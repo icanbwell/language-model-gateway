@@ -1,3 +1,4 @@
+import asyncio
 from typing import Any
 from pydantic import BaseModel, Field
 import logging
@@ -51,4 +52,4 @@ class CalculatorLengthTool(ResilientBaseTool):
 
     def _run(self, items: list[Any]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
-        return self._run(items=items)
+        return asyncio.run(self._arun(items=items))
