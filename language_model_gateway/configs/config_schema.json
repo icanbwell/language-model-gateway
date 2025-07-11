@@ -264,6 +264,10 @@
               {
                 "enum": [
                   "current_date",
+                  "calculator_stddev",
+                  "calculator_average",
+                  "calculator_length",
+                  "calculator_sum",
                   "pubmed",
                   "web_search",
                   "get_web_page",
