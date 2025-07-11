@@ -20,8 +20,7 @@ class CalculatorSumInput(BaseModel):
     """
 
     numbers: List[float] = Field(
-        ...,
-        description="List of numbers to calculate the sum. Example: [10, 20, 30]"
+        ..., description="List of numbers to calculate the sum. Example: [10, 20, 30]"
     )
 
 
@@ -35,7 +34,9 @@ class CalculatorSumTool(ResilientBaseTool):
     """
 
     name: str = "CalculatorSumTool"
-    description: str = "Useful for when you need to calculate the sum of a list of numbers"
+    description: str = (
+        "Useful for when you need to calculate the sum of a list of numbers"
+    )
     args_schema: Type[BaseModel] = CalculatorSumInput
 
     async def _arun(self, numbers: list[float]) -> str:

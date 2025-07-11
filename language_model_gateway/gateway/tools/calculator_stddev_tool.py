@@ -1,7 +1,6 @@
 import asyncio
 
 import math
-from typing import Any
 from pydantic import BaseModel, Field
 import logging
 
@@ -23,7 +22,7 @@ class CalculatorStddevInput(BaseModel):
 
     numbers: list[float] = Field(
         ...,
-        description="List of numbers to calculate the standard deviation. Example: [10, 20, 30]"
+        description="List of numbers to calculate the standard deviation. Example: [10, 20, 30]",
     )
 
 

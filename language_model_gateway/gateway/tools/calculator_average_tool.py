@@ -20,7 +20,7 @@ class CalculatorAverageInput(BaseModel):
 
     numbers: List[float] = Field(
         ...,
-        description="List of numbers to calculate the average. Example: [10.0, 20, 30]"
+        description="List of numbers to calculate the average. Example: [10.0, 20, 30]",
     )
 
 
@@ -34,7 +34,9 @@ class CalculatorAverageTool(ResilientBaseTool):
     """
 
     name: str = "CalculatorAverageTool"
-    description: str = "Useful for when you need to calculate the average of a list of numbers"
+    description: str = (
+        "Useful for when you need to calculate the average of a list of numbers"
+    )
     args_schema: Type[BaseModel] = CalculatorAverageInput
 
     async def _arun(self, numbers: List[float]) -> str:

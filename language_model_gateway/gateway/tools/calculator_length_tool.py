@@ -21,7 +21,7 @@ class CalculatorLengthInput(BaseModel):
 
     items: list[Any] = Field(
         ...,
-        description="List of items to calculate the length. Can contain any type of items. Example: ['apple', 'banana', 'cherry']"
+        description="List of items to calculate the length. Can contain any type of items. Example: ['apple', 'banana', 'cherry']",
     )
 
 
@@ -35,13 +35,13 @@ class CalculatorLengthTool(ResilientBaseTool):
     """
 
     name: str = "CalculatorLengthTool"
-    description: str = "Useful for when you need to calculate the length (count) of a list of items"
+    description: str = (
+        "Useful for when you need to calculate the length (count) of a list of items"
+    )
     args_schema: type[BaseModel] = CalculatorLengthInput
 
     async def _arun(self, items: list[Any]) -> str:
         """Run the tool to calculate the length of a list of items"""
-        logger.info("CalculatorLengthTool _run called with args: %s, kwargs: %s", args, kwargs)
-
         if items is None:
             logger.warning("No list provided to calculate the length.")
             return "No list provided to calculate the length."
