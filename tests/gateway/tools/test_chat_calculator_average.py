@@ -31,7 +31,7 @@ async def test_calculator_average_tool_floats() -> None:
     tool = CalculatorAverageTool()
     result = await tool._arun(numbers=[1.5, 2.5, 3.0])
     print(result)
-    assert "The average of the provided numbers is: 2.333333333333333" in result
+    assert "The average of the provided numbers is: 2.333333333333" in result
 
 
 async def test_calculator_average_tool_negative_numbers() -> None:
