@@ -1,4 +1,5 @@
-from typing import Any
+import asyncio
+from typing import List, Type
 from pydantic import BaseModel, Field
 import logging
 
@@ -18,7 +19,7 @@ class CalculatorSumInput(BaseModel):
     }
     """
 
-    numbers: list[float] = Field(
+    numbers: List[float] = Field(
         ...,
         description="List of numbers to calculate the sum. Example: [10, 20, 30]"
     )
@@ -35,9 +36,9 @@ class CalculatorSumTool(ResilientBaseTool):
 
     name: str = "CalculatorSumTool"
     description: str = "Useful for when you need to calculate the sum of a list of numbers"
-    args_schema: type[BaseModel] = CalculatorSumInput
+    args_schema: Type[BaseModel] = CalculatorSumInput
 
-    def _run(self, numbers: list[float]) -> str:
+    async def _arun(self, numbers: list[float]) -> str:
         """Run the tool to calculate the sum of a list of numbers"""
         logger = logging.getLogger(__name__)
         logger.debug(f"Received numbers for sum: {numbers}")
@@ -50,6 +51,6 @@ class CalculatorSumTool(ResilientBaseTool):
         logger.info(f"Calculated sum: {total}")
         return f"The sum of the provided numbers is: {total}"
 
-    async def _arun(self, numbers: list[float]) -> str:
+    def _run(self, numbers: list[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
-        return self._run(numbers=numbers)
+        return asyncio.run(self._arun(numbers=numbers))

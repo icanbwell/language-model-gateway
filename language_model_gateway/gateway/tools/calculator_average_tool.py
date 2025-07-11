@@ -1,4 +1,5 @@
-from typing import Any
+import asyncio
+from typing import Type, List
 from pydantic import BaseModel, Field
 import logging
 
@@ -17,7 +18,7 @@ class CalculatorAverageInput(BaseModel):
     }
     """
 
-    numbers: list[float] = Field(
+    numbers: List[float] = Field(
         ...,
         description="List of numbers to calculate the average. Example: [10.0, 20, 30]"
     )
@@ -34,9 +35,9 @@ class CalculatorAverageTool(ResilientBaseTool):
 
     name: str = "CalculatorAverageTool"
     description: str = "Useful for when you need to calculate the average of a list of numbers"
-    args_schema: type[BaseModel] = CalculatorAverageInput
+    args_schema: Type[BaseModel] = CalculatorAverageInput
 
-    def _run(self, numbers: list[float]) -> str:
+    async def _arun(self, numbers: List[float]) -> str:
         """Run the tool to calculate the average of a list of numbers"""
         logger.info("CalculatorAverageTool_run called with numbers: %s", numbers)
         logger.debug("Numbers received for averaging: %s", numbers)
@@ -55,6 +56,6 @@ class CalculatorAverageTool(ResilientBaseTool):
             logger.error(f"Error converting numbers: {e}")
             return f"Error: Could not convert all inputs to numbers. {e}"
 
-    async def _arun(self, numbers: list[float]) -> str:
+    def _run(self, numbers: List[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
-        return self._run(numbers)
+        return asyncio.run(self._arun(numbers))
