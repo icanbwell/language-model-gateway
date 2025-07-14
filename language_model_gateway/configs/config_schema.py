@@ -126,3 +126,34 @@ class ChatModelConfig(BaseModel):
     def get_agents(self) -> List[AgentConfig]:
         """Get the agents for the model"""
         return self.agents or self.tools or []
+
+
+class MCPServerConfig(BaseModel):
+    """MCP Server configuration"""
+
+    name: str
+    """The name of the MCP server"""
+
+    url: str
+    """The URL of the MCP server"""
+
+    oauth2_token: Optional[str] = None
+    """OAuth2 token for authentication"""
+
+    oauth2_token_url: Optional[str] = None
+    """OAuth2 token endpoint URL"""
+
+    oauth2_client_id: Optional[str] = None
+    """OAuth2 client ID"""
+
+    oauth2_client_secret: Optional[str] = None
+    """OAuth2 client secret"""
+
+    oauth2_scopes: Optional[List[str]] = None
+    """OAuth2 scopes"""
+
+    timeout: Optional[int] = 30
+    """Timeout for requests in seconds"""
+
+    headers: Optional[List[HeaderConfig]] = None
+    """Additional headers to send to the MCP server"""

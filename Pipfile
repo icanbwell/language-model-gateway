@@ -86,6 +86,10 @@ backoff = ">=2.2.1"
 databricks-sdk = ">=0.42.0"
 # pandas is a Python library for working with data
 pandas = ">=2.2.3"
+# mcp is the Model Context Protocol Python library for connecting to MCP servers
+mcp = ">=1.0.0"
+# aiohttp is needed for async HTTP requests
+aiohttp = ">=3.10.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks

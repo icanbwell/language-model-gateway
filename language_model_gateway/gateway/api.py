@@ -22,6 +22,7 @@ from language_model_gateway.gateway.routers.image_generation_router import (
 )
 from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
+from language_model_gateway.gateway.routers.mcp_router import mcp_router
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
@@ -75,6 +76,7 @@ def create_app() -> FastAPI:
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
+    app1.include_router(mcp_router)  # Add MCP router
     # Mount the static directory
     app1.mount(
         "/static",
