@@ -45,6 +45,18 @@
       ]
     },
     {
+      "name": "calculator_average"
+    },
+    {
+      "name": "calculator_stddev"
+    },
+    {
+      "name": "calculator_length"
+    },
+    {
+      "name": "calculator_sum"
+    },
+    {
       "name": "pubmed"
     },
     {

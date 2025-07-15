@@ -71,6 +71,16 @@ from language_model_gateway.gateway.tools.sequence_diagram_generator_tool import
     SequenceDiagramGeneratorTool,
 )
 from language_model_gateway.gateway.tools.url_to_markdown_tool import URLToMarkdownTool
+from language_model_gateway.gateway.tools.calculator_average_tool import (
+    CalculatorAverageTool,
+)
+from language_model_gateway.gateway.tools.calculator_stddev_tool import (
+    CalculatorStddevTool,
+)
+from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
+from language_model_gateway.gateway.tools.calculator_length_tool import (
+    CalculatorLengthTool,
+)
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
 )
@@ -117,6 +127,10 @@ class ToolProvider:
 
         self.tools: Dict[str, BaseTool] = {
             "current_date": CurrentTimeTool(),
+            "calculator_average": CalculatorAverageTool(),
+            "calculator_stddev": CalculatorStddevTool(),
+            "calculator_sum": CalculatorSumTool(),
+            "calculator_length": CalculatorLengthTool(),
             "web_search": web_search_tool,
             "pubmed": PubmedQueryRun(),
             "google_search": GoogleSearchTool(),
