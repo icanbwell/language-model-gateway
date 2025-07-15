@@ -74,7 +74,7 @@ class LangGraphToOpenAIConverter:
         request: ChatRequest,
         request_id: str,
         headers: Dict[str, str],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: List[ChatCompletionMessageParam],
     ) -> AsyncGenerator[str, None]:
         """
@@ -302,7 +302,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         chat_request: ChatRequest,
         request_id: str,
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatCompletionSystemMessageParam],
     ) -> StreamingResponse | JSONResponse:
         """
@@ -499,7 +499,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         request: ChatRequest,
         request_id: str,
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatCompletionSystemMessageParam],
     ) -> AsyncGenerator[str, None]:
         """
@@ -540,7 +540,7 @@ class LangGraphToOpenAIConverter:
         chat_request: ChatRequest,
         headers: Dict[str, str],
         messages: List[BaseMessage],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
     ) -> List[AnyMessage]:
         """
         Run the graph with the provided messages asynchronously.
@@ -568,7 +568,7 @@ class LangGraphToOpenAIConverter:
         request: ChatRequest,
         headers: Dict[str, str],
         messages: List[BaseMessage],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream the graph with the provided messages asynchronously.
@@ -598,7 +598,7 @@ class LangGraphToOpenAIConverter:
         *,
         request: ChatRequest,
         headers: Dict[str, str],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: Iterable[ChatCompletionSystemMessageParam],
     ) -> List[AnyMessage]:
         """
@@ -635,7 +635,7 @@ class LangGraphToOpenAIConverter:
         *,
         request: ChatRequest,
         headers: Dict[str, str],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: Iterable[ChatCompletionMessageParam],
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
@@ -726,7 +726,7 @@ class LangGraphToOpenAIConverter:
         *,
         request: ChatRequest,
         headers: Dict[str, Any],
-        compiled_state_graph: CompiledStateGraph,
+        compiled_state_graph: CompiledStateGraph[MyMessagesState],
     ) -> List[AnyMessage]:
         """
         Run the graph asynchronously.
@@ -754,7 +754,7 @@ class LangGraphToOpenAIConverter:
     # noinspection PyMethodMayBeStatic
     async def create_graph_for_llm_async(
         self, *, llm: BaseChatModel, tools: Sequence[BaseTool]
-    ) -> CompiledStateGraph:
+    ) -> CompiledStateGraph[MyMessagesState]:
         """
         Create a graph for the language model asynchronously.
 
@@ -770,7 +770,7 @@ class LangGraphToOpenAIConverter:
     # noinspection PyMethodMayBeStatic
     async def _create_graph_for_llm_with_tools_async(
         self, *, llm: BaseChatModel, tools: Sequence[BaseTool]
-    ) -> CompiledStateGraph:
+    ) -> CompiledStateGraph[MyMessagesState]:
         """
         Create a graph for the language model asynchronously.
 
@@ -783,12 +783,12 @@ class LangGraphToOpenAIConverter:
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
 
-        compiled_state_graph: CompiledStateGraph = create_react_agent(
+        compiled_state_graph: CompiledStateGraph[MyMessagesState] = create_react_agent(
             model=llm,
             tools=tool_node if tool_node is not None else [],
             state_schema=MyMessagesState,
         )
-        return cast(CompiledStateGraph, compiled_state_graph)
+        return compiled_state_graph
 
     @staticmethod
     def add_completion_usage(

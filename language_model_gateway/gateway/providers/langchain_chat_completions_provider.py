@@ -66,11 +66,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             else []
         )
 
-        compiled_state_graph: CompiledStateGraph = (
-            await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-                llm=llm,
-                tools=tools,
-            )
+        compiled_state_graph: CompiledStateGraph[
+            Any
+        ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+            llm=llm,
+            tools=tools,
         )
         request_id = random.randint(1, 1000)
 

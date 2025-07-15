@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Dict, Any
 
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
@@ -11,11 +11,8 @@ from langgraph.prebuilt import ToolNode, tools_condition
 
 async def test_mcp_agent() -> None:
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
-    model_parameters_dict = {}
-    default_model_provider: str = os.environ.get("DEFAULT_MODEL_PROVIDER", "bedrock")
-    default_model_name: str = os.environ.get(
-        "DEFAULT_MODEL_NAME", "us.anthropic.claude-3-5-haiku-20241022-v1:0"
-    )
+    model_parameters_dict: Dict[str, Any] = {}
+
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
         model="us.anthropic.claude-sonnet-4-20250514-v1:0",
@@ -57,7 +54,9 @@ async def test_mcp_agent() -> None:
     )
     builder.add_edge("tools", "call_model")
     graph = builder.compile()
-    math_response = await graph.ainvoke({"messages": "what's (3 + 5) x 12?"})
+    prompt = {"messages": "what's (3 + 5) x 12?"}
+    # noinspection PyTypeChecker
+    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
     print(math_response)
     print("=== Math Response ===")
     print(math_response["messages"][-1].content)
