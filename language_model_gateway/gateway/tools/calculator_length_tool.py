@@ -1,28 +1,11 @@
 import asyncio
 from typing import Any
-from pydantic import BaseModel, Field
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 
 logger = logging.getLogger(__name__)
-
-
-class CalculatorLengthInput(BaseModel):
-    """
-    Input model for CalculatorLengthTool
-
-    Example input:
-    {
-        "items": ["apple", "banana", "cherry"]
-    }
-    """
-
-    items: list[Any] = Field(
-        ...,
-        description="List of items to calculate the length. Can contain any type of items. Example: ['apple', 'banana', 'cherry']",
-    )
 
 
 class CalculatorLengthTool(ResilientBaseTool):
@@ -38,7 +21,6 @@ class CalculatorLengthTool(ResilientBaseTool):
     description: str = (
         "Useful for when you need to calculate the length (count) of a list of items"
     )
-    args_schema: type[BaseModel] = CalculatorLengthInput
 
     async def _arun(self, items: list[Any]) -> str:
         """Run the tool to calculate the length of a list of items"""

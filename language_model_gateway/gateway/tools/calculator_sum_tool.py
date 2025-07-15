@@ -1,27 +1,11 @@
 import asyncio
-from typing import List, Type
-from pydantic import BaseModel, Field
+from typing import List
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 
 logger = logging.getLogger(__name__)
-
-
-class CalculatorSumInput(BaseModel):
-    """
-    Input model for CalculatorSumTool
-
-    Example input:
-    {
-        "numbers": [10, 20, 30]
-    }
-    """
-
-    numbers: List[float] = Field(
-        ..., description="List of numbers to calculate the sum. Example: [10, 20, 30]"
-    )
 
 
 class CalculatorSumTool(ResilientBaseTool):
@@ -37,11 +21,9 @@ class CalculatorSumTool(ResilientBaseTool):
     description: str = (
         "Useful for when you need to calculate the sum of a list of numbers"
     )
-    args_schema: Type[BaseModel] = CalculatorSumInput
 
-    async def _arun(self, numbers: list[float]) -> str:
+    async def _arun(self, numbers: List[float]) -> str:
         """Run the tool to calculate the sum of a list of numbers"""
-        logger = logging.getLogger(__name__)
         logger.debug(f"Received numbers for sum: {numbers}")
 
         if not numbers:
@@ -52,6 +34,6 @@ class CalculatorSumTool(ResilientBaseTool):
         logger.info(f"Calculated sum: {total}")
         return f"The sum of the provided numbers is: {total}"
 
-    def _run(self, numbers: list[float]) -> str:
+    def _run(self, numbers: List[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(numbers=numbers))

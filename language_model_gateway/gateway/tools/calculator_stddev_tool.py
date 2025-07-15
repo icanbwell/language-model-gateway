@@ -1,29 +1,12 @@
 import asyncio
 
 import math
-from pydantic import BaseModel, Field
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 
 logger = logging.getLogger(__name__)
-
-
-class CalculatorStddevInput(BaseModel):
-    """
-    Input model for CalculatorStddevTool
-
-    Example input:
-    {
-        "numbers": [10, 20, 30]
-    }
-    """
-
-    numbers: list[float] = Field(
-        ...,
-        description="List of numbers to calculate the standard deviation. Example: [10, 20, 30]",
-    )
 
 
 class CalculatorStddevTool(ResilientBaseTool):
@@ -37,7 +20,6 @@ class CalculatorStddevTool(ResilientBaseTool):
 
     name: str = "CalculatorStddevTool"
     description: str = "Useful for when you need to calculate the standard deviation of a list of numbers"
-    args_schema: type[BaseModel] = CalculatorStddevInput
 
     async def _arun(self, numbers: list[float]) -> str:
         """Run the tool to calculate the standard deviation of a list of numbers"""

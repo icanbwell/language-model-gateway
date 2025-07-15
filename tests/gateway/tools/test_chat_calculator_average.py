@@ -1,12 +1,18 @@
-from pathlib import Path
-from shutil import rmtree
-from os import makedirs
 import logging
 
 import httpx
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion
 from typing import List, Dict, Any
+
+from language_model_gateway.configs.config_schema import (
+    ChatModelConfig,
+    ModelConfig,
+    AgentConfig,
+)
+from language_model_gateway.container.simple_container import SimpleContainer
+from language_model_gateway.gateway.api_container import get_container_async
+from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
@@ -22,11 +28,31 @@ async def test_chat_calculator_average_tool_bedrock(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    data_dir = Path(__file__).parent.joinpath("./")
-    temp_folder = data_dir.joinpath("../temp")
-    if temp_folder.is_dir():
-        rmtree(temp_folder)
-    makedirs(temp_folder)
+    print("")
+    test_container: SimpleContainer = await get_container_async()
+
+    # set the model configuration for this test
+    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
+        test_container.resolve(ExpiringCache)
+    )
+
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="general_purpose",
+                name="General Purpose",
+                description="General Purpose Language Model",
+                type="langchain",
+                model=ModelConfig(
+                    provider="bedrock",
+                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+                ),
+                tools=[
+                    AgentConfig(name="calculator_average"),
+                ],
+            )
+        ]
+    )
 
     test_cases: List[Dict[str, Any]] = [
         {"numbers": [10, 20, 30], "expected": "20.0"},
