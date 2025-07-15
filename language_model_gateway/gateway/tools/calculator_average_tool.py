@@ -19,7 +19,6 @@ class CalculatorAverageInput(BaseModel):
     """
 
     numbers: List[float] = Field(
-        ...,
         description="List of numbers to calculate the average. Example: [10.0, 20, 30]",
     )
 
@@ -33,6 +32,8 @@ class CalculatorAverageTool(ResilientBaseTool):
     - Output: "The average of the provided numbers is: 20.0"
     """
 
+    logger.info("Initializing CalculatorAverageTool")
+
     name: str = "CalculatorAverageTool"
     description: str = (
         "Useful for when you need to calculate the average of a list of numbers"
@@ -41,8 +42,7 @@ class CalculatorAverageTool(ResilientBaseTool):
 
     async def _arun(self, numbers: List[float]) -> str:
         """Run the tool to calculate the average of a list of numbers"""
-        logger.info("CalculatorAverageTool_run called with numbers: %s", numbers)
-        logger.debug("Numbers received for averaging: %s", numbers)
+        logger.info(f"CalculatorAverageTool _arun called with numbers: {numbers}")
 
         if not numbers:
             logger.warning("No numbers provided to calculate the average.")
@@ -52,7 +52,7 @@ class CalculatorAverageTool(ResilientBaseTool):
             # Ensure all inputs are convertible to float
             numbers = [float(num) for num in numbers]
             average = sum(numbers) / len(numbers)
-            logger.info("Calculated average: %f", average)
+            logger.info(f"Calculated average: {average}")
             return f"The average of the provided numbers is: {average}"
         except (TypeError, ValueError) as e:
             logger.error(f"Error converting numbers: {e}")
