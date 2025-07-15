@@ -214,5 +214,12 @@ class ToolProvider:
             return self.tools[tool.name]
         raise ValueError(f"Tool with name {tool.name} not found")
 
+    def has_tool(self, *, tool: AgentConfig) -> bool:
+        return tool.name in self.tools
+
     def get_tools(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
-        return [self.get_tool_by_name(tool=tool) for tool in tools]
+        return [
+            self.get_tool_by_name(tool=tool)
+            for tool in tools
+            if self.has_tool(tool=tool)
+        ]

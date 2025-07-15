@@ -85,13 +85,12 @@ async def test_chat_calculator_average_tool_bedrock(
         print(f"\nSending prompt to Bedrock: {prompt}")
 
         # call API
+        content_prompt_: ChatCompletionUserMessageParam = {
+            "role": "user",
+            "content": prompt,
+        }
         chat_completion = await client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
+            messages=[content_prompt_],
             model="General Purpose",
         )
 

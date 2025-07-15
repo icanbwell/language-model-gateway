@@ -2,7 +2,11 @@ from typing import Optional, List
 
 import httpx
 from openai import AsyncOpenAI, AsyncStream
-from openai.types.chat import ChatCompletionChunk, ChatCompletion
+from openai.types.chat import (
+    ChatCompletionChunk,
+    ChatCompletion,
+    ChatCompletionUserMessageParam,
+)
 from openai.types.chat.chat_completion import Choice
 
 from language_model_gateway.configs.config_schema import (
@@ -78,13 +82,12 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Get me the address of Dr. Scott Rodriguez",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Get me the address of Dr. Scott Rodriguez",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
     )
 

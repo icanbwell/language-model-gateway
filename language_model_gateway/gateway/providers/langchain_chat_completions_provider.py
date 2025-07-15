@@ -72,6 +72,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             else []
         )
 
+        # Load MCP tools if they are enabled
+        await self.mcp_tool_provider.load_async()
+        # add MCP tools
+        tools = [t for t in tools] + self.mcp_tool_provider.get_tools(
+            tools=[t for t in model_config.get_agents()]
+        )
+
         compiled_state_graph: CompiledStateGraph[
             Any
         ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(

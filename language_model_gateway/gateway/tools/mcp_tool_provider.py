@@ -24,7 +24,9 @@ class MCPToolProvider:
                     "math": {
                         "command": "python",
                         # Make sure to update to the full absolute path to your math_server.py file
-                        "args": ["./examples/math_server.py"],
+                        "args": [
+                            "/usr/src/language_model_gateway/language_model_gateway/gateway/tools/mcp/math_server.py"
+                        ],
                         "transport": "stdio",
                     },
                     # "weather": {
@@ -43,5 +45,12 @@ class MCPToolProvider:
             return self.tools[tool.name]
         raise ValueError(f"Tool with name {tool.name} not found")
 
+    def has_tool(self, *, tool: AgentConfig) -> bool:
+        return tool.name in self.tools
+
     def get_tools(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
-        return [self.get_tool_by_name(tool=tool) for tool in tools]
+        return [
+            self.get_tool_by_name(tool=tool)
+            for tool in tools
+            if self.has_tool(tool=tool)
+        ]
