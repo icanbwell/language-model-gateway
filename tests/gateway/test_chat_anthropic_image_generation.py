@@ -1,7 +1,7 @@
 import httpx
 import pytest
 from openai import AsyncOpenAI
-from openai.types import ImagesResponse
+from openai.types import ImagesResponse, Image
 
 
 @pytest.mark.asyncio
@@ -39,7 +39,9 @@ async def test_chat_anthropic_image_generation(async_client: httpx.AsyncClient) 
         n=1,
     )
 
-    image_url = response.data[0].url
+    image: Image | None = response.data[0] if response.data else None
+    assert image is not None
+    image_url: str | None = image.url
     print(f"Image URL: {image_url}")
     assert image_url is not None
     assert "http" in image_url

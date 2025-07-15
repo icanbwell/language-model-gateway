@@ -31,7 +31,6 @@ from langchain_core.messages import AIMessageChunk
 from langchain_core.messages.ai import UsageMetadata
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
 from langchain_core.tools import BaseTool
-from langgraph.graph.graph import CompiledGraph
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from openai import NotGiven, NOT_GIVEN
@@ -784,7 +783,7 @@ class LangGraphToOpenAIConverter:
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
 
-        compiled_state_graph: CompiledGraph = create_react_agent(
+        compiled_state_graph: CompiledStateGraph = create_react_agent(
             model=llm,
             tools=tool_node if tool_node is not None else [],
             state_schema=MyMessagesState,
