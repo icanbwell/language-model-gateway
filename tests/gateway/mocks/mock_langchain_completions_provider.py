@@ -11,6 +11,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
     LangChainCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol
 
@@ -22,12 +23,14 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         model_factory: ModelFactory,
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
+        mcp_tool_provider: MCPToolProvider,
         fn_get_response: MockChatResponseProtocol,
     ) -> None:
         super().__init__(
             model_factory=model_factory,
             lang_graph_to_open_ai_converter=lang_graph_to_open_ai_converter,
             tool_provider=tool_provider,
+            mcp_tool_provider=mcp_tool_provider,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 

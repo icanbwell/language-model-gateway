@@ -16,6 +16,7 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
     BaseChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 
 
@@ -26,6 +27,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         model_factory: ModelFactory,
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
+        mcp_tool_provider: MCPToolProvider,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -40,6 +42,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.tool_provider: ToolProvider = tool_provider
         assert self.tool_provider is not None
         assert isinstance(self.tool_provider, ToolProvider)
+
+        self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
+        assert self.mcp_tool_provider is not None
+        assert isinstance(self.mcp_tool_provider, MCPToolProvider)
 
     async def chat_completions(
         self,

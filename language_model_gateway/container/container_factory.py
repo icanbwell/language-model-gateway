@@ -33,6 +33,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
+from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
@@ -154,12 +155,16 @@ class ContainerFactory:
                 databricks_helper=c.resolve(DatabricksHelper),
             ),
         )
+
+        container.register(MCPToolProvider, lambda c: MCPToolProvider())
+
         container.register(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
                 tool_provider=c.resolve(ToolProvider),
+                mcp_tool_provider=c.resolve(MCPToolProvider),
             ),
         )
         # we want only one instance of the cache so we use singleton

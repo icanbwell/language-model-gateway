@@ -6,7 +6,11 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
-from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.prebuilt import tools_condition
+
+from language_model_gateway.gateway.converters.streaming_tool_node import (
+    StreamingToolNode,
+)
 
 
 async def test_mcp_agent() -> None:
@@ -16,6 +20,7 @@ async def test_mcp_agent() -> None:
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
         model="us.anthropic.claude-sonnet-4-20250514-v1:0",
+        # model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
         provider="anthropic",
         credentials_profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"),
         region_name=os.environ.get("AWS_REGION", "us-east-1"),
@@ -46,7 +51,7 @@ async def test_mcp_agent() -> None:
 
     builder = StateGraph(MessagesState)
     builder.add_node(call_model)
-    builder.add_node(ToolNode(tools))
+    builder.add_node(StreamingToolNode(tools))
     builder.add_edge(START, "call_model")
     builder.add_conditional_edges(
         "call_model",
