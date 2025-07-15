@@ -4,7 +4,7 @@ import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
-logger = logging.getLogger(__file__)
+logger = logging.getLogger(__name__)
 
 
 class CalculatorAverageTool(ResilientBaseTool):
