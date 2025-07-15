@@ -2,7 +2,7 @@ import logging
 
 import httpx
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from typing import List, Dict, Any
 
 from language_model_gateway.configs.config_schema import (
@@ -70,13 +70,12 @@ async def test_chat_calculator_average_tool_bedrock(
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is the current date and time?",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "what is the current date and time?",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
     )
     print(chat_completion)
