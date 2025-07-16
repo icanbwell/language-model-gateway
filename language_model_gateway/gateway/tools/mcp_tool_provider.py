@@ -21,19 +21,19 @@ class MCPToolProvider:
         if not self._loaded:
             client: MultiServerMCPClient = MultiServerMCPClient(
                 {
-                    "math": {
-                        "command": "python",
-                        # Make sure to update to the full absolute path to your math_server.py file
-                        "args": [
-                            "/usr/src/language_model_gateway/language_model_gateway/gateway/tools/mcp/math_server.py"
-                        ],
-                        "transport": "stdio",
-                    },
-                    # "weather": {
-                    #     # make sure you start your weather server on port 8000
-                    #     "url": "http://localhost:8000/mcp/",
-                    #     "transport": "streamable_http",
+                    # "math": {
+                    #     "command": "python",
+                    #     # Make sure to update to the full absolute path to your math_server.py file
+                    #     "args": [
+                    #         "/usr/src/language_model_gateway/language_model_gateway/gateway/tools/mcp/math_server.py"
+                    #     ],
+                    #     "transport": "stdio",
                     # },
+                    "math": {
+                        # make sure you start your weather server on port 8000
+                        "url": "http://localhost:8000/mcp/",
+                        "transport": "streamable_http",
+                    },
                 }
             )
             tools: List[BaseTool] = await client.get_tools()

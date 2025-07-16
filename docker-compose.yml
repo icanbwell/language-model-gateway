@@ -54,18 +54,25 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-    networks:
-      - web
+
+
   math_server:
     build:
       context: ./language_model_gateway/gateway/tools/mcp
       dockerfile: Dockerfile
     container_name: math_server
     ports:
-      - "8000:8000"
-    networks:
-      - web
+      - "9000:8000"
 
-networks:
-  web:
-    driver: bridge
+  inspector:
+    image: mcp/inspector:latest
+    container_name: inspector
+    ports:
+      - "8080:5173"
+#    environment:
+      # Add environment variables here if needed
+      # Example: MCP_INSPECTOR_CONFIG: /config/config.yaml
+    # volumes:
+      # - ./config:/config
+    # Uncomment and configure volumes if you need to mount config files
+    # Add other options as needed
