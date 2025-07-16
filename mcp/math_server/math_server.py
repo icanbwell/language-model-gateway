@@ -1,6 +1,6 @@
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
-mcp = FastMCP("Math")
+mcp: FastMCP = FastMCP("Math")
 
 
 @mcp.tool()
@@ -29,7 +29,8 @@ def configure_assistant(skills: str) -> list[dict[str, str]]:
 if __name__ == "__main__":
     try:
         print("Starting Math MCP server...")
-        mcp.run(transport="streamable-http")
+        # mcp.run(transport="streamable-http")
+        mcp.run(transport="http", host="0.0.0.0", port=8000, path="/mcp")
         print("Math MCP server started.")
     except Exception as e:
         print(f"Error starting Math MCP server: {e}")

@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
@@ -7,10 +7,32 @@ from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
+from mcp.types import Prompt, Resource, Tool
 
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from fastmcp import Client
+
+
+async def test_mcp_agent_directly() -> None:
+    # HTTP server
+    client: Client = Client("http://math_server:8000/mcp/")
+    async with client:
+        # Basic server interaction
+        await client.ping()
+
+        # List available operations
+        tools: List[Tool] = await client.list_tools()
+        assert tools is not None
+        resources: List[Resource] = await client.list_resources()
+        assert resources is not None
+        prompts: List[Prompt] = await client.list_prompts()
+        assert prompts is not None
+
+        # Execute operations
+        result = await client.call_tool("add", {"a": 12, "b": 8})
+        print(result)
 
 
 async def test_mcp_agent() -> None:

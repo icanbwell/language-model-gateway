@@ -58,20 +58,23 @@ services:
 
   math_server:
     build:
-      context: ./language_model_gateway/gateway/tools/mcp
-      dockerfile: Dockerfile
+      context: mcp/math_server
+      dockerfile: math_server.Dockerfile
     container_name: math_server
     ports:
-      - "9000:8000"
+      - "8000:8000"
 
   inspector:
-    image: mcp/inspector:latest
+    build:
+      context: .
+      dockerfile: inspector.Dockerfile
     container_name: inspector
     ports:
-      - "8080:5173"
-#    environment:
+      - "8080:6277"
+    restart: unless-stopped
+    environment:
       # Add environment variables here if needed
-      # Example: MCP_INSPECTOR_CONFIG: /config/config.yaml
+      DANGEROUSLY_OMIT_AUTH: "true"
     # volumes:
       # - ./config:/config
     # Uncomment and configure volumes if you need to mount config files

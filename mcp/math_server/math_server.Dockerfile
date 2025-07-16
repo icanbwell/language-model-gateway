@@ -8,7 +8,7 @@ WORKDIR /app
 RUN pip install fastmcp uvicorn
 
 # Copy the current directory contents into the container
-COPY . .
+COPY .. .
 
 # Expose port 8000 for the API
 EXPOSE 8000
