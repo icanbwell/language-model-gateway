@@ -27,4 +27,10 @@ def configure_assistant(skills: str) -> list[dict[str, str]]:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    try:
+        print("Starting Math MCP server...")
+        mcp.run(transport="streamable-http")
+        print("Math MCP server started.")
+    except Exception as e:
+        print(f"Error starting Math MCP server: {e}")
+        raise e

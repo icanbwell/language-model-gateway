@@ -56,6 +56,15 @@ services:
       retries: 3
     networks:
       - web
+  math_server:
+    build:
+      context: ./language_model_gateway/gateway/tools/mcp
+      dockerfile: Dockerfile
+    container_name: math_server
+    ports:
+      - "8000:8000"
+    networks:
+      - web
 
 networks:
   web:
