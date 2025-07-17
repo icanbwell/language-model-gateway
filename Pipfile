@@ -119,6 +119,8 @@ bandit = ">=1.8.3"
 ruff = ">=0.11.5"
 # pytest-cov is needed for measuring test coverage
 pytest-cov = ">=6.1.1"
+# for testing the MCP client
+mcp = ">=1.11.0"
 # for creating the MCP client to test
 fastmcp = ">=2.10.5"
 

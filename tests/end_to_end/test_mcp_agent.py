@@ -17,7 +17,7 @@ from fastmcp import Client
 
 async def test_mcp_agent_directly() -> None:
     # HTTP server
-    client: Client = Client("http://math_server:8000/mcp/")
+    client: Client[Any] = Client("http://math_server:8000/mcp/")
     async with client:
         # Basic server interaction
         await client.ping()
