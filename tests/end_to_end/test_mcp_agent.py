@@ -7,7 +7,7 @@ from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
-from mcp.types import Prompt, Resource, Tool
+from mcp_servers.types import Prompt, Resource, Tool
 
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,

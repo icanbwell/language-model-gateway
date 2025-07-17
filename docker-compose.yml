@@ -58,7 +58,7 @@ services:
 
   math_server:
     build:
-      context: mcp/math_server
+      context: mcp_servers/math_server
       dockerfile: math_server.Dockerfile
     container_name: math_server
     ports:
