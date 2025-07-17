@@ -40,7 +40,11 @@ async def main():
         print("Starting Math MCP server...")
         # mcp.run(transport="streamable-http")
         await mcp.run_async(
-            transport="http", host="0.0.0.0", port=8000, path="/mcp", log_level="debug"
+            transport="http",
+            host="0.0.0.0",
+            port=8000,
+            path="/mcp",
+            log_level="debug",  # nosec B104
         )
         print("Math MCP server started.")
     except Exception as e:

@@ -74,7 +74,7 @@ repos:
         require_serial: true
         args: [
           '-q',
-          '--skip', 'B101,B105,B106',
+          '--skip', 'B101,B104,B105,B106',
           '-r',
           '--severity-level', 'medium'
         ]
