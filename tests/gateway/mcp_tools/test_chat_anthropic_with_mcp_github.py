@@ -73,7 +73,7 @@ async def test_chat_completions_with_mcp_github(
     # call API
     message: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "what's address for Dr. Alice Smith?",
+        "content": "list first 2 repositories in icanbwell organization that include the word 'fhir' in the name",
     }
     chat_completion: ChatCompletion = await client.chat.completions.create(
         messages=[message],
@@ -86,4 +86,4 @@ async def test_chat_completions_with_mcp_github(
     )
     assert content is not None
     print(content)
-    assert "123 Main St, Springfield" in content
+    assert "fhir" in content
