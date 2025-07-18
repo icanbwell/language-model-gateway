@@ -1,22 +1,10 @@
-import dataclasses
 from typing import Dict, List
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
-
-
-@dataclasses.dataclass
-class MCPToolConfig:
-    """
-    Configuration for MCP tools.
-    This class holds the necessary information to configure an MCP tool.
-    """
-
-    name: str
-    url: str
-    tool: BaseTool
 
 
 class MCPToolProvider:
@@ -40,13 +28,17 @@ class MCPToolProvider:
             if url in self.tools_by_mcp_url:
                 return self.tools_by_mcp_url[url]
 
+            mcp_tool_config: StreamableHttpConnection = {
+                # make sure you start your weather server on port 8000
+                "url": url,
+                "transport": "streamable_http",
+            }
+            if tool.headers:
+                mcp_tool_config["headers"] = tool.headers
+
             client: MultiServerMCPClient = MultiServerMCPClient(
                 {
-                    f"{tool.name}": {
-                        # make sure you start your weather server on port 8000
-                        "url": url,
-                        "transport": "streamable_http",
-                    },
+                    f"{tool.name}": mcp_tool_config,
                 }
             )
             tools: List[BaseTool] = await client.get_tools()

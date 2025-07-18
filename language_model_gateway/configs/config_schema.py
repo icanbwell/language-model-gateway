@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from pydantic import BaseModel
 
@@ -70,6 +70,9 @@ class AgentConfig(BaseModel):
 
     url: str | None = None
     """The MCP (Model Context Protocol) URL to access the tool"""
+
+    headers: Dict[str, str] | None = None
+    """The headers to pass to the MCP tool"""
 
 
 class ModelConfig(BaseModel):
