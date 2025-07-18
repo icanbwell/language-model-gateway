@@ -10,10 +10,10 @@ DOCTOR_DB = {
     "Dr. Carol White": "789 Oak St, Capital City",
 }
 
-mcp: FastMCP = FastMCP("Math")
+mcp: FastMCP = FastMCP("ProviderSearch")
 
 
-@mcp.prompt()
+@mcp.tool()
 def get_doctor_address(doctor_name: str) -> str:
     """Return the address of the doctor given their name."""
     return DOCTOR_DB.get(doctor_name, "Doctor not found.")

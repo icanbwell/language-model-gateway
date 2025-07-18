@@ -63,6 +63,11 @@ async def test_mcp_agent() -> None:
                 "url": "http://math_server:8000/mcp/",
                 "transport": "streamable_http",
             },
+            "providersearch": {
+                # make sure you start your weather server on port 8000
+                "url": "http://provider_search:8001/mcp/",
+                "transport": "streamable_http",
+            },
         }
     )
     tools = await client.get_tools()
@@ -81,13 +86,13 @@ async def test_mcp_agent() -> None:
     )
     builder.add_edge("tools", "call_model")
     graph = builder.compile()
-    prompt = {"messages": "what's (3 + 5) x 12?"}
+    prompt = {"messages": "what's address for Dr. Alice Smith?"}
     # noinspection PyTypeChecker
     math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
     print(math_response)
     print("=== Math Response ===")
     print(math_response["messages"][-1].content)
     print("===== End of Math Response =====")
-    assert "97" in math_response["messages"][-1].content
+    assert "123 Main St, Springfield" in math_response["messages"][-1].content
     # weather_response = await graph.ainvoke({"messages": "what is the weather in nyc?"})
     # print(weather_response)
