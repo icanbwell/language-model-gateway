@@ -57,8 +57,8 @@ async def test_mcp_agent() -> None:
 
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
-        model="us.anthropic.claude-sonnet-4-20250514-v1:0",
-        # model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+        # model="us.anthropic.claude-sonnet-4-20250514-v1:0",
+        model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
         provider="anthropic",
         credentials_profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"),
         region_name=os.environ.get("AWS_REGION", "us-east-1"),

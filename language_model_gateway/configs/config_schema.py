@@ -68,6 +68,9 @@ class AgentConfig(BaseModel):
     parameters: List[AgentParameterConfig] | None = None
     """The parameters for the tool"""
 
+    url: str | None = None
+    """The MCP (Model Context Protocol) URL to access the tool"""
+
 
 class ModelConfig(BaseModel):
     """Model configuration"""

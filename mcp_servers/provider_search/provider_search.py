@@ -16,6 +16,7 @@ mcp: FastMCP = FastMCP("ProviderSearch")
 @mcp.tool()
 def get_doctor_address(doctor_name: str) -> str:
     """Return the address of the doctor given their name."""
+    print(f"Received get_doctor_address for doctor: {doctor_name}")
     return DOCTOR_DB.get(doctor_name, "Doctor not found.")
 
 
