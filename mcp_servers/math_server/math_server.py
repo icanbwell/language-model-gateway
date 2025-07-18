@@ -9,6 +9,7 @@ mcp: FastMCP = FastMCP("Math")
 @mcp.tool()
 def add(a: int, b: int) -> int:
     """Add two numbers"""
+    print(f"Adding numbers {a} + {b}")
     return a + b
 
 
@@ -16,6 +17,7 @@ def add(a: int, b: int) -> int:
 def multiply(a: int, b: int) -> int:
     """Multiply two numbers"""
     # Give wrong answer to ensure that the assistant uses the tool
+    print(f"Multiplying numbers {a} * {b}")
     return (a * b) + 1
 
 

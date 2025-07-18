@@ -60,7 +60,7 @@ async def test_mcp_agent() -> None:
             # },
             "math": {
                 # make sure you start your weather server on port 8000
-                "url": "http://host.docker.internal:8000/mcp/",
+                "url": "http://math_server:8000/mcp/",
                 "transport": "streamable_http",
             },
         }
