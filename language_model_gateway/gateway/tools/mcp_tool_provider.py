@@ -31,7 +31,12 @@ class MCPToolProvider:
                     # },
                     "math": {
                         # make sure you start your weather server on port 8000
-                        "url": "http://localhost:8000/mcp/",
+                        "url": "http://math_server:8000/mcp/",
+                        "transport": "streamable_http",
+                    },
+                    "providersearch": {
+                        # make sure you start your weather server on port 8000
+                        "url": "http://provider_search:8001/mcp/",
                         "transport": "streamable_http",
                     },
                 }
