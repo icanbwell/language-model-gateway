@@ -1,3 +1,4 @@
+import os
 from typing import Dict, List
 
 from langchain_core.tools import BaseTool
@@ -34,7 +35,11 @@ class MCPToolProvider:
                 "transport": "streamable_http",
             }
             if tool.headers:
-                mcp_tool_config["headers"] = tool.headers
+                # replace the strings with os.path.expandvars # to allow for environment variable expansion
+                mcp_tool_config["headers"] = {
+                    key: os.path.expandvars(value)
+                    for key, value in tool.headers.items()
+                }
 
             client: MultiServerMCPClient = MultiServerMCPClient(
                 {

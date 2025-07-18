@@ -56,6 +56,7 @@ async def test_chat_completions_with_mcp_github(
                     AgentConfig(
                         name="mcp_github_search",
                         url="https://api.githubcopilot.com/mcp/",
+                        headers={"Authorization": "Bearer $GITHUB_TOKEN"},
                     ),
                 ],
             )
