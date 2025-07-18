@@ -7,12 +7,22 @@ from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
-from mcp.types import Prompt, Resource, Tool
+from mcp.types import (
+    Prompt,
+    Resource,
+    Tool,
+    TextContent,
+    ImageContent,
+    AudioContent,
+    ResourceLink,
+    EmbeddedResource,
+)
 
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client
+from fastmcp.client.client import CallToolResult
 
 
 async def test_mcp_agent_directly() -> None:
@@ -31,8 +41,14 @@ async def test_mcp_agent_directly() -> None:
         assert prompts is not None
 
         # Execute operations
-        result = await client.call_tool("add", {"a": 12, "b": 8})
+        result: CallToolResult = await client.call_tool("add", {"a": 12, "b": 8})
         print(result)
+        content: (
+            TextContent | ImageContent | AudioContent | ResourceLink | EmbeddedResource
+        ) = result.content[0]
+        assert content is not None
+        assert isinstance(content, TextContent)
+        assert content.text == "20"
 
 
 async def test_mcp_agent() -> None:
