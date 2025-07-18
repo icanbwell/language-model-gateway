@@ -79,3 +79,12 @@ services:
       # - ./config:/config
     # Uncomment and configure volumes if you need to mount config files
     # Add other options as needed
+
+  provider_search:
+    build:
+      context: ./mcp_servers/provider_search
+      dockerfile: provider_search.Dockerfile
+    container_name: provider_search
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
