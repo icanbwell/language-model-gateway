@@ -22,7 +22,7 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
 @pytest.mark.asyncio
-async def test_chat_completions_with_mcp_provider_search(
+async def test_chat_completions_with_mcp_github(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
@@ -54,8 +54,8 @@ async def test_chat_completions_with_mcp_provider_search(
                 ),
                 tools=[
                     AgentConfig(
-                        name="mcp_provider_search",
-                        url="http://provider_search:8001/mcp/",
+                        name="mcp_github_search",
+                        url="https://api.githubcopilot.com/mcp/",
                     ),
                 ],
             )
