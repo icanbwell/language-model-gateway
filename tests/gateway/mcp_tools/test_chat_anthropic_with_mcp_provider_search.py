@@ -54,7 +54,8 @@ async def test_chat_completions_with_web_search(
                 ),
                 tools=[
                     AgentConfig(
-                        name="provider_search", url="http://localhost:8001/mcp/"
+                        name="mcp_provider_search",
+                        url="http://provider_search:8001/mcp/",
                     ),
                 ],
             )
@@ -84,4 +85,4 @@ async def test_chat_completions_with_web_search(
     )
     assert content is not None
     print(content)
-    assert "Trump" in content
+    assert "123 Main St, Springfield" in content

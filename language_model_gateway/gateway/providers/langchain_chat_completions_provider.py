@@ -75,7 +75,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
         # add MCP tools
-        tools = [t for t in tools] + self.mcp_tool_provider.get_tools(
+        tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
             tools=[t for t in model_config.get_agents()]
         )
 

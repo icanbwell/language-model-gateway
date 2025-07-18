@@ -1,9 +1,22 @@
+import dataclasses
 from typing import Dict, List
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from language_model_gateway.configs.config_schema import AgentConfig
+
+
+@dataclasses.dataclass
+class MCPToolConfig:
+    """
+    Configuration for MCP tools.
+    This class holds the necessary information to configure an MCP tool.
+    """
+
+    name: str
+    url: str
+    tool: BaseTool
 
 
 class MCPToolProvider:
@@ -14,48 +27,46 @@ class MCPToolProvider:
     """
 
     def __init__(self) -> None:
-        self.tools: Dict[str, BaseTool] = {}
-        self._loaded: bool = False
+        self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
 
     async def load_async(self) -> None:
-        if not self._loaded:
+        pass
+
+    async def get_tools_by_url_async(self, *, tool: AgentConfig) -> List[BaseTool]:
+        try:
+            url: str | None = tool.url
+            assert url is not None, "Tool URL must be provided"
+            # first see if the url is already loaded
+            if url in self.tools_by_mcp_url:
+                return self.tools_by_mcp_url[url]
+
             client: MultiServerMCPClient = MultiServerMCPClient(
                 {
-                    # "math": {
-                    #     "command": "python",
-                    #     # Make sure to update to the full absolute path to your math_server.py file
-                    #     "args": [
-                    #         "/usr/src/language_model_gateway/language_model_gateway/gateway/tools/mcp/math_server.py"
-                    #     ],
-                    #     "transport": "stdio",
-                    # },
-                    "math": {
+                    f"{tool.name}": {
                         # make sure you start your weather server on port 8000
-                        "url": "http://math_server:8000/mcp/",
-                        "transport": "streamable_http",
-                    },
-                    "providersearch": {
-                        # make sure you start your weather server on port 8000
-                        "url": "http://provider_search:8001/mcp/",
+                        "url": url,
                         "transport": "streamable_http",
                     },
                 }
             )
             tools: List[BaseTool] = await client.get_tools()
-            self.tools = {tool.name: tool for tool in tools}
-            self._loaded = True
+            self.tools_by_mcp_url[url] = tools
+            return tools
+        except Exception as e:
+            raise ValueError(f"Failed to load tools from MCP URL {tool.url}: {e}")
 
-    def get_tool_by_name(self, *, tool: AgentConfig) -> BaseTool:
-        if tool.name in self.tools:
-            return self.tools[tool.name]
-        raise ValueError(f"Tool with name {tool.name} not found")
-
-    def has_tool(self, *, tool: AgentConfig) -> bool:
-        return tool.name in self.tools
-
-    def get_tools(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
-        return [
-            self.get_tool_by_name(tool=tool)
-            for tool in tools
-            if self.has_tool(tool=tool)
-        ]
+    async def get_tools_async(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
+        # get list of tools from the tools from each agent and then concatenate them
+        all_tools: List[BaseTool] = []
+        for tool in tools:
+            if tool.url is not None:
+                try:
+                    tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
+                        tool=tool
+                    )
+                    all_tools.extend(tools_by_url)
+                except Exception as e:
+                    raise ValueError(
+                        f"Failed to get tools from MCP URL {tool.url}: {e}"
+                    )
+        return all_tools
