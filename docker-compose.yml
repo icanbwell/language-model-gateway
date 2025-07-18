@@ -88,3 +88,25 @@ services:
     ports:
       - "8001:8001"
     restart: unless-stopped
+
+  google_search:
+    build:
+      context: ./mcp_servers/google_search
+      dockerfile: google_search.Dockerfile
+    container_name: google_search
+    ports:
+      - "8002:8002"
+    restart: unless-stopped
+
+  url_to_markdown_server:
+    build:
+      context: mcp_servers/url_to_markdown
+      dockerfile: url_to_markdown.Dockerfile
+    container_name: url_to_markdown
+    ports:
+      - '8003:8003'
+    healthcheck:
+      test: curl --fail -s http://localhost:8000/health || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
