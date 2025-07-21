@@ -30,7 +30,9 @@ from fastmcp.client.client import CallToolResult
 
 async def test_mcp_agent_directly() -> None:
     # HTTP server
-    client: Client[Any] = Client("http://math_server:8000/mcp/")
+    client: Client[Any] = Client(
+        "http://mcp_server_gateway:5051/math_server/math_server"
+    )
     async with client:
         # Basic server interaction
         await client.ping()

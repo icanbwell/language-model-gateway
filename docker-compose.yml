@@ -54,63 +54,8 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-
-
-  math_server:
-    build:
-      context: mcp_servers/math_server
-      dockerfile: math_server.Dockerfile
-    container_name: math_server
-    ports:
-      - "8000:8000"
-
-  inspector:
-    build:
-      context: .
-      dockerfile: inspector.Dockerfile
-    container_name: inspector
-    ports:
-      - "8080:6277"
-    restart: unless-stopped
-    environment:
-      # Add environment variables here if needed
-      DANGEROUSLY_OMIT_AUTH: "true"
-    # volumes:
-      # - ./config:/config
-    # Uncomment and configure volumes if you need to mount config files
-    # Add other options as needed
-
-  provider_search:
-    build:
-      context: ./mcp_servers/provider_search
-      dockerfile: provider_search.Dockerfile
-    container_name: provider_search
-    ports:
-      - "8001:8001"
-    restart: unless-stopped
-
-  google_search:
-    build:
-      context: ./mcp_servers/google_search
-      dockerfile: google_search.Dockerfile
-    container_name: google_search
-    ports:
-      - "8002:8002"
-    restart: unless-stopped
-
-  url_to_markdown_server:
-    build:
-      context: mcp_servers/url_to_markdown
-      dockerfile: url_to_markdown.Dockerfile
-    container_name: url_to_markdown
-    ports:
-      - '8003:8003'
-    healthcheck:
-      test: curl --fail -s http://localhost:8000/health || exit 1
-      interval: 10s
-      timeout: 10s
-      retries: 3
-
+    networks:
+      - web
 
   mcp_server_gateway:
     build:
@@ -129,3 +74,9 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
