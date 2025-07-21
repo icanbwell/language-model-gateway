@@ -110,3 +110,22 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
+
+
+  mcp_server_gateway:
+    build:
+      dockerfile: Dockerfile
+      context: ../mcp_server_gateway
+    container_name: mcp_server_gateway
+    environment:
+      DEBUG_METRICS: 0
+      DD_TRACE_ENABLED: "false"
+      LOG_LEVEL: INFO
+    env_file: docker.env
+    ports:
+      - '5051:5000'
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/health || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3

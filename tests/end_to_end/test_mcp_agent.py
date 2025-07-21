@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
@@ -17,6 +17,9 @@ from mcp.types import (
     ResourceLink,
     EmbeddedResource,
 )
+from openai import AsyncOpenAI
+from openai.types.responses import Response
+from openai.types.responses.tool_param import Mcp
 
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
@@ -112,3 +115,25 @@ async def test_mcp_agent() -> None:
     assert "123 Main St, Springfield" in math_response["messages"][-1].content
     # weather_response = await graph.ainvoke({"messages": "what is the weather in nyc?"})
     # print(weather_response)
+
+
+async def test_mcp_agent_via_openai() -> None:
+    # uses the OpenAI API to call the MCP server
+    openai_api_key: Optional[str] = os.environ.get("OPENAI_API_KEY")
+    assert openai_api_key is not None, "OPENAI_API_KEY environment variable is not set"
+
+    client = AsyncOpenAI(api_key=openai_api_key)
+
+    tool: Mcp = {
+        "type": "mcp",
+        "server_label": "deepwiki",
+        "server_url": "https://mcp.deepwiki.com/mcp",
+        "require_approval": "never",
+    }
+    resp: Response = await client.responses.create(
+        model="gpt-4.1",
+        tools=[tool],
+        input="What transport protocols are supported in the 2025-03-26 version of the MCP spec?",
+    )
+
+    print(resp.output_text)
