@@ -1,6 +1,7 @@
 import os
 from typing import Dict, Any, List, Optional
 
+import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage
@@ -30,9 +31,7 @@ from fastmcp.client.client import CallToolResult
 
 async def test_mcp_agent_directly() -> None:
     # HTTP server
-    client: Client[Any] = Client(
-        "http://mcp_server_gateway:5000/math_server/math_server"
-    )
+    client: Client[Any] = Client("http://mcp_server_gateway:5000/math_server")
     async with client:
         # Basic server interaction
         await client.ping()
@@ -81,12 +80,12 @@ async def test_mcp_agent() -> None:
             # },
             "math": {
                 # make sure you start your weather server on port 8000
-                "url": "http://mcp_server_gateway:5000/math_server/math_server",
+                "url": "http://mcp_server_gateway:5000/math_server",
                 "transport": "streamable_http",
             },
             "providersearch": {
                 # make sure you start your weather server on port 8000
-                "url": "http://mcp_server_gateway:5000/provider_search/provider_search",
+                "url": "http://mcp_server_gateway:5000/provider_search",
                 "transport": "streamable_http",
             },
         }
@@ -119,6 +118,9 @@ async def test_mcp_agent() -> None:
     # print(weather_response)
 
 
+@pytest.mark.skip(
+    reason="This test requires opening a public MCP server per https://gofastmcp.com/integrations/openai"
+)
 async def test_mcp_agent_via_openai() -> None:
     # uses the OpenAI API to call the MCP server
     openai_api_key: Optional[str] = os.environ.get("OPENAI_API_KEY")
@@ -129,7 +131,7 @@ async def test_mcp_agent_via_openai() -> None:
     tool: Mcp = {
         "type": "mcp",
         "server_label": "math_server",
-        "server_url": "http://mcp_server_gateway:5000/math_server/math_server",
+        "server_url": "http://mcp_server_gateway:5000/math_server",
         "require_approval": "never",
     }
     resp: Response = await client.responses.create(
