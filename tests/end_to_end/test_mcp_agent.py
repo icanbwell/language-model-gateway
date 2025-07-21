@@ -126,14 +126,14 @@ async def test_mcp_agent_via_openai() -> None:
 
     tool: Mcp = {
         "type": "mcp",
-        "server_label": "deepwiki",
-        "server_url": "https://mcp.deepwiki.com/mcp",
+        "server_label": "math_server",
+        "server_url": "http://mcp_server_gateway:5051/math_server/math_server",
         "require_approval": "never",
     }
     resp: Response = await client.responses.create(
         model="gpt-4.1",
         tools=[tool],
-        input="What transport protocols are supported in the 2025-03-26 version of the MCP spec?",
+        input="multiple 2 and 3 using math server",
     )
 
     print(resp.output_text)
