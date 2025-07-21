@@ -81,12 +81,12 @@ async def test_mcp_agent() -> None:
             # },
             "math": {
                 # make sure you start your weather server on port 8000
-                "url": "http://math_server:8000/mcp/",
+                "url": "http://mcp_server_gateway:5000/math_server/math_server",
                 "transport": "streamable_http",
             },
             "providersearch": {
                 # make sure you start your weather server on port 8000
-                "url": "http://provider_search:8001/mcp/",
+                "url": "http://mcp_server_gateway:5000/provider_search/provider_search",
                 "transport": "streamable_http",
             },
         }
@@ -129,7 +129,7 @@ async def test_mcp_agent_via_openai() -> None:
     tool: Mcp = {
         "type": "mcp",
         "server_label": "math_server",
-        "server_url": "http://mcp_server_gateway:5051/math_server/math_server",
+        "server_url": "http://mcp_server_gateway:5000/math_server/math_server",
         "require_approval": "never",
     }
     resp: Response = await client.responses.create(
