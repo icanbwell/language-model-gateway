@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 import pytest
 from langchain_aws import ChatBedrockConverse
@@ -8,7 +8,8 @@ from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
-from mcp import ListToolsResult
+from mcp import ListToolsResult, types, Tool
+from mcp.types import CallToolResult
 from openai import AsyncOpenAI
 from openai.types.responses import Response
 from openai.types.responses.tool_param import Mcp
@@ -49,8 +50,20 @@ async def test_google_workspace_agent_directly() -> None:
             # Initialize the connection
             await session.initialize()
             # List available tools
-            tools: ListToolsResult = await session.list_tools()
-            print(f"Available tools: {[tool.name for tool in tools.tools]}")
+            tool_result: ListToolsResult = await session.list_tools()
+            tools_tools: List[Tool] = tool_result.tools
+            print(f"Available tools: {[tool.name for tool in tools_tools]}")
+
+            result: CallToolResult = await session.call_tool(
+                "search_drive_files",
+                {
+                    "query": "search google drive for a file named 'test.txt'.",
+                    "user_google_email": "imran@icanbwell.com",
+                },
+            )
+            for content in result.content:
+                if isinstance(content, types.TextContent):
+                    print(f"Text: {content.text}")
 
 
 async def test_mcp_agent() -> None:
