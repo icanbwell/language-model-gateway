@@ -77,6 +77,23 @@ services:
     networks:
       - web
 
+  google-workspace-mcp:
+    build:
+      context: ../google_workspace_mcp
+      dockerfile: Dockerfile
+    image: google-workspace-mcp
+    env_file: docker.env
+    command: ["python", "main.py", "--transport", "streamable-http", "--single-user"]
+    ports:
+      - "5052:8000"
+    healthcheck:
+      test: curl --fail -s http://localhost:8000/health || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - web
+
 networks:
   web:
     driver: bridge
