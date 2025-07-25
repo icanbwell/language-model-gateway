@@ -56,7 +56,7 @@ async def test_google_drive_mcp_agent_directly() -> None:
         assert "Hello, this is a test file shared with all of b.well" in content.text
 
 
-async def test_mcp_agent() -> None:
+async def test_google_drive_mcp_agent() -> None:
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
 
