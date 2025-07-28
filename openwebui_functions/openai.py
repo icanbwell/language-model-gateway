@@ -34,8 +34,7 @@ class Pipe:
 
     def __init__(self) -> None:
         self.type: str = "pipe"
-        self.id: str = "langchain_pipe"
-        self.name: str = "LangChain Pipe"
+        self.id: str = "language_model_gateway"
         self.valves = self.Valves()
         self.last_emit_time: float = 0
 
