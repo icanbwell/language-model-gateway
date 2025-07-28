@@ -299,6 +299,12 @@ class Pipe:
         if auth_token:
             headers["Authorization"] = f"Bearer {auth_token}"
 
+        # Extract model id from the model name
+        model_id = body["model"][body["model"].find(".") + 1 :]
+
+        # Update the model id in the body
+        payload = {**body, "model": model_id}
+
         try:
             # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
             # include any query parameters in the URL
@@ -313,7 +319,7 @@ class Pipe:
             # now run the __request__ with the OpenAI API
             response = requests.post(
                 url=url,
-                json=body,
+                json=payload,
                 headers=headers,
                 stream=body.get("stream", False),
                 timeout=30,  # Set a timeout for the request
@@ -327,3 +333,9 @@ class Pipe:
                 return response.json()  # type: ignore[no-any-return]
         except Exception as e:
             return f"Error: {e}"
+
+    # noinspection PyMethodMayBeStatic
+    def pipes(self) -> list[dict[str, str]]:
+        return [
+            {"id": "Python Coding", "name": "Python Coding"},
+        ]
