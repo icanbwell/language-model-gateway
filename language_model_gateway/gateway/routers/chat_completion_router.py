@@ -85,7 +85,8 @@ class ChatCompletionsRouter:
 
         try:
             return await chat_manager.chat_completions(
-                headers={k: v for k, v in request.headers.items()},
+                # convert headers to lowercase to match OpenAI API expectations
+                headers={k.lower(): v for k, v in request.headers.items()},
                 chat_request=cast(ChatRequest, chat_request),
             )
         except* TokenRetrievalError as e:

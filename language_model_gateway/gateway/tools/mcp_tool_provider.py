@@ -47,11 +47,11 @@ class MCPToolProvider:
                 }
 
             # pass Authorization header if provided
-            if headers and "Authorization" in headers:
+            if headers and "authorization" in headers:
                 # add the Authorization header to the mcp_tool_config headers
                 mcp_tool_config["headers"] = {
                     **mcp_tool_config.get("headers", {}),
-                    "Authorization": headers["Authorization"],
+                    "Authorization": headers["authorization"],
                 }
 
             client: MultiServerMCPClient = MultiServerMCPClient(

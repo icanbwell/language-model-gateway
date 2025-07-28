@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "google_drive",
+  "name": "Google Drive",
+  "description": "This is a general purpose language model that can access data in Google Drive.",
+  "type": "langchain",
+  "model": {
+    "provider": "bedrock",
+    "model": "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+  },
+  "system_prompts": [
+    {
+      "role": "system",
+      "content": "You are a tool that answers questions and generates text.  Let’s think step by step and take your time to get the right answer."
+    }
+  ],
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": 0.5
+    },
+    {
+      "key": "max_tokens",
+      "value": 1000
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "name": "calculator_average"
+    },
+    {
+      "name": "calculator_stddev"
+    },
+    {
+      "name": "calculator_length"
+    },
+    {
+      "name": "calculator_sum"
+    },
+    {
+      "name": "pubmed"
+    },
+    {
+      "name": "web_search"
+    },
+    {
+      "name": "arxiv_search"
+    },
+    {
+      "name": "image_generator"
+    },
+    {
+      "name": "provider_search"
+    },
+    {
+      "name": "get_web_page"
+    },
+    {
+      "name": "scraping_bee_web_scraper"
+    },
+    {
+      "name": "pdf_text_extractor"
+    }
+  ],
+  "example_prompts": [
+    {
+      "role": "user",
+      "content": "What is the capital of France?"
+    },
+    {
+      "role": "user",
+      "content": "```Generate an Entity-Relationship Diagram with the following specifications:\n\nEntities and Attributes:\n1. User Entity\n   - user_id* (primary key)\n   - username\n   - email\n   - registration_date\n\n2. Product Entity\n   - product_id* (primary key)\n   - name\n   - price\n   - category\n   - stock_quantity\n\n3. Order Entity\n   - order_id* (primary key)\n   - user_id (foreign key)\n   - order_date\n   - total_amount\n   - status\n\nRelationships:\n- User places Order (one_to_many)\n- Order contains Product (many_to_many)\n- Product belongs to Category (many_to_one)\n\nDiagram Requirements:\n- Use distinct colors for each entity\n- Clearly mark primary keys\n- Show relationship cardinalities```"
+    }
+  ]
+}

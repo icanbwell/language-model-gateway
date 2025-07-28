@@ -31,6 +31,27 @@ import requests
 from authlib.integrations.requests_client import OAuth2Session
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
+from typing import Optional
+
+import httpx
+import pytest
+from openai import AsyncOpenAI
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
+
+from language_model_gateway.configs.config_schema import (
+    ChatModelConfig,
+    ModelConfig,
+    AgentConfig,
+)
+from language_model_gateway.container.simple_container import SimpleContainer
+from language_model_gateway.gateway.api_container import get_container_async
+from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.utilities.environment_reader import (
+    EnvironmentReader,
+)
+from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+from tests.gateway.mocks.mock_chat_model import MockChatModel
+from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
 def get_access_token(username: str, password: str) -> Dict[str, Any]:
@@ -245,3 +266,77 @@ def verify_aws_boto3_authentication() -> None:
     except Exception as e:
         print(f"Unexpected error: {e}")
         assert False, f"Unexpected error: {e}"
+
+
+@pytest.mark.asyncio
+async def test_chat_completions_with_google_drive(
+    async_client: httpx.AsyncClient,
+) -> None:
+    print("")
+    verify_aws_boto3_authentication()
+    access_token_result: Dict[str, str] = get_access_token(
+        username="tester", password="password"
+    )
+    url: str = "http://mcp_server_gateway:5000/google_drive"
+    access_token = access_token_result["access_token"]
+
+    test_container: SimpleContainer = await get_container_async()
+    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
+        test_container.register(
+            ModelFactory,
+            lambda c: MockModelFactory(
+                fn_get_model=lambda chat_model_config: MockChatModel(
+                    fn_get_response=lambda messages: "Donald Trump won the last US election"
+                )
+            ),
+        )
+
+    # set the model configuration for this test
+    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
+        test_container.resolve(ExpiringCache)
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="google_drive",
+                name="Google Drive",
+                description="Google Drive",
+                type="langchain",
+                model=ModelConfig(
+                    provider="bedrock",
+                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+                ),
+                tools=[
+                    AgentConfig(name="download_file_from_url", url=url),
+                ],
+            )
+        ]
+    )
+
+    # init client and connect to localhost server
+    client = AsyncOpenAI(
+        api_key="fake-api-key",
+        base_url="http://localhost:5000/api/v1",  # change the default port if needed
+        http_client=async_client,
+    )
+
+    # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "show me contents of this file: https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing",
+    }
+    chat_completion: ChatCompletion = await client.chat.completions.create(
+        messages=[message],
+        model="Google Drive",
+        extra_headers={
+            "Authorization": f"Bearer {access_token}",
+        },
+    )
+
+    # print the top "choice"
+    content: Optional[str] = "\n".join(
+        choice.message.content or "" for choice in chat_completion.choices
+    )
+    assert content is not None
+    print(content)
+    assert "Trump" in content
