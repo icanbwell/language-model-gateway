@@ -20,6 +20,7 @@ services:
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
       OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
+      LANGUAGE_MODEL_GATEWAY_API_BASE_URL: 'http://dev:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'
       #      DEFAULT_MODELS: "General Purpose"
