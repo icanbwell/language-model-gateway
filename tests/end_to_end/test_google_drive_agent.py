@@ -45,13 +45,7 @@ from language_model_gateway.configs.config_schema import (
 )
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
-from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.utilities.environment_reader import (
-    EnvironmentReader,
-)
 from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
-from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
 def get_access_token(username: str, password: str) -> Dict[str, Any]:
@@ -281,15 +275,15 @@ async def test_chat_completions_with_google_drive(
     access_token = access_token_result["access_token"]
 
     test_container: SimpleContainer = await get_container_async()
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Donald Trump won the last US election"
-                )
-            ),
-        )
+    # if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
+    #     test_container.register(
+    #         ModelFactory,
+    #         lambda c: MockModelFactory(
+    #             fn_get_model=lambda chat_model_config: MockChatModel(
+    #                 fn_get_response=lambda messages: "Hello, this is a test file shared with all of b.well"
+    #             )
+    #         ),
+    #     )
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
@@ -339,4 +333,4 @@ async def test_chat_completions_with_google_drive(
     )
     assert content is not None
     print(content)
-    assert "Trump" in content
+    assert "Hello, this is a test file shared with all of b.well" in content
