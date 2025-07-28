@@ -11,6 +11,7 @@ from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
@@ -66,11 +67,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             else []
         )
 
-        compiled_state_graph: CompiledStateGraph = (
-            await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-                llm=llm,
-                tools=tools,
-            )
+        compiled_state_graph: CompiledStateGraph[
+            MyMessagesState
+        ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+            llm=llm,
+            tools=tools,
         )
         request_id = random.randint(1, 1000)
 

@@ -14,13 +14,9 @@ from starlette.staticfiles import StaticFiles
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
-from language_model_gateway.gateway.oauth.google_drive_authenticator import (
-    GoogleDriveAuthenticator,
-)
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
-from language_model_gateway.gateway.routers.google_drive_router import GoogleDriveRouter
 from language_model_gateway.gateway.routers.image_generation_router import (
     ImageGenerationRouter,
 )
@@ -97,13 +93,6 @@ def create_app() -> FastAPI:
     makedirs(image_generation_path, exist_ok=True)
     app1.include_router(
         ImagesRouter(image_generation_path=image_generation_path).get_router()
-    )
-    app1.include_router(
-        GoogleDriveRouter(
-            authenticator=GoogleDriveAuthenticator(
-                redirect_uri=environ["GOOGLE_AUTH_REDIRECT_URI"],
-            ),
-        ).get_router()
     )
     return app1
 
