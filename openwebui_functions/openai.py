@@ -8,7 +8,9 @@ to make requests to the OpenAI API. It supports both streaming and non-streaming
 
 import asyncio
 import json
+import os
 import time
+from pathlib import PurePosixPath
 from typing import AsyncGenerator
 from typing import Optional, Callable, Awaitable, Any, Dict
 from typing import Union, Generator, Iterator
@@ -18,6 +20,7 @@ from pydantic import BaseModel
 from pydantic import Field
 from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
+from urllib.parse import urlparse, urlunparse
 
 
 class Pipe:
@@ -214,6 +217,38 @@ class Pipe:
             yield f"data: {json.dumps(error_chunk)}\n\n"
             await self.emit_status(__event_emitter__, "error", str(e), True)
 
+    @classmethod
+    def pathlib_url_join(cls, base_url: str, path: str) -> str:
+        """
+        Join URLs using pathlib for path manipulation.
+
+        Args:
+            base_url: The base URL
+            path: Path to append
+
+        Returns:
+            Fully constructed URL
+        """
+        # Parse the base URL
+        parsed_base = urlparse(base_url)
+
+        # Use PurePosixPath to handle path joining
+        full_path = str(PurePosixPath(parsed_base.path) / path.lstrip("/"))
+
+        # Reconstruct the URL
+        reconstructed_url = urlunparse(
+            (
+                parsed_base.scheme,
+                parsed_base.netloc,
+                full_path,
+                parsed_base.params,
+                parsed_base.query,
+                parsed_base.fragment,
+            )
+        )
+
+        return reconstructed_url
+
     # noinspection PyMethodMayBeStatic
     async def pipe(
         self,
@@ -252,6 +287,12 @@ class Pipe:
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
         print(f"auth_token: {auth_token}")
 
+        open_api_base_url: str | None = os.getenv("OPENAI_API_BASE_URL")
+        assert open_api_base_url is not None, (
+            "OpenAI_API_BASE_URL must be set as an environment variable."
+        )
+        print(f"open_api_base_url: {open_api_base_url}")
+
         headers: MutableHeaders = __request__.headers.mutablecopy()
 
         # if auth token is available in the cookies, add it to the Authorization header
@@ -259,9 +300,19 @@ class Pipe:
             headers["Authorization"] = f"Bearer {auth_token}"
 
         try:
+            # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
+            # include any query parameters in the URL
+            operation_path = str(__request__.url).replace(
+                "https://open-webui.localhost/api/", ""
+            )
+            print(f"operation_path: {operation_path}")
+            url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
+
+            print(f"url: {url}")
+
             # now run the __request__ with the OpenAI API
             response = requests.post(
-                url=str(__request__.url),
+                url=url,
                 json=body,
                 headers=headers,
                 stream=body.get("stream", False),
