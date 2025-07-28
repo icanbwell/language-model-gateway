@@ -8,6 +8,7 @@ to make requests to the OpenAI API. It supports both streaming and non-streaming
 
 import asyncio
 import json
+import logging
 import os
 import time
 from pathlib import PurePosixPath
@@ -21,6 +22,8 @@ from pydantic import Field
 from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
 from urllib.parse import urlparse, urlunparse
+
+logger = logging.getLogger(__name__)
 
 
 class Pipe:
@@ -39,8 +42,40 @@ class Pipe:
     def __init__(self) -> None:
         self.type: str = "pipe"
         self.id: str = "language_model_gateway"
-        self.valves = self.Valves(OPENAI_API_BASE_URL=os.getenv("OPENAI_API_BASE_URL"))
+        openai_api_base_url_ = self.read_base_url()
+        self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
+        self.name: str = "Aiden: "
         self.last_emit_time: float = 0
+        self.pipelines = self.get_models()
+
+    # noinspection PyMethodMayBeStatic
+    def read_base_url(self) -> Optional[str]:
+        """
+        Reads the OpenAI API base URL from environment variables.
+        Returns:
+            The OpenAI API base URL if set, otherwise None.
+        """
+        return os.getenv("LANGUAGE_MODEL_GATEWAY_API_BASE_URL") or os.getenv(
+            "OPENAI_API_BASE_URL"
+        )
+
+    # noinspection PyMethodMayBeStatic
+    async def on_startup(self) -> None:
+        # This function is called when the server is started.
+        logger.debug(f"on_startup:{__name__}")
+        pass
+
+    # noinspection PyMethodMayBeStatic
+    async def on_shutdown(self) -> None:
+        # This function is called when the server is stopped.
+        logger.debug(f"on_shutdown:{__name__}")
+        pass
+
+    async def on_valves_updated(self) -> None:
+        # This function is called when the valves are updated.
+        logger.debug(f"on_valves_updated:{__name__}")
+        self.pipelines = self.get_models()
+        pass
 
     async def emit_status(
         self,
@@ -267,34 +302,45 @@ class Pipe:
         Main pipe method supporting both streaming and non-streaming responses
         """
         # This is where you can add your custom pipelines like RAG.
-        print(f"pipe:{__name__}")
+        logger.debug(f"pipe:{__name__}")
 
-        print("=== body ===")
-        print(body)
-        print("==== End of body ===")
-        print(f"__request__: {__request__}")
-        print(f"__user__: {__user__}")
-        print("==== Request Url ====")
-        print(__request__.url if __request__ else "No request URL provided")
-        print("==== End of Request Url ====")
+        logger.debug("=== body ===")
+        logger.debug(body)
+        logger.debug("==== End of body ===")
+        logger.debug(f"__request__: {__request__}")
+        logger.debug(f"__user__: {__user__}")
+        logger.debug("==== Request Url ====")
+        logger.debug(__request__.url if __request__ else "No request URL provided")
+        logger.debug("==== End of Request Url ====")
 
         assert __request__ is not None, "Request object must be provided."
 
-        # print the Authorization header if available
+        # logger.debug the Authorization header if available
         auth_header = __request__.headers.get("Authorization")
         if auth_header:
-            print(f"Authorization header: {auth_header}")
+            logger.debug(f"Authorization header: {auth_header}")
         else:
-            print("No Authorization header found.")
+            logger.debug("No Authorization header found.")
 
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
-        print(f"auth_token: {auth_token}")
+        logger.debug(f"auth_token: {auth_token}")
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
+        if open_api_base_url is None:
+            logger.debug(
+                "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
+            )
+            open_api_base_url = self.read_base_url()
+            logger.debug(
+                f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
+            )
         assert open_api_base_url is not None, (
-            "OpenAI_API_BASE_URL must be set as an environment variable."
+            "LanguageModelGateway:Pipes OpenAI_API_BASE_URL must be set as an environment variable."
         )
-        print(f"open_api_base_url: {open_api_base_url}")
+        assert open_api_base_url is not None, (
+            "LanguageModelGateway:Pipe OpenAI_API_BASE_URL must be set as an environment variable."
+        )
+        logger.debug(f"open_api_base_url: {open_api_base_url}")
 
         headers: MutableHeaders = __request__.headers.mutablecopy()
 
@@ -314,10 +360,10 @@ class Pipe:
             operation_path = str(__request__.url).replace(
                 "https://open-webui.localhost/api/", ""
             )
-            print(f"operation_path: {operation_path}")
+            logger.debug(f"operation_path: {operation_path}")
             url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
 
-            print(f"url: {url}")
+            logger.debug(f"Calling chat completion url: {url}")
 
             # now run the __request__ with the OpenAI API
             response = requests.post(
@@ -337,18 +383,28 @@ class Pipe:
         except Exception as e:
             return f"Error: {e}"
 
-    # noinspection PyMethodMayBeStatic
-    def pipes(self) -> list[dict[str, str]]:
+    def get_models(self) -> list[dict[str, str]]:
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
+        if open_api_base_url is None:
+            logger.debug(
+                "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
+            )
+            open_api_base_url = self.read_base_url()
+            logger.debug(
+                f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
+            )
+        if open_api_base_url is None:
+            return []
         assert open_api_base_url is not None, (
-            "OpenAI_API_BASE_URL must be set as an environment variable."
+            "LanguageModelGateway:Pipes OpenAI_API_BASE_URL must be set as an environment variable."
         )
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         # call the models endpoint to get the list of available models
+        logger.debug(f"Calling models endpoint: {model_url}")
         response = requests.get(model_url, timeout=30)  # Set a timeout for the request
         response.raise_for_status()
         models = response.json().get("data", [])
-        print(f"models: {models}")
+        logger.debug(f"Received models from {model_url}: {models}")
         return [
             {
                 "id": model["id"],
@@ -356,3 +412,6 @@ class Pipe:
             }
             for model in models
         ]
+
+    def pipes(self) -> list[dict[str, str]]:
+        return self.pipelines

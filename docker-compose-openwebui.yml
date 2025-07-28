@@ -10,7 +10,7 @@ services:
     ports:
       - "3050:8080"
     environment:
-      # https://docs.openwebui.com/getting-started/advanced-topics/env-configuration
+      # https://docs.openwebui.com/getting-started/env-configuration/
       BYPASS_MODEL_ACCESS_CONTROL: True
       DEFAULT_USER_ROLE: user
       WEBUI_AUTH: 0
@@ -19,6 +19,7 @@ services:
       SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG"}'
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
+      ENABLE_OPENAI_API: 0
       OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       LANGUAGE_MODEL_GATEWAY_API_BASE_URL: 'http://dev:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
