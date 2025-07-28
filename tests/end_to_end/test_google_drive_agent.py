@@ -1,6 +1,7 @@
 import os
 from typing import Dict, Any, List
 
+import mcp
 from authlib.oauth2.rfc6749 import OAuth2Token
 from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
@@ -24,7 +25,6 @@ from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client
-from fastmcp.client.client import CallToolResult
 from fastmcp.client.logging import LogMessage
 import requests
 from authlib.integrations.requests_client import OAuth2Session
@@ -96,12 +96,21 @@ async def test_google_drive_mcp_agent_directly() -> None:
     )
 
     async def log_handler(message: LogMessage) -> None:
-        print(f"Server log: {message.data}")
+        if message.level == "error":
+            print(f"ERROR: {message.data}")
+        elif message.level == "warning":
+            print(f"WARNING: {message.data}")
+        else:
+            print(f"{message.level.upper()}: {message.data}")
 
     async def progress_handler(
         progress: float, total: float | None, message: str | None
     ) -> None:
-        print(f"Progress: {progress}/{total} - {message}")
+        if total is not None:
+            percentage = (progress / total) * 100
+            print(f"Progress: {percentage:.1f}% - {message or ''}")
+        else:
+            print(f"Progress: {progress} - {message or ''}")
 
     client: Client[Any] = Client(
         transport=transport,
@@ -121,7 +130,7 @@ async def test_google_drive_mcp_agent_directly() -> None:
         assert prompts is not None
 
         # Execute operations
-        result: CallToolResult = await client.call_tool(
+        result: mcp.types.CallToolResult = await client.call_tool_mcp(
             "download_file_from_url",
             {
                 "url": "https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
