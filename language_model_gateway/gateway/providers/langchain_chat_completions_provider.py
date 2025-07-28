@@ -67,7 +67,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Initialize tools
         tools: Sequence[BaseTool] = (
-            self.tool_provider.get_tools(tools=[t for t in model_config.get_agents()])
+            self.tool_provider.get_tools(
+                tools=[t for t in model_config.get_agents()], headers=headers
+            )
             if model_config.get_agents() is not None
             else []
         )
@@ -76,7 +78,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         await self.mcp_tool_provider.load_async()
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
-            tools=[t for t in model_config.get_agents()]
+            tools=[t for t in model_config.get_agents()],
+            headers=headers,
         )
 
         compiled_state_graph: CompiledStateGraph[

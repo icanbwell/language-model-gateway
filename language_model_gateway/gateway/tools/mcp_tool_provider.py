@@ -21,7 +21,9 @@ class MCPToolProvider:
     async def load_async(self) -> None:
         pass
 
-    async def get_tools_by_url_async(self, *, tool: AgentConfig) -> List[BaseTool]:
+    async def get_tools_by_url_async(
+        self, *, tool: AgentConfig, headers: Dict[str, str]
+    ) -> List[BaseTool]:
         try:
             url: str | None = tool.url
             assert url is not None, "Tool URL must be provided"
@@ -29,16 +31,27 @@ class MCPToolProvider:
             if url in self.tools_by_mcp_url:
                 return self.tools_by_mcp_url[url]
 
+            # TODO: probably cache the tools and just use the headers by specifying an httpx_client_factory
             mcp_tool_config: StreamableHttpConnection = {
-                # make sure you start your weather server on port 8000
                 "url": url,
                 "transport": "streamable_http",
+                # specify the http client factory to use the headers
+                # httpx_client_factory
+                # and/or bearer "auth"# auth: NotRequired[httpx.Auth]
             }
             if tool.headers:
                 # replace the strings with os.path.expandvars # to allow for environment variable expansion
                 mcp_tool_config["headers"] = {
                     key: os.path.expandvars(value)
                     for key, value in tool.headers.items()
+                }
+
+            # pass Authorization header if provided
+            if headers and "Authorization" in headers:
+                # add the Authorization header to the mcp_tool_config headers
+                mcp_tool_config["headers"] = {
+                    **mcp_tool_config.get("headers", {}),
+                    "Authorization": headers["Authorization"],
                 }
 
             client: MultiServerMCPClient = MultiServerMCPClient(
@@ -52,14 +65,16 @@ class MCPToolProvider:
         except Exception as e:
             raise ValueError(f"Failed to load tools from MCP URL {tool.url}: {e}")
 
-    async def get_tools_async(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
+    async def get_tools_async(
+        self, *, tools: list[AgentConfig], headers: Dict[str, str]
+    ) -> list[BaseTool]:
         # get list of tools from the tools from each agent and then concatenate them
         all_tools: List[BaseTool] = []
         for tool in tools:
             if tool.url is not None:
                 try:
                     tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
-                        tool=tool
+                        tool=tool, headers=headers
                     )
                     all_tools.extend(tools_by_url)
                 except Exception as e:
