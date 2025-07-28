@@ -336,6 +336,20 @@ class Pipe:
 
     # noinspection PyMethodMayBeStatic
     def pipes(self) -> list[dict[str, str]]:
+        open_api_base_url: str | None = os.getenv("OPENAI_API_BASE_URL")
+        assert open_api_base_url is not None, (
+            "OpenAI_API_BASE_URL must be set as an environment variable."
+        )
+        model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
+        # call the models endpoint to get the list of available models
+        response = requests.get(model_url, timeout=30)  # Set a timeout for the request
+        response.raise_for_status()
+        models = response.json().get("data", [])
+        print(f"models: {models}")
         return [
-            {"id": "Python Coding", "name": "Python Coding"},
+            {
+                "id": model["id"],
+                "name": model["id"],
+            }
+            for model in models
         ]
