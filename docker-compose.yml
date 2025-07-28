@@ -66,6 +66,10 @@ services:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
       LOG_LEVEL: INFO
+      # These define the connection to the identity provider for JWT validation
+      JWKS_URI: "https://my-identity-provider.com/.well-known/jwks.json"
+      AUDIENCE: "my-mcp-server"
+      ISSUER: "https://my-identity-provider.com/"
     env_file: docker.env
     ports:
       - '5051:5000'
