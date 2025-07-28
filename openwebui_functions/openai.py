@@ -381,6 +381,8 @@ class Pipe:
             else:
                 return response.json()  # type: ignore[no-any-return]
         except Exception as e:
+            # logger.error(f"Error in pipe: {e}")
+            # logger.debug(f"Error details: {e.__traceback__}")
             return f"Error: {e}"
 
     def get_models(self) -> list[dict[str, str]]:
