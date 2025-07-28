@@ -88,8 +88,7 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 		printf "========== ERROR: language_model_gateway-open-webui-1 did not start. Run docker logs language_model_gateway-open-webui-1 =========\n" && \
 		exit 1; \
 	fi
-	make insert-admin-user
-	make set-admin-user-role
+	make insert-admin-user && make set-admin-user-role
 	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
