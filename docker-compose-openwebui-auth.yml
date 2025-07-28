@@ -18,63 +18,6 @@ services:
       OAUTH_USERNAME_CLAIM: "email"
       WEBUI_URL: "https://open-webui.localhost"
 
-  keycloak:
-    # https://github.com/keycloak/keycloak/releases
-    image: quay.io/keycloak/keycloak:25.0.6
-    #    container_name: keycloak
-    #    build:
-    #      dockerfile: keycloak.Dockerfile
-    #      context: .
-    #    depends_on:
-    #      - postgres
-    environment:
-      KC_HEALTH_ENABLED: true
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: password
-      #      KC_DB: postgres
-      #      KC_DB_URL: jdbc:postgresql://postgres/pdb
-      #      KC_DB_USERNAME: admin
-      #      KC_DB_PASSWORD: admin
-      # The below settings are for test data creation
-      # This is the user and password that will be created in the realm
-      MY_ADMIN_USER_NAME: admin
-      MY_ADMIN_USER_PASSWORD: password
-      MY_ADMIN_USER_SCOPE: user/*.* access/*.*
-      MY_ADMIN_USER_GROUPS: user/*.* access/*.*
-      MY_ADMIN_USER_TOKEN_USERNAME: admin
-      # This is the user and password that will be created in the realm
-      MY_USER_NAME: tester
-      MY_USER_PASSWORD: password
-      # These groups get specified as scopes in the token
-      MY_USER_GROUPS: user/*.*,access/*.* launch/patient,patient/*.read
-      MY_USER_SCOPE: user/*.* access/*.* launch/patient patient/*.read openid profile email
-      MY_USER_TOKEN_USERNAME: tester
-      # This is the client setup
-      CLIENT_ID: bwell-client-id
-      CLIENT_SECRET: bwell-secret
-      # This is the service account that will be created in the realm
-      SERVICE_ACCOUNT_NAME: service-account
-      SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*
-      SERVICE_ACCOUNT_GROUPS: user/*.* access/*.*
-      # These are the custom claims that will be added to any generated token
-      MY_USER_CLIENT_PERSON_ID: 0b2ad38a-20bc-5cf5-9739-13f242b05892
-      MY_USER_CLIENT_PATIENT_ID: 22aa18af-af51-5799-bc55-367c22c85407
-      MY_USER_BWELL_PERSON_ID: 0eb80391-0f61-5ce6-b221-a5428f2f38a7
-      MY_USER_BWELL_PATIENT_ID: patient2
-      QUARKUS_HTTP_ACCESS_LOG_PATTERN: "%r\n%{ALL_REQUEST_HEADERS}"
-    ports:
-      - "8080:8080"
-    command: [ "start-dev", "--import-realm", "--verbose" ]
-    volumes:
-      - ./keycloak-config/realm-import.json:/opt/keycloak/data/import/realm-import.json
-    healthcheck:
-      test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - web
-
   openid-connect-debugger:
     image: leplusorg/openid-connect-provider-debugger:latest
 #    network_mode: "host"

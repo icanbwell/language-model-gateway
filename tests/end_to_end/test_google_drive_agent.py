@@ -1,6 +1,7 @@
 import os
 from typing import Dict, Any, List
 
+from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage
@@ -27,7 +28,11 @@ from fastmcp.client.client import CallToolResult
 
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
-    client: Client[Any] = Client("http://mcp_server_gateway:5000/google_drive")
+    url: str = "http://mcp_server_gateway:5000/google_drive"
+    transport: StreamableHttpTransport = StreamableHttpTransport(
+        url=url, auth="test-token"
+    )
+    client: Client[Any] = Client(transport=transport)
     async with client:
         # Basic server interaction
         await client.ping()
