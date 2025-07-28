@@ -4,7 +4,7 @@ import os
 from typing import override, Literal, Optional
 
 from openai import AsyncOpenAI
-from openai.types import ImagesResponse, Image
+from openai.types import ImagesResponse
 
 from language_model_gateway.gateway.image_generation.image_generator import (
     ImageGenerator,
@@ -41,9 +41,11 @@ class OpenAIImageGenerator(ImageGenerator):
         )
 
         # Extract the base64 encoded image and decode
-        image: Image | None = response.data[0] if response.data else None
-        assert image is not None, "Image data is None"
-        base64_image: Optional[str] = image.b64_json
+        assert response.data is not None and len(response.data) > 0, (
+            "Base64 image is None"
+        )
+
+        base64_image: Optional[str] = response.data[0].b64_json
         assert base64_image is not None, "Base64 image is None"
         return base64.b64decode(base64_image)
 

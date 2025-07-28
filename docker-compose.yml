@@ -14,7 +14,7 @@ services:
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
 #      DEFAULT_WEB_SEARCH_TOOL: "duckduckgo_search"
       DEFAULT_WEB_SEARCH_TOOL: "google_search"
-      RUN_TESTS_WITH_REAL_LLM: 1
+      RUN_TESTS_WITH_REAL_LLM: 0
       IMAGE_GENERATION_PATH: "/usr/src/language_model_gateway/image_generation"
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
@@ -77,23 +77,6 @@ services:
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 30s
-      timeout: 10s
-      retries: 3
-    networks:
-      - web
-
-  google-workspace-mcp:
-    build:
-      context: ../google_workspace_mcp
-      dockerfile: Dockerfile
-    image: google-workspace-mcp
-    env_file: docker.env
-    command: ["python", "main.py", "--transport", "streamable-http", "--single-user"]
-    ports:
-      - "5052:8000"
-    healthcheck:
-      test: curl --fail -s http://localhost:8000/health || exit 1
-      interval: 1m30s
       timeout: 10s
       retries: 3
     networks:
