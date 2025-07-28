@@ -38,13 +38,17 @@ class Pipe:
             default=None,
             description="Base URL for OpenAI API, e.g., https://api.openai.com/v1",
         )
+        model_name_prefix: str = Field(
+            default="MCP: ",
+            description="Prefix for model names in the dropdown",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
         self.id: str = "language_model_gateway"
         openai_api_base_url_ = self.read_base_url()
         self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
-        self.name: str = "Aiden: "
+        self.name: str = self.valves.model_name_prefix
         self.last_emit_time: float = 0
         self.pipelines = self.get_models()
 
