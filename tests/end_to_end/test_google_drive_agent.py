@@ -29,6 +29,8 @@ from fastmcp import Client
 from fastmcp.client.logging import LogMessage
 import requests
 from authlib.integrations.requests_client import OAuth2Session
+import boto3
+from botocore.exceptions import NoCredentialsError, ClientError
 
 
 def get_access_token(username: str, password: str) -> Dict[str, Any]:
@@ -147,6 +149,7 @@ async def test_google_drive_mcp_agent_directly() -> None:
 
 
 async def test_google_drive_via_llm() -> None:
+    verify_aws_boto3_authentication()
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
     access_token_result: Dict[str, str] = get_access_token(
@@ -213,3 +216,32 @@ async def test_google_drive_via_llm() -> None:
     )
     # weather_response = await graph.ainvoke({"messages": "what is the weather in nyc?"})
     # print(weather_response)
+
+
+def verify_aws_boto3_authentication() -> None:
+    """
+    Test if AWS credentials are configured and boto3 can authenticate.
+    Uses profile and region from environment variables if set.
+    """
+    credentials_profile_name = os.environ.get("AWS_CREDENTIALS_PROFILE")
+    region_name = os.environ.get("AWS_REGION", "us-east-1")
+    session_kwargs = {}
+    if credentials_profile_name:
+        session_kwargs["profile_name"] = credentials_profile_name
+    if region_name:
+        session_kwargs["region_name"] = region_name
+    try:
+        session = boto3.Session(**session_kwargs)
+        sts = session.client("sts")
+        identity = sts.get_caller_identity()
+        print(f"AWS authentication successful: {identity}")
+        assert "Account" in identity
+    except NoCredentialsError:
+        print("AWS credentials not found.")
+        assert False, "AWS credentials not found."
+    except ClientError as e:
+        print(f"AWS client error: {e}")
+        assert False, f"AWS client error: {e}"
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        assert False, f"Unexpected error: {e}"
