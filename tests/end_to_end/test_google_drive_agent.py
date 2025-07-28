@@ -8,6 +8,7 @@ from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.sessions import StreamableHttpConnection
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
 from mcp.types import (
@@ -145,9 +146,14 @@ async def test_google_drive_mcp_agent_directly() -> None:
         assert "Hello, this is a test file shared with all of b.well" in content.text
 
 
-async def test_google_drive_mcp_agent() -> None:
+async def test_google_drive_via_llm() -> None:
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
+    access_token_result: Dict[str, str] = get_access_token(
+        username="tester", password="password"
+    )
+    url: str = "http://mcp_server_gateway:5000/google_drive"
+    access_token = access_token_result["access_token"]
 
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
@@ -159,14 +165,21 @@ async def test_google_drive_mcp_agent() -> None:
         # Setting temperature to 0 for deterministic results
         **model_parameters_dict,
     )
+    mcp_tool_config: StreamableHttpConnection = {
+        "url": url,
+        "transport": "streamable_http",
+        # specify the http client factory to use the headers
+        # httpx_client_factory
+        # and/or bearer "auth"# auth: NotRequired[httpx.Auth]
+        "headers": {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+    }
 
     client = MultiServerMCPClient(
         {
-            "google_drive": {
-                # make sure you start your weather server on port 8000
-                "url": "http://mcp_server_gateway:5000/google_drive",
-                "transport": "streamable_http",
-            },
+            "download_file_from_url": mcp_tool_config,
         }
     )
     tools = await client.get_tools()
