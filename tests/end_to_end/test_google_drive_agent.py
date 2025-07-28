@@ -39,8 +39,9 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
     Returns:
         dict: The token response.
     """
-    OAUTH_CLIENT_ID = os.getenv("OAUTH_CLIENT_ID", "bwell-client-id")
-    OAUTH_CLIENT_SECRET = os.getenv("OAUTH_CLIENT_SECRET", "bwell-secret")
+    OAUTH_CLIENT_ID = "bwell-client-id"
+    # OAUTH_CLIENT_SECRET = os.getenv("OAUTH_CLIENT_SECRET", "bwell-secret")
+    OAUTH_CLIENT_SECRET = "bwell-secret"
     OPENID_PROVIDER_URL = os.getenv(
         "OPENID_PROVIDER_URL",
         "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
@@ -55,7 +56,7 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
     client = OAuth2Session(
         client_id=OAUTH_CLIENT_ID,
         client_secret=OAUTH_CLIENT_SECRET,
-        scope="openid email offline_access",
+        # scope="openid email offline_access",
     )
 
     try:
@@ -85,10 +86,13 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
 
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
-    access_token = get_access_token(username="tester", password="password")
+    access_token_result: Dict[str, str] = get_access_token(
+        username="tester", password="password"
+    )
     url: str = "http://mcp_server_gateway:5000/google_drive"
+    access_token = access_token_result["access_token"]
     transport: StreamableHttpTransport = StreamableHttpTransport(
-        url=url, auth=access_token["access_token"]
+        url=url, auth=access_token
     )
 
     async def log_handler(message: LogMessage) -> None:
