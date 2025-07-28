@@ -57,8 +57,8 @@ up-open-webui-ssl: clean_database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: clean_database create-certs up ## starts docker containers
-	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml up --build -d
+up-open-webui-auth: clean_database create-certs ## starts docker containers
+	docker compose --progress=plain -f docker-compose.yml -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	max_attempts=30 && \
 	attempt=0 && \
