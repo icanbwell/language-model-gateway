@@ -60,6 +60,9 @@ class MCPToolProvider:
                 }
             )
             tools: List[BaseTool] = await client.get_tools()
+            if tool.tool_name and tools:
+                # filter tools by tool_name if provided
+                tools = [t for t in tools if t.name == tool.tool_name]
             self.tools_by_mcp_url[url] = tools
             return tools
         except Exception as e:

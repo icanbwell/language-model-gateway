@@ -308,7 +308,9 @@ async def test_chat_completions_with_google_drive(
                     model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
                 ),
                 tools=[
-                    AgentConfig(name="download_file_from_url", url=url),
+                    AgentConfig(
+                        name="google_drive", tool_name="download_file_from_url", url=url
+                    ),
                 ],
             )
         ]
