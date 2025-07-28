@@ -24,6 +24,7 @@ from language_model_gateway.gateway.converters.streaming_tool_node import (
 )
 from fastmcp import Client
 from fastmcp.client.client import CallToolResult
+from fastmcp.client.logging import LogMessage
 
 
 async def test_google_drive_mcp_agent_directly() -> None:
@@ -32,7 +33,20 @@ async def test_google_drive_mcp_agent_directly() -> None:
     transport: StreamableHttpTransport = StreamableHttpTransport(
         url=url, auth="test-token"
     )
-    client: Client[Any] = Client(transport=transport)
+
+    async def log_handler(message: LogMessage) -> None:
+        print(f"Server log: {message.data}")
+
+    async def progress_handler(
+        progress: float, total: float | None, message: str | None
+    ) -> None:
+        print(f"Progress: {progress}/{total} - {message}")
+
+    client: Client[Any] = Client(
+        transport=transport,
+        log_handler=log_handler,
+        progress_handler=progress_handler,
+    )
     async with client:
         # Basic server interaction
         await client.ping()

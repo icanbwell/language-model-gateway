@@ -90,6 +90,10 @@ pandas = ">=2.2.3"
 mcp = ">=1.11.0"
 # langchain_mcp_adapters is a Python library for working with MCP adapters in LangChain
 langchain_mcp_adapters = ">=0.1.9"
+# authlib is a Python library for OAuth and OpenID Connect
+authlib = ">=1.6.1"
+# joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)
+joserfc = ">=1.2.2"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
