@@ -45,7 +45,13 @@ from language_model_gateway.configs.config_schema import (
 )
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
+from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.utilities.environment_reader import (
+    EnvironmentReader,
+)
 from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+from tests.gateway.mocks.mock_chat_model import MockChatModel
+from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
 def get_access_token(username: str, password: str) -> Dict[str, Any]:
@@ -267,7 +273,6 @@ async def test_chat_completions_with_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    verify_aws_boto3_authentication()
     access_token_result: Dict[str, str] = get_access_token(
         username="tester", password="password"
     )
@@ -275,15 +280,17 @@ async def test_chat_completions_with_google_drive(
     access_token = access_token_result["access_token"]
 
     test_container: SimpleContainer = await get_container_async()
-    # if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-    #     test_container.register(
-    #         ModelFactory,
-    #         lambda c: MockModelFactory(
-    #             fn_get_model=lambda chat_model_config: MockChatModel(
-    #                 fn_get_response=lambda messages: "Hello, this is a test file shared with all of b.well"
-    #             )
-    #         ),
-    #     )
+    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
+        test_container.register(
+            ModelFactory,
+            lambda c: MockModelFactory(
+                fn_get_model=lambda chat_model_config: MockChatModel(
+                    fn_get_response=lambda messages: "Hello, this is a test file shared with all of b.well"
+                )
+            ),
+        )
+    else:
+        verify_aws_boto3_authentication()
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
