@@ -31,11 +31,15 @@ class Pipe:
         enable_status_indicator: bool = Field(
             default=True, description="Enable or disable status indicator emissions"
         )
+        OPENAI_API_BASE_URL: str | None = Field(
+            default=None,
+            description="Base URL for OpenAI API, e.g., https://api.openai.com/v1",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
         self.id: str = "language_model_gateway"
-        self.valves = self.Valves()
+        self.valves = self.Valves(OPENAI_API_BASE_URL=os.getenv("OPENAI_API_BASE_URL"))
         self.last_emit_time: float = 0
 
     async def emit_status(
@@ -286,7 +290,7 @@ class Pipe:
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
         print(f"auth_token: {auth_token}")
 
-        open_api_base_url: str | None = os.getenv("OPENAI_API_BASE_URL")
+        open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         assert open_api_base_url is not None, (
             "OpenAI_API_BASE_URL must be set as an environment variable."
         )
@@ -335,7 +339,7 @@ class Pipe:
 
     # noinspection PyMethodMayBeStatic
     def pipes(self) -> list[dict[str, str]]:
-        open_api_base_url: str | None = os.getenv("OPENAI_API_BASE_URL")
+        open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         assert open_api_base_url is not None, (
             "OpenAI_API_BASE_URL must be set as an environment variable."
         )
