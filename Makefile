@@ -57,7 +57,7 @@ up-open-webui-ssl: clean_database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: clean_database create-certs ## starts docker containers
+up-open-webui-auth: clean_database create-certs up ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	max_attempts=30 && \
@@ -88,8 +88,12 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 		printf "========== ERROR: language_model_gateway-open-webui-1 did not start. Run docker logs language_model_gateway-open-webui-1 =========\n" && \
 		exit 1; \
 	fi
-	make insert-admin-user && make set-admin-user-role
-	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost tester/password
+	make insert-admin-user
+	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
+	@echo Click 'Continue with Keycloak' to login
+	@echo Use the following credentials:
+	@echo Admin User: admin/password. After login, run 'make set-admin-user-role' to set admin role.
+	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 

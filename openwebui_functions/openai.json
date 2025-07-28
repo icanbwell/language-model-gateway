@@ -9,8 +9,8 @@
       "description": "Talks to Language Model Gateway",
       "manifest": {
         "title": "LangChain Pipe Function",
-        "author": "Colby Sawyer @ Attollo LLC (mailto:colby.sawyer@attollodefense.com)",
-        "author_url": "https://github.com/ColbySawyer7",
+        "author": "Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)",
+        "author_url": "https://github.com/imranq2",
         "version": "0.1.0"
       }
     },

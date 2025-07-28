@@ -1,19 +1,23 @@
 """title: LangChain Pipe Function (Streaming Version)
-author: Colby Sawyer @ Attollo LLC (mailto:colby.sawyer@attollodefense.com)
-author_url: https://github.com/ColbySawyer7
+author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
+author_url: https://github.com/imranq2
 version: 0.2.0
-This module defines a Pipe class that utilizes LangChain with streaming support
+This module defines a Pipe class that reads the oauth_id_token from the request cookies and uses it in Authorization header
+to make requests to the OpenAI API. It supports both streaming and non-streaming responses.
 """
 
 import asyncio
 import json
 import time
 from typing import AsyncGenerator
-from typing import Optional, Callable, Awaitable, Any, Dict, Union
+from typing import Optional, Callable, Awaitable, Any, Dict
+from typing import Union, Generator, Iterator
 
-from pydantic import BaseModel, Field
+import requests
+from pydantic import BaseModel
+from pydantic import Field
+from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
-from starlette.responses import StreamingResponse
 
 
 class Pipe:
@@ -60,7 +64,7 @@ class Pipe:
             )
             self.last_emit_time = current_time
 
-    async def stream_response(
+    async def stream_hardcoded_response(
         self,
         *,
         body: Dict[str, Any],
@@ -210,6 +214,7 @@ class Pipe:
             yield f"data: {json.dumps(error_chunk)}\n\n"
             await self.emit_status(__event_emitter__, "error", str(e), True)
 
+    # noinspection PyMethodMayBeStatic
     async def pipe(
         self,
         body: Dict[str, Any],
@@ -219,36 +224,55 @@ class Pipe:
         __event_call__: Optional[
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
-    ) -> Union[Dict[str, Any], StreamingResponse]:
+    ) -> Union[str, Generator[Any, None, None] | Iterator[Any]]:
         """
         Main pipe method supporting both streaming and non-streaming responses
         """
+        # This is where you can add your custom pipelines like RAG.
+        print(f"pipe:{__name__}")
+
+        print("=== body ===")
+        print(body)
+        print("==== End of body ===")
+        print(f"__request__: {__request__}")
+        print(f"__user__: {__user__}")
+        print("==== Request Url ====")
+        print(__request__.url if __request__ else "No request URL provided")
+        print("==== End of Request Url ====")
+
+        assert __request__ is not None, "Request object must be provided."
+
+        # print the Authorization header if available
+        auth_header = __request__.headers.get("Authorization")
+        if auth_header:
+            print(f"Authorization header: {auth_header}")
+        else:
+            print("No Authorization header found.")
+
+        auth_token: str | None = __request__.cookies.get("oauth_id_token")
+        print(f"auth_token: {auth_token}")
+
+        headers: MutableHeaders = __request__.headers.mutablecopy()
+
+        # if auth token is available in the cookies, add it to the Authorization header
+        if auth_token:
+            headers["Authorization"] = f"Bearer {auth_token}"
+
         try:
-            # Return a streaming response
-            return StreamingResponse(
-                self.stream_response(
-                    body=body,
-                    __request__=__request__,
-                    __user__=__user__,
-                    __event_emitter__=__event_emitter__,
-                    __event_call__=__event_call__,
-                ),
-                media_type="text/plain",
+            # now run the __request__ with the OpenAI API
+            response = requests.post(
+                url=str(__request__.url),
+                json=body,
+                headers=headers,
+                stream=body.get("stream", False),
+                timeout=30,  # Set a timeout for the request
             )
 
+            response.raise_for_status()
+
+            if body["stream"]:
+                return response.iter_lines()
+            else:
+                return response.json()  # type: ignore[no-any-return]
         except Exception as e:
-            await self.emit_status(__event_emitter__, "error", str(e), True)
-            return {
-                "id": "error",
-                "model": "error",
-                "created": "2023-10-01T00:00:00Z",
-                "choices": [
-                    {
-                        "index": "1",
-                        "message": {
-                            "role": "assistant",
-                            "content": f"Error: {e}",
-                        },
-                    }
-                ],
-            }
+            return f"Error: {e}"
