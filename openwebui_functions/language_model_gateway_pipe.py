@@ -42,6 +42,10 @@ class Pipe:
             default="MCP: ",
             description="Prefix for model names in the dropdown",
         )
+        restrict_to_admins: bool = Field(
+            default=False,
+            description="Restrict access to this pipe to admin users only",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"

@@ -2,10 +2,12 @@ import os
 from typing import Dict, List
 
 from langchain_core.tools import BaseTool
-from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
+    MultiServerMCPClientWithCaching,
+)
 
 
 class MCPToolProvider:
@@ -54,7 +56,7 @@ class MCPToolProvider:
                     "Authorization": headers["authorization"],
                 }
 
-            client: MultiServerMCPClient = MultiServerMCPClient(
+            client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
                 {
                     f"{tool.name}": mcp_tool_config,
                 }
