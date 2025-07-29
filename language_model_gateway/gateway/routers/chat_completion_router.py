@@ -6,6 +6,7 @@ from typing import Annotated, Dict, Any, TypedDict, cast, Sequence
 
 from botocore.exceptions import TokenRetrievalError
 from fastapi import APIRouter, Depends, HTTPException
+from openai.types.responses import Response
 from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 from fastapi import params
@@ -56,6 +57,16 @@ class ChatCompletionsRouter:
             summary="Complete a chat prompt",
             description="Completes a chat prompt using the specified model",
             response_description="Chat completions",
+            status_code=200,
+        )
+        self.router.add_api_route(
+            "/responses",
+            self.openai_responses,
+            methods=["POST"],
+            response_model=None,
+            summary="Handle OpenAI responses API",
+            description="Handles the new responses API from OpenAI",
+            response_description="OpenAI responses",
             status_code=200,
         )
 
@@ -123,6 +134,42 @@ class ChatCompletionsRouter:
             call_stack = traceback.format_exc()
             error_detail = {
                 "message": "Internal server error",
+                "timestamp": datetime.now().isoformat(),
+                "trace_id": "",
+                "call_stack": call_stack,
+            }
+            logger.exception(e, stack_info=True)
+            raise HTTPException(status_code=500, detail=error_detail)
+
+    async def openai_responses(
+        self,
+        request: Request,
+        responses_request: Dict[str, Any],
+        chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+    ) -> StreamingResponse | JSONResponse:
+        """
+        OpenAI responses endpoint. chat_manager is injected by FastAPI.
+
+        Args:
+            request: The incoming request
+            responses_request: The responses request data
+            chat_manager: Injected chat manager instance
+
+        Returns:
+            StreamingResponse or JSONResponse
+        """
+        assert responses_request
+        assert chat_manager
+        try:
+            # You may want to implement a new method in chat_manager for this endpoint
+            return await chat_manager.handle_openai_responses(
+                headers={k.lower(): v for k, v in request.headers.items()},
+                responses_request=cast(Response, responses_request),
+            )
+        except* Exception as e:
+            call_stack = traceback.format_exc()
+            error_detail = {
+                "message": "Internal server error (OpenAI responses)",
                 "timestamp": datetime.now().isoformat(),
                 "trace_id": "",
                 "call_stack": call_stack,

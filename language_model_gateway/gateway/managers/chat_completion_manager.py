@@ -2,7 +2,7 @@ import json
 import logging
 import os
 import time
-from typing import Dict, List, cast, AsyncGenerator, Optional
+from typing import Dict, List, cast, AsyncGenerator, Optional, Iterable
 
 from fastapi import HTTPException
 from openai.types import CompletionUsage
@@ -12,9 +12,13 @@ from openai.types.chat import (
     ChatCompletion,
     ChatCompletionMessage,
     ChatCompletionUserMessageParam,
-    ChatCompletionChunk,
+    ChatCompletionChunk, ChatCompletionToolParam,
 )
 from openai.types.chat.chat_completion import Choice
+from openai.types.responses import ResponseOutputMessage, ResponseOutputText, ResponseTextDeltaEvent, \
+    ResponseOutputRefusal
+from openai.types.responses.response_create_params import ResponseCreateParamsNonStreaming, \
+    ResponseCreateParamsStreaming
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
@@ -44,11 +48,11 @@ class ChatCompletionManager:
     """
 
     def __init__(
-        self,
-        *,
-        open_ai_provider: OpenAiChatCompletionsProvider,
-        langchain_provider: LangChainCompletionsProvider,
-        config_reader: ConfigReader,
+            self,
+            *,
+            open_ai_provider: OpenAiChatCompletionsProvider,
+            langchain_provider: LangChainCompletionsProvider,
+            config_reader: ConfigReader,
     ) -> None:
         """
         Chat completion manager
@@ -70,15 +74,19 @@ class ChatCompletionManager:
 
     # noinspection PyMethodMayBeStatic
     async def chat_completions(
-        self,
-        *,
-        headers: Dict[str, str],
-        chat_request: ChatRequest,
+            self,
+            *,
+            headers: Dict[str, str],
+            chat_request: ChatRequest,
     ) -> StreamingResponse | JSONResponse:
         # Use the model to choose the provider
         try:
             model: str = chat_request["model"]
             assert model is not None
+
+            # see if any tools were provided in the request
+            if "tools" in chat_request:
+                tools: Iterable[ChatCompletionToolParam] | None = chat_request["tools"]
 
             configs: List[
                 ChatModelConfig
@@ -125,7 +133,7 @@ class ChatCompletionManager:
                 )
             # Use the provider to get the completions
             response: (
-                StreamingResponse | JSONResponse
+                    StreamingResponse | JSONResponse
             ) = await provider.chat_completions(
                 model_config=model_config,
                 headers=headers,
@@ -137,7 +145,7 @@ class ChatCompletionManager:
 
     # noinspection PyMethodMayBeStatic
     def add_system_messages(
-        self, chat_request: ChatRequest, system_prompts: List[PromptConfig] | None
+            self, chat_request: ChatRequest, system_prompts: List[PromptConfig] | None
     ) -> ChatRequest:
         # see if there are any system prompts in chat_request
         has_system_messages_in_chat_request: bool = any(
@@ -148,9 +156,9 @@ class ChatCompletionManager:
             ]
         )
         if (
-            not has_system_messages_in_chat_request
-            and system_prompts is not None
-            and len(system_prompts) > 0
+                not has_system_messages_in_chat_request
+                and system_prompts is not None
+                and len(system_prompts) > 0
         ):
             system_messages: List[ChatCompletionSystemMessageParam] = [
                 ChatCompletionSystemMessageParam(role="system", content=message.content)
@@ -165,7 +173,7 @@ class ChatCompletionManager:
 
     # noinspection PyMethodMayBeStatic
     def handle_help_prompt(
-        self, *, chat_request: ChatRequest, model: str, model_config: ChatModelConfig
+            self, *, chat_request: ChatRequest, model: str, model_config: ChatModelConfig
     ) -> StreamingResponse | JSONResponse | None:
         request_messages: List[ChatCompletionMessageParam] = [
             m for m in chat_request["messages"]
@@ -193,8 +201,8 @@ class ChatCompletionManager:
 
         help_keywords: List[str] = os.environ.get("HELP_KEYWORDS", "help").split(";")
         if (
-            isinstance(last_message_content, str)
-            and last_message_content.lower() in help_keywords
+                isinstance(last_message_content, str)
+                and last_message_content.lower() in help_keywords
         ):
             logger.info(f"Help requested for model {model}")
             response_messages: List[ChatCompletionMessage] = [
@@ -230,19 +238,18 @@ class ChatCompletionManager:
 
     # noinspection PyMethodMayBeStatic
     def write_response(
-        self,
-        *,
-        chat_request: ChatRequest,
-        response_messages: List[ChatCompletionMessage],
+            self,
+            *,
+            chat_request: ChatRequest,
+            response_messages: List[ChatCompletionMessage],
     ) -> StreamingResponse | JSONResponse:
         chat_model: str = chat_request["model"]
         should_stream_response: Optional[bool] = cast(
             Optional[bool], chat_request.get("stream")
         )
         if should_stream_response:
-
-            async def foo(
-                response_messages1: List[ChatCompletionMessage],
+            async def write_response_to_stream(
+                    response_messages1: List[ChatCompletionMessage],
             ) -> AsyncGenerator[str, None]:
                 for response_message in response_messages1:
                     if response_message.content:
@@ -270,7 +277,7 @@ class ChatCompletionManager:
                 yield "data: [DONE]\n\n"
 
             return StreamingResponse(
-                content=foo(response_messages1=response_messages),
+                content=write_response_to_stream(response_messages1=response_messages),
                 media_type="text/event-stream",
             )
         else:
@@ -296,10 +303,140 @@ class ChatCompletionManager:
             return JSONResponse(content=chat_response.model_dump())
 
     async def handle_exception(
-        self, *, chat_request: ChatRequest, e: Exception
+            self, *, chat_request: ChatRequest, e: Exception
     ) -> StreamingResponse | JSONResponse:
         logger.error(f"Error in chat completion: {e}")
         return self.write_response(
             chat_request=chat_request,
             response_messages=[ChatCompletionMessage(role="assistant", content=str(e))],
         )
+
+    async def handle_openai_responses(
+            self,
+            *,
+            headers: Dict[str, str],
+            responses_request: ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming,
+    ) -> StreamingResponse | JSONResponse:
+        """
+        Handles the new OpenAI responses API endpoint, following the pattern of chat_completions.
+        Args:
+            headers: Request headers
+            responses_request: The OpenAI responses request (non-streaming or streaming)
+        Returns:
+            StreamingResponse or JSONResponse
+        """
+        try:
+            model: str = responses_request["model"]
+            assert model is not None
+
+            configs: List[ChatModelConfig] = await self.config_reader.read_model_configs_async()
+            model_config: ChatModelConfig | None = next(
+                (config for config in configs if config.name.lower() == model.lower()),
+                None,
+            )
+            if model_config is None:
+                logger.error(f"Model {model} not found in the config")
+                raise HTTPException(
+                    status_code=400, detail=f"Model {model} not found in the config"
+                )
+
+            provider: BaseChatCompletionsProvider
+            match model_config.type:
+                case "openai":
+                    provider = self.openai_provider
+                case "langchain":
+                    provider = self.langchain_provider
+                case _:
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Model type {model_config.type} not supported",
+                    )
+
+            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                logger.info(
+                    f"Running OpenAI responses for {responses_request} with headers {headers}"
+                )
+
+            response: StreamingResponse | JSONResponse = await provider.handle_responses_api(
+                model_config=model_config,
+                headers=headers,
+                responses_request=responses_request,
+            )
+            return response
+        except Exception as e:
+            return self.write_responses_api_response(
+                responses_request=responses_request,
+                response_messages=[ResponseOutputMessage(
+                    role="assistant",
+                    content=[
+                        ResponseOutputText(
+                            text=str(e),
+                            type="output_text",
+                            annotations=[]
+                        )
+                    ],
+                    id="1",
+                    status="completed",
+                    type="message"
+                )
+                ],
+            )
+
+    # noinspection PyMethodMayBeStatic
+    def write_responses_api_response(
+            self,
+            *,
+            responses_request: ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming,
+            response_messages: List[ResponseOutputMessage],
+    ) -> StreamingResponse | JSONResponse:
+        """
+        Write a response mimicking the OpenAI responses API format.
+        Args:
+            responses_request: The original responses API request
+            response_messages: List of ChatCompletionMessage
+        Returns:
+            StreamingResponse or JSONResponse
+        """
+        should_stream_response: Optional[bool] = cast(
+            Optional[bool], responses_request.get("stream")
+        )
+        if should_stream_response:
+            async def write_response_to_stream(
+                response_messages1: List[ResponseOutputMessage],
+            ) -> AsyncGenerator[str, None]:
+                response_message: ResponseOutputMessage
+                for response_message in response_messages1:
+                    if response_message.content:
+                        content: ResponseOutputText | ResponseOutputRefusal
+                        for content in response_message.content:
+                            chunk = ResponseTextDeltaEvent(
+                                delta=content.text,
+                                content_index=response_message.content_index,
+                                item_id=response_message.item_id,
+                                logprobs=response_message.logprobs,
+                                output_index=response_message.output_index,
+                                sequence_number=response_message.sequence_number,
+                                type="response.output_text.delta",
+                            )
+                            yield f"data: {json.dumps(chunk)}\n\n"
+                yield "data: [DONE]\n\n"
+            return StreamingResponse(
+                content=write_response_to_stream(response_messages1=response_messages),
+                media_type="text/event-stream",
+            )
+        else:
+            full_text: str = ""
+            for response_message1 in response_messages:
+                if response_message1.content:
+                    content1: ResponseOutputText | ResponseOutputRefusal
+                    for content1 in response_message1.content:
+                        full_text += content1.text + "\n"
+
+            response: ResponseOutputText = ResponseOutputText(
+                text=full_text,
+                type="output_text",
+                annotations=[],
+            )
+            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                logger.info(f"Returning responses API response: {response}")
+            return JSONResponse(content=response)

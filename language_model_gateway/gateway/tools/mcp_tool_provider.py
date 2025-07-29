@@ -1,9 +1,10 @@
 import os
-from typing import Dict, List
+from typing import Dict, List, Iterable
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from openai.types.chat import ChatCompletionToolParam
 
 from language_model_gateway.configs.config_schema import AgentConfig
 
@@ -69,7 +70,8 @@ class MCPToolProvider:
             raise ValueError(f"Failed to load tools from MCP URL {tool.url}: {e}")
 
     async def get_tools_async(
-        self, *, tools: list[AgentConfig], headers: Dict[str, str]
+        self, *, tools: list[AgentConfig], headers: Dict[str, str],
+           tools_in_request: Iterable[ChatCompletionToolParam] | None
     ) -> list[BaseTool]:
         # get list of tools from the tools from each agent and then concatenate them
         all_tools: List[BaseTool] = []
@@ -78,6 +80,23 @@ class MCPToolProvider:
                 try:
                     tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
                         tool=tool, headers=headers
+                    )
+                    all_tools.extend(tools_by_url)
+                except Exception as e:
+                    raise ValueError(
+                        f"Failed to get tools from MCP URL {tool.url}: {e}"
+                    )
+        # now add the tools in the request if provided
+        if tools_in_request:
+            for tool_in_request in tools_in_request:
+                try:
+                    tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
+                        tool=AgentConfig(
+                            name=tool_in_request.name,
+                            url=tool_in_request.ser,
+                            tool_name=tool_in_request.tool_name,
+                            headers=tool_in_request.headers or {},
+                        ), headers=headers
                     )
                     all_tools.extend(tools_by_url)
                 except Exception as e:

@@ -319,7 +319,6 @@ class LangGraphToOpenAIConverter:
             The response as a StreamingResponse or JSONResponse.
         """
         assert chat_request is not None
-        assert isinstance(chat_request, dict)
 
         if chat_request.get("stream"):
             return StreamingResponse(

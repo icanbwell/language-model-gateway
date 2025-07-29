@@ -1,13 +1,16 @@
 import datetime
 import random
-from typing import Dict, Any, Sequence
+from typing import Dict, Any, Sequence, Iterable
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
 from langgraph.graph.state import CompiledStateGraph
+from openai.types.chat import ChatCompletionToolParam
+from openai.types.responses.response_create_params import ResponseCreateParamsNonStreaming, \
+    ResponseCreateParamsStreaming
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -81,6 +84,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
             tools=[t for t in model_config.get_agents()],
             headers=headers,
+            tools_in_request=chat_request.get("tools", None),
         )
 
         compiled_state_graph: CompiledStateGraph[
@@ -98,3 +102,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             chat_request=chat_request,
             system_messages=[],
         )
+
+    async def handle_responses_api(
+            self,
+            *,
+            model_config: ChatModelConfig,
+            headers: Dict[str, str],
+            responses_request: ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming,
+    ) -> StreamingResponse | JSONResponse:
+        pass
