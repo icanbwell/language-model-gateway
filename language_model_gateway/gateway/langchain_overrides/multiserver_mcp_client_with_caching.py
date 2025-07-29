@@ -1,14 +1,15 @@
-import asyncio
-from typing import override
+from typing import override, List, Dict
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.sessions import Connection, create_session
+
+# noinspection PyProtectedMember
 from langchain_mcp_adapters.tools import (
     _list_all_tools,
     convert_mcp_tool_to_langchain_tool,
 )
-from mcp import ClientSession
-from langchain_mcp_adapters.sessions import Connection, create_session
+from mcp import ClientSession, Tool
 
 
 class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[misc]
@@ -30,28 +31,37 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             if server_name not in self.connections:
                 msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
                 raise ValueError(msg)
-            return await self.load_mcp_tools(
-                None, connection=self.connections[server_name]
+            return self.create_tools_from_list(
+                await self.load_metadata_for_mcp_tools(
+                    None, connection=self.connections[server_name]
+                ),
+                session=None,
+                connection=self.connections[server_name],
             )
 
-        all_tools: list[BaseTool] = []
-        load_mcp_tool_tasks = []
+        all_tools_metadata: Dict[str, list[Tool]] = {}
         for connection in self.connections.values():
-            load_mcp_tool_task = asyncio.create_task(
-                self.load_mcp_tools(None, connection=connection)
+            all_tools_metadata[
+                connection["url"]
+            ] = await self.load_metadata_for_mcp_tools(None, connection=connection)
+
+        # create LangChain tools from the loaded MCP tools
+        all_tools: List[BaseTool] = []
+        for connection in self.connections.values():
+            tools_for_connection = all_tools_metadata[connection["url"]]
+            all_tools.extend(
+                self.create_tools_from_list(
+                    tools_for_connection, session=None, connection=connection
+                )
             )
-            load_mcp_tool_tasks.append(load_mcp_tool_task)
-        tools_list = await asyncio.gather(*load_mcp_tool_tasks)
-        for tools in tools_list:
-            all_tools.extend(tools)
         return all_tools
 
     @staticmethod
-    async def load_mcp_tools(
+    async def load_metadata_for_mcp_tools(
         session: ClientSession | None,
         *,
         connection: Connection | None = None,
-    ) -> list[BaseTool]:
+    ) -> list[Tool]:
         """Load all available MCP tools and convert them to LangChain tools.
 
         Args:
@@ -73,10 +83,17 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             # If a session is not provided, we will create one on the fly
             async with create_session(connection) as tool_session:
                 await tool_session.initialize()
-                tools = await _list_all_tools(tool_session)
+                tools: List[Tool] = await _list_all_tools(tool_session)
         else:
             tools = await _list_all_tools(session)
+        return tools
 
+    @staticmethod
+    def create_tools_from_list(
+        tools: list[Tool],
+        session: ClientSession | None = None,
+        connection: Connection | None = None,
+    ) -> List[BaseTool]:
         return [
             convert_mcp_tool_to_langchain_tool(session, tool, connection=connection)
             for tool in tools
