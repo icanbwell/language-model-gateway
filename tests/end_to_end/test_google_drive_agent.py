@@ -22,6 +22,7 @@ from mcp.types import (
     EmbeddedResource,
 )
 
+from language_model_gateway.container.container_factory import ConfigExpiringCache
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
@@ -49,7 +50,6 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -293,8 +293,8 @@ async def test_chat_completions_with_google_drive(
         verify_aws_boto3_authentication()
 
     # set the model configuration for this test
-    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ExpiringCache)
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
     )
     await model_configuration_cache.set(
         [

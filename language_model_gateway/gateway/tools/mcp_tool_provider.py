@@ -3,11 +3,13 @@ from typing import Dict, List
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from mcp import Tool
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
+from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 
 
 class MCPToolProvider:
@@ -17,8 +19,16 @@ class MCPToolProvider:
     that can be used in conjunction with the MCP.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, *, cache: ExpiringCache[Dict[str, List[Tool]]]) -> None:
+        """
+        Initialize the MCPToolProvider with a cache.
+
+        Args:
+            cache: An ExpiringCache instance to store tools by their MCP URLs.
+        """
         self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
+        self._cache: ExpiringCache[Dict[str, List[Tool]]] = cache
+        assert self._cache is not None, "Cache must be provided"
 
     async def load_async(self) -> None:
         pass
@@ -57,9 +67,10 @@ class MCPToolProvider:
                 }
 
             client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
-                {
+                cache=self._cache,
+                connections={
                     f"{tool.name}": mcp_tool_config,
-                }
+                },
             )
             tools: List[BaseTool] = await client.get_tools()
             if tool.tool_name and tools:

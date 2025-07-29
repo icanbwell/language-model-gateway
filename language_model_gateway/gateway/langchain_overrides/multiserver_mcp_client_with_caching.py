@@ -1,9 +1,12 @@
+import asyncio
 import logging
 from typing import override, List, Dict
+from uuid import UUID, uuid4
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.sessions import Connection, create_session
+from langchain_mcp_adapters.sessions import create_session
+from langchain_mcp_adapters.sessions import Connection
 
 # noinspection PyProtectedMember
 from langchain_mcp_adapters.tools import (
@@ -11,6 +14,8 @@ from langchain_mcp_adapters.tools import (
     convert_mcp_tool_to_langchain_tool,
 )
 from mcp import ClientSession, Tool
+
+from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +28,25 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
     without needing to repeatedly query the MCP server for the same tool metadata.
     """
 
-    all_tools_metadata_cache: Dict[str, list[Tool]] = {}
-    """Cache for all tools metadata across all servers.  url is connection URL of MCP server."""
+    _identifier: UUID = uuid4()
+    _lock: asyncio.Lock = asyncio.Lock()
+
+    def __init__(
+        self,
+        *,
+        connections: dict[str, Connection] | None = None,
+        cache: ExpiringCache[Dict[str, List[Tool]]],
+    ) -> None:
+        """
+        Initialize the async config reader
+
+        Args:
+            cache: Expiring cache for model configurations
+        """
+        assert cache is not None
+        self._cache: ExpiringCache[Dict[str, List[Tool]]] = cache
+        assert self._cache is not None
+        super().__init__(connections=connections)
 
     async def load_tools_metadata_cache(
         self, *, server_name: str | None = None
@@ -41,13 +63,16 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             A list of LangChain tools
 
         """
+        cache: Dict[str, List[Tool]] | None = await self._cache.get()
+        assert cache is not None
+
         if server_name is not None:
             if server_name not in self.connections:
                 msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
                 raise ValueError(msg)
             connection_for_server = self.connections[server_name]
-            if connection_for_server["url"] not in self.all_tools_metadata_cache:
-                self.all_tools_metadata_cache[
+            if connection_for_server["url"] not in cache:
+                cache[
                     connection_for_server["url"]
                 ] = await self.load_metadata_for_mcp_tools(
                     None, connection=connection_for_server
@@ -62,10 +87,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         else:
             for connection in self.connections.values():
                 # if the tools for this connection are already cached, skip loading them
-                if connection["url"] not in self.all_tools_metadata_cache:
-                    self.all_tools_metadata_cache[
-                        connection["url"]
-                    ] = await self.load_metadata_for_mcp_tools(
+                if connection["url"] not in cache:
+                    cache[connection["url"]] = await self.load_metadata_for_mcp_tools(
                         None, connection=connection
                     )
                     logger.info(f"Loaded tools for connection {connection['url']}")
@@ -91,10 +114,13 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
 
         await self.load_tools_metadata_cache(server_name=server_name)
 
+        cache: Dict[str, List[Tool]] | None = await self._cache.get()
+        assert cache is not None, "Cache must be initialized before getting tools"
+
         # create LangChain tools from the loaded MCP tools
         all_tools: List[BaseTool] = []
         for connection in self.connections.values():
-            tools_for_connection = self.all_tools_metadata_cache[connection["url"]]
+            tools_for_connection = cache[connection["url"]]
             all_tools.extend(
                 self.create_tools_from_list(
                     tools_for_connection, session=None, connection=connection
