@@ -63,39 +63,42 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             A list of LangChain tools
 
         """
-        cache: Dict[str, List[Tool]] | None = await self._cache.get()
-        assert cache is not None
+        async with self._lock:
+            cache: Dict[str, List[Tool]] | None = await self._cache.get()
+            assert cache is not None
 
-        if server_name is not None:
-            if server_name not in self.connections:
-                msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
-                raise ValueError(msg)
-            connection_for_server = self.connections[server_name]
-            if connection_for_server["url"] not in cache:
-                cache[
-                    connection_for_server["url"]
-                ] = await self.load_metadata_for_mcp_tools(
-                    None, connection=connection_for_server
-                )
-                logger.info(
-                    f"Loaded tools for connection {connection_for_server['url']}"
-                )
-            else:
-                logger.debug(
-                    f"Tools for connection {connection_for_server['url']} are already cached"
-                )
-        else:
-            for connection in self.connections.values():
-                # if the tools for this connection are already cached, skip loading them
-                if connection["url"] not in cache:
-                    cache[connection["url"]] = await self.load_metadata_for_mcp_tools(
-                        None, connection=connection
+            if server_name is not None:
+                if server_name not in self.connections:
+                    msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
+                    raise ValueError(msg)
+                connection_for_server = self.connections[server_name]
+                if connection_for_server["url"] not in cache:
+                    cache[
+                        connection_for_server["url"]
+                    ] = await self.load_metadata_for_mcp_tools(
+                        None, connection=connection_for_server
                     )
-                    logger.info(f"Loaded tools for connection {connection['url']}")
+                    logger.info(
+                        f"Loaded tools for connection {connection_for_server['url']}"
+                    )
                 else:
                     logger.debug(
-                        f"Tools for connection {connection['url']} are already cached"
+                        f"Tools for connection {connection_for_server['url']} are already cached"
                     )
+            else:
+                for connection in self.connections.values():
+                    # if the tools for this connection are already cached, skip loading them
+                    if connection["url"] not in cache:
+                        cache[
+                            connection["url"]
+                        ] = await self.load_metadata_for_mcp_tools(
+                            None, connection=connection
+                        )
+                        logger.info(f"Loaded tools for connection {connection['url']}")
+                    else:
+                        logger.debug(
+                            f"Tools for connection {connection['url']} are already cached"
+                        )
 
     @override
     async def get_tools(self, *, server_name: str | None = None) -> list[BaseTool]:
@@ -114,19 +117,20 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
 
         await self.load_tools_metadata_cache(server_name=server_name)
 
-        cache: Dict[str, List[Tool]] | None = await self._cache.get()
-        assert cache is not None, "Cache must be initialized before getting tools"
+        async with self._lock:
+            cache: Dict[str, List[Tool]] | None = await self._cache.get()
+            assert cache is not None, "Cache must be initialized before getting tools"
 
-        # create LangChain tools from the loaded MCP tools
-        all_tools: List[BaseTool] = []
-        for connection in self.connections.values():
-            tools_for_connection = cache[connection["url"]]
-            all_tools.extend(
-                self.create_tools_from_list(
-                    tools_for_connection, session=None, connection=connection
+            # create LangChain tools from the loaded MCP tools
+            all_tools: List[BaseTool] = []
+            for connection in self.connections.values():
+                tools_for_connection = cache[connection["url"]]
+                all_tools.extend(
+                    self.create_tools_from_list(
+                        tools_for_connection, session=None, connection=connection
+                    )
                 )
-            )
-        return all_tools
+            return all_tools
 
     @staticmethod
     async def load_metadata_for_mcp_tools(
