@@ -41,42 +41,6 @@
       ]
     },
     {
-      "name": "calculator_average"
-    },
-    {
-      "name": "calculator_stddev"
-    },
-    {
-      "name": "calculator_length"
-    },
-    {
-      "name": "calculator_sum"
-    },
-    {
-      "name": "pubmed"
-    },
-    {
-      "name": "web_search"
-    },
-    {
-      "name": "arxiv_search"
-    },
-    {
-      "name": "image_generator"
-    },
-    {
-      "name": "provider_search"
-    },
-    {
-      "name": "get_web_page"
-    },
-    {
-      "name": "scraping_bee_web_scraper"
-    },
-    {
-      "name": "pdf_text_extractor"
-    },
-    {
       "name": "google_drive",
       "url": "http://mcp_server_gateway:5000/google_drive",
       "tool_name": "download_file_from_url"
