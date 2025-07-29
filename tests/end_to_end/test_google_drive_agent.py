@@ -108,6 +108,10 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
     return token if isinstance(token, dict) else token["access_token"]
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
     access_token_result: Dict[str, str] = get_access_token(
@@ -169,6 +173,10 @@ async def test_google_drive_mcp_agent_directly() -> None:
         assert "Hello, this is a test file shared with all of b.well" in content.text
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_google_drive_via_llm() -> None:
     verify_aws_boto3_authentication()
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
@@ -268,7 +276,10 @@ def verify_aws_boto3_authentication() -> None:
         assert False, f"Unexpected error: {e}"
 
 
-@pytest.mark.asyncio
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_chat_completions_with_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:

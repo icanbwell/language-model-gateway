@@ -29,6 +29,10 @@ from fastmcp import Client
 from fastmcp.client.client import CallToolResult
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_mcp_agent_directly() -> None:
     # HTTP server
     client: Client[Any] = Client("http://mcp_server_gateway:5000/math_server")
@@ -55,6 +59,10 @@ async def test_mcp_agent_directly() -> None:
         assert content.text == "20"
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_mcp_agent() -> None:
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
