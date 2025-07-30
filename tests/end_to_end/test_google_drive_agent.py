@@ -320,7 +320,7 @@ async def test_chat_completions_with_google_drive(
                 ),
                 tools=[
                     AgentConfig(
-                        name="google_drive", tool_name="download_file_from_url", url=url
+                        name="google_drive", tools="download_file_from_url", url=url
                     ),
                 ],
             )

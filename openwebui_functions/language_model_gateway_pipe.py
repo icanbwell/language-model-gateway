@@ -428,7 +428,9 @@ class Pipe:
         if self.valves.restrict_to_model_ids:
             # Filter models based on the restricted model IDs
             models = [
-                model for model in models if model["id"] in self.valves.restrict_to_model_ids
+                model
+                for model in models
+                if model["id"] in self.valves.restrict_to_model_ids
             ]
             logger.debug(f"Filtered models: {models}")
         return [

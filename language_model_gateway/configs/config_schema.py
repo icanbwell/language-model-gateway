@@ -74,8 +74,8 @@ class AgentConfig(BaseModel):
     headers: Dict[str, str] | None = None
     """The headers to pass to the MCP tool"""
 
-    tool_name: str | None = None
-    """The name of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used."""
+    tools: str | None = None
+    """The names of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used. Separate multiple tool names with commas."""
 
 
 class ModelConfig(BaseModel):

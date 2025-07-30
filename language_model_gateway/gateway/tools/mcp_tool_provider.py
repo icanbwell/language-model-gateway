@@ -66,16 +66,18 @@ class MCPToolProvider:
                     "Authorization": headers["authorization"],
                 }
 
+            tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
             client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
                 cache=self._cache,
                 connections={
                     f"{tool.name}": mcp_tool_config,
                 },
+                tool_names=tool_names,
             )
             tools: List[BaseTool] = await client.get_tools()
-            if tool.tool_name and tools:
+            if tool_names and tools:
                 # filter tools by tool_name if provided
-                tools = [t for t in tools if t.name == tool.tool_name]
+                tools = [t for t in tools if t.name in tool_names]
             self.tools_by_mcp_url[url] = tools
             return tools
         except Exception as e:
