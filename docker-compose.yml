@@ -4,7 +4,7 @@ services:
       dockerfile: Dockerfile
       context: .
       target: development
-    container_name: language_model_gateway
+    container_name: language-model-gateway
     environment:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
