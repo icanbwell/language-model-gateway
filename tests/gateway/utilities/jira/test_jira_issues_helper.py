@@ -32,7 +32,7 @@ from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariab
 
 
 @pytest.mark.httpx_mock(
-    should_mock=lambda request: os.environ["RUN_TESTS_WITH_REAL_LLM"] != "1"
+    should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_jira_get_summarized_issues(httpx_mock: HTTPXMock) -> None:
     print()

@@ -11,11 +11,13 @@ from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 
 
@@ -26,6 +28,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         model_factory: ModelFactory,
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
+        mcp_tool_provider: MCPToolProvider,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -40,6 +43,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.tool_provider: ToolProvider = tool_provider
         assert self.tool_provider is not None
         assert isinstance(self.tool_provider, ToolProvider)
+
+        self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
+        assert self.mcp_tool_provider is not None
+        assert isinstance(self.mcp_tool_provider, MCPToolProvider)
 
     async def chat_completions(
         self,
@@ -61,16 +68,26 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Initialize tools
         tools: Sequence[BaseTool] = (
-            self.tool_provider.get_tools(tools=[t for t in model_config.get_agents()])
+            self.tool_provider.get_tools(
+                tools=[t for t in model_config.get_agents()], headers=headers
+            )
             if model_config.get_agents() is not None
             else []
         )
 
-        compiled_state_graph: CompiledStateGraph = (
-            await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-                llm=llm,
-                tools=tools,
-            )
+        # Load MCP tools if they are enabled
+        await self.mcp_tool_provider.load_async()
+        # add MCP tools
+        tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
+            tools=[t for t in model_config.get_agents()],
+            headers=headers,
+        )
+
+        compiled_state_graph: CompiledStateGraph[
+            MyMessagesState
+        ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+            llm=llm,
+            tools=tools,
         )
         request_id = random.randint(1, 1000)
 

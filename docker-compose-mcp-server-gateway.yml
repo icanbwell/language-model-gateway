@@ -1,0 +1,25 @@
+services:
+  mcp_server_gateway:
+    build:
+      dockerfile: Dockerfile
+      context: ../mcp_server_gateway
+    container_name: mcp_server_gateway
+    environment:
+      DEBUG_METRICS: 0
+      DD_TRACE_ENABLED: "false"
+      LOG_LEVEL: DEBUG
+      # These define the connection to the identity provider for JWT validation
+      JWKS_URI: "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/certs"
+#      AUDIENCE: "my-mcp-server"
+#      ISSUER: "https://keycloak:8080/realms/bwell-realm"
+    env_file: docker.env
+    command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--workers", "1", "--log-level", "debug"]
+    ports:
+      - '5051:5000'
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - web

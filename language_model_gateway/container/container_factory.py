@@ -1,7 +1,11 @@
 import logging
 import os
+from typing import Dict, List
+
+from mcp import Tool
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
+from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
@@ -33,6 +37,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
+from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
@@ -54,6 +59,14 @@ from language_model_gateway.gateway.utilities.databricks.databricks_helper impor
 logger = logging.getLogger(__name__)
 
 
+class ConfigExpiringCache(ExpiringCache[list[ChatModelConfig]]):
+    pass
+
+
+class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
+    pass
+
+
 class ContainerFactory:
     # noinspection PyMethodMayBeStatic
     async def create_container_async(self) -> SimpleContainer:
@@ -62,6 +75,30 @@ class ContainerFactory:
         container = SimpleContainer()
 
         # register services here
+
+        # we want only one instance of the cache so we use singleton
+        container.singleton(
+            ConfigExpiringCache,
+            ConfigExpiringCache(
+                ttl_seconds=(
+                    int(os.environ["CONFIG_CACHE_TIMEOUT_SECONDS"])
+                    if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
+                    else 60 * 60
+                )
+            ),
+        )
+        container.singleton(
+            McpToolsMetadataExpiringCache,
+            McpToolsMetadataExpiringCache(
+                ttl_seconds=(
+                    int(os.environ["MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS"])
+                    if os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS")
+                    else 60 * 60
+                ),
+                init_value={},
+            ),
+        )
+
         container.register(HttpClientFactory, lambda c: HttpClientFactory())
 
         container.register(
@@ -154,28 +191,26 @@ class ContainerFactory:
                 databricks_helper=c.resolve(DatabricksHelper),
             ),
         )
+
+        container.register(
+            MCPToolProvider,
+            lambda c: MCPToolProvider(
+                cache=c.resolve(McpToolsMetadataExpiringCache),
+            ),
+        )
+
         container.register(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
                 tool_provider=c.resolve(ToolProvider),
-            ),
-        )
-        # we want only one instance of the cache so we use singleton
-        container.singleton(
-            ExpiringCache,
-            ExpiringCache(
-                ttl_seconds=(
-                    int(os.environ["CONFIG_CACHE_TIMEOUT_SECONDS"])
-                    if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
-                    else 60 * 60
-                )
+                mcp_tool_provider=c.resolve(MCPToolProvider),
             ),
         )
 
         container.register(
-            ConfigReader, lambda c: ConfigReader(cache=c.resolve(ExpiringCache))
+            ConfigReader, lambda c: ConfigReader(cache=c.resolve(ConfigExpiringCache))
         )
         container.register(
             ChatCompletionManager,

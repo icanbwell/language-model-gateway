@@ -2,7 +2,7 @@ services:
   open-webui:
     # https://github.com/open-webui/open-webui/releases
 #    image: openwebui-local:latest
-    image: ghcr.io/open-webui/open-webui:v0.6.14
+    image: ghcr.io/open-webui/open-webui:v0.6.18
     depends_on:
       - open-webui-db
     env_file:
@@ -10,7 +10,7 @@ services:
     ports:
       - "3050:8080"
     environment:
-      # https://docs.openwebui.com/getting-started/advanced-topics/env-configuration
+      # https://docs.openwebui.com/getting-started/env-configuration/
       BYPASS_MODEL_ACCESS_CONTROL: True
       DEFAULT_USER_ROLE: user
       WEBUI_AUTH: 0
@@ -19,6 +19,8 @@ services:
       SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG"}'
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
+      # disable OEPNAI_API since we use a Pipeline to handle requests
+      ENABLE_OPENAI_API: 0
       OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'

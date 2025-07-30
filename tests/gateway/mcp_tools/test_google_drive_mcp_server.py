@@ -1,14 +1,12 @@
-from typing import Optional, List
-
+from typing import List
+import pytest
 import httpx
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion
-
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,
-    PromptConfig,
 )
 from language_model_gateway.container.container_factory import ConfigExpiringCache
 from language_model_gateway.container.simple_container import SimpleContainer
@@ -22,7 +20,8 @@ from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
-async def test_chat_anthropic_with_web_scraping(
+@pytest.mark.asyncio
+async def test_chat_completions_with_mcp_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:
     test_container: SimpleContainer = await get_container_async()
@@ -31,7 +30,7 @@ async def test_chat_anthropic_with_web_scraping(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "3800 Reservoir Road Northwest"
+                    fn_get_response=lambda messages: "This is a mock response from the LLM."
                 )
             ),
         )
@@ -43,52 +42,38 @@ async def test_chat_anthropic_with_web_scraping(
     await model_configuration_cache.set(
         [
             ChatModelConfig(
-                id="parse_web_page",
-                name="Parse Web Page",
-                description="Parse Web Page",
+                id="test_google_drive",
+                name="General Purpose",
+                description="General Purpose Language Model",
                 type="langchain",
                 model=ModelConfig(
-                    provider="bedrock",
-                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+                    provider="openai",
+                    model="gpt-3.5-turbo",
                 ),
-                system_prompts=[
-                    PromptConfig(
-                        role="system",
-                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
-                    )
-                ],
                 tools=[
-                    AgentConfig(name="google_search"),
-                    AgentConfig(name="get_web_page"),
-                    AgentConfig(name="scraping_bee_web_scraper"),
+                    AgentConfig(
+                        name="download_file_from_url",
+                        url="http://mcp_server_gateway:5051/google_drive/",  # Assumes MCP server is running locally
+                    ),
                 ],
             )
         ]
     )
 
-    # init client and connect to localhost server
     client = AsyncOpenAI(
         api_key="fake-api-key",
-        base_url="http://localhost:5000/api/v1",  # change the default port if needed
+        base_url="http://localhost:5000/api/v1",  # Change if your API runs on a different port
         http_client=async_client,
     )
 
-    # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Download https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Get the doctor's address from https://www.medstarhealth.org/doctors/meggin-a-sabatino-dnp",
-            }
-        ],
-        model="Parse Web Page",
+        messages=[message],
+        model="General Purpose",
     )
+    assert chat_completion.choices[0].message.content is not None
 
-    print(chat_completion)
-    # print the top "choice"
-    content: Optional[str] = "\n".join(
-        choice.message.content or "" for choice in chat_completion.choices
-    )
-    assert content is not None
-    print(content)
-    assert "3800 Reservoir" in content
+    await model_configuration_cache.clear()

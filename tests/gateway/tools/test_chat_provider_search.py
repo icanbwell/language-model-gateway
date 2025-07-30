@@ -2,7 +2,11 @@ from typing import Optional, List
 
 import httpx
 from openai import AsyncOpenAI, AsyncStream
-from openai.types.chat import ChatCompletionChunk, ChatCompletion
+from openai.types.chat import (
+    ChatCompletionChunk,
+    ChatCompletion,
+    ChatCompletionUserMessageParam,
+)
 from openai.types.chat.chat_completion import Choice
 
 from language_model_gateway.configs.config_schema import (
@@ -10,6 +14,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
+from language_model_gateway.container.container_factory import ConfigExpiringCache
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
@@ -46,7 +51,7 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ExpiringCache)
+        test_container.resolve(ConfigExpiringCache)
     )
     await model_configuration_cache.set(
         [
@@ -78,13 +83,12 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Get me the address of Dr. Scott Rodriguez",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Get me the address of Dr. Scott Rodriguez",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
     )
 
@@ -126,7 +130,7 @@ async def test_chat_provider_search_streaming(
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ExpiringCache)
+        test_container.resolve(ConfigExpiringCache)
     )
     await model_configuration_cache.set(
         [

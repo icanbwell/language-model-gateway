@@ -2,7 +2,7 @@ import logging
 
 import httpx
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from typing import List, Dict, Any
 
 from language_model_gateway.configs.config_schema import (
@@ -10,6 +10,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
+from language_model_gateway.container.container_factory import ConfigExpiringCache
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
@@ -33,7 +34,7 @@ async def test_chat_calculator_average_tool_bedrock(
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ExpiringCache)
+        test_container.resolve(ConfigExpiringCache)
     )
 
     await model_configuration_cache.set(
@@ -70,13 +71,12 @@ async def test_chat_calculator_average_tool_bedrock(
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is the current date and time?",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "what is the current date and time?",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
     )
     print(chat_completion)
@@ -86,13 +86,12 @@ async def test_chat_calculator_average_tool_bedrock(
         print(f"\nSending prompt to Bedrock: {prompt}")
 
         # call API
+        content_prompt_: ChatCompletionUserMessageParam = {
+            "role": "user",
+            "content": prompt,
+        }
         chat_completion = await client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
+            messages=[content_prompt_],
             model="General Purpose",
         )
 

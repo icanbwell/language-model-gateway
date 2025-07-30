@@ -9,9 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 class ExpiringCache[T]:
-    def __init__(self, *, ttl_seconds: float) -> None:
-        self._cache: Optional[T] = None
-        self._cache_timestamp: Optional[float] = None
+    def __init__(self, *, ttl_seconds: float, init_value: Optional[T] = None) -> None:
+        self._cache: Optional[T] = init_value
+        self._cache_timestamp: Optional[float] = (
+            time.time() if init_value is not None else None
+        )
         self._lock: asyncio.Lock = asyncio.Lock()
         self._ttl: float = ttl_seconds
         self._identifier: UUID = uuid4()

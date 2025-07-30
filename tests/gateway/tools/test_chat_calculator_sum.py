@@ -10,6 +10,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
+from language_model_gateway.container.container_factory import ConfigExpiringCache
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
@@ -33,7 +34,7 @@ async def test_chat_calculator_sum_tool_bedrock(
 
     # set the model configuration for this test
     model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ExpiringCache)
+        test_container.resolve(ConfigExpiringCache)
     )
 
     await model_configuration_cache.set(

@@ -209,10 +209,21 @@ class ToolProvider:
             # ),
         }
 
-    def get_tool_by_name(self, *, tool: AgentConfig) -> BaseTool:
+    def get_tool_by_name(
+        self, *, tool: AgentConfig, headers: Dict[str, str]
+    ) -> BaseTool:
         if tool.name in self.tools:
             return self.tools[tool.name]
         raise ValueError(f"Tool with name {tool.name} not found")
 
-    def get_tools(self, *, tools: list[AgentConfig]) -> list[BaseTool]:
-        return [self.get_tool_by_name(tool=tool) for tool in tools]
+    def has_tool(self, *, tool: AgentConfig) -> bool:
+        return tool.name in self.tools
+
+    def get_tools(
+        self, *, tools: list[AgentConfig], headers: Dict[str, str]
+    ) -> list[BaseTool]:
+        return [
+            self.get_tool_by_name(tool=tool, headers=headers)
+            for tool in tools
+            if self.has_tool(tool=tool)
+        ]
