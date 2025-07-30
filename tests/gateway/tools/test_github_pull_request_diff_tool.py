@@ -29,7 +29,7 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
 @pytest.mark.httpx_mock(
-    should_mock=lambda request: os.environ["RUN_TESTS_WITH_REAL_LLM"] != "1"
+    should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_github_pull_request_diff_tool(async_client: httpx.AsyncClient) -> None:
     print("")
@@ -110,7 +110,7 @@ async def test_github_pull_request_diff_tool(async_client: httpx.AsyncClient) ->
 
 
 @pytest.mark.httpx_mock(
-    should_mock=lambda request: os.environ["RUN_TESTS_WITH_REAL_LLM"] != "1"
+    should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_github_pull_request_diff_combined_tool(
     async_client: httpx.AsyncClient,
