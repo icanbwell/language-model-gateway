@@ -46,6 +46,10 @@ class Pipe:
             default=False,
             description="Restrict access to this pipe to admin users only",
         )
+        restrict_to_model_ids: list[str] = Field(
+            default_factory=list,
+            description="List of model IDs to restrict access to. If empty, no restriction is applied.",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
@@ -394,6 +398,12 @@ class Pipe:
             return f"Error: {e}"
 
     def get_models(self) -> list[dict[str, str]]:
+        """
+        Fetches the list of available models from the OpenAI API.
+        Returns:
+            A list of dictionaries containing model IDs and names.
+
+        """
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
             logger.debug(
@@ -415,6 +425,12 @@ class Pipe:
         response.raise_for_status()
         models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
+        if self.valves.restrict_to_model_ids:
+            # Filter models based on the restricted model IDs
+            models = [
+                model for model in models if model["id"] in self.valves.restrict_to_model_ids
+            ]
+            logger.debug(f"Filtered models: {models}")
         return [
             {
                 "id": model["id"],
