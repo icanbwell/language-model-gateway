@@ -42,8 +42,7 @@
     },
     {
       "name": "google_drive",
-      "url": "http://mcp_server_gateway:5000/google_drive",
-      "tool_name": "download_file_from_url"
+      "url": "http://mcp_server_gateway:5000/google_drive"
     }
   ],
   "example_prompts": [
