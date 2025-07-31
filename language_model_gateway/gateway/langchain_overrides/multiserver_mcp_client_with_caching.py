@@ -16,7 +16,7 @@ from langchain_mcp_adapters.tools import (
 )
 from mcp import ClientSession, Tool
 
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
 
 logger = logging.getLogger(__name__)
 

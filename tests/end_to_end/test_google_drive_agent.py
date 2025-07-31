@@ -22,7 +22,9 @@ from mcp.types import (
     EmbeddedResource,
 )
 
-from language_model_gateway.container.container_factory import ConfigExpiringCache
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )

@@ -10,7 +10,7 @@ from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
 
 logger = logging.getLogger(__name__)
 

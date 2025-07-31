@@ -14,7 +14,9 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from language_model_gateway.container.container_factory import ConfigExpiringCache
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
@@ -24,7 +26,6 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
@@ -50,8 +51,8 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ConfigExpiringCache)
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
     )
     await model_configuration_cache.set(
         [
@@ -129,8 +130,8 @@ async def test_chat_provider_search_streaming(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ConfigExpiringCache)
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
     )
     await model_configuration_cache.set(
         [

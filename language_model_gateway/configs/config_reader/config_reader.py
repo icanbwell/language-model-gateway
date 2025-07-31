@@ -15,7 +15,9 @@ from language_model_gateway.configs.config_reader.github_config_zip_reader impor
 )
 from language_model_gateway.configs.config_reader.s3_config_reader import S3ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
@@ -25,7 +27,7 @@ class ConfigReader:
     _identifier: UUID = uuid4()
     _lock: asyncio.Lock = asyncio.Lock()
 
-    def __init__(self, *, cache: ExpiringCache[List[ChatModelConfig]]) -> None:
+    def __init__(self, *, cache: ConfigExpiringCache) -> None:
         """
         Initialize the async config reader
 
@@ -33,7 +35,7 @@ class ConfigReader:
             cache: Expiring cache for model configurations
         """
         assert cache is not None
-        self._cache: ExpiringCache[List[ChatModelConfig]] = cache
+        self._cache: ConfigExpiringCache = cache
         assert self._cache is not None
 
     # noinspection PyMethodMayBeStatic

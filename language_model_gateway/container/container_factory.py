@@ -1,11 +1,7 @@
 import logging
 import os
-from typing import Dict, List
-
-from mcp import Tool
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
@@ -30,7 +26,6 @@ from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtracto
 from language_model_gateway.gateway.providers.image_generation_provider import (
     ImageGenerationProvider,
 )
-
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
 )
@@ -39,32 +34,29 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
+from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
+    McpToolsMetadataExpiringCache,
+)
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
+)
+from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
+    DatabricksHelper,
 )
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
 )
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
-from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
-    DatabricksHelper,
-)
 
 logger = logging.getLogger(__name__)
-
-
-class ConfigExpiringCache(ExpiringCache[list[ChatModelConfig]]):
-    pass
-
-
-class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
-    pass
 
 
 class ContainerFactory:

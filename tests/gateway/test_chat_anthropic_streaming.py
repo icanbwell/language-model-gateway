@@ -1,7 +1,7 @@
 import httpx
 import pytest
 from openai import AsyncOpenAI, AsyncStream
-from openai.types.chat import ChatCompletionChunk
+from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
 
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
@@ -37,13 +37,12 @@ async def test_chat_completions_streaming(async_client: httpx.AsyncClient) -> No
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is the first name of Obama?",
+    }
     stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "what is the first name of Obama?",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
         stream=True,
     )
