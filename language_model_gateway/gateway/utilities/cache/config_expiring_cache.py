@@ -5,11 +5,12 @@ from typing import Optional, List
 from uuid import uuid4, UUID
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
 
 logger = logging.getLogger(__name__)
 
 
-class ConfigExpiringCache:
+class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):
     _cache: Optional[List[ChatModelConfig]] = None
     _cache_timestamp: Optional[float] = None
     _lock: asyncio.Lock = asyncio.Lock()

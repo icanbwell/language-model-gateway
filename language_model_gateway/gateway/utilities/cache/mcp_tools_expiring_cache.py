@@ -6,10 +6,12 @@ from uuid import uuid4, UUID
 
 from mcp import Tool
 
+from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
+
 logger = logging.getLogger(__name__)
 
 
-class McpToolsMetadataExpiringCache:
+class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
     _cache: Optional[Dict[str, List[Tool]]] = None
     _cache_timestamp: Optional[float] = None
     _lock: asyncio.Lock = asyncio.Lock()

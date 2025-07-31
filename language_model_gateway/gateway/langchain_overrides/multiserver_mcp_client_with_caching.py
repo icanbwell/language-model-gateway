@@ -6,8 +6,8 @@ from uuid import UUID, uuid4
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.sessions import create_session
 from langchain_mcp_adapters.sessions import Connection
+from langchain_mcp_adapters.sessions import create_session
 
 # noinspection PyProtectedMember
 from langchain_mcp_adapters.tools import (
@@ -16,7 +16,9 @@ from langchain_mcp_adapters.tools import (
 )
 from mcp import ClientSession, Tool
 
-from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
+    McpToolsMetadataExpiringCache,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +38,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         self,
         *,
         connections: dict[str, Connection] | None = None,
-        cache: ExpiringCache[Dict[str, List[Tool]]],
+        cache: McpToolsMetadataExpiringCache,
         tool_names: List[str] | None,
     ) -> None:
         """
@@ -46,7 +48,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             cache: Expiring cache for model configurations
         """
         assert cache is not None
-        self._cache: ExpiringCache[Dict[str, List[Tool]]] = cache
+        self._cache: McpToolsMetadataExpiringCache = cache
         assert self._cache is not None
         self._tool_names: List[str] | None = tool_names
         super().__init__(connections=connections)
