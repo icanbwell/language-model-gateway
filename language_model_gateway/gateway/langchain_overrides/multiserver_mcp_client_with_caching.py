@@ -190,7 +190,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             msg = "Either a session or a connection config must be provided"
             raise ValueError(msg)
 
-        tools: List[Tool] = []
+        tools: List[Tool]
         try:
             if session is None:
                 # If a session is not provided, we will create one on the fly
@@ -200,7 +200,9 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             else:
                 tools = await _list_all_tools(session)
         except Exception as e:
-            logger.error(f"Failed to load tools: {e}")
+            url: str = connection.get("url") if connection else "unknown"
+            logger.error(f"Failed to load tools from {url} : {e}")
+            raise e
 
         if tool_names is not None:
             # Filter tools by names if provided
@@ -227,5 +229,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 for tool in tools
             ]
         except Exception as e:
-            logger.error(f"Failed to convert MCP tools to LangChain tools: {e}")
-            return []
+            url: str = connection.get("url") if connection else "unknown"
+            logger.error(
+                f"Failed to convert MCP tools to LangChain tools from {url},  tools={[t.name for t in tools]}: {e}"
+            )
+            raise e
