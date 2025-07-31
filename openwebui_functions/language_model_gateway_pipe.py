@@ -14,13 +14,13 @@ import time
 from pathlib import PurePosixPath
 from typing import AsyncGenerator, List
 from typing import Optional, Callable, Awaitable, Any, Dict
-import httpx
+from urllib.parse import urlparse, urlunparse
 
+import httpx
 from pydantic import BaseModel
 from pydantic import Field
 from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
-from urllib.parse import urlparse, urlunparse
 
 logger = logging.getLogger(__name__)
 
@@ -73,19 +73,19 @@ class Pipe:
     # noinspection PyMethodMayBeStatic
     async def on_startup(self) -> None:
         # This function is called when the server is started.
-        logger.debug(f"on_startup:{__name__}")
+        logger.info(f"on_startup:{__name__}")
         self.pipelines = await self.get_models()
         pass
 
     # noinspection PyMethodMayBeStatic
     async def on_shutdown(self) -> None:
         # This function is called when the server is stopped.
-        logger.debug(f"on_shutdown:{__name__}")
+        logger.info(f"on_shutdown:{__name__}")
         pass
 
     async def on_valves_updated(self) -> None:
         # This function is called when the valves are updated.
-        logger.debug(f"on_valves_updated:{__name__}")
+        logger.info(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
         pass
 
@@ -314,36 +314,36 @@ class Pipe:
         Main pipe method supporting both streaming and non-streaming responses
         """
         # This is where you can add your custom pipelines like RAG.
-        logger.debug(f"pipe:{__name__}")
+        logger.info(f"pipe:{__name__}")
 
-        logger.debug("=== body ===")
-        logger.debug(body)
-        logger.debug("==== End of body ===")
-        logger.debug(f"__request__: {__request__}")
-        logger.debug(f"__user__: {__user__}")
-        logger.debug("==== Request Url ====")
-        logger.debug(__request__.url if __request__ else "No request URL provided")
-        logger.debug("==== End of Request Url ====")
+        logger.info("=== body ===")
+        logger.info(body)
+        logger.info("==== End of body ===")
+        logger.info(f"__request__: {__request__}")
+        logger.info(f"__user__: {__user__}")
+        logger.info("==== Request Url ====")
+        logger.info(__request__.url if __request__ else "No request URL provided")
+        logger.info("==== End of Request Url ====")
 
         assert __request__ is not None, "Request object must be provided."
 
-        # logger.debug the Authorization header if available
+        # logger.info the Authorization header if available
         auth_header = __request__.headers.get("Authorization")
         if auth_header:
-            logger.debug(f"Authorization header: {auth_header}")
+            logger.info(f"Authorization header: {auth_header}")
         else:
-            logger.debug("No Authorization header found.")
+            logger.info("No Authorization header found.")
 
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
-        logger.debug(f"auth_token: {auth_token}")
+        logger.info(f"auth_token: {auth_token}")
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
-            logger.debug(
+            logger.info(
                 "LanguageModelGateway::pipe OPENAI_API_BASE_URL is not set in valves, trying environment variable."
             )
             open_api_base_url = self.read_base_url()
-            logger.debug(
+            logger.info(
                 f"LanguageModelGateway::pipe after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
             )
         assert open_api_base_url is not None, (
@@ -352,7 +352,7 @@ class Pipe:
         assert open_api_base_url is not None, (
             "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
         )
-        logger.debug(f"open_api_base_url: {open_api_base_url}")
+        logger.info(f"open_api_base_url: {open_api_base_url}")
 
         headers: MutableHeaders = __request__.headers.mutablecopy()
         # remove Content-Length header if it exists so we calculate it correctly
@@ -368,24 +368,69 @@ class Pipe:
         # Update the model id in the body
         payload = {**body, "model": model_id}
 
-        try:
-            # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
-            # include any query parameters in the URL
-            operation_path = str(__request__.url).replace(
-                "https://open-webui.localhost/api/", ""
-            )
-            logger.debug(f"operation_path: {operation_path}")
-            url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
+        # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
+        # include any query parameters in the URL
+        operation_path = str(__request__.url).replace(
+            "https://aiden.bwell.zone/api/", ""
+        )
+        logger.info(f"operation_path: {operation_path}")
+        url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
+        url = (
+            "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
+        )
+        response_text: str = ""
 
-            logger.debug(
+        def log_httpx_request(request: httpx.Request) -> str:
+            """
+            Convert an HTTPX request to a detailed string representation.
+
+            Args:
+                request (httpx.Request): The HTTPX request to log
+
+            Returns:
+                str: Formatted string representation of the request
+            """
+            # Construct request details
+            request_log = f"""
+        HTTPX Request:
+        - Method: {request.method}
+        - URL: {request.url}
+        - Headers: {dict(request.headers)}
+        - Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
+        """.strip()
+
+            return request_log
+
+        v = 3
+
+        try:
+            logger.info(
                 f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {headers}"
             )
 
+            # call the /health endpoint to check if the OpenAI API is reachable
+            health_url = "https://language-model-gateway.services.bwell.zone/health"
+            logger.info(f"Checking OpenAI API health at: {health_url}")
+            async with httpx.AsyncClient() as client:
+                health_response = await client.get(
+                    url=health_url,
+                    headers=headers,
+                    timeout=10.0,  # 10 seconds timeout for health check
+                )
+                health_response.raise_for_status()
+            response_text += f"{health_url}:{health_response.json()}"
+
+            # If the health check passes, proceed with the main request
             # now run the __request__ with the OpenAI API
             # Use httpx.stream for more efficient streaming
             async with httpx.AsyncClient() as client:
                 async with client.stream(
-                    method="POST", url=url, json=payload, headers=headers, timeout=30.0
+                    method="POST",
+                    url=url,
+                    json=payload,
+                    headers=headers,
+                    timeout=30.0,
+                    follow_redirects=True,
                 ) as response:
                     # Raise an exception for HTTP errors
                     response.raise_for_status()
@@ -398,10 +443,13 @@ class Pipe:
                     else:
                         # Non-streaming mode: collect and return full JSON response
                         yield await response.json()
+        except httpx.HTTPStatusError as e:
+            yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e} [{url=}] original=[{__request__.url}] {response_text=} {payload=} {headers=}\n{log_httpx_request(e.request)}\n"
         except Exception as e:
             # logger.error(f"Error in pipe: {e}")
-            # logger.debug(f"Error details: {e.__traceback__}")
-            yield f"LanguageModelGateway::pipe Error: {e}"
+            # logger.info(f"Error details: {e.__traceback__}")
+            httpx_version = httpx.__version__
+            yield f"LanguageModelGateway::pipe Error [{v}]: {type(e)} {e} {httpx_version=} [{url=}] original=[{__request__.url}] {response_text=} {payload=} {headers=}\n"
 
     async def get_models(self) -> list[dict[str, str]]:
         """
@@ -412,11 +460,11 @@ class Pipe:
         """
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
-            logger.debug(
+            logger.info(
                 "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
             )
             open_api_base_url = self.read_base_url()
-            logger.debug(
+            logger.info(
                 f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
             )
         if open_api_base_url is None:
@@ -426,7 +474,7 @@ class Pipe:
         )
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         # call the models endpoint to get the list of available models
-        logger.debug(f"Calling models endpoint: {model_url}")
+        logger.info(f"Calling models endpoint: {model_url}")
         models: list[dict[str, str]] = []
         async with httpx.AsyncClient() as client:
             # Perform the GET request with a timeout
@@ -440,7 +488,7 @@ class Pipe:
 
             # Parse JSON and extract 'data' key, defaulting to empty list
             models = response.json().get("data", [])
-        logger.debug(f"Received models from {model_url}: {models}")
+        logger.info(f"Received models from {model_url}: {models}")
         if self.valves.restrict_to_model_ids:
             # Filter models based on the restricted model IDs
             models = [
@@ -448,7 +496,7 @@ class Pipe:
                 for model in models
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
-            logger.debug(f"Filtered models: {models}")
+            logger.info(f"Filtered models: {models}")
         return [
             {
                 "id": model["id"],
@@ -459,6 +507,6 @@ class Pipe:
 
     async def pipes(self) -> list[dict[str, str]]:
         if self.pipelines is None:
-            logger.debug("Fetching models for the first time.")
+            logger.info("Fetching models for the first time.")
             self.pipelines = await self.get_models()
         return self.pipelines or []
