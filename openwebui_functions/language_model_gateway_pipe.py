@@ -7,6 +7,7 @@ to make requests to the OpenAI API. It supports both streaming and non-streaming
 """
 
 import asyncio
+import datetime
 import json
 import logging
 import os
@@ -401,7 +402,43 @@ class Pipe:
 
             return request_log
 
-        v = 3
+        def log_response_as_string(response1: httpx.Response) -> str:
+            """
+            Convert an HTTPX response to a detailed, formatted string.
+
+            Args:
+                response1 (httpx.Response): The HTTP response to log
+
+            Returns:
+                str: Comprehensive response log string
+            """
+            try:
+                # Attempt to parse JSON response
+                try:
+                    response_body = json.dumps(response1.json(), indent=2)
+                except (ValueError, json.JSONDecodeError):
+                    # Fallback to text if not JSON
+                    response_body = response1.text[:1000]  # Limit body size
+            except Exception:
+                response_body = "(Unable to decode response body)"
+
+            response_log = f"""
+        HTTPX Response Log:
+        - Timestamp: {datetime.datetime.now().isoformat()}
+        - Status Code: {response.status_code}
+        - URL: {response.request.url}
+        - Method: {response.request.method}
+        - Response Headers:
+        {json.dumps(dict(response.headers), indent=2)}
+        - Response Body:
+        {response_body}
+        - Response Encoding: {response.encoding}
+        - Response Elapsed Time: {response.elapsed}
+        """.strip()
+
+            return response_log
+
+        v = 5
 
         try:
             logger.info(
@@ -422,29 +459,27 @@ class Pipe:
 
             # If the health check passes, proceed with the main request
             # now run the __request__ with the OpenAI API
-            # Use httpx.stream for more efficient streaming
+            # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
-                async with client.stream(
-                    method="POST",
+                response = await client.post(
                     url=url,
                     json=payload,
                     headers=headers,
                     timeout=30.0,
                     follow_redirects=True,
-                ) as response:
-                    # Raise an exception for HTTP errors
-                    response.raise_for_status()
+                )
+                # Raise an exception for HTTP errors
+                response.raise_for_status()
 
-                    # Handle streaming or regular response
-                    if body.get("stream", False):
-                        # Stream mode: yield lines as they arrive
-                        async for line in response.aiter_lines():
-                            yield line
-                    else:
-                        # Non-streaming mode: collect and return full JSON response
-                        yield await response.json()
+                # Handle streaming or regular response
+                if body.get("stream", False):
+                    # Stream mode: yield lines as they arrive (not supported in plain POST)
+                    yield response.text
+                else:
+                    # Non-streaming mode: collect and return full JSON response
+                    yield response.json()
         except httpx.HTTPStatusError as e:
-            yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e} [{url=}] original=[{__request__.url}] {response_text=} {payload=} {headers=}\n{log_httpx_request(e.request)}\n"
+            yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e}\n{log_httpx_request(e.request)}\n{log_response_as_string(e.response)}"
         except Exception as e:
             # logger.error(f"Error in pipe: {e}")
             # logger.info(f"Error details: {e.__traceback__}")
