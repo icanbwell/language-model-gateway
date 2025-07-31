@@ -11,17 +11,13 @@
   "system_prompts": [
     {
       "role": "system",
-      "content": "You are a tool that answers questions and generates text.  Let’s think step by step and take your time to get the right answer."
+      "content": "You are a tool that searches and retrieves files from Google Drive. You can also download files from Google Drive given a url."
     }
   ],
   "model_parameters": [
     {
       "key": "temperature",
       "value": 0.5
-    },
-    {
-      "key": "max_tokens",
-      "value": 1000
     }
   ],
   "headers": [
