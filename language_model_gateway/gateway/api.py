@@ -100,7 +100,7 @@ def create_app() -> FastAPI:
     # noinspection PyTypeChecker
     allowed_origins = environ.get("ALLOWED_ORIGINS", "").split(",")
     if not allowed_origins or allowed_origins == [""]:
-        raise ValueError("ALLOWED_ORIGINS environment variable must be set to a comma-separated list of allowed origins.")
+        allowed_origins = ["*"]  # Allow all origins if not specified
     app1.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,
