@@ -7,6 +7,7 @@ from typing import AsyncGenerator, Annotated, List
 
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
+from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
@@ -93,6 +94,16 @@ def create_app() -> FastAPI:
     makedirs(image_generation_path, exist_ok=True)
     app1.include_router(
         ImagesRouter(image_generation_path=image_generation_path).get_router()
+    )
+
+    # Set up CORS middleware; adjust parameters as needed
+    # noinspection PyTypeChecker
+    app1.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
     return app1
 
