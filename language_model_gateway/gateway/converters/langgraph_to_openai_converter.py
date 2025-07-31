@@ -17,6 +17,7 @@ from typing import (
     Iterable,
 )
 
+from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
@@ -273,6 +274,28 @@ class LangGraphToOpenAIConverter:
                     case _:
                         # Handle other event types
                         pass
+        except TokenRetrievalError as e:
+            logger.exception(e, stack_info=True)
+            message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
+            chat_stream_response = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[
+                    ChunkChoice(
+                        index=0,
+                        delta=ChoiceDelta(
+                            role="assistant",
+                            content=f"\n{message}\n",
+                        ),
+                    )
+                ],
+                usage=CompletionUsage(
+                    prompt_tokens=0, completion_tokens=0, total_tokens=0
+                ),
+                object="chat.completion.chunk",
+            )
+            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
         except Exception as e:
             chat_stream_response = ChatCompletionChunk(
                 id=request_id,
@@ -402,9 +425,25 @@ class LangGraphToOpenAIConverter:
                     object="chat.completion",
                 )
                 return JSONResponse(content=chat_response.model_dump())
-            except Exception as e:
+            except* TokenRetrievalError as e:
                 logger.exception(e, stack_info=True)
-                raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
+                raise HTTPException(
+                    status_code=401,
+                    detail=f"Token retrieval error: {type(e)} {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`.",
+                )
+            except* Exception as e:
+                logger.exception(e, stack_info=True)
+                # print type of first exception in ExceptionGroup
+                # if there is just one exception, we can log it directly
+                if len(e.exceptions) > 0:
+                    logger.error(
+                        f"ExceptionGroup in call_agent_with_input: {type(e.exceptions[0])} {e.exceptions[0]}",
+                        exc_info=True,
+                    )
+
+                raise HTTPException(
+                    status_code=500, detail=f"Unexpected error: {type(e)} {e}"
+                )
 
     @staticmethod
     def add_system_messages_for_json(
@@ -613,7 +652,6 @@ class LangGraphToOpenAIConverter:
             The list of any messages.
         """
         assert request is not None
-        assert isinstance(request, dict)
 
         new_messages: List[ChatCompletionMessageParam] = [
             m for m in request["messages"]
