@@ -67,7 +67,10 @@ class GitHubConfigZipDownloader:
             """
             headers = {}
             if self.github_token:
-                headers["Authorization"] = f"token {self.github_token}"
+                headers["Authorization"] = f"Bearer {self.github_token}"
+
+            headers["X-GitHub-Api-Version"] = "2022-11-28"
+            headers["Accept"] = "application/vnd.github+json"
 
             for attempt in range(self.max_retries):
                 try:
@@ -81,13 +84,16 @@ class GitHubConfigZipDownloader:
                         response.raise_for_status()
                         return response.content
                 except Exception as e1:
-                    logger.warning(f"Download attempt {attempt + 1} failed: {str(e1)}")
+                    logger.error(
+                        f"Download attempt {attempt + 1} failed URL: {url}, token: {self.github_token} {type(e1)}: {str(e1)},",
+                        exc_info=True,
+                    )
 
                     # Exponential backoff
                     await asyncio.sleep(self.base_delay * (2**attempt))
 
             raise RuntimeError(
-                f"Failed to download ZIP after {self.max_retries} attempts"
+                f"Failed to download ZIP after {self.max_retries} attempts URL: {url}, token: {self.github_token}"
             )
 
         try:
