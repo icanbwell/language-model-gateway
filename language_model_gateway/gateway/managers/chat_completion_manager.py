@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import time
+import traceback
 from typing import Dict, List, cast, AsyncGenerator, Optional
 
 from fastapi import HTTPException
@@ -306,6 +307,73 @@ class ChatCompletionManager:
 
             return JSONResponse(content=chat_response.model_dump())
 
+    @staticmethod
+    def extract_error_details(error: Exception | ExceptionGroup) -> str:
+        """
+        Extract comprehensive error details from an Exception or ExceptionGroup.
+
+        Args:
+            error (Union[Exception, ExceptionGroup]): The exception to extract details from
+
+        Returns:
+            str: A formatted string containing error details
+        """
+
+        def format_single_exception(exc: Exception) -> str:
+            """
+            Format details for a single exception.
+
+            Args:
+                exc (Exception): The exception to format
+
+            Returns:
+                str: Formatted exception details
+            """
+            # Extract full traceback
+            tb_details = traceback.extract_tb(exc.__traceback__)
+
+            # Construct error message with type, value, and traceback
+            error_lines = [
+                f"Type: {type(exc).__name__}",
+                f"Message: {str(exc)}",
+                "Traceback:",
+            ]
+
+            # Add traceback details
+            for frame in tb_details:
+                error_lines.append(
+                    f"  File {frame.filename}, line {frame.lineno}, in {frame.name}"
+                )
+                if frame.line:
+                    error_lines.append(f"    {frame.line.strip()}")
+
+            return "\n".join(error_lines)
+
+        # Handle single Exception
+        if isinstance(error, Exception) and not isinstance(error, ExceptionGroup):
+            return format_single_exception(error)
+
+        # Handle ExceptionGroup
+        if isinstance(error, ExceptionGroup):
+            error_details: List[str] = []
+
+            # Recursively extract details from nested exceptions
+            def extract_nested_exceptions(exc_group: ExceptionGroup) -> None:
+                for exc in exc_group.exceptions:
+                    if isinstance(exc, ExceptionGroup):
+                        extract_nested_exceptions(exc)
+                    else:
+                        error_details.append(format_single_exception(exc))
+
+            # Start extraction
+            error_details.append(f"Exception Group: {error.message}")
+            extract_nested_exceptions(error)
+
+            return "\n\n".join(error_details)
+
+        # Fallback for unexpected input
+        return f"Unsupported error type: {type(error)}"
+
     async def handle_exception(
         self, *, chat_request: ChatRequest, e: Exception
     ) -> StreamingResponse | JSONResponse:
@@ -313,24 +381,7 @@ class ChatCompletionManager:
             f"Error in chat completion: {e} {type(e)} {e.__dict__.keys()}",
             exc_info=True,
         )
-        content = str(e)
-        # if we have a TaskGroup error, log sub-exceptions
-        if hasattr(e, "exceptions") and isinstance(e.exceptions, list):
-            # if there is just one exception, we can log it directly
-            if len(e.exceptions) == 1:
-                logger.error(f"Sub-exception: {e.exceptions[0]}", exc_info=True)
-                content = f"{e.exceptions[0]}"
-            else:
-                for idx, sub_e in enumerate(e.exceptions):
-                    logger.error(f"Sub-exception {idx + 1}: {sub_e}", exc_info=True)
-                    # add sub-exception content to the response
-                    content += f"\nSub-exception {idx + 1}: {sub_e}"
-        if isinstance(e, HTTPException):
-            # If the exception is an HTTPException, we can return it directly
-            return JSONResponse(
-                status_code=e.status_code,
-                content={"detail": e.detail},
-            )
+        content = self.extract_error_details(e)
         return self.write_response(
             chat_request=chat_request,
             response_messages=[
