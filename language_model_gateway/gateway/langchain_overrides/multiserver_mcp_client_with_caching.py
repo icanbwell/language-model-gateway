@@ -3,6 +3,7 @@ import logging
 from typing import override, List, Dict
 from uuid import UUID, uuid4
 
+from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import create_session
@@ -199,6 +200,26 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     tools = await _list_all_tools(tool_session)
             else:
                 tools = await _list_all_tools(session)
+        except* HTTPStatusError as exc:
+            # if there is
+            # exc is a ExceptionGroup, so we can catch it with a wildcard
+            # and log the type of the exception
+            # if there is just one exception then check if it is 401 and then return a custom error
+            if len(exc.exceptions) == 1 and isinstance(
+                exc.exceptions[0], HTTPStatusError
+            ):
+                http_status_exception: HTTPStatusError = exc.exceptions[0]
+
+                if http_status_exception.response.status_code == 401:
+                    logger.error(
+                        f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
+                    )
+                    raise ValueError(
+                        f"Not allowed to access MCP tool at {http_status_exception.request.url}. Perhaps your login token has expired. Please reload to login again."
+                    ) from exc
+            logger.error(
+                f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
+            )
         except* Exception as e:
             url: str = connection.get("url") if connection else "unknown"
             logger.error(
