@@ -39,7 +39,7 @@ repos:
         entry: ruff
         language: system
         types: [ python ]
-        args: [ check, --fix, --show-fixes ]
+        args: [ check, --fix, --show-fixes, --target-version=py312 ]
         require_serial: true
 
       - id: ruff-format

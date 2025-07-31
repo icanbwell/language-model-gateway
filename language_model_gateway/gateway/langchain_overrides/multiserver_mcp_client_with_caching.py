@@ -199,9 +199,11 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     tools = await _list_all_tools(tool_session)
             else:
                 tools = await _list_all_tools(session)
-        except Exception as e:
+        except* Exception as e:
             url: str = connection.get("url") if connection else "unknown"
-            logger.error(f"Failed to load tools from {url} : {e}")
+            logger.error(
+                f"load_metadata_for_mcp_tools Failed to load MCP tools from {url}: {type(e)} {e}"
+            )
             raise e
 
         if tool_names is not None:

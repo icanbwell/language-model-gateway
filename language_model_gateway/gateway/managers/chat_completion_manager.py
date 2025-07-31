@@ -132,6 +132,17 @@ class ChatCompletionManager:
                 chat_request=chat_request,
             )
             return response
+        except ExceptionGroup as e:
+            # if there is just one exception, we can log it directly
+            if len(e.exceptions) == 1:
+                logger.error(
+                    f"ExceptionGroup in chat completion: {e.exceptions[0]}",
+                    exc_info=True,
+                )
+                return await self.handle_exception(
+                    chat_request=chat_request, e=e.exceptions[0]
+                )
+            return await self.handle_exception(chat_request=chat_request, e=e)
         except Exception as e:
             return await self.handle_exception(chat_request=chat_request, e=e)
 
@@ -298,8 +309,31 @@ class ChatCompletionManager:
     async def handle_exception(
         self, *, chat_request: ChatRequest, e: Exception
     ) -> StreamingResponse | JSONResponse:
-        logger.error(f"Error in chat completion: {e}")
+        logger.error(
+            f"Error in chat completion: {e} {type(e)} {e.__dict__.keys()}",
+            exc_info=True,
+        )
+        content = str(e)
+        # if we have a TaskGroup error, log sub-exceptions
+        if hasattr(e, "exceptions") and isinstance(e.exceptions, list):
+            # if there is just one exception, we can log it directly
+            if len(e.exceptions) == 1:
+                logger.error(f"Sub-exception: {e.exceptions[0]}", exc_info=True)
+                content = f"{e.exceptions[0]}"
+            else:
+                for idx, sub_e in enumerate(e.exceptions):
+                    logger.error(f"Sub-exception {idx + 1}: {sub_e}", exc_info=True)
+                    # add sub-exception content to the response
+                    content += f"\nSub-exception {idx + 1}: {sub_e}"
+        if isinstance(e, HTTPException):
+            # If the exception is an HTTPException, we can return it directly
+            return JSONResponse(
+                status_code=e.status_code,
+                content={"detail": e.detail},
+            )
         return self.write_response(
             chat_request=chat_request,
-            response_messages=[ChatCompletionMessage(role="assistant", content=str(e))],
+            response_messages=[
+                ChatCompletionMessage(role="assistant", content=content)
+            ],
         )

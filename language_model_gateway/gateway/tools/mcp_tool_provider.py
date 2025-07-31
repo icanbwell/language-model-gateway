@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import Dict, List
 
@@ -10,6 +11,8 @@ from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_w
     MultiServerMCPClientWithCaching,
 )
 from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
+
+logger = logging.getLogger(__name__)
 
 
 class MCPToolProvider:
@@ -80,8 +83,12 @@ class MCPToolProvider:
                 tools = [t for t in tools if t.name in tool_names]
             self.tools_by_mcp_url[url] = tools
             return tools
-        except Exception as e:
-            raise ValueError(f"Failed to load tools from MCP URL {tool.url}: {e}")
+        except* Exception as e:
+            url = tool.url if tool.url else "unknown"
+            logger.error(
+                f"get_tools_by_url_async Failed to load MCP tools from {url}: {type(e)} {e}"
+            )
+            raise e
 
     async def get_tools_async(
         self, *, tools: list[AgentConfig], headers: Dict[str, str]
@@ -95,8 +102,9 @@ class MCPToolProvider:
                         tool=tool, headers=headers
                     )
                     all_tools.extend(tools_by_url)
-                except Exception as e:
-                    raise ValueError(
-                        f"Failed to get tools from MCP URL {tool.url}: {e}"
+                except* Exception as e:
+                    logger.error(
+                        f"get_tools_async Failed to get tools for {tool.name} from {tool.url}: {type(e)} {e}"
                     )
+                    raise e
         return all_tools
