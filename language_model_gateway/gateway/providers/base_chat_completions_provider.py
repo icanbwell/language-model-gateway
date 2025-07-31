@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 from typing import Dict
 
 from starlette.responses import StreamingResponse, JSONResponse
@@ -7,7 +7,7 @@ from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 
 
-class BaseChatCompletionsProvider:
+class BaseChatCompletionsProvider(metaclass=ABCMeta):
     @abstractmethod
     async def chat_completions(
         self,

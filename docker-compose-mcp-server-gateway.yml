@@ -2,8 +2,8 @@ services:
   mcp_server_gateway:
     build:
       dockerfile: Dockerfile
-      context: ../mcp_server_gateway
-    container_name: mcp_server_gateway
+      context: ../mcp-server-gateway
+    container_name: mcp-server-gateway
     environment:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"

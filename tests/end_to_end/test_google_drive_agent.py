@@ -22,7 +22,9 @@ from mcp.types import (
     EmbeddedResource,
 )
 
-from language_model_gateway.container.container_factory import ConfigExpiringCache
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
@@ -320,7 +322,7 @@ async def test_chat_completions_with_google_drive(
                 ),
                 tools=[
                     AgentConfig(
-                        name="google_drive", tool_name="download_file_from_url", url=url
+                        name="google_drive", tools="download_file_from_url", url=url
                     ),
                 ],
             )

@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 
 import httpx
 from openai import AsyncOpenAI, AsyncStream
@@ -10,14 +10,15 @@ from language_model_gateway.configs.config_schema import (
     PromptConfig,
     ModelParameterConfig,
 )
-from language_model_gateway.container.container_factory import ConfigExpiringCache
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.expiring_cache import ExpiringCache
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -37,8 +38,8 @@ async def test_chat_prompt_helper(async_client: httpx.AsyncClient) -> None:
             ),
         )
 
-    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ConfigExpiringCache)
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
     )
     await model_configuration_cache.set(
         [
@@ -114,8 +115,8 @@ async def test_chat_prompt_helper_streaming(async_client: httpx.AsyncClient) -> 
             ),
         )
 
-    model_configuration_cache: ExpiringCache[List[ChatModelConfig]] = (
-        test_container.resolve(ConfigExpiringCache)
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
     )
     await model_configuration_cache.set(
         [

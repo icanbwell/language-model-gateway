@@ -1,22 +1,28 @@
 import asyncio
 import logging
 import time
-from typing import Optional
+from typing import Optional, List
 from uuid import uuid4, UUID
 
+from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
 
 logger = logging.getLogger(__name__)
 
 
-class ExpiringCache[T]:
-    def __init__(self, *, ttl_seconds: float, init_value: Optional[T] = None) -> None:
-        self._cache: Optional[T] = init_value
-        self._cache_timestamp: Optional[float] = (
-            time.time() if init_value is not None else None
-        )
-        self._lock: asyncio.Lock = asyncio.Lock()
+class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):
+    _cache: Optional[List[ChatModelConfig]] = None
+    _cache_timestamp: Optional[float] = None
+    _lock: asyncio.Lock = asyncio.Lock()
+
+    def __init__(
+        self, *, ttl_seconds: float, init_value: Optional[List[ChatModelConfig]] = None
+    ) -> None:
         self._ttl: float = ttl_seconds
         self._identifier: UUID = uuid4()
+        if init_value is not None:
+            self._cache = init_value
+            self._cache_timestamp = time.time()
 
     def is_valid(self) -> bool:
         if self._cache is None or self._cache_timestamp is None:
@@ -29,12 +35,12 @@ class ExpiringCache[T]:
         )
         return cache_is_valid
 
-    async def get(self) -> Optional[T]:
+    async def get(self) -> Optional[List[ChatModelConfig]]:
         if self.is_valid():
             return self._cache
         return None
 
-    async def set(self, value: T) -> None:
+    async def set(self, value: List[ChatModelConfig]) -> None:
         async with self._lock:
             self._cache = value
             self._cache_timestamp = time.time()

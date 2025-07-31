@@ -167,9 +167,10 @@ class GitHubConfigReader:
                 api_url = f"https://api.github.com/repos/{repo_url}/contents/{path}?ref={branch}"
 
                 headers = (
-                    {"Authorization": f"token {github_token}"} if github_token else {}
+                    {"Authorization": f"Bearer {github_token}"} if github_token else {}
                 )
                 headers["Accept"] = "application/vnd.github.v3+json"
+                headers["X-GitHub-Api-Version"] = "2022-11-28"
 
                 # Get the list of files with rate limit handling
                 response = await self._make_request(

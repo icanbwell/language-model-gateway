@@ -12,11 +12,10 @@ import logging
 import os
 import time
 from pathlib import PurePosixPath
-from typing import AsyncGenerator
+from typing import AsyncGenerator, List
 from typing import Optional, Callable, Awaitable, Any, Dict
-from typing import Union, Generator, Iterator
+import httpx
 
-import requests
 from pydantic import BaseModel
 from pydantic import Field
 from starlette.datastructures import MutableHeaders
@@ -46,6 +45,10 @@ class Pipe:
             default=False,
             description="Restrict access to this pipe to admin users only",
         )
+        restrict_to_model_ids: list[str] = Field(
+            default_factory=list,
+            description="List of model IDs to restrict access to. If empty, no restriction is applied.",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
@@ -54,7 +57,7 @@ class Pipe:
         self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
         self.name: str = self.valves.model_name_prefix
         self.last_emit_time: float = 0
-        self.pipelines = self.get_models()
+        self.pipelines: List[Dict[str, Any]] | None = None
 
     # noinspection PyMethodMayBeStatic
     def read_base_url(self) -> Optional[str]:
@@ -71,6 +74,7 @@ class Pipe:
     async def on_startup(self) -> None:
         # This function is called when the server is started.
         logger.debug(f"on_startup:{__name__}")
+        self.pipelines = await self.get_models()
         pass
 
     # noinspection PyMethodMayBeStatic
@@ -82,7 +86,7 @@ class Pipe:
     async def on_valves_updated(self) -> None:
         # This function is called when the valves are updated.
         logger.debug(f"on_valves_updated:{__name__}")
-        self.pipelines = self.get_models()
+        self.pipelines = await self.get_models()
         pass
 
     async def emit_status(
@@ -305,7 +309,7 @@ class Pipe:
         __event_call__: Optional[
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
-    ) -> Union[str, Generator[Any, None, None] | Iterator[Any]]:
+    ) -> AsyncGenerator[str, None]:
         """
         Main pipe method supporting both streaming and non-streaming responses
         """
@@ -336,21 +340,23 @@ class Pipe:
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
             logger.debug(
-                "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
+                "LanguageModelGateway::pipe OPENAI_API_BASE_URL is not set in valves, trying environment variable."
             )
             open_api_base_url = self.read_base_url()
             logger.debug(
-                f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
+                f"LanguageModelGateway::pipe after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
             )
         assert open_api_base_url is not None, (
-            "LanguageModelGateway:Pipes OpenAI_API_BASE_URL must be set as an environment variable."
+            "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
         )
         assert open_api_base_url is not None, (
-            "LanguageModelGateway:Pipe OpenAI_API_BASE_URL must be set as an environment variable."
+            "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
         )
         logger.debug(f"open_api_base_url: {open_api_base_url}")
 
         headers: MutableHeaders = __request__.headers.mutablecopy()
+        # remove Content-Length header if it exists so we calculate it correctly
+        del headers["Content-Length"]
 
         # if auth token is available in the cookies, add it to the Authorization header
         if auth_token:
@@ -371,29 +377,39 @@ class Pipe:
             logger.debug(f"operation_path: {operation_path}")
             url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
 
-            logger.debug(f"Calling chat completion url: {url}")
-
-            # now run the __request__ with the OpenAI API
-            response = requests.post(
-                url=url,
-                json=payload,
-                headers=headers,
-                stream=body.get("stream", False),
-                timeout=30,  # Set a timeout for the request
+            logger.debug(
+                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {headers}"
             )
 
-            response.raise_for_status()
+            # now run the __request__ with the OpenAI API
+            # Use httpx.stream for more efficient streaming
+            async with httpx.AsyncClient() as client:
+                async with client.stream(
+                    method="POST", url=url, json=payload, headers=headers, timeout=30.0
+                ) as response:
+                    # Raise an exception for HTTP errors
+                    response.raise_for_status()
 
-            if body["stream"]:
-                return response.iter_lines()
-            else:
-                return response.json()  # type: ignore[no-any-return]
+                    # Handle streaming or regular response
+                    if body.get("stream", False):
+                        # Stream mode: yield lines as they arrive
+                        async for line in response.aiter_lines():
+                            yield line
+                    else:
+                        # Non-streaming mode: collect and return full JSON response
+                        yield await response.json()
         except Exception as e:
             # logger.error(f"Error in pipe: {e}")
             # logger.debug(f"Error details: {e.__traceback__}")
-            return f"Error: {e}"
+            yield f"LanguageModelGateway::pipe Error: {e}"
 
-    def get_models(self) -> list[dict[str, str]]:
+    async def get_models(self) -> list[dict[str, str]]:
+        """
+        Fetches the list of available models from the OpenAI API.
+        Returns:
+            A list of dictionaries containing model IDs and names.
+
+        """
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
             logger.debug(
@@ -411,10 +427,28 @@ class Pipe:
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         # call the models endpoint to get the list of available models
         logger.debug(f"Calling models endpoint: {model_url}")
-        response = requests.get(model_url, timeout=30)  # Set a timeout for the request
-        response.raise_for_status()
-        models = response.json().get("data", [])
+        models: list[dict[str, str]] = []
+        async with httpx.AsyncClient() as client:
+            # Perform the GET request with a timeout
+            response = await client.get(
+                url=model_url,
+                timeout=30.0,  # 30 seconds timeout
+            )
+
+            # Raise an exception for HTTP errors
+            response.raise_for_status()
+
+            # Parse JSON and extract 'data' key, defaulting to empty list
+            models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
+        if self.valves.restrict_to_model_ids:
+            # Filter models based on the restricted model IDs
+            models = [
+                model
+                for model in models
+                if model["id"] in self.valves.restrict_to_model_ids
+            ]
+            logger.debug(f"Filtered models: {models}")
         return [
             {
                 "id": model["id"],
@@ -423,5 +457,8 @@ class Pipe:
             for model in models
         ]
 
-    def pipes(self) -> list[dict[str, str]]:
-        return self.pipelines
+    async def pipes(self) -> list[dict[str, str]]:
+        if self.pipelines is None:
+            logger.debug("Fetching models for the first time.")
+            self.pipelines = await self.get_models()
+        return self.pipelines or []
