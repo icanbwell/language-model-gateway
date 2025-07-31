@@ -112,7 +112,7 @@ def create_app() -> FastAPI:
 app = create_app()
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "POST"])
 async def health() -> str:
     return "OK"
 
