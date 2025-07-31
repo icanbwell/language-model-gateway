@@ -98,9 +98,12 @@ def create_app() -> FastAPI:
 
     # Set up CORS middleware; adjust parameters as needed
     # noinspection PyTypeChecker
+    allowed_origins = environ.get("ALLOWED_ORIGINS", "").split(",")
+    if not allowed_origins or allowed_origins == [""]:
+        raise ValueError("ALLOWED_ORIGINS environment variable must be set to a comma-separated list of allowed origins.")
     app1.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=allowed_origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
