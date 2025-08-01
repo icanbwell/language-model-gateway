@@ -21,7 +21,6 @@ import httpx
 import requests
 from pydantic import BaseModel
 from pydantic import Field
-from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
@@ -384,14 +383,6 @@ class Pipe:
         )
         logger.info(f"open_api_base_url: {open_api_base_url}")
 
-        headers: MutableHeaders = __request__.headers.mutablecopy()
-        # remove Content-Length header if it exists so we calculate it correctly
-        del headers["Content-Length"]
-
-        # if auth token is available in the cookies, add it to the Authorization headers
-        if auth_token:
-            headers["Authorization"] = f"Bearer {auth_token}"
-
         # Extract model id from the model name
         model_id = body["model"][body["model"].find(".") + 1 :]
 
@@ -468,21 +459,25 @@ class Pipe:
 
         try:
             logger.info(
-                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {headers}"
+                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
             )
 
             # now run the __request__ with the OpenAI API
             # Headers
-            headers2 = {
+            headers = {
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {auth_token}",
             }
+            # remove stream from payload if it exists
+            if "stream" in payload:
+                del payload["stream"]
+
             # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
                 response = await client.post(
                     url=url,
                     json=payload,
-                    headers=headers2,
+                    headers=headers,
                     timeout=30.0,
                     follow_redirects=True,
                 )
@@ -492,14 +487,17 @@ class Pipe:
                 # # Handle streaming or regular response
                 content_type = response.headers.get("content-type", "")
                 if content_type.startswith("text/event-stream"):
+                    yield json.dumps(payload) + "\n"
                     # Stream mode: yield lines as they arrive
                     async for line in response.aiter_lines():
                         if line:
                             yield line + "\n"
                 else:
                     # Non-streaming mode: collect and return full JSON response
-                    yield f"LanguageModelGateway::pipe [{v}]" + json.dumps(
-                        response.json()
+                    yield (
+                        "non-streaming: "
+                        + json.dumps(payload)
+                        + json.dumps(response.json())
                     )
 
         except httpx.HTTPStatusError as e:
