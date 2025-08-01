@@ -452,10 +452,32 @@ class Pipe:
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {auth_token}",
             }
+            # set User-Agent to the one from the request, if available
+            if "User-Agent" in __request__.headers:
+                headers["User-Agent"] = __request__.headers["User-Agent"]
+            # set Referrer to the one from the request, if available
+            if "Referrer" in __request__.headers:
+                headers["Referrer"] = __request__.headers["Referrer"]
+            # set Cookie to the one from the request, if available
+            if "Cookie" in __request__.headers:
+                headers["Cookie"] = __request__.headers["Cookie"]
+            # set traceparent to the one from the request, if available
+            if "traceparent" in __request__.headers:
+                headers["traceparent"] = __request__.headers["traceparent"]
+            if "origin" in __request__.headers:
+                headers["Origin"] = __request__.headers["origin"]
+            if "Accept-Encoding" in __request__.headers:
+                headers["Accept-Encoding"] = __request__.headers["Accept-Encoding"]
+
+            # copy any headers that start with "x-"
+            for key, value in __request__.headers.items():
+                if key.lower().startswith("x-"):
+                    headers[key] = value
 
             if self.valves.debug_mode:
                 yield url + "\n"
-                yield f"{dict(__request__.headers)}" + "\n"
+                yield f"Original Headers: {dict(__request__.headers)}" + "\n"
+                yield f"New Headers: {dict(headers)}" + "\n"
                 yield json.dumps(payload) + "\n"
 
             # Use httpx.post for a plain POST request
