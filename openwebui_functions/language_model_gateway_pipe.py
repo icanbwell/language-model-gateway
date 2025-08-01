@@ -402,8 +402,20 @@ class Pipe:
         else:
             logger.debug("No Authorization header found.")
 
+        if self.valves.debug_mode:
+            yield f"User:\n{__user__}" + "\n"
+            yield f"Original Headers:\n{dict(__request__.headers)}" + "\n"
+
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
         logger.debug(f"auth_token: {auth_token}")
+
+        if auth_token is None:
+            yield (
+                "LanguageModelGateway::pipe No oauth_id_token found in cookies. "
+                "Please ensure you are authenticated."
+            )
+            await self.emit_status(__event_emitter__, "error", "Error", True)
+            return
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
@@ -427,6 +439,8 @@ class Pipe:
 
         # Update the model id in the body
         payload = {**body, "model": model_id}
+        if self.valves.debug_mode:
+            yield json.dumps(payload) + "\n"
 
         # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
         # include any query parameters in the URL
@@ -469,6 +483,29 @@ class Pipe:
             if "Accept-Encoding" in __request__.headers:
                 headers["Accept-Encoding"] = __request__.headers["Accept-Encoding"]
 
+            # Add custom headers for OpenWebUI user information
+            if __user__ is not None:
+                user = __user__
+                # check that each value is not None before adding to headers
+                if user.get("name") is not None:
+                    headers["X-OpenWebUI-User-Name"] = user["name"]
+                if user.get("id") is not None:
+                    headers["X-OpenWebUI-User-Id"] = user["id"]
+                if user.get("email") is not None:
+                    headers["X-OpenWebUI-User-Email"] = user["email"]
+                if user.get("role") is not None:
+                    headers["X-OpenWebUI-User-Role"] = user["role"]
+                if (
+                    user.get("info") is not None
+                    and isinstance(user["info"], dict)
+                    and user["info"].get("location") is not None
+                    and isinstance(user["info"]["location"], str)
+                ):
+                    location = user["info"]["location"]
+                    if self.valves.debug_mode:
+                        yield "Location: " + type(location).__name__ + f"{location}\n"
+                    headers["X-OpenWebUI-User-Location"] = user["info"]["location"]
+
             # copy any headers that start with "x-"
             for key, value in __request__.headers.items():
                 if key.lower().startswith("x-"):
@@ -476,7 +513,6 @@ class Pipe:
 
             if self.valves.debug_mode:
                 yield url + "\n"
-                yield f"Original Headers: {dict(__request__.headers)}" + "\n"
                 yield f"New Headers: {dict(headers)}" + "\n"
                 yield json.dumps(payload) + "\n"
 
