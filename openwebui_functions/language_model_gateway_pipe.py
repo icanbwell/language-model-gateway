@@ -388,7 +388,7 @@ class Pipe:
         # remove Content-Length header if it exists so we calculate it correctly
         del headers["Content-Length"]
 
-        # if auth token is available in the cookies, add it to the Authorization header
+        # if auth token is available in the cookies, add it to the Authorization headers
         if auth_token:
             headers["Authorization"] = f"Bearer {auth_token}"
 
@@ -518,7 +518,7 @@ class Pipe:
                 # Raise an exception for HTTP errors
                 response.raise_for_status()
 
-                yield json.dumps(response.json())
+                yield f"LanguageModelGateway::pipe [{v}]" + json.dumps(response.json())
 
                 # # Handle streaming or regular response
                 # if body.get("stream", False):
