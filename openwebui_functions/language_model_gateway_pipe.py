@@ -442,13 +442,7 @@ class Pipe:
         if self.valves.debug_mode:
             yield json.dumps(payload) + "\n"
 
-        # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
-        # include any query parameters in the URL
-        operation_path = str(__request__.url).replace(
-            "https://aiden.bwell.zone/api/", ""
-        )
-        logger.debug(f"operation_path: {operation_path}")
-        url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
+        url = self.pathlib_url_join(base_url=open_api_base_url, path="chat/completions")
         response_text: str = ""
 
         v = 11
