@@ -405,9 +405,6 @@ class Pipe:
         )
         logger.info(f"operation_path: {operation_path}")
         url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
-        url = (
-            "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
-        )
         response_text: str = ""
 
         def log_httpx_request(request: httpx.Request) -> str:
@@ -474,22 +471,7 @@ class Pipe:
                 f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {headers}"
             )
 
-            # call the /health endpoint to check if the OpenAI API is reachable
-            health_url = "https://language-model-gateway.services.bwell.zone/health"
-            logger.info(f"Checking OpenAI API health at: {health_url}")
-            async with httpx.AsyncClient() as client:
-                health_response = await client.get(
-                    url=health_url,
-                    headers=headers,
-                    timeout=10.0,  # 10 seconds timeout for health check
-                )
-                health_response.raise_for_status()
-            response_text += f"{health_url}:{health_response.json()}"
-
-            # If the health check passes, proceed with the main request
             # now run the __request__ with the OpenAI API
-            url = "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
-
             # Headers
             headers2 = {
                 "Content-Type": "application/json",
