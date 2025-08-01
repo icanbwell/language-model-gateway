@@ -18,7 +18,6 @@ from typing import Optional, Callable, Awaitable, Any, Dict
 from urllib.parse import urlparse, urlunparse
 
 import httpx
-import requests
 from pydantic import BaseModel
 from pydantic import Field
 from starlette.requests import Request
@@ -50,6 +49,10 @@ class Pipe:
             default_factory=list,
             description="List of model IDs to restrict access to. If empty, no restriction is applied.",
         )
+        debug_mode: bool = Field(
+            default=False,
+            description="Enable debug mode for additional logging and debugging information",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
@@ -74,19 +77,19 @@ class Pipe:
     # noinspection PyMethodMayBeStatic
     async def on_startup(self) -> None:
         # This function is called when the server is started.
-        logger.info(f"on_startup:{__name__}")
+        logger.debug(f"on_startup:{__name__}")
         self.pipelines = await self.get_models()
         pass
 
     # noinspection PyMethodMayBeStatic
     async def on_shutdown(self) -> None:
         # This function is called when the server is stopped.
-        logger.info(f"on_shutdown:{__name__}")
+        logger.debug(f"on_shutdown:{__name__}")
         pass
 
     async def on_valves_updated(self) -> None:
         # This function is called when the valves are updated.
-        logger.info(f"on_valves_updated:{__name__}")
+        logger.debug(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
         pass
 
@@ -301,32 +304,63 @@ class Pipe:
         return reconstructed_url
 
     @staticmethod
-    def test_call() -> str:
-        # API endpoint
-        url = (
-            "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
-        )
+    def log_httpx_request(request: httpx.Request) -> str:
+        """
+        Convert an HTTPX request to a detailed string representation.
 
-        # Headers
-        headers = {"Content-Type": "application/json", "Authorization": "Bearer 123"}
+        Args:
+            request (httpx.Request): The HTTPX request to log
 
-        # Payload
-        payload = {
-            "model": "General Purpose",
-            "messages": [
-                {"role": "user", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Hello!"},
-            ],
-        }
+        Returns:
+            str: Formatted string representation of the request
+        """
+        # Construct request details
+        request_log = f"""
+    HTTPX Request:
+    - Method: {request.method}
+    - URL: {request.url}
+    - Headers: {dict(request.headers)}
+    - Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
+    """.strip()
 
-        # Send POST request
-        response = requests.post(url, headers=headers, json=payload, timeout=30)
+        return request_log
 
-        # Print response
-        print("Status Code:", response.status_code)
-        print("Response JSON:")
-        print(json.dumps(response.json(), indent=2))
-        return json.dumps(response.json())
+    @staticmethod
+    def log_response_as_string(response1: httpx.Response) -> str:
+        """
+        Convert an HTTPX response to a detailed, formatted string.
+
+        Args:
+            response1 (httpx.Response): The HTTP response to log
+
+        Returns:
+            str: Comprehensive response log string
+        """
+        try:
+            # Attempt to parse JSON response
+            try:
+                response_body = json.dumps(response1.json(), indent=2)
+            except (ValueError, json.JSONDecodeError):
+                # Fallback to text if not JSON
+                response_body = response1.text[:1000]  # Limit body size
+        except Exception:
+            response_body = "(Unable to decode response body)"
+
+        response_log = f"""
+    HTTPX Response Log:
+    - Timestamp: {datetime.datetime.now().isoformat()}
+    - Status Code: {response1.status_code}
+    - URL: {response1.request.url}
+    - Method: {response1.request.method}
+    - Response Headers:
+    {json.dumps(dict(response1.headers), indent=2)}
+    - Response Body:
+    {response_body}
+    - Response Encoding: {response1.encoding}
+    - Response Elapsed Time: {response1.elapsed}
+    """.strip()
+
+        return response_log
 
     # noinspection PyMethodMayBeStatic
     async def pipe(
@@ -342,37 +376,44 @@ class Pipe:
         """
         Main pipe method supporting both streaming and non-streaming responses
         """
-        # This is where you can add your custom pipelines like RAG.
-        logger.info(f"pipe:{__name__}")
+        await self.emit_status(
+            __event_emitter__,
+            "info",
+            f"/initiating Chain: headers={__request__.headers if __request__ else None}"
+            f", cookies={__request__.cookies if __request__ else None}"
+            f" {__user__=} {body=}",
+            False,
+        )
+        logger.debug(f"pipe:{__name__}")
 
-        logger.info("=== body ===")
-        logger.info(body)
-        logger.info("==== End of body ===")
-        logger.info(f"__request__: {__request__}")
-        logger.info(f"__user__: {__user__}")
-        logger.info("==== Request Url ====")
-        logger.info(__request__.url if __request__ else "No request URL provided")
-        logger.info("==== End of Request Url ====")
+        logger.debug("=== body ===")
+        logger.debug(body)
+        logger.debug("==== End of body ===")
+        logger.debug(f"__request__: {__request__}")
+        logger.debug(f"__user__: {__user__}")
+        logger.debug("==== Request Url ====")
+        logger.debug(__request__.url if __request__ else "No request URL provided")
+        logger.debug("==== End of Request Url ====")
 
         assert __request__ is not None, "Request object must be provided."
 
-        # logger.info the Authorization header if available
+        # logger.debug the Authorization header if available
         auth_header = __request__.headers.get("Authorization")
         if auth_header:
-            logger.info(f"Authorization header: {auth_header}")
+            logger.debug(f"Authorization header: {auth_header}")
         else:
-            logger.info("No Authorization header found.")
+            logger.debug("No Authorization header found.")
 
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
-        logger.info(f"auth_token: {auth_token}")
+        logger.debug(f"auth_token: {auth_token}")
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
-            logger.info(
+            logger.debug(
                 "LanguageModelGateway::pipe OPENAI_API_BASE_URL is not set in valves, trying environment variable."
             )
             open_api_base_url = self.read_base_url()
-            logger.info(
+            logger.debug(
                 f"LanguageModelGateway::pipe after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
             )
         assert open_api_base_url is not None, (
@@ -381,7 +422,7 @@ class Pipe:
         assert open_api_base_url is not None, (
             "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
         )
-        logger.info(f"open_api_base_url: {open_api_base_url}")
+        logger.debug(f"open_api_base_url: {open_api_base_url}")
 
         # Extract model id from the model name
         model_id = body["model"][body["model"].find(".") + 1 :]
@@ -394,71 +435,16 @@ class Pipe:
         operation_path = str(__request__.url).replace(
             "https://aiden.bwell.zone/api/", ""
         )
-        logger.info(f"operation_path: {operation_path}")
+        logger.debug(f"operation_path: {operation_path}")
         url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
         response_text: str = ""
 
-        def log_httpx_request(request: httpx.Request) -> str:
-            """
-            Convert an HTTPX request to a detailed string representation.
-
-            Args:
-                request (httpx.Request): The HTTPX request to log
-
-            Returns:
-                str: Formatted string representation of the request
-            """
-            # Construct request details
-            request_log = f"""
-        HTTPX Request:
-        - Method: {request.method}
-        - URL: {request.url}
-        - Headers: {dict(request.headers)}
-        - Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
-        """.strip()
-
-            return request_log
-
-        def log_response_as_string(response1: httpx.Response) -> str:
-            """
-            Convert an HTTPX response to a detailed, formatted string.
-
-            Args:
-                response1 (httpx.Response): The HTTP response to log
-
-            Returns:
-                str: Comprehensive response log string
-            """
-            try:
-                # Attempt to parse JSON response
-                try:
-                    response_body = json.dumps(response1.json(), indent=2)
-                except (ValueError, json.JSONDecodeError):
-                    # Fallback to text if not JSON
-                    response_body = response1.text[:1000]  # Limit body size
-            except Exception:
-                response_body = "(Unable to decode response body)"
-
-            response_log = f"""
-        HTTPX Response Log:
-        - Timestamp: {datetime.datetime.now().isoformat()}
-        - Status Code: {response.status_code}
-        - URL: {response.request.url}
-        - Method: {response.request.method}
-        - Response Headers:
-        {json.dumps(dict(response.headers), indent=2)}
-        - Response Body:
-        {response_body}
-        - Response Encoding: {response.encoding}
-        - Response Elapsed Time: {response.elapsed}
-        """.strip()
-
-            return response_log
-
         v = 11
 
+        is_streaming: bool = body.get("stream", False)
+
         try:
-            logger.info(
+            logger.debug(
                 f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
             )
 
@@ -468,9 +454,11 @@ class Pipe:
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {auth_token}",
             }
-            # remove stream from payload if it exists
-            if "stream" in payload:
-                del payload["stream"]
+
+            if self.valves.debug_mode:
+                yield url + "\n"
+                yield f"{dict(__request__.headers)}" + "\n"
+                yield json.dumps(payload) + "\n"
 
             # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
@@ -487,26 +475,45 @@ class Pipe:
                 # # Handle streaming or regular response
                 content_type = response.headers.get("content-type", "")
                 if content_type.startswith("text/event-stream"):
-                    yield json.dumps(payload) + "\n"
                     # Stream mode: yield lines as they arrive
                     async for line in response.aiter_lines():
                         if line:
                             yield line + "\n"
                 else:
                     # Non-streaming mode: collect and return full JSON response
-                    yield (
-                        "non-streaming: "
-                        + json.dumps(payload)
-                        + json.dumps(response.json())
-                    )
+                    yield response.json()
 
+            await self.emit_status(__event_emitter__, "info", "Stream Complete", True)
         except httpx.HTTPStatusError as e:
-            yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e}\n{log_httpx_request(e.request)}\n{log_response_as_string(e.response)}"
+            yield (
+                f"LanguageModelGateway::pipe HTTP Status Error [{v}]:"
+                + f" {type(e)} {e}\n"
+                + f"{self.log_httpx_request(e.request)}\n"
+                + f"{self.log_response_as_string(e.response)}"
+            )
         except Exception as e:
             # logger.error(f"Error in pipe: {e}")
-            # logger.info(f"Error details: {e.__traceback__}")
+            # logger.debug(f"Error details: {e.__traceback__}")
             httpx_version = httpx.__version__
-            yield f"LanguageModelGateway::pipe Error [{v}]: {type(e)} {e} {httpx_version=} [{url=}] original=[{__request__.url}] {response_text=} {payload=} {headers=}\n"
+            if is_streaming:
+                error_chunk = {
+                    "id": "chatcmpl-error",
+                    "object": "chat.completion.chunk",
+                    "created": int(time.time()),
+                    "model": "error",
+                    "choices": [
+                        {
+                            "index": 0,
+                            "delta": {"content": f"Error: {str(e)}"},
+                            "finish_reason": "stop",
+                        }
+                    ],
+                }
+                yield f"data: {json.dumps(error_chunk)}\n\n"
+            else:
+                yield f"LanguageModelGateway::pipe Error [{v}]: {type(e)} {e} {httpx_version=} [{url=}] original=[{__request__.url}] {response_text=} {payload=}\n"
+
+            await self.emit_status(__event_emitter__, "error", str(e), True)
 
     async def get_models(self) -> list[dict[str, str]]:
         """
@@ -517,11 +524,11 @@ class Pipe:
         """
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
-            logger.info(
+            logger.debug(
                 "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
             )
             open_api_base_url = self.read_base_url()
-            logger.info(
+            logger.debug(
                 f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
             )
         if open_api_base_url is None:
@@ -531,7 +538,7 @@ class Pipe:
         )
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         # call the models endpoint to get the list of available models
-        logger.info(f"Calling models endpoint: {model_url}")
+        logger.debug(f"Calling models endpoint: {model_url}")
         models: list[dict[str, str]] = []
         async with httpx.AsyncClient() as client:
             # Perform the GET request with a timeout
@@ -545,7 +552,7 @@ class Pipe:
 
             # Parse JSON and extract 'data' key, defaulting to empty list
             models = response.json().get("data", [])
-        logger.info(f"Received models from {model_url}: {models}")
+        logger.debug(f"Received models from {model_url}: {models}")
         if self.valves.restrict_to_model_ids:
             # Filter models based on the restricted model IDs
             models = [
@@ -553,7 +560,7 @@ class Pipe:
                 for model in models
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
-            logger.info(f"Filtered models: {models}")
+            logger.debug(f"Filtered models: {models}")
         return [
             {
                 "id": model["id"],
@@ -564,6 +571,6 @@ class Pipe:
 
     async def pipes(self) -> list[dict[str, str]]:
         if self.pipelines is None:
-            logger.info("Fetching models for the first time.")
+            logger.debug("Fetching models for the first time.")
             self.pipelines = await self.get_models()
         return self.pipelines or []
