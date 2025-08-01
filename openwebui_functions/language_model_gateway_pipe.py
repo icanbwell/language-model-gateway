@@ -467,7 +467,7 @@ class Pipe:
 
             return response_log
 
-        v = 9
+        v = 11
 
         try:
             logger.info(
@@ -508,9 +508,12 @@ class Pipe:
                 response.raise_for_status()
 
                 # # Handle streaming or regular response
-                if body.get("stream", False):
-                    # Stream mode: yield lines as they arrive (not supported in plain POST)
-                    yield f"LanguageModelGateway::pipe (stream) [{v}]" + response.text
+                content_type = response.headers.get("content-type", "")
+                if content_type.startswith("text/event-stream"):
+                    # Stream mode: yield lines as they arrive
+                    async for line in response.aiter_lines():
+                        if line:
+                            yield line + "\n"
                 else:
                     # Non-streaming mode: collect and return full JSON response
                     yield f"LanguageModelGateway::pipe [{v}]" + json.dumps(
