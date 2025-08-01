@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import time
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, override
 from uuid import uuid4, UUID
 
 from mcp import Tool
@@ -25,6 +25,7 @@ class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
             self._cache = init_value
             self._cache_timestamp = time.time()
 
+    @override
     def is_valid(self) -> bool:
         if self._cache is None or self._cache_timestamp is None:
             return False
@@ -36,11 +37,13 @@ class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
         )
         return cache_is_valid
 
+    @override
     async def get(self) -> Optional[Dict[str, List[Tool]]]:
         if self.is_valid():
             return self._cache
         return None
 
+    @override
     async def set(self, value: Dict[str, List[Tool]]) -> None:
         async with self._lock:
             self._cache = value
@@ -49,6 +52,17 @@ class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):
                 f"ExpiringCache with id: {self._identifier} set cache with timestamp: {self._cache_timestamp}"
             )
 
+    @override
+    async def create(
+        self, *, init_value: Optional[Dict[str, List[Tool]]] = None
+    ) -> Dict[str, List[Tool]] | None:
+        async with self._lock:
+            self._cache = init_value if init_value is not None else {}
+            self._cache_timestamp = time.time()
+            logger.info(f"ExpiringCache with id: {self._identifier} created cache")
+            return self._cache
+
+    @override
     async def clear(self) -> None:
         async with self._lock:
             self._cache = None
