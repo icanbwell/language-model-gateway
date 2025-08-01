@@ -18,6 +18,7 @@ from typing import Optional, Callable, Awaitable, Any, Dict
 from urllib.parse import urlparse, urlunparse
 
 import httpx
+import requests
 from pydantic import BaseModel
 from pydantic import Field
 from starlette.datastructures import MutableHeaders
@@ -300,6 +301,34 @@ class Pipe:
 
         return reconstructed_url
 
+    @staticmethod
+    def test_call() -> str:
+        # API endpoint
+        url = (
+            "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
+        )
+
+        # Headers
+        headers = {"Content-Type": "application/json", "Authorization": "Bearer 123"}
+
+        # Payload
+        payload = {
+            "model": "General Purpose",
+            "messages": [
+                {"role": "user", "content": "You are a helpful assistant."},
+                {"role": "user", "content": "Hello!"},
+            ],
+        }
+
+        # Send POST request
+        response = requests.post(url, headers=headers, json=payload, timeout=30)
+
+        # Print response
+        print("Status Code:", response.status_code)
+        print("Response JSON:")
+        print(json.dumps(response.json(), indent=2))
+        return json.dumps(response.json())
+
     # noinspection PyMethodMayBeStatic
     async def pipe(
         self,
@@ -438,7 +467,11 @@ class Pipe:
 
             return response_log
 
-        v = 5
+        v = 7
+
+        # content1 = self.test_call()
+        # yield content1
+        # return
 
         try:
             logger.info(
@@ -459,25 +492,41 @@ class Pipe:
 
             # If the health check passes, proceed with the main request
             # now run the __request__ with the OpenAI API
+            url = "https://language-model-gateway.services.bwell.zone/api/v1/chat/completions"
+
+            # Headers
+            headers2 = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer 123",
+            }
+            payload2 = {
+                "model": "General Purpose",
+                "messages": [
+                    {"role": "user", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": "Hello!"},
+                ],
+            }
             # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
                 response = await client.post(
                     url=url,
-                    json=payload,
-                    headers=headers,
+                    json=payload2,
+                    headers=headers2,
                     timeout=30.0,
                     follow_redirects=True,
                 )
                 # Raise an exception for HTTP errors
                 response.raise_for_status()
 
-                # Handle streaming or regular response
-                if body.get("stream", False):
-                    # Stream mode: yield lines as they arrive (not supported in plain POST)
-                    yield response.text
-                else:
-                    # Non-streaming mode: collect and return full JSON response
-                    yield response.json()
+                yield json.dumps(response.json())
+
+                # # Handle streaming or regular response
+                # if body.get("stream", False):
+                #     # Stream mode: yield lines as they arrive (not supported in plain POST)
+                #     yield response.text
+                # else:
+                #     # Non-streaming mode: collect and return full JSON response
+                #     yield response.json()
         except httpx.HTTPStatusError as e:
             yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e}\n{log_httpx_request(e.request)}\n{log_response_as_string(e.response)}"
         except Exception as e:
