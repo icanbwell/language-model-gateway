@@ -467,7 +467,7 @@ class Pipe:
 
             return response_log
 
-        v = 7
+        v = 8
 
         # content1 = self.test_call()
         # yield content1
@@ -499,18 +499,18 @@ class Pipe:
                 "Content-Type": "application/json",
                 "Authorization": "Bearer 123",
             }
-            payload2 = {
-                "model": "General Purpose",
-                "messages": [
-                    {"role": "user", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": "Hello!"},
-                ],
-            }
+            # payload2 = {
+            #     "model": "General Purpose",
+            #     "messages": [
+            #         {"role": "user", "content": "You are a helpful assistant."},
+            #         {"role": "user", "content": "Hello!"},
+            #     ],
+            # }
             # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
                 response = await client.post(
                     url=url,
-                    json=payload2,
+                    json=payload,
                     headers=headers2,
                     timeout=30.0,
                     follow_redirects=True,
@@ -518,15 +518,16 @@ class Pipe:
                 # Raise an exception for HTTP errors
                 response.raise_for_status()
 
-                yield f"LanguageModelGateway::pipe [{v}]" + json.dumps(response.json())
-
                 # # Handle streaming or regular response
-                # if body.get("stream", False):
-                #     # Stream mode: yield lines as they arrive (not supported in plain POST)
-                #     yield response.text
-                # else:
-                #     # Non-streaming mode: collect and return full JSON response
-                #     yield response.json()
+                if body.get("stream", False):
+                    # Stream mode: yield lines as they arrive (not supported in plain POST)
+                    yield f"LanguageModelGateway::pipe (stream) [{v}]" + response.text
+                else:
+                    # Non-streaming mode: collect and return full JSON response
+                    yield f"LanguageModelGateway::pipe [{v}]" + json.dumps(
+                        response.json()
+                    )
+
         except httpx.HTTPStatusError as e:
             yield f"LanguageModelGateway::pipe HTTP Status Error [{v}]: {type(e)} {e}\n{log_httpx_request(e.request)}\n{log_response_as_string(e.response)}"
         except Exception as e:
