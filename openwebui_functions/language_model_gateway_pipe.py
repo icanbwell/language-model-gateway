@@ -467,11 +467,7 @@ class Pipe:
 
             return response_log
 
-        v = 8
-
-        # content1 = self.test_call()
-        # yield content1
-        # return
+        v = 9
 
         try:
             logger.info(
@@ -497,15 +493,8 @@ class Pipe:
             # Headers
             headers2 = {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer 123",
+                "Authorization": f"Bearer {auth_token}",
             }
-            # payload2 = {
-            #     "model": "General Purpose",
-            #     "messages": [
-            #         {"role": "user", "content": "You are a helpful assistant."},
-            #         {"role": "user", "content": "Hello!"},
-            #     ],
-            # }
             # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
                 response = await client.post(
