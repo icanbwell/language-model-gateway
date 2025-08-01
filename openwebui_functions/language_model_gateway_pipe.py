@@ -7,6 +7,7 @@ to make requests to the OpenAI API. It supports both streaming and non-streaming
 """
 
 import asyncio
+import datetime
 import json
 import logging
 import os
@@ -14,13 +15,12 @@ import time
 from pathlib import PurePosixPath
 from typing import AsyncGenerator, List
 from typing import Optional, Callable, Awaitable, Any, Dict
-import httpx
+from urllib.parse import urlparse, urlunparse
 
+import httpx
 from pydantic import BaseModel
 from pydantic import Field
-from starlette.datastructures import MutableHeaders
 from starlette.requests import Request
-from urllib.parse import urlparse, urlunparse
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +48,10 @@ class Pipe:
         restrict_to_model_ids: list[str] = Field(
             default_factory=list,
             description="List of model IDs to restrict access to. If empty, no restriction is applied.",
+        )
+        debug_mode: bool = Field(
+            default=False,
+            description="Enable debug mode for additional logging and debugging information",
         )
 
     def __init__(self) -> None:
@@ -299,6 +303,65 @@ class Pipe:
 
         return reconstructed_url
 
+    @staticmethod
+    def log_httpx_request(request: httpx.Request) -> str:
+        """
+        Convert an HTTPX request to a detailed string representation.
+
+        Args:
+            request (httpx.Request): The HTTPX request to log
+
+        Returns:
+            str: Formatted string representation of the request
+        """
+        # Construct request details
+        request_log = f"""
+    HTTPX Request:
+    - Method: {request.method}
+    - URL: {request.url}
+    - Headers: {dict(request.headers)}
+    - Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
+    """.strip()
+
+        return request_log
+
+    @staticmethod
+    def log_response_as_string(response1: httpx.Response) -> str:
+        """
+        Convert an HTTPX response to a detailed, formatted string.
+
+        Args:
+            response1 (httpx.Response): The HTTP response to log
+
+        Returns:
+            str: Comprehensive response log string
+        """
+        try:
+            # Attempt to parse JSON response
+            try:
+                response_body = json.dumps(response1.json(), indent=2)
+            except (ValueError, json.JSONDecodeError):
+                # Fallback to text if not JSON
+                response_body = response1.text[:1000]  # Limit body size
+        except Exception:
+            response_body = "(Unable to decode response body)"
+
+        response_log = f"""
+    HTTPX Response Log:
+    - Timestamp: {datetime.datetime.now().isoformat()}
+    - Status Code: {response1.status_code}
+    - URL: {response1.request.url}
+    - Method: {response1.request.method}
+    - Response Headers:
+    {json.dumps(dict(response1.headers), indent=2)}
+    - Response Body:
+    {response_body}
+    - Response Encoding: {response1.encoding}
+    - Response Elapsed Time: {response1.elapsed}
+    """.strip()
+
+        return response_log
+
     # noinspection PyMethodMayBeStatic
     async def pipe(
         self,
@@ -313,7 +376,12 @@ class Pipe:
         """
         Main pipe method supporting both streaming and non-streaming responses
         """
-        # This is where you can add your custom pipelines like RAG.
+        await self.emit_status(
+            __event_emitter__,
+            "info",
+            "Working...",
+            False,
+        )
         logger.debug(f"pipe:{__name__}")
 
         logger.debug("=== body ===")
@@ -334,8 +402,20 @@ class Pipe:
         else:
             logger.debug("No Authorization header found.")
 
+        if self.valves.debug_mode:
+            yield f"User:\n{__user__}" + "\n"
+            yield f"Original Headers:\n{dict(__request__.headers)}" + "\n"
+
         auth_token: str | None = __request__.cookies.get("oauth_id_token")
         logger.debug(f"auth_token: {auth_token}")
+
+        if auth_token is None:
+            yield (
+                "No oauth_id_token found in cookies or it may have expired. "
+                "Please sign out and sign back in."
+            )
+            await self.emit_status(__event_emitter__, "error", "Error", True)
+            return
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
@@ -354,54 +434,136 @@ class Pipe:
         )
         logger.debug(f"open_api_base_url: {open_api_base_url}")
 
-        headers: MutableHeaders = __request__.headers.mutablecopy()
-        # remove Content-Length header if it exists so we calculate it correctly
-        del headers["Content-Length"]
-
-        # if auth token is available in the cookies, add it to the Authorization header
-        if auth_token:
-            headers["Authorization"] = f"Bearer {auth_token}"
-
         # Extract model id from the model name
         model_id = body["model"][body["model"].find(".") + 1 :]
 
         # Update the model id in the body
         payload = {**body, "model": model_id}
+        if self.valves.debug_mode:
+            yield json.dumps(payload) + "\n"
+
+        url = self.pathlib_url_join(base_url=open_api_base_url, path="chat/completions")
+        response_text: str = ""
+
+        v = 11
+
+        is_streaming: bool = body.get("stream", False)
 
         try:
-            # replace host with the OpenAI API base URL.  use proper urljoin to handle paths correctly
-            # include any query parameters in the URL
-            operation_path = str(__request__.url).replace(
-                "https://open-webui.localhost/api/", ""
-            )
-            logger.debug(f"operation_path: {operation_path}")
-            url = self.pathlib_url_join(base_url=open_api_base_url, path=operation_path)
-
             logger.debug(
-                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {headers}"
+                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
             )
 
             # now run the __request__ with the OpenAI API
-            # Use httpx.stream for more efficient streaming
-            async with httpx.AsyncClient() as client:
-                async with client.stream(
-                    method="POST", url=url, json=payload, headers=headers, timeout=30.0
-                ) as response:
-                    # Raise an exception for HTTP errors
-                    response.raise_for_status()
+            # Headers
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {auth_token}",
+            }
+            # set User-Agent to the one from the request, if available
+            if "User-Agent" in __request__.headers:
+                headers["User-Agent"] = __request__.headers["User-Agent"]
+            # set Referrer to the one from the request, if available
+            if "Referrer" in __request__.headers:
+                headers["Referrer"] = __request__.headers["Referrer"]
+            # set Cookie to the one from the request, if available
+            if "Cookie" in __request__.headers:
+                headers["Cookie"] = __request__.headers["Cookie"]
+            # set traceparent to the one from the request, if available
+            if "traceparent" in __request__.headers:
+                headers["traceparent"] = __request__.headers["traceparent"]
+            if "origin" in __request__.headers:
+                headers["Origin"] = __request__.headers["origin"]
+            if "Accept-Encoding" in __request__.headers:
+                headers["Accept-Encoding"] = __request__.headers["Accept-Encoding"]
 
-                    # Handle streaming or regular response
-                    if body.get("stream", False):
-                        # Stream mode: yield lines as they arrive
-                        async for line in response.aiter_lines():
-                            yield line
-                    else:
-                        # Non-streaming mode: collect and return full JSON response
-                        yield await response.json()
+            # Add custom headers for OpenWebUI user information
+            if __user__ is not None:
+                user = __user__
+                # check that each value is not None before adding to headers
+                if user.get("name") is not None:
+                    headers["X-OpenWebUI-User-Name"] = user["name"]
+                if user.get("id") is not None:
+                    headers["X-OpenWebUI-User-Id"] = user["id"]
+                if user.get("email") is not None:
+                    headers["X-OpenWebUI-User-Email"] = user["email"]
+                if user.get("role") is not None:
+                    headers["X-OpenWebUI-User-Role"] = user["role"]
+                if (
+                    user.get("info") is not None
+                    and isinstance(user["info"], dict)
+                    and user["info"].get("location") is not None
+                    and isinstance(user["info"]["location"], str)
+                ):
+                    location = user["info"]["location"]
+                    if self.valves.debug_mode:
+                        yield "Location: " + type(location).__name__ + f"{location}\n"
+                    headers["X-OpenWebUI-User-Location"] = user["info"]["location"]
+
+            # copy any headers that start with "x-"
+            for key, value in __request__.headers.items():
+                if key.lower().startswith("x-"):
+                    headers[key] = value
+
+            if self.valves.debug_mode:
+                yield url + "\n"
+                yield f"New Headers: {dict(headers)}" + "\n"
+                yield json.dumps(payload) + "\n"
+
+            # Use httpx.post for a plain POST request
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    url=url,
+                    json=payload,
+                    headers=headers,
+                    timeout=30.0,
+                    follow_redirects=True,
+                )
+                # Raise an exception for HTTP errors
+                response.raise_for_status()
+
+                # # Handle streaming or regular response
+                content_type = response.headers.get("content-type", "")
+                if content_type.startswith("text/event-stream"):
+                    # Stream mode: yield lines as they arrive
+                    async for line in response.aiter_lines():
+                        if line:
+                            yield line + "\n"
+                else:
+                    # Non-streaming mode: collect and return full JSON response
+                    yield response.json()
+
+            await self.emit_status(__event_emitter__, "info", "Done", True)
+        except httpx.HTTPStatusError as e:
+            yield (
+                f"LanguageModelGateway::pipe HTTP Status Error [{v}]:"
+                + f" {type(e)} {e}\n"
+                + f"{self.log_httpx_request(e.request)}\n"
+                + f"{self.log_response_as_string(e.response)}"
+            )
         except Exception as e:
             # logger.error(f"Error in pipe: {e}")
             # logger.debug(f"Error details: {e.__traceback__}")
-            yield f"LanguageModelGateway::pipe Error: {e}"
+            httpx_version = httpx.__version__
+            if is_streaming:
+                error_chunk = {
+                    "id": "chatcmpl-error",
+                    "object": "chat.completion.chunk",
+                    "created": int(time.time()),
+                    "model": "error",
+                    "choices": [
+                        {
+                            "index": 0,
+                            "delta": {"content": f"Error: {str(e)}"},
+                            "finish_reason": "stop",
+                        }
+                    ],
+                }
+                yield f"data: {json.dumps(error_chunk)}\n\n"
+            else:
+                yield f"LanguageModelGateway::pipe Error [{v}]: {type(e)} {e} {httpx_version=} [{url=}] original=[{__request__.url}] {response_text=} {payload=}\n"
+
+            await self.emit_status(__event_emitter__, "error", str(e), True)
 
     async def get_models(self) -> list[dict[str, str]]:
         """

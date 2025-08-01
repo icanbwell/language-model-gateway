@@ -71,7 +71,11 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         """
         async with self._lock:
             cache: Dict[str, List[Tool]] | None = await self._cache.get()
-            assert cache is not None
+            if cache is None:
+                cache = await self._cache.create()
+                assert cache is not None, (
+                    "Cache must be initialized before getting tools"
+                )
 
             if server_name is not None:
                 if server_name not in self.connections:
@@ -132,6 +136,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                             logger.debug(
                                 f"Tools for connection {connection['url']} are already cached"
                             )
+            # set the cache with the loaded tools
+            await self._cache.set(cache)
 
     @override
     async def get_tools(self, *, server_name: str | None = None) -> list[BaseTool]:

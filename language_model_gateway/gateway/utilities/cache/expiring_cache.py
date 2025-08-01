@@ -18,3 +18,7 @@ class ExpiringCache[T](ABC):
     @abstractmethod
     async def clear(self) -> None:
         pass
+
+    @abstractmethod
+    async def create(self, *, init_value: Optional[T] = None) -> Optional[T]:
+        pass

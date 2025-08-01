@@ -58,6 +58,16 @@ class ChatCompletionsRouter:
             response_description="Chat completions",
             status_code=200,
         )
+        self.router.add_api_route(
+            "/chat/completion",
+            self.chat_completions,
+            methods=["POST"],
+            response_model=None,
+            summary="Complete a chat prompt",
+            description="Completes a chat prompt using the specified model",
+            response_description="Chat completions",
+            status_code=200,
+        )
 
     # noinspection PyMethodMayBeStatic
     async def chat_completions(

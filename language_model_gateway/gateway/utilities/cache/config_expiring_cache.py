@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import time
-from typing import Optional, List
+from typing import Optional, List, override
 from uuid import uuid4, UUID
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
@@ -24,6 +24,7 @@ class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):
             self._cache = init_value
             self._cache_timestamp = time.time()
 
+    @override
     def is_valid(self) -> bool:
         if self._cache is None or self._cache_timestamp is None:
             return False
@@ -35,11 +36,13 @@ class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):
         )
         return cache_is_valid
 
+    @override
     async def get(self) -> Optional[List[ChatModelConfig]]:
         if self.is_valid():
             return self._cache
         return None
 
+    @override
     async def set(self, value: List[ChatModelConfig]) -> None:
         async with self._lock:
             self._cache = value
@@ -48,8 +51,19 @@ class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):
                 f"ExpiringCache with id: {self._identifier} set cache with timestamp: {self._cache_timestamp}"
             )
 
+    @override
     async def clear(self) -> None:
         async with self._lock:
             self._cache = None
             self._cache_timestamp = None
             logger.info(f"ExpiringCache with id: {self._identifier} cleared cache")
+
+    @override
+    async def create(
+        self, *, init_value: Optional[List[ChatModelConfig]] = None
+    ) -> Optional[List[ChatModelConfig]]:
+        async with self._lock:
+            self._cache = init_value if init_value is not None else None
+            self._cache_timestamp = time.time()
+            logger.info(f"ExpiringCache with id: {self._identifier} created cache")
+            return self._cache
