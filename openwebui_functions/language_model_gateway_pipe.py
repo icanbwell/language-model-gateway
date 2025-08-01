@@ -379,9 +379,7 @@ class Pipe:
         await self.emit_status(
             __event_emitter__,
             "info",
-            f"/initiating Chain: headers={__request__.headers if __request__ else None}"
-            f", cookies={__request__.cookies if __request__ else None}"
-            f" {__user__=} {body=}",
+            "Working...",
             False,
         )
         logger.debug(f"pipe:{__name__}")
@@ -483,7 +481,7 @@ class Pipe:
                     # Non-streaming mode: collect and return full JSON response
                     yield response.json()
 
-            await self.emit_status(__event_emitter__, "info", "Stream Complete", True)
+            await self.emit_status(__event_emitter__, "info", "Done", True)
         except httpx.HTTPStatusError as e:
             yield (
                 f"LanguageModelGateway::pipe HTTP Status Error [{v}]:"
