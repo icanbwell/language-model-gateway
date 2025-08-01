@@ -411,8 +411,8 @@ class Pipe:
 
         if auth_token is None:
             yield (
-                "LanguageModelGateway::pipe No oauth_id_token found in cookies. "
-                "Please ensure you are authenticated."
+                "No oauth_id_token found in cookies or it may have expired. "
+                "Please sign out and sign back in."
             )
             await self.emit_status(__event_emitter__, "error", "Error", True)
             return
