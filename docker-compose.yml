@@ -41,6 +41,7 @@ services:
 #      JIRA_USERNAME: "imran.qureshi@icanbwell.com"
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
+      MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
     env_file: docker.env
     ports:
       - '5050:5000'
