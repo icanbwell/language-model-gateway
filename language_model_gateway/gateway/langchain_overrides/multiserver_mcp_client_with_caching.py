@@ -199,7 +199,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             msg = "Either a session or a connection config must be provided"
             raise ValueError(msg)
 
-        tools: List[Tool]
+        tools: List[Tool] = []
         try:
             if session is None:
                 # If a session is not provided, we will create one on the fly
