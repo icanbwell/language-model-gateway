@@ -63,12 +63,23 @@ class MCPToolProvider:
                 }
 
             # pass Authorization header if provided
-            if headers and "authorization" in headers:
+            if headers:
+                auth_header: str | None = next(
+                    (
+                        headers.get(key)
+                        for key in headers
+                        if key.lower() == "authorization"
+                    ),
+                    None,
+                )
                 # add the Authorization header to the mcp_tool_config headers
                 mcp_tool_config["headers"] = {
                     **mcp_tool_config.get("headers", {}),
-                    "Authorization": headers["authorization"],
+                    "Authorization": auth_header,
                 }
+                logger.debug(
+                    f"Loading MCP tools with Authorization header: {auth_header}"
+                )
 
             tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
             client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
