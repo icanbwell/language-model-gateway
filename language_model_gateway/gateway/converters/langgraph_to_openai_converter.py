@@ -145,7 +145,7 @@ class LangGraphToOpenAIConverter:
                                 os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1"
                                 and content_text
                             ):
-                                logger.info(f"Returning content: {content_text}")
+                                logger.debug(f"Returning content: {content_text}")
 
                             if content_text:
                                 chat_model_stream_response: ChatCompletionChunk = (
