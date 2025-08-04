@@ -217,13 +217,24 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 exc.exceptions[0], HTTPStatusError
             ):
                 http_status_exception: HTTPStatusError = exc.exceptions[0]
-
                 if http_status_exception.response.status_code == 401:
                     logger.error(
                         f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
                     )
+                    # Read response text before the stream is closed
+                    if not http_status_exception.response.is_closed:
+                        response_bytes = await http_status_exception.response.aread()
+                        response_text = (
+                            response_bytes.decode()
+                            if isinstance(response_bytes, bytes)
+                            else str(response_bytes)
+                        )
+                    else:
+                        response_text = http_status_exception.response.reason_phrase
                     raise ValueError(
-                        f"Not allowed to access MCP tool at {http_status_exception.request.url}. Perhaps your login token has expired. Please reload to login again."
+                        f"Not allowed to access MCP tool at {http_status_exception.request.url}."
+                        + " Perhaps your login token has expired. Please reload to login again."
+                        + f" Response: {response_text}"
                     ) from exc
             logger.error(
                 f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
