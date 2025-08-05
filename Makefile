@@ -88,6 +88,11 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 		printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && \
 		exit 1; \
 	fi
+	echo "waiting for mcp-server-gateway to become healthy" && \
+	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; do printf "." && sleep 2; done && \
+	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} mcp-server-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
+	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
+
 	make insert-admin-user
 	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login

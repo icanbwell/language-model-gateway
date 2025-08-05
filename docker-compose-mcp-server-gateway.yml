@@ -1,5 +1,7 @@
 services:
   mcp_server_gateway:
+    depends_on:
+      - keycloak
     build:
       dockerfile: Dockerfile
       context: ../mcp-server-gateway
