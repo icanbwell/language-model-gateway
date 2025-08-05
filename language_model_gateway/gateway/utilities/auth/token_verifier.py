@@ -1,3 +1,4 @@
+import logging
 from typing import Optional, Any, Dict, List
 
 import httpx
@@ -5,6 +6,8 @@ from httpx import ConnectError
 from joserfc import jwt
 from aiocache import cached
 from joserfc.jwk import KeySet
+
+logger = logging.getLogger(__name__)
 
 
 class TokenVerifier:
@@ -19,6 +22,7 @@ class TokenVerifier:
     async def fetch_jwks_async(self) -> None:
         async with httpx.AsyncClient() as client:
             try:
+                logger.debug(f"Fetching JWKS from {self.jwks_uri}")
                 response = await client.get(self.jwks_uri)
                 response.raise_for_status()
                 jwks_data = response.json()
@@ -61,5 +65,7 @@ class TokenVerifier:
         # Create claims registry
         claims_requests = jwt.JWTClaimsRegistry()
         claims_requests.validate(verified.claims)
+
+        logger.debug(f"Successfully verified token: {token}")
 
         return verified.claims
