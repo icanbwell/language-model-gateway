@@ -92,7 +92,7 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
-	@echo Admin User: admin/password. After login, run 'make set-admin-user-role' to set admin role.
+	@echo Admin User: admin/password. After login, run [make set-admin-user-role] to set admin role.
 	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
