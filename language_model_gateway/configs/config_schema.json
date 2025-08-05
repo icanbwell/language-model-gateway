@@ -229,8 +229,8 @@
             ]
           },
           "parameters": {
-            "type": "array",
-            "description": "Parameters for the tool.",
+            "type": ["array", "null"],
+            "description": "The parameters for the tool",
             "items": {
               "type": "object",
               "required": [
@@ -247,7 +247,31 @@
                   "description": "Parameter value."
                 }
               }
-            }
+            },
+            "default": null
+          },
+          "url": {
+            "type": ["string", "null"],
+            "description": "The MCP (Model Context Protocol) URL to access the tool",
+            "default": null
+          },
+          "headers": {
+            "type": ["object", "null"],
+            "description": "The headers to pass to the MCP tool",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "default": null
+          },
+          "auth": {
+            "type": ["string", "null"],
+            "description": "The authentication method to use when calling the tool",
+            "enum": [
+              "None",
+              "jwt_token",
+              "oauth"
+            ],
+            "default": null
           }
         }
       }
