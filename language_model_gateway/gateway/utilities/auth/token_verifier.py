@@ -1,3 +1,4 @@
+import datetime
 import logging
 import time
 from typing import Optional, Any, Dict, List
@@ -8,6 +9,8 @@ from joserfc import jwt
 from aiocache import cached
 from joserfc.errors import ExpiredTokenError
 from joserfc.jwk import KeySet
+
+from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
 
@@ -69,17 +72,29 @@ class TokenVerifier:
 
             exp = verified.claims.get("exp")
             now = time.time()
-            # convert exp to string for logging
-            exp_str = (
-                time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(exp))
-                if exp
-                else "None"
-            )
-            now_str = (
-                time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
-                if exp
-                else "None"
-            )
+            # convert exp and now to ET (America/New_York) for logging
+            tz = None
+            try:
+                tz = ZoneInfo("America/New_York")
+            except Exception:
+                tz = None  # fallback to localtime if zoneinfo fails
+
+            def to_eastern_time(ts: Optional[float]) -> str:
+                """Convert a timestamp to a formatted string in Eastern Time (ET)."""
+                if not ts:
+                    return "None"
+                try:
+                    dt = (
+                        datetime.datetime.fromtimestamp(ts, tz)
+                        if tz
+                        else datetime.datetime.fromtimestamp(ts)
+                    )
+                    return dt.strftime("%Y-%m-%d %I:%M:%S %p %Z")  # AM/PM format
+                except Exception:
+                    return str(ts)
+
+            exp_str = to_eastern_time(exp)
+            now_str = to_eastern_time(now)
             # Create claims registry
             claims_requests = jwt.JWTClaimsRegistry()
             claims_requests.validate(verified.claims)
@@ -90,7 +105,7 @@ class TokenVerifier:
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
             raise ValueError(
-                f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}. Please logout and login to get a fresh OAuth token."
+                f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}.\nPlease Sign Out and Sign In to get a fresh OAuth token."
             ) from e
         except Exception as e:
             raise ValueError(
