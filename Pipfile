@@ -94,6 +94,8 @@ langchain_mcp_adapters = ">=0.1.9"
 authlib = ">=1.6.1"
 # joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)
 joserfc = ">=1.2.2"
+# aiocache is a Python library for caching with asyncio support
+aiocache = ">=0.12.3"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -127,6 +129,12 @@ ruff = ">=0.11.5"
 pytest-cov = ">=6.1.1"
 # for creating the MCP client to test
 fastmcp = ">=2.10.5"
+# types-boto3 provides type hints for boto3
+types-boto3 = { version = ">=1.40.0", extras = ["bedrock", "s3", "textract"] }
+types-boto3-bedrock = ">=1.40.0"
+types-boto3-s3 = ">=1.40.0"
+types-boto3-textract = ">=1.40.0"
+types-boto3-bedrock-runtime = ">=1.40.0"
 
 [requires]
 python_version = "3.12"

@@ -34,6 +34,7 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
+from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -71,7 +72,7 @@ class ContainerFactory:
         # we want only one instance of the cache so we use singleton
         container.singleton(
             ConfigExpiringCache,
-            ConfigExpiringCache(
+            lambda c: ConfigExpiringCache(
                 ttl_seconds=(
                     int(os.environ["CONFIG_CACHE_TIMEOUT_SECONDS"])
                     if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
@@ -81,13 +82,24 @@ class ContainerFactory:
         )
         container.singleton(
             McpToolsMetadataExpiringCache,
-            McpToolsMetadataExpiringCache(
+            lambda c: McpToolsMetadataExpiringCache(
                 ttl_seconds=(
                     int(os.environ["MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS"])
                     if os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS")
                     else 60 * 60
                 ),
                 init_value={},
+            ),
+        )
+
+        container.singleton(
+            TokenVerifier,
+            lambda c: TokenVerifier(
+                jwks_uri=c.resolve(EnvironmentVariables).auth_jwks_uri,
+                issuer=c.resolve(EnvironmentVariables).auth_issuer,
+                audience=c.resolve(EnvironmentVariables).auth_audience,
+                algorithms=c.resolve(EnvironmentVariables).auth_algorithms,
+                well_known_uri=c.resolve(EnvironmentVariables).auth_well_known_uri,
             ),
         )
 
@@ -198,6 +210,7 @@ class ContainerFactory:
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
+                token_verifier=c.resolve(TokenVerifier),
             ),
         )
 

@@ -863,7 +863,6 @@ class LangGraphToOpenAIConverter:
             auth_token=LangGraphToOpenAIConverter.get_auth_token_from_headers(
                 headers=headers
             ),
-            is_last_step=False,
             usage_metadata=None,
             remaining_steps=0,
         )

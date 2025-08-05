@@ -65,23 +65,23 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
     Returns:
         dict: The token response.
     """
-    OAUTH_CLIENT_ID = "bwell-client-id"
-    # OAUTH_CLIENT_SECRET = os.getenv("OAUTH_CLIENT_SECRET", "bwell-secret")
-    OAUTH_CLIENT_SECRET = "bwell-secret"
-    OPENID_PROVIDER_URL = os.getenv(
-        "OPENID_PROVIDER_URL",
+    oauth_client_id = "bwell-client-id"
+    # oauth_client_secret = os.getenv("oauth_client_secret", "bwell-secret")
+    oauth_client_secret = "bwell-secret"
+    openid_provider_url = os.getenv(
+        "openid_provider_url",
         "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
     )
 
-    resp = requests.get(OPENID_PROVIDER_URL, timeout=5)
+    resp = requests.get(openid_provider_url, timeout=5)
     resp.raise_for_status()
     openid_config = resp.json()
     token_endpoint = openid_config["token_endpoint"]
 
     # https://docs.authlib.org/en/latest/client/oauth2.html
     client = OAuth2Session(
-        client_id=OAUTH_CLIENT_ID,
-        client_secret=OAUTH_CLIENT_SECRET,
+        client_id=oauth_client_id,
+        client_secret=oauth_client_secret,
         # scope="openid email offline_access",
     )
 
@@ -119,7 +119,7 @@ async def test_google_drive_mcp_agent_directly() -> None:
     access_token_result: Dict[str, str] = get_access_token(
         username="tester", password="password"
     )
-    url: str = "http://mcp_server_gateway:5000/google_drive"
+    url: str = "http://mcp_server_gateway:5000/google_drive/"
     access_token = access_token_result["access_token"]
     transport: StreamableHttpTransport = StreamableHttpTransport(
         url=url, auth=access_token
@@ -262,7 +262,7 @@ def verify_aws_boto3_authentication() -> None:
     if region_name:
         session_kwargs["region_name"] = region_name
     try:
-        session = boto3.Session(**session_kwargs)
+        session = boto3.Session(**session_kwargs)  # type: ignore[arg-type]
         sts = session.client("sts")
         identity = sts.get_caller_identity()
         print(f"AWS authentication successful: {identity}")

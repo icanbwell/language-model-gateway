@@ -1,6 +1,6 @@
 import datetime
 import random
-from typing import Dict, Any, Sequence
+from typing import Dict, Any, Sequence, List
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
@@ -19,6 +19,7 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
+from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
@@ -29,6 +30,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
+        token_verifier: TokenVerifier,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -47,6 +49,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
         assert self.mcp_tool_provider is not None
         assert isinstance(self.mcp_tool_provider, MCPToolProvider)
+
+        self.token_verifier: TokenVerifier = token_verifier
+        assert self.token_verifier is not None
+        assert isinstance(self.token_verifier, TokenVerifier)
 
     async def chat_completions(
         self,
@@ -77,6 +83,44 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
+        # check if any of the MCP tools require authentication
+        tools_using_authentication: List[str] = [
+            a.name for a in model_config.get_agents() if a.auth == "jwt_token"
+        ]
+        if any(tools_using_authentication):
+            # check that we have a valid Authorization header
+            auth_header: str | None = next(
+                (headers.get(key) for key in headers if key.lower() == "authorization"),
+                None,
+            )
+            if not auth_header:
+                raise ValueError(
+                    "Authorization header is required for MCP tools with JWT authentication."
+                    + f"Following tools require authentication: {tools_using_authentication}"
+                )
+            else:
+                token = self.token_verifier.extract_token(auth_header)
+                if not token:
+                    raise ValueError(
+                        "Invalid Authorization header format. Expected 'Bearer <token>'"
+                        + f"Following tools require authentication: {tools_using_authentication}"
+                    )
+                # verify the token
+                try:
+                    access_token = await self.token_verifier.verify_token_async(
+                        token=token
+                    )
+                    if not access_token:
+                        raise ValueError(
+                            "Invalid or expired token provided in Authorization header"
+                            + f"Following tools require authentication: {tools_using_authentication}"
+                        )
+                except Exception as e:
+                    raise ValueError(
+                        "Invalid or expired token provided in Authorization header."
+                        + f" Following tools require authentication: {tools_using_authentication}"
+                    ) from e
+
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
             tools=[t for t in model_config.get_agents()],

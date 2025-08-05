@@ -38,7 +38,8 @@
     },
     {
       "name": "google_drive",
-      "url": "http://mcp_server_gateway:5000/google_drive"
+      "url": "http://mcp_server_gateway:5000/google_drive/",
+      "auth": "jwt_token"
     }
   ],
   "example_prompts": [

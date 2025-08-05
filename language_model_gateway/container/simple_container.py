@@ -79,9 +79,11 @@ class SimpleContainer:
 
         return service
 
-    def singleton(self, service_type: type[T], instance: T) -> "SimpleContainer":
+    def singleton(
+        self, service_type: type[T], factory: ServiceFactory[T]
+    ) -> "SimpleContainer":
         """Register a singleton instance"""
-        self._singletons[service_type] = instance
+        self._factories[service_type] = factory
         self._singleton_types.add(service_type)
         return self
 
