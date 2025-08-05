@@ -42,6 +42,10 @@ services:
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
+      # These define the connection to the identity provider for JWT validation
+      JWKS_URI: "https://my-identity-provider.com/.well-known/jwks.json"
+      AUDIENCE: "my-mcp-server"
+      ISSUER: "https://my-identity-provider.com/"
     env_file: docker.env
     ports:
       - '5050:5000'
