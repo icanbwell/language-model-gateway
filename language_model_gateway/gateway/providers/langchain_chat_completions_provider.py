@@ -106,12 +106,20 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         + f"Following tools require authentication: {tools_using_authentication}"
                     )
                 # verify the token
-                access_token = await self.token_verifier.verify_token_async(token=token)
-                if not access_token:
-                    raise ValueError(
-                        "Invalid or expired token provided in Authorization header"
-                        + f"Following tools require authentication: {tools_using_authentication}"
+                try:
+                    access_token = await self.token_verifier.verify_token_async(
+                        token=token
                     )
+                    if not access_token:
+                        raise ValueError(
+                            "Invalid or expired token provided in Authorization header"
+                            + f"Following tools require authentication: {tools_using_authentication}"
+                        )
+                except Exception as e:
+                    raise ValueError(
+                        "Invalid or expired token provided in Authorization header."
+                        + f" Following tools require authentication: {tools_using_authentication}"
+                    ) from e
 
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(

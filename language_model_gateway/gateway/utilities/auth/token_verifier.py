@@ -1,10 +1,12 @@
 import logging
+import time
 from typing import Optional, Any, Dict, List
 
 import httpx
 from httpx import ConnectError
 from joserfc import jwt
 from aiocache import cached
+from joserfc.errors import ExpiredTokenError
 from joserfc.jwk import KeySet
 
 logger = logging.getLogger(__name__)
@@ -59,13 +61,38 @@ class TokenVerifier:
         await self.fetch_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
 
-        # Validate the token
-        verified = jwt.decode(token, self.jwks, algorithms=self.algorithms)
+        exp_str: str = "None"
+        now_str: str = "None"
+        try:
+            # Validate the token
+            verified = jwt.decode(token, self.jwks, algorithms=self.algorithms)
 
-        # Create claims registry
-        claims_requests = jwt.JWTClaimsRegistry()
-        claims_requests.validate(verified.claims)
+            exp = verified.claims.get("exp")
+            now = time.time()
+            # convert exp to string for logging
+            exp_str = (
+                time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(exp))
+                if exp
+                else "None"
+            )
+            now_str = (
+                time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
+                if exp
+                else "None"
+            )
+            # Create claims registry
+            claims_requests = jwt.JWTClaimsRegistry()
+            claims_requests.validate(verified.claims)
 
-        logger.debug(f"Successfully verified token: {token}")
+            logger.debug(f"Successfully verified token: {token}")
 
-        return verified.claims
+            return verified.claims
+        except ExpiredTokenError as e:
+            logger.warning(f"Token has expired: {token}")
+            raise ValueError(
+                f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}. Please logout and login to get a fresh OAuth token."
+            ) from e
+        except Exception as e:
+            raise ValueError(
+                f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token."
+            ) from e
