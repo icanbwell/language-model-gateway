@@ -7,12 +7,13 @@ from shutil import rmtree
 
 import boto3
 import pytest
+from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
 
 
-def create_bedrock_client() -> boto3.client:
+def create_bedrock_client() -> BedrockRuntimeClient:
     """Create and return a Bedrock client"""
     session1 = boto3.Session(profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"))
-    bedrock_client = session1.client(
+    bedrock_client: BedrockRuntimeClient = session1.client(
         service_name="bedrock-runtime",
         region_name="us-east-1",  # Replace with your preferred region
         # Add credentials if not using default AWS configuration:
@@ -28,7 +29,7 @@ def generate_image(
     """Generate an image using Titan Image Generator"""
 
     # Create Bedrock client
-    client = create_bedrock_client()
+    client: BedrockRuntimeClient = create_bedrock_client()
 
     # Prepare the request parameters
     request_body = {

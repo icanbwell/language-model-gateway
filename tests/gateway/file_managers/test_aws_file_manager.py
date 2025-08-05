@@ -1,9 +1,12 @@
-from typing import Dict, List, Any
+import os
+from typing import Dict, List, Any, Generator
 
 import boto3
 import pytest
+from botocore.client import BaseClient
 from moto import mock_aws
 from starlette.responses import Response, StreamingResponse
+from boto3 import Session
 
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.aws_s3_file_manager import (
@@ -11,17 +14,25 @@ from language_model_gateway.gateway.file_managers.aws_s3_file_manager import (
 )
 from language_model_gateway.gateway.utilities.s3_url import S3Url
 from tests.gateway.mocks.mock_aws_client_factory import MockAwsClientFactory
+from types_boto3_s3.client import S3Client
 
 
 @pytest.fixture
-def mock_s3() -> boto3.client:
+def mock_s3() -> Generator[S3Client, Any, None]:
     """Create a mock S3 client using moto."""
     with mock_aws():
-        yield boto3.client("s3", region_name="us-east-1")
+        session: Session = boto3.Session(
+            profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE")
+        )
+        s3_client: S3Client = session.client(
+            service_name="s3",
+            region_name="us-east-1",
+        )
+        yield s3_client
 
 
 @pytest.fixture
-def aws_client_factory(mock_s3: boto3.client) -> AwsClientFactory:
+def aws_client_factory(mock_s3: BaseClient) -> AwsClientFactory:
     """Create a mock AWS client factory."""
     return MockAwsClientFactory(aws_client=mock_s3)
 
@@ -94,7 +105,7 @@ def test_get_bucket(aws_s3_file_manager: AwsS3FileManager) -> None:
 
 @pytest.mark.asyncio
 async def test_save_file_async_success(
-    aws_s3_file_manager: AwsS3FileManager, mock_s3: boto3.client
+    aws_s3_file_manager: AwsS3FileManager, mock_s3: S3Client
 ) -> None:
     """
     Comprehensive test for save_file_async method.
@@ -182,7 +193,7 @@ async def test_save_file_async_edge_cases(
 
 @pytest.mark.asyncio
 async def test_read_file_async_success(
-    aws_s3_file_manager: AwsS3FileManager, mock_s3: boto3.client
+    aws_s3_file_manager: AwsS3FileManager, mock_s3: S3Client
 ) -> None:
     """
     Comprehensive test for read_file_async method.
@@ -240,7 +251,7 @@ async def test_read_file_async_success(
 
 @pytest.mark.asyncio
 async def test_read_file_async_error_cases(
-    aws_s3_file_manager: AwsS3FileManager, mock_s3: boto3.client
+    aws_s3_file_manager: AwsS3FileManager, mock_s3: S3Client
 ) -> None:
     """
     Test error cases for read_file_async.

@@ -1,9 +1,9 @@
 import logging
 from typing import Optional, Generator, override
 
-import boto3
 from botocore.exceptions import ClientError
 from starlette.responses import Response, StreamingResponse
+from types_boto3_s3.client import S3Client
 
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager import FileManager
@@ -46,7 +46,8 @@ class AwsS3FileManager(FileManager):
 
         s3_full_path: str = s3_url.url
 
-        s3_client = self.aws_client_factory.create_client(service_name="s3")
+        s3_client: S3Client = self.aws_client_factory.create_s3_client()
+
         if not file_data:
             logger.error("No file to save")
             return None
@@ -90,9 +91,7 @@ class AwsS3FileManager(FileManager):
     async def read_file_async(
         self, *, folder: str, file_path: str
     ) -> StreamingResponse | Response:
-        s3_client: boto3.client = self.aws_client_factory.create_client(
-            service_name="s3"
-        )
+        s3_client: S3Client = self.aws_client_factory.create_s3_client()
 
         assert "s3://" not in folder, (
             "folder should not contain s3://.  It should be the bucket name"

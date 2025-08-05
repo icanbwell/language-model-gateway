@@ -262,7 +262,7 @@ def verify_aws_boto3_authentication() -> None:
     if region_name:
         session_kwargs["region_name"] = region_name
     try:
-        session = boto3.Session(**session_kwargs)
+        session = boto3.Session(**session_kwargs)  # type: ignore[arg-type]
         sts = session.client("sts")
         identity = sts.get_caller_identity()
         print(f"AWS authentication successful: {identity}")
