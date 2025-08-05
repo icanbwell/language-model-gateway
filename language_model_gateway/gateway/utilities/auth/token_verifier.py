@@ -2,6 +2,7 @@ from typing import Optional, Any, Dict, List
 
 import httpx
 from joserfc import jwt
+from aiocache import cached
 from joserfc.jwk import KeySet
 
 
@@ -11,6 +12,7 @@ class TokenVerifier:
         self.algorithms: List[str] = algorithms or ["RS256"]
         self.jwks: KeySet | None = None  # Will be set by async fetch
 
+    @cached(ttl=60 * 60)
     async def fetch_jwks_async(self) -> None:
         async with httpx.AsyncClient() as client:
             response = await client.get(self.jwks_uri)
