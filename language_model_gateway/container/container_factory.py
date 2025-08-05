@@ -72,7 +72,7 @@ class ContainerFactory:
         # we want only one instance of the cache so we use singleton
         container.singleton(
             ConfigExpiringCache,
-            ConfigExpiringCache(
+            lambda c: ConfigExpiringCache(
                 ttl_seconds=(
                     int(os.environ["CONFIG_CACHE_TIMEOUT_SECONDS"])
                     if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
@@ -82,7 +82,7 @@ class ContainerFactory:
         )
         container.singleton(
             McpToolsMetadataExpiringCache,
-            McpToolsMetadataExpiringCache(
+            lambda c: McpToolsMetadataExpiringCache(
                 ttl_seconds=(
                     int(os.environ["MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS"])
                     if os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS")

@@ -7,7 +7,9 @@ from joserfc.jwk import KeySet
 
 
 class TokenVerifier:
-    def __init__(self, jwks_uri: str, algorithms: Optional[list[str]] = None):
+    def __init__(self, jwks_uri: Optional[str], algorithms: Optional[list[str]] = None):
+        assert jwks_uri, "JWKS URI must be provided"
+        assert isinstance(jwks_uri, str), "JWKS URI must be a string"
         self.jwks_uri: str = jwks_uri
         self.algorithms: List[str] = algorithms or ["RS256"]
         self.jwks: KeySet | None = None  # Will be set by async fetch
