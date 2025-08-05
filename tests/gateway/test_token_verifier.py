@@ -4,7 +4,6 @@ import pytest
 import base64
 
 from joserfc import jwk
-from joserfc.errors import ExpiredTokenError
 
 from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
 from joserfc import jwt
@@ -58,5 +57,5 @@ async def test_verify_token_valid(mock_jwks: Any) -> None:
 async def test_verify_token_expired(mock_jwks: Any) -> None:
     verifier = TokenVerifier(jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM])
     token = create_jwt_token(exp_offset=-60)
-    with pytest.raises(ExpiredTokenError):
+    with pytest.raises(ValueError, match="This OAuth Token has expired"):
         await verifier.verify_token_async(token=token)
