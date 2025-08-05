@@ -1,7 +1,7 @@
 import datetime
 import logging
 import time
-from typing import Optional, Any, Dict, List
+from typing import Optional, Any, Dict, List, cast
 
 import httpx
 from httpx import ConnectError
@@ -16,18 +16,36 @@ logger = logging.getLogger(__name__)
 
 
 class TokenVerifier:
-    def __init__(self, jwks_uri: Optional[str], algorithms: Optional[list[str]] = None):
-        assert jwks_uri, "JWKS URI must be provided"
-        assert isinstance(jwks_uri, str), "JWKS URI must be a string"
-        self.jwks_uri: str = jwks_uri
+    def __init__(
+        self,
+        *,
+        jwks_uri: Optional[str] = None,
+        well_known_uri: Optional[str] = None,
+        issuer: Optional[str] = None,
+        audience: Optional[str] = None,
+        algorithms: Optional[list[str]] = None,
+    ):
+        assert jwks_uri or well_known_uri, (
+            "Either JWKS URI or Well-Known URI must be provided"
+        )
+        self.jwks_uri: Optional[str] = jwks_uri
+        self.well_known_uri: Optional[str] = well_known_uri
         self.algorithms: List[str] = algorithms or ["RS256"]
         self.jwks: KeySet | None = None  # Will be set by async fetch
+        self.issuer: Optional[str] = issuer
+        self.audience: Optional[str] = audience
 
     @cached(ttl=60 * 60)
     async def fetch_jwks_async(self) -> None:
+        # if we don't have a JWKS URI, try to fetch it from the well-known configuration
+        if not self.jwks_uri:
+            if not self.well_known_uri:
+                raise ValueError("Neither JWKS URI nor Well-Known URI is set")
+            self.jwks_uri, self.issuer = await self.get_jwks_uri_and_issuer_async()
+
         async with httpx.AsyncClient() as client:
             try:
-                logger.debug(f"Fetching JWKS from {self.jwks_uri}")
+                logger.info(f"Fetching JWKS from {self.jwks_uri}")
                 response = await client.get(self.jwks_uri)
                 response.raise_for_status()
                 jwks_data = response.json()
@@ -111,3 +129,45 @@ class TokenVerifier:
             raise ValueError(
                 f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token."
             ) from e
+
+    async def fetch_well_known_config_async(self) -> Dict[str, Any]:
+        """
+        Fetches the OpenID Connect discovery document and returns its contents as a dict.
+        Returns:
+            dict: The parsed discovery document.
+        Raises:
+            ValueError: If the document cannot be fetched or parsed.
+        """
+        if not self.well_known_uri:
+            raise ValueError("well_known_uri is not set")
+        async with httpx.AsyncClient() as client:
+            try:
+                logger.info(
+                    f"Fetching OIDC discovery document from {self.well_known_uri}"
+                )
+                response = await client.get(self.well_known_uri)
+                response.raise_for_status()
+                return cast(Dict[str, Any], response.json())
+            except httpx.HTTPStatusError as e:
+                raise ValueError(
+                    f"Failed to fetch OIDC discovery document from {self.well_known_uri} with status {e.response.status_code} : {e}"
+                )
+            except ConnectError as e:
+                raise ConnectionError(
+                    f"Failed to connect to OIDC discovery document: {self.well_known_uri}: {e}"
+                )
+
+    async def get_jwks_uri_and_issuer_async(self) -> tuple[str, str]:
+        """
+        Retrieves the JWKS URI and issuer from the well-known OpenID Connect configuration.
+        Returns:
+            tuple: (jwks_uri, issuer)
+        Raises:
+            ValueError: If required fields are missing.
+        """
+        config = await self.fetch_well_known_config_async()
+        jwks_uri = config.get("jwks_uri")
+        issuer = config.get("issuer")
+        if not jwks_uri or not issuer:
+            raise ValueError("jwks_uri or issuer not found in well-known configuration")
+        return jwks_uri, issuer

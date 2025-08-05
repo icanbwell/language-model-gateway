@@ -95,7 +95,11 @@ class ContainerFactory:
         container.singleton(
             TokenVerifier,
             lambda c: TokenVerifier(
-                jwks_uri=c.resolve(EnvironmentVariables).jwks_uri,
+                jwks_uri=c.resolve(EnvironmentVariables).auth_jwks_uri,
+                issuer=c.resolve(EnvironmentVariables).auth_issuer,
+                audience=c.resolve(EnvironmentVariables).auth_audience,
+                algorithms=c.resolve(EnvironmentVariables).auth_algorithms,
+                well_known_uri=c.resolve(EnvironmentVariables).auth_well_known_uri,
             ),
         )
 
