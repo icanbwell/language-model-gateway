@@ -1,6 +1,7 @@
 from typing import Optional, Any, Dict, List
 
 import httpx
+from httpx import ConnectError
 from joserfc import jwt
 from aiocache import cached
 from joserfc.jwk import KeySet
@@ -17,11 +18,20 @@ class TokenVerifier:
     @cached(ttl=60 * 60)
     async def fetch_jwks_async(self) -> None:
         async with httpx.AsyncClient() as client:
-            response = await client.get(self.jwks_uri)
-            response.raise_for_status()
-            jwks_data = response.json()
-            # Store all keys in a dict for fast lookup by kid
-            self.jwks = KeySet.import_key_set(jwks_data)
+            try:
+                response = await client.get(self.jwks_uri)
+                response.raise_for_status()
+                jwks_data = response.json()
+                # Store all keys in a dict for fast lookup by kid
+                self.jwks = KeySet.import_key_set(jwks_data)
+            except httpx.HTTPStatusError as e:
+                raise ValueError(
+                    f"Failed to fetch JWKS from {self.jwks_uri} with status {e.response.status_code} : {e}"
+                )
+            except ConnectError as e:
+                raise ConnectionError(
+                    f"Failed to connect to JWKS URI: {self.jwks_uri}: {e}"
+                )
 
     @staticmethod
     def extract_token(authorization_header: str | None) -> Optional[str]:
