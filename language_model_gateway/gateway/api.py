@@ -61,6 +61,7 @@ assert redirect_uri is not None, "AUTH_REDIRECT_URI environment variable must be
 #     "AUTH_SESSION_SECRET environment variable must be set"
 # )
 
+# https://docs.authlib.org/en/latest/client/frameworks.html#frameworks-clients
 cache: OAuthCache = OAuthCache()
 oauth = OAuth(cache=cache)
 oauth.register(
@@ -68,10 +69,7 @@ oauth.register(
     client_id=client_id,
     client_secret=client_secret,
     server_metadata_url=well_known_url,
-    client_kwargs={
-        "scope": "openid email",
-        # 'code_challenge_method': 'S256'
-    },
+    client_kwargs={"scope": "openid email", "code_challenge_method": "S256"},
 )
 
 
