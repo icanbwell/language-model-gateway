@@ -12,13 +12,13 @@ from urllib.parse import urlparse, parse_qs
 def test_login_route() -> None:
     client = TestClient(app)
 
-    response = client.get("/login", follow_redirects=False)
+    response = client.get("/auth/login", follow_redirects=False)
     # Should redirect to Google OAuth
     assert response.status_code in (302, 307)
     assert "location" in response.headers
     print(response.headers["location"])
     assert (
-        "/callback" in response.headers["location"]
+        "/auth/callback" in response.headers["location"]
         or "keycloak" in response.headers["location"]
     )
 
@@ -54,7 +54,7 @@ def test_callback_route() -> None:
             "AUTH_REDIRECT_URI environment variable must be set"
         )
         # first call to /login to set up the session
-        response = client.get("/login", follow_redirects=False)
+        response = client.get("/auth/login", follow_redirects=False)
         assert response.status_code in (302, 307)
         assert "location" in response.headers
         location = response.headers["location"]
@@ -107,7 +107,7 @@ def test_callback_route() -> None:
         if not state:
             raise ValueError("State must be provided for the callback test")
         response = client.get(
-            "/callback",
+            "/auth/callback",
             params={"state": state, "code": code},
             follow_redirects=False,
         )

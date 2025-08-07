@@ -5,7 +5,7 @@ from os import makedirs, environ
 from pathlib import Path
 from typing import AsyncGenerator, Annotated, List, cast, Any, Dict
 
-from authlib.integrations.starlette_client import OAuth
+from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
@@ -160,7 +160,8 @@ def create_app() -> FastAPI:
         # absolute url for callback
         # we will define it below
         redirect_uri1 = request.url_for("auth")
-        client = oauth.create_client(auth_provider_name)
+        client: StarletteOAuth2App = oauth.create_client(auth_provider_name)
+        # https://docs.authlib.org/en/latest/client/api.html
         return cast(
             RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
         )
@@ -168,7 +169,7 @@ def create_app() -> FastAPI:
     @app1.api_route("/auth/callback", methods=["GET"])
     async def auth(request: Request) -> JSONResponse:
         logger.info(f"Received request for auth callback: {request.url}")
-        client = oauth.create_client(auth_provider_name)
+        client: StarletteOAuth2App = oauth.create_client(auth_provider_name)
         token = await client.authorize_access_token(request)
         access_token = token["access_token"]
         assert access_token is not None, (
