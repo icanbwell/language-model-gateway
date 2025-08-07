@@ -3,7 +3,7 @@ import os
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
-from typing import AsyncGenerator, Annotated, List, Any, Dict, cast
+from typing import AsyncGenerator, Annotated, List, cast
 
 from authlib.integrations.starlette_client import OAuth
 from fastapi import FastAPI, HTTPException
@@ -161,7 +161,7 @@ assert session_secret is not None, (
 oidc = OIDCAuthPKCE(
     well_known_url=well_known_url, client_id=client_id, redirect_uri=redirect_uri
 )
-state_code_verifier: Dict[str, Any] = {}
+# state_code_verifier: Dict[str, Any] = {}
 
 # use authlib for authentication
 # https://docs.authlib.org/en/v1.6.1/client/frameworks.html#frameworks-clients

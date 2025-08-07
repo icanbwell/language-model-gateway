@@ -17,7 +17,7 @@ class OAuthCache:
         if key in self._cache:
             del self._cache[key]
 
-    async def get(self, key: str, default: str | None) -> str | None:
+    async def get(self, key: str, default: str | None = None) -> str | None:
         """
         Retrieve a value from the cache.
 
