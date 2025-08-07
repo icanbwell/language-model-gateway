@@ -22,9 +22,9 @@ class OAuthMongoCache(OAuthCache):
         assert connection_string, "MONGO_URL environment variable is not set."
         database_name = os.getenv("MONGO_DB_NAME")
         assert database_name, "MONGO_DB_NAME environment variable is not set."
-        collection_name = os.getenv("MONGO_DB_COLLECTION_NAME")
+        collection_name = os.getenv("MONGO_DB_AUTH_CACHE_COLLECTION_NAME")
         assert collection_name, (
-            "MONGO_DB_COLLECTION_NAME environment variable is not set."
+            "MONGO_DB_AUTH_CACHE_COLLECTION_NAME environment variable is not set."
         )
 
         self.repository: AsyncMongoRepository[CacheItem] = AsyncMongoRepository(

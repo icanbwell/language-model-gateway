@@ -67,6 +67,9 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             ObjectId: Inserted document's ID
         """
+        logger.debug(
+            f"Saving document in collection {collection_name} with data: {model}"
+        )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Convert model to dictionary
@@ -95,6 +98,9 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             Optional[T]: Pydantic model instance or None
         """
+        logger.debug(
+            f"Finding document with ID: {document_id} in collection {collection_name}"
+        )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Convert string ID to ObjectId
@@ -126,6 +132,7 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             Optional[T]: Pydantic model instance or None
         """
+        logger.debug(f"Finding {field_name} in collection {collection_name}")
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Create filter dictionary
@@ -159,6 +166,9 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             list[T]: List of Pydantic model instances
         """
+        logger.debug(
+            f"Finding documents in collection {collection_name} with filter: {filter_dict}, limit: {limit}, skip: {skip}"
+        )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         filter_dict = filter_dict or {}
@@ -190,6 +200,7 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             Optional[T]: Updated document or None
         """
+        logger.debug(f"Updating document {document_id} in collection {collection_name}")
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Convert string ID to ObjectId
@@ -219,6 +230,9 @@ class AsyncMongoRepository[T: BaseModel]:
         Returns:
             bool: True if deletion was successful, False otherwise
         """
+        logger.debug(
+            f"Deleting document {document_id} from collection {collection_name}"
+        )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Convert string ID to ObjectId
