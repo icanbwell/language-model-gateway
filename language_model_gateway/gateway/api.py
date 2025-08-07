@@ -5,11 +5,11 @@ from os import makedirs, environ
 from pathlib import Path
 from typing import AsyncGenerator, Annotated, List, Any, Dict, cast
 
+from authlib.integrations.starlette_client import OAuth
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware.sessions import SessionMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse, RedirectResponse
 from starlette.staticfiles import StaticFiles
@@ -17,6 +17,7 @@ from starlette.staticfiles import StaticFiles
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.auth.oauth_cache import OAuthCache
 from language_model_gateway.gateway.oidc_pkce_auth import OIDCAuthPKCE
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
@@ -27,7 +28,6 @@ from language_model_gateway.gateway.routers.image_generation_router import (
 from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
-from authlib.integrations.starlette_client import OAuth
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
@@ -166,7 +166,8 @@ state_code_verifier: Dict[str, Any] = {}
 # use authlib for authentication
 # https://docs.authlib.org/en/v1.6.1/client/frameworks.html#frameworks-clients
 
-oauth = OAuth()
+cache: OAuthCache = OAuthCache(app)
+oauth = OAuth(cache=cache)
 oauth.register(
     name="google",
     client_id=client_id,
@@ -177,7 +178,7 @@ oauth.register(
     },
 )
 
-app.add_middleware(SessionMiddleware, secret_key=session_secret)
+# app.add_middleware(SessionMiddleware, secret_key=session_secret)
 
 
 @app.api_route("/login", methods=["GET"])
