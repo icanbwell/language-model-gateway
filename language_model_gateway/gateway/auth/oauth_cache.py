@@ -1,12 +1,9 @@
-from fastapi import FastAPI
-
-
 class OAuthCache:
     _cache: dict[str, str] = {}
 
-    def __init__(self, app: FastAPI) -> None:
+    def __init__(self) -> None:
         """Initialize the AuthCache."""
-        self.app = app
+        pass
 
     async def delete(self, key: str) -> None:
         """

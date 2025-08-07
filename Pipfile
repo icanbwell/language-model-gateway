@@ -129,6 +129,8 @@ ruff = ">=0.11.5"
 pytest-cov = ">=6.1.1"
 # for creating the MCP client to test
 fastmcp = ">=2.10.5"
+# respx is a Python library for mocking HTTP requests in tests
+respx = ">=0.22.0"
 # types-boto3 provides type hints for boto3
 types-boto3 = { version = ">=1.40.0", extras = ["bedrock", "s3", "textract"] }
 types-boto3-bedrock = ">=1.40.0"

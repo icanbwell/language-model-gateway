@@ -18,7 +18,6 @@ from language_model_gateway.configs.config_reader.config_reader import ConfigRea
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
 from language_model_gateway.gateway.auth.oauth_cache import OAuthCache
-from language_model_gateway.gateway.oidc_pkce_auth import OIDCAuthPKCE
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -45,6 +44,32 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
+
+# OIDC PKCE setup
+well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
+client_id = os.getenv("AUTH_CLIENT_ID")
+redirect_uri = os.getenv("AUTH_REDIRECT_URI")
+# session_secret = os.getenv("AUTH_SESSION_SECRET")
+assert well_known_url is not None, (
+    "AUTH_WELL_KNOWN_URI environment variable must be set"
+)
+assert client_id is not None, "AUTH_CLIENT_ID environment variable must be set"
+assert redirect_uri is not None, "AUTH_REDIRECT_URI environment variable must be set"
+# assert session_secret is not None, (
+#     "AUTH_SESSION_SECRET environment variable must be set"
+# )
+
+cache: OAuthCache = OAuthCache()
+oauth = OAuth(cache=cache)
+oauth.register(
+    name="google",
+    client_id=client_id,
+    server_metadata_url=well_known_url,
+    client_kwargs={
+        "scope": "openid email profile",
+        # 'code_challenge_method': 'S256'
+    },
+)
 
 
 @asynccontextmanager
@@ -112,6 +137,56 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # oidc = OIDCAuthPKCE(
+    #     well_known_url=well_known_url, client_id=client_id, redirect_uri=redirect_uri
+    # )
+    # state_code_verifier: Dict[str, Any] = {}
+
+    # use authlib for authentication
+    # https://docs.authlib.org/en/v1.6.1/client/frameworks.html#frameworks-clients
+
+    # app.add_middleware(SessionMiddleware, secret_key=session_secret)
+
+    @app1.api_route("/login", methods=["GET"])
+    async def login(request: Request) -> RedirectResponse:
+        # absolute url for callback
+        # we will define it below
+        redirect_uri1 = request.url_for("auth")
+        client = oauth.create_client("google")
+        return cast(
+            RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
+        )
+
+    @app1.api_route("/callback", methods=["GET"])
+    async def auth(request: Request) -> JSONResponse:
+        client = oauth.create_client("google")
+        token = await client.authorize_access_token(request)
+        user = token["access_token"]
+        return JSONResponse(user)
+
+    #
+    # @app1.api_route("/login", methods=["GET"])
+    # async def login() -> RedirectResponse:
+    #     state: str = secrets.token_urlsafe(16)
+    #     url: str
+    #     code_verifier: str
+    #     url, code_verifier = await oidc.get_authorization_url(state)
+    #     state_code_verifier[state] = code_verifier
+    #     return RedirectResponse(url)
+    #
+    #
+    # @app1.api_route("/callback", methods=["GET"])
+    # async def callback(request: Request) -> JSONResponse:
+    #     code: str | None = request.query_params.get("code")
+    #     state: str | None = request.query_params.get("state")
+    #     assert state is not None, "State must be provided in the callback"
+    #     code_verifier: str | None = state_code_verifier.pop(state, None)
+    #     if not code or not code_verifier:
+    #         return JSONResponse({"error": "Missing code or code_verifier"}, status_code=400)
+    #     token_response: dict[str, Any] = await oidc.exchange_code(code, code_verifier)
+    #     return JSONResponse(token_response)
+
     return app1
 
 
@@ -142,84 +217,3 @@ async def refresh_data(
     await config_reader.clear_cache()
     configs: List[ChatModelConfig] = await config_reader.read_model_configs_async()
     return JSONResponse({"message": "Configuration refreshed", "data": configs})
-
-
-# OIDC PKCE setup
-well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
-client_id = os.getenv("AUTH_CLIENT_ID")
-redirect_uri = os.getenv("AUTH_REDIRECT_URI")
-session_secret = os.getenv("AUTH_SESSION_SECRET")
-assert well_known_url is not None, (
-    "AUTH_WELL_KNOWN_URI environment variable must be set"
-)
-assert client_id is not None, "AUTH_CLIENT_ID environment variable must be set"
-assert redirect_uri is not None, "AUTH_REDIRECT_URI environment variable must be set"
-assert session_secret is not None, (
-    "AUTH_SESSION_SECRET environment variable must be set"
-)
-
-oidc = OIDCAuthPKCE(
-    well_known_url=well_known_url, client_id=client_id, redirect_uri=redirect_uri
-)
-# state_code_verifier: Dict[str, Any] = {}
-
-# use authlib for authentication
-# https://docs.authlib.org/en/v1.6.1/client/frameworks.html#frameworks-clients
-
-cache: OAuthCache = OAuthCache(app)
-oauth = OAuth(cache=cache)
-oauth.register(
-    name="google",
-    client_id=client_id,
-    server_metadata_url=well_known_url,
-    client_kwargs={
-        "scope": "openid email profile",
-        # 'code_challenge_method': 'S256'
-    },
-)
-
-# app.add_middleware(SessionMiddleware, secret_key=session_secret)
-
-
-@app.api_route("/login", methods=["GET"])
-async def login(request: Request) -> RedirectResponse:
-    # absolute url for callback
-    # we will define it below
-    redirect_uri1 = request.url_for("auth")
-    client = oauth.create_client("google")
-    return cast(
-        RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
-    )
-
-
-@app.api_route("/callback", methods=["GET"])
-async def auth(request: Request) -> JSONResponse:
-    client = oauth.create_client("google")
-    token = await client.authorize_access_token(request)
-    # <=0.15
-    # user = await oauth.google.parse_id_token(request, token)
-    user = token["userinfo"]
-    return JSONResponse(user)
-
-
-#
-# @app.api_route("/login", methods=["GET"])
-# async def login() -> RedirectResponse:
-#     state: str = secrets.token_urlsafe(16)
-#     url: str
-#     code_verifier: str
-#     url, code_verifier = await oidc.get_authorization_url(state)
-#     state_code_verifier[state] = code_verifier
-#     return RedirectResponse(url)
-#
-#
-# @app.api_route("/callback", methods=["GET"])
-# async def callback(request: Request) -> JSONResponse:
-#     code: str | None = request.query_params.get("code")
-#     state: str | None = request.query_params.get("state")
-#     assert state is not None, "State must be provided in the callback"
-#     code_verifier: str | None = state_code_verifier.pop(state, None)
-#     if not code or not code_verifier:
-#         return JSONResponse({"error": "Missing code or code_verifier"}, status_code=400)
-#     token_response: dict[str, Any] = await oidc.exchange_code(code, code_verifier)
-#     return JSONResponse(token_response)
