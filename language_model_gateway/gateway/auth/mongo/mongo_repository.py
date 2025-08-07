@@ -98,6 +98,37 @@ class AsyncMongoRepository(Generic[T]):
 
         return self._convert_dict_to_model(document, model_class)
 
+    # write a method to find by a field value
+    async def find_by_field(
+        self,
+        collection_name: str,
+        model_class: Type[T],
+        field_name: str,
+        field_value: Any,
+    ) -> Optional[T]:
+        """
+        Find a document by a specific field value asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            model_class (Type[T]): Pydantic model class
+            field_name (str): Field name to filter by
+            field_value (Any): Value of the field to filter by
+        Returns:
+            Optional[T]: Pydantic model instance or None
+        """
+        collection: AsyncIOMotorCollection = self._db[collection_name]
+
+        # Create filter dictionary
+        filter_dict = {field_name: field_value}
+
+        document = await collection.find_one(filter_dict)
+
+        if document is None:
+            return None
+
+        return self._convert_dict_to_model(document, model_class)
+
     async def find_many(
         self,
         collection_name: str,
@@ -189,7 +220,8 @@ class AsyncMongoRepository(Generic[T]):
 
         return result.deleted_count > 0
 
-    def _convert_model_to_dict(self, model: BaseModel) -> Dict[str, Any]:
+    @staticmethod
+    def _convert_model_to_dict(model: BaseModel) -> Dict[str, Any]:
         """
         Convert Pydantic model to dictionary.
 
@@ -207,9 +239,8 @@ class AsyncMongoRepository(Generic[T]):
 
         return document
 
-    def _convert_dict_to_model(
-        self, document: Mapping[str, Any], model_class: Type[T]
-    ) -> T:
+    @staticmethod
+    def _convert_dict_to_model(document: Mapping[str, Any], model_class: Type[T]) -> T:
         """
         Convert MongoDB document to Pydantic model.
 

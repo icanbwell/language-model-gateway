@@ -40,10 +40,11 @@ class OAuthMongoCache(OAuthCache):
         :param key: Unique identifier for the cache entry.
         """
         # check if the key exists in the repository
-        cache_item: CacheItem | None = await self.repository.find_by_id(
+        cache_item: CacheItem | None = await self.repository.find_by_field(
             collection_name=self.collection_name,
             model_class=CacheItem,
-            document_id=key,
+            field_name="key",
+            field_value=key,
         )
         if cache_item is not None:
             # delete the cache item if it exists
@@ -61,10 +62,11 @@ class OAuthMongoCache(OAuthCache):
         :param default: Default value to return if the key is not found.
         :return: Retrieved value or None if not found or expired.
         """
-        cache_item: CacheItem | None = await self.repository.find_by_id(
+        cache_item: CacheItem | None = await self.repository.find_by_field(
             collection_name=self.collection_name,
             model_class=CacheItem,
-            document_id=key,
+            field_name="key",
+            field_value=key,
         )
         return cache_item.value if cache_item is not None else default
 
@@ -77,7 +79,7 @@ class OAuthMongoCache(OAuthCache):
         :param value: Value to be stored.
         :param expires: Expiration time in seconds. Defaults to None (no expiration).
         """
-        cache_item = CacheItem(id=key, value=value)
+        cache_item = CacheItem(key=key, value=value)
         await self.repository.save(
             collection_name=self.collection_name,
             model=cache_item,

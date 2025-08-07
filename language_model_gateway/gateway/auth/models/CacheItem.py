@@ -10,5 +10,5 @@ class CacheItem(BaseModel):
         arbitrary_types_allowed=True,  # Allow non-Pydantic types
         json_encoders={ObjectId: str},  # Convert ObjectId to string for JSON
     )
-    id: Optional[str]
+    key: Optional[str]
     value: Optional[str]
