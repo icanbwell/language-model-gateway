@@ -101,6 +101,7 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
+	@echo Language Model Gateway: http://localhost:5050/login
 
 .PHONY: down
 down: ## stops docker containers

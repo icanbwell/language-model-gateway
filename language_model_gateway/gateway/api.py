@@ -48,12 +48,14 @@ uvicorn_logger.addFilter(EndpointFilter(path="/health"))
 # OIDC PKCE setup
 well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
 client_id = os.getenv("AUTH_CLIENT_ID")
+client_secret = os.getenv("AUTH_CLIENT_SECRET")
 redirect_uri = os.getenv("AUTH_REDIRECT_URI")
 # session_secret = os.getenv("AUTH_SESSION_SECRET")
 assert well_known_url is not None, (
     "AUTH_WELL_KNOWN_URI environment variable must be set"
 )
 assert client_id is not None, "AUTH_CLIENT_ID environment variable must be set"
+assert client_secret is not None, "AUTH_CLIENT_SECRET environment variable must be set"
 assert redirect_uri is not None, "AUTH_REDIRECT_URI environment variable must be set"
 # assert session_secret is not None, (
 #     "AUTH_SESSION_SECRET environment variable must be set"
@@ -64,9 +66,10 @@ oauth = OAuth(cache=cache)
 oauth.register(
     name="google",
     client_id=client_id,
+    client_secret=client_secret,
     server_metadata_url=well_known_url,
     client_kwargs={
-        "scope": "openid email profile",
+        "scope": "openid email",
         # 'code_challenge_method': 'S256'
     },
 )
