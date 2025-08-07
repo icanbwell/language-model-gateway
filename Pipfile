@@ -96,6 +96,12 @@ authlib = ">=1.6.1"
 joserfc = ">=1.2.2"
 # aiocache is a Python library for caching with asyncio support
 aiocache = ">=0.12.3"
+# motor is a Python library for working with MongoDB asynchronously
+motor = ">=3.7.1"
+# pymongo is a Python library for working with MongoDB
+pymongo = ">=4.14.0"
+# redis is a Python library for working with Redis
+redis = ">=6.4.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
