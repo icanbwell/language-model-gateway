@@ -5,6 +5,7 @@ from os import makedirs, environ
 from pathlib import Path
 from typing import AsyncGenerator, Annotated, List, cast
 
+from authlib.integrations.httpx_client import AsyncOAuth2Client
 from authlib.integrations.starlette_client import OAuth
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
@@ -167,8 +168,67 @@ def create_app() -> FastAPI:
     async def auth(request: Request) -> JSONResponse:
         client = oauth.create_client(auth_provider_name)
         token = await client.authorize_access_token(request)
-        # user = token["access_token"]
-        return JSONResponse(token)
+        access_token = token["access_token"]
+        assert access_token is not None, (
+            "access_token was not found in the token response"
+        )
+
+        auth_token_exchange_client_id = os.getenv("AUTH_TOKEN_EXCHANGE_CLIENT_ID")
+        assert auth_token_exchange_client_id is not None, (
+            "AUTH_TOKEN_EXCHANGE_CLIENT_ID environment variable must be set"
+        )
+        logger.info(f"Auth token exchange client id {auth_token_exchange_client_id}")
+        auth_token_exchange_client_secret = os.getenv(
+            "AUTH_TOKEN_EXCHANGE_CLIENT_SECRET"
+        )
+        assert auth_token_exchange_client_secret is not None, (
+            "AUTH_TOKEN_EXCHANGE_CLIENT_SECRET environment variable must be set"
+        )
+        logger.info(
+            f"Auth token exchange client secret {auth_token_exchange_client_secret}"
+        )
+        token_endpoint_ = client.server_metadata["token_endpoint"]
+        logger.info(f"Token endpoint {token_endpoint_}")
+
+        logger.info(f"Access token: {access_token}")
+
+        # # get access token using client credentials for token exchange
+        # service_access_token = await client.fetch_access_token(
+        #     grant_type="client_credentials",
+        #     # client_id=client_id,
+        #     # client_secret=client_secret,
+        #     # scope="email openid",
+        # )
+        # logger.info(f"Service access token: {service_access_token}")
+
+        async with AsyncOAuth2Client(
+            client_id=auth_token_exchange_client_id,
+            client_secret=auth_token_exchange_client_secret,
+        ) as oauth_client:
+            # first get the access token for the service account using client credentials
+            service_access_token = await oauth_client.fetch_token(
+                url=token_endpoint_,
+                grant_type="client_credentials",
+                # client_id=auth_token_exchange_client_id,
+                # client_secret=auth_token_exchange_client_secret,
+                # scope="email openid",
+            )
+            logger.info(f"Service access token: {service_access_token}")
+            # set url for oauth_client
+            # oauth_client.token_endpoint = client.server_metadata["token_endpoint"]
+            # Perform token exchange
+            token_response = await oauth_client.fetch_token(
+                url=token_endpoint_,
+                grant_type="urn:ietf:params:oauth:grant-type:token-exchange",
+                subject_token=access_token,
+                subject_token_type="urn:ietf:params:oauth:token-type:access_token",
+                actor_token=service_access_token,
+                actor_token_type="urn:ietf:params:oauth:token-type:access_token",
+                requested_token_type="urn:ietf:params:oauth:token-type:access_token",
+                scope="email openid",
+            )
+            # user = token["access_token"]
+            return JSONResponse(token_response)
 
     #
     # @app1.api_route("/login", methods=["GET"])
