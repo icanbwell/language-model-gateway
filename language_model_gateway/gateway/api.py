@@ -3,9 +3,8 @@ import os
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
-from typing import AsyncGenerator, Annotated, List, cast
+from typing import AsyncGenerator, Annotated, List, cast, Any, Dict
 
-from authlib.integrations.httpx_client import AsyncOAuth2Client
 from authlib.integrations.starlette_client import OAuth
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
@@ -18,6 +17,7 @@ from starlette.staticfiles import StaticFiles
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.auth.auth_helper import AuthHelper
 from language_model_gateway.gateway.auth.oauth_cache import OAuthCache
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
@@ -40,7 +40,7 @@ logging.basicConfig(
 )
 
 # disable INFO logging for httpx because it logs every request
-logging.getLogger("httpx").setLevel(logging.WARNING)
+# logging.getLogger("httpx").setLevel(logging.WARNING)
 
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
@@ -156,6 +156,7 @@ def create_app() -> FastAPI:
 
     @app1.api_route("/auth/login", methods=["GET"])
     async def login(request: Request) -> RedirectResponse:
+        logger.info(f"Received request for auth login: {request.url}")
         # absolute url for callback
         # we will define it below
         redirect_uri1 = request.url_for("auth")
@@ -166,6 +167,7 @@ def create_app() -> FastAPI:
 
     @app1.api_route("/auth/callback", methods=["GET"])
     async def auth(request: Request) -> JSONResponse:
+        logger.info(f"Received request for auth callback: {request.url}")
         client = oauth.create_client(auth_provider_name)
         token = await client.authorize_access_token(request)
         access_token = token["access_token"]
@@ -200,35 +202,58 @@ def create_app() -> FastAPI:
         #     # scope="email openid",
         # )
         # logger.info(f"Service access token: {service_access_token}")
+        private_key = os.getenv("AUTH_TOKEN_EXCHANGE_PRIVATE_KEY")
+        assert private_key is not None, (
+            "AUTH_TOKEN_PRIVATE_KEY environment variable must be set"
+        )
 
-        async with AsyncOAuth2Client(
+        service_token = await AuthHelper.get_client_credentials_token(
+            token_url=token_endpoint_,
             client_id=auth_token_exchange_client_id,
-            client_secret=auth_token_exchange_client_secret,
-        ) as oauth_client:
-            # first get the access token for the service account using client credentials
-            service_access_token = await oauth_client.fetch_token(
-                url=token_endpoint_,
-                grant_type="client_credentials",
-                # client_id=auth_token_exchange_client_id,
-                # client_secret=auth_token_exchange_client_secret,
-                # scope="email openid",
-            )
-            logger.info(f"Service access token: {service_access_token}")
-            # set url for oauth_client
-            # oauth_client.token_endpoint = client.server_metadata["token_endpoint"]
-            # Perform token exchange
-            token_response = await oauth_client.fetch_token(
-                url=token_endpoint_,
-                grant_type="urn:ietf:params:oauth:grant-type:token-exchange",
-                subject_token=access_token,
-                subject_token_type="urn:ietf:params:oauth:token-type:access_token",
-                actor_token=service_access_token,
-                actor_token_type="urn:ietf:params:oauth:token-type:access_token",
-                requested_token_type="urn:ietf:params:oauth:token-type:access_token",
-                scope="email openid",
-            )
-            # user = token["access_token"]
-            return JSONResponse(token_response)
+            scope="okta.apps.read",
+            private_key=private_key,
+        )
+        logger.info(f"Service token: {service_token}")
+
+        exchanged_token: Dict[str, Any] = await AuthHelper.exchange_token(
+            url=token_endpoint_,
+            client_id=auth_token_exchange_client_id,
+            # client_secret=auth_token_exchange_client_secret,
+            access_token=access_token,
+            private_key=private_key,
+            actor_token=service_token["access_token"],
+            scope="okta.apps.read",
+            # scope== "api:access:read api:access:write"
+        )
+
+        return JSONResponse(exchanged_token)
+
+        # async with AsyncOAuth2Client(
+        #     client_id=auth_token_exchange_client_id,
+        #     client_secret=auth_token_exchange_client_secret,
+        # ) as oauth_client:
+        #     # first get the access token for the service account using client credentials
+        #     # service_access_token = await oauth_client.fetch_token(
+        #     #     url=token_endpoint_,
+        #     #     grant_type="client_credentials",
+        #     #     # scope="email openid",
+        #     # )
+        #     # logger.info(f"Service access token: {service_access_token}")
+        #     # set url for oauth_client
+        #     # oauth_client.token_endpoint = client.server_metadata["token_endpoint"]
+        #     # Perform token exchange
+        #     token_response = await oauth_client.fetch_token(
+        #         url=token_endpoint_,
+        #         grant_type="urn:ietf:params:oauth:grant-type:token-exchange",
+        #         subject_token=access_token,
+        #         subject_token_type="urn:ietf:params:oauth:token-type:access_token",
+        #         actor_token=access_token,
+        #         actor_token_type="urn:ietf:params:oauth:token-type:access_token",
+        #         requested_token_type="urn:ietf:params:oauth:token-type:access_token",
+        #         scope="email openid",
+        #     )
+        #     # user = token["access_token"]
+        #     return JSONResponse(token_response)
 
     #
     # @app1.api_route("/login", methods=["GET"])

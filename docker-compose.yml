@@ -8,7 +8,7 @@ services:
     environment:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
-      LOG_LEVEL: INFO
+      LOG_LEVEL: DEBUG
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
@@ -58,6 +58,7 @@ services:
 #      AUTH_AUDIENCE: "my-mcp-server"
 #      AUTH_ISSUER: "https://my-identity-provider.com/"
     env_file: docker.env
+    command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
       - '5050:5000'
     volumes:
