@@ -217,7 +217,13 @@ def create_app() -> FastAPI:
 
         # exchanged_token = await perform_token_exchange(access_token, auth_token_exchange_client_id, token_endpoint_)
 
-        return JSONResponse(token)
+        return JSONResponse(
+            {
+                "token": token,
+                "state": state_decoded,
+                "code": code,
+            }
+        )
 
     async def perform_token_exchange(
         access_token: str, auth_token_exchange_client_id: str, token_endpoint_: str
