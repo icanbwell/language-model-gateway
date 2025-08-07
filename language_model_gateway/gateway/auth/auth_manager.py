@@ -6,7 +6,7 @@ from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from fastapi import Request
 
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
-from language_model_gateway.gateway.auth.oauth_cache import OAuthCache
+from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 
 logger = logging.getLogger(__name__)
 

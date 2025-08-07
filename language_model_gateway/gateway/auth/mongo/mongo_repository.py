@@ -17,8 +17,8 @@ class AsyncMongoRepository(Generic[T]):
 
     def __init__(
         self,
-        connection_string: str = "mongodb://localhost:27017",
-        database_name: str = "mydb",
+        connection_string: str,
+        database_name: str,
     ):
         """
         Initialize async MongoDB connection.
@@ -27,6 +27,8 @@ class AsyncMongoRepository(Generic[T]):
             connection_string (str): MongoDB connection string
             database_name (str): Name of the database
         """
+        assert connection_string, "MONGO_URL environment variable is not set."
+        assert database_name, "Database name must be provided."
         self._client = AsyncIOMotorClient(connection_string)
         self._db: AsyncIOMotorDatabase = self._client[database_name]
 
