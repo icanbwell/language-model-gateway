@@ -165,8 +165,8 @@ def create_app() -> FastAPI:
     async def auth(request: Request) -> JSONResponse:
         client = oauth.create_client("google")
         token = await client.authorize_access_token(request)
-        user = token["access_token"]
-        return JSONResponse(user)
+        # user = token["access_token"]
+        return JSONResponse(token)
 
     #
     # @app1.api_route("/login", methods=["GET"])
