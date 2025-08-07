@@ -7,14 +7,21 @@ from fastapi import Request
 
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
+from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
+    OAuthMemoryCache,
+)
+from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
 
 logger = logging.getLogger(__name__)
 
 
 class AuthManager:
-    cache: OAuthCache = OAuthCache()
-
     def __init__(self) -> None:
+        oauth_cache_type = os.getenv("OAUTH_CACHE", "memory")
+        self.cache: OAuthCache = (
+            OAuthMemoryCache() if oauth_cache_type == "memory" else OAuthMongoCache()
+        )
+
         logger.info(f"Initializing AuthManager with cache id: {self.cache.id_}")
         # OIDC PKCE setup
         self.auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")

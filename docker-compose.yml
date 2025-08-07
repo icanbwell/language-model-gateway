@@ -60,6 +60,7 @@ services:
       MONGO_DB_NAME: fhir
       MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
       MONGO_DB_COLLECTION_NAME: oauth-cache
+      OAUTH_CACHE: mongo
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:

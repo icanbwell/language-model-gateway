@@ -1,14 +1,18 @@
 import os
+import uuid
+from typing import override
 
+from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.models.CacheItem import CacheItem
 from language_model_gateway.gateway.auth.mongo.mongo_repository import (
     AsyncMongoRepository,
 )
 
 
-class OAuthMongoCache:
+class OAuthMongoCache(OAuthCache):
     def __init__(self) -> None:
         """Initialize the AuthCache."""
+        self.id_ = uuid.uuid4()
         connection_string = os.getenv("MONGO_URL")
         assert connection_string, "MONGO_URL environment variable is not set."
         database_name = os.getenv("MONGO_DB_NAME")
@@ -24,6 +28,11 @@ class OAuthMongoCache:
         )
         self.collection_name = collection_name
 
+    @property
+    def id(self) -> uuid.UUID:
+        return self.id_
+
+    @override
     async def delete(self, key: str) -> None:
         """
         Delete a cache entry.
@@ -43,6 +52,7 @@ class OAuthMongoCache:
                 document_id=key,
             )
 
+    @override
     async def get(self, key: str, default: str | None = None) -> str | None:
         """
         Retrieve a value from the cache.
@@ -58,6 +68,7 @@ class OAuthMongoCache:
         )
         return cache_item.value if cache_item is not None else default
 
+    @override
     async def set(self, key: str, value: str, expires: int | None = None) -> None:
         """
         Set a value in the cache with optional expiration.
