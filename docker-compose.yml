@@ -44,8 +44,9 @@ services:
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      AUTH_CLIENT_ID: ""
+      AUTH_CLIENT_ID: "bwell-client-id"
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
+      AUTH_SESSION_SECRET: "my-secret-session"
       # if well-known URI is defined then JWKS_URI, AUTH_AUDIENCE and AUTH_ISSUER are not needed
 #      AUTH_JWKS_URI: "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/certs"
 #      AUTH_AUDIENCE: "my-mcp-server"
