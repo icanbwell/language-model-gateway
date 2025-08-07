@@ -7,6 +7,7 @@ from motor.motor_asyncio import (
     AsyncIOMotorCollection,
 )
 from bson import ObjectId
+from pymongo.results import InsertOneResult
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +75,10 @@ class AsyncMongoRepository[T: BaseModel]:
         # Remove None values to prevent storing null fields
         document = {k: v for k, v in document.items() if v is not None}
 
-        result = await collection.insert_one(document)
+        result: InsertOneResult = await collection.insert_one(document)
+        logger.debug(
+            f"Document inserted with ID: {result.inserted_id} in collection {collection_name} with data: {document} result: {result}"
+        )
         return cast(ObjectId, result.inserted_id)
 
     async def find_by_id(

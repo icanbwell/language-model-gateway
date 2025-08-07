@@ -98,11 +98,15 @@ class OAuthMongoCache(OAuthCache):
                 collection_name=self.collection_name,
                 model=existing_cache_item,
             )
-            logger.debug(f"Cache item updated with ID: {new_object_id}")
+            logger.debug(
+                f"Cache item updated with ID: {new_object_id} for key: {key} with value: {value}"
+            )
         else:
             cache_item = CacheItem(_id=ObjectId(), key=key, value=value)
             new_object_id = await self.repository.save(
                 collection_name=self.collection_name,
                 model=cache_item,
             )
-            logger.debug(f"New cache item created with ID: {new_object_id}")
+            logger.debug(
+                f"New cache item created with ID: {new_object_id}: {cache_item}"
+            )
