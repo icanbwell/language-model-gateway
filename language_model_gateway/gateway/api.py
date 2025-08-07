@@ -153,7 +153,7 @@ def create_app() -> FastAPI:
 
     # app.add_middleware(SessionMiddleware, secret_key=session_secret)
 
-    @app1.api_route("/login", methods=["GET"])
+    @app1.api_route("/auth/login", methods=["GET"])
     async def login(request: Request) -> RedirectResponse:
         # absolute url for callback
         # we will define it below
@@ -163,7 +163,7 @@ def create_app() -> FastAPI:
             RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
         )
 
-    @app1.api_route("/callback", methods=["GET"])
+    @app1.api_route("/auth/callback", methods=["GET"])
     async def auth(request: Request) -> JSONResponse:
         client = oauth.create_client(auth_provider_name)
         token = await client.authorize_access_token(request)
