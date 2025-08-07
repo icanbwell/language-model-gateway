@@ -194,6 +194,13 @@ def create_app() -> FastAPI:
 
         logger.info(f"Access token: {access_token}")
 
+        # exchanged_token = await perform_token_exchange(access_token, auth_token_exchange_client_id, token_endpoint_)
+
+        return JSONResponse(token)
+
+    async def perform_token_exchange(
+        access_token: str, auth_token_exchange_client_id: str, token_endpoint_: str
+    ) -> Dict[str, Any]:
         # # get access token using client credentials for token exchange
         # service_access_token = await client.fetch_access_token(
         #     grant_type="client_credentials",
@@ -206,7 +213,6 @@ def create_app() -> FastAPI:
         assert private_key is not None, (
             "AUTH_TOKEN_PRIVATE_KEY environment variable must be set"
         )
-
         service_token = await AuthHelper.get_client_credentials_token(
             token_url=token_endpoint_,
             client_id=auth_token_exchange_client_id,
@@ -214,7 +220,6 @@ def create_app() -> FastAPI:
             private_key=private_key,
         )
         logger.info(f"Service token: {service_token}")
-
         exchanged_token: Dict[str, Any] = await AuthHelper.exchange_token(
             url=token_endpoint_,
             client_id=auth_token_exchange_client_id,
@@ -225,8 +230,6 @@ def create_app() -> FastAPI:
             scope="okta.apps.read",
             # scope== "api:access:read api:access:write"
         )
-
-        return JSONResponse(exchanged_token)
 
         # async with AsyncOAuth2Client(
         #     client_id=auth_token_exchange_client_id,
@@ -254,6 +257,8 @@ def create_app() -> FastAPI:
         #     )
         #     # user = token["access_token"]
         #     return JSONResponse(token_response)
+
+        return exchanged_token
 
     #
     # @app1.api_route("/login", methods=["GET"])
