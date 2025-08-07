@@ -46,11 +46,15 @@ uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
 
 # OIDC PKCE setup
+auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")
 well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
 client_id = os.getenv("AUTH_CLIENT_ID")
 client_secret = os.getenv("AUTH_CLIENT_SECRET")
 redirect_uri = os.getenv("AUTH_REDIRECT_URI")
 # session_secret = os.getenv("AUTH_SESSION_SECRET")
+assert auth_provider_name is not None, (
+    "AUTH_PROVIDER_NAME environment variable must be set"
+)
 assert well_known_url is not None, (
     "AUTH_WELL_KNOWN_URI environment variable must be set"
 )
@@ -65,7 +69,7 @@ assert redirect_uri is not None, "AUTH_REDIRECT_URI environment variable must be
 cache: OAuthCache = OAuthCache()
 oauth = OAuth(cache=cache)
 oauth.register(
-    name="google",
+    name=auth_provider_name,
     client_id=client_id,
     client_secret=client_secret,
     server_metadata_url=well_known_url,
@@ -154,14 +158,14 @@ def create_app() -> FastAPI:
         # absolute url for callback
         # we will define it below
         redirect_uri1 = request.url_for("auth")
-        client = oauth.create_client("google")
+        client = oauth.create_client(auth_provider_name)
         return cast(
             RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
         )
 
     @app1.api_route("/callback", methods=["GET"])
     async def auth(request: Request) -> JSONResponse:
-        client = oauth.create_client("google")
+        client = oauth.create_client(auth_provider_name)
         token = await client.authorize_access_token(request)
         # user = token["access_token"]
         return JSONResponse(token)
