@@ -143,6 +143,8 @@ types-boto3-bedrock = ">=1.40.0"
 types-boto3-s3 = ">=1.40.0"
 types-boto3-textract = ">=1.40.0"
 types-boto3-bedrock-runtime = ">=1.40.0"
+# motor-types is a Python library for typing motor
+motor-types = ">=1.0.0b4"
 
 [requires]
 python_version = "3.12"
