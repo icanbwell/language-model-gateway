@@ -1,9 +1,12 @@
+import uuid
+
+
 class OAuthCache:
     _cache: dict[str, str] = {}
 
     def __init__(self) -> None:
         """Initialize the AuthCache."""
-        pass
+        self.id_ = uuid.uuid4()
 
     async def delete(self, key: str) -> None:
         """

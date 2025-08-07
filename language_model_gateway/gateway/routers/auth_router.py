@@ -1,105 +1,71 @@
 import logging
-import os
-from typing import Any, Dict, cast
+from enum import Enum
+from typing import Any, Sequence, Annotated
 
-from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
-from fastapi import APIRouter, Request
-from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi import APIRouter
+from fastapi import params
+from fastapi.params import Depends
+from fastapi.responses import RedirectResponse
+from starlette.datastructures import URL
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
-from language_model_gateway.gateway.auth.auth_helper import AuthHelper
-from language_model_gateway.gateway.auth.oauth_cache import OAuthCache
+from language_model_gateway.gateway.api_container import get_auth_manager
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
 
 logger = logging.getLogger(__name__)
 
 
 class AuthRouter:
-    def __init__(self) -> None:
-        # OIDC PKCE setup
-        self.auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")
-        self.well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
-        self.client_id = os.getenv("AUTH_CLIENT_ID")
-        self.client_secret = os.getenv("AUTH_CLIENT_SECRET")
-        self.redirect_uri = os.getenv("AUTH_REDIRECT_URI")
-        # session_secret = os.getenv("AUTH_SESSION_SECRET")
-        assert self.auth_provider_name is not None, (
-            "AUTH_PROVIDER_NAME environment variable must be set"
+    def __init__(
+        self,
+        *,
+        prefix: str = "/auth",
+        tags: list[str | Enum] | None = None,
+        dependencies: Sequence[params.Depends] | None = None,
+    ) -> None:
+        self.prefix = prefix
+        self.tags = tags or ["models"]
+        self.dependencies = dependencies or []
+        self.router = APIRouter(
+            prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
-        assert self.well_known_url is not None, (
-            "AUTH_WELL_KNOWN_URI environment variable must be set"
-        )
-        assert self.client_id is not None, (
-            "AUTH_CLIENT_ID environment variable must be set"
-        )
-        assert self.client_secret is not None, (
-            "AUTH_CLIENT_SECRET environment variable must be set"
-        )
-        assert self.redirect_uri is not None, (
-            "AUTH_REDIRECT_URI environment variable must be set"
-        )
-        # assert session_secret is not None, (
-        #     "AUTH_SESSION_SECRET environment variable must be set"
-        # )
+        self._register_routes()
 
-        # https://docs.authlib.org/en/latest/client/frameworks.html#frameworks-clients
-        cache: OAuthCache = OAuthCache()
-        self.oauth: OAuth = OAuth(cache=cache)
-        self.oauth.register(
-            name=self.auth_provider_name,
-            client_id=self.client_id,
-            client_secret=self.client_secret,
-            server_metadata_url=self.well_known_url,
-            client_kwargs={"scope": "openid email", "code_challenge_method": "S256"},
+    def _register_routes(self) -> None:
+        """Register all routes for this router"""
+        self.router.add_api_route("/login", self.login, methods=["GET"])
+        self.router.add_api_route(
+            "/callback", self.auth_callback, methods=["GET", "POST"]
         )
 
-        self.router = APIRouter()
-        self.router.add_api_route("/auth/login", self.login, methods=["GET"])
-        self.router.add_api_route("/auth/callback", self.auth_callback, methods=["GET"])
-
-    async def login(self, request: Request) -> RedirectResponse:
+    # noinspection PyMethodMayBeStatic
+    async def login(
+        self,
+        request: Request,
+        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+    ) -> RedirectResponse:
         logger.info(f"Received request for auth login: {request.url}")
-        redirect_uri1 = request.url_for("auth_callback")
-        client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
-        state_content = {
-            "tool_name": "auth",
-        }
-        # convert state_content to a string
-        state: str = AuthHelper.encode_state(state_content)
+        redirect_uri1: URL = request.url_for("auth_callback")
 
-        # https://docs.authlib.org/en/latest/client/api.html
-        return cast(
-            RedirectResponse,
-            await client.authorize_redirect(
-                request=request,
-                redirect_uri=redirect_uri1,
-                state=state,
-            ),
+        url = await auth_manager.create_authorization_url(
+            redirect_uri=str(redirect_uri1),
+            tool_name="auth",
         )
 
-    async def auth_callback(self, request: Request) -> JSONResponse:
+        return RedirectResponse(url, status_code=302)
+
+    # noinspection PyMethodMayBeStatic
+    async def auth_callback(
+        self,
+        request: Request,
+        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+    ) -> JSONResponse:
         logger.info(f"Received request for auth callback: {request.url}")
-        client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
-        state: str | None = request.query_params.get("state")
-        code: str | None = request.query_params.get("code")
-        assert state is not None, "State must be provided in the callback"
-        state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
-        logger.info(f"State decoded: {state_decoded}")
-        logger.info(f"Code received: {code}")
-        token = await client.authorize_access_token(request)
-        access_token = token["access_token"]
-        assert access_token is not None, (
-            "access_token was not found in the token response"
+        content: dict[str, Any] = await auth_manager.read_callback_response(
+            request=request,
         )
-        # auth_token_exchange_client_id = os.getenv("AUTH_TOKEN_EXCHANGE_CLIENT_ID")
-        # assert auth_token_exchange_client_id is not None, (
-        #     "AUTH_TOKEN_EXCHANGE_CLIENT_ID environment variable must be set"
-        # )
-        return JSONResponse(
-            {
-                "token": token,
-                "state": state_decoded,
-                "code": code,
-            }
-        )
+        return JSONResponse(content)
 
     def get_router(self) -> APIRouter:
         """ """

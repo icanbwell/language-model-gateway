@@ -3,6 +3,7 @@ import os
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.simple_container import SimpleContainer
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
@@ -243,5 +244,7 @@ class ContainerFactory:
         container.register(
             ModelManager, lambda c: ModelManager(config_reader=c.resolve(ConfigReader))
         )
+
+        container.register(AuthManager, lambda c: AuthManager())
         logger.info("DI container initialized")
         return container
