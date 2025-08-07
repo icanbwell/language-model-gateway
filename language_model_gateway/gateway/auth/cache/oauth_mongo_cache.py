@@ -1,13 +1,17 @@
+import logging
 import os
 import uuid
 from typing import override
 
+from bson import ObjectId
 
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.models.CacheItem import CacheItem
 from language_model_gateway.gateway.auth.mongo.mongo_repository import (
     AsyncMongoRepository,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class OAuthMongoCache(OAuthCache):
@@ -80,8 +84,25 @@ class OAuthMongoCache(OAuthCache):
         :param value: Value to be stored.
         :param expires: Expiration time in seconds. Defaults to None (no expiration).
         """
-        cache_item = CacheItem(_id=str(uuid.uuid4()), key=key, value=value)
-        await self.repository.save(
+        # first see if the key already exists
+        existing_cache_item: CacheItem | None = await self.repository.find_by_field(
             collection_name=self.collection_name,
-            model=cache_item,
+            model_class=CacheItem,
+            field_name="key",
+            field_value=key,
         )
+        if existing_cache_item is not None:
+            # if it exists, update the value
+            existing_cache_item.value = value
+            new_object_id: ObjectId = await self.repository.save(
+                collection_name=self.collection_name,
+                model=existing_cache_item,
+            )
+            logger.debug(f"Cache item updated with ID: {new_object_id}")
+        else:
+            cache_item = CacheItem(_id=ObjectId(), key=key, value=value)
+            new_object_id = await self.repository.save(
+                collection_name=self.collection_name,
+                model=cache_item,
+            )
+            logger.debug(f"New cache item created with ID: {new_object_id}")

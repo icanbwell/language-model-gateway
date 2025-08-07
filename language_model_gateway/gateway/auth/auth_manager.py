@@ -22,7 +22,9 @@ class AuthManager:
             OAuthMemoryCache() if oauth_cache_type == "memory" else OAuthMongoCache()
         )
 
-        logger.info(f"Initializing AuthManager with cache id: {self.cache.id_}")
+        logger.info(
+            f"Initializing AuthManager with cache type {type(self.cache)} cache id: {self.cache.id}"
+        )
         # OIDC PKCE setup
         self.auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")
         self.well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")

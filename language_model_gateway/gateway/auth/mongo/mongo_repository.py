@@ -1,4 +1,5 @@
-from typing import Any, Dict, Optional, Type, TypeVar, Generic, Mapping, cast
+import logging
+from typing import Any, Dict, Optional, Type, Mapping, cast
 from pydantic import BaseModel
 from motor.motor_asyncio import (
     AsyncIOMotorClient,
@@ -7,10 +8,10 @@ from motor.motor_asyncio import (
 )
 from bson import ObjectId
 
-T = TypeVar("T", bound=BaseModel)
+logger = logging.getLogger(__name__)
 
 
-class AsyncMongoRepository(Generic[T]):
+class AsyncMongoRepository[T: BaseModel]:
     """
     Async MongoDB repository for Pydantic models with comprehensive async support.
     """
@@ -29,6 +30,8 @@ class AsyncMongoRepository(Generic[T]):
         """
         assert connection_string, "MONGO_URL environment variable is not set."
         assert database_name, "Database name must be provided."
+        self.connection_string = connection_string
+        self.database_name = database_name
         self._client = AsyncIOMotorClient(connection_string)
         self._db: AsyncIOMotorDatabase = self._client[database_name]
 
@@ -39,9 +42,11 @@ class AsyncMongoRepository(Generic[T]):
         try:
             # Ping the database to verify connection
             await self._db.command("ping")
-            print("Successfully connected to MongoDB")
+            logger.info(
+                f"Successfully connected to MongoDB: {self.connection_string} in database {self.database_name}"
+            )
         except Exception as e:
-            print(f"Failed to connect to MongoDB: {e}")
+            logger.info(f"Failed to connect to MongoDB: {e}")
             raise
 
     async def close(self) -> None:
@@ -199,7 +204,7 @@ class AsyncMongoRepository(Generic[T]):
 
         return self._convert_dict_to_model(result, model_class) if result else None
 
-    async def delete_by_id(self, collection_name: str, document_id: str) -> bool:
+    async def delete_by_id(self, collection_name: str, document_id: ObjectId) -> bool:
         """
         Delete a document by its ID asynchronously.
 
@@ -253,8 +258,4 @@ class AsyncMongoRepository(Generic[T]):
         """
         # Convert Mapping to dict for assignment
         document = dict(document)
-        # Convert ObjectId to string
-        if "_id" in document and isinstance(document["_id"], ObjectId):
-            document["_id"] = str(document["_id"])
-
         return model_class(**document)
