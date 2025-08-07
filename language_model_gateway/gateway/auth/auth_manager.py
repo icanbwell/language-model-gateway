@@ -3,6 +3,7 @@ import os
 from typing import Any, Dict, cast
 
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
+from bson import ObjectId
 from fastapi import Request
 
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
@@ -11,6 +12,10 @@ from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
     OAuthMemoryCache,
 )
 from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
+from language_model_gateway.gateway.auth.models.Token import Token
+from language_model_gateway.gateway.auth.mongo.mongo_repository import (
+    AsyncMongoRepository,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -90,6 +95,7 @@ class AuthManager:
         logger.info(f"Code received: {code}")
         token = await client.authorize_access_token(request)
         access_token = token["access_token"]
+        id_token = token["id_token"]
         assert access_token is not None, (
             "access_token was not found in the token response"
         )
@@ -102,4 +108,50 @@ class AuthManager:
             "state": state_decoded,
             "code": code,
         }
+
+        connection_string = os.getenv("MONGO_URL")
+        assert connection_string is not None, (
+            "MONGO_URL environment variable must be set"
+        )
+        database_name = os.getenv("MONGO_DB_NAME")
+        assert database_name is not None, (
+            "MONGO_DB_NAME environment variable must be set"
+        )
+        mongo_repository: AsyncMongoRepository[Token] = AsyncMongoRepository(
+            connection_string=connection_string,
+            database_name=database_name,
+        )
+        collection_name = os.getenv("MONGO_DB_TOKEN_COLLECTION_NAME")
+        assert collection_name is not None, (
+            "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
+        )
+        stored_token_item: Token | None = await mongo_repository.find_by_field(
+            collection_name=collection_name,
+            model_class=Token,
+            field_name="name",
+            field_value=state_decoded["tool_name"],
+        )
+        if stored_token_item is None:
+            # Create a new token item if it does not exist
+            stored_token_item = Token(
+                _id=ObjectId(),
+                name=state_decoded["tool_name"],
+                url=None,
+                access_token=access_token,
+                id_token=id_token,
+                expires_at=None,
+                created_at=None,
+            )
+            await mongo_repository.save(
+                collection_name=collection_name,
+                model=stored_token_item,
+            )
+        else:
+            # Update the existing token item
+            stored_token_item.access_token = access_token
+            stored_token_item.id_token = id_token
+            await mongo_repository.save(
+                collection_name=collection_name,
+                model=stored_token_item,
+            )
         return content
