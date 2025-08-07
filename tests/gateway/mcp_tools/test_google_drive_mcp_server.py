@@ -30,7 +30,7 @@ async def test_chat_completions_with_mcp_google_drive(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "This is a mock response from the LLM."
+                    fn_get_response=lambda messages: "ABCDGX Test File Shared With b.well"
                 )
             ),
         )
@@ -75,5 +75,10 @@ async def test_chat_completions_with_mcp_google_drive(
         model="General Purpose",
     )
     assert chat_completion.choices[0].message.content is not None
+
+    assert (
+        "ABCDGX Test File Shared With b.well"
+        in chat_completion.choices[0].message.content
+    )
 
     await model_configuration_cache.clear()

@@ -3,7 +3,7 @@ import logging
 from typing import override, List, Dict
 from uuid import UUID, uuid4
 
-from httpx import HTTPStatusError
+from httpx import HTTPStatusError, ConnectError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
@@ -236,9 +236,24 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         + " Perhaps your login token has expired. Please reload to login again."
                         + f" Response: {response_text}"
                     ) from exc
-            logger.error(
-                f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
-            )
+            else:
+                logger.error(
+                    f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
+                )
+                raise
+        except* ConnectError as exc:
+            if len(exc.exceptions) == 1 and isinstance(exc.exceptions[0], ConnectError):
+                # If there is just one exception, we can log it directly
+                http_connect_exception: ConnectError = exc.exceptions[0]
+                # Handle connection errors
+                logger.error(
+                    f"load_metadata_for_mcp_tools Failed to connect to MCP server: {type(http_connect_exception)} {http_connect_exception}"
+                )
+                raise ConnectionError(
+                    f"Failed to connect to the MCP server: {http_connect_exception.request.url}. Please check your connection."
+                ) from http_connect_exception
+            else:
+                raise
         except* Exception as e:
             url: str = connection.get("url") if connection else "unknown"
             logger.error(
