@@ -161,15 +161,35 @@ def create_app() -> FastAPI:
         # we will define it below
         redirect_uri1 = request.url_for("auth")
         client: StarletteOAuth2App = oauth.create_client(auth_provider_name)
+        # create state and code_verifier
+        state_content = {
+            "tool_name": "auth",
+        }
+        # convert state_content to a string
+        state: str = AuthHelper.encode_state(state_content)
+
+        # code_verifier: str = secrets.token_urlsafe(64)
         # https://docs.authlib.org/en/latest/client/api.html
         return cast(
-            RedirectResponse, await client.authorize_redirect(request, redirect_uri1)
+            RedirectResponse,
+            await client.authorize_redirect(
+                request=request,
+                redirect_uri=redirect_uri1,
+                state=state,
+            ),
         )
 
     @app1.api_route("/auth/callback", methods=["GET"])
     async def auth(request: Request) -> JSONResponse:
         logger.info(f"Received request for auth callback: {request.url}")
         client: StarletteOAuth2App = oauth.create_client(auth_provider_name)
+        # get state and code from the request
+        state: str | None = request.query_params.get("state")
+        code: str | None = request.query_params.get("code")
+        assert state is not None, "State must be provided in the callback"
+        state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
+        logger.info(f"State decoded: {state_decoded}")
+        logger.info(f"Code received: {code}")
         token = await client.authorize_access_token(request)
         access_token = token["access_token"]
         assert access_token is not None, (

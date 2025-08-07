@@ -1,4 +1,5 @@
 import base64
+import json
 import logging
 from typing import Dict, Any, cast
 import os
@@ -155,3 +156,37 @@ class AuthHelper:
         except Exception as e:
             logger.exception(f"An unexpected error occurred: {e}")
             raise
+
+    @staticmethod
+    def encode_state(content: dict[str, str]) -> str:
+        """
+        Encode the state content into a base64url encoded string.
+
+        Args:
+            content: The content to encode, typically a dictionary.
+
+        Returns:
+            A base64url encoded string of the content.
+        """
+        json_content = json.dumps(content)
+        encoded_content = base64.urlsafe_b64encode(json_content.encode("utf-8")).decode(
+            "utf-8"
+        )
+        return encoded_content.rstrip("=")
+
+    @staticmethod
+    def decode_state(encoded_content: str) -> dict[str, str]:
+        """
+        Decode a base64url encoded string back into its original dictionary form.
+
+        Args:
+            encoded_content: The base64url encoded string to decode.
+
+        Returns:
+            The decoded content as a dictionary.
+        """
+        padding_needed = 4 - (len(encoded_content) % 4)
+        if padding_needed < 4:
+            encoded_content += "=" * padding_needed
+        json_content = base64.urlsafe_b64decode(encoded_content).decode("utf-8")
+        return cast(dict[str, str], json.loads(json_content))
