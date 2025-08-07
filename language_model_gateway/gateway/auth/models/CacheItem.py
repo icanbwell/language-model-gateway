@@ -1,7 +1,7 @@
 from typing import Optional
 
 from bson import ObjectId
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class CacheItem(BaseModel):
@@ -10,5 +10,6 @@ class CacheItem(BaseModel):
         arbitrary_types_allowed=True,  # Allow non-Pydantic types
         json_encoders={ObjectId: str},  # Convert ObjectId to string for JSON
     )
+    id: Optional[str] = Field(None, alias="_id")
     key: Optional[str]
     value: Optional[str]

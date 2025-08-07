@@ -2,6 +2,7 @@ import os
 import uuid
 from typing import override
 
+
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.models.CacheItem import CacheItem
 from language_model_gateway.gateway.auth.mongo.mongo_repository import (
@@ -46,11 +47,11 @@ class OAuthMongoCache(OAuthCache):
             field_name="key",
             field_value=key,
         )
-        if cache_item is not None:
+        if cache_item is not None and cache_item.id:
             # delete the cache item if it exists
             await self.repository.delete_by_id(
                 collection_name=self.collection_name,
-                document_id=key,
+                document_id=cache_item.id,
             )
 
     @override
@@ -79,7 +80,7 @@ class OAuthMongoCache(OAuthCache):
         :param value: Value to be stored.
         :param expires: Expiration time in seconds. Defaults to None (no expiration).
         """
-        cache_item = CacheItem(key=key, value=value)
+        cache_item = CacheItem(_id=str(uuid.uuid4()), key=key, value=value)
         await self.repository.save(
             collection_name=self.collection_name,
             model=cache_item,
