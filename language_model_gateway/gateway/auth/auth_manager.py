@@ -53,7 +53,7 @@ class AuthManager:
         )
 
     async def create_authorization_url(
-        self, *, redirect_uri: str, tool_name: str
+        self, *, redirect_uri: str, tool_name: str, request: Request
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
@@ -68,6 +68,7 @@ class AuthManager:
         rv: Dict[str, Any] = await client.create_authorization_url(
             redirect_uri=redirect_uri, state=state
         )
+        await client.save_authorize_data(request, redirect_uri=redirect_uri, **rv)
         return cast(str, rv["url"])
 
     async def read_callback_response(self, *, request: Request) -> dict[str, Any]:

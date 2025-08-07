@@ -51,6 +51,7 @@ class AuthRouter:
         url = await auth_manager.create_authorization_url(
             redirect_uri=str(redirect_uri1),
             tool_name="auth",
+            request=request,
         )
 
         return RedirectResponse(url, status_code=302)
