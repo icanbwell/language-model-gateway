@@ -1,20 +1,23 @@
 import logging
 import os
+import secrets
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
-from typing import AsyncGenerator, Annotated, List
+from typing import AsyncGenerator, Annotated, List, Any
 
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
+from fastapi.responses import RedirectResponse, JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
-from starlette.responses import FileResponse, JSONResponse
+from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.oidc_pkce_auth import OIDCAuthPKCE
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -138,3 +141,36 @@ async def refresh_data(
     await config_reader.clear_cache()
     configs: List[ChatModelConfig] = await config_reader.read_model_configs_async()
     return JSONResponse({"message": "Configuration refreshed", "data": configs})
+
+
+# OIDC PKCE setup
+well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
+client_id = os.getenv("AUTH_CLIENT_ID")
+redirect_uri = os.getenv("AUTH_REDIRECT_URI")
+
+oidc = OIDCAuthPKCE(
+    well_known_url=well_known_url, client_id=client_id, redirect_uri=redirect_uri
+)
+state_code_verifier = {}
+
+
+@app.api_route("/login", methods=["GET"])
+async def login() -> RedirectResponse:
+    state: str = secrets.token_urlsafe(16)
+    url: str
+    code_verifier: str
+    url, code_verifier = await oidc.get_authorization_url(state)
+    state_code_verifier[state] = code_verifier
+    return RedirectResponse(url)
+
+
+@app.api_route("/callback", methods=["GET"])
+async def callback(request: Request) -> JSONResponse:
+    code: str | None = request.query_params.get("code")
+    state: str | None = request.query_params.get("state")
+    assert state is not None, "State must be provided in the callback"
+    code_verifier: str | None = state_code_verifier.pop(state, None)
+    if not code or not code_verifier:
+        return JSONResponse({"error": "Missing code or code_verifier"}, status_code=400)
+    token_response: dict[str, Any] = await oidc.exchange_code(code, code_verifier)
+    return JSONResponse(token_response)
