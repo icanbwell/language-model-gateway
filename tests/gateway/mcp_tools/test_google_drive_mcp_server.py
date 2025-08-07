@@ -39,6 +39,7 @@ async def test_chat_completions_with_mcp_google_drive(
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
     )
+    url: str = "http://mcp_server_gateway:5000/google_drive"
     await model_configuration_cache.set(
         [
             ChatModelConfig(
@@ -53,7 +54,7 @@ async def test_chat_completions_with_mcp_google_drive(
                 tools=[
                     AgentConfig(
                         name="download_file_from_url",
-                        url="http://mcp_server_gateway:5051/google_drive/",  # Assumes MCP server is running locally
+                        url=url,  # Assumes MCP server is running locally
                     ),
                 ],
             )

@@ -16,6 +16,9 @@ from langchain_mcp_adapters.tools import (
 )
 from mcp import ClientSession, Tool
 
+from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+    McpToolUnauthorizedException,
+)
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
@@ -221,6 +224,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     logger.error(
                         f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
                     )
+                    # see if the response as a www-authenticate header
+                    www_authenticate_header = (
+                        http_status_exception.response.headers.get("www-authenticate")
+                    )
                     # Read response text before the stream is closed
                     if not http_status_exception.response.is_closed:
                         response_bytes = await http_status_exception.response.aread()
@@ -231,10 +238,18 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         )
                     else:
                         response_text = http_status_exception.response.reason_phrase
-                    raise ValueError(
-                        f"Not allowed to access MCP tool at {http_status_exception.request.url}."
+                    raise McpToolUnauthorizedException(
+                        message=f"Not allowed to access MCP tool at {http_status_exception.request.url}."
                         + " Perhaps your login token has expired. Please reload to login again."
                         + f" Response: {response_text}"
+                        + (
+                            f" WWW-Authenticate header: {www_authenticate_header}"
+                            if www_authenticate_header
+                            else ""
+                        ),
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
                     ) from exc
             else:
                 logger.error(

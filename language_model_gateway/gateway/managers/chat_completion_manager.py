@@ -19,6 +19,12 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
+    McpAuthorizationHelper,
+)
+from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+    McpToolUnauthorizedException,
+)
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
@@ -137,12 +143,26 @@ class ChatCompletionManager:
         except ExceptionGroup as e:
             # if there is just one exception, we can log it directly
             if len(e.exceptions) == 1:
+                first_exception = e.exceptions[0]
+                if isinstance(first_exception, McpToolUnauthorizedException):
+                    url: str | None = (
+                        McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
+                            headers=first_exception.headers
+                        )
+                    )
+                    content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
+                    return self.write_response(
+                        chat_request=chat_request,
+                        response_messages=[
+                            ChatCompletionMessage(role="assistant", content=content)
+                        ],
+                    )
                 logger.error(
-                    f"ExceptionGroup in chat completion: {e.exceptions[0]}",
+                    f"ExceptionGroup in chat completion: {first_exception}",
                     exc_info=True,
                 )
                 return await self.handle_exception(
-                    chat_request=chat_request, e=e.exceptions[0]
+                    chat_request=chat_request, e=first_exception
                 )
             return await self.handle_exception(chat_request=chat_request, e=e)
         except Exception as e:
