@@ -11,6 +11,7 @@ class Token(BaseModel):
     )
     id: ObjectId = Field(alias="_id")
     name: str = Field(alias="name")
+    email: str = Field(alias="email")
     url: Optional[str] = Field(None)
     access_token: Optional[str] = Field(None)
     id_token: Optional[str] = Field(None)

@@ -113,13 +113,11 @@ class AsyncMongoRepository[T: BaseModel]:
 
         return self._convert_dict_to_model(document, model_class)
 
-    # write a method to find by a field value
-    async def find_by_field(
+    async def find_by_fields(
         self,
         collection_name: str,
         model_class: Type[T],
-        field_name: str,
-        field_value: Any,
+        fields: Dict[str, str],
     ) -> Optional[T]:
         """
         Find a document by a specific field value asynchronously.
@@ -127,18 +125,17 @@ class AsyncMongoRepository[T: BaseModel]:
         Args:
             collection_name (str): Name of the collection
             model_class (Type[T]): Pydantic model class
-            field_name (str): Field name to filter by
-            field_value (Any): Value of the field to filter by
+            fields (Dict[str, str]): Fields value
         Returns:
             Optional[T]: Pydantic model instance or None
         """
-        logger.debug(f"Finding {field_name} in collection {collection_name}")
+        logger.debug(f"Finding {fields} in collection {collection_name}")
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
         # Create filter dictionary
-        filter_dict = {field_name: field_value}
+        filter_dict = fields
 
-        document = await collection.find_one(filter_dict)
+        document = await collection.find_one(filter=filter_dict)
 
         if document is None:
             return None

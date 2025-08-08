@@ -59,7 +59,7 @@ services:
 #      AUTH_ISSUER: "https://my-identity-provider.com/"
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
-      MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauthcache
+      MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       OAUTH_CACHE: mongo
     env_file: docker.env

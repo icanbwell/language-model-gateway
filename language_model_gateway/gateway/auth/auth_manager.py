@@ -99,6 +99,8 @@ class AuthManager:
         assert access_token is not None, (
             "access_token was not found in the token response"
         )
+        email: str = token.get("userinfo", {}).get("email")
+        logger.info(f"Email received: {email}")
         # auth_token_exchange_client_id = os.getenv("AUTH_TOKEN_EXCHANGE_CLIENT_ID")
         # assert auth_token_exchange_client_id is not None, (
         #     "AUTH_TOKEN_EXCHANGE_CLIENT_ID environment variable must be set"
@@ -107,6 +109,7 @@ class AuthManager:
             "token": token,
             "state": state_decoded,
             "code": code,
+            "email": email,
         }
 
         connection_string = os.getenv("MONGO_URL")
@@ -125,17 +128,20 @@ class AuthManager:
         assert collection_name is not None, (
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
-        stored_token_item: Token | None = await mongo_repository.find_by_field(
+        stored_token_item: Token | None = await mongo_repository.find_by_fields(
             collection_name=collection_name,
             model_class=Token,
-            field_name="name",
-            field_value=state_decoded["tool_name"],
+            fields={
+                "email": email,
+                "name": state_decoded["tool_name"],
+            },
         )
         if stored_token_item is None:
             # Create a new token item if it does not exist
             stored_token_item = Token(
                 _id=ObjectId(),
                 name=state_decoded["tool_name"],
+                email=email,
                 url=None,
                 access_token=access_token,
                 id_token=id_token,

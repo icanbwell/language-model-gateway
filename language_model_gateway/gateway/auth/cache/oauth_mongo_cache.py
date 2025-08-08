@@ -45,11 +45,12 @@ class OAuthMongoCache(OAuthCache):
         :param key: Unique identifier for the cache entry.
         """
         # check if the key exists in the repository
-        cache_item: CacheItem | None = await self.repository.find_by_field(
+        cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
             model_class=CacheItem,
-            field_name="key",
-            field_value=key,
+            fields={
+                "key": key,
+            },
         )
         if cache_item is not None and cache_item.id:
             # delete the cache item if it exists
@@ -67,11 +68,12 @@ class OAuthMongoCache(OAuthCache):
         :param default: Default value to return if the key is not found.
         :return: Retrieved value or None if not found or expired.
         """
-        cache_item: CacheItem | None = await self.repository.find_by_field(
+        cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
             model_class=CacheItem,
-            field_name="key",
-            field_value=key,
+            fields={
+                "key": key,
+            },
         )
         return cache_item.value if cache_item is not None else default
 
@@ -85,11 +87,12 @@ class OAuthMongoCache(OAuthCache):
         :param expires: Expiration time in seconds. Defaults to None (no expiration).
         """
         # first see if the key already exists
-        existing_cache_item: CacheItem | None = await self.repository.find_by_field(
+        existing_cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
             model_class=CacheItem,
-            field_name="key",
-            field_value=key,
+            fields={
+                "key": key,
+            },
         )
         if existing_cache_item is not None:
             # if it exists, update the value
