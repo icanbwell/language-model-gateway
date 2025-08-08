@@ -5,6 +5,11 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
+      # https://github.com/pre-commit/pre-commit-hooks/blob/main/pre_commit_hooks/pretty_format_json.py#L60-L85
+      - id: pretty-format-json
+        files: keycloak-config/realm-import.json
+        args: ["--autofix"]
+
       # File and formatting checks
       - id: end-of-file-fixer
         types: [ python ]
