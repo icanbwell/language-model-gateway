@@ -32,8 +32,6 @@ CHARLIE_AUDIENCE = os.environ.get(
 ADAM_SUBJECT_TOKEN = os.environ.get(
     "ADAM_SUBJECT_TOKEN", "your_adam_subject_token_here"
 )
-# Determine the subject token type (adjust based on what Adam issues)
-ADAM_SUBJECT_TOKEN_TYPE = "urn:ietf:params:oauth:token-type:id_token"  # Or "urn:ietf:params:oauth:token-type:access_token"
 
 
 # --- Helper function for making POST requests ---
@@ -163,7 +161,7 @@ def perform_token_exchange(
         "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
         "client_id": BOB_CLIENT_ID,  # Bob is the client making the exchange request
         "subject_token": adam_subject_token,
-        "subject_token_type": ADAM_SUBJECT_TOKEN_TYPE,
+        "subject_token_type": "urn:ietf:params:oauth:token-type:id_token",
         "actor_token": bob_actor_token1,
         "actor_token_type": "urn:ietf:params:oauth:token-type:access_token",
         # Indicating the actor token is an access token
