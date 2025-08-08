@@ -165,7 +165,7 @@ def perform_token_exchange(
         "actor_token": bob_actor_token1,
         "actor_token_type": "urn:ietf:params:oauth:token-type:access_token",
         # Indicating the actor token is an access token
-        "scope": "openid profile email",  # Requesting default scopes for the new token
+        "scope": "openid",  # Requesting default scopes for the new token
         "audience": CHARLIE_AUDIENCE,  # The identifier for Charlie's API/Resource Server
         "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
         "client_assertion": bob_client_assertion,
