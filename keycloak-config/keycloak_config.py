@@ -102,47 +102,49 @@ def configure_keycloak() -> None:
 
         # User Creation Example
         # https://www.keycloak.org/docs-api/latest/rest-api/index.html#UserRepresentation
+        admin_user = {
+            "username": os.getenv("MY_ADMIN_USER_NAME", "admin"),
+            "enabled": True,
+            # Default demographics
+            "firstName": os.getenv("MY_ADMIN_USER_FIRST_NAME", "Admin"),
+            "lastName": os.getenv("MY_ADMIN_USER_LAST_NAME", "User"),
+            "email": os.getenv("MY_ADMIN_USER_EMAIL", "admin@example.com"),
+            "emailVerified": True,
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": os.getenv("MY_ADMIN_USER_PASSWORD", "password"),
+                    "temporary": False,
+                }
+            ],
+            "attributes": {
+                "custom:scope": os.getenv("MY_ADMIN_USER_SCOPE", ""),
+                "cognito:groups": os.getenv("MY_ADMIN_USER_GROUPS", ""),
+            },
+        }
+        test_user = {
+            "username": os.getenv("MY_USER_NAME", "tester"),
+            "enabled": True,
+            # Default demographics
+            "firstName": os.getenv("MY_USER_FIRST_NAME", "Test"),
+            "lastName": os.getenv("MY_USER_LAST_NAME", "User"),
+            "email": os.getenv("MY_USER_EMAIL", "testuser@example.com"),
+            "emailVerified": True,
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": os.getenv("MY_USER_PASSWORD", "password"),
+                    "temporary": False,
+                }
+            ],
+            "attributes": {
+                "custom:scope": os.getenv("MY_USER_SCOPE", ""),
+                "cognito:groups": os.getenv("MY_USER_GROUPS", ""),
+            },
+        }
         users_to_create = [
-            {
-                "username": os.getenv("MY_ADMIN_USER_NAME", "admin"),
-                "enabled": True,
-                # Default demographics
-                "firstName": os.getenv("MY_ADMIN_USER_FIRST_NAME", "Admin"),
-                "lastName": os.getenv("MY_ADMIN_USER_LAST_NAME", "User"),
-                "email": os.getenv("MY_ADMIN_USER_EMAIL", "admin@example.com"),
-                "emailVerified": True,
-                "credentials": [
-                    {
-                        "type": "password",
-                        "value": os.getenv("MY_ADMIN_USER_PASSWORD", "password"),
-                        "temporary": False,
-                    }
-                ],
-                "attributes": {
-                    "custom:scope": os.getenv("MY_ADMIN_USER_SCOPE", ""),
-                    "cognito:groups": os.getenv("MY_ADMIN_USER_GROUPS", ""),
-                },
-            },
-            {
-                "username": os.getenv("MY_USER_NAME", "tester"),
-                "enabled": True,
-                # Default demographics
-                "firstName": os.getenv("MY_USER_FIRST_NAME", "Test"),
-                "lastName": os.getenv("MY_USER_LAST_NAME", "User"),
-                "email": os.getenv("MY_USER_EMAIL", "testuser@example.com"),
-                "emailVerified": True,
-                "credentials": [
-                    {
-                        "type": "password",
-                        "value": os.getenv("MY_USER_PASSWORD", "password"),
-                        "temporary": False,
-                    }
-                ],
-                "attributes": {
-                    "custom:scope": os.getenv("MY_USER_SCOPE", ""),
-                    "cognito:groups": os.getenv("MY_USER_GROUPS", ""),
-                },
-            },
+            admin_user,
+            test_user,
         ]
 
         for user_config in users_to_create:
