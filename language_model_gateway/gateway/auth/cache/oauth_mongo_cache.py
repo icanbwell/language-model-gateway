@@ -52,7 +52,10 @@ class OAuthMongoCache(OAuthCache):
                 "key": key,
             },
         )
-        if cache_item is not None and cache_item.id:
+        disable_delete: bool = (
+            os.getenv("MONGO_DB_AUTH_CACHE_DISABLE_DELETE", "false").lower() == "true"
+        )
+        if cache_item is not None and cache_item.id and not disable_delete:
             # delete the cache item if it exists
             await self.repository.delete_by_id(
                 collection_name=self.collection_name,
