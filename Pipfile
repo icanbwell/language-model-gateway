@@ -145,6 +145,8 @@ types-boto3-textract = ">=1.40.0"
 types-boto3-bedrock-runtime = ">=1.40.0"
 # motor-types is a Python library for typing motor
 motor-types = ">=1.0.0b4"
+# python-keycloak is a Python library for interacting with Keycloak.  We use it for initializing the Keycloak realm
+python-keycloak = ">=5.7.0"
 
 [requires]
 python_version = "3.12"

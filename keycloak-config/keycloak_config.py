@@ -2,7 +2,6 @@ import os
 import time
 import requests
 
-# noinspection PyUnresolvedReferences
 from keycloak import KeycloakAdmin
 
 
@@ -71,7 +70,7 @@ def configure_keycloak() -> None:
             keycloak_admin.create_realm(realm_config)
 
         # Set current realm
-        keycloak_admin.realm_name = realm_name
+        keycloak_admin.realm_name = realm_name  # type: ignore[attr-defined]
 
         # Client Configuration
         client_config = {
