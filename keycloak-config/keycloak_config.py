@@ -80,6 +80,9 @@ def configure_keycloak() -> None:
             "protocol": "openid-connect",
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET", "bwell-secret"),
+            # Add redirectUris and webOrigins for OIDC
+            "redirectUris": ["*"],
+            "webOrigins": ["*"],
         }
 
         # Create or Update Client
