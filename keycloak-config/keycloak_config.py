@@ -1,5 +1,7 @@
 import os
 import time
+from typing import Any, Dict
+
 import requests
 
 from keycloak import KeycloakAdmin
@@ -41,6 +43,7 @@ def configure_keycloak() -> None:
     wait_for_keycloak()
 
     # https://www.keycloak.org/docs-api/latest/rest-api/index.html
+    # https://python-keycloak.readthedocs.io/en/latest/modules/admin.html
 
     # Keycloak Admin Configuration
     keycloak_admin = KeycloakAdmin(
@@ -87,18 +90,7 @@ def configure_keycloak() -> None:
             "webOrigins": ["*"],
         }
 
-        # Create or Update Client
-        clients = keycloak_admin.get_clients()
-        existing_client = next(
-            (c for c in clients if c["clientId"] == client_config["clientId"]), None
-        )
-
-        if existing_client:
-            print(f"Updating existing client: {client_config['clientId']}")
-            keycloak_admin.update_client(existing_client["id"], client_config)
-        else:
-            print(f"Creating new client: {client_config['clientId']}")
-            keycloak_admin.create_client(client_config)
+        create_client(client_config=client_config, keycloak_admin=keycloak_admin)
 
         # User Creation Example
         # https://www.keycloak.org/docs-api/latest/rest-api/index.html#UserRepresentation
@@ -148,24 +140,43 @@ def configure_keycloak() -> None:
         ]
 
         for user_config in users_to_create:
-            existing_users = keycloak_admin.get_users()
-            existing_user = next(
-                (u for u in existing_users if u["username"] == user_config["username"]),
-                None,
-            )
-
-            if existing_user:
-                print(f"Updating existing user: {user_config['username']}")
-                keycloak_admin.update_user(existing_user["id"], user_config)
-            else:
-                print(f"Creating new user: {user_config['username']}")
-                keycloak_admin.create_user(user_config)
+            create_user(keycloak_admin=keycloak_admin, user_config=user_config)
 
         print("Keycloak configuration completed successfully!")
 
     except Exception as e:
         print(f"Error configuring Keycloak: {e}")
         raise
+
+
+def create_user(*, keycloak_admin: KeycloakAdmin, user_config: Dict[str, Any]) -> None:
+    existing_users = keycloak_admin.get_users()
+    existing_user = next(
+        (u for u in existing_users if u["username"] == user_config["username"]),
+        None,
+    )
+    if existing_user:
+        print(f"Updating existing user: {user_config['username']}")
+        keycloak_admin.update_user(existing_user["id"], user_config)
+    else:
+        print(f"Creating new user: {user_config['username']}")
+        keycloak_admin.create_user(user_config)
+
+
+def create_client(
+    *, client_config: Dict[str, Any], keycloak_admin: KeycloakAdmin
+) -> None:
+    # Create or Update Client
+    clients = keycloak_admin.get_clients()
+    existing_client = next(
+        (c for c in clients if c["clientId"] == client_config["clientId"]), None
+    )
+    if existing_client:
+        print(f"Updating existing client: {client_config['clientId']}")
+        keycloak_admin.update_client(existing_client["id"], client_config)
+    else:
+        print(f"Creating new client: {client_config['clientId']}")
+        keycloak_admin.create_client(client_config)
 
 
 if __name__ == "__main__":
