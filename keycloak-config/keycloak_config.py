@@ -78,7 +78,8 @@ def configure_keycloak() -> None:
         keycloak_admin.change_current_realm(realm_name)
 
         # Client Configuration
-        client_config = {
+        # https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation
+        client1 = {
             "clientId": os.getenv("CLIENT_ID", "bwell-client-id"),
             "name": os.getenv("CLIENT_ID", "bwell-client-id"),
             "enabled": True,
@@ -89,8 +90,33 @@ def configure_keycloak() -> None:
             "redirectUris": ["*"],
             "webOrigins": ["*"],
         }
+        client2 = {
+            "clientId": os.getenv("CLIENT_ID_2", "bwell-client-id-2"),
+            "name": os.getenv("CLIENT_ID_2", "bwell-client-id-2"),
+            "enabled": True,
+            "protocol": "openid-connect",
+            "publicClient": False,
+            "secret": os.getenv("CLIENT_SECRET_2", "bwell-secret-2"),
+            # Add redirectUris and webOrigins for OIDC
+            "redirectUris": ["*"],
+            "webOrigins": ["*"],
+        }
+        client3 = {
+            "clientId": os.getenv("CLIENT_ID_3", "bwell-client-id-3"),
+            "name": os.getenv("CLIENT_ID_3", "bwell-client-id-3"),
+            "enabled": True,
+            "protocol": "openid-connect",
+            "publicClient": False,
+            "secret": os.getenv("CLIENT_SECRET_3", "bwell-secret-3"),
+            # Add redirectUris and webOrigins for OIDC
+            "redirectUris": ["*"],
+            "webOrigins": ["*"],
+        }
 
-        create_client(client_config=client_config, keycloak_admin=keycloak_admin)
+        clients = [client1, client2, client3]
+
+        for client_config in clients:
+            create_client(client_config=client_config, keycloak_admin=keycloak_admin)
 
         # User Creation Example
         # https://www.keycloak.org/docs-api/latest/rest-api/index.html#UserRepresentation
