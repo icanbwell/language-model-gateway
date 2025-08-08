@@ -49,7 +49,7 @@ def configure_keycloak() -> None:
     )
 
     # Realm Configuration
-    realm_name = os.getenv("CLIENT_ID", "bwell-realm")
+    realm_name = os.getenv("MY_REALM_NAME", "bwell-realm")
     realm_config = {
         "realm": realm_name,
         "enabled": True,
@@ -70,7 +70,7 @@ def configure_keycloak() -> None:
             keycloak_admin.create_realm(realm_config)
 
         # Set current realm
-        keycloak_admin.realm_name = realm_name  # type: ignore[attr-defined]
+        keycloak_admin.change_current_realm(realm_name)
 
         # Client Configuration
         client_config = {

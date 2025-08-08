@@ -98,6 +98,7 @@ services:
       #      KC_DB_PASSWORD: admin
       # The below settings are for test data creation
       # This is the user and password that will be created in the realm
+      MY_REALM_NAME: bwell-realm
       MY_ADMIN_USER_NAME: admin
       MY_ADMIN_USER_PASSWORD: password
       MY_ADMIN_USER_SCOPE: user/*.* access/*.*
@@ -127,7 +128,7 @@ services:
       - "8080:8080"
       # 9000 is for health checks: https://www.keycloak.org/observability/health
       - "9000:9000"
-    command: [ "start-dev", "--import-realm", "--verbose" ]
+    command: [ "start-dev", "--verbose" ]
     volumes:
       - ./keycloak-config/realm-import.json:/opt/keycloak/data/import/realm-import.json
     healthcheck:
