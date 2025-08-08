@@ -40,6 +40,8 @@ def configure_keycloak() -> None:
     # Wait for Keycloak to be ready
     wait_for_keycloak()
 
+    # https://www.keycloak.org/docs-api/latest/rest-api/index.html
+
     # Keycloak Admin Configuration
     keycloak_admin = KeycloakAdmin(
         server_url=f"http://{os.getenv('KEYCLOAK_HOST', 'localhost')}:{os.getenv('KEYCLOAK_PORT', '8080')}/",
@@ -99,10 +101,16 @@ def configure_keycloak() -> None:
             keycloak_admin.create_client(client_config)
 
         # User Creation Example
+        # https://www.keycloak.org/docs-api/latest/rest-api/index.html#UserRepresentation
         users_to_create = [
             {
                 "username": os.getenv("MY_ADMIN_USER_NAME", "admin"),
                 "enabled": True,
+                # Default demographics
+                "firstName": os.getenv("MY_ADMIN_USER_FIRST_NAME", "Admin"),
+                "lastName": os.getenv("MY_ADMIN_USER_LAST_NAME", "User"),
+                "email": os.getenv("MY_ADMIN_USER_EMAIL", "admin@example.com"),
+                "emailVerified": True,
                 "credentials": [
                     {
                         "type": "password",
@@ -118,6 +126,11 @@ def configure_keycloak() -> None:
             {
                 "username": os.getenv("MY_USER_NAME", "tester"),
                 "enabled": True,
+                # Default demographics
+                "firstName": os.getenv("MY_USER_FIRST_NAME", "Test"),
+                "lastName": os.getenv("MY_USER_LAST_NAME", "User"),
+                "email": os.getenv("MY_USER_EMAIL", "testuser@example.com"),
+                "emailVerified": True,
                 "credentials": [
                     {
                         "type": "password",
