@@ -169,6 +169,7 @@ def perform_token_exchange(
         "audience": CHARLIE_AUDIENCE,  # The identifier for Charlie's API/Resource Server
         "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
         "client_assertion": bob_client_assertion,
+        "requested_token_type": "urn:ietf:params:oauth:token-type:access_token",
     }
 
     print(
