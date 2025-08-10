@@ -97,6 +97,7 @@ def configure_keycloak() -> None:
             "protocol": "openid-connect",
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET_2", "bwell-secret-2"),
+            "serviceAccountsEnabled": True,  # Enable client credentials flow
             # Add redirectUris and webOrigins for OIDC
             "redirectUris": ["*"],
             "webOrigins": ["*"],
@@ -126,7 +127,7 @@ def configure_keycloak() -> None:
             # Default demographics
             "firstName": os.getenv("MY_ADMIN_USER_FIRST_NAME", "Admin"),
             "lastName": os.getenv("MY_ADMIN_USER_LAST_NAME", "User"),
-            "email": os.getenv("MY_ADMIN_USER_EMAIL", "admin@example.com"),
+            "email": os.getenv("MY_ADMIN_USER_EMAIL", "admin@tester.com"),
             "emailVerified": True,
             "credentials": [
                 {
@@ -146,7 +147,7 @@ def configure_keycloak() -> None:
             # Default demographics
             "firstName": os.getenv("MY_USER_FIRST_NAME", "Test"),
             "lastName": os.getenv("MY_USER_LAST_NAME", "User"),
-            "email": os.getenv("MY_USER_EMAIL", "testuser@example.com"),
+            "email": os.getenv("MY_USER_EMAIL", "testuser@tester.com"),
             "emailVerified": True,
             "credentials": [
                 {
