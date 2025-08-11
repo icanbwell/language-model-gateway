@@ -93,6 +93,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 (headers.get(key) for key in headers if key.lower() == "authorization"),
                 None,
             )
+            # authorization_url = ""
             if not auth_header:
                 raise ValueError(
                     "Authorization header is required for MCP tools with JWT authentication."

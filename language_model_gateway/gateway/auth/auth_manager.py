@@ -21,7 +21,31 @@ logger = logging.getLogger(__name__)
 
 
 class AuthManager:
+    """
+    AuthManager is responsible for managing authentication using OIDC PKCE.
+
+    It initializes the OAuth client with the necessary configuration and provides methods
+    to create authorization URLs and handle callback responses.
+    """
+
     def __init__(self) -> None:
+        """
+        Initialize the AuthManager with the necessary configuration for OIDC PKCE.
+        It sets up the OAuth cache, reads environment variables for the OIDC provider,
+        and configures the OAuth client.
+        The environment variables required are:
+        - AUTH_PROVIDER_NAME: The name of the OIDC provider.
+        - AUTH_WELL_KNOWN_URI: The well-known URL of the OIDC provider
+        - AUTH_CLIENT_ID: The client ID for the OIDC application.
+        - AUTH_CLIENT_SECRET: The client secret for the OIDC application.
+        - AUTH_REDIRECT_URI: The redirect URI for the OIDC application.
+        - MONGO_URL: The connection string for the MongoDB database.
+        - MONGO_DB_NAME: The name of the MongoDB database.
+        - MONGO_DB_TOKEN_COLLECTION_NAME: The name of the MongoDB collection for tokens.
+        It also initializes the OAuth cache based on the OAUTH_CACHE environment variable,
+        which can be set to "memory" for in-memory caching or "mongo" for MongoDB caching.
+        If the OAUTH_CACHE environment variable is not set, it defaults to "memory".
+        """
         oauth_cache_type = os.getenv("OAUTH_CACHE", "memory")
         self.cache: OAuthCache = (
             OAuthMemoryCache() if oauth_cache_type == "memory" else OAuthMongoCache()
@@ -71,6 +95,17 @@ class AuthManager:
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
+
+        This method generates the authorization URL with the necessary parameters,
+        including the redirect URI and state. The state is encoded to include the tool name,
+        which is used to identify the tool that initiated the authentication process.
+        Args:
+            redirect_uri (str): The redirect URI to which the OIDC provider will send the user
+                after authentication.
+            tool_name (str): The name of the tool that is requesting authentication.
+            request (Request): The FastAPI request object, which is used to save the authorization data.
+        Returns:
+            str: The authorization URL to redirect the user to for authentication.
         """
         client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
         state_content = {
@@ -86,6 +121,18 @@ class AuthManager:
         return cast(str, rv["url"])
 
     async def read_callback_response(self, *, request: Request) -> dict[str, Any]:
+        """
+        Handle the callback response from the OIDC provider after the user has authenticated.
+
+        This method retrieves the authorization code and state from the request,
+        decodes the state to get the tool name, and exchanges the authorization code for an access
+        token and ID token. It then stores the tokens in a MongoDB collection if they do
+        not already exist, or updates the existing token if it does.
+        Args:
+            request (Request): The FastAPI request object containing the callback data.
+        Returns:
+            dict[str, Any]: A dictionary containing the token information, state, code, and email.
+        """
         client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
         state: str | None = request.query_params.get("state")
         code: str | None = request.query_params.get("code")

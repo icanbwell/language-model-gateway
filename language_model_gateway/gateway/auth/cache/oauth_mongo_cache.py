@@ -15,8 +15,25 @@ logger = logging.getLogger(__name__)
 
 
 class OAuthMongoCache(OAuthCache):
+    """
+    OAuthMongoCache is a cache implementation for OAuth tokens using MongoDB.
+    It inherits from OAuthCache and provides methods to set, get, and delete cache entries
+    in a MongoDB collection. The cache is initialized with a unique ID and connects to
+    a MongoDB database specified by environment variables.
+
+    """
+
     def __init__(self) -> None:
-        """Initialize the AuthCache."""
+        """
+        Initialize the OAuthMongoCache with a unique ID and MongoDB connection.
+        It reads the connection string, database name, and collection name from environment variables.
+        The environment variables required are:
+        - MONGO_URL: The connection string for the MongoDB database.
+        - MONGO_DB_NAME: The name of the MongoDB database.
+        - MONGO_DB_AUTH_CACHE_COLLECTION_NAME: The name of the MongoDB collection for the
+            authentication cache.
+
+        """
         self.id_ = uuid.uuid4()
         connection_string = os.getenv("MONGO_URL")
         assert connection_string, "MONGO_URL environment variable is not set."
@@ -35,6 +52,9 @@ class OAuthMongoCache(OAuthCache):
 
     @property
     def id(self) -> uuid.UUID:
+        """
+        Get the unique identifier for this cache instance.
+        """
         return self.id_
 
     @override
