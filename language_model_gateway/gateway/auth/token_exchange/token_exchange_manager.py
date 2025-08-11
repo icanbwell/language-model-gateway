@@ -1,6 +1,9 @@
 from language_model_gateway.gateway.auth.models.token_item import TokenItem
-from language_model_gateway.gateway.auth.repository.mongo.mongo_repository import (
-    AsyncMongoRepository,
+from language_model_gateway.gateway.auth.repository.base_repository import (
+    AsyncBaseRepository,
+)
+from language_model_gateway.gateway.auth.repository.repository_factory import (
+    RepositoryFactory,
 )
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
@@ -13,17 +16,14 @@ class TokenExchangeManager:
     """
 
     def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
-        # oauth_cache_type = os.getenv("OAUTH_CACHE", "memory")
         assert environment_variables is not None
         assert environment_variables.mongo_uri is not None
         assert environment_variables.mongo_db_name is not None
-        self.token_repository: AsyncMongoRepository[TokenItem] = (
-            AsyncMongoRepository(
-                connection_string=environment_variables.mongo_uri,
-                database_name=environment_variables.mongo_db_name,
+        self.token_repository: AsyncBaseRepository[TokenItem] = (
+            RepositoryFactory.get_repository(
+                repository_type=environment_variables.oauth_cache,
+                environment_variables=environment_variables,
             )
-            # if oauth_cache_type == "mongo"
-            # else None
         )
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.token_repository is not None, (
