@@ -2,6 +2,7 @@ import os
 from typing import Dict, Any
 
 import httpx
+import pytest
 import respx
 from fastapi.testclient import TestClient
 from httpx import Response
@@ -32,6 +33,10 @@ def test_login_route() -> None:
     )
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") == "1",
+    reason="Have to use the password grant flow for real LLM tests",
+)
 def test_callback_route() -> None:
     well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
     client_id = os.getenv("AUTH_CLIENT_ID")
@@ -101,8 +106,11 @@ def test_callback_route() -> None:
         parsed_url = urlparse(location)
         query_params = parse_qs(parsed_url.query)
         state = query_params.get("state", [None])[0]
+        assert state is not None
         code = query_params.get("code", [None])[0]
+        # assert code is not None, "Code must be present in the query parameters"
         nonce = query_params.get("nonce", [None])[0]
+        assert nonce is not None, "Nonce must be present in the query parameters"
 
         # mock the redirect to the authorization endpoint
         if mock is not None:

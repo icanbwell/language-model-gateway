@@ -1,4 +1,6 @@
 import logging
+import traceback
+
 from enum import Enum
 from typing import Any, Sequence, Annotated
 
@@ -68,9 +70,10 @@ class AuthRouter:
             )
             return JSONResponse(content)
         except Exception as e:
-            logger.error(f"Error processing auth callback: {e}")
+            exc: str = traceback.format_exc()
+            logger.error(f"Error processing auth callback: {e}\n{exc}")
             return JSONResponse(
-                content={"error": str(e)},
+                content={"error": f"Error processing auth callback: {e}\n{exc}"},
                 status_code=500,
             )
 
