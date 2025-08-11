@@ -71,3 +71,7 @@ class EnvironmentVariables:
     @property
     def mcp_tools_metadata_cache_ttl_seconds(self) -> int:
         return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TTL_SECONDS", 3600))
+
+    @property
+    def oauth_cache(self) -> str:
+        return os.environ.get("OAUTH_CACHE", "memory")

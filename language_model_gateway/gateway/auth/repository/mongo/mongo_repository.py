@@ -92,7 +92,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     @override
     async def find_by_id(
-        self, collection_name: str, model_class: Type[T], document_id: str
+        self, collection_name: str, model_class: Type[T], document_id: ObjectId
     ) -> Optional[T]:
         """
         Find a document by its ID asynchronously.

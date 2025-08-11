@@ -3,7 +3,6 @@ from abc import abstractmethod, ABCMeta
 from typing import Any, Dict, Optional, Type
 
 from bson import ObjectId
-from pydantic import BaseModel
 
 from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 
@@ -16,13 +15,13 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
     """
 
     @abstractmethod
-    async def insert(self, collection_name: str, model: BaseModel) -> ObjectId:
+    async def insert(self, collection_name: str, model: T) -> ObjectId:
         """
         Save a Pydantic model to MongoDB collection asynchronously.
 
         Args:
             collection_name (str): Name of the collection
-            model (BaseModel): Pydantic model to save
+            model (T): Pydantic model to save
 
         Returns:
             ObjectId: Inserted document's ID
@@ -31,7 +30,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
 
     @abstractmethod
     async def find_by_id(
-        self, collection_name: str, model_class: Type[T], document_id: str
+        self, collection_name: str, model_class: Type[T], document_id: ObjectId
     ) -> Optional[T]: ...
 
     @abstractmethod
@@ -57,7 +56,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
         self,
         collection_name: str,
         document_id: ObjectId,
-        update_data: BaseModel,
+        update_data: T,
         model_class: Type[T],
     ) -> Optional[T]: ...
 
