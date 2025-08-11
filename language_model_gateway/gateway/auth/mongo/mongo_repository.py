@@ -56,7 +56,7 @@ class AsyncMongoRepository[T: BaseModel]:
         """
         self._client.close()
 
-    async def save(self, collection_name: str, model: BaseModel) -> ObjectId:
+    async def insert(self, collection_name: str, model: BaseModel) -> ObjectId:
         """
         Save a Pydantic model to MongoDB collection asynchronously.
 
@@ -181,7 +181,7 @@ class AsyncMongoRepository[T: BaseModel]:
     async def update_by_id(
         self,
         collection_name: str,
-        document_id: str,
+        document_id: ObjectId,
         update_data: BaseModel,
         model_class: Type[T],
     ) -> Optional[T]:
@@ -200,16 +200,13 @@ class AsyncMongoRepository[T: BaseModel]:
         logger.debug(f"Updating document {document_id} in collection {collection_name}")
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
-        # Convert string ID to ObjectId
-        object_id = ObjectId(document_id)
-
         # Convert update data to dictionary, removing None values
         update_dict = self._convert_model_to_dict(update_data)
         update_dict = {k: v for k, v in update_dict.items() if v is not None}
 
         # Perform update
         result = await collection.find_one_and_update(
-            {"_id": object_id},
+            {"_id": document_id},
             {"$set": update_dict},
             return_document=True,  # Return the updated document
         )

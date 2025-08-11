@@ -148,7 +148,7 @@ class AuthManager:
                 expires_at=None,
                 created_at=None,
             )
-            await mongo_repository.save(
+            await mongo_repository.insert(
                 collection_name=collection_name,
                 model=stored_token_item,
             )
@@ -156,7 +156,7 @@ class AuthManager:
             # Update the existing token item
             stored_token_item.access_token = access_token
             stored_token_item.id_token = id_token
-            await mongo_repository.save(
+            await mongo_repository.insert(
                 collection_name=collection_name,
                 model=stored_token_item,
             )

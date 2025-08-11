@@ -4,6 +4,9 @@ import httpx
 import respx
 from fastapi.testclient import TestClient
 from httpx import Response
+from authlib.jose import jwk, jwt
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
 
 from language_model_gateway.gateway.api import app, create_app
 from urllib.parse import urlparse, parse_qs
@@ -29,6 +32,27 @@ def test_callback_route() -> None:
     redirect_uri = os.getenv("AUTH_REDIRECT_URI")
 
     with respx.mock() as mock:
+        # Generate RSA key pair using cryptography
+        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+        private_bytes = private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption(),
+        )
+        public_key = private_key.public_key()
+        public_bytes = public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        )
+        # Convert to JWK using authlib
+        jwk_private = jwk.dumps(private_bytes, kty="RSA")
+        jwk_public = jwk.dumps(public_bytes, kty="RSA")
+        jwks = {"keys": [jwk_public]}
+
+        # Mock JWKS URI to return public key
+        mock.get("https://openidconnect.googleapis.com/v1/jwks").mock(
+            return_value=Response(200, json=jwks)
+        )
         client = TestClient(create_app())
 
         # use respx to mock the OAuth flow using the well-known URL
@@ -64,6 +88,7 @@ def test_callback_route() -> None:
         query_params = parse_qs(parsed_url.query)
         state = query_params.get("state", [None])[0]
         code = query_params.get("code", [None])[0]
+        nonce = query_params.get("nonce", [None])[0]
 
         # mock the redirect to the authorization endpoint
         mock.get(
@@ -85,15 +110,23 @@ def test_callback_route() -> None:
             )
             assert httpx_response.status_code in (200, 302, 307)
 
-        # now mock the token endpoint to return a mock token when the requests passed 'grant_type=authorization_code&redirect_uri=http%3A%2F%2Ftestserver%2Fcallback'
+        # Prepare claims for id_token
+        claims = {
+            "iss": "https://accounts.google.com",
+            "sub": "1234567890",
+            "aud": client_id,
+            "exp": 9999999999,
+            "iat": 1111111111,
+            "email": "tester@tester.com",
+            "name": "John Doe",
+            "nonce": nonce,  # This should match the nonce used in the authorization request
+        }
+        # Sign the id_token using the private key
+        id_token = jwt.encode({"alg": "RS256"}, claims, jwk_private).decode()
+
+        # Mock token endpoint to return signed id_token
         mock.post(
             "https://oauth2.googleapis.com/token",
-            # params={
-            #     "grant_type": "authorization_code",
-            #     "redirect_uri": redirect_uri,
-            #     "client_id": client_id,
-            #     "code": code,
-            # },
         ).mock(
             return_value=Response(
                 200,
@@ -101,7 +134,7 @@ def test_callback_route() -> None:
                     "access_token": "mock_access_token",
                     "expires_in": 3600,
                     "token_type": "Bearer",
-                    "id_token": "mock_id_token",
+                    "id_token": id_token,
                     "user_info": {
                         "sub": "1234567890",
                         "name": "John Doe",

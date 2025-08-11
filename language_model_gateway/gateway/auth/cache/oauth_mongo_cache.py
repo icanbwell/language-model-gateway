@@ -100,16 +100,22 @@ class OAuthMongoCache(OAuthCache):
         if existing_cache_item is not None:
             # if it exists, update the value
             existing_cache_item.value = value
-            new_object_id: ObjectId = await self.repository.save(
+            existing_cache_item_id: ObjectId = existing_cache_item.id
+            updated_cache_item: CacheItem | None = await self.repository.update_by_id(
                 collection_name=self.collection_name,
-                model=existing_cache_item,
+                document_id=existing_cache_item_id,
+                update_data=existing_cache_item,
+                model_class=CacheItem,
+            )
+            assert updated_cache_item is not None, (
+                f"Failed to update cache item with ID: {existing_cache_item_id} for key: {key}"
             )
             logger.debug(
-                f"Cache item updated with ID: {new_object_id} for key: {key} with value: {value}"
+                f"Cache item updated with ID: {updated_cache_item.id} for key: {key} with value: {value}"
             )
         else:
             cache_item = CacheItem(_id=ObjectId(), key=key, value=value)
-            new_object_id = await self.repository.save(
+            new_object_id = await self.repository.insert(
                 collection_name=self.collection_name,
                 model=cache_item,
             )
