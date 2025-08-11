@@ -62,10 +62,17 @@ class AuthRouter:
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
     ) -> JSONResponse:
         logger.info(f"Received request for auth callback: {request.url}")
-        content: dict[str, Any] = await auth_manager.read_callback_response(
-            request=request,
-        )
-        return JSONResponse(content)
+        try:
+            content: dict[str, Any] = await auth_manager.read_callback_response(
+                request=request,
+            )
+            return JSONResponse(content)
+        except Exception as e:
+            logger.error(f"Error processing auth callback: {e}")
+            return JSONResponse(
+                content={"error": str(e)},
+                status_code=500,
+            )
 
     def get_router(self) -> APIRouter:
         """ """
