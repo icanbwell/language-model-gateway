@@ -7,7 +7,7 @@ from bson import ObjectId
 
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.models.CacheItem import CacheItem
-from language_model_gateway.gateway.auth.mongo.mongo_repository import (
+from language_model_gateway.gateway.auth.repository.mongo.mongo_repository import (
     AsyncMongoRepository,
 )
 

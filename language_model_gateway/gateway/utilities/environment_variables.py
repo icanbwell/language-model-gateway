@@ -47,3 +47,27 @@ class EnvironmentVariables:
     @property
     def auth_redirect_uri(self) -> Optional[str]:
         return os.environ.get("AUTH_REDIRECT_URI")
+
+    @property
+    def mongo_uri(self) -> Optional[str]:
+        return os.environ.get("MONGO_URL")
+
+    @property
+    def mongo_db_name(self) -> Optional[str]:
+        return os.environ.get("MONGO_DB_NAME")
+
+    @property
+    def mongo_db_auth_cache_collection_name(self) -> Optional[str]:
+        return os.environ.get("MONGO_DB_AUTH_CACHE_COLLECTION_NAME")
+
+    @property
+    def mongo_db_token_collection_name(self) -> Optional[str]:
+        return os.environ.get("MONGO_DB_TOKEN_COLLECTION_NAME")
+
+    @property
+    def mcp_tools_metadata_cache_timeout_seconds(self) -> int:
+        return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS", 3600))
+
+    @property
+    def mcp_tools_metadata_cache_ttl_seconds(self) -> int:
+        return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TTL_SECONDS", 3600))

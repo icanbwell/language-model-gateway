@@ -1,15 +1,11 @@
 from typing import Optional
 
-from bson import ObjectId
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import Field
+
+from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 
 
-class Token(BaseModel):
-    model_config = ConfigDict(
-        populate_by_name=True,  # Allow population by alias
-        arbitrary_types_allowed=True,  # Allow non-Pydantic types
-    )
-    id: ObjectId = Field(alias="_id")
+class TokenItem(BaseDbModel):
     name: str = Field(alias="name")
     email: str = Field(alias="email")
     url: Optional[str] = Field(None)

@@ -13,7 +13,7 @@ from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
 )
 from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
 from language_model_gateway.gateway.auth.models.Token import Token
-from language_model_gateway.gateway.auth.mongo.mongo_repository import (
+from language_model_gateway.gateway.auth.repository.mongo.mongo_repository import (
     AsyncMongoRepository,
 )
 
