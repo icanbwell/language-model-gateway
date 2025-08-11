@@ -3,6 +3,8 @@ from typing import Dict, Any
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -26,6 +28,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
         token_verifier: TokenVerifier,
+        auth_manager: AuthManager,
         fn_get_response: MockChatResponseProtocol,
     ) -> None:
         super().__init__(
@@ -34,6 +37,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             tool_provider=tool_provider,
             mcp_tool_provider=mcp_tool_provider,
             token_verifier=token_verifier,
+            auth_manager=auth_manager,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 
@@ -43,6 +47,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         model_config: ChatModelConfig,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         result: Dict[str, Any] = self.fn_get_response(
             model_config=model_config,

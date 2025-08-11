@@ -13,6 +13,7 @@ from openai.types.chat.chat_completion import Choice
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
@@ -38,7 +39,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
     )
     # Create a ChatRequest object
     model = "General Purpose"
-    request = ChatRequest(
+    chat_request = ChatRequest(
         model=model,
         messages=chat_history + [user_message],
     )
@@ -82,7 +83,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
 
     response: StreamingResponse | JSONResponse = await provider.chat_completions(
         headers={},
-        chat_request=request,
+        chat_request=chat_request,
         model_config=ChatModelConfig(
             id="1",
             name=model,
@@ -94,6 +95,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
             ),
             url="http://localhost:5000/api/v1/chat/completions",
         ),
+        auth_information=AuthInformation(redirect_uri=None),
     )
 
     assert response.status_code == 200, response.body

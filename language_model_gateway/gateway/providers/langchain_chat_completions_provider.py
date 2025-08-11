@@ -7,7 +7,9 @@ from langchain_core.tools import BaseTool
 from langgraph.graph.state import CompiledStateGraph
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -31,6 +33,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
         token_verifier: TokenVerifier,
+        auth_manager: AuthManager,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -54,12 +57,17 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         assert self.token_verifier is not None
         assert isinstance(self.token_verifier, TokenVerifier)
 
+        self.auth_manager: AuthManager = auth_manager
+        assert self.auth_manager is not None
+        assert isinstance(self.auth_manager, AuthManager)
+
     async def chat_completions(
         self,
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # noinspection PyArgumentList
         llm: BaseChatModel = self.model_factory.get_model(
@@ -84,8 +92,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
         # check if any of the MCP tools require authentication
-        tools_using_authentication: List[str] = [
-            a.name for a in model_config.get_agents() if a.auth == "jwt_token"
+        tools_using_authentication: List[AgentConfig] = [
+            a for a in model_config.get_agents() if a.auth == "jwt_token"
         ]
         if any(tools_using_authentication):
             # check that we have a valid Authorization header
@@ -93,11 +101,25 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 (headers.get(key) for key in headers if key.lower() == "authorization"),
                 None,
             )
-            # authorization_url = ""
+            # find tool that requires authentication
+            tool_using_authentication: str | None = next(
+                (t.name for t in tools_using_authentication if t.auth == "jwt_token"),
+                None,
+            )
+
+            authorization_url: str | None = (
+                await self.auth_manager.create_authorization_url(
+                    tool_name=tool_using_authentication,
+                    redirect_uri=auth_information.redirect_uri or "",
+                )
+                if tool_using_authentication
+                else None
+            )
             if not auth_header:
                 raise ValueError(
                     "Authorization header is required for MCP tools with JWT authentication."
                     + f"Following tools require authentication: {tools_using_authentication}"
+                    + f"Please visit {authorization_url} to authenticate."
                 )
             else:
                 token = self.token_verifier.extract_token(auth_header)
@@ -105,6 +127,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     raise ValueError(
                         "Invalid Authorization header format. Expected 'Bearer <token>'"
                         + f"Following tools require authentication: {tools_using_authentication}"
+                        + f"Please visit {authorization_url} to authenticate."
                     )
                 # verify the token
                 try:
@@ -115,11 +138,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         raise ValueError(
                             "Invalid or expired token provided in Authorization header"
                             + f"Following tools require authentication: {tools_using_authentication}"
+                            + f"Please visit {authorization_url} to authenticate."
                         )
                 except Exception as e:
                     raise ValueError(
                         "Invalid or expired token provided in Authorization header."
                         + f" Following tools require authentication: {tools_using_authentication}"
+                        + f" Please visit {authorization_url} to authenticate."
                     ) from e
 
         # add MCP tools

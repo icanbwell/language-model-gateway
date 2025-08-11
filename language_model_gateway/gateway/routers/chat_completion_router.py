@@ -11,6 +11,7 @@ from starlette.responses import StreamingResponse, JSONResponse
 from fastapi import params
 
 from language_model_gateway.gateway.api_container import get_chat_manager
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
@@ -94,10 +95,14 @@ class ChatCompletionsRouter:
         assert chat_manager
 
         try:
+            auth_information: AuthInformation = AuthInformation(
+                redirect_uri=str(request.url_for("auth_callback")),
+            )
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},
                 chat_request=cast(ChatRequest, chat_request),
+                auth_information=auth_information,
             )
         except* TokenRetrievalError as e:
             logger.exception(e, stack_info=True)

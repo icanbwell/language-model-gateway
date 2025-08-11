@@ -212,6 +212,7 @@ class ContainerFactory:
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
                 token_verifier=c.resolve(TokenVerifier),
+                auth_manager=c.resolve(AuthManager),
             ),
         )
 

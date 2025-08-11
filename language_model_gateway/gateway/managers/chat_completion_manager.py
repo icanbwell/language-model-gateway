@@ -19,6 +19,7 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
@@ -82,6 +83,7 @@ class ChatCompletionManager:
         *,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # Use the model to choose the provider
         try:
@@ -138,6 +140,7 @@ class ChatCompletionManager:
                 model_config=model_config,
                 headers=headers,
                 chat_request=chat_request,
+                auth_information=auth_information,
             )
             return response
         except ExceptionGroup as e:

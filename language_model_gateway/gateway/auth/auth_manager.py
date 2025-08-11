@@ -91,7 +91,7 @@ class AuthManager:
         )
 
     async def create_authorization_url(
-        self, *, redirect_uri: str, tool_name: str, request: Request
+        self, *, redirect_uri: str, tool_name: str
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
@@ -103,7 +103,6 @@ class AuthManager:
             redirect_uri (str): The redirect URI to which the OIDC provider will send the user
                 after authentication.
             tool_name (str): The name of the tool that is requesting authentication.
-            request (Request): The FastAPI request object, which is used to save the authorization data.
         Returns:
             str: The authorization URL to redirect the user to for authentication.
         """
@@ -117,7 +116,8 @@ class AuthManager:
         rv: Dict[str, Any] = await client.create_authorization_url(
             redirect_uri=redirect_uri, state=state
         )
-        await client.save_authorize_data(request, redirect_uri=redirect_uri, **rv)
+        # request is only needed if we are using the session to store the state
+        await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)
         return cast(str, rv["url"])
 
     async def read_callback_response(self, *, request: Request) -> dict[str, Any]:

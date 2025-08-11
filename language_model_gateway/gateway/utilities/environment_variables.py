@@ -43,3 +43,7 @@ class EnvironmentVariables:
     @property
     def auth_well_known_uri(self) -> Optional[str]:
         return os.environ.get("AUTH_WELL_KNOWN_URI")
+
+    @property
+    def auth_redirect_uri(self) -> Optional[str]:
+        return os.environ.get("AUTH_REDIRECT_URI")
