@@ -94,8 +94,8 @@ class AuthManager:
         logger.info(f"State decoded: {state_decoded}")
         logger.info(f"Code received: {code}")
         token = await client.authorize_access_token(request)
-        access_token = token["access_token"]
-        id_token = token["id_token"]
+        access_token = token.get("access_token")
+        id_token = token.get("id_token")
         assert access_token is not None, (
             "access_token was not found in the token response"
         )

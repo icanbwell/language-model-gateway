@@ -39,10 +39,11 @@ def test_callback_route() -> None:
                     "authorization_endpoint": "https://accounts.google.com/o/oauth2/auth",
                     "token_endpoint": "https://oauth2.googleapis.com/token",
                     "userinfo_endpoint": "https://openidconnect.googleapis.com/v1/userinfo",
+                    "jwks_uri": "https://openidconnect.googleapis.com/v1/jwks",
                 },
             )
         )
-        # mock the endpoints for the OAuth flow
+        # mock the endpoints for the OAuth flow`
         # this is the URL that the client will be redirected to for authentication
         # it should match the authorization_endpoint in the well-known configuration
         # and the client_id and redirect_uri should match the ones in the environment variables
@@ -100,6 +101,13 @@ def test_callback_route() -> None:
                     "access_token": "mock_access_token",
                     "expires_in": 3600,
                     "token_type": "Bearer",
+                    "id_token": "mock_id_token",
+                    "user_info": {
+                        "sub": "1234567890",
+                        "name": "John Doe",
+                        "email": "tester@tester.com",
+                        "picture": "http://example.com/john_doe.jpg",
+                    },
                 },
             )
         )
