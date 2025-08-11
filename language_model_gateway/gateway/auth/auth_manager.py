@@ -12,9 +12,15 @@ from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
     OAuthMemoryCache,
 )
 from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
-from language_model_gateway.gateway.auth.models.Token import Token
-from language_model_gateway.gateway.auth.repository.mongo.mongo_repository import (
-    AsyncMongoRepository,
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.repository.base_repository import (
+    AsyncBaseRepository,
+)
+from language_model_gateway.gateway.auth.repository.repository_factory import (
+    RepositoryFactory,
+)
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
 )
 
 logger = logging.getLogger(__name__)
@@ -28,7 +34,7 @@ class AuthManager:
     to create authorization URLs and handle callback responses.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
         """
         Initialize the AuthManager with the necessary configuration for OIDC PKCE.
         It sets up the OAuth cache, reads environment variables for the OIDC provider,
@@ -46,7 +52,13 @@ class AuthManager:
         which can be set to "memory" for in-memory caching or "mongo" for MongoDB caching.
         If the OAUTH_CACHE environment variable is not set, it defaults to "memory".
         """
-        oauth_cache_type = os.getenv("OAUTH_CACHE", "memory")
+        self.environment_variables: EnvironmentVariables = environment_variables
+        assert self.environment_variables is not None
+        assert isinstance(self.environment_variables, EnvironmentVariables), (
+            "environment_variables must be an instance of EnvironmentVariables"
+        )
+
+        oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
             OAuthMemoryCache() if oauth_cache_type == "memory" else OAuthMongoCache()
         )
@@ -167,17 +179,19 @@ class AuthManager:
         assert database_name is not None, (
             "MONGO_DB_NAME environment variable must be set"
         )
-        mongo_repository: AsyncMongoRepository[Token] = AsyncMongoRepository(
-            connection_string=connection_string,
-            database_name=database_name,
+        mongo_repository: AsyncBaseRepository[TokenItem] = (
+            RepositoryFactory.get_repository(
+                repository_type=self.environment_variables.oauth_cache,
+                environment_variables=self.environment_variables,
+            )
         )
         collection_name = os.getenv("MONGO_DB_TOKEN_COLLECTION_NAME")
         assert collection_name is not None, (
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
-        stored_token_item: Token | None = await mongo_repository.find_by_fields(
+        stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
             collection_name=collection_name,
-            model_class=Token,
+            model_class=TokenItem,
             fields={
                 "email": email,
                 "name": state_decoded["tool_name"],
@@ -185,7 +199,7 @@ class AuthManager:
         )
         if stored_token_item is None:
             # Create a new token item if it does not exist
-            stored_token_item = Token(
+            stored_token_item = TokenItem(
                 _id=ObjectId(),
                 name=state_decoded["tool_name"],
                 email=email,

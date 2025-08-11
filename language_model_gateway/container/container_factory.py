@@ -246,6 +246,11 @@ class ContainerFactory:
             ModelManager, lambda c: ModelManager(config_reader=c.resolve(ConfigReader))
         )
 
-        container.register(AuthManager, lambda c: AuthManager())
+        container.register(
+            AuthManager,
+            lambda c: AuthManager(
+                environment_variables=c.resolve(EnvironmentVariables),
+            ),
+        )
         logger.info("DI container initialized")
         return container
