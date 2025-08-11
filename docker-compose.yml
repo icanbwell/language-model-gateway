@@ -81,7 +81,7 @@ services:
 
   keycloak:
     # https://github.com/keycloak/keycloak/releases
-    image: quay.io/keycloak/keycloak:25.0.6
+    image: quay.io/keycloak/keycloak:26.3.2
     #    container_name: keycloak
     #    build:
     #      dockerfile: keycloak.Dockerfile
@@ -129,8 +129,8 @@ services:
       # 9000 is for health checks: https://www.keycloak.org/observability/health
       - "9000:9000"
     command: [ "start-dev", "--verbose" ]
-    volumes:
-      - ./keycloak-config/realm-import.json:/opt/keycloak/data/import/realm-import.json
+#    volumes:
+#      - ./keycloak-config/realm-import.json:/opt/keycloak/data/import/realm-import.json
     healthcheck:
       test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3" ]
       interval: 10s
