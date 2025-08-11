@@ -60,7 +60,9 @@ class AuthManager:
 
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
-            OAuthMemoryCache() if oauth_cache_type == "memory" else OAuthMongoCache()
+            OAuthMemoryCache()
+            if oauth_cache_type == "memory"
+            else OAuthMongoCache(environment_variables=environment_variables)
         )
 
         logger.info(

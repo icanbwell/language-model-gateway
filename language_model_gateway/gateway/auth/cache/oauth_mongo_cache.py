@@ -7,8 +7,14 @@ from bson import ObjectId
 
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.models.cache_item import CacheItem
-from language_model_gateway.gateway.auth.repository.mongo.mongo_repository import (
-    AsyncMongoRepository,
+from language_model_gateway.gateway.auth.repository.base_repository import (
+    AsyncBaseRepository,
+)
+from language_model_gateway.gateway.auth.repository.repository_factory import (
+    RepositoryFactory,
+)
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
 )
 
 logger = logging.getLogger(__name__)
@@ -23,7 +29,7 @@ class OAuthMongoCache(OAuthCache):
 
     """
 
-    def __init__(self) -> None:
+    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
         """
         Initialize the OAuthMongoCache with a unique ID and MongoDB connection.
         It reads the connection string, database name, and collection name from environment variables.
@@ -35,20 +41,19 @@ class OAuthMongoCache(OAuthCache):
 
         """
         self.id_ = uuid.uuid4()
-        connection_string = os.getenv("MONGO_URL")
-        assert connection_string, "MONGO_URL environment variable is not set."
-        database_name = os.getenv("MONGO_DB_NAME")
-        assert database_name, "MONGO_DB_NAME environment variable is not set."
-        collection_name = os.getenv("MONGO_DB_AUTH_CACHE_COLLECTION_NAME")
-        assert collection_name, (
-            "MONGO_DB_AUTH_CACHE_COLLECTION_NAME environment variable is not set."
+        self.repository: AsyncBaseRepository[CacheItem] = (
+            RepositoryFactory.get_repository(
+                repository_type=environment_variables.oauth_cache,
+                environment_variables=environment_variables,
+            )
         )
-
-        self.repository: AsyncMongoRepository[CacheItem] = AsyncMongoRepository(
-            connection_string=connection_string,
-            database_name=database_name,
+        collection_name: str | None = (
+            environment_variables.mongo_db_auth_cache_collection_name
         )
-        self.collection_name = collection_name
+        assert collection_name is not None, (
+            "MONGO_DB_AUTH_CACHE_COLLECTION_NAME environment variable must be set"
+        )
+        self.collection_name: str = collection_name
 
     @property
     def id(self) -> uuid.UUID:
