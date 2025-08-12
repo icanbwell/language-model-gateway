@@ -141,6 +141,7 @@ class AuthManager:
         rv: Dict[str, Any] = await client.create_authorization_url(
             redirect_uri=redirect_uri, state=state
         )
+        logger.debug(f"Authorization URL created: {rv}")
         # request is only needed if we are using the session to store the state
         await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)
         return cast(str, rv["url"])
