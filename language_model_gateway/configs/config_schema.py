@@ -80,8 +80,8 @@ class AgentConfig(BaseModel):
     auth: Literal["None", "jwt_token", "oauth"] | None = None
     """The authentication method to use when calling the tool"""
 
-    auth_audience: str | None = None
-    """The audience for the authentication token"""
+    auth_audiences: List[str] | None = None
+    """The audiences for the authentication. If multiple are provided then the tool accepts ANY of those audiences.  If auth is needed, we will use the first audience."""
 
 
 class ModelConfig(BaseModel):

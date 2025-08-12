@@ -162,14 +162,16 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
         if (
-            not tool_using_authentication.auth_audience
+            not tool_using_authentication.auth_audiences
             or not auth_information.redirect_uri
         ):
             return
 
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
-                audience=tool_using_authentication.auth_audience,
+                audience=tool_using_authentication.auth_audiences[
+                    0
+                ],  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
             )
             if tool_using_authentication
@@ -202,10 +204,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     )
                 else:
                     token_audience: str | None = token_claims.get("aud")
-                    if token_audience != tool_using_authentication.auth_audience:
+                    if token_audience not in tool_using_authentication.auth_audiences:
                         raise AuthorizationNeededException(
                             "Token provided in Authorization header has wrong audience:"
-                            + f"Found: {token_audience}, Expected: {tool_using_authentication.auth_audience}"
+                            + f"Found: {token_audience}, Expected: {tool_using_authentication.auth_audiences}"
                             + " and we could not find a cached token for the tool."
                             + f"Following tools require authentication: {tool_using_authentication}"
                             + f"Please visit {authorization_url} to authenticate."
