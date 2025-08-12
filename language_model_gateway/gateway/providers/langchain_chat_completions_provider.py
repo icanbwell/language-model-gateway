@@ -177,19 +177,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             if tool_using_authentication
             else None
         )
+        error_message: str = (
+            f"\nFollowing tools require authentication: {tool_using_authentication.name}."
+            + f"\nPlease visit {authorization_url} to authenticate."
+        )
         if not auth_header:
             raise AuthorizationNeededException(
                 "Authorization header is required for MCP tools with JWT authentication."
-                + f"Following tools require authentication: {tool_using_authentication}"
-                + f"Please visit {authorization_url} to authenticate."
+                + error_message
             )
         else:
             token: str | None = self.token_verifier.extract_token(auth_header)
             if not token:
                 raise AuthorizationNeededException(
                     "Invalid Authorization header format. Expected 'Bearer <token>'"
-                    + f"Following tools require authentication: {tool_using_authentication}"
-                    + f"Please visit {authorization_url} to authenticate."
+                    + error_message
                 )
             # verify the token
             try:
@@ -198,23 +200,20 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 ] = await self.token_verifier.verify_token_async(token=token)
                 if not token_claims:
                     raise AuthorizationNeededException(
-                        "Invalid or expired token provided in Authorization header"
-                        + f"Following tools require authentication: {tool_using_authentication}"
-                        + f"Please visit {authorization_url} to authenticate."
+                        "Invalid or expired token provided in Authorization header."
+                        + error_message
                     )
                 else:
                     token_audience: str | None = token_claims.get("aud")
                     if token_audience not in tool_using_authentication.auth_audiences:
                         raise AuthorizationNeededException(
                             "Token provided in Authorization header has wrong audience:"
-                            + f"Found: {token_audience}, Expected: {tool_using_authentication.auth_audiences}"
+                            + f" Found: {token_audience}, Expected: {tool_using_authentication.auth_audiences}"
                             + " and we could not find a cached token for the tool."
-                            + f"Following tools require authentication: {tool_using_authentication}"
-                            + f"Please visit {authorization_url} to authenticate."
+                            + error_message
                         )
             except Exception as e:
                 raise AuthorizationNeededException(
                     "Invalid or expired token provided in Authorization header."
-                    + f" Following tools require authentication: {tool_using_authentication}"
-                    + f" Please visit {authorization_url} to authenticate."
+                    + error_message
                 ) from e

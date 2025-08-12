@@ -12,6 +12,10 @@ from joserfc.jwk import KeySet
 
 from zoneinfo import ZoneInfo
 
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
+
 logger = logging.getLogger(__name__)
 
 
@@ -122,11 +126,11 @@ class TokenReader:
             return verified.claims
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
-            raise ValueError(
+            raise AuthorizationNeededException(
                 f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}.\nPlease Sign Out and Sign In to get a fresh OAuth token."
             ) from e
         except Exception as e:
-            raise ValueError(
+            raise AuthorizationNeededException(
                 f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token."
             ) from e
 

@@ -19,6 +19,9 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
     McpAuthorizationHelper,
@@ -143,6 +146,15 @@ class ChatCompletionManager:
                 auth_information=auth_information,
             )
             return response
+        except AuthorizationNeededException as e:
+            return self.write_response(
+                chat_request=chat_request,
+                response_messages=[
+                    ChatCompletionMessage(role="assistant", content=line.strip())
+                    for line in e.message.splitlines()
+                    if line.strip()
+                ],
+            )
         except ExceptionGroup as e:
             # if there is just one exception, we can log it directly
             if len(e.exceptions) == 1:
@@ -158,6 +170,17 @@ class ChatCompletionManager:
                         chat_request=chat_request,
                         response_messages=[
                             ChatCompletionMessage(role="assistant", content=content)
+                        ],
+                    )
+                elif isinstance(first_exception, AuthorizationNeededException):
+                    return self.write_response(
+                        chat_request=chat_request,
+                        response_messages=[
+                            ChatCompletionMessage(
+                                role="assistant", content=line.strip()
+                            )
+                            for line in first_exception.message.splitlines()
+                            if line.strip()
                         ],
                     )
                 logger.error(
