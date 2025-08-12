@@ -17,7 +17,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": 0.5
+      "value": "0.5"
     }
   ],
   "headers": [
@@ -39,7 +39,10 @@
     {
       "name": "google_drive",
       "url": "http://mcp_server_gateway:5000/google_drive/",
-      "auth": "jwt_token"
+      "auth": "jwt_token",
+      "auth_audiences": [
+        "bwell-client-id-3"
+      ]
     }
   ],
   "example_prompts": [
