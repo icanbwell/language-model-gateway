@@ -16,6 +16,11 @@ from language_model_gateway.gateway.auth.repository.base_repository import (
 
 logger = logging.getLogger(__name__)
 
+# disable pymongo logging to avoid cluttering the logs
+logging.getLogger("pymongo.topology").setLevel(logging.WARNING)
+logging.getLogger("pymongo.serverSelection").setLevel(logging.WARNING)
+logging.getLogger("pymongo.connection").setLevel(logging.WARNING)
+
 
 class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
     """

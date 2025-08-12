@@ -15,6 +15,9 @@ from language_model_gateway.gateway.api_container import (
     get_token_reader,
     get_environment_variables,
 )
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
@@ -139,7 +142,12 @@ class ChatCompletionsRouter:
                 status_code=500,
                 detail=f"Error retrieving AWS token: {e}.  If running on developer machines, run `aws sso login --profile [profile_name]` to get the token.",
             )
-
+        except* AuthorizationNeededException as e:
+            logger.exception(e, stack_info=True)
+            raise HTTPException(
+                status_code=401,
+                detail="Your login has expired. Please log in again.",
+            )
         except* ConnectionError as e:
             call_stack = traceback.format_exc()
             error_detail: ErrorDetail = {

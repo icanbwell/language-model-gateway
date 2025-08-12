@@ -38,7 +38,9 @@ logging.basicConfig(
 )
 
 # disable INFO logging for httpx because it logs every request
-# logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore.http11").setLevel(logging.WARNING)
+logging.getLogger("httpcore.connection").setLevel(logging.WARNING)
 
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
