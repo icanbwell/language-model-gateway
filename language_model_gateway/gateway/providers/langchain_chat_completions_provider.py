@@ -9,6 +9,9 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
@@ -158,19 +161,22 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_information (AuthInformation): The authentication information.
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
-        if not tool_using_authentication.auth_audience:
+        if (
+            not tool_using_authentication.auth_audience
+            or not auth_information.redirect_uri
+        ):
             return
 
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 audience=tool_using_authentication.auth_audience,
-                redirect_uri=auth_information.redirect_uri or "",
+                redirect_uri=auth_information.redirect_uri,
             )
             if tool_using_authentication
             else None
         )
         if not auth_header:
-            raise ValueError(
+            raise AuthorizationNeededException(
                 "Authorization header is required for MCP tools with JWT authentication."
                 + f"Following tools require authentication: {tool_using_authentication}"
                 + f"Please visit {authorization_url} to authenticate."
@@ -178,7 +184,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         else:
             token: str | None = self.token_verifier.extract_token(auth_header)
             if not token:
-                raise ValueError(
+                raise AuthorizationNeededException(
                     "Invalid Authorization header format. Expected 'Bearer <token>'"
                     + f"Following tools require authentication: {tool_using_authentication}"
                     + f"Please visit {authorization_url} to authenticate."
@@ -189,13 +195,23 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     str, Any
                 ] = await self.token_verifier.verify_token_async(token=token)
                 if not token_claims:
-                    raise ValueError(
+                    raise AuthorizationNeededException(
                         "Invalid or expired token provided in Authorization header"
                         + f"Following tools require authentication: {tool_using_authentication}"
                         + f"Please visit {authorization_url} to authenticate."
                     )
+                else:
+                    token_audience: str | None = token_claims.get("aud")
+                    if token_audience != tool_using_authentication.auth_audience:
+                        raise AuthorizationNeededException(
+                            "Token provided in Authorization header has wrong audience:"
+                            + f"Found: {token_audience}, Expected: {tool_using_authentication.auth_audience}"
+                            + " and we could not find a cached token for the tool."
+                            + f"Following tools require authentication: {tool_using_authentication}"
+                            + f"Please visit {authorization_url} to authenticate."
+                        )
             except Exception as e:
-                raise ValueError(
+                raise AuthorizationNeededException(
                     "Invalid or expired token provided in Authorization header."
                     + f" Following tools require authentication: {tool_using_authentication}"
                     + f" Please visit {authorization_url} to authenticate."
