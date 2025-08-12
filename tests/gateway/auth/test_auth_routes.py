@@ -39,7 +39,7 @@ def test_login_route() -> None:
 )
 def test_callback_route() -> None:
     well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
-    client_id = os.getenv("AUTH_CLIENT_ID")
+    client_id = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
     redirect_uri = os.getenv("AUTH_REDIRECT_URI")
 
     mock: MockRouter | None = None
@@ -93,7 +93,9 @@ def test_callback_route() -> None:
         assert well_known_url is not None, (
             "AUTH_WELL_KNOWN_URI environment variable must be set"
         )
-        assert client_id is not None, "AUTH_CLIENT_ID environment variable must be set"
+        assert client_id is not None, (
+            "AUTH_CLIENT_ID_bwell-client-id environment variable must be set"
+        )
         assert redirect_uri is not None, (
             "AUTH_REDIRECT_URI environment variable must be set"
         )
