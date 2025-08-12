@@ -204,7 +204,7 @@ class AuthManager:
             # Create a new token item if it does not exist
             stored_token_item = TokenItem(
                 _id=ObjectId(),
-                name=audience,
+                audience=audience,
                 email=email,
                 url=None,
                 access_token=access_token,
