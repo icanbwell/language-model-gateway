@@ -20,6 +20,9 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
 from language_model_gateway.gateway.managers.model_manager import ModelManager
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cached import cached
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -92,3 +95,11 @@ def get_token_reader(
     """helper function to get the chat manager"""
     assert isinstance(container, SimpleContainer), type(container)
     return container.resolve(TokenReader)
+
+
+def get_environment_variables(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> EnvironmentVariables:
+    """helper function to get the chat manager"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(EnvironmentVariables)

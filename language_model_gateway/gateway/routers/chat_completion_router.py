@@ -13,6 +13,7 @@ from fastapi import params
 from language_model_gateway.gateway.api_container import (
     get_chat_manager,
     get_token_reader,
+    get_environment_variables,
 )
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.auth.token_reader import TokenReader
@@ -20,6 +21,9 @@ from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +85,9 @@ class ChatCompletionsRouter:
         chat_request: Dict[str, Any],
         chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
         token_reader: Annotated[TokenReader, Depends(get_token_reader)],
+        environment_variables: Annotated[
+            EnvironmentVariables, Depends(get_environment_variables)
+        ],
     ) -> StreamingResponse | JSONResponse:
         """
         Chat completions endpoint. chat_manager is injected by FastAPI.
@@ -90,6 +97,7 @@ class ChatCompletionsRouter:
             chat_request: The chat request data
             chat_manager: Injected chat manager instance
             token_reader: Injected token reader instance
+            environment_variables: Injected environment variables instance
 
         Returns:
             StreamingResponse or JSONResponse
@@ -103,7 +111,8 @@ class ChatCompletionsRouter:
         try:
             # read the authorization header and extract the token
             auth_information: AuthInformation = AuthInformation(
-                redirect_uri=str(request.url_for("auth_callback")),
+                redirect_uri=environment_variables.auth_redirect_uri
+                or str(request.url_for("auth_callback")),
                 claims=None,
                 expires_at=None,
                 audience=None,
