@@ -1,8 +1,9 @@
 import logging
+import os
 import traceback
 
 from enum import Enum
-from typing import Any, Sequence, Annotated
+from typing import Any, Sequence, Annotated, Union
 
 from fastapi import APIRouter
 from fastapi import params
@@ -36,7 +37,9 @@ class AuthRouter:
 
     def _register_routes(self) -> None:
         """Register all routes for this router"""
-        self.router.add_api_route("/login", self.login, methods=["GET"])
+        self.router.add_api_route(
+            "/login", self.login, methods=["GET"], response_model=None
+        )
         self.router.add_api_route(
             "/callback", self.auth_callback, methods=["GET", "POST"]
         )
@@ -46,16 +49,25 @@ class AuthRouter:
         self,
         request: Request,
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
-    ) -> RedirectResponse:
-        logger.info(f"Received request for auth login: {request.url}")
+    ) -> Union[RedirectResponse, JSONResponse]:
         redirect_uri1: URL = request.url_for("auth_callback")
 
-        url = await auth_manager.create_authorization_url(
-            redirect_uri=str(redirect_uri1),
-            audience="auth",
-        )
+        try:
+            audience: str | None = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
+            assert audience is not None
+            url = await auth_manager.create_authorization_url(
+                redirect_uri=str(redirect_uri1),
+                audience=audience,
+            )
 
-        return RedirectResponse(url, status_code=302)
+            return RedirectResponse(url, status_code=302)
+        except Exception as e:
+            exc: str = traceback.format_exc()
+            logger.error(f"Error processing auth login: {e}\n{exc}")
+            return JSONResponse(
+                content={"error": f"Error processing auth login: {e}\n{exc}"},
+                status_code=500,
+            )
 
     # noinspection PyMethodMayBeStatic
     async def auth_callback(
