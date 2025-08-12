@@ -2,7 +2,6 @@ import logging
 import os
 from typing import Any, Dict, cast, List
 
-from authlib.common.security import generate_token
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from bson import ObjectId
 from fastapi import Request
@@ -34,8 +33,6 @@ class AuthManager:
     It initializes the OAuth client with the necessary configuration and provides methods
     to create authorization URLs and handle callback responses.
     """
-
-    _code_verifier = generate_token(48)
 
     def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
         """
@@ -138,7 +135,7 @@ class AuthManager:
         state: str = AuthHelper.encode_state(state_content)
 
         rv: Dict[str, Any] = await client.create_authorization_url(
-            redirect_uri=redirect_uri, state=state, code_verifier=self._code_verifier
+            redirect_uri=redirect_uri, state=state
         )
         # request is only needed if we are using the session to store the state
         await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)
@@ -166,9 +163,7 @@ class AuthManager:
         audience: str | None = state_decoded.get("audience")
         logger.info(f"Audience retrieved: {audience}")
         client: StarletteOAuth2App = self.oauth.create_client(audience)
-        token = await client.authorize_access_token(
-            request, code_verifier=self._code_verifier
-        )
+        token = await client.authorize_access_token(request)
         access_token = token.get("access_token")
         id_token = token.get("id_token")
         assert access_token is not None, (
