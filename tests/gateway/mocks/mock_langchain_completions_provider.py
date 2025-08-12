@@ -15,7 +15,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol
 
 
@@ -27,7 +27,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
-        token_verifier: TokenVerifier,
+        token_verifier: TokenReader,
         auth_manager: AuthManager,
         fn_get_response: MockChatResponseProtocol,
     ) -> None:

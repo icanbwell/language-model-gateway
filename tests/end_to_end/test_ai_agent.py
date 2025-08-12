@@ -95,7 +95,12 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
             ),
             url="http://localhost:5000/api/v1/chat/completions",
         ),
-        auth_information=AuthInformation(redirect_uri=None),
+        auth_information=AuthInformation(
+            redirect_uri=None,
+            claims=None,
+            expires_at=None,
+            audience=None,
+        ),
     )
 
     assert response.status_code == 200, response.body

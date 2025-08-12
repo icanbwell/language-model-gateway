@@ -13,3 +13,16 @@ class TokenItem(BaseDbModel):
     id_token: Optional[str] = Field(None)
     expires_at: Optional[str] = Field(None)  # ISO format string for expiration time
     created_at: Optional[str] = Field(None)  # ISO format string for creation time
+
+    def is_valid(self) -> bool:
+        """
+        Check if the token is valid based on its expiration time.
+        Returns:
+            bool: True if the token is valid, False otherwise.
+        """
+        if self.expires_at:
+            from datetime import datetime
+
+            expiration_time = datetime.fromisoformat(self.expires_at)
+            return expiration_time > datetime.now()
+        return False

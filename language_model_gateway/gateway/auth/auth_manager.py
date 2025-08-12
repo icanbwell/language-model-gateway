@@ -105,7 +105,7 @@ class AuthManager:
         )
 
     async def create_authorization_url(
-        self, *, redirect_uri: str, tool_name: str
+        self, *, redirect_uri: str, audience: str
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
@@ -116,13 +116,13 @@ class AuthManager:
         Args:
             redirect_uri (str): The redirect URI to which the OIDC provider will send the user
                 after authentication.
-            tool_name (str): The name of the tool that is requesting authentication.
+            audience (str): The audience we need to get a token for.
         Returns:
             str: The authorization URL to redirect the user to for authentication.
         """
         client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
         state_content = {
-            "tool_name": tool_name,
+            "audience": audience,
         }
         # convert state_content to a string
         state: str = AuthHelper.encode_state(state_content)
@@ -191,19 +191,20 @@ class AuthManager:
         assert collection_name is not None, (
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
+        audience = state_decoded["audience"]
         stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
             collection_name=collection_name,
             model_class=TokenItem,
             fields={
                 "email": email,
-                "name": state_decoded["tool_name"],
+                "name": audience,
             },
         )
         if stored_token_item is None:
             # Create a new token item if it does not exist
             stored_token_item = TokenItem(
                 _id=ObjectId(),
-                name=state_decoded["tool_name"],
+                name=audience,
                 email=email,
                 url=None,
                 access_token=access_token,

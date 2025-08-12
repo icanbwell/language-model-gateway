@@ -84,3 +84,38 @@ class TokenExchangeManager:
                 "name": auth_provider_name,
             },
         )
+
+    async def has_valid_token_for_auth_provider(
+        self, *, auth_provider_name: str, email: str, bearer_token: str
+    ) -> bool:
+        """
+        Check if a valid token exists for the given OIDC provider and email.
+
+        Args:
+            auth_provider_name (str): The name of the OIDC provider.
+            email (str): The email associated with the token.
+            bearer_token (str): The bearer token to verify.
+
+        Returns:
+            bool: True if a valid token exists, False otherwise.
+        """
+        # check if the bearer token has audience same as the auth provider name
+        if not bearer_token:
+            return False
+        if not auth_provider_name:
+            return False
+        if not email:
+            return False
+        # get the token for the auth provider and email
+        # and check if it is valid
+        if not bearer_token.startswith("Bearer "):
+            return False
+        # extract the token from the bearer token
+        token_value = bearer_token[len("Bearer ") :]
+        if not token_value:
+            return False
+
+        token: TokenItem | None = await self.get_token_for_auth_provider(
+            auth_provider_name=auth_provider_name, email=email
+        )
+        return token is not None and token.is_valid()

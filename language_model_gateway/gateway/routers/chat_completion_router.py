@@ -10,8 +10,12 @@ from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 from fastapi import params
 
-from language_model_gateway.gateway.api_container import get_chat_manager
+from language_model_gateway.gateway.api_container import (
+    get_chat_manager,
+    get_token_reader,
+)
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
@@ -76,6 +80,7 @@ class ChatCompletionsRouter:
         request: Request,
         chat_request: Dict[str, Any],
         chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
     ) -> StreamingResponse | JSONResponse:
         """
         Chat completions endpoint. chat_manager is injected by FastAPI.
@@ -84,6 +89,7 @@ class ChatCompletionsRouter:
             request: The incoming request
             chat_request: The chat request data
             chat_manager: Injected chat manager instance
+            token_reader: Injected token reader instance
 
         Returns:
             StreamingResponse or JSONResponse
@@ -95,9 +101,22 @@ class ChatCompletionsRouter:
         assert chat_manager
 
         try:
+            # read the authorization header and extract the token
             auth_information: AuthInformation = AuthInformation(
                 redirect_uri=str(request.url_for("auth_callback")),
+                claims=None,
+                expires_at=None,
+                audience=None,
             )
+            auth_header = request.headers.get("Authorization")
+            if auth_header:
+                token = token_reader.extract_token(auth_header)
+                if token:
+                    # verify the token
+                    claims = await token_reader.verify_token_async(token=token)
+                    auth_information.claims = claims
+                    auth_information.expires_at = claims.get("exp")
+                    auth_information.audience = claims.get("aud")
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},

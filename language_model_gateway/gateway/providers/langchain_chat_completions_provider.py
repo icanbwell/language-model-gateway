@@ -21,7 +21,7 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
@@ -32,7 +32,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
-        token_verifier: TokenVerifier,
+        token_verifier: TokenReader,
         auth_manager: AuthManager,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
@@ -53,9 +53,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         assert self.mcp_tool_provider is not None
         assert isinstance(self.mcp_tool_provider, MCPToolProvider)
 
-        self.token_verifier: TokenVerifier = token_verifier
+        self.token_verifier: TokenReader = token_verifier
         assert self.token_verifier is not None
-        assert isinstance(self.token_verifier, TokenVerifier)
+        assert isinstance(self.token_verifier, TokenReader)
 
         self.auth_manager: AuthManager = auth_manager
         assert self.auth_manager is not None
@@ -91,61 +91,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
-        # check if any of the MCP tools require authentication
-        tools_using_authentication: List[AgentConfig] = [
-            a for a in model_config.get_agents() if a.auth == "jwt_token"
-        ]
-        if any(tools_using_authentication):
-            # check that we have a valid Authorization header
-            auth_header: str | None = next(
-                (headers.get(key) for key in headers if key.lower() == "authorization"),
-                None,
-            )
-            # find tool that requires authentication
-            tool_using_authentication: str | None = next(
-                (t.name for t in tools_using_authentication if t.auth == "jwt_token"),
-                None,
-            )
-
-            authorization_url: str | None = (
-                await self.auth_manager.create_authorization_url(
-                    tool_name=tool_using_authentication,
-                    redirect_uri=auth_information.redirect_uri or "",
-                )
-                if tool_using_authentication
-                else None
-            )
-            if not auth_header:
-                raise ValueError(
-                    "Authorization header is required for MCP tools with JWT authentication."
-                    + f"Following tools require authentication: {tools_using_authentication}"
-                    + f"Please visit {authorization_url} to authenticate."
-                )
-            else:
-                token = self.token_verifier.extract_token(auth_header)
-                if not token:
-                    raise ValueError(
-                        "Invalid Authorization header format. Expected 'Bearer <token>'"
-                        + f"Following tools require authentication: {tools_using_authentication}"
-                        + f"Please visit {authorization_url} to authenticate."
-                    )
-                # verify the token
-                try:
-                    access_token = await self.token_verifier.verify_token_async(
-                        token=token
-                    )
-                    if not access_token:
-                        raise ValueError(
-                            "Invalid or expired token provided in Authorization header"
-                            + f"Following tools require authentication: {tools_using_authentication}"
-                            + f"Please visit {authorization_url} to authenticate."
-                        )
-                except Exception as e:
-                    raise ValueError(
-                        "Invalid or expired token provided in Authorization header."
-                        + f" Following tools require authentication: {tools_using_authentication}"
-                        + f" Please visit {authorization_url} to authenticate."
-                    ) from e
+        await self.check_tokens_are_valid_for_tools(
+            auth_information=auth_information,
+            headers=headers,
+            model_config=model_config,
+        )
 
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
@@ -168,3 +118,85 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             chat_request=chat_request,
             system_messages=[],
         )
+
+    async def check_tokens_are_valid_for_tools(
+        self,
+        *,
+        auth_information: AuthInformation,
+        headers: Dict[str, Any],
+        model_config: ChatModelConfig,
+    ) -> None:
+        # check if any of the MCP tools require authentication
+        tools_using_authentication: List[AgentConfig] = [
+            a for a in model_config.get_agents() if a.auth == "jwt_token"
+        ]
+        if any(tools_using_authentication):
+            # check that we have a valid Authorization header
+            auth_header: str | None = next(
+                (headers.get(key) for key in headers if key.lower() == "authorization"),
+                None,
+            )
+            tool_using_authentication: AgentConfig
+            for tool_using_authentication in tools_using_authentication:
+                await self.check_tokens_are_valid_for_tool(
+                    auth_header=auth_header,
+                    auth_information=auth_information,
+                    tool_using_authentication=tool_using_authentication,
+                )
+
+    async def check_tokens_are_valid_for_tool(
+        self,
+        *,
+        auth_header: str | None,
+        auth_information: AuthInformation,
+        tool_using_authentication: AgentConfig,
+    ) -> None:
+        """
+        Check if the provided token is valid for the specified tool.
+        Args:
+            auth_header (str | None): The Authorization header containing the token.
+            auth_information (AuthInformation): The authentication information.
+            tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
+        """
+        if not tool_using_authentication.auth_audience:
+            return
+
+        authorization_url: str | None = (
+            await self.auth_manager.create_authorization_url(
+                audience=tool_using_authentication.auth_audience,
+                redirect_uri=auth_information.redirect_uri or "",
+            )
+            if tool_using_authentication
+            else None
+        )
+        if not auth_header:
+            raise ValueError(
+                "Authorization header is required for MCP tools with JWT authentication."
+                + f"Following tools require authentication: {tool_using_authentication}"
+                + f"Please visit {authorization_url} to authenticate."
+            )
+        else:
+            token: str | None = self.token_verifier.extract_token(auth_header)
+            if not token:
+                raise ValueError(
+                    "Invalid Authorization header format. Expected 'Bearer <token>'"
+                    + f"Following tools require authentication: {tool_using_authentication}"
+                    + f"Please visit {authorization_url} to authenticate."
+                )
+            # verify the token
+            try:
+                token_claims: Dict[
+                    str, Any
+                ] = await self.token_verifier.verify_token_async(token=token)
+                if not token_claims:
+                    raise ValueError(
+                        "Invalid or expired token provided in Authorization header"
+                        + f"Following tools require authentication: {tool_using_authentication}"
+                        + f"Please visit {authorization_url} to authenticate."
+                    )
+            except Exception as e:
+                raise ValueError(
+                    "Invalid or expired token provided in Authorization header."
+                    + f" Following tools require authentication: {tool_using_authentication}"
+                    + f" Please visit {authorization_url} to authenticate."
+                ) from e

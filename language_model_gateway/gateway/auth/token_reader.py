@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 logger = logging.getLogger(__name__)
 
 
-class TokenVerifier:
+class TokenReader:
     def __init__(
         self,
         *,

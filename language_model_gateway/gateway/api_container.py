@@ -18,6 +18,7 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cached import cached
 
 logger = logging.getLogger(__name__)
@@ -83,3 +84,11 @@ def get_auth_manager(
     """helper function to get the chat manager"""
     assert isinstance(container, SimpleContainer), type(container)
     return container.resolve(AuthManager)
+
+
+def get_token_reader(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> TokenReader:
+    """helper function to get the chat manager"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(TokenReader)
