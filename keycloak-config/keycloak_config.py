@@ -89,6 +89,11 @@ def configure_keycloak() -> None:
             # Add redirectUris and webOrigins for OIDC
             "redirectUris": ["*"],
             "webOrigins": ["*"],
+            "attributes": {
+                "access.token.lifespan": 600,
+                "id.token.lifespan": 600,
+                "post.logout.redirect.uris": ["https://open-webui.localhost"],
+            },
         }
         client2 = {
             "clientId": os.getenv("CLIENT_ID_2", "bwell-client-id-2"),
