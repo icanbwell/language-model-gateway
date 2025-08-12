@@ -49,11 +49,13 @@ class AuthRouter:
         self,
         request: Request,
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        audience: str | None = None,
     ) -> Union[RedirectResponse, JSONResponse]:
         redirect_uri1: URL = request.url_for("auth_callback")
 
         try:
-            audience: str | None = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
+            if audience is None:
+                audience = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
             assert audience is not None
             url = await auth_manager.create_authorization_url(
                 redirect_uri=str(redirect_uri1),

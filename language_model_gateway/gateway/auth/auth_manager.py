@@ -134,6 +134,10 @@ class AuthManager:
         # convert state_content to a string
         state: str = AuthHelper.encode_state(state_content)
 
+        logger.debug(
+            f"Creating authorization URL for audience {audience} with state {state}"
+        )
+
         rv: Dict[str, Any] = await client.create_authorization_url(
             redirect_uri=redirect_uri, state=state
         )
