@@ -75,3 +75,8 @@ class EnvironmentVariables:
     @property
     def oauth_cache(self) -> str:
         return os.environ.get("OAUTH_CACHE", "memory")
+
+    @property
+    def auth_audiences(self) -> Optional[list[str]]:
+        auth_audiences: str | None = os.environ.get("AUTH_AUDIENCES")
+        return auth_audiences.split(",") if auth_audiences else None

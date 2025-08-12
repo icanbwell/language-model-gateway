@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Any, Dict, cast
+from typing import Any, Dict, cast, List
 
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from bson import ObjectId
@@ -42,8 +42,6 @@ class AuthManager:
         The environment variables required are:
         - AUTH_PROVIDER_NAME: The name of the OIDC provider.
         - AUTH_WELL_KNOWN_URI: The well-known URL of the OIDC provider
-        - AUTH_CLIENT_ID: The client ID for the OIDC application.
-        - AUTH_CLIENT_SECRET: The client secret for the OIDC application.
         - AUTH_REDIRECT_URI: The redirect URI for the OIDC application.
         - MONGO_URL: The connection string for the MongoDB database.
         - MONGO_DB_NAME: The name of the MongoDB database.
@@ -71,8 +69,6 @@ class AuthManager:
         # OIDC PKCE setup
         self.auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")
         self.well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
-        self.client_id = os.getenv("AUTH_CLIENT_ID")
-        self.client_secret = os.getenv("AUTH_CLIENT_SECRET")
         self.redirect_uri = os.getenv("AUTH_REDIRECT_URI")
         # session_secret = os.getenv("AUTH_SESSION_SECRET")
         assert self.auth_provider_name is not None, (
@@ -80,12 +76,6 @@ class AuthManager:
         )
         assert self.well_known_url is not None, (
             "AUTH_WELL_KNOWN_URI environment variable must be set"
-        )
-        assert self.client_id is not None, (
-            "AUTH_CLIENT_ID environment variable must be set"
-        )
-        assert self.client_secret is not None, (
-            "AUTH_CLIENT_SECRET environment variable must be set"
         )
         assert self.redirect_uri is not None, (
             "AUTH_REDIRECT_URI environment variable must be set"
@@ -96,13 +86,28 @@ class AuthManager:
 
         # https://docs.authlib.org/en/latest/client/frameworks.html#frameworks-clients
         self.oauth: OAuth = OAuth(cache=self.cache)
-        self.oauth.register(
-            name=self.auth_provider_name,
-            client_id=self.client_id,
-            client_secret=self.client_secret,
-            server_metadata_url=self.well_known_url,
-            client_kwargs={"scope": "openid email", "code_challenge_method": "S256"},
-        )
+        # read AUTH_PROVIDERS comma separated list from the environment variable and register the OIDC provider for each provider
+        self.auth_audiences: List[str] = environment_variables.auth_audiences or []
+        for audience in self.auth_audiences:
+            # read client_id and client_secret from the environment variables
+            auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{audience}")
+            assert auth_client_id is not None, (
+                f"AUTH_CLIENT_ID_{audience} environment variable must be set"
+            )
+            auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET_{audience}")
+            assert auth_client_secret is not None, (
+                f"AUTH_CLIENT_SECRET_{audience} environment variable must be set"
+            )
+            self.oauth.register(
+                name=audience,
+                client_id=auth_client_id,
+                client_secret=auth_client_secret,
+                server_metadata_url=self.well_known_url,
+                client_kwargs={
+                    "scope": "openid email",
+                    "code_challenge_method": "S256",
+                },
+            )
 
     async def create_authorization_url(
         self, *, redirect_uri: str, audience: str
@@ -120,7 +125,9 @@ class AuthManager:
         Returns:
             str: The authorization URL to redirect the user to for authentication.
         """
-        client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
+        # default to first audience
+        client: StarletteOAuth2App = self.oauth.create_client(audience)
+        assert client is not None, f"Client for audience {audience} not found"
         state_content = {
             "audience": audience,
         }
@@ -147,13 +154,15 @@ class AuthManager:
         Returns:
             dict[str, Any]: A dictionary containing the token information, state, code, and email.
         """
-        client: StarletteOAuth2App = self.oauth.create_client(self.auth_provider_name)
         state: str | None = request.query_params.get("state")
         code: str | None = request.query_params.get("code")
         assert state is not None, "State must be provided in the callback"
         state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
         logger.info(f"State decoded: {state_decoded}")
         logger.info(f"Code received: {code}")
+        audience: str | None = state_decoded.get("audience")
+        logger.info(f"Audience retrieved: {audience}")
+        client: StarletteOAuth2App = self.oauth.create_client(audience)
         token = await client.authorize_access_token(request)
         access_token = token.get("access_token")
         id_token = token.get("id_token")

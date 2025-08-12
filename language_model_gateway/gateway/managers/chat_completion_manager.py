@@ -124,6 +124,10 @@ class ChatCompletionManager:
                         detail=f"Model type {model_config.type} not supported",
                     )
 
+            assert provider is not None, (
+                f"Provider should not be None for model type {model_config.type}"
+            )
+
             help_response: StreamingResponse | JSONResponse | None = (
                 self.handle_help_prompt(
                     chat_request=chat_request, model=model, model_config=model_config
