@@ -45,20 +45,25 @@ class AuthConfigReader:
         """
         assert audience is not None
         # read client_id and client_secret from the environment variables
-        auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID-{audience}")
+        auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{audience}")
         assert auth_client_id is not None, (
-            f"AUTH_CLIENT_ID-{audience} environment variable must be set"
+            f"AUTH_CLIENT_ID_{audience} environment variable must be set"
         )
-        auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET-{audience}")
+        auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET_{audience}")
         assert auth_client_secret is not None, (
-            f"AUTH_CLIENT_SECRET-{audience} environment variable must be set"
+            f"AUTH_CLIENT_SECRET_{audience} environment variable must be set"
         )
-        auth_well_known_uri: str | None = os.getenv(f"AUTH_WELL_KNOWN_URI-{audience}")
+        auth_well_known_uri: str | None = os.getenv(f"AUTH_WELL_KNOWN_URI_{audience}")
         assert auth_well_known_uri is not None, (
-            f"AUTH_WELL_KNOWN_URI-{audience} environment variable must be set"
+            f"AUTH_WELL_KNOWN_URI_{audience} environment variable must be set"
+        )
+        issuer: str | None = os.getenv(f"AUTH_ISSUER_{audience}")
+        assert issuer is not None, (
+            f"AUTH_ISSUER_{audience} environment variable must be set"
         )
         return AuthConfig(
             audience=audience,
+            issuer=issuer,
             client_id=auth_client_id,
             client_secret=auth_client_secret,
             well_known_uri=auth_well_known_uri,

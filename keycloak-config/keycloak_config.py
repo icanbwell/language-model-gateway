@@ -86,7 +86,6 @@ def configure_keycloak() -> None:
             "protocol": "openid-connect",
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET", "bwell-secret"),
-            # Add redirectUris and webOrigins for OIDC
             "redirectUris": ["*"],
             "webOrigins": ["*"],
             "attributes": {
@@ -94,6 +93,21 @@ def configure_keycloak() -> None:
                 "id.token.lifespan": 3600,
                 "post.logout.redirect.uris": "https://open-webui.localhost",
             },
+            "protocolMappers": [
+                {
+                    "name": "audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "included.client.audience": os.getenv(
+                            "CLIENT_AUDIENCE", "bwell-client-id"
+                        ),
+                        "id.token.claim": "true",
+                        "access.token.claim": "true",
+                    },
+                }
+            ],
         }
         client2 = {
             "clientId": os.getenv("CLIENT_ID_2", "bwell-client-id-2"),
@@ -103,9 +117,23 @@ def configure_keycloak() -> None:
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET_2", "bwell-secret-2"),
             "serviceAccountsEnabled": True,  # Enable client credentials flow
-            # Add redirectUris and webOrigins for OIDC
             "redirectUris": ["*"],
             "webOrigins": ["*"],
+            "protocolMappers": [
+                {
+                    "name": "audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "included.client.audience": os.getenv(
+                            "CLIENT_AUDIENCE_2", "bwell-client-id-2"
+                        ),
+                        "id.token.claim": "true",
+                        "access.token.claim": "true",
+                    },
+                }
+            ],
         }
         client3 = {
             "clientId": os.getenv("CLIENT_ID_3", "bwell-client-id-3"),
@@ -114,9 +142,23 @@ def configure_keycloak() -> None:
             "protocol": "openid-connect",
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET_3", "bwell-secret-3"),
-            # Add redirectUris and webOrigins for OIDC
             "redirectUris": ["*"],
             "webOrigins": ["*"],
+            "protocolMappers": [
+                {
+                    "name": "audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "included.client.audience": os.getenv(
+                            "CLIENT_AUDIENCE_3", "bwell-client-id-3"
+                        ),
+                        "id.token.claim": "true",
+                        "access.token.claim": "true",
+                    },
+                }
+            ],
         }
 
         clients = [client1, client2, client3]

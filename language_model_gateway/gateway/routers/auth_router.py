@@ -13,8 +13,15 @@ from starlette.datastructures import URL
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from language_model_gateway.gateway.api_container import get_auth_manager
+from language_model_gateway.gateway.api_container import (
+    get_auth_manager,
+    get_auth_config_reader,
+)
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -49,15 +56,22 @@ class AuthRouter:
         self,
         request: Request,
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        auth_config_reader: Annotated[
+            AuthConfigReader, Depends(get_auth_config_reader)
+        ],
         audience: str | None = None,
     ) -> Union[RedirectResponse, JSONResponse]:
         redirect_uri1: URL = request.url_for("auth_callback")
 
         try:
             if audience is None:
-                audience = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
+                audience = os.getenv("AUTH_AUDIENCE_client1")
             assert audience is not None
-            issuer = os.getenv(f"AUTH_ISSUER-{audience}")
+            auth_config: AuthConfig | None = auth_config_reader.get_config_for_audience(
+                audience=audience
+            )
+            assert auth_config is not None
+            issuer: str | None = auth_config.issuer
             assert issuer is not None, (
                 f"AUTH_ISSUER-{audience} environment variable must be set"
             )

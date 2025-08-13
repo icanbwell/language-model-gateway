@@ -7,6 +7,9 @@ from language_model_gateway.configs.config_reader.config_reader import ConfigRea
 from language_model_gateway.container.container_factory import ContainerFactory
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
@@ -103,3 +106,11 @@ def get_environment_variables(
     """helper function to get the chat manager"""
     assert isinstance(container, SimpleContainer), type(container)
     return container.resolve(EnvironmentVariables)
+
+
+def get_auth_config_reader(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> AuthConfigReader:
+    """helper function to get the auth config reader"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(AuthConfigReader)

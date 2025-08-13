@@ -48,29 +48,26 @@ services:
       AUTH_DEFAULT_ISSUER: "http://keycloak:8080/realms/bwell-realm"
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_AUDIENCES: "bwell-client-id,bwell-client-id-3"
+      AUTH_AUDIENCES: "client1,client3"
       # first client for testing
-      AUTH_ISSUER-bwell-client-id: "http://keycloak:8080/realms/bwell-realm"
-      AUTH_AUDIENCE-bwell-client-id: "bwell-client-id"
-      AUTH_CLIENT_ID-bwell-client-id: "bwell-client-id"
-      AUTH_CLIENT_SECRET-bwell-client-id: "bwell-secret"
-      AUTH_WELL_KNOWN_URI-bwell-client-id: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      AUTH_ISSUER_client1: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_AUDIENCE_client1: "client1"
+      AUTH_CLIENT_ID_client1: "bwell-client-id"
+      AUTH_CLIENT_SECRET_client1: "bwell-secret"
+      AUTH_WELL_KNOWN_URI_client1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # second client for testing
-      AUTH_ISSUER-bwell-client-id-3: "http://keycloak:8080/realms/bwell-realm"
-      AUTH_AUDIENCE-bwell-client-id-3: "bwell-client-id"
-      AUTH_CLIENT_ID-bwell-client-id-3: "bwell-client-id-3"
-      AUTH_CLIENT_SECRET-bwell-client-id-3: "bwell-secret-3"
-      AUTH_WELL_KNOWN_URI-bwell-client-id-3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-
+      AUTH_ISSUER_client3: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_AUDIENCE_client3: "client3"
+      AUTH_CLIENT_ID_client3: "bwell-client-id-3"
+      AUTH_CLIENT_SECRET_client3: "bwell-secret-3"
+      AUTH_WELL_KNOWN_URI_client3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # Okta for production
-#      AUTH_PROVIDER_NAME: "okta"
-#      AUTH_WELL_KNOWN_URI: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_ISSUER_okta: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_AUDIENCE_okta: "bwell-client-id"
       # AUTH_CLIENT_ID and AUTH_CLIENT_SECRET are read from the docker.env file
+      AUTH_WELL_KNOWN_URI_okta: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
-      # if well-known URI is defined then JWKS_URI, AUTH_AUDIENCE and AUTH_ISSUER are not needed
-#      AUTH_JWKS_URI: "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/certs"
-#      AUTH_AUDIENCE: "my-mcp-server"
-#      AUTH_ISSUER: "https://my-identity-provider.com/"
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
@@ -131,10 +128,13 @@ services:
       # This is the client setup
       CLIENT_ID: bwell-client-id
       CLIENT_SECRET: bwell-secret
+      CLIENT_AUDIENCE: client1
       CLIENT_ID_2: bwell-client-id-2
       CLIENT_SECRET_2: bwell-secret-2
+      CLIENT_AUDIENCE_2: client2
       CLIENT_ID_3: bwell-client-id-3
       CLIENT_SECRET_3: bwell-secret-3
+      CLIENT_AUDIENCE_3: client3
       # This is the service account that will be created in the realm
       SERVICE_ACCOUNT_NAME: service-account
       SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*
