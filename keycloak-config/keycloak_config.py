@@ -224,6 +224,19 @@ def configure_keycloak() -> None:
             "optionalClientScopes": ["user/*.*", "access/*.*"],
             "protocolMappers": [
                 {
+                    "name": "aud-hardcoded-client1",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-hardcoded-claim-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "id.token.claim": "true",
+                        "claim.value": os.getenv("CLIENT_AUDIENCE", "bwell-client-id"),
+                        "claim.name": "aud",
+                        "jsonType.label": "String",
+                    },
+                },
+                {
                     "name": "cognito-groups-mapper",
                     "protocol": "openid-connect",
                     "protocolMapper": "oidc-usermodel-attribute-mapper",

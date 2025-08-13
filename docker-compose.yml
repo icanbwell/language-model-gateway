@@ -192,6 +192,13 @@ services:
       # This is the client setup
       CLIENT_ID: bwell-client-id
       CLIENT_SECRET: bwell-secret
+      CLIENT_AUDIENCE: client1
+      CLIENT_ID_2: bwell-client-id-2
+      CLIENT_SECRET_2: bwell-secret-2
+      CLIENT_AUDIENCE_2: client2
+      CLIENT_ID_3: bwell-client-id-3
+      CLIENT_SECRET_3: bwell-secret-3
+      CLIENT_AUDIENCE_3: client3
       # This is the service account that will be created in the realm
       SERVICE_ACCOUNT_NAME: service-account
       SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*
