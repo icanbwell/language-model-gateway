@@ -272,16 +272,18 @@ class AuthManager:
                 expires_at=expires_at.isoformat() if expires_at else None,
                 created_at=created_at.isoformat() if created_at else None,
             )
-            await mongo_repository.insert(
-                collection_name=collection_name,
-                model=stored_token_item,
-            )
         else:
             # Update the existing token item
             stored_token_item.access_token = access_token
             stored_token_item.id_token = id_token
-            await mongo_repository.insert(
-                collection_name=collection_name,
-                model=stored_token_item,
-            )
+        await mongo_repository.insert_or_update(
+            collection_name=collection_name,
+            item=stored_token_item,
+            fields={
+                "email": email,
+                "audience": audience,
+                "issuer": issuer,
+            },
+            model_class=TokenItem,
+        )
         return content
