@@ -99,7 +99,7 @@ class TokenExchangeManager:
             collection_name=self.token_collection_name,
             model_class=TokenItem,
             item=token,
-            fields={
+            keys={
                 "email": email,
                 "name": audience,
             },
@@ -286,7 +286,7 @@ class TokenExchangeManager:
         await mongo_repository.insert_or_update(
             collection_name=collection_name,
             item=stored_token_item,
-            fields={
+            keys={
                 "email": email,
                 "audience": audience,
                 "issuer": issuer,

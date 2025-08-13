@@ -296,7 +296,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        fields: Dict[str, str],
+        keys: Dict[str, str],
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.
@@ -305,7 +305,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             collection_name (str): Name of the collection
             model_class (Type[T]): Pydantic model class
             item (T): Pydantic model instance to insert or update
-            fields (Dict[str, str]): Fields that uniquely identify the document
+            keys (Dict[str, str]): Fields that uniquely identify the document
         Returns:
             ObjectId: The ID of the inserted or updated document
         """
@@ -322,7 +322,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
         # find the document by the fields that uniquely identify it
         existing_item = await self.find_by_fields(
-            collection_name=collection_name, fields=fields, model_class=model_class
+            collection_name=collection_name, fields=keys, model_class=model_class
         )
         if existing_item:
             # If the document exists, update it

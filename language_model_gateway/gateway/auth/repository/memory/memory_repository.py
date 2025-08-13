@@ -81,7 +81,7 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        fields: Dict[str, str],
+        keys: Dict[str, str],
     ) -> ObjectId:
         """
         Insert or update a Pydantic model in the in-memory storage.
@@ -89,7 +89,7 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         :param collection_name: Name of the collection (not used in memory storage).
         :param model_class: The Pydantic model class.
         :param item: The Pydantic model instance to insert or update.
-        :param fields: Fields to match for updating an existing item.
+        :param keys: Fields to match for updating an existing item.
         :return: The ID of the inserted or updated item.
 
         """

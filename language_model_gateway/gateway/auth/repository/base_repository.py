@@ -72,7 +72,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        fields: Dict[str, str],
+        keys: Dict[str, str],
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.
@@ -81,7 +81,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
             collection_name (str): Name of the collection
             model_class (Type[T]): Pydantic model class
             item (T): Pydantic model instance to insert or update
-            fields (Dict[str, str]): Fields that uniquely identify the document
+            keys (Dict[str, str]): Fields that uniquely identify the document
         Returns:
             ObjectId: The ID of the inserted or updated document
         """
