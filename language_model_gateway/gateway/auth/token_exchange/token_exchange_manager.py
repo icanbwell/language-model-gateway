@@ -272,43 +272,43 @@ class TokenExchangeManager:
             "Either id_token or access_token must be provided to store the token"
         )
         access_token_expires: datetime | None = (
-            await self.token_reader.get_expiration_from_token_async(token=access_token)
+            await self.token_reader.get_expires_from_token_async(token=access_token)
             if access_token
             else None
         )
         id_token_expires: datetime | None = (
-            await self.token_reader.get_expiration_from_token_async(token=id_token)
+            await self.token_reader.get_expires_from_token_async(token=id_token)
             if id_token
             else None
         )
         refresh_token_expires: datetime | None = (
-            await self.token_reader.get_expiration_from_token_async(token=refresh_token)
+            await self.token_reader.get_expires_from_token_async(token=refresh_token)
             if refresh_token
             else None
         )
         access_token_issued: datetime | None = (
-            await self.token_reader.get_issued_at_from_token_async(token=access_token)
+            await self.token_reader.get_issued_from_token_async(token=access_token)
             if access_token
             else None
         )
         id_token_issued: datetime | None = (
-            await self.token_reader.get_issued_at_from_token_async(token=id_token)
+            await self.token_reader.get_issued_from_token_async(token=id_token)
             if id_token
             else None
         )
         refresh_token_issued: datetime | None = (
-            await self.token_reader.get_issued_at_from_token_async(token=refresh_token)
+            await self.token_reader.get_issued_from_token_async(token=refresh_token)
             if refresh_token
             else None
         )
-        now: str = datetime.now(UTC).isoformat()
+        now: datetime = datetime.now(UTC)
 
         # Create a new token item if it does not exist
         if stored_token_item is None:
             stored_token_item = TokenItem(
                 _id=ObjectId(),
                 created=now,
-                updated=now,
+                updated=None,
                 issuer=issuer,
                 audience=audience,
                 email=email,
@@ -317,24 +317,14 @@ class TokenExchangeManager:
                 access_token=access_token,
                 id_token=id_token,
                 refresh_token=refresh_token,
-                access_token_expires=access_token_expires.isoformat()
+                access_token_expires=access_token_expires
                 if access_token_expires
                 else None,
-                id_token_expires=id_token_expires.isoformat()
-                if id_token_expires
-                else None,
-                refresh_token_expires=refresh_token_expires.isoformat()
-                if refresh_token_expires
-                else None,
-                access_token_issued=access_token_issued.isoformat()
-                if access_token_issued
-                else None,
-                id_token_issued=id_token_issued.isoformat()
-                if id_token_issued
-                else None,
-                refresh_token_issued=refresh_token_issued.isoformat()
-                if refresh_token_issued
-                else None,
+                id_token_expires=id_token_expires,
+                refresh_token_expires=refresh_token_expires,
+                access_token_issued=access_token_issued,
+                id_token_issued=id_token_issued,
+                refresh_token_issued=refresh_token_issued,
                 refreshed=None,
             )
         else:
@@ -343,24 +333,12 @@ class TokenExchangeManager:
             stored_token_item.access_token = access_token
             stored_token_item.id_token = id_token
             stored_token_item.refresh_token = refresh_token
-            stored_token_item.access_token_expires = (
-                access_token_expires.isoformat() if access_token_expires else None
-            )
-            stored_token_item.id_token_expires = (
-                id_token_expires.isoformat() if id_token_expires else None
-            )
-            stored_token_item.refresh_token_expires = (
-                refresh_token_expires.isoformat() if refresh_token_expires else None
-            )
-            stored_token_item.access_token_issued = (
-                access_token_issued.isoformat() if access_token_issued else None
-            )
-            stored_token_item.id_token_issued = (
-                id_token_issued.isoformat() if id_token_issued else None
-            )
-            stored_token_item.refresh_token_issued = (
-                refresh_token_issued.isoformat() if refresh_token_issued else None
-            )
+            stored_token_item.access_token_expires = access_token_expires
+            stored_token_item.id_token_expires = id_token_expires
+            stored_token_item.refresh_token_expires = refresh_token_expires
+            stored_token_item.access_token_issued = access_token_issued
+            stored_token_item.id_token_issued = id_token_issued
+            stored_token_item.refresh_token_issued = refresh_token_issued
             stored_token_item.refreshed = (
                 None  # since we are storing a new token, we set refreshed to None
             )

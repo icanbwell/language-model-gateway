@@ -212,6 +212,7 @@ class TokenReader:
                 f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token."
             ) from e
 
+    @cached(ttl=60 * 60)
     async def fetch_well_known_config_async(self) -> Dict[str, Any]:
         """
         Fetches the OpenID Connect discovery document and returns its contents as a dict.
@@ -272,7 +273,7 @@ class TokenReader:
             logger.error(f"Failed to extract subject from token: {e}")
             return None
 
-    async def get_expiration_from_token_async(
+    async def get_expires_from_token_async(
         self, token: str
     ) -> Optional[datetime.datetime]:
         """
@@ -331,7 +332,7 @@ class TokenReader:
             logger.error(f"Failed to extract audience from token: {e}")
             return None
 
-    async def get_issued_at_from_token_async(
+    async def get_issued_from_token_async(
         self, token: str
     ) -> Optional[datetime.datetime]:
         """
