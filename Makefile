@@ -104,7 +104,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Language Model Gateway: http://localhost:5050/auth/login
 
 .PHONY: down
-down: clean_database ## stops docker containers
+down: ## stops docker containers
 	docker compose down --remove-orphans
 
 .PHONY:update

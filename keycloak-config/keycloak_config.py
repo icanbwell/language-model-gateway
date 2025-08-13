@@ -92,7 +92,7 @@ def configure_keycloak() -> None:
             "attributes": {
                 "access.token.lifespan": 3600,
                 "id.token.lifespan": 3600,
-                "post.logout.redirect.uris": ["https://open-webui.localhost"],
+                "post.logout.redirect.uris": "https://open-webui.localhost",
             },
         }
         client2 = {

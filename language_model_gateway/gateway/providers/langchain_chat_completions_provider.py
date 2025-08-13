@@ -221,7 +221,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     )
                 else:
                     token_audience: str | None = token_claims.get("aud")
-                    if True:
+                    if token_audience not in tool_using_authentication.auth_audiences:
                         logger.debug(
                             f"Token audience found: {token_audience} for tool {tool_using_authentication.name}."
                         )
