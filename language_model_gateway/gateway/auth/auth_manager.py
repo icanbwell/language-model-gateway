@@ -1,5 +1,6 @@
 import logging
 import os
+import uuid
 from typing import Any, Dict, cast, List
 
 import httpx
@@ -135,6 +136,10 @@ class AuthManager:
         assert client is not None, f"Client for audience {audience} not found"
         state_content = {
             "audience": audience,
+            # include a unique request ID so we don't get cache for another request
+            # This will create a unique state for each request
+            # the callback will use this state to find the correct token
+            "request_id": uuid.uuid4().hex,
         }
         # convert state_content to a string
         state: str = AuthHelper.encode_state(state_content)

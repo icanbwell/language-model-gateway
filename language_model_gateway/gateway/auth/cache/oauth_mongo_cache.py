@@ -1,5 +1,6 @@
 import logging
 import os
+import traceback
 import uuid
 from typing import override
 
@@ -70,6 +71,7 @@ class OAuthMongoCache(OAuthCache):
         :param key: Unique identifier for the cache entry.
         """
         # check if the key exists in the repository
+        logger.debug(f" ====== Delete: {key} =====")
         cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
             model_class=CacheItem,
@@ -82,6 +84,7 @@ class OAuthMongoCache(OAuthCache):
         )
         if cache_item is not None and cache_item.id and not disable_delete:
             # delete the cache item if it exists
+            logger.debug(f" ====== Deleting {cache_item.id} =====")
             await self.repository.delete_by_id(
                 collection_name=self.collection_name,
                 document_id=cache_item.id,
@@ -96,12 +99,16 @@ class OAuthMongoCache(OAuthCache):
         :param default: Default value to return if the key is not found.
         :return: Retrieved value or None if not found or expired.
         """
+
         cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
             model_class=CacheItem,
             fields={
                 "key": key,
             },
+        )
+        logger.debug(
+            f" ====== For key {key} found {cache_item} default {default} ====="
         )
         return cache_item.value if cache_item is not None else default
 
@@ -114,6 +121,7 @@ class OAuthMongoCache(OAuthCache):
         :param value: Value to be stored.
         :param expires: Expiration time in seconds. Defaults to None (no expiration).
         """
+        logger.debug(f" ====== Set: {key} {value} =====")
         # first see if the key already exists
         existing_cache_item: CacheItem | None = await self.repository.find_by_fields(
             collection_name=self.collection_name,
@@ -123,6 +131,10 @@ class OAuthMongoCache(OAuthCache):
             },
         )
         if existing_cache_item is not None:
+            logger.debug(f" ====== Existing for key {key}: {existing_cache_item} =====")
+            # show call stack if the existing cache item is not None
+            stack = traceback.extract_stack()[:-1]  # last one would be full_stack()
+            stack_lines: str = "\n".join(traceback.format_list(stack))
             # if it exists, update the value
             existing_cache_item.value = value
             existing_cache_item_id: ObjectId = existing_cache_item.id
@@ -136,9 +148,10 @@ class OAuthMongoCache(OAuthCache):
                 f"Failed to update cache item with ID: {existing_cache_item_id} for key: {key}"
             )
             logger.debug(
-                f"Cache item updated with ID: {updated_cache_item.id} for key: {key} with value: {value}"
+                f"Cache item updated with ID: {updated_cache_item.id} for key: {key} with value: {value}.\n{stack_lines}"
             )
         else:
+            logger.debug(f" ====== Creating new cache item {key}: {value} =====")
             cache_item = CacheItem(_id=ObjectId(), key=key, value=value)
             new_object_id = await self.repository.insert(
                 collection_name=self.collection_name,

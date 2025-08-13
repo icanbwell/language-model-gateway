@@ -8,9 +8,15 @@ logger = logging.getLogger(__name__)
 
 class LogResponse(httpx.Response):
     async def aiter_bytes(self, *args: Any, **kwargs: Any) -> AsyncIterator[bytes]:
+        logger.debug(
+            f"====== Response: {self.request.method} {self.url} {self.status_code} ====="
+        )
         async for chunk in super().aiter_bytes(*args, **kwargs):
             logger.debug(chunk)
             yield chunk
+        logger.debug(
+            f"====== End Response: {self.request.method} {self.url} {self.status_code} ====="
+        )
 
 
 class LoggingTransport(httpx.AsyncBaseTransport):

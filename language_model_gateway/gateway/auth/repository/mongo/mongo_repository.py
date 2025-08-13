@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 logging.getLogger("pymongo.topology").setLevel(logging.WARNING)
 logging.getLogger("pymongo.serverSelection").setLevel(logging.WARNING)
 logging.getLogger("pymongo.connection").setLevel(logging.WARNING)
+logging.getLogger("pymongo.command").setLevel(logging.WARNING)
 
 
 class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):

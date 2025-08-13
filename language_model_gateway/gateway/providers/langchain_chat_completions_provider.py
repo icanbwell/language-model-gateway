@@ -227,7 +227,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         )
                         raise AuthorizationNeededException(
                             "Token provided in Authorization header has wrong audience:"
-                            + f" Found: {token_audience}, Expected: {tool_using_authentication.auth_audiences}"
+                            + f" Found: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}"
                             + " and we could not find a cached token for the tool."
                             + error_message
                         )
