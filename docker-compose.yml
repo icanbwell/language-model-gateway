@@ -46,7 +46,7 @@ services:
       # keycloak for local development
       AUTH_PROVIDER_NAME: "keycloak"
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      AUTH_DEFAULT_ISSUER: "bwell-client-id"
+      AUTH_DEFAULT_ISSUER: "http://keycloak:8080/realms/bwell-realm"
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
       AUTH_AUDIENCES: "bwell-client-id,bwell-client-id-3"

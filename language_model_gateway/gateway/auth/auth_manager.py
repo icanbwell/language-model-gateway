@@ -163,7 +163,7 @@ class AuthManager:
         state: str = AuthHelper.encode_state(state_content)
 
         logger.debug(
-            f"Creating authorization URL for audience {audience} with state {state}"
+            f"Creating authorization URL for audience {audience} with state {state_content} and encoded state {state}"
         )
 
         rv: Dict[str, Any] = await client.create_authorization_url(
@@ -239,12 +239,16 @@ class AuthManager:
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
         audience = state_decoded["audience"]
+        assert issuer is not None, (
+            "Issuer must be provided in the state for storing the token"
+        )
         stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
             collection_name=collection_name,
             model_class=TokenItem,
             fields={
                 "email": email,
                 "name": audience,
+                "issuer": issuer,
             },
         )
 
@@ -259,7 +263,7 @@ class AuthManager:
             # Create a new token item if it does not exist
             stored_token_item = TokenItem(
                 _id=ObjectId(),
-                issuer=state_decoded["issuer"],
+                issuer=issuer,
                 audience=audience,
                 email=email,
                 url=url,
