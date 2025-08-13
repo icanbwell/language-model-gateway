@@ -1,6 +1,6 @@
 import os
 import time
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import requests
 
@@ -77,6 +77,127 @@ def configure_keycloak() -> None:
         # Set current realm
         keycloak_admin.change_current_realm(realm_name)
 
+        # Define client scopes with protocol mappers
+        client_scopes: List[Dict[str, Any]] = [
+            {
+                "name": "offline_access",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "consent.screen.text": "${offlineAccessScopeConsentText}",
+                    "display.on.consent.screen": "true",
+                },
+                "description": "OpenID Connect built-in scope: offline_access",
+            },
+            {
+                "name": "openid",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "consent.screen.text": "",
+                    "display.on.consent.screen": "true",
+                    "gui.order": "",
+                    "include.in.token.scope": "false",
+                },
+                "description": "",
+            },
+            {
+                "name": "email",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "consent.screen.text": "",
+                    "display.on.consent.screen": "true",
+                    "gui.order": "",
+                    "include.in.token.scope": "false",
+                },
+                "description": "",
+                "protocolMappers": [
+                    {
+                        "name": "email",
+                        "protocol": "openid-connect",
+                        "protocolMapper": "oidc-usermodel-attribute-mapper",
+                        "consentRequired": False,
+                        "config": {
+                            "access.token.claim": "true",
+                            "aggregate.attrs": "false",
+                            "claim.name": "email",
+                            "id.token.claim": "true",
+                            "introspection.token.claim": "true",
+                            "jsonType.label": "String",
+                            "lightweight.claim": "false",
+                            "multivalued": "false",
+                            "user.attribute": "email",
+                            "userinfo.token.claim": "true",
+                        },
+                    }
+                ],
+            },
+            {
+                "name": "user/*.*",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "display.on.consent.screen": "true",
+                    "include.in.token.scope": "true",
+                },
+                "description": "User scope",
+                "protocolMappers": [
+                    {
+                        "name": "user-attribute-mapper",
+                        "protocol": "openid-connect",
+                        "protocolMapper": "oidc-usermodel-attribute-mapper",
+                        "consentRequired": False,
+                        "config": {
+                            "access.token.claim": "true",
+                            "claim.name": "user-attribute",
+                            "id.token.claim": "true",
+                            "jsonType.label": "String",
+                            "user.attribute": "user-attribute",
+                            "userinfo.token.claim": "true",
+                        },
+                    }
+                ],
+            },
+            {
+                "name": "access/*.*",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "display.on.consent.screen": "true",
+                    "include.in.token.scope": "true",
+                },
+                "description": "Access scope",
+                "protocolMappers": [
+                    {
+                        "name": "access-attribute-mapper",
+                        "protocol": "openid-connect",
+                        "protocolMapper": "oidc-usermodel-attribute-mapper",
+                        "consentRequired": False,
+                        "config": {
+                            "access.token.claim": "true",
+                            "claim.name": "access-attribute",
+                            "id.token.claim": "true",
+                            "jsonType.label": "String",
+                            "user.attribute": "access-attribute",
+                            "userinfo.token.claim": "true",
+                        },
+                    }
+                ],
+            },
+        ]
+
+        # Add or update client scopes in Keycloak
+        for scope in client_scopes:
+            try:
+                existing_scopes = keycloak_admin.get_client_scopes()
+                existing_scope = next(
+                    (s for s in existing_scopes if s["name"] == scope["name"]), None
+                )
+                if existing_scope:
+                    print(f"Updating existing client scope: {scope['name']}")
+                    keycloak_admin.update_client_scope(existing_scope["id"], scope)
+                else:
+                    print(f"Creating new client scope: {scope['name']}")
+                    keycloak_admin.create_client_scope(scope)
+            except Exception as e:
+                print(f"Error creating/updating client scope {scope['name']}: {e}")
+
         # Client Configuration
         # https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation
         client1 = {
@@ -93,20 +214,128 @@ def configure_keycloak() -> None:
                 "id.token.lifespan": 3600,
                 "post.logout.redirect.uris": "https://open-webui.localhost",
             },
+            "defaultClientScopes": [
+                "web-origins",
+                "roles",
+                "profile",
+                "email",
+                "openid",
+            ],
+            "optionalClientScopes": ["user/*.*", "access/*.*"],
             "protocolMappers": [
                 {
-                    "name": "audience",
+                    "name": "cognito-groups-mapper",
                     "protocol": "openid-connect",
-                    "protocolMapper": "oidc-audience-mapper",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
                     "consentRequired": False,
                     "config": {
-                        "included.client.audience": os.getenv(
-                            "CLIENT_AUDIENCE", "bwell-client-id"
-                        ),
-                        "id.token.claim": "true",
                         "access.token.claim": "true",
+                        "claim.name": "cognito:groups",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "multivalued": "true",
+                        "user.attribute": "cognito:groups",
+                        "userinfo.token.claim": "true",
                     },
-                }
+                },
+                {
+                    "name": "client-person-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "clientFhirPersonId",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "clientFhirPersonId",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "client-patient-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "clientFhirPatientId",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "clientFhirPatientId",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "bwell-person-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "bwellFhirPersonId",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "bwellFhirPersonId",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "bwell-patient-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "bwellFhirPatientId",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "bwellFhirPatientId",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "bwell-token-use-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "token_use",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "token_use",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "bwell-username-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "username",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "username",
+                        "userinfo.token.claim": "true",
+                    },
+                },
+                {
+                    "name": "custom-scope-mapper",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-usermodel-attribute-mapper",
+                    "consentRequired": False,
+                    "config": {
+                        "access.token.claim": "true",
+                        "claim.name": "custom:scope",
+                        "id.token.claim": "true",
+                        "jsonType.label": "String",
+                        "user.attribute": "custom:scope",
+                        "userinfo.token.claim": "true",
+                    },
+                },
             ],
         }
         client2 = {
