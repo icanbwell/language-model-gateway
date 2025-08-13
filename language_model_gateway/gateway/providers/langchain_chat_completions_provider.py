@@ -235,6 +235,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         logger.debug(
                             f"Token is valid for tool {tool_using_authentication.name}."
                         )
+            except AuthorizationNeededException:
+                # just re-raise the exception with the original message
+                raise
             except Exception as e:
                 logger.debug(
                     f"Error verifying token for tool {tool_using_authentication.name}: {e}"
