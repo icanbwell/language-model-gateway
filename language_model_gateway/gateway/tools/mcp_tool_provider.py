@@ -1,3 +1,4 @@
+import httpx
 import logging
 import os
 from typing import Dict, List
@@ -14,6 +15,9 @@ from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_w
 )
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
+)
+from language_model_gateway.gateway.utilities.logger.logging_transport import (
+    LoggingTransport,
 )
 
 logger = logging.getLogger(__name__)
@@ -51,6 +55,25 @@ class MCPToolProvider:
     async def load_async(self) -> None:
         pass
 
+    @staticmethod
+    def get_httpx_async_client(
+        headers: dict[str, str] | None = None,
+        timeout: httpx.Timeout | None = None,
+        auth: httpx.Auth | None = None,
+    ) -> httpx.AsyncClient:
+        """
+        Get an async HTTP client for making requests to MCP tools.
+
+        Returns:
+            An instance of httpx.AsyncClient configured for MCP tool requests.
+        """
+        return httpx.AsyncClient(
+            auth=auth,
+            headers=headers,
+            timeout=timeout,
+            transport=LoggingTransport(httpx.AsyncHTTPTransport()),
+        )
+
     async def get_tools_by_url_async(
         self, *, tool: AgentConfig, headers: Dict[str, str]
     ) -> List[BaseTool]:
@@ -64,9 +87,7 @@ class MCPToolProvider:
             mcp_tool_config: StreamableHttpConnection = {
                 "url": url,
                 "transport": "streamable_http",
-                # specify the http client factory to use the headers
-                # httpx_client_factory
-                # and/or bearer "auth"# auth: NotRequired[httpx.Auth]
+                "httpx_client_factory": self.get_httpx_async_client,
             }
             if tool.headers:
                 # replace the strings with os.path.expandvars # to allow for environment variable expansion

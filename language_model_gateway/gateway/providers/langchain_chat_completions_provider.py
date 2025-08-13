@@ -188,7 +188,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             logger.debug("AuthInformation doesn't have redirect_uri.")
             return
 
-        tool_first_audience = tool_using_authentication.auth_audiences[0]
+        tool_first_audience: str = tool_using_authentication.auth_audiences[0]
         tool_first_issuer: str | None = (
             tool_using_authentication.issuers[0]
             if tool_using_authentication.issuers
