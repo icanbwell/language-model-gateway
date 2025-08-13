@@ -14,6 +14,7 @@ from respx import MockRouter
 from language_model_gateway.gateway.api import app, create_app
 from urllib.parse import urlparse, parse_qs
 
+from language_model_gateway.gateway.auth.auth_helper import AuthHelper
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
@@ -39,7 +40,7 @@ def test_login_route() -> None:
 )
 def test_callback_route() -> None:
     well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
-    client_id = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
+    client_id = os.getenv("AUTH_CLIENT_ID_bwell-client-id-3")
     redirect_uri = os.getenv("AUTH_REDIRECT_URI")
 
     mock: MockRouter | None = None
@@ -100,7 +101,9 @@ def test_callback_route() -> None:
             "AUTH_REDIRECT_URI environment variable must be set"
         )
         # first call to /login to set up the session
-        response = client.get("/auth/login", follow_redirects=False)
+        response = client.get(
+            f"/auth/login?audience={client_id}", follow_redirects=False
+        )
         assert response.status_code in (302, 307)
         assert "location" in response.headers
         location = response.headers["location"]
@@ -179,7 +182,7 @@ def test_callback_route() -> None:
             follow_redirects=False,
         )
         assert response.status_code == 200, (
-            f"Unexpected status code: {response.status_code}"
+            f"Unexpected status code: {response.status_code} {response.text}"
         )
         assert "application/json" in response.headers.get("content-type", "")
         # Check if the response contains JSON data
@@ -189,3 +192,18 @@ def test_callback_route() -> None:
     finally:
         if mock is not None:
             mock.__exit__(None, None, None)
+
+
+@pytest.mark.skip(reason="This test is for debugging purposes only")
+def test_callback_url() -> None:
+    state1 = AuthHelper.decode_state("eyJhdWRpZW5jZSI6ICJid2VsbC1jbGllbnQtaWQifQ")
+    print(state1)
+    state2 = AuthHelper.decode_state("eyJhdWRpZW5jZSI6ICJid2VsbC1jbGllbnQtaWQtMyJ9")
+    print(state2)
+    url = ""
+    client = TestClient(create_app())
+    response = client.get(
+        url,
+        follow_redirects=False,
+    )
+    print(response.url)

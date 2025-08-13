@@ -19,7 +19,7 @@ class LoggingTransport(httpx.AsyncBaseTransport):
 
     async def handle_async_request(self, request: httpx.Request) -> LogResponse:
         # log the request
-        logger.debug(f"Request: {request.method} {request.url}")
+        logger.debug(f" ====== Request: {request.method} {request.url} =====")
         logger.debug(f"Headers: {request.headers}")
         if request.content:
             logger.debug(f"Content: {request.content.decode('utf-8', errors='ignore')}")
