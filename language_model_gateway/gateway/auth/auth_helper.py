@@ -158,7 +158,7 @@ class AuthHelper:
             raise
 
     @staticmethod
-    def encode_state(content: dict[str, str]) -> str:
+    def encode_state(content: dict[str, str | None]) -> str:
         """
         Encode the state content into a base64url encoded string.
 

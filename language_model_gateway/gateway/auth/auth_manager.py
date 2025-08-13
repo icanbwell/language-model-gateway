@@ -1,6 +1,7 @@
 import logging
 import os
 import uuid
+from datetime import datetime
 from typing import Any, Dict, cast, List
 
 import httpx
@@ -21,6 +22,7 @@ from language_model_gateway.gateway.auth.repository.base_repository import (
 from language_model_gateway.gateway.auth.repository.repository_factory import (
     RepositoryFactory,
 )
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
@@ -39,7 +41,9 @@ class AuthManager:
     to create authorization URLs and handle callback responses.
     """
 
-    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+    def __init__(
+        self, *, environment_variables: EnvironmentVariables, token_reader: TokenReader
+    ) -> None:
         """
         Initialize the AuthManager with the necessary configuration for OIDC PKCE.
         It sets up the OAuth cache, reads environment variables for the OIDC provider,
@@ -61,6 +65,10 @@ class AuthManager:
             "environment_variables must be an instance of EnvironmentVariables"
         )
 
+        self.token_reader: TokenReader = token_reader
+        assert self.token_reader is not None
+        assert isinstance(self.token_reader, TokenReader)
+
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
             OAuthMemoryCache()
@@ -68,7 +76,7 @@ class AuthManager:
             else OAuthMongoCache(environment_variables=environment_variables)
         )
 
-        logger.info(
+        logger.debug(
             f"Initializing AuthManager with cache type {type(self.cache)} cache id: {self.cache.id}"
         )
         # OIDC PKCE setup
@@ -95,19 +103,25 @@ class AuthManager:
         self.auth_audiences: List[str] = environment_variables.auth_audiences or []
         for audience in self.auth_audiences:
             # read client_id and client_secret from the environment variables
-            auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{audience}")
+            auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID-{audience}")
             assert auth_client_id is not None, (
-                f"AUTH_CLIENT_ID_{audience} environment variable must be set"
+                f"AUTH_CLIENT_ID-{audience} environment variable must be set"
             )
-            auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET_{audience}")
+            auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET-{audience}")
             assert auth_client_secret is not None, (
-                f"AUTH_CLIENT_SECRET_{audience} environment variable must be set"
+                f"AUTH_CLIENT_SECRET-{audience} environment variable must be set"
+            )
+            auth_well_known_uri: str | None = os.getenv(
+                f"AUTH_WELL_KNOWN_URI-{audience}"
+            )
+            assert auth_well_known_uri is not None, (
+                f"AUTH_WELL_KNOWN_URI-{audience} environment variable must be set"
             )
             self.oauth.register(
                 name=audience,
                 client_id=auth_client_id,
                 client_secret=auth_client_secret,
-                server_metadata_url=self.well_known_url,
+                server_metadata_url=auth_well_known_uri,
                 client_kwargs={
                     "scope": "openid email",
                     "code_challenge_method": "S256",
@@ -116,7 +130,7 @@ class AuthManager:
             )
 
     async def create_authorization_url(
-        self, *, redirect_uri: str, audience: str
+        self, *, redirect_uri: str, audience: str, issuer: str, url: str | None
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
@@ -128,14 +142,18 @@ class AuthManager:
             redirect_uri (str): The redirect URI to which the OIDC provider will send the user
                 after authentication.
             audience (str): The audience we need to get a token for.
+            issuer (str): The issuer of the OIDC provider, used to validate the token.
+            url (str): The URL of the tool that has requested this.
         Returns:
             str: The authorization URL to redirect the user to for authentication.
         """
         # default to first audience
         client: StarletteOAuth2App = self.oauth.create_client(audience)
         assert client is not None, f"Client for audience {audience} not found"
-        state_content = {
+        state_content: Dict[str, str | None] = {
             "audience": audience,
+            "issuer": issuer,
+            "url": url,  # the URL of the tool that has requested this
             # include a unique request ID so we don't get cache for another request
             # This will create a unique state for each request
             # the callback will use this state to find the correct token
@@ -173,10 +191,14 @@ class AuthManager:
         code: str | None = request.query_params.get("code")
         assert state is not None, "State must be provided in the callback"
         state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
-        logger.info(f"State decoded: {state_decoded}")
-        logger.info(f"Code received: {code}")
+        logger.debug(f"State decoded: {state_decoded}")
+        logger.debug(f"Code received: {code}")
         audience: str | None = state_decoded.get("audience")
-        logger.info(f"Audience retrieved: {audience}")
+        logger.debug(f"Audience retrieved: {audience}")
+        issuer: str | None = state_decoded.get("issuer")
+        logger.debug(f"Issuer retrieved: {issuer}")
+        url: str | None = state_decoded.get("url")
+        logger.debug(f"URL retrieved: {url}")
         client: StarletteOAuth2App = self.oauth.create_client(audience)
         token = await client.authorize_access_token(request)
         access_token = token.get("access_token")
@@ -185,7 +207,7 @@ class AuthManager:
             "access_token was not found in the token response"
         )
         email: str = token.get("userinfo", {}).get("email")
-        logger.info(f"Email received: {email}")
+        logger.debug(f"Email received: {email}")
         # auth_token_exchange_client_id = os.getenv("AUTH_TOKEN_EXCHANGE_CLIENT_ID")
         # assert auth_token_exchange_client_id is not None, (
         #     "AUTH_TOKEN_EXCHANGE_CLIENT_ID environment variable must be set"
@@ -195,6 +217,7 @@ class AuthManager:
             "state": state_decoded,
             "code": code,
             "email": email,
+            "issuer": issuer,
         }
 
         connection_string = os.getenv("MONGO_URL")
@@ -224,17 +247,26 @@ class AuthManager:
                 "name": audience,
             },
         )
+
+        valid_token: str = id_token or access_token
+        expires_at: (
+            datetime | None
+        ) = await self.token_reader.get_expiration_from_token_async(token=valid_token)
+        created_at: (
+            datetime | None
+        ) = await self.token_reader.get_created_at_from_token_async(token=valid_token)
         if stored_token_item is None:
             # Create a new token item if it does not exist
             stored_token_item = TokenItem(
                 _id=ObjectId(),
+                issuer=state_decoded["issuer"],
                 audience=audience,
                 email=email,
-                url=None,
+                url=url,
                 access_token=access_token,
                 id_token=id_token,
-                expires_at=None,
-                created_at=None,
+                expires_at=expires_at.isoformat() if expires_at else None,
+                created_at=created_at.isoformat() if created_at else None,
             )
             await mongo_repository.insert(
                 collection_name=collection_name,

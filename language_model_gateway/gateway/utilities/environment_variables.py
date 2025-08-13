@@ -80,3 +80,7 @@ class EnvironmentVariables:
     def auth_audiences(self) -> Optional[list[str]]:
         auth_audiences: str | None = os.environ.get("AUTH_AUDIENCES")
         return auth_audiences.split(",") if auth_audiences else None
+
+    @property
+    def auth_default_issuer(self) -> Optional[str]:
+        return os.environ.get("AUTH_DEFAULT_ISSUER")

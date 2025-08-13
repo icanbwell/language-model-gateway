@@ -1,3 +1,5 @@
+from typing import List
+
 from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
@@ -40,8 +42,8 @@ class TokenExchangeManager:
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
 
-    async def get_token_for_auth_provider(
-        self, *, auth_provider_name: str, email: str
+    async def get_token_for_auth_provider_async(
+        self, *, audience: str, email: str
     ) -> TokenItem | None:
         """
         Get the token for the OIDC provider.
@@ -58,13 +60,13 @@ class TokenExchangeManager:
             model_class=TokenItem,
             fields={
                 "email": email,
-                "name": auth_provider_name,
+                "audience": audience,
             },
         )
         return token
 
-    async def store_token(
-        self, *, token: TokenItem, email: str, auth_provider_name: str
+    async def store_token_async(
+        self, *, token: TokenItem, email: str, audience: str
     ) -> None:
         """
         Store the token in the cache or MongoDB.
@@ -73,7 +75,7 @@ class TokenExchangeManager:
         Args:
             token (Token): The token to store.
             email (str): The email associated with the token.
-            auth_provider_name (str): The name of the OIDC provider.
+            audience (str): The name of the OIDC provider.
         """
         await self.token_repository.insert_or_update(
             collection_name=self.token_collection_name,
@@ -81,41 +83,33 @@ class TokenExchangeManager:
             item=token,
             fields={
                 "email": email,
-                "name": auth_provider_name,
+                "name": audience,
             },
         )
 
-    async def has_valid_token_for_auth_provider(
-        self, *, auth_provider_name: str, email: str, bearer_token: str
+    async def has_valid_token_for_auth_provider_async(
+        self, *, audiences: List[str], email: str
     ) -> bool:
         """
         Check if a valid token exists for the given OIDC provider and email.
 
         Args:
-            auth_provider_name (str): The name of the OIDC provider.
+            audiences (List[str]): The OIDC audiences to check.
             email (str): The email associated with the token.
-            bearer_token (str): The bearer token to verify.
 
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
         # check if the bearer token has audience same as the auth provider name
-        if not bearer_token:
-            return False
-        if not auth_provider_name:
-            return False
+        assert audiences is not None
         if not email:
             return False
-        # get the token for the auth provider and email
-        # and check if it is valid
-        if not bearer_token.startswith("Bearer "):
-            return False
-        # extract the token from the bearer token
-        token_value = bearer_token[len("Bearer ") :]
-        if not token_value:
-            return False
 
-        token: TokenItem | None = await self.get_token_for_auth_provider(
-            auth_provider_name=auth_provider_name, email=email
-        )
-        return token is not None and token.is_valid()
+        for audience in audiences:
+            token: TokenItem | None = await self.get_token_for_auth_provider_async(
+                audience=audience, email=email
+            )
+            if token and token.is_valid():
+                return True
+
+        return False

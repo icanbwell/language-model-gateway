@@ -14,6 +14,9 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
     AuthorizationNeededException,
 )
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -26,6 +29,9 @@ from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.auth.token_reader import TokenReader
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +44,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
-        token_verifier: TokenReader,
+        token_reader: TokenReader,
         auth_manager: AuthManager,
+        token_exchange_manager: TokenExchangeManager,
+        environment_variables: EnvironmentVariables,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -59,13 +67,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         assert self.mcp_tool_provider is not None
         assert isinstance(self.mcp_tool_provider, MCPToolProvider)
 
-        self.token_verifier: TokenReader = token_verifier
-        assert self.token_verifier is not None
-        assert isinstance(self.token_verifier, TokenReader)
+        self.token_reader: TokenReader = token_reader
+        assert self.token_reader is not None
+        assert isinstance(self.token_reader, TokenReader)
 
         self.auth_manager: AuthManager = auth_manager
         assert self.auth_manager is not None
         assert isinstance(self.auth_manager, AuthManager)
+
+        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
+        assert self.token_exchange_manager is not None
+        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
+
+        self.environment_variables: EnvironmentVariables = environment_variables
+        assert self.environment_variables is not None
+        assert isinstance(self.environment_variables, EnvironmentVariables)
 
     async def chat_completions(
         self,
@@ -176,10 +192,20 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             return
 
         tool_first_audience = tool_using_authentication.auth_audiences[0]
+        tool_first_issuer: str | None = (
+            tool_using_authentication.issuers[0]
+            if tool_using_authentication.issuers
+            else self.environment_variables.auth_default_issuer
+        )
+        assert tool_first_issuer, (
+            "Tool using authentication must have at least one issuer or use the default issuer."
+        )
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
+                issuer=tool_first_issuer,
+                url=tool_using_authentication.url,
             )
             if tool_using_authentication
             else None
@@ -197,7 +223,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 + error_message
             )
         else:  # auth_header is present
-            token: str | None = self.token_verifier.extract_token(auth_header)
+            token: str | None = self.token_reader.extract_token(auth_header)
             if not token:
                 logger.debug(
                     f"No token found in Authorization header for tool {tool_using_authentication.name}."
@@ -210,7 +236,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             try:
                 token_claims: Dict[
                     str, Any
-                ] = await self.token_verifier.verify_token_async(token=token)
+                ] = await self.token_reader.verify_token_async(token=token)
                 if not token_claims:
                     logger.debug(
                         f"Token claims are empty for tool {tool_using_authentication.name}."
@@ -221,16 +247,32 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     )
                 else:
                     token_audience: str | None = token_claims.get("aud")
+                    # check if the token audience matches the tool's expected audiences
                     if token_audience not in tool_using_authentication.auth_audiences:
-                        logger.debug(
-                            f"Token audience found: {token_audience} for tool {tool_using_authentication.name}."
+                        # see if we have a token for this audience and email in the cache
+                        email: (
+                            str | None
+                        ) = await self.token_reader.get_subject_from_token_async(token)
+                        assert email, (
+                            "Token must contain a subject (email or sub) claim."
                         )
-                        raise AuthorizationNeededException(
-                            "Token provided in Authorization header has wrong audience:"
-                            + f" Found: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}"
-                            + " and we could not find a cached token for the tool."
-                            + error_message
-                        )
+                        if await self.token_exchange_manager.has_valid_token_for_auth_provider_async(
+                            audiences=tool_using_authentication.auth_audiences,
+                            email=email,
+                        ):
+                            logger.debug(
+                                f"Found Token in cache for tool {tool_using_authentication.name}."
+                            )
+                        else:
+                            logger.debug(
+                                f"Token audience found: {token_audience} for tool {tool_using_authentication.name}."
+                            )
+                            raise AuthorizationNeededException(
+                                "Token provided in Authorization header has wrong audience:"
+                                + f" Found: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}"
+                                + " and we could not find a cached token for the tool."
+                                + error_message
+                            )
                     else:  # token is valid
                         logger.debug(
                             f"Token is valid for tool {tool_using_authentication.name}."

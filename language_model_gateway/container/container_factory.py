@@ -4,6 +4,9 @@ import os
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
@@ -211,8 +214,10 @@ class ContainerFactory:
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
-                token_verifier=c.resolve(TokenReader),
+                token_reader=c.resolve(TokenReader),
                 auth_manager=c.resolve(AuthManager),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                environment_variables=c.resolve(EnvironmentVariables),
             ),
         )
 
@@ -250,6 +255,14 @@ class ContainerFactory:
             AuthManager,
             lambda c: AuthManager(
                 environment_variables=c.resolve(EnvironmentVariables),
+                token_reader=c.resolve(TokenReader),
+            ),
+        )
+
+        container.register(
+            TokenExchangeManager,
+            lambda c: TokenExchangeManager(
+                environment_variables=c.resolve(EnvironmentVariables)
             ),
         )
         logger.info("DI container initialized")

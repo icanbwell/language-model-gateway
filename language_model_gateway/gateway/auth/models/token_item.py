@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 class TokenItem(BaseDbModel):
+    issuer: str = Field()
     audience: str = Field()
     email: str = Field()
     url: Optional[str] = Field(None)

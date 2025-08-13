@@ -20,6 +20,10 @@ logger = logging.getLogger(__name__)
 
 
 class TokenReader:
+    """
+    TokenReader is a utility class for reading and verifying JWT tokens using JWKS (JSON Web Key Set).
+    """
+
     def __init__(
         self,
         *,
@@ -29,6 +33,15 @@ class TokenReader:
         audience: Optional[str] = None,
         algorithms: Optional[list[str]] = None,
     ):
+        """
+        Initializes the TokenReader with the JWKS URI or Well-Known URI, issuer, audience, and algorithms.
+        Args:
+            jwks_uri (Optional[str]): The URI to fetch the JWKS from.
+            well_known_uri (Optional[str]): The URI to fetch the OpenID Connect discovery document.
+            issuer (Optional[str]): The expected issuer of the JWT.
+            audience (Optional[str]): The expected audience of the JWT.
+            algorithms (Optional[list[str]]): The list of algorithms to use for verifying the JWT.
+        """
         assert jwks_uri or well_known_uri, (
             "Either JWKS URI or Well-Known URI must be provided"
         )
@@ -41,6 +54,11 @@ class TokenReader:
 
     @cached(ttl=60 * 60)
     async def fetch_jwks_async(self) -> None:
+        """
+        Fetches the JWKS from the provided URI or from the well-known OpenID Connect configuration.
+        This method will fetch the JWKS and store it in the `self.jwks` attribute for later use.
+
+        """
         # if we don't have a JWKS URI, try to fetch it from the well-known configuration
         if not self.jwks_uri:
             if not self.well_known_uri:
@@ -66,6 +84,13 @@ class TokenReader:
 
     @staticmethod
     def extract_token(authorization_header: str | None) -> Optional[str]:
+        """
+        Extracts the JWT token from the Authorization header.
+        Args:
+            authorization_header (str | None): The Authorization header string.
+        Returns:
+            Optional[str]: The extracted JWT token if present, otherwise None.
+        """
         if not authorization_header:
             return None
         parts = authorization_header.split()
@@ -175,3 +200,103 @@ class TokenReader:
         if not jwks_uri or not issuer:
             raise ValueError("jwks_uri or issuer not found in well-known configuration")
         return jwks_uri, issuer
+
+    async def get_subject_from_token_async(self, token: str) -> Optional[str]:
+        """
+        Extracts the 'sub' (subject) claim from the JWT token.
+        Args:
+            token (str): The JWT token string.
+        Returns:
+            Optional[str]: The subject claim if present, otherwise None.
+        """
+        assert token, "Token must not be empty"
+        await self.fetch_jwks_async()
+        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        try:
+            claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
+            return claims.get("email") or claims.get("sub")
+        except Exception as e:
+            logger.error(f"Failed to extract subject from token: {e}")
+            return None
+
+    async def get_expiration_from_token_async(
+        self, token: str
+    ) -> Optional[datetime.datetime]:
+        """
+        Extracts the 'exp' (expiration) claim from the JWT token.
+        Args:
+            token (str): The JWT token string.
+        Returns:
+            Optional[datetime.datetime]: The expiration time as a datetime object if present, otherwise None.
+        """
+        assert token, "Token must not be empty"
+        await self.fetch_jwks_async()
+        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        try:
+            claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
+            exp = claims.get("exp")
+            if exp:
+                return datetime.datetime.fromtimestamp(exp, tz=ZoneInfo("UTC"))
+            return None
+        except Exception as e:
+            logger.error(f"Failed to extract expiration from token: {e}")
+            return None
+
+    async def get_issuer_from_token_async(self, token: str) -> Optional[str]:
+        """
+        Extracts the 'iss' (issuer) claim from the JWT token.
+        Args:
+            token (str): The JWT token string.
+        Returns:
+            Optional[str]: The issuer claim if present, otherwise None.
+        """
+        assert token, "Token must not be empty"
+        await self.fetch_jwks_async()
+        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        try:
+            claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
+            return claims.get("iss")
+        except Exception as e:
+            logger.error(f"Failed to extract issuer from token: {e}")
+            return None
+
+    async def get_audience_from_token_async(self, token: str) -> Optional[str]:
+        """
+        Extracts the 'aud' (audience) claim from the JWT token.
+        Args:
+            token (str): The JWT token string.
+        Returns:
+            Optional[str]: The audience claim if present, otherwise None.
+        """
+        assert token, "Token must not be empty"
+        await self.fetch_jwks_async()
+        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        try:
+            claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
+            return claims.get("aud")
+        except Exception as e:
+            logger.error(f"Failed to extract audience from token: {e}")
+            return None
+
+    async def get_created_at_from_token_async(
+        self, token: str
+    ) -> Optional[datetime.datetime]:
+        """
+        Extracts the 'iat' (issued at) claim from the JWT token.
+        Args:
+            token (str): The JWT token string.
+        Returns:
+            Optional[datetime.datetime]: The issued at time as a datetime object if present, otherwise None.
+        """
+        assert token, "Token must not be empty"
+        await self.fetch_jwks_async()
+        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        try:
+            claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
+            iat = claims.get("iat")
+            if iat:
+                return datetime.datetime.fromtimestamp(iat, tz=ZoneInfo("UTC"))
+            return None
+        except Exception as e:
+            logger.error(f"Failed to extract created at from token: {e}")
+            return None

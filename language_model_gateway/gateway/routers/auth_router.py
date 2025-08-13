@@ -57,9 +57,15 @@ class AuthRouter:
             if audience is None:
                 audience = os.getenv("AUTH_CLIENT_ID_bwell-client-id")
             assert audience is not None
+            issuer = os.getenv(f"AUTH_ISSUER-{audience}")
+            assert issuer is not None, (
+                f"AUTH_ISSUER-{audience} environment variable must be set"
+            )
             url = await auth_manager.create_authorization_url(
                 redirect_uri=str(redirect_uri1),
                 audience=audience,
+                issuer=issuer,
+                url=str(request.url),
             )
 
             return RedirectResponse(url, status_code=302)
