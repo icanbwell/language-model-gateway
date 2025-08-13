@@ -3,15 +3,22 @@ import logging
 import os
 from typing import Dict, List
 
+from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
+)
+from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+    McpToolUnauthorizedException,
 )
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
@@ -142,10 +149,26 @@ class MCPToolProvider:
                 tools = [t for t in tools if t.name in tool_names]
             self.tools_by_mcp_url[url] = tools
             return tools
+        except* HTTPStatusError as e:
+            url = tool.url if tool.url else "unknown"
+            logger.error(
+                f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
+            )
+            raise AuthorizationNeededException(
+                f"Authorization needed for MCP tools at {url}. Please provide a valid token in the Authorization header."
+            ) from e
+        except* McpToolUnauthorizedException as e:
+            url = tool.url if tool.url else "unknown"
+            logger.error(
+                f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
+            )
+            raise AuthorizationNeededException(
+                f"Authorization needed for MCP tools at {url}. Please provide a valid token in the Authorization header."
+            ) from e
         except* Exception as e:
             url = tool.url if tool.url else "unknown"
             logger.error(
-                f"get_tools_by_url_async Failed to load MCP tools from {url}: {type(e)} {e}"
+                f"get_tools_by_url_async Failed to load MCP tools from {url}: {type(e.exceptions[0])} {e}"
             )
             raise e
 

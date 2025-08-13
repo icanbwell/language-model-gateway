@@ -153,8 +153,10 @@ class TokenExchangeManager:
                     "Invalid Authorization header format. Expected 'Bearer <token>'"
                     + error_message
                 )
-            # verify the token
             try:
+                # verify the token
+                await self.token_reader.verify_token_async(token=token)
+                # get the audience from the token
                 token_audience: (
                     str | None
                 ) = await self.token_reader.get_audience_from_token_async(token=token)

@@ -27,6 +27,9 @@ class LoggingTransport(httpx.AsyncBaseTransport):
         # log the request
         logger.debug(f" ====== Request: {request.method} {request.url} =====")
         logger.debug(f"Headers: {request.headers}")
+        # Log the actual Authorization header value if present
+        if "authorization" in request.headers:
+            logger.debug(f"Authorization header: {request.headers['authorization']}")
         if request.content:
             logger.debug(f"Content: {request.content.decode('utf-8', errors='ignore')}")
 
