@@ -331,7 +331,7 @@ class TokenReader:
             logger.error(f"Failed to extract audience from token: {e}")
             return None
 
-    async def get_created_at_from_token_async(
+    async def get_issued_at_from_token_async(
         self, token: str
     ) -> Optional[datetime.datetime]:
         """

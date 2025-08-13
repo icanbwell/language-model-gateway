@@ -198,21 +198,21 @@ class AuthManager:
         logger.debug(f"URL retrieved: {url}")
         client: StarletteOAuth2App = self.oauth.create_client(audience)
         token = await client.authorize_access_token(request)
-        access_token = token.get("access_token")
-        id_token = token.get("id_token")
+        access_token: str | None = token.get("access_token")
+        id_token: str | None = token.get("id_token")
+        refresh_token: str | None = token.get("refresh_token")
         assert access_token is not None, (
             "access_token was not found in the token response"
         )
         email: str = token.get("userinfo", {}).get("email")
+        subject: str = token.get("userinfo", {}).get("sub")
         logger.debug(f"Email received: {email}")
-        # auth_token_exchange_client_id = os.getenv("AUTH_TOKEN_EXCHANGE_CLIENT_ID")
-        # assert auth_token_exchange_client_id is not None, (
-        #     "AUTH_TOKEN_EXCHANGE_CLIENT_ID environment variable must be set"
-        # )
+        logger.debug(f"Subject received: {subject}")
         content = {
             "token": token,
             "state": state_decoded,
             "code": code,
+            "subject": subject,
             "email": email,
             "issuer": issuer,
         }
@@ -221,7 +221,9 @@ class AuthManager:
         await self.token_exchange_manager.save_token_async(
             access_token=access_token,
             email=email,
+            subject=subject,
             id_token=id_token,
+            refresh_token=refresh_token,
             issuer=issuer,
             audience=audience,
             url=url,
@@ -244,7 +246,6 @@ class AuthManager:
                 if id_token
                 else None
             )
-            refresh_token: str | None = token.get("refresh_token")
             refresh_token_decoded: Dict[str, Any] | None = (
                 await self.token_reader.decode_token_async(
                     token=refresh_token.strip("\n"),

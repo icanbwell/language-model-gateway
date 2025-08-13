@@ -363,18 +363,20 @@ def configure_keycloak() -> None:
             "webOrigins": ["*"],
             "protocolMappers": [
                 {
-                    "name": "audience",
+                    "name": "aud-hardcoded-client1",
                     "protocol": "openid-connect",
-                    "protocolMapper": "oidc-audience-mapper",
+                    "protocolMapper": "oidc-hardcoded-claim-mapper",
                     "consentRequired": False,
                     "config": {
-                        "included.client.audience": os.getenv(
+                        "access.token.claim": "true",
+                        "id.token.claim": "true",
+                        "claim.value": os.getenv(
                             "CLIENT_AUDIENCE_2", "bwell-client-id-2"
                         ),
-                        "id.token.claim": "true",
-                        "access.token.claim": "true",
+                        "claim.name": "aud",
+                        "jsonType.label": "String",
                     },
-                }
+                },
             ],
         }
         client3 = {
@@ -388,18 +390,20 @@ def configure_keycloak() -> None:
             "webOrigins": ["*"],
             "protocolMappers": [
                 {
-                    "name": "audience",
+                    "name": "aud-hardcoded-client1",
                     "protocol": "openid-connect",
-                    "protocolMapper": "oidc-audience-mapper",
+                    "protocolMapper": "oidc-hardcoded-claim-mapper",
                     "consentRequired": False,
                     "config": {
-                        "included.client.audience": os.getenv(
+                        "access.token.claim": "true",
+                        "id.token.claim": "true",
+                        "claim.value": os.getenv(
                             "CLIENT_AUDIENCE_3", "bwell-client-id-3"
                         ),
-                        "id.token.claim": "true",
-                        "access.token.claim": "true",
+                        "claim.name": "aud",
+                        "jsonType.label": "String",
                     },
-                }
+                },
             ],
         }
 

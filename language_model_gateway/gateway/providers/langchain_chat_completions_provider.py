@@ -212,7 +212,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             + f"\nClick here to authenticate: [Login to {tool_first_audience}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
-        await self.token_exchange_manager.get_token_for_tool(
+        await self.token_exchange_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
             tool_name=tool_using_authentication.name,

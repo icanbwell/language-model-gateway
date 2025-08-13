@@ -117,7 +117,7 @@ class MCPToolProvider:
                     # get the appropriate token for this tool
                     token: (
                         str | None
-                    ) = await self.token_exchange_manager.get_token_for_tool(
+                    ) = await self.token_exchange_manager.get_token_for_tool_async(
                         auth_header=auth_header,
                         error_message="",
                         tool_name=tool.name,
