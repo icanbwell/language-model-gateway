@@ -204,6 +204,7 @@ class ContainerFactory:
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 cache=c.resolve(McpToolsMetadataExpiringCache),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
             ),
         )
 

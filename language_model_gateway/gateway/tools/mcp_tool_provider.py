@@ -6,6 +6,9 @@ from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
@@ -23,7 +26,12 @@ class MCPToolProvider:
     that can be used in conjunction with the MCP.
     """
 
-    def __init__(self, *, cache: McpToolsMetadataExpiringCache) -> None:
+    def __init__(
+        self,
+        *,
+        cache: McpToolsMetadataExpiringCache,
+        token_exchange_manager: TokenExchangeManager,
+    ) -> None:
         """
         Initialize the MCPToolProvider with a cache.
 
@@ -33,6 +41,12 @@ class MCPToolProvider:
         self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
         self._cache: McpToolsMetadataExpiringCache = cache
         assert self._cache is not None, "Cache must be provided"
+
+        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
+        assert self.token_exchange_manager is not None, (
+            "MCPToolProvider requires a TokenExchangeManager instance."
+        )
+        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
 
     async def load_async(self) -> None:
         pass
@@ -47,7 +61,6 @@ class MCPToolProvider:
             if url in self.tools_by_mcp_url:
                 return self.tools_by_mcp_url[url]
 
-            # TODO: probably cache the tools and just use the headers by specifying an httpx_client_factory
             mcp_tool_config: StreamableHttpConnection = {
                 "url": url,
                 "transport": "streamable_http",
@@ -73,12 +86,26 @@ class MCPToolProvider:
                     None,
                 )
                 if auth_header:
+                    # get the appropriate token for this tool
+                    token: (
+                        str | None
+                    ) = await self.token_exchange_manager.get_token_for_tool(
+                        auth_header=auth_header,
+                        error_message="",
+                        tool_name=tool.name,
+                        tool_auth_audiences=tool.auth_audiences,
+                    )
+                    if token:
+                        # if we have a token, we need to add it to the Authorization header
+                        auth_header = f"Bearer {token}"
                     # add the Authorization header to the mcp_tool_config headers
                     mcp_tool_config["headers"] = {
                         **mcp_tool_config.get("headers", {}),
                         "Authorization": auth_header,
                     }
-                logger.debug("Loading MCP tools with Authorization header")
+                logger.debug(
+                    f"Loading MCP tools with Authorization header: {auth_header}"
+                )
 
             tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
             client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(

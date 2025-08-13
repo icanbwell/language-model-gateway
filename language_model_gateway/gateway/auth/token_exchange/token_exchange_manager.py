@@ -1,5 +1,5 @@
 import logging
-from typing import List, Dict, Any
+from typing import List
 
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
@@ -155,55 +155,43 @@ class TokenExchangeManager:
                 )
             # verify the token
             try:
-                token_claims: Dict[
-                    str, Any
-                ] = await self.token_reader.verify_token_async(token=token)
-                if not token_claims:
-                    logger.debug(f"Token claims are empty for tool {tool_name}.")
-                    raise AuthorizationNeededException(
-                        "Invalid or expired token provided in Authorization header."
-                        + error_message
-                    )
+                token_audience: (
+                    str | None
+                ) = await self.token_reader.get_audience_from_token_async(token=token)
+                if (
+                    not tool_auth_audiences or token_audience in tool_auth_audiences
+                ):  # token is valid
+                    logger.debug(f"Token is valid for tool {tool_name}.")
+                    return token
                 else:
-                    token_audience: str | None = token_claims.get("aud")
-                    # check if the token audience matches the tool's expected audiences
-                    if (
-                        tool_auth_audiences
-                        and token_audience not in tool_auth_audiences
-                    ):
-                        # see if we have a token for this audience and email in the cache
-                        email: (
-                            str | None
-                        ) = await self.token_reader.get_subject_from_token_async(token)
-                        assert email, (
-                            "Token must contain a subject (email or sub) claim."
+                    # see if we have a token for this audience and email in the cache
+                    email: (
+                        str | None
+                    ) = await self.token_reader.get_subject_from_token_async(token)
+                    assert email, "Token must contain a subject (email or sub) claim."
+                    token_for_tool: (
+                        TokenItem | None
+                    ) = await self.get_token_for_auth_provider_async(
+                        audience=tool_auth_audiences[0],
+                        email=email,
+                    )
+                    if token_for_tool:
+                        logger.debug(f"Found Token in cache for tool {tool_name}.")
+                        return (
+                            token_for_tool.id_token
+                            if token_for_tool.id_token
+                            else token_for_tool.access_token
                         )
-                        token_for_tool: (
-                            TokenItem | None
-                        ) = await self.get_token_for_auth_provider_async(
-                            audience=tool_auth_audiences[0],
-                            email=email,
+                    else:
+                        logger.debug(
+                            f"Token audience found: {token_audience} for tool {tool_name}."
                         )
-                        if token_for_tool:
-                            logger.debug(f"Found Token in cache for tool {tool_name}.")
-                            return (
-                                token_for_tool.id_token
-                                if token_for_tool.id_token
-                                else token_for_tool.access_token
-                            )
-                        else:
-                            logger.debug(
-                                f"Token audience found: {token_audience} for tool {tool_name}."
-                            )
-                            raise AuthorizationNeededException(
-                                "Token provided in Authorization header has wrong audience:"
-                                + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
-                                + "\nCould not find a cached token for the tool."
-                                + error_message
-                            )
-                    else:  # token is valid
-                        logger.debug(f"Token is valid for tool {tool_name}.")
-                        return token
+                        raise AuthorizationNeededException(
+                            "Token provided in Authorization header has wrong audience:"
+                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
+                            + "\nCould not find a cached token for the tool."
+                            + error_message
+                        )
             except AuthorizationNeededException:
                 # just re-raise the exception with the original message
                 raise
