@@ -1,12 +1,10 @@
 import logging
 import os
 import uuid
-from datetime import datetime
 from typing import Any, Dict, cast, List
 
 import httpx
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
-from bson import ObjectId
 from fastapi import Request
 
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
@@ -15,14 +13,9 @@ from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
     OAuthMemoryCache,
 )
 from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
-from language_model_gateway.gateway.auth.repository.base_repository import (
-    AsyncBaseRepository,
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
 )
-from language_model_gateway.gateway.auth.repository.repository_factory import (
-    RepositoryFactory,
-)
-from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
@@ -42,7 +35,10 @@ class AuthManager:
     """
 
     def __init__(
-        self, *, environment_variables: EnvironmentVariables, token_reader: TokenReader
+        self,
+        *,
+        environment_variables: EnvironmentVariables,
+        token_exchange_manager: TokenExchangeManager,
     ) -> None:
         """
         Initialize the AuthManager with the necessary configuration for OIDC PKCE.
@@ -58,6 +54,10 @@ class AuthManager:
         It also initializes the OAuth cache based on the OAUTH_CACHE environment variable,
         which can be set to "memory" for in-memory caching or "mongo" for MongoDB caching.
         If the OAUTH_CACHE environment variable is not set, it defaults to "memory".
+
+        Args:
+            environment_variables (EnvironmentVariables): The environment variables for the application.
+            token_exchange_manager (TokenExchangeManager): The manager for handling token exchanges.
         """
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None
@@ -65,9 +65,9 @@ class AuthManager:
             "environment_variables must be an instance of EnvironmentVariables"
         )
 
-        self.token_reader: TokenReader = token_reader
-        assert self.token_reader is not None
-        assert isinstance(self.token_reader, TokenReader)
+        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
+        assert self.token_exchange_manager is not None
+        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
 
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
@@ -219,71 +219,14 @@ class AuthManager:
             "email": email,
             "issuer": issuer,
         }
-
-        connection_string = os.getenv("MONGO_URL")
-        assert connection_string is not None, (
-            "MONGO_URL environment variable must be set"
-        )
-        database_name = os.getenv("MONGO_DB_NAME")
-        assert database_name is not None, (
-            "MONGO_DB_NAME environment variable must be set"
-        )
-        mongo_repository: AsyncBaseRepository[TokenItem] = (
-            RepositoryFactory.get_repository(
-                repository_type=self.environment_variables.oauth_cache,
-                environment_variables=self.environment_variables,
-            )
-        )
-        collection_name = os.getenv("MONGO_DB_TOKEN_COLLECTION_NAME")
-        assert collection_name is not None, (
-            "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
-        )
         audience = state_decoded["audience"]
-        assert issuer is not None, (
-            "Issuer must be provided in the state for storing the token"
-        )
-        stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
-            collection_name=collection_name,
-            model_class=TokenItem,
-            fields={
-                "email": email,
-                "name": audience,
-                "issuer": issuer,
-            },
-        )
 
-        valid_token: str = id_token or access_token
-        expires_at: (
-            datetime | None
-        ) = await self.token_reader.get_expiration_from_token_async(token=valid_token)
-        created_at: (
-            datetime | None
-        ) = await self.token_reader.get_created_at_from_token_async(token=valid_token)
-        if stored_token_item is None:
-            # Create a new token item if it does not exist
-            stored_token_item = TokenItem(
-                _id=ObjectId(),
-                issuer=issuer,
-                audience=audience,
-                email=email,
-                url=url,
-                access_token=access_token,
-                id_token=id_token,
-                expires_at=expires_at.isoformat() if expires_at else None,
-                created_at=created_at.isoformat() if created_at else None,
-            )
-        else:
-            # Update the existing token item
-            stored_token_item.access_token = access_token
-            stored_token_item.id_token = id_token
-        await mongo_repository.insert_or_update(
-            collection_name=collection_name,
-            item=stored_token_item,
-            fields={
-                "email": email,
-                "audience": audience,
-                "issuer": issuer,
-            },
-            model_class=TokenItem,
+        await self.token_exchange_manager.save_token_async(
+            access_token=access_token,
+            email=email,
+            id_token=id_token,
+            issuer=issuer,
+            audience=audience,
+            url=url,
         )
         return content

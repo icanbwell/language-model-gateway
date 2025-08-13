@@ -1,5 +1,8 @@
 import logging
+from datetime import datetime
 from typing import List
+
+from bson import ObjectId
 
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
@@ -204,3 +207,89 @@ class TokenExchangeManager:
                     "Invalid or expired token provided in Authorization header."
                     + error_message
                 ) from e
+
+    async def save_token_async(
+        self,
+        *,
+        access_token: str | None,
+        email: str,
+        id_token: str | None,
+        issuer: str | None,
+        audience: str,
+        url: str | None,
+    ) -> None:
+        connection_string = self.environment_variables.mongo_uri
+        assert connection_string is not None, (
+            "MONGO_URL environment variable must be set"
+        )
+        database_name = self.environment_variables.mongo_db_name
+        assert database_name is not None, (
+            "MONGO_DB_NAME environment variable must be set"
+        )
+        mongo_repository: AsyncBaseRepository[TokenItem] = (
+            RepositoryFactory.get_repository(
+                repository_type=self.environment_variables.oauth_cache,
+                environment_variables=self.environment_variables,
+            )
+        )
+        collection_name = self.environment_variables.mongo_db_token_collection_name
+        assert collection_name is not None, (
+            "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
+        )
+        assert issuer is not None, (
+            "Issuer must be provided in the state for storing the token"
+        )
+        stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
+            collection_name=collection_name,
+            model_class=TokenItem,
+            fields={
+                "email": email,
+                "name": audience,
+                "issuer": issuer,
+            },
+        )
+        valid_token: str | None = id_token or access_token
+        assert valid_token is not None, (
+            "Either id_token or access_token must be provided to store the token"
+        )
+        expires_at: (
+            datetime | None
+        ) = await self.token_reader.get_expiration_from_token_async(token=valid_token)
+        created_at: (
+            datetime | None
+        ) = await self.token_reader.get_created_at_from_token_async(token=valid_token)
+        if stored_token_item is None:
+            # Create a new token item if it does not exist
+            stored_token_item = TokenItem(
+                _id=ObjectId(),
+                issuer=issuer,
+                audience=audience,
+                email=email,
+                url=url,
+                access_token=access_token,
+                id_token=id_token,
+                expires_at=expires_at.isoformat() if expires_at else None,
+                created_at=created_at.isoformat() if created_at else None,
+            )
+        else:
+            # Update the existing token item
+            stored_token_item.access_token = access_token
+            stored_token_item.id_token = id_token
+            stored_token_item.expires_at = (
+                expires_at.isoformat() if expires_at else None
+            )
+            stored_token_item.created_at = (
+                created_at.isoformat() if created_at else None
+            )
+
+        # now insert or update the token item in the database
+        await mongo_repository.insert_or_update(
+            collection_name=collection_name,
+            item=stored_token_item,
+            fields={
+                "email": email,
+                "audience": audience,
+                "issuer": issuer,
+            },
+            model_class=TokenItem,
+        )
