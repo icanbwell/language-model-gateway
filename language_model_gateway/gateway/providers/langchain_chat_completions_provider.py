@@ -216,19 +216,22 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             + f"\nClick here to authenticate: {authorization_url}."
         )
         await self.get_token_for_tool(
-            auth_header, error_message, tool_using_authentication
+            auth_header=auth_header,
+            error_message=error_message,
+            tool_name=tool_using_authentication.name,
+            tool_auth_audiences=tool_using_authentication.auth_audiences,
         )
 
     async def get_token_for_tool(
         self,
+        *,
         auth_header: str | None,
         error_message: str,
-        tool_using_authentication: AgentConfig,
+        tool_name: str,
+        tool_auth_audiences: List[str] | None,
     ) -> str | None:
         if not auth_header:
-            logger.debug(
-                f"Authorization header is missing for tool {tool_using_authentication.name}."
-            )
+            logger.debug(f"Authorization header is missing for tool {tool_name}.")
             raise AuthorizationNeededException(
                 "Authorization header is required for MCP tools with JWT authentication."
                 + error_message
@@ -237,7 +240,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             token: str | None = self.token_reader.extract_token(auth_header)
             if not token:
                 logger.debug(
-                    f"No token found in Authorization header for tool {tool_using_authentication.name}."
+                    f"No token found in Authorization header for tool {tool_name}."
                 )
                 raise AuthorizationNeededException(
                     "Invalid Authorization header format. Expected 'Bearer <token>'"
@@ -249,9 +252,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     str, Any
                 ] = await self.token_reader.verify_token_async(token=token)
                 if not token_claims:
-                    logger.debug(
-                        f"Token claims are empty for tool {tool_using_authentication.name}."
-                    )
+                    logger.debug(f"Token claims are empty for tool {tool_name}.")
                     raise AuthorizationNeededException(
                         "Invalid or expired token provided in Authorization header."
                         + error_message
@@ -260,9 +261,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     token_audience: str | None = token_claims.get("aud")
                     # check if the token audience matches the tool's expected audiences
                     if (
-                        tool_using_authentication.auth_audiences
-                        and token_audience
-                        not in tool_using_authentication.auth_audiences
+                        tool_auth_audiences
+                        and token_audience not in tool_auth_audiences
                     ):
                         # see if we have a token for this audience and email in the cache
                         email: (
@@ -274,13 +274,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         token_for_tool: (
                             TokenItem | None
                         ) = await self.token_exchange_manager.get_token_for_auth_provider_async(
-                            audience=tool_using_authentication.auth_audiences[0],
+                            audience=tool_auth_audiences[0],
                             email=email,
                         )
                         if token_for_tool:
-                            logger.debug(
-                                f"Found Token in cache for tool {tool_using_authentication.name}."
-                            )
+                            logger.debug(f"Found Token in cache for tool {tool_name}.")
                             return (
                                 token_for_tool.id_token
                                 if token_for_tool.id_token
@@ -288,26 +286,22 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                             )
                         else:
                             logger.debug(
-                                f"Token audience found: {token_audience} for tool {tool_using_authentication.name}."
+                                f"Token audience found: {token_audience} for tool {tool_name}."
                             )
                             raise AuthorizationNeededException(
                                 "Token provided in Authorization header has wrong audience:"
-                                + f"\nFound: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}."
+                                + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
                                 + "\nCould not find a cached token for the tool."
                                 + error_message
                             )
                     else:  # token is valid
-                        logger.debug(
-                            f"Token is valid for tool {tool_using_authentication.name}."
-                        )
+                        logger.debug(f"Token is valid for tool {tool_name}.")
                         return token
             except AuthorizationNeededException:
                 # just re-raise the exception with the original message
                 raise
             except Exception as e:
-                logger.error(
-                    f"Error verifying token for tool {tool_using_authentication.name}: {e}"
-                )
+                logger.error(f"Error verifying token for tool {tool_name}: {e}")
                 logger.exception(e, stack_info=True)
                 raise AuthorizationNeededException(
                     "Invalid or expired token provided in Authorization header."
