@@ -14,6 +14,7 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
     AuthorizationNeededException,
 )
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -214,6 +215,16 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
             + f"\nClick here to authenticate: {authorization_url}."
         )
+        await self.get_token_for_tool(
+            auth_header, error_message, tool_using_authentication
+        )
+
+    async def get_token_for_tool(
+        self,
+        auth_header: str | None,
+        error_message: str,
+        tool_using_authentication: AgentConfig,
+    ) -> str | None:
         if not auth_header:
             logger.debug(
                 f"Authorization header is missing for tool {tool_using_authentication.name}."
@@ -248,7 +259,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 else:
                     token_audience: str | None = token_claims.get("aud")
                     # check if the token audience matches the tool's expected audiences
-                    if token_audience not in tool_using_authentication.auth_audiences:
+                    if (
+                        tool_using_authentication.auth_audiences
+                        and token_audience
+                        not in tool_using_authentication.auth_audiences
+                    ):
                         # see if we have a token for this audience and email in the cache
                         email: (
                             str | None
@@ -256,12 +271,20 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         assert email, (
                             "Token must contain a subject (email or sub) claim."
                         )
-                        if await self.token_exchange_manager.has_valid_token_for_auth_provider_async(
-                            audiences=tool_using_authentication.auth_audiences,
+                        token_for_tool: (
+                            TokenItem | None
+                        ) = await self.token_exchange_manager.get_token_for_auth_provider_async(
+                            audience=tool_using_authentication.auth_audiences[0],
                             email=email,
-                        ):
+                        )
+                        if token_for_tool:
                             logger.debug(
                                 f"Found Token in cache for tool {tool_using_authentication.name}."
+                            )
+                            return (
+                                token_for_tool.id_token
+                                if token_for_tool.id_token
+                                else token_for_tool.access_token
                             )
                         else:
                             logger.debug(
@@ -277,6 +300,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         logger.debug(
                             f"Token is valid for tool {tool_using_authentication.name}."
                         )
+                        return token
             except AuthorizationNeededException:
                 # just re-raise the exception with the original message
                 raise

@@ -87,9 +87,9 @@ class TokenExchangeManager:
             },
         )
 
-    async def has_valid_token_for_auth_provider_async(
+    async def get_valid_token_for_auth_provider_async(
         self, *, audiences: List[str], email: str
-    ) -> bool:
+    ) -> TokenItem | None:
         """
         Check if a valid token exists for the given OIDC provider and email.
 
@@ -103,13 +103,13 @@ class TokenExchangeManager:
         # check if the bearer token has audience same as the auth provider name
         assert audiences is not None
         if not email:
-            return False
+            return None
 
         for audience in audiences:
             token: TokenItem | None = await self.get_token_for_auth_provider_async(
                 audience=audience, email=email
             )
             if token and token.is_valid():
-                return True
+                return token
 
-        return False
+        return None
