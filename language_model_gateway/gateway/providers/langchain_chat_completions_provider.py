@@ -1,4 +1,5 @@
 import datetime
+import logging
 import random
 from typing import Dict, Any, Sequence, List
 
@@ -25,6 +26,8 @@ from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.auth.token_reader import TokenReader
+
+logger = logging.getLogger(__name__)
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
@@ -146,6 +149,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     auth_information=auth_information,
                     tool_using_authentication=tool_using_authentication,
                 )
+        else:
+            logger.debug("No tools require authentication.")
 
     async def check_tokens_are_valid_for_tool(
         self,
@@ -161,17 +166,19 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_information (AuthInformation): The authentication information.
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
-        if (
-            not tool_using_authentication.auth_audiences
-            or not auth_information.redirect_uri
-        ):
+        if not tool_using_authentication.auth_audiences:
+            logger.debug(
+                f"Tool {tool_using_authentication.name} doesn't have auth_audiences."
+            )
+            return
+        if not auth_information.redirect_uri:
+            logger.debug("AuthInformation doesn't have redirect_uri.")
             return
 
+        tool_first_audience = tool_using_authentication.auth_audiences[0]
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
-                audience=tool_using_authentication.auth_audiences[
-                    0
-                ],  # use the first audience to get a new authorization URL
+                audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
             )
             if tool_using_authentication
@@ -182,13 +189,19 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             + f"\nPlease visit {authorization_url} to authenticate."
         )
         if not auth_header:
+            logger.debug(
+                f"Authorization header is missing for tool {tool_using_authentication.name}."
+            )
             raise AuthorizationNeededException(
                 "Authorization header is required for MCP tools with JWT authentication."
                 + error_message
             )
-        else:
+        else:  # auth_header is present
             token: str | None = self.token_verifier.extract_token(auth_header)
             if not token:
+                logger.debug(
+                    f"No token found in Authorization header for tool {tool_using_authentication.name}."
+                )
                 raise AuthorizationNeededException(
                     "Invalid Authorization header format. Expected 'Bearer <token>'"
                     + error_message
@@ -199,20 +212,33 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     str, Any
                 ] = await self.token_verifier.verify_token_async(token=token)
                 if not token_claims:
+                    logger.debug(
+                        f"Token claims are empty for tool {tool_using_authentication.name}."
+                    )
                     raise AuthorizationNeededException(
                         "Invalid or expired token provided in Authorization header."
                         + error_message
                     )
                 else:
                     token_audience: str | None = token_claims.get("aud")
-                    if token_audience not in tool_using_authentication.auth_audiences:
+                    if True:
+                        logger.debug(
+                            f"Token audience found: {token_audience} for tool {tool_using_authentication.name}."
+                        )
                         raise AuthorizationNeededException(
                             "Token provided in Authorization header has wrong audience:"
                             + f" Found: {token_audience}, Expected: {tool_using_authentication.auth_audiences}"
                             + " and we could not find a cached token for the tool."
                             + error_message
                         )
+                    else:  # token is valid
+                        logger.debug(
+                            f"Token is valid for tool {tool_using_authentication.name}."
+                        )
             except Exception as e:
+                logger.debug(
+                    f"Error verifying token for tool {tool_using_authentication.name}: {e}"
+                )
                 raise AuthorizationNeededException(
                     "Invalid or expired token provided in Authorization header."
                     + error_message

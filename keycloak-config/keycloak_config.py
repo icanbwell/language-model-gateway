@@ -90,8 +90,8 @@ def configure_keycloak() -> None:
             "redirectUris": ["*"],
             "webOrigins": ["*"],
             "attributes": {
-                "access.token.lifespan": 600,
-                "id.token.lifespan": 600,
+                "access.token.lifespan": 3600,
+                "id.token.lifespan": 3600,
                 "post.logout.redirect.uris": ["https://open-webui.localhost"],
             },
         }

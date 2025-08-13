@@ -78,6 +78,10 @@ class AuthRouter:
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
     ) -> JSONResponse:
         logger.info(f"Received request for auth callback: {request.url}")
+        # return JSONResponse(
+        #     content={"message": "Processing auth callback..."},
+        #     status_code=200,
+        # )
         try:
             content: dict[str, Any] = await auth_manager.read_callback_response(
                 request=request,

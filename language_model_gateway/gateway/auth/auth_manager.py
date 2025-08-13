@@ -2,6 +2,7 @@ import logging
 import os
 from typing import Any, Dict, cast, List
 
+import httpx
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from bson import ObjectId
 from fastapi import Request
@@ -21,6 +22,9 @@ from language_model_gateway.gateway.auth.repository.repository_factory import (
 )
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
+)
+from language_model_gateway.gateway.utilities.logger.logging_transport import (
+    LoggingTransport,
 )
 
 logger = logging.getLogger(__name__)
@@ -106,6 +110,7 @@ class AuthManager:
                 client_kwargs={
                     "scope": "openid email",
                     "code_challenge_method": "S256",
+                    "transport": LoggingTransport(httpx.AsyncHTTPTransport()),
                 },
             )
 
