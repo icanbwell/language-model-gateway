@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import Field
 
 from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
-from datetime import datetime
+from datetime import datetime, UTC
 
 
 class TokenItem(BaseDbModel):
@@ -24,5 +24,9 @@ class TokenItem(BaseDbModel):
         """
         if self.expires_at:
             expiration_time = datetime.fromisoformat(self.expires_at)
-            return expiration_time > datetime.now()
+            if expiration_time.tzinfo:
+                now = datetime.now(UTC).replace(tzinfo=expiration_time.tzinfo)
+            else:
+                now = datetime.now(UTC)
+            return expiration_time > now
         return False

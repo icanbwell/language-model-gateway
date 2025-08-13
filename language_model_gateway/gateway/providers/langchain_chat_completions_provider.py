@@ -212,7 +212,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         error_message: str = (
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
-            + f"\nPlease visit {authorization_url} to authenticate."
+            + f"\nClick here to authenticate: {authorization_url}."
         )
         if not auth_header:
             logger.debug(
@@ -269,8 +269,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                             )
                             raise AuthorizationNeededException(
                                 "Token provided in Authorization header has wrong audience:"
-                                + f" Found: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}"
-                                + " and we could not find a cached token for the tool."
+                                + f"\nFound: {token_audience}, Expected: {','.join(tool_using_authentication.auth_audiences)}."
+                                + "\nCould not find a cached token for the tool."
                                 + error_message
                             )
                     else:  # token is valid
@@ -281,9 +281,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 # just re-raise the exception with the original message
                 raise
             except Exception as e:
-                logger.debug(
+                logger.error(
                     f"Error verifying token for tool {tool_using_authentication.name}: {e}"
                 )
+                logger.exception(e, stack_info=True)
                 raise AuthorizationNeededException(
                     "Invalid or expired token provided in Authorization header."
                     + error_message
