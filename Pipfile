@@ -3,12 +3,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[[source]]
-name = "alpine-wheels"
-# https://github.com/imranq2/alpine-wheels/
-url = "https://imranq2.github.io/alpine-wheels/docs/"
-verify_ssl = true
-
 [packages]
 # wheel is needed for building the package and installing wheels
 wheel = ">=0.45.1"
@@ -27,7 +21,7 @@ ddtrace = ">=2.17.2"
 # prometheus-fastapi-instrumentator is a Python library for instrumenting FastAPI applications
 prometheus-fastapi-instrumentator = ">=7.0.0"
 # python-crfsuite is a Python library used when installing some packages
-python-crfsuite = { version = "==0.9.10", index = "alpine-wheels" }
+python-crfsuite = ">=0.9.11"
 # httpx is a Python library for making HTTP requests
 httpx = ">=0.28.1"
 # httpx-sse is a Python library for making Server-Sent Events requests
@@ -47,7 +41,7 @@ langchain-openai = ">=0.3.3"
 # langchain-community is a Python library that contains ommmunity extensions
 langchain-community = ">=0.3.16"
 # grpcio is a Python library for working with gRPC.   Needed by Google Vertex AI
-grpcio = { version = "==1.66.0", index = "alpine-wheels" }
+grpcio = ">=1.74.0"
 # langchain-google-community is a Python library that contains Google community extensions
 langchain-google-community = ">=2.0.3"
 # langgraph is a Python library for building language models
