@@ -58,8 +58,8 @@ def configure_keycloak() -> None:
     realm_config = {
         "realm": realm_name,
         "enabled": True,
-        "sslRequired": "none",
-        "defaultSignatureAlgorithm": "RS256",
+        "sslRequired": "none",  # keep if you want to override default (default is 'external')
+        # "defaultSignatureAlgorithm": "RS256",  # default is RS256
     }
 
     try:
@@ -97,7 +97,7 @@ def configure_keycloak() -> None:
                     "gui.order": "",
                     "include.in.token.scope": "false",
                 },
-                "description": "",
+                "description": "OpenID Connect built-in scope: openid",
             },
             {
                 "name": "email",
@@ -108,7 +108,7 @@ def configure_keycloak() -> None:
                     "gui.order": "",
                     "include.in.token.scope": "false",
                 },
-                "description": "",
+                "description": "OpenID Connect built-in scope: email",
                 "protocolMappers": [
                     {
                         "name": "email",
@@ -137,7 +137,7 @@ def configure_keycloak() -> None:
                     "display.on.consent.screen": "true",
                     "include.in.token.scope": "true",
                 },
-                "description": "User scope",
+                "description": "FHIR User scope",
                 "protocolMappers": [
                     {
                         "name": "user-attribute-mapper",
@@ -162,7 +162,7 @@ def configure_keycloak() -> None:
                     "display.on.consent.screen": "true",
                     "include.in.token.scope": "true",
                 },
-                "description": "Access scope",
+                "description": "FHIR Access scope",
                 "protocolMappers": [
                     {
                         "name": "access-attribute-mapper",
@@ -203,9 +203,9 @@ def configure_keycloak() -> None:
         client1 = {
             "clientId": os.getenv("CLIENT_ID", "bwell-client-id"),
             "name": os.getenv("CLIENT_ID", "bwell-client-id"),
-            "enabled": True,
-            "protocol": "openid-connect",
-            "publicClient": False,
+            "enabled": True,  # default is True
+            "protocol": "openid-connect",  # default is openid-connect
+            # "publicClient": False,  # default is False
             "secret": os.getenv("CLIENT_SECRET", "bwell-secret"),
             "redirectUris": ["*"],
             "webOrigins": ["*"],
