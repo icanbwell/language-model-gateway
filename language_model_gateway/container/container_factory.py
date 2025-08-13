@@ -4,6 +4,9 @@ import os
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -257,6 +260,7 @@ class ContainerFactory:
             lambda c: AuthManager(
                 environment_variables=c.resolve(EnvironmentVariables),
                 token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
@@ -265,6 +269,13 @@ class ContainerFactory:
             lambda c: TokenExchangeManager(
                 environment_variables=c.resolve(EnvironmentVariables),
                 token_reader=c.resolve(TokenReader),
+            ),
+        )
+
+        container.register(
+            AuthConfigReader,
+            lambda c: AuthConfigReader(
+                environment_variables=c.resolve(EnvironmentVariables)
             ),
         )
         logger.info("DI container initialized")

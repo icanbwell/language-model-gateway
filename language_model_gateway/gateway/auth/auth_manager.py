@@ -13,6 +13,10 @@ from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
     OAuthMemoryCache,
 )
 from language_model_gateway.gateway.auth.cache.oauth_mongo_cache import OAuthMongoCache
+from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -39,6 +43,7 @@ class AuthManager:
         *,
         environment_variables: EnvironmentVariables,
         token_exchange_manager: TokenExchangeManager,
+        auth_config_reader: AuthConfigReader,
     ) -> None:
         """
         Initialize the AuthManager with the necessary configuration for OIDC PKCE.
@@ -58,6 +63,7 @@ class AuthManager:
         Args:
             environment_variables (EnvironmentVariables): The environment variables for the application.
             token_exchange_manager (TokenExchangeManager): The manager for handling token exchanges.
+            auth_config_reader (AuthConfigReader): The reader for authentication configurations.
         """
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None
@@ -68,6 +74,10 @@ class AuthManager:
         self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
         assert self.token_exchange_manager is not None
         assert isinstance(self.token_exchange_manager, TokenExchangeManager)
+
+        self.auth_config_reader: AuthConfigReader = auth_config_reader
+        assert self.auth_config_reader is not None
+        assert isinstance(self.auth_config_reader, AuthConfigReader)
 
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
@@ -80,48 +90,28 @@ class AuthManager:
             f"Initializing AuthManager with cache type {type(self.cache)} cache id: {self.cache.id}"
         )
         # OIDC PKCE setup
-        self.auth_provider_name = os.getenv("AUTH_PROVIDER_NAME")
         self.well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
         self.redirect_uri = os.getenv("AUTH_REDIRECT_URI")
-        # session_secret = os.getenv("AUTH_SESSION_SECRET")
-        assert self.auth_provider_name is not None, (
-            "AUTH_PROVIDER_NAME environment variable must be set"
-        )
         assert self.well_known_url is not None, (
             "AUTH_WELL_KNOWN_URI environment variable must be set"
         )
         assert self.redirect_uri is not None, (
             "AUTH_REDIRECT_URI environment variable must be set"
         )
-        # assert session_secret is not None, (
-        #     "AUTH_SESSION_SECRET environment variable must be set"
-        # )
-
         # https://docs.authlib.org/en/latest/client/frameworks.html#frameworks-clients
         self.oauth: OAuth = OAuth(cache=self.cache)
         # read AUTH_PROVIDERS comma separated list from the environment variable and register the OIDC provider for each provider
-        self.auth_audiences: List[str] = environment_variables.auth_audiences or []
-        for audience in self.auth_audiences:
-            # read client_id and client_secret from the environment variables
-            auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID-{audience}")
-            assert auth_client_id is not None, (
-                f"AUTH_CLIENT_ID-{audience} environment variable must be set"
-            )
-            auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET-{audience}")
-            assert auth_client_secret is not None, (
-                f"AUTH_CLIENT_SECRET-{audience} environment variable must be set"
-            )
-            auth_well_known_uri: str | None = os.getenv(
-                f"AUTH_WELL_KNOWN_URI-{audience}"
-            )
-            assert auth_well_known_uri is not None, (
-                f"AUTH_WELL_KNOWN_URI-{audience} environment variable must be set"
-            )
+        auth_configs: List[AuthConfig] = (
+            self.auth_config_reader.get_auth_configs_for_all_audiences()
+        )
+
+        auth_config: AuthConfig
+        for auth_config in auth_configs:
             self.oauth.register(
-                name=audience,
-                client_id=auth_client_id,
-                client_secret=auth_client_secret,
-                server_metadata_url=auth_well_known_uri,
+                name=auth_config.audience,
+                client_id=auth_config.client_id,
+                client_secret=auth_config.client_secret,
+                server_metadata_url=auth_config.well_known_uri,
                 client_kwargs={
                     "scope": "openid email",
                     "code_challenge_method": "S256",
