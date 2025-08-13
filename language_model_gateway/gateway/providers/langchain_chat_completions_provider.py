@@ -209,7 +209,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         error_message: str = (
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
-            + f"\nClick here to authenticate: {authorization_url}."
+            + f"\nClick here to authenticate: [Login to {tool_first_audience}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
         await self.token_exchange_manager.get_token_for_tool(

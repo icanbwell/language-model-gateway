@@ -37,7 +37,7 @@ up-integration: ## starts docker containers
 
 
 .PHONY: up-open-webui
-up-open-webui: clean_database ## starts docker containers
+up-open-webui: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
@@ -47,7 +47,7 @@ up-open-webui: clean_database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
-up-open-webui-ssl: clean_database ## starts docker containers
+up-open-webui-ssl: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
@@ -149,10 +149,10 @@ run-pre-commit: setup-pre-commit
 	./.git/hooks/pre-commit pre_commit_all_files
 
 .PHONY: clean
-clean: down clean_database ## Cleans all the local docker setup
+clean: down clean-database ## Cleans all the local docker setup
 
-.PHONY: clean_database
-clean_database: down ## Cleans all the local docker setup
+.PHONY: clean-database
+clean-database: down ## Cleans all the local docker setup
 ifneq ($(shell docker volume ls | grep "language-model-gateway"| awk '{print $$2}'),)
 	docker volume ls | grep "language-model-gateway" | awk '{print $$2}' | xargs docker volume rm
 endif
