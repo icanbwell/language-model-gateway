@@ -173,8 +173,8 @@ class TokenExchangeManager:
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
                         TokenItem | None
-                    ) = await self.get_token_for_auth_provider_async(
-                        audience=tool_auth_audiences[0],
+                    ) = await self.get_valid_token_for_auth_provider_async(
+                        audiences=tool_auth_audiences,
                         email=email,
                     )
                     if token_for_tool:
