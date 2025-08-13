@@ -262,7 +262,8 @@ class ContainerFactory:
         container.register(
             TokenExchangeManager,
             lambda c: TokenExchangeManager(
-                environment_variables=c.resolve(EnvironmentVariables)
+                environment_variables=c.resolve(EnvironmentVariables),
+                token_reader=c.resolve(TokenReader),
             ),
         )
         logger.info("DI container initialized")

@@ -1,5 +1,9 @@
-from typing import List
+import logging
+from typing import List, Dict, Any
 
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
@@ -7,9 +11,12 @@ from language_model_gateway.gateway.auth.repository.base_repository import (
 from language_model_gateway.gateway.auth.repository.repository_factory import (
     RepositoryFactory,
 )
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class TokenExchangeManager:
@@ -17,7 +24,9 @@ class TokenExchangeManager:
     Manages the token exchange process.
     """
 
-    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+    def __init__(
+        self, *, environment_variables: EnvironmentVariables, token_reader: TokenReader
+    ) -> None:
         assert environment_variables is not None
         assert environment_variables.mongo_uri is not None
         assert environment_variables.mongo_db_name is not None
@@ -41,6 +50,12 @@ class TokenExchangeManager:
         assert self.token_collection_name is not None, (
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
+
+        self.token_reader: TokenReader = token_reader
+        assert self.token_reader is not None, (
+            "TokenExchangeManager requires a TokenReader instance."
+        )
+        assert isinstance(token_reader, TokenReader)
 
     async def get_token_for_auth_provider_async(
         self, *, audience: str, email: str
@@ -113,3 +128,89 @@ class TokenExchangeManager:
                 return token
 
         return None
+
+    async def get_token_for_tool(
+        self,
+        *,
+        auth_header: str | None,
+        error_message: str,
+        tool_name: str,
+        tool_auth_audiences: List[str] | None,
+    ) -> str | None:
+        if not auth_header:
+            logger.debug(f"Authorization header is missing for tool {tool_name}.")
+            raise AuthorizationNeededException(
+                "Authorization header is required for MCP tools with JWT authentication."
+                + error_message
+            )
+        else:  # auth_header is present
+            token: str | None = self.token_reader.extract_token(auth_header)
+            if not token:
+                logger.debug(
+                    f"No token found in Authorization header for tool {tool_name}."
+                )
+                raise AuthorizationNeededException(
+                    "Invalid Authorization header format. Expected 'Bearer <token>'"
+                    + error_message
+                )
+            # verify the token
+            try:
+                token_claims: Dict[
+                    str, Any
+                ] = await self.token_reader.verify_token_async(token=token)
+                if not token_claims:
+                    logger.debug(f"Token claims are empty for tool {tool_name}.")
+                    raise AuthorizationNeededException(
+                        "Invalid or expired token provided in Authorization header."
+                        + error_message
+                    )
+                else:
+                    token_audience: str | None = token_claims.get("aud")
+                    # check if the token audience matches the tool's expected audiences
+                    if (
+                        tool_auth_audiences
+                        and token_audience not in tool_auth_audiences
+                    ):
+                        # see if we have a token for this audience and email in the cache
+                        email: (
+                            str | None
+                        ) = await self.token_reader.get_subject_from_token_async(token)
+                        assert email, (
+                            "Token must contain a subject (email or sub) claim."
+                        )
+                        token_for_tool: (
+                            TokenItem | None
+                        ) = await self.get_token_for_auth_provider_async(
+                            audience=tool_auth_audiences[0],
+                            email=email,
+                        )
+                        if token_for_tool:
+                            logger.debug(f"Found Token in cache for tool {tool_name}.")
+                            return (
+                                token_for_tool.id_token
+                                if token_for_tool.id_token
+                                else token_for_tool.access_token
+                            )
+                        else:
+                            logger.debug(
+                                f"Token audience found: {token_audience} for tool {tool_name}."
+                            )
+                            raise AuthorizationNeededException(
+                                "Token provided in Authorization header has wrong audience:"
+                                + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
+                                + "\nCould not find a cached token for the tool."
+                                + error_message
+                            )
+                    else:  # token is valid
+                        logger.debug(f"Token is valid for tool {tool_name}.")
+                        return token
+            except AuthorizationNeededException:
+                # just re-raise the exception with the original message
+                raise
+            except Exception as e:
+                logger.error(f"Error verifying token for tool {tool_name}: {e}")
+                logger.exception(e, stack_info=True)
+                raise AuthorizationNeededException(
+                    "Invalid or expired token provided in Authorization header."
+                    + error_message
+                ) from e
