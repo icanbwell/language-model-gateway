@@ -20,6 +20,7 @@ from language_model_gateway.gateway.auth.config.auth_config_reader import (
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
@@ -44,6 +45,7 @@ class AuthManager:
         environment_variables: EnvironmentVariables,
         token_exchange_manager: TokenExchangeManager,
         auth_config_reader: AuthConfigReader,
+        token_reader: TokenReader,
     ) -> None:
         """
         Initialize the AuthManager with the necessary configuration for OIDC PKCE.
@@ -64,6 +66,7 @@ class AuthManager:
             environment_variables (EnvironmentVariables): The environment variables for the application.
             token_exchange_manager (TokenExchangeManager): The manager for handling token exchanges.
             auth_config_reader (AuthConfigReader): The reader for authentication configurations.
+            token_reader (TokenReader): The reader for tokens.
         """
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None
@@ -78,6 +81,10 @@ class AuthManager:
         self.auth_config_reader: AuthConfigReader = auth_config_reader
         assert self.auth_config_reader is not None
         assert isinstance(self.auth_config_reader, AuthConfigReader)
+
+        self.token_reader: TokenReader = token_reader
+        assert self.token_reader is not None
+        assert isinstance(self.token_reader, TokenReader)
 
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
@@ -219,4 +226,35 @@ class AuthManager:
             audience=audience,
             url=url,
         )
+
+        if logger.isEnabledFor(logging.DEBUG):
+            access_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=access_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if access_token
+                else None
+            )
+            id_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=id_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if id_token
+                else None
+            )
+            refresh_token: str | None = token.get("refresh_token")
+            refresh_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=refresh_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if refresh_token
+                else None
+            )
+            content["access_token_decoded"] = access_token_decoded
+            content["id_token_decoded"] = id_token_decoded
+            content["refresh_token_decoded"] = refresh_token_decoded
+
         return content

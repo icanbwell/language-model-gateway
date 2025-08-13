@@ -1,11 +1,12 @@
 import datetime
+import json
 import logging
 import time
 from typing import Optional, Any, Dict, List, cast
 
 import httpx
 from httpx import ConnectError
-from joserfc import jwt
+from joserfc import jwt, jws
 from aiocache import cached
 from joserfc.errors import ExpiredTokenError
 from joserfc.jwk import KeySet
@@ -47,7 +48,20 @@ class TokenReader:
         )
         self.jwks_uri: Optional[str] = jwks_uri
         self.well_known_uri: Optional[str] = well_known_uri
-        self.algorithms: List[str] = algorithms or ["RS256"]
+        self.algorithms: List[str] = algorithms or [
+            "RS256",
+            "RS384",
+            "RS512",
+            "HS256",
+            "HS384",
+            "HS512",
+            "ES256",
+            "ES384",
+            "ES512",
+            "PS256",
+            "PS384",
+            "PS512",
+        ]
         self.jwks: KeySet | None = None  # Will be set by async fetch
         self.issuer: Optional[str] = issuer
         self.audience: Optional[str] = audience
@@ -97,6 +111,45 @@ class TokenReader:
         if len(parts) == 2 and parts[0].lower() == "bearer":
             return parts[1]
         return None
+
+    async def decode_token_async(
+        self, *, token: str, verify_signature: bool
+    ) -> Dict[str, Any] | None:
+        """
+        Decode a JWT token, optionally without verifying its signature.
+        Args:
+            token (str): The JWT token string to decode.
+            verify_signature (bool): Whether to verify the signature using JWKS. Default is True.
+        Returns:
+            Dict[str, Any]: The decoded claims of the JWT token, or None if not a JWT.
+        """
+        assert token, "Token must not be empty"
+        # Only attempt to decode if token looks like a JWT (contains two dots)
+        if token.count(".") != 2:
+            logger.warning(
+                f"Token does not appear to be a JWT, skipping decode: {token}"
+            )
+            return None
+        if verify_signature:
+            await self.fetch_jwks_async()
+            assert self.jwks, "JWKS must be fetched before decoding tokens"
+            try:
+                decoded = jwt.decode(token, self.jwks, algorithms=self.algorithms)
+                return decoded.claims
+            except Exception as e:
+                logger.error(f"Failed to decode token: {e}")
+                raise AuthorizationNeededException(
+                    f"Invalid token provided. Please check the token: {token}"
+                ) from e
+        else:
+            try:
+                token_content = jws.extract_compact(token.encode())
+                return cast(Dict[str, Any], json.loads(token_content.payload))
+            except Exception as e:
+                logger.error(f"Failed to decode token without verification: {e}")
+                raise AuthorizationNeededException(
+                    f"Invalid token provided. Please check the token: {token}"
+                ) from e
 
     async def verify_token_async(self, *, token: str) -> Dict[str, Any]:
         """

@@ -261,6 +261,7 @@ class ContainerFactory:
                 environment_variables=c.resolve(EnvironmentVariables),
                 token_exchange_manager=c.resolve(TokenExchangeManager),
                 auth_config_reader=c.resolve(AuthConfigReader),
+                token_reader=c.resolve(TokenReader),
             ),
         )
 
