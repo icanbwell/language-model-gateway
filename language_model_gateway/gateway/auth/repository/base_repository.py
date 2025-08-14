@@ -1,6 +1,6 @@
 import logging
 from abc import abstractmethod, ABCMeta
-from typing import Any, Dict, Optional, Type
+from typing import Any, Dict, Optional, Type, Callable
 
 from bson import ObjectId
 
@@ -73,6 +73,8 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
         model_class: Type[T],
         item: T,
         keys: Dict[str, str | None],
+        on_update: Callable[[T], T] = lambda x: x,
+        on_insert: Callable[[T], T] = lambda x: x,
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.
@@ -82,6 +84,8 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
             model_class (Type[T]): Pydantic model class
             item (T): Pydantic model instance to insert or update
             keys (Dict[str, str]): Fields that uniquely identify the document
+            on_update (Callable[[T], T]): Function to apply on update
+            on_insert (Callable[[T], T]): Function to apply on insert
         Returns:
             ObjectId: The ID of the inserted or updated document
         """

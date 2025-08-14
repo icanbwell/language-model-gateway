@@ -1,9 +1,12 @@
 import json
+import logging
 from datetime import datetime, UTC
 from typing import Optional, Any, Dict, cast, List
 
 from joserfc import jws
 from pydantic import BaseModel, Field, ConfigDict
+
+logger = logging.getLogger(__name__)
 
 
 class Token(BaseModel):
@@ -42,11 +45,16 @@ class Token(BaseModel):
         Returns:
             bool: True if the token is valid, False otherwise.
         """
-        if self.expires is None:
+        if self.expires is not None:
             now: datetime = datetime.now(UTC)
             expires: datetime | None = self._make_aware_utc(self.expires)
+            logger.debug(
+                f"Token expires at {self.expires}, current time is {datetime.now(UTC)}"
+            )
             return not expires or expires > now
-        return False
+        else:
+            logger.debug(f"Expires not set for token: {self.expires}")
+            return False
 
     @classmethod
     def create(cls, *, token: str | None) -> Optional["Token"]:

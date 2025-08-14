@@ -1,12 +1,13 @@
 import logging
-from typing import Any, Dict, Optional, Type, Mapping, cast, override
-from pydantic import BaseModel
+from typing import Any, Dict, Optional, Type, Mapping, cast, override, Callable
+
+from bson import ObjectId
 from motor.motor_asyncio import (
     AsyncIOMotorClient,
     AsyncIOMotorDatabase,
     AsyncIOMotorCollection,
 )
-from bson import ObjectId
+from pydantic import BaseModel
 from pymongo.results import InsertOneResult, UpdateResult
 
 from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
@@ -297,6 +298,8 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         model_class: Type[T],
         item: T,
         keys: Dict[str, str | None],
+        on_update: Callable[[T], T] = lambda x: x,
+        on_insert: Callable[[T], T] = lambda x: x,
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.
@@ -306,6 +309,8 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             model_class (Type[T]): Pydantic model class
             item (T): Pydantic model instance to insert or update
             keys (Dict[str, str]): Fields that uniquely identify the document
+            on_update (Callable[[T], T]): Function to apply on update
+            on_insert (Callable[[T], T]): Function to apply on insert
         Returns:
             ObjectId: The ID of the inserted or updated document
         """
@@ -314,19 +319,25 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
+        # find the document by the fields that uniquely identify it
+        existing_item = await self.find_by_fields(
+            collection_name=collection_name, fields=keys, model_class=model_class
+        )
+
+        if existing_item:
+            item = on_update(existing_item)
+        else:
+            item = on_insert(item)
+
         # Convert item to dictionary
         document = self._convert_model_to_dict(item)
 
         # Remove None values to prevent storing null fields
         document = {k: v for k, v in document.items() if v is not None}
 
-        # find the document by the fields that uniquely identify it
-        existing_item = await self.find_by_fields(
-            collection_name=collection_name, fields=keys, model_class=model_class
-        )
         if existing_item:
-            # If the document exists, update it
-            update_result: UpdateResult = await collection.update_one(
+            # If the document exists, replace it
+            update_result: UpdateResult = await collection.replace_one(
                 {"_id": existing_item.id},
                 {"$set": document},
             )
@@ -336,7 +347,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
                 )
             else:
                 logger.debug(
-                    f"Document updated with ID: {existing_item.id} in collection {collection_name} with data: {document} result: {update_result}"
+                    f"Document updated with ID: {existing_item.id} in collection {collection_name} with data:\n{document}\nresult: {update_result}"
                 )
             return existing_item.id
         else:
@@ -348,6 +359,6 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
                 )
                 raise Exception("Insert operation was not acknowledged by MongoDB")
             logger.debug(
-                f"Document inserted with ID: {insert_result.inserted_id} in collection {collection_name} with data: {document} result: {insert_result}"
+                f"Document inserted with ID: {insert_result.inserted_id} in collection {collection_name} with data:\n{document}\nresult: {insert_result}"
             )
             return cast(ObjectId, insert_result.inserted_id)

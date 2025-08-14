@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, UTC
 from typing import List
 
 
@@ -268,6 +269,19 @@ class TokenExchangeManager:
         assert token_cache_item.issuer is not None, (
             "Issuer must be provided in the state for storing the token"
         )
+
+        now = datetime.now(UTC)
+
+        def on_insert(item: TokenCacheItem) -> TokenCacheItem:
+            item.created = now
+            return item
+
+        def on_update(item: TokenCacheItem) -> TokenCacheItem:
+            # update the token item with the new token
+            item.updated = now
+            item.refreshed = None
+            return item
+
         # now insert or update the token item in the database
         await mongo_repository.insert_or_update(
             collection_name=collection_name,
@@ -278,6 +292,8 @@ class TokenExchangeManager:
                 "issuer": token_cache_item.issuer,
             },
             model_class=TokenCacheItem,
+            on_insert=on_insert,
+            on_update=on_update,
         )
 
         return token_cache_item

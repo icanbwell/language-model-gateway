@@ -1,4 +1,4 @@
-from typing import Type, Dict, override, Any
+from typing import Type, Dict, override, Any, Callable
 
 from bson import ObjectId
 
@@ -82,6 +82,8 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         model_class: Type[T],
         item: T,
         keys: Dict[str, str | None],
+        on_update: Callable[[T], T] = lambda x: x,
+        on_insert: Callable[[T], T] = lambda x: x,
     ) -> ObjectId:
         """
         Insert or update a Pydantic model in the in-memory storage.
@@ -90,13 +92,17 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         :param model_class: The Pydantic model class.
         :param item: The Pydantic model instance to insert or update.
         :param keys: Fields to match for updating an existing item.
+        :param on_update: Function to apply on update (default is identity).
+        :param on_insert: Function to apply on insert (default is identity).
         :return: The ID of the inserted or updated item.
 
         """
         if item.id in self._storage:
+            item = on_update(item)
             # Update existing item
             self._storage[item.id] = item
         else:
             # Insert new item
+            item = on_insert(item)
             self._storage[item.id] = item
         return item.id
