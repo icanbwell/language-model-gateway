@@ -11,6 +11,7 @@ from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -114,17 +115,18 @@ class MCPToolProvider:
                     None,
                 )
                 if auth_header:
-                    # get the appropriate token for this tool
-                    token: (
-                        str | None
+                    # get the appropriate token_item for this tool
+                    token_item: (
+                        TokenItem | None
                     ) = await self.token_exchange_manager.get_token_for_tool_async(
                         auth_header=auth_header,
                         error_message="",
                         tool_name=tool.name,
                         tool_auth_audiences=tool.auth_audiences,
                     )
+                    token: str | None = token_item.get_token() if token_item else None
                     if token:
-                        # if we have a token, we need to add it to the Authorization header
+                        # if we have a token_item, we need to add it to the Authorization header
                         auth_header = f"Bearer {token}"
                     # add the Authorization header to the mcp_tool_config headers
                     mcp_tool_config["headers"] = {
@@ -155,7 +157,7 @@ class MCPToolProvider:
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
             )
             raise AuthorizationNeededException(
-                f"Authorization needed for MCP tools at {url}. Please provide a valid token in the Authorization header."
+                f"Authorization needed for MCP tools at {url}. Please provide a valid token_item in the Authorization header."
             ) from e
         except* McpToolUnauthorizedException as e:
             url = tool.url if tool.url else "unknown"
@@ -163,7 +165,7 @@ class MCPToolProvider:
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
             )
             raise AuthorizationNeededException(
-                f"Authorization needed for MCP tools at {url}. Please provide a valid token in the Authorization header."
+                f"Authorization needed for MCP tools at {url}. Please provide a valid token_item in the Authorization header."
             ) from e
         except* Exception as e:
             url = tool.url if tool.url else "unknown"

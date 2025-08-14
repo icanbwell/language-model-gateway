@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import Field
 
@@ -11,11 +11,11 @@ class TokenItem(BaseDbModel):
     Represents a token item in the database.
     """
 
-    created: Optional[datetime] = Field(None)
+    created: Optional[datetime] = Field(default=None)
     """The creation time of the token as a datetime object."""
-    updated: Optional[datetime] = Field(None)
+    updated: Optional[datetime] = Field(default=None)
     """The last update time of the token as a datetime object."""
-    refreshed: Optional[datetime] = Field(None)
+    refreshed: Optional[datetime] = Field(default=None)
     """The last refresh time of the token as a datetime object."""
 
     issuer: str = Field()
@@ -26,25 +26,31 @@ class TokenItem(BaseDbModel):
     """The email associated with the token, used for user identification."""
     subject: str = Field()
     """The subject of the token, typically the user ID or unique identifier."""
-    url: Optional[str] = Field(None)
+    url: Optional[str] = Field(default=None)
     """The URL associated with the token, if applicable."""
-    access_token: Optional[str] = Field(None)
+    access_token: Optional[str] = Field(default=None)
     """The access token used for authentication."""
-    id_token: Optional[str] = Field(None)
+    access_token_claims: Optional[dict[str, str | List[str]]] = Field(default=None)
+    """The claims contained within the access token."""
+    id_token: Optional[str] = Field(default=None)
     """The ID token containing user information."""
-    refresh_token: Optional[str] = Field(None)
+    id_token_claims: Optional[dict[str, str | List[str]]] = Field(default=None)
+    """The claims contained within the ID token."""
+    refresh_token: Optional[str] = Field(default=None)
     """The refresh token used to obtain new access tokens."""
-    access_token_expires: Optional[datetime] = Field(None)
+    refresh_token_claims: Optional[dict[str, str | List[str]]] = Field(default=None)
+    """The claims contained within the refresh token."""
+    access_token_expires: Optional[datetime] = Field(default=None)
     """The expiration time of the token as a datetime object."""
-    access_token_issued: Optional[datetime] = Field(None)
+    access_token_issued: Optional[datetime] = Field(default=None)
     """The creation time of the token as a datetime object."""
-    id_token_expires: Optional[datetime] = Field(None)
+    id_token_expires: Optional[datetime] = Field(default=None)
     """The expiration time of the ID token as a datetime object."""
-    id_token_issued: Optional[datetime] = Field(None)
+    id_token_issued: Optional[datetime] = Field(default=None)
     """The creation time of the ID token as a datetime object."""
-    refresh_token_expires: Optional[datetime] = Field(None)
+    refresh_token_expires: Optional[datetime] = Field(default=None)
     """The expiration time of the refresh token as a datetime object."""
-    refresh_token_issued: Optional[datetime] = Field(None)
+    refresh_token_issued: Optional[datetime] = Field(default=None)
     """The creation time of the refresh token as a datetime object."""
 
     @staticmethod
@@ -93,3 +99,11 @@ class TokenItem(BaseDbModel):
             expires: datetime | None = self._make_aware_utc(self.access_token_expires)
             return not expires or expires > now
         return False
+
+    def get_token(self) -> Optional[str]:
+        """
+        Gets the ID token if it is valid, otherwise returns the access token.
+        Returns:
+            Optional[str]: The id token if valid, otherwise the access token.
+        """
+        return self.id_token if self.id_token else self.access_token

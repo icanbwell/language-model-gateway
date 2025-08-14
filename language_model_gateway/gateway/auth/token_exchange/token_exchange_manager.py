@@ -105,7 +105,7 @@ class TokenExchangeManager:
             },
         )
 
-    async def get_valid_token_for_auth_provider_async(
+    async def get_valid_token_for_audiences_async(
         self, *, audiences: List[str], email: str
     ) -> TokenItem | None:
         """
@@ -140,7 +140,7 @@ class TokenExchangeManager:
         error_message: str,
         tool_name: str,
         tool_auth_audiences: List[str] | None,
-    ) -> str | None:
+    ) -> TokenItem | None:
         if not auth_header:
             logger.debug(f"Authorization header is missing for tool {tool_name}.")
             raise AuthorizationNeededException(
@@ -159,7 +159,9 @@ class TokenExchangeManager:
                 )
             try:
                 # verify the token
-                await self.token_reader.verify_token_async(token=token)
+                token_item: (
+                    TokenItem | None
+                ) = await self.token_reader.verify_token_async(token=token)
                 # get the audience from the token
                 token_audience: (
                     str | None
@@ -168,7 +170,7 @@ class TokenExchangeManager:
                     not tool_auth_audiences or token_audience in tool_auth_audiences
                 ):  # token is valid
                     logger.debug(f"Token is valid for tool {tool_name}.")
-                    return token
+                    return token_item
                 else:
                     # see if we have a token for this audience and email in the cache
                     email: (
@@ -177,17 +179,13 @@ class TokenExchangeManager:
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
                         TokenItem | None
-                    ) = await self.get_valid_token_for_auth_provider_async(
+                    ) = await self.get_valid_token_for_audiences_async(
                         audiences=tool_auth_audiences,
                         email=email,
                     )
                     if token_for_tool:
                         logger.debug(f"Found Token in cache for tool {tool_name}.")
-                        return (
-                            token_for_tool.id_token
-                            if token_for_tool.id_token
-                            else token_for_tool.access_token
-                        )
+                        return token_for_tool
                     else:
                         logger.debug(
                             f"Token audience found: {token_audience} for tool {tool_name}."

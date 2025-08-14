@@ -5,6 +5,7 @@ import time
 from typing import Optional, Any, Dict, List, cast
 
 import httpx
+from bson import ObjectId
 from httpx import ConnectError
 from joserfc import jwt, jws
 from aiocache import cached
@@ -16,6 +17,7 @@ from zoneinfo import ZoneInfo
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
 
 logger = logging.getLogger(__name__)
 
@@ -151,7 +153,7 @@ class TokenReader:
                     f"Invalid token provided. Please check the token: {token}"
                 ) from e
 
-    async def verify_token_async(self, *, token: str) -> Dict[str, Any]:
+    async def verify_token_async(self, *, token: str) -> TokenItem:
         """
         Verify a JWT token asynchronously using the JWKS from the provided URI.
 
@@ -200,8 +202,39 @@ class TokenReader:
             claims_requests.validate(verified.claims)
 
             logger.debug(f"Successfully verified token: {token}")
-
-            return verified.claims
+            if verified.claims.get("typ", "").lower() == "id":
+                # If the token is an ID token, we return a TokenItem with the claims
+                return TokenItem(
+                    _id=ObjectId(),
+                    id_token=token,
+                    id_token_claims=verified.claims,
+                    issuer=verified.claims["iss"],
+                    audience=verified.claims["aud"],
+                    email=verified.claims.get("email", ""),
+                    subject=verified.claims.get("sub", ""),
+                )
+            elif verified.claims.get("typ", "").lower() == "refresh":
+                # If the token is a refresh token, we return a TokenItem with the claims
+                return TokenItem(
+                    _id=ObjectId(),
+                    refresh_token=token,
+                    refresh_token_claims=verified.claims,
+                    issuer=verified.claims["iss"],
+                    audience=verified.claims["aud"],
+                    email=verified.claims.get("email", ""),
+                    subject=verified.claims.get("sub", ""),
+                )
+            else:
+                # If the token is an access token, we return a TokenItem with the claims
+                return TokenItem(
+                    _id=ObjectId(),
+                    access_token=token,
+                    access_token_claims=verified.claims,
+                    issuer=verified.claims["iss"],
+                    audience=verified.claims["aud"],
+                    email=verified.claims.get("email", ""),
+                    subject=verified.claims.get("sub", ""),
+                )
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
             raise AuthorizationNeededException(

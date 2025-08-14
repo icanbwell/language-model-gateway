@@ -5,6 +5,7 @@ import base64
 
 from joserfc import jwk
 
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from joserfc import jwt
 import time
@@ -38,24 +39,30 @@ def create_jwt_token(exp_offset: int = 60) -> str:
 
 
 def test_extract_token() -> None:
-    verifier = TokenReader(jwks_uri="https://fake-jwks-uri")
-    header = "Bearer sometoken"
-    assert verifier.extract_token(header) == "sometoken"
-    assert verifier.extract_token(None) is None
-    assert verifier.extract_token("") is None
-    assert verifier.extract_token("Basic sometoken") is None
+    token_reader: TokenReader = TokenReader(jwks_uri="https://fake-jwks-uri")
+    header: str = "Bearer sometoken"
+    assert token_reader.extract_token(header) == "sometoken"
+    assert token_reader.extract_token(None) is None
+    assert token_reader.extract_token("") is None
+    assert token_reader.extract_token("Basic sometoken") is None
 
 
 async def test_verify_token_valid(mock_jwks: Any) -> None:
-    verifier = TokenReader(jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM])
-    token = create_jwt_token()
-    claims = await verifier.verify_token_async(token=token)
-    assert claims["sub"] == "1234567890"
-    assert claims["name"] == "John Doe"
+    token_reader: TokenReader = TokenReader(
+        jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM]
+    )
+    token: str = create_jwt_token()
+    token_item: TokenItem | None = await token_reader.verify_token_async(token=token)
+    assert token_item is not None
+    assert token_item.subject == "1234567890"
+    assert token_item.id_token_claims
+    assert token_item.id_token_claims["name"] == "John Doe"
 
 
 async def test_verify_token_expired(mock_jwks: Any) -> None:
-    verifier = TokenReader(jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM])
-    token = create_jwt_token(exp_offset=-60)
+    token_reader: TokenReader = TokenReader(
+        jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM]
+    )
+    token: str = create_jwt_token(exp_offset=-60)
     with pytest.raises(ValueError, match="This OAuth Token has expired"):
-        await verifier.verify_token_async(token=token)
+        await token_reader.verify_token_async(token=token)

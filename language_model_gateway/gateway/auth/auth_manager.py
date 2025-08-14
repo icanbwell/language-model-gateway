@@ -1,9 +1,9 @@
+import httpx
 import logging
 import os
 import uuid
 from typing import Any, Dict, cast, List
 
-import httpx
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from fastapi import Request
 
@@ -17,6 +17,7 @@ from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
+from language_model_gateway.gateway.auth.models.token_item import TokenItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -259,3 +260,76 @@ class AuthManager:
             content["refresh_token_decoded"] = refresh_token_decoded
 
         return content
+
+    async def get_token_for_tool_async(
+        self,
+        *,
+        auth_header: str | None,
+        error_message: str,
+        tool_name: str,
+        tool_auth_audiences: List[str] | None,
+    ) -> TokenItem | None:
+        """
+        Get the token for the specified tool.
+
+        This method retrieves the token for the specified tool from the token exchange manager.
+        If the token is not found, it raises an AuthorizationNeededException with the provided error message.
+        Args:
+            auth_header (str | None): The Authorization header containing the token.
+            error_message (str): The error message to display if authorization is needed.
+            tool_name (str): The name of the tool for which the token is requested.
+            tool_auth_audiences (List[str] | None): The list of audiences for which the tool requires authentication.
+        Returns:
+            str | None: The token for the specified tool, or None if not found.
+        Raises:
+            AuthorizationNeededException: If the token is not found and authorization is needed.
+        """
+        return await self.token_exchange_manager.get_token_for_tool_async(
+            auth_header=auth_header,
+            error_message=error_message,
+            tool_name=tool_name,
+            tool_auth_audiences=tool_auth_audiences,
+        )
+
+    async def refresh_tokens_with_oidc(
+        self, audience: str, refresh_token: str
+    ) -> dict[str, Any]:
+        """
+        Given a refresh token, call the OIDC token endpoint using authlib and decode the returned access and ID tokens using joserfc.
+        Args:
+            audience (str): The audience/client to use for OIDC.
+            refresh_token (str): The refresh token to exchange.
+        Returns:
+            dict: Contains 'access_token', 'id_token', and their decoded claims.
+        Raises:
+            Exception: If token refresh fails or tokens are invalid.
+        """
+        client = self.oauth.create_client(audience)
+        if client is None:
+            raise ValueError(f"OIDC client for audience '{audience}' not found.")
+        # Prepare token refresh request
+        token_response = await client.fetch_token(
+            grant_type="refresh_token",
+            refresh_token=refresh_token,
+        )
+        access_token = token_response.get("access_token")
+        id_token = token_response.get("id_token")
+        if not access_token or not id_token:
+            raise Exception(
+                "OIDC token refresh did not return access_token or id_token."
+            )
+        # Decode tokens using joserfc
+        access_token_item: (
+            TokenItem | None
+        ) = await self.token_reader.verify_token_async(token=access_token)
+        id_token_item: TokenItem | None = await self.token_reader.verify_token_async(
+            token=id_token
+        )
+        return {
+            "access_token": access_token,
+            "id_token": id_token,
+            "access_token_item": access_token_item.access_token_claims
+            if access_token_item
+            else None,
+            "id_token_item": id_token_item.id_token_claims if id_token_item else None,
+        }
