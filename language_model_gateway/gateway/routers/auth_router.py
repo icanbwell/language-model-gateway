@@ -1,9 +1,8 @@
 import logging
-import os
 import traceback
 
 from enum import Enum
-from typing import Any, Sequence, Annotated, Union
+from typing import Any, Sequence, Annotated, Union, List
 
 from fastapi import APIRouter
 from fastapi import params
@@ -65,7 +64,10 @@ class AuthRouter:
 
         try:
             if audience is None:
-                audience = os.getenv("AUTH_AUDIENCE_client1")
+                auth_configs: List[AuthConfig] = (
+                    auth_config_reader.get_auth_configs_for_all_audiences()
+                )
+                audience = auth_configs[0].audience if auth_configs else None
             assert audience is not None
             auth_config: AuthConfig | None = auth_config_reader.get_config_for_audience(
                 audience=audience

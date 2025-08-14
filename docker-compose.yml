@@ -43,12 +43,9 @@ services:
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # These define the connection to the identity provider for JWT validation
-      # keycloak for local development
-      AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      AUTH_DEFAULT_ISSUER: "http://keycloak:8080/realms/bwell-realm"
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_AUDIENCES: "client1,client3,OKTA"
+      AUTH_AUDIENCES: "OKTA,client1,client3"
       # first client for testing
       AUTH_ISSUER_client1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_client1: "client1"

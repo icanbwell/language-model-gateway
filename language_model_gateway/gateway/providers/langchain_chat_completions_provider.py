@@ -10,6 +10,9 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
@@ -41,6 +44,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         token_reader: TokenReader,
         auth_manager: AuthManager,
         environment_variables: EnvironmentVariables,
+        auth_config_reader: AuthConfigReader,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -71,6 +75,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None
         assert isinstance(self.environment_variables, EnvironmentVariables)
+
+        self.auth_config_reader: AuthConfigReader = auth_config_reader
+        assert self.auth_config_reader is not None
+        assert isinstance(self.auth_config_reader, AuthConfigReader)
 
     async def chat_completions(
         self,
@@ -184,7 +192,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tool_first_issuer: str | None = (
             tool_using_authentication.issuers[0]
             if tool_using_authentication.issuers
-            else self.environment_variables.auth_default_issuer
+            else self.auth_config_reader.get_issuer_for_audience(
+                audience=tool_first_audience
+            )
         )
         assert tool_first_issuer, (
             "Tool using authentication must have at least one issuer or use the default issuer."

@@ -102,11 +102,8 @@ class ContainerFactory:
         container.singleton(
             TokenReader,
             lambda c: TokenReader(
-                jwks_uri=c.resolve(EnvironmentVariables).auth_jwks_uri,
-                issuer=c.resolve(EnvironmentVariables).auth_issuer,
-                audience=c.resolve(EnvironmentVariables).auth_audience,
                 algorithms=c.resolve(EnvironmentVariables).auth_algorithms,
-                well_known_uri=c.resolve(EnvironmentVariables).auth_well_known_uri,
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
@@ -221,6 +218,7 @@ class ContainerFactory:
                 token_reader=c.resolve(TokenReader),
                 auth_manager=c.resolve(AuthManager),
                 environment_variables=c.resolve(EnvironmentVariables),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 

@@ -4,10 +4,10 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
-    TokenExchangeManager,
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
 )
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -36,7 +36,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         token_reader: TokenReader,
         auth_manager: AuthManager,
         fn_get_response: MockChatResponseProtocol,
-        token_exchange_manager: TokenExchangeManager,
+        auth_config_reader: AuthConfigReader,
         environment_variables: EnvironmentVariables,
     ) -> None:
         super().__init__(
@@ -47,6 +47,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             token_reader=token_reader,
             auth_manager=auth_manager,
             environment_variables=environment_variables,
+            auth_config_reader=auth_config_reader,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 

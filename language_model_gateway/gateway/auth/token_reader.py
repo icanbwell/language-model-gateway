@@ -13,6 +13,10 @@ from joserfc.jwk import KeySet
 
 from zoneinfo import ZoneInfo
 
+from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_expired_exception import (
     AuthorizationBearerTokenExpiredException,
 )
@@ -35,26 +39,15 @@ class TokenReader:
     def __init__(
         self,
         *,
-        jwks_uri: Optional[str] = None,
-        well_known_uri: Optional[str] = None,
-        issuer: Optional[str] = None,
-        audience: Optional[str] = None,
         algorithms: Optional[list[str]] = None,
+        auth_config_reader: AuthConfigReader,
     ):
         """
         Initializes the TokenReader with the JWKS URI or Well-Known URI, issuer, audience, and algorithms.
         Args:
-            jwks_uri (Optional[str]): The URI to fetch the JWKS from.
-            well_known_uri (Optional[str]): The URI to fetch the OpenID Connect discovery document.
-            issuer (Optional[str]): The expected issuer of the JWT.
-            audience (Optional[str]): The expected audience of the JWT.
             algorithms (Optional[list[str]]): The list of algorithms to use for verifying the JWT.
+            auth_config_reader (AuthConfigReader): The configuration reader for authentication settings.
         """
-        assert jwks_uri or well_known_uri, (
-            "Either JWKS URI or Well-Known URI must be provided"
-        )
-        self.jwks_uri: Optional[str] = jwks_uri
-        self.well_known_uri: Optional[str] = well_known_uri
         self.algorithms: List[str] = algorithms or [
             "RS256",
             "RS384",
@@ -69,39 +62,70 @@ class TokenReader:
             "PS384",
             "PS512",
         ]
-        self.jwks: KeySet | None = None  # Will be set by async fetch
-        self.issuer: Optional[str] = issuer
-        self.audience: Optional[str] = audience
+
+        self.auth_config_reader: AuthConfigReader = auth_config_reader
+        assert self.auth_config_reader is not None, "AuthConfigReader must be provided"
+        assert isinstance(self.auth_config_reader, AuthConfigReader)
+
+        self.auth_configs: List[AuthConfig] = (
+            self.auth_config_reader.get_auth_configs_for_all_audiences()
+        )
+        assert self.auth_configs, "At least one AuthConfig must be provided"
+
+        self.well_known_configs: List[
+            Dict[str, Any]
+        ] = []  # will load asynchronously later
+        self.jwks: KeySet = KeySet(keys=[])  # Will be set by async fetch
 
     @cached(ttl=60 * 60)
-    async def fetch_jwks_async(self) -> None:
+    async def fetch_well_known_config_and_jwks_async(self) -> None:
         """
         Fetches the JWKS from the provided URI or from the well-known OpenID Connect configuration.
         This method will fetch the JWKS and store it in the `self.jwks` attribute for later use.
 
         """
-        # if we don't have a JWKS URI, try to fetch it from the well-known configuration
-        if not self.jwks_uri:
-            if not self.well_known_uri:
-                raise ValueError("Neither JWKS URI nor Well-Known URI is set")
-            self.jwks_uri, self.issuer = await self.get_jwks_uri_and_issuer_async()
 
-        async with httpx.AsyncClient() as client:
-            try:
-                logger.info(f"Fetching JWKS from {self.jwks_uri}")
-                response = await client.get(self.jwks_uri)
-                response.raise_for_status()
-                jwks_data = response.json()
-                # Store all keys in a dict for fast lookup by kid
-                self.jwks = KeySet.import_key_set(jwks_data)
-            except httpx.HTTPStatusError as e:
-                raise ValueError(
-                    f"Failed to fetch JWKS from {self.jwks_uri} with status {e.response.status_code} : {e}"
+        self.well_known_configs = []  # Reset well-known configs before fetching
+        self.jwks = KeySet(keys=[])  # Reset JWKS before fetching
+
+        for auth_config in [c for c in self.auth_configs if c.well_known_uri]:
+            if not auth_config.well_known_uri:
+                logger.warning(
+                    f"AuthConfig {auth_config} does not have a well-known URI, skipping JWKS fetch."
                 )
-            except ConnectError as e:
-                raise ConnectionError(
-                    f"Failed to connect to JWKS URI: {self.jwks_uri}: {e}"
+                continue
+
+            well_known_config: Dict[
+                str, Any
+            ] = await self.fetch_well_known_config_async(
+                well_known_uri=auth_config.well_known_uri
+            )
+
+            jwks_uri = await self.get_jwks_uri_async(
+                well_known_config=well_known_config
+            )
+            if not jwks_uri:
+                logger.warning(
+                    f"AuthConfig {auth_config} does not have a JWKS URI, skipping JWKS fetch."
                 )
+                continue
+
+            async with httpx.AsyncClient() as client:
+                try:
+                    logger.info(f"Fetching JWKS from {jwks_uri}")
+                    response = await client.get(jwks_uri)
+                    response.raise_for_status()
+                    jwks_data = response.json()
+                    # Store all keys in a dict for fast lookup by kid
+                    self.jwks.import_key_set(jwks_data)
+                except httpx.HTTPStatusError as e:
+                    raise ValueError(
+                        f"Failed to fetch JWKS from {jwks_uri} with status {e.response.status_code} : {e}"
+                    )
+                except ConnectError as e:
+                    raise ConnectionError(
+                        f"Failed to connect to JWKS URI: {jwks_uri}: {e}"
+                    )
 
     @staticmethod
     def extract_token(authorization_header: str | None) -> Optional[str]:
@@ -138,7 +162,7 @@ class TokenReader:
             )
             return None
         if verify_signature:
-            await self.fetch_jwks_async()
+            await self.fetch_well_known_config_and_jwks_async()
             assert self.jwks, "JWKS must be fetched before decoding tokens"
             try:
                 decoded = jwt.decode(token, self.jwks, algorithms=self.algorithms)
@@ -169,7 +193,7 @@ class TokenReader:
             The decoded claims if the token is valid.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
 
         exp_str: str = "None"
@@ -182,6 +206,7 @@ class TokenReader:
             now = time.time()
             # convert exp and now to ET (America/New_York) for logging
             tz = None
+            # noinspection PyBroadException
             try:
                 tz = ZoneInfo("America/New_York")
             except Exception:
@@ -191,6 +216,7 @@ class TokenReader:
                 """Convert a timestamp to a formatted string in Eastern Time (ET)."""
                 if not ts:
                     return "None"
+                # noinspection PyBroadException
                 try:
                     dt = (
                         datetime.datetime.fromtimestamp(ts, tz)
@@ -223,8 +249,10 @@ class TokenReader:
                 token=token,
             ) from e
 
-    @cached(ttl=60 * 60)
-    async def fetch_well_known_config_async(self) -> Dict[str, Any]:
+    # noinspection PyMethodMayBeStatic
+    async def fetch_well_known_config_async(
+        self, *, well_known_uri: str
+    ) -> Dict[str, Any]:
         """
         Fetches the OpenID Connect discovery document and returns its contents as a dict.
         Returns:
@@ -232,26 +260,27 @@ class TokenReader:
         Raises:
             ValueError: If the document cannot be fetched or parsed.
         """
-        if not self.well_known_uri:
+        if not well_known_uri:
             raise ValueError("well_known_uri is not set")
         async with httpx.AsyncClient() as client:
             try:
-                logger.info(
-                    f"Fetching OIDC discovery document from {self.well_known_uri}"
-                )
-                response = await client.get(self.well_known_uri)
+                logger.info(f"Fetching OIDC discovery document from {well_known_uri}")
+                response = await client.get(well_known_uri)
                 response.raise_for_status()
                 return cast(Dict[str, Any], response.json())
             except httpx.HTTPStatusError as e:
                 raise ValueError(
-                    f"Failed to fetch OIDC discovery document from {self.well_known_uri} with status {e.response.status_code} : {e}"
+                    f"Failed to fetch OIDC discovery document from {well_known_uri} with status {e.response.status_code} : {e}"
                 )
             except ConnectError as e:
                 raise ConnectionError(
-                    f"Failed to connect to OIDC discovery document: {self.well_known_uri}: {e}"
+                    f"Failed to connect to OIDC discovery document: {well_known_uri}: {e}"
                 )
 
-    async def get_jwks_uri_and_issuer_async(self) -> tuple[str, str]:
+    # noinspection PyMethodMayBeStatic
+    async def get_jwks_uri_async(
+        self, *, well_known_config: Dict[str, Any]
+    ) -> str | None:
         """
         Retrieves the JWKS URI and issuer from the well-known OpenID Connect configuration.
         Returns:
@@ -259,12 +288,11 @@ class TokenReader:
         Raises:
             ValueError: If required fields are missing.
         """
-        config = await self.fetch_well_known_config_async()
-        jwks_uri = config.get("jwks_uri")
-        issuer = config.get("issuer")
+        jwks_uri: str | None = well_known_config.get("jwks_uri")
+        issuer = well_known_config.get("issuer")
         if not jwks_uri or not issuer:
             raise ValueError("jwks_uri or issuer not found in well-known configuration")
-        return jwks_uri, issuer
+        return jwks_uri
 
     async def get_subject_from_token_async(self, token: str) -> Optional[str]:
         """
@@ -275,7 +303,7 @@ class TokenReader:
             Optional[str]: The subject claim if present, otherwise None.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
@@ -295,7 +323,7 @@ class TokenReader:
             Optional[datetime.datetime]: The expiration time as a datetime object if present, otherwise None.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
@@ -316,7 +344,7 @@ class TokenReader:
             Optional[str]: The issuer claim if present, otherwise None.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
@@ -334,7 +362,7 @@ class TokenReader:
             Optional[str]: The audience claim if present, otherwise None.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
@@ -354,7 +382,7 @@ class TokenReader:
             Optional[datetime.datetime]: The issued at time as a datetime object if present, otherwise None.
         """
         assert token, "Token must not be empty"
-        await self.fetch_jwks_async()
+        await self.fetch_well_known_config_and_jwks_async()
         assert self.jwks, "JWKS must be fetched before verifying tokens"
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims

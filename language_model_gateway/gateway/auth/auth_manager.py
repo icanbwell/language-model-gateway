@@ -60,9 +60,6 @@ class AuthManager:
         It sets up the OAuth cache, reads environment variables for the OIDC provider,
         and configures the OAuth client.
         The environment variables required are:
-        - AUTH_PROVIDER_NAME: The name of the OIDC provider.
-        - AUTH_WELL_KNOWN_URI: The well-known URL of the OIDC provider
-        - AUTH_REDIRECT_URI: The redirect URI for the OIDC application.
         - MONGO_URL: The connection string for the MongoDB database.
         - MONGO_DB_NAME: The name of the MongoDB database.
         - MONGO_DB_TOKEN_COLLECTION_NAME: The name of the MongoDB collection for tokens.
@@ -105,11 +102,7 @@ class AuthManager:
             f"Initializing AuthManager with cache type {type(self.cache)} cache id: {self.cache.id}"
         )
         # OIDC PKCE setup
-        self.well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
         self.redirect_uri = os.getenv("AUTH_REDIRECT_URI")
-        assert self.well_known_url is not None, (
-            "AUTH_WELL_KNOWN_URI environment variable must be set"
-        )
         assert self.redirect_uri is not None, (
             "AUTH_REDIRECT_URI environment variable must be set"
         )

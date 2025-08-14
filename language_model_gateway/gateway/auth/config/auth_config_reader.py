@@ -68,3 +68,17 @@ class AuthConfigReader:
             client_secret=auth_client_secret,
             well_known_uri=auth_well_known_uri,
         )
+
+    def get_issuer_for_audience(self, *, audience: str) -> str:
+        """
+        Get the issuer for a specific audience.
+
+        Args:
+            audience (str): The audience for which to retrieve the issuer.
+
+        Returns:
+            str: The issuer for the specified audience.
+        """
+        auth_config: AuthConfig | None = self.get_config_for_audience(audience=audience)
+        assert auth_config is not None, f"AuthConfig for audience {audience} not found."
+        return auth_config.issuer

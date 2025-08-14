@@ -39,9 +39,11 @@ def test_login_route() -> None:
     reason="Have to use the password grant flow for real LLM tests",
 )
 def test_callback_route() -> None:
-    well_known_url = os.getenv("AUTH_WELL_KNOWN_URI")
     client_id = os.getenv("AUTH_CLIENT_ID_bwell-client-id-3")
     redirect_uri = os.getenv("AUTH_REDIRECT_URI")
+    well_known_url = (
+        "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+    )
 
     mock: MockRouter | None = None
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
@@ -91,9 +93,6 @@ def test_callback_route() -> None:
         # this is the URL that the client will be redirected to for authentication
         # it should match the authorization_endpoint in the well-known configuration
         # and the client_id and redirect_uri should match the ones in the environment variables
-        assert well_known_url is not None, (
-            "AUTH_WELL_KNOWN_URI environment variable must be set"
-        )
         assert client_id is not None, (
             "AUTH_CLIENT_ID_bwell-client-id environment variable must be set"
         )
