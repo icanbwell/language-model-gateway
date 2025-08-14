@@ -1,29 +1,43 @@
 import logging
-from typing import Any, AsyncIterator
 
 import httpx
+
+from language_model_gateway.gateway.utilities.logger.logging_response import (
+    LoggingResponse,
+)
 
 logger = logging.getLogger(__name__)
 
 
-class LogResponse(httpx.Response):
-    async def aiter_bytes(self, *args: Any, **kwargs: Any) -> AsyncIterator[bytes]:
-        logger.debug(
-            f"====== Response: {self.request.method} {self.url} {self.status_code} ====="
-        )
-        async for chunk in super().aiter_bytes(*args, **kwargs):
-            logger.debug(chunk)
-            yield chunk
-        logger.debug(
-            f"====== End Response: {self.request.method} {self.url} {self.status_code} ====="
-        )
-
-
 class LoggingTransport(httpx.AsyncBaseTransport):
-    def __init__(self, transport: httpx.AsyncBaseTransport) -> None:
-        self.transport = transport
+    """
+    A custom HTTP transport that logs request and response details.
+    This class extends httpx.AsyncBaseTransport to log the request method, URL,
+    headers, and content before sending the request, and logs the response status code,
+    headers, and content as it is streamed back.
+    It is designed to be used with httpx for asynchronous HTTP requests.
+    It logs the request method, URL, headers, and content before sending the request,
+    and logs the response status code, headers, and content as it is streamed back.
+    This transport can be used to monitor and debug HTTP requests and responses in an application.
+    """
 
-    async def handle_async_request(self, request: httpx.Request) -> LogResponse:
+    def __init__(self, transport: httpx.AsyncBaseTransport) -> None:
+        """
+        Initialize the LoggingTransport with a given transport.
+        Args:
+            transport (httpx.AsyncBaseTransport): The underlying transport to wrap.
+            This transport will handle the actual HTTP requests and responses.
+        """
+        self.transport: httpx.AsyncBaseTransport = transport
+
+    async def handle_async_request(self, request: httpx.Request) -> LoggingResponse:
+        """
+        Handle an asynchronous HTTP request, logging the request details and returning a LoggingResponse.
+        Args:
+            request (httpx.Request): The HTTP request to handle.
+        Returns:
+            LoggingResponse: A custom response object that logs the response details.
+        """
         # log the request
         logger.debug(f" ====== Request: {request.method} {request.url} =====")
         logger.debug(f"Headers: {request.headers}")
@@ -35,7 +49,7 @@ class LoggingTransport(httpx.AsyncBaseTransport):
 
         response = await self.transport.handle_async_request(request)
 
-        return LogResponse(
+        return LoggingResponse(
             status_code=response.status_code,
             headers=response.headers,
             stream=response.stream,

@@ -5,6 +5,10 @@ from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 
 
 class OAuthMemoryCache(OAuthCache):
+    """
+    In-memory implementation of OAuth cache
+    """
+
     @property
     def id(self) -> uuid.UUID:
         return self.id_

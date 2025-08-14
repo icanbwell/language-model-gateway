@@ -5,9 +5,11 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
 
 class AuthorizationBearerTokenMissingException(AuthorizationNeededException):
     """
-    Exception raised when authorization is needed for a specific operation.
-    This exception is used to indicate that the user needs to authenticate
-    or provide valid credentials before proceeding with the operation.
+    Exception raised when a bearer token is missing.
+    This exception is used to indicate that the required bearer token is not present
+    in the request headers or parameters, and therefore authorization cannot be performed.
+    It inherits from AuthorizationNeededException and provides a message to indicate the
+    nature of the error.
     """
 
     def __init__(self, *, message: str) -> None:

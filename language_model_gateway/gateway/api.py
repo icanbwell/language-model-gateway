@@ -42,7 +42,7 @@ logging.basicConfig(
 logging.getLogger("httpcore.http11").setLevel(logging.WARNING)
 logging.getLogger("httpcore.connection").setLevel(logging.WARNING)
 
-logging.getLogger("authlib").setLevel(logging.DEBUG)
+logging.getLogger("authlib").setLevel(logging.INFO)
 
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")

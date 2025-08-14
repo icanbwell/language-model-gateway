@@ -5,9 +5,11 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
 
 class AuthorizationBearerTokenInvalidException(AuthorizationNeededException):
     """
-    Exception raised when authorization is needed for a specific operation.
-    This exception is used to indicate that the user needs to authenticate
-    or provide valid credentials before proceeding with the operation.
+    Exception raised when a bearer token is invalid.
+    This exception is used to indicate that the provided token does not meet the
+    required format or is not recognized by the authentication system.
+    It inherits from AuthorizationNeededException and provides additional context
+    about the invalid token.
     """
 
     def __init__(self, *, message: str, token: str) -> None:

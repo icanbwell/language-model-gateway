@@ -3,6 +3,10 @@ from abc import abstractmethod, ABCMeta
 
 
 class OAuthCache(metaclass=ABCMeta):
+    """
+    Base class for OAuthCache
+    """
+
     @property
     @abstractmethod
     def id(self) -> uuid.UUID:

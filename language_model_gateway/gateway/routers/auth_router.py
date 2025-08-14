@@ -10,7 +10,7 @@ from fastapi.params import Depends
 from fastapi.responses import RedirectResponse
 from starlette.datastructures import URL
 from starlette.requests import Request
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, HTMLResponse
 
 from language_model_gateway.gateway.api_container import (
     get_auth_manager,
@@ -26,6 +26,10 @@ logger = logging.getLogger(__name__)
 
 
 class AuthRouter:
+    """
+    AuthRouter is a FastAPI router for handling authentication-related routes.
+    """
+
     def __init__(
         self,
         *,
@@ -33,6 +37,13 @@ class AuthRouter:
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
     ) -> None:
+        """
+        Initialize the AuthRouter with a prefix, tags, and dependencies.
+        Args:
+            prefix (str): The prefix for the router's routes, default is "/auth".
+            tags (list[str | Enum] | None): Tags to categorize the routes, default is ["models"].
+            dependencies (Sequence[params.Depends] | None): Dependencies to be applied to all routes in this router, default is an empty list.
+        """
         self.prefix = prefix
         self.tags = tags or ["models"]
         self.dependencies = dependencies or []
@@ -60,6 +71,16 @@ class AuthRouter:
         ],
         audience: str | None = None,
     ) -> Union[RedirectResponse, JSONResponse]:
+        """
+        Handle the login route for authentication.
+        This route initiates the authentication process by redirecting the user to the
+        authorization server's login page.
+        Args:
+            request (Request): The incoming request object.
+            auth_manager (AuthManager): The authentication manager instance.
+            auth_config_reader (AuthConfigReader): The authentication configuration reader instance.
+            audience (str | None): The audience for which to authenticate. If None, the first audience from the config will be used.
+        """
         redirect_uri1: URL = request.url_for("auth_callback")
 
         try:
@@ -98,16 +119,25 @@ class AuthRouter:
         self,
         request: Request,
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
-    ) -> JSONResponse:
+    ) -> Union[JSONResponse, HTMLResponse]:
         logger.info(f"Received request for auth callback: {request.url}")
-        # return JSONResponse(
-        #     content={"message": "Processing auth callback..."},
-        #     status_code=200,
-        # )
         try:
             content: dict[str, Any] = await auth_manager.read_callback_response(
                 request=request,
             )
+            if not logger.isEnabledFor(logging.DEBUG):
+                from starlette.responses import HTMLResponse
+
+                html_content = """
+                <html>
+                    <head><title>Token Saved</title></head>
+                    <body>
+                        <h2>Your new token has been saved.</h2>
+                        <p>You can now retry your question.</p>
+                    </body>
+                </html>
+                """
+                return HTMLResponse(content=html_content, status_code=200)
             return JSONResponse(content)
         except Exception as e:
             exc: str = traceback.format_exc()

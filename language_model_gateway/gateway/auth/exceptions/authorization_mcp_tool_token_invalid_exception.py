@@ -6,9 +6,11 @@ from language_model_gateway.gateway.auth.models.token import Token
 
 class AuthorizationMcpToolTokenInvalidException(AuthorizationNeededException):
     """
-    Exception raised when authorization is needed for a specific operation.
-    This exception is used to indicate that the user needs to authenticate
-    or provide valid credentials before proceeding with the operation.
+    Exception raised when a tool token is invalid.
+    This exception is used to indicate that the provided tool token does not meet the
+    required format or is not recognized by the authentication system.
+    It inherits from AuthorizationNeededException and provides additional context
+    about the invalid token and the tool URL.
     """
 
     def __init__(self, *, message: str, token: Token | None, tool_url: str) -> None:

@@ -5,9 +5,14 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
 
 class AuthorizationBearerTokenExpiredException(AuthorizationNeededException):
     """
-    Exception raised when authorization is needed for a specific operation.
-    This exception is used to indicate that the user needs to authenticate
-    or provide valid credentials before proceeding with the operation.
+    Exception raised when a bearer token has expired and needs to be refreshed.
+    This exception is used to indicate that the current token is no longer valid and
+    a new token must be obtained to continue the operation.
+    It inherits from AuthorizationNeededException and provides additional context
+    about the expired token, including its expiration time and the current time.
+    It also includes the issuer and audience of the token, if available.
+    This exception is typically raised in scenarios where a token is required for
+    authentication or authorization, and the existing token has expired.
     """
 
     def __init__(

@@ -7,8 +7,17 @@ from language_model_gateway.gateway.utilities.environment_variables import (
 
 
 class AuthConfigReader:
+    """
+    A class to read authentication configurations from environment variables.
+    """
+
     def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
-        self.environment_variables = environment_variables
+        """
+        Initialize the AuthConfigReader with an EnvironmentVariables instance.
+        Args:
+            environment_variables (EnvironmentVariables): An instance of EnvironmentVariables to read auth configurations.
+        """
+        self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None, (
             "AuthConfigReader requires an EnvironmentVariables instance."
         )

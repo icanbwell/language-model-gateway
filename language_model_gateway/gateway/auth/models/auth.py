@@ -5,7 +5,15 @@ from pydantic import BaseModel
 
 
 class AuthInformation(BaseModel):
+    """
+    Represents the information about the authenticated user or client.
+    """
+
     redirect_uri: Optional[str]
+    """The URI to redirect to after authentication, if applicable."""
     claims: Optional[dict[str, Any]]
+    """The claims associated with the authenticated user or client."""
     audience: Optional[str | List[str]]
+    """The audience for which the token is intended, can be a single string or a list of strings."""
     expires_at: Optional[datetime]
+    """The expiration time of the authentication token, if applicable."""
