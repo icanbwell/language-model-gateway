@@ -86,8 +86,8 @@ class TokenReader:
         """
 
         self.well_known_configs = []  # Reset well-known configs before fetching
-        self.jwks = KeySet(keys=[])  # Reset JWKS before fetching
 
+        keys: List[Dict[str, Any]] = []
         for auth_config in [c for c in self.auth_configs if c.well_known_uri]:
             if not auth_config.well_known_uri:
                 logger.warning(
@@ -115,9 +115,15 @@ class TokenReader:
                     logger.info(f"Fetching JWKS from {jwks_uri}")
                     response = await client.get(jwks_uri)
                     response.raise_for_status()
-                    jwks_data = response.json()
-                    # Store all keys in a dict for fast lookup by kid
-                    self.jwks.import_key_set(jwks_data)
+                    jwks_data: Dict[str, Any] = response.json()
+                    for key in jwks_data.get("keys", []):
+                        # if there is no matching "kid" in keys then add it
+                        if not any(k.get("kid") == key.get("kid") for k in keys):
+                            keys.append(key)
+
+                    logger.info(
+                        f"Successfully fetched JWKS from {jwks_uri}, keys= {len(keys)}"
+                    )
                 except httpx.HTTPStatusError as e:
                     raise ValueError(
                         f"Failed to fetch JWKS from {jwks_uri} with status {e.response.status_code} : {e}"
@@ -126,6 +132,13 @@ class TokenReader:
                     raise ConnectionError(
                         f"Failed to connect to JWKS URI: {jwks_uri}: {e}"
                     )
+
+        self.jwks = KeySet.import_key_set(
+            {
+                "keys": keys,
+            }
+        )
+        logger.debug(f"Fetched JWKS with {len(self.jwks.keys)} keys.")
 
     @staticmethod
     def extract_token(authorization_header: str | None) -> Optional[str]:
@@ -198,9 +211,13 @@ class TokenReader:
 
         exp_str: str = "None"
         now_str: str = "None"
+        issuer: Optional[str] = None
+        audience: Optional[str] = None
         try:
             # Validate the token
             verified = jwt.decode(token, self.jwks, algorithms=self.algorithms)
+            issuer = verified.claims.get("iss")
+            audience = verified.claims.get("aud")
 
             exp = verified.claims.get("exp")
             now = time.time()
@@ -238,10 +255,14 @@ class TokenReader:
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
             raise AuthorizationBearerTokenExpiredException(
-                message=f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}.\nPlease Sign Out and Sign In to get a fresh OAuth token.",
+                message=f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}."
+                + "\nPlease Sign Out and Sign In to get a fresh OAuth token."
+                + f"\nissuer: {issuer}, audience: {audience}",
                 expires=exp_str,
                 now=now_str,
                 token=token,
+                issuer=issuer,
+                audience=audience,
             ) from e
         except Exception as e:
             raise AuthorizationBearerTokenInvalidException(

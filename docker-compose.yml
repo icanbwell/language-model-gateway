@@ -45,7 +45,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_AUDIENCES: "OKTA,client1,client3"
+      AUTH_AUDIENCES: "client1,client3,OKTA"
       # first client for testing
       AUTH_ISSUER_client1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_client1: "client1"
@@ -60,7 +60,8 @@ services:
       AUTH_WELL_KNOWN_URI_client3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # Okta for dev and production
       AUTH_ISSUER_OKTA: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTA: "https://icanbwell.okta.com"
+#      AUTH_AUDIENCE_OKTA: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTA: "0oatz6lcbwmIkbXUD697"
       # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
       AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
       # This is the URL that the user will be redirected to after authentication
@@ -151,8 +152,8 @@ services:
       CLIENT_ID: bwell-client-id
       CLIENT_SECRET: bwell-secret
       CLIENT_AUDIENCE: client1
-      CLIENT_ACCESS_TOKEN_LIFE_SPAN: 60
-      CLIENT_ID_TOKEN_LIFE_SPAN: 60
+      CLIENT_ACCESS_TOKEN_LIFE_SPAN: 600
+      CLIENT_ID_TOKEN_LIFE_SPAN: 600
       CLIENT_REFRESH_TOKEN_LIFE_SPAN: 3600
       # for client 2
       CLIENT_ID_2: bwell-client-id-2

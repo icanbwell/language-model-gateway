@@ -10,7 +10,16 @@ class AuthorizationBearerTokenExpiredException(AuthorizationNeededException):
     or provide valid credentials before proceeding with the operation.
     """
 
-    def __init__(self, *, message: str, token: str, expires: str, now: str) -> None:
+    def __init__(
+        self,
+        *,
+        message: str,
+        token: str,
+        expires: str,
+        now: str,
+        issuer: str | None,
+        audience: str | None,
+    ) -> None:
         """
         Initialize the AuthorizationNeededException with a message and an optional token cache item.
         """
@@ -19,3 +28,5 @@ class AuthorizationBearerTokenExpiredException(AuthorizationNeededException):
         self.token: str = token
         self.expires: str = expires
         self.now: str = now
+        self.issuer: str | None = issuer
+        self.audience: str | None = audience
