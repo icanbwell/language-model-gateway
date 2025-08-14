@@ -51,20 +51,7 @@ class TokenReader:
             auth_config_reader (AuthConfigReader): The configuration reader for authentication settings.
         """
         self.uuid: UUID = uuid.uuid4()
-        self.algorithms: List[str] = algorithms or [
-            "RS256",
-            "RS384",
-            "RS512",
-            "HS256",
-            "HS384",
-            "HS512",
-            "ES256",
-            "ES384",
-            "ES512",
-            "PS256",
-            "PS384",
-            "PS512",
-        ]
+        self.algorithms: List[str] | None = algorithms or None
 
         self.auth_config_reader: AuthConfigReader = auth_config_reader
         assert self.auth_config_reader is not None, "AuthConfigReader must be provided"
