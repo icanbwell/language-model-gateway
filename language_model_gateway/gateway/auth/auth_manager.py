@@ -337,11 +337,15 @@ class AuthManager:
                 e.token_cache_item
                 and e.token_cache_item.audience
                 and e.token_cache_item.is_expired()
+                and e.token_cache_item.refresh_token
             ):
-                return await self.refresh_tokens_with_oidc(
+                refreshed_token = await self.refresh_tokens_with_oidc(
                     audience=e.token_cache_item.audience,
                     token_cache_item=e.token_cache_item,
                 )
+                return refreshed_token
+            else:
+                raise e
 
         logger.debug(
             f"No valid token found for tool '{tool_name}' with {tool_auth_audiences}."

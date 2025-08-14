@@ -14,6 +14,7 @@ from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token
 )
 from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
@@ -122,7 +123,7 @@ class MCPToolProvider:
                     ),
                     None,
                 )
-                if auth_header:
+                if auth_header and tool.auth_audiences:
                     # get the appropriate token_item for this tool
                     token_item: (
                         TokenCacheItem | None
@@ -136,6 +137,21 @@ class MCPToolProvider:
                     if token:
                         # if we have a token_item, we need to add it to the Authorization header
                         auth_header = f"Bearer {token.token}"
+                    else:
+                        auth_bearer_token: str | None = TokenReader.extract_token(
+                            authorization_header=auth_header
+                        )
+                        auth_token: Token | None = Token.create(token=auth_bearer_token)
+                        raise AuthorizationMcpToolTokenInvalidException(
+                            message=f"No token found.  Authorization needed for MCP tools at {url}. "
+                            + f" for audiences {tool.auth_audiences}"
+                            + f", token_email: {auth_token.email if auth_token else 'None'}"
+                            + f", token_audience: {auth_token.audience if auth_token else 'None'}"
+                            + f", token_subject: {auth_token.subject if auth_token else 'None'}",
+                            tool_url=url,
+                            token=token,
+                        )
+
                     # add the Authorization header to the mcp_tool_config headers
                     mcp_tool_config["headers"] = {
                         **mcp_tool_config.get("headers", {}),
@@ -165,7 +181,9 @@ class MCPToolProvider:
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
             )
             raise AuthorizationMcpToolTokenInvalidException(
-                message=f"Authorization needed for MCP tools at {url}. Please provide a valid token_item in the Authorization header.",
+                message=f"Authorization needed for MCP tools at {url}. "
+                + "Please provide a valid token_item in the Authorization header."
+                + f" token: {token.audience if token else 'None'}",
                 tool_url=url,
                 token=token,
             ) from e
@@ -175,7 +193,9 @@ class MCPToolProvider:
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(e)} {e}"
             )
             raise AuthorizationMcpToolTokenInvalidException(
-                message=f"Authorization needed for MCP tools at {url}. Please provide a valid token_item in the Authorization header.",
+                message=f"Authorization needed for MCP tools at {url}. "
+                + "Please provide a valid token_item in the Authorization header."
+                + f" token: {token.audience if token else 'None'}",
                 tool_url=url,
                 token=token,
             ) from e
