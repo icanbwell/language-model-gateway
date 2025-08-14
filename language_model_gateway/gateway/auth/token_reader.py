@@ -2,16 +2,18 @@ import datetime
 import json
 import logging
 import time
+import uuid
 from typing import Optional, Any, Dict, List, cast
+from uuid import UUID
 
 import httpx
 from httpx import ConnectError
 from joserfc import jwt, jws
-from aiocache import cached
 from joserfc.errors import ExpiredTokenError
 from joserfc.jwk import KeySet
 
 from zoneinfo import ZoneInfo
+
 
 from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
@@ -48,6 +50,7 @@ class TokenReader:
             algorithms (Optional[list[str]]): The list of algorithms to use for verifying the JWT.
             auth_config_reader (AuthConfigReader): The configuration reader for authentication settings.
         """
+        self.uuid: UUID = uuid.uuid4()
         self.algorithms: List[str] = algorithms or [
             "RS256",
             "RS384",
@@ -77,13 +80,16 @@ class TokenReader:
         ] = []  # will load asynchronously later
         self.jwks: KeySet = KeySet(keys=[])  # Will be set by async fetch
 
-    @cached(ttl=60 * 60)
     async def fetch_well_known_config_and_jwks_async(self) -> None:
         """
         Fetches the JWKS from the provided URI or from the well-known OpenID Connect configuration.
         This method will fetch the JWKS and store it in the `self.jwks` attribute for later use.
 
         """
+        if len(self.jwks.keys) > 0:
+            return  # If JWKS is already fetched, skip fetching again
+
+        logger.debug(f"Fetching well-known configurations and JWKS for id {self.uuid}.")
 
         self.well_known_configs = []  # Reset well-known configs before fetching
 
