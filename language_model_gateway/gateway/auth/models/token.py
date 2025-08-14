@@ -28,17 +28,6 @@ class Token(BaseModel):
     issuer: Optional[str] = Field(default=None)
     """The issuer of the token, typically the authorization server."""
 
-    @staticmethod
-    def _make_aware_utc(dt: Optional[datetime]) -> Optional[datetime]:
-        """
-        Ensure a datetime is offset-aware in UTC. If offset-naive, convert to UTC-aware.
-        """
-        if dt is None:
-            return None
-        if dt.tzinfo is None:
-            return dt.replace(tzinfo=UTC)
-        return dt.astimezone(UTC)
-
     def is_valid(self) -> bool:
         """
         Check if the token is valid based on its expiration time.
@@ -47,10 +36,11 @@ class Token(BaseModel):
         """
         if self.expires is not None:
             now: datetime = datetime.now(UTC)
-            expires: datetime | None = self._make_aware_utc(self.expires)
-            logger.debug(
-                f"Token expires at {self.expires}, current time is {datetime.now(UTC)}"
-            )
+            expires: datetime | None = self.expires
+            # Ensure expires is timezone-aware for comparison
+            if expires is not None and expires.tzinfo is None:
+                expires = expires.replace(tzinfo=UTC)
+            logger.debug(f"Token expires at {expires}, current time is {now}")
             return not expires or expires > now
         else:
             logger.debug(f"Expires not set for token: {self.expires}")
@@ -83,8 +73,8 @@ class Token(BaseModel):
         )
         return cls(
             token=token,
-            expires=cls._make_aware_utc(expires_dt),
-            issued=cls._make_aware_utc(issued_dt),
+            expires=expires_dt,
+            issued=issued_dt,
             claims=claims,
             issuer=claims.get("iss"),
         )
