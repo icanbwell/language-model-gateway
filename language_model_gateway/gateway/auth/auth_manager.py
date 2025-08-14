@@ -317,6 +317,7 @@ class AuthManager:
                 return token_cache_item
 
             if token_cache_item.audience and token_cache_item.is_expired():
+                logger.debug(f"Token for tool '{tool_name}' is expired, refreshing...")
                 return await self.refresh_tokens_with_oidc(
                     audience=token_cache_item.audience,
                     token_cache_item=token_cache_item,
@@ -326,8 +327,12 @@ class AuthManager:
                     f"Token for tool '{tool_name}' is not expired:"
                     + f"\n{token_cache_item.id_token.model_dump_json() if token_cache_item.id_token else 'No ID token found.'}."
                 )
+                return token_cache_item
         except AuthorizationTokenCacheItemExpiredException as e:
             # if the token is expired, try to refresh it
+            logger.debug(
+                f"Token for tool '{tool_name}' is expired, trying to refresh: {e.message}"
+            )
             if (
                 e.token_cache_item
                 and e.token_cache_item.audience
@@ -338,6 +343,9 @@ class AuthManager:
                     token_cache_item=e.token_cache_item,
                 )
 
+        logger.debug(
+            f"No valid token found for tool '{tool_name}' with {tool_auth_audiences}."
+        )
         return None
 
     async def refresh_tokens_with_oidc(

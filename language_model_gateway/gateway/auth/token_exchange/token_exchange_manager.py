@@ -68,7 +68,7 @@ class TokenExchangeManager:
         )
         assert isinstance(token_reader, TokenReader)
 
-    async def get_token_for_auth_provider_async(
+    async def get_token_for_audience_and_email(
         self, *, audience: str, email: str
     ) -> TokenCacheItem | None:
         """
@@ -163,7 +163,7 @@ class TokenExchangeManager:
 
         found_cache_item: TokenCacheItem | None = None
         for audience in audiences:
-            token: TokenCacheItem | None = await self.get_token_for_auth_provider_async(
+            token: TokenCacheItem | None = await self.get_token_for_audience_and_email(
                 audience=audience, email=email
             )
             if token:
@@ -182,6 +182,9 @@ class TokenExchangeManager:
                     )
                     found_cache_item = token
 
+        logger.debug(
+            f"Found token cache item for audiences {audiences} email {email}: {found_cache_item}"
+        )
         return found_cache_item
 
     async def get_token_for_tool_async(
@@ -206,6 +209,9 @@ class TokenExchangeManager:
         Returns:
             Token | None: The token item if the token is valid, otherwise raises an exception.
         """
+        logger.debug(
+            f"Getting token for tool {tool_name} with audiences {tool_auth_audiences}."
+        )
         if not auth_header:
             logger.debug(f"Authorization header is missing for tool {tool_name}.")
             raise AuthorizationBearerTokenMissingException(
@@ -254,12 +260,17 @@ class TokenExchangeManager:
                             logger.debug(f"Found Token in cache for tool {tool_name}.")
                             return token_for_tool
                         else:
+                            logger.debug(f"Token has expired for tool {tool_name}.")
                             raise AuthorizationTokenCacheItemExpiredException(
                                 message=f"Your token has expired for tool {tool_name}."
                                 + error_message,
                                 token_cache_item=token_for_tool,
                             )
                     else:
+                        logger.debug(
+                            "Token provided in Authorization header has wrong audience:"
+                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
+                        )
                         raise AuthorizationTokenCacheItemNotFoundException(
                             message="Token provided in Authorization header has wrong audience:"
                             + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
