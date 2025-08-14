@@ -41,7 +41,7 @@
       "url": "http://mcp_server_gateway:5000/google_drive/",
       "auth": "jwt_token",
       "auth_audiences": [
-        "client3"
+        "OKTA"
       ]
     }
   ],

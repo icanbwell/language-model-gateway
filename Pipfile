@@ -93,7 +93,7 @@ aiocache = ">=0.12.3"
 # motor is a Python library for working with MongoDB asynchronously
 motor = ">=3.7.1"
 # pymongo is a Python library for working with MongoDB
-pymongo = ">=4.14.0"
+pymongo = { version = ">=4.14.0", extras = ["srv"] }
 # redis is a Python library for working with Redis
 redis = ">=6.4.0"
 
