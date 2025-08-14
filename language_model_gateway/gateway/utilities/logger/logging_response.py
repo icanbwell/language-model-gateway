@@ -1,8 +1,9 @@
+import logging
 from typing import Any, AsyncIterator
 
 import httpx
 
-from language_model_gateway.gateway.utilities.logger.logging_transport import logger
+logger = logging.getLogger(__name__)
 
 
 class LoggingResponse(httpx.Response):
