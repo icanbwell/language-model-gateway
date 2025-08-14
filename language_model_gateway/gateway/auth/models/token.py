@@ -1,6 +1,6 @@
 import json
 from datetime import datetime, UTC
-from typing import Optional, Any, Dict, cast
+from typing import Optional, Any, Dict, cast, List
 
 from joserfc import jws
 from pydantic import BaseModel, Field, ConfigDict
@@ -24,8 +24,6 @@ class Token(BaseModel):
     """Additional claims associated with the token."""
     issuer: Optional[str] = Field(default=None)
     """The issuer of the token, typically the authorization server."""
-    audience: Optional[str] = Field(default=None)
-    """The intended audience for the token, usually the resource server."""
 
     @staticmethod
     def _make_aware_utc(dt: Optional[datetime]) -> Optional[datetime]:
@@ -63,13 +61,24 @@ class Token(BaseModel):
         # parse the token but don't verify it
         token_content = jws.extract_compact(token.encode())
         claims: Dict[str, Any] = cast(Dict[str, Any], json.loads(token_content.payload))
+        exp = claims.get("exp")
+        iat = claims.get("iat")
+        expires_dt = (
+            datetime.fromtimestamp(exp, tz=UTC)
+            if isinstance(exp, (int, float))
+            else None
+        )
+        issued_dt = (
+            datetime.fromtimestamp(iat, tz=UTC)
+            if isinstance(iat, (int, float))
+            else None
+        )
         return cls(
             token=token,
-            expires=cls._make_aware_utc(claims.get("exp")),
-            issued=cls._make_aware_utc(claims.get("iat")),
+            expires=cls._make_aware_utc(expires_dt),
+            issued=cls._make_aware_utc(issued_dt),
             claims=claims,
             issuer=claims.get("iss"),
-            audience=claims.get("aud"),
         )
 
     @property
@@ -136,3 +145,18 @@ class Token(BaseModel):
             str: The email associated with the token, typically the user's email address.
         """
         return self.claims.get("email") if self.claims else None
+
+    @property
+    def audience(self) -> str | List[str] | None:
+        """
+        Get the audience of the token.
+        Returns:
+            str | List[str]: The audience of the token, which can be a single string or a list of strings.
+        """
+        if not self.claims:
+            return None
+
+        aud = self.claims.get("aud")
+        if isinstance(aud, list):
+            return aud
+        return aud if isinstance(aud, str) else None

@@ -177,7 +177,7 @@ class TokenExchangeManager:
                 )
                 assert token_item is not None
                 # get the audience from the token
-                token_audience: str | None = token_item.audience
+                token_audience: str | List[str] | None = token_item.audience
                 if (
                     not tool_auth_audiences or token_audience in tool_auth_audiences
                 ):  # token is valid

@@ -21,9 +21,9 @@ class TokenCacheItem(BaseDbModel):
     refreshed: Optional[datetime] = Field(default=None)
     """The last refresh time of the token as a datetime object."""
 
-    issuer: str = Field()
+    issuer: str | None = Field()
     """The issuer of the token, typically the authorization server."""
-    audience: str = Field()
+    audience: str | None = Field()
     """The intended audience for the token, usually the resource server."""
     email: str | None = Field(default=None)
     """The email associated with the token, used for user identification."""
@@ -74,13 +74,20 @@ class TokenCacheItem(BaseDbModel):
     def create(cls, *, token: Token) -> "TokenCacheItem":
         # see what the token this is
 
+        audience: str | None = None
+        if isinstance(token.audience, list):
+            if len(token.audience) == 1:
+                audience = token.audience[0]
+        elif isinstance(token.audience, str):
+            audience = token.audience
+
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
             created=datetime.now(UTC),
             updated=None,
             refreshed=None,
-            issuer=token.issuer or "",
-            audience=token.audience or "",
+            issuer=token.issuer,
+            audience=audience,
             email=token.email,
             subject=token.subject,
             referrer=None,

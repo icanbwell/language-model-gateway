@@ -309,7 +309,7 @@ class AuthManager:
         if token_item.is_valid_id_token():
             return token_item
 
-        if token_item.is_expired():
+        if token_item.audience and token_item.is_expired():
             return await self.refresh_tokens_with_oidc(
                 audience=token_item.audience,
                 token_cache_item=token_item,
