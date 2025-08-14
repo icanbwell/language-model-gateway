@@ -29,7 +29,7 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     @override
     async def find_by_fields(
-        self, collection_name: str, model_class: type[T], fields: dict[str, str]
+        self, collection_name: str, model_class: type[T], fields: dict[str, str | None]
     ) -> T | None:
         for item in self._storage.values():
             if all(getattr(item, k) == v for k, v in fields.items()):
@@ -81,7 +81,7 @@ class AsyncMemoryRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        keys: Dict[str, str],
+        keys: Dict[str, str | None],
     ) -> ObjectId:
         """
         Insert or update a Pydantic model in the in-memory storage.

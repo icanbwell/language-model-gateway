@@ -38,7 +38,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
         self,
         collection_name: str,
         model_class: Type[T],
-        fields: Dict[str, str],
+        fields: Dict[str, str | None],
     ) -> Optional[T]: ...
 
     @abstractmethod
@@ -72,7 +72,7 @@ class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        keys: Dict[str, str],
+        keys: Dict[str, str | None],
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.

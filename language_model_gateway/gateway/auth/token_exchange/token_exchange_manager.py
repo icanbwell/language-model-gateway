@@ -1,13 +1,12 @@
 import logging
-from datetime import datetime, UTC
 from typing import List
 
-from bson import ObjectId
 
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
 )
@@ -33,7 +32,7 @@ class TokenExchangeManager:
         assert environment_variables is not None
         assert environment_variables.mongo_uri is not None
         assert environment_variables.mongo_db_name is not None
-        self.token_repository: AsyncBaseRepository[TokenItem] = (
+        self.token_repository: AsyncBaseRepository[TokenCacheItem] = (
             RepositoryFactory.get_repository(
                 repository_type=environment_variables.oauth_cache,
                 environment_variables=environment_variables,
@@ -62,7 +61,7 @@ class TokenExchangeManager:
 
     async def get_token_for_auth_provider_async(
         self, *, audience: str, email: str
-    ) -> TokenItem | None:
+    ) -> TokenCacheItem | None:
         """
         Get the token for the OIDC provider.
 
@@ -73,9 +72,9 @@ class TokenExchangeManager:
         """
 
         # see if the token is in the cache
-        token: TokenItem | None = await self.token_repository.find_by_fields(
+        token: TokenCacheItem | None = await self.token_repository.find_by_fields(
             collection_name=self.token_collection_name,
-            model_class=TokenItem,
+            model_class=TokenCacheItem,
             fields={
                 "email": email,
                 "audience": audience,
@@ -84,7 +83,7 @@ class TokenExchangeManager:
         return token
 
     async def store_token_async(
-        self, *, token: TokenItem, email: str, audience: str
+        self, *, token: TokenCacheItem, email: str, audience: str
     ) -> None:
         """
         Store the token in the cache or MongoDB.
@@ -97,7 +96,7 @@ class TokenExchangeManager:
         """
         await self.token_repository.insert_or_update(
             collection_name=self.token_collection_name,
-            model_class=TokenItem,
+            model_class=TokenCacheItem,
             item=token,
             keys={
                 "email": email,
@@ -107,7 +106,7 @@ class TokenExchangeManager:
 
     async def get_valid_token_for_audiences_async(
         self, *, audiences: List[str], email: str
-    ) -> TokenItem | None:
+    ) -> TokenCacheItem | None:
         """
         Check if a valid token exists for the given OIDC provider and email.
 
@@ -124,7 +123,7 @@ class TokenExchangeManager:
             return None
 
         for audience in audiences:
-            token: TokenItem | None = await self.get_token_for_auth_provider_async(
+            token: TokenCacheItem | None = await self.get_token_for_auth_provider_async(
                 audience=audience, email=email
             )
             # we really care about the id token
@@ -140,7 +139,21 @@ class TokenExchangeManager:
         error_message: str,
         tool_name: str,
         tool_auth_audiences: List[str] | None,
-    ) -> TokenItem | None:
+    ) -> TokenCacheItem | None:
+        """
+        Get the token for the tool using the Authorization header.
+
+        This method checks if the Authorization header is present and extracts the token.
+        If the token is valid, it returns the token item. If the token is not valid
+        or the Authorization header is missing, it raises an AuthorizationNeededException.
+        Args:
+            auth_header (str | None): The Authorization header containing the token.
+            error_message (str): The error message to include in the exception if the token is invalid
+            tool_name (str): The name of the tool for which the token is being requested.
+            tool_auth_audiences (List[str] | None): The list of audiences for the tool.
+        Returns:
+            Token | None: The token item if the token is valid, otherwise raises an exception.
+        """
         if not auth_header:
             logger.debug(f"Authorization header is missing for tool {tool_name}.")
             raise AuthorizationNeededException(
@@ -159,18 +172,19 @@ class TokenExchangeManager:
                 )
             try:
                 # verify the token
-                token_item: (
-                    TokenItem | None
-                ) = await self.token_reader.verify_token_async(token=token)
+                token_item: Token | None = await self.token_reader.verify_token_async(
+                    token=token
+                )
+                assert token_item is not None
                 # get the audience from the token
-                token_audience: (
-                    str | None
-                ) = await self.token_reader.get_audience_from_token_async(token=token)
+                token_audience: str | None = token_item.audience
                 if (
                     not tool_auth_audiences or token_audience in tool_auth_audiences
                 ):  # token is valid
                     logger.debug(f"Token is valid for tool {tool_name}.")
-                    return token_item
+                    return TokenCacheItem.create(
+                        token=token_item,
+                    )
                 else:
                     # see if we have a token for this audience and email in the cache
                     email: (
@@ -178,7 +192,7 @@ class TokenExchangeManager:
                     ) = await self.token_reader.get_subject_from_token_async(token)
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
-                        TokenItem | None
+                        TokenCacheItem | None
                     ) = await self.get_valid_token_for_audiences_async(
                         audiences=tool_auth_audiences,
                         email=email,
@@ -210,15 +224,8 @@ class TokenExchangeManager:
     async def save_token_async(
         self,
         *,
-        access_token: str | None,
-        email: str,
-        subject: str,
-        id_token: str | None,
-        refresh_token: str | None,
-        issuer: str | None,
-        audience: str,
-        url: str | None,
-    ) -> None:
+        token_cache_item: TokenCacheItem,
+    ) -> TokenCacheItem:
         """
         Save the token to the database.
 
@@ -227,14 +234,7 @@ class TokenExchangeManager:
         item and inserts it into the database.
 
         Args:
-            access_token (str | None): The access token to store.
-            email (str): The email associated with the token.
-            subject (str): The subject of the token, typically the user ID or unique identifier.
-            id_token (str | None): The ID token to store.
-            refresh_token (str | None): The refresh token to store.
-            issuer (str | None): The issuer of the token.
-            audience (str): The audience for which the token is valid.
-            url (str | None): The URL associated with the token.
+            token_cache_item: TokenCacheItem to store in the database.
         """
         connection_string = self.environment_variables.mongo_uri
         assert connection_string is not None, (
@@ -244,7 +244,7 @@ class TokenExchangeManager:
         assert database_name is not None, (
             "MONGO_DB_NAME environment variable must be set"
         )
-        mongo_repository: AsyncBaseRepository[TokenItem] = (
+        mongo_repository: AsyncBaseRepository[TokenCacheItem] = (
             RepositoryFactory.get_repository(
                 repository_type=self.environment_variables.oauth_cache,
                 environment_variables=self.environment_variables,
@@ -254,101 +254,19 @@ class TokenExchangeManager:
         assert collection_name is not None, (
             "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
         )
-        assert issuer is not None, (
+        assert token_cache_item.issuer is not None, (
             "Issuer must be provided in the state for storing the token"
         )
-        stored_token_item: TokenItem | None = await mongo_repository.find_by_fields(
-            collection_name=collection_name,
-            model_class=TokenItem,
-            fields={
-                "email": email,
-                "name": audience,
-                "issuer": issuer,
-            },
-        )
-        assert access_token or id_token, (
-            "Either id_token or access_token must be provided to store the token"
-        )
-        access_token_expires: datetime | None = (
-            await self.token_reader.get_expires_from_token_async(token=access_token)
-            if access_token
-            else None
-        )
-        id_token_expires: datetime | None = (
-            await self.token_reader.get_expires_from_token_async(token=id_token)
-            if id_token
-            else None
-        )
-        refresh_token_expires: datetime | None = (
-            await self.token_reader.get_expires_from_token_async(token=refresh_token)
-            if refresh_token
-            else None
-        )
-        access_token_issued: datetime | None = (
-            await self.token_reader.get_issued_from_token_async(token=access_token)
-            if access_token
-            else None
-        )
-        id_token_issued: datetime | None = (
-            await self.token_reader.get_issued_from_token_async(token=id_token)
-            if id_token
-            else None
-        )
-        refresh_token_issued: datetime | None = (
-            await self.token_reader.get_issued_from_token_async(token=refresh_token)
-            if refresh_token
-            else None
-        )
-        now: datetime = datetime.now(UTC)
-
-        # Create a new token item if it does not exist
-        if stored_token_item is None:
-            stored_token_item = TokenItem(
-                _id=ObjectId(),
-                created=now,
-                updated=None,
-                issuer=issuer,
-                audience=audience,
-                email=email,
-                subject=subject,
-                url=url,
-                access_token=access_token,
-                id_token=id_token,
-                refresh_token=refresh_token,
-                access_token_expires=access_token_expires
-                if access_token_expires
-                else None,
-                id_token_expires=id_token_expires,
-                refresh_token_expires=refresh_token_expires,
-                access_token_issued=access_token_issued,
-                id_token_issued=id_token_issued,
-                refresh_token_issued=refresh_token_issued,
-                refreshed=None,
-            )
-        else:
-            # Update the existing token item
-            stored_token_item.updated = now
-            stored_token_item.access_token = access_token
-            stored_token_item.id_token = id_token
-            stored_token_item.refresh_token = refresh_token
-            stored_token_item.access_token_expires = access_token_expires
-            stored_token_item.id_token_expires = id_token_expires
-            stored_token_item.refresh_token_expires = refresh_token_expires
-            stored_token_item.access_token_issued = access_token_issued
-            stored_token_item.id_token_issued = id_token_issued
-            stored_token_item.refresh_token_issued = refresh_token_issued
-            stored_token_item.refreshed = (
-                None  # since we are storing a new token, we set refreshed to None
-            )
-
         # now insert or update the token item in the database
         await mongo_repository.insert_or_update(
             collection_name=collection_name,
-            item=stored_token_item,
+            item=token_cache_item,
             keys={
-                "email": email,
-                "audience": audience,
-                "issuer": issuer,
+                "email": token_cache_item.email,
+                "audience": token_cache_item.audience,
+                "issuer": token_cache_item.issuer,
             },
-            model_class=TokenItem,
+            model_class=TokenCacheItem,
         )
+
+        return token_cache_item

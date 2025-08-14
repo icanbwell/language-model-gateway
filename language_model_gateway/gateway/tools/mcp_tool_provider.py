@@ -11,7 +11,8 @@ from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -117,17 +118,17 @@ class MCPToolProvider:
                 if auth_header:
                     # get the appropriate token_item for this tool
                     token_item: (
-                        TokenItem | None
+                        TokenCacheItem | None
                     ) = await self.token_exchange_manager.get_token_for_tool_async(
                         auth_header=auth_header,
                         error_message="",
                         tool_name=tool.name,
                         tool_auth_audiences=tool.auth_audiences,
                     )
-                    token: str | None = token_item.get_token() if token_item else None
+                    token: Token | None = token_item.get_token() if token_item else None
                     if token:
                         # if we have a token_item, we need to add it to the Authorization header
-                        auth_header = f"Bearer {token}"
+                        auth_header = f"Bearer {token.token}"
                     # add the Authorization header to the mcp_tool_config headers
                     mcp_tool_config["headers"] = {
                         **mcp_tool_config.get("headers", {}),

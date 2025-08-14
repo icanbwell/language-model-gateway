@@ -1,0 +1,138 @@
+import json
+from datetime import datetime, UTC
+from typing import Optional, Any, Dict, cast
+
+from joserfc import jws
+from pydantic import BaseModel, Field, ConfigDict
+
+
+class Token(BaseModel):
+    """
+    Represents a token with its associated properties.
+    """
+
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
+    token: str = Field(...)
+    """The token string."""
+    expires: Optional[datetime] = Field(default=None)
+    """The expiration time of the token."""
+    issued: Optional[datetime] = Field(default=None)
+    """The time when the token was issued."""
+    claims: Optional[dict[str, Any]] = Field(default=None)
+    """Additional claims associated with the token."""
+    issuer: Optional[str] = Field(default=None)
+    """The issuer of the token, typically the authorization server."""
+    audience: Optional[str] = Field(default=None)
+    """The intended audience for the token, usually the resource server."""
+
+    @staticmethod
+    def _make_aware_utc(dt: Optional[datetime]) -> Optional[datetime]:
+        """
+        Ensure a datetime is offset-aware in UTC. If offset-naive, convert to UTC-aware.
+        """
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            return dt.replace(tzinfo=UTC)
+        return dt.astimezone(UTC)
+
+    def is_valid(self) -> bool:
+        """
+        Check if the token is valid based on its expiration time.
+        Returns:
+            bool: True if the token is valid, False otherwise.
+        """
+        if self.expires is None:
+            now: datetime = datetime.now(UTC)
+            expires: datetime | None = self._make_aware_utc(self.expires)
+            return not expires or expires > now
+        return False
+
+    @classmethod
+    def create(cls, *, token: str | None) -> Optional["Token"]:
+        """
+        Create a Token instance from a JWS compact token string.  Extracts claims and expiration information.
+        Args:
+            token (str): The JWS compact token string.
+        """
+        if not token:
+            return None
+
+        # parse the token but don't verify it
+        token_content = jws.extract_compact(token.encode())
+        claims: Dict[str, Any] = cast(Dict[str, Any], json.loads(token_content.payload))
+        return cls(
+            token=token,
+            expires=cls._make_aware_utc(claims.get("exp")),
+            issued=cls._make_aware_utc(claims.get("iat")),
+            claims=claims,
+            issuer=claims.get("iss"),
+            audience=claims.get("aud"),
+        )
+
+    @property
+    def token_type(self) -> str | None:
+        """
+        Get the type of the token.
+        Returns:
+            str: The type of the token, which is always "Bearer".
+        """
+        return self.claims.get("typ") if self.claims else None
+
+    @property
+    def is_id_token(self) -> bool:
+        """
+        Check if the token is an ID token.
+        Returns:
+            bool: True if the token is an ID token, False otherwise.
+        """
+        return self.token_type.lower() == "id" if self.token_type else False
+
+    @property
+    def is_access_token(self) -> bool:
+        """
+        Check if the token is an access token.
+        Returns:
+            bool: True if the token is an access token, False otherwise.
+        """
+        return (
+            self.token_type.lower() == "bearer" if self.token_type else True
+        )  # assume all other tokens are access tokens
+
+    @property
+    def is_refresh_token(self) -> bool:
+        """
+        Check if the token is a refresh token.
+        Returns:
+            bool: True if the token is a refresh token, False otherwise.
+        """
+        return self.token_type.lower() == "refresh" if self.token_type else False
+
+    @property
+    def subject(self) -> str | None:
+        """
+        Get the subject of the token.
+        Returns:
+            str: The subject of the token, typically the user ID or unique identifier.
+        """
+        return self.claims.get("sub") if self.claims else None
+
+    @property
+    def name(self) -> str | None:
+        """
+        Get the name associated with the token.
+        Returns:
+            str: The name associated with the token, typically the user's name.
+        """
+        return self.claims.get("name") if self.claims else None
+
+    @property
+    def email(self) -> str | None:
+        """
+        Get the email associated with the token.
+        Returns:
+            str: The email associated with the token, typically the user's email address.
+        """
+        return self.claims.get("email") if self.claims else None

@@ -1,3 +1,5 @@
+from datetime import datetime, UTC
+
 import httpx
 import logging
 import os
@@ -5,6 +7,7 @@ import uuid
 from typing import Any, Dict, cast, List
 
 from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
+from bson import ObjectId
 from fastapi import Request
 
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
@@ -17,7 +20,8 @@ from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -194,6 +198,7 @@ class AuthManager:
         audience: str | None = state_decoded.get("audience")
         logger.debug(f"Audience retrieved: {audience}")
         issuer: str | None = state_decoded.get("issuer")
+        assert issuer is not None, "Issuer must be provided in the callback"
         logger.debug(f"Issuer retrieved: {issuer}")
         url: str | None = state_decoded.get("url")
         logger.debug(f"URL retrieved: {url}")
@@ -219,15 +224,20 @@ class AuthManager:
         }
         audience = state_decoded["audience"]
 
-        await self.token_exchange_manager.save_token_async(
-            access_token=access_token,
+        token_cache_item: TokenCacheItem = TokenCacheItem(
+            _id=ObjectId(),
+            access_token=Token.create(token=access_token),
+            id_token=Token.create(token=id_token),
+            refresh_token=Token.create(token=refresh_token),
             email=email,
             subject=subject,
-            id_token=id_token,
-            refresh_token=refresh_token,
             issuer=issuer,
             audience=audience,
-            url=url,
+            referrer=url,
+        )
+
+        await self.token_exchange_manager.save_token_async(
+            token_cache_item=token_cache_item,
         )
 
         if logger.isEnabledFor(logging.DEBUG):
@@ -268,7 +278,7 @@ class AuthManager:
         error_message: str,
         tool_name: str,
         tool_auth_audiences: List[str] | None,
-    ) -> TokenItem | None:
+    ) -> TokenCacheItem | None:
         """
         Get the token for the specified tool.
 
@@ -284,52 +294,73 @@ class AuthManager:
         Raises:
             AuthorizationNeededException: If the token is not found and authorization is needed.
         """
-        return await self.token_exchange_manager.get_token_for_tool_async(
+        token_item: (
+            TokenCacheItem | None
+        ) = await self.token_exchange_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
             tool_name=tool_name,
             tool_auth_audiences=tool_auth_audiences,
         )
+        if token_item is None:
+            return None
+
+        # if id_token is valid, return it
+        if token_item.is_valid_id_token():
+            return token_item
+
+        if token_item.is_expired():
+            return await self.refresh_tokens_with_oidc(
+                audience=token_item.audience,
+                token_cache_item=token_item,
+            )
+
+        return None
 
     async def refresh_tokens_with_oidc(
-        self, audience: str, refresh_token: str
-    ) -> dict[str, Any]:
+        self, audience: str, token_cache_item: TokenCacheItem
+    ) -> TokenCacheItem | None:
         """
         Given a refresh token, call the OIDC token endpoint using authlib and decode the returned access and ID tokens using joserfc.
         Args:
             audience (str): The audience/client to use for OIDC.
-            refresh_token (str): The refresh token to exchange.
+            token_cache_item (TokenCacheItem): The token item to use for OIDC.
         Returns:
             dict: Contains 'access_token', 'id_token', and their decoded claims.
         Raises:
             Exception: If token refresh fails or tokens are invalid.
         """
-        client = self.oauth.create_client(audience)
+        client: StarletteOAuth2App = self.oauth.create_client(audience)
         if client is None:
             raise ValueError(f"OIDC client for audience '{audience}' not found.")
+
+        if (
+            not token_cache_item.refresh_token
+            or not token_cache_item.is_valid_refresh_token()
+        ):
+            return None
+
         # Prepare token refresh request
-        token_response = await client.fetch_token(
+        token_response: Dict[str, Any] = await client.fetch_access_token(
             grant_type="refresh_token",
-            refresh_token=refresh_token,
+            refresh_token=token_cache_item.refresh_token.token,
         )
         access_token = token_response.get("access_token")
         id_token = token_response.get("id_token")
+        refresh_token = token_response.get("refresh_token")
         if not access_token or not id_token:
             raise Exception(
                 "OIDC token refresh did not return access_token or id_token."
             )
-        # Decode tokens using joserfc
-        access_token_item: (
-            TokenItem | None
-        ) = await self.token_reader.verify_token_async(token=access_token)
-        id_token_item: TokenItem | None = await self.token_reader.verify_token_async(
-            token=id_token
+
+        token_cache_item.access_token = Token.create(token=access_token)
+        token_cache_item.id_token = Token.create(token=id_token)
+        token_cache_item.refresh_token = Token.create(token=refresh_token)
+        token_cache_item.refreshed = datetime.now(tz=UTC)
+
+        new_token_item: TokenCacheItem = (
+            await self.token_exchange_manager.save_token_async(
+                token_cache_item=token_cache_item,
+            )
         )
-        return {
-            "access_token": access_token,
-            "id_token": id_token,
-            "access_token_item": access_token_item.access_token_claims
-            if access_token_item
-            else None,
-            "id_token_item": id_token_item.id_token_claims if id_token_item else None,
-        }
+        return new_token_item

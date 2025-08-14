@@ -19,7 +19,7 @@ from language_model_gateway.gateway.auth.exceptions.authorization_needed_excepti
     AuthorizationNeededException,
 )
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
@@ -126,12 +126,12 @@ class ChatCompletionsRouter:
                 token = token_reader.extract_token(auth_header)
                 if token:
                     # verify the token
-                    token_item: (
-                        TokenItem | None
-                    ) = await token_reader.verify_token_async(token=token)
+                    token_item: Token | None = await token_reader.verify_token_async(
+                        token=token
+                    )
                     if token_item is not None:
-                        auth_information.claims = token_item.id_token_claims
-                        auth_information.expires_at = token_item.id_token_expires
+                        auth_information.claims = token_item.claims
+                        auth_information.expires_at = token_item.expires
                         auth_information.audience = token_item.audience
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations

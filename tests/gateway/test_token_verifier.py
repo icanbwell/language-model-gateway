@@ -5,7 +5,7 @@ import base64
 
 from joserfc import jwk
 
-from language_model_gateway.gateway.auth.models.token_item import TokenItem
+from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from joserfc import jwt
 import time
@@ -52,11 +52,10 @@ async def test_verify_token_valid(mock_jwks: Any) -> None:
         jwks_uri="https://fake-jwks-uri", algorithms=[ALGORITHM]
     )
     token: str = create_jwt_token()
-    token_item: TokenItem | None = await token_reader.verify_token_async(token=token)
+    token_item: Token | None = await token_reader.verify_token_async(token=token)
     assert token_item is not None
     assert token_item.subject == "1234567890"
-    assert token_item.id_token_claims
-    assert token_item.id_token_claims["name"] == "John Doe"
+    assert token_item.name == "John Doe"
 
 
 async def test_verify_token_expired(mock_jwks: Any) -> None:

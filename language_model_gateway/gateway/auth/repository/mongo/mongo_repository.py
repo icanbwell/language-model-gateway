@@ -131,7 +131,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         self,
         collection_name: str,
         model_class: Type[T],
-        fields: Dict[str, str],
+        fields: Dict[str, str | None],
     ) -> Optional[T]:
         """
         Find a document by a specific field value asynchronously.
@@ -296,7 +296,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         collection_name: str,
         model_class: Type[T],
         item: T,
-        keys: Dict[str, str],
+        keys: Dict[str, str | None],
     ) -> ObjectId:
         """
         Insert a new item or update an existing one in the collection.

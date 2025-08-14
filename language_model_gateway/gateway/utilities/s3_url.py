@@ -8,7 +8,7 @@ class S3Url(object):
     'bucket'
     >>> s.key
     'hello/world'
-    >>> s.url
+    >>> s.referrer
     's3://bucket/hello/world'
 
     >>> s = S3Url("s3://bucket/hello/world?qwe1=3#ddd")
@@ -16,13 +16,13 @@ class S3Url(object):
     'bucket'
     >>> s.key
     'hello/world?qwe1=3#ddd'
-    >>> s.url
+    >>> s.referrer
     's3://bucket/hello/world?qwe1=3#ddd'
 
     >>> s = S3Url("s3://bucket/hello/world#foo?bar=2")
     >>> s.key
     'hello/world#foo?bar=2'
-    >>> s.url
+    >>> s.referrer
     's3://bucket/hello/world#foo?bar=2'
     """
 
