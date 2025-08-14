@@ -11,7 +11,8 @@ services:
       DD_TRACE_ENABLED: "false"
       LOG_LEVEL: DEBUG
       # These define the connection to the identity provider for JWT validation
-      AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+#      AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      AUTH_WELL_KNOWN_URI: "https://icanbwell.okta.com/.well-known/openid-configuration"
     env_file: docker.env
     command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
