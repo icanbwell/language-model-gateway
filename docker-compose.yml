@@ -154,12 +154,20 @@ services:
       CLIENT_ID: bwell-client-id
       CLIENT_SECRET: bwell-secret
       CLIENT_AUDIENCE: client1
+      CLIENT_ACCESS_TOKEN_LIFE_SPAN: 60
+      CLIENT_ID_TOKEN_LIFE_SPAN: 60
+      CLIENT_REFRESH_TOKEN_LIFE_SPAN: 3600
+      # for client 2
       CLIENT_ID_2: bwell-client-id-2
       CLIENT_SECRET_2: bwell-secret-2
       CLIENT_AUDIENCE_2: client2
+      # for client 3
       CLIENT_ID_3: bwell-client-id-3
       CLIENT_SECRET_3: bwell-secret-3
       CLIENT_AUDIENCE_3: client3
+      CLIENT_ACCESS_TOKEN_LIFE_SPAN_3: 60
+      CLIENT_ID_TOKEN_LIFE_SPAN_3: 60
+      CLIENT_REFRESH_TOKEN_LIFE_SPAN_3: 3600
       # This is the service account that will be created in the realm
       SERVICE_ACCOUNT_NAME: service-account
       SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*

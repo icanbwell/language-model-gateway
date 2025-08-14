@@ -240,7 +240,7 @@ class AuthManager:
         )
 
         await self.token_exchange_manager.save_token_async(
-            token_cache_item=token_cache_item,
+            token_cache_item=token_cache_item, refreshed=False
         )
 
         if logger.isEnabledFor(logging.DEBUG):
@@ -399,7 +399,7 @@ class AuthManager:
 
         new_token_item: TokenCacheItem = (
             await self.token_exchange_manager.save_token_async(
-                token_cache_item=token_cache_item,
+                token_cache_item=token_cache_item, refreshed=True
             )
         )
         return new_token_item

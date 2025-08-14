@@ -315,7 +315,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             ObjectId: The ID of the inserted or updated document
         """
         logger.debug(
-            f"Inserting or updating item in collection {collection_name} with data: {item}"
+            f"Inserting or updating item in collection {collection_name} with data:\n{item.model_dump_json()}"
         )
         collection: AsyncIOMotorCollection = self._db[collection_name]
 
@@ -338,8 +338,8 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         if existing_item:
             # If the document exists, replace it
             update_result: UpdateResult = await collection.replace_one(
-                {"_id": existing_item.id},
-                {"$set": document},
+                filter={"_id": existing_item.id},
+                replacement=document,
             )
             if update_result.modified_count == 0:
                 logger.debug(

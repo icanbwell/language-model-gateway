@@ -210,8 +210,15 @@ def configure_keycloak() -> None:
             "redirectUris": ["*"],
             "webOrigins": ["*"],
             "attributes": {
-                "access.token.lifespan": 3600,
-                "id.token.lifespan": 3600,
+                "access.token.lifespan": int(
+                    os.getenv("CLIENT_ACCESS_TOKEN_LIFE_SPAN", "3600")
+                ),
+                "id.token.lifespan": int(
+                    os.getenv("CLIENT_ID_TOKEN_LIFE_SPAN", "3600")
+                ),
+                "refresh.token.lifespan": int(
+                    os.getenv("CLIENT_REFRESH_TOKEN_LIFE_SPAN", "3600")
+                ),
                 "post.logout.redirect.uris": "https://open-webui.localhost",
             },
             "defaultClientScopes": [
@@ -388,6 +395,18 @@ def configure_keycloak() -> None:
             "secret": os.getenv("CLIENT_SECRET_3", "bwell-secret-3"),
             "redirectUris": ["*"],
             "webOrigins": ["*"],
+            "attributes": {
+                "access.token.lifespan": int(
+                    os.getenv("CLIENT_ACCESS_TOKEN_LIFE_SPAN_3", "3600")
+                ),
+                "id.token.lifespan": int(
+                    os.getenv("CLIENT_ID_TOKEN_LIFE_SPAN_3", "3600")
+                ),
+                "refresh.token.lifespan": int(
+                    os.getenv("CLIENT_REFRESH_TOKEN_LIFE_SPAN_3", "3600")
+                ),
+                "post.logout.redirect.uris": "https://open-webui.localhost",
+            },
             "protocolMappers": [
                 {
                     "name": "aud-hardcoded-client1",

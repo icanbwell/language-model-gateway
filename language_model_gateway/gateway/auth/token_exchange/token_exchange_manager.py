@@ -279,9 +279,7 @@ class TokenExchangeManager:
                 ) from e
 
     async def save_token_async(
-        self,
-        *,
-        token_cache_item: TokenCacheItem,
+        self, *, token_cache_item: TokenCacheItem, refreshed: bool
     ) -> TokenCacheItem:
         """
         Save the token to the database.
@@ -292,6 +290,7 @@ class TokenExchangeManager:
 
         Args:
             token_cache_item: TokenCacheItem to store in the database.
+            refreshed: bool indicating if the token was refreshed.
         """
         connection_string = self.environment_variables.mongo_uri
         assert connection_string is not None, (
@@ -324,7 +323,7 @@ class TokenExchangeManager:
         def on_update(item: TokenCacheItem) -> TokenCacheItem:
             # update the token item with the new token
             item.updated = now
-            item.refreshed = None
+            item.refreshed = now if refreshed else None
             return item
 
         # now insert or update the token item in the database
