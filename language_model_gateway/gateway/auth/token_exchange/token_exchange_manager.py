@@ -2,9 +2,17 @@ import logging
 from datetime import datetime, UTC
 from typing import List
 
-
+from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_missing_exception import (
+    AuthorizationBearerTokenMissingException,
+)
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
+)
+from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
+    AuthorizationTokenCacheItemExpiredException,
+)
+from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_not_found_exception import (
+    AuthorizationTokenCacheItemNotFoundException,
 )
 from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
@@ -105,7 +113,7 @@ class TokenExchangeManager:
             },
         )
 
-    async def get_valid_token_for_audiences_async(
+    async def get_valid_token_cache_item_for_audiences_async(
         self, *, audiences: List[str], email: str
     ) -> TokenCacheItem | None:
         """
@@ -123,6 +131,37 @@ class TokenExchangeManager:
         if not email:
             return None
 
+        found_cache_item: (
+            TokenCacheItem | None
+        ) = await self.get_token_cache_item_for_audiences_async(
+            audiences=audiences, email=email
+        )
+        return (
+            found_cache_item
+            if found_cache_item and found_cache_item.is_valid_id_token()
+            else None
+        )
+
+    async def get_token_cache_item_for_audiences_async(
+        self, *, audiences: List[str], email: str
+    ) -> TokenCacheItem | None:
+        """
+        Check if a valid token exists for the given OIDC provider and email.
+        If no valid token is found then it will return the last found token.
+
+        Args:
+            audiences (List[str]): The OIDC audiences to check.
+            email (str): The email associated with the token.
+
+        Returns:
+            bool: True if a valid token exists, False otherwise.
+        """
+        # check if the bearer token has audience same as the auth provider name
+        assert audiences is not None
+        if not email:
+            return None
+
+        found_cache_item: TokenCacheItem | None = None
         for audience in audiences:
             token: TokenCacheItem | None = await self.get_token_for_auth_provider_async(
                 audience=audience, email=email
@@ -141,8 +180,9 @@ class TokenExchangeManager:
                     logger.info(
                         f"Token found is not valid for audience {audience} and email {email}: {token.model_dump_json() if token else 'None'}"
                     )
+                    found_cache_item = token
 
-        return None
+        return found_cache_item
 
     async def get_token_for_tool_async(
         self,
@@ -168,9 +208,9 @@ class TokenExchangeManager:
         """
         if not auth_header:
             logger.debug(f"Authorization header is missing for tool {tool_name}.")
-            raise AuthorizationNeededException(
-                "Authorization header is required for MCP tools with JWT authentication."
-                + error_message
+            raise AuthorizationBearerTokenMissingException(
+                message="Authorization header is required for MCP tools with JWT authentication."
+                + error_message,
             )
         else:  # auth_header is present
             token: str | None = self.token_reader.extract_token(auth_header)
@@ -178,9 +218,9 @@ class TokenExchangeManager:
                 logger.debug(
                     f"No token found in Authorization header for tool {tool_name}."
                 )
-                raise AuthorizationNeededException(
-                    "Invalid Authorization header format. Expected 'Bearer <token>'"
-                    + error_message
+                raise AuthorizationBearerTokenMissingException(
+                    message="Invalid Authorization header format. Expected 'Bearer <token>'"
+                    + error_message,
                 )
             try:
                 # verify the token
@@ -205,22 +245,27 @@ class TokenExchangeManager:
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
                         TokenCacheItem | None
-                    ) = await self.get_valid_token_for_audiences_async(
+                    ) = await self.get_token_cache_item_for_audiences_async(
                         audiences=tool_auth_audiences,
                         email=email,
                     )
                     if token_for_tool:
-                        logger.debug(f"Found Token in cache for tool {tool_name}.")
-                        return token_for_tool
+                        if token_for_tool.is_valid_id_token():
+                            logger.debug(f"Found Token in cache for tool {tool_name}.")
+                            return token_for_tool
+                        else:
+                            raise AuthorizationTokenCacheItemExpiredException(
+                                message=f"Your token has expired for tool {tool_name}."
+                                + error_message,
+                                token_cache_item=token_for_tool,
+                            )
                     else:
-                        logger.debug(
-                            f"Token audience found: {token_audience} for tool {tool_name}."
-                        )
-                        raise AuthorizationNeededException(
-                            "Token provided in Authorization header has wrong audience:"
+                        raise AuthorizationTokenCacheItemNotFoundException(
+                            message="Token provided in Authorization header has wrong audience:"
                             + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
                             + "\nCould not find a cached token for the tool."
-                            + error_message
+                            + error_message,
+                            tool_auth_audiences=tool_auth_audiences,
                         )
             except AuthorizationNeededException:
                 # just re-raise the exception with the original message
@@ -229,8 +274,8 @@ class TokenExchangeManager:
                 logger.error(f"Error verifying token for tool {tool_name}: {e}")
                 logger.exception(e, stack_info=True)
                 raise AuthorizationNeededException(
-                    "Invalid or expired token provided in Authorization header."
-                    + error_message
+                    message="Invalid or expired token provided in Authorization header."
+                    + error_message,
                 ) from e
 
     async def save_token_async(

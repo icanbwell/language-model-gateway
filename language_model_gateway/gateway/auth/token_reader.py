@@ -13,8 +13,14 @@ from joserfc.jwk import KeySet
 
 from zoneinfo import ZoneInfo
 
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
-    AuthorizationNeededException,
+from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_expired_exception import (
+    AuthorizationBearerTokenExpiredException,
+)
+from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_invalid_exception import (
+    AuthorizationBearerTokenInvalidException,
+)
+from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_missing_exception import (
+    AuthorizationBearerTokenMissingException,
 )
 from language_model_gateway.gateway.auth.models.token import Token
 
@@ -139,8 +145,8 @@ class TokenReader:
                 return decoded.claims
             except Exception as e:
                 logger.error(f"Failed to decode token: {e}")
-                raise AuthorizationNeededException(
-                    f"Invalid token provided. Please check the token: {token}"
+                raise AuthorizationBearerTokenMissingException(
+                    message=f"Invalid token provided. Please check the token: {token}",
                 ) from e
         else:
             try:
@@ -148,8 +154,9 @@ class TokenReader:
                 return cast(Dict[str, Any], json.loads(token_content.payload))
             except Exception as e:
                 logger.error(f"Failed to decode token without verification: {e}")
-                raise AuthorizationNeededException(
-                    f"Invalid token provided. Please check the token: {token}"
+                raise AuthorizationBearerTokenInvalidException(
+                    message=f"Invalid token provided. Please check the token: {token}",
+                    token=token,
                 ) from e
 
     async def verify_token_async(self, *, token: str) -> Token | None:
@@ -204,12 +211,16 @@ class TokenReader:
             return Token.create(token=token)
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
-            raise AuthorizationNeededException(
-                f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}.\nPlease Sign Out and Sign In to get a fresh OAuth token."
+            raise AuthorizationBearerTokenExpiredException(
+                message=f"This OAuth Token has expired. Exp: {exp_str}, Now: {now_str}.\nPlease Sign Out and Sign In to get a fresh OAuth token.",
+                expires=exp_str,
+                now=now_str,
+                token=token,
             ) from e
         except Exception as e:
-            raise AuthorizationNeededException(
-                f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token."
+            raise AuthorizationBearerTokenInvalidException(
+                message=f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token.",
+                token=token,
             ) from e
 
     @cached(ttl=60 * 60)

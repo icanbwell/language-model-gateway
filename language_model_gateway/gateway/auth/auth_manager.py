@@ -20,6 +20,9 @@ from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
+from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
+    AuthorizationTokenCacheItemExpiredException,
+)
 from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
@@ -294,26 +297,53 @@ class AuthManager:
         Raises:
             AuthorizationNeededException: If the token is not found and authorization is needed.
         """
-        token_item: (
-            TokenCacheItem | None
-        ) = await self.token_exchange_manager.get_token_for_tool_async(
-            auth_header=auth_header,
-            error_message=error_message,
-            tool_name=tool_name,
-            tool_auth_audiences=tool_auth_audiences,
+        logger.debug(
+            f"Getting token for tool '{tool_name}' with audiences {tool_auth_audiences} with auth_header: {auth_header}"
         )
-        if token_item is None:
-            return None
 
-        # if id_token is valid, return it
-        if token_item.is_valid_id_token():
-            return token_item
-
-        if token_item.audience and token_item.is_expired():
-            return await self.refresh_tokens_with_oidc(
-                audience=token_item.audience,
-                token_cache_item=token_item,
+        try:
+            token_cache_item: (
+                TokenCacheItem | None
+            ) = await self.token_exchange_manager.get_token_for_tool_async(
+                auth_header=auth_header,
+                error_message=error_message,
+                tool_name=tool_name,
+                tool_auth_audiences=tool_auth_audiences,
             )
+            logger.debug(f"AuthManager Token retrieved: {token_cache_item}")
+            if token_cache_item is None:
+                logger.debug(f"No token found for audience '{tool_auth_audiences}'.")
+                return None
+
+            # if id_token is valid, return it
+            if token_cache_item.is_valid_id_token():
+                logger.debug(
+                    f"Token for tool '{tool_name}' is valid:"
+                    + f"\n{token_cache_item.id_token.model_dump_json() if token_cache_item.id_token else 'No ID token found.'}"
+                )
+                return token_cache_item
+
+            if token_cache_item.audience and token_cache_item.is_expired():
+                return await self.refresh_tokens_with_oidc(
+                    audience=token_cache_item.audience,
+                    token_cache_item=token_cache_item,
+                )
+            else:
+                logger.debug(
+                    f"Token for tool '{tool_name}' is not expired:"
+                    + f"\n{token_cache_item.id_token.model_dump_json() if token_cache_item.id_token else 'No ID token found.'}."
+                )
+        except AuthorizationTokenCacheItemExpiredException as e:
+            # if the token is expired, try to refresh it
+            if (
+                e.token_cache_item
+                and e.token_cache_item.audience
+                and e.token_cache_item.is_expired()
+            ):
+                return await self.refresh_tokens_with_oidc(
+                    audience=e.token_cache_item.audience,
+                    token_cache_item=e.token_cache_item,
+                )
 
         return None
 
@@ -330,6 +360,9 @@ class AuthManager:
         Raises:
             Exception: If token refresh fails or tokens are invalid.
         """
+        logger.debug(
+            f"Refreshing token for audience '{audience}' with token_cache_item:\n{token_cache_item.model_dump_json()}"
+        )
         client: StarletteOAuth2App = self.oauth.create_client(audience)
         if client is None:
             raise ValueError(f"OIDC client for audience '{audience}' not found.")
@@ -338,6 +371,10 @@ class AuthManager:
             not token_cache_item.refresh_token
             or not token_cache_item.is_valid_refresh_token()
         ):
+            logger.debug(
+                f"Refresh token for audience '{audience}' not found or is not valid:"
+                + f"\n{token_cache_item.refresh_token.model_dump_json() if token_cache_item.refresh_token else 'No Refresh token found.'}."
+            )
             return None
 
         # Prepare token refresh request
@@ -345,6 +382,8 @@ class AuthManager:
             grant_type="refresh_token",
             refresh_token=token_cache_item.refresh_token.token,
         )
+        logger.debug(f"Token response received: {token_response}")
+
         access_token = token_response.get("access_token")
         id_token = token_response.get("id_token")
         refresh_token = token_response.get("refresh_token")

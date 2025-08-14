@@ -1,4 +1,9 @@
-class AuthorizationNeededException(Exception):
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
+
+
+class AuthorizationBearerTokenMissingException(AuthorizationNeededException):
     """
     Exception raised when authorization is needed for a specific operation.
     This exception is used to indicate that the user needs to authenticate
@@ -9,5 +14,5 @@ class AuthorizationNeededException(Exception):
         """
         Initialize the AuthorizationNeededException with a message and an optional token cache item.
         """
-        super().__init__(message)
+        super().__init__(message=message)
         self.message = message
