@@ -126,9 +126,20 @@ class TokenExchangeManager:
             token: TokenCacheItem | None = await self.get_token_for_auth_provider_async(
                 audience=audience, email=email
             )
-            # we really care about the id token
-            if token and token.is_valid_id_token():
-                return token
+            if token:
+                logger.debug(
+                    f"Found token for audience {audience} and email {email}: {token.model_dump_json()}"
+                )
+                # we really care about the id token
+                if token.is_valid_id_token():
+                    logger.debug(
+                        f"Found valid token for audience {audience} and email {email}"
+                    )
+                    return token
+                else:
+                    logger.info(
+                        f"Token found is not valid for audience {audience} and email {email}: {token.model_dump_json() if token else 'None'}"
+                    )
 
         return None
 
