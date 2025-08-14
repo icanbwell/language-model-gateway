@@ -11,9 +11,7 @@ from starlette.responses import StreamingResponse, JSONResponse
 from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
 from language_model_gateway.gateway.auth.auth_manager import AuthManager
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
-    TokenExchangeManager,
-)
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -25,7 +23,6 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
@@ -43,7 +40,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
         auth_manager: AuthManager,
-        token_exchange_manager: TokenExchangeManager,
         environment_variables: EnvironmentVariables,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
@@ -71,10 +67,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.auth_manager: AuthManager = auth_manager
         assert self.auth_manager is not None
         assert isinstance(self.auth_manager, AuthManager)
-
-        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
-        assert self.token_exchange_manager is not None
-        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
 
         self.environment_variables: EnvironmentVariables = environment_variables
         assert self.environment_variables is not None
@@ -212,7 +204,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             + f"\nClick here to authenticate: [Login to {tool_first_audience}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
-        await self.token_exchange_manager.get_token_for_tool_async(
+        await self.auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
             tool_name=tool_using_authentication.name,

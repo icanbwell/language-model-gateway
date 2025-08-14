@@ -8,14 +8,12 @@ from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
 from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
-    TokenExchangeManager,
-)
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
@@ -43,7 +41,7 @@ class MCPToolProvider:
         self,
         *,
         cache: McpToolsMetadataExpiringCache,
-        token_exchange_manager: TokenExchangeManager,
+        auth_manager: AuthManager,
     ) -> None:
         """
         Initialize the MCPToolProvider with a cache.
@@ -55,11 +53,9 @@ class MCPToolProvider:
         self._cache: McpToolsMetadataExpiringCache = cache
         assert self._cache is not None, "Cache must be provided"
 
-        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
-        assert self.token_exchange_manager is not None, (
-            "MCPToolProvider requires a TokenExchangeManager instance."
-        )
-        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
+        self.auth_manager = auth_manager
+        assert self.auth_manager is not None, "AuthManager must be provided"
+        assert isinstance(self.auth_manager, AuthManager)
 
     async def load_async(self) -> None:
         pass
@@ -119,7 +115,7 @@ class MCPToolProvider:
                     # get the appropriate token_item for this tool
                     token_item: (
                         TokenCacheItem | None
-                    ) = await self.token_exchange_manager.get_token_for_tool_async(
+                    ) = await self.auth_manager.get_token_for_tool_async(
                         auth_header=auth_header,
                         error_message="",
                         tool_name=tool.name,

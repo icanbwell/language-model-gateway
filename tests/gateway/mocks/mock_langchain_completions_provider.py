@@ -46,7 +46,6 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             mcp_tool_provider=mcp_tool_provider,
             token_reader=token_reader,
             auth_manager=auth_manager,
-            token_exchange_manager=token_exchange_manager,
             environment_variables=environment_variables,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
