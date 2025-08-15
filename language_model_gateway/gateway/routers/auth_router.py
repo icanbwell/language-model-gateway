@@ -58,7 +58,10 @@ class AuthRouter:
             "/login", self.login, methods=["GET"], response_model=None
         )
         self.router.add_api_route(
-            "/callback", self.auth_callback, methods=["GET", "POST"]
+            "/callback",
+            self.auth_callback,
+            methods=["GET", "POST"],
+            response_model=None,
         )
 
     # noinspection PyMethodMayBeStatic
