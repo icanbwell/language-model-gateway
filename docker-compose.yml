@@ -192,7 +192,7 @@ services:
       - keycloak
 
   mongo:
-    image: mongo:8.0.12
+    image: public.ecr.aws/docker/library/mongo:8.0.12
     container_name: mongo
     ports:
       - '27017:27017'
