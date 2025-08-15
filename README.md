@@ -34,6 +34,12 @@ Update the keys for the functionality/providers you're planning on using.
     make down; make up
     ```
 
+5. If you're testing with the mcp-server-gateway then set up your AWS credentials:
+    ```sh
+    aws sso login --profile {your-profile e.g., admin-dev}
+    aws ecr get-login-password --region us-east-1 --profile {your-profile e.g., admin-dev} | docker login --username AWS --password-stdin 856965016623.dkr.ecr.us-east-1.amazonaws.com
+    ```
+
 ## Project Architecture
 
 The project is structured into several main components:
