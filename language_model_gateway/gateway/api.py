@@ -85,11 +85,24 @@ def create_app() -> FastAPI:
         name="static",
     )
 
-    image_generation_path: str = environ["IMAGE_GENERATION_PATH"]
+    image_generation_path: str = environ.get("IMAGE_GENERATION_PATH", "")
+    image_generation_url: str = environ.get("IMAGE_GENERATION_URL", "")
 
-    assert image_generation_path is not None, (
-        "IMAGE_GENERATION_PATH environment variable must be set"
-    )
+    if not image_generation_path:
+        logger.error(
+            "IMAGE_GENERATION_PATH environment variable is not set. "
+            "Please set it to a directory path (e.g., '/tmp/images') or S3 URI (e.g., 's3://bucket/path'). "
+            "See IMAGE_GENERATION_SETUP.md for detailed setup instructions."
+        )
+        raise ValueError("IMAGE_GENERATION_PATH environment variable must be set")
+        
+    if not image_generation_url:
+        logger.error(
+            "IMAGE_GENERATION_URL environment variable is not set. "
+            "Please set it to the base URL where images will be served (e.g., 'http://localhost:5050/image_generation'). "
+            "See IMAGE_GENERATION_SETUP.md for detailed setup instructions."
+        )
+        raise ValueError("IMAGE_GENERATION_URL environment variable must be set")
 
     makedirs(image_generation_path, exist_ok=True)
     app1.include_router(
