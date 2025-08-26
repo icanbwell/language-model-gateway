@@ -25,6 +25,7 @@ class LocalFileManager(FileManager):
     ) -> Optional[str]:
         """Save the generated image to a file"""
         file_path: str = self.get_full_path(filename=filename, folder=folder)
+        logger.info(f"Saving image to {file_path}")
         if file_data:
             with open(file_path, "wb") as f:
                 f.write(file_data)
@@ -63,6 +64,7 @@ class LocalFileManager(FileManager):
         self, *, folder: str, file_path: str
     ) -> StreamingResponse:
         full_path: str = str(Path(folder) / Path(file_path))
+        logger.info(f"Reading file from {full_path}")
         try:
             # Determine file size and MIME type
             file_size = os.path.getsize(full_path)

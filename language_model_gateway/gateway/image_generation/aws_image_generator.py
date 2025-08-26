@@ -16,6 +16,8 @@ from language_model_gateway.gateway.image_generation.image_generator import (
 
 logger = logging.getLogger(__name__)
 
+MODEL_ID = "amazon.titan-image-generator-v2:0"
+
 
 class AwsImageGenerator(ImageGenerator):
     def __init__(self, *, aws_client_factory: AwsClientFactory) -> None:
@@ -26,10 +28,24 @@ class AwsImageGenerator(ImageGenerator):
 
     def _invoke_model(self, request_body: Dict[str, Any]) -> InvokeModelResponseTypeDef:
         """Synchronous model invocation"""
-
         client: BedrockRuntimeClient = self.aws_client_factory.create_bedrock_client()
+
+        if logger.isEnabledFor(logging.DEBUG):
+            # Log a safe summary of the request body (avoid full prompt/content)
+            debug_summary = {
+                "taskType": request_body.get("taskType"),
+                "imageGenerationConfig": request_body.get("imageGenerationConfig"),
+                "textLength": len(
+                    (request_body.get("textToImageParams") or {}).get("text", "")
+                ),
+            }
+            logger.debug(
+                "Invoking Bedrock model",
+                extra={"model_id": MODEL_ID, "request_summary": debug_summary},
+            )
+
         response: InvokeModelResponseTypeDef = client.invoke_model(
-            modelId="amazon.titan-image-generator-v2:0",
+            modelId=MODEL_ID,
             body=json.dumps(request_body),
         )
         return response

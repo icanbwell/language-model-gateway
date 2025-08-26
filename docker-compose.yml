@@ -6,7 +6,7 @@ services:
       target: development
     container_name: language-model-gateway
     environment:
-      DEBUG_METRICS: 0
+      DEBUG_METRICS: 1
       DD_TRACE_ENABLED: "false"
       LOG_LEVEL: INFO
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
