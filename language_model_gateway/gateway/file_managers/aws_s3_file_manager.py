@@ -3,7 +3,14 @@ from typing import Optional, Generator, override
 
 from botocore.exceptions import ClientError
 from starlette.responses import Response, StreamingResponse
-from types_boto3_s3.client import S3Client
+
+try:
+    from types_boto3_s3.client import S3Client
+    BOTO3_S3_TYPES_AVAILABLE = True
+except ImportError:
+    from typing import Any
+    S3Client = Any
+    BOTO3_S3_TYPES_AVAILABLE = False
 
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager import FileManager

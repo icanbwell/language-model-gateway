@@ -5,7 +5,13 @@ from typing import Optional, List
 from uuid import uuid4
 
 from pypdf import PdfReader, PdfWriter
-from types_boto3_textract.client import TextractClient
+try:
+    from types_boto3_textract.client import TextractClient
+    BOTO3_TEXTRACT_TYPES_AVAILABLE = True
+except ImportError:
+    from typing import Any
+    TextractClient = Any
+    BOTO3_TEXTRACT_TYPES_AVAILABLE = False
 
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager import FileManager

@@ -89,10 +89,20 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
             # logger.info(f"image_b64_json: {image_b64_json}")
             response_data = [Image(b64_json=image_b64_json)]
         else:
-            image_generation_path_ = os.environ["IMAGE_GENERATION_PATH"]
-            assert image_generation_path_, (
-                "IMAGE_GENERATION_PATH environment variable is not set"
-            )
+            image_generation_path_ = os.environ.get("IMAGE_GENERATION_PATH")
+            if not image_generation_path_:
+                raise ValueError(
+                    "IMAGE_GENERATION_PATH environment variable must be set for URL response format. "
+                    "Set it to a local directory path (e.g., '/tmp/images') or S3 URI (e.g., 's3://bucket/path')."
+                )
+            
+            image_generation_url = os.environ.get("IMAGE_GENERATION_URL")  
+            if not image_generation_url:
+                raise ValueError(
+                    "IMAGE_GENERATION_URL environment variable must be set for URL response format. "
+                    "Set it to the base URL where images will be served (e.g., 'http://localhost:5050/image_generation')."
+                )
+                
             image_file_name: str = f"{uuid4()}.png"
             file_manager: FileManager = self.file_manager_factory.get_file_manager(
                 folder=image_generation_path_
@@ -105,7 +115,11 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
             url = (
                 UrlParser.get_url_for_file_name(image_file_name) if file_path else None
             )
-            response_data = [Image(url=url)] if url else []
+            
+            if not url:
+                raise RuntimeError("Failed to save image file and generate URL")
+                
+            response_data = [Image(url=url)]
 
         response: ImagesResponse = ImagesResponse(
             created=int(time.time()), data=response_data
