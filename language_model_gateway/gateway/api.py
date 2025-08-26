@@ -104,7 +104,9 @@ def create_app() -> FastAPI:
         )
         raise ValueError("IMAGE_GENERATION_URL environment variable must be set")
 
-    makedirs(image_generation_path, exist_ok=True)
+    # Only create directories for local filesystem paths, not S3 URIs
+    if not image_generation_path.lower().startswith("s3://"):
+        makedirs(image_generation_path, exist_ok=True)
     app1.include_router(
         ImagesRouter(image_generation_path=image_generation_path).get_router()
     )
