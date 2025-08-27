@@ -34,6 +34,8 @@ Update the keys for the functionality/providers you're planning on using.
     make down; make up
     ```
 
+5. Refer to the [Running without OAuth](#running-without-oauth) or [Running with OAuth](#running-with-oauth) sections below to start OpenWebUI.
+
 ## Project Architecture
 
 The project is structured into several main components:
@@ -105,9 +107,9 @@ make down; make up; make up-open-webui
 ```
 
 ## Running with OAuth
-Since the OpenWebUI uses Keycloak on both server side and browser side, you need to create a host mapping for `keycloak`.
+Since the OpenWebUI uses Keycloak on both server side and browser side, you **MUST** create a host mapping for `keycloak`.
 
-On Macs, this can be done by adding an entry to `/etc/hosts`:
+On Macs, this is done by adding an entry to `/etc/hosts`. This is likely a `sudo` operation so you may need to run `sudo nano /etc/hosts` or `sudo vi /etc/hosts` (depending on your preferred editor) and add the following line:
 
 ```sh
 127.0.0.1   keycloak
@@ -117,6 +119,8 @@ Then run:
 ```shell
 make down; make up; make up-open-webui-auth
 ```
+
+For more details and getting the models list up and running, refer to the [openwebui_functions/readme.md](openwebui_functions/readme.md).
 
 ## Contributing
 
