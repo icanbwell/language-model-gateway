@@ -34,6 +34,8 @@ Update the keys for the functionality/providers you're planning on using.
     make down; make up
     ```
 
+5. Refer to the [Running without OAuth](#running-without-oauth) or [Running with OAuth](#running-with-oauth) sections below to start OpenWebUI.
+
 ## Project Architecture
 
 The project is structured into several main components:
