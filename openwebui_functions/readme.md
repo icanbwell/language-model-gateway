@@ -4,7 +4,8 @@
 https://docs.openwebui.com/features/plugin/functions/pipe/
 
 ## Instructions to add pipe to OpenWebUI on local machine
-- Run `make down; make up-open-webui-auth` to start OpenWebUI with authenticatio
+- Run `make down; make up-open-webui-auth` to start OpenWebUI with authentication
+  - Refer to base level README.md for instructions on setting up OAuth if you haven't already. Specifically, the keycloak host mapping in /etc/hosts.
 - Login with admin/password to openwebui 
 - Now run `make set-admin-user-role` to set the admin role for this new user
 - Reload the OpenWebUI page in your browser
