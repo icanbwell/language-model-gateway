@@ -26,7 +26,7 @@ from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (

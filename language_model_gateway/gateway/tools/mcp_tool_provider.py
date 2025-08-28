@@ -18,7 +18,7 @@ from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (

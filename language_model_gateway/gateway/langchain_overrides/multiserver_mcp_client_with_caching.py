@@ -16,7 +16,10 @@ from langchain_mcp_adapters.tools import (
 )
 from mcp import ClientSession, Tool
 
-from language_model_gateway.gateway.mcp.mcp_tool_unauthorized_exception import (
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_not_found_exception import (
+    McpToolNotFoundException,
+)
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
@@ -216,10 +219,18 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             # exc is a ExceptionGroup, so we can catch it with a wildcard
             # and log the type of the exception
             # if there is just one exception then check if it is 401 and then return a custom error
-            if len(exc.exceptions) == 1 and isinstance(
+            if len(exc.exceptions) >= 1 and isinstance(
                 exc.exceptions[0], HTTPStatusError
             ):
                 http_status_exception: HTTPStatusError = exc.exceptions[0]
+                response_text: str | None = None
+                # Read response text before the stream is closed
+                if not http_status_exception.response.is_closed:
+                    response_bytes: bytes = await http_status_exception.response.aread()
+                    response_text = response_bytes.decode()
+                else:
+                    response_text = http_status_exception.response.reason_phrase
+                # Handle 401 error
                 if http_status_exception.response.status_code == 401:
                     logger.error(
                         f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
@@ -228,16 +239,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     www_authenticate_header = (
                         http_status_exception.response.headers.get("www-authenticate")
                     )
-                    # Read response text before the stream is closed
-                    if not http_status_exception.response.is_closed:
-                        response_bytes = await http_status_exception.response.aread()
-                        response_text = (
-                            response_bytes.decode()
-                            if isinstance(response_bytes, bytes)
-                            else str(response_bytes)
-                        )
-                    else:
-                        response_text = http_status_exception.response.reason_phrase
+
                     raise McpToolUnauthorizedException(
                         message=f"Not allowed to access MCP tool at {http_status_exception.request.url}."
                         + " Perhaps your login token has expired. Please reload to login again."
@@ -251,9 +253,26 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         headers=http_status_exception.response.headers,
                         url=str(http_status_exception.request.url),
                     ) from exc
+                elif http_status_exception.response.status_code == 404:
+                    raise McpToolNotFoundException(
+                        message=f"MCP tool not found at {http_status_exception.request.url}. "
+                        + "Please check the URL and try again."
+                        + f" Response: {response_text}",
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
+                    )
+                else:
+                    raise McpToolUnauthorizedException(
+                        message=f"Error accessing MCP tool at {http_status_exception.request.url}. "
+                        + f"Response: {response_text}",
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
+                    )
             else:
                 logger.error(
-                    f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
+                    f"load_metadata_for_mcp_tools Received error when loading MCP tools: {type(exc)}"
                 )
                 raise
         except* ConnectError as exc:

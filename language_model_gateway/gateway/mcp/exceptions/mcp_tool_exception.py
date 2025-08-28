@@ -1,7 +1,7 @@
 from httpx import Headers
 
 
-class McpToolUnauthorizedException(Exception):
+class McpToolException(Exception):
     """
     Exception raised when a tool is not authorized to be used by the user.
     """
