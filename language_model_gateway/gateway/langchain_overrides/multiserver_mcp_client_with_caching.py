@@ -22,6 +22,9 @@ from language_model_gateway.gateway.mcp.exceptions.mcp_tool_not_found_exception 
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unknown_exception import (
+    McpToolUnknownException,
+)
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
@@ -261,15 +264,15 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         status_code=http_status_exception.response.status_code,
                         headers=http_status_exception.response.headers,
                         url=str(http_status_exception.request.url),
-                    )
+                    ) from exc
                 else:
-                    raise McpToolUnauthorizedException(
+                    raise McpToolUnknownException(
                         message=f"Error accessing MCP tool at {http_status_exception.request.url}. "
                         + f"Response: {response_text}",
                         status_code=http_status_exception.response.status_code,
                         headers=http_status_exception.response.headers,
                         url=str(http_status_exception.request.url),
-                    )
+                    ) from exc
             else:
                 logger.error(
                     f"load_metadata_for_mcp_tools Received error when loading MCP tools: {type(exc)}"
@@ -288,12 +291,19 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 ) from http_connect_exception
             else:
                 raise
-        except* Exception as e:
+        except* Exception as exc:
             url: str = connection.get("url") if connection else "unknown"
-            logger.error(
-                f"load_metadata_for_mcp_tools Failed to load MCP tools from {url}: {type(e)} {e}"
-            )
-            raise e
+            if len(exc.exceptions) >= 1:
+                first_exception: Exception = exc.exceptions[0]
+                logger.error(
+                    f"load_metadata_for_mcp_tools Failed to load MCP tools from {url}: {type(first_exception)} {first_exception}"
+                )
+            raise McpToolUnknownException(
+                message=f"Error accessing MCP tool at {url}. ",
+                status_code=None,
+                headers=None,
+                url=url,
+            ) from exc
 
         if tool_names is not None:
             # Filter tools by names if provided

@@ -7,10 +7,15 @@ class McpToolException(Exception):
     """
 
     def __init__(
-        self, *, message: str, url: str, headers: Headers, status_code: int
+        self,
+        *,
+        message: str,
+        url: str,
+        headers: Headers | None,
+        status_code: int | None,
     ) -> None:
         super().__init__(message)
-        self.message = message
-        self.url = url
-        self.headers = headers
-        self.status_code = status_code
+        self.message: str = message
+        self.url: str = url
+        self.headers: Headers | None = headers
+        self.status_code: int | None = status_code

@@ -163,7 +163,10 @@ class ChatCompletionManager:
             # if there is just one exception, we can log it directly
             if len(e.exceptions) == 1:
                 first_exception = e.exceptions[0]
-                if isinstance(first_exception, McpToolUnauthorizedException):
+                if (
+                    isinstance(first_exception, McpToolUnauthorizedException)
+                    and first_exception.headers
+                ):
                     url: str | None = (
                         McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
                             headers=first_exception.headers
