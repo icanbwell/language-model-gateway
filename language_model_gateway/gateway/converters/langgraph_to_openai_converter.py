@@ -17,6 +17,7 @@ from typing import (
     Iterable,
 )
 
+import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
 from langchain_core.language_models import BaseChatModel
@@ -591,13 +592,20 @@ class LangGraphToOpenAIConverter:
             The list of any messages.
         """
 
-        output: Dict[str, Any] = await compiled_state_graph.ainvoke(
-            input=self.create_state(
-                chat_request=chat_request, headers=headers, messages=messages
-            )
+        input_: MyMessagesState = self.create_state(
+            chat_request=chat_request, headers=headers, messages=messages
         )
-        out_messages: List[AnyMessage] = output["messages"]
-        return out_messages
+        try:
+            output: Dict[str, Any] = await compiled_state_graph.ainvoke(input=input_)
+            out_messages: List[AnyMessage] = output["messages"]
+            return out_messages
+        except botocore.exceptions.NoCredentialsError as e:
+            message: str = (
+                f"AWS login error: {e}.  If you are running locally, your AWS session may have expired.  "
+                + "Please re-authenticate using `aws sso login --profile [role]`."
+            )
+            logger.exception(message, stack_info=True)
+            return [AIMessage(content=message, role="assistant", artifact=None)]
 
     # noinspection PyMethodMayBeStatic
     async def _stream_graph_with_messages_async(
@@ -816,7 +824,7 @@ class LangGraphToOpenAIConverter:
         :param tools: list of tools
         :return: compiled state graph
         """
-        tool_node: ToolNode | None = None
+        tool_node: Optional[ToolNode] = None
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
 
