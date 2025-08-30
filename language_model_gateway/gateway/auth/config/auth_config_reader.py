@@ -1,0 +1,93 @@
+import os
+
+from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
+
+
+class AuthConfigReader:
+    """
+    A class to read authentication configurations from environment variables.
+    """
+
+    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+        """
+        Initialize the AuthConfigReader with an EnvironmentVariables instance.
+        Args:
+            environment_variables (EnvironmentVariables): An instance of EnvironmentVariables to read auth configurations.
+        """
+        self.environment_variables: EnvironmentVariables = environment_variables
+        assert self.environment_variables is not None, (
+            "AuthConfigReader requires an EnvironmentVariables instance."
+        )
+        assert isinstance(self.environment_variables, EnvironmentVariables)
+
+    def get_auth_configs_for_all_audiences(self) -> list[AuthConfig]:
+        """
+        Get authentication configurations for all audiences.
+
+        Returns:
+            list[AuthConfig]: A list of AuthConfig instances for each audience.
+        """
+        audiences: list[str] | None = self.environment_variables.auth_audiences
+        assert audiences is not None, "AUTH_AUDIENCES environment variable must be set"
+        auth_configs: list[AuthConfig] = []
+        for audience in audiences:
+            auth_config: AuthConfig | None = self.get_config_for_audience(
+                audience=audience
+            )
+            if auth_config is not None:
+                auth_configs.append(auth_config)
+        return auth_configs
+
+    # noinspection PyMethodMayBeStatic
+    def get_config_for_audience(self, *, audience: str) -> AuthConfig | None:
+        """
+        Get the authentication configuration for a specific audience.
+
+        Args:
+            audience (str): The audience for which to retrieve the configuration.
+
+        Returns:
+            AuthConfig | None: The authentication configuration if found, otherwise None.
+        """
+        assert audience is not None
+        # read client_id and client_secret from the environment variables
+        auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{audience}")
+        assert auth_client_id is not None, (
+            f"AUTH_CLIENT_ID_{audience} environment variable must be set"
+        )
+        auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET_{audience}")
+        assert auth_client_secret is not None, (
+            f"AUTH_CLIENT_SECRET_{audience} environment variable must be set"
+        )
+        auth_well_known_uri: str | None = os.getenv(f"AUTH_WELL_KNOWN_URI_{audience}")
+        assert auth_well_known_uri is not None, (
+            f"AUTH_WELL_KNOWN_URI_{audience} environment variable must be set"
+        )
+        issuer: str | None = os.getenv(f"AUTH_ISSUER_{audience}")
+        assert issuer is not None, (
+            f"AUTH_ISSUER_{audience} environment variable must be set"
+        )
+        return AuthConfig(
+            audience=audience,
+            issuer=issuer,
+            client_id=auth_client_id,
+            client_secret=auth_client_secret,
+            well_known_uri=auth_well_known_uri,
+        )
+
+    def get_issuer_for_audience(self, *, audience: str) -> str:
+        """
+        Get the issuer for a specific audience.
+
+        Args:
+            audience (str): The audience for which to retrieve the issuer.
+
+        Returns:
+            str: The issuer for the specified audience.
+        """
+        auth_config: AuthConfig | None = self.get_config_for_audience(audience=audience)
+        assert auth_config is not None, f"AuthConfig for audience {audience} not found."
+        return auth_config.issuer

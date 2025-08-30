@@ -6,6 +6,10 @@ from fastapi import Depends
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.container_factory import ContainerFactory
 from language_model_gateway.container.simple_container import SimpleContainer
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
@@ -17,7 +21,11 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cached import cached
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -74,3 +82,35 @@ def get_file_manager_factory(
     """helper function to get the chat manager"""
     assert isinstance(container, SimpleContainer), type(container)
     return container.resolve(FileManagerFactory)
+
+
+def get_auth_manager(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> AuthManager:
+    """helper function to get the chat manager"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(AuthManager)
+
+
+def get_token_reader(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> TokenReader:
+    """helper function to get the chat manager"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(TokenReader)
+
+
+def get_environment_variables(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> EnvironmentVariables:
+    """helper function to get the chat manager"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(EnvironmentVariables)
+
+
+def get_auth_config_reader(
+    container: Annotated[SimpleContainer, Depends(get_container_async)],
+) -> AuthConfigReader:
+    """helper function to get the auth config reader"""
+    assert isinstance(container, SimpleContainer), type(container)
+    return container.resolve(AuthConfigReader)

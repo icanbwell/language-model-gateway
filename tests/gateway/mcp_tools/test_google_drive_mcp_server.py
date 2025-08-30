@@ -30,7 +30,7 @@ async def test_chat_completions_with_mcp_google_drive(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "This is a mock response from the LLM."
+                    fn_get_response=lambda messages: "ABCDGX Test File Shared With b.well"
                 )
             ),
         )
@@ -39,6 +39,7 @@ async def test_chat_completions_with_mcp_google_drive(
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
     )
+    url: str = "http://mcp_server_gateway:5000/google_drive"
     await model_configuration_cache.set(
         [
             ChatModelConfig(
@@ -53,7 +54,7 @@ async def test_chat_completions_with_mcp_google_drive(
                 tools=[
                     AgentConfig(
                         name="download_file_from_url",
-                        url="http://mcp_server_gateway:5051/google_drive/",  # Assumes MCP server is running locally
+                        url=url,  # Assumes MCP server is running locally
                     ),
                 ],
             )
@@ -75,5 +76,10 @@ async def test_chat_completions_with_mcp_google_drive(
         model="General Purpose",
     )
     assert chat_completion.choices[0].message.content is not None
+
+    assert (
+        "ABCDGX Test File Shared With b.well"
+        in chat_completion.choices[0].message.content
+    )
 
     await model_configuration_cache.clear()

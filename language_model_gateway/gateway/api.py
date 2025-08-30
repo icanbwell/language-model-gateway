@@ -7,14 +7,16 @@ from typing import AsyncGenerator, Annotated, List
 
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
+from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
-from starlette.responses import FileResponse, JSONResponse
+from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.routers.auth_router import AuthRouter
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -36,7 +38,11 @@ logging.basicConfig(
 )
 
 # disable INFO logging for httpx because it logs every request
-logging.getLogger("httpx").setLevel(logging.WARNING)
+# logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore.http11").setLevel(logging.WARNING)
+logging.getLogger("httpcore.connection").setLevel(logging.WARNING)
+
+logging.getLogger("authlib").setLevel(logging.INFO)
 
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
@@ -76,6 +82,7 @@ def create_app() -> FastAPI:
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
+    app1.include_router(AuthRouter().get_router())
     # Mount the static directory
     app1.mount(
         "/static",
@@ -108,6 +115,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
     return app1
 
 

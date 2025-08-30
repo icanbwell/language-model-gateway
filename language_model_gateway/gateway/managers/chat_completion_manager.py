@@ -19,6 +19,16 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
+    McpAuthorizationHelper,
+)
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
+    McpToolUnauthorizedException,
+)
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
@@ -76,6 +86,7 @@ class ChatCompletionManager:
         *,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # Use the model to choose the provider
         try:
@@ -113,6 +124,10 @@ class ChatCompletionManager:
                         detail=f"Model type {model_config.type} not supported",
                     )
 
+            assert provider is not None, (
+                f"Provider should not be None for model type {model_config.type}"
+            )
+
             help_response: StreamingResponse | JSONResponse | None = (
                 self.handle_help_prompt(
                     chat_request=chat_request, model=model, model_config=model_config
@@ -132,17 +147,55 @@ class ChatCompletionManager:
                 model_config=model_config,
                 headers=headers,
                 chat_request=chat_request,
+                auth_information=auth_information,
             )
             return response
+        except AuthorizationNeededException as e:
+            return self.write_response(
+                chat_request=chat_request,
+                response_messages=[
+                    ChatCompletionMessage(role="assistant", content=line.strip())
+                    for line in e.message.splitlines()
+                    if line.strip()
+                ],
+            )
         except ExceptionGroup as e:
             # if there is just one exception, we can log it directly
             if len(e.exceptions) == 1:
+                first_exception = e.exceptions[0]
+                if (
+                    isinstance(first_exception, McpToolUnauthorizedException)
+                    and first_exception.headers
+                ):
+                    url: str | None = (
+                        McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
+                            headers=first_exception.headers
+                        )
+                    )
+                    content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
+                    return self.write_response(
+                        chat_request=chat_request,
+                        response_messages=[
+                            ChatCompletionMessage(role="assistant", content=content)
+                        ],
+                    )
+                elif isinstance(first_exception, AuthorizationNeededException):
+                    return self.write_response(
+                        chat_request=chat_request,
+                        response_messages=[
+                            ChatCompletionMessage(
+                                role="assistant", content=line.strip()
+                            )
+                            for line in first_exception.message.splitlines()
+                            if line.strip()
+                        ],
+                    )
                 logger.error(
-                    f"ExceptionGroup in chat completion: {e.exceptions[0]}",
+                    f"ExceptionGroup in chat completion: {first_exception}",
                     exc_info=True,
                 )
                 return await self.handle_exception(
-                    chat_request=chat_request, e=e.exceptions[0]
+                    chat_request=chat_request, e=first_exception
                 )
             return await self.handle_exception(chat_request=chat_request, e=e)
         except Exception as e:

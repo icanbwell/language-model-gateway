@@ -14,6 +14,7 @@ from openai.types.chat import (
 from pydantic_core import ValidationError
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 
 
@@ -39,6 +40,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         model_config: ChatModelConfig,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         """
         Call the OpenAI API to get chat completions
@@ -46,6 +48,8 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         :param headers:
         :param chat_request:
         :param model_config:
+        :param auth_information:
+
         :return:
         """
         assert chat_request

@@ -148,4 +148,4 @@ async def test_mcp_agent_via_openai() -> None:
         input="multiple 2 and 3 using math server",
     )
 
-    print(resp.output_text)
+    print(resp.text)
