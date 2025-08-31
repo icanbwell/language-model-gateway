@@ -7,7 +7,9 @@ import inspect
 import redis
 from pydantic import BaseModel
 
-T = TypeVar("T", bound=BaseModel)
+from language_model_gateway.gateway.auth.repository.base_db_model import BaseDbModel
+
+T = TypeVar("T", bound=BaseDbModel)
 
 
 class RedisConfig:
