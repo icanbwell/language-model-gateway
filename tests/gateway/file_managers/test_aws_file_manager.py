@@ -1,4 +1,3 @@
-import os
 from typing import Dict, List, Any, Generator
 
 import boto3
@@ -21,9 +20,7 @@ from types_boto3_s3.client import S3Client
 def mock_s3() -> Generator[S3Client, Any, None]:
     """Create a mock S3 client using moto."""
     with mock_aws():
-        session: Session = boto3.Session(
-            profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE")
-        )
+        session: Session = boto3.Session()
         s3_client: S3Client = session.client(
             service_name="s3",
             region_name="us-east-1",
@@ -104,7 +101,9 @@ def test_get_bucket(aws_s3_file_manager: AwsS3FileManager) -> None:
 
 
 @pytest.mark.asyncio
-async def test_save_file_async_success() -> None:
+async def test_save_file_async_success(
+    aws_s3_file_manager: AwsS3FileManager, mock_s3: S3Client
+) -> None:
     """
     Comprehensive test for save_file_async method.
 
@@ -114,60 +113,49 @@ async def test_save_file_async_success() -> None:
     - File contents match
     - Different file types and sizes
     """
-    with mock_aws():
-        session: Session = boto3.Session(
-            profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE")
+    # Create S3 bucket
+    bucket_name = "test-bucket"
+    mock_s3.create_bucket(Bucket=bucket_name)
+
+    # Test cases with different file contents and paths
+    test_cases: List[Dict[str, Any]] = [
+        {
+            "image_data": b"small image content",
+            "folder": f"s3://{bucket_name}/images",
+            "filename": "small.jpg",
+            "content_type": "image/jpeg",
+        },
+        {
+            "image_data": b"x" * 1024 * 1024,  # 1MB file
+            "folder": f"s3://{bucket_name}/large",
+            "filename": "large.png",
+            "content_type": "image/png",
+        },
+    ]
+
+    for case in test_cases:
+        # Save file
+        filename_ = case["filename"]
+        result = await aws_s3_file_manager.save_file_async(
+            file_data=case["image_data"],
+            folder=case["folder"],
+            filename=filename_,
         )
-        mock_s3: S3Client = session.client(
-            service_name="s3",
-            region_name="us-east-1",
+
+        # Assertions
+        expected_path = (
+            f"s3://{bucket_name}/{filename_}"
+            if case["folder"] == f"s3://{bucket_name}"
+            else result
         )
+        assert result == expected_path
+        assert expected_path
+        s3_url: S3Url = S3Url(expected_path)
 
-        aws_client_factory = MockAwsClientFactory(aws_client=mock_s3)
-        aws_s3_file_manager = AwsS3FileManager(aws_client_factory=aws_client_factory)
-        # Create S3 bucket
-        bucket_name = "test-bucket"
-        mock_s3.create_bucket(Bucket=bucket_name)
-
-        # Test cases with different file contents and paths
-        test_cases: List[Dict[str, Any]] = [
-            {
-                "image_data": b"small image content",
-                "folder": f"s3://{bucket_name}/images",
-                "filename": "small.jpg",
-                "content_type": "image/jpeg",
-            },
-            {
-                "image_data": b"x" * 1024 * 1024,  # 1MB file
-                "folder": f"s3://{bucket_name}/large",
-                "filename": "large.png",
-                "content_type": "image/png",
-            },
-        ]
-
-        for case in test_cases:
-            # Save file
-            filename_ = case["filename"]
-            result = await aws_s3_file_manager.save_file_async(
-                file_data=case["image_data"],
-                folder=case["folder"],
-                filename=filename_,
-            )
-
-            # Assertions
-            expected_path = (
-                f"s3://{bucket_name}/{filename_}"
-                if case["folder"] == f"s3://{bucket_name}"
-                else result
-            )
-            assert result == expected_path
-            assert expected_path
-            s3_url: S3Url = S3Url(expected_path)
-
-            # Verify file was saved correctly
-            response = mock_s3.get_object(Bucket=s3_url.bucket, Key=s3_url.key)
-            saved_content = response["Body"].read()
-            assert saved_content == case["image_data"]
+        # Verify file was saved correctly
+        response = mock_s3.get_object(Bucket=s3_url.bucket, Key=s3_url.key)
+        saved_content = response["Body"].read()
+        assert saved_content == case["image_data"]
 
 
 @pytest.mark.asyncio
