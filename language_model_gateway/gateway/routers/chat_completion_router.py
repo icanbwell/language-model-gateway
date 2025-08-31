@@ -124,7 +124,9 @@ class ChatCompletionsRouter:
             auth_header = request.headers.get("Authorization")
             if auth_header:
                 token = token_reader.extract_token(auth_header)
-                if token:
+                if (
+                    token and token != "fake-api-key"
+                ):  # fake-api-key is used for local testing
                     # verify the token
                     token_item: Token | None = await token_reader.verify_token_async(
                         token=token
