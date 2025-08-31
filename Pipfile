@@ -122,7 +122,7 @@ types-beautifulsoup4 = ">=4.12.0.20241020"
 # types-cachetools is a Python library for typing cachetools
 types-cachetools = ">=5.5.0"
 # moto is a Python library for mocking AWS services
-moto = { version = ">=5.1.11", extras = ["all"] }
+moto = { version = ">=5.1.11", extras = ["s3"] }
 # bandit is needed for security checks
 bandit = ">=1.8.3"
 # ruff is needed for linting
