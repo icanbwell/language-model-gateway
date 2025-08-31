@@ -125,9 +125,8 @@ class ChatCompletionsRouter:
             if auth_header:
                 token = token_reader.extract_token(auth_header)
                 if (
-                    token and token != "fake-api-key"
-                ):  # fake-api-key is used for local testing
-                    # verify the token
+                    token and token != "fake-api-key" and token != "bedrock"
+                ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
                     token_item: Token | None = await token_reader.verify_token_async(
                         token=token
                     )

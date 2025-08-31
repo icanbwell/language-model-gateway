@@ -259,7 +259,7 @@ class TokenReader:
             ) from e
         except Exception as e:
             raise AuthorizationBearerTokenInvalidException(
-                message=f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token.",
+                message=f"Invalid token provided. Exp: {exp_str}, Now: {now_str}. Please check the token:\n{token}.",
                 token=token,
             ) from e
 

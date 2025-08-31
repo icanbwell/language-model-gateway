@@ -2,7 +2,9 @@ services:
   open-webui:
     # https://github.com/open-webui/open-webui/releases
 #    image: openwebui-local:latest
-    image: ghcr.io/open-webui/open-webui:v0.6.21
+    # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
+    # Slim image excludes embedded AI models and Ollama installation
+    image: ghcr.io/open-webui/open-webui:v0.6.26-slim
     depends_on:
       - open-webui-db
     env_file:
@@ -11,7 +13,9 @@ services:
       - "3050:8080"
     environment:
       # https://docs.openwebui.com/getting-started/env-configuration/
+      # Set to True to bypass model access control checks (useful for development)
       BYPASS_MODEL_ACCESS_CONTROL: True
+      # Set default user role to 'user' (other option is 'admin')
       DEFAULT_USER_ROLE: user
       WEBUI_AUTH: 0
       #      OPENAI_API_BASE_URL: 'https://api.openai.com/v1'
@@ -20,7 +24,7 @@ services:
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
       # disable OEPNAI_API since we use a Pipeline to handle requests
-      ENABLE_OPENAI_API: 0
+#      ENABLE_OPENAI_API: 0
       OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'
@@ -57,6 +61,16 @@ services:
       RAG_EMBEDDING_MODEL: ""
       # curl --silent --fail http://localhost:8081/health | jq -ne 'input.status == true' || exit 1
       WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY:-$(openssl rand -hex 32)}"
+      # Disables persistent config and reads from environment variables only
+      ENABLE_PERSISTENT_CONFIG: False
+      # enable initial admin user creation
+      ENABLE_INITIAL_ADMIN_SIGNUP: True
+      # Toggles email, password, sign-in and "or" (only when ENABLE_OAUTH_SIGNUP is set to True) elements.
+      ENABLE_LOGIN_FORM: False
+      # Enables account creation when signing up via OAuth
+      ENABLE_OAUTH_SIGNUP: True
+      # Controls whether OAuth-related settings are persisted in the database after the first launch.
+      ENABLE_OAUTH_PERSISTENT_CONFIG: False
     networks:
       - web
     healthcheck:

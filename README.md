@@ -120,6 +120,13 @@ Then run:
 make down; make up; make up-open-webui-auth
 ```
 
+Since we also pull the mcp-server-gateway image from ECR, you will need to be logged into ECR. You can do this by running:
+```sh
+aws sso login --profile {profile}
+aws ecr get-login-password --region us-east-1 --profile {profile} | docker login --username AWS --password-stdin 875300655693.dkr.ecr.us-east-1.amazonaws.com 
+```
+where profile is the AWS profile you're part of e.g., `admin_dev` or `data-engineer_dev`.
+
 For more details and getting the models list up and running, refer to the [openwebui_functions/readme.md](openwebui_functions/readme.md).
 
 ## Contributing
