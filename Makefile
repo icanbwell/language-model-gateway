@@ -93,7 +93,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} mcp-server-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
 	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
 
-	make insert-admin-user
+	make insert-admin-user && make insert-admin-user-2
 	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
@@ -163,6 +163,13 @@ insert-admin-user:
     "INSERT INTO public.\"user\" (id,name,email,\"role\",profile_image_url,api_key,created_at,updated_at,last_active_at,settings,info,oauth_sub) \
     SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286','User','admin@localhost','admin','/user.png',NULL,1735089600,1735089600,1735089609,'{"ui": {"version": "0.4.8"}}','null',NULL \
     WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE id = '8d967d73-99b8-40ff-ac3b-c71ac19e1286');"
+
+.PHONY: insert-admin-user-2
+insert-admin-user-2:
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+    "INSERT INTO public.user (id, name, email, role, profile_image_url, api_key, created_at, updated_at, last_active_at, settings, info, oauth_sub, username, bio, gender, date_of_birth) \
+	SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', NULL, 1756681388, 1756681388, 1756681389, 'null', 'null', 'oidc@admin', NULL, NULL, NULL, NULL \
+    WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE email='admin@tester.com');"
 
 .PHONY: set-admin-user-role
 set-admin-user-role:

@@ -72,7 +72,8 @@ services:
       # Controls whether OAuth-related settings are persisted in the database after the first launch.
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
       # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
-      OAUTH_SUB_CLAIM: "email"
+      OAUTH_SUB_CLAIM: "username"
+      OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
     networks:
       - web
     healthcheck:
