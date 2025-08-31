@@ -57,6 +57,13 @@ class MockAuthConfigReader(AuthConfigReader):
         ]
 
 
+class MockTokenReader(TokenReader):
+    pass
+    # @override
+    # async def fetch_well_known_config_and_jwks_async(self) -> None:
+    #     self.jwks = KeySet.import_key_set(JWKS)
+
+
 def create_jwt_token(exp_offset: int = 60) -> str:
     header = {"kid": KID, "alg": ALGORITHM}
     payload = {
@@ -70,7 +77,7 @@ def create_jwt_token(exp_offset: int = 60) -> str:
 
 
 def test_extract_token() -> None:
-    token_reader: TokenReader = TokenReader(
+    token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
             environment_variables=EnvironmentVariables()
         )
@@ -83,7 +90,7 @@ def test_extract_token() -> None:
 
 
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:
-    token_reader: TokenReader = TokenReader(
+    token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
             environment_variables=EnvironmentVariables()
         ),
@@ -97,7 +104,7 @@ async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -
 
 
 async def test_verify_token_expired(mock_jwks: Any) -> None:
-    token_reader: TokenReader = TokenReader(
+    token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
             environment_variables=EnvironmentVariables()
         ),

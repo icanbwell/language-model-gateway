@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import httpx
 from openai import AsyncOpenAI
@@ -20,7 +22,10 @@ from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
-@pytest.mark.asyncio
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_chat_completions_with_mcp_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:

@@ -20,12 +20,17 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 )
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Have to use the password grant flow for real LLM tests",
+)
 def test_login_route() -> None:
     client = TestClient(app)
 
     response = client.get("/auth/login", follow_redirects=False)
     # Should redirect to Google OAuth
-    assert response.status_code in (302, 307)
+    response_text = response.text
+    assert response.status_code in (302, 307), response_text
     assert "location" in response.headers
     print(response.headers["location"])
     assert (
@@ -35,7 +40,7 @@ def test_login_route() -> None:
 
 
 @pytest.mark.skipif(
-    os.environ.get("RUN_TESTS_WITH_REAL_LLM") == "1",
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
     reason="Have to use the password grant flow for real LLM tests",
 )
 def test_callback_route() -> None:
