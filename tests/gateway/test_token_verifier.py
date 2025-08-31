@@ -9,6 +9,9 @@ from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
+from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_expired_exception import (
+    AuthorizationBearerTokenExpiredException,
+)
 from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from joserfc import jwt
@@ -39,7 +42,13 @@ def mock_jwks(httpx_mock: Any) -> Generator[None, Any, None]:
 
 @pytest.fixture
 def mock_well_known_config(httpx_mock: Any) -> Generator[None, Any, None]:
-    httpx_mock.add_response(url=openid_configuration, json={"jwks_uri": jwks_uri})
+    httpx_mock.add_response(
+        url=openid_configuration,
+        json={
+            "jwks_uri": jwks_uri,
+            "issuer": "https://fake-issuer",
+        },
+    )
     yield
 
 
@@ -103,7 +112,9 @@ async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -
     assert token_item.name == "John Doe"
 
 
-async def test_verify_token_expired(mock_jwks: Any) -> None:
+async def test_verify_token_expired(
+    mock_jwks: Any, mock_well_known_config: Any
+) -> None:
     token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
             environment_variables=EnvironmentVariables()
@@ -111,5 +122,7 @@ async def test_verify_token_expired(mock_jwks: Any) -> None:
         algorithms=[ALGORITHM],
     )
     token: str = create_jwt_token(exp_offset=-60)
-    with pytest.raises(ValueError, match="This OAuth Token has expired"):
+    with pytest.raises(
+        AuthorizationBearerTokenExpiredException, match="This OAuth Token has expired"
+    ):
         await token_reader.verify_token_async(token=token)

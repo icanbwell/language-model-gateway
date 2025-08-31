@@ -304,8 +304,14 @@ class TokenReader:
         """
         jwks_uri: str | None = well_known_config.get("jwks_uri")
         issuer = well_known_config.get("issuer")
-        if not jwks_uri or not issuer:
-            raise ValueError("jwks_uri or issuer not found in well-known configuration")
+        if not jwks_uri:
+            raise ValueError(
+                f"jwks_uri not found in well-known configuration: {well_known_config}"
+            )
+        if not issuer:
+            raise ValueError(
+                f"issuer not found in well-known configuration: {well_known_config}"
+            )
         return jwks_uri
 
     async def get_subject_from_token_async(self, token: str) -> Optional[str]:
