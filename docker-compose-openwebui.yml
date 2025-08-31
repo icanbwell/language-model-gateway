@@ -71,6 +71,8 @@ services:
       ENABLE_OAUTH_SIGNUP: True
       # Controls whether OAuth-related settings are persisted in the database after the first launch.
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
+      # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
+      OAUTH_SUB_CLAIM: "email"
     networks:
       - web
     healthcheck:
