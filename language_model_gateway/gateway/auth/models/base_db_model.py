@@ -15,7 +15,7 @@ class BaseDbModel(BaseModel):
         populate_by_name=True,  # Allow population by alias
         arbitrary_types_allowed=True,  # Allow non-Pydantic types
     )
-    id: ObjectId = Field(alias="_id")
+    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
 
     @field_serializer("id")
     def serialize_object_id(self, object_id: ObjectId) -> str:
