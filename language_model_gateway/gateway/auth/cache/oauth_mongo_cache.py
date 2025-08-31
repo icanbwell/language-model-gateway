@@ -152,7 +152,7 @@ class OAuthMongoCache(OAuthCache):
             )
         else:
             logger.debug(f" ====== Creating new cache item {key}: {value} =====")
-            cache_item = CacheItem(key=key, value=value)
+            cache_item = CacheItem(_id=ObjectId(), key=key, value=value)
             new_object_id = await self.repository.insert(
                 collection_name=self.collection_name,
                 model=cache_item,
