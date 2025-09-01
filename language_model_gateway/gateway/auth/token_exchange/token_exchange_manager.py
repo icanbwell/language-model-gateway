@@ -229,6 +229,10 @@ class TokenExchangeManager:
         Returns:
             Token | None: The token item if the token is valid, otherwise raises an exception.
         """
+        if tool_auth_providers is not None:
+            # capitalize all auth providers to ensure case insensitive comparison
+            tool_auth_providers = [ap.upper() for ap in tool_auth_providers]
+
         logger.debug(
             f"Getting token for tool {tool_name} with auth_providers {tool_auth_providers}."
         )
@@ -288,6 +292,10 @@ class TokenExchangeManager:
                         token=token
                     )
                     assert email, "Token must contain a subject (email or sub) claim."
+                    # if we have an override email, use that instead of the email from the token
+                    if self.environment_variables.override_email:
+                        email = self.environment_variables.override_email
+                    # now find token for this email and auth provider
                     token_for_tool: (
                         TokenCacheItem | None
                     ) = await self.get_token_cache_item_for_auth_providers_async(
@@ -319,7 +327,7 @@ class TokenExchangeManager:
                             + f"\nFound auth provider: {token_auth_provider} for audience {token_audience}"
                             + f", Expected auth provider: {','.join(tool_auth_providers)}."
                             + f"\nEmail (sub) in token: {email}."
-                            + "\nCould not find a cached token for the tool."
+                            + f"\nCould not find a cached token for the tool for auth_provider {token_auth_provider} and email {email}."
                             + error_message,
                             tool_auth_providers=tool_auth_providers,
                         )
