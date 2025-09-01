@@ -79,14 +79,18 @@ class TokenExchangeManager:
         assert self.auth_config_reader is not None
         assert isinstance(self.auth_config_reader, AuthConfigReader)
 
-    async def get_token_for_audience_and_email(
-        self, *, audience: str, email: str
+    async def get_token_for_auth_provider_and_email(
+        self, *, auth_provider: str, email: str
     ) -> TokenCacheItem | None:
         """
         Get the token for the OIDC provider.
 
         This method retrieves the token from the cache or MongoDB based on the email and tool name.
         It returns a dictionary containing the token information.
+
+        Args:
+            auth_provider (str): The name of the OIDC provider.
+            email (str): The email associated with the token.
         Returns:
             dict[str, Any]: A dictionary containing the token information.
         """
@@ -97,7 +101,7 @@ class TokenExchangeManager:
             model_class=TokenCacheItem,
             fields={
                 "email": email,
-                "audience": audience,
+                "auth_provider": auth_provider,
             },
         )
         return token
@@ -124,28 +128,28 @@ class TokenExchangeManager:
             },
         )
 
-    async def get_valid_token_cache_item_for_audiences_async(
-        self, *, audiences: List[str], email: str
+    async def get_valid_token_cache_item_for_auth_providers_async(
+        self, *, auth_providers: List[str], email: str
     ) -> TokenCacheItem | None:
         """
         Check if a valid token exists for the given OIDC provider and email.
 
         Args:
-            audiences (List[str]): The OIDC audiences to check.
+            auth_providers (List[str]): The OIDC auth providers to check.
             email (str): The email associated with the token.
 
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
         # check if the bearer token has audience same as the auth provider name
-        assert audiences is not None
+        assert auth_providers is not None
         if not email:
             return None
 
         found_cache_item: (
             TokenCacheItem | None
-        ) = await self.get_token_cache_item_for_audiences_async(
-            audiences=audiences, email=email
+        ) = await self.get_token_cache_item_for_auth_providers_async(
+            auth_providers=auth_providers, email=email
         )
         return (
             found_cache_item
@@ -153,48 +157,53 @@ class TokenExchangeManager:
             else None
         )
 
-    async def get_token_cache_item_for_audiences_async(
-        self, *, audiences: List[str], email: str
+    async def get_token_cache_item_for_auth_providers_async(
+        self, *, auth_providers: List[str], email: str
     ) -> TokenCacheItem | None:
         """
         Check if a valid token exists for the given OIDC provider and email.
         If no valid token is found then it will return the last found token.
 
         Args:
-            audiences (List[str]): The OIDC audiences to check.
+            auth_providers (List[str]): The OIDC providers to check.
             email (str): The email associated with the token.
 
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
         # check if the bearer token has audience same as the auth provider name
-        assert audiences is not None
+        assert auth_providers is not None
         if not email:
             return None
 
         found_cache_item: TokenCacheItem | None = None
-        for audience in audiences:
-            token: TokenCacheItem | None = await self.get_token_for_audience_and_email(
-                audience=audience, email=email
+        for auth_provider in auth_providers:
+            audience: str = self.auth_config_reader.get_audience_for_provider(
+                auth_provider=auth_provider
+            )
+            token: (
+                TokenCacheItem | None
+            ) = await self.get_token_for_auth_provider_and_email(
+                auth_provider=auth_provider, email=email
             )
             if token:
                 logger.debug(
-                    f"Found token for audience {audience} and email {email}: {token.model_dump_json()}"
+                    f"Found token for auth_provider {auth_provider}, audience {audience} and email {email}: {token.model_dump_json()}"
                 )
                 # we really care about the id token
                 if token.is_valid_id_token():
                     logger.debug(
-                        f"Found valid token for audience {audience} and email {email}"
+                        f"Found valid token for auth_provider {auth_provider}, audience {audience} and email {email}"
                     )
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for audience {audience} and email {email}: {token.model_dump_json() if token else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and email {email}: {token.model_dump_json() if token else 'None'}"
                     )
                     found_cache_item = token
 
         logger.debug(
-            f"Found token cache item for audiences {audiences} email {email}: {found_cache_item}"
+            f"Found token cache item for auth providers {auth_providers} email {email}: {found_cache_item}"
         )
         return found_cache_item
 
@@ -273,8 +282,8 @@ class TokenExchangeManager:
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
                         TokenCacheItem | None
-                    ) = await self.get_token_cache_item_for_audiences_async(
-                        audiences=tool_auth_providers,
+                    ) = await self.get_token_cache_item_for_auth_providers_async(
+                        auth_providers=tool_auth_providers,
                         email=email,
                     )
                     if token_for_tool:
