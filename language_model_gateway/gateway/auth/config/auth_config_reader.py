@@ -55,6 +55,8 @@ class AuthConfigReader:
             AuthConfig | None: The authentication configuration if found, otherwise None.
         """
         assert auth_provider is not None
+        # environment variables are case-insensitive, but we standardize to upper case
+        auth_provider = auth_provider.upper()
         # read client_id and client_secret from the environment variables
         auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{auth_provider}")
         assert auth_client_id is not None, (
