@@ -5,7 +5,7 @@ services:
 #    build:
 #      dockerfile: Dockerfile
 #      context: ../mcp-server-gateway
-    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.17
+    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.18
     container_name: mcp-server-gateway
     environment:
       DEBUG_METRICS: 0
