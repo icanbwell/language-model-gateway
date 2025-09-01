@@ -74,7 +74,3 @@ class EnvironmentVariables:
     @property
     def mongo_db_cache_disable_delete(self) -> Optional[bool]:
         return str2bool(os.environ.get("MONGO_DB_AUTH_CACHE_DISABLE_DELETE"))
-
-    @property
-    def override_email(self) -> Optional[str]:
-        return os.environ.get("OVERRIDE_EMAIL")

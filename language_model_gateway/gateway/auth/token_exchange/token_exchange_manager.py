@@ -270,9 +270,7 @@ class TokenExchangeManager:
                         token=token
                     )
                     assert email, "Token must contain a subject (email or sub) claim."
-                    # # if we have an override email, use that instead of the email from the token
-                    # if self.environment_variables.override_email:
-                    #     email = self.environment_variables.override_email
+
                     # now find token for this email and auth provider
                     token_for_tool: (
                         TokenCacheItem | None
