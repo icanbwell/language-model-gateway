@@ -17,3 +17,8 @@ class AuthInformation(BaseModel):
     """The audience for which the token is intended, can be a single string or a list of strings."""
     expires_at: Optional[datetime]
     """The expiration time of the authentication token, if applicable."""
+
+    email: Optional[str]
+    """The email of the authenticated user, if available."""
+    subject: Optional[str]
+    """The subject (sub) claim from the token, representing the unique identifier of the user."""

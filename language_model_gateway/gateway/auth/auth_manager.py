@@ -128,7 +128,14 @@ class AuthManager:
             )
 
     async def create_authorization_url(
-        self, *, redirect_uri: str, audience: str, issuer: str, url: str | None
+        self,
+        *,
+        redirect_uri: str,
+        audience: str,
+        issuer: str,
+        url: str | None,
+        referring_email: str,
+        referring_subject: str,
     ) -> str:
         """
         Create the authorization URL for the OIDC provider.
@@ -142,6 +149,8 @@ class AuthManager:
             audience (str): The audience we need to get a token for.
             issuer (str): The issuer of the OIDC provider, used to validate the token.
             url (str): The URL of the tool that has requested this.
+            referring_email (str): The email of the user who initiated the request.
+            referring_subject (str): The subject of the user who initiated the request.
         Returns:
             str: The authorization URL to redirect the user to for authentication.
         """
@@ -154,6 +163,8 @@ class AuthManager:
                 audience=audience
             ),
             "issuer": issuer,
+            "referring_email": referring_email,
+            "referring_subject": referring_subject,
             "url": url,  # the URL of the tool that has requested this
             # include a unique request ID so we don't get cache for another request
             # This will create a unique state for each request
@@ -213,6 +224,8 @@ class AuthManager:
         subject: str = token.get("userinfo", {}).get("sub")
         logger.debug(f"Email received: {email}")
         logger.debug(f"Subject received: {subject}")
+        referring_email = state_decoded.get("referring_email")
+        referring_subject = state_decoded.get("referring_subject")
         content = {
             "token": token,
             "state": state_decoded,
@@ -220,6 +233,8 @@ class AuthManager:
             "subject": subject,
             "email": email,
             "issuer": issuer,
+            "referring_email": referring_email,
+            "referring_subject": referring_subject,
         }
         audience = state_decoded["audience"]
         auth_provider: str | None = (
@@ -227,6 +242,11 @@ class AuthManager:
             if audience
             else "unknown"
         )
+
+        if not referring_email:
+            raise ValueError("referring_email must be provided in the state")
+        if not referring_subject:
+            raise ValueError("referring_subject must be provided in the state")
 
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
@@ -239,6 +259,9 @@ class AuthManager:
             audience=audience,
             referrer=url,
             auth_provider=auth_provider if auth_provider else "unknown",
+            created=datetime.now(UTC),
+            referring_email=referring_email,
+            referring_subject=referring_subject,
         )
 
         await self.token_exchange_manager.save_token_async(

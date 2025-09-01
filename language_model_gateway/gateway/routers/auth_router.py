@@ -106,6 +106,8 @@ class AuthRouter:
                 audience=audience,
                 issuer=issuer,
                 url=str(request.url),
+                referring_email="admin@tester.com",
+                referring_subject="admin@tester.com",
             )
 
             return RedirectResponse(url, status_code=302)

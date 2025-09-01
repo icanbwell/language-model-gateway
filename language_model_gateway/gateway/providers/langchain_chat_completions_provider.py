@@ -202,12 +202,22 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tool_first_audience: str = self.auth_config_reader.get_audience_for_provider(
             auth_provider=tool_first_auth_provider
         )
+        if not auth_information.email:
+            raise ValueError(
+                "AuthInformation must have email to authenticate for tools."
+            )
+        if not auth_information.subject:
+            raise ValueError(
+                "AuthInformation must have subject to authenticate for tools."
+            )
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
                 issuer=tool_first_issuer,
                 url=tool_using_authentication.url,
+                referring_email=auth_information.email,
+                referring_subject=auth_information.subject,
             )
             if tool_using_authentication
             else None

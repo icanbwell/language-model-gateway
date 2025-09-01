@@ -120,10 +120,12 @@ class ChatCompletionsRouter:
                 claims=None,
                 expires_at=None,
                 audience=None,
+                email=None,
+                subject=None,
             )
             auth_header = request.headers.get("Authorization")
             if auth_header:
-                token = token_reader.extract_token(auth_header)
+                token: str | None = token_reader.extract_token(auth_header)
                 if (
                     token and token != "fake-api-key" and token != "bedrock"
                 ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
@@ -134,6 +136,9 @@ class ChatCompletionsRouter:
                         auth_information.claims = token_item.claims
                         auth_information.expires_at = token_item.expires
                         auth_information.audience = token_item.audience
+                        auth_information.email = token_item.email
+                        auth_information.subject = token_item.subject
+
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},

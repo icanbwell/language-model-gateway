@@ -79,8 +79,8 @@ class TokenExchangeManager:
         assert self.auth_config_reader is not None
         assert isinstance(self.auth_config_reader, AuthConfigReader)
 
-    async def get_token_for_auth_provider_and_email(
-        self, *, auth_provider: str, email: str
+    async def get_token_for_auth_provider_and_referring_email(
+        self, *, auth_provider: str, referring_email: str
     ) -> TokenCacheItem | None:
         """
         Get the token for the OIDC provider.
@@ -90,7 +90,7 @@ class TokenExchangeManager:
 
         Args:
             auth_provider (str): The name of the OIDC provider.
-            email (str): The email associated with the token.
+            referring_email (str): The email associated with the token.
         Returns:
             dict[str, Any]: A dictionary containing the token information.
         """
@@ -100,7 +100,7 @@ class TokenExchangeManager:
             collection_name=self.token_collection_name,
             model_class=TokenCacheItem,
             fields={
-                "email": email,
+                "referring_email": referring_email,
                 "auth_provider": auth_provider,
             },
         )
@@ -128,37 +128,8 @@ class TokenExchangeManager:
             },
         )
 
-    async def get_valid_token_cache_item_for_auth_providers_async(
-        self, *, auth_providers: List[str], email: str
-    ) -> TokenCacheItem | None:
-        """
-        Check if a valid token exists for the given OIDC provider and email.
-
-        Args:
-            auth_providers (List[str]): The OIDC auth providers to check.
-            email (str): The email associated with the token.
-
-        Returns:
-            bool: True if a valid token exists, False otherwise.
-        """
-        # check if the bearer token has audience same as the auth provider name
-        assert auth_providers is not None
-        if not email:
-            return None
-
-        found_cache_item: (
-            TokenCacheItem | None
-        ) = await self.get_token_cache_item_for_auth_providers_async(
-            auth_providers=auth_providers, email=email
-        )
-        return (
-            found_cache_item
-            if found_cache_item and found_cache_item.is_valid_id_token()
-            else None
-        )
-
     async def get_token_cache_item_for_auth_providers_async(
-        self, *, auth_providers: List[str], email: str
+        self, *, auth_providers: List[str], referring_email: str
     ) -> TokenCacheItem | None:
         """
         Check if a valid token exists for the given OIDC provider and email.
@@ -166,14 +137,14 @@ class TokenExchangeManager:
 
         Args:
             auth_providers (List[str]): The OIDC providers to check.
-            email (str): The email associated with the token.
+            referring_email (str): The email associated with the token.
 
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
         # check if the bearer token has audience same as the auth provider name
         assert auth_providers is not None
-        if not email:
+        if not referring_email:
             return None
 
         found_cache_item: TokenCacheItem | None = None
@@ -183,27 +154,27 @@ class TokenExchangeManager:
             )
             token: (
                 TokenCacheItem | None
-            ) = await self.get_token_for_auth_provider_and_email(
-                auth_provider=auth_provider, email=email
+            ) = await self.get_token_for_auth_provider_and_referring_email(
+                auth_provider=auth_provider, referring_email=referring_email
             )
             if token:
                 logger.debug(
-                    f"Found token for auth_provider {auth_provider}, audience {audience} and email {email}: {token.model_dump_json()}"
+                    f"Found token for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json()}"
                 )
                 # we really care about the id token
                 if token.is_valid_id_token():
                     logger.debug(
-                        f"Found valid token for auth_provider {auth_provider}, audience {audience} and email {email}"
+                        f"Found valid token for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}"
                     )
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and email {email}: {token.model_dump_json() if token else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token else 'None'}"
                     )
                     found_cache_item = token
 
         logger.debug(
-            f"Found token cache item for auth providers {auth_providers} email {email}: {found_cache_item}"
+            f"Found token cache item for auth providers {auth_providers} referring_email {referring_email}: {found_cache_item}"
         )
         return found_cache_item
 
@@ -277,12 +248,19 @@ class TokenExchangeManager:
                         f"Token is valid for tool {tool_name} with token_auth_provider {token_auth_provider}."
                     )
 
+                    if not token_item.email:
+                        raise ValueError("Token must have an email claim.")
+                    if not token_item.subject:
+                        raise ValueError("Token must have a subject claim.")
+
                     # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
                         auth_provider=token_auth_provider
                         if token_auth_provider
                         else "unknown",
+                        referring_email=token_item.email,
+                        referring_subject=token_item.subject,
                     )
                 else:
                     # see if we have a token for this audience and email in the cache
@@ -292,15 +270,15 @@ class TokenExchangeManager:
                         token=token
                     )
                     assert email, "Token must contain a subject (email or sub) claim."
-                    # if we have an override email, use that instead of the email from the token
-                    if self.environment_variables.override_email:
-                        email = self.environment_variables.override_email
+                    # # if we have an override email, use that instead of the email from the token
+                    # if self.environment_variables.override_email:
+                    #     email = self.environment_variables.override_email
                     # now find token for this email and auth provider
                     token_for_tool: (
                         TokenCacheItem | None
                     ) = await self.get_token_cache_item_for_auth_providers_async(
                         auth_providers=tool_auth_providers,
-                        email=email,
+                        referring_email=email,
                     )
                     if token_for_tool:
                         if token_for_tool.is_valid_id_token():

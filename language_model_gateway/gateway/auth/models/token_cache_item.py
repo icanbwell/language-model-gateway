@@ -14,7 +14,7 @@ class TokenCacheItem(BaseDbModel):
     Represents a token cache item in the database.
     """
 
-    created: Optional[datetime] = Field(default=None)
+    created: datetime = Field()
     """The creation time of the token as a datetime object."""
     updated: Optional[datetime] = Field(default=None)
     """The last update time of the token as a datetime object."""
@@ -23,14 +23,18 @@ class TokenCacheItem(BaseDbModel):
 
     auth_provider: str = Field()
     """The authentication provider associated with the token."""
-    issuer: str | None = Field()
+    issuer: str | None = Field(default=None)
     """The issuer of the token, typically the authorization server."""
-    audience: str | None = Field()
+    audience: str = Field()
     """The intended audience for the token, usually the resource server."""
-    email: str | None = Field(default=None)
+    email: str = Field()
     """The email associated with the token, used for user identification."""
-    subject: str | None = Field(default=None)
+    subject: str = Field()
     """The subject of the token, typically the user ID or unique identifier."""
+    referring_email: str = Field()
+    """The email of the original token that is linked to this token, if applicable."""
+    referring_subject: str = Field()
+    """The subject of the original token that is linked to this token, if applicable."""
     referrer: Optional[str] = Field(default=None)
     """The URL associated with the token, if applicable."""
     access_token: Optional[Token] = Field(default=None)
@@ -73,7 +77,14 @@ class TokenCacheItem(BaseDbModel):
         return self.id_token if self.id_token else self.access_token
 
     @classmethod
-    def create(cls, *, token: Token, auth_provider: str) -> "TokenCacheItem":
+    def create(
+        cls,
+        *,
+        token: Token,
+        auth_provider: str,
+        referring_email: str,
+        referring_subject: str,
+    ) -> "TokenCacheItem":
         # see what the token this is
 
         audience: str | None = None
@@ -82,6 +93,14 @@ class TokenCacheItem(BaseDbModel):
                 audience = token.audience[0]
         elif isinstance(token.audience, str):
             audience = token.audience
+
+        if audience is None:
+            raise ValueError("Audience must be a string or a list with one string.")
+
+        if token.email is None:
+            raise ValueError("Token must have an email claim.")
+        if token.subject is None:
+            raise ValueError("Token must have a subject claim.")
 
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
@@ -97,6 +116,8 @@ class TokenCacheItem(BaseDbModel):
             access_token=token,
             id_token=None,
             refresh_token=None,
+            referring_email=referring_email,
+            referring_subject=referring_subject,
         )
         if token.is_id_token:
             token_cache_item.id_token = token
