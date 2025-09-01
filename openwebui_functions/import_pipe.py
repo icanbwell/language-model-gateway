@@ -93,7 +93,7 @@ def create_function(
     response.raise_for_status()
 
     # now call the toggle function
-    if not toggle_function_url.startswith(('https://', 'http://')):
+    if not toggle_function_url.startswith(("https://", "http://")):
         raise ValueError("Invalid URL scheme. Only http:// or https:// are allowed.")
     response2 = requests.post(toggle_function_url, headers=headers, timeout=30)
 
