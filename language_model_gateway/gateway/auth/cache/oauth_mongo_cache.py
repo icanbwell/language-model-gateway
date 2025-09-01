@@ -1,7 +1,7 @@
 import logging
-import os
 import traceback
 import uuid
+from datetime import datetime, UTC
 from typing import override
 
 from bson import ObjectId
@@ -56,6 +56,12 @@ class OAuthMongoCache(OAuthCache):
         )
         self.collection_name: str = collection_name
 
+        self.environment_variables: EnvironmentVariables = environment_variables
+        assert self.environment_variables is not None, (
+            "OAuthMongoCache requires an EnvironmentVariables instance."
+        )
+        assert isinstance(self.environment_variables, EnvironmentVariables)
+
     @property
     def id(self) -> uuid.UUID:
         """
@@ -79,16 +85,27 @@ class OAuthMongoCache(OAuthCache):
                 "key": key,
             },
         )
-        disable_delete: bool = (
-            os.getenv("MONGO_DB_AUTH_CACHE_DISABLE_DELETE", "false").lower() == "true"
+        disable_delete: bool | None = (
+            self.environment_variables.mongo_db_cache_disable_delete
         )
-        if cache_item is not None and cache_item.id and not disable_delete:
+        if cache_item is not None and cache_item.id:
             # delete the cache item if it exists
             logger.debug(f" ====== Deleting {cache_item.id} =====")
-            await self.repository.delete_by_id(
-                collection_name=self.collection_name,
-                document_id=cache_item.id,
-            )
+            if disable_delete:
+                cache_item.deleted = datetime.now(UTC)
+                await self.repository.insert_or_update(
+                    collection_name=self.collection_name,
+                    model_class=CacheItem,
+                    item=cache_item,
+                    keys={
+                        "key": key,
+                    },
+                )
+            else:
+                await self.repository.delete_by_id(
+                    collection_name=self.collection_name,
+                    document_id=cache_item.id,
+                )
 
     @override
     async def get(self, key: str, default: str | None = None) -> str | None:
@@ -152,7 +169,7 @@ class OAuthMongoCache(OAuthCache):
             )
         else:
             logger.debug(f" ====== Creating new cache item {key}: {value} =====")
-            cache_item = CacheItem(key=key, value=value)
+            cache_item = CacheItem(key=key, value=value, created=datetime.now(UTC))
             new_object_id = await self.repository.insert(
                 collection_name=self.collection_name,
                 model=cache_item,

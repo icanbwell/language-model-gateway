@@ -1,6 +1,8 @@
 import os
 from typing import Optional
 
+from moto.utilities.utils import str2bool
+
 
 class EnvironmentVariables:
     @property
@@ -64,3 +66,11 @@ class EnvironmentVariables:
     def auth_providers(self) -> Optional[list[str]]:
         auth_providers: str | None = os.environ.get("AUTH_PROVIDERS")
         return auth_providers.split(",") if auth_providers else None
+
+    @staticmethod
+    def str2bool(v: str | None) -> bool:
+        return v is not None and str(v).lower() in ("yes", "true", "t", "1", "y")
+
+    @property
+    def mongo_db_cache_disable_delete(self) -> Optional[bool]:
+        return str2bool(os.environ.get("MONGO_DB_AUTH_CACHE_DISABLE_DELETE"))
