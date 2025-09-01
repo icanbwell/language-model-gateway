@@ -92,8 +92,8 @@ services:
 
   keycloak:
     # https://github.com/keycloak/keycloak/releases
-#    image: quay.io/keycloak/keycloak:26.3.2
-    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/keycloak/keycloak:26.3.2
+    image: quay.io/keycloak/keycloak:26.3.2
+#    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/keycloak/keycloak:26.3.2
     #    container_name: keycloak
     #    build:
     #      dockerfile: keycloak.Dockerfile

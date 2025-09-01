@@ -20,14 +20,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+#      - name: AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v4
+#        with:
+#          aws-region: us-east-1
+#
+#      - name: Login to Amazon ECR
+#        id: login-ecr
+#        uses: aws-actions/amazon-ecr-login@v2
 
       - name: create docker.env
         run: |
@@ -45,6 +45,10 @@ jobs:
           mkdir -p ${{ github.workspace }}/reports
           chmod -R 777 ${{ github.workspace }}/reports
 
+      # setup and install everything and run tests
+      - name: Pull required Docker images
+        run: |
+          docker compose pull
 
       # setup and install everything and run tests
       - name: up
