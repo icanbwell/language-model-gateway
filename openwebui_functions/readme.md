@@ -1,5 +1,10 @@
 # Pipes for installing and running in OpenWebUI
 
+## Specifying the AWS Credentials Profile
+Set `AWS_CREDENTIALS_PROFILE='{profile}'` where profile is the name of your AWS profile in docker.env
+
+This is needed for accessing AWS Bedrock for testing.
+
 ## OpenWebUI Pipes
 https://docs.openwebui.com/features/plugin/functions/pipe/
 
@@ -17,3 +22,18 @@ https://docs.openwebui.com/features/plugin/functions/pipe/
 - After the function has been loaded, make sure to click the toggle next to it to turn it on
 - Now go back to the main UI
 - There should be new models in the model dropdown
+
+# Docker Login to pull private images from AWS ECR
+`data-engineer_dev` or `admin_dev`
+```shell
+aws ecr get-login-password --region us-east-1 --profile {profile} | docker login --username AWS --password-stdin 875300655693.dkr.ecr.us-east-1.amazonaws.com
+```
+
+For example:
+```shell
+aws ecr get-login-password --region us-east-1 --profile data-engineer_dev | docker login --username AWS --password-stdin 875300655693.dkr.ecr.us-east-1.amazonaws.com
+```
+Or
+```shell
+aws ecr get-login-password --region us-east-1 --profile admin_dev | docker login --username AWS --password-stdin 875300655693.dkr.ecr.us-east-1.amazonaws.com
+```

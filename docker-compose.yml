@@ -43,12 +43,38 @@ services:
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # These define the connection to the identity provider for JWT validation
-      AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      # if well-known URI is defined then JWKS_URI, AUTH_AUDIENCE and AUTH_ISSUER are not needed
-#      AUTH_JWKS_URI: "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/certs"
-#      AUTH_AUDIENCE: "my-mcp-server"
-#      AUTH_ISSUER: "https://my-identity-provider.com/"
+      # This lists the audiences that are allowed to access the API
+      # Below we specify the client id, client secret and well-known URI for each client
+      AUTH_PROVIDERS: "client1,client3,okta"
+      # first client for testing
+      AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_AUDIENCE_CLIENT1: "client1"
+      AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
+      AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
+      AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      # second client for testing
+      AUTH_ISSUER_CLIENT3: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_AUDIENCE_CLIENT3: "client3"
+      AUTH_CLIENT_ID_CLIENT3: "bwell-client-id-3"
+      AUTH_CLIENT_SECRET_CLIENT3: "bwell-secret-3"
+      AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      # Okta for dev and production
+      AUTH_ISSUER_OKTA: "https://icanbwell.okta.com"
+      # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
+      AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      # This is the URL that the user will be redirected to after authentication
+      AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
+      MONGO_DB_NAME: language_model_gateway
+      MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
+      MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
+      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
+      MONGO_DB_TOKEN_COLLECTION_NAME: tokens
+      OAUTH_CACHE: mongo
+      # This is the user and password that can be used for testing
+      MY_USER_NAME: tester
+      MY_USER_PASSWORD: password
     env_file: docker.env
+    command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
       - '5050:5000'
     volumes:
@@ -65,7 +91,8 @@ services:
 
   keycloak:
     # https://github.com/keycloak/keycloak/releases
-    image: quay.io/keycloak/keycloak:25.0.6
+    image: quay.io/keycloak/keycloak:26.3.2
+#    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/keycloak/keycloak:26.3.2
     #    container_name: keycloak
     #    build:
     #      dockerfile: keycloak.Dockerfile
@@ -74,8 +101,34 @@ services:
     #      - postgres
     environment:
       KC_HEALTH_ENABLED: true
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: password
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: password
+      QUARKUS_HTTP_ACCESS_LOG_PATTERN: "%r\n%{ALL_REQUEST_HEADERS}"
+    ports:
+      - "8080:8080"
+      # 9000 is for health checks: https://www.keycloak.org/observability/health
+      - "9000:9000"
+    command: [ "start-dev", "--verbose" ]
+    healthcheck:
+      test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q 'HTTP/1.1 200 OK' <&3" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - web
+
+  keycloak-init:
+    # This container is used to initialize Keycloak with test data
+    image: public.ecr.aws/docker/library/python:3.12-alpine3.20
+    volumes:
+      - ./keycloak-config:/config
+    environment:
+      KEYCLOAK_HOST: keycloak
+      KEYCLOAK_PORT: 8080
+      KEYCLOAK_HEALTH_CHECK_PORT: 9000
+      # These are the Keycloak admin credentials
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: password
       #      KC_DB: postgres
       #      KC_DB_URL: jdbc:postgresql://postgres/pdb
       #      KC_DB_USERNAME: admin
@@ -85,38 +138,66 @@ services:
       MY_ADMIN_USER_NAME: admin
       MY_ADMIN_USER_PASSWORD: password
       MY_ADMIN_USER_SCOPE: user/*.* access/*.*
-      MY_ADMIN_USER_GROUPS: user/*.* access/*.*
+      MY_ADMIN_USER_GROUPS: user/*.*,access/*.*
       MY_ADMIN_USER_TOKEN_USERNAME: admin
       # This is the user and password that will be created in the realm
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
+      MY_USER_EMAIL: imran.qureshi@icanbwell.com
+      MY_USER_FIRST_NAME: Imran
+      MY_USER_LAST_NAME: Qureshi
       # These groups get specified as scopes in the token
-      MY_USER_GROUPS: user/*.*,access/*.* launch/patient,patient/*.read
+      MY_USER_GROUPS: user/*.*,access/*.*,launch/patient,patient/*.read
       MY_USER_SCOPE: user/*.* access/*.* launch/patient patient/*.read openid profile email
       MY_USER_TOKEN_USERNAME: tester
       # This is the client setup
       CLIENT_ID: bwell-client-id
       CLIENT_SECRET: bwell-secret
+      CLIENT_AUDIENCE: client1
+      CLIENT_ACCESS_TOKEN_LIFE_SPAN: 3600
+      CLIENT_ID_TOKEN_LIFE_SPAN: 3600
+      CLIENT_REFRESH_TOKEN_LIFE_SPAN: 3600
+      # for client 2
+      CLIENT_ID_2: bwell-client-id-2
+      CLIENT_SECRET_2: bwell-secret-2
+      CLIENT_AUDIENCE_2: client2
+      # for client 3
+      CLIENT_ID_3: bwell-client-id-3
+      CLIENT_SECRET_3: bwell-secret-3
+      CLIENT_AUDIENCE_3: client3
+      CLIENT_ACCESS_TOKEN_LIFE_SPAN_3: 60
+      CLIENT_ID_TOKEN_LIFE_SPAN_3: 60
+      CLIENT_REFRESH_TOKEN_LIFE_SPAN_3: 3600
       # This is the service account that will be created in the realm
       SERVICE_ACCOUNT_NAME: service-account
       SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*
       SERVICE_ACCOUNT_GROUPS: user/*.* access/*.*
       # These are the custom claims that will be added to any generated token
       MY_USER_CLIENT_PERSON_ID: 0b2ad38a-20bc-5cf5-9739-13f242b05892
-      MY_USER_CLIENT_PATIENT_ID: 22aa18af-af51-5799-bc55-367c22c85407
+      MY_USER_CLIENT_PATIENT_ID: d58b4c4d-e820-5935-adfc-4cb372a91c22
       MY_USER_BWELL_PERSON_ID: 0eb80391-0f61-5ce6-b221-a5428f2f38a7
       MY_USER_BWELL_PATIENT_ID: patient2
-      QUARKUS_HTTP_ACCESS_LOG_PATTERN: "%r\n%{ALL_REQUEST_HEADERS}"
+
+    entrypoint: >
+      /bin/sh -c "
+        pip install --upgrade pip;
+        pip install python-keycloak requests;
+        python /config/keycloak_config.py
+      "
+    networks:
+      - web
+    depends_on:
+      - keycloak
+
+  mongo:
+    image: public.ecr.aws/docker/library/mongo:8.0.12
+    container_name: mongo
     ports:
-      - "8080:8080"
-    command: [ "start-dev", "--import-realm", "--verbose" ]
-    volumes:
-      - ./keycloak-config/realm-import.json:/opt/keycloak/data/import/realm-import.json
+      - '27017:27017'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     healthcheck:
-      test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
     networks:
       - web
 

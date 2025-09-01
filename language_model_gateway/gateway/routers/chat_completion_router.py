@@ -10,11 +10,24 @@ from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 from fastapi import params
 
-from language_model_gateway.gateway.api_container import get_chat_manager
+from language_model_gateway.gateway.api_container import (
+    get_chat_manager,
+    get_token_reader,
+    get_environment_variables,
+)
+from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -75,6 +88,10 @@ class ChatCompletionsRouter:
         request: Request,
         chat_request: Dict[str, Any],
         chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
+        environment_variables: Annotated[
+            EnvironmentVariables, Depends(get_environment_variables)
+        ],
     ) -> StreamingResponse | JSONResponse:
         """
         Chat completions endpoint. chat_manager is injected by FastAPI.
@@ -83,6 +100,8 @@ class ChatCompletionsRouter:
             request: The incoming request
             chat_request: The chat request data
             chat_manager: Injected chat manager instance
+            token_reader: Injected token reader instance
+            environment_variables: Injected environment variables instance
 
         Returns:
             StreamingResponse or JSONResponse
@@ -94,10 +113,37 @@ class ChatCompletionsRouter:
         assert chat_manager
 
         try:
+            # read the authorization header and extract the token
+            auth_information: AuthInformation = AuthInformation(
+                redirect_uri=environment_variables.auth_redirect_uri
+                or str(request.url_for("auth_callback")),
+                claims=None,
+                expires_at=None,
+                audience=None,
+                email=None,
+                subject=None,
+            )
+            auth_header = request.headers.get("Authorization")
+            if auth_header:
+                token: str | None = token_reader.extract_token(auth_header)
+                if (
+                    token and token != "fake-api-key" and token != "bedrock"
+                ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
+                    token_item: Token | None = await token_reader.verify_token_async(
+                        token=token
+                    )
+                    if token_item is not None:
+                        auth_information.claims = token_item.claims
+                        auth_information.expires_at = token_item.expires
+                        auth_information.audience = token_item.audience
+                        auth_information.email = token_item.email
+                        auth_information.subject = token_item.subject
+
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},
                 chat_request=cast(ChatRequest, chat_request),
+                auth_information=auth_information,
             )
         except* TokenRetrievalError as e:
             logger.exception(e, stack_info=True)
@@ -106,7 +152,12 @@ class ChatCompletionsRouter:
                 status_code=500,
                 detail=f"Error retrieving AWS token: {e}.  If running on developer machines, run `aws sso login --profile [profile_name]` to get the token.",
             )
-
+        except* AuthorizationNeededException as e:
+            logger.exception(e, stack_info=True)
+            raise HTTPException(
+                status_code=401,
+                detail="Your login has expired. Please log in again.",
+            )
         except* ConnectionError as e:
             call_stack = traceback.format_exc()
             error_detail: ErrorDetail = {

@@ -375,6 +375,7 @@ class Pipe:
     ) -> AsyncGenerator[str, None]:
         """
         Main pipe method supporting both streaming and non-streaming responses
+        OpenWebUI Documentation: https://docs.openwebui.com/features/plugin/functions/pipe#using-internal-open-webui-functions
         """
         await self.emit_status(
             __event_emitter__,

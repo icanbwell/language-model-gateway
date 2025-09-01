@@ -17,7 +17,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": 0.5
+      "value": "0.5"
     }
   ],
   "headers": [

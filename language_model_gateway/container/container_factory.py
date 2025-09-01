@@ -3,6 +3,13 @@ import os
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.simple_container import SimpleContainer
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
@@ -34,7 +41,7 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -93,13 +100,10 @@ class ContainerFactory:
         )
 
         container.singleton(
-            TokenVerifier,
-            lambda c: TokenVerifier(
-                jwks_uri=c.resolve(EnvironmentVariables).auth_jwks_uri,
-                issuer=c.resolve(EnvironmentVariables).auth_issuer,
-                audience=c.resolve(EnvironmentVariables).auth_audience,
+            TokenReader,
+            lambda c: TokenReader(
                 algorithms=c.resolve(EnvironmentVariables).auth_algorithms,
-                well_known_uri=c.resolve(EnvironmentVariables).auth_well_known_uri,
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
@@ -200,6 +204,7 @@ class ContainerFactory:
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 cache=c.resolve(McpToolsMetadataExpiringCache),
+                auth_manager=c.resolve(AuthManager),
             ),
         )
 
@@ -210,7 +215,10 @@ class ContainerFactory:
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
-                token_verifier=c.resolve(TokenVerifier),
+                token_reader=c.resolve(TokenReader),
+                auth_manager=c.resolve(AuthManager),
+                environment_variables=c.resolve(EnvironmentVariables),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
@@ -242,6 +250,32 @@ class ContainerFactory:
 
         container.register(
             ModelManager, lambda c: ModelManager(config_reader=c.resolve(ConfigReader))
+        )
+
+        container.register(
+            AuthManager,
+            lambda c: AuthManager(
+                environment_variables=c.resolve(EnvironmentVariables),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
+                token_reader=c.resolve(TokenReader),
+            ),
+        )
+
+        container.register(
+            TokenExchangeManager,
+            lambda c: TokenExchangeManager(
+                environment_variables=c.resolve(EnvironmentVariables),
+                token_reader=c.resolve(TokenReader),
+                auth_config_reader=c.resolve(AuthConfigReader),
+            ),
+        )
+
+        container.register(
+            AuthConfigReader,
+            lambda c: AuthConfigReader(
+                environment_variables=c.resolve(EnvironmentVariables)
+            ),
         )
         logger.info("DI container initialized")
         return container

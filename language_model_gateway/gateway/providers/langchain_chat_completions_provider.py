@@ -1,4 +1,5 @@
 import datetime
+import logging
 import random
 from typing import Dict, Any, Sequence, List
 
@@ -7,7 +8,13 @@ from langchain_core.tools import BaseTool
 from langgraph.graph.state import CompiledStateGraph
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
+from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -19,7 +26,11 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.auth.token_verifier import TokenVerifier
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
+
+logger = logging.getLogger(__name__)
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
@@ -30,7 +41,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
-        token_verifier: TokenVerifier,
+        token_reader: TokenReader,
+        auth_manager: AuthManager,
+        environment_variables: EnvironmentVariables,
+        auth_config_reader: AuthConfigReader,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -50,9 +64,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         assert self.mcp_tool_provider is not None
         assert isinstance(self.mcp_tool_provider, MCPToolProvider)
 
-        self.token_verifier: TokenVerifier = token_verifier
-        assert self.token_verifier is not None
-        assert isinstance(self.token_verifier, TokenVerifier)
+        self.token_reader: TokenReader = token_reader
+        assert self.token_reader is not None
+        assert isinstance(self.token_reader, TokenReader)
+
+        self.auth_manager: AuthManager = auth_manager
+        assert self.auth_manager is not None
+        assert isinstance(self.auth_manager, AuthManager)
+
+        self.environment_variables: EnvironmentVariables = environment_variables
+        assert self.environment_variables is not None
+        assert isinstance(self.environment_variables, EnvironmentVariables)
+
+        self.auth_config_reader: AuthConfigReader = auth_config_reader
+        assert self.auth_config_reader is not None
+        assert isinstance(self.auth_config_reader, AuthConfigReader)
 
     async def chat_completions(
         self,
@@ -60,6 +86,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         model_config: ChatModelConfig,
         headers: Dict[str, str],
         chat_request: ChatRequest,
+        auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # noinspection PyArgumentList
         llm: BaseChatModel = self.model_factory.get_model(
@@ -83,43 +110,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
-        # check if any of the MCP tools require authentication
-        tools_using_authentication: List[str] = [
-            a.name for a in model_config.get_agents() if a.auth == "jwt_token"
-        ]
-        if any(tools_using_authentication):
-            # check that we have a valid Authorization header
-            auth_header: str | None = next(
-                (headers.get(key) for key in headers if key.lower() == "authorization"),
-                None,
-            )
-            if not auth_header:
-                raise ValueError(
-                    "Authorization header is required for MCP tools with JWT authentication."
-                    + f"Following tools require authentication: {tools_using_authentication}"
-                )
-            else:
-                token = self.token_verifier.extract_token(auth_header)
-                if not token:
-                    raise ValueError(
-                        "Invalid Authorization header format. Expected 'Bearer <token>'"
-                        + f"Following tools require authentication: {tools_using_authentication}"
-                    )
-                # verify the token
-                try:
-                    access_token = await self.token_verifier.verify_token_async(
-                        token=token
-                    )
-                    if not access_token:
-                        raise ValueError(
-                            "Invalid or expired token provided in Authorization header"
-                            + f"Following tools require authentication: {tools_using_authentication}"
-                        )
-                except Exception as e:
-                    raise ValueError(
-                        "Invalid or expired token provided in Authorization header."
-                        + f" Following tools require authentication: {tools_using_authentication}"
-                    ) from e
+        await self.check_tokens_are_valid_for_tools(
+            auth_information=auth_information,
+            headers=headers,
+            model_config=model_config,
+        )
 
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
@@ -141,4 +136,100 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             compiled_state_graph=compiled_state_graph,
             chat_request=chat_request,
             system_messages=[],
+        )
+
+    async def check_tokens_are_valid_for_tools(
+        self,
+        *,
+        auth_information: AuthInformation,
+        headers: Dict[str, Any],
+        model_config: ChatModelConfig,
+    ) -> None:
+        # check if any of the MCP tools require authentication
+        tools_using_authentication: List[AgentConfig] = [
+            a for a in model_config.get_agents() if a.auth == "jwt_token"
+        ]
+        if any(tools_using_authentication):
+            # check that we have a valid Authorization header
+            auth_header: str | None = next(
+                (headers.get(key) for key in headers if key.lower() == "authorization"),
+                None,
+            )
+            tool_using_authentication: AgentConfig
+            for tool_using_authentication in tools_using_authentication:
+                await self.check_tokens_are_valid_for_tool(
+                    auth_header=auth_header,
+                    auth_information=auth_information,
+                    tool_using_authentication=tool_using_authentication,
+                )
+        else:
+            logger.debug("No tools require authentication.")
+
+    async def check_tokens_are_valid_for_tool(
+        self,
+        *,
+        auth_header: str | None,
+        auth_information: AuthInformation,
+        tool_using_authentication: AgentConfig,
+    ) -> None:
+        """
+        Check if the provided token is valid for the specified tool.
+        Args:
+            auth_header (str | None): The Authorization header containing the token.
+            auth_information (AuthInformation): The authentication information.
+            tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
+        """
+        if not tool_using_authentication.auth_providers:
+            logger.debug(
+                f"Tool {tool_using_authentication.name} doesn't have auth providers."
+            )
+            return
+        if not auth_information.redirect_uri:
+            logger.debug("AuthInformation doesn't have redirect_uri.")
+            return
+
+        tool_first_auth_provider: str = tool_using_authentication.auth_providers[0]
+        tool_first_issuer: str | None = (
+            tool_using_authentication.issuers[0]
+            if tool_using_authentication.issuers
+            else self.auth_config_reader.get_issuer_for_provider(
+                auth_provider=tool_first_auth_provider,
+            )
+        )
+        assert tool_first_issuer, (
+            "Tool using authentication must have at least one issuer or use the default issuer."
+        )
+        tool_first_audience: str = self.auth_config_reader.get_audience_for_provider(
+            auth_provider=tool_first_auth_provider
+        )
+        if not auth_information.email:
+            raise ValueError(
+                "AuthInformation must have email to authenticate for tools."
+            )
+        if not auth_information.subject:
+            raise ValueError(
+                "AuthInformation must have subject to authenticate for tools."
+            )
+        authorization_url: str | None = (
+            await self.auth_manager.create_authorization_url(
+                audience=tool_first_audience,  # use the first audience to get a new authorization URL
+                redirect_uri=auth_information.redirect_uri,
+                issuer=tool_first_issuer,
+                url=tool_using_authentication.url,
+                referring_email=auth_information.email,
+                referring_subject=auth_information.subject,
+            )
+            if tool_using_authentication
+            else None
+        )
+        error_message: str = (
+            f"\nFollowing tools require authentication: {tool_using_authentication.name}."
+            + f"\nClick here to authenticate: [Login to {tool_first_auth_provider}]({authorization_url})."
+        )
+        # we don't care about the token but just verify it exists so we can throw an error if it doesn't
+        await self.auth_manager.get_token_for_tool_async(
+            auth_header=auth_header,
+            error_message=error_message,
+            tool_name=tool_using_authentication.name,
+            tool_auth_providers=tool_using_authentication.auth_providers,
         )

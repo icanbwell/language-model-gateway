@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "google_drive_separate_auth",
+  "name": "Google Drive Separate Auth",
+  "description": "This is a language model that can access data in Google Drive.",
+  "type": "langchain",
+  "model": {
+    "provider": "bedrock",
+    "model": "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+  },
+  "system_prompts": [
+    {
+      "role": "system",
+      "content": "You are a tool that searches and retrieves files from Google Drive. You can also download files from Google Drive given a url."
+    }
+  ],
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "name": "google_drive",
+      "url": "http://mcp_server_gateway:5000/google_drive/",
+      "auth": "jwt_token",
+      "auth_providers": [
+        "okta"
+      ]
+    }
+  ],
+  "example_prompts": [
+    {
+      "role": "user",
+      "content": "Summarize the contents of the file at this URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing"
+    }
+  ]
+}

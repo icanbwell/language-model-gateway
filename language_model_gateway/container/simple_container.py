@@ -32,8 +32,10 @@ class ServiceNotFoundError(ContainerError):
 class SimpleContainer:
     """Generic IoC Container"""
 
+    _singletons: Dict[type[Any], Any] = {}  # Shared across all instances
+
     def __init__(self) -> None:
-        self._singletons: Dict[type[Any], Any] = {}
+        # Remove instance-level _singletons
         self._factories: Dict[type[Any], ServiceFactory[Any]] = {}
         self._singleton_types: set[type[Any]] = set()
 
@@ -64,8 +66,8 @@ class SimpleContainer:
             An instance of the requested service
         """
         # Check if it's a singleton and already instantiated
-        if service_type in self._singletons:
-            return cast(T, self._singletons[service_type])
+        if service_type in SimpleContainer._singletons:
+            return cast(T, SimpleContainer._singletons[service_type])
 
         if service_type not in self._factories:
             raise ServiceNotFoundError(f"No factory registered for {service_type}")
@@ -75,7 +77,7 @@ class SimpleContainer:
 
         # If it's a singleton type, cache the instance
         if service_type in self._singleton_types:
-            self._singletons[service_type] = service
+            SimpleContainer._singletons[service_type] = service
 
         return service
 

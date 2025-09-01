@@ -141,3 +141,4 @@ dmypy.json
 /image_generation/*.png
 /certs/*
 /letsencrypt/*
+/keycloak-config/public_key.json

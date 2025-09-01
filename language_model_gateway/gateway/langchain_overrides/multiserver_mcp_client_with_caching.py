@@ -3,7 +3,7 @@ import logging
 from typing import override, List, Dict
 from uuid import UUID, uuid4
 
-from httpx import HTTPStatusError
+from httpx import HTTPStatusError, ConnectError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
@@ -16,6 +16,15 @@ from langchain_mcp_adapters.tools import (
 )
 from mcp import ClientSession, Tool
 
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_not_found_exception import (
+    McpToolNotFoundException,
+)
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
+    McpToolUnauthorizedException,
+)
+from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unknown_exception import (
+    McpToolUnknownException,
+)
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
@@ -199,7 +208,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             msg = "Either a session or a connection config must be provided"
             raise ValueError(msg)
 
-        tools: List[Tool] = []
+        tools: List[Tool]
         try:
             if session is None:
                 # If a session is not provided, we will create one on the fly
@@ -213,38 +222,88 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             # exc is a ExceptionGroup, so we can catch it with a wildcard
             # and log the type of the exception
             # if there is just one exception then check if it is 401 and then return a custom error
-            if len(exc.exceptions) == 1 and isinstance(
+            if len(exc.exceptions) >= 1 and isinstance(
                 exc.exceptions[0], HTTPStatusError
             ):
                 http_status_exception: HTTPStatusError = exc.exceptions[0]
+                response_text: str | None
+                # Read response text before the stream is closed
+                if not http_status_exception.response.is_closed:
+                    response_bytes: bytes = await http_status_exception.response.aread()
+                    response_text = response_bytes.decode()
+                else:
+                    response_text = http_status_exception.response.reason_phrase
+                # Handle 401 error
                 if http_status_exception.response.status_code == 401:
                     logger.error(
                         f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
                     )
-                    # Read response text before the stream is closed
-                    if not http_status_exception.response.is_closed:
-                        response_bytes = await http_status_exception.response.aread()
-                        response_text = (
-                            response_bytes.decode()
-                            if isinstance(response_bytes, bytes)
-                            else str(response_bytes)
-                        )
-                    else:
-                        response_text = http_status_exception.response.reason_phrase
-                    raise ValueError(
-                        f"Not allowed to access MCP tool at {http_status_exception.request.url}."
+                    # see if the response as a www-authenticate header
+                    www_authenticate_header = (
+                        http_status_exception.response.headers.get("www-authenticate")
+                    )
+
+                    raise McpToolUnauthorizedException(
+                        message=f"Not allowed to access MCP tool at {http_status_exception.request.url}."
                         + " Perhaps your login token has expired. Please reload to login again."
                         + f" Response: {response_text}"
+                        + (
+                            f" WWW-Authenticate header: {www_authenticate_header}"
+                            if www_authenticate_header
+                            else ""
+                        ),
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
                     ) from exc
-            logger.error(
-                f"load_metadata_for_mcp_tools Failed to load MCP tools: {type(exc)}"
-            )
-        except* Exception as e:
+                elif http_status_exception.response.status_code == 404:
+                    raise McpToolNotFoundException(
+                        message=f"MCP tool not found at {http_status_exception.request.url}. "
+                        + "Please check the URL and try again."
+                        + f" Response: {response_text}",
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
+                    ) from exc
+                else:
+                    raise McpToolUnknownException(
+                        message=f"Error accessing MCP tool at {http_status_exception.request.url}. "
+                        + f"Response: {response_text}",
+                        status_code=http_status_exception.response.status_code,
+                        headers=http_status_exception.response.headers,
+                        url=str(http_status_exception.request.url),
+                    ) from exc
+            else:
+                logger.error(
+                    f"load_metadata_for_mcp_tools Received error when loading MCP tools: {type(exc)}"
+                )
+                raise
+        except* ConnectError as exc:
+            if len(exc.exceptions) == 1 and isinstance(exc.exceptions[0], ConnectError):
+                # If there is just one exception, we can log it directly
+                http_connect_exception: ConnectError = exc.exceptions[0]
+                # Handle connection errors
+                logger.error(
+                    f"load_metadata_for_mcp_tools Failed to connect to MCP server: {type(http_connect_exception)} {http_connect_exception}"
+                )
+                raise ConnectionError(
+                    f"Failed to connect to the MCP server: {http_connect_exception.request.url}. Please check your connection."
+                ) from http_connect_exception
+            else:
+                raise
+        except* Exception as exc:
             url: str = connection.get("url") if connection else "unknown"
-            logger.error(
-                f"load_metadata_for_mcp_tools Failed to load MCP tools from {url}: {type(e)} {e}"
-            )
-            raise e
+            if len(exc.exceptions) >= 1:
+                first_exception: Exception = exc.exceptions[0]
+                logger.error(
+                    f"load_metadata_for_mcp_tools Failed to load MCP tools from {url}: {type(first_exception)} {first_exception}"
+                )
+            raise McpToolUnknownException(
+                message=f"Error accessing MCP tool at {url}. ",
+                status_code=None,
+                headers=None,
+                url=url,
+            ) from exc
 
         if tool_names is not None:
             # Filter tools by names if provided

@@ -37,7 +37,7 @@ up-integration: ## starts docker containers
 
 
 .PHONY: up-open-webui
-up-open-webui: clean_database ## starts docker containers
+up-open-webui: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
@@ -47,7 +47,7 @@ up-open-webui: clean_database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
-up-open-webui-ssl: clean_database ## starts docker containers
+up-open-webui-ssl: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
@@ -57,7 +57,7 @@ up-open-webui-ssl: clean_database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: clean_database create-certs ## starts docker containers
+up-open-webui-auth: create-certs ## starts docker containers
 	docker compose --progress=plain -f docker-compose.yml -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml -f docker-compose-mcp-server-gateway.yml up --build -d
 	echo "waiting for open-webui service to become healthy" && \
 	max_attempts=30 && \
@@ -93,14 +93,15 @@ up-open-webui-auth: clean_database create-certs ## starts docker containers
 	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} mcp-server-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
 	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
 
-	make insert-admin-user
+	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
-	@echo Admin User: admin/password. After login, run [make set-admin-user-role] to set admin role.
+	@echo Admin User: admin/password
 	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
+	@echo Language Model Gateway: http://localhost:5050/auth/login
 
 .PHONY: down
 down: ## stops docker containers
@@ -144,27 +145,34 @@ setup-pre-commit:
 	cp ./pre-commit-hook ./.git/hooks/pre-commit
 
 .PHONY:run-pre-commit
-run-pre-commit: setup-pre-commit
+run-pre-commit: setup-pre-commit ## runs pre-commit on all files
 	./.git/hooks/pre-commit pre_commit_all_files
 
 .PHONY: clean
-clean: down clean_database ## Cleans all the local docker setup
+clean: down clean-database ## Cleans all the local docker setup
 
-.PHONY: clean_database
-clean_database: down ## Cleans all the local docker setup
+.PHONY: clean-database
+clean-database: down ## Cleans all the local docker setup
 ifneq ($(shell docker volume ls | grep "language-model-gateway"| awk '{print $$2}'),)
 	docker volume ls | grep "language-model-gateway" | awk '{print $$2}' | xargs docker volume rm
 endif
 
 .PHONY: insert-admin-user
-insert-admin-user:
+insert-admin-user: ## Inserts an admin user with email 'admin@localhost' if it does not already exist
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
     "INSERT INTO public.\"user\" (id,name,email,\"role\",profile_image_url,api_key,created_at,updated_at,last_active_at,settings,info,oauth_sub) \
     SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286','User','admin@localhost','admin','/user.png',NULL,1735089600,1735089600,1735089609,'{"ui": {"version": "0.4.8"}}','null',NULL \
     WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE id = '8d967d73-99b8-40ff-ac3b-c71ac19e1286');"
 
+.PHONY: insert-admin-user-2
+insert-admin-user-2: ## Inserts an admin user with email 'admin@tester.com' and api_key 'sk-my-api-key' if it does not already exist
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+    "INSERT INTO public.user (id, name, email, role, profile_image_url, api_key, created_at, updated_at, last_active_at, settings, info, oauth_sub, username, bio, gender, date_of_birth) \
+	SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', 'sk-my-api-key', 1756681388, 1756681388, 1756681389, 'null', 'null', 'oidc@admin', NULL, NULL, NULL, NULL \
+    WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE email='admin@tester.com');"
+
 .PHONY: set-admin-user-role
-set-admin-user-role:
+set-admin-user-role: ## Sets the role of the user 'admin@tester.com' to admin
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
     "UPDATE public.\"user\" SET \"role\"='admin' WHERE name='admin@tester.com';"
 
@@ -175,11 +183,11 @@ CERT_CRT := $(CERT_DIR)/open-webui.localhost.pem
 .PHONY: all install-ca create-certs
 
 # Install local Certificate Authority
-install-ca:
+install-ca: ## Installs a local CA using mkcert
 	mkcert -install
 
 # Create certificates
-create-certs: install-ca
+create-certs: install-ca ## Creates self-signed certificates for open-webui.localhost
 	@if [ ! -f "$(CERT_CRT)" ]; then \
 		mkdir -p $(CERT_DIR); \
 		mkcert open-webui.localhost localhost 127.0.0.1 ::1; \
@@ -192,3 +200,20 @@ create-certs: install-ca
 
 clean_certs:
 	rm -rf $(CERT_DIR)
+
+.PHONY: import-open-webui-pipe
+import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+	"DELETE FROM public.function WHERE id='language_model_gateway';"
+	docker run --rm -it --name openid-function-creator \
+        --network language-model-gateway_web \
+        --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
+        python:3.12-alpine \
+        sh -c "pip install --upgrade pip && \
+        	   pip install authlib requests && \
+               cd /app && \
+               python3 import_pipe.py \
+               --url 'http://language-model-gateway-open-webui-1:8080' \
+               --api-key 'sk-my-api-key' \
+               --json 'language_model_gateway_pipe.json' \
+               --file 'language_model_gateway_pipe.py'"

@@ -17,6 +17,7 @@ from typing import (
     Iterable,
 )
 
+import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
 from langchain_core.language_models import BaseChatModel
@@ -427,9 +428,21 @@ class LangGraphToOpenAIConverter:
                 return JSONResponse(content=chat_response.model_dump())
             except* TokenRetrievalError as e:
                 logger.exception(e, stack_info=True)
+                first_exception = e.exceptions[0]
                 raise HTTPException(
                     status_code=401,
-                    detail=f"Token retrieval error: {type(e)} {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`.",
+                    detail=f"AWS Bedrock Token retrieval error: {type(first_exception)} {first_exception}."
+                    + "  If you are running locally, your AWS session may have expired."
+                    + "  Please re-authenticate using `aws sso login --profile [role]`.",
+                )
+            except* botocore.exceptions.NoCredentialsError as e:
+                logger.exception(e, stack_info=True)
+                first_exception1 = e.exceptions[0]
+                raise HTTPException(
+                    status_code=401,
+                    detail=f"AWS Bedrock Login error: {type(first_exception1)} {first_exception1}."
+                    + "  If you are running locally, your AWS session may have expired."
+                    + "  Please re-authenticate using `aws sso login --profile [role]`.",
                 )
             except* Exception as e:
                 logger.exception(e, stack_info=True)
@@ -591,11 +604,10 @@ class LangGraphToOpenAIConverter:
             The list of any messages.
         """
 
-        output: Dict[str, Any] = await compiled_state_graph.ainvoke(
-            input=self.create_state(
-                chat_request=chat_request, headers=headers, messages=messages
-            )
+        input_: MyMessagesState = self.create_state(
+            chat_request=chat_request, headers=headers, messages=messages
         )
+        output: Dict[str, Any] = await compiled_state_graph.ainvoke(input=input_)
         out_messages: List[AnyMessage] = output["messages"]
         return out_messages
 
@@ -816,7 +828,7 @@ class LangGraphToOpenAIConverter:
         :param tools: list of tools
         :return: compiled state graph
         """
-        tool_node: ToolNode | None = None
+        tool_node: Optional[ToolNode] = None
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
 

@@ -3,12 +3,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[[source]]
-name = "alpine-wheels"
-# https://github.com/imranq2/alpine-wheels/
-url = "https://imranq2.github.io/alpine-wheels/docs/"
-verify_ssl = true
-
 [packages]
 # wheel is needed for building the package and installing wheels
 wheel = ">=0.45.1"
@@ -19,7 +13,9 @@ ariadne = ">=0.23.0"
 # fastapi is a Python library for building APIs
 fastapi = ">=0.115.8"
 # boto3 is a Python library for interacting with AWS services
-boto3 = ">=1.36.9"
+boto3 = ">=1.40.21"
+# botocore is a low-level interface to a growing number of Amazon Web Services.  It is a dependency of boto3
+botocore = ">=1.40.21"  # needed by boto3
 # uvicorn is a Python library for running ASGI applications
 uvicorn = ">=0.34.0"
 # ddtrace is a Python library for tracing requests
@@ -27,7 +23,7 @@ ddtrace = ">=2.17.2"
 # prometheus-fastapi-instrumentator is a Python library for instrumenting FastAPI applications
 prometheus-fastapi-instrumentator = ">=7.0.0"
 # python-crfsuite is a Python library used when installing some packages
-python-crfsuite = { version = "==0.9.10", index = "alpine-wheels" }
+python-crfsuite = ">=0.9.11"
 # httpx is a Python library for making HTTP requests
 httpx = ">=0.28.1"
 # httpx-sse is a Python library for making Server-Sent Events requests
@@ -47,7 +43,7 @@ langchain-openai = ">=0.3.3"
 # langchain-community is a Python library that contains ommmunity extensions
 langchain-community = ">=0.3.16"
 # grpcio is a Python library for working with gRPC.   Needed by Google Vertex AI
-grpcio = { version = "==1.66.0", index = "alpine-wheels" }
+grpcio = ">=1.74.0"
 # langchain-google-community is a Python library that contains Google community extensions
 langchain-google-community = ">=2.0.3"
 # langgraph is a Python library for building language models
@@ -59,8 +55,6 @@ furl = ">=2.1.3"
 # tiktoken is a fast BPE tokeniser for use with OpenAI's models
 # tiktoken 0.8.0 is missing wheel for tiktoken-0.7.0-cp312-cp312-musllinux_1_2_aarch64.whl: https://pypi.org/simple/tiktoken/
 tiktoken = "==0.7.0"
-# duckduckgo-search is a Python library for searching DuckDuckGo web results
-duckduckgo-search = ">=7.3.0"
 # xmltodict is a Python library for working with XML.  It is used by the PubMed tool
 xmltodict = ">=0.14.2"
 # llm-guard is a Python library designed to protect the LLM API from abuse
@@ -96,6 +90,14 @@ authlib = ">=1.6.1"
 joserfc = ">=1.2.2"
 # aiocache is a Python library for caching with asyncio support
 aiocache = ">=0.12.3"
+# motor is a Python library for working with MongoDB asynchronously
+motor = ">=3.7.1"
+# pymongo is a Python library for working with MongoDB
+pymongo = { version = ">=4.14.0", extras = ["srv"] }
+# redis is a Python library for working with Redis
+redis = ">=6.4.0"
+# ddgs is a Python library for searching DuckDuckGo web results asynchronously
+ddgs = ">=8.1.1"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -120,7 +122,7 @@ types-beautifulsoup4 = ">=4.12.0.20241020"
 # types-cachetools is a Python library for typing cachetools
 types-cachetools = ">=5.5.0"
 # moto is a Python library for mocking AWS services
-moto = { version = ">=5.0.23", extras = ["s3"] }
+moto = { version = ">=5.1.11", extras = ["s3"] }
 # bandit is needed for security checks
 bandit = ">=1.8.3"
 # ruff is needed for linting
@@ -129,12 +131,18 @@ ruff = ">=0.11.5"
 pytest-cov = ">=6.1.1"
 # for creating the MCP client to test
 fastmcp = ">=2.10.5"
+# respx is a Python library for mocking HTTP requests in tests
+respx = ">=0.22.0"
 # types-boto3 provides type hints for boto3
 types-boto3 = { version = ">=1.40.0", extras = ["bedrock", "s3", "textract"] }
 types-boto3-bedrock = ">=1.40.0"
 types-boto3-s3 = ">=1.40.0"
 types-boto3-textract = ">=1.40.0"
 types-boto3-bedrock-runtime = ">=1.40.0"
+# motor-types is a Python library for typing motor
+motor-types = ">=1.0.0b4"
+# python-keycloak is a Python library for interacting with Keycloak.  We use it for initializing the Keycloak realm
+python-keycloak = ">=5.7.0"
 
 [requires]
 python_version = "3.12"

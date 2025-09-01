@@ -1,4 +1,3 @@
-import os
 from typing import Dict, List, Any, Generator
 
 import boto3
@@ -21,9 +20,7 @@ from types_boto3_s3.client import S3Client
 def mock_s3() -> Generator[S3Client, Any, None]:
     """Create a mock S3 client using moto."""
     with mock_aws():
-        session: Session = boto3.Session(
-            profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE")
-        )
+        session: Session = boto3.Session()
         s3_client: S3Client = session.client(
             service_name="s3",
             region_name="us-east-1",
@@ -284,3 +281,27 @@ async def test_read_file_async_error_cases(
         await aws_s3_file_manager.read_file_async(
             folder=bucket_name, file_path="s3://test.jpg"
         )
+
+
+class MyModel:
+    def __init__(self, name: str, value: Any) -> None:
+        self.name = name
+        self.value = value
+
+    def save(self) -> None:
+        s3 = boto3.client("s3", region_name="us-east-1")
+        s3.put_object(Bucket="mybucket", Key=self.name, Body=self.value)
+
+
+@pytest.mark.asyncio
+async def test_mock_aws() -> None:
+    with mock_aws():
+        conn = boto3.resource("s3", region_name="us-east-1")
+        conn.create_bucket(Bucket="mybucket")
+
+        model_instance = MyModel("steve", "is awesome")
+        model_instance.save()
+
+        body = conn.Object("mybucket", "steve").get()["Body"].read().decode("utf-8")
+
+        assert body == "is awesome"

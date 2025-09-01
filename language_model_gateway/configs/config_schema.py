@@ -80,6 +80,17 @@ class AgentConfig(BaseModel):
     auth: Literal["None", "jwt_token", "oauth"] | None = None
     """The authentication method to use when calling the tool"""
 
+    auth_providers: List[str] | None = None
+    """The auth providers for the authentication. If multiple are provided then the tool accepts ANY of those auth providers.  If auth is needed, we will use the first auth provider."""
+
+    issuers: List[str] | None = None
+    """
+    The issuers for the authentication.
+    If multiple are provided then the tool accepts ANY of those issuers.
+    If auth is needed, we will use the first issuer.
+    If none is provided then we use the default issuer from the OIDC provider.
+    """
+
 
 class ModelConfig(BaseModel):
     """Model configuration"""
