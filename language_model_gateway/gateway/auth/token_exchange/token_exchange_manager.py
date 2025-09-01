@@ -327,7 +327,7 @@ class TokenExchangeManager:
                             + f"\nFound auth provider: {token_auth_provider} for audience {token_audience}"
                             + f", Expected auth provider: {','.join(tool_auth_providers)}."
                             + f"\nEmail (sub) in token: {email}."
-                            + f"\nCould not find a cached token for the tool for auth_provider {token_auth_provider} and email {email}."
+                            + f"\nCould not find a cached token for the tool for auth_providers {','.join(tool_auth_providers)} and email {email}."
                             + error_message,
                             tool_auth_providers=tool_auth_providers,
                         )
