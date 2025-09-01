@@ -168,7 +168,7 @@ insert-admin-user:
 insert-admin-user-2:
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
     "INSERT INTO public.user (id, name, email, role, profile_image_url, api_key, created_at, updated_at, last_active_at, settings, info, oauth_sub, username, bio, gender, date_of_birth) \
-	SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', NULL, 1756681388, 1756681388, 1756681389, 'null', 'null', 'oidc@admin', NULL, NULL, NULL, NULL \
+	SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', 'sk-my-api-key', 1756681388, 1756681388, 1756681389, 'null', 'null', 'oidc@admin', NULL, NULL, NULL, NULL \
     WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE email='admin@tester.com');"
 
 .PHONY: set-admin-user-role
@@ -211,9 +211,5 @@ import-open-webui-pipe:
                cd /app && \
                python3 import_pipe.py \
                -u 'http://language-model-gateway-open-webui-1:8080' \
-               -c 'bwell-client-id' \
-               -s 'bwell-secret' \
-               -w 'http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration' \
-               -l 'admin' \
-               -p 'password' \
+               -k 'sk-my-api-key' \
                -f 'language_model_gateway_pipe.py'"

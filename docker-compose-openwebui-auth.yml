@@ -8,7 +8,6 @@ services:
       # Authentication settings (https://docs.openwebui.com/features/sso#oidc)
       ENABLE_SIGNUP: True
 #      ENABLE_LOGIN_FORM: True
-      ENABLE_API_KEY: False
       OAUTH_CLIENT_ID: "bwell-client-id"
       OPENID_PROVIDER_URL: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       OAUTH_CLIENT_SECRET: "bwell-secret"

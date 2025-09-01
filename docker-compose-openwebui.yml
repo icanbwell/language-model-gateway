@@ -73,7 +73,13 @@ services:
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
       # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
       OAUTH_SUB_CLAIM: "username"
+      # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
+      # Enables API key authentication.
+      ENABLE_API_KEY: True
+      # Enables API key endpoint restrictions for added security and configurability
+      ENABLE_API_KEY_ENDPOINT_RESTRICTIONS: False
+      API_KEY_ALLOWED_ENDPOINTS: '/api/v1/messages,/api/v1/channels,/api/v1/models,/api/v1/images/generations,/api/models'
     networks:
       - web
     healthcheck:

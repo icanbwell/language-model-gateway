@@ -62,6 +62,13 @@ def create_function(
         "contents": function_contents,
     }
 
+    # print the request headers and payload for debugging
+    print("url:", function_create_url)
+    print("Request Headers:")
+    print(json.dumps(headers, indent=2))
+    print("Request Payload:")
+    print(json.dumps(payload, indent=2))
+
     # Create function
     response = requests.post(
         function_create_url, headers=headers, json=payload, timeout=30
