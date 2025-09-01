@@ -203,15 +203,17 @@ clean_certs:
 
 .PHONY: import-open-webui-pipe
 import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+	"DELETE FROM public.function WHERE id='language_model_gateway';"
 	docker run --rm -it --name openid-function-creator \
         --network language-model-gateway_web \
         --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
         python:3.12-alpine \
-        sh -c " pip install --upgrade pip && \
-        		pip install authlib requests && \
+        sh -c "pip install --upgrade pip && \
+        	   pip install authlib requests && \
                cd /app && \
                python3 import_pipe.py \
-               -u 'http://language-model-gateway-open-webui-1:8080' \
-               -k 'sk-my-api-key' \
-               -j 'language_model_gateway_pipe.json' \
-               -f 'language_model_gateway_pipe.py'"
+               --url 'http://language-model-gateway-open-webui-1:8080' \
+               --api-key 'sk-my-api-key' \
+               --json 'language_model_gateway_pipe.json' \
+               --file 'language_model_gateway_pipe.py'"
