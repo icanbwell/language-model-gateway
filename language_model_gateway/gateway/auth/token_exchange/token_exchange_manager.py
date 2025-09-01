@@ -256,29 +256,37 @@ class TokenExchangeManager:
                 assert token_item is not None
                 # get the audience from the token
                 token_audience: str | List[str] | None = token_item.audience
-                if (
-                    not tool_auth_providers or token_audience in tool_auth_providers
-                ):  # token is valid
-                    logger.debug(f"Token is valid for tool {tool_name}.")
-                    auth_provider: str | None = (
-                        self.auth_config_reader.get_provider_for_audience(
-                            audience=token_audience
-                            if isinstance(token_audience, str)
-                            else token_audience[0]
-                        )
-                        if token_audience
-                        else "unknown"
+                token_auth_provider: str | None = (
+                    self.auth_config_reader.get_provider_for_audience(
+                        audience=token_audience
+                        if isinstance(token_audience, str)
+                        else token_audience[0]
                     )
+                    if token_audience
+                    else "unknown"
+                )
+                if (
+                    not tool_auth_providers
+                    or token_auth_provider in tool_auth_providers
+                ):  # token is valid
+                    logger.debug(
+                        f"Token is valid for tool {tool_name} with token_auth_provider {token_auth_provider}."
+                    )
+
                     # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
-                        auth_provider=auth_provider if auth_provider else "unknown",
+                        auth_provider=token_auth_provider
+                        if token_auth_provider
+                        else "unknown",
                     )
                 else:
                     # see if we have a token for this audience and email in the cache
                     email: (
                         str | None
-                    ) = await self.token_reader.get_subject_from_token_async(token)
+                    ) = await self.token_reader.get_subject_from_token_async(
+                        token=token
+                    )
                     assert email, "Token must contain a subject (email or sub) claim."
                     token_for_tool: (
                         TokenCacheItem | None
@@ -288,10 +296,14 @@ class TokenExchangeManager:
                     )
                     if token_for_tool:
                         if token_for_tool.is_valid_id_token():
-                            logger.debug(f"Found Token in cache for tool {tool_name}.")
+                            logger.debug(
+                                f"Found Token in cache for tool {tool_name} for email {email} and auth_provider {token_auth_provider}."
+                            )
                             return token_for_tool
                         else:
-                            logger.debug(f"Token has expired for tool {tool_name}.")
+                            logger.debug(
+                                f"Token has expired for tool {tool_name} for email {email} and auth_provider {token_auth_provider}."
+                            )
                             raise AuthorizationTokenCacheItemExpiredException(
                                 message=f"Your token has expired for tool {tool_name}."
                                 + error_message,
@@ -299,12 +311,14 @@ class TokenExchangeManager:
                             )
                     else:
                         logger.debug(
-                            "Token provided in Authorization header has wrong audience:"
-                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_providers)}."
+                            "Token provided in Authorization header has wrong token provider:"
+                            + f"\nFound: {token_auth_provider}, Expected: {','.join(tool_auth_providers)}."
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
-                            message="Token provided in Authorization header has wrong audience:"
-                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_providers)}."
+                            message="Token provided in Authorization header has wrong auth provider:"
+                            + f"\nFound auth provider: {token_auth_provider} for audience {token_audience}"
+                            + f", Expected auth provider: {','.join(tool_auth_providers)}."
+                            + f"\nEmail (sub) in token: {email}."
                             + "\nCould not find a cached token for the tool."
                             + error_message,
                             tool_auth_providers=tool_auth_providers,

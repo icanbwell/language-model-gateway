@@ -314,7 +314,7 @@ class TokenReader:
             )
         return jwks_uri
 
-    async def get_subject_from_token_async(self, token: str) -> Optional[str]:
+    async def get_subject_from_token_async(self, *, token: str) -> Optional[str]:
         """
         Extracts the 'sub' (subject) claim from the JWT token.
         Args:
