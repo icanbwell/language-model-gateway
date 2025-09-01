@@ -45,9 +45,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: "client1,client3"
-      # when testing with real Okta, comment out the line above and uncomment the line below
-#      AUTH_PROVIDERS: "client1,client3,okta"
+      AUTH_PROVIDERS: "client1,client3,okta"
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
