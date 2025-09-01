@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "google_drive",
-  "name": "Google Drive",
+  "id": "google_drive_separate_auth",
+  "name": "Google Drive Separate Auth",
   "description": "This is a language model that can access data in Google Drive.",
   "type": "langchain",
   "model": {
@@ -39,7 +39,10 @@
     {
       "name": "google_drive",
       "url": "http://mcp_server_gateway:5000/google_drive/",
-      "auth": "jwt_token"
+      "auth": "jwt_token",
+      "auth_providers": [
+        "okta"
+      ]
     }
   ],
   "example_prompts": [
