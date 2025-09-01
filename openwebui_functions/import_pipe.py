@@ -1,13 +1,20 @@
 import argparse
 import json
+import logging
 from pathlib import Path
-from typing import Optional, Dict, Any, cast
+from typing import Optional, Dict, Any, cast, List
 
 import requests
 
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
 
 def create_function(
-    base_url: str, api_key: str, contents_file_path: Optional[str] = None
+    base_url: str,
+    api_key: str,
+    contents_file_path: Optional[str] = None,
+    json_config_file_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Create a function using API key authentication
@@ -16,12 +23,16 @@ def create_function(
         base_url (str): Base URL of the service
         api_key (str): API key for authentication
         contents_file_path (Optional[str]): Path to function contents file
+        json_config_file_path (Optional[str]): Path to JSON config file
 
     Returns:
         dict: Function creation response
     """
     # Function creation endpoint
     function_create_url = f"{base_url}/api/v1/functions/create"
+    toggle_function_url = (
+        f"{base_url}/api/v1/functions/id/language_model_gateway/toggle"
+    )
 
     # Prepare headers with API key
     headers = {
@@ -38,42 +49,37 @@ def create_function(
     if not contents_file_path:
         raise ValueError("Contents file path must be provided")
 
+    if not json_config_file_path:
+        raise ValueError("JSON config file path must be provided")
+
+    # first read the config json file
+    with Path(json_config_file_path).open("r", encoding="utf-8") as f:
+        json_config: List[Dict[str, Any]] = json.load(f)
+        if not isinstance(json_config, list):
+            raise ValueError("JSON config file must contain a list of configurations")
+        if len(json_config) == 0:
+            raise ValueError("JSON config file must contain at least one configuration")
+
     with Path(contents_file_path).open("r", encoding="utf-8") as f:
-        py_content = f.read()
+        py_content: str = f.read()
 
-    # Compose the JSON structure
-    json_obj = [
-        {
-            "id": "language_model_gateway",
-            "user_id": "6c03bf27-dbbf-44c1-b980-2c6a4608f712",
-            "name": "language_model_gateway",
-            "type": "pipe",
-            "content": py_content,
-            "meta": {
-                "description": "Talks to Language Model Gateway and passes the OAuth ID token in the request cookies as Bearer Authorization header.",
-                "manifest": {
-                    "title": "Language Model Gateway Pipe",
-                    "author": "Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)",
-                    "author_url": "https://github.com/imranq2",
-                    "version": "0.1.0",
-                },
-            },
-            "is_active": True,
-            "is_global": True,
-            "updated_at": 1745989387,
-            "created_at": 1745989309,
-        }
-    ]
+    first_json_config: Dict[str, Any] = json_config[0]
+    if not isinstance(first_json_config, dict):
+        raise ValueError(
+            "Each configuration in the JSON config file must be a dictionary"
+        )
 
-    payload = json_obj[0]
+    first_json_config["content"] = py_content
 
-    # print the request headers and payload for debugging
-    print("url:", function_create_url)
-    print("==== Headers ====")
-    print(json.dumps(headers))
-    print("==== Payload ====")
-    print(json.dumps(payload))
-    print("==== End of Payload ====")
+    payload: Dict[str, Any] = first_json_config
+
+    # logger.info the request headers and payload for debugging
+    logger.debug("url:", function_create_url)
+    logger.debug("==== Headers ====")
+    logger.debug(json.dumps(headers))
+    logger.debug("==== Payload ====")
+    logger.debug(json.dumps(payload))
+    logger.debug("==== End of Payload ====")
 
     # Create function
     response = requests.post(
@@ -83,12 +89,11 @@ def create_function(
     response.raise_for_status()
 
     # now call the toggle function
-    toggle_function_url = (
-        f"{base_url}/api/v1/functions/id/language_model_gateway/toggle"
-    )
     response2 = requests.post(toggle_function_url, headers=headers, timeout=30)
 
     response2.raise_for_status()
+
+    logger.info("Finished importing pipe into OpenWebUI")
 
     return cast(Dict[str, Any], response.json())
 
@@ -102,17 +107,23 @@ def main() -> None:
     parser.add_argument(
         "-k", "--api-key", required=True, help="API Key for authentication"
     )
-    parser.add_argument("-f", "--file", help="Path to function contents file")
+    parser.add_argument(
+        "-f", "--file", help="Path to Python file containing the code", required=True
+    )
+    parser.add_argument("-j", "--json", help="Path to json config file", required=True)
 
     args = parser.parse_args()
 
     # Create function
     result = create_function(
-        base_url=args.url, api_key=args.api_key, contents_file_path=args.file
+        base_url=args.url,
+        api_key=args.api_key,
+        contents_file_path=args.file,
+        json_config_file_path=args.json,
     )
 
-    print("Function created successfully:")
-    print(json.dumps(result, indent=2))
+    logger.debug("Function created successfully:")
+    logger.debug(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
