@@ -54,7 +54,7 @@ def mock_well_known_config(httpx_mock: Any) -> Generator[None, Any, None]:
 
 class MockAuthConfigReader(AuthConfigReader):
     @override
-    def get_auth_configs_for_all_audiences(self) -> list[AuthConfig]:
+    def get_auth_configs_for_all_auth_providers(self) -> list[AuthConfig]:
         return [
             AuthConfig(
                 audience="test-audience",

@@ -123,7 +123,7 @@ class MCPToolProvider:
                     ),
                     None,
                 )
-                if auth_header and tool.auth_audiences:
+                if auth_header and tool.auth_providers:
                     # get the appropriate token_item for this tool
                     token_item: (
                         TokenCacheItem | None
@@ -131,7 +131,7 @@ class MCPToolProvider:
                         auth_header=auth_header,
                         error_message="",
                         tool_name=tool.name,
-                        tool_auth_audiences=tool.auth_audiences,
+                        tool_auth_providers=tool.auth_providers,
                     )
                     token = token_item.get_token() if token_item else None
                     if token:
@@ -144,7 +144,7 @@ class MCPToolProvider:
                         auth_token: Token | None = Token.create(token=auth_bearer_token)
                         raise AuthorizationMcpToolTokenInvalidException(
                             message=f"No token found.  Authorization needed for MCP tools at {url}. "
-                            + f" for audiences {tool.auth_audiences}"
+                            + f" for auth providers {tool.auth_providers}"
                             + f", token_email: {auth_token.email if auth_token else 'None'}"
                             + f", token_audience: {auth_token.audience if auth_token else 'None'}"
                             + f", token_subject: {auth_token.subject if auth_token else 'None'}",

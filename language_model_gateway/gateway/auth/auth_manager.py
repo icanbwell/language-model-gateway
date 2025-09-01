@@ -110,7 +110,7 @@ class AuthManager:
         self.oauth: OAuth = OAuth(cache=self.cache)
         # read AUTH_PROVIDERS comma separated list from the environment variable and register the OIDC provider for each provider
         auth_configs: List[AuthConfig] = (
-            self.auth_config_reader.get_auth_configs_for_all_audiences()
+            self.auth_config_reader.get_auth_configs_for_all_auth_providers()
         )
 
         auth_config: AuthConfig
@@ -273,7 +273,7 @@ class AuthManager:
         auth_header: str | None,
         error_message: str,
         tool_name: str,
-        tool_auth_audiences: List[str] | None,
+        tool_auth_providers: List[str] | None,
     ) -> TokenCacheItem | None:
         """
         Get the token for the specified tool.
@@ -284,14 +284,14 @@ class AuthManager:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to display if authorization is needed.
             tool_name (str): The name of the tool for which the token is requested.
-            tool_auth_audiences (List[str] | None): The list of audiences for which the tool requires authentication.
+            tool_auth_providers (List[str] | None): The list of audiences for which the tool requires authentication.
         Returns:
             str | None: The token for the specified tool, or None if not found.
         Raises:
             AuthorizationNeededException: If the token is not found and authorization is needed.
         """
         logger.debug(
-            f"Getting token for tool '{tool_name}' with audiences {tool_auth_audiences} with auth_header: {auth_header}"
+            f"Getting token for tool '{tool_name}' with auth providers {tool_auth_providers} with auth_header: {auth_header}"
         )
 
         try:
@@ -301,11 +301,11 @@ class AuthManager:
                 auth_header=auth_header,
                 error_message=error_message,
                 tool_name=tool_name,
-                tool_auth_audiences=tool_auth_audiences,
+                tool_auth_providers=tool_auth_providers,
             )
             logger.debug(f"AuthManager Token retrieved: {token_cache_item}")
             if token_cache_item is None:
-                logger.debug(f"No token found for audience '{tool_auth_audiences}'.")
+                logger.debug(f"No token found for audience '{tool_auth_providers}'.")
                 return None
 
             # if id_token is valid, return it
@@ -348,7 +348,7 @@ class AuthManager:
                 raise e
 
         logger.debug(
-            f"No valid token found for tool '{tool_name}' with {tool_auth_audiences}."
+            f"No valid token found for tool '{tool_name}' with {tool_auth_providers}."
         )
         return None
 

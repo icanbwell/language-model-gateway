@@ -89,12 +89,12 @@ class AuthRouter:
         try:
             if audience is None:
                 auth_configs: List[AuthConfig] = (
-                    auth_config_reader.get_auth_configs_for_all_audiences()
+                    auth_config_reader.get_auth_configs_for_all_auth_providers()
                 )
                 audience = auth_configs[0].audience if auth_configs else None
             assert audience is not None
-            auth_config: AuthConfig | None = auth_config_reader.get_config_for_audience(
-                audience=audience
+            auth_config: AuthConfig | None = (
+                auth_config_reader.get_config_for_auth_provider(auth_provider=audience)
             )
             assert auth_config is not None
             issuer: str | None = auth_config.issuer

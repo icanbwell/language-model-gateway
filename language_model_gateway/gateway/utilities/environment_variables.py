@@ -24,18 +24,6 @@ class EnvironmentVariables:
         return os.environ.get("JIRA_USERNAME")
 
     @property
-    def auth_jwks_uri(self) -> Optional[str]:
-        return os.environ.get("AUTH_JWKS_URI")
-
-    @property
-    def auth_audience(self) -> Optional[str]:
-        return os.environ.get("AUTH_AUDIENCE")
-
-    @property
-    def auth_issuer(self) -> Optional[str]:
-        return os.environ.get("AUTH_ISSUER")
-
-    @property
     def auth_algorithms(self) -> Optional[list[str]]:
         auth_algorithms: str | None = os.environ.get("AUTH_ALGORITHMS")
         return auth_algorithms.split(",") if auth_algorithms else None
@@ -73,6 +61,6 @@ class EnvironmentVariables:
         return os.environ.get("OAUTH_CACHE", "memory")
 
     @property
-    def auth_audiences(self) -> Optional[list[str]]:
-        auth_audiences: str | None = os.environ.get("AUTH_AUDIENCES")
-        return auth_audiences.split(",") if auth_audiences else None
+    def auth_providers(self) -> Optional[list[str]]:
+        auth_providers: str | None = os.environ.get("AUTH_PROVIDERS")
+        return auth_providers.split(",") if auth_providers else None

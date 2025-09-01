@@ -58,7 +58,7 @@ class TokenReader:
         assert isinstance(self.auth_config_reader, AuthConfigReader)
 
         self.auth_configs: List[AuthConfig] = (
-            self.auth_config_reader.get_auth_configs_for_all_audiences()
+            self.auth_config_reader.get_auth_configs_for_all_auth_providers()
         )
         assert self.auth_configs, "At least one AuthConfig must be provided"
 

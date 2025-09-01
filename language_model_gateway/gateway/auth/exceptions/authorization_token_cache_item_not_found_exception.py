@@ -14,10 +14,10 @@ class AuthorizationTokenCacheItemNotFoundException(AuthorizationNeededException)
     that may be relevant for the authorization process.
     """
 
-    def __init__(self, *, message: str, tool_auth_audiences: list[str] | None) -> None:
+    def __init__(self, *, message: str, tool_auth_providers: list[str] | None) -> None:
         """
         Initialize the AuthorizationNeededException with a message and an optional token cache item.
         """
         super().__init__(message=message)
         self.message = message
-        self.tool_auth_audiences = tool_auth_audiences
+        self.tool_auth_providers = tool_auth_providers

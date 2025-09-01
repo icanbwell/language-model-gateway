@@ -179,25 +179,28 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_information (AuthInformation): The authentication information.
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
-        if not tool_using_authentication.auth_audiences:
+        if not tool_using_authentication.auth_providers:
             logger.debug(
-                f"Tool {tool_using_authentication.name} doesn't have auth_audiences."
+                f"Tool {tool_using_authentication.name} doesn't have auth providers."
             )
             return
         if not auth_information.redirect_uri:
             logger.debug("AuthInformation doesn't have redirect_uri.")
             return
 
-        tool_first_audience: str = tool_using_authentication.auth_audiences[0]
+        tool_first_auth_provider: str = tool_using_authentication.auth_providers[0]
         tool_first_issuer: str | None = (
             tool_using_authentication.issuers[0]
             if tool_using_authentication.issuers
-            else self.auth_config_reader.get_issuer_for_audience(
-                audience=tool_first_audience
+            else self.auth_config_reader.get_issuer_for_provider(
+                auth_provider=tool_first_auth_provider,
             )
         )
         assert tool_first_issuer, (
             "Tool using authentication must have at least one issuer or use the default issuer."
+        )
+        tool_first_audience: str = self.auth_config_reader.get_audience_for_provider(
+            auth_provider=tool_first_auth_provider
         )
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
@@ -211,12 +214,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         error_message: str = (
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
-            + f"\nClick here to authenticate: [Login to {tool_first_audience}]({authorization_url})."
+            + f"\nClick here to authenticate: [Login to {tool_first_auth_provider}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
         await self.auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
             tool_name=tool_using_authentication.name,
-            tool_auth_audiences=tool_using_authentication.auth_audiences,
+            tool_auth_providers=tool_using_authentication.auth_providers,
         )

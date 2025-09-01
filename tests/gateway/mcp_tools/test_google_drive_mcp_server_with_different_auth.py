@@ -61,7 +61,7 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
                         name="download_file_from_url",
                         url=url,  # Assumes MCP server is running locally
                         auth="jwt_token",
-                        auth_audiences=["bwell-client-id-3"],
+                        auth_providers=["bwell-client-id-3"],
                     ),
                 ],
             )

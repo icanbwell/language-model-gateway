@@ -193,7 +193,7 @@ class TokenExchangeManager:
         auth_header: str | None,
         error_message: str,
         tool_name: str,
-        tool_auth_audiences: List[str] | None,
+        tool_auth_providers: List[str] | None,
     ) -> TokenCacheItem | None:
         """
         Get the token for the tool using the Authorization header.
@@ -205,12 +205,12 @@ class TokenExchangeManager:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to include in the exception if the token is invalid
             tool_name (str): The name of the tool for which the token is being requested.
-            tool_auth_audiences (List[str] | None): The list of audiences for the tool.
+            tool_auth_providers (List[str] | None): The list of audiences for the tool.
         Returns:
             Token | None: The token item if the token is valid, otherwise raises an exception.
         """
         logger.debug(
-            f"Getting token for tool {tool_name} with audiences {tool_auth_audiences}."
+            f"Getting token for tool {tool_name} with auth_providers {tool_auth_providers}."
         )
         if not auth_header:
             logger.debug(f"Authorization header is missing for tool {tool_name}.")
@@ -237,7 +237,7 @@ class TokenExchangeManager:
                 # get the audience from the token
                 token_audience: str | List[str] | None = token_item.audience
                 if (
-                    not tool_auth_audiences or token_audience in tool_auth_audiences
+                    not tool_auth_providers or token_audience in tool_auth_providers
                 ):  # token is valid
                     logger.debug(f"Token is valid for tool {tool_name}.")
                     return TokenCacheItem.create(
@@ -252,7 +252,7 @@ class TokenExchangeManager:
                     token_for_tool: (
                         TokenCacheItem | None
                     ) = await self.get_token_cache_item_for_audiences_async(
-                        audiences=tool_auth_audiences,
+                        audiences=tool_auth_providers,
                         email=email,
                     )
                     if token_for_tool:
@@ -269,14 +269,14 @@ class TokenExchangeManager:
                     else:
                         logger.debug(
                             "Token provided in Authorization header has wrong audience:"
-                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
+                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_providers)}."
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
                             message="Token provided in Authorization header has wrong audience:"
-                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_audiences)}."
+                            + f"\nFound: {token_audience}, Expected: {','.join(tool_auth_providers)}."
                             + "\nCould not find a cached token for the tool."
                             + error_message,
-                            tool_auth_audiences=tool_auth_audiences,
+                            tool_auth_providers=tool_auth_providers,
                         )
             except AuthorizationNeededException:
                 # just re-raise the exception with the original message

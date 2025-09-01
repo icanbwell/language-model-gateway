@@ -23,52 +23,62 @@ class AuthConfigReader:
         )
         assert isinstance(self.environment_variables, EnvironmentVariables)
 
-    def get_auth_configs_for_all_audiences(self) -> list[AuthConfig]:
+    def get_auth_configs_for_all_auth_providers(self) -> list[AuthConfig]:
         """
         Get authentication configurations for all audiences.
 
         Returns:
             list[AuthConfig]: A list of AuthConfig instances for each audience.
         """
-        audiences: list[str] | None = self.environment_variables.auth_audiences
-        assert audiences is not None, "AUTH_AUDIENCES environment variable must be set"
+        auth_providers: list[str] | None = self.environment_variables.auth_providers
+        assert auth_providers is not None, (
+            "auth_providers environment variable must be set"
+        )
         auth_configs: list[AuthConfig] = []
-        for audience in audiences:
-            auth_config: AuthConfig | None = self.get_config_for_audience(
-                audience=audience
+        for auth_provider in auth_providers:
+            auth_config: AuthConfig | None = self.get_config_for_auth_provider(
+                auth_provider=auth_provider,
             )
             if auth_config is not None:
                 auth_configs.append(auth_config)
         return auth_configs
 
     # noinspection PyMethodMayBeStatic
-    def get_config_for_audience(self, *, audience: str) -> AuthConfig | None:
+    def get_config_for_auth_provider(self, *, auth_provider: str) -> AuthConfig | None:
         """
         Get the authentication configuration for a specific audience.
 
         Args:
-            audience (str): The audience for which to retrieve the configuration.
+            auth_provider (str): The audience for which to retrieve the configuration.
 
         Returns:
             AuthConfig | None: The authentication configuration if found, otherwise None.
         """
-        assert audience is not None
+        assert auth_provider is not None
         # read client_id and client_secret from the environment variables
-        auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{audience}")
+        auth_client_id: str | None = os.getenv(f"AUTH_CLIENT_ID_{auth_provider}")
         assert auth_client_id is not None, (
-            f"AUTH_CLIENT_ID_{audience} environment variable must be set"
+            f"AUTH_CLIENT_ID_{auth_provider} environment variable must be set"
         )
-        auth_client_secret: str | None = os.getenv(f"AUTH_CLIENT_SECRET_{audience}")
+        auth_client_secret: str | None = os.getenv(
+            f"AUTH_CLIENT_SECRET_{auth_provider}"
+        )
         assert auth_client_secret is not None, (
-            f"AUTH_CLIENT_SECRET_{audience} environment variable must be set"
+            f"AUTH_CLIENT_SECRET_{auth_provider} environment variable must be set"
         )
-        auth_well_known_uri: str | None = os.getenv(f"AUTH_WELL_KNOWN_URI_{audience}")
+        auth_well_known_uri: str | None = os.getenv(
+            f"AUTH_WELL_KNOWN_URI_{auth_provider}"
+        )
         assert auth_well_known_uri is not None, (
-            f"AUTH_WELL_KNOWN_URI_{audience} environment variable must be set"
+            f"AUTH_WELL_KNOWN_URI_{auth_provider} environment variable must be set"
         )
-        issuer: str | None = os.getenv(f"AUTH_ISSUER_{audience}")
+        issuer: str | None = os.getenv(f"AUTH_ISSUER_{auth_provider}")
         assert issuer is not None, (
-            f"AUTH_ISSUER_{audience} environment variable must be set"
+            f"AUTH_ISSUER_{auth_provider} environment variable must be set"
+        )
+        audience: str | None = os.getenv(f"AUTH_AUDIENCE_{auth_provider}")
+        assert audience is not None, (
+            f"AUTH_AUDIENCE_{auth_provider} environment variable must be set"
         )
         return AuthConfig(
             audience=audience,
@@ -78,16 +88,38 @@ class AuthConfigReader:
             well_known_uri=auth_well_known_uri,
         )
 
-    def get_issuer_for_audience(self, *, audience: str) -> str:
+    def get_issuer_for_provider(self, *, auth_provider: str) -> str:
         """
-        Get the issuer for a specific audience.
+        Get the issuer for a specific auth provider.
 
         Args:
-            audience (str): The audience for which to retrieve the issuer.
+            auth_provider (str): The auth provider for which to retrieve the issuer.
 
         Returns:
-            str: The issuer for the specified audience.
+            str: The issuer for the specified auth provider.
         """
-        auth_config: AuthConfig | None = self.get_config_for_audience(audience=audience)
-        assert auth_config is not None, f"AuthConfig for audience {audience} not found."
+        auth_config: AuthConfig | None = self.get_config_for_auth_provider(
+            auth_provider=auth_provider
+        )
+        assert auth_config is not None, (
+            f"AuthConfig for audience {auth_provider} not found."
+        )
         return auth_config.issuer
+
+    def get_audience_for_provider(self, *, auth_provider: str) -> str:
+        """
+        Get the audience for a specific auth provider.
+
+        Args:
+            auth_provider (str): The auth provider for which to retrieve the audience.
+
+        Returns:
+            str: The audience for the specified auth provider.
+        """
+        auth_config: AuthConfig | None = self.get_config_for_auth_provider(
+            auth_provider=auth_provider
+        )
+        assert auth_config is not None, (
+            f"AuthConfig for audience {auth_provider} not found."
+        )
+        return auth_config.audience
