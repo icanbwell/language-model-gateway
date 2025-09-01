@@ -31,7 +31,7 @@ jobs:
 
       - name: create docker.env
         run: |
-          touch ./docker.env
+          touch ${{ github.workspace }}/docker.env
 
       - name: pre-commit
         run: make run-pre-commit && make clean-pre-commit
