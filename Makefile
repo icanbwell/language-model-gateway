@@ -200,3 +200,20 @@ create-certs: install-ca
 
 clean_certs:
 	rm -rf $(CERT_DIR)
+
+.PHONY: import-open-webui-pipe
+import-open-webui-pipe:
+	docker run --rm -it --name openid-function-creator \
+        --network language-model-gateway_web \
+        --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
+        python:3.12-alpine \
+        sh -c "pip install authlib requests requests-oauthlib && \
+               cd /app && \
+               python3 import_pipe.py \
+               -u 'http://language-model-gateway-open-webui-1:8080' \
+               -c 'bwell-client-id' \
+               -s 'bwell-secret' \
+               -w 'http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration' \
+               -l 'admin' \
+               -p 'password' \
+               -f 'language_model_gateway_pipe.py'"
