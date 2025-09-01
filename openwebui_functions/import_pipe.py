@@ -76,7 +76,11 @@ def create_function(
     # logger.info the request headers and payload for debugging
     logger.debug("url:", function_create_url)
     logger.debug("==== Headers ====")
-    logger.debug(json.dumps(headers))
+    # Remove or redact API key before logging
+    sanitized_headers = dict(headers)
+    if "Authorization" in sanitized_headers:
+        sanitized_headers["Authorization"] = "Bearer ***REDACTED***"
+    logger.debug(json.dumps(sanitized_headers))
     logger.debug("==== Payload ====")
     logger.debug(json.dumps(payload))
     logger.debug("==== End of Payload ====")
