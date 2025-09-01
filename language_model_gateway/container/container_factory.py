@@ -267,6 +267,7 @@ class ContainerFactory:
             lambda c: TokenExchangeManager(
                 environment_variables=c.resolve(EnvironmentVariables),
                 token_reader=c.resolve(TokenReader),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 

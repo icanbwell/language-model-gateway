@@ -6,6 +6,8 @@ class AuthConfig(BaseModel):
     Represent the configuration for an auth provider.  Usually read from environment variables.
     """
 
+    auth_provider: str
+    """The name of the auth provider, typically used to identify the provider in logs and error messages."""
     audience: str
     """The audience for the auth provider, typically the API or service that the token is intended for."""
     issuer: str

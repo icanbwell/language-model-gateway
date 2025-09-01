@@ -62,6 +62,7 @@ class MockAuthConfigReader(AuthConfigReader):
                 client_secret="test-client-secret",
                 well_known_uri=openid_configuration,
                 issuer="https://fake-issuer",
+                auth_provider="fake-auth-provider",
             )
         ]
 

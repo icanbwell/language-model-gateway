@@ -83,6 +83,7 @@ class AuthConfigReader:
             f"AUTH_AUDIENCE_{auth_provider} environment variable must be set"
         )
         return AuthConfig(
+            auth_provider=auth_provider,
             audience=audience,
             issuer=issuer,
             client_id=auth_client_id,
@@ -125,3 +126,19 @@ class AuthConfigReader:
             f"AuthConfig for audience {auth_provider} not found."
         )
         return auth_config.audience
+
+    def get_provider_for_audience(self, *, audience: str) -> str | None:
+        """
+        Get the auth provider for a specific audience.
+
+        Args:
+            audience (str): The audience for which to retrieve the auth provider.
+
+        Returns:
+            str | None: The auth provider if found, otherwise None.
+        """
+        auth_configs: list[AuthConfig] = self.get_auth_configs_for_all_auth_providers()
+        for auth_config in auth_configs:
+            if auth_config.audience == audience:
+                return auth_config.auth_provider
+        return None

@@ -150,6 +150,9 @@ class AuthManager:
         assert client is not None, f"Client for audience {audience} not found"
         state_content: Dict[str, str | None] = {
             "audience": audience,
+            "auth_provider": self.auth_config_reader.get_provider_for_audience(
+                audience=audience
+            ),
             "issuer": issuer,
             "url": url,  # the URL of the tool that has requested this
             # include a unique request ID so we don't get cache for another request
@@ -219,6 +222,11 @@ class AuthManager:
             "issuer": issuer,
         }
         audience = state_decoded["audience"]
+        auth_provider: str | None = (
+            self.auth_config_reader.get_provider_for_audience(audience=audience)
+            if audience
+            else "unknown"
+        )
 
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
@@ -230,6 +238,7 @@ class AuthManager:
             issuer=issuer,
             audience=audience,
             referrer=url,
+            auth_provider=auth_provider if auth_provider else "unknown",
         )
 
         await self.token_exchange_manager.save_token_async(

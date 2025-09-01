@@ -2,6 +2,9 @@ import logging
 from datetime import datetime, UTC
 from typing import List
 
+from language_model_gateway.gateway.auth.config.auth_config_reader import (
+    AuthConfigReader,
+)
 from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_missing_exception import (
     AuthorizationBearerTokenMissingException,
 )
@@ -36,7 +39,11 @@ class TokenExchangeManager:
     """
 
     def __init__(
-        self, *, environment_variables: EnvironmentVariables, token_reader: TokenReader
+        self,
+        *,
+        environment_variables: EnvironmentVariables,
+        token_reader: TokenReader,
+        auth_config_reader: AuthConfigReader,
     ) -> None:
         assert environment_variables is not None
         assert environment_variables.mongo_uri is not None
@@ -67,6 +74,10 @@ class TokenExchangeManager:
             "TokenExchangeManager requires a TokenReader instance."
         )
         assert isinstance(token_reader, TokenReader)
+
+        self.auth_config_reader: AuthConfigReader = auth_config_reader
+        assert self.auth_config_reader is not None
+        assert isinstance(self.auth_config_reader, AuthConfigReader)
 
     async def get_token_for_audience_and_email(
         self, *, audience: str, email: str
@@ -240,8 +251,19 @@ class TokenExchangeManager:
                     not tool_auth_providers or token_audience in tool_auth_providers
                 ):  # token is valid
                     logger.debug(f"Token is valid for tool {tool_name}.")
+                    auth_provider: str | None = (
+                        self.auth_config_reader.get_provider_for_audience(
+                            audience=token_audience
+                            if isinstance(token_audience, str)
+                            else token_audience[0]
+                        )
+                        if token_audience
+                        else "unknown"
+                    )
+                    # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
+                        auth_provider=auth_provider if auth_provider else "unknown",
                     )
                 else:
                     # see if we have a token for this audience and email in the cache
