@@ -81,6 +81,15 @@ def create_function(
     )
 
     response.raise_for_status()
+
+    # now call the toggle function
+    toggle_function_url = (
+        f"{base_url}/api/v1/functions/id/language_model_gateway/toggle"
+    )
+    response2 = requests.post(toggle_function_url, headers=headers, timeout=30)
+
+    response2.raise_for_status()
+
     return cast(Dict[str, Any], response.json())
 
 
