@@ -208,7 +208,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             msg = "Either a session or a connection config must be provided"
             raise ValueError(msg)
 
-        tools: List[Tool] = []
+        tools: List[Tool]
         try:
             if session is None:
                 # If a session is not provided, we will create one on the fly
@@ -226,7 +226,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 exc.exceptions[0], HTTPStatusError
             ):
                 http_status_exception: HTTPStatusError = exc.exceptions[0]
-                response_text: str | None = None
+                response_text: str | None
                 # Read response text before the stream is closed
                 if not http_status_exception.response.is_closed:
                     response_bytes: bytes = await http_status_exception.response.aread()
