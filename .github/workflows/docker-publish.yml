@@ -49,6 +49,10 @@ jobs:
         run: |
           docker buildx inspect --bootstrap
 
+      - name: cat tool_provider.py
+        run: |
+          cat language_model_gateway/gateway/tools/tool_provider.py 
+
       - name: Build, tag, and push image to Amazon ECR
         env:
           TAG: ${{ github.event.release.tag_name }}
