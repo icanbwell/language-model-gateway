@@ -215,9 +215,12 @@ class ToolProvider:
     def get_tool_by_name(
         self, *, tool: AgentConfig, headers: Dict[str, str]
     ) -> BaseTool:
+        tool_names: List[str] = [name for name in self.tools.keys()]
         if tool.name in [name for name in self.tools.keys()]:
             return self.tools[tool.name]
-        raise ValueError(f"Tool with name {tool.name} not found")
+        raise ValueError(
+            f"Tool with name {tool.name} not found in available tools: {','.join(tool_names)}"
+        )
 
     def has_tool(self, *, tool: AgentConfig) -> bool:
         tool_names: List[str] = [name for name in self.tools.keys()]
