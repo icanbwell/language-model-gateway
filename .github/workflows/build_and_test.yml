@@ -52,6 +52,10 @@ jobs:
         run: |
           docker compose pull
 
+      - name: cat tool_provider.py
+        run: |
+          cat language_model_gateway/gateway/tools/tool_provider.p
+
       # setup and install everything and run tests
       - name: up
         run: make up
