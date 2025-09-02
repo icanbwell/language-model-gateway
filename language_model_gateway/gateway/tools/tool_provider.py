@@ -1,5 +1,6 @@
+import logging
 from os import environ
-from typing import Dict
+from typing import Dict, List
 
 from langchain_community.tools import (
     DuckDuckGoSearchRun,
@@ -96,6 +97,8 @@ from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
 from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
     DatabricksHelper,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class ToolProvider:
@@ -212,12 +215,14 @@ class ToolProvider:
     def get_tool_by_name(
         self, *, tool: AgentConfig, headers: Dict[str, str]
     ) -> BaseTool:
-        if tool.name in self.tools:
+        if tool.name in [name for name in self.tools.keys()]:
             return self.tools[tool.name]
         raise ValueError(f"Tool with name {tool.name} not found")
 
     def has_tool(self, *, tool: AgentConfig) -> bool:
-        return tool.name in self.tools
+        tool_names: List[str] = [name for name in self.tools.keys()]
+        logger.info(f"Checking for tool: {tool.name} in {','.join(tool_names)}")
+        return tool.name in tool_names
 
     def get_tools(
         self, *, tools: list[AgentConfig], headers: Dict[str, str]
