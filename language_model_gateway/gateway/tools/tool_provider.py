@@ -224,7 +224,6 @@ class ToolProvider:
 
     def has_tool(self, *, tool: AgentConfig) -> bool:
         tool_names: List[str] = [name for name in self.tools.keys()]
-        logger.info(f"Checking for tool: {tool.name} in {','.join(tool_names)}")
         return tool.name in tool_names
 
     def get_tools(

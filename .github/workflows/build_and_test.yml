@@ -16,8 +16,6 @@ jobs:
     steps:
       # Checks-out your repository
       - uses: actions/checkout@v4
-        with:
-          repository: icanbwell/language-model-gateway
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -35,11 +33,6 @@ jobs:
         run: |
           touch ${{ github.workspace }}/docker.env
 
-
-      - name: cat tool_provider.py
-        run: |
-          cat language_model_gateway/gateway/tools/tool_provider.py
-
       - name: pre-commit
         run: make run-pre-commit && make clean-pre-commit
 
@@ -56,7 +49,6 @@ jobs:
       - name: Pull required Docker images
         run: |
           docker compose pull
-
 
       # setup and install everything and run tests
       - name: up
