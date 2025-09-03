@@ -39,10 +39,6 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
 
-      - name: cat tool_provider.py
-        run: |
-          cat language_model_gateway/gateway/tools/tool_provider.py 
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
