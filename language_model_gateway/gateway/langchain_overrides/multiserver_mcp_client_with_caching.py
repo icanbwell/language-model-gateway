@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import override, List, Dict
+from typing import override, List, Dict, Any, cast
 from uuid import UUID, uuid4
 
 from httpx import HTTPStatusError, ConnectError
@@ -13,9 +13,14 @@ from langchain_mcp_adapters.sessions import create_session
 from langchain_mcp_adapters.tools import (
     _list_all_tools,
     convert_mcp_tool_to_langchain_tool,
+    NonTextContent,
+    _convert_call_tool_result,
 )
 from mcp import ClientSession, Tool
 
+from language_model_gateway.gateway.langchain_overrides.structured_tool_with_output_limits import (
+    StructuredToolWithOutputLimits,
+)
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_not_found_exception import (
     McpToolNotFoundException,
 )
@@ -28,6 +33,7 @@ from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unknown_exception im
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
+from mcp.types import Tool as MCPTool
 
 logger = logging.getLogger(__name__)
 
@@ -309,6 +315,60 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             # Filter tools by names if provided
             tools = [tool for tool in tools if tool.name in tool_names]
         return tools
+
+    @staticmethod
+    def convert_mcp_tool_to_langchain_tool(
+        session: ClientSession | None,
+        tool: MCPTool,
+        *,
+        connection: Connection | None = None,
+    ) -> BaseTool:
+        """Convert an MCP tool to a LangChain tool.
+
+        NOTE: this tool can be executed only in a context of an active MCP client session.
+
+        Args:
+            session: MCP client session
+            tool: MCP tool to convert
+            connection: Optional connection config to use to create a new session
+                        if a `session` is not provided
+
+        Returns:
+            a LangChain tool
+
+        """
+        if session is None and connection is None:
+            msg = "Either a session or a connection config must be provided"
+            raise ValueError(msg)
+
+        async def call_tool(
+            **arguments: dict[str, Any],
+        ) -> tuple[str | list[str], list[NonTextContent] | None]:
+            if session is None:
+                # If a session is not provided, we will create one on the fly
+                async with create_session(connection) as tool_session:
+                    await tool_session.initialize()
+                    call_tool_result = await cast(
+                        "ClientSession", tool_session
+                    ).call_tool(
+                        tool.name,
+                        arguments,
+                    )
+            else:
+                call_tool_result = await session.call_tool(tool.name, arguments)
+            return cast(
+                tuple[str | list[str], list[NonTextContent] | None],
+                _convert_call_tool_result(call_tool_result),
+            )
+
+        return StructuredToolWithOutputLimits(
+            name=tool.name,
+            description=tool.description or "",
+            args_schema=tool.inputSchema,
+            coroutine=call_tool,
+            response_format="content_and_artifact",
+            metadata=tool.annotations.model_dump() if tool.annotations else None,
+        )
 
     @staticmethod
     def create_tools_from_list(
