@@ -54,7 +54,7 @@ jobs:
 
       - name: cat tool_provider.py
         run: |
-          cat language_model_gateway/gateway/tools/tool_provider.p
+          cat language_model_gateway/gateway/tools/tool_provider.py
 
       # setup and install everything and run tests
       - name: up
