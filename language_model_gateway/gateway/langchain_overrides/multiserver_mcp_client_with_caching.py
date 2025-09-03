@@ -12,7 +12,6 @@ from langchain_mcp_adapters.sessions import create_session
 # noinspection PyProtectedMember
 from langchain_mcp_adapters.tools import (
     _list_all_tools,
-    convert_mcp_tool_to_langchain_tool,
     NonTextContent,
     _convert_call_tool_result,
 )
@@ -35,6 +34,10 @@ from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache imp
 )
 from mcp.types import Tool as MCPTool
 
+from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+    TokenReducer,
+)
+
 logger = logging.getLogger(__name__)
 
 
@@ -55,17 +58,30 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         connections: dict[str, Connection] | None = None,
         cache: McpToolsMetadataExpiringCache,
         tool_names: List[str] | None,
+        tool_output_token_limit: int | None,
+        token_reducer: TokenReducer,
     ) -> None:
         """
         Initialize the async config reader
 
         Args:
             cache: Expiring cache for model configurations
+            connections: Optional dictionary of server name to connection config.
+                If None, an empty dictionary will be used (default).
+            tool_names: Optional list of tool names to filter the tools.
+                If None, all tools will be returned.
+            tool_output_token_limit: Optional limit for the number of tokens
+            token_reducer: TokenReducer instance to manage token limits
         """
         assert cache is not None
         self._cache: McpToolsMetadataExpiringCache = cache
         assert self._cache is not None
         self._tool_names: List[str] | None = tool_names
+        self._tool_output_token_limit: int | None = tool_output_token_limit
+        self.token_reducer = token_reducer
+        assert isinstance(self._cache, McpToolsMetadataExpiringCache)
+        assert isinstance(token_reducer, TokenReducer)
+
         super().__init__(connections=connections)
 
     async def load_tools_metadata_cache(
@@ -322,6 +338,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         tool: MCPTool,
         *,
         connection: Connection | None = None,
+        tool_output_token_limit: int | None,
+        token_reducer: TokenReducer,
     ) -> BaseTool:
         """Convert an MCP tool to a LangChain tool.
 
@@ -332,6 +350,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             tool: MCP tool to convert
             connection: Optional connection config to use to create a new session
                         if a `session` is not provided
+            tool_output_token_limit: Optional limit for the number of tokens
+            token_reducer: token reducer that can reduce the number of tokens
 
         Returns:
             a LangChain tool
@@ -368,10 +388,12 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             coroutine=call_tool,
             response_format="content_and_artifact",
             metadata=tool.annotations.model_dump() if tool.annotations else None,
+            limit_output_tokens=tool_output_token_limit,
+            token_reducer=token_reducer,
         )
 
-    @staticmethod
     def create_tools_from_list(
+        self,
         *,
         tools: list[Tool],
         session: ClientSession | None = None,
@@ -386,7 +408,13 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         """
         try:
             return [
-                convert_mcp_tool_to_langchain_tool(session, tool, connection=connection)
+                self.convert_mcp_tool_to_langchain_tool(
+                    session,
+                    tool,
+                    connection=connection,
+                    tool_output_token_limit=self._tool_output_token_limit,
+                    token_reducer=self.token_reducer,
+                )
                 for tool in tools
             ]
         except Exception as e:

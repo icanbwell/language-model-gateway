@@ -1,5 +1,6 @@
 import logging
 import os
+from typing import cast
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.simple_container import SimpleContainer
@@ -62,6 +63,10 @@ from language_model_gateway.gateway.utilities.github.github_pull_request_helper 
 )
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
+)
+from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+    TokenReducer,
+    TOKEN_REDUCER_STRATEGY,
 )
 
 logger = logging.getLogger(__name__)
@@ -205,6 +210,8 @@ class ContainerFactory:
             lambda c: MCPToolProvider(
                 cache=c.resolve(McpToolsMetadataExpiringCache),
                 auth_manager=c.resolve(AuthManager),
+                environment_variables=c.resolve(EnvironmentVariables),
+                token_reducer=c.resolve(TokenReducer),
             ),
         )
 
@@ -277,5 +284,19 @@ class ContainerFactory:
                 environment_variables=c.resolve(EnvironmentVariables)
             ),
         )
+
+        # Validate truncation_strategy to ensure it matches allowed literals
+        truncation_strategy_env = os.environ.get("TOKEN_TRUNCATION_STRATEGY", "smart")
+        truncation_strategy: TOKEN_REDUCER_STRATEGY = cast(
+            TOKEN_REDUCER_STRATEGY, truncation_strategy_env
+        )
+        container.register(
+            TokenReducer,
+            lambda c: TokenReducer(
+                model=os.environ.get("DEFAULT_LLM_MODEL", "gpt-3.5-turbo"),
+                truncation_strategy=truncation_strategy,
+            ),
+        )
+
         logger.info("DI container initialized")
         return container

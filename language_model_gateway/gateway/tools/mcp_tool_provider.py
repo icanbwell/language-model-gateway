@@ -24,8 +24,14 @@ from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_excepti
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
+)
+from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+    TokenReducer,
 )
 
 logger = logging.getLogger(__name__)
@@ -43,6 +49,8 @@ class MCPToolProvider:
         *,
         cache: McpToolsMetadataExpiringCache,
         auth_manager: AuthManager,
+        environment_variables: EnvironmentVariables,
+        token_reducer: TokenReducer,
     ) -> None:
         """
         Initialize the MCPToolProvider with a cache.
@@ -57,6 +65,16 @@ class MCPToolProvider:
         self.auth_manager = auth_manager
         assert self.auth_manager is not None, "AuthManager must be provided"
         assert isinstance(self.auth_manager, AuthManager)
+
+        self.environment_variables = environment_variables
+        assert self.environment_variables is not None, (
+            "EnvironmentVariables must be provided"
+        )
+        assert isinstance(self.environment_variables, EnvironmentVariables)
+
+        self.token_reducer = token_reducer
+        assert self.token_reducer is not None, "TokenReducer must be provided"
+        assert isinstance(self.token_reducer, TokenReducer)
 
     async def load_async(self) -> None:
         pass
@@ -168,6 +186,8 @@ class MCPToolProvider:
                     f"{tool.name}": mcp_tool_config,
                 },
                 tool_names=tool_names,
+                tool_output_token_limit=self.environment_variables.tool_output_token_limit,
+                token_reducer=self.token_reducer,
             )
             tools: List[BaseTool] = await client.get_tools()
             if tool_names and tools:

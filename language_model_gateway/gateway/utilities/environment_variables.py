@@ -74,3 +74,8 @@ class EnvironmentVariables:
     @property
     def mongo_db_cache_disable_delete(self) -> Optional[bool]:
         return str2bool(os.environ.get("MONGO_DB_AUTH_CACHE_DISABLE_DELETE"))
+
+    @property
+    def tool_output_token_limit(self) -> Optional[int]:
+        limit = os.environ.get("TOOL_OUTPUT_TOKEN_LIMIT")
+        return int(limit) if limit and limit.isdigit() else None
