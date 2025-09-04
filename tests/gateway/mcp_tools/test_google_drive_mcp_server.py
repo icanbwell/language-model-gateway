@@ -53,8 +53,8 @@ async def test_chat_completions_with_mcp_google_drive(
                 description="General Purpose Language Model",
                 type="langchain",
                 model=ModelConfig(
-                    provider="openai",
-                    model="gpt-3.5-turbo",
+                    provider="bedrock",
+                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
                 ),
                 tools=[
                     AgentConfig(

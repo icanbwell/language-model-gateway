@@ -69,7 +69,7 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     )
 
     # do a password grant with keycloak to get a JWT token
-    token_url = "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/token"  # Replace <realm-name> with your Keycloak realm
+    token_url = "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/token"
     data = {
         "grant_type": "password",
         "client_id": os.getenv("AUTH_CLIENT_ID"),  # Replace with your client_id
