@@ -26,15 +26,15 @@ class StructuredToolWithOutputLimits(StructuredTool):
         run_manager: Optional[AsyncCallbackManagerForToolRun] = None,
         **kwargs: Any,
     ) -> Any:
+        # log input params and output
+        logger.info(
+            f"StructuredToolWithOutputLimits input args: {args}, kwargs: {kwargs}"
+        )
         result = await super()._arun(
             args=args,
             config=config,
             run_manager=run_manager,
             kwargs=kwargs,
-        )
-        # log input params and output
-        logger.info(
-            f"StructuredToolWithOutputLimits input args: {args}, kwargs: {kwargs}"
         )
         logger.info(
             f"StructuredToolWithOutputLimits output before token limit: {type(result)}\n{result}"

@@ -66,9 +66,10 @@ async def test_google_drive_mcp_agent_directly() -> None:
     access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
-    url: str = "http://mcp_server_gateway:5000/google_drive/"
     access_token = access_token_result["access_token"]
     logger.info(f"Access Token: {access_token}")
+
+    url: str = "http://mcp_server_gateway:5000/google_drive/"
     transport: StreamableHttpTransport = StreamableHttpTransport(
         url=url, auth=access_token
     )
