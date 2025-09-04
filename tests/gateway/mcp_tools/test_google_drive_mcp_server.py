@@ -44,7 +44,7 @@ async def test_chat_completions_with_mcp_google_drive(
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
     )
-    url: str = "http://mcp_server_gateway:5000/google_drive"
+    url: str = "http://mcp_server_gateway:5000/google_drive/"
     await model_configuration_cache.set(
         [
             ChatModelConfig(
