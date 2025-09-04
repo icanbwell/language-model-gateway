@@ -257,23 +257,38 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     response_text = http_status_exception.response.reason_phrase
                 # Handle 401 error
                 if http_status_exception.response.status_code == 401:
-                    logger.error(
-                        f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
+                    authorization_header = http_status_exception.request.headers.get(
+                        "authorization"
                     )
                     # see if the response as a www-authenticate header
                     www_authenticate_header = (
                         http_status_exception.response.headers.get("www-authenticate")
                     )
 
-                    raise McpToolUnauthorizedException(
-                        message=f"Not allowed to access MCP tool at {http_status_exception.request.url}."
-                        + " Perhaps your login token has expired. Please reload to login again."
+                    message = (
+                        f"Not allowed to access MCP tool at {http_status_exception.request.url}."
+                        + (
+                            " Perhaps your login token has expired. Please reload to login again."
+                            if authorization_header
+                            else "No authorization header was provided in the request."
+                        )
                         + f" Response: {response_text}"
                         + (
                             f" WWW-Authenticate header: {www_authenticate_header}"
                             if www_authenticate_header
                             else ""
-                        ),
+                        )
+                    )
+                    logger.error(
+                        f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
+                        f": {message}"
+                        f" Response: {response_text}"
+                        f" Headers: {http_status_exception.request.headers}"
+                        f" Authorization: {authorization_header}"
+                    )
+
+                    raise McpToolUnauthorizedException(
+                        message=message,
                         status_code=http_status_exception.response.status_code,
                         headers=http_status_exception.response.headers,
                         url=str(http_status_exception.request.url),
