@@ -43,21 +43,6 @@ class KeyCloakHelper:
         )
 
         try:
-            # Acquire token using client_credentials grant
-            client_credentials_token = client.fetch_token(
-                url=token_endpoint,
-                grant_type="client_credentials",
-            )
-            logger.info(
-                f"OAuth2 access token: {client_credentials_token}"
-                f"Client credentials token fetched successfully: {client_credentials_token}"
-            )
-        except Exception as e:
-            logger.exception(f"Error fetching client_credentials token: {e}")
-            raise Exception(
-                f"Error fetching client_credentials token for user {username=},{password=},{oauth_client_id=},{oauth_client_secret=},{openid_provider_url}"
-            ) from e
-        try:
             token: dict[str, str] | OAuth2Token = client.fetch_token(
                 url=token_endpoint,
                 username=username,
