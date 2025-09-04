@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import Dict, Any, List
 
@@ -53,6 +54,8 @@ from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
+logger = logging.getLogger(__name__)
+
 
 @pytest.mark.skipif(
     os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
@@ -65,6 +68,7 @@ async def test_google_drive_mcp_agent_directly() -> None:
     )
     url: str = "http://mcp_server_gateway:5000/google_drive/"
     access_token = access_token_result["access_token"]
+    logger.info(f"Access Token: {access_token}")
     transport: StreamableHttpTransport = StreamableHttpTransport(
         url=url, auth=access_token
     )

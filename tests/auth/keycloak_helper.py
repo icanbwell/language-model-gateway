@@ -7,7 +7,6 @@ from authlib.oauth2.rfc6749 import OAuth2Token
 import requests
 from authlib.integrations.requests_client import OAuth2Session
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -22,13 +21,12 @@ class KeyCloakHelper:
         Returns:
             dict: The token response.
         """
-        oauth_client_id = "bwell-client-id"
-        # oauth_client_secret = os.getenv("oauth_client_secret", "bwell-secret")
-        oauth_client_secret = "bwell-secret"
-        openid_provider_url = os.getenv(
-            "openid_provider_url",
-            "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
-        )
+        oauth_client_id = os.getenv("AUTH_CLIENT_ID_CLIENT1")
+        assert oauth_client_id is not None
+        oauth_client_secret = os.getenv("AUTH_CLIENT_SECRET_CLIENT1")
+        assert oauth_client_secret is not None
+        openid_provider_url = os.getenv("AUTH_WELL_KNOWN_URI_CLIENT1")
+        assert openid_provider_url is not None
 
         resp = requests.get(openid_provider_url, timeout=5)
         resp.raise_for_status()
@@ -39,7 +37,7 @@ class KeyCloakHelper:
         client = OAuth2Session(
             client_id=oauth_client_id,
             client_secret=oauth_client_secret,
-            # scope="openid email offline_access",
+            scope="openid",
         )
 
         try:
