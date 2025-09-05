@@ -29,7 +29,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
     def __init__(
         self,
         *,
-        connection_string: str,
+        server_url: str,
         database_name: str,
         username: Optional[str],
         password: Optional[str],
@@ -38,20 +38,20 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         Initialize async MongoDB connection.
 
         Args:
-            connection_string (str): MongoDB connection string
+            server_url (str): MongoDB connection string
             database_name (str): Name of the database
             username (Optional[str]): MongoDB username
             password (Optional[str]): MongoDB password
         """
-        assert connection_string, "MONGO_URL environment variable is not set."
+        assert server_url, "MONGO_URL environment variable is not set."
         assert database_name, "Database name must be provided."
         self.connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
-            mongo_url=connection_string,
+            mongo_url=server_url,
             username=username,
             password=password,
         )
         self.database_name = database_name
-        self._client: AsyncMongoClient[Any] = AsyncMongoClient(connection_string)
+        self._client: AsyncMongoClient[Any] = AsyncMongoClient(self.connection_string)
         self._db = self._client[database_name]
 
     async def connect(self) -> None:
