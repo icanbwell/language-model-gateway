@@ -3763,13 +3763,11 @@
             "version": "==3.23.1"
         },
         "deepdiff": {
-            "extras": [
-                "murmur"
-            ],
             "hashes": [
                 "sha256:ec56d7a769ca80891b5200ec7bd41eec300ced91ebcc7797b41eb2b3f3ff643a",
                 "sha256:ee8708a7f7d37fb273a541fa24ad010ed484192cd0c4ffc0fa0ed5e2d4b9e78b"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.9'",
             "version": "==8.6.1"
         },
