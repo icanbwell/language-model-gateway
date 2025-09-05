@@ -2,12 +2,12 @@ services:
   mcp_server_gateway:
     depends_on:
       - keycloak
-    build:
-      dockerfile: Dockerfile
-      context: ../mcp-server-gateway
-    volumes:
-    - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
-#    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.18
+#    build:
+#      dockerfile: Dockerfile
+#      context: ../mcp-server-gateway
+#    volumes:
+#    - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
+    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.19
     container_name: mcp-server-gateway
     environment:
       DEBUG_METRICS: 0
