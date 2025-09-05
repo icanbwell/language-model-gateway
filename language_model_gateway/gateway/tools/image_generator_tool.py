@@ -4,7 +4,7 @@ import os
 from typing import Literal, Tuple, Type, Optional
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import Field, BaseModel
 
 from language_model_gateway.gateway.file_managers.file_manager import FileManager
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
