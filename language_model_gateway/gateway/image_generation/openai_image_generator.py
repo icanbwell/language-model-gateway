@@ -25,9 +25,18 @@ class OpenAIImageGenerator(ImageGenerator):
         """Synchronous OpenAI image generation"""
 
         openai_api_key: Optional[str] = os.environ.get("OPENAI_API_KEY")
-        assert openai_api_key is not None, (
-            "OPENAI_API_KEY environment variable is not set"
-        )
+        if not openai_api_key:
+            raise ValueError(
+                "OPENAI_API_KEY environment variable is not set. "
+                "Please set your OpenAI API key to use image generation with OpenAI DALL-E. "
+                "You can get an API key from https://platform.openai.com/api-keys"
+            )
+        
+        if openai_api_key.startswith("fake") or openai_api_key == "your-api-key-here":
+            raise ValueError(
+                "Invalid OPENAI_API_KEY detected. Please set a valid OpenAI API key. "
+                "The current key appears to be a placeholder or fake key."
+            )
 
         client = AsyncOpenAI(api_key=openai_api_key)
 

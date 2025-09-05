@@ -6,8 +6,15 @@ import os
 from concurrent.futures.thread import ThreadPoolExecutor
 from typing import override, Dict, Any, Literal
 
-from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
-from types_boto3_bedrock_runtime.type_defs import InvokeModelResponseTypeDef
+try:
+    from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
+    from types_boto3_bedrock_runtime.type_defs import InvokeModelResponseTypeDef
+    BOTO3_TYPES_AVAILABLE = True
+except ImportError:
+    # Fallback types when boto3 stubs are not available
+    BedrockRuntimeClient = Any
+    InvokeModelResponseTypeDef = Dict[str, Any]
+    BOTO3_TYPES_AVAILABLE = False
 
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.image_generation.image_generator import (
