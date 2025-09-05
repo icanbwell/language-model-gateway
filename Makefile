@@ -94,14 +94,14 @@ up-open-webui-auth: create-certs ## starts docker containers
 	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
-	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
+	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
 	@echo Admin User: admin/password
 	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
-	@echo Language Model Gateway: http://localhost:5050/auth/login
+	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 
 .PHONY: down
 down: ## stops docker containers

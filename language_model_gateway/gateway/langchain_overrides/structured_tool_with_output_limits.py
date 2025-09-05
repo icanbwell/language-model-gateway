@@ -31,10 +31,10 @@ class StructuredToolWithOutputLimits(StructuredTool):
             f"StructuredToolWithOutputLimits input args: {args}, kwargs: {kwargs}"
         )
         result = await super()._arun(
-            args=args,
+            *args,
             config=config,
             run_manager=run_manager,
-            kwargs=kwargs,
+            **kwargs,
         )
         logger.info(
             f"StructuredToolWithOutputLimits output before token limit: {type(result)}\n{result}"
