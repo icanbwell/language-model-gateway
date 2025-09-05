@@ -1,8 +1,8 @@
+import logging
 import os
 from typing import Dict, Any, List
 
 import mcp
-from authlib.oauth2.rfc6749 import OAuth2Token
 from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
@@ -30,8 +30,6 @@ from language_model_gateway.gateway.converters.streaming_tool_node import (
 )
 from fastmcp import Client
 from fastmcp.client.logging import LogMessage
-import requests
-from authlib.integrations.requests_client import OAuth2Session
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 from typing import Optional
@@ -52,62 +50,11 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
+from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
-
-def get_access_token(username: str, password: str) -> Dict[str, Any]:
-    """
-    Fetch an OAuth2 access token using Resource Owner Password Credentials grant.
-    Args:
-        username (str): The user's username.
-        password (str): The user's password.
-    Returns:
-        dict: The token response.
-    """
-    oauth_client_id = "bwell-client-id"
-    # oauth_client_secret = os.getenv("oauth_client_secret", "bwell-secret")
-    oauth_client_secret = "bwell-secret"
-    openid_provider_url = os.getenv(
-        "openid_provider_url",
-        "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
-    )
-
-    resp = requests.get(openid_provider_url, timeout=5)
-    resp.raise_for_status()
-    openid_config = resp.json()
-    token_endpoint = openid_config["token_endpoint"]
-
-    # https://docs.authlib.org/en/latest/client/oauth2.html
-    client = OAuth2Session(
-        client_id=oauth_client_id,
-        client_secret=oauth_client_secret,
-        # scope="openid email offline_access",
-    )
-
-    try:
-        # Acquire token using client_credentials grant
-        client_credentials_token = client.fetch_token(
-            url=token_endpoint,
-            grant_type="client_credentials",
-        )
-        print(
-            f"Client credentials token fetched successfully: {client_credentials_token}"
-        )
-    except Exception as e:
-        print(f"Error fetching client_credentials token: {e}")
-        raise
-    try:
-        token: dict[str, str] | OAuth2Token = client.fetch_token(
-            url=token_endpoint,
-            username=username,
-            password=password,
-            grant_type="password",
-        )
-    except Exception as e:
-        print(f"Error fetching access token: {e}")
-        raise
-    return token if isinstance(token, dict) else token["access_token"]
+logger = logging.getLogger(__name__)
 
 
 @pytest.mark.skipif(
@@ -116,11 +63,13 @@ def get_access_token(username: str, password: str) -> Dict[str, Any]:
 )
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
-    access_token_result: Dict[str, str] = get_access_token(
+    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
-    url: str = "http://mcp_server_gateway:5000/google_drive/"
     access_token = access_token_result["access_token"]
+    logger.info(f"Access Token: {access_token}")
+
+    url: str = "http://mcp_server_gateway:5000/google_drive/"
     transport: StreamableHttpTransport = StreamableHttpTransport(
         url=url, auth=access_token
     )
@@ -183,7 +132,7 @@ async def test_google_drive_via_llm() -> None:
     verify_aws_boto3_authentication()
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
-    access_token_result: Dict[str, str] = get_access_token(
+    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
     url: str = "http://mcp_server_gateway:5000/google_drive"
@@ -286,7 +235,7 @@ async def test_chat_completions_with_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    access_token_result: Dict[str, str] = get_access_token(
+    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
     url: str = "http://mcp_server_gateway:5000/google_drive"

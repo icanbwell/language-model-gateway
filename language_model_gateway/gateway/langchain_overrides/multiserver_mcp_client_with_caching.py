@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import override, List, Dict
+from typing import override, List, Dict, Any, cast
 from uuid import UUID, uuid4
 
 from httpx import HTTPStatusError, ConnectError
@@ -12,10 +12,14 @@ from langchain_mcp_adapters.sessions import create_session
 # noinspection PyProtectedMember
 from langchain_mcp_adapters.tools import (
     _list_all_tools,
-    convert_mcp_tool_to_langchain_tool,
+    NonTextContent,
+    _convert_call_tool_result,
 )
 from mcp import ClientSession, Tool
 
+from language_model_gateway.gateway.langchain_overrides.structured_tool_with_output_limits import (
+    StructuredToolWithOutputLimits,
+)
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_not_found_exception import (
     McpToolNotFoundException,
 )
@@ -27,6 +31,11 @@ from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unknown_exception im
 )
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
+)
+from mcp.types import Tool as MCPTool
+
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
+    TokenReducer,
 )
 
 logger = logging.getLogger(__name__)
@@ -49,17 +58,30 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         connections: dict[str, Connection] | None = None,
         cache: McpToolsMetadataExpiringCache,
         tool_names: List[str] | None,
+        tool_output_token_limit: int | None,
+        token_reducer: TokenReducer,
     ) -> None:
         """
         Initialize the async config reader
 
         Args:
             cache: Expiring cache for model configurations
+            connections: Optional dictionary of server name to connection config.
+                If None, an empty dictionary will be used (default).
+            tool_names: Optional list of tool names to filter the tools.
+                If None, all tools will be returned.
+            tool_output_token_limit: Optional limit for the number of tokens
+            token_reducer: TokenReducer instance to manage token limits
         """
         assert cache is not None
         self._cache: McpToolsMetadataExpiringCache = cache
         assert self._cache is not None
         self._tool_names: List[str] | None = tool_names
+        self._tool_output_token_limit: int | None = tool_output_token_limit
+        self.token_reducer = token_reducer
+        assert isinstance(self._cache, McpToolsMetadataExpiringCache)
+        assert isinstance(token_reducer, TokenReducer)
+
         super().__init__(connections=connections)
 
     async def load_tools_metadata_cache(
@@ -235,23 +257,38 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                     response_text = http_status_exception.response.reason_phrase
                 # Handle 401 error
                 if http_status_exception.response.status_code == 401:
-                    logger.error(
-                        f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
+                    authorization_header = http_status_exception.request.headers.get(
+                        "authorization"
                     )
                     # see if the response as a www-authenticate header
                     www_authenticate_header = (
                         http_status_exception.response.headers.get("www-authenticate")
                     )
 
-                    raise McpToolUnauthorizedException(
-                        message=f"Not allowed to access MCP tool at {http_status_exception.request.url}."
-                        + " Perhaps your login token has expired. Please reload to login again."
+                    message = (
+                        f"Not allowed to access MCP tool at {http_status_exception.request.url}."
+                        + (
+                            " Perhaps your login token has expired. Please reload to login again."
+                            if authorization_header
+                            else "No authorization header was provided in the request."
+                        )
                         + f" Response: {response_text}"
                         + (
                             f" WWW-Authenticate header: {www_authenticate_header}"
                             if www_authenticate_header
                             else ""
-                        ),
+                        )
+                    )
+                    logger.error(
+                        f"load_metadata_for_mcp_tools Unauthorized access to MCP tools: {http_status_exception}"
+                        f": {message}"
+                        f" Response: {response_text}"
+                        f" Headers: {http_status_exception.request.headers}"
+                        f" Authorization: {authorization_header}"
+                    )
+
+                    raise McpToolUnauthorizedException(
+                        message=message,
                         status_code=http_status_exception.response.status_code,
                         headers=http_status_exception.response.headers,
                         url=str(http_status_exception.request.url),
@@ -311,7 +348,67 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         return tools
 
     @staticmethod
+    def convert_mcp_tool_to_langchain_tool(
+        session: ClientSession | None,
+        tool: MCPTool,
+        *,
+        connection: Connection | None = None,
+        tool_output_token_limit: int | None,
+        token_reducer: TokenReducer,
+    ) -> BaseTool:
+        """Convert an MCP tool to a LangChain tool.
+
+        NOTE: this tool can be executed only in a context of an active MCP client session.
+
+        Args:
+            session: MCP client session
+            tool: MCP tool to convert
+            connection: Optional connection config to use to create a new session
+                        if a `session` is not provided
+            tool_output_token_limit: Optional limit for the number of tokens
+            token_reducer: token reducer that can reduce the number of tokens
+
+        Returns:
+            a LangChain tool
+
+        """
+        if session is None and connection is None:
+            msg = "Either a session or a connection config must be provided"
+            raise ValueError(msg)
+
+        async def call_tool(
+            **arguments: dict[str, Any],
+        ) -> tuple[str | list[str], list[NonTextContent] | None]:
+            if session is None:
+                # If a session is not provided, we will create one on the fly
+                async with create_session(connection) as tool_session:
+                    await tool_session.initialize()
+                    call_tool_result = await cast(
+                        "ClientSession", tool_session
+                    ).call_tool(
+                        tool.name,
+                        arguments,
+                    )
+            else:
+                call_tool_result = await session.call_tool(tool.name, arguments)
+            return cast(
+                tuple[str | list[str], list[NonTextContent] | None],
+                _convert_call_tool_result(call_tool_result),
+            )
+
+        return StructuredToolWithOutputLimits(
+            name=tool.name,
+            description=tool.description or "",
+            args_schema=tool.inputSchema,
+            coroutine=call_tool,
+            response_format="content_and_artifact",
+            metadata=tool.annotations.model_dump() if tool.annotations else None,
+            limit_output_tokens=tool_output_token_limit,
+            token_reducer=token_reducer,
+        )
+
     def create_tools_from_list(
+        self,
         *,
         tools: list[Tool],
         session: ClientSession | None = None,
@@ -326,7 +423,13 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         """
         try:
             return [
-                convert_mcp_tool_to_langchain_tool(session, tool, connection=connection)
+                self.convert_mcp_tool_to_langchain_tool(
+                    session,
+                    tool,
+                    connection=connection,
+                    tool_output_token_limit=self._tool_output_token_limit,
+                    token_reducer=self.token_reducer,
+                )
                 for tool in tools
             ]
         except Exception as e:

@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v2.10
+    image: traefik:v3.5.1
     container_name: traefik
     command:
       - "--providers.docker=true"

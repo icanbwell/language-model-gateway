@@ -39,22 +39,14 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
 
-      - name: Create builder
-        run: |
-          docker buildx create --use
-
-      - name: Inspect builder
-        run: |
-          docker buildx inspect --bootstrap
-
-      - name: Build, tag, and push image to Amazon ECR
-        env:
-          TAG: ${{ github.event.release.tag_name }}
-        run: |
-          docker buildx build \
-            --platform linux/amd64,linux/arm64 \
-            --target production \
-            -t $REPOSITORY_URL/$IMAGE_NAME:$TAG \
-            -t $REPOSITORY_URL/$IMAGE_NAME:latest \
-            --push \
-            -f Dockerfile .
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64,linux/arm64
+          target: production
+          push: true
+          tags: |
+            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}
+            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:latest

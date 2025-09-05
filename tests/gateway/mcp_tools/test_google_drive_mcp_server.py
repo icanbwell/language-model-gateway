@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 
 import pytest
 import httpx
@@ -18,6 +19,7 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
+from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -29,6 +31,12 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 async def test_chat_completions_with_mcp_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:
+    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+        username="tester", password="password"
+    )
+    access_token = access_token_result["access_token"]
+    assert access_token is not None
+
     test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
@@ -44,7 +52,7 @@ async def test_chat_completions_with_mcp_google_drive(
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
     )
-    url: str = "http://mcp_server_gateway:5000/google_drive"
+    url: str = "http://mcp_server_gateway:5000/google_drive/"
     await model_configuration_cache.set(
         [
             ChatModelConfig(
@@ -53,13 +61,14 @@ async def test_chat_completions_with_mcp_google_drive(
                 description="General Purpose Language Model",
                 type="langchain",
                 model=ModelConfig(
-                    provider="openai",
-                    model="gpt-3.5-turbo",
+                    provider="bedrock",
+                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
                 ),
                 tools=[
                     AgentConfig(
                         name="download_file_from_url",
                         url=url,  # Assumes MCP server is running locally
+                        auth="jwt_token",
                     ),
                 ],
             )
@@ -70,6 +79,9 @@ async def test_chat_completions_with_mcp_google_drive(
         api_key="fake-api-key",
         base_url="http://localhost:5000/api/v1",  # Change if your API runs on a different port
         http_client=async_client,
+        default_headers={
+            "Authorization": f"Bearer {access_token}",
+        },
     )
 
     message: ChatCompletionUserMessageParam = {

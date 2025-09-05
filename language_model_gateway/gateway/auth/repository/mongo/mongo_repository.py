@@ -2,11 +2,7 @@ import logging
 from typing import Any, Dict, Optional, Type, Mapping, cast, override, Callable
 
 from bson import ObjectId
-from motor.motor_asyncio import (
-    AsyncIOMotorClient,
-    AsyncIOMotorDatabase,
-    AsyncIOMotorCollection,
-)
+from pymongo import AsyncMongoClient
 from pydantic import BaseModel
 from pymongo.results import InsertOneResult, UpdateResult
 
@@ -14,6 +10,7 @@ from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
 )
+from language_model_gateway.utilities.mongo_url_utils import MongoUrlHelpers
 
 logger = logging.getLogger(__name__)
 
@@ -31,22 +28,31 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     def __init__(
         self,
-        connection_string: str,
+        *,
+        server_url: str,
         database_name: str,
-    ):
+        username: Optional[str],
+        password: Optional[str],
+    ) -> None:
         """
         Initialize async MongoDB connection.
 
         Args:
-            connection_string (str): MongoDB connection string
+            server_url (str): MongoDB connection string
             database_name (str): Name of the database
+            username (Optional[str]): MongoDB username
+            password (Optional[str]): MongoDB password
         """
-        assert connection_string, "MONGO_URL environment variable is not set."
+        assert server_url, "MONGO_URL environment variable is not set."
         assert database_name, "Database name must be provided."
-        self.connection_string = connection_string
+        self.connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
+            mongo_url=server_url,
+            username=username,
+            password=password,
+        )
         self.database_name = database_name
-        self._client = AsyncIOMotorClient(connection_string)
-        self._db: AsyncIOMotorDatabase = self._client[database_name]
+        self._client: AsyncMongoClient[Any] = AsyncMongoClient(self.connection_string)
+        self._db = self._client[database_name]
 
     async def connect(self) -> None:
         """
@@ -66,7 +72,7 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         """
         Close the MongoDB connection.
         """
-        self._client.close()
+        await self._client.close()
 
     @override
     async def insert(self, collection_name: str, model: BaseModel) -> ObjectId:
@@ -83,14 +89,9 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         logger.debug(
             f"Saving document in collection {collection_name} with data: {model}"
         )
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # Convert model to dictionary
+        collection = self._db[collection_name]
         document = self._convert_model_to_dict(model)
-
-        # Remove None values to prevent storing null fields
         document = {k: v for k, v in document.items() if v is not None}
-
         result: InsertOneResult = await collection.insert_one(document)
         logger.debug(
             f"Document inserted with ID: {result.inserted_id} in collection {collection_name} with data: {document} result: {result}"
@@ -115,16 +116,11 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         logger.debug(
             f"Finding document with ID: {document_id} in collection {collection_name}"
         )
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # Convert string ID to ObjectId
+        collection = self._db[collection_name]
         object_id = ObjectId(document_id)
-
         document = await collection.find_one({"_id": object_id})
-
         if document is None:
             return None
-
         return self._convert_dict_to_model(document, model_class)
 
     @override
@@ -145,16 +141,11 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             Optional[T]: Pydantic model instance or None
         """
         logger.debug(f"Finding {fields} in collection {collection_name}")
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # Create filter dictionary
+        collection = self._db[collection_name]
         filter_dict = fields
-
         document = await collection.find_one(filter=filter_dict)
-
         if document is None:
             return None
-
         return self._convert_dict_to_model(document, model_class)
 
     @override
@@ -182,16 +173,10 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         logger.debug(
             f"Finding documents in collection {collection_name} with filter: {filter_dict}, limit: {limit}, skip: {skip}"
         )
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
+        collection = self._db[collection_name]
         filter_dict = filter_dict or {}
-
-        # Cursor for finding documents
         cursor = collection.find(filter_dict).limit(limit).skip(skip)
-
-        # Convert documents to models
         documents = await cursor.to_list(length=limit)
-
         return [self._convert_dict_to_model(doc, model_class) for doc in documents]
 
     @override
@@ -215,19 +200,14 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             Optional[T]: Updated document or None
         """
         logger.debug(f"Updating document {document_id} in collection {collection_name}")
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # Convert update data to dictionary, removing None values
+        collection = self._db[collection_name]
         update_dict = self._convert_model_to_dict(update_data)
         update_dict = {k: v for k, v in update_dict.items() if v is not None}
-
-        # Perform update
         result = await collection.find_one_and_update(
             {"_id": document_id},
             {"$set": update_dict},
-            return_document=True,  # Return the updated document
+            return_document=True,
         )
-
         return self._convert_dict_to_model(result, model_class) if result else None
 
     @override
@@ -245,14 +225,9 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         logger.debug(
             f"Deleting document {document_id} from collection {collection_name}"
         )
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # Convert string ID to ObjectId
+        collection = self._db[collection_name]
         object_id = ObjectId(document_id)
-
-        # Delete document
         result = await collection.delete_one({"_id": object_id})
-
         return result.deleted_count > 0
 
     @staticmethod
@@ -317,26 +292,17 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         logger.debug(
             f"Inserting or updating item in collection {collection_name} with data:\n{item.model_dump_json()}"
         )
-        collection: AsyncIOMotorCollection = self._db[collection_name]
-
-        # find the document by the fields that uniquely identify it
+        collection = self._db[collection_name]
         existing_item = await self.find_by_fields(
             collection_name=collection_name, fields=keys, model_class=model_class
         )
-
         if existing_item:
             item = on_update(existing_item)
         else:
             item = on_insert(item)
-
-        # Convert item to dictionary
         document = self._convert_model_to_dict(item)
-
-        # Remove None values to prevent storing null fields
         document = {k: v for k, v in document.items() if v is not None}
-
         if existing_item:
-            # If the document exists, replace it
             update_result: UpdateResult = await collection.replace_one(
                 filter={"_id": existing_item.id},
                 replacement=document,
@@ -351,7 +317,6 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
                 )
             return existing_item.id
         else:
-            # If the document does not exist, insert it
             insert_result: InsertOneResult = await collection.insert_one(document)
             if not insert_result.acknowledged:
                 logger.error(

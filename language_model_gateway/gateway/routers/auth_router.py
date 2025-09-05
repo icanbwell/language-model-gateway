@@ -131,17 +131,18 @@ class AuthRouter:
                 request=request,
             )
             if not logger.isEnabledFor(logging.DEBUG):
+                import os
                 from starlette.responses import HTMLResponse
 
-                html_content = """
-                <html>
-                    <head><title>Token Saved</title></head>
-                    <body>
-                        <h2>Your new token has been saved.</h2>
-                        <p>You can now retry your question.</p>
-                    </body>
-                </html>
-                """
+                html_path = os.path.join(
+                    os.path.dirname(__file__), "../../static/token_saved.html"
+                )
+                try:
+                    with open(html_path, "r", encoding="utf-8") as f:
+                        html_content = f.read()
+                except Exception as file_exc:
+                    logger.error(f"Error reading token_saved.html: {file_exc}")
+                    html_content = "<html><body><h2>Token Saved</h2><p>(HTML file missing)</p></body></html>"
                 return HTMLResponse(content=html_content, status_code=200)
             return JSONResponse(content)
         except Exception as e:

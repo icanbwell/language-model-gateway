@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 
 import pytest
 import httpx
@@ -18,6 +19,7 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
+from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -29,6 +31,12 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     async_client: httpx.AsyncClient,
 ) -> None:
+    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+        username="tester", password="password"
+    )
+    access_token = access_token_result["access_token"]
+    assert access_token is not None
+
     test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
@@ -68,26 +76,8 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
         ]
     )
 
-    # do a password grant with keycloak to get a JWT token
-    token_url = "http://keycloak:8080/realms/bwell-realm/protocol/openid-connect/token"  # Replace <realm-name> with your Keycloak realm
-    data = {
-        "grant_type": "password",
-        "client_id": os.getenv("AUTH_CLIENT_ID"),  # Replace with your client_id
-        "username": os.getenv("MY_USER_NAME"),  # Replace with your username
-        "password": os.getenv("MY_USER_PASSWORD"),  # Replace with your password
-        "client_secret": os.getenv("AUTH_CLIENT_SECRET"),  # Uncomment if needed
-        "scope": "openid",  # Optional
-    }
-    jwt_token: str | None = None
-    async with httpx.AsyncClient() as oidc_client:
-        token_response = await oidc_client.post(token_url, data=data)
-        token_response.raise_for_status()
-        token_response_json = token_response.json()
-        jwt_token = token_response_json["access_token"]
-
-    assert jwt_token is not None
     client = AsyncOpenAI(
-        api_key=jwt_token,
+        api_key=access_token,
         base_url="http://localhost:5000/api/v1",  # Change if your API runs on a different port
         http_client=async_client,
     )

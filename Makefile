@@ -58,7 +58,7 @@ up-open-webui-ssl: clean-database ## starts docker containers
 
 .PHONY: up-open-webui-auth
 up-open-webui-auth: create-certs ## starts docker containers
-	docker compose --progress=plain -f docker-compose.yml -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml -f docker-compose-mcp-server-gateway.yml up --build -d
+	docker compose --progress=plain -f docker-compose.yml -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml -f docker-compose-mcp-server-gateway.yml up -d
 	echo "waiting for open-webui service to become healthy" && \
 	max_attempts=30 && \
 	attempt=0 && \
@@ -94,14 +94,15 @@ up-open-webui-auth: create-certs ## starts docker containers
 	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
-	@echo OpenWebUI: http://localhost:3050  https://open-webui.localhost
+	@echo "======== Services are up and running ========"
+	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
 	@echo Admin User: admin/password
 	@echo Normal User: tester/password
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
-	@echo Language Model Gateway: http://localhost:5050/auth/login
+	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 
 .PHONY: down
 down: ## stops docker containers
@@ -209,8 +210,8 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
         --network language-model-gateway_web \
         --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
         python:3.12-alpine \
-        sh -c "pip install --upgrade pip && \
-        	   pip install authlib requests && \
+        sh -c "pip install --root-user-action=ignore --upgrade pip && \
+        	   pip install --root-user-action=ignore authlib requests && \
                cd /app && \
                python3 import_pipe.py \
                --url 'http://language-model-gateway-open-webui-1:8080' \

@@ -33,8 +33,10 @@ class RepositoryFactory:
             assert environment_variables.mongo_uri
             assert environment_variables.mongo_db_name
             return AsyncMongoRepository(
-                connection_string=environment_variables.mongo_uri,
+                server_url=environment_variables.mongo_uri,
                 database_name=environment_variables.mongo_db_name,
+                username=environment_variables.mongo_db_username,
+                password=environment_variables.mongo_db_password,
             )
         elif repository_type.lower() == "memory":
             return AsyncMemoryRepository()
