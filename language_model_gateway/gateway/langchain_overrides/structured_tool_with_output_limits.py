@@ -39,13 +39,39 @@ class StructuredToolWithOutputLimits(StructuredTool):
         logger.info(
             f"StructuredToolWithOutputLimits output before token limit: {type(result)}\n{result}"
         )
-        if self.limit_output_tokens is not None and isinstance(result, str):
-            token_count = self.token_reducer.count_tokens(result)
-            if token_count > self.limit_output_tokens:
-                result = self.token_reducer.reduce_tokens(
-                    text=result,
-                    max_tokens=self.limit_output_tokens,
-                    preserve_start=0,
-                )
+        if self.limit_output_tokens is not None:
+            if isinstance(result, str):
+                token_count = self.token_reducer.count_tokens(result)
+                if token_count > self.limit_output_tokens:
+                    result = self.token_reducer.reduce_tokens(
+                        text=result,
+                        max_tokens=self.limit_output_tokens,
+                        preserve_start=0,
+                    )
+            elif isinstance(result, tuple):
+                # find the largest string in the tuple and apply truncation to that
+                str_indices = [i for i, v in enumerate(result) if isinstance(v, str)]
+                if str_indices:
+                    largest_str_index = max(
+                        str_indices,
+                        key=lambda i: self.token_reducer.count_tokens(result[i]),
+                    )
+                    token_count = self.token_reducer.count_tokens(
+                        result[largest_str_index]
+                    )
+                    if token_count > self.limit_output_tokens:
+                        reduced_str = self.token_reducer.reduce_tokens(
+                            text=result[largest_str_index],
+                            max_tokens=self.limit_output_tokens,
+                            preserve_start=0,
+                        )
+                        result = (
+                            result[:largest_str_index]
+                            + (reduced_str,)
+                            + result[largest_str_index + 1 :]
+                        )
 
+        logger.info(
+            f"StructuredToolWithOutputLimits output after token limit: {type(result)}\n{result}"
+        )
         return result

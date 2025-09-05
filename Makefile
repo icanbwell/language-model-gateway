@@ -210,7 +210,7 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
         --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
         python:3.12-alpine \
         sh -c "pip install --upgrade pip && \
-        	   pip install authlib requests && \
+        	   pip install --root-user-action=ignore authlib requests && \
                cd /app && \
                python3 import_pipe.py \
                --url 'http://language-model-gateway-open-webui-1:8080' \
