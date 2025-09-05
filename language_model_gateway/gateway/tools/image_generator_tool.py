@@ -113,8 +113,7 @@ class ImageGeneratorTool(ResilientBaseTool):
                 artifact += f"\n\n{markdown_image}"
                 return url, artifact
         except Exception as e:
-            logger.error(f"Failed to generate image: {str(e)}")
-            logger.exception(e, stack_info=True)
+            logger.exception(f"Failed to generate image: {str(e)}")
             return (
                 f"Failed to generate image: {e}",
                 f"ImageGeneratorAgent[{self.model_provider}]: Failed to generate image from prompt: {prompt}",

@@ -84,11 +84,13 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                 response_text = agent_response.text
                 response_dict: Dict[str, Any] = agent_response.json()
             except json.JSONDecodeError:
+                logger.exception(f"Error decoding response. url: {agent_url}")
                 return JSONResponse(
                     content=f"Error decoding response. url: {agent_url}\n{response_text}",
                     status_code=500,
                 )
             except Exception as e:
+                logger.exception(f"Error from agent: {e} url: {agent_url}")
                 return JSONResponse(
                     content=f"Error from agent: {e} url: {agent_url}\n{response_text}",
                     status_code=500,

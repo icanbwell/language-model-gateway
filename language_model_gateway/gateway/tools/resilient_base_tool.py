@@ -59,6 +59,6 @@ class ResilientBaseTool(BaseTool, metaclass=ABCMeta):
                     for key, value in tool_input.items()
                 }
             except Exception as e:
-                logger.exception(e)
+                logger.exception(f"Error parsing tool input: {tool_input}")
                 return str(e)
         return super()._parse_input(tool_input, tool_call_id)

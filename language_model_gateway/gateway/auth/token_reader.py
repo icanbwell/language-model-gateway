@@ -118,6 +118,7 @@ class TokenReader:
                         f"Successfully fetched JWKS from {jwks_uri}, keys= {len(keys)}"
                     )
                 except httpx.HTTPStatusError as e:
+                    logger.exception(e)
                     raise ValueError(
                         f"Failed to fetch JWKS from {jwks_uri} with status {e.response.status_code} : {e}"
                     )
