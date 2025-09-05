@@ -87,7 +87,7 @@ services:
       retries: 20
 
   open-webui-db:
-    image: postgres:13
+    image: postgres:13.22-alpine3.22
     environment:
       - POSTGRES_DB=myapp_db
       - POSTGRES_USER=myapp_user

@@ -96,7 +96,7 @@ services:
 
   keycloak:
     # https://github.com/keycloak/keycloak/releases
-    image: quay.io/keycloak/keycloak:26.3.2
+    image: quay.io/keycloak/keycloak:26.3.3
 #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/keycloak/keycloak:26.3.2
     #    container_name: keycloak
     #    build:
@@ -195,7 +195,7 @@ services:
       - keycloak
 
   mongo:
-    image: mongodb/mongodb-atlas-local:7.0.12
+    image: mongodb/mongodb-atlas-local:8.0.12
     # https://github.com/mongodb/mongodb-atlas-cli/releases
     # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
     # https://hub.docker.com/r/mongodb/mongodb-atlas-local
