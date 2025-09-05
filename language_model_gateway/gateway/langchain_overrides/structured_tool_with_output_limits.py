@@ -5,7 +5,7 @@ from typing import override, Any, Optional, Dict, List
 from langchain_core.callbacks import AsyncCallbackManagerForToolRun
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import StructuredTool
-from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 
@@ -13,6 +13,12 @@ logger = logging.getLogger(__name__)
 
 
 class StructuredToolWithOutputLimits(StructuredTool):
+    """
+    A StructuredTool that limits the output based on token count using a TokenReducer.
+    Inherits from langchain's StructuredTool and adds functionality to limit the output
+    based on the number of tokens.
+    """
+
     limit_output_tokens: Optional[int] = None
     """The maximum number of tokens to return in the output. If None, no limit is applied."""
 

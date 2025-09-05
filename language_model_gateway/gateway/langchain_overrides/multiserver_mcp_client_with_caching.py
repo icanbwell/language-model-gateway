@@ -34,7 +34,7 @@ from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache imp
 )
 from mcp.types import Tool as MCPTool
 
-from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 

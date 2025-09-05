@@ -30,7 +30,7 @@ from language_model_gateway.gateway.utilities.environment_variables import (
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
-from language_model_gateway.gateway.utilities.token_counter.token_counter import (
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 

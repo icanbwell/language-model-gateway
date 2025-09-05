@@ -76,6 +76,16 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     @override
     async def insert(self, collection_name: str, model: BaseModel) -> ObjectId:
+        """
+        Save a Pydantic model to MongoDB collection asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            model (BaseModel): Pydantic model to save
+
+        Returns:
+            ObjectId: Inserted document's ID
+        """
         logger.debug(
             f"Saving document in collection {collection_name} with data: {model}"
         )
@@ -92,6 +102,17 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
     async def find_by_id(
         self, collection_name: str, model_class: Type[T], document_id: ObjectId
     ) -> Optional[T]:
+        """
+        Find a document by its ID asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            model_class (Type[T]): Pydantic model class
+            document_id (str): Document ID
+
+        Returns:
+            Optional[T]: Pydantic model instance or None
+        """
         logger.debug(
             f"Finding document with ID: {document_id} in collection {collection_name}"
         )
@@ -109,6 +130,16 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         model_class: Type[T],
         fields: Dict[str, str | None],
     ) -> Optional[T]:
+        """
+        Find a document by a specific field value asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            model_class (Type[T]): Pydantic model class
+            fields (Dict[str, str]): Fields value
+        Returns:
+            Optional[T]: Pydantic model instance or None
+        """
         logger.debug(f"Finding {fields} in collection {collection_name}")
         collection = self._db[collection_name]
         filter_dict = fields
@@ -126,6 +157,19 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         limit: int = 100,
         skip: int = 0,
     ) -> list[T]:
+        """
+        Find multiple documents matching a filter asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            model_class (Type[T]): Pydantic model class
+            filter_dict (Optional[Dict[str, Any]]): Filter criteria
+            limit (int): Maximum number of documents to return
+            skip (int): Number of documents to skip
+
+        Returns:
+            list[T]: List of Pydantic model instances
+        """
         logger.debug(
             f"Finding documents in collection {collection_name} with filter: {filter_dict}, limit: {limit}, skip: {skip}"
         )
@@ -143,6 +187,18 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         update_data: BaseModel,
         model_class: Type[T],
     ) -> Optional[T]:
+        """
+        Update a document by its ID asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            document_id (str): Document ID
+            update_data (BaseModel): Pydantic model with update data
+            model_class (Type[T]): Pydantic model class
+
+        Returns:
+            Optional[T]: Updated document or None
+        """
         logger.debug(f"Updating document {document_id} in collection {collection_name}")
         collection = self._db[collection_name]
         update_dict = self._convert_model_to_dict(update_data)
@@ -156,6 +212,16 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     @override
     async def delete_by_id(self, collection_name: str, document_id: ObjectId) -> bool:
+        """
+        Delete a document by its ID asynchronously.
+
+        Args:
+            collection_name (str): Name of the collection
+            document_id (str): Document ID
+
+        Returns:
+            bool: True if deletion was successful, False otherwise
+        """
         logger.debug(
             f"Deleting document {document_id} from collection {collection_name}"
         )
@@ -210,6 +276,19 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
         on_update: Callable[[T], T] = lambda x: x,
         on_insert: Callable[[T], T] = lambda x: x,
     ) -> ObjectId:
+        """
+        Insert a new item or update an existing one in the collection.
+
+        Args:
+            collection_name (str): Name of the collection
+            model_class (Type[T]): Pydantic model class
+            item (T): Pydantic model instance to insert or update
+            keys (Dict[str, str]): Fields that uniquely identify the document
+            on_update (Callable[[T], T]): Function to apply on update
+            on_insert (Callable[[T], T]): Function to apply on insert
+        Returns:
+            ObjectId: The ID of the inserted or updated document
+        """
         logger.debug(
             f"Inserting or updating item in collection {collection_name} with data:\n{item.model_dump_json()}"
         )
