@@ -10,6 +10,7 @@ from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
 )
+from language_model_gateway.utilities.mongo_url_utils import MongoUrlHelpers
 
 logger = logging.getLogger(__name__)
 
@@ -27,19 +28,28 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
 
     def __init__(
         self,
+        *,
         connection_string: str,
         database_name: str,
-    ):
+        username: Optional[str],
+        password: Optional[str],
+    ) -> None:
         """
         Initialize async MongoDB connection.
 
         Args:
             connection_string (str): MongoDB connection string
             database_name (str): Name of the database
+            username (Optional[str]): MongoDB username
+            password (Optional[str]): MongoDB password
         """
         assert connection_string, "MONGO_URL environment variable is not set."
         assert database_name, "Database name must be provided."
-        self.connection_string = connection_string
+        self.connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
+            mongo_url=connection_string,
+            username=username,
+            password=password,
+        )
         self.database_name = database_name
         self._client: AsyncMongoClient[Any] = AsyncMongoClient(connection_string)
         self._db = self._client[database_name]

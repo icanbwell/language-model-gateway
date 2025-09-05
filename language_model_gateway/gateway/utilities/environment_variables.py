@@ -43,6 +43,14 @@ class EnvironmentVariables:
         return os.environ.get("MONGO_DB_NAME")
 
     @property
+    def mongo_db_username(self) -> Optional[str]:
+        return os.environ.get("MONGO_DB_USERNAME")
+
+    @property
+    def mongo_db_password(self) -> Optional[str]:
+        return os.environ.get("MONGO_DB_PASSWORD")
+
+    @property
     def mongo_db_auth_cache_collection_name(self) -> Optional[str]:
         return os.environ.get("MONGO_DB_AUTH_CACHE_COLLECTION_NAME")
 
