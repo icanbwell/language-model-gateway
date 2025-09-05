@@ -64,8 +64,11 @@ services:
       AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
+      # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
+      MONGO_DB_USERNAME: root
+      MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
       MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
@@ -192,17 +195,25 @@ services:
       - keycloak
 
   mongo:
-    image: public.ecr.aws/docker/library/mongo:8.0.12
-    container_name: mongo
+    image: mongodb/mongodb-atlas-local:7.0.12
+    # https://github.com/mongodb/mongodb-atlas-cli/releases
+    # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
+    # https://hub.docker.com/r/mongodb/mongodb-atlas-local
     ports:
-      - '27017:27017'
+      - "27017:27017"
+    container_name: mongo
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+      #      ALLOW_EMPTY_PASSWORD: yes
+      MONGO_VECTOR_DATABASE: data-science
+      MONGO_VECTOR_COLLECTION: complaints_cache
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: "test123" # pragma: allowlist secret
+      MONGO_VECTOR_PORT: 27017
+      MONGO_EMBEDDINGS_CACHE_COLLECTION: embeddings_cache
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
     networks:
       - web
-
 networks:
   web:
     driver: bridge

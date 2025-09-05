@@ -7,7 +7,7 @@ services:
 #      context: ../mcp-server-gateway
 #    volumes:
 #    - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
-    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.19
+    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.20
     container_name: mcp-server-gateway
     environment:
       DEBUG_METRICS: 0
