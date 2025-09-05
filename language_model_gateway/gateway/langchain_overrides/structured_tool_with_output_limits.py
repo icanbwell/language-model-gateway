@@ -1,5 +1,6 @@
+import json
 import logging
-from typing import override, Any, Optional
+from typing import override, Any, Optional, Dict, List
 
 from langchain_core.callbacks import AsyncCallbackManagerForToolRun
 from langchain_core.runnables import RunnableConfig
@@ -48,30 +49,70 @@ class StructuredToolWithOutputLimits(StructuredTool):
                         max_tokens=self.limit_output_tokens,
                         preserve_start=0,
                     )
-            elif isinstance(result, tuple):
-                # find the largest string in the tuple and apply truncation to that
-                str_indices = [i for i, v in enumerate(result) if isinstance(v, str)]
-                if str_indices:
-                    largest_str_index = max(
-                        str_indices,
-                        key=lambda i: self.token_reducer.count_tokens(result[i]),
+                    logger.info(
+                        f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
                     )
-                    token_count = self.token_reducer.count_tokens(
-                        result[largest_str_index]
-                    )
-                    if token_count > self.limit_output_tokens:
-                        reduced_str = self.token_reducer.reduce_tokens(
-                            text=result[largest_str_index],
-                            max_tokens=self.limit_output_tokens,
-                            preserve_start=0,
-                        )
-                        result = (
-                            result[:largest_str_index]
-                            + (reduced_str,)
-                            + result[largest_str_index + 1 :]
-                        )
 
-        logger.info(
-            f"StructuredToolWithOutputLimits output after token limit: {type(result)}\n{result}"
-        )
+            elif isinstance(result, tuple):
+                result_dict_str: str
+                result_dict_str, _ = result
+                result_dict: Dict[str, Any] | List[Dict[str, Any]] = json.loads(
+                    result_dict_str
+                )
+                # find the largest string in the dict or list of dicts and apply truncation to it
+                if isinstance(result_dict, dict):
+                    largest_str_key = max(
+                        result_dict,
+                        key=lambda k: len(result_dict[k])
+                        if isinstance(result_dict[k], str)
+                        else 0,
+                    )
+                    if isinstance(result_dict[largest_str_key], str):
+                        token_count = self.token_reducer.count_tokens(
+                            result_dict[largest_str_key]
+                        )
+                        if token_count > self.limit_output_tokens:
+                            result_dict[largest_str_key] = (
+                                self.token_reducer.reduce_tokens(
+                                    text=result_dict[largest_str_key],
+                                    max_tokens=self.limit_output_tokens,
+                                    preserve_start=0,
+                                )
+                            )
+                            result = (json.dumps(result_dict), None)
+                            logger.info(
+                                f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
+                            )
+
+                elif isinstance(result_dict, list):
+                    for item in result_dict:
+                        if isinstance(item, dict):
+                            largest_str_key = max(
+                                item,
+                                key=lambda k: len(item[k])
+                                if isinstance(item[k], str)
+                                else 0,
+                            )
+                            if isinstance(item[largest_str_key], str):
+                                token_count = self.token_reducer.count_tokens(
+                                    item[largest_str_key]
+                                )
+                                if token_count > self.limit_output_tokens:
+                                    item[largest_str_key] = (
+                                        self.token_reducer.reduce_tokens(
+                                            text=item[largest_str_key],
+                                            max_tokens=self.limit_output_tokens,
+                                            preserve_start=0,
+                                        )
+                                    )
+                    result = (json.dumps(result_dict), None)
+                    logger.info(
+                        f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
+                    )
+
+            else:
+                logger.warning(
+                    f"StructuredToolWithOutputLimits received unsupported result type for token limiting: {type(result)}"
+                )
+
         return result

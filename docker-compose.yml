@@ -74,7 +74,7 @@ services:
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
       # truncates the tool output to the specified number of tokens
-      TOOL_OUTPUT_TOKEN_LIMIT: 10
+      TOOL_OUTPUT_TOKEN_LIMIT: 100000
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
