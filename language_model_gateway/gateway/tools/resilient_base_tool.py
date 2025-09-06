@@ -58,7 +58,7 @@ class ResilientBaseTool(BaseTool, metaclass=ABCMeta):
                     (camel_to_snake(key) if key not in input_fields else key): value
                     for key, value in tool_input.items()
                 }
-            except Exception as e:
+            except Exception:
                 logger.exception(f"Error parsing tool input: {tool_input}")
-                return str(e)
+                raise
         return super()._parse_input(tool_input, tool_call_id)
