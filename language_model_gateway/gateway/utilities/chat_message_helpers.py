@@ -26,7 +26,7 @@ def convert_message_content_to_string(content: str | list[str | Dict[str, Any]])
                 text.append(content_item.get("text") or "")
         else:
             assert False, (
-                f"Unsupported content item type: {type(content_item)}: {content_item}"
+                f"convert_message_content_to_string: Unsupported content item type: {type(content_item)}: {content_item}"
             )
     return "".join(text)
 

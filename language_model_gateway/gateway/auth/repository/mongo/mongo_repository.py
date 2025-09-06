@@ -64,8 +64,8 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             logger.info(
                 f"Successfully connected to MongoDB: {self.connection_string} in database {self.database_name}"
             )
-        except Exception as e:
-            logger.info(f"Failed to connect to MongoDB: {e}")
+        except Exception:
+            logger.exception("Failed to connect to MongoDB")
             raise
 
     async def close(self) -> None:

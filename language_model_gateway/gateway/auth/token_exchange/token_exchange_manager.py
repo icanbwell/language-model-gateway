@@ -311,8 +311,7 @@ class TokenExchangeManager:
                 # just re-raise the exception with the original message
                 raise
             except Exception as e:
-                logger.error(f"Error verifying token for tool {tool_name}: {e}")
-                logger.exception(e, stack_info=True)
+                logger.exception(f"Error verifying token for tool {tool_name}: {e}")
                 raise AuthorizationNeededException(
                     message="Invalid or expired token provided in Authorization header."
                     + error_message,
