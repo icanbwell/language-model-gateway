@@ -53,8 +53,12 @@ class FastApiLoggingMiddleware(BaseHTTPMiddleware):
 
         if logger.isEnabledFor(logging.DEBUG):
             content_type = response.headers.get("content-type", "")
-            is_text = content_type.startswith("text/") or content_type.startswith(
-                "application/json"
+            is_text = (
+                content_type.startswith("text/")
+                or content_type.startswith("application/json")
+                or content_type.startswith("application/xml")
+                or content_type.startswith("application/yaml")
+                or content_type.startswith("application/x-www-form-urlencoded")
             )
             # if response is StreamingResponse, we need to read the body
             if "body_iterator" in response.__dict__:
