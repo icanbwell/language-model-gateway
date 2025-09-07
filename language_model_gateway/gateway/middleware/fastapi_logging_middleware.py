@@ -1,3 +1,4 @@
+import json
 import logging
 import time
 from typing import override, Callable, Awaitable, cast
@@ -79,16 +80,32 @@ class FastApiLoggingMiddleware(BaseHTTPMiddleware):
 
         if response.status_code >= 300:
             logger.error(
-                f"Request: {request.method} {request.url} | Headers: {request.headers} | Body: {req_body}"
+                f"\n==== Request ERROR: {request.method} {request.url} ======"
+                f"\n===== Headers ======"
+                f"\n{request.headers}"
+                f"\n====== Request Body ====="
+                f"\n{json.dumps(req_body)}"
+                f"\n==== End of Request Body ======"
             )
             logger.error(
-                f"Response: {response.status_code} | {request.method} {request.url} | time: {process_time_in_secs} | Body: {res_body_text} "
+                f"\n====== Response ERROR : {response.status_code} {request.method} {request.url} (time: {process_time_in_secs}) ======"
+                f"\n==== Response Body ======"
+                f"\n{res_body_text}"
+                f"\n==== End of Response Body ======"
             )
         else:
             logger.debug(
-                f"Request: {request.method} {request.url} | Headers: {request.headers} | Response Body: {req_body}"
+                f"\n==== Request: {request.method} {request.url} ======"
+                f"\n===== Headers ======"
+                f"\n{request.headers}"
+                f"\n====== Request Body ====="
+                f"\n{json.dumps(req_body)}"
+                f"\n==== End of Request Body ======"
             )
             logger.debug(
-                f"Response: {response.status_code} | {request.method} {request.url} | time: {process_time_in_secs} | Response Body: {res_body_text} "
+                f"\n====== Response: {response.status_code} {request.method} {request.url} (time: {process_time_in_secs}) ======"
+                f"\n==== Response Body ======"
+                f"\n{res_body_text}"
+                f"\n==== End of Response Body ======"
             )
         return response
