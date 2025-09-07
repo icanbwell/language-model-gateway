@@ -20,7 +20,7 @@ services:
       WEBUI_AUTH: 0
       #      OPENAI_API_BASE_URL: 'https://api.openai.com/v1'
       GLOBAL_LOG_LEVEL: debug
-      SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG"}'
+      SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG", "RAG": "DEBUG", "TOOLS": "DEBUG", "AUDIO": "DEBUG"}'
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
       # disable OPENAI_API since we use a Pipeline to handle requests
@@ -56,8 +56,6 @@ services:
       AUDIO_TTS_OPENAI_API_BASE_URL: "http://localhost:5050/api/v1"
       AUDIO_TTS_VOICE: "alloy"
       ENABLE_WEBSOCKET_SUPPORT: True
-      # RAG requires downloading embedding models.  On slow connections, this can timeout docker compose
-      RAG_EMBEDDING_MODEL: ""
       # curl --silent --fail http://localhost:8081/health | jq -ne 'input.status == true' || exit 1
       WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY:-$(openssl rand -hex 32)}"
       # Disables persistent config and reads from environment variables only
@@ -85,6 +83,10 @@ services:
       S3_KEY_PREFIX: "uploads/"
       # Embeddings config
 #      BYPASS_EMBEDDING_AND_RETRIEVAL: True
+#      RAG_EMBEDDING_ENGINE: "openai"
+#      RAG_EMBEDDING_MODEL: "text-embedding-3-small"
+      # RAG requires downloading embedding models.  On slow connections, this can timeout docker compose
+#      RAG_EMBEDDING_MODEL: ""
       # set up vector database
       VECTOR_DB: "s3vector"
       S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
