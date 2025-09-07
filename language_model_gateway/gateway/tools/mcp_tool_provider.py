@@ -27,6 +27,7 @@ from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache imp
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
@@ -35,6 +36,7 @@ from language_model_gateway.gateway.utilities.token_reducer.token_reducer import
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
 class MCPToolProvider:

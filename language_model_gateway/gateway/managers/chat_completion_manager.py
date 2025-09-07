@@ -42,8 +42,10 @@ from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 
 from language_model_gateway.gateway.utilities.exception_logger import ExceptionLogger
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ChatCompletionManager:

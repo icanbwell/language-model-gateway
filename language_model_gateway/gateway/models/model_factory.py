@@ -11,8 +11,10 @@ from language_model_gateway.configs.config_schema import (
     ModelParameterConfig,
     ChatModelConfig,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ModelFactory:

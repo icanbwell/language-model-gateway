@@ -34,11 +34,13 @@ from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache imp
 )
 from mcp.types import Tool as MCPTool
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
 class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[misc]

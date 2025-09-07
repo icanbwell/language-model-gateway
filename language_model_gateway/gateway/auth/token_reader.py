@@ -29,8 +29,10 @@ from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_m
     AuthorizationBearerTokenMissingException,
 )
 from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AUTH"])
 
 
 class TokenReader:

@@ -7,8 +7,10 @@ from fastapi import params
 
 from language_model_gateway.gateway.api_container import get_model_manager
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ModelsRouter:

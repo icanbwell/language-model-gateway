@@ -9,8 +9,10 @@ import httpx
 from pydantic import PrivateAttr, Field, BaseModel
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__file__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class GoogleSearchToolInput(BaseModel):

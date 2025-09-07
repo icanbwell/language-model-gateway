@@ -17,9 +17,11 @@ from language_model_gateway.gateway.image_generation.image_generator_factory imp
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])
 
 
 class ImageGeneratorToolInput(BaseModel):

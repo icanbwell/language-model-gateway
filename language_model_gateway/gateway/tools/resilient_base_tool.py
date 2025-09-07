@@ -5,7 +5,10 @@ from typing import Optional, Any, Dict, Union, List
 
 from langchain_core.tools import BaseTool
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class ResilientBaseTool(BaseTool, metaclass=ABCMeta):

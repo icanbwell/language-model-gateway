@@ -6,8 +6,10 @@ from uuid import uuid4, UUID
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["CONFIG"])
 
 
 class ConfigExpiringCache(ExpiringCache[List[ChatModelConfig]]):

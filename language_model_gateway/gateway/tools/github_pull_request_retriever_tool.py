@@ -10,8 +10,10 @@ from language_model_gateway.gateway.utilities.github.github_pull_request import 
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class GitHubPullRequestRetrieverInput(BaseModel):

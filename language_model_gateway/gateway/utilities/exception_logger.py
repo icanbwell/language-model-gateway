@@ -5,12 +5,15 @@ from typing import List, Optional
 
 import sys
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["ERRORS"])
 
 
 class ExceptionLogger:
     @staticmethod
-    def extract_error_details(error: Exception | ExceptionGroup) -> str:
+    def extract_error_details(error: Exception | ExceptionGroup) -> str | None:
         """
         Extract comprehensive error details from an Exception or ExceptionGroup.
 

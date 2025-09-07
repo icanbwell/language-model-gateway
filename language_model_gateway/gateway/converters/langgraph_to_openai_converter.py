@@ -62,8 +62,10 @@ from language_model_gateway.gateway.utilities.chat_message_helpers import (
     convert_message_content_to_string,
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__file__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangGraphToOpenAIConverter:

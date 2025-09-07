@@ -9,8 +9,10 @@ from language_model_gateway.gateway.utilities.confluence.confluence_helper impor
 from language_model_gateway.gateway.utilities.csv_to_markdown_converter import (
     CsvToMarkdownConverter,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class ConfluenceSearchToolInput(BaseModel):
