@@ -82,13 +82,13 @@ class FastApiLoggingMiddleware(BaseHTTPMiddleware):
                 f"Request: {request.method} | url: {request.url} | Headers: {request.headers} | Body: {req_body}"
             )
             logger.error(
-                f"Response: {response.status_code} | time: {process_time_in_secs} | Body: {res_body_text} "
+                f"Response: {response.status_code} | {request.method} {request.url} | time: {process_time_in_secs} | Body: {res_body_text} "
             )
         else:
             logger.debug(
-                f"Request: {request.method} | url: {request.url} | Headers: {request.headers} | Body: {req_body}"
+                f"Request: {request.method} | url: {request.url} | Headers: {request.headers} | Response Body: {req_body}"
             )
             logger.debug(
-                f"Response: {response.status_code} | time: {process_time_in_secs} | Body: {res_body_text} "
+                f"Response: {response.status_code} | {request.method} {request.url} | time: {process_time_in_secs} | Response Body: {res_body_text} "
             )
         return response
