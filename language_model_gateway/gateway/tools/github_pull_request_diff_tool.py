@@ -7,8 +7,10 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class GitHubPullRequestDiffAgentDiffInput(BaseModel):

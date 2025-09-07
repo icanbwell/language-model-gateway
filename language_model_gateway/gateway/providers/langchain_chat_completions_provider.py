@@ -29,8 +29,10 @@ from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):

@@ -9,8 +9,10 @@ import httpx
 from pydantic import PrivateAttr, Field, BaseModel
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__file__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class GoogleSearchToolInput(BaseModel):
@@ -112,7 +114,7 @@ class GoogleSearchTool(ResilientBaseTool):
                     continue
                 raise
             except Exception as e:
-                logger.error(
+                logger.exception(
                     f"Error making request for {url} with params {params}\n{str(e)}"
                 )
                 raise
@@ -217,5 +219,5 @@ class GoogleSearchTool(ResilientBaseTool):
             # Result follows https://developers.google.com/custom-search/v1/reference/rest/v1/Search
             return cast(List[Dict[str, Any]], result.get("items", []))
         except Exception as e:
-            logger.error(f"Error in Google Search: {str(e)}")
+            logger.exception(f"Error in Google Search: {str(e)}")
             raise

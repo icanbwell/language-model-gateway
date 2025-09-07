@@ -16,6 +16,7 @@ services:
       DEFAULT_WEB_SEARCH_TOOL: "google_search"
       IMAGE_GENERATION_PATH: "/usr/src/language_model_gateway/image_generation"
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
+#      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/testing"
@@ -78,6 +79,8 @@ services:
       MY_USER_PASSWORD: password
       # truncates the tool output to the specified number of tokens
       TOOL_OUTPUT_TOKEN_LIMIT: 100000
+      # Control logging by code area
+      HTTP_TRACING_LOG_LEVEL: 'DEBUG'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:

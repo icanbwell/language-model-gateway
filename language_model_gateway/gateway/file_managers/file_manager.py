@@ -3,7 +3,10 @@ from typing import Optional
 
 from starlette.responses import Response, StreamingResponse
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["FILES"])
 
 
 class FileManager:

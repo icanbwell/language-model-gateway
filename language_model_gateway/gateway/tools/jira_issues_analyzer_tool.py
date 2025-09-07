@@ -16,8 +16,10 @@ from language_model_gateway.gateway.utilities.jira.jira_issue_result import (
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class JiraIssuesAnalyzerAgentInput(BaseModel):

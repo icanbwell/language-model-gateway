@@ -32,11 +32,13 @@ from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AUTH"])
 
 
 class AuthManager:

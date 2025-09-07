@@ -7,8 +7,10 @@ from uuid import uuid4, UUID
 from mcp import Tool
 
 from language_model_gateway.gateway.utilities.cache.expiring_cache import ExpiringCache
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
 class McpToolsMetadataExpiringCache(ExpiringCache[Dict[str, List[Tool]]]):

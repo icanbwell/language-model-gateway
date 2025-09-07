@@ -13,9 +13,11 @@ from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.ocr.ocr_extractor import OCRExtractor
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["IMAGE_PROCESSING"])
 
 
 class AwsOCRExtractor(OCRExtractor):
@@ -87,7 +89,7 @@ class AwsOCRExtractor(OCRExtractor):
                         full_text_pages.append(page_text)
 
                 except Exception as page_error:
-                    logger.error(
+                    logger.exception(
                         f"Textract OCR failed for page {page_num + 1}: {str(page_error)}"
                     )
                     continue
@@ -98,7 +100,7 @@ class AwsOCRExtractor(OCRExtractor):
             return full_text
 
         except Exception as e:
-            logger.error(f"Overall Textract OCR process failed: {str(e)}")
+            logger.exception(f"Overall Textract OCR process failed: {str(e)}")
             return ""
 
     async def extract_text_with_textract_save_to_s3_async(
@@ -160,5 +162,5 @@ class AwsOCRExtractor(OCRExtractor):
             return full_text
 
         except Exception as e:
-            logger.error(f"Textract OCR failed: {str(e)}")
+            logger.exception(f"Textract OCR failed: {str(e)}")
             return ""

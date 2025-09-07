@@ -97,8 +97,10 @@ from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
 from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
     DatabricksHelper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class ToolProvider:

@@ -1,6 +1,10 @@
 import json
+import logging
 import re
 from typing import Dict, Any, List, cast
+
+
+logger = logging.getLogger(__name__)
 
 
 class JsonExtractor:
@@ -21,7 +25,7 @@ class JsonExtractor:
                     Dict[str, Any] | List[Dict[str, Any]], json.loads(json_content1)
                 )
             except json.JSONDecodeError as e:
-                print(f"JSON Decode Error: {e}")
+                logger.exception(f"JSON Decode Error: {e}")
                 return {}
 
         # Fallback: try to find any JSON-like structure

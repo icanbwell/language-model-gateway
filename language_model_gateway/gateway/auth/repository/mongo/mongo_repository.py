@@ -10,9 +10,11 @@ from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 from language_model_gateway.gateway.auth.repository.base_repository import (
     AsyncBaseRepository,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.utilities.mongo_url_utils import MongoUrlHelpers
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["DATABASE"])
 
 # disable pymongo logging to avoid cluttering the logs
 logging.getLogger("pymongo.topology").setLevel(logging.WARNING)
@@ -64,8 +66,8 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             logger.info(
                 f"Successfully connected to MongoDB: {self.connection_string} in database {self.database_name}"
             )
-        except Exception as e:
-            logger.info(f"Failed to connect to MongoDB: {e}")
+        except Exception:
+            logger.exception("Failed to connect to MongoDB")
             raise
 
     async def close(self) -> None:

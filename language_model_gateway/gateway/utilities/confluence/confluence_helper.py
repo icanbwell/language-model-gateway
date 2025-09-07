@@ -13,6 +13,10 @@ from language_model_gateway.gateway.utilities.confluence.confluence_document imp
 from language_model_gateway.gateway.utilities.confluence.confluence_search_result import (
     ConfluenceSearchResult,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class ConfluenceHelper:
@@ -25,7 +29,6 @@ class ConfluenceHelper:
         username: Optional[str],
     ):
         self.http_client_factory = http_client_factory
-        self.logger = logging.getLogger(__name__)
         self.confluence_base_url = (
             confluence_base_url.rstrip("/") if confluence_base_url else None
         )
@@ -44,7 +47,7 @@ class ConfluenceHelper:
         self, search_string: str, limit: int = 10
     ) -> List[ConfluenceSearchResult]:
         if not self.confluence_base_url:
-            self.logger.error("Confluence base URL is not set.")
+            logger.error("Confluence base URL is not set.")
             return []
 
         async with self.http_client_factory.create_http_client(
@@ -52,7 +55,7 @@ class ConfluenceHelper:
         ) as client:
             try:
                 cleaned_string = re.sub(r"[^a-zA-Z0-9\s]", "", search_string)
-                self.logger.info(
+                logger.info(
                     f"Searching Confluence for: {search_string}; pre-cleaned search string was: {search_string}"
                 )
                 cql_query = f'siteSearch ~ "{cleaned_string}"'  # 'siteSearch' gives much better results than doing 'text'
@@ -62,7 +65,7 @@ class ConfluenceHelper:
 
                 # Combine them to create the full URL for logging
                 full_url = f"{base_url}?{urlencode(params)}"
-                self.logger.info(f"Making Confluence request to: {full_url}")
+                logger.info(f"Making Confluence request to: {full_url}")
 
                 # Make the actual request
                 response = await client.get(base_url, params=params)
@@ -70,7 +73,7 @@ class ConfluenceHelper:
                 response.raise_for_status()
 
                 results = response.json().get("results", [])
-                # self.logger.info(f"Confluence raw response:\n{results}")
+                # logger.info(f"Confluence raw response:\n{results}")
                 search_results = []
                 for result in results:
                     content = result.get("content", {})
@@ -89,7 +92,7 @@ class ConfluenceHelper:
                     )
                 return search_results
             except Exception as e:
-                self.logger.error(f"Error searching Confluence content: {str(e)}")
+                logger.error(f"Error searching Confluence content: {str(e)}")
                 return []
 
     def write_results_to_csv(
@@ -119,9 +122,9 @@ class ConfluenceHelper:
                             result.excerpt,
                         ]
                     )
-            self.logger.info(f"Results exported to {output_file}")
+            logger.info(f"Results exported to {output_file}")
         except IOError as e:
-            self.logger.error(f"Failed to export results: {e}")
+            logger.error(f"Failed to export results: {e}")
 
     def format_results_as_csv(
         self, search_results: List[ConfluenceSearchResult]
@@ -163,7 +166,7 @@ class ConfluenceHelper:
 
     async def retrieve_page_by_id(self, page_id: str) -> Optional[ConfluenceDocument]:
         if not self.confluence_base_url:
-            self.logger.error("Confluence base URL is not set.")
+            logger.error("Confluence base URL is not set.")
             return None
 
         async with self.http_client_factory.create_http_client(
@@ -171,7 +174,7 @@ class ConfluenceHelper:
         ) as client:
             try:
                 url = f"{self.confluence_base_url}/wiki/rest/api/content/{page_id}?expand=body.storage,version.by"
-                self.logger.info(
+                logger.info(
                     f"Retrieving Confluence page with ID: {page_id}, full URL: {url}"
                 )
 
@@ -203,5 +206,5 @@ class ConfluenceHelper:
                 )
                 return page
             except Exception as e:
-                self.logger.error(f"Error retrieving Confluence page: {str(e)}")
+                logger.error(f"Error retrieving Confluence page: {str(e)}")
                 return None

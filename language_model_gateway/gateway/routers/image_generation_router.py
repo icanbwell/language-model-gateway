@@ -15,8 +15,10 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
 from language_model_gateway.gateway.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])
 
 
 class ImageGenerationRouter:

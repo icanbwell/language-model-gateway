@@ -1,10 +1,8 @@
-import logging
 from functools import wraps
 from typing import Callable, Awaitable
 
 from typing_extensions import ParamSpec, TypeVar
 
-logger = logging.getLogger(__name__)
 P = ParamSpec("P")
 R = TypeVar("R")
 

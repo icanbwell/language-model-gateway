@@ -6,6 +6,10 @@ from openai.types import Model
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ModelManager:
@@ -23,7 +27,7 @@ class ModelManager:
         configs: List[
             ChatModelConfig
         ] = await self.config_reader.read_model_configs_async()
-        logger = logging.getLogger(__name__)
+
         logger.info("Received request for models")
         # get time in seconds since epoch from ten minutes ago
 

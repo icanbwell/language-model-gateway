@@ -20,10 +20,10 @@ services:
       WEBUI_AUTH: 0
       #      OPENAI_API_BASE_URL: 'https://api.openai.com/v1'
       GLOBAL_LOG_LEVEL: debug
-      SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG"}'
+      SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG", "RAG": "DEBUG", "TOOLS": "DEBUG", "AUDIO": "DEBUG"}'
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
-      # disable OEPNAI_API since we use a Pipeline to handle requests
+      # disable OPENAI_API since we use a Pipeline to handle requests
 #      ENABLE_OPENAI_API: 0
       OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
@@ -55,10 +55,7 @@ services:
       AUDIO_TTS_ENGINE: "openai"
       AUDIO_TTS_OPENAI_API_BASE_URL: "http://localhost:5050/api/v1"
       AUDIO_TTS_VOICE: "alloy"
-      SAFE_MODE: True
       ENABLE_WEBSOCKET_SUPPORT: True
-      # RAG requires downloading embedding models.  On slow connections, this can timeout docker compose
-      RAG_EMBEDDING_MODEL: ""
       # curl --silent --fail http://localhost:8081/health | jq -ne 'input.status == true' || exit 1
       WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY:-$(openssl rand -hex 32)}"
       # Disables persistent config and reads from environment variables only
@@ -75,8 +72,28 @@ services:
       OAUTH_SUB_CLAIM: "username"
       # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
-      # Enables API key authentication.  Needed for our script to set up configuration
+      # Enables API key authentication.  Needed for our script in Makefile to set up configuration
       ENABLE_API_KEY: True
+      # Use S3 for file storage: https://docs.openwebui.com/tutorials/s3-storage/
+      STORAGE_PROVIDER: s3
+#      S3_ENDPOINT_URL: "https://bwell-services-data-science-ue1.s3.us-east-1.amazonaws.com"
+      S3_ENDPOINT_URL: "https://bwell-dev-data-science-ue1.s3.us-east-1.amazonaws.com/"
+      S3_BUCKET_NAME: "aiden"
+      S3_REGION_NAME: "us-east-1"
+      S3_KEY_PREFIX: "uploads/"
+      # Embeddings config
+#      BYPASS_EMBEDDING_AND_RETRIEVAL: True
+#      RAG_EMBEDDING_ENGINE: "openai"
+#      RAG_EMBEDDING_MODEL: "text-embedding-3-small"
+      # RAG requires downloading embedding models.  On slow connections, this can timeout docker compose
+#      RAG_EMBEDDING_MODEL: ""
+      # set up vector database
+      VECTOR_DB: "s3vector"
+      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
+      S3_VECTOR_REGION: "us-east-1"
+    volumes:
+      # Mount AWS credentials if using S3 storage
+      - ~/.aws/:/root/.aws:ro-
     networks:
       - web
     healthcheck:

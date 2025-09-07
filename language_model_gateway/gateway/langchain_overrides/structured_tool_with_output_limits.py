@@ -5,11 +5,14 @@ from typing import override, Any, Optional, Dict, List
 from langchain_core.callbacks import AsyncCallbackManagerForToolRun
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import StructuredTool
+
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
 class StructuredToolWithOutputLimits(StructuredTool):

@@ -10,9 +10,10 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 from language_model_gateway.gateway.utilities.html_to_markdown_converter import (
     HtmlToMarkdownConverter,
 )
-
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 class URLToMarkdownToolInput(BaseModel):

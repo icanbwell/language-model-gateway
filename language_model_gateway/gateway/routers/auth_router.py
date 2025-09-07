@@ -21,8 +21,10 @@ from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AUTH"])
 
 
 class AuthRouter:

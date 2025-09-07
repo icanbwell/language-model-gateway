@@ -24,8 +24,10 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
     BaseChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__file__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
@@ -84,11 +86,13 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                 response_text = agent_response.text
                 response_dict: Dict[str, Any] = agent_response.json()
             except json.JSONDecodeError:
+                logger.exception(f"Error decoding response. url: {agent_url}")
                 return JSONResponse(
                     content=f"Error decoding response. url: {agent_url}\n{response_text}",
                     status_code=500,
                 )
             except Exception as e:
+                logger.exception(f"Error from agent: {e} url: {agent_url}")
                 return JSONResponse(
                     content=f"Error from agent: {e} url: {agent_url}\n{response_text}",
                     status_code=500,

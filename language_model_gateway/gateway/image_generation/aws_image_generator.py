@@ -13,8 +13,10 @@ from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFacto
 from language_model_gateway.gateway.image_generation.image_generator import (
     ImageGenerator,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])
 
 
 class AwsImageGenerator(ImageGenerator):

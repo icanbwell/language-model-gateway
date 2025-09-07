@@ -16,6 +16,9 @@ from starlette.staticfiles import StaticFiles
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
+    FastApiLoggingMiddleware,
+)
 from language_model_gateway.gateway.routers.auth_router import AuthRouter
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
@@ -26,6 +29,7 @@ from language_model_gateway.gateway.routers.image_generation_router import (
 from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
@@ -39,10 +43,10 @@ logging.basicConfig(
 
 # disable INFO logging for httpx because it logs every request
 # logging.getLogger("httpx").setLevel(logging.WARNING)
-logging.getLogger("httpcore.http11").setLevel(logging.WARNING)
-logging.getLogger("httpcore.connection").setLevel(logging.WARNING)
+logging.getLogger("httpcore.http11").setLevel(SRC_LOG_LEVELS["HTTP"])
+logging.getLogger("httpcore.connection").setLevel(SRC_LOG_LEVELS["HTTP"])
 
-logging.getLogger("authlib").setLevel(logging.INFO)
+logging.getLogger("authlib").setLevel(SRC_LOG_LEVELS["AUTH"])
 
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
@@ -115,6 +119,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    app1.add_middleware(FastApiLoggingMiddleware)
 
     return app1
 

@@ -64,12 +64,14 @@ from language_model_gateway.gateway.utilities.github.github_pull_request_helper 
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
 
 
 class ContainerFactory:

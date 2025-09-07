@@ -2,11 +2,13 @@ import logging
 
 import httpx
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.logger.logging_response import (
     LoggingResponse,
 )
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["HTTP"])
 
 
 class LoggingTransport(httpx.AsyncBaseTransport):

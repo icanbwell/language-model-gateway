@@ -5,8 +5,10 @@ from typing import Any, Dict, Optional, Type, Callable
 from bson import ObjectId
 
 from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["DATABASE"])
 
 
 class AsyncBaseRepository[T: BaseDbModel](metaclass=ABCMeta):

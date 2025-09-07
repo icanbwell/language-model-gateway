@@ -25,9 +25,11 @@ from language_model_gateway.gateway.providers.base_image_generation_provider imp
 from language_model_gateway.gateway.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])
 
 
 class ImageGenerationProvider(BaseImageGenerationProvider):
