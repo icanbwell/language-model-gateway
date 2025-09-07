@@ -16,6 +16,7 @@ services:
       DEFAULT_WEB_SEARCH_TOOL: "google_search"
       IMAGE_GENERATION_PATH: "/usr/src/language_model_gateway/image_generation"
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
+#      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/testing"
