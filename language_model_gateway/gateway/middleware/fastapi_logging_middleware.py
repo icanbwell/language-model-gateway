@@ -76,8 +76,13 @@ class FastApiLoggingMiddleware(BaseHTTPMiddleware):
                             else str(res_body_)
                         )
                     else:
+                        # Safely get length if possible
+                        try:
+                            body_len = len(res_body_)
+                        except TypeError:
+                            body_len = None
                         res_body_text = (
-                            f"Non-text response: {content_type}, {len(res_body_)} bytes"
+                            f"Non-text response: {content_type}, {body_len} bytes"
                         )
             else:
                 if response.body:
@@ -91,7 +96,13 @@ class FastApiLoggingMiddleware(BaseHTTPMiddleware):
                                 else str(res_body_2)
                             )
                         else:
-                            res_body_text = f"Non-text response: {content_type}, {len(res_body_2)} bytes"
+                            try:
+                                body_len2 = len(res_body_2)
+                            except TypeError:
+                                body_len2 = None
+                            res_body_text = (
+                                f"Non-text response: {content_type}, {body_len2} bytes"
+                            )
 
         if response.status_code >= 300:
             logger.error(
