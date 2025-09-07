@@ -16,6 +16,9 @@ from starlette.staticfiles import StaticFiles
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
+    FastApiLoggingMiddleware,
+)
 from language_model_gateway.gateway.routers.auth_router import AuthRouter
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
@@ -115,6 +118,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    app1.add_middleware(FastApiLoggingMiddleware)
 
     return app1
 
