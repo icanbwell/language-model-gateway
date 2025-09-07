@@ -84,7 +84,11 @@ services:
       S3_REGION_NAME: "us-east-1"
       S3_KEY_PREFIX: "uploads/"
       # Embeddings config
-      BYPASS_EMBEDDING_AND_RETRIEVAL: True
+#      BYPASS_EMBEDDING_AND_RETRIEVAL: True
+      # set up vector database
+      VECTOR_DB: "s3vector"
+      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
+      S3_VECTOR_REGION: "us-east-1"
     volumes:
       # Mount AWS credentials if using S3 storage
       - ~/.aws/:/root/.aws:ro-
