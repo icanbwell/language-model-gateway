@@ -76,11 +76,10 @@ services:
       ENABLE_API_KEY: True
       # Use S3 for file storage: https://docs.openwebui.com/tutorials/s3-storage/
       STORAGE_PROVIDER: s3
-#      S3_ENDPOINT_URL: "https://bwell-services-data-science-ue1.s3.us-east-1.amazonaws.com"
-      S3_ENDPOINT_URL: "https://bwell-dev-data-science-ue1.s3.us-east-1.amazonaws.com/"
-      S3_BUCKET_NAME: "aiden"
+      S3_ENDPOINT_URL: "https://s3.us-east-1.amazonaws.com"
+      S3_BUCKET_NAME: "bwell-dev-data-science-ue1"
       S3_REGION_NAME: "us-east-1"
-      S3_KEY_PREFIX: "uploads/"
+      S3_KEY_PREFIX: "aiden/uploads/"
       # Embeddings config
 #      BYPASS_EMBEDDING_AND_RETRIEVAL: True
 #      RAG_EMBEDDING_ENGINE: "openai"
