@@ -38,7 +38,6 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-from opentelemetry.instrumentation.uvicorn import UvicornInstrumentor
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
@@ -69,10 +68,6 @@ otlp_exporter = OTLPSpanExporter()
 span_processor = BatchSpanProcessor(otlp_exporter)
 provider.add_span_processor(span_processor)
 trace.set_tracer_provider(provider)
-
-# Instrument FastAPI and Uvicorn
-FastAPIInstrumentor.instrument()
-UvicornInstrumentor.instrument()
 
 
 @asynccontextmanager
@@ -173,3 +168,7 @@ async def refresh_data(
     await config_reader.clear_cache()
     configs: List[ChatModelConfig] = await config_reader.read_model_configs_async()
     return JSONResponse({"message": "Configuration refreshed", "data": configs})
+
+
+# Instrument FastAPI and Uvicorn
+FastAPIInstrumentor.instrument_app(app)
