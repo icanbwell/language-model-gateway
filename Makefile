@@ -100,7 +100,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Use the following credentials:
 	@echo Admin User: admin/password
 	@echo Normal User: tester/password
-	@echo Keycloak: http://keycloak:8080 admin/password
+	@echo Keycloak: http://keycloak:8085 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 
@@ -214,7 +214,7 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
         	   pip install --root-user-action=ignore authlib requests && \
                cd /app && \
                python3 import_pipe.py \
-               --url 'http://language-model-gateway-open-webui-1:8080' \
+               --url 'http://language-model-gateway-open-webui-1:8085' \
                --api-key 'sk-my-api-key' \
                --json 'language_model_gateway_pipe.json' \
                --file 'language_model_gateway_pipe.py'"

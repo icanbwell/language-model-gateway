@@ -48,17 +48,17 @@ services:
       # Below we specify the client id, client secret and well-known URI for each client
       AUTH_PROVIDERS: "client1,client3,okta"
       # first client for testing
-      AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_ISSUER_CLIENT1: "http://keycloak:8085/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
       AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
       AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
-      AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8085/realms/bwell-realm/.well-known/openid-configuration"
       # second client for testing
-      AUTH_ISSUER_CLIENT3: "http://keycloak:8080/realms/bwell-realm"
+      AUTH_ISSUER_CLIENT3: "http://keycloak:8085/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT3: "client3"
       AUTH_CLIENT_ID_CLIENT3: "bwell-client-id-3"
       AUTH_CLIENT_SECRET_CLIENT3: "bwell-secret-3"
-      AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8085/realms/bwell-realm/.well-known/openid-configuration"
       # Okta for dev and production
       AUTH_ISSUER_OKTA: "https://icanbwell.okta.com"
       # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
@@ -144,9 +144,9 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: password
       QUARKUS_HTTP_ACCESS_LOG_PATTERN: "%r\n%{ALL_REQUEST_HEADERS}"
     ports:
-      - "8080:8080"
+      - "8085:8080"
       # 9000 is for health checks: https://www.keycloak.org/observability/health
-      - "9000:9000"
+      - "9010:9000"
     command: [ "start-dev", "--verbose" ]
     healthcheck:
       test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q 'HTTP/1.1 200 OK' <&3" ]
@@ -163,8 +163,8 @@ services:
       - ./keycloak-config:/config
     environment:
       KEYCLOAK_HOST: keycloak
-      KEYCLOAK_PORT: 8080
-      KEYCLOAK_HEALTH_CHECK_PORT: 9000
+      KEYCLOAK_PORT: 8085
+      KEYCLOAK_HEALTH_CHECK_PORT: 9010
       # These are the Keycloak admin credentials
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: password

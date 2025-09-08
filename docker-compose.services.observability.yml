@@ -177,7 +177,7 @@ services:
     container_name: schema-migrator-async
     command:
       - async
-      - --dsn=tcp://clickhouse:9001
+      - --dsn=tcp://clickhouse:9000
       - --up=
     restart: on-failure
 #  dev:
