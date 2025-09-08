@@ -18,8 +18,15 @@ boto3 = ">=1.40.21"
 botocore = ">=1.40.21"  # needed by boto3
 # uvicorn is a Python library for running ASGI applications
 uvicorn = ">=0.34.0"
-# ddtrace is a Python library for tracing requests
-ddtrace = ">=2.17.2"
+# OpenTelemetry dependencies for tracing
+opentelemetry-api = ">=1.24.0"
+opentelemetry-sdk = ">=1.24.0"
+opentelemetry-instrumentation-fastapi = ">=0.45b0"
+opentelemetry-exporter-otlp = ">=1.24.0"
+# opentelemetry-instrumentation-uvicorn for ASGI server tracing
+#opentelemetry-instrumentation-uvicorn = ">=0.45b0"
+# opentelemetry-instrumentation-requests for HTTP client tracing
+opentelemetry-instrumentation-requests = ">=0.45b0"
 # prometheus-fastapi-instrumentator is a Python library for instrumenting FastAPI applications
 prometheus-fastapi-instrumentator = ">=7.0.0"
 # python-crfsuite is a Python library used when installing some packages

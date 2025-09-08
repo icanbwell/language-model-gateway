@@ -31,6 +31,15 @@ from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
+# OpenTelemetry imports
+from opentelemetry import trace
+from opentelemetry.sdk.resources import SERVICE_NAME, Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.instrumentation.uvicorn import UvicornInstrumentor
+
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
 logger = logging.getLogger(__name__)
@@ -51,6 +60,19 @@ logging.getLogger("authlib").setLevel(SRC_LOG_LEVELS["AUTH"])
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
+
+
+# OpenTelemetry setup
+resource = Resource(attributes={SERVICE_NAME: "language-model-gateway"})
+provider = TracerProvider(resource=resource)
+otlp_exporter = OTLPSpanExporter()
+span_processor = BatchSpanProcessor(otlp_exporter)
+provider.add_span_processor(span_processor)
+trace.set_tracer_provider(provider)
+
+# Instrument FastAPI and Uvicorn
+FastAPIInstrumentor.instrument()
+UvicornInstrumentor.instrument()
 
 
 @asynccontextmanager

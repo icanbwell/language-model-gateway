@@ -121,12 +121,12 @@ USER appuser
 
 # Development CMD with hot reload enabled
 CMD ["sh", "-c", "\
-    ddtrace-run uvicorn language_model_gateway.gateway.api:app \
+    opentelemetry-instrumentation uvicorn language_model_gateway.gateway.api:app \
         --host 0.0.0.0 \
         --port 5000 \
         --reload \
         --log-level $(echo ${LOG_LEVEL:-info} | tr '[:upper:]' '[:lower:]') \
-    "]
+"]
 
 # Stage 3: Production deployment image
 # This stage is optimized for deployment with multiple workers
