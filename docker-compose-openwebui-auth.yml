@@ -9,7 +9,7 @@ services:
       ENABLE_SIGNUP: True
 #      ENABLE_LOGIN_FORM: True
       OAUTH_CLIENT_ID: "bwell-client-id"
-      OPENID_PROVIDER_URL: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      OPENID_PROVIDER_URL: "http://keycloak:8085/realms/bwell-realm/.well-known/openid-configuration"
       OAUTH_CLIENT_SECRET: "bwell-secret"
       ENABLE_OAUTH_SIGNUP: True
       OAUTH_PROVIDER_NAME: "keycloak"

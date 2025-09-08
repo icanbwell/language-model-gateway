@@ -1,4 +1,4 @@
-exclude: (^.idea/|^docsrc|^docs)
+exclude: (^.idea/|^docsrc|^docs|^observability)
 
 repos:
   # Pre-commit hooks for basic checks
@@ -107,5 +107,6 @@ repos:
             docker-compose\.yml|
             .helm/.*|
             docker-compose-openwebui\.yml|
-            docker-compose-openwebui-auth\.yml
+            docker-compose-openwebui-auth\.yml|
+            observability/.*
           )$

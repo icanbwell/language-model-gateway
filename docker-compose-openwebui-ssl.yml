@@ -26,7 +26,7 @@ services:
       - "traefik.http.routers.open-webui.rule=Host(`open-webui.localhost`)"
       - "traefik.http.routers.open-webui.entrypoints=websecure"
       - "traefik.http.routers.open-webui.tls=true"
-      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8085"
     volumes:
       - "./certs/open-webui.localhost.pem:/etc/ssl/certs/open-webui.localhost.crt:ro"
       - "./certs/open-webui.localhost-key.pem:/etc/ssl/private/open-webui.localhost.key:ro"
