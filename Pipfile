@@ -96,6 +96,8 @@ pymongo = { version = ">=4.14.0", extras = ["srv"] }
 redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
 ddgs = ">=8.1.1"
+# langmem is a Python library for managing language model memory
+langmem = ">=0.0.29"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
