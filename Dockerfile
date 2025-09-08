@@ -121,7 +121,7 @@ USER appuser
 
 # Development CMD with hot reload enabled
 CMD ["sh", "-c", "\
-    opentelemetry-instrumentation uvicorn language_model_gateway.gateway.api:app \
+    opentelemetry-instrument uvicorn language_model_gateway.gateway.api:app \
         --host 0.0.0.0 \
         --port 5000 \
         --reload \
