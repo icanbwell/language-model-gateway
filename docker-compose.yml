@@ -81,6 +81,37 @@ services:
       TOOL_OUTPUT_TOKEN_LIMIT: 100000
       # Control logging by code area
       HTTP_TRACING_LOG_LEVEL: 'DEBUG'
+#      ----- OpenTelemetry Environment Variables -----
+      # https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/
+      # https://opentelemetry.io/docs/specs/otel/protocol/exporter/
+#      OTEL_SERVICE_NAME: your-service-name
+      # this sets the endpoint for the OTLP exporter.
+      # For traces the code will append /v1/traces and for metrics it will append /v1/metrics
+      # gRPC collector runs on port 4317 while HTTP collector runs on port 4318
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
+      # you can also specify the endpoints for traces and metrics separately
+#      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://otel-collector:4318/v1/traces"
+#      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "http://otel-collector:4318/v1/metrics"
+#       Maximum number of spans to queue
+#       OTEL_BSP_MAX_QUEUE_SIZE: 2048
+#        Delay between exports
+#        OTEL_BSP_SCHEDULE_DELAY: 5000
+#       Maximum number of spans to send in a batch
+#       OTEL_BSP_MAX_EXPORT_BATCH_SIZE: 512
+#       Timeout for export operations
+#       OTEL_BSP_EXPORT_TIMEOUT: 30000
+#     Add tracers for specified libraries: asyncio, aiohttp, botocore, pymongo, requests
+#      TELEMETRY_TRACERS: "aiohttp,requests"
+#     enable telemetry for all pipelines
+#      TELEMETRY_ENABLE: 1
+      # whether to write all telemetry to console also
+#      TELEMETRY_WRITE_TO_CONSOLE: 1
+      # store telemetry metrics as deltas
+      # https://signoz.io/docs/metrics-management/types-and-aggregation/#temporality-of-metrics
+      OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: "DELTA"
+      # speed up the metrics export interval for local testing.  Default is 60000 milliseconds
+      OTEL_METRIC_EXPORT_INTERVAL: 1000
+#       ----- End OpenTelemetry Environment Variables -----
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
