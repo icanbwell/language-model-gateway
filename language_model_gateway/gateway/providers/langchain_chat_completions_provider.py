@@ -151,17 +151,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 )
                 request_id = random.randint(1, 1000)
 
-                result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-                    compiled_state_graph=compiled_state_graph,
-                    chat_request=chat_request,
-                    system_messages=[],
-                    request_information=RequestInformation(
-                        auth_information=auth_information,
-                        user_id=auth_information.subject,
-                        request_id=str(request_id),
-                        conversation_thread_id="1",  # TODO: pass real conversation thread id
-                        headers=headers,
-                    ),
+                result = (
+                    await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                        compiled_state_graph=compiled_state_graph,
+                        chat_request=chat_request,
+                        system_messages=[],
+                        request_information=RequestInformation(
+                            auth_information=auth_information,
+                            user_id=auth_information.subject,
+                            request_id=str(request_id),
+                            conversation_thread_id=str(
+                                request_id
+                            ),  # TODO: pass real conversation thread id
+                            headers=headers,
+                        ),
+                    )
                 )
                 return result
 

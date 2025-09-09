@@ -58,10 +58,15 @@ class PersistenceFactory:
             )
             assert llm_store_collection_name is not None
 
+            # index: VectorIndexConfig = {
+            #     "dims": 1536,
+            #     "embed": "openai:text-embedding-3-small",
+            # }
             with MongoDBStore.from_conn_string(
                 conn_string=connection_string,
                 db_name=llm_storage_db_name,
                 collection_name=llm_store_collection_name,
+                index_config=None,
             ) as store:
                 yield store
         else:
@@ -93,15 +98,13 @@ class PersistenceFactory:
             )
             llm_storage_db_name = self._environment_variables.mongo_llm_storage_db_name
             assert llm_storage_db_name is not None
-            llm_storage_store_collection_name = (
-                self._environment_variables.mongo_llm_storage_store_collection_name
-            )
-            assert llm_storage_store_collection_name is not None
+            llm_storage_checkpointer_collection_name = self._environment_variables.mongo_llm_storage_checkpointer_collection_name
+            assert llm_storage_checkpointer_collection_name is not None
 
             with MongoDBSaver.from_conn_string(
                 conn_string=connection_string,
                 db_name=llm_storage_db_name,
-                checkpoint_collection_name=llm_storage_store_collection_name,
+                checkpoint_collection_name=llm_storage_checkpointer_collection_name,
             ) as checkpointer:
                 yield checkpointer
         else:
