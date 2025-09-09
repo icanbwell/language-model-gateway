@@ -1,3 +1,4 @@
+from random import randint
 from typing import Optional
 
 import httpx
@@ -42,12 +43,11 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
         "role": "user",
         "content": "what is the first name of Obama?",
     }
+    chat_id: str = str(randint(1, 1000))
     chat_completion: ChatCompletion = await client.chat.completions.create(
         messages=[message],
         model="General Purpose",
-        extra_headers={
-            "X-Chat-Id": "test-chat-completions",  # Example of passing custom header
-        },
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
     )
 
     # print the top "choice"
@@ -61,14 +61,12 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
 
     message = {
         "role": "user",
-        "content": "look up user information",
+        "content": "look up my user profile",
     }
     chat_completion = await client.chat.completions.create(
         messages=[message],
         model="General Purpose",
-        extra_headers={
-            "X-Chat-Id": "test-chat-completions",
-        },
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
     )
 
     # print the top "choice"

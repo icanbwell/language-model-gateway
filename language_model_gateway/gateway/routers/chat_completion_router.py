@@ -140,6 +140,16 @@ class ChatCompletionsRouter:
                         auth_information.audience = token_item.audience
                         auth_information.email = token_item.email
                         auth_information.subject = token_item.subject
+                else:
+                    # read information from headers if present
+                    if "x-openwebui-user-id" in request.headers:
+                        auth_information.subject = request.headers[
+                            "x-openwebui-user-id"
+                        ]
+                    if "x-openwebui-user-email" in request.headers:
+                        auth_information.email = request.headers[
+                            "x-openwebui-user-email"
+                        ]
 
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations

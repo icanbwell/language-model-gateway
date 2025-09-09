@@ -9,8 +9,8 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 
 
 class GetUserInfoTool(ResilientBaseTool):
-    name: str = "get_user_info"
-    description: str = "Look up user info for a given user_id from the store."
+    name: str = "get_user_profile"
+    description: str = "Look up user profile for a given user."
 
     def _run(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
         user_id = state.user_id
