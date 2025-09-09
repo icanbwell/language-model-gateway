@@ -809,6 +809,7 @@ class LangGraphToOpenAIConverter:
             "dims": 1536,
             "embed": "openai:text-embedding-3-small",
         }
+        # https://langchain-ai.github.io/langgraph/concepts/persistence/
         store: BaseStore | None = (
             InMemoryStore(index=index)
             if self.environment_variables.enable_llm_memory
