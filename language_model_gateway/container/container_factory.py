@@ -309,7 +309,9 @@ class ContainerFactory:
 
         container.register(
             PersistenceFactory,
-            lambda c: PersistenceFactory(),
+            lambda c: PersistenceFactory(
+                environment_variables=c.resolve(EnvironmentVariables)
+            ),
         )
 
         logger.info("DI container initialized")

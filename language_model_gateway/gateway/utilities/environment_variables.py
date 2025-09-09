@@ -95,3 +95,29 @@ class EnvironmentVariables:
     @property
     def llm_storage_type(self) -> str:
         return os.environ.get("LLM_STORAGE_TYPE", "memory")
+
+    @property
+    def mongo_llm_storage_uri(self) -> Optional[str]:
+        return os.environ.get("MONGO_LLM_STORAGE_URI") or self.mongo_uri
+
+    @property
+    def mongo_llm_storage_db_name(self) -> Optional[str]:
+        return os.environ.get("MONGO_LLM_STORAGE_DB_NAME", "llm_storage")
+
+    @property
+    def mongo_llm_storage_db_username(self) -> Optional[str]:
+        return os.environ.get("MONGO_LLM_STORAGE_DB_USERNAME") or self.mongo_db_username
+
+    @property
+    def mongo_llm_storage_db_password(self) -> Optional[str]:
+        return os.environ.get("MONGO_LLM_STORAGE_DB_PASSWORD") or self.mongo_db_password
+
+    @property
+    def mongo_llm_storage_store_collection_name(self) -> str:
+        return os.environ.get("MONGO_LLM_STORAGE_STORE_COLLECTION_NAME", "stores")
+
+    @property
+    def mongo_llm_storage_checkpointer_collection_name(self) -> str:
+        return os.environ.get(
+            "MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME", "checkpoints"
+        )
