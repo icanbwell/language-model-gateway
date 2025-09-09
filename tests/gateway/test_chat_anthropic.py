@@ -3,7 +3,7 @@ from typing import Optional
 import httpx
 import pytest
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
@@ -42,13 +42,12 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is the first name of Obama?",
+    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "what is the first name of Obama?",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
     )
 

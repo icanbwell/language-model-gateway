@@ -461,16 +461,18 @@ class LangGraphToOpenAIConverter:
                 )
             except* Exception as e:
                 logger.exception(e, stack_info=True)
+                first_exception2 = e.exceptions[0] if len(e.exceptions) > 0 else e
                 # print type of first exception in ExceptionGroup
                 # if there is just one exception, we can log it directly
                 if len(e.exceptions) > 0:
                     logger.error(
-                        f"ExceptionGroup in call_agent_with_input: {type(e.exceptions[0])} {e.exceptions[0]}",
+                        f"ExceptionGroup in call_agent_with_input: {type(first_exception2)} {first_exception2}",
                         exc_info=True,
                     )
 
                 raise HTTPException(
-                    status_code=500, detail=f"Unexpected error: {type(e)} {e}"
+                    status_code=500,
+                    detail=f"Unexpected error: {type(first_exception2)} {first_exception2}",
                 )
 
     @staticmethod
