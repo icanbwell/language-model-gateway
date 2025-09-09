@@ -1,7 +1,7 @@
 import datetime
 import logging
 import random
-from typing import Dict, Any, Sequence, List
+from typing import Dict, Any, Sequence, List, AsyncGenerator
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
@@ -135,40 +135,65 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
-        with self.persistence_factory.create_store(
+        # Use context managers only for the duration of streaming
+        store_cm = self.persistence_factory.create_store(
             persistence_type=self.environment_variables.llm_storage_type,
-        ) as store:
-            with self.persistence_factory.create_checkpointer(
-                persistence_type=self.environment_variables.llm_storage_type,
-            ) as checkpointer:
-                compiled_state_graph: CompiledStateGraph[
-                    MyMessagesState
-                ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-                    llm=llm,
-                    tools=tools,
-                    store=store,
-                    checkpointer=checkpointer,
-                )
-                request_id = random.randint(1, 1000)
+        )
+        checkpointer_cm = self.persistence_factory.create_checkpointer(
+            persistence_type=self.environment_variables.llm_storage_type,
+        )
+        try:
+            store = store_cm.__enter__()
+            checkpointer = checkpointer_cm.__enter__()
+            compiled_state_graph: CompiledStateGraph[
+                MyMessagesState
+            ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+                llm=llm,
+                tools=tools,
+                store=store,
+                checkpointer=checkpointer,
+            )
+            request_id = random.randint(1, 1000)
 
-                result = (
-                    await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-                        compiled_state_graph=compiled_state_graph,
-                        chat_request=chat_request,
-                        system_messages=[],
-                        request_information=RequestInformation(
-                            auth_information=auth_information,
-                            user_id=auth_information.subject,
-                            user_email=auth_information.email,
-                            request_id=str(request_id),
-                            conversation_thread_id=str(
-                                request_id
-                            ),  # TODO: pass real conversation thread id
-                            headers=headers,
-                        ),
-                    )
-                )
+            result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                compiled_state_graph=compiled_state_graph,
+                chat_request=chat_request,
+                system_messages=[],
+                request_information=RequestInformation(
+                    auth_information=auth_information,
+                    user_id=auth_information.subject,
+                    user_email=auth_information.email,
+                    request_id=str(request_id),
+                    conversation_thread_id=str(
+                        request_id
+                    ),  # TODO: pass real conversation thread id
+                    headers=headers,
+                ),
+            )
+            # If result is a StreamingResponse, wrap the generator so context managers stay open
+            if isinstance(result, StreamingResponse):
+                original_generator = result.body_iterator
+
+                async def streaming_wrapper() -> AsyncGenerator[
+                    str | bytes | memoryview, None
+                ]:
+                    try:
+                        async for chunk in original_generator:
+                            yield chunk
+                    finally:
+                        checkpointer_cm.__exit__(None, None, None)
+                        store_cm.__exit__(None, None, None)
+
+                result.body_iterator = streaming_wrapper()
                 return result
+            else:
+                checkpointer_cm.__exit__(None, None, None)
+                store_cm.__exit__(None, None, None)
+                return result
+        except Exception as e:
+            checkpointer_cm.__exit__(type(e), e, e.__traceback__)
+            store_cm.__exit__(type(e), e, e.__traceback__)
+            raise
 
     async def check_tokens_are_valid_for_tools(
         self,
