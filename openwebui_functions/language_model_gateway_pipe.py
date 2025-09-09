@@ -99,7 +99,19 @@ class Pipe:
         level: str,
         message: str,
         done: bool,
+        message_type: str = "status",
     ) -> None:
+        """
+        Emit status updates at controlled intervals
+        Args:
+            __event_emitter__: Callable to emit events
+            level: Status level (e.g., "info", "error")
+            message: Status message
+            done: Whether the operation is complete
+            message_type: Type of message, default is "status".  https://docs.openwebui.com/features/plugin/tools/development#status
+        Returns:
+            None
+        """
         current_time = time.time()
         if (
             __event_emitter__
@@ -108,9 +120,11 @@ class Pipe:
                 current_time - self.last_emit_time >= self.valves.emit_interval or done
             )
         ):
+            # https://docs.openwebui.com/features/plugin/tools/development#event-emitters
+            # Interactive events: https://docs.openwebui.com/features/plugin/events/#interactive-events
             await __event_emitter__(
                 {
-                    "type": "status",
+                    "type": message_type,
                     "data": {
                         "status": "complete" if done else "in_progress",
                         "level": level,
@@ -372,11 +386,22 @@ class Pipe:
         __event_call__: Optional[
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
+        __oauth_token__: Optional[Dict[str, Any]] = None,
     ) -> AsyncGenerator[str, None]:
         """
         Main pipe method supporting both streaming and non-streaming responses
         OpenWebUI Documentation: https://docs.openwebui.com/features/plugin/functions/pipe#using-internal-open-webui-functions
+        Parameters: https://docs.openwebui.com/features/plugin/tools/development#optional-arguments
         """
+
+        if not __oauth_token__ or "access_token" not in __oauth_token__:
+            yield "Error: User is not authenticated via OAuth or token is unavailable."
+            return
+
+        access_token: str | None = __oauth_token__.get("access_token")
+
+        id_token: str | None = __oauth_token__.get("id_token")
+
         await self.emit_status(
             __event_emitter__,
             "info",
@@ -406,17 +431,6 @@ class Pipe:
         if self.valves.debug_mode:
             yield f"User:\n{__user__}" + "\n"
             yield f"Original Headers:\n{dict(__request__.headers)}" + "\n"
-
-        auth_token: str | None = __request__.cookies.get("oauth_id_token")
-        logger.debug(f"auth_token: {auth_token}")
-
-        if auth_token is None:
-            yield (
-                "No oauth_id_token found in cookies or it may have expired. "
-                "Please sign out and sign back in."
-            )
-            await self.emit_status(__event_emitter__, "error", "Error", True)
-            return
 
         open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
         if open_api_base_url is None:
@@ -459,7 +473,8 @@ class Pipe:
             # Headers
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {auth_token}",
+                "Authorization": f"Bearer {access_token}",
+                "X-ID-Token": id_token if id_token else "",
             }
             # set User-Agent to the one from the request, if available
             if "User-Agent" in __request__.headers:
