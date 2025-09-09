@@ -58,6 +58,7 @@ from language_model_gateway.gateway.converters.my_messages_state import MyMessag
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from language_model_gateway.gateway.converters.user_profile import UserProfile
 from language_model_gateway.gateway.schema.openai.completions import (
     ChatRequest,
 )
@@ -818,11 +819,19 @@ class LangGraphToOpenAIConverter:
 
         if self.environment_variables.enable_llm_memory and store is not None:
             # Memory tools use LangGraph's BaseStore for persistence (4)
-            tools = list(tools) + [
-                create_manage_memory_tool(namespace=("memories",)),
-                create_search_memory_tool(namespace=("memories",)),
-                GetUserInfoTool(),
-            ]
+            tools = (
+                list(tools)
+                + [
+                    create_manage_memory_tool(  # All memories saved to this tool will live within this namespace
+                        # The brackets will be populated at runtime by the configurable values
+                        namespace=("memories", "{user_id}", "user_profile"),
+                        schema=UserProfile,
+                        instructions="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.",
+                    ),
+                    create_search_memory_tool(namespace=("memories",)),
+                    GetUserInfoTool(),
+                ]
+            )
 
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)

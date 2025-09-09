@@ -18,5 +18,7 @@ class GetUserInfoTool(ResilientBaseTool):
             raise ValueError("user_id is required")
 
         my_store: BaseStore = get_store()
-        user_info = my_store.get(("users",), user_id)
+        user_info = my_store.get(("memories",), user_id)
+
+        # user_info2 = my_store.search(("memories", user_id, "user_profile"))
         return str(user_info.value) if user_info else "Unknown user"
