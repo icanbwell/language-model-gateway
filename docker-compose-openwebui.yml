@@ -57,7 +57,8 @@ services:
       AUDIO_TTS_VOICE: "alloy"
       ENABLE_WEBSOCKET_SUPPORT: True
       # curl --silent --fail http://localhost:8081/health | jq -ne 'input.status == true' || exit 1
-      WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY:-$(openssl rand -hex 32)}"
+      WEBUI_SECRET_KEY: "2700d293b8e65dca57c4904043af8ae09b5293338e83b7bd0d9f615e9971f3d6"
+      OAUTH_SESSION_TOKEN_ENCRYPTION_KEY: "ce6901571af605719757c58a8388f4ded7728b0c6dd849ed05b0a2c8159f92ad"
       # Disables persistent config and reads from environment variables only
       ENABLE_PERSISTENT_CONFIG: False
       # enable initial admin user creation
@@ -90,6 +91,9 @@ services:
       VECTOR_DB: "s3vector"
       S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
       S3_VECTOR_REGION: "us-east-1"
+      # Whether to write oauth cookie or not
+      # We now get it directly in the language_model_gateway.py so we don't need this
+      ENABLE_OAUTH_ID_TOKEN_COOKIE: False
     volumes:
       # Mount AWS credentials if using S3 storage
       - ~/.aws/:/root/.aws:ro-
