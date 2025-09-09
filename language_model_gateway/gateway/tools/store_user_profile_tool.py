@@ -1,14 +1,16 @@
 import logging
 import typing
 import uuid
-from typing import Type, Dict, Any
+from typing import Type, Dict, Any, Annotated
 
 from langgraph.config import get_store
+from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
 from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel
 
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.converters.user_profile import UserProfile
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
@@ -51,11 +53,13 @@ class StoreUserProfileTool(ResilientBaseTool):
 
     async def _arun(
         self,
+        *,
         name: str,
         age: int | None,
         recent_memories: list[str],
         preferences: Dict[str, Any] | None,
         action: str,
+        state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         id = name
         store = self._get_store()

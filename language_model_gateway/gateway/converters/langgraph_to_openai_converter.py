@@ -58,6 +58,7 @@ from language_model_gateway.gateway.converters.my_messages_state import MyMessag
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from language_model_gateway.gateway.converters.user_profile import UserProfile
 from language_model_gateway.gateway.schema.openai.completions import (
     ChatRequest,
 )
@@ -65,9 +66,7 @@ from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
 from language_model_gateway.gateway.tools.get_user_info_tool import GetUserInfoTool
-from language_model_gateway.gateway.tools.store_user_profile_tool import (
-    StoreUserProfileTool,
-)
+from language_model_gateway.gateway.tools.manage_memory_tool import ManageMemoryTool
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
@@ -824,10 +823,16 @@ class LangGraphToOpenAIConverter:
             tools = (
                 list(tools)
                 + [
-                    StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
+                    # StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
+                    #     # The brackets will be populated at runtime by the configurable values
+                    #     namespace=("memories", "{user_id}", "user_profile"),
+                    #     # schema=UserProfile,
+                    #     # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
+                    # ),
+                    ManageMemoryTool(  # All memories saved to this tool will live within this namespace
                         # The brackets will be populated at runtime by the configurable values
                         namespace=("memories", "{user_id}", "user_profile"),
-                        # schema=UserProfile,
+                        schema=UserProfile,
                         # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
                     create_search_memory_tool(namespace=("memories",)),

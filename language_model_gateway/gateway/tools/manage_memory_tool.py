@@ -1,13 +1,15 @@
 import logging
 import typing
 import uuid
-from typing import Any
+from typing import Any, Annotated
 
 from langgraph.config import get_store
+from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
 from langmem.utils import NamespaceTemplate
 
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 logger = logging.getLogger(__name__)
@@ -37,9 +39,11 @@ class ManageMemoryTool(ResilientBaseTool):
 
     def _run(
         self,
+        *,
         content: typing.Optional[typing.Any] = None,
         action: str | None = None,
         id: typing.Optional[str] = None,
+        state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         raise NotImplementedError(
             "Synchronous execution is not supported. Use the asynchronous method instead."
@@ -47,9 +51,11 @@ class ManageMemoryTool(ResilientBaseTool):
 
     async def _arun(
         self,
+        *,
         content: typing.Optional[typing.Any] = None,
         action: str | None = None,
         id: typing.Optional[str] = None,
+        state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         store = self._get_store()
         if self.actions_permitted and action not in self.actions_permitted:
