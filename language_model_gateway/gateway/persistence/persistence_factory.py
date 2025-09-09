@@ -34,6 +34,7 @@ class PersistenceFactory:
             yield InMemoryStore(index=index)
         elif persistence_type == "mongo":
             # https://pypi.org/project/langgraph-store-mongodb/
+            # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/
             mongo_llm_storage_uri = self._environment_variables.mongo_llm_storage_uri
             assert mongo_llm_storage_uri is not None
             llm_storage_db_username = (
@@ -73,6 +74,7 @@ class PersistenceFactory:
             yield InMemorySaver()
         elif persistence_type == "mongo":
             # https://pypi.org/project/langgraph-checkpoint-mongodb/
+            # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/
             mongo_llm_storage_uri = self._environment_variables.mongo_llm_storage_uri
             assert mongo_llm_storage_uri is not None
             llm_storage_db_username = (
@@ -98,7 +100,7 @@ class PersistenceFactory:
             with MongoDBSaver.from_conn_string(
                 conn_string=connection_string,
                 db_name=llm_storage_db_name,
-                collection_name=llm_storage_store_collection_name,
+                checkpoint_collection_name=llm_storage_store_collection_name,
             ) as checkpointer:
                 yield checkpointer
         else:

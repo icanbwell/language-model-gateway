@@ -156,7 +156,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     compiled_state_graph=compiled_state_graph,
                     chat_request=chat_request,
                     system_messages=[],
-                    config={"configurable": {"thread_id": "1"}},
+                    config={"configurable": {"thread_id": "1", "user_id": "10"}},
                 )
 
     async def check_tokens_are_valid_for_tools(
