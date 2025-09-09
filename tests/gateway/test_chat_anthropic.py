@@ -49,6 +49,9 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
     chat_completion: ChatCompletion = await client.chat.completions.create(
         messages=[message],
         model="General Purpose",
+        extra_headers={
+            "X-Chat-Id": "test-chat-completions",  # Example of passing custom header
+        },
     )
 
     # print the top "choice"

@@ -387,6 +387,11 @@ class Pipe:
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
         __oauth_token__: Optional[Dict[str, Any]] = None,
+        __chat_id__: Optional[str] = None,
+        __session_id__: Optional[str] = None,
+        __message_id__: Optional[str] = None,
+        __metadata__: Optional[Dict[str, Any]] = None,
+        __files__: Optional[List[str]] = None,
     ) -> AsyncGenerator[str, None]:
         """
         Main pipe method supporting both streaming and non-streaming responses
@@ -475,6 +480,9 @@ class Pipe:
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {access_token}",
                 "X-ID-Token": id_token if id_token else "",
+                "X-Session-Id": __session_id__ if __session_id__ else "",
+                "X-Chat-Id": __chat_id__ if __chat_id__ else "",
+                "X-Message-Id": __message_id__ if __message_id__ else "",
             }
             # set User-Agent to the one from the request, if available
             if "User-Agent" in __request__.headers:

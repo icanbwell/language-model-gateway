@@ -37,6 +37,7 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
+from langmem import create_manage_memory_tool, create_search_memory_tool
 from openai import NotGiven, NOT_GIVEN
 from openai.types import CompletionUsage
 from openai.types.chat import (
@@ -63,6 +64,7 @@ from language_model_gateway.gateway.schema.openai.completions import (
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
+from language_model_gateway.gateway.tools.get_user_info_tool import GetUserInfoTool
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
@@ -72,7 +74,6 @@ from language_model_gateway.gateway.utilities.environment_variables import (
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from langmem import create_manage_memory_tool, create_search_memory_tool
 
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -816,10 +817,11 @@ class LangGraphToOpenAIConverter:
         tool_node: Optional[ToolNode] = None
 
         if self.environment_variables.enable_llm_memory and store is not None:
+            # Memory tools use LangGraph's BaseStore for persistence (4)
             tools = list(tools) + [
-                # Memory tools use LangGraph's BaseStore for persistence (4)
                 create_manage_memory_tool(namespace=("memories",)),
                 create_search_memory_tool(namespace=("memories",)),
+                GetUserInfoTool(),
             ]
 
         if len(tools) > 0:

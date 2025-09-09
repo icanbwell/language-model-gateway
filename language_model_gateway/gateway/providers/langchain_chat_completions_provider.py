@@ -155,6 +155,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             )
             request_id = random.randint(1, 1000)
 
+            conversation_thread_id: str | None = headers.get("X-Chat-Id".lower())
+
             result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
                 compiled_state_graph=compiled_state_graph,
                 chat_request=chat_request,
@@ -164,9 +166,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     user_id=auth_information.subject,
                     user_email=auth_information.email,
                     request_id=str(request_id),
-                    conversation_thread_id=str(
-                        request_id
-                    ),  # TODO: pass real conversation thread id
+                    conversation_thread_id=conversation_thread_id or str(request_id),
                     headers=headers,
                 ),
             )
