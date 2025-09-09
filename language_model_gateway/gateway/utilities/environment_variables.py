@@ -87,3 +87,7 @@ class EnvironmentVariables:
     def tool_output_token_limit(self) -> Optional[int]:
         limit = os.environ.get("TOOL_OUTPUT_TOKEN_LIMIT")
         return int(limit) if limit and limit.isdigit() else None
+
+    @property
+    def enable_llm_memory(self) -> bool:
+        return self.str2bool(os.environ.get("ENABLE_LLM_MEMORY", "false"))

@@ -143,7 +143,10 @@ class ContainerFactory:
         )
 
         container.register(
-            LangGraphToOpenAIConverter, lambda c: LangGraphToOpenAIConverter()
+            LangGraphToOpenAIConverter,
+            lambda c: LangGraphToOpenAIConverter(
+                environment_variables=c.resolve(EnvironmentVariables)
+            ),
         )
 
         container.register(

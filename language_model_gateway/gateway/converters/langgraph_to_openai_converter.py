@@ -34,6 +34,7 @@ from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEve
 from langchain_core.tools import BaseTool
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
+from langgraph.store.base import IndexConfig, BaseStore
 from openai import NotGiven, NOT_GIVEN
 from openai.types import CompletionUsage
 from openai.types.chat import (
@@ -61,14 +62,22 @@ from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
 )
+from language_model_gateway.gateway.utilities.environment_variables import (
+    EnvironmentVariables,
+)
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from langgraph.store.memory import InMemoryStore
+from langmem import create_manage_memory_tool, create_search_memory_tool
 
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangGraphToOpenAIConverter:
+    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+        self.environment_variables: EnvironmentVariables = environment_variables
+
     async def _stream_resp_async_generator(
         self,
         *,
@@ -784,13 +793,33 @@ class LangGraphToOpenAIConverter:
         :return: compiled state graph
         """
         tool_node: Optional[ToolNode] = None
+
+        if self.environment_variables.enable_llm_memory:
+            tools = list(tools) + [
+                # Memory tools use LangGraph's BaseStore for persistence (4)
+                create_manage_memory_tool(namespace=("memories",)),
+                create_search_memory_tool(namespace=("memories",)),
+            ]
+
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
+
+        # Set up storage
+        index: IndexConfig = {
+            "dims": 1536,
+            "embed": "openai:text-embedding-3-small",
+        }
+        store: BaseStore | None = (
+            InMemoryStore(index=index)
+            if self.environment_variables.enable_llm_memory
+            else None
+        )
 
         compiled_state_graph: CompiledStateGraph[MyMessagesState] = create_react_agent(
             model=llm,
             tools=tool_node if tool_node is not None else [],
             state_schema=MyMessagesState,
+            store=store,
         )
         return compiled_state_graph
 
