@@ -159,6 +159,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         request_information=RequestInformation(
                             auth_information=auth_information,
                             user_id=auth_information.subject,
+                            user_email=auth_information.email,
                             request_id=str(request_id),
                             conversation_thread_id=str(
                                 request_id
