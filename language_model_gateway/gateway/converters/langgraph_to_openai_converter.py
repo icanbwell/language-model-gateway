@@ -460,6 +460,8 @@ class LangGraphToOpenAIConverter:
                     + "  Please re-authenticate using `aws sso login --profile [role]`.",
                 )
             except* Exception as e:
+                import traceback
+
                 logger.exception(e, stack_info=True)
                 first_exception2 = e.exceptions[0] if len(e.exceptions) > 0 else e
                 # print type of first exception in ExceptionGroup
@@ -469,10 +471,17 @@ class LangGraphToOpenAIConverter:
                         f"ExceptionGroup in call_agent_with_input: {type(first_exception2)} {first_exception2}",
                         exc_info=True,
                     )
-
+                # Get the traceback for the first exception
+                stack = "".join(
+                    traceback.format_exception(
+                        type(first_exception2),
+                        first_exception2,
+                        first_exception2.__traceback__,
+                    )
+                )
                 raise HTTPException(
                     status_code=500,
-                    detail=f"Unexpected error: {type(first_exception2)} {first_exception2}",
+                    detail=f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}",
                 )
 
     @staticmethod

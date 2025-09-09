@@ -35,6 +35,7 @@ class PersistenceFactory:
         elif persistence_type == "mongo":
             # https://pypi.org/project/langgraph-store-mongodb/
             # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/
+            # https://langchain-ai.github.io/langgraph/how-tos/memory/add-memory/
             mongo_llm_storage_uri = self._environment_variables.mongo_llm_storage_uri
             assert mongo_llm_storage_uri is not None
             llm_storage_db_username = (
