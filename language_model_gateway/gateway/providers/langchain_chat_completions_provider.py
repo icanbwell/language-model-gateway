@@ -27,6 +27,9 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
     BaseChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.request_information import (
+    RequestInformation,
+)
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.environment_variables import (
@@ -148,17 +151,17 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 )
                 request_id = random.randint(1, 1000)
 
-                # TODO: Need thread_id
-                # config = {"configurable": {"thread_id": "1"}}
-                result = (
-                    await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                    compiled_state_graph=compiled_state_graph,
+                    chat_request=chat_request,
+                    system_messages=[],
+                    request_information=RequestInformation(
+                        auth_information=auth_information,
+                        user_id=auth_information.subject,
                         request_id=str(request_id),
+                        conversation_thread_id="1",  # TODO: pass real conversation thread id
                         headers=headers,
-                        compiled_state_graph=compiled_state_graph,
-                        chat_request=chat_request,
-                        system_messages=[],
-                        config={"configurable": {"thread_id": "1", "user_id": "10"}},
-                    )
+                    ),
                 )
                 return result
 
