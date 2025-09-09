@@ -31,6 +31,9 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
 from language_model_gateway.gateway.managers.model_manager import ModelManager
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
+from language_model_gateway.gateway.persistence.persistence_factory import (
+    PersistenceFactory,
+)
 from language_model_gateway.gateway.providers.image_generation_provider import (
     ImageGenerationProvider,
 )
@@ -231,6 +234,7 @@ class ContainerFactory:
                 auth_manager=c.resolve(AuthManager),
                 environment_variables=c.resolve(EnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
+                persistence_factory=c.resolve(PersistenceFactory),
             ),
         )
 
@@ -301,6 +305,11 @@ class ContainerFactory:
                 model=os.environ.get("DEFAULT_LLM_MODEL", "gpt-3.5-turbo"),
                 truncation_strategy=truncation_strategy,
             ),
+        )
+
+        container.register(
+            PersistenceFactory,
+            lambda c: PersistenceFactory(),
         )
 
         logger.info("DI container initialized")

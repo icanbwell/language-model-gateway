@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9b80e6f0442610cf4be3a76bd8a4d1af3e5ba32c1ef8810e489c0ac9b8ca7d0e"
+            "sha256": "56850f578d9205920ddde398907f5d51e8e8590e2a8e31595779d18b7e0180bb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1230,6 +1230,7 @@
                 "sha256:5a779134fd28134a9a83d078be4450bbf0e0c79fdf5e992549658899e6fc5ea7",
                 "sha256:72038c0f9e22260cb9bff1f3ebe5eb06d940b7ee5c1e4765019269d4f21cf92d"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.9'",
             "version": "==2.1.1"
         },
@@ -1257,6 +1258,15 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==0.2.6"
+        },
+        "langgraph-store-mongodb": {
+            "hashes": [
+                "sha256:1e89958e0c4db802170685482589a78cb3d2a1391bc33c9ce674d20990cf0881",
+                "sha256:691a6d0ed2d0984b83755ce1bf391ebc53da844ddcd5fe70f459c93282e27bc2"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==0.1.0"
         },
         "langmem": {
             "hashes": [

@@ -20,6 +20,9 @@ from language_model_gateway.gateway.converters.langgraph_to_openai_converter imp
 )
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.persistence.persistence_factory import (
+    PersistenceFactory,
+)
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
@@ -47,6 +50,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         auth_manager: AuthManager,
         environment_variables: EnvironmentVariables,
         auth_config_reader: AuthConfigReader,
+        persistence_factory: PersistenceFactory,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -81,6 +85,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.auth_config_reader: AuthConfigReader = auth_config_reader
         assert self.auth_config_reader is not None
         assert isinstance(self.auth_config_reader, AuthConfigReader)
+
+        self.persistence_factory: PersistenceFactory = persistence_factory
+        assert self.persistence_factory is not None
+        assert isinstance(self.persistence_factory, PersistenceFactory)
 
     async def chat_completions(
         self,
@@ -124,21 +132,32 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
-        compiled_state_graph: CompiledStateGraph[
-            MyMessagesState
-        ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-            llm=llm,
-            tools=tools,
-        )
-        request_id = random.randint(1, 1000)
+        with self.persistence_factory.create_store(
+            persistence_type=self.environment_variables.llm_storage_type,
+        ) as store:
+            with self.persistence_factory.create_checkpointer(
+                persistence_type=self.environment_variables.llm_storage_type,
+            ) as checkpointer:
+                compiled_state_graph: CompiledStateGraph[
+                    MyMessagesState
+                ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+                    llm=llm,
+                    tools=tools,
+                    store=store,
+                    checkpointer=checkpointer,
+                )
+                request_id = random.randint(1, 1000)
 
-        return await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-            request_id=str(request_id),
-            headers=headers,
-            compiled_state_graph=compiled_state_graph,
-            chat_request=chat_request,
-            system_messages=[],
-        )
+                # TODO: Need thread_id
+                # config = {"configurable": {"thread_id": "1"}}
+                return await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                    request_id=str(request_id),
+                    headers=headers,
+                    compiled_state_graph=compiled_state_graph,
+                    chat_request=chat_request,
+                    system_messages=[],
+                    config={"configurable": {"thread_id": "1"}},
+                )
 
     async def check_tokens_are_valid_for_tools(
         self,

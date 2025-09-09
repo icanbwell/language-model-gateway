@@ -30,11 +30,13 @@ from langchain_core.messages import (
 )
 from langchain_core.messages import AIMessageChunk
 from langchain_core.messages.ai import UsageMetadata
+from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
 from langchain_core.tools import BaseTool
+from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
-from langgraph.store.base import IndexConfig, BaseStore
+from langgraph.store.base import BaseStore
 from openai import NotGiven, NOT_GIVEN
 from openai.types import CompletionUsage
 from openai.types.chat import (
@@ -67,7 +69,6 @@ from language_model_gateway.gateway.utilities.environment_variables import (
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from langgraph.store.memory import InMemoryStore
 from langmem import create_manage_memory_tool, create_search_memory_tool
 
 logger = logging.getLogger(__file__)
@@ -86,6 +87,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: List[ChatCompletionMessageParam],
+        config: RunnableConfig,
     ) -> AsyncGenerator[str, None]:
         """
         Asynchronously generate streaming responses from the agent.
@@ -108,6 +110,7 @@ class LangGraphToOpenAIConverter:
                 headers=headers,
                 compiled_state_graph=compiled_state_graph,
                 messages=messages,
+                config=config,
             ):
                 if not event:
                     continue
@@ -336,6 +339,7 @@ class LangGraphToOpenAIConverter:
         request_id: str,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatCompletionSystemMessageParam],
+        config: RunnableConfig,
     ) -> StreamingResponse | JSONResponse:
         """
         Call the agent with the provided input and return the response.
@@ -346,6 +350,7 @@ class LangGraphToOpenAIConverter:
             request_id: The unique request identifier.
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
+            config: The runnable configuration.
 
         Returns:
             The response as a StreamingResponse or JSONResponse.
@@ -360,6 +365,7 @@ class LangGraphToOpenAIConverter:
                     request_id=request_id,
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,
+                    config=config,
                 ),
                 media_type="text/event-stream",
             )
@@ -375,6 +381,7 @@ class LangGraphToOpenAIConverter:
                     headers=headers,
                     request=chat_request,
                     system_messages=system_messages,
+                    config=config,
                 )
                 # add usage metadata from each message into a total usage metadata
                 total_usage_metadata: CompletionUsage = (
@@ -560,6 +567,7 @@ class LangGraphToOpenAIConverter:
         request_id: str,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatCompletionSystemMessageParam],
+        config: RunnableConfig,
     ) -> AsyncGenerator[str, None]:
         """
         Get the streaming response asynchronously.
@@ -570,6 +578,7 @@ class LangGraphToOpenAIConverter:
             request_id: The unique request identifier.
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
+            config: The runnable configuration.
 
         Returns:
             The streaming response as an async generator.
@@ -589,6 +598,7 @@ class LangGraphToOpenAIConverter:
             headers=headers,
             compiled_state_graph=compiled_state_graph,
             messages=messages,
+            config=config,
         )
         return generator
 
@@ -600,6 +610,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
+        config: RunnableConfig,
     ) -> List[AnyMessage]:
         """
         Run the graph with the provided messages asynchronously.
@@ -615,7 +626,9 @@ class LangGraphToOpenAIConverter:
         input_: MyMessagesState = self.create_state(
             chat_request=chat_request, headers=headers, messages=messages
         )
-        output: Dict[str, Any] = await compiled_state_graph.ainvoke(input=input_)
+        output: Dict[str, Any] = await compiled_state_graph.ainvoke(
+            input=input_, config=config
+        )
         out_messages: List[AnyMessage] = output["messages"]
         return out_messages
 
@@ -627,6 +640,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
+        config: RunnableConfig,
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream the graph with the provided messages asynchronously.
@@ -647,6 +661,7 @@ class LangGraphToOpenAIConverter:
                 chat_request=request, headers=headers, messages=messages
             ),
             version="v2",
+            config=config,
         ):
             yield event
 
@@ -658,6 +673,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: Iterable[ChatCompletionSystemMessageParam],
+        config: RunnableConfig,
     ) -> List[AnyMessage]:
         """
         Run the agent asynchronously.
@@ -667,6 +683,7 @@ class LangGraphToOpenAIConverter:
             headers: The request headers.
             compiled_state_graph: The compiled state graph.
             system_messages: The iterable of chat completion message parameters.
+            config: The runnable configuration.
 
         Returns:
             The list of any messages.
@@ -685,6 +702,7 @@ class LangGraphToOpenAIConverter:
             headers=headers,
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
+            config=config,
         )
 
     async def astream_events(
@@ -694,6 +712,7 @@ class LangGraphToOpenAIConverter:
         headers: Dict[str, str],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: Iterable[ChatCompletionMessageParam],
+        config: RunnableConfig,
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream events asynchronously.
@@ -703,6 +722,7 @@ class LangGraphToOpenAIConverter:
             headers: The request headers.
             compiled_state_graph: The compiled state graph.
             messages: The iterable of chat completion message parameters.
+            config: The runnable configuration.
 
         Yields:
             The standard or custom stream event.
@@ -713,6 +733,7 @@ class LangGraphToOpenAIConverter:
             headers=headers,
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
+            config=config,
         ):
             yield event
 
@@ -740,6 +761,7 @@ class LangGraphToOpenAIConverter:
         request: ChatRequest,
         headers: Dict[str, Any],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
+        config: RunnableConfig,
     ) -> List[AnyMessage]:
         """
         Run the graph asynchronously.
@@ -748,6 +770,7 @@ class LangGraphToOpenAIConverter:
             request: The chat request.
             headers: The request headers.
             compiled_state_graph: The compiled state graph.
+            config: The runnable configuration.
 
         Returns:
             The list of any messages.
@@ -761,12 +784,17 @@ class LangGraphToOpenAIConverter:
             headers=headers,
             compiled_state_graph=compiled_state_graph,
             messages=messages,
+            config=config,
         )
         return output_messages
 
-    # noinspection PyMethodMayBeStatic
     async def create_graph_for_llm_async(
-        self, *, llm: BaseChatModel, tools: Sequence[BaseTool]
+        self,
+        *,
+        llm: BaseChatModel,
+        tools: Sequence[BaseTool],
+        store: BaseStore | None,
+        checkpointer: BaseCheckpointSaver[str] | None,
     ) -> CompiledStateGraph[MyMessagesState]:
         """
         Create a graph for the language model asynchronously.
@@ -774,27 +802,15 @@ class LangGraphToOpenAIConverter:
         Args:
             llm: The base chat model.
             tools: The sequence of tools.
+            store: The base store for persistence.
+            checkpointer: The checkpoint saver for saving state.
 
         Returns:
             The compiled state graph.
         """
-        return await self._create_graph_for_llm_with_tools_async(llm=llm, tools=tools)
-
-    # noinspection PyMethodMayBeStatic
-    async def _create_graph_for_llm_with_tools_async(
-        self, *, llm: BaseChatModel, tools: Sequence[BaseTool]
-    ) -> CompiledStateGraph[MyMessagesState]:
-        """
-        Create a graph for the language model asynchronously.
-
-
-        :param llm: base chat model
-        :param tools: list of tools
-        :return: compiled state graph
-        """
         tool_node: Optional[ToolNode] = None
 
-        if self.environment_variables.enable_llm_memory:
+        if self.environment_variables.enable_llm_memory and store is not None:
             tools = list(tools) + [
                 # Memory tools use LangGraph's BaseStore for persistence (4)
                 create_manage_memory_tool(namespace=("memories",)),
@@ -804,23 +820,13 @@ class LangGraphToOpenAIConverter:
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
 
-        # Set up storage
-        index: IndexConfig = {
-            "dims": 1536,
-            "embed": "openai:text-embedding-3-small",
-        }
         # https://langchain-ai.github.io/langgraph/concepts/persistence/
-        store: BaseStore | None = (
-            InMemoryStore(index=index)
-            if self.environment_variables.enable_llm_memory
-            else None
-        )
-
         compiled_state_graph: CompiledStateGraph[MyMessagesState] = create_react_agent(
             model=llm,
             tools=tool_node if tool_node is not None else [],
             state_schema=MyMessagesState,
             store=store,
+            checkpointer=checkpointer,
         )
         return compiled_state_graph
 

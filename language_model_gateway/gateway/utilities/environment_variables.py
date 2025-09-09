@@ -91,3 +91,7 @@ class EnvironmentVariables:
     @property
     def enable_llm_memory(self) -> bool:
         return self.str2bool(os.environ.get("ENABLE_LLM_MEMORY", "false"))
+
+    @property
+    def llm_storage_type(self) -> str:
+        return os.environ.get("LLM_STORAGE_TYPE", "memory")
