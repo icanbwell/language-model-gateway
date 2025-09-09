@@ -1,0 +1,100 @@
+import logging
+import typing
+import uuid
+from typing import Type, Dict, Any
+
+from langgraph.config import get_store
+from langgraph.store.base import BaseStore
+from langmem import errors
+from langmem.utils import NamespaceTemplate
+from pydantic import BaseModel
+
+from language_model_gateway.gateway.converters.user_profile import UserProfile
+from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+logger = logging.getLogger(__name__)
+
+
+class StoreUserProfileTool(ResilientBaseTool):
+    """
+    Tool for managing persistent memories in conversations. Supports create, update, and delete actions.
+    """
+
+    name: str = "store_user_profile"
+    description: str = (
+        "Create, update, or delete a user profile to persist across conversations. "
+        "Proactively call this tool when you: "
+        "1. Identify a new USER profile. "
+        "2. Receive an explicit USER request to remember something or otherwise alter your behavior. "
+        "3. Are working and want to record important context. "
+        "4. Identify that an existing MEMORY is incorrect or outdated."
+    )
+    args_schema: Type[BaseModel] = UserProfile
+    namespace: tuple[str, ...] | str
+    # schema: typing.Type = str
+    actions_permitted: typing.Optional[
+        tuple[typing.Literal["create", "update", "delete"], ...]
+    ] = ("create", "update", "delete")
+    store: typing.Optional[BaseStore] = None
+
+    def _run(
+        self,
+        name: str,
+        age: int | None,
+        recent_memories: list[str],
+        preferences: Dict[str, Any] | None,
+        action: str,
+    ) -> str:
+        raise NotImplementedError(
+            "Synchronous execution is not supported. Use the asynchronous method instead."
+        )
+
+    async def _arun(
+        self,
+        name: str,
+        age: int | None,
+        recent_memories: list[str],
+        preferences: Dict[str, Any] | None,
+        action: str,
+    ) -> str:
+        id = name
+        store = self._get_store()
+        if self.actions_permitted and action not in self.actions_permitted:
+            raise ValueError(
+                f"Invalid action {action}. Must be one of {self.actions_permitted}."
+            )
+        if action == "create" and id is not None:
+            raise ValueError(
+                "You cannot provide a MEMORY ID when creating a MEMORY. Please try again, omitting the id argument."
+            )
+        if action in ("delete", "update") and not name:
+            raise ValueError(
+                "You must provide a MEMORY ID when deleting or updating a MEMORY."
+            )
+        namespacer = NamespaceTemplate(self.namespace)
+        namespace = namespacer()
+        if action == "delete":
+            await store.adelete(namespace, key=str(id))
+            return f"Deleted memory {id}"
+        memory_id = id or str(uuid.uuid4())
+        # await store.aput(namespace, key=str(memory_id), value={"content": self._ensure_json_serializable(content)})
+        return f"{action}d memory {memory_id}"
+
+    def _get_store(self) -> BaseStore:
+        if self.store is not None:
+            return self.store
+        try:
+            return get_store()
+        except RuntimeError as e:
+            raise errors.ConfigurationError("Could not get store") from e
+
+    def _ensure_json_serializable(self, content: typing.Any) -> typing.Any:
+        if isinstance(content, (str, int, float, bool, dict, list)):
+            return content
+        if hasattr(content, "model_dump"):
+            try:
+                return content.model_dump(mode="json")
+            except Exception as e:
+                logger.error(e)
+                return str(content)
+        return content

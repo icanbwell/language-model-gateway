@@ -1,10 +1,14 @@
 from typing import Dict, Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class UserProfile(BaseModel):
-    name: str
-    age: int | None = None
-    recent_memories: list[str] = []
-    preferences: Dict[str, Any] | None = None
+    name: str = Field(description="Name of the current user")
+    age: int | None = Field(default=None, description="Optional age of the user")
+    recent_memories: list[str] = Field(
+        default=[], description="list of recent memories or interactions with the user"
+    )
+    preferences: Dict[str, Any] | None = Field(
+        default=None, description="Optional dictionary of user preferences"
+    )
