@@ -30,10 +30,6 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
             ),
         )
 
-    # Test health endpoint
-    # response = await async_client.get("/health")
-    # assert response.status_code == 200
-
     # init client and connect to localhost server
     client = AsyncOpenAI(
         api_key="fake-api-key",
@@ -62,6 +58,25 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
     assert content is not None
     print(content)
     assert "Barack" in content
+
+    message = {
+        "role": "user",
+        "content": "look up user information",
+    }
+    chat_completion = await client.chat.completions.create(
+        messages=[message],
+        model="General Purpose",
+        extra_headers={
+            "X-Chat-Id": "test-chat-completions",
+        },
+    )
+
+    # print the top "choice"
+    content = "\n".join(
+        choice.message.content or "" for choice in chat_completion.choices
+    )
+
+    assert content is not None
 
 
 @pytest.mark.asyncio
