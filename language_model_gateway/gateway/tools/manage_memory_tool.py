@@ -58,6 +58,7 @@ class ManageMemoryTool(ResilientBaseTool):
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         store = self._get_store()
+        id = id or state.user_id
         if self.actions_permitted and action not in self.actions_permitted:
             raise ValueError(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
