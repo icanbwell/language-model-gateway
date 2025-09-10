@@ -1,8 +1,8 @@
 import logging
 import typing
-import uuid
 from typing import Type, Dict, Any, Annotated, Literal
 
+from langchain_core.tools import ToolException
 from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
@@ -17,11 +17,15 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 logger = logging.getLogger(__name__)
 
 
-class UserProfileInput(UserProfile):
+class UserProfileInput(BaseModel):
     action: Literal["create", "update", "delete"] = Field(
         description="Action to perform on the user profile"
     )
     state: Annotated[MyMessagesState, InjectedState] = Field()
+
+    user_profile: UserProfile = Field(
+        description="The user profile data to create or update"
+    )
 
 
 class StoreUserProfileTool(ResilientBaseTool):
@@ -61,35 +65,37 @@ class StoreUserProfileTool(ResilientBaseTool):
     async def _arun(
         self,
         *,
-        name: str,
-        age: int | None = None,
-        recent_memories: list[str] = [],
-        preferences: Dict[str, Any] | None = None,
+        user_profile: UserProfile,
         action: str | None = None,
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
-        id = name
+        # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
+        if not state.user_id:
+            raise ToolException(
+                "user_id is required in the state to store user profile"
+            )
+        user_profile.user_id = state.user_id
         store = self._get_store()
         if self.actions_permitted and action not in self.actions_permitted:
-            raise ValueError(
+            raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
             )
-        if action == "create" and id is not None:
-            raise ValueError(
-                "You cannot provide a MEMORY ID when creating a MEMORY. Please try again, omitting the id argument."
+        try:
+            namespacer = NamespaceTemplate(self.namespace)
+            namespace = namespacer()
+            user_profile_id: str = f"user_profile_{user_profile.user_id}"
+            if action == "delete":
+                await store.adelete(namespace, key=str(user_profile_id))
+                return f"Deleted user profile {user_profile_id}"
+            await store.aput(
+                namespace,
+                key=str(user_profile_id),
+                value=self._ensure_json_serializable(user_profile),
             )
-        if action in ("delete", "update") and not name:
-            raise ValueError(
-                "You must provide a MEMORY ID when deleting or updating a MEMORY."
-            )
-        namespacer = NamespaceTemplate(self.namespace)
-        namespace = namespacer()
-        if action == "delete":
-            await store.adelete(namespace, key=str(id))
-            return f"Deleted memory {id}"
-        memory_id = id or str(uuid.uuid4())
-        # await store.aput(namespace, key=str(memory_id), value={"content": self._ensure_json_serializable(content)})
-        return f"{action}d memory {memory_id}"
+            return f"{action}d memory {user_profile_id}"
+        except Exception as e:
+            logger.exception("Error storing user profile")
+            raise ToolException("Error storing user profile") from e
 
     def _get_store(self) -> BaseStore:
         if self.store is not None:
