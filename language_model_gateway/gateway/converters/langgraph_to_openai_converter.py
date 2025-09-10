@@ -823,17 +823,11 @@ class LangGraphToOpenAIConverter:
             tools = (
                 list(tools)
                 + [
-                    # StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
-                    #     # The brackets will be populated at runtime by the configurable values
-                    #     namespace=("memories", "{user_id}", "user_profile"),
-                    #     # schema=UserProfile,
-                    #     # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
-                    # ),
                     ManageMemoryTool(  # All memories saved to this tool will live within this namespace
                         # The brackets will be populated at runtime by the configurable values
                         namespace=("memories", "{user_id}", "user_profile"),
                         schema=UserProfile,
-                        # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
+                        description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
                     create_search_memory_tool(namespace=("memories",)),
                     GetUserInfoTool(),
