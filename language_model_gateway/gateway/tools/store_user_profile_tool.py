@@ -1,20 +1,27 @@
 import logging
 import typing
 import uuid
-from typing import Type, Dict, Any, Annotated
+from typing import Type, Dict, Any, Annotated, Literal
 
 from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
 from langmem.utils import NamespaceTemplate
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.converters.user_profile import UserProfile
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 logger = logging.getLogger(__name__)
+
+
+class UserProfileInput(UserProfile):
+    action: Literal["create", "update", "delete"] | None = Field(
+        default=None, description="Action to perform on the user profile"
+    )
+    state: Annotated[MyMessagesState, InjectedState] = Field()
 
 
 class StoreUserProfileTool(ResilientBaseTool):
@@ -31,7 +38,7 @@ class StoreUserProfileTool(ResilientBaseTool):
         "3. Are working and want to record important context. "
         "4. Identify that an existing MEMORY is incorrect or outdated."
     )
-    args_schema: Type[BaseModel] = UserProfile
+    args_schema: Type[BaseModel] = UserProfileInput
     namespace: tuple[str, ...] | str
     # schema: typing.Type = str
     actions_permitted: typing.Optional[
@@ -55,10 +62,10 @@ class StoreUserProfileTool(ResilientBaseTool):
         self,
         *,
         name: str,
-        age: int | None,
-        recent_memories: list[str],
-        preferences: Dict[str, Any] | None,
-        action: str,
+        age: int | None = None,
+        recent_memories: list[str] = [],
+        preferences: Dict[str, Any] | None = None,
+        action: str | None = None,
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         id = name
