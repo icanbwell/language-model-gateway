@@ -103,6 +103,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
+	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 
 .PHONY: down
 down: ## stops docker containers

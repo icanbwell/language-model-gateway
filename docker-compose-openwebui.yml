@@ -12,6 +12,7 @@ services:
     ports:
       - "3050:8080"
     environment:
+      ENV: dev
       # https://docs.openwebui.com/getting-started/env-configuration/
       # Set to True to bypass model access control checks (useful for development)
       BYPASS_MODEL_ACCESS_CONTROL: True
