@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 
 
 class UserProfileInput(UserProfile):
-    action: Literal["create", "update", "delete"] | None = Field(
-        default=None, description="Action to perform on the user profile"
+    action: Literal["create", "update", "delete"] = Field(
+        description="Action to perform on the user profile"
     )
     state: Annotated[MyMessagesState, InjectedState] = Field()
 
