@@ -1,7 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class ConversationMemory(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
     user_id: str = Field(description="Unique identifier for the user")
     conversation_id: str = Field(description="Unique identifier for the conversation")
     memory_id: str | None = Field(

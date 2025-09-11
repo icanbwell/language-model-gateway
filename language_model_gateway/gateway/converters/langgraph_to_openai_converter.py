@@ -226,6 +226,8 @@ class LangGraphToOpenAIConverter:
                         # remove auth_token from tool_input
                         if tool_input_display and "auth_token" in tool_input_display:
                             tool_input_display["auth_token"] = "***"
+                        if tool_input_display and "state" in tool_input_display:
+                            tool_input_display["state"] = "***"
 
                         if tool_name:
                             logger.debug(
@@ -379,6 +381,7 @@ class LangGraphToOpenAIConverter:
                     chat_request=chat_request,
                     user_id=request_information.user_id,
                     user_name=request_information.user_name,
+                    email=request_information.user_email,
                 )
 
                 responses: List[AnyMessage] = await self.ainvoke(
@@ -493,10 +496,11 @@ class LangGraphToOpenAIConverter:
         *,
         chat_request: ChatRequest,
         user_id: Optional[str],
-        user_name: Optional[str] = None,
+        user_name: Optional[str],
+        email: Optional[str],
     ) -> ChatRequest:
         content: str = (
-            f"You are interacting with user_id: {user_id} who is named {user_name}"
+            f"You are interacting with user_id: {user_id} who is named {user_name} and has email {email}"
             if user_id
             else "You are interacting with an anonymous user"
         )

@@ -8,7 +8,7 @@ from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
 from langmem.utils import NamespaceTemplate
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.structures.user_profile import UserProfile
@@ -18,6 +18,9 @@ logger = logging.getLogger(__name__)
 
 
 class UserProfileInput(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
     action: Literal["create", "update", "delete"] = Field(
         description="Action to perform on the user profile"
     )

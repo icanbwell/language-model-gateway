@@ -1,6 +1,6 @@
 from typing import Optional, Dict
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 
@@ -9,6 +9,10 @@ class RequestInformation(BaseModel):
     """
     Represents the information about the request being processed.
     """
+
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
 
     auth_information: Optional[AuthInformation]
     """ The authentication information associated with the request, if available."""

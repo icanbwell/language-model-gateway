@@ -1,11 +1,15 @@
 from typing import Dict, Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class UserProfile(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
     user_id: str = Field(description="Unique identifier for the user")
-    name: str = Field(description="Name of the current user")
+    name: str | None = Field(description="Name of the current user")
+    email: str | None = Field(description="Email address of the user")
     age: int | None = Field(default=None, description="Optional age of the user")
     recent_memories: list[str] = Field(
         default=[], description="list of recent memories or interactions with the user"
@@ -20,7 +24,11 @@ class UserProfile(BaseModel):
 
         :return: A string representation of the user profile.
         """
-        profile_parts = [f"User ID: {self.user_id}", f"Name: {self.name}"]
+        profile_parts = [f"User ID: {self.user_id}"]
+        if self.name:
+            profile_parts.append(f"Name: {self.name}")
+        if self.email:
+            profile_parts.append(f"Email: {self.email}")
         if self.age is not None:
             profile_parts.append(f"Age: {self.age}")
         if self.recent_memories:

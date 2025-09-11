@@ -1,13 +1,17 @@
 from datetime import datetime
 from typing import Optional, Any, List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class AuthInformation(BaseModel):
     """
     Represents the information about the authenticated user or client.
     """
+
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
 
     redirect_uri: Optional[str]
     """The URI to redirect to after authentication, if applicable."""
