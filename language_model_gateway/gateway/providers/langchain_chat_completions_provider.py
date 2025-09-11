@@ -165,6 +165,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     auth_information=auth_information,
                     user_id=auth_information.subject,
                     user_email=auth_information.email,
+                    user_name=auth_information.user_name,
                     request_id=str(request_id),
                     conversation_thread_id=conversation_thread_id or str(request_id),
                     headers=headers,

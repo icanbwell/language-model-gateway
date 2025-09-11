@@ -19,6 +19,9 @@ class RequestInformation(BaseModel):
     user_email: Optional[str]
     """ The user email associated with the request, if available."""
 
+    user_name: Optional[str]
+    """ The user name associated with the request, if available."""
+
     request_id: str
     """ The unique identifier for the request, if available."""
 

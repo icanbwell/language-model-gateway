@@ -124,6 +124,7 @@ class ChatCompletionsRouter:
                 audience=None,
                 email=None,
                 subject=None,
+                user_name=None,
             )
             auth_header = request.headers.get("Authorization")
             if auth_header:
@@ -140,6 +141,7 @@ class ChatCompletionsRouter:
                         auth_information.audience = token_item.audience
                         auth_information.email = token_item.email
                         auth_information.subject = token_item.subject
+                        auth_information.user_name = token_item.name
                 else:
                     # read information from headers if present
                     if "x-openwebui-user-id" in request.headers:
@@ -149,6 +151,10 @@ class ChatCompletionsRouter:
                     if "x-openwebui-user-email" in request.headers:
                         auth_information.email = request.headers[
                             "x-openwebui-user-email"
+                        ]
+                    if "x-openwebui-user-name" in request.headers:
+                        auth_information.user_name = request.headers[
+                            "x-openwebui-user-name"
                         ]
 
             return await chat_manager.chat_completions(

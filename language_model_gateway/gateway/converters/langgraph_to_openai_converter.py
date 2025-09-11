@@ -375,8 +375,10 @@ class LangGraphToOpenAIConverter:
                     chat_request=chat_request
                 )
 
-                chat_request = self.add_system_message_for_user_id(
-                    chat_request=chat_request, user_id=request_information.user_id
+                chat_request = self.add_system_message_for_user_info(
+                    chat_request=chat_request,
+                    user_id=request_information.user_id,
+                    user_name=request_information.user_name,
                 )
 
                 responses: List[AnyMessage] = await self.ainvoke(
@@ -487,11 +489,14 @@ class LangGraphToOpenAIConverter:
                 )
 
     @staticmethod
-    def add_system_message_for_user_id(
-        *, chat_request: ChatRequest, user_id: Optional[str]
+    def add_system_message_for_user_info(
+        *,
+        chat_request: ChatRequest,
+        user_id: Optional[str],
+        user_name: Optional[str] = None,
     ) -> ChatRequest:
         content: str = (
-            f"You are interacting with user_id: {user_id}"
+            f"You are interacting with user_id: {user_id} who is named {user_name}"
             if user_id
             else "You are interacting with an anonymous user"
         )

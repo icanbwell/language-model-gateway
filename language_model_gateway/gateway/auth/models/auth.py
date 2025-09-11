@@ -22,3 +22,6 @@ class AuthInformation(BaseModel):
     """The email of the authenticated user, if available."""
     subject: Optional[str]
     """The subject (sub) claim from the token, representing the unique identifier of the user."""
+
+    user_name: Optional[str]
+    """The name of the authenticated user, if available."""
