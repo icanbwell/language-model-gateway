@@ -11,7 +11,7 @@ from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
-from language_model_gateway.gateway.converters.user_profile import UserProfile
+from language_model_gateway.gateway.structures.user_profile import UserProfile
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 logger = logging.getLogger(__name__)
