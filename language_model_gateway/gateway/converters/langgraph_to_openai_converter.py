@@ -65,7 +65,7 @@ from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
 from language_model_gateway.gateway.tools.get_user_info_tool import GetUserInfoTool
-from language_model_gateway.gateway.tools.store_user_profile_tool import (
+from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
     StoreUserProfileTool,
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
