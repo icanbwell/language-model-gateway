@@ -40,7 +40,7 @@ class StoreUserProfileTool(ResilientBaseTool):
         "1. Identify a new USER profile. "
         "2. Receive an explicit USER request to remember something or otherwise alter your behavior. "
         "3. Are working and want to record important context. "
-        "4. Identify that an existing MEMORY is incorrect or outdated."
+        "4. Identify that an existing USER profile is incorrect or outdated."
     )
     args_schema: Type[BaseModel] = UserProfileInput
     namespace: tuple[str, ...] | str

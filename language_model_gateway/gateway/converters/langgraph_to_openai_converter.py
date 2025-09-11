@@ -832,7 +832,7 @@ class LangGraphToOpenAIConverter:
                     StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
                         # The brackets will be populated at runtime by the configurable values
                         namespace=user_profile_namespace,
-                        description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
+                        # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
                     ManageMemoryTool(namespace=memories_namespace),
                     create_search_memory_tool(namespace=user_profile_namespace),
