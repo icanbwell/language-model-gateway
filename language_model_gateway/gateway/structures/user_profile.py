@@ -8,8 +8,8 @@ class UserProfile(BaseModel):
         extra="forbid"  # Prevents any additional properties
     )
     user_id: str = Field(description="Unique identifier for the user")
-    name: str | None = Field(description="Name of the current user")
-    email: str | None = Field(description="Email address of the user")
+    name: str | None = Field(default=None, description="Name of the current user")
+    email: str | None = Field(default=None, description="Email address of the user")
     age: int | None = Field(default=None, description="Optional age of the user")
     recent_memories: list[str] = Field(
         default=[], description="list of recent memories or interactions with the user"
