@@ -61,6 +61,23 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
 
     message = {
         "role": "user",
+        "content": "let’s talk about football",
+    }
+    chat_completion = await client.chat.completions.create(
+        messages=[message],
+        model="General Purpose",
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
+    )
+
+    # print the top "choice"
+    content = "\n".join(
+        choice.message.content or "" for choice in chat_completion.choices
+    )
+
+    assert content is not None
+
+    message = {
+        "role": "user",
         "content": "look up my user profile",
     }
     chat_completion = await client.chat.completions.create(

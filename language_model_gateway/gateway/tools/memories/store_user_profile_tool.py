@@ -68,6 +68,9 @@ class StoreUserProfileTool(ResilientBaseTool):
         action: str | None = None,
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
+        logger.info(
+            f"StoreUserProfileTool called with action: {action} state: {state} user_profile: {user_profile.model_dump()}"
+        )
         # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
         if not state.user_id:
             raise ToolException(

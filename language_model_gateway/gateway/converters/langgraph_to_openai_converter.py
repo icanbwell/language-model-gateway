@@ -65,9 +65,6 @@ from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
 from language_model_gateway.gateway.tools.get_user_info_tool import GetUserInfoTool
-from language_model_gateway.gateway.tools.memories.manage_memory_tool import (
-    ManageMemoryTool,
-)
 from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
     StoreUserProfileTool,
 )
@@ -378,6 +375,10 @@ class LangGraphToOpenAIConverter:
                     chat_request=chat_request
                 )
 
+                chat_request = self.add_system_message_for_user_id(
+                    chat_request=chat_request, user_id=request_information.user_id
+                )
+
                 responses: List[AnyMessage] = await self.ainvoke(
                     compiled_state_graph=compiled_state_graph,
                     request=chat_request,
@@ -484,6 +485,24 @@ class LangGraphToOpenAIConverter:
                     status_code=500,
                     detail=f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}",
                 )
+
+    @staticmethod
+    def add_system_message_for_user_id(
+        *, chat_request: ChatRequest, user_id: Optional[str]
+    ) -> ChatRequest:
+        content: str = (
+            f"You are interacting with user_id: {user_id}"
+            if user_id
+            else "You are interacting with an anonymous user"
+        )
+
+        new_system_message: ChatCompletionSystemMessageParam = (
+            ChatCompletionSystemMessageParam(role="system", content=content)
+        )
+        chat_request["messages"] = [r for r in chat_request["messages"]] + [
+            new_system_message
+        ]
+        return chat_request
 
     @staticmethod
     def add_system_messages_for_json(
@@ -825,7 +844,7 @@ class LangGraphToOpenAIConverter:
         if self.environment_variables.enable_llm_memory and store is not None:
             # Memory tools use LangGraph's BaseStore for persistence (4)
             user_profile_namespace = ("memories", "{user_id}", "user_profile")
-            memories_namespace = ("memories", "{user_id}", "memories")
+            # memories_namespace = ("memories", "{user_id}", "memories")
             tools = (
                 list(tools)
                 + [
@@ -834,7 +853,7 @@ class LangGraphToOpenAIConverter:
                         namespace=user_profile_namespace,
                         # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
-                    ManageMemoryTool(namespace=memories_namespace),
+                    # ManageMemoryTool(namespace=memories_namespace),
                     create_search_memory_tool(namespace=user_profile_namespace),
                     GetUserInfoTool(),
                 ]

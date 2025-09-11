@@ -13,3 +13,19 @@ class UserProfile(BaseModel):
     preferences: Dict[str, Any] | None = Field(
         default=None, description="Optional dictionary of user preferences"
     )
+
+    def to_text(self) -> str:
+        """
+        Convert the user profile to a human-readable text format.
+
+        :return: A string representation of the user profile.
+        """
+        profile_parts = [f"User ID: {self.user_id}", f"Name: {self.name}"]
+        if self.age is not None:
+            profile_parts.append(f"Age: {self.age}")
+        if self.recent_memories:
+            profile_parts.append(f"Recent Memories: {', '.join(self.recent_memories)}")
+        if self.preferences:
+            prefs = ", ".join(f"{k}: {v}" for k, v in self.preferences.items())
+            profile_parts.append(f"Preferences: {prefs}")
+        return "\n".join(profile_parts)
