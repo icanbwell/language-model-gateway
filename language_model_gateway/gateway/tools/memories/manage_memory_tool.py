@@ -39,11 +39,11 @@ class ManageMemoryTool(ResilientBaseTool):
     description: str = (
         "Create, update, or delete a memory to persist across conversations. "
         "Include the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you. "
-        "Proactively call this tool when you: "
-        "1. Identify a new USER preference. "
-        "2. Receive an explicit USER request to remember something or otherwise alter your behavior. "
-        "3. Are working and want to record important context. "
-        "4. Identify that an existing MEMORY is incorrect or outdated."
+        "Proactively call this tool whenever there is a new message in the conversation, or when: "
+        "1. You identify a new memory to save for later. "
+        "2. You receive an explicit USER request to remember something or otherwise alter your behavior. "
+        "3. You are working and want to record important context. "
+        "4. You identify that an existing MEMORY is incorrect or outdated."
     )
     namespace: tuple[str, ...] | str
     args_schema: Type[BaseModel] = ConversationMemoryInput
