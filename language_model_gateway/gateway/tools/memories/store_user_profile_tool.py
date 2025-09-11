@@ -44,7 +44,6 @@ class StoreUserProfileTool(ResilientBaseTool):
     )
     args_schema: Type[BaseModel] = UserProfileInput
     namespace: tuple[str, ...] | str
-    # schema: typing.Type = str
     actions_permitted: typing.Optional[
         tuple[typing.Literal["create", "update", "delete"], ...]
     ] = ("create", "update", "delete")
@@ -105,7 +104,8 @@ class StoreUserProfileTool(ResilientBaseTool):
         except RuntimeError as e:
             raise errors.ConfigurationError("Could not get store") from e
 
-    def _ensure_json_serializable(self, content: typing.Any) -> typing.Any:
+    @staticmethod
+    def _ensure_json_serializable(content: typing.Any) -> typing.Any:
         if isinstance(content, (str, int, float, bool, dict, list)):
             return content
         if hasattr(content, "model_dump"):

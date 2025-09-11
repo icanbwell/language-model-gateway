@@ -1,18 +1,33 @@
 import logging
 import typing
-import uuid
-from typing import Any, Annotated
+from typing import Annotated, Literal, Type
 
+from langchain_core.tools import ToolException
 from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
 from langmem.utils import NamespaceTemplate
+from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from language_model_gateway.gateway.structures.conversation_memory import (
+    ConversationMemory,
+)
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 logger = logging.getLogger(__name__)
+
+
+class ConversationMemoryInput(BaseModel):
+    action: Literal["create", "update", "delete"] = Field(
+        description="Action to perform on the user profile"
+    )
+    state: Annotated[MyMessagesState, InjectedState] = Field()
+
+    memory: ConversationMemory = Field(
+        description="The memory data to create or update"
+    )
 
 
 class ManageMemoryTool(ResilientBaseTool):
@@ -31,7 +46,7 @@ class ManageMemoryTool(ResilientBaseTool):
         "4. Identify that an existing MEMORY is incorrect or outdated."
     )
     namespace: tuple[str, ...] | str
-    schema: typing.Type[Any] = str
+    args_schema: Type[BaseModel] = ConversationMemoryInput
     actions_permitted: typing.Optional[
         tuple[typing.Literal["create", "update", "delete"], ...]
     ] = ("create", "update", "delete")
@@ -40,9 +55,8 @@ class ManageMemoryTool(ResilientBaseTool):
     def _run(
         self,
         *,
-        content: typing.Optional[typing.Any] = None,
+        memory: ConversationMemory,
         action: str | None = None,
-        id: typing.Optional[str] = None,
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
         raise NotImplementedError(
@@ -52,37 +66,37 @@ class ManageMemoryTool(ResilientBaseTool):
     async def _arun(
         self,
         *,
-        content: typing.Optional[typing.Any] = None,
+        memory: ConversationMemory,
         action: str | None = None,
-        id: typing.Optional[str] = None,
         state: Annotated[MyMessagesState, InjectedState],
     ) -> str:
+        # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
+        if not state.user_id:
+            raise ToolException(
+                "user_id is required in the state to store user profile"
+            )
+        memory.user_id = state.user_id
         store = self._get_store()
-        id = id or state.user_id
         if self.actions_permitted and action not in self.actions_permitted:
-            raise ValueError(
+            raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
             )
-        if action == "create" and id is not None:
-            raise ValueError(
-                "You cannot provide a MEMORY ID when creating a MEMORY. Please try again, omitting the id argument."
+        try:
+            namespacer = NamespaceTemplate(self.namespace)
+            namespace = namespacer()
+            key: str = f"user_profile_{memory.user_id}"
+            if action == "delete":
+                await store.adelete(namespace, key=str(key))
+                return f"Deleted user profile {key}"
+            await store.aput(
+                namespace,
+                key=str(key),
+                value=self._ensure_json_serializable(memory),
             )
-        if action in ("delete", "update") and not id:
-            raise ValueError(
-                "You must provide a MEMORY ID when deleting or updating a MEMORY."
-            )
-        namespacer = NamespaceTemplate(self.namespace)
-        namespace = namespacer()
-        if action == "delete":
-            await store.adelete(namespace, key=str(id))
-            return f"Deleted memory {id}"
-        memory_id = id or str(uuid.uuid4())
-        await store.aput(
-            namespace,
-            key=str(memory_id),
-            value={"content": self._ensure_json_serializable(content)},
-        )
-        return f"{action}d memory {memory_id}"
+            return f"{action}d memory {key}"
+        except Exception as e:
+            logger.exception("Error storing user profile")
+            raise ToolException("Error storing user profile") from e
 
     def _get_store(self) -> BaseStore:
         if self.store is not None:
@@ -92,7 +106,8 @@ class ManageMemoryTool(ResilientBaseTool):
         except RuntimeError as e:
             raise errors.ConfigurationError("Could not get store") from e
 
-    def _ensure_json_serializable(self, content: typing.Any) -> typing.Any:
+    @staticmethod
+    def _ensure_json_serializable(content: typing.Any) -> typing.Any:
         if isinstance(content, (str, int, float, bool, dict, list)):
             return content
         if hasattr(content, "model_dump"):
