@@ -264,6 +264,11 @@ class LangGraphToOpenAIConverter:
                             artifact: Optional[Any] = tool_message.artifact
 
                             # print(f"on_tool_end: {tool_message}")
+                            if (
+                                not artifact
+                                and os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
+                            ):
+                                artifact = tool_message.content
 
                             if artifact:
                                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
@@ -278,9 +283,16 @@ class LangGraphToOpenAIConverter:
                                             index=0,
                                             delta=ChoiceDelta(
                                                 role="assistant",
+                                                content=f"\n> ==== Raw response from tool {tool_message.name} =====\n",
+                                            ),
+                                        ),
+                                        ChunkChoice(
+                                            index=0,
+                                            delta=ChoiceDelta(
+                                                role="assistant",
                                                 content=f"\n> {artifact}\n",
                                             ),
-                                        )
+                                        ),
                                     ],
                                     usage=CompletionUsage(
                                         prompt_tokens=0,

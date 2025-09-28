@@ -209,10 +209,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         ]
         if any(tools_using_authentication):
             # check that we have a valid Authorization header
-            auth_header: str | None = next(
-                (headers.get(key) for key in headers if key.lower() == "authorization"),
-                None,
-            )
+            auth_headers = [
+                headers.get(key) for key in headers if key.lower() == "authorization"
+            ]
+            auth_header: str | None = auth_headers[0] if auth_headers else None
             tool_using_authentication: AgentConfig
             for tool_using_authentication in tools_using_authentication:
                 await self.check_tokens_are_valid_for_tool(

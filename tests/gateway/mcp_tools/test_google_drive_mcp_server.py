@@ -1,21 +1,22 @@
 import os
 from typing import Dict
 
-import pytest
 import httpx
-from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
+import pytest
+from openai import AsyncOpenAI, AsyncStream
+from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
+
 from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,
 )
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
@@ -88,15 +89,28 @@ async def test_chat_completions_with_mcp_google_drive(
         "role": "user",
         "content": "Download https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing",
     }
-    chat_completion: ChatCompletion = await client.chat.completions.create(
+    stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
         messages=[message],
         model="General Purpose",
+        stream=True,
     )
-    assert chat_completion.choices[0].message.content is not None
+    content: str = ""
+    i: int = 0
+    async for chunk in stream:
+        i += 1
+        print(f"======== Chunk {i} ========")
+        delta_content = "\n".join(
+            [choice.delta.content or "" for choice in chunk.choices]
+        )
+        content += delta_content or ""
+        print(delta_content or "")
+        print(f"\n{chunk}\n")
+        print(f"====== End of Chunk {i} ======")
 
-    assert (
-        "ABCDGX Test File Shared With b.well"
-        in chat_completion.choices[0].message.content
-    )
+    print("======== Final Content ========")
+    print(content)
+    print("====== End of Final Content ======")
+
+    assert "ABCDGX Test File Shared With b.well" in content
 
     await model_configuration_cache.clear()

@@ -113,7 +113,7 @@ class TokenReader:
                     jwks_data: Dict[str, Any] = response.json()
                     for key in jwks_data.get("keys", []):
                         # if there is no matching "kid" in keys then add it
-                        if not any(k.get("kid") == key.get("kid") for k in keys):
+                        if not any([k.get("kid") == key.get("kid") for k in keys]):
                             keys.append(key)
 
                     logger.info(

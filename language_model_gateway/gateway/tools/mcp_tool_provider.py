@@ -139,14 +139,12 @@ class MCPToolProvider:
 
             # pass Authorization header if provided
             if headers:
-                auth_header: str | None = next(
-                    (
-                        headers.get(key)
-                        for key in headers
-                        if key.lower() == "authorization"
-                    ),
-                    None,
-                )
+                auth_headers = [
+                    headers.get(key)
+                    for key in headers
+                    if key.lower() == "authorization"
+                ]
+                auth_header: str | None = auth_headers[0] if auth_headers else None
                 if auth_header:
                     if tool.auth_providers:
                         # get the appropriate token_item for this tool
