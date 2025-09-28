@@ -267,21 +267,20 @@ class LangGraphToOpenAIConverter:
                             return_raw_tool_output: bool = (
                                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
                             )
-                            if not artifact and return_raw_tool_output:
-                                artifact = tool_message.content
-
-                            if artifact:
+                            if artifact or return_raw_tool_output:
                                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                                    logger.info(f"Returning artifact: {artifact}")
+                                    logger.info(
+                                        f"Returning artifact: {artifact if artifact else tool_message.content}"
+                                    )
 
                                 tool_progress_message: str = (
                                     (
                                         f"\n> ==== Raw responses from tool {tool_message.name} ====="
-                                        f"\n> {artifact}"
+                                        f"\n>{tool_message.content}"
                                         f"\n> ==== End Raw responses from tool {tool_message.name} =====\n"
                                     )
                                     if return_raw_tool_output
-                                    else (f"\n> {artifact}")
+                                    else f"\n> {artifact}"
                                 )
                                 chat_stream_response = ChatCompletionChunk(
                                     id=request_id,
