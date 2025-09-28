@@ -263,10 +263,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if not auth_information.email:
             raise ValueError(
                 "AuthInformation must have email to authenticate for tools."
+                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
         if not auth_information.subject:
             raise ValueError(
                 "AuthInformation must have subject to authenticate for tools."
+                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(

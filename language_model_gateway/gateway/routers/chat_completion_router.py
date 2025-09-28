@@ -140,7 +140,9 @@ class ChatCompletionsRouter:
                         auth_information.expires_at = token_item.expires
                         auth_information.audience = token_item.audience
                         auth_information.email = token_item.email
-                        auth_information.subject = token_item.subject
+                        auth_information.subject = (
+                            token_item.subject or token_item.email
+                        )
                         auth_information.user_name = token_item.name
                 else:
                     # read information from headers if present
