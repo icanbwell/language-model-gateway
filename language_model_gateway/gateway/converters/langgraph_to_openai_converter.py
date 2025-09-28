@@ -283,16 +283,9 @@ class LangGraphToOpenAIConverter:
                                             index=0,
                                             delta=ChoiceDelta(
                                                 role="assistant",
-                                                content=f"\n> ==== Raw response from tool {tool_message.name} =====\n",
+                                                content=f"\n> ==== Raw responses from tool {tool_message.name} =====\n> {artifact}\n",
                                             ),
-                                        ),
-                                        ChunkChoice(
-                                            index=0,
-                                            delta=ChoiceDelta(
-                                                role="assistant",
-                                                content=f"\n> {artifact}\n",
-                                            ),
-                                        ),
+                                        )
                                     ],
                                     usage=CompletionUsage(
                                         prompt_tokens=0,
