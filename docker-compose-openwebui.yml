@@ -4,7 +4,7 @@ services:
 #    image: openwebui-local:latest
     # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
     # Slim image excludes embedded AI models and Ollama installation
-    image: ghcr.io/open-webui/open-webui:v0.6.27-slim
+    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
     depends_on:
       - open-webui-db
     env_file:
