@@ -86,14 +86,11 @@ services:
       S3_KEY_PREFIX: "aiden/uploads/"
       # Embeddings config
 #      BYPASS_EMBEDDING_AND_RETRIEVAL: True
-#      RAG_EMBEDDING_ENGINE: "openai"
-#      RAG_EMBEDDING_MODEL: "text-embedding-3-small"
-      # RAG requires downloading embedding models.  On slow connections, this can timeout docker compose
-#      RAG_EMBEDDING_MODEL: ""
+      RAG_EMBEDDING_MODEL: "all-MiniLM-L6-v2"
       # set up vector database
-      VECTOR_DB: "s3vector"
-      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
-      S3_VECTOR_REGION: "us-east-1"
+#      VECTOR_DB: "s3vector"
+#      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
+#      S3_VECTOR_REGION: "us-east-1"
       # Whether to write oauth cookie or not
       # We now get it directly in the language_model_gateway.py so we don't need this
       ENABLE_OAUTH_ID_TOKEN_COOKIE: False
