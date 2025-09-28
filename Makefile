@@ -112,7 +112,12 @@ up-open-webui-auth: create-certs ## starts docker containers
 
 .PHONY: down
 down: ## stops docker containers
-	docker compose down --remove-orphans
+	docker compose --progress=plain \
+	  -f docker-compose-keycloak.yml \
+	-f docker-compose.yml \
+	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	down --remove-orphans
 
 .PHONY:update
 update: Pipfile.lock setup-pre-commit  ## Updates all the packages using Pipfile
