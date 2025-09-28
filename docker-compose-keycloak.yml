@@ -50,12 +50,14 @@ services:
       MY_ADMIN_USER_SCOPE: user/*.* access/*.*
       MY_ADMIN_USER_GROUPS: user/*.*,access/*.*
       MY_ADMIN_USER_TOKEN_USERNAME: admin
+      MY_ADMIN_USER_SUB: admin-subject-id
       # This is the user and password that will be created in the realm
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
       MY_USER_EMAIL: imran.qureshi@icanbwell.com
       MY_USER_FIRST_NAME: Imran
       MY_USER_LAST_NAME: Qureshi
+      MY_USER_SUB: tester-subject-id
       # These groups get specified as scopes in the token
       MY_USER_GROUPS: user/*.*,access/*.*,launch/patient,patient/*.read
       MY_USER_SCOPE: user/*.* access/*.* launch/patient patient/*.read openid profile email
