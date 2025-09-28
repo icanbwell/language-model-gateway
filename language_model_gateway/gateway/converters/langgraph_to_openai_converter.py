@@ -283,7 +283,7 @@ class LangGraphToOpenAIConverter:
                                             index=0,
                                             delta=ChoiceDelta(
                                                 role="assistant",
-                                                content=f"\n> ==== Raw responses from tool {tool_message.name} =====\n> {artifact}\n",
+                                                content=f"\n> ==== Raw responses from tool {tool_message.name} =====\n> {artifact}\n> ==== End Raw responses from tool {tool_message.name} =====\n",
                                             ),
                                         )
                                     ],
