@@ -1,12 +1,14 @@
 services:
   open-webui:
     # https://github.com/open-webui/open-webui/releases
-#    image: openwebui-local:latest
-    # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
-    # Slim image excludes embedded AI models and Ollama installation
-    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
     depends_on:
       - open-webui-db
+    # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
+    # Slim image excludes embedded AI models and Ollama installation
+#    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
+    build:
+      dockerfile: ./openwebui_functions/open-webui.Dockerfile
+      context: .
     env_file:
       - docker.env
     ports:
@@ -102,7 +104,7 @@ services:
       - web
     healthcheck:
       test: [ "CMD-SHELL", "curl --silent --fail http://localhost:8080/health | jq -ne 'input.status == true' || exit 1" ]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       start_period: 10s
       retries: 20
