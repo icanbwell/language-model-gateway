@@ -29,7 +29,12 @@ services:
 
   keycloak-init:
     # This container is used to initialize Keycloak with test data
-    image: public.ecr.aws/docker/library/python:3.12-alpine3.20
+    depends_on:
+      - keycloak
+#    image: public.ecr.aws/docker/library/python:3.12-alpine3.20
+    build:
+        dockerfile: keycloak-config/keycloak-init.Dockerfile
+        context: .
     volumes:
       - ./keycloak-config:/config
     environment:
@@ -98,8 +103,6 @@ services:
       "
     networks:
       - web
-    depends_on:
-      - keycloak
 
 networks:
   web:
