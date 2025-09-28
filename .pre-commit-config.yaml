@@ -104,8 +104,6 @@ repos:
         exclude: >
           (?x)^(
             tests/.*|
-            docker-compose\.yml|
-            .helm/.*|
-            docker-compose-openwebui\.yml|
-            docker-compose-openwebui-auth\.yml
+            docker-compose.*\.yml|
+            .helm/.*
           )$
