@@ -7,11 +7,14 @@ from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
-from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field, ConfigDict
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.structures.user_profile import UserProfile
+from language_model_gateway.gateway.tools.memories.user_profile_components import (
+    UserProfileRepository,
+    UserProfileValidator,
+)
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 logger = logging.getLogger(__name__)
@@ -74,6 +77,9 @@ class StoreUserProfileTool(ResilientBaseTool):
         logger.info(
             f"StoreUserProfileTool called with action: {action} state: {state} user_profile: {user_profile.model_dump()}"
         )
+        # Validate state and action
+        UserProfileValidator.validate_state_user_id(state)
+        UserProfileValidator.validate_action(action, self.actions_permitted)
         # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
         if not state.user_id:
             raise ToolException(
@@ -81,23 +87,13 @@ class StoreUserProfileTool(ResilientBaseTool):
             )
         user_profile.user_id = state.user_id
         store = self._get_store()
-        if self.actions_permitted and action not in self.actions_permitted:
-            raise ToolException(
-                f"Invalid action {action}. Must be one of {self.actions_permitted}."
-            )
+        repo = UserProfileRepository(store, self.namespace)
         try:
-            namespacer = NamespaceTemplate(self.namespace)
-            namespace = namespacer()
-            user_profile_id: str = f"user_profile_{user_profile.user_id}"
             if action == "delete":
-                await store.adelete(namespace, key=str(user_profile_id))
-                return f"Deleted user profile {user_profile_id}"
-            await store.aput(
-                namespace,
-                key=str(user_profile_id),
-                value=self._ensure_json_serializable(user_profile),
-            )
-            return f"{action}d memory {user_profile_id}"
+                await repo.delete(user_profile.user_id)
+                return f"Deleted user profile user_profile_{user_profile.user_id}"
+            await repo.save(user_profile)
+            return f"{action}d memory user_profile_{user_profile.user_id}"
         except Exception as e:
             logger.exception("Error storing user profile")
             raise ToolException("Error storing user profile") from e
@@ -109,15 +105,3 @@ class StoreUserProfileTool(ResilientBaseTool):
             return get_store()
         except RuntimeError as e:
             raise errors.ConfigurationError("Could not get store") from e
-
-    @staticmethod
-    def _ensure_json_serializable(content: typing.Any) -> typing.Any:
-        if isinstance(content, (str, int, float, bool, dict, list)):
-            return content
-        if hasattr(content, "model_dump"):
-            try:
-                return content.model_dump(mode="json")
-            except Exception as e:
-                logger.error(e)
-                return str(content)
-        return content
