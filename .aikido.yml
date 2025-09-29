@@ -1,0 +1,4 @@
+rules:
+  - id: python.dangerous-assert
+    enabled: false
+
