@@ -158,7 +158,10 @@ class LangGraphToOpenAIConverter:
                         pass
                     case "on_chat_model_stream":
                         # Handle the chat model stream event
-                        chunk: AIMessageChunk | None = event.get("data", {}).get(
+                        from typing import cast
+
+                        event_dict = cast(dict[str, Any], cast(object, event))
+                        chunk: AIMessageChunk | None = event_dict.get("data", {}).get(
                             "chunk"
                         )
                         if chunk is not None:
@@ -209,9 +212,10 @@ class LangGraphToOpenAIConverter:
                                 yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
-                        output: Dict[str, Any] | str | None = event.get("data", {}).get(
-                            "output"
-                        )
+                        event_dict = cast(dict[str, Any], cast(object, event))
+                        output: Dict[str, Any] | str | None = event_dict.get(
+                            "data", {}
+                        ).get("output")
                         if (
                             output
                             and isinstance(output, dict)
@@ -237,10 +241,11 @@ class LangGraphToOpenAIConverter:
                             yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
                     case "on_tool_start":
                         # Handle the start of the tool event
-                        tool_name: Optional[str] = event.get("name", None)
-                        tool_input: Dict[str, Any] | None = event.get("data", {}).get(
-                            "input"
-                        )
+                        event_dict = cast(dict[str, Any], cast(object, event))
+                        tool_name: Optional[str] = event_dict.get("name", None)
+                        tool_input: Dict[str, Any] | None = event_dict.get(
+                            "data", {}
+                        ).get("input")
 
                         # copy the tool_input to avoid modifying the original
                         tool_input_display = (
@@ -280,9 +285,10 @@ class LangGraphToOpenAIConverter:
 
                     case "on_tool_end":
                         # Handle the end of the tool event
-                        tool_message: ToolMessage | None = event.get("data", {}).get(
-                            "output"
-                        )
+                        event_dict = cast(dict[str, Any], cast(object, event))
+                        tool_message: ToolMessage | None = event_dict.get(
+                            "data", {}
+                        ).get("output")
                         if tool_message:
                             artifact: Optional[Any] = tool_message.artifact
 
@@ -849,7 +855,7 @@ class LangGraphToOpenAIConverter:
             The list of role and incoming message type tuples.
         """
         messages_: List[BaseMessage] = convert_openai_messages(
-            messages=[cast(Dict[str, Any], m) for m in messages]
+            messages=[cast(dict[str, Any], cast(object, m)) for m in messages]
         )
         return messages_
 
