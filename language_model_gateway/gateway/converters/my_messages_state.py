@@ -5,6 +5,10 @@ from langgraph.prebuilt.chat_agent_executor import AgentStatePydantic
 
 
 class MyMessagesState(AgentStatePydantic):
+    """ "
+    Custom state class that extends AgentStatePydantic to include additional metadata.
+    """
+
     usage_metadata: Optional[UsageMetadata]
     """ Metadata about the usage of the agent, if available."""
 

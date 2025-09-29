@@ -14,8 +14,3 @@ RUN mkdir -p /config && chown appuser:appuser /config
 
 # Switch to non-root user
 USER appuser
-
-# Test: show Python version (uncomment for debugging)
-# RUN python --version
-
-#RUN python /config/keycloak_config.py

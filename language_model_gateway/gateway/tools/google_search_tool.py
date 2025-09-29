@@ -93,7 +93,9 @@ class GoogleSearchTool(ResilientBaseTool):
         logger.warning(f"Rate limit hit. Retrying in {total_delay:.2f} seconds...")
         await asyncio.sleep(total_delay)
 
-    async def _make_request(self, url: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    async def _make_request(
+        self, url: str, params: Dict[str, Any]
+    ) -> Dict[str, Any] | None:
         """Make HTTP request with retry logic for rate limiting."""
         retry_count = 0
 
