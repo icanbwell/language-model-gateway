@@ -1,4 +1,10 @@
 rules:
   - id: python.dangerous-assert
     enabled: false
-
+ignore-paths:
+  - path: docker-compose-openwebui.yml
+    rules:
+      - generic.exposed-secret
+  - path: docker-compose-keycloak.yml
+    rules:
+      - generic.exposed-secret

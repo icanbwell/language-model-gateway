@@ -3,6 +3,8 @@ import logging
 import os
 import re
 import time
+import traceback
+
 from typing import (
     Any,
     List,
@@ -511,8 +513,6 @@ class LangGraphToOpenAIConverter:
                     + "  Please re-authenticate using `aws sso login --profile [role]`.",
                 )
             except* Exception as e:
-                import traceback
-
                 logger.exception(e, stack_info=True)
                 first_exception2 = e.exceptions[0] if len(e.exceptions) > 0 else e
                 # print type of first exception in ExceptionGroup
