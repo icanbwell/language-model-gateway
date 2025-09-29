@@ -15,6 +15,15 @@ logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
+# Utility to redact sensitive info from params
+def redact_params(params: Dict[str, Any]) -> Dict[str, Any]:
+    redacted = params.copy()
+    for sensitive_key in ("key", "cx", "api_key", "cse_id"):
+        if sensitive_key in redacted:
+            redacted[sensitive_key] = "***REDACTED***"
+    return redacted
+
+
 class GoogleSearchToolInput(BaseModel):
     query: str = Field(description="The search query to send to Google Search")
     use_verbose_logging: Optional[bool] = Field(
@@ -93,8 +102,9 @@ class GoogleSearchTool(ResilientBaseTool):
         while True:
             try:
                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                    safe_params = redact_params(params)
                     logger.info(
-                        f"Running Google search with query {params['q']}.  Params: {params}.  Retry count: {retry_count}"
+                        f"Running Google search with query {params.get('q')}. Params: {safe_params}. Retry count: {retry_count}"
                     )
 
                 response = await self._client.get(url, params=params)
@@ -122,8 +132,9 @@ class GoogleSearchTool(ResilientBaseTool):
                     continue
                 raise
             except Exception as e:
+                safe_params = redact_params(params)
                 logger.exception(
-                    f"Error making request for {url} with params {params}\n{str(e)}"
+                    f"Error making request for {url} with params {safe_params}\n{str(e)}"
                 )
                 raise
 
@@ -225,8 +236,13 @@ class GoogleSearchTool(ResilientBaseTool):
         try:
             result = await self._make_request(url, params)
             if not result:
-                logger.exception(f"Error making request for {url} with params {params}")
-                raise Exception(f"Error making request for {url} with params {params}")
+                safe_params = redact_params(params)
+                logger.exception(
+                    f"Error making request for {url} with params {safe_params}"
+                )
+                raise Exception(
+                    f"Error making request for {url} with params {safe_params}"
+                )
 
             # Result follows https://developers.google.com/custom-search/v1/reference/rest/v1/Search
             return cast(List[Dict[str, Any]], result.get("items", []))
