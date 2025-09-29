@@ -1,0 +1,7 @@
+rules:
+  - id: python.dangerous-assert
+    enabled: false
+exclude:
+  paths:
+    - docker-compose-openwebui.yml
+    - docker-compose-keycloak.yml
