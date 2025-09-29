@@ -136,6 +136,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
 
         # Use context managers only for the duration of streaming
+        # we can't use async with because we need to return the StreamingResponse
         store_cm = self.persistence_factory.create_store(
             persistence_type=self.environment_variables.llm_storage_type,
         )
