@@ -77,14 +77,27 @@ from language_model_gateway.gateway.utilities.environment_variables import (
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
+    TokenReducer,
+)
 
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangGraphToOpenAIConverter:
-    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+    def __init__(
+        self,
+        *,
+        environment_variables: EnvironmentVariables,
+        token_reducer: TokenReducer,
+    ) -> None:
         self.environment_variables: EnvironmentVariables = environment_variables
+        assert isinstance(self.environment_variables, EnvironmentVariables)
+        assert self.environment_variables is not None
+        self.token_reducer = token_reducer
+        assert self.token_reducer is not None
+        assert isinstance(self.token_reducer, TokenReducer)
 
     async def _stream_resp_async_generator(
         self,
@@ -268,19 +281,37 @@ class LangGraphToOpenAIConverter:
                                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
                             )
                             if artifact or return_raw_tool_output:
+                                tool_message_content: str = (
+                                    tool_message.content
+                                    if isinstance(tool_message.content, str)
+                                    else " ".join(
+                                        [str(c) for c in tool_message.content]
+                                    )
+                                )
                                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
                                     logger.info(
-                                        f"Returning artifact: {artifact if artifact else tool_message.content}"
+                                        f"Returning artifact: {artifact if artifact else tool_message_content}"
                                     )
+
+                                token_count: int = self.token_reducer.count_tokens(
+                                    tool_message_content
+                                    if return_raw_tool_output
+                                    else str(artifact)
+                                )
 
                                 tool_progress_message: str = (
                                     (
-                                        f"\n> ==== Raw responses from tool {tool_message.name} ====="
-                                        f"\n>{tool_message.content}"
+                                        f"\n> ==== Raw responses from tool {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n>{tool_message_content}"
                                         f"\n> ==== End Raw responses from tool {tool_message.name} =====\n"
                                     )
                                     if return_raw_tool_output
                                     else f"\n> {artifact}"
+                                    + (
+                                        f" [tokens: {token_count}]"
+                                        if logger.isEnabledFor(logging.DEBUG) > 0
+                                        else ""
+                                    )
                                 )
                                 chat_stream_response = ChatCompletionChunk(
                                     id=request_id,
