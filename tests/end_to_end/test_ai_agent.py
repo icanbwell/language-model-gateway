@@ -102,6 +102,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
             audience=None,
             email=None,
             subject=None,
+            user_name=None,
         ),
     )
 

@@ -96,6 +96,14 @@ pymongo = { version = ">=4.14.0", extras = ["srv"] }
 redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
 ddgs = ">=8.1.1"
+# langmem is a Python library for managing language model memory
+langmem = ">=0.0.29"
+# langgraph-checkpoint is a Python library for working with checkpoints in LangGraph
+langgraph-checkpoint = ">=2.1.1"
+# langgraph-checkpoint-mongodb is a Python library for working with MongoDB checkpoints in LangGraph
+langgraph-checkpoint-mongodb = ">=0.2.0"
+# langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
+langgraph-store-mongodb = ">=0.1.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks

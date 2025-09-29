@@ -1,9 +1,10 @@
+from random import randint
 from typing import Optional
 
 import httpx
 import pytest
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion
+from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
@@ -30,10 +31,6 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
             ),
         )
 
-    # Test health endpoint
-    # response = await async_client.get("/health")
-    # assert response.status_code == 200
-
     # init client and connect to localhost server
     client = AsyncOpenAI(
         api_key="fake-api-key",
@@ -42,14 +39,15 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
     )
 
     # call API
+    message: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "I'm 60 years old and have been programming for 5 days.",
+    }
+    chat_id: str = str(randint(1, 1000))
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "what is the first name of Obama?",
-            }
-        ],
+        messages=[message],
         model="General Purpose",
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
     )
 
     # print the top "choice"
@@ -59,7 +57,41 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
 
     assert content is not None
     print(content)
-    assert "Barack" in content
+    # assert "Barack" in content
+
+    message = {
+        "role": "user",
+        "content": "let’s talk about football",
+    }
+    chat_completion = await client.chat.completions.create(
+        messages=[message],
+        model="General Purpose",
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
+    )
+
+    # print the top "choice"
+    content = "\n".join(
+        choice.message.content or "" for choice in chat_completion.choices
+    )
+
+    assert content is not None
+
+    message = {
+        "role": "user",
+        "content": "look up my user profile",
+    }
+    chat_completion = await client.chat.completions.create(
+        messages=[message],
+        model="General Purpose",
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
+    )
+
+    # print the top "choice"
+    content = "\n".join(
+        choice.message.content or "" for choice in chat_completion.choices
+    )
+
+    assert content is not None
 
 
 @pytest.mark.asyncio

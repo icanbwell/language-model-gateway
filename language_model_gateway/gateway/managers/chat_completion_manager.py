@@ -100,9 +100,11 @@ class ChatCompletionManager:
             ] = await self.config_reader.read_model_configs_async()
 
             # Find the model config
-            model_config: ChatModelConfig | None = next(
-                (config for config in configs if config.name.lower() == model.lower()),
-                None,
+            configs = [
+                config for config in configs if config.name.lower() == model.lower()
+            ]
+            model_config: ChatModelConfig | None = (
+                configs[0] if len(configs) > 0 else None
             )
             if model_config is None:
                 logger.error(f"Model {model} not found in the config")

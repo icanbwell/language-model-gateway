@@ -1,7 +1,7 @@
 import datetime
 import logging
 import random
-from typing import Dict, Any, Sequence, List
+from typing import Dict, Any, Sequence, List, AsyncGenerator
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
@@ -20,10 +20,16 @@ from language_model_gateway.gateway.converters.langgraph_to_openai_converter imp
 )
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.persistence.persistence_factory import (
+    PersistenceFactory,
+)
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.request_information import (
+    RequestInformation,
+)
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.environment_variables import (
@@ -47,6 +53,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         auth_manager: AuthManager,
         environment_variables: EnvironmentVariables,
         auth_config_reader: AuthConfigReader,
+        persistence_factory: PersistenceFactory,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         assert self.model_factory is not None
@@ -81,6 +88,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         self.auth_config_reader: AuthConfigReader = auth_config_reader
         assert self.auth_config_reader is not None
         assert isinstance(self.auth_config_reader, AuthConfigReader)
+
+        self.persistence_factory: PersistenceFactory = persistence_factory
+        assert self.persistence_factory is not None
+        assert isinstance(self.persistence_factory, PersistenceFactory)
 
     async def chat_completions(
         self,
@@ -124,21 +135,67 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
-        compiled_state_graph: CompiledStateGraph[
-            MyMessagesState
-        ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
-            llm=llm,
-            tools=tools,
+        # Use context managers only for the duration of streaming
+        # we can't use async with because we need to return the StreamingResponse
+        store_cm = self.persistence_factory.create_store(
+            persistence_type=self.environment_variables.llm_storage_type,
         )
-        request_id = random.randint(1, 1000)
+        checkpointer_cm = self.persistence_factory.create_checkpointer(
+            persistence_type=self.environment_variables.llm_storage_type,
+        )
+        try:
+            store = store_cm.__enter__()
+            checkpointer = checkpointer_cm.__enter__()
+            compiled_state_graph: CompiledStateGraph[
+                MyMessagesState
+            ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
+                llm=llm,
+                tools=tools,
+                store=store,
+                checkpointer=checkpointer,
+            )
+            request_id = random.randint(1, 1000)
 
-        return await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-            request_id=str(request_id),
-            headers=headers,
-            compiled_state_graph=compiled_state_graph,
-            chat_request=chat_request,
-            system_messages=[],
-        )
+            conversation_thread_id: str | None = headers.get("X-Chat-Id".lower())
+
+            result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
+                compiled_state_graph=compiled_state_graph,
+                chat_request=chat_request,
+                system_messages=[],
+                request_information=RequestInformation(
+                    auth_information=auth_information,
+                    user_id=auth_information.subject,
+                    user_email=auth_information.email,
+                    user_name=auth_information.user_name,
+                    request_id=str(request_id),
+                    conversation_thread_id=conversation_thread_id or str(request_id),
+                    headers=headers,
+                ),
+            )
+            # If result is a StreamingResponse, wrap the generator so context managers stay open
+            if isinstance(result, StreamingResponse):
+                original_generator = result.body_iterator
+
+                async def streaming_wrapper() -> AsyncGenerator[
+                    str | bytes | memoryview, None
+                ]:
+                    try:
+                        async for chunk in original_generator:
+                            yield chunk
+                    finally:
+                        checkpointer_cm.__exit__(None, None, None)
+                        store_cm.__exit__(None, None, None)
+
+                result.body_iterator = streaming_wrapper()
+                return result
+            else:
+                checkpointer_cm.__exit__(None, None, None)
+                store_cm.__exit__(None, None, None)
+                return result
+        except Exception as e:
+            checkpointer_cm.__exit__(type(e), e, e.__traceback__)
+            store_cm.__exit__(type(e), e, e.__traceback__)
+            raise
 
     async def check_tokens_are_valid_for_tools(
         self,
@@ -153,10 +210,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         ]
         if any(tools_using_authentication):
             # check that we have a valid Authorization header
-            auth_header: str | None = next(
-                (headers.get(key) for key in headers if key.lower() == "authorization"),
-                None,
-            )
+            auth_headers = [
+                headers.get(key) for key in headers if key.lower() == "authorization"
+            ]
+            auth_header: str | None = auth_headers[0] if auth_headers else None
             tool_using_authentication: AgentConfig
             for tool_using_authentication in tools_using_authentication:
                 await self.check_tokens_are_valid_for_tool(
@@ -207,10 +264,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if not auth_information.email:
             raise ValueError(
                 "AuthInformation must have email to authenticate for tools."
+                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
         if not auth_information.subject:
             raise ValueError(
                 "AuthInformation must have subject to authenticate for tools."
+                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(

@@ -282,6 +282,20 @@ def configure_keycloak() -> None:
                 "userinfo.token.claim": "true",
             },
         }
+        sub_attribute_mapper = {
+            "name": "sub-attribute-mapper",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": False,
+            "config": {
+                "access.token.claim": "true",
+                "claim.name": "sub",
+                "id.token.claim": "true",
+                "jsonType.label": "String",
+                "user.attribute": "sub",
+                "userinfo.token.claim": "true",
+            },
+        }
         # Define client scopes with protocol mappers
         client_scopes: List[Dict[str, Any]] = [
             {
@@ -426,6 +440,16 @@ def configure_keycloak() -> None:
                 },
                 "protocolMappers": [custom_scope_mapper],
             },
+            {
+                "name": "sub-attribute-scope",
+                "protocol": "openid-connect",
+                "attributes": {
+                    "display.on.consent.screen": "true",
+                    "include.in.token.scope": "false",
+                },
+                "description": "Scope to set sub claim to user attribute 'sub'",
+                "protocolMappers": [sub_attribute_mapper],
+            },
         ]
 
         # Add or update client scopes in Keycloak
@@ -448,6 +472,7 @@ def configure_keycloak() -> None:
             "name": os.getenv("CLIENT_ID", "bwell-client-id"),
             "enabled": True,  # default is True
             "protocol": "openid-connect",  # default is openid-connect
+            "fullScopeAllowed": False,
             # "publicClient": False,  # default is False
             "secret": os.getenv("CLIENT_SECRET", "bwell-secret"),
             "redirectUris": ["*"],
@@ -479,6 +504,7 @@ def configure_keycloak() -> None:
                 "bwell-token-use-mapper",
                 "bwell-username-mapper",
                 "custom-scope-mapper",
+                "sub-attribute-scope",
             ],
             "optionalClientScopes": [
                 "user/*.*",
@@ -490,6 +516,7 @@ def configure_keycloak() -> None:
             "name": os.getenv("CLIENT_ID_2", "bwell-client-id-2"),
             "enabled": True,
             "protocol": "openid-connect",
+            "fullScopeAllowed": False,
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET_2", "bwell-secret-2"),
             "serviceAccountsEnabled": True,  # Enable client credentials flow
@@ -501,6 +528,7 @@ def configure_keycloak() -> None:
             "name": os.getenv("CLIENT_ID_3", "bwell-client-id-3"),
             "enabled": True,
             "protocol": "openid-connect",
+            "fullScopeAllowed": False,
             "publicClient": False,
             "secret": os.getenv("CLIENT_SECRET_3", "bwell-secret-3"),
             "redirectUris": ["*"],
@@ -523,6 +551,7 @@ def configure_keycloak() -> None:
                 "profile",
                 "email",
                 "openid",
+                "sub-attribute-scope",
             ],
             "optionalClientScopes": [
                 "user/*.*",
@@ -563,6 +592,7 @@ def configure_keycloak() -> None:
                 "custom:scope": os.getenv("MY_ADMIN_USER_SCOPE", ""),
                 "cognito:groups": os.getenv("MY_ADMIN_USER_GROUPS", "").split(","),
                 "username": os.getenv("MY_ADMIN_USER_TOKEN_USERNAME", "admin"),
+                "sub": os.getenv("MY_ADMIN_USER_SUB", "admin-subject-id"),
             },
         }
         test_user = {
@@ -587,6 +617,7 @@ def configure_keycloak() -> None:
                 "bwellFhirPersonId": os.getenv("MY_USER_BWELL_PERSON_ID", ""),
                 "bwellFhirPatientId": os.getenv("MY_USER_BWELL_PATIENT_ID", ""),
                 "username": os.getenv("MY_USER_TOKEN_USERNAME", "tester"),
+                "sub": os.getenv("MY_USER_SUB", "tester-subject-id"),
             },
         }
         users_to_create = [

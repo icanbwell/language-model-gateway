@@ -58,7 +58,12 @@ up-open-webui-ssl: clean-database ## starts docker containers
 
 .PHONY: up-open-webui-auth
 up-open-webui-auth: create-certs ## starts docker containers
-	docker compose --progress=plain -f docker-compose.yml -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml -f docker-compose-mcp-server-gateway.yml up -d
+	docker compose --progress=plain \
+	  -f docker-compose-keycloak.yml \
+	-f docker-compose.yml \
+	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	up -d
 	echo "waiting for open-webui service to become healthy" && \
 	max_attempts=30 && \
 	attempt=0 && \
@@ -103,10 +108,16 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
+	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 
 .PHONY: down
 down: ## stops docker containers
-	docker compose down --remove-orphans
+	docker compose --progress=plain \
+	  -f docker-compose-keycloak.yml \
+	-f docker-compose.yml \
+	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	down --remove-orphans
 
 .PHONY:update
 update: Pipfile.lock setup-pre-commit  ## Updates all the packages using Pipfile

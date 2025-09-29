@@ -15,6 +15,15 @@ logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
+# Utility to redact sensitive info from params
+def redact_params(params: Dict[str, Any]) -> Dict[str, Any]:
+    redacted = params.copy()
+    for sensitive_key in ("key", "cx", "api_key", "cse_id"):
+        if sensitive_key in redacted:
+            redacted[sensitive_key] = "***REDACTED***"
+    return redacted
+
+
 class GoogleSearchToolInput(BaseModel):
     query: str = Field(description="The search query to send to Google Search")
     use_verbose_logging: Optional[bool] = Field(
@@ -72,10 +81,10 @@ class GoogleSearchTool(ResilientBaseTool):
         self._api_key = api_key
         self._cse_id = cse_id
 
-    async def _handle_rate_limit(self, retry_count: int) -> None:
+    async def _handle_rate_limit(self, *, retry_count: int, error_text: str) -> None:
         """Handle rate limiting with exponential backoff."""
         if retry_count >= self._max_retries:
-            raise Exception("Max retries exceeded for Google Search API")
+            raise Exception(f"Max retries exceeded for Google Search API: {error_text}")
 
         delay = min(self._base_delay * (2**retry_count), self._max_delay)
         jitter = delay * 0.1 * (2 * random.random() - 1)  # Add 10% jitter
@@ -84,21 +93,27 @@ class GoogleSearchTool(ResilientBaseTool):
         logger.warning(f"Rate limit hit. Retrying in {total_delay:.2f} seconds...")
         await asyncio.sleep(total_delay)
 
-    async def _make_request(self, url: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    async def _make_request(
+        self, url: str, params: Dict[str, Any]
+    ) -> Dict[str, Any] | None:
         """Make HTTP request with retry logic for rate limiting."""
         retry_count = 0
 
         while True:
             try:
                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                    safe_params = redact_params(params)
                     logger.info(
-                        f"Running Google search with query {params['q']}.  Params: {params}.  Retry count: {retry_count}"
+                        f"Running Google search with query {params.get('q')}. Params: {safe_params}. Retry count: {retry_count}"
                     )
 
                 response = await self._client.get(url, params=params)
 
                 if response.status_code == 429:  # Too Many Requests
-                    await self._handle_rate_limit(retry_count)
+                    text = response.text
+                    await self._handle_rate_limit(
+                        retry_count=retry_count, error_text=text
+                    )
                     retry_count += 1
                     continue
 
@@ -109,13 +124,17 @@ class GoogleSearchTool(ResilientBaseTool):
 
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 429:
-                    await self._handle_rate_limit(retry_count)
+                    text = e.response.text
+                    await self._handle_rate_limit(
+                        retry_count=retry_count, error_text=text
+                    )
                     retry_count += 1
                     continue
                 raise
             except Exception as e:
+                safe_params = redact_params(params)
                 logger.exception(
-                    f"Error making request for {url} with params {params}\n{str(e)}"
+                    f"Error making request for {url} with params {safe_params}\n{str(e)}"
                 )
                 raise
 
@@ -216,6 +235,15 @@ class GoogleSearchTool(ResilientBaseTool):
         # parameters follow https://developers.google.com/custom-search/v1/reference/rest/v1/cse/list
         try:
             result = await self._make_request(url, params)
+            if not result:
+                safe_params = redact_params(params)
+                logger.exception(
+                    f"Error making request for {url} with params {safe_params}"
+                )
+                raise Exception(
+                    f"Error making request for {url} with params {safe_params}"
+                )
+
             # Result follows https://developers.google.com/custom-search/v1/reference/rest/v1/Search
             return cast(List[Dict[str, Any]], result.get("items", []))
         except Exception as e:

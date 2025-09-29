@@ -1,14 +1,14 @@
-from datetime import datetime
 import logging
 import traceback
+from datetime import datetime
 from enum import Enum
-from typing import Annotated, Dict, Any, TypedDict, cast, Sequence
+from typing import Annotated, Dict, Any, TypedDict, Sequence, cast
 
 from botocore.exceptions import TokenRetrievalError
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi import params
 from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
-from fastapi import params
 
 from language_model_gateway.gateway.api_container import (
     get_chat_manager,
@@ -115,32 +115,13 @@ class ChatCompletionsRouter:
         assert chat_manager
 
         try:
-            # read the authorization header and extract the token
-            auth_information: AuthInformation = AuthInformation(
-                redirect_uri=environment_variables.auth_redirect_uri
-                or str(request.url_for("auth_callback")),
-                claims=None,
-                expires_at=None,
-                audience=None,
-                email=None,
-                subject=None,
+            auth_information = await self.read_auth_information(
+                environment_variables=environment_variables,
+                request=request,
+                token_reader=token_reader,
             )
-            auth_header = request.headers.get("Authorization")
-            if auth_header:
-                token: str | None = token_reader.extract_token(auth_header)
-                if (
-                    token and token != "fake-api-key" and token != "bedrock"
-                ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
-                    token_item: Token | None = await token_reader.verify_token_async(
-                        token=token
-                    )
-                    if token_item is not None:
-                        auth_information.claims = token_item.claims
-                        auth_information.expires_at = token_item.expires
-                        auth_information.audience = token_item.audience
-                        auth_information.email = token_item.email
-                        auth_information.subject = token_item.subject
 
+            # noinspection PyInvalidCast
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},
@@ -192,6 +173,52 @@ class ChatCompletionsRouter:
             }
             logger.exception(e, stack_info=True)
             raise HTTPException(status_code=500, detail=error_detail)
+
+    async def read_auth_information(
+        self,
+        *,
+        environment_variables: EnvironmentVariables,
+        request: Request,
+        token_reader: TokenReader,
+    ) -> AuthInformation:
+        # read the authorization header and extract the token
+        auth_information: AuthInformation = AuthInformation(
+            redirect_uri=environment_variables.auth_redirect_uri
+            or str(request.url_for("auth_callback")),
+            claims=None,
+            expires_at=None,
+            audience=None,
+            email=None,
+            subject=None,
+            user_name=None,
+        )
+        auth_header = request.headers.get("Authorization")
+        if auth_header:
+            token: str | None = token_reader.extract_token(auth_header)
+            if (
+                token and token != "fake-api-key" and token != "bedrock"
+            ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
+                token_item: Token | None = await token_reader.verify_token_async(
+                    token=token
+                )
+                if token_item is not None:
+                    auth_information.claims = token_item.claims
+                    auth_information.expires_at = token_item.expires
+                    auth_information.audience = token_item.audience
+                    auth_information.email = token_item.email
+                    auth_information.subject = token_item.subject or token_item.email
+                    auth_information.user_name = token_item.name
+            else:
+                # read information from headers if present
+                if "x-openwebui-user-id" in request.headers:
+                    auth_information.subject = request.headers["x-openwebui-user-id"]
+                if "x-openwebui-user-email" in request.headers:
+                    auth_information.email = request.headers["x-openwebui-user-email"]
+                if "x-openwebui-user-name" in request.headers:
+                    auth_information.user_name = request.headers[
+                        "x-openwebui-user-name"
+                    ]
+        return auth_information
 
     def get_router(self) -> APIRouter:
         """Get the configured router"""

@@ -12,6 +12,9 @@ from language_model_gateway.gateway.converters.langgraph_to_openai_converter imp
     LangGraphToOpenAIConverter,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.persistence.persistence_factory import (
+    PersistenceFactory,
+)
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
 )
@@ -38,6 +41,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         fn_get_response: MockChatResponseProtocol,
         auth_config_reader: AuthConfigReader,
         environment_variables: EnvironmentVariables,
+        persistence_factory: PersistenceFactory,
     ) -> None:
         super().__init__(
             model_factory=model_factory,
@@ -48,6 +52,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             auth_manager=auth_manager,
             environment_variables=environment_variables,
             auth_config_reader=auth_config_reader,
+            persistence_factory=persistence_factory,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 
