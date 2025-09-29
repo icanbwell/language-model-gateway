@@ -357,7 +357,7 @@ class JiraIssueHelper:
         """
         if not issue_counts:
             raise ValueError("Issue counts are required")
-        if output_file is None:
+        if not output_file:
             raise ValueError("Output file path is invalid")
 
         try:

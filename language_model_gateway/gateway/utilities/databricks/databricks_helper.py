@@ -25,7 +25,7 @@ class DatabricksHelper:
 
     def parse_databricks_statement_response(
         self, statement_response: StatementResponse
-    ) -> pd.DataFrame:
+    ) -> pd.DataFrame | None:
         """
         Simple parser to create a DataFrame from Databricks StatementResponse
         Args:
@@ -57,8 +57,7 @@ class DatabricksHelper:
 
         except Exception as e:
             self.logger.error(f"Error parsing Databricks statement response: {e}")
-            # Return an empty DataFrame instead of None to match the expected return type
-            return pd.DataFrame()
+            return None
 
     def dataframe_to_markdown(self, df: DataFrame) -> str:
         """
