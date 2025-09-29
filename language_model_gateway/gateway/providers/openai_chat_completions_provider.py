@@ -141,31 +141,38 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         headers: Dict[str, str],
     ) -> AsyncGenerator[str, None]:
         logger.info(f"Streaming response {request_id} from agent")
-        async with self.http_client_factory.create_http_client(
-            base_url="http://test"
-        ) as client:
-            async with aconnect_sse(
-                client,
-                "POST",
-                agent_url,
-                json=chat_request,
-                timeout=60 * 60,
-                headers=headers,
-            ) as event_source:
-                i = 0
-                sse: ServerSentEvent
-                async for sse in event_source.aiter_sse():
-                    event: str = sse.event
-                    data: str = sse.data
-                    i += 1
+        try:
+            async with self.http_client_factory.create_http_client(
+                base_url="http://test"
+            ) as client:
+                async with aconnect_sse(
+                    client,
+                    "POST",
+                    agent_url,
+                    json=chat_request,
+                    timeout=60 * 60,
+                    headers=headers,
+                ) as event_source:
+                    i = 0
+                    sse: ServerSentEvent
+                    async for sse in event_source.aiter_sse():
+                        event: str = sse.event
+                        data: str = sse.data
+                        i += 1
 
-                    if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                        if logger.isEnabledFor(logging.DEBUG):
-                            logger.debug(
-                                f"----- Received data from stream {i} {event} {type(data)} ------"
-                            )
-                            logger.debug(data)
-                            logger.debug(
-                                f"----- End data from stream {i} {event} {type(data)} ------"
-                            )
-                    yield f"data: {data}\n\n"
+                        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                            if logger.isEnabledFor(logging.DEBUG):
+                                logger.debug(
+                                    f"----- Received data from stream {i} {event} {type(data)} ------"
+                                )
+                                logger.debug(data)
+                                logger.debug(
+                                    f"----- End data from stream {i} {event} {type(data)} ------"
+                                )
+                        yield f"data: {data}\n\n"
+        except Exception as e:
+            logger.error(
+                f"Exception in _stream_resp_async_generator: {e}", exc_info=True
+            )
+            # Optionally yield an error message to the client
+            yield f'data: {{"error": "{str(e)}"}}\n\n'

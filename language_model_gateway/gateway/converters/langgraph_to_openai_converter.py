@@ -149,6 +149,7 @@ class LangGraphToOpenAIConverter:
 
                 # print(f"===== {event_type} =====\n{event}\n")
 
+                event_object = cast(object, event)
                 match event_type:
                     case "on_chain_start":
                         # Handle the start of the chain event
@@ -158,9 +159,7 @@ class LangGraphToOpenAIConverter:
                         pass
                     case "on_chat_model_stream":
                         # Handle the chat model stream event
-                        from typing import cast
-
-                        event_dict = cast(dict[str, Any], cast(object, event))
+                        event_dict = cast(dict[str, Any], event_object)
                         chunk: AIMessageChunk | None = event_dict.get("data", {}).get(
                             "chunk"
                         )
@@ -212,7 +211,7 @@ class LangGraphToOpenAIConverter:
                                 yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
-                        event_dict = cast(dict[str, Any], cast(object, event))
+                        event_dict = cast(dict[str, Any], event_object)
                         output: Dict[str, Any] | str | None = event_dict.get(
                             "data", {}
                         ).get("output")
@@ -241,7 +240,7 @@ class LangGraphToOpenAIConverter:
                             yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
                     case "on_tool_start":
                         # Handle the start of the tool event
-                        event_dict = cast(dict[str, Any], cast(object, event))
+                        event_dict = cast(dict[str, Any], event_object)
                         tool_name: Optional[str] = event_dict.get("name", None)
                         tool_input: Dict[str, Any] | None = event_dict.get(
                             "data", {}
@@ -285,7 +284,7 @@ class LangGraphToOpenAIConverter:
 
                     case "on_tool_end":
                         # Handle the end of the tool event
-                        event_dict = cast(dict[str, Any], cast(object, event))
+                        event_dict = cast(dict[str, Any], event_object)
                         tool_message: ToolMessage | None = event_dict.get(
                             "data", {}
                         ).get("output")
@@ -376,6 +375,11 @@ class LangGraphToOpenAIConverter:
             )
             yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
         except Exception as e:
+            tb = traceback.format_exc()
+            logger.error(
+                f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
+            )
+            error_message = f"Error: {e}\nTraceback:\n{tb}"
             chat_stream_response = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
@@ -385,7 +389,7 @@ class LangGraphToOpenAIConverter:
                         index=0,
                         delta=ChoiceDelta(
                             role="assistant",
-                            content=f"\nError:\n{e}\n",
+                            content=f"\n{error_message}\n",
                         ),
                     )
                 ],
