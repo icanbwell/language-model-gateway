@@ -1,3 +1,4 @@
+# pragma: allowlist secret
 services:
   keycloak:
     # https://github.com/keycloak/keycloak/releases
