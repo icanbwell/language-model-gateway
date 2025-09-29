@@ -75,7 +75,9 @@ class ManageMemoryTool(ResilientBaseTool):
             raise ToolException(
                 "user_id is required in the state to store user profile"
             )
-        memory.user_id = state.user_id
+        # Copy memory before setting user_id to avoid mutating the input object
+        memory_copy = memory.model_copy()
+        memory_copy.user_id = state.user_id
         store = self._get_store()
         if self.actions_permitted and action not in self.actions_permitted:
             raise ToolException(
@@ -84,14 +86,14 @@ class ManageMemoryTool(ResilientBaseTool):
         try:
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()
-            key: str = f"user_profile_{memory.user_id}"
+            key: str = f"user_profile_{memory_copy.user_id}"
             if action == "delete":
                 await store.adelete(namespace, key=str(key))
                 return f"Deleted user profile {key}"
             await store.aput(
                 namespace,
                 key=str(key),
-                value=self._ensure_json_serializable(memory),
+                value=self._ensure_json_serializable(memory_copy),
             )
             return f"{action}d memory {key}"
         except Exception as e:
