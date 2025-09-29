@@ -78,8 +78,6 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         if cache is None:
             raise ValueError("cache must not be None")
         self._cache: McpToolsMetadataExpiringCache = cache
-        if self._cache is None:
-            raise ValueError("self._cache must not be None")
         self._tool_names: List[str] | None = tool_names
         self._tool_output_token_limit: int | None = tool_output_token_limit
         if not isinstance(self._cache, McpToolsMetadataExpiringCache):
