@@ -53,8 +53,6 @@ class ChatCompletionManager:
     Implements the chat completion manager following the OpenAI API
     https://platform.openai.com/docs/overview
     https://github.com/openai/openai-python/blob/main/api.md
-
-
     """
 
     def __init__(
@@ -64,23 +62,27 @@ class ChatCompletionManager:
         langchain_provider: LangChainCompletionsProvider,
         config_reader: ConfigReader,
     ) -> None:
-        """
-        Chat completion manager
-
-        :param open_ai_provider: provider to use for OpenAI completions
-        :param langchain_provider: provider to use for LangChain completions
-        :return:
-        """
-
         self.openai_provider: OpenAiChatCompletionsProvider = open_ai_provider
-        assert self.openai_provider is not None
-        assert isinstance(self.openai_provider, OpenAiChatCompletionsProvider)
+        if self.openai_provider is None:
+            raise ValueError("open_ai_provider must not be None")
+        if not isinstance(self.openai_provider, OpenAiChatCompletionsProvider):
+            raise TypeError(
+                f"open_ai_provider must be OpenAiChatCompletionsProvider, got {type(self.openai_provider)}"
+            )
         self.langchain_provider: LangChainCompletionsProvider = langchain_provider
-        assert self.langchain_provider is not None
-        assert isinstance(self.langchain_provider, LangChainCompletionsProvider)
+        if self.langchain_provider is None:
+            raise ValueError("langchain_provider must not be None")
+        if not isinstance(self.langchain_provider, LangChainCompletionsProvider):
+            raise TypeError(
+                f"langchain_provider must be LangChainCompletionsProvider, got {type(self.langchain_provider)}"
+            )
         self.config_reader: ConfigReader = config_reader
-        assert self.config_reader is not None
-        assert isinstance(self.config_reader, ConfigReader)
+        if self.config_reader is None:
+            raise ValueError("config_reader must not be None")
+        if not isinstance(self.config_reader, ConfigReader):
+            raise TypeError(
+                f"config_reader must be ConfigReader, got {type(self.config_reader)}"
+            )
 
     # noinspection PyMethodMayBeStatic
     async def chat_completions(
@@ -93,7 +95,8 @@ class ChatCompletionManager:
         # Use the model to choose the provider
         try:
             model: str = chat_request["model"]
-            assert model is not None
+            if model is None:
+                raise ValueError("model must not be None in chat_request")
 
             configs: List[
                 ChatModelConfig
@@ -128,9 +131,10 @@ class ChatCompletionManager:
                         detail=f"Model type {model_config.type} not supported",
                     )
 
-            assert provider is not None, (
-                f"Provider should not be None for model type {model_config.type}"
-            )
+            if provider is None:
+                raise RuntimeError(
+                    f"Provider should not be None for model type {model_config.type}"
+                )
 
             help_response: StreamingResponse | JSONResponse | None = (
                 self.handle_help_prompt(

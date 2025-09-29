@@ -76,22 +76,34 @@ class AuthManager:
             token_reader (TokenReader): The reader for tokens.
         """
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert self.environment_variables is not None
-        assert isinstance(self.environment_variables, EnvironmentVariables), (
-            "environment_variables must be an instance of EnvironmentVariables"
-        )
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "environment_variables must be an instance of EnvironmentVariables"
+            )
 
         self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
-        assert self.token_exchange_manager is not None
-        assert isinstance(self.token_exchange_manager, TokenExchangeManager)
+        if self.token_exchange_manager is None:
+            raise ValueError("token_exchange_manager must not be None")
+        if not isinstance(self.token_exchange_manager, TokenExchangeManager):
+            raise TypeError(
+                "token_exchange_manager must be an instance of TokenExchangeManager"
+            )
 
         self.auth_config_reader: AuthConfigReader = auth_config_reader
-        assert self.auth_config_reader is not None
-        assert isinstance(self.auth_config_reader, AuthConfigReader)
+        if self.auth_config_reader is None:
+            raise ValueError("auth_config_reader must not be None")
+        if not isinstance(self.auth_config_reader, AuthConfigReader):
+            raise TypeError(
+                "auth_config_reader must be an instance of AuthConfigReader"
+            )
 
         self.token_reader: TokenReader = token_reader
-        assert self.token_reader is not None
-        assert isinstance(self.token_reader, TokenReader)
+        if self.token_reader is None:
+            raise ValueError("token_reader must not be None")
+        if not isinstance(self.token_reader, TokenReader):
+            raise TypeError("token_reader must be an instance of TokenReader")
 
         oauth_cache_type = environment_variables.oauth_cache
         self.cache: OAuthCache = (
@@ -105,9 +117,8 @@ class AuthManager:
         )
         # OIDC PKCE setup
         self.redirect_uri = os.getenv("AUTH_REDIRECT_URI")
-        assert self.redirect_uri is not None, (
-            "AUTH_REDIRECT_URI environment variable must be set"
-        )
+        if self.redirect_uri is None:
+            raise ValueError("AUTH_REDIRECT_URI environment variable must be set")
         # https://docs.authlib.org/en/latest/client/frameworks.html#frameworks-clients
         self.oauth: OAuth = OAuth(cache=self.cache)
         # read AUTH_PROVIDERS comma separated list from the environment variable and register the OIDC provider for each provider
@@ -158,7 +169,8 @@ class AuthManager:
         """
         # default to first audience
         client: StarletteOAuth2App = self.oauth.create_client(audience)
-        assert client is not None, f"Client for audience {audience} not found"
+        if client is None:
+            raise ValueError(f"Client for audience {audience} not found")
         state_content: Dict[str, str | None] = {
             "audience": audience,
             "auth_provider": self.auth_config_reader.get_provider_for_audience(
@@ -203,14 +215,16 @@ class AuthManager:
         """
         state: str | None = request.query_params.get("state")
         code: str | None = request.query_params.get("code")
-        assert state is not None, "State must be provided in the callback"
+        if state is None:
+            raise ValueError("State must be provided in the callback")
         state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
         logger.debug(f"State decoded: {state_decoded}")
         logger.debug(f"Code received: {code}")
         audience: str | None = state_decoded.get("audience")
         logger.debug(f"Audience retrieved: {audience}")
         issuer: str | None = state_decoded.get("issuer")
-        assert issuer is not None, "Issuer must be provided in the callback"
+        if issuer is None:
+            raise ValueError("Issuer must be provided in the callback")
         logger.debug(f"Issuer retrieved: {issuer}")
         url: str | None = state_decoded.get("url")
         logger.debug(f"URL retrieved: {url}")
@@ -219,9 +233,8 @@ class AuthManager:
         access_token: str | None = token.get("access_token")
         id_token: str | None = token.get("id_token")
         refresh_token: str | None = token.get("refresh_token")
-        assert access_token is not None, (
-            "access_token was not found in the token response"
-        )
+        if access_token is None:
+            raise ValueError("access_token was not found in the token response")
         email: str = token.get("userinfo", {}).get("email")
         subject: str = token.get("userinfo", {}).get("sub")
         logger.debug(f"Email received: {email}")

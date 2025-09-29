@@ -40,11 +40,19 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
         file_manager_factory: FileManagerFactory,
     ) -> None:
         self.image_generator_factory: ImageGeneratorFactory = image_generator_factory
-        assert self.image_generator_factory is not None
-        assert isinstance(self.image_generator_factory, ImageGeneratorFactory)
+        if self.image_generator_factory is None:
+            raise ValueError("image_generator_factory must not be None")
+        if not isinstance(self.image_generator_factory, ImageGeneratorFactory):
+            raise TypeError(
+                "image_generator_factory must be an instance of ImageGeneratorFactory"
+            )
         self.file_manager_factory: FileManagerFactory = file_manager_factory
-        assert self.file_manager_factory is not None
-        assert isinstance(self.file_manager_factory, FileManagerFactory)
+        if self.file_manager_factory is None:
+            raise ValueError("file_manager_factory must not be None")
+        if not isinstance(self.file_manager_factory, FileManagerFactory):
+            raise TypeError(
+                "file_manager_factory must be an instance of FileManagerFactory"
+            )
 
     async def generate_image_async(
         self,
@@ -78,8 +86,10 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
         )
 
         prompt = image_generation_request["prompt"]
-        assert prompt is not None
-        assert isinstance(prompt, str)
+        if prompt is None:
+            raise ValueError("prompt must not be None")
+        if not isinstance(prompt, str):
+            raise TypeError("prompt must be a string")
 
         image_bytes: bytes = await image_generator.generate_image_async(prompt=prompt)
 
@@ -92,9 +102,10 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
             response_data = [Image(b64_json=image_b64_json)]
         else:
             image_generation_path_ = os.environ["IMAGE_GENERATION_PATH"]
-            assert image_generation_path_, (
-                "IMAGE_GENERATION_PATH environment variable is not set"
-            )
+            if not image_generation_path_:
+                raise ValueError(
+                    "IMAGE_GENERATION_PATH environment variable is not set"
+                )
             image_file_name: str = f"{uuid4()}.png"
             file_manager: FileManager = self.file_manager_factory.get_file_manager(
                 folder=image_generation_path_

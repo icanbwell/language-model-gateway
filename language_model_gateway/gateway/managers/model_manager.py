@@ -15,8 +15,12 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 class ModelManager:
     def __init__(self, *, config_reader: ConfigReader) -> None:
         self.config_reader: ConfigReader = config_reader
-        assert self.config_reader is not None
-        assert isinstance(self.config_reader, ConfigReader)
+        if self.config_reader is None:
+            raise ValueError("config_reader must not be None")
+        if not isinstance(self.config_reader, ConfigReader):
+            raise TypeError(
+                f"config_reader must be ConfigReader, got {type(self.config_reader)}"
+            )
 
     # noinspection PyMethodMayBeStatic
     async def get_models(
@@ -41,8 +45,4 @@ class ModelManager:
             for config in configs
         ]
         models_list: List[Dict[str, Any]] = [model.model_dump() for model in models]
-        # return {"data": models_list}
-        # models2 = [
-        #     {"id": config.name, "description": config.description, "created": 1686935002} for config in configs
-        # ]
         return {"object": "list", "data": models_list}

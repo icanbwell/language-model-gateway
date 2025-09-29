@@ -62,21 +62,28 @@ class MCPToolProvider:
         """
         self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
         self._cache: McpToolsMetadataExpiringCache = cache
-        assert self._cache is not None, "Cache must be provided"
+        if self._cache is None:
+            raise ValueError("Cache must be provided")
 
         self.auth_manager = auth_manager
-        assert self.auth_manager is not None, "AuthManager must be provided"
-        assert isinstance(self.auth_manager, AuthManager)
+        if self.auth_manager is None:
+            raise ValueError("AuthManager must be provided")
+        if not isinstance(self.auth_manager, AuthManager):
+            raise TypeError("auth_manager must be an instance of AuthManager")
 
         self.environment_variables = environment_variables
-        assert self.environment_variables is not None, (
-            "EnvironmentVariables must be provided"
-        )
-        assert isinstance(self.environment_variables, EnvironmentVariables)
+        if self.environment_variables is None:
+            raise ValueError("EnvironmentVariables must be provided")
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "environment_variables must be an instance of EnvironmentVariables"
+            )
 
         self.token_reducer = token_reducer
-        assert self.token_reducer is not None, "TokenReducer must be provided"
-        assert isinstance(self.token_reducer, TokenReducer)
+        if self.token_reducer is None:
+            raise ValueError("TokenReducer must be provided")
+        if not isinstance(self.token_reducer, TokenReducer):
+            raise TypeError("token_reducer must be an instance of TokenReducer")
 
     async def load_async(self) -> None:
         pass
@@ -120,7 +127,8 @@ class MCPToolProvider:
 
         try:
             url: str | None = tool.url
-            assert url is not None, "Tool URL must be provided"
+            if url is None:
+                raise ValueError("Tool URL must be provided")
             # first see if the url is already loaded
             if url in self.tools_by_mcp_url:
                 return self.tools_by_mcp_url[url]

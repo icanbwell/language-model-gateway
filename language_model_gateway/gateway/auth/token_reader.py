@@ -56,13 +56,18 @@ class TokenReader:
         self.algorithms: List[str] | None = algorithms or None
 
         self.auth_config_reader: AuthConfigReader = auth_config_reader
-        assert self.auth_config_reader is not None, "AuthConfigReader must be provided"
-        assert isinstance(self.auth_config_reader, AuthConfigReader)
+        if self.auth_config_reader is None:
+            raise ValueError("AuthConfigReader must be provided")
+        if not isinstance(self.auth_config_reader, AuthConfigReader):
+            raise TypeError(
+                "auth_config_reader must be an instance of AuthConfigReader"
+            )
 
         self.auth_configs: List[AuthConfig] = (
             self.auth_config_reader.get_auth_configs_for_all_auth_providers()
         )
-        assert self.auth_configs, "At least one AuthConfig must be provided"
+        if not self.auth_configs:
+            raise ValueError("At least one AuthConfig must be provided")
 
         self.well_known_configs: List[
             Dict[str, Any]
@@ -163,7 +168,8 @@ class TokenReader:
         Returns:
             Dict[str, Any]: The decoded claims of the JWT token, or None if not a JWT.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         # Only attempt to decode if token looks like a JWT (contains two dots)
         if token.count(".") != 2:
             logger.warning(
@@ -172,7 +178,8 @@ class TokenReader:
             return None
         if verify_signature:
             await self.fetch_well_known_config_and_jwks_async()
-            assert self.jwks, "JWKS must be fetched before decoding tokens"
+            if not self.jwks:
+                raise RuntimeError("JWKS must be fetched before decoding tokens")
             try:
                 decoded = jwt.decode(token, self.jwks, algorithms=self.algorithms)
                 return decoded.claims
@@ -201,9 +208,11 @@ class TokenReader:
         Returns:
             The decoded claims if the token is valid.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
 
         exp_str: str = "None"
         now_str: str = "None"
@@ -325,9 +334,11 @@ class TokenReader:
         Returns:
             Optional[str]: The subject claim if present, otherwise None.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
             return claims.get("email") or claims.get("sub")
@@ -345,9 +356,11 @@ class TokenReader:
         Returns:
             Optional[datetime.datetime]: The expiration time as a datetime object if present, otherwise None.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
             exp = claims.get("exp")
@@ -366,9 +379,11 @@ class TokenReader:
         Returns:
             Optional[str]: The issuer claim if present, otherwise None.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
             return claims.get("iss")
@@ -384,9 +399,11 @@ class TokenReader:
         Returns:
             Optional[str]: The audience claim if present, otherwise None.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
             return claims.get("aud")
@@ -404,9 +421,11 @@ class TokenReader:
         Returns:
             Optional[datetime.datetime]: The issued at time as a datetime object if present, otherwise None.
         """
-        assert token, "Token must not be empty"
+        if not token:
+            raise ValueError("Token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             claims = jwt.decode(token, self.jwks, algorithms=self.algorithms).claims
             iat = claims.get("iat")

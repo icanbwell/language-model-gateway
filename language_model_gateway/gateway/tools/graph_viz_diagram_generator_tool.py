@@ -87,9 +87,10 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
 
             # Render the diagram
             image_generation_path_ = os.environ["IMAGE_GENERATION_PATH"]
-            assert image_generation_path_, (
-                "IMAGE_GENERATION_PATH environment variable is not set"
-            )
+            if not image_generation_path_:
+                raise ValueError(
+                    "IMAGE_GENERATION_PATH environment variable is not set"
+                )
             image_file_name: str = f"{uuid4()}.png"
 
             # dot.render(output_file, cleanup=True)

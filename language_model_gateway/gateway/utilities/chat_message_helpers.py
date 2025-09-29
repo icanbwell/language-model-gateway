@@ -25,7 +25,7 @@ def convert_message_content_to_string(content: str | list[str | Dict[str, Any]])
             if content_item_type == "text":
                 text.append(content_item.get("text") or "")
         else:
-            assert False, (
+            raise TypeError(
                 f"convert_message_content_to_string: Unsupported content item type: {type(content_item)}: {content_item}"
             )
     return "".join(text)
@@ -35,11 +35,11 @@ def langchain_to_chat_message(message: BaseMessage) -> Optional[ChatCompletionMe
     """Create a ChatMessage from a LangChain message."""
     match message:
         case SystemMessage():
-            assert False, (
+            raise ValueError(
                 "System messages should not be converted to ChatCompletionMessage"
             )
         case HumanMessage():
-            assert False, (
+            raise ValueError(
                 "Human messages should not be converted to ChatCompletionMessage"
             )
         case AIMessage():
@@ -47,13 +47,8 @@ def langchain_to_chat_message(message: BaseMessage) -> Optional[ChatCompletionMe
                 role="assistant",
                 content=convert_message_content_to_string(message.content),
             )
-            # if message.tool_calls:
-            #     ai_message.tool_calls = message.tool_calls
-            # if message.response_metadata:
-            #     ai_message.response_metadata = message.response_metadata
             return ai_message
         case ToolMessage():
-            # content: str = convert_message_content_to_string(message.content)
             artifact: str = message.artifact
             if artifact:
                 ai_message = ChatCompletionMessage(
@@ -62,7 +57,7 @@ def langchain_to_chat_message(message: BaseMessage) -> Optional[ChatCompletionMe
                 )
                 return ai_message
         case LangchainChatMessage():
-            assert False, (
+            raise ValueError(
                 "Chat messages should not be converted to ChatCompletionMessage"
             )
         case _:

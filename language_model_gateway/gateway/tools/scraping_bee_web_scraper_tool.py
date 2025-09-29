@@ -62,7 +62,8 @@ class ScrapingBeeWebScraperTool(ResilientBaseTool):
     async def _async_scrape(self, *, url: str, query: Optional[str]) -> Optional[str]:
         """Async method to scrape URL using ScrapingBee"""
 
-        assert self.api_key, "ScrapingBee API key is required"
+        if not self.api_key:
+            raise ValueError("ScrapingBee API key is required")
 
         # https://www.scrapingbee.com/documentation/
         params: Dict[str, str] = {

@@ -47,9 +47,14 @@ class TokenExchangeManager:
         token_reader: TokenReader,
         auth_config_reader: AuthConfigReader,
     ) -> None:
-        assert environment_variables is not None
-        assert environment_variables.mongo_uri is not None
-        assert environment_variables.mongo_db_name is not None
+        if environment_variables is None:
+            raise ValueError(
+                "TokenExchangeManager requires environment_variables to be provided."
+            )
+        if environment_variables.mongo_uri is None:
+            raise ValueError("MONGO_URL environment variable must be set.")
+        if environment_variables.mongo_db_name is None:
+            raise ValueError("MONGO_DB_NAME environment variable must be set.")
         self.token_repository: AsyncBaseRepository[TokenCacheItem] = (
             RepositoryFactory.get_repository(
                 repository_type=environment_variables.oauth_cache,
@@ -57,29 +62,39 @@ class TokenExchangeManager:
             )
         )
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert self.token_repository is not None, (
-            "TokenExchangeManager requires a token repository to be set up."
-        )
-        assert isinstance(environment_variables, EnvironmentVariables), (
-            "TokenExchangeManager requires EnvironmentVariables instance."
-        )
-        assert environment_variables.mongo_db_token_collection_name is not None
+        if self.token_repository is None:
+            raise ValueError(
+                "TokenExchangeManager requires a token repository to be set up."
+            )
+        if not isinstance(environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "TokenExchangeManager requires EnvironmentVariables instance."
+            )
+        if environment_variables.mongo_db_token_collection_name is None:
+            raise ValueError(
+                "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set."
+            )
         self.token_collection_name: str = (
             environment_variables.mongo_db_token_collection_name
         )
-        assert self.token_collection_name is not None, (
-            "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
-        )
+        if self.token_collection_name is None:
+            raise ValueError(
+                "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set."
+            )
 
         self.token_reader: TokenReader = token_reader
-        assert self.token_reader is not None, (
-            "TokenExchangeManager requires a TokenReader instance."
-        )
-        assert isinstance(token_reader, TokenReader)
+        if self.token_reader is None:
+            raise ValueError("TokenExchangeManager requires a TokenReader instance.")
+        if not isinstance(token_reader, TokenReader):
+            raise TypeError("token_reader must be a TokenReader instance.")
 
         self.auth_config_reader: AuthConfigReader = auth_config_reader
-        assert self.auth_config_reader is not None
-        assert isinstance(self.auth_config_reader, AuthConfigReader)
+        if self.auth_config_reader is None:
+            raise ValueError(
+                "TokenExchangeManager requires an AuthConfigReader instance."
+            )
+        if not isinstance(self.auth_config_reader, AuthConfigReader):
+            raise TypeError("auth_config_reader must be an AuthConfigReader instance.")
 
     async def get_token_for_auth_provider_and_referring_email(
         self, *, auth_provider: str, referring_email: str
@@ -144,8 +159,9 @@ class TokenExchangeManager:
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
+        if auth_providers is None:
+            raise ValueError("auth_providers must be provided.")
         # check if the bearer token has audience same as the auth provider name
-        assert auth_providers is not None
         if not referring_email:
             return None
 
@@ -230,7 +246,8 @@ class TokenExchangeManager:
                 token_item: Token | None = await self.token_reader.verify_token_async(
                     token=token
                 )
-                assert token_item is not None
+                if token_item is None:
+                    raise ValueError("Token verification failed: token_item is None.")
                 # get the audience from the token
                 token_audience: str | List[str] | None = token_item.audience
                 token_auth_provider: str | None = (
@@ -271,7 +288,10 @@ class TokenExchangeManager:
                     ) = await self.token_reader.get_subject_from_token_async(
                         token=token
                     )
-                    assert email, "Token must contain a subject (email or sub) claim."
+                    if not email:
+                        raise ValueError(
+                            "Token must contain a subject (email or sub) claim."
+                        )
 
                     # now find token for this email and auth provider
                     token_for_tool: (
@@ -339,26 +359,20 @@ class TokenExchangeManager:
             refreshed: bool indicating if the token was refreshed.
         """
         connection_string = self.environment_variables.mongo_uri
-        assert connection_string is not None, (
-            "MONGO_URL environment variable must be set"
-        )
+        if connection_string is None:
+            raise ValueError("MONGO_URL environment variable must be set")
         database_name = self.environment_variables.mongo_db_name
-        assert database_name is not None, (
-            "MONGO_DB_NAME environment variable must be set"
-        )
-        mongo_repository: AsyncBaseRepository[TokenCacheItem] = (
-            RepositoryFactory.get_repository(
-                repository_type=self.environment_variables.oauth_cache,
-                environment_variables=self.environment_variables,
-            )
-        )
+        if database_name is None:
+            raise ValueError("MONGO_DB_NAME environment variable must be set")
         collection_name = self.environment_variables.mongo_db_token_collection_name
-        assert collection_name is not None, (
-            "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
-        )
-        assert token_cache_item.issuer is not None, (
-            "Issuer must be provided in the state for storing the token"
-        )
+        if collection_name is None:
+            raise ValueError(
+                "MONGO_DB_TOKEN_COLLECTION_NAME environment variable must be set"
+            )
+        if token_cache_item.issuer is None:
+            raise ValueError(
+                "Issuer must be provided in the state for storing the token"
+            )
 
         now = datetime.now(UTC)
 
@@ -373,7 +387,7 @@ class TokenExchangeManager:
             return item
 
         # now insert or update the token item in the database
-        await mongo_repository.insert_or_update(
+        await self.token_repository.insert_or_update(
             collection_name=collection_name,
             item=token_cache_item,
             keys={

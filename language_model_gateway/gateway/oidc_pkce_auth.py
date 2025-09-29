@@ -14,9 +14,12 @@ class OIDCAuthPKCE:
         client_id: str | None,
         redirect_uri: str | None,
     ):
-        assert well_known_url, "Well-known URL must be provided"
-        assert client_id, "Client ID must be provided"
-        assert redirect_uri, "Redirect URI must be provided"
+        if not well_known_url:
+            raise ValueError("Well-known URL must be provided")
+        if not client_id:
+            raise ValueError("Client ID must be provided")
+        if not redirect_uri:
+            raise ValueError("Redirect URI must be provided")
         self.well_known_url: str = well_known_url
         self.client_id: str = client_id
         self.redirect_uri: str = redirect_uri
@@ -31,14 +34,17 @@ class OIDCAuthPKCE:
     async def get_authorization_url(self, state: str) -> tuple[str, str]:
         if not self._metadata:
             await self.fetch_metadata()
-        assert self._metadata, (
-            "Metadata must be fetched before getting authorization URL"
-        )
+        if not self._metadata:
+            raise RuntimeError(
+                "Metadata must be fetched before getting authorization URL"
+            )
         code_verifier = secrets.token_urlsafe(64)
         authorization_endpoint = self._metadata["authorization_endpoint"]
-        assert authorization_endpoint, "Authorization endpoint must be provided"
+        if not authorization_endpoint:
+            raise ValueError("Authorization endpoint must be provided")
         token_endpoint = self._metadata["token_endpoint"]
-        assert token_endpoint, "Token endpoint must be provided"
+        if not token_endpoint:
+            raise ValueError("Token endpoint must be provided")
         oauth_client = AsyncOAuth2Client(
             client_id=self.client_id,
             redirect_uri=self.redirect_uri,
@@ -57,11 +63,14 @@ class OIDCAuthPKCE:
     async def exchange_code(self, code: str, code_verifier: str) -> dict[str, Any]:
         if not self._metadata:
             await self.fetch_metadata()
-        assert self._metadata, "Metadata must be fetched before exchanging code"
+        if not self._metadata:
+            raise RuntimeError("Metadata must be fetched before exchanging code")
         authorization_endpoint = self._metadata["authorization_endpoint"]
-        assert authorization_endpoint, "Authorization endpoint must be provided"
+        if not authorization_endpoint:
+            raise ValueError("Authorization endpoint must be provided")
         token_endpoint = self._metadata["token_endpoint"]
-        assert token_endpoint, "Token endpoint must be provided"
+        if not token_endpoint:
+            raise ValueError("Token endpoint must be provided")
         oauth_client = AsyncOAuth2Client(
             client_id=self.client_id,
             redirect_uri=self.redirect_uri,

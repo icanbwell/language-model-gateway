@@ -37,26 +37,33 @@ class PersistenceFactory:
             # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/
             # https://langchain-ai.github.io/langgraph/how-tos/memory/add-memory/
             mongo_llm_storage_uri = self._environment_variables.mongo_llm_storage_uri
-            assert mongo_llm_storage_uri is not None
+            if mongo_llm_storage_uri is None:
+                raise ValueError("mongo_llm_storage_uri must not be None")
             llm_storage_db_username = (
                 self._environment_variables.mongo_llm_storage_db_username
             )
-            assert llm_storage_db_username is not None
+            if llm_storage_db_username is None:
+                raise ValueError("mongo_llm_storage_db_username must not be None")
             llm_storage_db_password = (
                 self._environment_variables.mongo_llm_storage_db_password
             )
-            assert llm_storage_db_password is not None
+            if llm_storage_db_password is None:
+                raise ValueError("mongo_llm_storage_db_password must not be None")
             connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
                 mongo_url=mongo_llm_storage_uri,
                 username=llm_storage_db_username,
                 password=llm_storage_db_password,
             )
             llm_storage_db_name = self._environment_variables.mongo_llm_storage_db_name
-            assert llm_storage_db_name is not None
+            if llm_storage_db_name is None:
+                raise ValueError("mongo_llm_storage_db_name must not be None")
             llm_store_collection_name = (
                 self._environment_variables.mongo_llm_storage_store_collection_name
             )
-            assert llm_store_collection_name is not None
+            if llm_store_collection_name is None:
+                raise ValueError(
+                    "mongo_llm_storage_store_collection_name must not be None"
+                )
 
             # index: VectorIndexConfig = {
             #     "dims": 1536,
@@ -82,24 +89,31 @@ class PersistenceFactory:
             # https://pypi.org/project/langgraph-checkpoint-mongodb/
             # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/
             mongo_llm_storage_uri = self._environment_variables.mongo_llm_storage_uri
-            assert mongo_llm_storage_uri is not None
+            if mongo_llm_storage_uri is None:
+                raise ValueError("mongo_llm_storage_uri must not be None")
             llm_storage_db_username = (
                 self._environment_variables.mongo_llm_storage_db_username
             )
-            assert llm_storage_db_username is not None
+            if llm_storage_db_username is None:
+                raise ValueError("mongo_llm_storage_db_username must not be None")
             llm_storage_db_password = (
                 self._environment_variables.mongo_llm_storage_db_password
             )
-            assert llm_storage_db_password is not None
+            if llm_storage_db_password is None:
+                raise ValueError("mongo_llm_storage_db_password must not be None")
             connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
                 mongo_url=mongo_llm_storage_uri,
                 username=llm_storage_db_username,
                 password=llm_storage_db_password,
             )
             llm_storage_db_name = self._environment_variables.mongo_llm_storage_db_name
-            assert llm_storage_db_name is not None
+            if llm_storage_db_name is None:
+                raise ValueError("mongo_llm_storage_db_name must not be None")
             llm_storage_checkpointer_collection_name = self._environment_variables.mongo_llm_storage_checkpointer_collection_name
-            assert llm_storage_checkpointer_collection_name is not None
+            if llm_storage_checkpointer_collection_name is None:
+                raise ValueError(
+                    "mongo_llm_storage_checkpointer_collection_name must not be None"
+                )
 
             with MongoDBSaver.from_conn_string(
                 conn_string=connection_string,

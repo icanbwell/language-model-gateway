@@ -119,7 +119,8 @@ class GoogleSearchTool(ResilientBaseTool):
 
                 response.raise_for_status()
                 response_json = response.json()
-                assert isinstance(response_json, dict)
+                if not isinstance(response_json, dict):
+                    raise TypeError("Response JSON must be a dict")
                 return cast(Dict[str, Any], response_json)
 
             except httpx.HTTPStatusError as e:
@@ -153,8 +154,10 @@ class GoogleSearchTool(ResilientBaseTool):
     ) -> Tuple[str, str]:
         """Async implementation of the Google search tool."""
 
-        assert self._api_key, "GOOGLE_API_KEY environment variable is required"
-        assert self._cse_id, "GOOGLE_CSE_ID environment variable is required"
+        if not self._api_key:
+            raise ValueError("GOOGLE_API_KEY environment variable is required")
+        if not self._cse_id:
+            raise ValueError("GOOGLE_CSE_ID environment variable is required")
 
         snippets: List[str] = []
         try:

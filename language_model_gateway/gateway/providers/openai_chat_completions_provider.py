@@ -33,8 +33,12 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
     def __init__(self, *, http_client_factory: HttpClientFactory) -> None:
         self.http_client_factory: HttpClientFactory = http_client_factory
-        assert self.http_client_factory is not None
-        assert isinstance(self.http_client_factory, HttpClientFactory)
+        if self.http_client_factory is None:
+            raise ValueError("http_client_factory must not be None")
+        if not isinstance(self.http_client_factory, HttpClientFactory):
+            raise TypeError(
+                "http_client_factory must be an instance of HttpClientFactory"
+            )
 
     async def chat_completions(
         self,
@@ -54,11 +58,13 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
 
         :return:
         """
-        assert chat_request
+        if not chat_request:
+            raise ValueError("chat_request must not be None")
 
         request_id: str = str(randint(1, 1000))
         agent_url: Optional[str] = model_config.url or environ["OPENAI_AGENT_URL"]
-        assert agent_url
+        if not agent_url:
+            raise ValueError("agent_url must not be None")
 
         if chat_request.get("stream"):
             return StreamingResponse(

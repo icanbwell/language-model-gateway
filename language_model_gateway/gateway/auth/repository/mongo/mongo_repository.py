@@ -45,8 +45,10 @@ class AsyncMongoRepository[T: BaseDbModel](AsyncBaseRepository[T]):
             username (Optional[str]): MongoDB username
             password (Optional[str]): MongoDB password
         """
-        assert server_url, "MONGO_URL environment variable is not set."
-        assert database_name, "Database name must be provided."
+        if not server_url:
+            raise ValueError("MONGO_URL environment variable is not set.")
+        if not database_name:
+            raise ValueError("Database name must be provided.")
         self.connection_string: str = MongoUrlHelpers.add_credentials_to_mongo_url(
             mongo_url=server_url,
             username=username,

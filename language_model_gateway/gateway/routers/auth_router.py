@@ -94,15 +94,18 @@ class AuthRouter:
                     auth_config_reader.get_auth_configs_for_all_auth_providers()
                 )
                 audience = auth_configs[0].audience if auth_configs else None
-            assert audience is not None
+            if audience is None:
+                raise ValueError("audience must not be None")
             auth_config: AuthConfig | None = (
                 auth_config_reader.get_config_for_auth_provider(auth_provider=audience)
             )
-            assert auth_config is not None
+            if auth_config is None:
+                raise ValueError("auth_config must not be None")
             issuer: str | None = auth_config.issuer
-            assert issuer is not None, (
-                f"AUTH_ISSUER-{audience} environment variable must be set"
-            )
+            if issuer is None:
+                raise ValueError(
+                    f"AUTH_ISSUER-{audience} environment variable must be set"
+                )
             url = await auth_manager.create_authorization_url(
                 redirect_uri=str(redirect_uri1),
                 audience=audience,

@@ -65,7 +65,8 @@ class GitHubPullRequestDiffTool(ResilientBaseTool):
             Tuple of pull request analysis text and artifact description
         """
 
-        assert url, "Pull request URL is required"
+        if not url:
+            raise ValueError("Pull request URL is required")
 
         try:
             diff_content: str = (

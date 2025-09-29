@@ -34,14 +34,20 @@ class DatabricksHelper:
             Pandas DataFrame with query results
         """
         try:
-            assert statement_response.manifest
-            assert statement_response.manifest.schema
-            assert statement_response.manifest.schema.columns
+            if not statement_response.manifest:
+                raise ValueError("statement_response.manifest is required")
+            if not statement_response.manifest.schema:
+                raise ValueError("statement_response.manifest.schema is required")
+            if not statement_response.manifest.schema.columns:
+                raise ValueError(
+                    "statement_response.manifest.schema.columns is required"
+                )
             # Extract column names
             column_names = [
                 column.name for column in statement_response.manifest.schema.columns
             ]
-            assert statement_response.result
+            if not statement_response.result:
+                raise ValueError("statement_response.result is required")
             # Extract data array
             data_array = statement_response.result.data_array
             # Create DataFrame
@@ -51,7 +57,8 @@ class DatabricksHelper:
 
         except Exception as e:
             self.logger.error(f"Error parsing Databricks statement response: {e}")
-            return None
+            # Return an empty DataFrame instead of None to match the expected return type
+            return pd.DataFrame()
 
     def dataframe_to_markdown(self, df: DataFrame) -> str:
         """
@@ -98,7 +105,8 @@ class DatabricksHelper:
             results = ws_client.statement_execution.execute_statement(
                 query, warehouse_id=warehouse_id
             )
-            assert results.status is not None
+            if results.status is None:
+                raise ValueError("results.status is required")
             self.logger.debug(f"Initial results status: {results.status.state}")
 
             # Track start time for timeout
@@ -117,15 +125,18 @@ class DatabricksHelper:
 
                 # Refresh the statement status
                 self.logger.debug("Refreshing statement status")
-                assert results.statement_id is not None
+                if results.statement_id is None:
+                    raise ValueError("results.statement_id is required")
                 results = ws_client.statement_execution.get_statement(
                     results.statement_id
                 )
-                assert results.status is not None
+                if results.status is None:
+                    raise ValueError("results.status is required")
                 if results.status.state != StatementState.PENDING:
                     break
 
-            assert results.status is not None
+            if results.status is None:
+                raise ValueError("results.status is required")
             # Check for failed state
             if results.status.state == StatementState.FAILED:
                 error_message = (

@@ -105,8 +105,10 @@ class ConfluenceHelper:
             search_results (List[ConfluenceSearchResult]): List of search results
             output_file (str): Path to the output CSV file
         """
-        assert output_file, "Output file path is required"
-        assert search_results, "Search results are required"
+        if not output_file:
+            raise ValueError("Output file path is required")
+        if not search_results:
+            raise ValueError("Search results are required")
 
         try:
             with open(output_file, mode="w", newline="") as file:
@@ -138,7 +140,8 @@ class ConfluenceHelper:
         Returns:
             str: CSV formatted string of search results
         """
-        assert search_results, "Search results are required"
+        if not search_results:
+            raise ValueError("Search results are required")
 
         output = "Id,Title,URL,Updated,Excerpt\n"
         for result in search_results:
@@ -157,7 +160,8 @@ class ConfluenceHelper:
         Returns:
             str: CSV formatted string of search results
         """
-        assert search_results, "Search results are required"
+        if not search_results:
+            raise ValueError("Search results are required")
 
         output = "Title,URL,Updated\n"
         for result in search_results:

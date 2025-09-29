@@ -196,7 +196,8 @@ class ProviderSearchTool(ResilientBaseTool):
     ) -> Tuple[Dict[str, Any], str]:
         """Asynchronous execution"""
 
-        assert self.api_url, "API URL is required"
+        if not self.api_url:
+            raise ValueError("API URL is required")
 
         variables = self._prepare_variables(
             search=search,
