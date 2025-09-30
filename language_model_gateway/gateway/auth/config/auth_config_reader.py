@@ -18,10 +18,14 @@ class AuthConfigReader:
             environment_variables (EnvironmentVariables): An instance of EnvironmentVariables to read auth configurations.
         """
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert self.environment_variables is not None, (
-            "AuthConfigReader requires an EnvironmentVariables instance."
-        )
-        assert isinstance(self.environment_variables, EnvironmentVariables)
+        if self.environment_variables is None:
+            raise ValueError(
+                "AuthConfigReader requires an EnvironmentVariables instance."
+            )
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "environment_variables must be an instance of EnvironmentVariables"
+            )
 
     def get_auth_configs_for_all_auth_providers(self) -> list[AuthConfig]:
         """
@@ -31,9 +35,8 @@ class AuthConfigReader:
             list[AuthConfig]: A list of AuthConfig instances for each audience.
         """
         auth_providers: list[str] | None = self.environment_variables.auth_providers
-        assert auth_providers is not None, (
-            "auth_providers environment variable must be set"
-        )
+        if auth_providers is None:
+            raise ValueError("auth_providers environment variable must be set")
         auth_configs: list[AuthConfig] = []
         for auth_provider in auth_providers:
             auth_config: AuthConfig | None = self.get_config_for_auth_provider(
@@ -54,7 +57,8 @@ class AuthConfigReader:
         Returns:
             AuthConfig | None: The authentication configuration if found, otherwise None.
         """
-        assert auth_provider is not None
+        if auth_provider is None:
+            raise ValueError("auth_provider must not be None")
         # environment variables are case-insensitive, but we standardize to upper case
         auth_provider = auth_provider.upper()
         # read client_id and client_secret from the environment variables
@@ -71,17 +75,20 @@ class AuthConfigReader:
         auth_well_known_uri: str | None = os.getenv(
             f"AUTH_WELL_KNOWN_URI_{auth_provider}"
         )
-        assert auth_well_known_uri is not None, (
-            f"AUTH_WELL_KNOWN_URI_{auth_provider} environment variable must be set"
-        )
+        if auth_well_known_uri is None:
+            raise ValueError(
+                f"AUTH_WELL_KNOWN_URI_{auth_provider} environment variable must be set"
+            )
         issuer: str | None = os.getenv(f"AUTH_ISSUER_{auth_provider}")
-        assert issuer is not None, (
-            f"AUTH_ISSUER_{auth_provider} environment variable must be set"
-        )
+        if issuer is None:
+            raise ValueError(
+                f"AUTH_ISSUER_{auth_provider} environment variable must be set"
+            )
         audience: str | None = os.getenv(f"AUTH_AUDIENCE_{auth_provider}")
-        assert audience is not None, (
-            f"AUTH_AUDIENCE_{auth_provider} environment variable must be set"
-        )
+        if audience is None:
+            raise ValueError(
+                f"AUTH_AUDIENCE_{auth_provider} environment variable must be set"
+            )
         return AuthConfig(
             auth_provider=auth_provider,
             audience=audience,
@@ -104,9 +111,8 @@ class AuthConfigReader:
         auth_config: AuthConfig | None = self.get_config_for_auth_provider(
             auth_provider=auth_provider
         )
-        assert auth_config is not None, (
-            f"AuthConfig for audience {auth_provider} not found."
-        )
+        if auth_config is None:
+            raise ValueError(f"AuthConfig for audience {auth_provider} not found.")
         return auth_config.issuer
 
     def get_audience_for_provider(self, *, auth_provider: str) -> str:
@@ -122,9 +128,8 @@ class AuthConfigReader:
         auth_config: AuthConfig | None = self.get_config_for_auth_provider(
             auth_provider=auth_provider
         )
-        assert auth_config is not None, (
-            f"AuthConfig for audience {auth_provider} not found."
-        )
+        if auth_config is None:
+            raise ValueError(f"AuthConfig for audience {auth_provider} not found.")
         return auth_config.audience
 
     def get_provider_for_audience(self, *, audience: str) -> str | None:

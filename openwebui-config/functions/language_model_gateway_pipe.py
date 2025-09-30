@@ -26,6 +26,12 @@ logger = logging.getLogger(__name__)
 
 
 class Pipe:
+    """
+    A Pipe class that interacts with the OpenAI API using an OAuth ID token from request cookies.
+    It supports both streaming and non-streaming responses.
+    OpenWebUI Documentation: https://docs.openwebui.com/features/plugin/functions/pipe
+    """
+
     class Valves(BaseModel):
         emit_interval: float = Field(
             default=2.0, description="Interval in seconds between status emissions"

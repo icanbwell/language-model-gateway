@@ -2,8 +2,8 @@ export LANG
 
 .PHONY: Pipfile.lock
 Pipfile.lock: # Locks Pipfile and updates the Pipfile.lock on the local file system
-	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true dev && \
-	docker compose --progress=plain run dev sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
+	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
+	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
 
 .PHONY:devsetup
 devsetup: ## one time setup for devs
@@ -138,15 +138,15 @@ help: ## Show this help.
 
 .PHONY:tests
 tests: ## Runs all the tests
-	docker compose run --rm --name language-model-gateway_tests dev pytest tests
+	docker compose run --rm --name language-model-gateway_tests language-model-gateway pytest tests
 
 .PHONY:tests-integration
 tests-integration: ## Runs all the tests
-	docker compose run --rm -e RUN_TESTS_WITH_REAL_LLM=1 --name language-model-gateway_tests dev pytest tests
+	docker compose run --rm -e RUN_TESTS_WITH_REAL_LLM=1 --name language-model-gateway_tests language-model-gateway pytest tests
 
 .PHONY:shell
 shell: ## Brings up the bash shell in dev docker
-	docker compose run --rm --name language-model-gateway_shell dev /bin/sh
+	docker compose run --rm --name language-model-gateway_shell language-model-gateway /bin/sh
 
 .PHONY:clean-pre-commit
 clean-pre-commit: ## removes pre-commit hook
@@ -219,10 +219,10 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 	"DELETE FROM public.function WHERE id='language_model_gateway';"
 	docker run --rm -it --name openid-function-creator \
         --network language-model-gateway_web \
-        --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
+        --mount type=bind,source="${PWD}"/openwebui-config/functions,target=/app \
         python:3.12-alpine \
         sh -c "pip install --root-user-action=ignore --upgrade pip && \
-        	   pip install --root-user-action=ignore authlib requests && \
+               pip install --root-user-action=ignore authlib requests && \
                cd /app && \
                python3 import_pipe.py \
                --url 'http://language-model-gateway-open-webui-1:8080' \

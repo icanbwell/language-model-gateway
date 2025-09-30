@@ -1,4 +1,4 @@
 services:
-  dev:
+  language-model-gateway:
     environment:
       RUN_TESTS_WITH_REAL_LLM: 1

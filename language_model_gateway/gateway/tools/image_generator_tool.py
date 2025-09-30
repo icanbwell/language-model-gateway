@@ -75,10 +75,11 @@ class ImageGeneratorTool(ResilientBaseTool):
                 prompt=prompt, style=self.style, image_size=self.image_size
             )
             # base64_image: str = base64.b64encode(image_data).decode("utf-8")
-            image_generation_path_ = os.environ["IMAGE_GENERATION_PATH"]
-            assert image_generation_path_, (
-                "IMAGE_GENERATION_PATH environment variable is not set"
-            )
+            image_generation_path_ = os.environ.get("IMAGE_GENERATION_PATH")
+            if not image_generation_path_:
+                raise ValueError(
+                    "IMAGE_GENERATION_PATH environment variable is not set"
+                )
             image_file_name: str = f"{uuid4()}.png"
             file_manager: FileManager = self.file_manager_factory.get_file_manager(
                 folder=image_generation_path_

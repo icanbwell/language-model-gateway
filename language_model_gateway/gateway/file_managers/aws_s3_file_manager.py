@@ -18,8 +18,12 @@ logger.setLevel(SRC_LOG_LEVELS["FILES"])
 class AwsS3FileManager(FileManager):
     def __init__(self, *, aws_client_factory: AwsClientFactory) -> None:
         self.aws_client_factory = aws_client_factory
-        assert self.aws_client_factory is not None
-        assert isinstance(self.aws_client_factory, AwsClientFactory)
+        if self.aws_client_factory is None:
+            raise ValueError("aws_client_factory must not be None")
+        if not isinstance(self.aws_client_factory, AwsClientFactory):
+            raise TypeError(
+                f"aws_client_factory must be AwsClientFactory, got {type(self.aws_client_factory)}"
+            )
 
     @override
     async def save_file_async(
@@ -30,16 +34,10 @@ class AwsS3FileManager(FileManager):
         filename: str,
         content_type: str = "image/png",
     ) -> Optional[str]:
-        """
-        Save the given file to S3
-
-        :param file_data: File bytes to save
-        :param filename: Filename to use in S3
-        :param folder: Folder to save the image in
-        :param content_type: Content type of the image
-        """
-        assert "s3://" in folder, "folder should contain s3://"
-        assert "s3://" not in filename, "filename should not contain s3://"
+        if "s3://" not in folder:
+            raise ValueError("folder should contain s3://")
+        if "s3://" in filename:
+            raise ValueError("filename should not contain s3://")
 
         # Parse S3 URL
         # bucket_name: str
@@ -73,16 +71,19 @@ class AwsS3FileManager(FileManager):
 
     @override
     def get_full_path(self, *, filename: str, folder: str) -> str:
-        # Convert Path to string for S3 key
-        assert folder
-        assert filename
+        if not folder:
+            raise ValueError("folder must not be empty or None")
+        if not filename:
+            raise ValueError("filename must not be empty or None")
         s3_full_path = "s3://" + UrlParser.combine_path(folder, filename)
         return s3_full_path
 
     # noinspection PyMethodMayBeStatic
     def get_bucket(self, *, filename: str, folder: str) -> S3Url:
-        assert folder
-        assert filename
+        if not folder:
+            raise ValueError("folder must not be empty or None")
+        if not filename:
+            raise ValueError("filename must not be empty or None")
         if not folder.startswith("s3://"):
             folder = f"s3://{folder}"
         full_path = UrlParser.combine_path(folder, filename=filename)
@@ -95,12 +96,14 @@ class AwsS3FileManager(FileManager):
     ) -> StreamingResponse | Response:
         s3_client: S3Client = self.aws_client_factory.create_s3_client()
 
-        assert "s3://" not in folder, (
-            "folder should not contain s3://.  It should be the bucket name"
-        )
-        assert "s3://" not in file_path, (
-            "file_path should not contain s3://.  It should be the file path"
-        )
+        if "s3://" in folder:
+            raise ValueError(
+                "folder should not contain s3://.  It should be the bucket name"
+            )
+        if "s3://" in file_path:
+            raise ValueError(
+                "file_path should not contain s3://.  It should be the file path"
+            )
         s3_url: S3Url = self.get_bucket(folder=f"s3://{folder}", filename=file_path)
         try:
             s3_full_path: str = self.get_full_path(

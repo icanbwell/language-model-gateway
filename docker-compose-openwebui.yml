@@ -6,9 +6,9 @@ services:
       - open-webui-db
     # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
     # Slim image excludes embedded AI models and Ollama installation
-#    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
+    #    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
     build:
-      dockerfile: ./openwebui_functions/open-webui.Dockerfile
+      dockerfile: ./openwebui-config/functions/open-webui.Dockerfile
       context: .
     env_file:
       - docker.env
@@ -28,8 +28,8 @@ services:
       #      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
       # Supports balanced OpenAI base API URLs, semicolon-separated.
       # disable OPENAI_API since we use a Pipeline to handle requests
-#      ENABLE_OPENAI_API: 0
-      OPENAI_API_BASE_URL: 'http://dev:5000/api/v1'
+      #      ENABLE_OPENAI_API: 0
+      OPENAI_API_BASE_URL: 'http://language-model-gateway:5000/api/v1'
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'
       #      DEFAULT_MODELS: "General Purpose"
@@ -86,15 +86,44 @@ services:
       S3_REGION_NAME: "us-east-1"
       S3_KEY_PREFIX: "aiden/uploads/"
       # Embeddings config
-#      BYPASS_EMBEDDING_AND_RETRIEVAL: True
+      #      BYPASS_EMBEDDING_AND_RETRIEVAL: True
       RAG_EMBEDDING_MODEL: "all-MiniLM-L6-v2"
       # set up vector database
-#      VECTOR_DB: "s3vector"
-#      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
-#      S3_VECTOR_REGION: "us-east-1"
+      #      VECTOR_DB: "s3vector"
+      #      S3_VECTOR_BUCKET_NAME: "bwell-dev-data-science-vector-ue1"
+      #      S3_VECTOR_REGION: "us-east-1"
       # Whether to write oauth cookie or not
       # We now get it directly in the language_model_gateway.py so we don't need this
       ENABLE_OAUTH_ID_TOKEN_COOKIE: False
+      # https://docs.openwebui.com/getting-started/env-configuration/#default_prompt_suggestions
+      DEFAULT_PROMPT_SUGGESTIONS: '[{
+        "title": [
+          "Do I need a vaccine?",
+          "search your vaccination history"
+        ],
+        "content": "Do I need a vaccine?"
+      },
+      {
+        "title": [
+          "What are my active medications?",
+          "See the medications I am taking"
+        ],
+        "content": "What are my active medications?"
+      },
+      {
+        "title": [
+          "When did I see a doctor?",
+          "search your past visits"
+        ],
+        "content": "When did I see a doctor?"
+      },
+      {
+        "title": [
+          "What insurance did I have in 2025?",
+          "search your past insurance plans"
+        ],
+        "content": "What insurance did I have in 2025?"
+      }]'
     volumes:
       # Mount AWS credentials if using S3 storage
       - ~/.aws/:/root/.aws:ro-
@@ -108,7 +137,7 @@ services:
       retries: 20
 
   open-webui-db:
-    image: postgres:13.22-alpine3.22
+    image: public.ecr.aws/docker/library/postgres:18.0-alpine3.22
     environment:
       - POSTGRES_DB=myapp_db
       - POSTGRES_USER=myapp_user

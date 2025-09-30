@@ -95,11 +95,19 @@ class LangGraphToOpenAIConverter:
         token_reducer: TokenReducer,
     ) -> None:
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert isinstance(self.environment_variables, EnvironmentVariables)
-        assert self.environment_variables is not None
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                f"environment_variables must be EnvironmentVariables, got {type(self.environment_variables)}"
+            )
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
         self.token_reducer = token_reducer
-        assert self.token_reducer is not None
-        assert isinstance(self.token_reducer, TokenReducer)
+        if self.token_reducer is None:
+            raise ValueError("token_reducer must not be None")
+        if not isinstance(self.token_reducer, TokenReducer):
+            raise TypeError(
+                f"token_reducer must be TokenReducer, got {type(self.token_reducer)}"
+            )
 
     async def _stream_resp_async_generator(
         self,
@@ -141,6 +149,7 @@ class LangGraphToOpenAIConverter:
 
                 # print(f"===== {event_type} =====\n{event}\n")
 
+                event_object = cast(object, event)
                 match event_type:
                     case "on_chain_start":
                         # Handle the start of the chain event
@@ -150,7 +159,8 @@ class LangGraphToOpenAIConverter:
                         pass
                     case "on_chat_model_stream":
                         # Handle the chat model stream event
-                        chunk: AIMessageChunk | None = event.get("data", {}).get(
+                        event_dict = cast(dict[str, Any], event_object)
+                        chunk: AIMessageChunk | None = event_dict.get("data", {}).get(
                             "chunk"
                         )
                         if chunk is not None:
@@ -168,10 +178,10 @@ class LangGraphToOpenAIConverter:
                             content_text: str = convert_message_content_to_string(
                                 content
                             )
-
-                            assert isinstance(content_text, str), (
-                                f"content_text: {content_text} (type: {type(content_text)})"
-                            )
+                            if not isinstance(content_text, str):
+                                raise TypeError(
+                                    f"content_text must be str, got {type(content_text)}"
+                                )
 
                             if (
                                 os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1"
@@ -201,9 +211,10 @@ class LangGraphToOpenAIConverter:
                                 yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
-                        output: Dict[str, Any] | str | None = event.get("data", {}).get(
-                            "output"
-                        )
+                        event_dict = cast(dict[str, Any], event_object)
+                        output: Dict[str, Any] | str | None = event_dict.get(
+                            "data", {}
+                        ).get("output")
                         if (
                             output
                             and isinstance(output, dict)
@@ -229,10 +240,11 @@ class LangGraphToOpenAIConverter:
                             yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
                     case "on_tool_start":
                         # Handle the start of the tool event
-                        tool_name: Optional[str] = event.get("name", None)
-                        tool_input: Dict[str, Any] | None = event.get("data", {}).get(
-                            "input"
-                        )
+                        event_dict = cast(dict[str, Any], event_object)
+                        tool_name: Optional[str] = event_dict.get("name", None)
+                        tool_input: Dict[str, Any] | None = event_dict.get(
+                            "data", {}
+                        ).get("input")
 
                         # copy the tool_input to avoid modifying the original
                         tool_input_display = (
@@ -272,9 +284,10 @@ class LangGraphToOpenAIConverter:
 
                     case "on_tool_end":
                         # Handle the end of the tool event
-                        tool_message: ToolMessage | None = event.get("data", {}).get(
-                            "output"
-                        )
+                        event_dict = cast(dict[str, Any], event_object)
+                        tool_message: ToolMessage | None = event_dict.get(
+                            "data", {}
+                        ).get("output")
                         if tool_message:
                             artifact: Optional[Any] = tool_message.artifact
 
@@ -303,9 +316,9 @@ class LangGraphToOpenAIConverter:
 
                                 tool_progress_message: str = (
                                     (
-                                        f"\n> ==== Raw responses from tool {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n> ==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
                                         f"\n>{tool_message_content}"
-                                        f"\n> ==== End Raw responses from tool {tool_message.name} =====\n"
+                                        f"\n> ==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] =====\n"
                                     )
                                     if return_raw_tool_output
                                     else f"\n> {artifact}"
@@ -362,6 +375,11 @@ class LangGraphToOpenAIConverter:
             )
             yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
         except Exception as e:
+            tb = traceback.format_exc()
+            logger.error(
+                f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
+            )
+            error_message = f"Error: {e}\nTraceback:\n{tb}"
             chat_stream_response = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
@@ -371,7 +389,7 @@ class LangGraphToOpenAIConverter:
                         index=0,
                         delta=ChoiceDelta(
                             role="assistant",
-                            content=f"\nError:\n{e}\n",
+                            content=f"\n{error_message}\n",
                         ),
                     )
                 ],
@@ -404,7 +422,8 @@ class LangGraphToOpenAIConverter:
         Returns:
             The response as a StreamingResponse or JSONResponse.
         """
-        assert chat_request is not None
+        if chat_request is None:
+            raise ValueError("chat_request must not be None")
 
         if chat_request.get("stream"):
             return StreamingResponse(
@@ -604,9 +623,10 @@ class LangGraphToOpenAIConverter:
                     response_format,
                 )
                 json_schema: JSONSchema | None = json_response_format.get("json_schema")
-                assert json_schema is not None, (
-                    "json_schema should be specified in response_format if type is json_schema"
-                )
+                if json_schema is None:
+                    raise ValueError(
+                        "json_schema should be specified in response_format if type is json_schema"
+                    )
                 json_schema_system_message_text: str = f"""
                 Respond only with a JSON object or array using the provided schema:
                 ```{json_schema}```
@@ -779,7 +799,8 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of any messages.
         """
-        assert request is not None
+        if request is None:
+            raise ValueError("request must not be None")
 
         new_messages: List[ChatCompletionMessageParam] = [
             m for m in request["messages"]
@@ -838,7 +859,7 @@ class LangGraphToOpenAIConverter:
             The list of role and incoming message type tuples.
         """
         messages_: List[BaseMessage] = convert_openai_messages(
-            messages=[cast(Dict[str, Any], m) for m in messages]
+            messages=[cast(dict[str, Any], cast(object, m)) for m in messages]
         )
         return messages_
 

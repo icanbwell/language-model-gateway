@@ -23,8 +23,12 @@ class AwsImageGenerator(ImageGenerator):
     def __init__(self, *, aws_client_factory: AwsClientFactory) -> None:
         self.executor: ThreadPoolExecutor = ThreadPoolExecutor()
         self.aws_client_factory: AwsClientFactory = aws_client_factory
-        assert self.aws_client_factory is not None
-        assert isinstance(self.aws_client_factory, AwsClientFactory)
+        if self.aws_client_factory is None:
+            raise ValueError("aws_client_factory must not be None")
+        if not isinstance(self.aws_client_factory, AwsClientFactory):
+            raise TypeError(
+                "aws_client_factory must be an instance of AwsClientFactory"
+            )
 
     def _invoke_model(self, request_body: Dict[str, Any]) -> InvokeModelResponseTypeDef:
         """Synchronous model invocation"""

@@ -85,8 +85,10 @@ class JiraIssueHelper:
         Returns:
             List[JiraIssue]: List of closed Jira issues
         """
-        assert self.jira_base_url, "Jira base URL is required"
-        assert self.jira_access_token, "Jira access token is required"
+        if not self.jira_base_url:
+            raise ValueError("Jira base URL is required")
+        if not self.jira_access_token:
+            raise ValueError("Jira access token is required")
 
         async with self.http_client_factory.create_http_client(
             base_url=self.jira_base_url, headers=self.headers, timeout=30.0
@@ -353,8 +355,10 @@ class JiraIssueHelper:
             issue_counts (Dict[str, Dict[str, Any]]): Issue counts by assignee
             output_file (Optional[str]): Path to output file
         """
-        assert issue_counts, "Issue counts are required"
-        assert output_file or output_file is None, "Output file path is invalid"
+        if not issue_counts:
+            raise ValueError("Issue counts are required")
+        if not output_file:
+            raise ValueError("Output file path is invalid")
 
         try:
             with open(output_file, "w") as f:
@@ -395,8 +399,10 @@ class JiraIssueHelper:
         Returns:
             JiraIssueResult: The result containing the Jira issue
         """
-        assert self.jira_base_url, "Jira base URL is required"
-        assert self.jira_access_token, "Jira access token is required"
+        if not self.jira_base_url:
+            raise ValueError("Jira base URL is required")
+        if not self.jira_access_token:
+            raise ValueError("Jira access token is required")
 
         async with self.http_client_factory.create_http_client(
             base_url=self.jira_base_url, headers=self.headers, timeout=30.0

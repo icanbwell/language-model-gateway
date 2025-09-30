@@ -111,8 +111,10 @@ class ChatCompletionsRouter:
         Raises:
             HTTPException: For various error conditions
         """
-        assert chat_request
-        assert chat_manager
+        if not chat_request:
+            raise ValueError("chat_request must not be empty or None")
+        if chat_manager is None:
+            raise ValueError("chat_manager must not be None")
 
         try:
             auth_information = await self.read_auth_information(

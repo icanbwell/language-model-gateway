@@ -39,8 +39,8 @@ class FileManager:
         """
         extracted_content = ""
         async for chunk in response.body_iterator:
-            # Decode the chunk, assuming it is UTF-8 encoded
-            assert isinstance(chunk, bytes)
+            if not isinstance(chunk, bytes):
+                raise TypeError(f"Expected bytes, got {type(chunk)}")
             extracted_content += chunk.decode("utf-8")
 
         return extracted_content

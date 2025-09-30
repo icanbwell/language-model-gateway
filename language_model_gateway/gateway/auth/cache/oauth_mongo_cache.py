@@ -53,16 +53,21 @@ class OAuthMongoCache(OAuthCache):
         collection_name: str | None = (
             environment_variables.mongo_db_auth_cache_collection_name
         )
-        assert collection_name is not None, (
-            "MONGO_DB_AUTH_CACHE_COLLECTION_NAME environment variable must be set"
-        )
+        if collection_name is None:
+            raise ValueError(
+                "MONGO_DB_AUTH_CACHE_COLLECTION_NAME environment variable must be set"
+            )
         self.collection_name: str = collection_name
 
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert self.environment_variables is not None, (
-            "OAuthMongoCache requires an EnvironmentVariables instance."
-        )
-        assert isinstance(self.environment_variables, EnvironmentVariables)
+        if self.environment_variables is None:
+            raise ValueError(
+                "OAuthMongoCache requires an EnvironmentVariables instance."
+            )
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "environment_variables must be an instance of EnvironmentVariables"
+            )
 
     @property
     def id(self) -> uuid.UUID:
@@ -163,9 +168,10 @@ class OAuthMongoCache(OAuthCache):
                 update_data=existing_cache_item,
                 model_class=CacheItem,
             )
-            assert updated_cache_item is not None, (
-                f"Failed to update cache item with ID: {existing_cache_item_id} for key: {key}"
-            )
+            if updated_cache_item is None:
+                raise ValueError(
+                    f"Failed to update cache item with ID: {existing_cache_item_id} for key: {key}"
+                )
             logger.debug(
                 f"Cache item updated with ID: {updated_cache_item.id} for key: {key} with value: {value}.\n{stack_lines}"
             )

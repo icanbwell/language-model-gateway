@@ -56,42 +56,68 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         persistence_factory: PersistenceFactory,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
-        assert self.model_factory is not None
-        assert isinstance(self.model_factory, ModelFactory)
+        if self.model_factory is None:
+            raise ValueError("model_factory must not be None")
+        if not isinstance(self.model_factory, ModelFactory):
+            raise TypeError("model_factory must be an instance of ModelFactory")
         self.lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter = (
             lang_graph_to_open_ai_converter
         )
-        assert self.lang_graph_to_open_ai_converter is not None
-        assert isinstance(
+        if self.lang_graph_to_open_ai_converter is None:
+            raise ValueError("lang_graph_to_open_ai_converter must not be None")
+        if not isinstance(
             self.lang_graph_to_open_ai_converter, LangGraphToOpenAIConverter
-        )
+        ):
+            raise TypeError(
+                "lang_graph_to_open_ai_converter must be an instance of LangGraphToOpenAIConverter"
+            )
         self.tool_provider: ToolProvider = tool_provider
-        assert self.tool_provider is not None
-        assert isinstance(self.tool_provider, ToolProvider)
+        if self.tool_provider is None:
+            raise ValueError("tool_provider must not be None")
+        if not isinstance(self.tool_provider, ToolProvider):
+            raise TypeError("tool_provider must be an instance of ToolProvider")
 
         self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
-        assert self.mcp_tool_provider is not None
-        assert isinstance(self.mcp_tool_provider, MCPToolProvider)
+        if self.mcp_tool_provider is None:
+            raise ValueError("mcp_tool_provider must not be None")
+        if not isinstance(self.mcp_tool_provider, MCPToolProvider):
+            raise TypeError("mcp_tool_provider must be an instance of MCPToolProvider")
 
         self.token_reader: TokenReader = token_reader
-        assert self.token_reader is not None
-        assert isinstance(self.token_reader, TokenReader)
+        if self.token_reader is None:
+            raise ValueError("token_reader must not be None")
+        if not isinstance(self.token_reader, TokenReader):
+            raise TypeError("token_reader must be an instance of TokenReader")
 
         self.auth_manager: AuthManager = auth_manager
-        assert self.auth_manager is not None
-        assert isinstance(self.auth_manager, AuthManager)
+        if self.auth_manager is None:
+            raise ValueError("auth_manager must not be None")
+        if not isinstance(self.auth_manager, AuthManager):
+            raise TypeError("auth_manager must be an instance of AuthManager")
 
         self.environment_variables: EnvironmentVariables = environment_variables
-        assert self.environment_variables is not None
-        assert isinstance(self.environment_variables, EnvironmentVariables)
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(self.environment_variables, EnvironmentVariables):
+            raise TypeError(
+                "environment_variables must be an instance of EnvironmentVariables"
+            )
 
         self.auth_config_reader: AuthConfigReader = auth_config_reader
-        assert self.auth_config_reader is not None
-        assert isinstance(self.auth_config_reader, AuthConfigReader)
+        if self.auth_config_reader is None:
+            raise ValueError("auth_config_reader must not be None")
+        if not isinstance(self.auth_config_reader, AuthConfigReader):
+            raise TypeError(
+                "auth_config_reader must be an instance of AuthConfigReader"
+            )
 
         self.persistence_factory: PersistenceFactory = persistence_factory
-        assert self.persistence_factory is not None
-        assert isinstance(self.persistence_factory, PersistenceFactory)
+        if self.persistence_factory is None:
+            raise ValueError("persistence_factory must not be None")
+        if not isinstance(self.persistence_factory, PersistenceFactory):
+            raise TypeError(
+                "persistence_factory must be an instance of PersistenceFactory"
+            )
 
     async def chat_completions(
         self,
@@ -255,9 +281,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 auth_provider=tool_first_auth_provider,
             )
         )
-        assert tool_first_issuer, (
-            "Tool using authentication must have at least one issuer or use the default issuer."
-        )
+        if not tool_first_issuer:
+            raise ValueError(
+                "Tool using authentication must have at least one issuer or use the default issuer."
+            )
         tool_first_audience: str = self.auth_config_reader.get_audience_for_provider(
             auth_provider=tool_first_auth_provider
         )

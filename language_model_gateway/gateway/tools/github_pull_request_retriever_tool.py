@@ -67,7 +67,8 @@ class GitHubPullRequestRetriever(ResilientBaseTool):
         Returns:
             Tuple of pull request information and artifact description
         """
-        assert url, "Pull request URL is required"
+        if not url:
+            raise ValueError("Pull request URL is required")
 
         try:
             pull_request: GithubPullRequest = (

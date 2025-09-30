@@ -1,5 +1,5 @@
 services:
-  dev:
+  language-model-gateway:
     build:
       dockerfile: Dockerfile
       context: .
@@ -104,10 +104,9 @@ services:
       - web
 
   mongo:
-    image: mongodb/mongodb-atlas-local:8.0.12
+    image: mongodb/mongodb-atlas-local:8.2.0
     # https://github.com/mongodb/mongodb-atlas-cli/releases
     # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
-    # https://hub.docker.com/r/mongodb/mongodb-atlas-local
     ports:
       - "27017:27017"
     container_name: mongo

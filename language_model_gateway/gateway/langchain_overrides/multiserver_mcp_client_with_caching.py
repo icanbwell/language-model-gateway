@@ -75,15 +75,20 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             tool_output_token_limit: Optional limit for the number of tokens
             token_reducer: TokenReducer instance to manage token limits
         """
-        assert cache is not None
+        if cache is None:
+            raise ValueError("cache must not be None")
         self._cache: McpToolsMetadataExpiringCache = cache
-        assert self._cache is not None
         self._tool_names: List[str] | None = tool_names
         self._tool_output_token_limit: int | None = tool_output_token_limit
+        if not isinstance(self._cache, McpToolsMetadataExpiringCache):
+            raise TypeError(
+                f"self._cache must be McpToolsMetadataExpiringCache, got {type(self._cache)}"
+            )
+        if not isinstance(token_reducer, TokenReducer):
+            raise TypeError(
+                f"token_reducer must be TokenReducer, got {type(token_reducer)}"
+            )
         self.token_reducer = token_reducer
-        assert isinstance(self._cache, McpToolsMetadataExpiringCache)
-        assert isinstance(token_reducer, TokenReducer)
-
         super().__init__(connections=connections)
 
     async def load_tools_metadata_cache(
@@ -106,9 +111,8 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             cache: Dict[str, List[Tool]] | None = await self._cache.get()
             if cache is None:
                 cache = await self._cache.create()
-                assert cache is not None, (
-                    "Cache must be initialized before getting tools"
-                )
+                if cache is None:
+                    raise RuntimeError("Cache must be initialized before getting tools")
 
             if server_name is not None:
                 if server_name not in self.connections:
@@ -190,15 +194,15 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         await self.load_tools_metadata_cache(
             server_name=server_name, tool_names=self._tool_names
         )
-
         async with self._lock:
             cache: Dict[str, List[Tool]] | None = await self._cache.get()
-            assert cache is not None, "Cache must be initialized before getting tools"
+            if cache is None:
+                raise RuntimeError("Cache must be initialized before getting tools")
 
             # create LangChain tools from the loaded MCP tools
             all_tools: List[BaseTool] = []
             for connection in self.connections.values():
-                tools_for_connection = cache[connection["url"]]
+                tools_for_connection: List[Tool] = cache[connection["url"]]
                 all_tools.extend(
                     self.create_tools_from_list(
                         tools=tools_for_connection, session=None, connection=connection

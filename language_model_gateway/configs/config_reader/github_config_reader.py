@@ -156,9 +156,12 @@ class GitHubConfigReader:
             branch: The branch to read from
             github_token: Optional GitHub token for private repositories
         """
-        assert repo_url
-        assert path
-        assert branch
+        if not repo_url:
+            raise ValueError("repo_url must not be empty or None")
+        if not path:
+            raise ValueError("path must not be empty or None")
+        if not branch:
+            raise ValueError("branch must not be empty or None")
 
         logger.info(f"Reading model configurations from GitHub: {repo_url}/{path}")
         configs: List[ChatModelConfig] = []

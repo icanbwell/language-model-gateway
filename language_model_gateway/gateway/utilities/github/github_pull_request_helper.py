@@ -105,8 +105,10 @@ class GithubPullRequestHelper:
         Async method to retrieve closed pull requests across organization repositories.
         """
 
-        assert self.org_name, "Organization name is required"
-        assert self.github_access_token, "GitHub access token is required"
+        if not self.org_name:
+            raise ValueError("Organization name is required")
+        if not self.github_access_token:
+            raise ValueError("GitHub access token is required")
 
         if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
             self.logger.info(
@@ -328,6 +330,9 @@ class GithubPullRequestHelper:
         Returns:
             Dict[str, GithubPullRequestPerContributorInfo]: Summary of PRs by engineer
         """
+        if not pull_requests:
+            raise ValueError("Pull requests are required")
+
         engineer_pr_counts: Dict[str, GithubPullRequestPerContributorInfo] = {}
 
         for pr in pull_requests:
@@ -404,8 +409,10 @@ class GithubPullRequestHelper:
             str: The raw diff content of the PR
         """
 
-        assert self.org_name, "Organization name is required"
-        assert self.github_access_token, "GitHub access token is required"
+        if not self.org_name:
+            raise ValueError("Organization name is required")
+        if not self.github_access_token:
+            raise ValueError("GitHub access token is required")
 
         async with self.http_client_factory.create_http_client(
             base_url=self.base_url
@@ -449,8 +456,10 @@ class GithubPullRequestHelper:
             pr_counts (Dict[str, GithubPullRequestPerContributorInfo]): PR counts by engineer
             output_file (Optional[str]): Path to output file
         """
-        assert output_file, "Output file path is required"
-        assert pr_counts, "PR counts are required"
+        if not output_file:
+            raise ValueError("Output file path is required")
+        if not pr_counts:
+            raise ValueError("PR counts are required")
 
         try:
             with open(output_file, "w") as f:
@@ -488,8 +497,10 @@ class GithubPullRequestHelper:
         Returns:
             GithubPullRequest: The pull request information
         """
-        assert self.org_name, "Organization name is required"
-        assert self.github_access_token, "GitHub access token is required"
+        if not self.org_name:
+            raise ValueError("Organization name is required")
+        if not self.github_access_token:
+            raise ValueError("GitHub access token is required")
 
         async with self.http_client_factory.create_http_client(
             base_url=self.base_url

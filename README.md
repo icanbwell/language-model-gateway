@@ -127,7 +127,7 @@ aws ecr get-login-password --region us-east-1 --profile {profile} | docker login
 ```
 where profile is the AWS profile you're part of e.g., `admin_dev` or `data-engineer_dev`.
 
-For more details and getting the models list up and running, refer to the [openwebui_functions/readme.md](openwebui_functions/readme.md).
+For more details and getting the models list up and running, refer to the [openwebui-config/functions/readme.md](openwebui-config/functions/readme.md).
 
 ## Contributing
 

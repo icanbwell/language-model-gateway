@@ -11,8 +11,12 @@ from language_model_gateway.gateway.file_managers.local_file_manager import (
 class FileManagerFactory:
     def __init__(self, *, aws_client_factory: AwsClientFactory) -> None:
         self.aws_client_factory = aws_client_factory
-        assert self.aws_client_factory is not None
-        assert isinstance(self.aws_client_factory, AwsClientFactory)
+        if self.aws_client_factory is None:
+            raise ValueError("aws_client_factory must not be None")
+        if not isinstance(self.aws_client_factory, AwsClientFactory):
+            raise TypeError(
+                f"aws_client_factory must be AwsClientFactory, got {type(self.aws_client_factory)}"
+            )
 
     def get_file_manager(self, *, folder: str) -> FileManager:
         if folder.startswith("s3"):

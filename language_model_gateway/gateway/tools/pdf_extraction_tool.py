@@ -107,7 +107,8 @@ class PDFExtractionTool(ResilientBaseTool):
         else:
             logger.info("Extracting text from base64 encoded PDF")
 
-        assert base64_pdf or url, "Either base64_pdf or url must be provided"
+        if not (base64_pdf or url):
+            raise ValueError("Either base64_pdf or url must be provided")
 
         pdf_bytes: bytes
         if not base64_pdf and url:
@@ -133,7 +134,8 @@ class PDFExtractionTool(ResilientBaseTool):
                     f"PDFExtractionAgent: Failed to fetch or process the URL: <{url}> ",
                 )
         else:
-            assert base64_pdf is not None, "base64_pdf must be provided"
+            if base64_pdf is None:
+                raise ValueError("base64_pdf must be provided")
             pdf_bytes = base64.b64decode(base64_pdf)
 
         try:

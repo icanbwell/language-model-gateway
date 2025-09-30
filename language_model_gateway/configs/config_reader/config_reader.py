@@ -36,16 +36,17 @@ class ConfigReader:
         Args:
             cache: Expiring cache for model configurations
         """
-        assert cache is not None
+        if cache is None:
+            raise ValueError("cache must not be None")
         self._cache: ConfigExpiringCache = cache
-        assert self._cache is not None
+        if self._cache is None:
+            raise ValueError("self._cache must not be None")
 
     # noinspection PyMethodMayBeStatic
     async def read_model_configs_async(self) -> List[ChatModelConfig]:
         config_path: str = os.environ["MODELS_OFFICIAL_PATH"]
-        assert config_path is not None, (
-            "MODELS_OFFICIAL_PATH environment variable is not set"
-        )
+        if config_path is None:
+            raise ValueError("MODELS_OFFICIAL_PATH environment variable is not set")
         models_zip_path: Optional[str] = os.environ.get("MODELS_ZIP_PATH", "")
 
         # Check cache first

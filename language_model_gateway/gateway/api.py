@@ -98,9 +98,8 @@ def create_app() -> FastAPI:
 
     image_generation_path: str = environ["IMAGE_GENERATION_PATH"]
 
-    assert image_generation_path is not None, (
-        "IMAGE_GENERATION_PATH environment variable must be set"
-    )
+    if image_generation_path is None:
+        raise ValueError("IMAGE_GENERATION_PATH environment variable must be set")
 
     makedirs(image_generation_path, exist_ok=True)
     app1.include_router(
@@ -146,8 +145,12 @@ async def favicon() -> FileResponse:
 async def refresh_data(
     request: Request, config_reader: Annotated[ConfigReader, Depends(get_config_reader)]
 ) -> JSONResponse:
-    assert config_reader is not None
-    assert isinstance(config_reader, ConfigReader)
+    if config_reader is None:
+        raise ValueError("config_reader must not be None")
+    if not isinstance(config_reader, ConfigReader):
+        raise TypeError(
+            f"config_reader must be ConfigReader, got {type(config_reader)}"
+        )
     await config_reader.clear_cache()
     configs: List[ChatModelConfig] = await config_reader.read_model_configs_async()
     return JSONResponse({"message": "Configuration refreshed", "data": configs})

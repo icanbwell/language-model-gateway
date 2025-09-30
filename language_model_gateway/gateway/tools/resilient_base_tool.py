@@ -44,7 +44,8 @@ class ResilientBaseTool(BaseTool, metaclass=ABCMeta):
 
                 # find keys that are not present in self.args_schema
                 # and convert them to snake_case
-                assert self.args_schema is not None
+                if self.args_schema is None:
+                    raise ValueError("args_schema must not be None")
                 # check if the self.args_schema has the model_fields attribute
                 if not hasattr(self.args_schema, "model_fields"):
                     raise ValueError(

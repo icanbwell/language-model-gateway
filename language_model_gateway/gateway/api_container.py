@@ -40,7 +40,8 @@ def get_chat_manager(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> ChatCompletionManager:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(ChatCompletionManager)
 
 
@@ -48,7 +49,8 @@ def get_model_manager(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> ModelManager:
     """helper function to get the model manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(ModelManager)
 
 
@@ -56,7 +58,8 @@ def get_image_generation_manager(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> ImageGenerationManager:
     """helper function to get the model manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(ImageGenerationManager)
 
 
@@ -64,7 +67,8 @@ def get_config_reader(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> ConfigReader:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(ConfigReader)
 
 
@@ -72,7 +76,8 @@ def get_aws_client_factory(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> AwsClientFactory:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(AwsClientFactory)
 
 
@@ -80,7 +85,8 @@ def get_file_manager_factory(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> FileManagerFactory:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(FileManagerFactory)
 
 
@@ -88,7 +94,8 @@ def get_auth_manager(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> AuthManager:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(AuthManager)
 
 
@@ -96,7 +103,8 @@ def get_token_reader(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> TokenReader:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(TokenReader)
 
 
@@ -104,7 +112,8 @@ def get_environment_variables(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> EnvironmentVariables:
     """helper function to get the chat manager"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(EnvironmentVariables)
 
 
@@ -112,5 +121,6 @@ def get_auth_config_reader(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
 ) -> AuthConfigReader:
     """helper function to get the auth config reader"""
-    assert isinstance(container, SimpleContainer), type(container)
+    if not isinstance(container, SimpleContainer):
+        raise TypeError(f"container must be SimpleContainer, got {type(container)}")
     return container.resolve(AuthConfigReader)

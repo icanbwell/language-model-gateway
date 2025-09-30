@@ -207,6 +207,16 @@
 #         assert input_text
 #         assert isinstance(chat_history, list)
 #
+#         # NOTE: If uncommenting, replace asserts with exceptions for production use:
+#         if not agent_url:
+#             raise ValueError("agent_url must not be empty")
+#         if not patient_id:
+#             raise ValueError("patient_id must not be empty")
+#         if not input_text:
+#             raise ValueError("input_text must not be empty")
+#         if not isinstance(chat_history, list):
+#             raise TypeError("chat_history must be a list")
+#
 #         test_data = {
 #             "input": input_text,
 #             "patient_id": patient_id,
@@ -240,8 +250,14 @@
 #                     }
 #                 }
 #
-#             assert agent_response.status_code == 200
-#             assert "output" in response_dict
+#             # NOTE: If uncommenting, replace asserts with exceptions for production use:
+#             if agent_response.status_code != 200:
+#                 raise ValueError(f"agent_response.status_code must be 200, got {agent_response.status_code}")
+#             if "output" not in response_dict:
+#                 raise ValueError('"output" key missing in response_dict')
+#             if len(outputs) != 1:
+#                 raise ValueError(f"outputs must have length 1, got {len(outputs)}")
+#
 #             output_dict: Dict[str, Any] = response_dict["output"]
 #             outputs: List[Dict[str, Any]] = output_dict["output"]
 #             assert len(outputs) == 1

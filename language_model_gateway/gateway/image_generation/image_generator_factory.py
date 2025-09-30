@@ -15,8 +15,12 @@ from language_model_gateway.gateway.image_generation.openai_image_generator impo
 class ImageGeneratorFactory:
     def __init__(self, *, aws_client_factory: AwsClientFactory) -> None:
         self.aws_client_factory = aws_client_factory
-        assert self.aws_client_factory is not None
-        assert isinstance(self.aws_client_factory, AwsClientFactory)
+        if self.aws_client_factory is None:
+            raise ValueError("aws_client_factory must not be None")
+        if not isinstance(self.aws_client_factory, AwsClientFactory):
+            raise TypeError(
+                "aws_client_factory must be an instance of AwsClientFactory"
+            )
 
     # noinspection PyMethodMayBeStatic
     def get_image_generator(

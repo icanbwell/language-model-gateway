@@ -30,8 +30,14 @@ class RepositoryFactory:
         :return: An instance of the specified repository.
         """
         if repository_type.lower() == "mongo":
-            assert environment_variables.mongo_uri
-            assert environment_variables.mongo_db_name
+            if not environment_variables.mongo_uri:
+                raise ValueError(
+                    "mongo_uri must be set in environment_variables for Mongo repository."
+                )
+            if not environment_variables.mongo_db_name:
+                raise ValueError(
+                    "mongo_db_name must be set in environment_variables for Mongo repository."
+                )
             return AsyncMongoRepository(
                 server_url=environment_variables.mongo_uri,
                 database_name=environment_variables.mongo_db_name,
