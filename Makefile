@@ -219,10 +219,10 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 	"DELETE FROM public.function WHERE id='language_model_gateway';"
 	docker run --rm -it --name openid-function-creator \
         --network language-model-gateway_web \
-        --mount type=bind,source="${PWD}"/openwebui_functions,target=/app \
+        --mount type=bind,source="${PWD}"/openwebui-config/functions,target=/app \
         python:3.12-alpine \
         sh -c "pip install --root-user-action=ignore --upgrade pip && \
-        	   pip install --root-user-action=ignore authlib requests && \
+               pip install --root-user-action=ignore authlib requests && \
                cd /app && \
                python3 import_pipe.py \
                --url 'http://language-model-gateway-open-webui-1:8080' \

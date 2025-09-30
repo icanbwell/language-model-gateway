@@ -8,7 +8,7 @@ services:
     # Slim image excludes embedded AI models and Ollama installation
 #    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
     build:
-      dockerfile: ./openwebui_functions/open-webui.Dockerfile
+      dockerfile: ./openwebui-config/functions/open-webui.Dockerfile
       context: .
     env_file:
       - docker.env

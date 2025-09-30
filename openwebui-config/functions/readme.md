@@ -17,7 +17,7 @@ https://docs.openwebui.com/features/plugin/functions/pipe/
 - Click top right icon and select Admin Panel
 - Click Functions tab
 - Click Import Functions (don’t click + to add a new function)
-- Select the language_model_gateway_pipe.json file in the openwebui_functions folder in language_model_gateway 
+- Select the language_model_gateway_pipe.json file in the openwebui-config/functions folder in language_model_gateway 
 - This contains the content of openai.py in a json string so update that if you change openai.py
 - After the function has been loaded, make sure to click the toggle next to it to turn it on
 - Now go back to the main UI
