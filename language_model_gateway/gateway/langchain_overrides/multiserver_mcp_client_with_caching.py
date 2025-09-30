@@ -202,7 +202,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             # create LangChain tools from the loaded MCP tools
             all_tools: List[BaseTool] = []
             for connection in self.connections.values():
-                tools_for_connection = cache[connection["url"]]
+                tools_for_connection: List[Tool] = cache[connection["url"]]
                 all_tools.extend(
                     self.create_tools_from_list(
                         tools=tools_for_connection, session=None, connection=connection
