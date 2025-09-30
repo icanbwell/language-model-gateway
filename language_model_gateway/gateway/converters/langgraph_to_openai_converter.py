@@ -316,9 +316,9 @@ class LangGraphToOpenAIConverter:
 
                                 tool_progress_message: str = (
                                     (
-                                        f"\n> ==== Raw responses from tool {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n> ==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
                                         f"\n>{tool_message_content}"
-                                        f"\n> ==== End Raw responses from tool {tool_message.name} =====\n"
+                                        f"\n> ==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] =====\n"
                                     )
                                     if return_raw_tool_output
                                     else f"\n> {artifact}"
