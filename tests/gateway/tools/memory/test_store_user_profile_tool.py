@@ -112,7 +112,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
 
     message2: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "Show me my memories.",
+        "content": "Show me my user profile.",
     }
     chat_completion2: ChatCompletion = await client.chat.completions.create(
         messages=[message2],
