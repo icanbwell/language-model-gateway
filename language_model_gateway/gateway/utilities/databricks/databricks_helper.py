@@ -2,6 +2,8 @@ import logging
 import os
 import time
 from logging import Logger
+from typing import Optional
+
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.service.sql import StatementState, StatementResponse
 import pandas as pd
@@ -25,7 +27,7 @@ class DatabricksHelper:
 
     def parse_databricks_statement_response(
         self, statement_response: StatementResponse
-    ) -> pd.DataFrame | None:
+    ) -> Optional[pd.DataFrame]:
         """
         Simple parser to create a DataFrame from Databricks StatementResponse
         Args:
