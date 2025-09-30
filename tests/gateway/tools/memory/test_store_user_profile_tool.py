@@ -131,4 +131,4 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
     print("======== Final Content ========")
     print(content2)
     print("====== End of Final Content ======")
-    assert "profile" in content2
+    assert "fast cars" in content2

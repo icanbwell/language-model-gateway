@@ -18,6 +18,11 @@ class GetUserInfoTool(ResilientBaseTool):
     description: str = "Look up user profile for a given user."
 
     def _run(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
+        raise NotImplementedError(
+            "Synchronous execution is not supported. Use the asynchronous method instead."
+        )
+
+    async def _arun(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
         logger.info(f"GetUserInfoTool called with state: {state}")
 
         try:
@@ -28,7 +33,7 @@ class GetUserInfoTool(ResilientBaseTool):
             my_store: BaseStore = get_store()
             # user_info = my_store.get(("memories",), user_id)
 
-            user_info_items: List[SearchItem] = my_store.search(
+            user_info_items: List[SearchItem] = await my_store.asearch(
                 ("memories", user_id, "user_profile")
             )
             if not user_info_items:
