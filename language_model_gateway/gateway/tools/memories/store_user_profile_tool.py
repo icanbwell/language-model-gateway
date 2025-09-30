@@ -77,23 +77,24 @@ class StoreUserProfileTool(ResilientBaseTool):
         logger.info(
             f"StoreUserProfileTool called with action: {action} state: {state} user_profile: {user_profile.model_dump()}"
         )
-        # Validate state and action
-        UserProfileValidator.validate_state_user_id(state)
-        UserProfileValidator.validate_action(action, self.actions_permitted)
-        # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
-        if not state.user_id:
-            raise ToolException(
-                "user_id is required in the state to store user profile"
-            )
-        user_profile.user_id = state.user_id
-        store = self._get_store()
-        repo = UserProfileRepository(store, self.namespace)
         try:
+            # Validate state and action
+            UserProfileValidator.validate_state_user_id(state)
+            UserProfileValidator.validate_action(action, self.actions_permitted)
+            # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
+            if not state.user_id:
+                raise ToolException(
+                    "user_id is required in the state to store user profile"
+                )
+            user_profile.user_id = state.user_id
+            store = self._get_store()
+            repo = UserProfileRepository(store, self.namespace)
             if action == "delete":
                 await repo.delete(user_profile.user_id)
                 return f"Deleted user profile user_profile_{user_profile.user_id}"
-            await repo.save(user_profile)
-            return f"{action}d memory user_profile_{user_profile.user_id}"
+            else:
+                await repo.save(user_profile)
+                return f"{action}d memory user_profile_{user_profile.user_id}"
         except Exception as e:
             logger.exception("Error storing user profile")
             raise ToolException("Error storing user profile") from e
