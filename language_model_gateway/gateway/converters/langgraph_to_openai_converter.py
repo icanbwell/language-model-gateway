@@ -66,7 +66,9 @@ from language_model_gateway.gateway.schema.openai.completions import (
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.tools.get_user_info_tool import GetUserInfoTool
+from language_model_gateway.gateway.tools.memories.get_user_info_tool import (
+    GetUserInfoTool,
+)
 from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
     StoreUserProfileTool,
 )

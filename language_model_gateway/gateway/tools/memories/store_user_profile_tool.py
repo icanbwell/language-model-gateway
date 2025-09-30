@@ -41,11 +41,11 @@ class StoreUserProfileTool(ResilientBaseTool):
 
     name: str = "store_user_profile"
     description: str = (
-        "Create, update, or delete a user profile to persist across conversations. "
+        "Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user."
         "Proactively call this tool when you: "
         "1. Identify a new USER profile. "
         "2. Receive an explicit USER request to remember something or otherwise alter your behavior. "
-        "3. Are working and want to record important context. "
+        "3. Are working and want to record important memory. "
         "4. Identify that an existing USER profile is incorrect or outdated."
     )
     args_schema: Type[BaseModel] = UserProfileInput
