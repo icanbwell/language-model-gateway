@@ -1,5 +1,5 @@
 services:
-  dev:
+  language-model-gateway:
     build:
       dockerfile: Dockerfile
       context: .

@@ -2,8 +2,8 @@ export LANG
 
 .PHONY: Pipfile.lock
 Pipfile.lock: # Locks Pipfile and updates the Pipfile.lock on the local file system
-	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true dev && \
-	docker compose --progress=plain run dev sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
+	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
+	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
 
 .PHONY:devsetup
 devsetup: ## one time setup for devs
@@ -138,15 +138,15 @@ help: ## Show this help.
 
 .PHONY:tests
 tests: ## Runs all the tests
-	docker compose run --rm --name language-model-gateway_tests dev pytest tests
+	docker compose run --rm --name language-model-gateway_tests language-model-gateway pytest tests
 
 .PHONY:tests-integration
 tests-integration: ## Runs all the tests
-	docker compose run --rm -e RUN_TESTS_WITH_REAL_LLM=1 --name language-model-gateway_tests dev pytest tests
+	docker compose run --rm -e RUN_TESTS_WITH_REAL_LLM=1 --name language-model-gateway_tests language-model-gateway pytest tests
 
 .PHONY:shell
 shell: ## Brings up the bash shell in dev docker
-	docker compose run --rm --name language-model-gateway_shell dev /bin/sh
+	docker compose run --rm --name language-model-gateway_shell language-model-gateway /bin/sh
 
 .PHONY:clean-pre-commit
 clean-pre-commit: ## removes pre-commit hook
