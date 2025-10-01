@@ -39,7 +39,6 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
-from langmem import create_search_memory_tool
 from openai import NotGiven, NOT_GIVEN
 from openai.types import CompletionUsage
 from openai.types.chat import (
@@ -67,7 +66,7 @@ from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
 from language_model_gateway.gateway.tools.memories.get_user_info_tool import (
-    GetUserInfoTool,
+    GetUserProfileTool,
 )
 from language_model_gateway.gateway.tools.memories.manage_memory_tool import (
     ManageMemoryTool,
@@ -933,8 +932,8 @@ class LangGraphToOpenAIConverter:
                         # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
                     ManageMemoryTool(namespace=memories_namespace),
-                    create_search_memory_tool(namespace=user_profile_namespace),
-                    GetUserInfoTool(),
+                    # create_search_memory_tool(namespace=user_profile_namespace),
+                    GetUserProfileTool(),
                 ]
             )
 

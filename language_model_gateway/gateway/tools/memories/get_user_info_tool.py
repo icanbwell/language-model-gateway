@@ -13,7 +13,7 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 logger = logging.getLogger(__name__)
 
 
-class GetUserInfoTool(ResilientBaseTool):
+class GetUserProfileTool(ResilientBaseTool):
     name: str = "get_user_profile"
     description: str = "Look up user profile for a given user."
 

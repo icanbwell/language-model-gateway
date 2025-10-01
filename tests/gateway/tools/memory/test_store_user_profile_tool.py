@@ -86,7 +86,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
     # call API
     message: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "I have diabetes.   Return what tools you have access to and why you chose not to use each tool",
+        "content": "I have diabetes. Also return what tools you have access to and why you chose not to use each tool.",
     }
     chat_completion: ChatCompletion = await client.chat.completions.create(
         messages=[message],
@@ -112,7 +112,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
 
     message2: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "Show me my user profile.",
+        "content": "Show me my user profile. Also return what tools you have access to and why you chose not to use each tool.",
     }
     chat_completion2: ChatCompletion = await client.chat.completions.create(
         messages=[message2],
@@ -131,4 +131,27 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
     print("======== Final Content ========")
     print(content2)
     print("====== End of Final Content ======")
-    assert "fast cars" in content2
+    assert "tester-subject-id" in content2
+
+    message3: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Show me my memories.  Also return what tools you have access to and why you chose not to use each tool.",
+    }
+    chat_completion3: ChatCompletion = await client.chat.completions.create(
+        messages=[message3],
+        model="General Purpose",
+        extra_headers={
+            "Authorization": f"Bearer {access_token}",
+        },
+    )
+
+    choices3: List[Choice] = chat_completion3.choices
+    print(choices3)
+    content3: Optional[str] = ",".join(
+        [choice.message.content or "" for choice in choices3]
+    )
+    assert content3 is not None
+    print("======== Final Content ========")
+    print(content3)
+    print("====== End of Final Content ======")
+    assert "fast cars" in content3

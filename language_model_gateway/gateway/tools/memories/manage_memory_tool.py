@@ -1,6 +1,6 @@
 import logging
 import typing
-from typing import Annotated, Literal, Type, List
+from typing import Annotated, Literal, Type, List, Optional
 
 from langchain_core.tools import ToolException
 from langgraph.config import get_store
@@ -28,6 +28,10 @@ class ConversationMemoryInput(BaseModel):
         default=None,
         description="The memory data to create or update. Required for create/update. Omit for search/delete unless needed.",
     )
+    all_memories: typing.Optional[bool] = Field(
+        default=False,
+        description="If true, retrieve all memories for the user. Only used for search action.",
+    )
     query: typing.Optional[str] = Field(
         default=None,
         description="Query string to search for relevant memories. Only used for search action.",
@@ -36,7 +40,7 @@ class ConversationMemoryInput(BaseModel):
 
 class ManageMemoryTool(ResilientBaseTool):
     """
-    Tool for managing persistent memories in conversations. Supports create, update, and delete actions.
+    Tool for managing persistent memories in conversations. Supports create, update, delete, and search actions.
 
     Use this tool to store, search, update, or delete a memory for this conversation.
     Use it whenever you need to remember something, retrieve a memory, update, or delete it.
@@ -50,8 +54,9 @@ class ManageMemoryTool(ResilientBaseTool):
     - To delete: action='delete', memory=..., include MEMORY ID
 
     Call this tool whenever a user asks to remember, search, update, or delete a memory,
-    or when you want to proactively store or retrieve context that may be important for the conversation,
-    such as general disclosures, health information, or any information that could be useful later—even if the user does not explicitly request it.
+    or when you want to proactively store or retrieve context that may be important for the conversation or user profile,
+    such as general disclosures, health information (e.g., diabetes), user profile data, or any information that could be useful later—even if the user does not explicitly request it.
+    This tool is appropriate for storing both conversational context and important user profile information that may be relevant in future interactions.
     """
 
     name: str = "manage_memory"
@@ -66,8 +71,9 @@ class ManageMemoryTool(ResilientBaseTool):
         "- To update: action='update', memory=..., include MEMORY ID "
         "- To delete: action='delete', memory=..., include MEMORY ID "
         "Call this tool whenever a user asks to remember, search, update, or delete a memory, "
-        "or when you want to proactively store or retrieve context that may be important for the conversation, "
-        "such as general disclosures, health information, or any information that could be useful later—even if the user does not explicitly request it."
+        "or when you want to proactively store or retrieve context that may be important for the conversation or user profile, "
+        "such as general disclosures, health information (e.g., diabetes), user profile data, or any information that could be useful later—even if the user does not explicitly request it. "
+        "This tool is appropriate for storing both conversational context and important user profile information that may be relevant in future interactions."
     )
     namespace: tuple[str, ...] | str
     args_schema: Type[BaseModel] = ConversationMemoryInput
@@ -79,9 +85,11 @@ class ManageMemoryTool(ResilientBaseTool):
     def _run(
         self,
         *,
-        memory: ConversationMemory,
-        action: str | None = None,
+        memory: typing.Optional[ConversationMemory] = None,
+        action: Literal["create", "update", "delete", "search"] | None = None,
         state: Annotated[MyMessagesState, InjectedState],
+        all_memories: Optional[bool] = None,
+        query: typing.Optional[str] = None,
     ) -> str:
         raise NotImplementedError(
             "Synchronous execution is not supported. Use the asynchronous method instead."
@@ -91,8 +99,9 @@ class ManageMemoryTool(ResilientBaseTool):
         self,
         *,
         memory: typing.Optional[ConversationMemory] = None,
-        action: str | None = None,
+        action: Literal["create", "update", "delete", "search"] | None = None,
         state: Annotated[MyMessagesState, InjectedState],
+        all_memories: Optional[bool] = None,
         query: typing.Optional[str] = None,
     ) -> str:
         if self.actions_permitted and action not in self.actions_permitted:
@@ -113,8 +122,8 @@ class ManageMemoryTool(ResilientBaseTool):
                 return f"Deleted user profile {key}"
             if action == "search":
                 # For demonstration, return all memories for the user, or filter by query if provided
-                all_memories: List[SearchItem] = await store.asearch(namespace)
-                user_memories = [m for m in all_memories]
+                found_memories: List[SearchItem] = await store.asearch(namespace)
+                user_memories = [m for m in found_memories]
                 if query:
                     user_memories = [
                         m for m in user_memories if query.lower() in str(m).lower()
