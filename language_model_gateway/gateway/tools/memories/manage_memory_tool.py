@@ -1,5 +1,6 @@
 import logging
 import typing
+import uuid
 from typing import Annotated, Literal, Type, List, Optional
 
 from langchain_core.tools import ToolException
@@ -108,19 +109,24 @@ class ManageMemoryTool(ResilientBaseTool):
             raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
             )
+        if not state.user_id:
+            raise ToolException(
+                "user_id is required in the state to store user profile"
+            )
         try:
-            if not state.user_id:
-                raise ToolException(
-                    "user_id is required in the state to store user profile"
-                )
+            if not memory:
+                raise ToolException("memory is required for create/update actions")
+
             store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()
-            key: str = f"user_profile_{state.user_id}"
+            if not memory.memory_id:
+                memory.memory_id = str(uuid.uuid4())
+            key: str = f"memory_{memory.memory_id}"
             if action == "delete":
                 await store.adelete(namespace, key=str(key))
                 return f"Deleted user profile {key}"
-            if action == "search":
+            elif action == "search":
                 # For demonstration, return all memories for the user, or filter by query if provided
                 found_memories: List[SearchItem] = await store.asearch(namespace)
                 user_memories = [m for m in found_memories]
@@ -129,16 +135,15 @@ class ManageMemoryTool(ResilientBaseTool):
                         m for m in user_memories if query.lower() in str(m).lower()
                     ]
                 return f"Found {len(user_memories)} memories: {user_memories}"
-            if not memory:
-                raise ToolException("memory is required for create/update actions")
-            memory_copy = memory.model_copy()
-            memory_copy.user_id = state.user_id
-            await store.aput(
-                namespace,
-                key=str(key),
-                value=self._ensure_json_serializable(memory_copy),
-            )
-            return f"{action}d memory {key}"
+            else:
+                memory_copy = memory.model_copy()
+                memory_copy.user_id = state.user_id
+                await store.aput(
+                    namespace,
+                    key=str(key),
+                    value=self._ensure_json_serializable(memory_copy),
+                )
+                return f"{action}d memory {key}"
         except Exception as e:
             logger.exception("Error storing user profile")
             raise ToolException("Error storing user profile") from e
