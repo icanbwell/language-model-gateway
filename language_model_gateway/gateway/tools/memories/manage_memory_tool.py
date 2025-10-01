@@ -37,6 +37,21 @@ class ConversationMemoryInput(BaseModel):
 class ManageMemoryTool(ResilientBaseTool):
     """
     Tool for managing persistent memories in conversations. Supports create, update, and delete actions.
+
+    Use this tool to store, search, update, or delete a memory for this conversation.
+    Use it whenever you need to remember something, retrieve a memory, update, or delete it.
+    Actions: 'create' (store new memory), 'search' (find memories by query),
+    'update' (modify existing memory, include MEMORY ID), 'delete' (remove memory, include MEMORY ID).
+
+    Examples:
+    - To remember something: action='create', memory=...
+    - To search: action='search', query='...'
+    - To update: action='update', memory=..., include MEMORY ID
+    - To delete: action='delete', memory=..., include MEMORY ID
+
+    Call this tool whenever a user asks to remember, search, update, or delete a memory,
+    or when you want to proactively store or retrieve context that may be important for the conversation,
+    such as general disclosures, health information, or any information that could be useful later—even if the user does not explicitly request it.
     """
 
     name: str = "manage_memory"
@@ -50,7 +65,9 @@ class ManageMemoryTool(ResilientBaseTool):
         "- To search: action='search', query='...' "
         "- To update: action='update', memory=..., include MEMORY ID "
         "- To delete: action='delete', memory=..., include MEMORY ID "
-        "Call this tool whenever a user asks to remember, search, update, or delete a memory, or when you want to proactively store or retrieve context."
+        "Call this tool whenever a user asks to remember, search, update, or delete a memory, "
+        "or when you want to proactively store or retrieve context that may be important for the conversation, "
+        "such as general disclosures, health information, or any information that could be useful later—even if the user does not explicitly request it."
     )
     namespace: tuple[str, ...] | str
     args_schema: Type[BaseModel] = ConversationMemoryInput
