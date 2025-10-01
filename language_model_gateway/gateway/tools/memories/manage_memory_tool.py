@@ -1,11 +1,11 @@
 import logging
 import typing
-from typing import Annotated, Literal, Type
+from typing import Annotated, Literal, Type, List
 
 from langchain_core.tools import ToolException
 from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
-from langgraph.store.base import BaseStore
+from langgraph.store.base import BaseStore, SearchItem
 from langmem import errors
 from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field
@@ -20,13 +20,17 @@ logger = logging.getLogger(__name__)
 
 
 class ConversationMemoryInput(BaseModel):
-    action: Literal["create", "update", "delete"] = Field(
-        description="Action to perform on the user profile"
+    action: Literal["create", "update", "delete", "search"] = Field(
+        description="Action to perform on the user profile (create, update, delete, or search)"
     )
     state: Annotated[MyMessagesState, InjectedState] = Field()
-
-    memory: ConversationMemory = Field(
-        description="The memory data to create or update"
+    memory: typing.Optional[ConversationMemory] = Field(
+        default=None,
+        description="The memory data to create or update. Required for create/update. Omit for search/delete unless needed.",
+    )
+    query: typing.Optional[str] = Field(
+        default=None,
+        description="Query string to search for relevant memories. Only used for search action.",
     )
 
 
@@ -37,19 +41,22 @@ class ManageMemoryTool(ResilientBaseTool):
 
     name: str = "manage_memory"
     description: str = (
-        "Create, update, or delete a memory to persist across conversations. "
-        "Include the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you. "
-        "Proactively call this tool whenever there is a new message in the conversation, or when: "
-        "1. You identify a new memory to save for later. "
-        "2. You receive an explicit USER request to remember something or otherwise alter your behavior. "
-        "3. You are working and want to record important context. "
-        "4. You identify that an existing MEMORY is incorrect or outdated."
+        "Store, search, update, or delete a memory for this conversation. "
+        "Use this tool whenever you need to remember something, retrieve a memory, update, or delete it. "
+        "Actions: 'create' (store new memory), 'search' (find memories by query), "
+        "'update' (modify existing memory, include MEMORY ID), 'delete' (remove memory, include MEMORY ID). "
+        "Examples: "
+        "- To remember something: action='create', memory=... "
+        "- To search: action='search', query='...' "
+        "- To update: action='update', memory=..., include MEMORY ID "
+        "- To delete: action='delete', memory=..., include MEMORY ID "
+        "Call this tool whenever a user asks to remember, search, update, or delete a memory, or when you want to proactively store or retrieve context."
     )
     namespace: tuple[str, ...] | str
     args_schema: Type[BaseModel] = ConversationMemoryInput
     actions_permitted: typing.Optional[
-        tuple[typing.Literal["create", "update", "delete"], ...]
-    ] = ("create", "update", "delete")
+        tuple[typing.Literal["create", "update", "delete", "search"], ...]
+    ] = ("create", "update", "delete", "search")
     store: typing.Optional[BaseStore] = None
 
     def _run(
@@ -66,30 +73,40 @@ class ManageMemoryTool(ResilientBaseTool):
     async def _arun(
         self,
         *,
-        memory: ConversationMemory,
+        memory: typing.Optional[ConversationMemory] = None,
         action: str | None = None,
         state: Annotated[MyMessagesState, InjectedState],
+        query: typing.Optional[str] = None,
     ) -> str:
-        # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
-        if not state.user_id:
-            raise ToolException(
-                "user_id is required in the state to store user profile"
-            )
-        # Copy memory before setting user_id to avoid mutating the input object
-        memory_copy = memory.model_copy()
-        memory_copy.user_id = state.user_id
-        store = self._get_store()
         if self.actions_permitted and action not in self.actions_permitted:
             raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
             )
         try:
+            if not state.user_id:
+                raise ToolException(
+                    "user_id is required in the state to store user profile"
+                )
+            store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()
-            key: str = f"user_profile_{memory_copy.user_id}"
+            key: str = f"user_profile_{state.user_id}"
             if action == "delete":
                 await store.adelete(namespace, key=str(key))
                 return f"Deleted user profile {key}"
+            if action == "search":
+                # For demonstration, return all memories for the user, or filter by query if provided
+                all_memories: List[SearchItem] = await store.asearch(namespace)
+                user_memories = [m for m in all_memories]
+                if query:
+                    user_memories = [
+                        m for m in user_memories if query.lower() in str(m).lower()
+                    ]
+                return f"Found {len(user_memories)} memories: {user_memories}"
+            if not memory:
+                raise ToolException("memory is required for create/update actions")
+            memory_copy = memory.model_copy()
+            memory_copy.user_id = state.user_id
             await store.aput(
                 namespace,
                 key=str(key),

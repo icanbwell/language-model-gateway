@@ -69,6 +69,9 @@ from language_model_gateway.gateway.structures.request_information import (
 from language_model_gateway.gateway.tools.memories.get_user_info_tool import (
     GetUserInfoTool,
 )
+from language_model_gateway.gateway.tools.memories.manage_memory_tool import (
+    ManageMemoryTool,
+)
 from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
     StoreUserProfileTool,
 )
@@ -920,7 +923,7 @@ class LangGraphToOpenAIConverter:
         if self.environment_variables.enable_llm_memory and store is not None:
             # Memory tools use LangGraph's BaseStore for persistence (4)
             user_profile_namespace = ("memories", "{user_id}", "user_profile")
-            # memories_namespace = ("memories", "{user_id}", "memories")
+            memories_namespace = ("memories", "{user_id}", "memories")
             tools = (
                 list(tools)
                 + [
@@ -929,7 +932,7 @@ class LangGraphToOpenAIConverter:
                         namespace=user_profile_namespace,
                         # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
-                    # ManageMemoryTool(namespace=memories_namespace),
+                    ManageMemoryTool(namespace=memories_namespace),
                     create_search_memory_tool(namespace=user_profile_namespace),
                     GetUserInfoTool(),
                 ]

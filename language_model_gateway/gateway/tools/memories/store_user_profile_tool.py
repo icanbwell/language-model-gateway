@@ -36,12 +36,12 @@ class UserProfileInput(BaseModel):
 
 class StoreUserProfileTool(ResilientBaseTool):
     """
-    Tool for managing persistent memories in conversations. Supports create, update, and delete actions.
+    Tool for managing persistent user profiles in conversations. Supports create, update, and delete actions.
     """
 
     name: str = "store_user_profile"
     description: str = (
-        "Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user."
+        "Update the existing user profile (or create a new one if it doesn't exist) based on the shared information. Create one entry per user. "
         "Proactively call this tool when you: "
         "1. Identify a new USER profile. "
         "2. Receive an explicit USER request to remember something or otherwise alter your behavior. "
@@ -94,7 +94,7 @@ class StoreUserProfileTool(ResilientBaseTool):
                 return f"Deleted user profile user_profile_{user_profile.user_id}"
             else:
                 await repo.save(user_profile)
-                return f"{action}d memory user_profile_{user_profile.user_id}"
+                return f"{action}d user profile user_profile_{user_profile.user_id}"
         except Exception as e:
             logger.exception("Error storing user profile")
             raise ToolException("Error storing user profile") from e
