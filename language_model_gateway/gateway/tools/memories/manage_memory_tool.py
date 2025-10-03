@@ -114,19 +114,10 @@ class ManageMemoryTool(ResilientBaseTool):
                 "user_id is required in the state to store user profile"
             )
         try:
-            if not memory:
-                raise ToolException("memory is required for create/update actions")
-
             store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()
-            if not memory.memory_id:
-                memory.memory_id = str(uuid.uuid4())
-            key: str = f"memory_{memory.memory_id}"
-            if action == "delete":
-                await store.adelete(namespace, key=str(key))
-                return f"Deleted user profile {key}"
-            elif action == "search":
+            if action == "search":
                 # For demonstration, return all memories for the user, or filter by query if provided
                 found_memories: List[SearchItem] = await store.asearch(namespace)
                 user_memories = [m for m in found_memories]
@@ -134,7 +125,17 @@ class ManageMemoryTool(ResilientBaseTool):
                     user_memories = [
                         m for m in user_memories if query.lower() in str(m).lower()
                     ]
-                return f"Found {len(user_memories)} memories: {user_memories}"
+                return f"Found {len(user_memories)} memories: {[u.value for u in user_memories]}"
+
+            if not memory:
+                raise ToolException("memory is required for create/update actions")
+
+            if not memory.memory_id:
+                memory.memory_id = str(uuid.uuid4())
+            key: str = f"memory_{memory.memory_id}"
+            if action == "delete":
+                await store.adelete(namespace, key=str(key))
+                return f"Deleted user profile {key}"
             else:
                 memory_copy = memory.model_copy()
                 memory_copy.user_id = state.user_id
