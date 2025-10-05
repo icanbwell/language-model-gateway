@@ -104,7 +104,7 @@ class ManageMemoryTool(ResilientBaseTool):
         state: Annotated[MyMessagesState, InjectedState],
         all_memories: Optional[bool] = None,
         query: typing.Optional[str] = None,
-    ) -> str:
+    ) -> List[ConversationMemory] | None:
         if self.actions_permitted and action not in self.actions_permitted:
             raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
@@ -125,7 +125,7 @@ class ManageMemoryTool(ResilientBaseTool):
                     user_memories = [
                         m for m in user_memories if query.lower() in str(m).lower()
                     ]
-                return f"Found {len(user_memories)} memories: {[u.value for u in user_memories]}"
+                return [ConversationMemory(**u.value) for u in user_memories]
 
             if not memory:
                 raise ToolException("memory is required for create/update actions")
@@ -135,7 +135,7 @@ class ManageMemoryTool(ResilientBaseTool):
             key: str = f"memory_{memory.memory_id}"
             if action == "delete":
                 await store.adelete(namespace, key=str(key))
-                return f"Deleted user profile {key}"
+                return None
             else:
                 memory_copy = memory.model_copy()
                 memory_copy.user_id = state.user_id
@@ -144,7 +144,7 @@ class ManageMemoryTool(ResilientBaseTool):
                     key=str(key),
                     value=self._ensure_json_serializable(memory_copy),
                 )
-                return f"{action}d memory {key}"
+                return None
         except Exception as e:
             logger.exception("Error storing user profile")
             raise ToolException("Error storing user profile") from e
