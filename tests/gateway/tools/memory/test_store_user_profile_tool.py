@@ -44,7 +44,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "20852"
+                    fn_get_response=lambda messages: "tester-subject-id profile diabetes"
                 )
             ),
         )
