@@ -21,46 +21,38 @@ build: ## Builds the docker for dev
 up: ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml up -d && \
-	echo "waiting for language-model-gateway-keycloak-1 service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-keycloak-1`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-keycloak-1 && printf "========== ERROR: language-model-gateway-keycloak-1 did not start. Run docker logs language-model-gateway-keycloak-1 =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1  && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
-	echo "waiting for language-model-gateway service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ]; then docker ps && docker logs language-model-gateway && printf "========== ERROR: language-model-gateway did not start. Run docker logs language-model-gateway =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 
 .PHONY: up-integration
 up-integration: ## starts docker containers
 	docker compose -f docker-compose.yml -f docker-compose-integration.yml up --build -d && \
-	echo "waiting for language-model-gateway service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ]; then docker ps && docker logs language-model-gateway && printf "========== ERROR: language-model-gateway did not start. Run docker logs language-model-gateway =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo language-model-gateway Service: http://localhost:5050/graphql
-
 
 .PHONY: up-open-webui
 up-open-webui: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
-	echo "waiting for open-webui service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-open-webui-1`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-open-webui-1 && printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
 up-open-webui-ssl: clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
-	echo "waiting for open-webui service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-open-webui-1`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-open-webui-1 && printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
-	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
+	@echo OpenWebUI: http://localhost:3050 https://open-web-ui.localhost
 
 .PHONY: up-open-webui-auth
 up-open-webui-auth: create-certs ## starts docker containers
@@ -70,39 +62,10 @@ up-open-webui-auth: create-certs ## starts docker containers
 	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
-	echo "waiting for open-webui service to become healthy" && \
-	max_attempts=30 && \
-	attempt=0 && \
-	while [ $$attempt -lt $$max_attempts ]; do \
-		container_status=$$(docker inspect --format '{{.State.Health.Status}}' language-model-gateway-open-webui-1 2>/dev/null) && \
-		container_state=$$(docker inspect --format '{{.State.Status}}' language-model-gateway-open-webui-1 2>/dev/null) && \
-		if [ "$$container_status" = "healthy" ]; then \
-			echo "" && \
-			break; \
-		elif [ "$$container_status" = "unhealthy" ] || [ "$$container_state" = "restarting" ]; then \
-			echo "" && \
-			echo "========== ERROR: Container became unhealthy ==========" && \
-			docker ps && \
-			docker logs language-model-gateway-open-webui-1 && \
-			printf "========== ERROR: language-model-gateway-open-webui-1 is unhealthy. Run docker logs language-model-gateway-open-webui-1 =========\n" && \
-			exit 1; \
-		fi; \
-		printf "." && \
-		sleep 2 && \
-		attempt=$$((attempt + 1)); \
-	done && \
-	if [ $$attempt -ge $$max_attempts ]; then \
-		echo "" && \
-		echo "========== ERROR: Container did not become healthy within timeout ==========" && \
-		docker ps && \
-		docker logs language-model-gateway-open-webui-1 && \
-		printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && \
-		exit 1; \
-	fi
-	echo "waiting for mcp-server-gateway to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} mcp-server-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi
+	sh scripts/wait-for-healthy.sh mcp-server-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
