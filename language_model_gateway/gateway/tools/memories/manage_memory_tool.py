@@ -105,6 +105,12 @@ class ManageMemoryTool(ResilientBaseTool):
         all_memories: Optional[bool] = None,
         query: typing.Optional[str] = None,
     ) -> List[ConversationMemory] | None:
+        logger.debug(
+            f"{self.__class__.__name__} _arun:"
+            f" memory={memory.model_dump() if memory else None}, action={action},"
+            f" state={state}, all_memories={all_memories},"
+            f" query={query}"
+        )
         if self.actions_permitted and action not in self.actions_permitted:
             raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
