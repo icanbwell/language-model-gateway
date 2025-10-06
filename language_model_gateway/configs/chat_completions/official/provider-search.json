@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "provider-search",
+  "name": "Provider Search",
+  "description": "This is a language model that can search for healthcare providers like doctors.",
+  "type": "langchain",
+  "model": {
+    "provider": "bedrock",
+    "model": "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+  },
+  "system_prompts": [
+    {
+      "role": "system",
+      "content": "You are a tool that searches for healthcare providers like doctors. You can search by name, specialty, location, and other criteria."
+    }
+  ],
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "name": "google_drive",
+      "url": "http://mcp_server_gateway:5000/provider_search/",
+      "auth": "jwt_token"
+    }
+  ]
+}
