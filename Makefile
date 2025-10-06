@@ -20,7 +20,11 @@ build: ## Builds the docker for dev
 .PHONY: up
 up: ## starts docker containers
 	docker compose --progress=plain \
-	-f docker-compose-keycloak.yml \
+	-f docker-compose-keycloak.yml up -d && \
+	echo "waiting for language-model-gateway-keycloak-1 service to become healthy" && \
+	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-keycloak-1`" != "restarting" ]; do printf "." && sleep 2; done && \
+	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-keycloak-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-keycloak-1 && printf "========== ERROR: language-model-gateway-keycloak-1 did not start. Run docker logs language-model-gateway-keycloak-1 =========\n" && exit 1; fi && \
+	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
 	echo "waiting for language-model-gateway service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
@@ -102,7 +106,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
-	@echo OpenWebUI: https://open-webui.localhost
+	@echo OpenWebUI: https://open-web-ui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
 	@echo Admin User: admin/password
@@ -110,7 +114,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
-	@echo OpenWebUI API docs: https://open-webui.localhost//docs
+	@echo OpenWebUI API docs: https://open-web-ui.localhost//docs
 
 .PHONY: down
 down: ## stops docker containers
