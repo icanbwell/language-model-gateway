@@ -21,7 +21,7 @@ build: ## Builds the docker for dev
 up: ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml \
-	-f docker-compose.yml --build -d && \
+	-f docker-compose.yml up -d && \
 	echo "waiting for language-model-gateway service to become healthy" && \
 	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
 	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ]; then docker ps && docker logs language-model-gateway && printf "========== ERROR: language-model-gateway did not start. Run docker logs language-model-gateway =========\n" && exit 1; fi && \

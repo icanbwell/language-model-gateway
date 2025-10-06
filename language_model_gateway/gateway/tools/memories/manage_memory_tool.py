@@ -37,6 +37,9 @@ class ConversationMemoryInput(BaseModel):
         default=None,
         description="Query string to search for relevant memories. Only used for search action.",
     )
+    user_id: str = Field(
+        description="User ID associated with the memory. Required for create/update actions.",
+    )
 
 
 class ManageMemoryTool(ResilientBaseTool):
@@ -89,6 +92,7 @@ class ManageMemoryTool(ResilientBaseTool):
         memory: typing.Optional[ConversationMemory] = None,
         action: Literal["create", "update", "delete", "search"] | None = None,
         state: Annotated[MyMessagesState, InjectedState],
+        user_id: str,
         all_memories: Optional[bool] = None,
         query: typing.Optional[str] = None,
     ) -> str:
@@ -101,23 +105,25 @@ class ManageMemoryTool(ResilientBaseTool):
         *,
         memory: typing.Optional[ConversationMemory] = None,
         action: Literal["create", "update", "delete", "search"] | None = None,
+        user_id: str,
         state: Annotated[MyMessagesState, InjectedState],
         all_memories: Optional[bool] = None,
         query: typing.Optional[str] = None,
     ) -> List[ConversationMemory] | None:
-        logger.debug(
+        logger.info(
             f"{self.__class__.__name__} _arun:"
             f" memory={memory.model_dump() if memory else None}, action={action},"
-            f" state={state}, all_memories={all_memories},"
+            # f" state={state},"
+            f" all_memories={all_memories},"
             f" query={query}"
         )
         if self.actions_permitted and action not in self.actions_permitted:
             raise ToolException(
                 f"Invalid action {action}. Must be one of {self.actions_permitted}."
             )
-        if not state.user_id:
+        if not user_id:
             raise ToolException(
-                "user_id is required in the state to store user profile"
+                "user_id is required in the memory to store user profile"
             )
         try:
             store = self._get_store()
@@ -144,7 +150,7 @@ class ManageMemoryTool(ResilientBaseTool):
                 return None
             else:
                 memory_copy = memory.model_copy()
-                memory_copy.user_id = state.user_id
+                # memory_copy.user_id = state.user_id
                 await store.aput(
                     namespace,
                     key=str(key),
