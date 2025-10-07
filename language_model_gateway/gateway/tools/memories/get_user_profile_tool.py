@@ -23,7 +23,7 @@ class GetUserProfileTool(ResilientBaseTool):
         )
 
     async def _arun(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
-        logger.info(f"GetUserInfoTool called with state: {state}")
+        logger.info(f"GetUserProfileTool called with state: {state}")
 
         try:
             user_id = state.user_id
@@ -31,7 +31,6 @@ class GetUserProfileTool(ResilientBaseTool):
                 raise ValueError("user_id is required")
 
             my_store: BaseStore = get_store()
-            # user_info = my_store.get(("memories",), user_id)
 
             user_info_items: List[SearchItem] = await my_store.asearch(
                 ("memories", user_id, "user_profile")
