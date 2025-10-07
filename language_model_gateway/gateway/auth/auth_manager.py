@@ -265,9 +265,9 @@ class AuthManager:
 
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
-            access_token=Token.create(token=access_token),
-            id_token=Token.create(token=id_token),
-            refresh_token=Token.create(token=refresh_token),
+            access_token=Token.create_from_token(token=access_token),
+            id_token=Token.create_from_token(token=id_token),
+            refresh_token=Token.create_from_token(token=refresh_token),
             email=email,
             subject=subject,
             issuer=issuer,
@@ -444,9 +444,9 @@ class AuthManager:
                 "OIDC token refresh did not return access_token or id_token."
             )
 
-        token_cache_item.access_token = Token.create(token=access_token)
-        token_cache_item.id_token = Token.create(token=id_token)
-        token_cache_item.refresh_token = Token.create(token=refresh_token)
+        token_cache_item.access_token = Token.create_from_token(token=access_token)
+        token_cache_item.id_token = Token.create_from_token(token=id_token)
+        token_cache_item.refresh_token = Token.create_from_token(token=refresh_token)
         token_cache_item.refreshed = datetime.now(tz=UTC)
 
         new_token_item: TokenCacheItem = (

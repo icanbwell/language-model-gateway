@@ -172,7 +172,7 @@ class MCPToolProvider:
                             auth_bearer_token: str | None = TokenReader.extract_token(
                                 authorization_header=auth_header
                             )
-                            auth_token: Token | None = Token.create(
+                            auth_token: Token | None = Token.create_from_token(
                                 token=auth_bearer_token
                             )
                             raise AuthorizationMcpToolTokenInvalidException(

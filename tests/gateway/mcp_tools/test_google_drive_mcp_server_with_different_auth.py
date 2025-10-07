@@ -1,5 +1,4 @@
 import os
-from typing import Dict
 
 import pytest
 import httpx
@@ -10,6 +9,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
+from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -31,10 +31,9 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     async_client: httpx.AsyncClient,
 ) -> None:
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
-    access_token = access_token_result["access_token"]
     assert access_token is not None
 
     test_container: SimpleContainer = await get_container_async()
@@ -77,7 +76,7 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     )
 
     client = AsyncOpenAI(
-        api_key=access_token,
+        api_key=access_token.token,
         base_url="http://localhost:5000/api/v1",  # Change if your API runs on a different port
         http_client=async_client,
     )

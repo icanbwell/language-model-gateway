@@ -50,7 +50,7 @@ class Token(BaseModel):
             return False
 
     @classmethod
-    def create(cls, *, token: str | None) -> Optional["Token"]:
+    def create_from_token(cls, *, token: str | None) -> Optional["Token"]:
         """
         Create a Token instance from a JWS compact token string.  Extracts claims and expiration information.
         Args:
@@ -62,6 +62,23 @@ class Token(BaseModel):
         # parse the token but don't verify it
         token_content = jws.extract_compact(token.encode())
         claims: Dict[str, Any] = cast(Dict[str, Any], json.loads(token_content.payload))
+        return cls.create_from_dict(claims=claims, token=token)
+
+    @classmethod
+    def create_from_dict(
+        cls, *, claims: dict[str, Any] | None, token: str | None
+    ) -> Optional["Token"]:
+        """
+        Create a Token instance from a dictionary of claims. Extracts expiration and issued times.
+        Args:
+            claims (dict): The dictionary of claims.  Must have "exp", "iat", "iss".
+            token (str): The original token string.
+        Returns:
+            Token: The created Token instance, or None if claims is None.
+        """
+        if not claims or not isinstance(claims, dict) or not token:
+            return None
+
         exp = claims.get("exp")
         iat = claims.get("iat")
         expires_dt = (

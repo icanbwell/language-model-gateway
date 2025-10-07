@@ -22,6 +22,7 @@ from mcp.types import (
     EmbeddedResource,
 )
 
+from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -63,15 +64,15 @@ logger = logging.getLogger(__name__)
 )
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
-    access_token = access_token_result["access_token"]
+    assert access_token is not None
     logger.info(f"Access Token: {access_token}")
 
     url: str = "http://mcp_server_gateway:5000/google_drive/"
     transport: StreamableHttpTransport = StreamableHttpTransport(
-        url=url, auth=access_token
+        url=url, auth=access_token.token
     )
 
     async def log_handler(message: LogMessage) -> None:
@@ -132,11 +133,11 @@ async def test_google_drive_via_llm() -> None:
     verify_aws_boto3_authentication()
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
+    assert access_token is not None
     url: str = "http://mcp_server_gateway:5000/google_drive"
-    access_token = access_token_result["access_token"]
 
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
@@ -155,7 +156,7 @@ async def test_google_drive_via_llm() -> None:
         # httpx_client_factory
         # and/or bearer "auth"# auth: NotRequired[httpx.Auth]
         "headers": {
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {access_token.token}",
             "Content-Type": "application/json",
         },
     }
@@ -235,11 +236,11 @@ async def test_chat_completions_with_google_drive(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
+    assert access_token is not None
     url: str = "http://mcp_server_gateway:5000/google_drive"
-    access_token = access_token_result["access_token"]
 
     test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
@@ -294,7 +295,7 @@ async def test_chat_completions_with_google_drive(
         messages=[message],
         model="Google Drive",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {access_token.token}",
         },
     )
 

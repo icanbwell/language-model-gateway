@@ -176,6 +176,7 @@ class ChatCompletionsRouter:
             logger.exception(e, stack_info=True)
             raise HTTPException(status_code=500, detail=error_detail)
 
+    # noinspection PyMethodMayBeStatic
     async def read_auth_information(
         self,
         *,
@@ -183,7 +184,17 @@ class ChatCompletionsRouter:
         request: Request,
         token_reader: TokenReader,
     ) -> AuthInformation:
-        # read the authorization header and extract the token
+        """
+        Reads the authentication information from the request headers and verifies the token if present.
+        Args:
+            environment_variables: The environment variables instance
+            request: The incoming request
+            token_reader: The token reader instance
+        Returns:
+            AuthInformation instance with the extracted information
+        """
+
+        # set default values first and the override if we have a valid token
         auth_information: AuthInformation = AuthInformation(
             redirect_uri=environment_variables.auth_redirect_uri
             or str(request.url_for("auth_callback")),

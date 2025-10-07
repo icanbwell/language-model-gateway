@@ -186,7 +186,7 @@ class TokenReader:
             except Exception as e:
                 logger.error(f"Failed to decode token: {e}")
                 raise AuthorizationBearerTokenMissingException(
-                    message=f"Invalid token provided. Please check the token: {token}",
+                    message=f"Invalid token provided [{type(e)}]. Please check the token: {token}",
                 ) from e
         else:
             try:
@@ -195,7 +195,7 @@ class TokenReader:
             except Exception as e:
                 logger.error(f"Failed to decode token without verification: {e}")
                 raise AuthorizationBearerTokenInvalidException(
-                    message=f"Invalid token provided. Please check the token: {token}",
+                    message=f"Invalid token provided [{type(e)}]. Please check the token: {token}",
                     token=token,
                 ) from e
 
@@ -256,7 +256,7 @@ class TokenReader:
             claims_requests.validate(verified.claims)
 
             logger.debug(f"Successfully verified token: {token}")
-            return Token.create(token=token)
+            return Token.create_from_token(token=token)
         except ExpiredTokenError as e:
             logger.warning(f"Token has expired: {token}")
             raise AuthorizationBearerTokenExpiredException(

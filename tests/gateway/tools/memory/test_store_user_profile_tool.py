@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict
+from typing import Optional, List
 
 import httpx
 from openai import AsyncOpenAI
@@ -12,6 +12,7 @@ from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
 )
+from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -33,10 +34,10 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
     print("")
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
-    access_token = access_token_result["access_token"]
+    assert access_token is not None
     test_container: SimpleContainer = await get_container_async()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
@@ -92,7 +93,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {access_token.token}",
         },
     )
 
@@ -118,7 +119,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message2],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {access_token.token}",
         },
     )
 
@@ -141,7 +142,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message3],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": f"Bearer {access_token.token}",
         },
     )
 
