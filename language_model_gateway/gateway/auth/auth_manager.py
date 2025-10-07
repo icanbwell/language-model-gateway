@@ -230,6 +230,70 @@ class AuthManager:
         logger.debug(f"URL retrieved: {url}")
         client: StarletteOAuth2App = self.oauth.create_client(audience)
         token = await client.authorize_access_token(request)
+
+        token_cache_item: TokenCacheItem = self.create_token_cache_item(
+            code=code, issuer=issuer, state_decoded=state_decoded, token=token, url=url
+        )
+
+        await self.token_exchange_manager.save_token_async(
+            token_cache_item=token_cache_item, refreshed=False
+        )
+
+        content: Dict[str, Any] = token_cache_item.model_dump()
+
+        if logger.isEnabledFor(logging.DEBUG):
+            access_token: str | None = (
+                token_cache_item.access_token.token
+                if token_cache_item.access_token
+                else None
+            )
+            access_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=access_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if access_token
+                else None
+            )
+            id_token: str | None = (
+                token_cache_item.id_token.token if token_cache_item.id_token else None
+            )
+            id_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=id_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if id_token
+                else None
+            )
+            refresh_token: str | None = (
+                token_cache_item.refresh_token.token
+                if token_cache_item.refresh_token
+                else None
+            )
+            refresh_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=refresh_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if refresh_token
+                else None
+            )
+            content["access_token_decoded"] = access_token_decoded
+            content["id_token_decoded"] = id_token_decoded
+            content["refresh_token_decoded"] = refresh_token_decoded
+
+        return content
+
+    def create_token_cache_item(
+        self,
+        *,
+        code: str | None,
+        issuer: str,
+        state_decoded: dict[str, Any],
+        token: Dict[str, Any],
+        url: str | None,
+    ) -> TokenCacheItem:
         access_token: str | None = token.get("access_token")
         id_token: str | None = token.get("id_token")
         refresh_token: str | None = token.get("refresh_token")
@@ -241,16 +305,16 @@ class AuthManager:
         logger.debug(f"Subject received: {subject}")
         referring_email = state_decoded.get("referring_email")
         referring_subject = state_decoded.get("referring_subject")
-        content = {
-            "token": token,
-            "state": state_decoded,
-            "code": code,
-            "subject": subject,
-            "email": email,
-            "issuer": issuer,
-            "referring_email": referring_email,
-            "referring_subject": referring_subject,
-        }
+        # content = {
+        #     "token": token,
+        #     "state": state_decoded,
+        #     "code": code,
+        #     "subject": subject,
+        #     "email": email,
+        #     "issuer": issuer,
+        #     "referring_email": referring_email,
+        #     "referring_subject": referring_subject,
+        # }
         audience = state_decoded["audience"]
         auth_provider: str | None = (
             self.auth_config_reader.get_provider_for_audience(audience=audience)
@@ -278,41 +342,7 @@ class AuthManager:
             referring_email=referring_email,
             referring_subject=referring_subject,
         )
-
-        await self.token_exchange_manager.save_token_async(
-            token_cache_item=token_cache_item, refreshed=False
-        )
-
-        if logger.isEnabledFor(logging.DEBUG):
-            access_token_decoded: Dict[str, Any] | None = (
-                await self.token_reader.decode_token_async(
-                    token=access_token.strip("\n"),
-                    verify_signature=False,
-                )
-                if access_token
-                else None
-            )
-            id_token_decoded: Dict[str, Any] | None = (
-                await self.token_reader.decode_token_async(
-                    token=id_token.strip("\n"),
-                    verify_signature=False,
-                )
-                if id_token
-                else None
-            )
-            refresh_token_decoded: Dict[str, Any] | None = (
-                await self.token_reader.decode_token_async(
-                    token=refresh_token.strip("\n"),
-                    verify_signature=False,
-                )
-                if refresh_token
-                else None
-            )
-            content["access_token_decoded"] = access_token_decoded
-            content["id_token_decoded"] = id_token_decoded
-            content["refresh_token_decoded"] = refresh_token_decoded
-
-        return content
+        return token_cache_item
 
     async def get_token_for_tool_async(
         self,
@@ -394,11 +424,6 @@ class AuthManager:
             else:
                 raise e
 
-        logger.debug(
-            f"No valid token found for tool '{tool_name}' with {tool_auth_providers}."
-        )
-        return None
-
     async def refresh_tokens_with_oidc(
         self, audience: str, token_cache_item: TokenCacheItem
     ) -> TokenCacheItem | None:
@@ -435,7 +460,22 @@ class AuthManager:
             refresh_token=token_cache_item.refresh_token.token,
         )
         logger.debug(f"Token response received: {token_response}")
+        return await self.create_and_cache_token_async(
+            token_response=token_response, token_cache_item=token_cache_item
+        )
 
+    async def create_and_cache_token_async(
+        self, *, token_response: dict[str, Any], token_cache_item: TokenCacheItem
+    ) -> TokenCacheItem:
+        """
+        Create and cache a new token from the token response.
+        Args:
+            token_response (dict): The token response containing access_token, id_token, refresh_token, etc.
+            token_cache_item (TokenCacheItem): The token cache item to update and save.
+        Returns:
+            TokenCacheItem: The updated and saved token cache item.
+        Raises:
+        """
         access_token = token_response.get("access_token")
         id_token = token_response.get("id_token")
         refresh_token = token_response.get("refresh_token")
@@ -443,6 +483,37 @@ class AuthManager:
             raise Exception(
                 "OIDC token refresh did not return access_token or id_token."
             )
+
+        return await self.cache_token_async(
+            access_token=access_token,
+            id_token=id_token,
+            refresh_token=refresh_token,
+            token_cache_item=token_cache_item,
+        )
+
+    async def cache_token_async(
+        self,
+        *,
+        access_token: str | None,
+        id_token: str | None,
+        refresh_token: str | None,
+        token_cache_item: TokenCacheItem,
+    ) -> TokenCacheItem:
+        """
+        Cache the provided tokens in the token cache item and save it using the token exchange manager.
+        Args:
+            access_token (str | None): The access token to cache.
+            id_token (str | None): The ID token to cache.
+            refresh_token (str | None): The refresh token to cache.
+            token_cache_item (TokenCacheItem): The token cache item to update and save.
+        Returns:
+            TokenCacheItem: The updated and saved token cache item.
+        """
+
+        assert token_cache_item is not None, "token_cache_item must not be None"
+        assert isinstance(token_cache_item, TokenCacheItem), (
+            "token_cache_item must be a TokenCacheItem"
+        )
 
         token_cache_item.access_token = Token.create_from_token(token=access_token)
         token_cache_item.id_token = Token.create_from_token(token=id_token)
@@ -455,3 +526,52 @@ class AuthManager:
             )
         )
         return new_token_item
+
+    async def login_and_get_access_token_with_password_async(
+        self,
+        audience: str,
+        username: str,
+        password: str,
+    ) -> TokenCacheItem:
+        """
+        Obtain an access token using Resource Owner Password Credentials (ROPC) grant.
+        Args:
+            audience (str): The audience/client to use for OIDC.
+            username (str): The username of the resource owner.
+            password (str): The password of the resource owner.
+        Returns:
+            dict[str, Any]: The token response containing access_token, id_token, refresh_token, etc.
+        Raises:
+            ValueError: If the OIDC client is not found or token response is invalid.
+        """
+        logger.debug(
+            f"Getting access token for audience '{audience}' using username/password grant."
+        )
+        client: StarletteOAuth2App = self.oauth.create_client(audience)
+        if client is None:
+            raise ValueError(f"OIDC client for audience '{audience}' not found.")
+        token_response: dict[str, Any] = await client.fetch_access_token(
+            grant_type="password",
+            username=username,
+            password=password,
+        )
+        logger.debug(f"Token response received: {token_response}")
+        token_cache_item: TokenCacheItem = self.create_token_cache_item(
+            code=None,
+            issuer=client.server_metadata.get("issuer"),
+            state_decoded={
+                "audience": audience,
+                "auth_provider": self.auth_config_reader.get_provider_for_audience(
+                    audience=audience
+                ),
+                "referring_email": username,
+                "referring_subject": username,
+                "url": None,
+                "request_id": uuid.uuid4().hex,
+            },
+            token=token_response,
+            url=None,
+        )
+        return await self.create_and_cache_token_async(
+            token_response=token_response, token_cache_item=token_cache_item
+        )

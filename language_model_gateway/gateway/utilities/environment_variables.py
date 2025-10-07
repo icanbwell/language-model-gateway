@@ -121,3 +121,15 @@ class EnvironmentVariables:
         return os.environ.get(
             "MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME", "checkpoints"
         )
+
+    @property
+    def fake_user_id(self) -> Optional[str]:
+        return os.environ.get("FAKE_USER_ID")
+
+    @property
+    def fake_user_password(self) -> Optional[str]:
+        return os.environ.get("FAKE_USER_PASSWORD")
+
+    @property
+    def fake_audience(self) -> Optional[str]:
+        return os.environ.get("FAKE_AUDIENCE")
