@@ -34,6 +34,11 @@ async def test_store_and_read_memories_tool_with_fake_api_key(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
+    # IMPORTANT: Needs the following values set in docker.env if testing with real LLM
+    # FAKE_USER_ID="tester"
+    # FAKE_USER_PASSWORD="password"
+    # FAKE_AUDIENCE="client1"
+
     test_container: SimpleContainer = await get_container_async()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):

@@ -216,39 +216,34 @@ class ChatCompletionsRouter:
         auth_header = request.headers.get("Authorization")
         if auth_header:
             token: str | None = token_reader.extract_token(auth_header)
-            token_item: Token | None
+            token_item: Token | None = None
             if (
-                token
-                and token in ["bedrock", "fake-api-key"]
-                and environment_variables.fake_user_id
-                and environment_variables.fake_user_password
-                and environment_variables.fake_audience
+                token and token in ["bedrock", "fake-api-key"]
+                # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
             ):
-                # login with the test user and use that token
-                token_cache_item: TokenCacheItem = (
-                    await auth_manager.login_and_get_access_token_with_password_async(
+                # If a fake test account is configured then try to log in via that
+                if (
+                    environment_variables.fake_user_id
+                    and environment_variables.fake_user_password
+                    and environment_variables.fake_audience
+                ):
+                    # login with the test user and use that token
+                    token_cache_item: TokenCacheItem = await auth_manager.login_and_get_access_token_with_password_async(
                         username=environment_variables.fake_user_id,
                         password=environment_variables.fake_user_password,
                         audience=environment_variables.fake_audience,
                     )
-                )
-                token_item = token_cache_item.access_token
-                if token_item is not None:
-                    auth_information.claims = token_item.claims
-                    auth_information.expires_at = token_item.expires
-                    auth_information.audience = token_item.audience
-                    auth_information.email = token_item.email
-                    auth_information.subject = token_item.subject or token_item.email
-                    auth_information.user_name = token_item.name
-            elif token:  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
+                    token_item = token_cache_item.access_token
+            elif token:
                 token_item = await token_reader.verify_token_async(token=token)
-                if token_item is not None:
-                    auth_information.claims = token_item.claims
-                    auth_information.expires_at = token_item.expires
-                    auth_information.audience = token_item.audience
-                    auth_information.email = token_item.email
-                    auth_information.subject = token_item.subject or token_item.email
-                    auth_information.user_name = token_item.name
+
+            if token_item is not None:
+                auth_information.claims = token_item.claims
+                auth_information.expires_at = token_item.expires
+                auth_information.audience = token_item.audience
+                auth_information.email = token_item.email
+                auth_information.subject = token_item.subject or token_item.email
+                auth_information.user_name = token_item.name
             else:
                 # read information from headers if present
                 if "x-openwebui-user-id" in request.headers:
