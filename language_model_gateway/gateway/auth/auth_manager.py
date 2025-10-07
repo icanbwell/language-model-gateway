@@ -295,12 +295,37 @@ class AuthManager:
         url: str | None,
     ) -> TokenCacheItem:
         access_token: str | None = token.get("access_token")
+        access_token_item = Token.create_from_token(token=access_token)
+
         id_token: str | None = token.get("id_token")
+        id_token_item = Token.create_from_token(token=id_token)
+
         refresh_token: str | None = token.get("refresh_token")
+        refresh_token_item = Token.create_from_token(token=refresh_token)
+
         if access_token is None:
             raise ValueError("access_token was not found in the token response")
-        email: str = token.get("userinfo", {}).get("email")
-        subject: str = token.get("userinfo", {}).get("sub")
+
+        email: str | None = (
+            token.get("userinfo", {}).get("email") or access_token_item.email
+            if access_token_item
+            else None or id_token_item.email
+            if id_token_item
+            else None
+        )
+        subject: str | None = (
+            token.get("userinfo", {}).get("sub") or access_token_item.subject
+            if access_token_item
+            else None or id_token_item.subject
+            if id_token_item
+            else None
+        )
+
+        if not email:
+            raise ValueError("email must be provided in the token")
+        if not subject:
+            raise ValueError("subject must be provided in the token")
+
         logger.debug(f"Email received: {email}")
         logger.debug(f"Subject received: {subject}")
         referring_email = state_decoded.get("referring_email")
@@ -329,9 +354,9 @@ class AuthManager:
 
         token_cache_item: TokenCacheItem = TokenCacheItem(
             _id=ObjectId(),
-            access_token=Token.create_from_token(token=access_token),
-            id_token=Token.create_from_token(token=id_token),
-            refresh_token=Token.create_from_token(token=refresh_token),
+            access_token=access_token_item,
+            id_token=id_token_item,
+            refresh_token=refresh_token_item,
             email=email,
             subject=subject,
             issuer=issuer,
@@ -544,6 +569,9 @@ class AuthManager:
         Raises:
             ValueError: If the OIDC client is not found or token response is invalid.
         """
+        assert username, "username must not be None"
+        assert password, "password must not be None"
+        assert audience, "audience must not be None"
         logger.debug(
             f"Getting access token for audience '{audience}' using username/password grant."
         )
@@ -566,11 +594,11 @@ class AuthManager:
                 ),
                 "referring_email": username,
                 "referring_subject": username,
-                "url": None,
+                "url": client.server_metadata.get("url"),
                 "request_id": uuid.uuid4().hex,
             },
             token=token_response,
-            url=None,
+            url=client.server_metadata.get("url"),
         )
         return await self.create_and_cache_token_async(
             token_response=token_response, token_cache_item=token_cache_item
