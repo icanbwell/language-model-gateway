@@ -93,10 +93,10 @@ def test_extract_token() -> None:
         )
     )
     header: str = "Bearer sometoken"
-    assert token_reader.extract_token(header) == "sometoken"
-    assert token_reader.extract_token(None) is None
-    assert token_reader.extract_token("") is None
-    assert token_reader.extract_token("Basic sometoken") is None
+    assert token_reader.extract_token(authorization_header=header) == "sometoken"
+    assert token_reader.extract_token(authorization_header=None) is None
+    assert token_reader.extract_token(authorization_header="") is None
+    assert token_reader.extract_token(authorization_header="Basic sometoken") is None
 
 
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:

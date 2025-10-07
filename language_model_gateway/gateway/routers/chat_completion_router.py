@@ -215,7 +215,9 @@ class ChatCompletionsRouter:
         )
         auth_header = request.headers.get("Authorization")
         if auth_header:
-            token: str | None = token_reader.extract_token(auth_header)
+            token: str | None = token_reader.extract_token(
+                authorization_header=auth_header
+            )
             token_item: Token | None = None
             if (
                 token and token in ["bedrock", "fake-api-key"]

@@ -234,7 +234,9 @@ class TokenExchangeManager:
                 + error_message,
             )
         else:  # auth_header is present
-            token: str | None = self.token_reader.extract_token(auth_header)
+            token: str | None = self.token_reader.extract_token(
+                authorization_header=auth_header
+            )
             if not token:
                 logger.debug(
                     f"No token found in Authorization header for tool {tool_config.name}."

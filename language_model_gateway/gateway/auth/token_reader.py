@@ -142,7 +142,7 @@ class TokenReader:
         logger.debug(f"Fetched JWKS with {len(self.jwks.keys)} keys.")
 
     @staticmethod
-    def extract_token(authorization_header: str | None) -> Optional[str]:
+    def extract_token(*, authorization_header: str | None) -> Optional[str]:
         """
         Extracts the JWT token from the Authorization header.
         Args:
