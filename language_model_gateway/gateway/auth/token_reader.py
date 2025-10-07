@@ -207,6 +207,10 @@ class TokenReader:
             token: The JWT token string to validate.
         Returns:
             The decoded claims if the token is valid.
+        Throws:
+            AuthorizationBearerTokenExpiredException: If the token has expired.
+            AuthorizationBearerTokenInvalidException: If the token is invalid for any other reason.
+
         """
         if not token:
             raise ValueError("Token must not be empty")

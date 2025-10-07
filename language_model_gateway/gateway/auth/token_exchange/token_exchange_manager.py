@@ -333,8 +333,12 @@ class TokenExchangeManager:
                             + error_message,
                             tool_auth_providers=tool_auth_providers,
                         )
-            except AuthorizationNeededException:
+            except AuthorizationNeededException as e:
+                # if tool does not need auth, then we can ignore the exception
+                if tool_config.auth_optional:
+                    return None
                 # just re-raise the exception with the original message
+                logger.exception(e, stack_info=True)
                 raise
             except Exception as e:
                 logger.exception(
