@@ -4,7 +4,6 @@ import os
 import re
 import time
 import traceback
-
 from typing import (
     Any,
     List,
@@ -68,8 +67,11 @@ from language_model_gateway.gateway.structures.request_information import (
 from language_model_gateway.gateway.tools.memories.get_user_profile_tool import (
     GetUserProfileTool,
 )
-from language_model_gateway.gateway.tools.memories.manage_memory_tool import (
-    ManageMemoryTool,
+from language_model_gateway.gateway.tools.memories.memory_read_tool import (
+    MemoryReadTool,
+)
+from language_model_gateway.gateway.tools.memories.memory_write_tool import (
+    MemoryWriteTool,
 )
 from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
     StoreUserProfileTool,
@@ -931,7 +933,8 @@ class LangGraphToOpenAIConverter:
                         namespace=user_profile_namespace,
                         # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
                     ),
-                    ManageMemoryTool(namespace=memories_namespace),
+                    MemoryReadTool(namespace=memories_namespace),
+                    MemoryWriteTool(namespace=memories_namespace),
                     # create_search_memory_tool(namespace=user_profile_namespace),
                     GetUserProfileTool(),
                 ]
