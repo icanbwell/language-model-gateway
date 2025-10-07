@@ -234,7 +234,7 @@ HTTPX Response Log:
         url: str,
         headers: Dict[str, str],
         payload: Dict[str, Any],
-    ) -> Generator[str, str, None]:
+    ) -> Generator[str, None, None]:
         if self.valves.debug_mode:
             yield f"User:\n{json.dumps(user, indent=2) if user else None}\n"
             yield f"Original Headers:\n{dict(request.headers)}\n"
