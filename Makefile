@@ -18,7 +18,7 @@ build: ## Builds the docker for dev
 	docker compose build --parallel
 
 .PHONY: up
-up: ## starts docker containers
+up: fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1  && \
@@ -31,7 +31,7 @@ up: ## starts docker containers
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 
 .PHONY: up-integration
-up-integration: ## starts docker containers
+up-integration: fix-script-permissions ## starts docker containers
 	docker compose -f docker-compose.yml -f docker-compose-integration.yml up --build -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway && \
 	if [ $? -ne 0 ]; then exit 1; fi && \
@@ -39,7 +39,7 @@ up-integration: ## starts docker containers
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 
 .PHONY: up-open-webui
-up-open-webui: clean-database ## starts docker containers
+up-open-webui: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
 	if [ $? -ne 0 ]; then exit 1; fi && \
@@ -47,7 +47,7 @@ up-open-webui: clean-database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
-up-open-webui-ssl: clean-database ## starts docker containers
+up-open-webui-ssl: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
 	if [ $? -ne 0 ]; then exit 1; fi && \
@@ -55,7 +55,7 @@ up-open-webui-ssl: clean-database ## starts docker containers
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: create-certs check-cert-expiry ## starts docker containers
+up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## starts docker containers
 	docker compose --progress=plain \
 	  -f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
@@ -225,3 +225,7 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
                --api-key 'sk-my-api-key' \
                --json 'language_model_gateway_pipe.json' \
                --file 'language_model_gateway_pipe.py'"
+
+.PHONY: fix-script-permissions
+fix-script-permissions:
+	chmod +x ./scripts/wait-for-healthy.sh
