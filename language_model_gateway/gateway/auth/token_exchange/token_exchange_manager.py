@@ -2,6 +2,7 @@ import logging
 from datetime import datetime, UTC
 from typing import List
 
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
@@ -197,12 +198,7 @@ class TokenExchangeManager:
         return found_cache_item
 
     async def get_token_for_tool_async(
-        self,
-        *,
-        auth_header: str | None,
-        error_message: str,
-        tool_name: str,
-        tool_auth_providers: List[str] | None,
+        self, *, auth_header: str | None, error_message: str, tool_config: AgentConfig
     ) -> TokenCacheItem | None:
         """
         Get the token for the tool using the Authorization header.
@@ -213,20 +209,26 @@ class TokenExchangeManager:
         Args:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to include in the exception if the token is invalid
-            tool_name (str): The name of the tool for which the token is being requested.
-            tool_auth_providers (List[str] | None): The list of audiences for the tool.
+            tool_config (AgentConfig): The tool configuration to use.
         Returns:
             Token | None: The token item if the token is valid, otherwise raises an exception.
         """
-        if tool_auth_providers is not None:
-            # capitalize all auth providers to ensure case insensitive comparison
-            tool_auth_providers = [ap.upper() for ap in tool_auth_providers]
+        assert tool_config is not None
+        assert isinstance(tool_config, AgentConfig)
+
+        tool_auth_providers: List[str] = (
+            [ap.upper() for ap in tool_config.auth_providers]
+            if tool_config.auth_providers
+            else []
+        )
 
         logger.debug(
-            f"Getting token for tool {tool_name} with auth_providers {tool_auth_providers}."
+            f"Getting token for tool {tool_config.name} with auth_providers {tool_auth_providers}."
         )
         if not auth_header:
-            logger.debug(f"Authorization header is missing for tool {tool_name}.")
+            logger.debug(
+                f"Authorization header is missing for tool {tool_config.name}."
+            )
             raise AuthorizationBearerTokenMissingException(
                 message="Authorization header is required for MCP tools with JWT authentication."
                 + error_message,
@@ -235,7 +237,7 @@ class TokenExchangeManager:
             token: str | None = self.token_reader.extract_token(auth_header)
             if not token:
                 logger.debug(
-                    f"No token found in Authorization header for tool {tool_name}."
+                    f"No token found in Authorization header for tool {tool_config.name}."
                 )
                 raise AuthorizationBearerTokenMissingException(
                     message="Invalid Authorization header format. Expected 'Bearer <token>'"
@@ -264,7 +266,7 @@ class TokenExchangeManager:
                     or token_auth_provider in tool_auth_providers
                 ):  # token is valid
                     logger.debug(
-                        f"Token is valid for tool {tool_name} with token_auth_provider {token_auth_provider}."
+                        f"Token is valid for tool {tool_config.name} with token_auth_provider {token_auth_provider}."
                     )
 
                     if not token_item.email:
@@ -303,15 +305,15 @@ class TokenExchangeManager:
                     if token_for_tool:
                         if token_for_tool.is_valid_id_token():
                             logger.debug(
-                                f"Found Token in cache for tool {tool_name} for email {email} and auth_provider {token_auth_provider}."
+                                f"Found Token in cache for tool {tool_config.name} for email {email} and auth_provider {token_auth_provider}."
                             )
                             return token_for_tool
                         else:
                             logger.debug(
-                                f"Token has expired for tool {tool_name} for email {email} and auth_provider {token_auth_provider}."
+                                f"Token has expired for tool {tool_config.name} for email {email} and auth_provider {token_auth_provider}."
                             )
                             raise AuthorizationTokenCacheItemExpiredException(
-                                message=f"Your token has expired for tool {tool_name}."
+                                message=f"Your token has expired for tool {tool_config.name}."
                                 + error_message,
                                 token_cache_item=token_for_tool,
                             )
@@ -333,7 +335,9 @@ class TokenExchangeManager:
                 # just re-raise the exception with the original message
                 raise
             except Exception as e:
-                logger.exception(f"Error verifying token for tool {tool_name}: {e}")
+                logger.exception(
+                    f"Error verifying token for tool {tool_config.name}: {e}"
+                )
                 raise AuthorizationNeededException(
                     message="Invalid or expired token provided in Authorization header."
                     + (

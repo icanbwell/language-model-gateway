@@ -10,6 +10,7 @@ from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
 from bson import ObjectId
 from fastapi import Request
 
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.auth_helper import AuthHelper
 from language_model_gateway.gateway.auth.cache.oauth_cache import OAuthCache
 from language_model_gateway.gateway.auth.cache.oauth_memory_cache import (
@@ -374,8 +375,7 @@ class AuthManager:
         *,
         auth_header: str | None,
         error_message: str,
-        tool_name: str,
-        tool_auth_providers: List[str] | None,
+        tool_config: AgentConfig,
     ) -> TokenCacheItem | None:
         """
         Get the token for the specified tool.
@@ -385,15 +385,14 @@ class AuthManager:
         Args:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to display if authorization is needed.
-            tool_name (str): The name of the tool for which the token is requested.
-            tool_auth_providers (List[str] | None): The list of audiences for which the tool requires authentication.
+            tool_config (AgentConfig): The tool configuration.
         Returns:
             str | None: The token for the specified tool, or None if not found.
         Raises:
             AuthorizationNeededException: If the token is not found and authorization is needed.
         """
         logger.debug(
-            f"Getting token for tool '{tool_name}' with auth providers {tool_auth_providers} with auth_header: {auth_header}"
+            f"Getting token for tool '{tool_config.name}' with auth providers {tool_config.auth_providers} with auth_header: {auth_header}"
         )
 
         try:
@@ -402,38 +401,41 @@ class AuthManager:
             ) = await self.token_exchange_manager.get_token_for_tool_async(
                 auth_header=auth_header,
                 error_message=error_message,
-                tool_name=tool_name,
-                tool_auth_providers=tool_auth_providers,
+                tool_config=tool_config,
             )
             logger.debug(f"AuthManager Token retrieved: {token_cache_item}")
             if token_cache_item is None:
-                logger.debug(f"No token found for audience '{tool_auth_providers}'.")
+                logger.debug(
+                    f"No token found for audience '{tool_config.auth_providers}'."
+                )
                 return None
 
             # if id_token is valid, return it
             if token_cache_item.is_valid_id_token():
                 logger.debug(
-                    f"Token for tool '{tool_name}' is valid:"
+                    f"Token for tool '{tool_config.name}' is valid:"
                     + f"\n{token_cache_item.id_token.model_dump_json() if token_cache_item.id_token else 'No ID token found.'}"
                 )
                 return token_cache_item
 
             if token_cache_item.audience and token_cache_item.is_expired():
-                logger.debug(f"Token for tool '{tool_name}' is expired, refreshing...")
+                logger.debug(
+                    f"Token for tool '{tool_config.name}' is expired, refreshing..."
+                )
                 return await self.refresh_tokens_with_oidc(
                     audience=token_cache_item.audience,
                     token_cache_item=token_cache_item,
                 )
             else:
                 logger.debug(
-                    f"Token for tool '{tool_name}' is not expired:"
+                    f"Token for tool '{tool_config.name}' is not expired:"
                     + f"\n{token_cache_item.id_token.model_dump_json() if token_cache_item.id_token else 'No ID token found.'}."
                 )
                 return token_cache_item
         except AuthorizationTokenCacheItemExpiredException as e:
             # if the token is expired, try to refresh it
             logger.debug(
-                f"Token for tool '{tool_name}' is expired, trying to refresh: {e.message}"
+                f"Token for tool '{tool_config.name}' is expired, trying to refresh: {e.message}"
             )
             if (
                 e.token_cache_item

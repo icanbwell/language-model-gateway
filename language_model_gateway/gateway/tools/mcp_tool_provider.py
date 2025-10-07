@@ -159,10 +159,7 @@ class MCPToolProvider:
                         token_item: (
                             TokenCacheItem | None
                         ) = await self.auth_manager.get_token_for_tool_async(
-                            auth_header=auth_header,
-                            error_message="",
-                            tool_name=tool.name,
-                            tool_auth_providers=tool.auth_providers,
+                            auth_header=auth_header, error_message="", tool_config=tool
                         )
                         token = token_item.get_token() if token_item else None
                         if token:
