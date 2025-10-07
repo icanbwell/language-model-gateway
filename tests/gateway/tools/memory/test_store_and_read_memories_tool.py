@@ -32,7 +32,7 @@ from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorF
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
-async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
+async def test_store_and_read_memories_tool(async_client: httpx.AsyncClient) -> None:
     print("")
     access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
