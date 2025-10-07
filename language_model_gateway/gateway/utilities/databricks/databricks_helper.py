@@ -20,7 +20,8 @@ class DatabricksHelper:
         # Initialize logger as time, error level, and message
         self.logger: Logger = logging.getLogger(__name__)
         logging.basicConfig(
-            format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
+            format="%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s",
+            level=logging.INFO,
         )
         self.catalog = catalog
         self.schema = schema

@@ -4,7 +4,12 @@ import sys
 
 GLOBAL_LOG_LEVEL = os.environ.get("LOG_LEVEL", "").upper()
 if GLOBAL_LOG_LEVEL in logging.getLevelNamesMapping():
-    logging.basicConfig(stream=sys.stdout, level=GLOBAL_LOG_LEVEL, force=True)
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=GLOBAL_LOG_LEVEL,
+        force=True,
+        format="%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s",
+    )
 else:
     GLOBAL_LOG_LEVEL = "INFO"
 

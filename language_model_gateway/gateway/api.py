@@ -37,8 +37,8 @@ logger = logging.getLogger(__name__)
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(
+    format="%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s",
     level=getattr(logging, log_level),
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
 # disable INFO logging for httpx because it logs every request
