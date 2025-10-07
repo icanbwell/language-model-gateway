@@ -18,85 +18,54 @@ build: ## Builds the docker for dev
 	docker compose build --parallel
 
 .PHONY: up
-up: ## starts docker containers
-	docker compose up --build -d && \
-	echo "waiting for language-model-gateway service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ]; then docker ps && docker logs language-model-gateway && printf "========== ERROR: language-model-gateway did not start. Run docker logs language-model-gateway =========\n" && exit 1; fi && \
+up: fix-script-permissions ## starts docker containers
+	docker compose --progress=plain \
+	-f docker-compose-keycloak.yml up -d && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1  && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
+	docker compose --progress=plain \
+	-f docker-compose.yml up -d && \
+	sh scripts/wait-for-healthy.sh language-model-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 
 .PHONY: up-integration
-up-integration: ## starts docker containers
+up-integration: fix-script-permissions ## starts docker containers
 	docker compose -f docker-compose.yml -f docker-compose-integration.yml up --build -d && \
-	echo "waiting for language-model-gateway service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway`" != "healthy" ]; then docker ps && docker logs language-model-gateway && printf "========== ERROR: language-model-gateway did not start. Run docker logs language-model-gateway =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 
-
 .PHONY: up-open-webui
-up-open-webui: clean-database ## starts docker containers
+up-open-webui: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
-	echo "waiting for open-webui service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-open-webui-1`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-open-webui-1 && printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
-up-open-webui-ssl: clean-database ## starts docker containers
+up-open-webui-ssl: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
-	echo "waiting for open-webui service to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} language-model-gateway-open-webui-1`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} language-model-gateway-open-webui-1`" != "healthy" ]; then docker ps && docker logs language-model-gateway-open-webui-1 && printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: create-certs ## starts docker containers
+up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## starts docker containers
 	docker compose --progress=plain \
 	  -f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
-	echo "waiting for open-webui service to become healthy" && \
-	max_attempts=30 && \
-	attempt=0 && \
-	while [ $$attempt -lt $$max_attempts ]; do \
-		container_status=$$(docker inspect --format '{{.State.Health.Status}}' language-model-gateway-open-webui-1 2>/dev/null) && \
-		container_state=$$(docker inspect --format '{{.State.Status}}' language-model-gateway-open-webui-1 2>/dev/null) && \
-		if [ "$$container_status" = "healthy" ]; then \
-			echo "" && \
-			break; \
-		elif [ "$$container_status" = "unhealthy" ] || [ "$$container_state" = "restarting" ]; then \
-			echo "" && \
-			echo "========== ERROR: Container became unhealthy ==========" && \
-			docker ps && \
-			docker logs language-model-gateway-open-webui-1 && \
-			printf "========== ERROR: language-model-gateway-open-webui-1 is unhealthy. Run docker logs language-model-gateway-open-webui-1 =========\n" && \
-			exit 1; \
-		fi; \
-		printf "." && \
-		sleep 2 && \
-		attempt=$$((attempt + 1)); \
-	done && \
-	if [ $$attempt -ge $$max_attempts ]; then \
-		echo "" && \
-		echo "========== ERROR: Container did not become healthy within timeout ==========" && \
-		docker ps && \
-		docker logs language-model-gateway-open-webui-1 && \
-		printf "========== ERROR: language-model-gateway-open-webui-1 did not start. Run docker logs language-model-gateway-open-webui-1 =========\n" && \
-		exit 1; \
-	fi
-	echo "waiting for mcp-server-gateway to become healthy" && \
-	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; do printf "." && sleep 2; done && \
-	while [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ] && [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "unhealthy" ] && [ "`docker inspect --format {{.State.Status}} mcp-server-gateway`" != "restarting" ]; do printf "." && sleep 2; done && \
-	if [ "`docker inspect --format {{.State.Health.Status}} mcp-server-gateway`" != "healthy" ]; then docker ps && docker logs mcp-server-gateway && printf "========== ERROR: mcp-server-gateway did not start. Run docker logs mcp-server-gateway =========\n" && exit 1; fi
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
+	if [ $? -ne 0 ]; then exit 1; fi
+	sh scripts/wait-for-healthy.sh mcp-server-gateway && \
+	if [ $? -ne 0 ]; then exit 1; fi
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
@@ -192,11 +161,38 @@ CERT_DIR := certs
 CERT_KEY := $(CERT_DIR)/open-webui.localhost-key.pem
 CERT_CRT := $(CERT_DIR)/open-webui.localhost.pem
 
-.PHONY: all install-ca create-certs
+.PHONY: all install-ca create-certs check-cert-expiry
 
 # Install local Certificate Authority
 install-ca: ## Installs a local CA using mkcert
 	mkcert -install
+
+# Check certificate expiry
+check-cert-expiry: ## Checks if the SSL certificate expires within 1 day and fails if not valid
+	@if [ -f "$(CERT_CRT)" ]; then \
+		expiry_date=$$(openssl x509 -enddate -noout -in $(CERT_CRT) | cut -d= -f2); \
+		echo "DEBUG: checking certificate is '$(CERT_CRT)'"; \
+		echo "DEBUG: expiry_date is '$$expiry_date'"; \
+		expiry_epoch=$$(date -j -f "%b %d %H:%M:%S %Y %Z" "$$expiry_date" "+%s" 2>/dev/null); \
+		echo "DEBUG: expiry_epoch is '$$expiry_epoch'"; \
+		now_epoch=$$(date "+%s"); \
+		echo "DEBUG: now_epoch is '$$now_epoch'"; \
+		diff_days=$$(( ($$expiry_epoch - $$now_epoch) / 86400 )); \
+		echo "DEBUG: diff_days is '$$diff_days'"; \
+		if [ -z "$$expiry_epoch" ]; then \
+			echo "ERROR: Could not parse expiry date: $$expiry_date"; \
+			exit 1; \
+		fi; \
+		if [ "$$diff_days" -lt 1 ]; then \
+			echo "ERROR: Certificate $(CERT_CRT) is valid for less than 1 day ($$expiry_date)"; \
+			exit 1; \
+		else \
+			echo "Certificate $(CERT_CRT) is valid for $$diff_days more days ($$expiry_date)"; \
+		fi; \
+	else \
+		echo "Certificate $(CERT_CRT) not found."; \
+		exit 1; \
+	fi
 
 # Create certificates
 create-certs: install-ca ## Creates self-signed certificates for open-webui.localhost
@@ -229,3 +225,7 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
                --api-key 'sk-my-api-key' \
                --json 'language_model_gateway_pipe.json' \
                --file 'language_model_gateway_pipe.py'"
+
+.PHONY: fix-script-permissions
+fix-script-permissions:
+	chmod +x ./scripts/wait-for-healthy.sh

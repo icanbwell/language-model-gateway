@@ -6,20 +6,26 @@ This module defines a Pipe class that reads the oauth_id_token from the request 
 to make requests to the OpenAI API. It supports both streaming and non-streaming responses.
 """
 
-import asyncio
 import datetime
 import json
 import logging
 import os
 import time
 from pathlib import PurePosixPath
-from typing import AsyncGenerator, List
-from typing import Optional, Callable, Awaitable, Any, Dict
+from typing import (
+    AsyncGenerator,
+    List,
+    Optional,
+    Callable,
+    Awaitable,
+    Any,
+    Dict,
+    Generator,
+)
 from urllib.parse import urlparse, urlunparse
 
 import httpx
-from pydantic import BaseModel
-from pydantic import Field
+from pydantic import BaseModel, Field
 from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
@@ -27,9 +33,8 @@ logger = logging.getLogger(__name__)
 
 class Pipe:
     """
-    A Pipe class that interacts with the OpenAI API using an OAuth ID token from request cookies.
-    It supports both streaming and non-streaming responses.
-    OpenWebUI Documentation: https://docs.openwebui.com/features/plugin/functions/pipe
+    Pipe class for interacting with the OpenAI API using OAuth ID token from request cookies.
+    Supports both streaming and non-streaming responses.
     """
 
     class Valves(BaseModel):
@@ -39,19 +44,18 @@ class Pipe:
         enable_status_indicator: bool = Field(
             default=True, description="Enable or disable status indicator emissions"
         )
-        OPENAI_API_BASE_URL: str | None = Field(
+        OPENAI_API_BASE_URL: Optional[str] = Field(
             default=None,
             description="Base URL for OpenAI API, e.g., https://api.openai.com/v1",
         )
         model_name_prefix: str = Field(
-            default="MCP: ",
-            description="Prefix for model names in the dropdown",
+            default="MCP: ", description="Prefix for model names in the dropdown"
         )
         restrict_to_admins: bool = Field(
             default=False,
             description="Restrict access to this pipe to admin users only",
         )
-        restrict_to_model_ids: list[str] = Field(
+        restrict_to_model_ids: List[str] = Field(
             default_factory=list,
             description="List of model IDs to restrict access to. If empty, no restriction is applied.",
         )
@@ -67,37 +71,26 @@ class Pipe:
         self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
         self.name: str = self.valves.model_name_prefix
         self.last_emit_time: float = 0
-        self.pipelines: List[Dict[str, Any]] | None = None
+        self.pipelines: Optional[List[Dict[str, Any]]] = None
 
-    # noinspection PyMethodMayBeStatic
-    def read_base_url(self) -> Optional[str]:
-        """
-        Reads the OpenAI API base URL from environment variables.
-        Returns:
-            The OpenAI API base URL if set, otherwise None.
-        """
+    @staticmethod
+    def read_base_url() -> Optional[str]:
+        """Reads the OpenAI API base URL from environment variables."""
         return os.getenv("LANGUAGE_MODEL_GATEWAY_API_BASE_URL") or os.getenv(
             "OPENAI_API_BASE_URL"
         )
 
-    # noinspection PyMethodMayBeStatic
     async def on_startup(self) -> None:
-        # This function is called when the server is started.
         logger.debug(f"on_startup:{__name__}")
         self.pipelines = await self.get_models()
-        pass
 
     # noinspection PyMethodMayBeStatic
     async def on_shutdown(self) -> None:
-        # This function is called when the server is stopped.
         logger.debug(f"on_shutdown:{__name__}")
-        pass
 
     async def on_valves_updated(self) -> None:
-        # This function is called when the valves are updated.
         logger.debug(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
-        pass
 
     async def emit_status(
         self,
@@ -107,17 +100,7 @@ class Pipe:
         done: bool,
         message_type: str = "status",
     ) -> None:
-        """
-        Emit status updates at controlled intervals
-        Args:
-            __event_emitter__: Callable to emit events
-            level: Status level (e.g., "info", "error")
-            message: Status message
-            done: Whether the operation is complete
-            message_type: Type of message, default is "status".  https://docs.openwebui.com/features/plugin/tools/development#status
-        Returns:
-            None
-        """
+        """Emit status updates at controlled intervals."""
         current_time = time.time()
         if (
             __event_emitter__
@@ -126,8 +109,6 @@ class Pipe:
                 current_time - self.last_emit_time >= self.valves.emit_interval or done
             )
         ):
-            # https://docs.openwebui.com/features/plugin/tools/development#event-emitters
-            # Interactive events: https://docs.openwebui.com/features/plugin/events/#interactive-events
             await __event_emitter__(
                 {
                     "type": message_type,
@@ -141,175 +122,11 @@ class Pipe:
             )
             self.last_emit_time = current_time
 
-    async def stream_hardcoded_response(
-        self,
-        *,
-        body: Dict[str, Any],
-        __request__: Optional[Request] = None,
-        __user__: Optional[Dict[str, Any]] = None,
-        __event_emitter__: Callable[[Dict[str, Any]], Awaitable[None]] | None = None,
-        __event_call__: Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
-        | None = None,
-    ) -> AsyncGenerator[str, None]:
-        """
-        Async generator to stream response chunks
-        """
-        try:
-            await self.emit_status(
-                __event_emitter__,
-                "info",
-                f"/initiating Chain: headers={__request__.headers if __request__ else None}"
-                f", cookies={__request__.cookies if __request__ else None}"
-                f" {__user__=} {body=}",
-                False,
-            )
-
-            if __request__ is None or __user__ is None:
-                raise ValueError("Request and user information must be provided.")
-
-            # Simulate streaming response
-            # Generate chunks in OpenAI streaming format
-            chunks = [
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {"role": "assistant"},
-                            "finish_reason": None,
-                        }
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {"content": "Here"},
-                            "finish_reason": None,
-                        }
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {"index": 0, "delta": {"content": " is"}, "finish_reason": None}
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {"index": 0, "delta": {"content": " a"}, "finish_reason": None}
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {"content": " streamed"},
-                            "finish_reason": None,
-                        }
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {
-                                "content": f"\nheaders=\n{__request__.headers}\ncookies=\n{__request__.cookies}\n{__user__=}\n{body=}",
-                            },
-                            "finish_reason": None,
-                        }
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {
-                                "content": f"\nOAuth_id_token:\n{__request__.cookies.get('oauth_id_token')}\n",
-                            },
-                            "finish_reason": None,
-                        }
-                    ],
-                },
-                {
-                    "id": "chatcmpl-123",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "gpt-3.5-turbo",
-                    "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}],
-                },
-            ]
-
-            for chunk in chunks:
-                # Yield each chunk as a JSON-encoded string with a data: prefix
-                yield f"data: {json.dumps(chunk)}\n\n"
-                await self.emit_status(__event_emitter__, "info", "Streaming...", False)
-                await asyncio.sleep(0.5)  # Simulate streaming delay
-
-            await self.emit_status(__event_emitter__, "info", "Stream Complete", True)
-
-        except Exception as e:
-            error_chunk = {
-                "id": "chatcmpl-error",
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": "error",
-                "choices": [
-                    {
-                        "index": 0,
-                        "delta": {"content": f"Error: {str(e)}"},
-                        "finish_reason": "stop",
-                    }
-                ],
-            }
-            yield f"data: {json.dumps(error_chunk)}\n\n"
-            await self.emit_status(__event_emitter__, "error", str(e), True)
-
     @classmethod
     def pathlib_url_join(cls, base_url: str, path: str) -> str:
-        """
-        Join URLs using pathlib for path manipulation.
-
-        Args:
-            base_url: The base URL
-            path: Path to append
-
-        Returns:
-            Fully constructed URL
-        """
-        # Parse the base URL
+        """Join URLs using pathlib for path manipulation."""
         parsed_base = urlparse(base_url)
-
-        # Use PurePosixPath to handle path joining
         full_path = str(PurePosixPath(parsed_base.path) / path.lstrip("/"))
-
-        # Reconstruct the URL
         reconstructed_url = urlunparse(
             (
                 parsed_base.scheme,
@@ -320,69 +137,134 @@ class Pipe:
                 parsed_base.fragment,
             )
         )
-
         return reconstructed_url
 
     @staticmethod
     def log_httpx_request(request: httpx.Request) -> str:
-        """
-        Convert an HTTPX request to a detailed string representation.
-
-        Args:
-            request (httpx.Request): The HTTPX request to log
-
-        Returns:
-            str: Formatted string representation of the request
-        """
-        # Construct request details
+        """Convert an HTTPX request to a detailed string representation."""
         request_log = f"""
-    HTTPX Request:
-    - Method: {request.method}
-    - URL: {request.url}
-    - Headers: {dict(request.headers)}
-    - Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
-    """.strip()
-
+HTTPX Request:
+- Method: {request.method}
+- URL: {request.url}
+- Headers: {dict(request.headers)}
+- Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
+""".strip()
         return request_log
 
     @staticmethod
     def log_response_as_string(response1: httpx.Response) -> str:
-        """
-        Convert an HTTPX response to a detailed, formatted string.
-
-        Args:
-            response1 (httpx.Response): The HTTP response to log
-
-        Returns:
-            str: Comprehensive response log string
-        """
+        """Convert an HTTPX response to a detailed, formatted string."""
         try:
-            # Attempt to parse JSON response
             try:
                 response_body = json.dumps(response1.json(), indent=2)
             except (ValueError, json.JSONDecodeError):
-                # Fallback to text if not JSON
-                response_body = response1.text[:1000]  # Limit body size
+                response_body = response1.text[:1000]
         except Exception:
             response_body = "(Unable to decode response body)"
-
         response_log = f"""
-    HTTPX Response Log:
-    - Timestamp: {datetime.datetime.now().isoformat()}
-    - Status Code: {response1.status_code}
-    - URL: {response1.request.url}
-    - Method: {response1.request.method}
-    - Response Headers:
-    {json.dumps(dict(response1.headers), indent=2)}
-    - Response Body:
-    {response_body}
-    - Response Encoding: {response1.encoding}
-    - Response Elapsed Time: {response1.elapsed}
-    """.strip()
-
+HTTPX Response Log:
+- Timestamp: {datetime.datetime.now().isoformat()}
+- Status Code: {response1.status_code}
+- URL: {response1.request.url}
+- Method: {response1.request.method}
+- Response Headers:
+{json.dumps(dict(response1.headers), indent=2)}
+- Response Body:
+{response_body}
+- Response Encoding: {response1.encoding}
+- Response Elapsed Time: {response1.elapsed}
+""".strip()
         return response_log
 
-    # noinspection PyMethodMayBeStatic
+    @staticmethod
+    def _build_headers(
+        *,
+        request: Request,
+        user: Optional[Dict[str, Any]],
+        access_token: Optional[str],
+        id_token: Optional[str],
+        session_id: Optional[str],
+        chat_id: Optional[str],
+        message_id: Optional[str],
+    ) -> Dict[str, str]:
+        """
+        Build headers for the OpenAI API request, including user and request context.
+
+        """
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}",
+            "X-ID-Token": id_token or "",
+            "X-Session-Id": session_id or "",
+            "X-Chat-Id": chat_id or "",
+            "X-Message-Id": message_id or "",
+        }
+        for key in [
+            "User-Agent",
+            "Referrer",
+            "Cookie",
+            "traceparent",
+            "origin",
+            "Accept-Encoding",
+        ]:
+            if key in request.headers:
+                headers[key] = request.headers[key]
+        if user:
+            for user_key, header_key in [
+                ("name", "X-OpenWebUI-User-Name"),
+                ("id", "X-OpenWebUI-User-Id"),
+                ("email", "X-OpenWebUI-User-Email"),
+                ("role", "X-OpenWebUI-User-Role"),
+            ]:
+                if user.get(user_key):
+                    headers[header_key] = user[user_key]
+            info = user.get("info")
+            if info and isinstance(info, dict) and info.get("location"):
+                headers["X-OpenWebUI-User-Location"] = info["location"]
+        for key, value in request.headers.items():
+            if key.lower().startswith("x-"):
+                headers[key] = value
+        return headers
+
+    def _yield_debug_info(
+        self,
+        *,
+        user: Optional[Dict[str, Any]],
+        request: Request,
+        url: str,
+        headers: Dict[str, str],
+        payload: Dict[str, Any],
+    ) -> Generator[str, None, None]:
+        if self.valves.debug_mode:
+            yield f"User:\n{json.dumps(user, indent=2) if user else None}\n"
+            yield f"Original Headers:\n{dict(request.headers)}\n"
+            yield url + "\n"
+            yield f"New Headers: {dict(headers)}\n"
+            yield json.dumps(payload) + "\n"
+            info = user.get("info") if user else None
+            if info and isinstance(info, dict) and info.get("location"):
+                yield f"Location: {type(info['location']).__name__} {info['location']}\n"
+
+    @staticmethod
+    def _make_error_chunk(
+        *, error: Exception, is_streaming: bool
+    ) -> Optional[Dict[str, Any]]:
+        if is_streaming:
+            return {
+                "id": "chatcmpl-error",
+                "object": "chat.completion.chunk",
+                "created": int(time.time()),
+                "model": "error",
+                "choices": [
+                    {
+                        "index": 0,
+                        "delta": {"content": f"Error [{type(error)}]: {error}"},
+                        "finish_reason": "stop",
+                    }
+                ],
+            }
+        return None
+
     async def pipe(
         self,
         body: Dict[str, Any],
@@ -400,147 +282,59 @@ class Pipe:
         __files__: Optional[List[str]] = None,
     ) -> AsyncGenerator[str, None]:
         """
-        Main pipe method supporting both streaming and non-streaming responses
-        OpenWebUI Documentation: https://docs.openwebui.com/features/plugin/functions/pipe#using-internal-open-webui-functions
-        Parameters: https://docs.openwebui.com/features/plugin/tools/development#optional-arguments
+        Main pipe method supporting both streaming and non-streaming responses.
         """
-
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             yield "Error: User is not authenticated via OAuth or token is unavailable."
             return
-
-        access_token: str | None = __oauth_token__.get("access_token")
-
-        id_token: str | None = __oauth_token__.get("id_token")
-
-        await self.emit_status(
-            __event_emitter__,
-            "info",
-            "Working...",
-            False,
-        )
+        access_token: Optional[str] = __oauth_token__.get("access_token")
+        id_token: Optional[str] = __oauth_token__.get("id_token")
+        await self.emit_status(__event_emitter__, "info", "Working...", False)
         logger.debug(f"pipe:{__name__}")
-
-        logger.debug("=== body ===")
-        logger.debug(body)
-        logger.debug("==== End of body ===")
+        logger.debug(f"body: {body}")
         logger.debug(f"__request__: {__request__}")
         logger.debug(f"__user__: {__user__}")
-        logger.debug("==== Request Url ====")
-        logger.debug(__request__.url if __request__ else "No request URL provided")
-        logger.debug("==== End of Request Url ====")
-
-        assert __request__ is not None, "Request object must be provided."
-
-        # logger.debug the Authorization header if available
+        logger.debug(f"Request URL: {getattr(__request__, 'url', None)}")
+        if __request__ is None:
+            raise ValueError("Request object must be provided.")
         auth_header = __request__.headers.get("Authorization")
-        if auth_header:
-            logger.debug(f"Authorization header: {auth_header}")
-        else:
-            logger.debug("No Authorization header found.")
-
-        if self.valves.debug_mode:
-            yield f"User:\n{__user__}" + "\n"
-            yield f"Original Headers:\n{dict(__request__.headers)}" + "\n"
-
-        open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
-        if open_api_base_url is None:
-            logger.debug(
-                "LanguageModelGateway::pipe OPENAI_API_BASE_URL is not set in valves, trying environment variable."
-            )
-            open_api_base_url = self.read_base_url()
-            logger.debug(
-                f"LanguageModelGateway::pipe after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
-            )
-        assert open_api_base_url is not None, (
-            "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
+        logger.debug(f"Authorization header: {auth_header if auth_header else 'None'}")
+        open_api_base_url: Optional[str] = (
+            self.valves.OPENAI_API_BASE_URL or self.read_base_url()
         )
-        assert open_api_base_url is not None, (
-            "LanguageModelGateway::pipe OpenAI_API_BASE_URL must be set as an environment variable."
-        )
+        if not open_api_base_url:
+            raise RuntimeError(
+                "OpenAI API base URL must be set as an environment variable."
+            )
         logger.debug(f"open_api_base_url: {open_api_base_url}")
-
-        # Extract model id from the model name
-        model_id = body["model"][body["model"].find(".") + 1 :]
-
-        # Update the model id in the body
+        model_id = body.get("model", "")
+        if "." in model_id:
+            model_id = model_id.split(".", 1)[1]
         payload = {**body, "model": model_id}
-        if self.valves.debug_mode:
-            yield json.dumps(payload) + "\n"
-
         url = self.pathlib_url_join(base_url=open_api_base_url, path="chat/completions")
         response_text: str = ""
-
-        v = 11
-
         is_streaming: bool = body.get("stream", False)
-
+        headers = self._build_headers(
+            request=__request__,
+            user=__user__,
+            access_token=access_token,
+            id_token=id_token,
+            session_id=__session_id__,
+            chat_id=__chat_id__,
+            message_id=__message_id__,
+        )
+        for debug_line in self._yield_debug_info(
+            user=__user__,
+            request=__request__,
+            url=url,
+            headers=headers,
+            payload=payload,
+        ):
+            yield debug_line
         try:
             logger.debug(
-                f"LanguageModelGateway::pipe Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
+                f"Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
             )
-
-            # now run the __request__ with the OpenAI API
-            # Headers
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {access_token}",
-                "X-ID-Token": id_token if id_token else "",
-                "X-Session-Id": __session_id__ if __session_id__ else "",
-                "X-Chat-Id": __chat_id__ if __chat_id__ else "",
-                "X-Message-Id": __message_id__ if __message_id__ else "",
-            }
-            # set User-Agent to the one from the request, if available
-            if "User-Agent" in __request__.headers:
-                headers["User-Agent"] = __request__.headers["User-Agent"]
-            # set Referrer to the one from the request, if available
-            if "Referrer" in __request__.headers:
-                headers["Referrer"] = __request__.headers["Referrer"]
-            # set Cookie to the one from the request, if available
-            if "Cookie" in __request__.headers:
-                headers["Cookie"] = __request__.headers["Cookie"]
-            # set traceparent to the one from the request, if available
-            if "traceparent" in __request__.headers:
-                headers["traceparent"] = __request__.headers["traceparent"]
-            if "origin" in __request__.headers:
-                headers["Origin"] = __request__.headers["origin"]
-            if "Accept-Encoding" in __request__.headers:
-                headers["Accept-Encoding"] = __request__.headers["Accept-Encoding"]
-
-            # Add custom headers for OpenWebUI user information
-            if __user__ is not None:
-                user = __user__
-                # check that each value is not None before adding to headers
-                if user.get("name") is not None:
-                    headers["X-OpenWebUI-User-Name"] = user["name"]
-                if user.get("id") is not None:
-                    headers["X-OpenWebUI-User-Id"] = user["id"]
-                if user.get("email") is not None:
-                    headers["X-OpenWebUI-User-Email"] = user["email"]
-                if user.get("role") is not None:
-                    headers["X-OpenWebUI-User-Role"] = user["role"]
-                if (
-                    user.get("info") is not None
-                    and isinstance(user["info"], dict)
-                    and user["info"].get("location") is not None
-                    and isinstance(user["info"]["location"], str)
-                ):
-                    location = user["info"]["location"]
-                    if self.valves.debug_mode:
-                        yield "Location: " + type(location).__name__ + f"{location}\n"
-                    headers["X-OpenWebUI-User-Location"] = user["info"]["location"]
-
-            # copy any headers that start with "x-"
-            for key, value in __request__.headers.items():
-                if key.lower().startswith("x-"):
-                    headers[key] = value
-
-            if self.valves.debug_mode:
-                yield url + "\n"
-                yield f"New Headers: {dict(headers)}" + "\n"
-                yield json.dumps(payload) + "\n"
-
-            # Use httpx.post for a plain POST request
             async with httpx.AsyncClient() as client:
                 response = await client.post(
                     url=url,
@@ -549,107 +343,61 @@ class Pipe:
                     timeout=30.0,
                     follow_redirects=True,
                 )
-                # Raise an exception for HTTP errors
                 response.raise_for_status()
-
-                # # Handle streaming or regular response
                 content_type = response.headers.get("content-type", "")
                 if content_type.startswith("text/event-stream"):
-                    # Stream mode: yield lines as they arrive
                     async for line in response.aiter_lines():
                         if line:
                             yield line + "\n"
                 else:
-                    # Non-streaming mode: collect and return full JSON response
-                    yield response.json()
-
+                    yield json.dumps(response.json())
             await self.emit_status(__event_emitter__, "info", "Done", True)
         except httpx.HTTPStatusError as e:
+            await self.emit_status(__event_emitter__, "HttpError", f"{e}", True)
             yield (
-                f"LanguageModelGateway::pipe HTTP Status Error [{v}]:"
-                + f" {type(e)} {e}\n"
+                f"LanguageModelGateway::pipe HTTP Status Error: {type(e)} {e}\n"
                 + f"{self.log_httpx_request(e.request)}\n"
                 + f"{self.log_response_as_string(e.response)}"
             )
         except Exception as e:
-            # logger.error(f"Error in pipe: {e}")
-            # logger.debug(f"Error details: {e.__traceback__}")
-            httpx_version = httpx.__version__
-            if is_streaming:
-                error_chunk = {
-                    "id": "chatcmpl-error",
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": "error",
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {"content": f"Error: {str(e)}"},
-                            "finish_reason": "stop",
-                        }
-                    ],
-                }
+            await self.emit_status(__event_emitter__, "error", f"{e}", True)
+            httpx_version = getattr(httpx, "__version__", "unknown")
+            error_chunk = self._make_error_chunk(error=e, is_streaming=is_streaming)
+            if error_chunk:
                 yield f"data: {json.dumps(error_chunk)}\n\n"
             else:
-                yield f"LanguageModelGateway::pipe Error [{v}]: {type(e)} {e} {httpx_version=} [{url=}] original=[{__request__.url}] {response_text=} {payload=}\n"
+                yield (
+                    f"LanguageModelGateway::pipe Error:"
+                    f" {type(e)} {e} httpx_version={httpx_version} url={url}"
+                    f" original_url={getattr(__request__, 'url', None)}"
+                    f" response_text={response_text} payload={payload}\n"
+                )
 
-            await self.emit_status(__event_emitter__, "error", str(e), True)
-
-    async def get_models(self) -> list[dict[str, str]]:
-        """
-        Fetches the list of available models from the OpenAI API.
-        Returns:
-            A list of dictionaries containing model IDs and names.
-
-        """
-        open_api_base_url: str | None = self.valves.OPENAI_API_BASE_URL
-        if open_api_base_url is None:
-            logger.debug(
-                "LanguageModelGateway:Pipes OPENAI_API_BASE_URL is not set in valves, trying environment variable."
-            )
-            open_api_base_url = self.read_base_url()
-            logger.debug(
-                f"LanguageModelGateway:Pipes after trying environment variable OpenAI API_BASE_URL: {open_api_base_url}"
-            )
-        if open_api_base_url is None:
-            return []
-        assert open_api_base_url is not None, (
-            "LanguageModelGateway:Pipes OpenAI_API_BASE_URL must be set as an environment variable."
+    async def get_models(self) -> List[Dict[str, str]]:
+        """Fetches the list of available models from the OpenAI API."""
+        open_api_base_url: Optional[str] = (
+            self.valves.OPENAI_API_BASE_URL or self.read_base_url()
         )
+        if not open_api_base_url:
+            logger.debug("OpenAI API base URL is not set.")
+            return []
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
-        # call the models endpoint to get the list of available models
         logger.debug(f"Calling models endpoint: {model_url}")
-        models: list[dict[str, str]] = []
         async with httpx.AsyncClient() as client:
-            # Perform the GET request with a timeout
-            response = await client.get(
-                url=model_url,
-                timeout=30.0,  # 30 seconds timeout
-            )
-
-            # Raise an exception for HTTP errors
+            response = await client.get(url=model_url, timeout=30.0)
             response.raise_for_status()
-
-            # Parse JSON and extract 'data' key, defaulting to empty list
             models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
         if self.valves.restrict_to_model_ids:
-            # Filter models based on the restricted model IDs
             models = [
                 model
                 for model in models
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
             logger.debug(f"Filtered models: {models}")
-        return [
-            {
-                "id": model["id"],
-                "name": model["id"],
-            }
-            for model in models
-        ]
+        return [{"id": model["id"], "name": model["id"]} for model in models]
 
-    async def pipes(self) -> list[dict[str, str]]:
+    async def pipes(self) -> List[Dict[str, str]]:
         if self.pipelines is None:
             logger.debug("Fetching models for the first time.")
             self.pipelines = await self.get_models()

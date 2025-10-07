@@ -13,12 +13,17 @@ from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBa
 logger = logging.getLogger(__name__)
 
 
-class GetUserInfoTool(ResilientBaseTool):
+class GetUserProfileTool(ResilientBaseTool):
     name: str = "get_user_profile"
     description: str = "Look up user profile for a given user."
 
     def _run(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
-        logger.info(f"GetUserInfoTool called with state: {state}")
+        raise NotImplementedError(
+            "Synchronous execution is not supported. Use the asynchronous method instead."
+        )
+
+    async def _arun(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
+        logger.info(f"GetUserProfileTool called with state: {state}")
 
         try:
             user_id = state.user_id
@@ -26,9 +31,8 @@ class GetUserInfoTool(ResilientBaseTool):
                 raise ValueError("user_id is required")
 
             my_store: BaseStore = get_store()
-            # user_info = my_store.get(("memories",), user_id)
 
-            user_info_items: List[SearchItem] = my_store.search(
+            user_info_items: List[SearchItem] = await my_store.asearch(
                 ("memories", user_id, "user_profile")
             )
             if not user_info_items:

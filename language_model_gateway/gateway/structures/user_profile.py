@@ -11,9 +11,6 @@ class UserProfile(BaseModel):
     name: str | None = Field(default=None, description="Name of the current user")
     email: str | None = Field(default=None, description="Email address of the user")
     age: int | None = Field(default=None, description="Optional age of the user")
-    recent_memories: list[str] = Field(
-        default=[], description="list of recent memories or interactions with the user"
-    )
     preferences: Dict[str, Any] | None = Field(
         default=None, description="Optional dictionary of user preferences"
     )
@@ -31,8 +28,6 @@ class UserProfile(BaseModel):
             profile_parts.append(f"Email: {self.email}")
         if self.age is not None:
             profile_parts.append(f"Age: {self.age}")
-        if self.recent_memories:
-            profile_parts.append(f"Recent Memories: {', '.join(self.recent_memories)}")
         if self.preferences:
             prefs = ", ".join(f"{k}: {v}" for k, v in self.preferences.items())
             profile_parts.append(f"Preferences: {prefs}")
