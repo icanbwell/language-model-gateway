@@ -52,10 +52,10 @@ up-open-webui-ssl: clean-database ## starts docker containers
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
 	if [ $? -ne 0 ]; then exit 1; fi && \
 	echo ""
-	@echo OpenWebUI: http://localhost:3050 https://open-web-ui.localhost
+	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: create-certs ## starts docker containers
+up-open-webui-auth: create-certs check-cert-expiry ## starts docker containers
 	docker compose --progress=plain \
 	  -f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
@@ -69,7 +69,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
-	@echo OpenWebUI: https://open-web-ui.localhost
+	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:
 	@echo Admin User: admin/password
@@ -77,7 +77,7 @@ up-open-webui-auth: create-certs ## starts docker containers
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
-	@echo OpenWebUI API docs: https://open-web-ui.localhost//docs
+	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 
 .PHONY: down
 down: ## stops docker containers
@@ -161,11 +161,38 @@ CERT_DIR := certs
 CERT_KEY := $(CERT_DIR)/open-webui.localhost-key.pem
 CERT_CRT := $(CERT_DIR)/open-webui.localhost.pem
 
-.PHONY: all install-ca create-certs
+.PHONY: all install-ca create-certs check-cert-expiry
 
 # Install local Certificate Authority
 install-ca: ## Installs a local CA using mkcert
 	mkcert -install
+
+# Check certificate expiry
+check-cert-expiry: ## Checks if the SSL certificate expires within 1 day and fails if not valid
+	@if [ -f "$(CERT_CRT)" ]; then \
+		expiry_date=$$(openssl x509 -enddate -noout -in $(CERT_CRT) | cut -d= -f2); \
+		echo "DEBUG: checking certificate is '$(CERT_CRT)'"; \
+		echo "DEBUG: expiry_date is '$$expiry_date'"; \
+		expiry_epoch=$$(date -j -f "%b %d %H:%M:%S %Y %Z" "$$expiry_date" "+%s" 2>/dev/null); \
+		echo "DEBUG: expiry_epoch is '$$expiry_epoch'"; \
+		now_epoch=$$(date "+%s"); \
+		echo "DEBUG: now_epoch is '$$now_epoch'"; \
+		diff_days=$$(( ($$expiry_epoch - $$now_epoch) / 86400 )); \
+		echo "DEBUG: diff_days is '$$diff_days'"; \
+		if [ -z "$$expiry_epoch" ]; then \
+			echo "ERROR: Could not parse expiry date: $$expiry_date"; \
+			exit 1; \
+		fi; \
+		if [ "$$diff_days" -lt 1 ]; then \
+			echo "ERROR: Certificate $(CERT_CRT) is valid for less than 1 day ($$expiry_date)"; \
+			exit 1; \
+		else \
+			echo "Certificate $(CERT_CRT) is valid for $$diff_days more days ($$expiry_date)"; \
+		fi; \
+	else \
+		echo "Certificate $(CERT_CRT) not found."; \
+		exit 1; \
+	fi
 
 # Create certificates
 create-certs: install-ca ## Creates self-signed certificates for open-webui.localhost
