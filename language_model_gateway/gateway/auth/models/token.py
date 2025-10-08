@@ -78,6 +78,12 @@ class Token(BaseModel):
         """
         if not claims or not isinstance(claims, dict) or not token:
             return None
+        # Validate required fields
+        required_fields = ["exp", "iat", "iss"]
+        missing_fields = [field for field in required_fields if field not in claims]
+        if missing_fields:
+            logger.debug(f"Missing required claim fields: {missing_fields} in claims: {claims}")
+            return None
 
         exp = claims.get("exp")
         iat = claims.get("iat")
