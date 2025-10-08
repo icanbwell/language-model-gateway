@@ -308,18 +308,14 @@ class AuthManager:
             raise ValueError("access_token was not found in the token response")
 
         email: str | None = (
-            token.get("userinfo", {}).get("email") or access_token_item.email
-            if access_token_item
-            else None or id_token_item.email
-            if id_token_item
-            else None
+            token.get("userinfo", {}).get("email")
+            or (access_token_item.email if access_token_item else None)
+            or (id_token_item.email if id_token_item else None)
         )
         subject: str | None = (
-            token.get("userinfo", {}).get("sub") or access_token_item.subject
-            if access_token_item
-            else None or id_token_item.subject
-            if id_token_item
-            else None
+            token.get("userinfo", {}).get("sub")
+            or (access_token_item.subject if access_token_item else None)
+            or (id_token_item.subject if id_token_item else None)
         )
 
         if not email:
