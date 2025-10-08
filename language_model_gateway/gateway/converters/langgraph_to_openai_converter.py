@@ -321,9 +321,11 @@ class LangGraphToOpenAIConverter:
 
                                 tool_progress_message: str = (
                                     (
-                                        f"\n> ==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
-                                        f"\n>{tool_message_content}"
-                                        f"\n> ==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] =====\n"
+                                        f"```"
+                                        f"\n==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n{tool_message_content}"
+                                        f"\n==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n```\n"
                                     )
                                     if return_raw_tool_output
                                     else f"\n> {artifact}"
@@ -422,6 +424,7 @@ class LangGraphToOpenAIConverter:
             if json_content is not None:
                 if isinstance(json_content, dict):
                     if "result" in json_content:
+                        # https://github.com/open-webui/open-webui/discussions/11981
                         return cast(str, json_content.get("result"))
             return tool_message.content
 
