@@ -119,7 +119,7 @@ class ChatCompletionManager:
                 chat_request=chat_request, system_prompts=model_config.system_prompts
             )
 
-            provider: BaseChatCompletionsProvider
+            provider: BaseChatCompletionsProvider | None = None
             match model_config.type:
                 case "openai":
                     provider = self.openai_provider

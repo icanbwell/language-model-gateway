@@ -80,6 +80,8 @@ def create_jwt_token(exp_offset: int = 60) -> str:
         "sub": "1234567890",
         "name": "John Doe",
         "exp": int(time.time()) + exp_offset,
+        "iat": int(time.time()),
+        "iss": "https://fake-issuer",
     }
     # joserfc requires key as dict for oct (symmetric) keys
     key = jwk.import_key(JWKS["keys"][0])
@@ -93,10 +95,10 @@ def test_extract_token() -> None:
         )
     )
     header: str = "Bearer sometoken"
-    assert token_reader.extract_token(header) == "sometoken"
-    assert token_reader.extract_token(None) is None
-    assert token_reader.extract_token("") is None
-    assert token_reader.extract_token("Basic sometoken") is None
+    assert token_reader.extract_token(authorization_header=header) == "sometoken"
+    assert token_reader.extract_token(authorization_header=None) is None
+    assert token_reader.extract_token(authorization_header="") is None
+    assert token_reader.extract_token(authorization_header="Basic sometoken") is None
 
 
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:

@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict
+from typing import Optional, List
 
 import httpx
 from openai import AsyncOpenAI
@@ -24,19 +24,21 @@ from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 
-async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
+async def test_store_and_read_memories_tool_with_fake_api_key(
+    async_client: httpx.AsyncClient,
+) -> None:
     print("")
-    access_token_result: Dict[str, str] = KeyCloakHelper.get_keycloak_access_token(
-        username="tester", password="password"
-    )
-    access_token = access_token_result["access_token"]
+    # IMPORTANT: Needs the following values set in docker.env if testing with real LLM
+    # FAKE_USER_ID="tester"
+    # FAKE_USER_PASSWORD="password"
+    # FAKE_AUDIENCE="client1"
+
     test_container: SimpleContainer = await get_container_async()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
@@ -92,7 +94,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": "Bearer fake-api-key",
         },
     )
 
@@ -118,7 +120,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message2],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": "Bearer fake-api-key",
         },
     )
 
@@ -141,7 +143,7 @@ async def test_store_user_profile_tool(async_client: httpx.AsyncClient) -> None:
         messages=[message3],
         model="General Purpose",
         extra_headers={
-            "Authorization": f"Bearer {access_token}",
+            "Authorization": "Bearer fake-api-key",
         },
     )
 

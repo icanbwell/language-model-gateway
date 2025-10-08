@@ -318,6 +318,5 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         await self.auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
-            tool_name=tool_using_authentication.name,
-            tool_auth_providers=tool_using_authentication.auth_providers,
+            tool_config=tool_using_authentication,
         )

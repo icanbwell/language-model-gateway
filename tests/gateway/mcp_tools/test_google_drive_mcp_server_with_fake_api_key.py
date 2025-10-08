@@ -12,7 +12,6 @@ from language_model_gateway.configs.config_schema import (
 )
 from language_model_gateway.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
-from language_model_gateway.gateway.auth.models.token import Token
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -20,7 +19,6 @@ from language_model_gateway.gateway.utilities.cache.config_expiring_cache import
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -29,14 +27,9 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
     os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
     reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
 )
-async def test_chat_completions_with_mcp_google_drive(
+async def test_google_drive_mcp_server_with_fake_api_key(
     async_client: httpx.AsyncClient,
 ) -> None:
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
-        username="tester", password="password"
-    )
-    assert access_token is not None
-
     test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
@@ -69,6 +62,7 @@ async def test_chat_completions_with_mcp_google_drive(
                         name="download_file_from_url",
                         url=url,  # Assumes MCP server is running locally
                         auth="jwt_token",
+                        auth_optional=True,
                     ),
                 ],
             )
@@ -80,7 +74,7 @@ async def test_chat_completions_with_mcp_google_drive(
         base_url="http://localhost:5000/api/v1",  # Change if your API runs on a different port
         http_client=async_client,
         default_headers={
-            "Authorization": f"Bearer {access_token.token}",
+            "Authorization": "Bearer fake-api-key",
         },
     )
 

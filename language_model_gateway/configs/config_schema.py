@@ -80,6 +80,9 @@ class AgentConfig(BaseModel):
     auth: Literal["None", "jwt_token", "oauth"] | None = None
     """The authentication method to use when calling the tool"""
 
+    auth_optional: bool | None = None
+    """Whether authentication is optional when calling the tool.  Default is None."""
+
     auth_providers: List[str] | None = None
     """The auth providers for the authentication. If multiple are provided then the tool accepts ANY of those auth providers.  If auth is needed, we will use the first auth provider."""
 

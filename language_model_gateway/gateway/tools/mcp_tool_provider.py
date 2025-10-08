@@ -159,10 +159,7 @@ class MCPToolProvider:
                         token_item: (
                             TokenCacheItem | None
                         ) = await self.auth_manager.get_token_for_tool_async(
-                            auth_header=auth_header,
-                            error_message="",
-                            tool_name=tool.name,
-                            tool_auth_providers=tool.auth_providers,
+                            auth_header=auth_header, error_message="", tool_config=tool
                         )
                         token = token_item.get_token() if token_item else None
                         if token:
@@ -172,18 +169,23 @@ class MCPToolProvider:
                             auth_bearer_token: str | None = TokenReader.extract_token(
                                 authorization_header=auth_header
                             )
-                            auth_token: Token | None = Token.create(
-                                token=auth_bearer_token
+                            auth_token: Token | None = (
+                                Token.create_from_token(token=auth_bearer_token)
+                                if auth_bearer_token
+                                and auth_bearer_token != "fake-api-key"
+                                else None
                             )
-                            raise AuthorizationMcpToolTokenInvalidException(
-                                message=f"No token found.  Authorization needed for MCP tools at {url}. "
-                                + f" for auth providers {tool.auth_providers}"
-                                + f", token_email: {auth_token.email if auth_token else 'None'}"
-                                + f", token_audience: {auth_token.audience if auth_token else 'None'}"
-                                + f", token_subject: {auth_token.subject if auth_token else 'None'}",
-                                tool_url=url,
-                                token=token,
-                            )
+
+                            if not auth_token and not tool.auth_optional:
+                                raise AuthorizationMcpToolTokenInvalidException(
+                                    message=f"No token found.  Authorization needed for MCP tools at {url}. "
+                                    + f" for auth providers {tool.auth_providers}"
+                                    + f", token_email: {auth_token.email if auth_token else 'None'}"
+                                    + f", token_audience: {auth_token.audience if auth_token else 'None'}"
+                                    + f", token_subject: {auth_token.subject if auth_token else 'None'}",
+                                    tool_url=url,
+                                    token=token,
+                                )
 
                         # add the Authorization header to the mcp_tool_config headers
                         mcp_tool_config["headers"] = {

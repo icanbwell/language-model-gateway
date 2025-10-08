@@ -14,12 +14,15 @@ from language_model_gateway.gateway.api_container import (
     get_chat_manager,
     get_token_reader,
     get_environment_variables,
+    get_auth_manager,
 )
+from language_model_gateway.gateway.auth.auth_manager import AuthManager
 from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
 from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.auth.models.token import Token
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
@@ -91,6 +94,7 @@ class ChatCompletionsRouter:
         chat_request: Dict[str, Any],
         chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
         token_reader: Annotated[TokenReader, Depends(get_token_reader)],
+        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
         environment_variables: Annotated[
             EnvironmentVariables, Depends(get_environment_variables)
         ],
@@ -103,6 +107,7 @@ class ChatCompletionsRouter:
             chat_request: The chat request data
             chat_manager: Injected chat manager instance
             token_reader: Injected token reader instance
+            auth_manager: Injected auth manager instance
             environment_variables: Injected environment variables instance
 
         Returns:
@@ -121,6 +126,7 @@ class ChatCompletionsRouter:
                 environment_variables=environment_variables,
                 request=request,
                 token_reader=token_reader,
+                auth_manager=auth_manager,
             )
 
             # noinspection PyInvalidCast
@@ -176,14 +182,27 @@ class ChatCompletionsRouter:
             logger.exception(e, stack_info=True)
             raise HTTPException(status_code=500, detail=error_detail)
 
+    # noinspection PyMethodMayBeStatic
     async def read_auth_information(
         self,
         *,
         environment_variables: EnvironmentVariables,
         request: Request,
         token_reader: TokenReader,
+        auth_manager: AuthManager,
     ) -> AuthInformation:
-        # read the authorization header and extract the token
+        """
+        Reads the authentication information from the request headers and verifies the token if present.
+        Args:
+            environment_variables: The environment variables instance
+            request: The incoming request
+            token_reader: The token reader instance
+            auth_manager: The authentication manager instance
+        Returns:
+            AuthInformation instance with the extracted information
+        """
+
+        # set default values first and the override if we have a valid token
         auth_information: AuthInformation = AuthInformation(
             redirect_uri=environment_variables.auth_redirect_uri
             or str(request.url_for("auth_callback")),
@@ -196,20 +215,37 @@ class ChatCompletionsRouter:
         )
         auth_header = request.headers.get("Authorization")
         if auth_header:
-            token: str | None = token_reader.extract_token(auth_header)
+            token: str | None = token_reader.extract_token(
+                authorization_header=auth_header
+            )
+            token_item: Token | None = None
             if (
-                token and token != "fake-api-key" and token != "bedrock"
-            ):  # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
-                token_item: Token | None = await token_reader.verify_token_async(
-                    token=token
-                )
-                if token_item is not None:
-                    auth_information.claims = token_item.claims
-                    auth_information.expires_at = token_item.expires
-                    auth_information.audience = token_item.audience
-                    auth_information.email = token_item.email
-                    auth_information.subject = token_item.subject or token_item.email
-                    auth_information.user_name = token_item.name
+                token and token in ["bedrock", "fake-api-key"]
+                # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
+            ):
+                # If a fake test account is configured then try to log in via that
+                if (
+                    environment_variables.fake_user_id
+                    and environment_variables.fake_user_password
+                    and environment_variables.fake_audience
+                ):
+                    # login with the test user and use that token
+                    token_cache_item: TokenCacheItem = await auth_manager.login_and_get_access_token_with_password_async(
+                        username=environment_variables.fake_user_id,
+                        password=environment_variables.fake_user_password,
+                        audience=environment_variables.fake_audience,
+                    )
+                    token_item = token_cache_item.access_token
+            elif token:
+                token_item = await token_reader.verify_token_async(token=token)
+
+            if token_item is not None:
+                auth_information.claims = token_item.claims
+                auth_information.expires_at = token_item.expires
+                auth_information.audience = token_item.audience
+                auth_information.email = token_item.email
+                auth_information.subject = token_item.subject or token_item.email
+                auth_information.user_name = token_item.name
             else:
                 # read information from headers if present
                 if "x-openwebui-user-id" in request.headers:
