@@ -35,9 +35,12 @@ class OAuthAuthenticator:
         Returns:
             dict: The token response.
         """
-        assert oauth_client_id is not None
-        assert oauth_client_secret is not None
-        assert openid_provider_url is not None
+        if oauth_client_id is None:
+            raise Exception("oauth_client_id must not be None")
+        if oauth_client_secret is None:
+            raise Exception("oauth_client_secret must not be None")
+        if openid_provider_url is None:
+            raise Exception("openid_provider_url must not be None")
 
         resp = requests.get(openid_provider_url, timeout=5)
         resp.raise_for_status()

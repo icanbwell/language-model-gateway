@@ -537,10 +537,11 @@ class AuthManager:
             TokenCacheItem: The updated and saved token cache item.
         """
 
-        assert token_cache_item is not None, "token_cache_item must not be None"
-        assert isinstance(token_cache_item, TokenCacheItem), (
-            "token_cache_item must be a TokenCacheItem"
-        )
+        if token_cache_item is None:
+            raise ValueError("token_cache_item must not be None")
+
+        if not isinstance(token_cache_item, TokenCacheItem):
+            raise TypeError(f"TokenCacheItem must be of type {TokenCacheItem.__name__}")
 
         token_cache_item.access_token = Token.create_from_token(token=access_token)
         token_cache_item.id_token = Token.create_from_token(token=id_token)
