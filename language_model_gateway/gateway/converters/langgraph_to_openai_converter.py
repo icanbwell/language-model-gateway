@@ -302,7 +302,7 @@ class LangGraphToOpenAIConverter:
                                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
                             )
                             if artifact or return_raw_tool_output:
-                                tool_message_content_type = type(tool_message.content)
+                                # tool_message_content_type = type(tool_message.content)
                                 tool_message_content: str = (
                                     self.convert_message_content_into_string(
                                         tool_message=tool_message
@@ -321,9 +321,9 @@ class LangGraphToOpenAIConverter:
 
                                 tool_progress_message: str = (
                                     (
-                                        f"\n> ==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] {tool_message_content_type=} ====="
+                                        f"\n> ==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
                                         f"\n>{tool_message_content}"
-                                        f"\n> ==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] {tool_message_content_type=} =====\n"
+                                        f"\n> ==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] =====\n"
                                     )
                                     if return_raw_tool_output
                                     else f"\n> {artifact}"
@@ -409,18 +409,33 @@ class LangGraphToOpenAIConverter:
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
-        return (
+        def safe_json(string: str) -> Any:
+            try:
+                return json.loads(string)
+            except json.JSONDecodeError:
+                return None
+
+        if isinstance(tool_message.content, str):
             # the content is str then just return it
-            tool_message.content
-            if isinstance(tool_message.content, str)
-            # if content is a list of dicts and has a result field, return that
-            else cast(str, tool_message.content[0].get("result"))
-            if isinstance(tool_message.content, list)
+            # see if this is a json object embedded in text
+            json_content: Any = safe_json(tool_message.content)
+            if json_content is not None:
+                if isinstance(json_content, dict):
+                    if "result" in json_content:
+                        return cast(str, json_content.get("result"))
+            return tool_message.content
+
+        if (
+            isinstance(tool_message.content, list)
             and len(tool_message.content) == 1
             and isinstance(tool_message.content[0], dict)
             and "result" in tool_message.content[0]
+        ):
+            return cast(str, tool_message.content[0].get("result"))
+
+        return (
             # otherwise if content is a list, convert each item to str and join the items with a space
-            else " ".join([str(c) for c in tool_message.content])
+            " ".join([str(c) for c in tool_message.content])
         )
 
     async def call_agent_with_input(
