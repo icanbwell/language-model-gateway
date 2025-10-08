@@ -213,8 +213,10 @@ class TokenExchangeManager:
         Returns:
             Token | None: The token item if the token is valid, otherwise raises an exception.
         """
-        assert tool_config is not None
-        assert isinstance(tool_config, AgentConfig)
+        if tool_config is None:
+            raise Exception("tool_config must not be None")
+        if not isinstance(tool_config, AgentConfig):
+            raise Exception("tool_config must be an instance of AgentConfig")
 
         tool_auth_providers: List[str] = (
             [ap.upper() for ap in tool_config.auth_providers]
