@@ -956,22 +956,13 @@ class LangGraphToOpenAIConverter:
 
         if self.environment_variables.enable_llm_memory and store is not None:
             # Memory tools use LangGraph's BaseStore for persistence (4)
-            user_profile_namespace = ("memories", "{user_id}", "user_profile")
-            memories_namespace = ("memories", "{user_id}", "memories")
-            tools = (
-                list(tools)
-                + [
-                    StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
-                        # The brackets will be populated at runtime by the configurable values
-                        namespace=user_profile_namespace,
-                        # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
-                    ),
-                    MemoryReadTool(namespace=memories_namespace),
-                    MemoryWriteTool(namespace=memories_namespace),
-                    # create_search_memory_tool(namespace=user_profile_namespace),
-                    GetUserProfileTool(),
-                ]
-            )
+            tools = list(tools) + [
+                StoreUserProfileTool(),
+                MemoryReadTool(),
+                MemoryWriteTool(),
+                # create_search_memory_tool(namespace=user_profile_namespace),
+                GetUserProfileTool(),
+            ]
 
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)

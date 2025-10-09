@@ -44,7 +44,7 @@ class MemoryWriteTool(ResilientBaseTool):
         "This tool is appropriate for storing both conversational context and important user profile information"
         " that may be relevant in future interactions."
     )
-    namespace: tuple[str, ...] | str
+    namespace: tuple[str, ...] | str = ("memories", "{user_id}", "memories")
     args_schema: Type[BaseModel] = ConversationMemoryWriteInput
     actions_permitted: Optional[tuple[Literal["create", "update", "delete"], ...]] = (
         "create",
