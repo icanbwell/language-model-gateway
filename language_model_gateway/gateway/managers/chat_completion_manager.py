@@ -237,7 +237,7 @@ class ChatCompletionManager:
             and len(system_prompts) > 0
         ):
             system_messages: List[ChatMessageWrapper] = [
-                ChatMessageWrapper.create_system_message(content=message.content)
+                chat_request_wrapper.create_system_message(content=message.content)
                 for message in system_prompts
                 if message.role == "system" and message.content is not None
             ]

@@ -28,7 +28,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class ChatRequest(BaseModel):
     model_config = ConfigDict(
-        extra="forbid"  # Prevents any additional properties
+        extra="forbid",  # Prevents any additional properties
+        arbitrary_types_allowed=True,  # Allow unknown types like openai.Omit
     )
     messages: List[ChatCompletionMessageParam] = Field(
         ..., description="The messages to generate chat completions for."

@@ -6,6 +6,9 @@ from openai.types.chat.completion_create_params import ResponseFormat
 
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
+from language_model_gateway.gateway.structures.chat_completion_message_wrapper import (
+    ChatCompletionMessageWrapper,
+)
 from language_model_gateway.gateway.structures.chat_message_wrapper import (
     ChatMessageWrapper,
 )
@@ -15,6 +18,10 @@ from openai.types.chat import (
 from openai.types.responses import (
     ResponseInputParam,
     EasyInputMessageParam,
+)
+
+from language_model_gateway.gateway.structures.responses_message_wrapper import (
+    ResponsesMessageWrapper,
 )
 
 
@@ -36,7 +43,7 @@ class ChatRequestWrapper:
     def convert_from_chat_messages(
         *, messages: list[ChatCompletionMessageParam]
     ) -> list[ChatMessageWrapper]:
-        return [ChatMessageWrapper(message_or_input=msg) for msg in messages]
+        return [ChatCompletionMessageWrapper(message=msg) for msg in messages]
 
     @staticmethod
     def convert_from_responses_input(
@@ -44,12 +51,12 @@ class ChatRequestWrapper:
     ) -> list[ChatMessageWrapper]:
         if isinstance(input_, str):
             return [
-                ChatMessageWrapper(
-                    message_or_input=EasyInputMessageParam(role="user", content=input_)
+                ResponsesMessageWrapper(
+                    input_=EasyInputMessageParam(role="user", content=input_)
                 )
             ]
         elif isinstance(input_, list):
-            return [ChatMessageWrapper(message_or_input=item) for item in input_]
+            return [ResponsesMessageWrapper(input_=item) for item in input_]
         else:
             return []
 
@@ -67,6 +74,13 @@ class ChatRequestWrapper:
 
     def append_message(self, *, message: ChatMessageWrapper) -> None:
         self._messages.append(message)
+
+    def create_system_message(self, *, content: str) -> ChatMessageWrapper:
+        return (
+            ResponsesMessageWrapper.create_system_message(content=content)
+            if isinstance(self.request, ResponsesRequest)
+            else ChatCompletionMessageWrapper.create_system_message(content=content)
+        )
 
     @property
     def stream(self) -> Literal[False, True] | None | bool:

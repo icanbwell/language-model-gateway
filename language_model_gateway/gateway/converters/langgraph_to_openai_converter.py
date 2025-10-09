@@ -21,7 +21,6 @@ from typing import (
 import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
-from langchain_community.adapters.openai import convert_openai_messages
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AIMessage,
@@ -599,7 +598,7 @@ class LangGraphToOpenAIConverter:
         )
 
         new_system_message: ChatMessageWrapper = (
-            ChatMessageWrapper.create_system_message(content=content)
+            chat_request_wrapper.create_system_message(content=content)
         )
         chat_request_wrapper.append_message(message=new_system_message)
 
@@ -637,7 +636,7 @@ class LangGraphToOpenAIConverter:
                 json  here
                 </json>"""
                 json_object_system_message: ChatMessageWrapper = (
-                    ChatMessageWrapper.create_system_message(
+                    chat_request_wrapper.create_system_message(
                         content=json_object_system_message_text
                     )
                 )
@@ -663,7 +662,7 @@ class LangGraphToOpenAIConverter:
                 json  here
                 </json>"""
                 json_schema_system_message: ChatMessageWrapper = (
-                    ChatMessageWrapper.create_system_message(
+                    chat_request_wrapper.create_system_message(
                         content=json_schema_system_message_text
                     )
                 )
@@ -871,9 +870,8 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of role and incoming message type tuples.
         """
-        messages_: List[BaseMessage] = convert_openai_messages(
-            messages=[cast(dict[str, Any], cast(object, m)) for m in messages]
-        )
+        messages_: List[BaseMessage] = [m.to_langchain_message() for m in messages]
+
         return messages_
 
     async def run_graph_async(
