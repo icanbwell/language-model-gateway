@@ -19,7 +19,7 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
     OpenAiChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (

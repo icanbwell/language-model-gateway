@@ -1,7 +1,7 @@
 from typing import Protocol, Dict, Any
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 

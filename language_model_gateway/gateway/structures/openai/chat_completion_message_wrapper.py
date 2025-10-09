@@ -7,7 +7,7 @@ from openai.types.chat import (
     ChatCompletionSystemMessageParam,
 )
 
-from language_model_gateway.gateway.structures.chat_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_message_wrapper import (
     ChatMessageWrapper,
 )
 

@@ -3,7 +3,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from language_model_gateway.gateway.structures.conversation_memory import (
+from language_model_gateway.gateway.tools.memories.structures.conversation_memory import (
     ConversationMemory,
 )
 

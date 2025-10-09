@@ -20,7 +20,7 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS

@@ -18,7 +18,7 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider

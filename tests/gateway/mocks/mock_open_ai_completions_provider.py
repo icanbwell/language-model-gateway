@@ -8,7 +8,7 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol

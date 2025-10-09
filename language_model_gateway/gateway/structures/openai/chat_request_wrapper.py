@@ -6,10 +6,10 @@ from openai.types.chat.completion_create_params import ResponseFormat
 
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
-from language_model_gateway.gateway.structures.chat_completion_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_completion_message_wrapper import (
     ChatCompletionMessageWrapper,
 )
-from language_model_gateway.gateway.structures.chat_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_message_wrapper import (
     ChatMessageWrapper,
 )
 from openai.types.chat import (
@@ -20,7 +20,7 @@ from openai.types.responses import (
     EasyInputMessageParam,
 )
 
-from language_model_gateway.gateway.structures.responses_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.responses_message_wrapper import (
     ResponsesMessageWrapper,
 )
 

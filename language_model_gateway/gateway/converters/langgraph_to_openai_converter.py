@@ -55,10 +55,10 @@ from language_model_gateway.gateway.converters.my_messages_state import MyMessag
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
-from language_model_gateway.gateway.structures.chat_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_message_wrapper import (
     ChatMessageWrapper,
 )
-from language_model_gateway.gateway.structures.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.structures.request_information import (

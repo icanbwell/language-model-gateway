@@ -3,7 +3,7 @@ from typing import Optional, cast
 from langchain_core.messages import BaseMessage
 from openai.types.responses import ResponseInputItemParam, EasyInputMessageParam
 
-from language_model_gateway.gateway.structures.chat_message_wrapper import (
+from language_model_gateway.gateway.structures.openai.chat_message_wrapper import (
     ChatMessageWrapper,
 )
 
