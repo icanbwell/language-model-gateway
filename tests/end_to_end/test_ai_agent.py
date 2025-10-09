@@ -19,6 +19,9 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
     OpenAiChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+    ChatCompletionApiRequestWrapper,
+)
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
@@ -42,7 +45,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
     )
     # Create a ChatRequest object
     model = "General Purpose"
-    chat_request_wrapper = ChatRequestWrapper(
+    chat_request_wrapper = ChatCompletionApiRequestWrapper(
         chat_request=ChatRequest(
             model=model,
             messages=chat_history + [user_message],

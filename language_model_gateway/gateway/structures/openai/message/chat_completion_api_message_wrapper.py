@@ -12,16 +12,18 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 )
 
 
-class ChatCompletionMessageWrapper(ChatMessageWrapper):
+class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     def __init__(self, *, message: ChatCompletionMessageParam) -> None:
         """
-        Wraps either a ChatMessage or a ChatCompletionInputMessage and provides a unified interface so the code can use either
+        Wraps a chat message from the OpenAI /chat/completion API and provides a unified interface so the code can use either
 
         """
         self.message: ChatCompletionMessageParam = message
 
     @classmethod
-    def create_system_message(cls, *, content: str) -> "ChatCompletionMessageWrapper":
+    def create_system_message(
+        cls, *, content: str
+    ) -> "ChatCompletionApiMessageWrapper":
         return cls(
             message=ChatCompletionSystemMessageParam(role="system", content=content)
         )

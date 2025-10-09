@@ -29,8 +29,14 @@ from language_model_gateway.gateway.managers.chat_completion_manager import (
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
+from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+    ChatCompletionApiRequestWrapper,
+)
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
+)
+from language_model_gateway.gateway.structures.openai.request.responses_api_request_wrapper import (
+    ResponsesApiRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
@@ -139,7 +145,7 @@ class ChatCompletionsRouter:
 
         return await self._chat_completions(
             request=request,
-            chat_request=chat_request_typed,
+            chat_request_wrapper=ChatCompletionApiRequestWrapper(chat_request_typed),
             chat_manager=chat_manager,
             token_reader=token_reader,
             auth_manager=auth_manager,
@@ -186,7 +192,9 @@ class ChatCompletionsRouter:
 
         return await self._chat_completions(
             request=request,
-            chat_request=chat_request_typed,
+            chat_request_wrapper=ResponsesApiRequestWrapper(
+                chat_request=chat_request_typed
+            ),
             chat_manager=chat_manager,
             token_reader=token_reader,
             auth_manager=auth_manager,
@@ -196,7 +204,7 @@ class ChatCompletionsRouter:
     async def _chat_completions(
         self,
         request: Request,
-        chat_request: ChatRequest | ResponsesRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
         token_reader: Annotated[TokenReader, Depends(get_token_reader)],
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
@@ -205,9 +213,6 @@ class ChatCompletionsRouter:
         ],
     ) -> StreamingResponse | JSONResponse:
         try:
-            chat_request_wrapper: ChatRequestWrapper = ChatRequestWrapper(
-                chat_request=chat_request
-            )
             auth_information = await self.read_auth_information(
                 environment_variables=environment_variables,
                 request=request,

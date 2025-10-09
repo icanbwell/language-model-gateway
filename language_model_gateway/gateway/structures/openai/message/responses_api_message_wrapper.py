@@ -8,16 +8,16 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 )
 
 
-class ResponsesMessageWrapper(ChatMessageWrapper):
+class ResponsesApiMessageWrapper(ChatMessageWrapper):
     def __init__(self, *, input_: ResponseInputItemParam) -> None:
         """
-        Wraps either a ChatMessage or a ChatCompletionInputMessage and provides a unified interface so the code can use either
+        Wraps a message from the OpenAI /responses API and provides a unified interface so the code can use either
 
         """
         self.input_: ResponseInputItemParam = input_
 
     @classmethod
-    def create_system_message(cls, *, content: str) -> "ResponsesMessageWrapper":
+    def create_system_message(cls, *, content: str) -> "ResponsesApiMessageWrapper":
         return cls(input_=EasyInputMessageParam(role="system", content=content))
 
     @property
