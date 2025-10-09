@@ -64,18 +64,6 @@ from language_model_gateway.gateway.schema.openai.completions import (
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.tools.memories.get_user_profile_tool import (
-    GetUserProfileTool,
-)
-from language_model_gateway.gateway.tools.memories.memory_read_tool import (
-    MemoryReadTool,
-)
-from language_model_gateway.gateway.tools.memories.memory_write_tool import (
-    MemoryWriteTool,
-)
-from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
-    StoreUserProfileTool,
-)
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
@@ -953,16 +941,6 @@ class LangGraphToOpenAIConverter:
             The compiled state graph.
         """
         tool_node: Optional[ToolNode] = None
-
-        if self.environment_variables.enable_llm_memory and store is not None:
-            # Memory tools use LangGraph's BaseStore for persistence (4)
-            tools = list(tools) + [
-                StoreUserProfileTool(),
-                MemoryReadTool(),
-                MemoryWriteTool(),
-                # create_search_memory_tool(namespace=user_profile_namespace),
-                GetUserProfileTool(),
-            ]
 
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)
