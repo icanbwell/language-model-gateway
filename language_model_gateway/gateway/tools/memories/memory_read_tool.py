@@ -8,10 +8,10 @@ from langmem import errors
 from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel
 
-from language_model_gateway.gateway.structures.conversation_memory import (
+from language_model_gateway.gateway.tools.memories.structures.conversation_memory import (
     ConversationMemory,
 )
-from language_model_gateway.gateway.tools.memories.conversation_memory_read_input import (
+from language_model_gateway.gateway.tools.memories.structures.conversation_memory_read_input import (
     ConversationMemoryReadInput,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool

@@ -11,12 +11,16 @@ from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field, ConfigDict
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
-from language_model_gateway.gateway.structures.user_profile import UserProfile
-from language_model_gateway.gateway.tools.memories.user_profile_components import (
-    UserProfileRepository,
-    UserProfileValidator,
+from language_model_gateway.gateway.tools.user_profile.structures.user_profile import (
+    UserProfile,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+from language_model_gateway.gateway.tools.user_profile.utilities.user_profile_repository import (
+    UserProfileRepository,
+)
+from language_model_gateway.gateway.tools.user_profile.utilities.user_profile_validator import (
+    UserProfileValidator,
+)
 
 logger = logging.getLogger(__name__)
 
