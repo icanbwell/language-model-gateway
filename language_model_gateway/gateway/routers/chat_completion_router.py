@@ -29,7 +29,7 @@ from language_model_gateway.gateway.managers.chat_completion_manager import (
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
-from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.environment_variables import (

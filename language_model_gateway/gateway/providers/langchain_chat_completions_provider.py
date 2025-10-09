@@ -26,7 +26,7 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.chat_request_wrapper import (
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.structures.request_information import (
