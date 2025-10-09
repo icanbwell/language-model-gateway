@@ -1,7 +1,8 @@
 import logging
 import os
-from typing import List, Any, Dict
+from typing import List, Any, Dict, cast, Literal
 
+import boto3
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_openai import ChatOpenAI
@@ -12,6 +13,7 @@ from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from botocore.config import Config as BotoConfig, _RetryDict
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -60,8 +62,22 @@ class ModelFactory:
         if model_vendor == "openai":
             llm = ChatOpenAI(**model_parameters_dict)
         elif model_config.provider == "bedrock":
+            retries: _RetryDict = {
+                "max_attempts": int(os.getenv("AWS_BEDROCK_MAX_RETRIES", "1")),
+                "mode": cast(
+                    Literal["legacy", "standard", "adaptive"],
+                    os.getenv("AWS_BEDROCK_RETRY_MODE", "standard"),
+                ),
+            }
+            # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/config.html
+            config = BotoConfig(
+                retries=retries,
+                connect_timeout=5,
+                read_timeout=20,
+            )
+            bedrock_client = boto3.client(service_name="bedrock-runtime", config=config)
             llm = ChatBedrockConverse(
-                client=None,
+                client=bedrock_client,
                 provider="anthropic",
                 credentials_profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"),
                 region_name=os.environ.get("AWS_REGION", "us-east-1"),
