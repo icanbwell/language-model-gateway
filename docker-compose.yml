@@ -35,7 +35,7 @@ services:
       LOG_INPUT_AND_OUTPUT: 1
       RETURN_RAW_TOOL_OUTPUT: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
-      DEFAULT_MODEL_NAME: "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+      DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
       GITHUB_MAXIMUM_REPOS: "100"
       GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO: "100"
