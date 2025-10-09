@@ -2,7 +2,7 @@ import logging
 import traceback
 from datetime import datetime
 from enum import Enum
-from typing import Annotated, Dict, Any, TypedDict, Sequence, cast
+from typing import Annotated, Dict, Any, TypedDict, Sequence
 
 from botocore.exceptions import TokenRetrievalError
 from fastapi import APIRouter, Depends, HTTPException
@@ -28,6 +28,10 @@ from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
+from language_model_gateway.gateway.structures.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
@@ -86,6 +90,16 @@ class ChatCompletionsRouter:
             response_description="Chat completions",
             status_code=200,
         )
+        self.router.add_api_route(
+            "/responses",
+            self.chat_responses,
+            methods=["POST"],
+            response_model=None,
+            summary="Get responses for a chat prompt (OpenAI Responses API)",
+            description="Returns responses for a chat prompt using the new OpenAI Responses API specification.",
+            response_description="Chat responses",
+            status_code=200,
+        )
 
     # noinspection PyMethodMayBeStatic
     async def chat_completions(
@@ -121,7 +135,79 @@ class ChatCompletionsRouter:
         if chat_manager is None:
             raise ValueError("chat_manager must not be None")
 
+        chat_request_typed: ChatRequest = ChatRequest.model_construct(**chat_request)
+
+        return await self._chat_completions(
+            request=request,
+            chat_request=chat_request_typed,
+            chat_manager=chat_manager,
+            token_reader=token_reader,
+            auth_manager=auth_manager,
+            environment_variables=environment_variables,
+        )
+
+    # noinspection PyMethodMayBeStatic
+    async def chat_responses(
+        self,
+        request: Request,
+        chat_request: Dict[str, Any],
+        chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
+        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        environment_variables: Annotated[
+            EnvironmentVariables, Depends(get_environment_variables)
+        ],
+    ) -> StreamingResponse | JSONResponse:
+        """
+        Chat completions endpoint. chat_manager is injected by FastAPI.
+
+        Args:
+            request: The incoming request
+            chat_request: The chat request data
+            chat_manager: Injected chat manager instance
+            token_reader: Injected token reader instance
+            auth_manager: Injected auth manager instance
+            environment_variables: Injected environment variables instance
+
+        Returns:
+            StreamingResponse or JSONResponse
+
+        Raises:
+            HTTPException: For various error conditions
+        """
+        if not chat_request:
+            raise ValueError("chat_request must not be empty or None")
+        if chat_manager is None:
+            raise ValueError("chat_manager must not be None")
+
+        chat_request_typed: ResponsesRequest = ResponsesRequest.model_construct(
+            **chat_request
+        )
+
+        return await self._chat_completions(
+            request=request,
+            chat_request=chat_request_typed,
+            chat_manager=chat_manager,
+            token_reader=token_reader,
+            auth_manager=auth_manager,
+            environment_variables=environment_variables,
+        )
+
+    async def _chat_completions(
+        self,
+        request: Request,
+        chat_request: ChatRequest | ResponsesRequest,
+        chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
+        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        environment_variables: Annotated[
+            EnvironmentVariables, Depends(get_environment_variables)
+        ],
+    ) -> StreamingResponse | JSONResponse:
         try:
+            chat_request_wrapper: ChatRequestWrapper = ChatRequestWrapper(
+                chat_request=chat_request
+            )
             auth_information = await self.read_auth_information(
                 environment_variables=environment_variables,
                 request=request,
@@ -129,11 +215,10 @@ class ChatCompletionsRouter:
                 auth_manager=auth_manager,
             )
 
-            # noinspection PyInvalidCast
             return await chat_manager.chat_completions(
                 # convert headers to lowercase to match OpenAI API expectations
                 headers={k.lower(): v for k, v in request.headers.items()},
-                chat_request=cast(ChatRequest, chat_request),
+                chat_request_wrapper=chat_request_wrapper,
                 auth_information=auth_information,
             )
         except* TokenRetrievalError as e:

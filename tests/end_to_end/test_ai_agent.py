@@ -19,6 +19,9 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
     OpenAiChatCompletionsProvider,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
@@ -39,9 +42,11 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
     )
     # Create a ChatRequest object
     model = "General Purpose"
-    chat_request = ChatRequest(
-        model=model,
-        messages=chat_history + [user_message],
+    chat_request_wrapper = ChatRequestWrapper(
+        chat_request=ChatRequest(
+            model=model,
+            messages=chat_history + [user_message],
+        )
     )
 
     provider: OpenAiChatCompletionsProvider
@@ -56,7 +61,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
         def mock_fn_get_response(
             model_config: ChatModelConfig,
             headers: Dict[str, str],
-            chat_request: ChatRequest,
+            chat_request_wrapper: ChatRequestWrapper,
         ) -> Dict[str, Any]:
             chat_response: ChatCompletion = ChatCompletion(
                 id="chat_1",
@@ -83,7 +88,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
 
     response: StreamingResponse | JSONResponse = await provider.chat_completions(
         headers={},
-        chat_request=chat_request,
+        chat_request_wrapper=chat_request_wrapper,
         model_config=ChatModelConfig(
             id="1",
             name=model,

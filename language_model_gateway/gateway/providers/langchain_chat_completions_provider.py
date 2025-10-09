@@ -26,7 +26,9 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
@@ -124,7 +126,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # noinspection PyArgumentList
@@ -186,7 +188,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
             result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
                 compiled_state_graph=compiled_state_graph,
-                chat_request=chat_request,
+                chat_request_wrapper=chat_request_wrapper,
                 system_messages=[],
                 request_information=RequestInformation(
                     auth_information=auth_information,

@@ -8,7 +8,9 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol
 
 
@@ -27,12 +29,12 @@ class MockOpenAiChatCompletionsProvider(OpenAiChatCompletionsProvider):
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         result: Dict[str, Any] = self.fn_get_response(
             model_config=model_config,
             headers=headers,
-            chat_request=chat_request,
+            chat_request_wrapper=chat_request_wrapper,
         )
         return JSONResponse(content=result)

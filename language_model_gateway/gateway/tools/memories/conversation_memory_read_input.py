@@ -1,9 +1,12 @@
 import typing
 from typing import Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class ConversationMemoryReadInput(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"  # Prevents any additional properties
+    )
     all_memories: typing.Optional[bool] = Field(
         default=False,
         description="If true, retrieve all memories for the user. ",

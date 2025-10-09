@@ -1,7 +1,9 @@
 from typing import Protocol, Dict, Any
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 
 
 class MockChatResponseProtocol(Protocol):
@@ -10,5 +12,5 @@ class MockChatResponseProtocol(Protocol):
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
     ) -> Dict[str, Any]: ...
