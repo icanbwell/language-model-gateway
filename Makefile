@@ -15,7 +15,11 @@ devsetup: ## one time setup for devs
 
 .PHONY:build
 build: ## Builds the docker for dev
-	docker compose build --parallel
+	docker compose \
+	-f docker-compose-keycloak.yml \
+	-f docker-compose.yml \
+	-f docker-compose-openwebui.yml \
+	 --progress=plain build --parallel;
 
 .PHONY: up
 up: fix-script-permissions ## starts docker containers
