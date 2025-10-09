@@ -26,7 +26,7 @@ class MemoryWriteTool(ResilientBaseTool):
     Actions: 'create' (store new memory), 'delete' (remove memory, include MEMORY ID).
     """
 
-    name: str = "memory_write"
+    name: str = "memory_writer"
     description: str = (
         "Store, update, or delete a memory for this conversation. "
         "Use this tool whenever you need to remember something, update a memory, or delete it. "

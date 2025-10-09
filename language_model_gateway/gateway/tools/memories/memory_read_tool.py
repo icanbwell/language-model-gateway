@@ -25,7 +25,7 @@ class MemoryReadTool(ResilientBaseTool):
     Action: 'search' (find memories by query or get all for user).
     """
 
-    name: str = "memory_read"
+    name: str = "memory_reader"
     description: str = (
         "Search a memory for this conversation. "
         "Use this tool whenever you need to retrieve a memory. "
