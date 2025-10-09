@@ -11,12 +11,12 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 
 
 class ChatRequestWrapper(abc.ABC):
-    @abstractmethod
     @property
+    @abstractmethod
     def model(self) -> str: ...
 
-    @abstractmethod
     @property
+    @abstractmethod
     def messages(self) -> list[ChatMessageWrapper]: ...
 
     @messages.setter
@@ -29,10 +29,10 @@ class ChatRequestWrapper(abc.ABC):
     @abstractmethod
     def create_system_message(self, *, content: str) -> ChatMessageWrapper: ...
 
-    @abstractmethod
     @property
+    @abstractmethod
     def stream(self) -> Literal[False, True] | None | bool: ...
 
-    @abstractmethod
     @property
+    @abstractmethod
     def response_format(self) -> ResponseFormat | NotGiven: ...

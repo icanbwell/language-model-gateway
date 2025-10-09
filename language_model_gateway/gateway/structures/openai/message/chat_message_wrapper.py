@@ -11,12 +11,12 @@ class ChatMessageWrapper(abc.ABC):
 
     """
 
-    @abstractmethod
     @property
+    @abstractmethod
     def system_message(self) -> bool: ...
 
-    @abstractmethod
     @property
+    @abstractmethod
     def content(self) -> str | None: ...
 
     @abstractmethod
