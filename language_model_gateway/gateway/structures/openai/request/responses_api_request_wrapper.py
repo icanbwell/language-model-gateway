@@ -1,6 +1,7 @@
-from typing import Literal, Union
+from typing import Literal, Union, override
 
 from openai import NotGiven
+from openai.types import CompletionUsage
 from openai.types.shared_params.response_format_json_object import (
     ResponseFormatJSONObject,
 )
@@ -49,6 +50,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         else:
             return []
 
+    @override
     @property
     def model(self) -> str:
         return self.request.model
@@ -61,18 +63,32 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def messages(self, value: list[ChatMessageWrapper]) -> None:
         self._messages = value
 
+    @override
     def append_message(self, *, message: ChatMessageWrapper) -> None:
         self._messages.append(message)
 
+    @override
     def create_system_message(self, *, content: str) -> ChatMessageWrapper:
         return ResponsesApiMessageWrapper.create_system_message(content=content)
 
+    @override
     @property
     def stream(self) -> Literal[False, True] | None | bool:
         return self.request.stream
 
+    @override
     @property
     def response_format(self) -> ResponseFormat | NotGiven:
         return ResponseFormatJSONObject(
             type="json_object"
         )  # in case of ResponsesRequest, we always use JSON object format
+
+    @override
+    def create_sse_message(
+        self,
+        *,
+        request_id: str,
+        content: str | None,
+        completion_usage_metadata: CompletionUsage,
+    ) -> str:
+        return "data: TODO: \n\n"

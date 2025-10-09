@@ -40,12 +40,10 @@ from langgraph.store.base import BaseStore
 from openai import NotGiven
 from openai.types import CompletionUsage
 from openai.types.chat import (
-    ChatCompletionChunk,
     ChatCompletion,
     ChatCompletionMessage,
 )
 from openai.types.chat.chat_completion import Choice
-from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.shared_params import ResponseFormatJSONSchema
 from openai.types.shared_params.response_format_json_schema import JSONSchema
@@ -183,26 +181,14 @@ class LangGraphToOpenAIConverter:
                             ):
                                 logger.debug(f"Returning content: {content_text}")
 
+                            # if there is no content then don't yield a message
                             if content_text:
-                                chat_model_stream_response: ChatCompletionChunk = (
-                                    ChatCompletionChunk(
-                                        id=request_id,
-                                        created=int(time.time()),
-                                        model=chat_request_wrapper.model,
-                                        choices=[
-                                            ChunkChoice(
-                                                index=0,
-                                                delta=ChoiceDelta(
-                                                    role="assistant",
-                                                    content=content_text,
-                                                ),
-                                            )
-                                        ],
-                                        usage=completion_usage_metadata,
-                                        object="chat.completion.chunk",
-                                    )
+                                yield chat_request_wrapper.create_sse_message(
+                                    content=content_text,
+                                    request_id=request_id,
+                                    completion_usage_metadata=completion_usage_metadata,
                                 )
-                                yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
+
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
                         event_dict = cast(dict[str, Any], event_object)
@@ -221,17 +207,11 @@ class LangGraphToOpenAIConverter:
                             )
 
                             # Handle the end of the chain event
-                            chat_end_stream_response: ChatCompletionChunk = (
-                                ChatCompletionChunk(
-                                    id=request_id,
-                                    created=int(time.time()),
-                                    model=chat_request_wrapper.model,
-                                    choices=[],
-                                    usage=completion_usage_metadata,
-                                    object="chat.completion.chunk",
-                                )
+                            yield chat_request_wrapper.create_sse_message(
+                                request_id=request_id,
+                                completion_usage_metadata=completion_usage_metadata,
+                                content=None,
                             )
-                            yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
                     case "on_tool_start":
                         # Handle the start of the tool event
                         event_dict = cast(dict[str, Any], event_object)
@@ -254,27 +234,15 @@ class LangGraphToOpenAIConverter:
                             logger.debug(
                                 f"on_tool_start: {tool_name} {tool_input_display}"
                             )
-                            chat_stream_response = ChatCompletionChunk(
-                                id=request_id,
-                                created=int(time.time()),
-                                model=chat_request_wrapper.model,
-                                choices=[
-                                    ChunkChoice(
-                                        index=0,
-                                        delta=ChoiceDelta(
-                                            role="assistant",
-                                            content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
-                                        ),
-                                    )
-                                ],
-                                usage=CompletionUsage(
+                            yield chat_request_wrapper.create_sse_message(
+                                request_id=request_id,
+                                completion_usage_metadata=CompletionUsage(
                                     prompt_tokens=0,
                                     completion_tokens=0,
                                     total_tokens=0,
                                 ),
-                                object="chat.completion.chunk",
+                                content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
                             )
-                            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
 
                     case "on_tool_end":
                         # Handle the end of the tool event
@@ -323,77 +291,45 @@ class LangGraphToOpenAIConverter:
                                         else ""
                                     )
                                 )
-                                chat_stream_response = ChatCompletionChunk(
-                                    id=request_id,
-                                    created=int(time.time()),
-                                    model=chat_request_wrapper.model,
-                                    choices=[
-                                        ChunkChoice(
-                                            index=0,
-                                            delta=ChoiceDelta(
-                                                role="assistant",
-                                                content=tool_progress_message,
-                                            ),
-                                        )
-                                    ],
-                                    usage=CompletionUsage(
+                                yield chat_request_wrapper.create_sse_message(
+                                    request_id=request_id,
+                                    completion_usage_metadata=CompletionUsage(
                                         prompt_tokens=0,
                                         completion_tokens=0,
                                         total_tokens=0,
                                     ),
-                                    object="chat.completion.chunk",
+                                    content=tool_progress_message,
                                 )
-                                yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
                     case _:
                         # Handle other event types
                         pass
         except TokenRetrievalError as e:
             logger.exception(e, stack_info=True)
             message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
-            chat_stream_response = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=chat_request_wrapper.model,
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n{message}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                completion_usage_metadata=CompletionUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
                 ),
-                object="chat.completion.chunk",
+                content=f"\n{message}\n",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
         except Exception as e:
             tb = traceback.format_exc()
             logger.error(
                 f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
             )
             error_message = f"Error: {e}\nTraceback:\n{tb}"
-            chat_stream_response = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=chat_request_wrapper.model,
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n{error_message}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                completion_usage_metadata=CompletionUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
                 ),
-                object="chat.completion.chunk",
+                content=f"\n{error_message}\n",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
 
         yield "data: [DONE]\n\n"
 

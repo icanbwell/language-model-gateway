@@ -3,6 +3,7 @@ from abc import abstractmethod
 from typing import Literal
 
 from openai import NotGiven
+from openai.types import CompletionUsage
 from openai.types.chat.completion_create_params import ResponseFormat
 
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
@@ -36,3 +37,12 @@ class ChatRequestWrapper(abc.ABC):
     @property
     @abstractmethod
     def response_format(self) -> ResponseFormat | NotGiven: ...
+
+    @abstractmethod
+    def create_sse_message(
+        self,
+        *,
+        request_id: str,
+        content: str | None,
+        completion_usage_metadata: CompletionUsage,
+    ) -> str: ...
