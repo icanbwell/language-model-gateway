@@ -4,8 +4,6 @@ from typing import Literal, Any, List, Optional
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
-from openai import NotGiven
-from openai.types.chat.completion_create_params import ResponseFormat
 
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
@@ -37,7 +35,13 @@ class ChatRequestWrapper(abc.ABC):
 
     @property
     @abstractmethod
-    def response_format(self) -> ResponseFormat | NotGiven: ...
+    def response_format(
+        self,
+    ) -> Literal["text", "json_object", "json_schema"] | None: ...
+
+    @property
+    @abstractmethod
+    def response_json_schema(self) -> str | None: ...
 
     @abstractmethod
     def create_sse_message(

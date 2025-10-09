@@ -10,6 +10,7 @@ from typing import (
     cast,
     Optional,
     Tuple,
+    Literal,
 )
 from typing import (
     Dict,
@@ -34,11 +35,6 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
-from openai import NotGiven
-from openai.types import CompletionUsage
-from openai.types.chat.completion_create_params import ResponseFormat
-from openai.types.shared_params import ResponseFormatJSONSchema
-from openai.types.shared_params.response_format_json_schema import JSONSchema
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
@@ -294,7 +290,9 @@ class LangGraphToOpenAIConverter:
                 content=f"\n{error_message}\n",
             )
 
-        yield "data: [DONE]\n\n"
+        yield chat_request_wrapper.create_final_sse_message(
+            request_id=request_id, usage_metadata=None
+        )
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
@@ -470,13 +468,13 @@ class LangGraphToOpenAIConverter:
         :return:
         """
         json_response_requested: bool = False
-        response_format: ResponseFormat | NotGiven = (
+        response_format: Literal["text", "json_object", "json_schema"] | None = (
             chat_request_wrapper.response_format
         )
-        if isinstance(response_format, NotGiven):
+        if not response_format:
             return chat_request_wrapper, json_response_requested
 
-        match response_format.get("type", None):
+        match response_format:
             case "text":
                 return chat_request_wrapper, json_response_requested
             case "json_object":
@@ -497,11 +495,7 @@ class LangGraphToOpenAIConverter:
                 return chat_request_wrapper, json_response_requested
             case "json_schema":
                 json_response_requested = True
-                json_response_format: ResponseFormatJSONSchema = cast(
-                    ResponseFormatJSONSchema,
-                    response_format,
-                )
-                json_schema: JSONSchema | None = json_response_format.get("json_schema")
+                json_schema: str | None = chat_request_wrapper.response_json_schema
                 if json_schema is None:
                     raise ValueError(
                         "json_schema should be specified in response_format if type is json_schema"
@@ -522,9 +516,7 @@ class LangGraphToOpenAIConverter:
                 chat_request_wrapper.append_message(message=json_schema_system_message)
                 return chat_request_wrapper, json_response_requested
             case _:
-                raise ValueError(
-                    f"Unexpected response format type: {response_format.get('type', None)}"
-                )
+                raise ValueError(f"Unexpected response format type: {response_format}")
 
     async def get_streaming_response_async(
         self,
@@ -776,26 +768,6 @@ class LangGraphToOpenAIConverter:
             checkpointer=checkpointer,
         )
         return compiled_state_graph
-
-    @staticmethod
-    def add_completion_usage(
-        *, original: CompletionUsage, new_one: CompletionUsage
-    ) -> CompletionUsage:
-        """
-        Add completion usage metadata.
-
-        Args:
-            original: The original completion usage metadata.
-            new_one: The new completion usage metadata.
-
-        Returns:
-            The completion usage metadata.
-        """
-        return CompletionUsage(
-            prompt_tokens=original.prompt_tokens + new_one.prompt_tokens,
-            completion_tokens=original.completion_tokens + new_one.completion_tokens,
-            total_tokens=original.total_tokens + new_one.total_tokens,
-        )
 
     @staticmethod
     def create_state(

@@ -2,11 +2,6 @@ from typing import Literal, Union, override, Optional, List, Any
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
-from openai import NotGiven
-from openai.types.shared_params.response_format_json_object import (
-    ResponseFormatJSONObject,
-)
-from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.responses import (
     ResponseInputParam,
     EasyInputMessageParam,
@@ -79,10 +74,13 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
 
     @override
     @property
-    def response_format(self) -> ResponseFormat | NotGiven:
-        return ResponseFormatJSONObject(
-            type="json_object"
-        )  # in case of ResponsesRequest, we always use JSON object format
+    def response_format(self) -> Literal["text", "json_object", "json_schema"] | None:
+        return "json_object"  # in case of ResponsesRequest, we always use JSON object format
+
+    @override
+    @property
+    def response_json_schema(self) -> str | None:
+        return None  # Not applicable for ResponsesRequest
 
     @override
     def create_sse_message(

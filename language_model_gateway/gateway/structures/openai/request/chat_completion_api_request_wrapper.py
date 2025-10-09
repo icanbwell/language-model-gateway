@@ -20,7 +20,10 @@ from openai.types.chat import (
 )
 from openai.types.chat.chat_completion import Choice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
-from openai.types.chat.completion_create_params import ResponseFormat
+from openai.types.shared_params.response_format_json_schema import (
+    JSONSchema,
+    ResponseFormatJSONSchema,
+)
 
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
@@ -92,13 +95,37 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
 
     @override
     @property
-    def response_format(self) -> ResponseFormat | NotGiven:
-        return cast(
-            ResponseFormat,
-            ResponseFormatJSONObject  # in case of ResponsesRequest, we always use JSON object format
-            if isinstance(self.request, ResponsesRequest)
-            else self.request.response_format,
+    def response_format(self) -> Literal["text", "json_object", "json_schema"] | None:
+        request_response_format = self.request.response_format
+        # Convert NotGiven to None for type safety
+        if request_response_format is None or isinstance(
+            request_response_format, NotGiven
+        ):
+            response_format = None
+        else:
+            response_format = request_response_format
+        if response_format is None:
+            return None
+        if isinstance(response_format, ResponseFormatJSONObject):
+            if response_format.type == "json_object":
+                return "json_object"
+            elif response_format.type == "json_schema":
+                return "json_schema"
+            else:
+                return "text"
+        return "text"
+
+    @override
+    @property
+    def response_json_schema(self) -> str | None:
+        json_response_format: ResponseFormatJSONSchema = cast(
+            ResponseFormatJSONSchema,
+            self.request.response_format,
         )
+        response_json_schema: JSONSchema | None = json_response_format.get(
+            "json_schema"
+        )
+        return str(response_json_schema) if response_json_schema else None
 
     @override
     def create_sse_message(
