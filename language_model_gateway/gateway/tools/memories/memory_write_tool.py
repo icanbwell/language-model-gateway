@@ -26,7 +26,7 @@ class MemoryWriteTool(ResilientBaseTool):
     Actions: 'create' (store new memory), 'delete' (remove memory, include MEMORY ID).
     """
 
-    name: str = "memory_write"
+    name: str = "memory_writer"
     description: str = (
         "Store, update, or delete a memory for this conversation. "
         "Use this tool whenever you need to remember something, update a memory, or delete it. "
@@ -44,7 +44,7 @@ class MemoryWriteTool(ResilientBaseTool):
         "This tool is appropriate for storing both conversational context and important user profile information"
         " that may be relevant in future interactions."
     )
-    namespace: tuple[str, ...] | str
+    namespace: tuple[str, ...] | str = ("memories", "{user_id}", "memories")
     args_schema: Type[BaseModel] = ConversationMemoryWriteInput
     actions_permitted: Optional[tuple[Literal["create", "update", "delete"], ...]] = (
         "create",
@@ -70,7 +70,7 @@ class MemoryWriteTool(ResilientBaseTool):
         memory: Optional[ConversationMemory] = None,
         action: Literal["create", "update", "delete", "search"] | None = None,
         user_id: str,
-    ) -> None:
+    ) -> str:
         logger.info(
             f"{self.__class__.__name__} _arun: memory={memory.model_dump() if memory else None}, action={action}"
         )
@@ -88,18 +88,20 @@ class MemoryWriteTool(ResilientBaseTool):
                 raise ToolException("memory and memory_id required for delete")
             key = f"memory_{memory.memory_id}"
             await store.adelete(namespace, key=key)
+            return f"Deleted memory {key}"
         elif action == "create":
             if not memory:
                 raise ToolException("memory is required for create")
             if not memory.memory_id:
                 memory.memory_id = str(uuid.uuid4())
             key = f"memory_{memory.memory_id}"
-            memory_copy = memory.model_copy()
+            memory_copy: ConversationMemory = memory.model_copy()
             await store.aput(
                 namespace,
                 key=key,
                 value=self._ensure_json_serializable(content=memory_copy),
             )
+            return f"Created memory {key}:\n{'\n'.join(memory_copy.recent_memories)}"
         else:
             raise ToolException("Unsupported action for MemoryWriteTool")
 

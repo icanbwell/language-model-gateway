@@ -1,6 +1,6 @@
 import logging
 from os import environ
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from langchain_community.tools import (
     DuckDuckGoSearchRun,
@@ -59,6 +59,18 @@ from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksS
 from language_model_gateway.gateway.tools.jira_issue_retriever import (
     JiraIssueRetriever,
 )
+from language_model_gateway.gateway.tools.memories.get_user_profile_tool import (
+    GetUserProfileTool,
+)
+from language_model_gateway.gateway.tools.memories.memory_read_tool import (
+    MemoryReadTool,
+)
+from language_model_gateway.gateway.tools.memories.memory_write_tool import (
+    MemoryWriteTool,
+)
+from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
+    StoreUserProfileTool,
+)
 from language_model_gateway.gateway.tools.network_topology_diagram_tool import (
     NetworkTopologyGeneratorTool,
 )
@@ -116,7 +128,7 @@ class ToolProvider:
         confluence_helper: ConfluenceHelper,
         databricks_helper: DatabricksHelper,
     ) -> None:
-        web_search_tool: BaseTool
+        web_search_tool: Optional[BaseTool] = None
         default_web_search_tool: str = environ.get(
             "DEFAULT_WEB_SEARCH_TOOL", "duckduckgo"
         )
@@ -203,6 +215,10 @@ class ToolProvider:
             "confluence_page_retriever": ConfluencePageRetriever(
                 confluence_helper=confluence_helper
             ),
+            "get_user_profile": GetUserProfileTool(),
+            "store_user_profile": StoreUserProfileTool(),
+            "memory_writer": MemoryWriteTool(),
+            "memory_reader": MemoryReadTool(),
             # "sql_query": QuerySQLDataBaseTool(
             #     db=SQLDatabase(
             #         engine=Engine(

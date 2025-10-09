@@ -1,4 +1,7 @@
+from typing import Optional
+
 from pydantic import BaseModel, Field, ConfigDict
+from datetime import datetime
 
 
 class ConversationMemory(BaseModel):
@@ -13,4 +16,11 @@ class ConversationMemory(BaseModel):
     name: str = Field(description="Name of the current user")
     recent_memories: list[str] = Field(
         default=[], description="list of recent memories or interactions with the user"
+    )
+    date_created: datetime = Field(description="Date when the memory was created")
+    date_updated: Optional[datetime] = Field(
+        default=None, description="Date when the memory was last updated if any"
+    )
+    user_input: str = Field(
+        description="The user's input that resulted in creating this memory entry"
     )

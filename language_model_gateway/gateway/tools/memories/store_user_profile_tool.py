@@ -7,6 +7,7 @@ from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore
 from langmem import errors
+from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field, ConfigDict
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
@@ -49,7 +50,7 @@ class StoreUserProfileTool(ResilientBaseTool):
         "4. Identify that an existing USER profile is incorrect or outdated."
     )
     args_schema: Type[BaseModel] = UserProfileInput
-    namespace: tuple[str, ...] | str
+    namespace: tuple[str, ...] | str = ("memories", "{user_id}", "user_profile")
     actions_permitted: typing.Optional[
         tuple[typing.Literal["create", "update", "delete"], ...]
     ] = ("create", "update", "delete")
@@ -88,7 +89,9 @@ class StoreUserProfileTool(ResilientBaseTool):
                 )
             user_profile.user_id = state.user_id
             store = self._get_store()
-            repo = UserProfileRepository(store, self.namespace)
+            namespacer = NamespaceTemplate(self.namespace)
+            namespace = namespacer()
+            repo = UserProfileRepository(store, namespace)
             if action == "delete":
                 await repo.delete(user_profile.user_id)
                 return f"Deleted user profile user_profile_{user_profile.user_id}"

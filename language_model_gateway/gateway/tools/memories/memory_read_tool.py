@@ -25,7 +25,7 @@ class MemoryReadTool(ResilientBaseTool):
     Action: 'search' (find memories by query or get all for user).
     """
 
-    name: str = "memory_read"
+    name: str = "memory_reader"
     description: str = (
         "Search a memory for this conversation. "
         "Use this tool whenever you need to retrieve a memory. "
@@ -39,7 +39,7 @@ class MemoryReadTool(ResilientBaseTool):
         "This tool is appropriate for storing both conversational context and important user profile information"
         " that may be relevant in future interactions."
     )
-    namespace: tuple[str, ...] | str
+    namespace: tuple[str, ...] | str = ("memories", "{user_id}", "memories")
     args_schema: Type[BaseModel] = ConversationMemoryReadInput
     actions_permitted: Optional[tuple[Literal["search"], ...]] = ("search",)
     store: Optional[BaseStore] = None

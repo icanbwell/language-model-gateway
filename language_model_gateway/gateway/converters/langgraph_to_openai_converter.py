@@ -64,18 +64,6 @@ from language_model_gateway.gateway.schema.openai.completions import (
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.tools.memories.get_user_profile_tool import (
-    GetUserProfileTool,
-)
-from language_model_gateway.gateway.tools.memories.memory_read_tool import (
-    MemoryReadTool,
-)
-from language_model_gateway.gateway.tools.memories.memory_write_tool import (
-    MemoryWriteTool,
-)
-from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
-    StoreUserProfileTool,
-)
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
@@ -953,25 +941,6 @@ class LangGraphToOpenAIConverter:
             The compiled state graph.
         """
         tool_node: Optional[ToolNode] = None
-
-        if self.environment_variables.enable_llm_memory and store is not None:
-            # Memory tools use LangGraph's BaseStore for persistence (4)
-            user_profile_namespace = ("memories", "{user_id}", "user_profile")
-            memories_namespace = ("memories", "{user_id}", "memories")
-            tools = (
-                list(tools)
-                + [
-                    StoreUserProfileTool(  # All memories saved to this tool will live within this namespace
-                        # The brackets will be populated at runtime by the configurable values
-                        namespace=user_profile_namespace,
-                        # description="Update the existing user profile (or create a new one if it doesn't exist) based on the shared information.  Create one entry per user.",
-                    ),
-                    MemoryReadTool(namespace=memories_namespace),
-                    MemoryWriteTool(namespace=memories_namespace),
-                    # create_search_memory_tool(namespace=user_profile_namespace),
-                    GetUserProfileTool(),
-                ]
-            )
 
         if len(tools) > 0:
             tool_node = StreamingToolNode(tools)

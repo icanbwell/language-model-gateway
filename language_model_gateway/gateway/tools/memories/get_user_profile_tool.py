@@ -5,6 +5,7 @@ from langchain_core.tools import ToolException
 from langgraph.config import get_store
 from langgraph.prebuilt import InjectedState
 from langgraph.store.base import BaseStore, SearchItem
+from langmem.utils import NamespaceTemplate
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.structures.user_profile import UserProfile
@@ -16,6 +17,7 @@ logger = logging.getLogger(__name__)
 class GetUserProfileTool(ResilientBaseTool):
     name: str = "get_user_profile"
     description: str = "Look up user profile for a given user."
+    namespace: tuple[str, ...] | str = ("memories", "{user_id}", "user_profile")
 
     def _run(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
         raise NotImplementedError(
@@ -32,9 +34,9 @@ class GetUserProfileTool(ResilientBaseTool):
 
             my_store: BaseStore = get_store()
 
-            user_info_items: List[SearchItem] = await my_store.asearch(
-                ("memories", user_id, "user_profile")
-            )
+            namespacer = NamespaceTemplate(self.namespace)
+            namespace = namespacer()
+            user_info_items: List[SearchItem] = await my_store.asearch(namespace)
             if not user_info_items:
                 return "Unknown user"
             user_info_value: Dict[str, Any] = user_info_items[0].value
