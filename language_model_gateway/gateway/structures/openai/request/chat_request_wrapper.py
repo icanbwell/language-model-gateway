@@ -1,9 +1,10 @@
 import abc
 from abc import abstractmethod
-from typing import Literal
+from typing import Literal, Any, List, Optional
 
+from langchain_core.messages import AnyMessage
+from langchain_core.messages.ai import UsageMetadata
 from openai import NotGiven
-from openai.types import CompletionUsage
 from openai.types.chat.completion_create_params import ResponseFormat
 
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
@@ -44,5 +45,22 @@ class ChatRequestWrapper(abc.ABC):
         *,
         request_id: str,
         content: str | None,
-        completion_usage_metadata: CompletionUsage,
+        usage_metadata: UsageMetadata | None,
     ) -> str: ...
+
+    @abstractmethod
+    def create_final_sse_message(
+        self,
+        *,
+        request_id: str,
+        usage_metadata: UsageMetadata | None,
+    ) -> str: ...
+
+    @abstractmethod
+    def create_non_streaming_response(
+        self,
+        *,
+        request_id: str,
+        json_output_requested: Optional[bool],
+        responses: List[AnyMessage],
+    ) -> dict[str, Any]: ...

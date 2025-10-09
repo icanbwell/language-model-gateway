@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import re
-import time
 import traceback
 from typing import (
     Any,
@@ -22,14 +21,12 @@ import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
 from langchain_core.language_models import BaseChatModel
+from langchain_core.messages import AIMessageChunk
 from langchain_core.messages import (
-    AIMessage,
     AnyMessage,
     ToolMessage,
     BaseMessage,
 )
-from langchain_core.messages import AIMessageChunk
-from langchain_core.messages.ai import UsageMetadata
 from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
 from langchain_core.tools import BaseTool
@@ -39,11 +36,6 @@ from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
 from openai import NotGiven
 from openai.types import CompletionUsage
-from openai.types.chat import (
-    ChatCompletion,
-    ChatCompletionMessage,
-)
-from openai.types.chat.chat_completion import Choice
 from openai.types.chat.completion_create_params import ResponseFormat
 from openai.types.shared_params import ResponseFormatJSONSchema
 from openai.types.shared_params.response_format_json_schema import JSONSchema
@@ -63,13 +55,11 @@ from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
-    langchain_to_chat_message,
     convert_message_content_to_string,
 )
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
-from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
@@ -161,11 +151,6 @@ class LangGraphToOpenAIConverter:
                             # print(f"chunk: {chunk}")
 
                             usage_metadata = chunk.usage_metadata
-                            completion_usage_metadata = (
-                                self.convert_usage_meta_data_to_openai(
-                                    usages=[usage_metadata] if usage_metadata else []
-                                )
-                            )
 
                             content_text: str = convert_message_content_to_string(
                                 content
@@ -186,7 +171,7 @@ class LangGraphToOpenAIConverter:
                                 yield chat_request_wrapper.create_sse_message(
                                     content=content_text,
                                     request_id=request_id,
-                                    completion_usage_metadata=completion_usage_metadata,
+                                    usage_metadata=usage_metadata,
                                 )
 
                     case "on_chain_end":
@@ -200,16 +185,10 @@ class LangGraphToOpenAIConverter:
                             and isinstance(output, dict)
                             and output.get("usage_metadata")
                         ):
-                            completion_usage_metadata = (
-                                self.convert_usage_meta_data_to_openai(
-                                    usages=[output["usage_metadata"]]
-                                )
-                            )
-
                             # Handle the end of the chain event
                             yield chat_request_wrapper.create_sse_message(
                                 request_id=request_id,
-                                completion_usage_metadata=completion_usage_metadata,
+                                usage_metadata=output["usage_metadata"],
                                 content=None,
                             )
                     case "on_tool_start":
@@ -236,11 +215,7 @@ class LangGraphToOpenAIConverter:
                             )
                             yield chat_request_wrapper.create_sse_message(
                                 request_id=request_id,
-                                completion_usage_metadata=CompletionUsage(
-                                    prompt_tokens=0,
-                                    completion_tokens=0,
-                                    total_tokens=0,
-                                ),
+                                usage_metadata=None,
                                 content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
                             )
 
@@ -293,11 +268,7 @@ class LangGraphToOpenAIConverter:
                                 )
                                 yield chat_request_wrapper.create_sse_message(
                                     request_id=request_id,
-                                    completion_usage_metadata=CompletionUsage(
-                                        prompt_tokens=0,
-                                        completion_tokens=0,
-                                        total_tokens=0,
-                                    ),
+                                    usage_metadata=None,
                                     content=tool_progress_message,
                                 )
                     case _:
@@ -308,12 +279,8 @@ class LangGraphToOpenAIConverter:
             message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
             yield chat_request_wrapper.create_sse_message(
                 request_id=request_id,
-                completion_usage_metadata=CompletionUsage(
-                    prompt_tokens=0,
-                    completion_tokens=0,
-                    total_tokens=0,
-                ),
-                content=f"\n{message}\n",
+                usage_metadata=None,
+                content=message,
             )
         except Exception as e:
             tb = traceback.format_exc()
@@ -323,11 +290,7 @@ class LangGraphToOpenAIConverter:
             error_message = f"Error: {e}\nTraceback:\n{tb}"
             yield chat_request_wrapper.create_sse_message(
                 request_id=request_id,
-                completion_usage_metadata=CompletionUsage(
-                    prompt_tokens=0,
-                    completion_tokens=0,
-                    total_tokens=0,
-                ),
+                usage_metadata=None,
                 content=f"\n{error_message}\n",
             )
 
@@ -420,64 +383,18 @@ class LangGraphToOpenAIConverter:
                     system_messages=system_messages,
                     request_information=request_information,
                 )
-                # add usage metadata from each message into a total usage metadata
-                total_usage_metadata: CompletionUsage = (
-                    self.convert_usage_meta_data_to_openai(
-                        usages=[
-                            m.usage_metadata
-                            for m in responses
-                            if hasattr(m, "usage_metadata") and m.usage_metadata
-                        ]
+
+                content_json: Dict[str, Any] = (
+                    chat_request_wrapper.create_non_streaming_response(
+                        request_id=request_information.request_id,
+                        responses=responses,
+                        json_output_requested=json_output_requested,
                     )
                 )
+                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and content_json:
+                    logger.info(f"Returning content: {content_json}")
 
-                output_messages_raw: List[ChatCompletionMessage | None] = [
-                    langchain_to_chat_message(m)
-                    for m in responses
-                    if isinstance(m, AIMessage) or isinstance(m, ToolMessage)
-                ]
-                output_messages: List[ChatCompletionMessage] = [
-                    m for m in output_messages_raw if m is not None
-                ]
-
-                choices: List[Choice] = [
-                    Choice(index=i, message=m, finish_reason="stop")
-                    for i, m in enumerate(output_messages)
-                ]
-
-                choices_text = "\n".join([f"{c.message.content}" for c in choices])
-
-                if json_output_requested:
-                    # extract the json content from response and just return that
-                    json_content_raw: Dict[str, Any] | List[Dict[str, Any]] | str = (
-                        (JsonExtractor.extract_structured_output(text=choices_text))
-                        if choices_text
-                        else choices_text
-                    )
-                    json_content: str = json.dumps(json_content_raw)
-                    choices = [
-                        Choice(
-                            index=i,
-                            message=ChatCompletionMessage(
-                                content=json_content, role="assistant"
-                            ),
-                            finish_reason="stop",
-                        )
-                        for i in range(1)
-                    ]
-
-                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and choices_text:
-                    logger.info(f"Returning content: {choices_text}")
-
-                chat_response: ChatCompletion = ChatCompletion(
-                    id=request_information.request_id,
-                    model=chat_request_wrapper.model,
-                    choices=choices,
-                    usage=total_usage_metadata,
-                    created=int(time.time()),
-                    object="chat.completion",
-                )
-                return JSONResponse(content=chat_response.model_dump())
+                return JSONResponse(content=content_json)
             except* TokenRetrievalError as e:
                 logger.exception(e, stack_info=True)
                 first_exception = e.exceptions[0]
@@ -608,20 +525,6 @@ class LangGraphToOpenAIConverter:
                 raise ValueError(
                     f"Unexpected response format type: {response_format.get('type', None)}"
                 )
-
-    # noinspection PyMethodMayBeStatic
-    def convert_usage_meta_data_to_openai(
-        self, *, usages: List[UsageMetadata]
-    ) -> CompletionUsage:
-        total_usage_metadata: CompletionUsage = CompletionUsage(
-            prompt_tokens=0, completion_tokens=0, total_tokens=0
-        )
-        usage_metadata: UsageMetadata
-        for usage_metadata in usages:
-            total_usage_metadata.prompt_tokens += usage_metadata["input_tokens"]
-            total_usage_metadata.completion_tokens += usage_metadata["output_tokens"]
-            total_usage_metadata.total_tokens += usage_metadata["total_tokens"]
-        return total_usage_metadata
 
     async def get_streaming_response_async(
         self,
@@ -839,8 +742,8 @@ class LangGraphToOpenAIConverter:
         )
         return output_messages
 
+    @staticmethod
     async def create_graph_for_llm_async(
-        self,
         *,
         llm: BaseChatModel,
         tools: Sequence[BaseTool],

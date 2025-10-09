@@ -1,7 +1,8 @@
-from typing import Literal, Union, override
+from typing import Literal, Union, override, Optional, List, Any
 
+from langchain_core.messages import AnyMessage
+from langchain_core.messages.ai import UsageMetadata
 from openai import NotGiven
-from openai.types import CompletionUsage
 from openai.types.shared_params.response_format_json_object import (
     ResponseFormatJSONObject,
 )
@@ -89,6 +90,24 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         *,
         request_id: str,
         content: str | None,
-        completion_usage_metadata: CompletionUsage,
+        usage_metadata: UsageMetadata | None,
     ) -> str:
-        return "data: TODO: \n\n"
+        # TODO: Implement this
+        raise NotImplementedError()
+        # return "data: TODO: \n\n"
+
+    @override
+    def create_final_sse_message(
+        self, *, request_id: str, usage_metadata: UsageMetadata | None
+    ) -> str:
+        raise NotImplementedError()
+
+    @override
+    def create_non_streaming_response(
+        self,
+        *,
+        request_id: str,
+        json_output_requested: Optional[bool],
+        responses: List[AnyMessage],
+    ) -> dict[str, Any]:
+        raise NotImplementedError()
