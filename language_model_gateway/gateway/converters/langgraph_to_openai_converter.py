@@ -21,7 +21,10 @@ from typing import (
 import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
-from langchain_community.adapters.openai import convert_openai_messages
+from langchain_community.adapters.openai import (
+    convert_openai_messages,
+    convert_message_to_dict,
+)
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AIMessage,
@@ -793,17 +796,26 @@ class LangGraphToOpenAIConverter:
                 "user_id": request_information.user_id,
             }
         }
-        event: StandardStreamEvent | CustomStreamEvent
-        async for event in compiled_state_graph.astream_events(
-            input=self.create_state(
-                chat_request=request,
-                messages=messages,
-                request_information=request_information,
-            ),
-            version="v2",
-            config=config,
-        ):
-            yield event
+        try:
+            event: StandardStreamEvent | CustomStreamEvent
+            async for event in compiled_state_graph.astream_events(
+                input=self.create_state(
+                    chat_request=request,
+                    messages=messages,
+                    request_information=request_information,
+                ),
+                version="v2",
+                config=config,
+            ):
+                yield event
+        except Exception as e:
+            messages_dict: List[dict[str, Any]] = [
+                convert_message_to_dict(m) for m in messages
+            ]
+            logger.exception(
+                f"Exception occurred: {e}. Messages: {messages_dict}", stack_info=True
+            )
+            raise
 
     # noinspection SpellCheckingInspection
     async def ainvoke(

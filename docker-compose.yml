@@ -8,7 +8,7 @@ services:
     environment:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
-      LOG_LEVEL: INFO
+      LOG_LEVEL: DEBUG
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
@@ -35,7 +35,7 @@ services:
       LOG_INPUT_AND_OUTPUT: 1
       RETURN_RAW_TOOL_OUTPUT: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
-      DEFAULT_MODEL_NAME: "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+      DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
       GITHUB_MAXIMUM_REPOS: "100"
       GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO: "100"
@@ -75,6 +75,8 @@ services:
       MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       # for LLM memory
+      ENABLE_LLM_STORE: 'true'
+      ENABLE_LLM_CHECKPOINTER: 'true'
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"
@@ -87,6 +89,9 @@ services:
       TOOL_OUTPUT_TOKEN_LIMIT: 100000
       # Control logging by code area
       HTTP_TRACING_LOG_LEVEL: 'DEBUG'
+      # configures retry behavior for AWS SDK calls
+      AWS_BEDROCK_MAX_RETRIES: '1'
+      AWS_BEDROCK_RETRY_MODE: 'standard'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:

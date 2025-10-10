@@ -1,10 +1,13 @@
 import logging
 import os
-from typing import List, Any, Dict
+from typing import List, Any, Dict, cast, Literal
 
+import boto3
+from boto3 import Session
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_openai import ChatOpenAI
+from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
 
 from language_model_gateway.configs.config_schema import (
     ModelConfig,
@@ -12,6 +15,7 @@ from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from botocore.config import Config as BotoConfig
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -60,11 +64,36 @@ class ModelFactory:
         if model_vendor == "openai":
             llm = ChatOpenAI(**model_parameters_dict)
         elif model_config.provider == "bedrock":
+            retries: dict[str, Literal["legacy", "standard", "adaptive"] | int] = {
+                "max_attempts": int(os.getenv("AWS_BEDROCK_MAX_RETRIES", "1")),
+                "mode": cast(
+                    Literal["legacy", "standard", "adaptive"],
+                    os.getenv("AWS_BEDROCK_RETRY_MODE", "standard"),
+                ),
+            }
+            # Specify retries and timeouts for boto3 client
+            # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/config.html
+            config = BotoConfig(
+                retries=retries,  # type: ignore[arg-type]
+                connect_timeout=5,
+                read_timeout=20,
+            )
+            aws_credentials_profile = os.environ.get("AWS_CREDENTIALS_PROFILE")
+            aws_region_name = os.environ.get("AWS_REGION", "us-east-1")
+            session: Session = boto3.Session(
+                profile_name=aws_credentials_profile,
+                region_name=aws_region_name,
+            )
+            bedrock_client: BedrockRuntimeClient = session.client(
+                service_name="bedrock-runtime",
+                config=config,
+                region_name=aws_region_name,
+            )
             llm = ChatBedrockConverse(
-                client=None,
+                client=bedrock_client,
                 provider="anthropic",
-                credentials_profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"),
-                region_name=os.environ.get("AWS_REGION", "us-east-1"),
+                credentials_profile_name=aws_credentials_profile,
+                region_name=aws_region_name,
                 # Setting temperature to 0 for deterministic results
                 **model_parameters_dict,
             )

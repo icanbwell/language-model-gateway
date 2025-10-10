@@ -1,7 +1,9 @@
 import json
+import os
 from typing import List
 
 import httpx
+import pytest
 from httpx import Response
 from openai import AsyncOpenAI, AsyncStream
 from openai.types import CompletionUsage
@@ -25,6 +27,9 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 
 
+@pytest.mark.httpx_mock(
+    should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
+)
 async def test_chat_completions_streaming(
     async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
 ) -> None:
@@ -92,8 +97,6 @@ async def test_chat_completions_streaming(
             ),
             url="http://host.docker.internal:5055/api/v1/chat/completions",
         )
-    else:
-        return  # this test only works with AI Agent
 
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache

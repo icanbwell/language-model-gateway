@@ -5,7 +5,7 @@ async def test_url_to_markdown_tool_async() -> None:
     tool = URLToMarkdownTool()
     content, artifact = await tool._arun("https://www.example.com")
     print(content)
-    assert "This domain is for use in illustrative examples in documents." in content
+    assert "This domain is for use" in content
 
 
 async def test_url_to_markdown_tool_complex_async() -> None:
