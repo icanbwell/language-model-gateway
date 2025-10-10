@@ -812,7 +812,7 @@ class LangGraphToOpenAIConverter:
             messages_dict: List[dict[str, Any]] = [
                 convert_message_to_dict(m) for m in messages
             ]
-            logger.exception(e, messages_dict, stack_info=True)
+            logger.exception(f"Exception occurred: {e}. Messages: {messages_dict}", stack_info=True)
             raise
 
     # noinspection SpellCheckingInspection
