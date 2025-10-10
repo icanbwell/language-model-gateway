@@ -21,7 +21,10 @@ from typing import (
 import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
-from langchain_community.adapters.openai import convert_openai_messages
+from langchain_community.adapters.openai import (
+    convert_openai_messages,
+    convert_message_to_dict,
+)
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AIMessage,
@@ -124,6 +127,10 @@ class LangGraphToOpenAIConverter:
             The streaming response as a string.
         """
         request_id = request_information.request_id
+
+        logger.debug(f"request_id: {request_id}")
+        my_messages_list: List[str] = [str(m.get("content")) for m in messages]
+        logger.debug(f"messages_list: {my_messages_list}")
 
         try:
             # Process streamed events from the graph and yield messages over the SSE stream.
@@ -375,6 +382,8 @@ class LangGraphToOpenAIConverter:
                 f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
             )
             error_message = f"Error: {e}\nTraceback:\n{tb}"
+            error_message += f", msg_count={len(messages)}"
+            error_message += f", messages={my_messages_list}"
             chat_stream_response = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
@@ -793,17 +802,24 @@ class LangGraphToOpenAIConverter:
                 "user_id": request_information.user_id,
             }
         }
-        event: StandardStreamEvent | CustomStreamEvent
-        async for event in compiled_state_graph.astream_events(
-            input=self.create_state(
-                chat_request=request,
-                messages=messages,
-                request_information=request_information,
-            ),
-            version="v2",
-            config=config,
-        ):
-            yield event
+        try:
+            event: StandardStreamEvent | CustomStreamEvent
+            async for event in compiled_state_graph.astream_events(
+                input=self.create_state(
+                    chat_request=request,
+                    messages=messages,
+                    request_information=request_information,
+                ),
+                version="v2",
+                config=config,
+            ):
+                yield event
+        except Exception as e:
+            messages_dict: List[dict[str, Any]] = [
+                convert_message_to_dict(m) for m in messages
+            ]
+            logger.exception(e, messages_dict, stack_info=True)
+            raise
 
     # noinspection SpellCheckingInspection
     async def ainvoke(
