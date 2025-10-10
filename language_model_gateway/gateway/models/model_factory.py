@@ -79,8 +79,6 @@ class ModelFactory:
                 read_timeout=20,
             )
             aws_credentials_profile = os.environ.get("AWS_CREDENTIALS_PROFILE")
-            if aws_credentials_profile is None:
-                raise ValueError("AWS_CREDENTIALS_PROFILE must be set for AWS Bedrock")
             aws_region_name = os.environ.get("AWS_REGION", "us-east-1")
             session: Session = boto3.Session(
                 profile_name=aws_credentials_profile,
