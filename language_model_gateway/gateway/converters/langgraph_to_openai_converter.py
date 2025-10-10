@@ -41,7 +41,7 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
-from openai import NotGiven, NOT_GIVEN
+from openai import NotGiven, NOT_GIVEN, BadRequestError
 from openai.types import CompletionUsage
 from openai.types.chat import (
     ChatCompletionChunk,
@@ -376,11 +376,69 @@ class LangGraphToOpenAIConverter:
                 object="chat.completion.chunk",
             )
             yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+        except BadRequestError as e:
+            tb = traceback.format_exc()
+            logger.exception(e, stack_info=True)
+            exception_message: str = (
+                f"Bad request error: {e}.  Please check your request and try again."
+            )
+            exception_message += f"\n{e.response.request.content!r}\n"
+            error_message = f"Error: {e}\n{exception_message}\nTraceback:\n{tb}"
+            error_message += f", msg_count={len(messages)}"
+            error_message += f", messages={my_messages_list}"
+            chat_stream_response = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[
+                    ChunkChoice(
+                        index=0,
+                        delta=ChoiceDelta(
+                            role="assistant",
+                            content=f"\n{error_message}\n",
+                        ),
+                    )
+                ],
+                usage=CompletionUsage(
+                    prompt_tokens=0, completion_tokens=0, total_tokens=0
+                ),
+                object="chat.completion.chunk",
+            )
+            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+
+        except botocore.exceptions.ClientError as e:
+            # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/error-handling.html
+            # https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception
+            tb = traceback.format_exc()
+            logger.exception(e, stack_info=True)
+            exception_message2: str = f"AWS error: {e}."
+            error_message = f"Error: {e}\n{exception_message2}\nTraceback:\n{tb}"
+            error_message += f", msg_count={len(messages)}"
+            error_message += f", messages={my_messages_list}"
+            chat_stream_response = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[
+                    ChunkChoice(
+                        index=0,
+                        delta=ChoiceDelta(
+                            role="assistant",
+                            content=f"\n{error_message}\n",
+                        ),
+                    )
+                ],
+                usage=CompletionUsage(
+                    prompt_tokens=0, completion_tokens=0, total_tokens=0
+                ),
+                object="chat.completion.chunk",
+            )
+            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+
         except Exception as e:
             tb = traceback.format_exc()
-            logger.error(
-                f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
-            )
+            logger.exception(e, stack_info=True)
+
             error_message = f"Error: {e}\nTraceback:\n{tb}"
             error_message += f", msg_count={len(messages)}"
             error_message += f", messages={my_messages_list}"
