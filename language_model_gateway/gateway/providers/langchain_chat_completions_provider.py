@@ -1,6 +1,6 @@
 import datetime
 import logging
-import random
+import uuid
 from typing import Dict, Any, Sequence, List, AsyncGenerator, ContextManager
 
 from langchain_core.language_models import BaseChatModel
@@ -186,7 +186,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 if self.environment_variables.enable_llm_checkpointer
                 else None,
             )
-            request_id = random.randint(1, 1000)
+            request_id: uuid.UUID = uuid.uuid4()
 
             conversation_thread_id: str | None = headers.get("X-Chat-Id".lower())
 
@@ -200,7 +200,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     user_email=auth_information.email,
                     user_name=auth_information.user_name,
                     request_id=str(request_id),
-                    conversation_thread_id=conversation_thread_id or str(request_id),
+                    conversation_thread_id=conversation_thread_id
+                    if conversation_thread_id
+                    else str(request_id),
                     headers=headers,
                 ),
             )
