@@ -140,7 +140,8 @@ fastmcp = ">=2.10.5"
 # respx is a Python library for mocking HTTP requests in tests
 respx = ">=0.22.0"
 # types-boto3 provides type hints for boto3
-types-boto3 = { version = ">=1.40.0", extras = ["bedrock", "s3", "textract"] }
+types-botocore = { version = ">=1.0.2" }
+types-boto3 = { version = ">=1.40.0" }
 types-boto3-bedrock = ">=1.40.0"
 types-boto3-s3 = ">=1.40.0"
 types-boto3-textract = ">=1.40.0"

@@ -13,7 +13,7 @@ from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from botocore.config import Config as BotoConfig, _RetryDict
+from botocore.config import Config as BotoConfig
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -62,7 +62,7 @@ class ModelFactory:
         if model_vendor == "openai":
             llm = ChatOpenAI(**model_parameters_dict)
         elif model_config.provider == "bedrock":
-            retries: _RetryDict = {
+            retries: dict[str, Literal["legacy", "standard", "adaptive"] | int] = {
                 "max_attempts": int(os.getenv("AWS_BEDROCK_MAX_RETRIES", "1")),
                 "mode": cast(
                     Literal["legacy", "standard", "adaptive"],
@@ -71,7 +71,7 @@ class ModelFactory:
             }
             # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/config.html
             config = BotoConfig(
-                retries=retries,
+                retries=retries,  # type: ignore[arg-type]
                 connect_timeout=5,
                 read_timeout=20,
             )
