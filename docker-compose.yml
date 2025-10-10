@@ -75,6 +75,8 @@ services:
       MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       # for LLM memory
+      ENABLE_LLM_STORE: 'true'
+      ENABLE_LLM_CHECKPOINTER: 'true'
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"

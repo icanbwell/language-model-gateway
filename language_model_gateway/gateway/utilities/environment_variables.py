@@ -133,3 +133,11 @@ class EnvironmentVariables:
     @property
     def fake_audience(self) -> Optional[str]:
         return os.environ.get("FAKE_AUDIENCE")
+
+    @property
+    def enable_llm_store(self) -> bool:
+        return self.str2bool(os.environ.get("ENABLE_LLM_STORE", "false"))
+
+    @property
+    def enable_llm_checkpointer(self) -> bool:
+        return self.str2bool(os.environ.get("ENABLE_LLM_CHECKPOINTER", "false"))

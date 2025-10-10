@@ -1,10 +1,11 @@
 import datetime
 import logging
 import random
-from typing import Dict, Any, Sequence, List, AsyncGenerator
+from typing import Dict, Any, Sequence, List, AsyncGenerator, ContextManager
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
+from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -35,6 +36,7 @@ from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.environment_variables import (
     EnvironmentVariables,
 )
+from langgraph.store.base import BaseStore
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -163,11 +165,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Use context managers only for the duration of streaming
         # we can't use async with because we need to return the StreamingResponse
-        store_cm = self.persistence_factory.create_store(
+        store_cm: ContextManager[BaseStore] = self.persistence_factory.create_store(
             persistence_type=self.environment_variables.llm_storage_type,
         )
-        checkpointer_cm = self.persistence_factory.create_checkpointer(
-            persistence_type=self.environment_variables.llm_storage_type,
+        checkpointer_cm: ContextManager[BaseCheckpointSaver[str]] = (
+            self.persistence_factory.create_checkpointer(
+                persistence_type=self.environment_variables.llm_storage_type,
+            )
         )
         try:
             store = store_cm.__enter__()
@@ -177,8 +181,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             ] = await self.lang_graph_to_open_ai_converter.create_graph_for_llm_async(
                 llm=llm,
                 tools=tools,
-                store=store,
-                checkpointer=checkpointer,
+                store=store if self.environment_variables.enable_llm_store else None,
+                checkpointer=checkpointer
+                if self.environment_variables.enable_llm_checkpointer
+                else None,
             )
             request_id = random.randint(1, 1000)
 
