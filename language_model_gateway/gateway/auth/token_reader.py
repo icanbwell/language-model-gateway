@@ -441,7 +441,7 @@ class TokenReader:
             return None
 
     async def is_token_valid_async(self, access_token: str) -> bool:
-        """c
+        """
         Checks if the provided access token is valid (not expired and properly signed).
         Args:
             access_token (str): The JWT access token string.
