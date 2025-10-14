@@ -439,3 +439,31 @@ class TokenReader:
         except Exception as e:
             logger.error(f"Failed to extract created at from token: {e}")
             return None
+
+    async def is_token_valid_async(self, access_token: str) -> bool:
+        """
+        Checks if the provided access token is valid (not expired and properly signed).
+        Args:
+            access_token (str): The JWT access token string.
+        Returns:
+            bool: True if the token is valid, False otherwise.
+        """
+        if not access_token:
+            raise ValueError("Access token must not be empty")
+        await self.fetch_well_known_config_and_jwks_async()
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
+        try:
+            verified = jwt.decode(access_token, self.jwks, algorithms=self.algorithms)
+            exp = verified.claims.get("exp")
+            now = time.time()
+            if exp and exp < now:
+                logger.warning(f"Token has expired. Exp: {exp}, Now: {now}")
+                return False
+            return True
+        except ExpiredTokenError:
+            logger.warning("Token has expired.")
+            return False
+        except Exception as e:
+            logger.exception(f"Token is invalid: {e}")
+            return False

@@ -1,8 +1,6 @@
 import os
 from typing import Optional
 
-from moto.utilities.utils import str2bool
-
 
 class EnvironmentVariables:
     @property
@@ -81,7 +79,7 @@ class EnvironmentVariables:
 
     @property
     def mongo_db_cache_disable_delete(self) -> Optional[bool]:
-        return str2bool(os.environ.get("MONGO_DB_AUTH_CACHE_DISABLE_DELETE"))
+        return self.str2bool(os.environ.get("MONGO_DB_AUTH_CACHE_DISABLE_DELETE"))
 
     @property
     def tool_output_token_limit(self) -> Optional[int]:
