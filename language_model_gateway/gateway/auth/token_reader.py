@@ -448,9 +448,11 @@ class TokenReader:
         Returns:
             bool: True if the token is valid, False otherwise.
         """
-        assert access_token, "Access token must not be empty"
+        if not access_token:
+            raise ValueError("Access token must not be empty")
         await self.fetch_well_known_config_and_jwks_async()
-        assert self.jwks, "JWKS must be fetched before verifying tokens"
+        if not self.jwks:
+            raise RuntimeError("JWKS must be fetched before verifying tokens")
         try:
             verified = jwt.decode(access_token, self.jwks, algorithms=self.algorithms)
             exp = verified.claims.get("exp")
