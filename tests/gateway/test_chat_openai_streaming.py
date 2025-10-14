@@ -30,7 +30,7 @@ from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as Chunk
 @pytest.mark.httpx_mock(
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
-async def test_chat_completions_streaming(
+async def test_chat_open_ai_completions_streaming(
     async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
 ) -> None:
     test_container: SimpleContainer = await get_container_async()
