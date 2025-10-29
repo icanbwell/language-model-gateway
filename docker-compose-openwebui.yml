@@ -33,7 +33,8 @@ services:
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'
       #      DEFAULT_MODELS: "General Purpose"
-      DEFAULT_MODELS: "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+      DEFAULT_MODELS: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+      ENABLE_FOLLOW_UP_GENERATION: False
       ENABLE_MODEL_FILTER: True
       #      MODEL_FILTER_LIST: "anthropic.claude-3-5-sonnet-20240620-v1:0"
       WEBUI_DB_HOST: "open-webui-db"
@@ -82,7 +83,7 @@ services:
       # Use S3 for file storage: https://docs.openwebui.com/tutorials/s3-storage/
       STORAGE_PROVIDER: s3
       S3_ENDPOINT_URL: "https://s3.us-east-1.amazonaws.com"
-      S3_BUCKET_NAME: "bwell-dev-data-science-ue1"
+      S3_BUCKET_NAME: "bwell-services-data-science-ue1"
       S3_REGION_NAME: "us-east-1"
       S3_KEY_PREFIX: "aiden/uploads/"
       # Embeddings config
