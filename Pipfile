@@ -4,8 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# wheel is needed for building the package and installing wheels
-wheel = ">=0.45.1"
 # requests is needed for making HTTP requests
 requests = ">=2.32.3"
 # aridne is a Python library for building GraphQL APIs
@@ -18,10 +16,6 @@ boto3 = ">=1.40.21"
 botocore = ">=1.40.21"  # needed by boto3
 # uvicorn is a Python library for running ASGI applications
 uvicorn = ">=0.34.0"
-# ddtrace is a Python library for tracing requests
-ddtrace = ">=2.17.2"
-# prometheus-fastapi-instrumentator is a Python library for instrumenting FastAPI applications
-prometheus-fastapi-instrumentator = ">=7.0.0"
 # python-crfsuite is a Python library used when installing some packages
 python-crfsuite = ">=0.9.11"
 # httpx is a Python library for making HTTP requests
@@ -37,7 +31,7 @@ langchain-core = ">=1.0.0"
 # langchain-aws is a Python library for interacting with AWS services
 langchain-aws = ">=1.0.0"
 # openai is a Python library for interacting with OpenAI
-openai = ">=1.60.2"
+openai = ">=2.5.0"
 # langchain-openai is a Python library for interacting with OpenAI
 langchain-openai = ">=1.0.0"
 # langchain-community is a Python library that contains ommmunity extensions
