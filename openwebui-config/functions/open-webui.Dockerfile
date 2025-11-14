@@ -1,5 +1,5 @@
 # Stage 1: Download models
-FROM ghcr.io/open-webui/open-webui:v0.6.33-slim AS model-downloader
+FROM ghcr.io/open-webui/open-webui:v0.6.34-slim AS model-downloader
 
 RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
 RUN pip install sentence-transformers==5.1.1 faster-whisper tiktoken
@@ -9,7 +9,7 @@ RUN python -c "import os; from sentence_transformers import SentenceTransformer;
     python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])";
 
 # Stage 2: Final image
-FROM ghcr.io/open-webui/open-webui:v0.6.33-slim
+FROM ghcr.io/open-webui/open-webui:v0.6.34-slim
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 RUN pip install sentence-transformers==5.1.1 faster-whisper tiktoken
