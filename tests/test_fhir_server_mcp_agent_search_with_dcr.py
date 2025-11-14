@@ -1,9 +1,11 @@
 import asyncio
 import logging
+import os
 from typing import Any
 from urllib.parse import urljoin
 
 import httpx
+import pytest
 from fastmcp import Client
 from fastmcp.client import OAuth
 from fastmcp.client import StreamableHttpTransport
@@ -13,6 +15,10 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 async def test_fhir_server_mcp_agent_search_with_dcr() -> None:
     base_server_url: str | None = "http://localhost:5051/"
     assert base_server_url
