@@ -98,6 +98,9 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
+    # mount cache
+    - ./pip-cache:/etc/appuser/.cache/pip
+    - ./site-packages:/usr/local/lib/python3.12/site-packages
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     healthcheck:

@@ -145,3 +145,6 @@ dmypy.json
 
 /openai_models_cache/*
 !/openai_models_cache/readme.md
+
+/pip-cache/*
+/pip-cache/readme.md
