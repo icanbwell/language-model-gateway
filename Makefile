@@ -19,7 +19,7 @@ build: ## Builds the docker for dev
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
-	 build --parallel;
+	 --progress=plain build --parallel;
 
 .PHONY: up
 up: fix-script-permissions ## starts docker containers
