@@ -6,7 +6,7 @@ import os
 import uuid
 from typing import Any, Dict, cast, List
 
-from authlib.integrations.starlette_client import OAuth, StarletteOAuth2App
+from authlib.integrations.starlette_client import StarletteOAuth2App, OAuth
 from bson import ObjectId
 from fastapi import Request
 

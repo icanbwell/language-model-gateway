@@ -1,4 +1,5 @@
 import logging
+from typing import cast
 
 import requests
 from authlib.integrations.requests_client import OAuth2Session
@@ -64,4 +65,4 @@ class OAuthAuthenticator:
         except Exception as e:
             logger.exception(f"Error fetching access token: {e}")
             raise
-        return Token.create_from_token(token=token.get("access_token"))
+        return Token.create_from_token(token=cast(str, token.get("access_token")))

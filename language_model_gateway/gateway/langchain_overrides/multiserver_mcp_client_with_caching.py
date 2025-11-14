@@ -6,7 +6,7 @@ from uuid import UUID, uuid4
 from httpx import HTTPStatusError, ConnectError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.sessions import Connection
+from langchain_mcp_adapters.sessions import Connection, StreamableHttpConnection
 from langchain_mcp_adapters.sessions import create_session
 
 # noinspection PyProtectedMember
@@ -43,7 +43,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
-class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[misc]
+class MultiServerMCPClientWithCaching(MultiServerMCPClient):
     """A MultiServerMCPClient that caches tool metadata to avoid repeated calls to the MCP server.
 
     This class extends the MultiServerMCPClient to cache the metadata of tools
@@ -118,7 +118,9 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 if server_name not in self.connections:
                     msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
                     raise ValueError(msg)
-                connection_for_server = self.connections[server_name]
+                connection_for_server: StreamableHttpConnection = cast(
+                    StreamableHttpConnection, self.connections[server_name]
+                )
                 if connection_for_server["url"] not in cache:
                     cache[
                         connection_for_server["url"]
@@ -135,7 +137,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         f"Tools for connection {connection_for_server['url']} are already cached"
                     )
             else:
-                for connection in self.connections.values():
+                connection: StreamableHttpConnection
+                for connection in [
+                    cast(StreamableHttpConnection, c) for c in self.connections.values()
+                ]:
                     # if the tools for this connection are already cached, skip loading them
                     if connection["url"] not in cache:
                         cache[
@@ -201,7 +206,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
 
             # create LangChain tools from the loaded MCP tools
             all_tools: List[BaseTool] = []
-            for connection in self.connections.values():
+            connection: StreamableHttpConnection
+            for connection in [
+                cast(StreamableHttpConnection, c) for c in self.connections.values()
+            ]:
                 tools_for_connection: List[Tool] = cache[connection["url"]]
                 all_tools.extend(
                     self.create_tools_from_list(
@@ -389,18 +397,13 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 # If a session is not provided, we will create one on the fly
                 async with create_session(connection) as tool_session:
                     await tool_session.initialize()
-                    call_tool_result = await cast(
-                        "ClientSession", tool_session
-                    ).call_tool(
+                    call_tool_result = await tool_session.call_tool(
                         tool.name,
                         arguments,
                     )
             else:
                 call_tool_result = await session.call_tool(tool.name, arguments)
-            return cast(
-                tuple[str | list[str], list[NonTextContent] | None],
-                _convert_call_tool_result(call_tool_result),
-            )
+            return _convert_call_tool_result(call_tool_result)
 
         return StructuredToolWithOutputLimits(
             name=tool.name,
