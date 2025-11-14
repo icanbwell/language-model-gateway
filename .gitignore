@@ -143,8 +143,5 @@ dmypy.json
 /letsencrypt/*
 /keycloak-config/public_key.json
 
-/openai_models_cache/*
-!/openai_models_cache/readme.md
-
-/pip-cache/*
-/pip-cache/readme.md
+/caches/*
+!/caches/**openai_models_cache/readme.md

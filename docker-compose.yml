@@ -99,8 +99,8 @@ services:
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
     # mount cache
-    - ./pip-cache:/etc/appuser/.cache/pip
-    - ./pip-virtualenvs:/etc/appuser/.local/share/virtualenvs
+#    - ./caches/pip:/etc/appuser/.cache/pip
+#    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     healthcheck:
