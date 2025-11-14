@@ -99,11 +99,13 @@ ddgs = ">=8.1.1"
 # langmem is a Python library for managing language model memory
 langmem = ">=0.0.29"
 # langgraph-checkpoint is a Python library for working with checkpoints in LangGraph
-langgraph-checkpoint = ">=2.1.2"
+langgraph-checkpoint = ">=3.0.0"
 # langgraph-checkpoint-mongodb is a Python library for working with MongoDB checkpoints in LangGraph
 langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
+# oidcauthlib is a Python library for OpenID Connect authentication
+oidcauthlib = ">=0.0.10"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -136,7 +138,7 @@ ruff = ">=0.11.5"
 # pytest-cov is needed for measuring test coverage
 pytest-cov = ">=6.1.1"
 # for creating the MCP client to test
-fastmcp = ">=2.10.5"
+fastmcp = ">=2.13.0"
 # respx is a Python library for mocking HTTP requests in tests
 respx = ">=0.22.0"
 # types-boto3 provides type hints for boto3
