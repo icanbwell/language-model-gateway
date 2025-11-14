@@ -1,12 +1,12 @@
 import os
-from typing import Dict, Any
 
 import httpx
 import pytest
 import respx
 from fastapi.testclient import TestClient
 from httpx import Response
-from authlib.jose import jwk, jwt
+from joserfc import jwt
+from joserfc.jwk import RSAKey
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from respx import MockRouter
@@ -55,7 +55,7 @@ def test_callback_route() -> None:
         mock = respx.mock().__enter__()
 
     try:
-        jwk_private: Dict[str, Any] | None = None
+        rsa_key: RSAKey | None = None
         if mock is not None:
             # Generate RSA key pair using cryptography
             private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
@@ -69,9 +69,11 @@ def test_callback_route() -> None:
                 encoding=serialization.Encoding.PEM,
                 format=serialization.PublicFormat.SubjectPublicKeyInfo,
             )
-            # Convert to JWK using authlib
-            jwk_private = jwk.dumps(private_bytes, kty="RSA")
-            jwk_public = jwk.dumps(public_bytes, kty="RSA")
+            # Convert to JWK using joserfc
+            rsa_key = RSAKey.import_key(private_bytes)
+            jwk_public: dict[str, str | list[str]] = RSAKey.import_key(
+                public_bytes
+            ).as_dict()
             jwks = {"keys": [jwk_public]}
 
             # Mock JWKS URI to return public key
@@ -155,7 +157,9 @@ def test_callback_route() -> None:
                 "nonce": nonce,  # This should match the nonce used in the authorization request
             }
             # Sign the id_token using the private key
-            id_token = jwt.encode({"alg": "RS256"}, claims, jwk_private).decode()
+            # joserfc jwt.encode() returns str directly
+            assert rsa_key is not None, "RSA key must be generated for signing"
+            id_token = jwt.encode({"alg": "RS256"}, claims, rsa_key)
 
             # Mock token endpoint to return signed id_token
             mock.post(
