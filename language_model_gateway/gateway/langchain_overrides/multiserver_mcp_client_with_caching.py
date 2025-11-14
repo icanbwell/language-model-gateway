@@ -401,7 +401,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                         tool.name,
                         arguments,
                     )
-            else:
+            elif session is not None:
                 call_tool_result = await session.call_tool(tool.name, arguments)
             return _convert_call_tool_result(call_tool_result)
 

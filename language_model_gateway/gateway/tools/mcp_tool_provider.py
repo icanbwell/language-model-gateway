@@ -188,8 +188,9 @@ class MCPToolProvider:
                                 )
 
                         # add the Authorization header to the mcp_tool_config headers
+                        existing_headers = mcp_tool_config.get("headers") or {}
                         mcp_tool_config["headers"] = {
-                            **mcp_tool_config.get("headers", {}),
+                            **existing_headers,
                             "Authorization": auth_header,
                         }
                     elif (
@@ -197,8 +198,9 @@ class MCPToolProvider:
                     ):  # no specific auth providers are specified for the tool
                         # just pass through the current Authorization header
                         # add the Authorization header to the mcp_tool_config headers
+                        existing_headers = mcp_tool_config.get("headers") or {}
                         mcp_tool_config["headers"] = {
-                            **mcp_tool_config.get("headers", {}),
+                            **existing_headers,
                             "Authorization": auth_header,
                         }
                 logger.debug(
