@@ -94,7 +94,7 @@ class MockChatModel(BaseChatModel):
 
     def bind_tools(
         self,
-        tools: Sequence[
+        tools: Sequence[  # ignore[type-arg]
             typing.Dict[str, Any] | type | Callable | BaseTool  # noqa: UP006
         ],
         *,

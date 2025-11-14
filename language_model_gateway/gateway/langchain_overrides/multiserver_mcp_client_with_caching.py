@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import override, List, Dict, Any, cast
+from typing import override, List, Dict, Any, cast, Optional
 from uuid import UUID, uuid4
 
 from httpx import HTTPStatusError, ConnectError
@@ -57,7 +57,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
     def __init__(
         self,
         *,
-        connections: dict[str, Connection] | None = None,
+        connections: Optional[dict[str, Connection]] = None,
         cache: McpToolsMetadataExpiringCache,
         tool_names: List[str] | None,
         tool_output_token_limit: int | None,
@@ -222,7 +222,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
     async def load_metadata_for_mcp_tools(
         *,
         session: ClientSession | None,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
         tool_names: List[str] | None,
     ) -> list[Tool]:
         """Load all available MCP tools and convert them to LangChain tools.
@@ -246,12 +246,12 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
 
         tools: List[Tool]
         try:
-            if session is None:
+            if session is None and connection is not None:
                 # If a session is not provided, we will create one on the fly
                 async with create_session(connection) as tool_session:
                     await tool_session.initialize()
                     tools = await _list_all_tools(tool_session)
-            else:
+            elif session is not None:
                 tools = await _list_all_tools(session)
         except* HTTPStatusError as exc:
             # if there is
@@ -343,7 +343,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
             else:
                 raise
         except* Exception as exc:
-            url: str = connection.get("url") if connection else "unknown"
+            url: str = cast(str, connection.get("url")) if connection else "unknown"
             if len(exc.exceptions) >= 1:
                 first_exception: Exception = exc.exceptions[0]
                 logger.error(
@@ -366,7 +366,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
         session: ClientSession | None,
         tool: MCPTool,
         *,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
         tool_output_token_limit: int | None,
         token_reducer: TokenReducer,
     ) -> BaseTool:
@@ -393,7 +393,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
         async def call_tool(
             **arguments: dict[str, Any],
         ) -> tuple[str | list[str], list[NonTextContent] | None]:
-            if session is None:
+            if session is None and connection is not None:
                 # If a session is not provided, we will create one on the fly
                 async with create_session(connection) as tool_session:
                     await tool_session.initialize()
@@ -421,7 +421,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
         *,
         tools: list[Tool],
         session: ClientSession | None = None,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
     ) -> List[BaseTool]:
         """
         Create LangChain tools from a list of MCP tools.
@@ -442,7 +442,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                 for tool in tools
             ]
         except Exception as e:
-            url: str = connection.get("url") if connection else "unknown"
+            url: str = cast(str, connection.get("url")) if connection else "unknown"
             logger.error(
                 f"Failed to convert MCP tools to LangChain tools from {url},  tools={[t.name for t in tools]}: {e}"
             )
