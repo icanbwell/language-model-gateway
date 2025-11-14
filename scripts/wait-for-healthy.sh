@@ -11,14 +11,15 @@ if [ -z "$CONTAINER_NAME" ]; then
   exit 2
 fi
 
-printf "Waiting for $CONTAINER_NAME to become healthy..."
+printf "Waiting for $CONTAINER_NAME to become healthy max_attempts: $MAX_ATTEMPTS ..."
 while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+  printf "\nAttempt %d of %d\n" "$((ATTEMPT + 1))" "$MAX_ATTEMPTS"
   STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_NAME" 2>/dev/null)
   STATE=$(docker inspect --format '{{.State.Status}}' "$CONTAINER_NAME" 2>/dev/null)
   if [ "$STATUS" = "healthy" ]; then
     echo "\n$CONTAINER_NAME is healthy."
     exit 0
-  elif [ "$STATUS" = "unhealthy" ] || [ "$STATE" = "restarting" ]; then
+  elif [ "$STATE" = "restarting" ]; then
     echo "\n========== ERROR: $CONTAINER_NAME is unhealthy or restarting =========="
     docker ps
     docker logs "$CONTAINER_NAME"
@@ -33,4 +34,3 @@ echo "\n========== ERROR: $CONTAINER_NAME did not become healthy within timeout 
 docker ps
 docker logs "$CONTAINER_NAME"
 exit 1
-
