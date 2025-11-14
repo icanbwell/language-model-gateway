@@ -61,6 +61,10 @@ from language_model_gateway.gateway.converters.my_messages_state import MyMessag
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from language_model_gateway.gateway.converters.streaming_utils import (
+    format_chat_completion_chunk_sse,
+    format_done_sse,
+)
 from language_model_gateway.gateway.schema.openai.completions import (
     ChatRequest,
 )
@@ -205,7 +209,9 @@ class LangGraphToOpenAIConverter:
                                         object="chat.completion.chunk",
                                     )
                                 )
-                                yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
+                                yield format_chat_completion_chunk_sse(
+                                    chat_model_stream_response.model_dump()
+                                )
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
                         event_dict = cast(dict[str, Any], event_object)
@@ -234,7 +240,9 @@ class LangGraphToOpenAIConverter:
                                     object="chat.completion.chunk",
                                 )
                             )
-                            yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
+                            yield format_chat_completion_chunk_sse(
+                                chat_end_stream_response.model_dump()
+                            )
                     case "on_tool_start":
                         # Handle the start of the tool event
                         event_dict = cast(dict[str, Any], event_object)
@@ -277,7 +285,9 @@ class LangGraphToOpenAIConverter:
                                 ),
                                 object="chat.completion.chunk",
                             )
-                            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+                            yield format_chat_completion_chunk_sse(
+                                chat_stream_response.model_dump()
+                            )
 
                     case "on_tool_end":
                         # Handle the end of the tool event
@@ -346,7 +356,9 @@ class LangGraphToOpenAIConverter:
                                     ),
                                     object="chat.completion.chunk",
                                 )
-                                yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+                                yield format_chat_completion_chunk_sse(
+                                    chat_stream_response.model_dump()
+                                )
                     case _:
                         # Handle other event types
                         pass
@@ -371,7 +383,7 @@ class LangGraphToOpenAIConverter:
                 ),
                 object="chat.completion.chunk",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
         except Exception as e:
             tb = traceback.format_exc()
             logger.error(
@@ -396,9 +408,9 @@ class LangGraphToOpenAIConverter:
                 ),
                 object="chat.completion.chunk",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
-        yield "data: [DONE]\n\n"
+        yield format_done_sse()
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
@@ -457,7 +469,7 @@ class LangGraphToOpenAIConverter:
 
         if chat_request.get("stream"):
             return StreamingResponse(
-                await self.get_streaming_response_async(
+                content=await self.get_streaming_response_async(
                     request=chat_request,
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,
