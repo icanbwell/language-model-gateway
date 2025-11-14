@@ -61,16 +61,7 @@ class MockChatModel(BaseChatModel):
         **kwargs: Any,
     ) -> Iterator[ChatGenerationChunk]:
         content: str = self.fn_get_response(messages=messages)
-        return iter(
-            [
-                ChatGenerationChunk(
-                    message=AIMessageChunk(
-                        content=[{"type": "text", "text": content, "index": 0}],
-                        id="run-da3c2606-4792-440a-ac66-72e0d1f6d117",
-                    )
-                )
-            ]
-        )
+        return iter([ChatGenerationChunk(message=AIMessageChunk(content=content))])
 
     async def _astream(
         self,
@@ -85,17 +76,12 @@ class MockChatModel(BaseChatModel):
         words = content.split()
 
         for i, word in enumerate(words):
-            yield ChatGenerationChunk(
-                message=AIMessageChunk(
-                    content=[{"type": "text", "text": word + " ", "index": i}],
-                    id="run-da3c2606-4792-440a-ac66-72e0d1f6d117",
-                )
-            )
+            yield ChatGenerationChunk(message=AIMessageChunk(content=word + " "))
 
     def bind_tools(
         self,
         tools: Sequence[  # ignore[type-arg]
-            typing.Dict[str, Any] | type | Callable | BaseTool  # noqa: UP006
+            typing.Dict[str, Any] | type | Callable[..., Any] | BaseTool  # noqa: UP006
         ],
         *,
         tool_choice: str | None = None,
