@@ -152,8 +152,8 @@ services:
     ports:
       - '5051:5000'
     volumes:
-#      - ./:/usr/src/mcp-fhir-agent/
-#      - ~/.config/gh:/root/.config/gh
+      - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
+      - ~/.config/gh:/root/.config/gh
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
