@@ -25,12 +25,10 @@ build: ## Builds the docker for dev
 up: fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml up -d && \
-	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1  && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
 	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
-	sh scripts/wait-for-healthy.sh language-model-gateway && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
+	sh scripts/wait-for-healthy.sh language-model-gateway || exit 1 && \
 	echo ""
 	@echo language-model-gateway Service: http://localhost:5050/graphql
 

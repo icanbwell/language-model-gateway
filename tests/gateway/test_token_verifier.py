@@ -83,6 +83,7 @@ def create_jwt_token(exp_offset: int = 60) -> str:
         "exp": int(time.time()) + exp_offset,
         "iat": int(time.time()),
         "iss": "https://fake-issuer",
+        "aud": "test-audience",
     }
     # joserfc requires key as dict for oct (symmetric) keys
     key = jwk.import_key(JWKS["keys"][0])

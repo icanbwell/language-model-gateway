@@ -51,5 +51,5 @@ async def test_chat_anthropic_image_download(async_client: httpx.AsyncClient) ->
     )
 
     # call API
-    assert response.status_code == 200
+    assert response.status_code == 200, f"Response content: {response.content!r}"
     assert response.content == b"image content"

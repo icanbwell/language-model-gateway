@@ -69,7 +69,7 @@ class ImagesRouter:
         request: Request,
         file_path: str,  # Add this parameter to capture the file path
         file_manager_factory: Annotated[
-            FileManagerFactory, Depends(Inject(FileManager))
+            FileManagerFactory, Depends(Inject(FileManagerFactory))
         ],
     ) -> Response | StreamingResponse:
         """
