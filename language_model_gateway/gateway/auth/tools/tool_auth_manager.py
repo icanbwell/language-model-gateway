@@ -168,6 +168,6 @@ class ToolAuthManager:
             refresh_token=token_cache_item.refresh_token.token,
         )
         logger.debug(f"Token response received: {token_response}")
-        return await self.create_and_cache_token_async(
+        return await self.token_exchange_manager.create_and_cache_token_async(
             token_response=token_response, token_cache_item=token_cache_item
         )

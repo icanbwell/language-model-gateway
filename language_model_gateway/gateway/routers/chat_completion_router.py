@@ -89,10 +89,11 @@ class ChatCompletionsRouter:
         chat_manager: Annotated[
             ChatCompletionManager, Depends(Inject(ChatCompletionManager))
         ],
-        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
-        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
+        auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
         environment_variables: Annotated[
-            LanguageModelGatewayEnvironmentVariables, Depends(get_environment_variables)
+            LanguageModelGatewayEnvironmentVariables,
+            Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
         ],
     ) -> StreamingResponse | JSONResponse:
         """
