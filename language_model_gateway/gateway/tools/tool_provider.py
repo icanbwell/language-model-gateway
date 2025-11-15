@@ -97,8 +97,8 @@ from language_model_gateway.gateway.tools.calculator_length_tool import (
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
@@ -122,7 +122,7 @@ class ToolProvider:
         image_generator_factory: ImageGeneratorFactory,
         file_manager_factory: FileManagerFactory,
         ocr_extractor_factory: OCRExtractorFactory,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         github_pull_request_helper: GithubPullRequestHelper,
         jira_issues_helper: JiraIssueHelper,
         confluence_helper: ConfluenceHelper,

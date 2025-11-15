@@ -3,11 +3,11 @@ from typing import (
     Optional,
     Any,
     Sequence,
-    Union,
     Callable,
     AsyncIterator,
     List,
     Iterator,
+    override,
 )
 
 from langchain_core.callbacks import (
@@ -26,10 +26,12 @@ from tests.gateway.mocks.mock_ai_message_protocol import MockAiMessageProtocol
 class MockChatModel(BaseChatModel):
     fn_get_response: MockAiMessageProtocol
 
+    @override
     @property
     def _llm_type(self) -> str:
         return "mock"
 
+    @override
     def _generate(
         self,
         messages: list[BaseMessage],
@@ -42,6 +44,7 @@ class MockChatModel(BaseChatModel):
             generations=[ChatGeneration(message=AIMessage(content=content))]
         )
 
+    @override
     async def _agenerate(
         self,
         messages: list[BaseMessage],
@@ -54,6 +57,7 @@ class MockChatModel(BaseChatModel):
             generations=[ChatGeneration(message=AIMessage(content=content))]
         )
 
+    @override
     def _stream(
         self,
         messages: List[BaseMessage],
@@ -62,17 +66,9 @@ class MockChatModel(BaseChatModel):
         **kwargs: Any,
     ) -> Iterator[ChatGenerationChunk]:
         content: str = self.fn_get_response(messages=messages)
-        return iter(
-            [
-                ChatGenerationChunk(
-                    message=AIMessageChunk(
-                        content=[{"type": "text", "text": content, "index": 0}],
-                        id="run-da3c2606-4792-440a-ac66-72e0d1f6d117",
-                    )
-                )
-            ]
-        )
+        return iter([ChatGenerationChunk(message=AIMessageChunk(content=content))])
 
+    @override
     async def _astream(
         self,
         messages: list[BaseMessage],
@@ -86,18 +82,16 @@ class MockChatModel(BaseChatModel):
         words = content.split()
 
         for i, word in enumerate(words):
-            yield ChatGenerationChunk(
-                message=AIMessageChunk(
-                    content=[{"type": "text", "text": word + " ", "index": i}],
-                    id="run-da3c2606-4792-440a-ac66-72e0d1f6d117",
-                )
-            )
+            yield ChatGenerationChunk(message=AIMessageChunk(content=word + " "))
 
+    @override
     def bind_tools(
         self,
         tools: Sequence[
-            Union[typing.Dict[str, Any], type, Callable[[], Any], BaseTool]  # noqa: UP006
+            typing.Dict[str, Any] | type | Callable[..., Any] | BaseTool  # noqa: UP006
         ],
+        *,
+        tool_choice: str | None = None,
         **kwargs: Any,
-    ) -> Runnable[LanguageModelInput, BaseMessage]:
+    ) -> Runnable[LanguageModelInput, AIMessage]:
         return self

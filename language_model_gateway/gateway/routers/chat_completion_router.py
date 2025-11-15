@@ -7,30 +7,24 @@ from typing import Annotated, Dict, Any, TypedDict, Sequence, cast
 from botocore.exceptions import TokenRetrievalError
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import params
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.gateway.api_container import (
-    get_chat_manager,
-    get_token_reader,
-    get_environment_variables,
-    get_auth_manager,
-)
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
-    AuthorizationNeededException,
-)
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.auth.models.token import Token
-from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.token_reader import TokenReader
+from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.models.auth import AuthInformation
+from oidcauthlib.auth.models.token import Token
+from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
+from oidcauthlib.container.inject import Inject
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -92,11 +86,14 @@ class ChatCompletionsRouter:
         self,
         request: Request,
         chat_request: Dict[str, Any],
-        chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
-        token_reader: Annotated[TokenReader, Depends(get_token_reader)],
-        auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
+        chat_manager: Annotated[
+            ChatCompletionManager, Depends(Inject(ChatCompletionManager))
+        ],
+        token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
+        auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
         environment_variables: Annotated[
-            EnvironmentVariables, Depends(get_environment_variables)
+            LanguageModelGatewayEnvironmentVariables,
+            Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
         ],
     ) -> StreamingResponse | JSONResponse:
         """
@@ -186,7 +183,7 @@ class ChatCompletionsRouter:
     async def read_auth_information(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         request: Request,
         token_reader: TokenReader,
         auth_manager: AuthManager,
@@ -223,19 +220,7 @@ class ChatCompletionsRouter:
                 token and token in ["bedrock", "fake-api-key"]
                 # fake-api-key and "bedrock" are special values to bypass auth for local dev and bedrock access
             ):
-                # If a fake test account is configured then try to log in via that
-                if (
-                    environment_variables.fake_user_id
-                    and environment_variables.fake_user_password
-                    and environment_variables.fake_audience
-                ):
-                    # login with the test user and use that token
-                    token_cache_item: TokenCacheItem = await auth_manager.login_and_get_access_token_with_password_async(
-                        username=environment_variables.fake_user_id,
-                        password=environment_variables.fake_user_password,
-                        audience=environment_variables.fake_audience,
-                    )
-                    token_item = token_cache_item.access_token
+                token_item = None
             elif token:
                 token_item = await token_reader.verify_token_async(token=token)
 

@@ -1,7 +1,7 @@
 import io
 import logging
 import os
-from typing import Optional, List
+from typing import Optional, List, override
 from uuid import uuid4
 
 from pypdf import PdfReader, PdfWriter
@@ -42,6 +42,7 @@ class AwsOCRExtractor(OCRExtractor):
                 f"file_manager_factory must be FileManagerFactory, got {type(self.file_manager_factory)}"
             )
 
+    @override
     async def extract_text_with_textract_async(self, pdf_bytes: bytes) -> str:
         """
         Extract text from PDF using AWS Textract, processing page by page.

@@ -1,7 +1,7 @@
 import base64
 import logging
 import os
-from typing import Literal, Tuple, Type, Optional
+from typing import Literal, Tuple, Type, Optional, override
 from uuid import uuid4
 
 from pydantic import Field, BaseModel
@@ -51,6 +51,7 @@ class ImageGeneratorTool(ResilientBaseTool):
     style: Literal["natural", "cinematic", "digital-art", "pop-art"] = "natural"
     return_embedded_image: bool = False
 
+    @override
     def _run(self, prompt: str) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).
@@ -59,6 +60,7 @@ class ImageGeneratorTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(self, prompt: str) -> Tuple[str, str]:
         """
         Asynchronous version of the tool.

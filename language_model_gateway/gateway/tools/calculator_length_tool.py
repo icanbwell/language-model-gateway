@@ -1,5 +1,5 @@
 import asyncio
-from typing import Any
+from typing import Any, override
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
@@ -22,6 +22,7 @@ class CalculatorLengthTool(ResilientBaseTool):
         "Useful for when you need to calculate the length (count) of a list of items"
     )
 
+    @override
     async def _arun(self, items: list[Any]) -> str:
         """Run the tool to calculate the length of a list of items"""
         if items is None:
@@ -32,6 +33,7 @@ class CalculatorLengthTool(ResilientBaseTool):
         logger.info("Calculated length: %d for items: %s", length, items)
         return f"The length of the provided list is: {length}"
 
+    @override
     def _run(self, items: list[Any]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(items=items))

@@ -5,9 +5,9 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 from fastapi import params
 
-from language_model_gateway.gateway.api_container import get_model_manager
 from language_model_gateway.gateway.managers.model_manager import ModelManager
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from oidcauthlib.container.inject import Inject
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -50,7 +50,7 @@ class ModelsRouter:
     async def get_models(
         self,
         request: Request,
-        model_manager: Annotated[ModelManager, Depends(get_model_manager)],
+        model_manager: Annotated[ModelManager, Depends(Inject(ModelManager))],
     ) -> Dict[str, str | List[Dict[str, str | int]]]:
         """
         Get models endpoint. model_manager is injected by FastAPI.

@@ -9,7 +9,7 @@ async def test_chat_anthropic_image_generation(async_client: httpx.AsyncClient) 
     print("")
 
     # if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-    #     test_container: SimpleContainer = await get_container_async()
+    #     test_container: IContainer = get_test_container()
     #     test_container.register(
     #         ModelFactory,
     #         lambda c: MockModelFactory(

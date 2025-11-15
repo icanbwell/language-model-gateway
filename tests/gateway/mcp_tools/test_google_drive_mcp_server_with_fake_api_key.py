@@ -10,8 +10,6 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -21,6 +19,8 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
+from oidcauthlib.container.interfaces import IContainer
+from tests.common import get_test_container
 
 
 @pytest.mark.skipif(
@@ -30,7 +30,7 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 async def test_google_drive_mcp_server_with_fake_api_key(
     async_client: httpx.AsyncClient,
 ) -> None:
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
             ModelFactory,

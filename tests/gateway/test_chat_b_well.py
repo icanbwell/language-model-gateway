@@ -16,18 +16,18 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
+from oidcauthlib.container.interfaces import IContainer
+from tests.common import get_test_container
 
 
 async def test_chat_completions_b_well(
     async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
 ) -> None:
     print("")
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         httpx_mock.add_callback(

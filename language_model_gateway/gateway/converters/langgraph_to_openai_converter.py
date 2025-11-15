@@ -61,6 +61,10 @@ from language_model_gateway.gateway.converters.my_messages_state import MyMessag
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from language_model_gateway.gateway.converters.streaming_utils import (
+    format_chat_completion_chunk_sse,
+    format_done_sse,
+)
 from language_model_gateway.gateway.schema.openai.completions import (
     ChatRequest,
 )
@@ -71,8 +75,8 @@ from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
@@ -88,11 +92,15 @@ class LangGraphToOpenAIConverter:
     def __init__(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
     ) -> None:
-        self.environment_variables: EnvironmentVariables = environment_variables
-        if not isinstance(self.environment_variables, EnvironmentVariables):
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 f"environment_variables must be EnvironmentVariables, got {type(self.environment_variables)}"
             )
@@ -205,7 +213,9 @@ class LangGraphToOpenAIConverter:
                                         object="chat.completion.chunk",
                                     )
                                 )
-                                yield f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
+                                yield format_chat_completion_chunk_sse(
+                                    chat_model_stream_response.model_dump()
+                                )
                     case "on_chain_end":
                         # print(f"===== {event_type} =====\n{event}\n")
                         event_dict = cast(dict[str, Any], event_object)
@@ -234,7 +244,9 @@ class LangGraphToOpenAIConverter:
                                     object="chat.completion.chunk",
                                 )
                             )
-                            yield f"data: {json.dumps(chat_end_stream_response.model_dump())}\n\n"
+                            yield format_chat_completion_chunk_sse(
+                                chat_end_stream_response.model_dump()
+                            )
                     case "on_tool_start":
                         # Handle the start of the tool event
                         event_dict = cast(dict[str, Any], event_object)
@@ -277,7 +289,9 @@ class LangGraphToOpenAIConverter:
                                 ),
                                 object="chat.completion.chunk",
                             )
-                            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+                            yield format_chat_completion_chunk_sse(
+                                chat_stream_response.model_dump()
+                            )
 
                     case "on_tool_end":
                         # Handle the end of the tool event
@@ -346,7 +360,9 @@ class LangGraphToOpenAIConverter:
                                     ),
                                     object="chat.completion.chunk",
                                 )
-                                yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+                                yield format_chat_completion_chunk_sse(
+                                    chat_stream_response.model_dump()
+                                )
                     case _:
                         # Handle other event types
                         pass
@@ -371,7 +387,7 @@ class LangGraphToOpenAIConverter:
                 ),
                 object="chat.completion.chunk",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
         except Exception as e:
             tb = traceback.format_exc()
             logger.error(
@@ -396,9 +412,9 @@ class LangGraphToOpenAIConverter:
                 ),
                 object="chat.completion.chunk",
             )
-            yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
-        yield "data: [DONE]\n\n"
+        yield format_done_sse()
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
@@ -457,7 +473,7 @@ class LangGraphToOpenAIConverter:
 
         if chat_request.get("stream"):
             return StreamingResponse(
-                await self.get_streaming_response_async(
+                content=await self.get_streaming_response_async(
                     request=chat_request,
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,

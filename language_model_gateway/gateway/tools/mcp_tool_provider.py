@@ -8,13 +8,14 @@ from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 
 from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.token_reader import TokenReader
+from oidcauthlib.auth.token_reader import TokenReader
+
+from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
     MultiServerMCPClientWithCaching,
 )
@@ -24,8 +25,8 @@ from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_excepti
 from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
     McpToolsMetadataExpiringCache,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
@@ -50,8 +51,8 @@ class MCPToolProvider:
         self,
         *,
         cache: McpToolsMetadataExpiringCache,
-        auth_manager: AuthManager,
-        environment_variables: EnvironmentVariables,
+        tool_auth_manager: ToolAuthManager,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
     ) -> None:
         """
@@ -65,16 +66,18 @@ class MCPToolProvider:
         if self._cache is None:
             raise ValueError("Cache must be provided")
 
-        self.auth_manager = auth_manager
-        if self.auth_manager is None:
-            raise ValueError("AuthManager must be provided")
-        if not isinstance(self.auth_manager, AuthManager):
-            raise TypeError("auth_manager must be an instance of AuthManager")
+        self.tool_auth_manager = tool_auth_manager
+        if self.tool_auth_manager is None:
+            raise ValueError("ToolAuthManager must be provided")
+        if not isinstance(self.tool_auth_manager, ToolAuthManager):
+            raise TypeError("auth_manager must be an instance of ToolAuthManager")
 
         self.environment_variables = environment_variables
         if self.environment_variables is None:
             raise ValueError("EnvironmentVariables must be provided")
-        if not isinstance(self.environment_variables, EnvironmentVariables):
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 "environment_variables must be an instance of EnvironmentVariables"
             )
@@ -158,7 +161,7 @@ class MCPToolProvider:
                         # get the appropriate token_item for this tool
                         token_item: (
                             TokenCacheItem | None
-                        ) = await self.auth_manager.get_token_for_tool_async(
+                        ) = await self.tool_auth_manager.get_token_for_tool_async(
                             auth_header=auth_header, error_message="", tool_config=tool
                         )
                         token = token_item.get_token() if token_item else None
@@ -188,8 +191,9 @@ class MCPToolProvider:
                                 )
 
                         # add the Authorization header to the mcp_tool_config headers
+                        existing_headers = mcp_tool_config.get("headers") or {}
                         mcp_tool_config["headers"] = {
-                            **mcp_tool_config.get("headers", {}),
+                            **existing_headers,
                             "Authorization": auth_header,
                         }
                     elif (
@@ -197,8 +201,9 @@ class MCPToolProvider:
                     ):  # no specific auth providers are specified for the tool
                         # just pass through the current Authorization header
                         # add the Authorization header to the mcp_tool_config headers
+                        existing_headers = mcp_tool_config.get("headers") or {}
                         mcp_tool_config["headers"] = {
-                            **mcp_tool_config.get("headers", {}),
+                            **existing_headers,
                             "Authorization": auth_header,
                         }
                 logger.debug(

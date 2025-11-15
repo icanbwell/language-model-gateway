@@ -7,16 +7,15 @@ from shutil import rmtree
 from typing import Dict, List, Optional, Any
 
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request import (
     GithubPullRequest,
@@ -30,6 +29,7 @@ from language_model_gateway.gateway.utilities.github.github_pull_request_per_con
 from language_model_gateway.gateway.utilities.github.github_pull_request_result import (
     GithubPullRequestResult,
 )
+from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
@@ -46,7 +46,7 @@ async def test_github_get_summarized_pull_requests_from_one_repo(
         rmtree(temp_folder)
     makedirs(temp_folder)
 
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     max_pull_requests = 2
     max_repos = 2
@@ -54,7 +54,8 @@ async def test_github_get_summarized_pull_requests_from_one_repo(
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
         test_container.register(
-            EnvironmentVariables, lambda c: MockEnvironmentVariables()
+            LanguageModelGatewayEnvironmentVariables,
+            lambda c: MockEnvironmentVariables(),
         )
 
         sample_content: Dict[str, Any] = {

@@ -1,16 +1,20 @@
 import logging
 from datetime import datetime, UTC
-from typing import List
+from typing import List, Any
 
-from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
-    AuthConfigReader,
-)
-from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_missing_exception import (
+from bson import ObjectId
+from oidcauthlib.auth.exceptions.authorization_bearer_token_missing_exception import (
     AuthorizationBearerTokenMissingException,
 )
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
+)
+from oidcauthlib.auth.repository.base_repository import AsyncBaseRepository
+from oidcauthlib.auth.repository.repository_factory import RepositoryFactory
+
+from language_model_gateway.configs.config_schema import AgentConfig
+from oidcauthlib.auth.config.auth_config_reader import (
+    AuthConfigReader,
 )
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
     AuthorizationTokenCacheItemExpiredException,
@@ -18,17 +22,13 @@ from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_it
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_not_found_exception import (
     AuthorizationTokenCacheItemNotFoundException,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
+
+from oidcauthlib.auth.token_reader import TokenReader
+
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.repository.base_repository import (
-    AsyncBaseRepository,
-)
-from language_model_gateway.gateway.auth.repository.repository_factory import (
-    RepositoryFactory,
-)
-from language_model_gateway.gateway.auth.token_reader import TokenReader
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -44,7 +44,7 @@ class TokenExchangeManager:
     def __init__(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reader: TokenReader,
         auth_config_reader: AuthConfigReader,
     ) -> None:
@@ -62,12 +62,16 @@ class TokenExchangeManager:
                 environment_variables=environment_variables,
             )
         )
-        self.environment_variables: EnvironmentVariables = environment_variables
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
         if self.token_repository is None:
             raise ValueError(
                 "TokenExchangeManager requires a token repository to be set up."
             )
-        if not isinstance(environment_variables, EnvironmentVariables):
+        if not isinstance(
+            environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 "TokenExchangeManager requires EnvironmentVariables instance."
             )
@@ -188,7 +192,7 @@ class TokenExchangeManager:
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token is not None else 'None'}"
                     )
                     found_cache_item = token
 
@@ -412,4 +416,146 @@ class TokenExchangeManager:
             on_update=on_update,
         )
 
+        return token_cache_item
+
+    async def create_and_cache_token_async(
+        self, *, token_response: dict[str, Any], token_cache_item: TokenCacheItem
+    ) -> TokenCacheItem:
+        """
+        Create and cache a new token from the token response.
+        Args:
+            token_response (dict): The token response containing access_token, id_token, refresh_token, etc.
+            token_cache_item (TokenCacheItem): The token cache item to update and save.
+        Returns:
+            TokenCacheItem: The updated and saved token cache item.
+        Raises:
+        """
+        access_token = token_response.get("access_token")
+        id_token = token_response.get("id_token")
+        refresh_token = token_response.get("refresh_token")
+        if not access_token or not id_token:
+            raise Exception(
+                "OIDC token refresh did not return access_token or id_token."
+            )
+
+        return await self.cache_token_async(
+            access_token=access_token,
+            id_token=id_token,
+            refresh_token=refresh_token,
+            token_cache_item=token_cache_item,
+        )
+
+    async def cache_token_async(
+        self,
+        *,
+        access_token: str | None,
+        id_token: str | None,
+        refresh_token: str | None,
+        token_cache_item: TokenCacheItem,
+    ) -> TokenCacheItem:
+        """
+        Cache the provided tokens in the token cache item and save it using the token exchange manager.
+        Args:
+            access_token (str | None): The access token to cache.
+            id_token (str | None): The ID token to cache.
+            refresh_token (str | None): The refresh token to cache.
+            token_cache_item (TokenCacheItem): The token cache item to update and save.
+        Returns:
+            TokenCacheItem: The updated and saved token cache item.
+        """
+
+        if token_cache_item is None:
+            raise ValueError("token_cache_item must not be None")
+
+        if not isinstance(token_cache_item, TokenCacheItem):
+            raise TypeError(f"TokenCacheItem must be of type {TokenCacheItem.__name__}")
+
+        token_cache_item.access_token = Token.create_from_token(token=access_token)
+        token_cache_item.id_token = Token.create_from_token(token=id_token)
+        token_cache_item.refresh_token = Token.create_from_token(token=refresh_token)
+        token_cache_item.refreshed = datetime.now(tz=UTC)
+
+        new_token_item: TokenCacheItem = await self.save_token_async(
+            token_cache_item=token_cache_item, refreshed=True
+        )
+        return new_token_item
+
+    def create_token_cache_item(
+        self,
+        *,
+        code: str | None,
+        issuer: str,
+        state_decoded: dict[str, Any],
+        token: dict[str, Any],
+        url: str | None,
+    ) -> TokenCacheItem:
+        access_token: str | None = token.get("access_token")
+        access_token_item = Token.create_from_token(token=access_token)
+
+        id_token: str | None = token.get("id_token")
+        id_token_item = Token.create_from_token(token=id_token)
+
+        refresh_token: str | None = token.get("refresh_token")
+        refresh_token_item = Token.create_from_token(token=refresh_token)
+
+        if access_token is None:
+            raise ValueError("access_token was not found in the token response")
+
+        email: str | None = (
+            token.get("userinfo", {}).get("email")
+            or (access_token_item.email if access_token_item else None)
+            or (id_token_item.email if id_token_item else None)
+        )
+        subject: str | None = (
+            token.get("userinfo", {}).get("sub")
+            or (access_token_item.subject if access_token_item else None)
+            or (id_token_item.subject if id_token_item else None)
+        )
+
+        if not email:
+            raise ValueError("email must be provided in the token")
+        if not subject:
+            raise ValueError("subject must be provided in the token")
+
+        logger.debug(f"Email received: {email}")
+        logger.debug(f"Subject received: {subject}")
+        referring_email = state_decoded.get("referring_email")
+        referring_subject = state_decoded.get("referring_subject")
+        # content = {
+        #     "token": token,
+        #     "state": state_decoded,
+        #     "code": code,
+        #     "subject": subject,
+        #     "email": email,
+        #     "issuer": issuer,
+        #     "referring_email": referring_email,
+        #     "referring_subject": referring_subject,
+        # }
+        audience = state_decoded["audience"]
+        auth_provider: str | None = (
+            self.auth_config_reader.get_provider_for_audience(audience=audience)
+            if audience
+            else "unknown"
+        )
+
+        if not referring_email:
+            raise ValueError("referring_email must be provided in the state")
+        if not referring_subject:
+            raise ValueError("referring_subject must be provided in the state")
+
+        token_cache_item: TokenCacheItem = TokenCacheItem(
+            _id=ObjectId(),
+            access_token=access_token_item,
+            id_token=id_token_item,
+            refresh_token=refresh_token_item,
+            email=email,
+            subject=subject,
+            issuer=issuer,
+            audience=audience,
+            referrer=url,
+            auth_provider=auth_provider if auth_provider else "unknown",
+            created=datetime.now(UTC),
+            referring_email=referring_email,
+            referring_subject=referring_subject,
+        )
         return token_cache_item

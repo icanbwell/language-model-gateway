@@ -8,7 +8,7 @@ from starlette.requests import Request
 from fastapi import params
 from starlette.responses import JSONResponse, StreamingResponse
 
-from language_model_gateway.gateway.api_container import get_image_generation_manager
+from oidcauthlib.container.inject import Inject
 from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
@@ -60,7 +60,7 @@ class ImageGenerationRouter:
         request: Request,
         image_generation_request: Dict[str, Any],
         model_manager: Annotated[
-            ImageGenerationManager, Depends(get_image_generation_manager)
+            ImageGenerationManager, Depends(Inject(ImageGenerationManager))
         ],
     ) -> StreamingResponse | JSONResponse:
         """

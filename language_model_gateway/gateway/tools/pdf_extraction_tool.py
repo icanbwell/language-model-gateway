@@ -1,7 +1,7 @@
 import base64
 import io
 import logging
-from typing import Type, Literal, Tuple, Optional, Dict
+from typing import Type, Literal, Tuple, Optional, Dict, override
 
 import httpx
 import pypdf
@@ -60,6 +60,7 @@ class PDFExtractionTool(ResilientBaseTool):
     ocr_extractor_factory: OCRExtractorFactory
     ocr_type: Literal["aws"] = "aws"
 
+    @override
     def _run(
         self,
         url: Optional[str] = None,
@@ -79,6 +80,7 @@ class PDFExtractionTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         url: Optional[str] = None,

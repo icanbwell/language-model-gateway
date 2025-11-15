@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, override
 import json
 import logging
 import os
@@ -8,13 +8,13 @@ from typing import Any, Dict, AsyncGenerator
 
 from httpx import Response
 from httpx_sse import aconnect_sse, ServerSentEvent
+from oidcauthlib.auth.models.auth import AuthInformation
 from openai.types.chat import (
     ChatCompletion,
 )
 from pydantic_core import ValidationError
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 
 
@@ -40,6 +40,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                 "http_client_factory must be an instance of HttpClientFactory"
             )
 
+    @override
     async def chat_completions(
         self,
         *,

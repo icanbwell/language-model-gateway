@@ -2,7 +2,7 @@ from typing import Optional, Dict
 
 from pydantic import BaseModel, ConfigDict
 
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from oidcauthlib.auth.models.auth import AuthInformation
 
 
 class RequestInformation(BaseModel):

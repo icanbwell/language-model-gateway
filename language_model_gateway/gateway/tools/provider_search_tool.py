@@ -1,7 +1,7 @@
 import os
 import logging
 
-from typing import Optional, Dict, Any, List, cast, Type, Literal, Tuple
+from typing import Optional, Dict, Any, List, cast, Type, Literal, Tuple, override
 
 import httpx
 from pydantic import BaseModel, Field
@@ -171,6 +171,7 @@ class ProviderSearchTool(ResilientBaseTool):
 
         return cast(Dict[str, Any], data["data"])
 
+    @override
     def _run(
         self,
         search: Optional[str] = None,
@@ -184,6 +185,7 @@ class ProviderSearchTool(ResilientBaseTool):
         """Synchronous execution"""
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         search: Optional[str] = None,

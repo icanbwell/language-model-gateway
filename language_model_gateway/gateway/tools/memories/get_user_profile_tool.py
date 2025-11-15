@@ -1,5 +1,5 @@
 import logging
-from typing import Annotated, List, Any, Dict
+from typing import Annotated, List, Any, Dict, override
 
 from langchain_core.tools import ToolException
 from langgraph.config import get_store
@@ -19,11 +19,13 @@ class GetUserProfileTool(ResilientBaseTool):
     description: str = "Look up user profile for a given user."
     namespace: tuple[str, ...] | str = ("memories", "{user_id}", "user_profile")
 
+    @override
     def _run(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
         raise NotImplementedError(
             "Synchronous execution is not supported. Use the asynchronous method instead."
         )
 
+    @override
     async def _arun(self, state: Annotated[MyMessagesState, InjectedState]) -> str:
         logger.info(f"GetUserProfileTool called with state: {state}")
 

@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Optional, Dict, Type, Tuple, Literal
+from typing import Optional, Dict, Type, Tuple, Literal, override
 
 import httpx
 from pydantic import BaseModel, Field
@@ -119,6 +119,7 @@ class ScrapingBeeWebScraperTool(ResilientBaseTool):
                 html_content=html_content
             )
 
+    @override
     def _run(
         self,
         url: str,
@@ -128,6 +129,7 @@ class ScrapingBeeWebScraperTool(ResilientBaseTool):
         """Synchronous run method required by LangChain"""
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         url: str,

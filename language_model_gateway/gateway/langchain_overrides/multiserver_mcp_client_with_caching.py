@@ -1,12 +1,12 @@
 import asyncio
 import logging
-from typing import override, List, Dict, Any, cast
+from typing import override, List, Dict, Any, cast, Optional
 from uuid import UUID, uuid4
 
 from httpx import HTTPStatusError, ConnectError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.sessions import Connection
+from langchain_mcp_adapters.sessions import Connection, StreamableHttpConnection
 from langchain_mcp_adapters.sessions import create_session
 
 # noinspection PyProtectedMember
@@ -43,7 +43,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 
-class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[misc]
+class MultiServerMCPClientWithCaching(MultiServerMCPClient):
     """A MultiServerMCPClient that caches tool metadata to avoid repeated calls to the MCP server.
 
     This class extends the MultiServerMCPClient to cache the metadata of tools
@@ -57,7 +57,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
     def __init__(
         self,
         *,
-        connections: dict[str, Connection] | None = None,
+        connections: Optional[dict[str, Connection]] = None,
         cache: McpToolsMetadataExpiringCache,
         tool_names: List[str] | None,
         tool_output_token_limit: int | None,
@@ -118,7 +118,9 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 if server_name not in self.connections:
                     msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
                     raise ValueError(msg)
-                connection_for_server = self.connections[server_name]
+                connection_for_server: StreamableHttpConnection = cast(
+                    StreamableHttpConnection, self.connections[server_name]
+                )
                 if connection_for_server["url"] not in cache:
                     cache[
                         connection_for_server["url"]
@@ -135,7 +137,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                         f"Tools for connection {connection_for_server['url']} are already cached"
                     )
             else:
-                for connection in self.connections.values():
+                connection: StreamableHttpConnection
+                for connection in [
+                    cast(StreamableHttpConnection, c) for c in self.connections.values()
+                ]:
                     # if the tools for this connection are already cached, skip loading them
                     if connection["url"] not in cache:
                         cache[
@@ -201,7 +206,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
 
             # create LangChain tools from the loaded MCP tools
             all_tools: List[BaseTool] = []
-            for connection in self.connections.values():
+            connection: StreamableHttpConnection
+            for connection in [
+                cast(StreamableHttpConnection, c) for c in self.connections.values()
+            ]:
                 tools_for_connection: List[Tool] = cache[connection["url"]]
                 all_tools.extend(
                     self.create_tools_from_list(
@@ -214,7 +222,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
     async def load_metadata_for_mcp_tools(
         *,
         session: ClientSession | None,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
         tool_names: List[str] | None,
     ) -> list[Tool]:
         """Load all available MCP tools and convert them to LangChain tools.
@@ -238,13 +246,16 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
 
         tools: List[Tool]
         try:
-            if session is None:
+            if session is None and connection is not None:
                 # If a session is not provided, we will create one on the fly
                 async with create_session(connection) as tool_session:
                     await tool_session.initialize()
                     tools = await _list_all_tools(tool_session)
-            else:
+            elif session is not None:
                 tools = await _list_all_tools(session)
+            else:
+                msg = "Either a session or a connection config must be provided"
+                raise ValueError(msg)
         except* HTTPStatusError as exc:
             # if there is
             # exc is a ExceptionGroup, so we can catch it with a wildcard
@@ -335,7 +346,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
             else:
                 raise
         except* Exception as exc:
-            url: str = connection.get("url") if connection else "unknown"
+            url: str = cast(str, connection.get("url")) if connection else "unknown"
             if len(exc.exceptions) >= 1:
                 first_exception: Exception = exc.exceptions[0]
                 logger.error(
@@ -358,7 +369,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         session: ClientSession | None,
         tool: MCPTool,
         *,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
         tool_output_token_limit: int | None,
         token_reducer: TokenReducer,
     ) -> BaseTool:
@@ -385,22 +396,21 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         async def call_tool(
             **arguments: dict[str, Any],
         ) -> tuple[str | list[str], list[NonTextContent] | None]:
-            if session is None:
+            if session is None and connection is not None:
                 # If a session is not provided, we will create one on the fly
                 async with create_session(connection) as tool_session:
                     await tool_session.initialize()
-                    call_tool_result = await cast(
-                        "ClientSession", tool_session
-                    ).call_tool(
+                    call_tool_result = await tool_session.call_tool(
                         tool.name,
                         arguments,
                     )
-            else:
+            elif session is not None:
                 call_tool_result = await session.call_tool(tool.name, arguments)
-            return cast(
-                tuple[str | list[str], list[NonTextContent] | None],
-                _convert_call_tool_result(call_tool_result),
-            )
+            else:
+                raise ValueError(
+                    "Either a session or a connection config must be provided"
+                )
+            return _convert_call_tool_result(call_tool_result)
 
         return StructuredToolWithOutputLimits(
             name=tool.name,
@@ -418,7 +428,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
         *,
         tools: list[Tool],
         session: ClientSession | None = None,
-        connection: Connection | None = None,
+        connection: Optional[Connection] = None,
     ) -> List[BaseTool]:
         """
         Create LangChain tools from a list of MCP tools.
@@ -439,7 +449,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):  # type: ignore[mis
                 for tool in tools
             ]
         except Exception as e:
-            url: str = connection.get("url") if connection else "unknown"
+            url: str = cast(str, connection.get("url")) if connection else "unknown"
             logger.error(
                 f"Failed to convert MCP tools to LangChain tools from {url},  tools={[t.name for t in tools]}: {e}"
             )

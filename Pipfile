@@ -4,8 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# wheel is needed for building the package and installing wheels
-wheel = ">=0.45.1"
 # requests is needed for making HTTP requests
 requests = ">=2.32.3"
 # aridne is a Python library for building GraphQL APIs
@@ -18,10 +16,6 @@ boto3 = ">=1.40.21"
 botocore = ">=1.40.21"  # needed by boto3
 # uvicorn is a Python library for running ASGI applications
 uvicorn = ">=0.34.0"
-# ddtrace is a Python library for tracing requests
-ddtrace = ">=2.17.2"
-# prometheus-fastapi-instrumentator is a Python library for instrumenting FastAPI applications
-prometheus-fastapi-instrumentator = ">=7.0.0"
 # python-crfsuite is a Python library used when installing some packages
 python-crfsuite = ">=0.9.11"
 # httpx is a Python library for making HTTP requests
@@ -29,32 +23,32 @@ httpx = ">=0.28.1"
 # httpx-sse is a Python library for making Server-Sent Events requests
 httpx-sse = ">=0.4.0"
 # langchain is a Python library for building language models
-langchain = ">=0.3.17"
+langchain = ">=1.0.0"
 # pydantic is a Python library for data validation
 pydantic = ">=2.0,<3.0.0"  # needed by langchain
 # langchain-core is a Python library for building language models
-langchain-core = ">=0.3.33"
+langchain-core = ">=1.0.0"
 # langchain-aws is a Python library for interacting with AWS services
-langchain-aws = ">=0.2.9"
+langchain-aws = ">=1.0.0"
 # openai is a Python library for interacting with OpenAI
-openai = ">=1.60.2"
+openai = ">=2.5.0"
 # langchain-openai is a Python library for interacting with OpenAI
-langchain-openai = ">=0.3.3"
+langchain-openai = ">=1.0.0"
 # langchain-community is a Python library that contains ommmunity extensions
-langchain-community = ">=0.3.16"
+langchain-community = ">=0.4"
 # grpcio is a Python library for working with gRPC.   Needed by Google Vertex AI
 grpcio = ">=1.74.0"
 # langchain-google-community is a Python library that contains Google community extensions
-langchain-google-community = ">=2.0.3"
+langchain-google-community = ">=3.0.0"
 # langgraph is a Python library for building language models
-langgraph = ">=0.2.68"
+langgraph = ">=1.0.0"
 # langchainhub is a Python library for interacting with the LangChainHub API
 langchainhub = ">=0.1.21"
 # furl is a Python library for working with URLs
 furl = ">=2.1.3"
 # tiktoken is a fast BPE tokeniser for use with OpenAI's models
 # tiktoken 0.8.0 is missing wheel for tiktoken-0.7.0-cp312-cp312-musllinux_1_2_aarch64.whl: https://pypi.org/simple/tiktoken/
-tiktoken = "==0.7.0"
+tiktoken = ">=0.12.0"
 # xmltodict is a Python library for working with XML.  It is used by the PubMed tool
 xmltodict = ">=0.14.2"
 # llm-guard is a Python library designed to protect the LLM API from abuse
@@ -83,9 +77,9 @@ pandas = ">=2.2.3"
 # for testing the MCP client
 mcp = ">=1.11.0"
 # langchain_mcp_adapters is a Python library for working with MCP adapters in LangChain
-langchain_mcp_adapters = ">=0.1.9"
+langchain_mcp_adapters = ">=0.1.11"
 # authlib is a Python library for OAuth and OpenID Connect
-authlib = ">=1.6.1"
+authlib = ">=1.6.5"
 # joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)
 joserfc = ">=1.2.2"
 # aiocache is a Python library for caching with asyncio support
@@ -99,11 +93,22 @@ ddgs = ">=8.1.1"
 # langmem is a Python library for managing language model memory
 langmem = ">=0.0.29"
 # langgraph-checkpoint is a Python library for working with checkpoints in LangGraph
-langgraph-checkpoint = ">=2.1.1"
+langgraph-checkpoint = ">=3.0.0"
 # langgraph-checkpoint-mongodb is a Python library for working with MongoDB checkpoints in LangGraph
-langgraph-checkpoint-mongodb = ">=0.2.0"
+langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
+# oidcauthlib is a Python library for OpenID Connect authentication
+oidcauthlib = ">=1.0.0"
+# Core OTel bundle
+opentelemetry-distro = "0.59b0"
+# Instrumentation
+opentelemetry-instrumentation-fastapi = "0.59b0"
+opentelemetry-instrumentation-requests = "0.59b0"
+opentelemetry-instrumentation-logging = "0.59b0"
+opentelemetry-instrumentation-mcp = "0.48.0"
+# Metrics (Prometheus)
+prometheus-fastapi-instrumentator = "7.1.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -136,7 +141,7 @@ ruff = ">=0.11.5"
 # pytest-cov is needed for measuring test coverage
 pytest-cov = ">=6.1.1"
 # for creating the MCP client to test
-fastmcp = ">=2.10.5"
+fastmcp = ">=2.13.0"
 # respx is a Python library for mocking HTTP requests in tests
 respx = ">=0.22.0"
 # types-boto3 provides type hints for boto3
@@ -148,6 +153,12 @@ types-boto3-textract = ">=1.40.0"
 types-boto3-bedrock-runtime = ">=1.40.0"
 # python-keycloak is a Python library for interacting with Keycloak.  We use it for initializing the Keycloak realm
 python-keycloak = ">=5.7.0"
+# types-Authlib is a Python library for typing Authlib
+types-Authlib = ">=1.6.5"
+# pandas-stubs provides type hints for pandas
+pandas-stubs = ">=2.3.2"
+# asgi-lifespan is a Python library for managing ASGI lifespan events
+asgi-lifespan = ">=2.1.0"
 
 [requires]
 python_version = "3.12"
