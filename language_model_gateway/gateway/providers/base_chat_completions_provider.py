@@ -4,7 +4,7 @@ from typing import Dict
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from oidcauthlib.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 
 

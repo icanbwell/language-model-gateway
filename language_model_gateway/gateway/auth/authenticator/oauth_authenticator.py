@@ -4,8 +4,7 @@ from typing import cast
 import requests
 from authlib.integrations.requests_client import OAuth2Session
 from authlib.oauth2.rfc6749 import OAuth2Token
-
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 
 logger = logging.getLogger(__name__)
 

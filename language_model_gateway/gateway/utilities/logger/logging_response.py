@@ -1,5 +1,5 @@
 import logging
-from typing import Any, AsyncIterator
+from typing import Any, AsyncIterator, override
 
 import httpx
 
@@ -16,6 +16,7 @@ class LoggingResponse(httpx.Response):
     and response content in bytes as they are streamed.
     """
 
+    @override
     async def aiter_bytes(self, *args: Any, **kwargs: Any) -> AsyncIterator[bytes]:
         """
         Asynchronously iterate over the response content in bytes, logging each chunk.

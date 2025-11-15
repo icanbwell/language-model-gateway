@@ -3,7 +3,7 @@ import logging
 import os
 import random
 from os import environ
-from typing import Optional, Dict, Any, List, cast, Type, Literal, Tuple
+from typing import Optional, Dict, Any, List, cast, Type, Literal, Tuple, override
 
 import httpx
 from pydantic import PrivateAttr, Field, BaseModel
@@ -143,12 +143,14 @@ class GoogleSearchTool(ResilientBaseTool):
         """Close the HTTP client."""
         await self._client.aclose()
 
+    @override
     def _run(
         self, query: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
         """Use async version of this tool."""
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self, query: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:

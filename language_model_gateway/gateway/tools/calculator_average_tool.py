@@ -1,5 +1,5 @@
 import asyncio
-from typing import List
+from typing import List, override
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
@@ -23,6 +23,7 @@ class CalculatorAverageTool(ResilientBaseTool):
         "Useful for when you need to calculate the average of a list of numbers"
     )
 
+    @override
     async def _arun(self, numbers: List[float]) -> str:
         """Run the tool to calculate the average of a list of numbers"""
         logger.info(f"CalculatorAverageTool _arun called with numbers: {numbers}")
@@ -41,6 +42,7 @@ class CalculatorAverageTool(ResilientBaseTool):
             logger.error(f"Error converting numbers: {e}")
             return f"Error: Could not convert all inputs to numbers. {e}"
 
+    @override
     def _run(self, numbers: List[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(numbers=numbers))

@@ -1,12 +1,12 @@
 from typing import Optional
 
 from bson import ObjectId
+from oidcauthlib.auth.models.base_db_model import BaseDbModel
 from pydantic import Field
 
-from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 from datetime import datetime, UTC
 
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 
 
 class TokenCacheItem(BaseDbModel):

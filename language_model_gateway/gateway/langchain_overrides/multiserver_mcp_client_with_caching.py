@@ -403,6 +403,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                     )
             elif session is not None:
                 call_tool_result = await session.call_tool(tool.name, arguments)
+            else:
+                raise ValueError(
+                    "Either a session or a connection config must be provided"
+                )
             return _convert_call_tool_result(call_tool_result)
 
         return StructuredToolWithOutputLimits(

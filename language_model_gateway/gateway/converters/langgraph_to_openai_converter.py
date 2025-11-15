@@ -75,8 +75,8 @@ from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
@@ -92,11 +92,15 @@ class LangGraphToOpenAIConverter:
     def __init__(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
     ) -> None:
-        self.environment_variables: EnvironmentVariables = environment_variables
-        if not isinstance(self.environment_variables, EnvironmentVariables):
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 f"environment_variables must be EnvironmentVariables, got {type(self.environment_variables)}"
             )

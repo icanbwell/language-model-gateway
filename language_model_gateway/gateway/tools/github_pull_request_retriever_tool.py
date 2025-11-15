@@ -2,7 +2,7 @@ import logging
 
 from pydantic import BaseModel, Field
 
-from typing import Type, Optional, Tuple, Literal
+from typing import Type, Optional, Tuple, Literal, override
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 from language_model_gateway.gateway.utilities.github.github_pull_request import (
     GithubPullRequest,
@@ -43,6 +43,7 @@ class GitHubPullRequestRetriever(ResilientBaseTool):
 
     github_pull_request_helper: GithubPullRequestHelper
 
+    @override
     def _run(
         self,
         url: Optional[str] = None,
@@ -56,6 +57,7 @@ class GitHubPullRequestRetriever(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         url: Optional[str] = None,

@@ -1,5 +1,5 @@
 import logging
-from typing import Type, Tuple, Literal
+from typing import Type, Tuple, Literal, override
 from pydantic import BaseModel, Field
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 from language_model_gateway.gateway.utilities.jira.jira_issue_result import (
@@ -43,6 +43,7 @@ class JiraIssueRetriever(ResilientBaseTool):
 
     jira_issues_helper: JiraIssueHelper
 
+    @override
     async def _arun(
         self,
         issue_id: str,
@@ -91,6 +92,7 @@ class JiraIssueRetriever(ResilientBaseTool):
             logger.error(error_msg)
             return error_msg, error_artifact
 
+    @override
     def _run(
         self,
         issue_id: str,

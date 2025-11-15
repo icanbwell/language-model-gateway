@@ -15,7 +15,7 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
+from oidcauthlib.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
@@ -34,10 +34,6 @@ async def test_store_and_read_memories_tool_with_fake_api_key(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    # IMPORTANT: Needs the following values set in docker.env if testing with real LLM
-    # FAKE_USER_ID="tester"
-    # FAKE_USER_PASSWORD="password"
-    # FAKE_AUDIENCE="client1"
 
     test_container: SimpleContainer = await get_container_async()
 

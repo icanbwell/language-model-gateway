@@ -65,7 +65,7 @@ async def test_fhir_server_mcp_agent_search_with_dcr() -> None:
                 if cause and isinstance(cause, ConnectError):
                     logger.info(f"Cause: {cause}")
                     request = cause.request
-                    if request:
+                    if request is not None:
                         logger.info(f"Request: {request.method} {request.url}")
                 raise e
     except Exception as e:

@@ -8,8 +8,8 @@ from langgraph.store.memory import InMemoryStore
 from langgraph.store.base import BaseStore, IndexConfig
 from langgraph.store.mongodb import MongoDBStore
 
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.utilities.mongo_url_utils import MongoUrlHelpers
 
@@ -21,7 +21,9 @@ class PersistenceFactory:
     https://langchain-ai.github.io/langgraph/concepts/memory/
     """
 
-    def __init__(self, *, environment_variables: EnvironmentVariables) -> None:
+    def __init__(
+        self, *, environment_variables: LanguageModelGatewayEnvironmentVariables
+    ) -> None:
         self._environment_variables = environment_variables
 
     @contextmanager

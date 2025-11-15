@@ -1,13 +1,15 @@
-from typing import Dict, Any
+from typing import Dict, Any, override
 
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
+from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
+from oidcauthlib.auth.models.auth import AuthInformation
+
+from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -21,9 +23,9 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.auth.token_reader import TokenReader
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from oidcauthlib.auth.token_reader import TokenReader
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol
 
@@ -38,9 +40,10 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
         auth_manager: AuthManager,
+        tool_auth_manager: ToolAuthManager,
         fn_get_response: MockChatResponseProtocol,
         auth_config_reader: AuthConfigReader,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
     ) -> None:
         super().__init__(
@@ -50,12 +53,14 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             mcp_tool_provider=mcp_tool_provider,
             token_reader=token_reader,
             auth_manager=auth_manager,
+            tool_auth_manager=tool_auth_manager,
             environment_variables=environment_variables,
             auth_config_reader=auth_config_reader,
             persistence_factory=persistence_factory,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 
+    @override
     async def chat_completions(
         self,
         *,

@@ -1,6 +1,6 @@
 import logging
 import uuid
-from typing import Type, Optional, Any, Literal
+from typing import Type, Optional, Any, Literal, override
 
 from langchain_core.tools import ToolException
 from langgraph.config import get_store
@@ -53,6 +53,7 @@ class MemoryWriteTool(ResilientBaseTool):
     )
     store: Optional[BaseStore] = None
 
+    @override
     def _run(
         self,
         *,
@@ -64,6 +65,7 @@ class MemoryWriteTool(ResilientBaseTool):
             "Synchronous execution is not supported. Use the asynchronous method instead."
         )
 
+    @override
     async def _arun(
         self,
         *,

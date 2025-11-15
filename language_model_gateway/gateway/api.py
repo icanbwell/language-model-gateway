@@ -8,6 +8,7 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -19,7 +20,6 @@ from language_model_gateway.gateway.api_container import get_config_reader
 from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
     FastApiLoggingMiddleware,
 )
-from language_model_gateway.gateway.routers.auth_router import AuthRouter
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -86,7 +86,7 @@ def create_app() -> FastAPI:
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
-    app1.include_router(AuthRouter().get_router())
+    app1.include_router(AuthRouter(prefix="/auth").get_router())
     # Mount the static directory
     app1.mount(
         "/static",

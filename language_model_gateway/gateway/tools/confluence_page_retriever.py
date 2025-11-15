@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, Type, Tuple, Literal
+from typing import Optional, Type, Tuple, Literal, override
 from pydantic import BaseModel, Field
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 from language_model_gateway.gateway.utilities.confluence.confluence_document import (
@@ -41,6 +41,7 @@ class ConfluencePageRetriever(ResilientBaseTool):
 
     confluence_helper: ConfluenceHelper
 
+    @override
     async def _arun(
         self,
         page_id: str,
@@ -88,6 +89,7 @@ class ConfluencePageRetriever(ResilientBaseTool):
             logger.error(error_msg)
             return error_msg, error_artifact
 
+    @override
     def _run(
         self,
         page_id: str,

@@ -2,15 +2,18 @@ import logging
 from datetime import datetime, UTC
 from typing import List
 
-from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
-    AuthConfigReader,
-)
-from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_missing_exception import (
+from oidcauthlib.auth.exceptions.authorization_bearer_token_missing_exception import (
     AuthorizationBearerTokenMissingException,
 )
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
+)
+from oidcauthlib.auth.repository.base_repository import AsyncBaseRepository
+from oidcauthlib.auth.repository.repository_factory import RepositoryFactory
+
+from language_model_gateway.configs.config_schema import AgentConfig
+from oidcauthlib.auth.config.auth_config_reader import (
+    AuthConfigReader,
 )
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
     AuthorizationTokenCacheItemExpiredException,
@@ -18,17 +21,13 @@ from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_it
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_not_found_exception import (
     AuthorizationTokenCacheItemNotFoundException,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
+
+from oidcauthlib.auth.token_reader import TokenReader
+
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.repository.base_repository import (
-    AsyncBaseRepository,
-)
-from language_model_gateway.gateway.auth.repository.repository_factory import (
-    RepositoryFactory,
-)
-from language_model_gateway.gateway.auth.token_reader import TokenReader
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -44,7 +43,7 @@ class TokenExchangeManager:
     def __init__(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reader: TokenReader,
         auth_config_reader: AuthConfigReader,
     ) -> None:
@@ -62,12 +61,16 @@ class TokenExchangeManager:
                 environment_variables=environment_variables,
             )
         )
-        self.environment_variables: EnvironmentVariables = environment_variables
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
         if self.token_repository is None:
             raise ValueError(
                 "TokenExchangeManager requires a token repository to be set up."
             )
-        if not isinstance(environment_variables, EnvironmentVariables):
+        if not isinstance(
+            environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 "TokenExchangeManager requires EnvironmentVariables instance."
             )
@@ -188,7 +191,7 @@ class TokenExchangeManager:
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token is not None else 'None'}"
                     )
                     found_cache_item = token
 

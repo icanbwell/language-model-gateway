@@ -1,7 +1,7 @@
 import logging
 import inspect
 from abc import ABCMeta
-from typing import Optional, Any, Dict, Union, List
+from typing import Optional, Any, Dict, Union, List, override
 
 from langchain_core.tools import BaseTool
 
@@ -17,6 +17,7 @@ class ResilientBaseTool(BaseTool, metaclass=ABCMeta):
 
     """
 
+    @override
     def _parse_input(
         self, tool_input: Union[str, Dict[str, Any]], tool_call_id: Optional[str]
     ) -> Union[str, dict[str, Any]]:

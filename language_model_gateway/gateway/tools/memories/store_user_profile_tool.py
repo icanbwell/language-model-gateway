@@ -1,6 +1,6 @@
 import logging
 import typing
-from typing import Type, Dict, Any, Annotated, Literal
+from typing import Type, Dict, Any, Annotated, Literal, override
 
 from langchain_core.tools import ToolException
 from langgraph.config import get_store
@@ -56,6 +56,7 @@ class StoreUserProfileTool(ResilientBaseTool):
     ] = ("create", "update", "delete")
     store: typing.Optional[BaseStore] = None
 
+    @override
     def _run(
         self,
         name: str,
@@ -68,6 +69,7 @@ class StoreUserProfileTool(ResilientBaseTool):
             "Synchronous execution is not supported. Use the asynchronous method instead."
         )
 
+    @override
     async def _arun(
         self,
         *,

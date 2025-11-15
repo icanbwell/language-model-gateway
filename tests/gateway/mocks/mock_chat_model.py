@@ -7,6 +7,7 @@ from typing import (
     AsyncIterator,
     List,
     Iterator,
+    override,
 )
 
 from langchain_core.callbacks import (
@@ -25,10 +26,12 @@ from tests.gateway.mocks.mock_ai_message_protocol import MockAiMessageProtocol
 class MockChatModel(BaseChatModel):
     fn_get_response: MockAiMessageProtocol
 
+    @override
     @property
     def _llm_type(self) -> str:
         return "mock"
 
+    @override
     def _generate(
         self,
         messages: list[BaseMessage],
@@ -41,6 +44,7 @@ class MockChatModel(BaseChatModel):
             generations=[ChatGeneration(message=AIMessage(content=content))]
         )
 
+    @override
     async def _agenerate(
         self,
         messages: list[BaseMessage],
@@ -53,6 +57,7 @@ class MockChatModel(BaseChatModel):
             generations=[ChatGeneration(message=AIMessage(content=content))]
         )
 
+    @override
     def _stream(
         self,
         messages: List[BaseMessage],
@@ -63,6 +68,7 @@ class MockChatModel(BaseChatModel):
         content: str = self.fn_get_response(messages=messages)
         return iter([ChatGenerationChunk(message=AIMessageChunk(content=content))])
 
+    @override
     async def _astream(
         self,
         messages: list[BaseMessage],
@@ -78,9 +84,10 @@ class MockChatModel(BaseChatModel):
         for i, word in enumerate(words):
             yield ChatGenerationChunk(message=AIMessageChunk(content=word + " "))
 
+    @override
     def bind_tools(
         self,
-        tools: Sequence[  # ignore[type-arg]
+        tools: Sequence[
             typing.Dict[str, Any] | type | Callable[..., Any] | BaseTool  # noqa: UP006
         ],
         *,

@@ -5,20 +5,21 @@ import base64
 
 from joserfc import jwk
 
-from language_model_gateway.gateway.auth.config.auth_config import AuthConfig
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
+from oidcauthlib.auth.config.auth_config import AuthConfig
+from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
-from language_model_gateway.gateway.auth.exceptions.authorization_bearer_token_expired_exception import (
+from oidcauthlib.auth.exceptions.authorization_bearer_token_expired_exception import (
     AuthorizationBearerTokenExpiredException,
 )
-from language_model_gateway.gateway.auth.models.token import Token
-from language_model_gateway.gateway.auth.token_reader import TokenReader
+
+from oidcauthlib.auth.models.token import Token
+from oidcauthlib.auth.token_reader import TokenReader
 from joserfc import jwt
 import time
 
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 
 # Sample JWKS and token generation for testing
@@ -91,7 +92,7 @@ def create_jwt_token(exp_offset: int = 60) -> str:
 def test_extract_token() -> None:
     token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
-            environment_variables=EnvironmentVariables()
+            environment_variables=LanguageModelGatewayEnvironmentVariables()
         )
     )
     header: str = "Bearer sometoken"
@@ -104,7 +105,7 @@ def test_extract_token() -> None:
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:
     token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
-            environment_variables=EnvironmentVariables()
+            environment_variables=LanguageModelGatewayEnvironmentVariables()
         ),
         algorithms=[ALGORITHM],
     )
@@ -120,7 +121,7 @@ async def test_verify_token_expired(
 ) -> None:
     token_reader: TokenReader = MockTokenReader(
         auth_config_reader=MockAuthConfigReader(
-            environment_variables=EnvironmentVariables()
+            environment_variables=LanguageModelGatewayEnvironmentVariables()
         ),
         algorithms=[ALGORITHM],
     )

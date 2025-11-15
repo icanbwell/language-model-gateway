@@ -1,5 +1,5 @@
 import logging
-from typing import Type, Literal, Optional, Tuple
+from typing import Type, Literal, Optional, Tuple, override
 from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
@@ -43,6 +43,7 @@ class ConfluenceSearchTool(ResilientBaseTool):
 
     confluence_helper: ConfluenceHelper
 
+    @override
     async def _arun(self, search_string: str, limit: int = 10) -> Tuple[str, str]:
         try:
             search_results = await self.confluence_helper.search_content(
@@ -68,6 +69,7 @@ class ConfluenceSearchTool(ResilientBaseTool):
             error_msg = f"Error searching Confluence content: {str(e)}"
             return error_msg, error_msg
 
+    @override
     def _run(self, search_string: str, limit: Optional[int] = 10) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).

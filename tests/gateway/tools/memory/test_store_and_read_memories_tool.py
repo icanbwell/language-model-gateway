@@ -12,11 +12,11 @@ from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
+from oidcauthlib.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,

@@ -2,15 +2,16 @@ import logging
 import os
 from typing import cast
 
+from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.container.simple_container import SimpleContainer
+
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
-    AuthConfigReader,
-)
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
+from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
@@ -45,7 +46,6 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -58,8 +58,8 @@ from language_model_gateway.gateway.utilities.confluence.confluence_helper impor
 from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
     DatabricksHelper,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
@@ -72,6 +72,9 @@ from language_model_gateway.gateway.utilities.token_reducer.token_reducer import
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )
+from oidcauthlib.container.container_factory import (
+    ContainerFactory as OidcContainerFactory,
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
@@ -82,7 +85,7 @@ class ContainerFactory:
     async def create_container_async(self) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = SimpleContainer()
+        container = OidcContainerFactory().create_container()
 
         # register services here
 
@@ -106,14 +109,6 @@ class ContainerFactory:
                     else 60 * 60
                 ),
                 init_value={},
-            ),
-        )
-
-        container.singleton(
-            TokenReader,
-            lambda c: TokenReader(
-                algorithms=c.resolve(EnvironmentVariables).auth_algorithms,
-                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
@@ -148,7 +143,9 @@ class ContainerFactory:
         container.register(
             LangGraphToOpenAIConverter,
             lambda c: LangGraphToOpenAIConverter(
-                environment_variables=c.resolve(EnvironmentVariables),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
                 token_reducer=c.resolve(TokenReducer),
             ),
         )
@@ -162,15 +159,17 @@ class ContainerFactory:
         )
 
         container.register(
-            EnvironmentVariables,
-            lambda c: EnvironmentVariables(),
+            LanguageModelGatewayEnvironmentVariables,
+            lambda c: LanguageModelGatewayEnvironmentVariables(),
         )
 
         container.register(
             GithubPullRequestHelper,
             lambda c: GithubPullRequestHelper(
-                org_name=c.resolve(EnvironmentVariables).github_org,
-                access_token=c.resolve(EnvironmentVariables).github_token,
+                org_name=c.resolve(LanguageModelGatewayEnvironmentVariables).github_org,
+                access_token=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).github_token,
                 http_client_factory=c.resolve(HttpClientFactory),
             ),
         )
@@ -179,9 +178,15 @@ class ContainerFactory:
             JiraIssueHelper,
             lambda c: JiraIssueHelper(
                 http_client_factory=c.resolve(HttpClientFactory),
-                jira_base_url=c.resolve(EnvironmentVariables).jira_base_url,
-                access_token=c.resolve(EnvironmentVariables).jira_token,
-                username=c.resolve(EnvironmentVariables).jira_username,
+                jira_base_url=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_base_url,
+                access_token=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_token,
+                username=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_username,
             ),
         )
 
@@ -189,9 +194,15 @@ class ContainerFactory:
             ConfluenceHelper,
             lambda c: ConfluenceHelper(
                 http_client_factory=c.resolve(HttpClientFactory),
-                confluence_base_url=c.resolve(EnvironmentVariables).jira_base_url,
-                access_token=c.resolve(EnvironmentVariables).jira_token,
-                username=c.resolve(EnvironmentVariables).jira_username,
+                confluence_base_url=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_base_url,
+                access_token=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_token,
+                username=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).jira_username,
             ),
         )
 
@@ -206,7 +217,9 @@ class ContainerFactory:
                 image_generator_factory=c.resolve(ImageGeneratorFactory),
                 file_manager_factory=c.resolve(FileManagerFactory),
                 ocr_extractor_factory=c.resolve(OCRExtractorFactory),
-                environment_variables=c.resolve(EnvironmentVariables),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
                 github_pull_request_helper=c.resolve(GithubPullRequestHelper),
                 jira_issues_helper=c.resolve(JiraIssueHelper),
                 confluence_helper=c.resolve(ConfluenceHelper),
@@ -215,11 +228,22 @@ class ContainerFactory:
         )
 
         container.register(
+            ToolAuthManager,
+            lambda c: ToolAuthManager(
+                auth_manager=c.resolve(AuthManager),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
+            ),
+        )
+
+        container.register(
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 cache=c.resolve(McpToolsMetadataExpiringCache),
-                auth_manager=c.resolve(AuthManager),
-                environment_variables=c.resolve(EnvironmentVariables),
+                tool_auth_manager=c.resolve(ToolAuthManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
                 token_reducer=c.resolve(TokenReducer),
             ),
         )
@@ -233,7 +257,10 @@ class ContainerFactory:
                 mcp_tool_provider=c.resolve(MCPToolProvider),
                 token_reader=c.resolve(TokenReader),
                 auth_manager=c.resolve(AuthManager),
-                environment_variables=c.resolve(EnvironmentVariables),
+                tool_auth_manager=c.resolve(ToolAuthManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 persistence_factory=c.resolve(PersistenceFactory),
             ),
@@ -270,28 +297,13 @@ class ContainerFactory:
         )
 
         container.register(
-            AuthManager,
-            lambda c: AuthManager(
-                environment_variables=c.resolve(EnvironmentVariables),
-                token_exchange_manager=c.resolve(TokenExchangeManager),
-                auth_config_reader=c.resolve(AuthConfigReader),
-                token_reader=c.resolve(TokenReader),
-            ),
-        )
-
-        container.register(
             TokenExchangeManager,
             lambda c: TokenExchangeManager(
-                environment_variables=c.resolve(EnvironmentVariables),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
                 token_reader=c.resolve(TokenReader),
                 auth_config_reader=c.resolve(AuthConfigReader),
-            ),
-        )
-
-        container.register(
-            AuthConfigReader,
-            lambda c: AuthConfigReader(
-                environment_variables=c.resolve(EnvironmentVariables)
             ),
         )
 
@@ -311,7 +323,9 @@ class ContainerFactory:
         container.register(
             PersistenceFactory,
             lambda c: PersistenceFactory(
-                environment_variables=c.resolve(EnvironmentVariables)
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                )
             ),
         )
 

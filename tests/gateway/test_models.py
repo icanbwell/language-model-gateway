@@ -13,7 +13,7 @@ async def test_models(async_client: httpx.AsyncClient) -> None:
     )
     models: AsyncPage[Model] = await client.models.list()
     # print(models.model_dump_json())
-    assert models
+    assert models is not None
     model: Model
     i = 0
     async for model in models:

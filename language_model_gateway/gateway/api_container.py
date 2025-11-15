@@ -2,12 +2,12 @@ import logging
 from typing import Annotated
 
 from fastapi import Depends
+from oidcauthlib.container.simple_container import SimpleContainer
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.container.container_factory import ContainerFactory
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
+from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
@@ -21,10 +21,10 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
-from language_model_gateway.gateway.auth.token_reader import TokenReader
+from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.cached import cached
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 
 logger = logging.getLogger(__name__)
@@ -110,11 +110,11 @@ def get_token_reader(
 
 def get_environment_variables(
     container: Annotated[SimpleContainer, Depends(get_container_async)],
-) -> EnvironmentVariables:
+) -> LanguageModelGatewayEnvironmentVariables:
     """helper function to get the chat manager"""
     if not isinstance(container, SimpleContainer):
         raise TypeError(f"container must be SimpleContainer, got {type(container)}")
-    return container.resolve(EnvironmentVariables)
+    return container.resolve(LanguageModelGatewayEnvironmentVariables)
 
 
 def get_auth_config_reader(

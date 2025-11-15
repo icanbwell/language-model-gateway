@@ -9,12 +9,12 @@ from joserfc import jwt
 from joserfc.jwk import RSAKey
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
+from oidcauthlib.auth.auth_helper import AuthHelper
 from respx import MockRouter
 
 from language_model_gateway.gateway.api import app, create_app
 from urllib.parse import urlparse, parse_qs
 
-from language_model_gateway.gateway.auth.auth_helper import AuthHelper
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )

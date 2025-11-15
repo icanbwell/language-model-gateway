@@ -1,4 +1,4 @@
-from typing import Tuple, Literal
+from typing import Tuple, Literal, override
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 
 
@@ -17,6 +17,7 @@ class GraphqlSchemaProviderTool(ResilientBaseTool):
 
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
 
+    @override
     async def _arun(self) -> Tuple[str, str]:
         graphql_schema = '''
 directive @key(fields: _FieldSet!, resolvable: Boolean = true) on OBJECT | INTERFACE
@@ -22051,6 +22052,7 @@ union _Entity = Account | ActivityDefinition | AdministrableProductDefinition | 
 
         return graphql_schema, "FHIR server graphql schema"
 
+    @override
     def _run(self) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).

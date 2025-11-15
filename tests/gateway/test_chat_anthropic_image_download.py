@@ -4,7 +4,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from language_model_gateway.container.simple_container import SimpleContainer
+from oidcauthlib.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,

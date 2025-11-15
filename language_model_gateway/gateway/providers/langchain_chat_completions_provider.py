@@ -1,21 +1,33 @@
 import datetime
 import logging
 import uuid
-from typing import Dict, Any, Sequence, List, AsyncGenerator, ContextManager
+from typing import (
+    Dict,
+    Any,
+    Sequence,
+    List,
+    AsyncGenerator,
+    ContextManager,
+    override,
+    Optional,
+)
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
+from oidcauthlib.auth.config.auth_config import AuthConfig
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
-from language_model_gateway.gateway.auth.auth_manager import AuthManager
-from language_model_gateway.gateway.auth.config.auth_config_reader import (
+from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.auth.token_reader import TokenReader
+from oidcauthlib.auth.models.auth import AuthInformation
+from oidcauthlib.auth.token_reader import TokenReader
+
+from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -33,8 +45,8 @@ from language_model_gateway.gateway.structures.request_information import (
 )
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from langgraph.store.base import BaseStore
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
@@ -53,7 +65,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
         auth_manager: AuthManager,
-        environment_variables: EnvironmentVariables,
+        tool_auth_manager: ToolAuthManager,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         auth_config_reader: AuthConfigReader,
         persistence_factory: PersistenceFactory,
     ) -> None:
@@ -97,10 +110,14 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if not isinstance(self.auth_manager, AuthManager):
             raise TypeError("auth_manager must be an instance of AuthManager")
 
-        self.environment_variables: EnvironmentVariables = environment_variables
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
         if self.environment_variables is None:
             raise ValueError("environment_variables must not be None")
-        if not isinstance(self.environment_variables, EnvironmentVariables):
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 "environment_variables must be an instance of EnvironmentVariables"
             )
@@ -121,6 +138,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "persistence_factory must be an instance of PersistenceFactory"
             )
 
+        self.tool_auth_manager: ToolAuthManager = tool_auth_manager
+        if self.tool_auth_manager is None:
+            raise ValueError("tool_auth_manager must not be None")
+        if not isinstance(self.tool_auth_manager, ToolAuthManager):
+            raise TypeError("tool_auth_manager must be an instance of ToolAuthManager")
+
+    @override
     async def chat_completions(
         self,
         *,
@@ -272,7 +296,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_information (AuthInformation): The authentication information.
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
-        if not tool_using_authentication.auth_providers:
+
+        tool_auth_providers: list[str] | None = tool_using_authentication.auth_providers
+        if (
+            tool_using_authentication.auth_providers is None
+            or len(tool_using_authentication.auth_providers) == 0
+        ):
             logger.debug(
                 f"Tool {tool_using_authentication.name} doesn't have auth providers."
             )
@@ -281,20 +310,34 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             logger.debug("AuthInformation doesn't have redirect_uri.")
             return
 
-        tool_first_auth_provider: str = tool_using_authentication.auth_providers[0]
-        tool_first_issuer: str | None = (
-            tool_using_authentication.issuers[0]
-            if tool_using_authentication.issuers
-            else self.auth_config_reader.get_issuer_for_provider(
-                auth_provider=tool_first_auth_provider,
+        tool_first_auth_provider: str | None = (
+            tool_auth_providers[0] if tool_auth_providers is not None else None
+        )
+        tool_auth_issuers: Optional[list[str]] = tool_using_authentication.issuers
+        auth_config: AuthConfig | None = (
+            self.auth_config_reader.get_config_for_auth_provider(
+                auth_provider=tool_first_auth_provider
             )
+            if tool_first_auth_provider is not None
+            else None
+        )
+        tool_first_issuer: str | None = (
+            tool_auth_issuers[0]
+            if tool_auth_issuers is not None
+            else auth_config.issuer
+            if auth_config is not None
+            else None
         )
         if not tool_first_issuer:
             raise ValueError(
                 "Tool using authentication must have at least one issuer or use the default issuer."
             )
-        tool_first_audience: str = self.auth_config_reader.get_audience_for_provider(
-            auth_provider=tool_first_auth_provider
+        tool_first_audience: str | None = (
+            self.auth_config_reader.get_audience_for_provider(
+                auth_provider=tool_first_auth_provider
+            )
+            if tool_first_auth_provider is not None
+            else None
         )
         if not auth_information.email:
             raise ValueError(
@@ -306,6 +349,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "AuthInformation must have subject to authenticate for tools."
                 + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
+        if not tool_first_audience:
+            raise ValueError("Tool using authentication must have an audience.")
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 audience=tool_first_audience,  # use the first audience to get a new authorization URL
@@ -315,7 +360,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 referring_email=auth_information.email,
                 referring_subject=auth_information.subject,
             )
-            if tool_using_authentication
+            if tool_using_authentication is not None
             else None
         )
         error_message: str = (
@@ -323,7 +368,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             + f"\nClick here to authenticate: [Login to {tool_first_auth_provider}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
-        await self.auth_manager.get_token_for_tool_async(
+        await self.tool_auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
             tool_config=tool_using_authentication,

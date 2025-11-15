@@ -146,6 +146,8 @@ types-boto3-bedrock-runtime = ">=1.40.0"
 python-keycloak = ">=5.7.0"
 # types-Authlib is a Python library for typing Authlib
 types-Authlib = ">=1.6.5"
+# pandas-stubs provides type hints for pandas
+pandas-stubs = ">=2.3.2"
 
 [requires]
 python_version = "3.12"

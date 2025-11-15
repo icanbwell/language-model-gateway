@@ -1,7 +1,7 @@
 import logging
 import os
 import tempfile
-from typing import Type, Literal, Tuple, Optional, List, Dict, Any
+from typing import Type, Literal, Tuple, Optional, List, Dict, Any, override
 from uuid import uuid4
 
 from graphviz import Graph  # Note: Using Graph instead of Digraph
@@ -63,9 +63,11 @@ class NetworkTopologyGeneratorTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
 
+    @override
     def _run(self, *args: Any, **kwargs: Any) -> Any:
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         nodes: Dict[str, Dict[str, str]],

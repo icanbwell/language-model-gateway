@@ -4,6 +4,7 @@ from typing import (
     Any,
     AsyncIterator,
     Optional,
+    override,
 )
 
 from langchain_core.runnables import RunnableConfig
@@ -15,6 +16,7 @@ from langgraph.prebuilt import ToolNode
 
 
 class StreamingToolNode(ToolNode):
+    @override
     async def astream(
         self,
         input: Input,

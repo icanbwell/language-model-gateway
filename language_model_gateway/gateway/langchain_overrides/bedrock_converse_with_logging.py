@@ -5,6 +5,7 @@ from typing import (
     Iterator,
     List,
     Optional,
+    override,
 )
 
 from langchain_aws import ChatBedrockConverse
@@ -34,6 +35,7 @@ class ChatBedrockException(Exception):
 
 
 class ChatBedrockConverseWithLogging(ChatBedrockConverse):
+    @override
     def _stream(
         self,
         messages: List[BaseMessage],

@@ -1,7 +1,7 @@
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 
 
 class AuthorizationMcpToolTokenInvalidException(AuthorizationNeededException):

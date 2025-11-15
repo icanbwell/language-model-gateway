@@ -8,14 +8,14 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.container.simple_container import SimpleContainer
+from oidcauthlib.container.simple_container import SimpleContainer
 from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
@@ -42,7 +42,8 @@ async def test_github_get_pull_request_diff(
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
         test_container.register(
-            EnvironmentVariables, lambda c: MockEnvironmentVariables()
+            LanguageModelGatewayEnvironmentVariables,
+            lambda c: MockEnvironmentVariables(),
         )
         sample_diff_content = """diff --git a/configs/chat_completions/testing/searchmining_claudehaiku3.json b/configs/chat_completions/testing/searchmining_claudehaiku3.json
 new file mode 100644
