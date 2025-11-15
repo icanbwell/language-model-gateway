@@ -193,5 +193,5 @@ services:
     entrypoint: [ "/bin/bash", "-c" ]
     command:
       - >-
-        if [ ! -d /backup/${DB_NAME} ]; then echo "Error: backup directory /backup/${DB_NAME} not found" >&2; exit 1; fi;
-        mongorestore --host "${MONGO_HOST}" --port "${MONGO_PORT}" --username "${MONGO_USER}" --password "${MONGO_PASS}" --authenticationDatabase admin --drop --db "${DB_NAME}" /backup/${DB_NAME} && echo "Restore completed"
+        if [ ! -d /backup/$${DB_NAME} ]; then echo "Error: backup directory /backup/$${DB_NAME} not found" >&2; exit 1; fi;
+        mongorestore --host "$${MONGO_HOST}" --port "$${MONGO_PORT}" --username "$${MONGO_USER}" --password "$${MONGO_PASS}" --authenticationDatabase admin --drop --db "${DB_NAME}" /backup/$${DB_NAME} && echo "Restore completed"
