@@ -124,7 +124,7 @@ services:
       # Mount AWS credentials if using S3 storage
       - ~/.aws/:/root/.aws:ro
       # Mount local model cache to container's embedding model cache
-      - ./caches/openai_models:/app/backend/data/cache
+      - ./caches/open-webui-models:/app/backend/data/cache
     networks:
       - web
     healthcheck:

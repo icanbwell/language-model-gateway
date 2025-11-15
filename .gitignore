@@ -144,4 +144,4 @@ dmypy.json
 /keycloak-config/public_key.json
 
 /caches/*
-!/caches/**openai_models_cache/readme.md
+!/caches/**/readme.md
