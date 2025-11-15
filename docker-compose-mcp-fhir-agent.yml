@@ -179,7 +179,7 @@ services:
     environment:
       <<: *agent_env
       # You can override any environment variables here
-      FHIR_SERVER_GET_URL: 'https://fhir-internal.dev.bwell.zone/4_0_0/'
+      FHIR_SERVER_GET_URL: 'https://fhir.dev.icanbwell.com/4_0_0/'
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
