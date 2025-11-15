@@ -229,7 +229,7 @@ class ToolAuthManager:
         logger.debug(
             f"Refreshing token for audience '{audience}' with token_cache_item:\n{token_cache_item.model_dump_json()}"
         )
-        client: StarletteOAuth2App = self.auth_manager.oauth.create_client(  # type: ignore[no-any-unimported]
+        client: StarletteOAuth2App = self.auth_manager.oauth.create_client(
             name=audience
         )  # type: ignore[no-untyped-call]
         if client is None:
@@ -246,7 +246,7 @@ class ToolAuthManager:
             return None
 
         # Prepare token refresh request
-        token_response: Dict[str, Any] = await client.fetch_access_token(
+        token_response: Dict[str, Any] = await client.fetch_access_token(  # type: ignore[no-untyped-call]
             grant_type="refresh_token",
             refresh_token=token_cache_item.refresh_token.token,
         )
