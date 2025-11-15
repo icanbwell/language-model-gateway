@@ -1,6 +1,13 @@
 version: '3'
 services:
   mcp-fhir-agent:
+    depends_on:
+      mongo:
+        condition: service_healthy
+      fhir:
+        condition: service_healthy
+      mongo-restore-drop:
+        condition: service_completed_successfully
     build:
       context: ../mcp-fhir-agent
       dockerfile: Dockerfile
@@ -22,7 +29,7 @@ services:
       FHIR_SERVER_GET_URL: ${FHIR_SERVER_GET_URL:-http://fhir:3000/4_0_0/}
       # FHIR_SERVER_GET_URL: 'https://fhir-internal.staging.bwell.zone/4_0_0/'
       # FHIR_SERVER_GET_URL: 'https://fhir-internal.client-sandbox.bwell.zone/4_0_0/'
-#      FHIR_SERVER_GET_URL: 'https://fhir-internal.dev.bwell.zone/4_0_0/'
+      #      FHIR_SERVER_GET_URL: 'https://fhir-internal.dev.bwell.zone/4_0_0/'
       FHIR_ADMIN_USERNAME: 'admin'
       FHIR_ADMIN_PASSWORD: 'password'
       FHIR_SERVER_GET_LIMIT: 100
@@ -33,7 +40,7 @@ services:
       # Below we specify the client id, client secret and well-known URI for each client
       # For list-like env vars, do NOT use quotes in the default value to avoid extra quotes in Python parsing
       AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox}
-#      AUTH_PROVIDERS: "client1,client3,okta,clientsandbox,cognito"
+      #      AUTH_PROVIDERS: "client1,client3,okta,clientsandbox,cognito"
       # first client for testing
       AUTH_ISSUER_CLIENT1: ${AUTH_ISSUER_CLIENT1:-http://keycloak:8080/realms/bwell-realm}
       AUTH_AUDIENCE_CLIENT1: ${AUTH_AUDIENCE_CLIENT1:-client1}
@@ -91,7 +98,7 @@ services:
       HTTP_TIMEOUT_SECONDS: ${HTTP_TIMEOUT_SECONDS:-30}
       # For talking to provider search service
       # PSS_BASE_URL: "https://provider-search.dev.bwell.zone/sdk/graphql"
-#      PSS_BASE_URL: "https://provider-search.staging.bwell.zone/graphql"
+      #      PSS_BASE_URL: "https://provider-search.staging.bwell.zone/graphql"
       PSS_BASE_URL: "https://provider-search.client-sandbox.bwell.zone/graphql"
       API_GATEWAY_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql"
       # Test accounts
@@ -128,7 +135,7 @@ services:
       MONGO_VECTOR_SIMILARITY: dotProduct
       MONGO_VECTOR_QUANTIZATION: scalar
       # embedding models
-#      EMBEDDING_MODEL: "arn:aws:bedrock:us-east-2::foundation-model/amazon.titan-embed-002"
+      #      EMBEDDING_MODEL: "arn:aws:bedrock:us-east-2::foundation-model/amazon.titan-embed-002"
       # https://docs.cohere.com/docs/cohere-embed
       EMBEDDING_MODEL: "cohere.embed-v4:0"
       EMBEDDING_MODEL_FAMILY: "cohere"
@@ -160,9 +167,31 @@ services:
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: ["uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
+    #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
       - web
+
+  # One-shot service to restore mongo db for testing
+  mongo-restore-drop:
+    image: mongo:6.0
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - web
+    volumes:
+      - ../mcp-fhir-agent/mongo_backup:/backup:ro
+    environment:
+      DB_NAME: fhir
+      MONGO_USER: root
+      MONGO_PASS: test123
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+    entrypoint: [ "/bin/bash", "-c" ]
+    command:
+      - >-
+        if [ ! -d /backup/${DB_NAME} ]; then echo "Error: backup directory /backup/${DB_NAME} not found" >&2; exit 1; fi;
+        mongorestore --host "${MONGO_HOST}" --port "${MONGO_PORT}" --username "${MONGO_USER}" --password "${MONGO_PASS}" --authenticationDatabase admin --drop --db "${DB_NAME}" /backup/${DB_NAME} && echo "Restore completed"
