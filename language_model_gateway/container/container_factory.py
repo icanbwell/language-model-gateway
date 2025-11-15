@@ -6,6 +6,7 @@ from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.token_reader import TokenReader
 from oidcauthlib.container.simple_container import SimpleContainer
+from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
@@ -86,6 +87,16 @@ class ContainerFactory:
         logger.info("Initializing DI container")
 
         container = OidcContainerFactory().create_container()
+
+        # TODO: Remove when oidcauthlib container registers AuthManager
+        container.register(
+            AuthManager,
+            lambda c: AuthManager(
+                auth_config_reader=c.resolve(AuthConfigReader),
+                token_reader=c.resolve(TokenReader),
+                environment_variables=c.resolve(EnvironmentVariables),
+            ),
+        )
 
         # register services here
 
