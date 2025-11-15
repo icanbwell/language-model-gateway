@@ -4,6 +4,7 @@ from typing import cast
 
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
 from oidcauthlib.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
@@ -12,6 +13,7 @@ from language_model_gateway.configs.config_reader.config_reader import ConfigRea
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
+from language_model_gateway.gateway.auth.token_storage_auth_manager import TokenStorageAuthManager
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
@@ -88,13 +90,15 @@ class ContainerFactory:
 
         container = OidcContainerFactory().create_container()
 
-        # TODO: Remove when oidcauthlib container registers AuthManager
+        # Register our own FastAPIManager so we can save the token
+        # Must be done AFTER the OidcContainerFactory to override the registration
         container.register(
-            AuthManager,
-            lambda c: AuthManager(
+            FastAPIAuthManager,
+            lambda c: TokenStorageAuthManager(
+                environment_variables=c.resolve(EnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
-                environment_variables=c.resolve(EnvironmentVariables),
+                token_exchange_manager=c.resolve(TokenExchangeManager)
             ),
         )
 

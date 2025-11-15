@@ -68,13 +68,11 @@ services:
       AUTH_ISSUER_OKTAFHIRDEV: ${AUTH_ISSUER_OKTAFHIRDEV:-https://icanbwell.okta.com}
       AUTH_AUDIENCE_OKTAFHIRDEV: ${AUTH_AUDIENCE_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
       AUTH_CLIENT_ID_OKTAFHIRDEV: ${AUTH_CLIENT_ID_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
-      AUTH_CLIENT_SECRET_OKTAFHIRDEV: ${AUTH_CLIENT_SECRET_OKTAFHIRDEV:-deprecated}
       AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: ${AUTH_WELL_KNOWN_URI_OKTAFHIRDEV:-https://icanbwell.okta.com/.well-known/openid-configuration}
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: ${AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
       AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: ${AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
       AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: ${AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
-      AUTH_CLIENT_SECRET_OKTAFHIRCLIENTSANDBOX: ${AUTH_CLIENT_SECRET_OKTAFHIRCLIENTSANDBOX:-deprecated}
       AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: ${AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com/.well-known/openid-configuration}
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
@@ -84,7 +82,7 @@ services:
       MONGO_DB_USERNAME: root
       MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
-      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
+#      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       OAUTH_CACHE: mongo
       # for LLM memory
@@ -115,6 +113,8 @@ services:
 #    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
+    # uncomment the below to get the code from local folders instead of pypi
+    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
