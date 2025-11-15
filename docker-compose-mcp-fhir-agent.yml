@@ -181,6 +181,9 @@ services:
       <<: *agent_env
       # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-internal.dev.bwell.zone/4_0_0/'
+      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
+      # disable until language model gateway supports elicitation
+      ENABLE_ELICITATION: "false"
     env_file: docker.env
     ports:
       - '5052:5000'
@@ -221,3 +224,12 @@ services:
       - >-
         if [ ! -d /backup/$${DB_NAME} ]; then echo "Error: backup directory /backup/$${DB_NAME} not found" >&2; exit 1; fi;
         mongorestore --host "$${MONGO_HOST}" --port "$${MONGO_PORT}" --username "$${MONGO_USER}" --password "$${MONGO_PASS}" --authenticationDatabase admin --drop --db "$${DB_NAME}" /backup/$${DB_NAME} && echo "Restore completed"
+
+#networks:
+#  web:
+#    external: true
+#    name: language-model-gateway_web
+
+networks:
+  web:
+    driver: bridge

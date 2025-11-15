@@ -143,6 +143,7 @@ services:
       test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
     networks:
       - web
+
 networks:
   web:
     driver: bridge
