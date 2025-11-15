@@ -18,14 +18,14 @@ services:
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
-      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/official"
-      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/testing"
+      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
+      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
 #      MODELS_OFFICIAL_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/testing"
-      MODELS_PATH_BACKUP: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions"
+      MODELS_PATH_BACKUP: "/usr/src/language-model-gateway-configs/chat_completions"
       CONFIG_CACHE_TIMEOUT_SECONDS: 120
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -108,6 +108,7 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
+    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
 #    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
