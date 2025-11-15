@@ -43,17 +43,15 @@ up-integration: fix-script-permissions ## starts docker containers
 .PHONY: up-open-webui
 up-open-webui: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
-	echo ""
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1
+	@echo ""
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
 up-open-webui-ssl: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
-	echo ""
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1
+	@echo ""
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
@@ -66,8 +64,7 @@ up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## sta
 	-f docker-compose-openwebui-ssl.yml \
 	-f docker-compose-openwebui-auth.yml \
 	up -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
@@ -89,10 +86,8 @@ up-mcp-fhir-agent:
 	-f docker-compose-embedding.yml \
 	-f docker-compose-mcp-fhir-agent.yml \
 	up -d
-	sh scripts/wait-for-healthy.sh  language-model-gateway-mcp-fhir-agent-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi
-	sh scripts/wait-for-healthy.sh language-model-gateway-mcp-fhir-agent-dev-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp-fhir-agent-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp-fhir-agent-dev-1 || exit 1
 
 .PHONY: up-mcp-server-gateway
 up-mcp-server-gateway:
