@@ -99,7 +99,16 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=0.0.10"
+oidcauthlib = ">=0.0.11"
+# Core OTel bundle
+opentelemetry-distro = "0.59b0"
+# Instrumentation
+opentelemetry-instrumentation-fastapi = "0.59b0"
+opentelemetry-instrumentation-requests = "0.59b0"
+opentelemetry-instrumentation-logging = "0.59b0"
+opentelemetry-instrumentation-mcp = "0.48.0"
+# Metrics (Prometheus)
+prometheus-fastapi-instrumentator = "7.1.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -148,6 +157,8 @@ python-keycloak = ">=5.7.0"
 types-Authlib = ">=1.6.5"
 # pandas-stubs provides type hints for pandas
 pandas-stubs = ">=2.3.2"
+# asgi-lifespan is a Python library for managing ASGI lifespan events
+asgi-lifespan = ">=2.1.0"
 
 [requires]
 python_version = "3.12"

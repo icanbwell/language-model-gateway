@@ -10,7 +10,6 @@ import pytest
 from oidcauthlib.container.simple_container import SimpleContainer
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,

@@ -13,12 +13,6 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.gateway.api_container import (
-    get_chat_manager,
-    get_token_reader,
-    get_environment_variables,
-    get_auth_manager,
-)
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.models.token import Token
@@ -30,6 +24,7 @@ from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
+from oidcauthlib.container.inject import Inject
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -91,7 +86,9 @@ class ChatCompletionsRouter:
         self,
         request: Request,
         chat_request: Dict[str, Any],
-        chat_manager: Annotated[ChatCompletionManager, Depends(get_chat_manager)],
+        chat_manager: Annotated[
+            ChatCompletionManager, Depends(Inject(ChatCompletionManager))
+        ],
         token_reader: Annotated[TokenReader, Depends(get_token_reader)],
         auth_manager: Annotated[AuthManager, Depends(get_auth_manager)],
         environment_variables: Annotated[

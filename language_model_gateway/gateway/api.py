@@ -16,7 +16,9 @@ from starlette.staticfiles import StaticFiles
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.container.container_factory import (
+    LanguageModelGatewayContainerFactory,
+)
 from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
     FastApiLoggingMiddleware,
 )
@@ -31,7 +33,13 @@ from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
+from oidcauthlib.container.container_registry import ContainerRegistry
+from oidcauthlib.container.inject import Inject
+
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
+
+# register our container
+ContainerRegistry.set_default(LanguageModelGatewayContainerFactory.create_container())
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +151,8 @@ async def favicon() -> FileResponse:
 
 @app.get("/refresh")
 async def refresh_data(
-    request: Request, config_reader: Annotated[ConfigReader, Depends(get_config_reader)]
+    request: Request,
+    config_reader: Annotated[ConfigReader, Depends(Inject(ConfigReader))],
 ) -> JSONResponse:
     if config_reader is None:
         raise ValueError("config_reader must not be None")

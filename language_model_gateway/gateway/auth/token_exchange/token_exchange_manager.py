@@ -475,10 +475,8 @@ class TokenExchangeManager:
         token_cache_item.refresh_token = Token.create_from_token(token=refresh_token)
         token_cache_item.refreshed = datetime.now(tz=UTC)
 
-        new_token_item: TokenCacheItem = (
-            await self.save_token_async(
-                token_cache_item=token_cache_item, refreshed=True
-            )
+        new_token_item: TokenCacheItem = await self.save_token_async(
+            token_cache_item=token_cache_item, refreshed=True
         )
         return new_token_item
 
@@ -561,4 +559,3 @@ class TokenExchangeManager:
             referring_subject=referring_subject,
         )
         return token_cache_item
-

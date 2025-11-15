@@ -1,12 +1,9 @@
-from datetime import datetime, UTC
 import logging
 from typing import Dict, Any
 
 from authlib.integrations.starlette_client import StarletteOAuth2App
-from bson import ObjectId
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
-from oidcauthlib.auth.models.token import Token
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
@@ -174,4 +171,3 @@ class ToolAuthManager:
         return await self.create_and_cache_token_async(
             token_response=token_response, token_cache_item=token_cache_item
         )
-

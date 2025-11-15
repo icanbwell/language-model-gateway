@@ -13,7 +13,9 @@ from language_model_gateway.configs.config_reader.config_reader import ConfigRea
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from language_model_gateway.gateway.auth.token_storage_auth_manager import TokenStorageAuthManager
+from language_model_gateway.gateway.auth.token_storage_auth_manager import (
+    TokenStorageAuthManager,
+)
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
@@ -75,20 +77,18 @@ from language_model_gateway.gateway.utilities.token_reducer.token_reducer import
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )
-from oidcauthlib.container.container_factory import (
-    ContainerFactory as OidcContainerFactory,
-)
+from oidcauthlib.container.oidc_authlib_container_factory import OidcAuthLibContainerFactory
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
 
 
-class ContainerFactory:
-    # noinspection PyMethodMayBeStatic
-    async def create_container_async(self) -> SimpleContainer:
+class LanguageModelGatewayContainerFactory:
+    @classmethod
+    def create_container(cls) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = OidcContainerFactory().create_container()
+        container = OidcAuthLibContainerFactory().create_container()
 
         # Register our own FastAPIManager so we can save the token
         # Must be done AFTER the OidcContainerFactory to override the registration
@@ -98,7 +98,7 @@ class ContainerFactory:
                 environment_variables=c.resolve(EnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
-                token_exchange_manager=c.resolve(TokenExchangeManager)
+                token_exchange_manager=c.resolve(TokenExchangeManager),
             ),
         )
 

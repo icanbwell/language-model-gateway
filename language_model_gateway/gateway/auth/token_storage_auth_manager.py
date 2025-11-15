@@ -4,12 +4,16 @@ from typing import override, Any, Dict
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
-from oidcauthlib.utilities.environment.abstract_environment_variables import AbstractEnvironmentVariables
+from oidcauthlib.utilities.environment.abstract_environment_variables import (
+    AbstractEnvironmentVariables,
+)
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import TokenExchangeManager
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -22,12 +26,12 @@ class TokenStorageAuthManager(FastAPIAuthManager):
     """
 
     def __init__(
-            self,
-            *,
-            environment_variables: AbstractEnvironmentVariables,
-            auth_config_reader: AuthConfigReader,
-            token_reader: TokenReader,
-            token_exchange_manager: TokenExchangeManager,
+        self,
+        *,
+        environment_variables: AbstractEnvironmentVariables,
+        auth_config_reader: AuthConfigReader,
+        token_reader: TokenReader,
+        token_exchange_manager: TokenExchangeManager,
     ) -> None:
         """
         Initialize the TokenStorageAuthManager with required components.
@@ -51,7 +55,9 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         if self.token_exchange_manager is None:
             raise ValueError("TokenExchangeManager instance is required")
         if not isinstance(self.token_exchange_manager, TokenExchangeManager):
-            raise TypeError("token_exchange_manager must be an instance of TokenExchangeManager")
+            raise TypeError(
+                "token_exchange_manager must be an instance of TokenExchangeManager"
+            )
 
     @override
     async def process_token_async(
@@ -79,19 +85,25 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         Returns:
             Dict[str, Any]: A dictionary containing the token details.
         """
-        logger.debug(
-            f"Saving token for audience '{audience}' and issuer '{issuer}'"
-        )
+        logger.debug(f"Saving token for audience '{audience}' and issuer '{issuer}'")
 
-        token_cache_item: TokenCacheItem = self.token_exchange_manager.create_token_cache_item(
-            code=code, issuer=issuer, state_decoded=state_decoded, token=token_dict, url=url
+        if issuer is None:
+            raise ValueError("issuer must not be None")
+
+        token_cache_item: TokenCacheItem = (
+            self.token_exchange_manager.create_token_cache_item(
+                code=code,
+                issuer=issuer,
+                state_decoded=state_decoded,
+                token=token_dict,
+                url=url,
+            )
         )
         content: Dict[str, Any] = token_cache_item.model_dump(mode="json")
 
         await self.token_exchange_manager.save_token_async(
             token_cache_item=token_cache_item, refreshed=False
         )
-
 
         if logger.isEnabledFor(logging.DEBUG):
             access_token: str | None = (
@@ -146,6 +158,6 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         """
         Process sign out by clearing stored tokens.
         """
-        
+
         # TODO: extract the bearer token from the request and use it to identify the token to be deleted
         pass
