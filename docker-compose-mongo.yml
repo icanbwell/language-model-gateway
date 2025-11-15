@@ -1,0 +1,60 @@
+services:
+  mongo:
+    image: mongodb/mongodb-atlas-local:8.2.1
+    # https://github.com/mongodb/mongodb-atlas-cli/releases
+    # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
+    # https://hub.docker.com/r/mongodb/mongodb-atlas-local
+    ports:
+      - "27017:27017"
+    container_name: mongo
+    environment:
+      #      ALLOW_EMPTY_PASSWORD: yes
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: "test123" # pragma: allowlist secret
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
+    networks:
+      - web
+
+  atlas-cli:
+    # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
+    image: mongodb/atlas:v1.50.0
+    profiles: ["seed"]
+    environment:
+      # Hardcoded values for vector index creation
+      MONGO_VECTOR_SERVER: mongo
+      MONGO_VECTOR_DATABASE: data-science
+      MONGO_VECTOR_COLLECTION: clinical-notes
+      MONGO_VECTOR_USERNAME: root
+      MONGO_VECTOR_PASSWORD: test123  # pragma: allowlist secret
+      MONGO_VECTOR_PORT: 27017
+      # vector index settings
+      MONGO_VECTOR_INDEX_NAME: vector_index
+      MONGO_VECTOR_INDEX_TYPE: vectorSearch
+      MONGO_VECTOR_EMBEDDINGS_FIELD: embedding
+      MONGO_VECTOR_DIMENSIONS: 1536
+      MONGO_VECTOR_SIMILARITY: dotProduct
+      MONGO_VECTOR_QUANTIZATION: scalar
+      # Force bash instead of zsh
+      ZDOTDIR: /dev/null
+      SHELL: /bin/bash
+    depends_on:
+      mongo:
+        condition: service_healthy
+    container_name: atlas-cli
+    volumes:
+      - ./scripts/create_vector_index.sh:/create_vector_index.sh:ro
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["/bin/bash /create_vector_index.sh"]
+    healthcheck:
+      test: /bin/sh -c "echo 'db.getCollection(\"clinical-notes\").getSearchIndexes().filter(index => index.name === \"vector_index\").length > 0' | mongosh mongodb://root:test123@mongo:27017/data-science?authSource=admin"
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: language-model-gateway_web

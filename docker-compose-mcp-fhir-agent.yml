@@ -221,6 +221,12 @@ services:
     entrypoint: [ "/bin/bash", "-c" ]
     command:
       - >-
+        echo "Waiting for MongoDB to be ready...";
+        until mongosh --host "$${MONGO_HOST}" --port "$${MONGO_PORT}" --username "$${MONGO_USER}" --password "$${MONGO_PASS}" --authenticationDatabase admin --eval "db.adminCommand('ping')" --quiet > /dev/null 2>&1; do
+          echo "MongoDB is unavailable - sleeping";
+          sleep 2;
+        done;
+        echo "MongoDB is ready!";
         if [ ! -d /backup/$${DB_NAME} ]; then echo "Error: backup directory /backup/$${DB_NAME} not found" >&2; exit 1; fi;
         mongorestore --host "$${MONGO_HOST}" --port "$${MONGO_PORT}" --username "$${MONGO_USER}" --password "$${MONGO_PASS}" --authenticationDatabase admin --drop --db "$${DB_NAME}" /backup/$${DB_NAME} && echo "Restore completed"
 

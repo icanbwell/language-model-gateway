@@ -124,26 +124,6 @@ services:
     networks:
       - web
 
-  mongo:
-    image: mongodb/mongodb-atlas-local:8.2.0
-    # https://github.com/mongodb/mongodb-atlas-cli/releases
-    # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
-    ports:
-      - "27017:27017"
-    container_name: mongo
-    environment:
-      #      ALLOW_EMPTY_PASSWORD: yes
-      MONGO_VECTOR_DATABASE: data-science
-      MONGO_VECTOR_COLLECTION: complaints_cache
-      MONGODB_INITDB_ROOT_USERNAME: root
-      MONGODB_INITDB_ROOT_PASSWORD: "test123" # pragma: allowlist secret
-      MONGO_VECTOR_PORT: 27017
-      MONGO_EMBEDDINGS_CACHE_COLLECTION: embeddings_cache
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
-    networks:
-      - web
-
 networks:
   web:
     driver: bridge

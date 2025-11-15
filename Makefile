@@ -60,6 +60,7 @@ up-open-webui-ssl: fix-script-permissions clean-database ## starts docker contai
 up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## starts docker containers
 	docker compose \
 	-f docker-compose-keycloak.yml \
+	-f docker-compose-mongo.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
 	-f docker-compose-openwebui-ssl.yml \
@@ -83,6 +84,7 @@ up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## sta
 up-mcp-fhir-agent:
 	docker compose \
 	-f docker-compose-keycloak.yml \
+	-f docker-compose-mongo.yml \
 	-f docker-compose-fhir.yml \
 	-f docker-compose-embedding.yml \
 	-f docker-compose-mcp-fhir-agent.yml \
