@@ -27,7 +27,7 @@ def format_chat_completion_chunk_sse(chunk_data: dict[str, Any]) -> str:
     Returns:
         SSE-formatted string
     """
-    return f"data: {json.dumps(chunk_data)}\n\n"
+    return format_sse(chunk_data)
 
 
 def format_done_sse() -> str:
