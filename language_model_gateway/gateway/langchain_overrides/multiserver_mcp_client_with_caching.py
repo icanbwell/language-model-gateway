@@ -253,6 +253,9 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                     tools = await _list_all_tools(tool_session)
             elif session is not None:
                 tools = await _list_all_tools(session)
+            else:
+                msg = "Either a session or a connection config must be provided"
+                raise ValueError(msg)
         except* HTTPStatusError as exc:
             # if there is
             # exc is a ExceptionGroup, so we can catch it with a wildcard
