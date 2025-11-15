@@ -160,4 +160,5 @@ volumes:
 
 networks:
   web:
-    driver: bridge
+    external: true
+    name: language-model-gateway_web
