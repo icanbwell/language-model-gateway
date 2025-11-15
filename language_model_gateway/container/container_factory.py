@@ -77,7 +77,9 @@ from language_model_gateway.gateway.utilities.token_reducer.token_reducer import
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )
-from oidcauthlib.container.oidc_authlib_container_factory import OidcAuthLibContainerFactory
+from oidcauthlib.container.oidc_authlib_container_factory import (
+    OidcAuthLibContainerFactory,
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
@@ -88,7 +90,11 @@ class LanguageModelGatewayContainerFactory:
     def create_container(cls) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = OidcAuthLibContainerFactory().create_container()
+        container = SimpleContainer()
+
+        container = OidcAuthLibContainerFactory().register_services_in_container(
+            container=container
+        )
 
         # Register our own FastAPIManager so we can save the token
         # Must be done AFTER the OidcContainerFactory to override the registration

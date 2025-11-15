@@ -7,7 +7,7 @@ from shutil import rmtree
 from typing import Dict, List, Optional, Any
 
 import pytest
-from oidcauthlib.container.simple_container import SimpleContainer
+from oidcauthlib.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
@@ -27,6 +27,7 @@ from language_model_gateway.gateway.utilities.jira.jira_issue_result import (
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
+from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
@@ -43,7 +44,7 @@ async def test_jira_get_summarized_issues(httpx_mock: HTTPXMock) -> None:
 
     max_projects = 2
 
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         os.environ["JIRA_USERNAME"] = "dummy_username"

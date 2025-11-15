@@ -17,8 +17,6 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from oidcauthlib.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
@@ -30,11 +28,13 @@ from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
+from oidcauthlib.container.interfaces import IContainer
+from tests.common import get_test_container
 
 
 async def test_chat_anthropic_image_generator(async_client: httpx.AsyncClient) -> None:
     print("")
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
@@ -111,7 +111,7 @@ async def test_chat_anthropic_image_generator_streaming(
     async_client: httpx.AsyncClient,
 ) -> None:
     print("")
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(

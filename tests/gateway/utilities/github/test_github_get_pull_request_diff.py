@@ -6,10 +6,9 @@ from typing import Optional
 
 import httpx
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
-from oidcauthlib.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -20,6 +19,7 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
 )
+from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
@@ -36,7 +36,7 @@ async def test_github_get_pull_request_diff(
         rmtree(temp_folder)
     makedirs(temp_folder)
 
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         org_name: str = "icanbwell"

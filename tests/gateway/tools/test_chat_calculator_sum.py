@@ -1,6 +1,7 @@
 import logging
 
 import httpx
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion
 from typing import List, Dict, Any
@@ -13,8 +14,8 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from oidcauthlib.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
+
+from tests.common import get_test_container
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
@@ -31,7 +32,7 @@ async def test_chat_calculator_sum_tool_bedrock(
 ) -> None:
     print("")
     print("")
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
 
     # set the model configuration for this test
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(

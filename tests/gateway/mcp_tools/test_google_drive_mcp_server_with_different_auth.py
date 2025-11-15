@@ -2,6 +2,7 @@ import os
 
 import pytest
 import httpx
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from language_model_gateway.configs.config_schema import (
@@ -13,13 +14,12 @@ from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from oidcauthlib.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from tests.auth.keycloak_helper import KeyCloakHelper
+from tests.common import get_test_container
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
@@ -36,7 +36,7 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     )
     assert access_token is not None
 
-    test_container: SimpleContainer = await get_container_async()
+    test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.register(
             ModelFactory,
