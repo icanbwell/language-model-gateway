@@ -95,10 +95,10 @@ up-mcp-fhir-agent:
 .PHONY: up-mcp-server-gateway
 up-mcp-server-gateway:
 	docker compose \
+	-f docker-compose-keycloak.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
-	sh scripts/wait-for-healthy.sh  language-model-gateway-mcp-server-gateway-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
 .PHOHY: up-all
 up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
