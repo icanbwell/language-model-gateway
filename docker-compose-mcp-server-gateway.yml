@@ -19,7 +19,7 @@ services:
     env_file: docker.env
     command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
-      - '5051:5000'
+      - '5054:5000'
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 30s

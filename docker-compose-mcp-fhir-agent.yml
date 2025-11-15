@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         GITHUB_TOKEN: ${GITHUB_TOKEN}
-#    image: mcp-fhir-agent:local
+    image: mcp-fhir-agent:local
     environment:
       DEBUG_METRICS: 0
       LOG_LEVEL: DEBUG

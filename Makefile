@@ -67,6 +67,7 @@ up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## sta
 	-f docker-compose-mcp-server-gateway.yml \
 	-f docker-compose-fhir.yml \
 	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
 	if [ $? -ne 0 ]; then exit 1; fi
