@@ -240,7 +240,7 @@ class AuthManager:
             token_cache_item=token_cache_item, refreshed=False
         )
 
-        content: Dict[str, Any] = token_cache_item.model_dump()
+        content: Dict[str, Any] = token_cache_item.model_dump(mode="json")
 
         if logger.isEnabledFor(logging.DEBUG):
             access_token: str | None = (

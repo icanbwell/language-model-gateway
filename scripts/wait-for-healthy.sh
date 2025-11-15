@@ -30,6 +30,11 @@ log() {
   printf "[%s] %s\n" "$(date '+%Y-%m-%dT%H:%M:%S')" "$*"
 }
 
+log_progress() {
+  # Log on same line with carriage return (no newline)
+  printf "\r[%s] %s" "$(date '+%Y-%m-%dT%H:%M:%S')" "$*"
+}
+
 if [ "$#" -lt 1 ]; then
   usage
   exit 2
@@ -73,10 +78,11 @@ get_status() {
 while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
   ATTEMPT=$((ATTEMPT + 1))
   get_status
-  log "Attempt $ATTEMPT/$MAX_ATTEMPTS STATUS=$STATUS STATE=$STATE"
+  log_progress "Attempt $ATTEMPT/$MAX_ATTEMPTS HEALTH=$STATUS STATE=$STATE"
 
   case "$STATUS" in
     healthy)
+      printf "\n" # Move to new line before final message
       log "Container '$CONTAINER_NAME' is healthy."
       exit 0
       ;;
@@ -84,6 +90,7 @@ while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
       : # keep waiting
       ;;
     unhealthy)
+      printf "\n" # Move to new line before error message
       log "ERROR: Container '$CONTAINER_NAME' reported unhealthy. Showing diagnostics."
       docker ps --filter "name=$CONTAINER_NAME" --format 'table {{.Names}}\t{{.Status}}'
       docker logs "$CONTAINER_NAME" 2>&1 | tail -n 100 || true
@@ -91,9 +98,11 @@ while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
       ;;
     no-healthcheck)
       if [ "$NO_HEALTHCHECK_OK" = "1" ]; then
+        printf "\n" # Move to new line before message
         log "No healthcheck defined for '$CONTAINER_NAME' (treating as success)."
         exit 3
       else
+        printf "\n" # Move to new line before warning
         log "WARNING: No healthcheck defined for '$CONTAINER_NAME'; continuing to wait on running state."
       fi
       ;;
@@ -101,19 +110,21 @@ while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
 
   case "$STATE" in
     restarting|dead|exited)
+      printf "\n" # Move to new line before error message
       log "ERROR: Container state is '$STATE'. Showing diagnostics."
       docker ps --filter "name=$CONTAINER_NAME" --format 'table {{.Names}}\t{{.Status}}'
       docker logs "$CONTAINER_NAME" 2>&1 | tail -n 100 || true
       exit 1
       ;;
     not-found)
-      log "INFO: Container '$CONTAINER_NAME' not found yet; will retry."
+      : # keep waiting
       ;;
   esac
 
   sleep "$INTERVAL"
 done
 
+printf "\n" # Move to new line before final error message
 log "ERROR: Container '$CONTAINER_NAME' did not become healthy within $MAX_ATTEMPTS attempts (interval=${INTERVAL}s)"
 docker ps --filter "name=$CONTAINER_NAME" --format 'table {{.Names}}\t{{.Status}}'
 docker logs "$CONTAINER_NAME" 2>&1 | tail -n 100 || true

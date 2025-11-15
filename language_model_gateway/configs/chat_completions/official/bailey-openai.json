@@ -42,8 +42,7 @@
       "auth": "jwt_token",
       "auth_providers": [
         "okta"
-      ],
-      "auth_optional": true
+      ]
     }
   ],
   "example_prompts": [
