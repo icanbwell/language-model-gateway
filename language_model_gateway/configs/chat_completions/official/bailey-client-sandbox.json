@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "bailey",
-  "name": "Bailey AI",
+  "id": "bailey_client_sandbox",
+  "name": "Bailey AI Client Sandbox",
   "description": "This is a language model that can access data in FHIR",
   "type": "langchain",
   "model": {
@@ -41,7 +41,7 @@
       "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/",
       "auth": "jwt_token",
       "auth_providers": [
-        "okta"
+        "oktafhirclientsandbox"
       ]
     }
   ],
