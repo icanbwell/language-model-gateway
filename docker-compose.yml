@@ -51,27 +51,32 @@ services:
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
+      AUTH_FRIENDLY_NAME_CLIENT1: "Keycloak BWell Realm"
       AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
       AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
       AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # second client for testing
       AUTH_ISSUER_CLIENT3: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT3: "client3"
+      AUTH_FRIENDLY_NAME_CLIENT3: "Keycloak BWell Realm Client 3"
       AUTH_CLIENT_ID_CLIENT3: "bwell-client-id-3"
       AUTH_CLIENT_SECRET_CLIENT3: "bwell-secret-3"
       AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # Okta for dev and production
       AUTH_ISSUER_OKTA: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTA: "Okta"
       # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
       AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
       # Okta FHIR Dev
       AUTH_ISSUER_OKTAFHIRDEV: ${AUTH_ISSUER_OKTAFHIRDEV:-https://icanbwell.okta.com}
       AUTH_AUDIENCE_OKTAFHIRDEV: ${AUTH_AUDIENCE_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
+      AUTH_FRIENDLY_NAME_OKTAFHIRDEV: ${AUTH_FRIENDLY_NAME_OKTAFHIRDEV:-Okta FHIR Dev}
       AUTH_CLIENT_ID_OKTAFHIRDEV: ${AUTH_CLIENT_ID_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
       AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: ${AUTH_WELL_KNOWN_URI_OKTAFHIRDEV:-https://icanbwell.okta.com/.well-known/openid-configuration}
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: ${AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
       AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: ${AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
+      AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX: ${AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX:-Okta FHIR Client Sandbox}
       AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: ${AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
       AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: ${AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com/.well-known/openid-configuration}
       # This is the URL that the user will be redirected to after authentication
@@ -115,7 +120,7 @@ services:
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s

@@ -248,7 +248,9 @@ class TokenExchangeManager:
                 )
                 if (
                     not tool_auth_providers
-                    or token_auth_provider in tool_auth_providers
+                    or not token_auth_provider
+                    or token_auth_provider.lower()
+                    in [c.lower() for c in tool_auth_providers]
                 ):  # token is valid
                     logger.debug(
                         f"Token is valid for tool {tool_config.name} with token_auth_provider {token_auth_provider}."
@@ -288,7 +290,7 @@ class TokenExchangeManager:
                         referring_email=email,
                     )
                     if token_for_tool:
-                        if token_for_tool.is_valid_id_token():
+                        if token_for_tool.is_valid_access_token():
                             logger.debug(
                                 f"Found Token in cache for tool {tool_config.name} for email {email} and auth_provider {token_auth_provider}."
                             )
@@ -309,7 +311,7 @@ class TokenExchangeManager:
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
                             message="Token provided in Authorization header has wrong auth provider:"
-                            + f"\nFound auth provider: {token_auth_provider} for client_id {client_id}."
+                            + f"\nFound auth provider: {token_auth_provider} for client_id :{client_id}."
                             + f", Expected auth provider: {','.join(tool_auth_providers)}."
                             + f"\nEmail (sub) in token: {email}."
                             + f"\nCould not find a cached token for the tool for auth_providers {','.join(tool_auth_providers)} and email {email}."

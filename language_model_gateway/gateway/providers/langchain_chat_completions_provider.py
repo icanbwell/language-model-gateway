@@ -321,6 +321,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             if tool_first_auth_provider is not None
             else None
         )
+        if auth_config is None:
+            raise ValueError(
+                f"AuthConfig not found for auth provider {tool_first_auth_provider} used by tool {tool_using_authentication.name}."
+            )
         tool_first_issuer: str | None = (
             tool_auth_issuers[0]
             if tool_auth_issuers is not None
@@ -370,7 +374,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         error_message: str = (
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
-            + f"\nClick here to authenticate: [Login to {tool_first_auth_provider}]({authorization_url})."
+            + f"\nClick here to authenticate: [Login to {auth_config.friendly_name}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
         await self.tool_auth_manager.get_token_for_tool_async(
