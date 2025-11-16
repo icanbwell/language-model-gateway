@@ -68,13 +68,29 @@ class TokenCacheItem(BaseDbModel):
         """
         return self.access_token.is_valid() if self.access_token else False
 
-    def get_token(self) -> Optional[Token]:
+    def get_access_token(self) -> Optional[Token]:
         """
         Gets the ID token if it is valid, otherwise returns the access token.
         Returns:
             Optional[str]: The id token if valid, otherwise the access token.
         """
-        return self.id_token if self.id_token else self.access_token
+        return self.access_token if self.access_token else None
+
+    def get_id_token(self) -> Optional[Token]:
+        """
+        Gets the ID token if it is valid, otherwise returns the access token.
+        Returns:
+            Optional[str]: The id token if valid, otherwise the access token.
+        """
+        return self.id_token if self.id_token else None
+
+    def get_refresh_token(self) -> Optional[Token]:
+        """
+        Gets the refresh token if it is valid.
+        Returns:
+            Optional[str]: The refresh token if valid, otherwise None.
+        """
+        return self.refresh_token if self.refresh_token else None
 
     @classmethod
     def create(

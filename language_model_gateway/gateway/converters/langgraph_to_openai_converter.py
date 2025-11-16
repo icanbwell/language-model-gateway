@@ -363,6 +363,32 @@ class LangGraphToOpenAIConverter:
                                 yield format_chat_completion_chunk_sse(
                                     chat_stream_response.model_dump()
                                 )
+                        else:
+                            logger.debug("on_tool_end: no tool message output")
+                            chat_stream_response = ChatCompletionChunk(
+                                id=request_id,
+                                created=int(time.time()),
+                                model=request["model"],
+                                choices=[
+                                    ChunkChoice(
+                                        index=0,
+                                        delta=ChoiceDelta(
+                                            role="assistant",
+                                            content="\n\n> Tool completed with no output.\n",
+                                        ),
+                                    )
+                                ],
+                                usage=CompletionUsage(
+                                    prompt_tokens=0,
+                                    completion_tokens=0,
+                                    total_tokens=0,
+                                ),
+                                object="chat.completion.chunk",
+                            )
+                            yield format_chat_completion_chunk_sse(
+                                chat_stream_response.model_dump()
+                            )
+
                     case _:
                         # Handle other event types
                         pass

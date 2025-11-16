@@ -1,6 +1,7 @@
 import logging
 from typing import override, Any, Dict
 
+from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
@@ -66,8 +67,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         code: str | None,
         state_decoded: Dict[str, Any],
         token_dict: dict[str, Any],
-        audience: str | None,
-        issuer: str | None,
+        auth_config: AuthConfig,
         url: str | None,
     ) -> Response:
         """
@@ -79,13 +79,14 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             code (str | None): The authorization code received from the OIDC provider.
             state_decoded (Dict[str, Any]): The decoded state information.
             token_dict (dict[str, Any]): The token information as a dictionary.
-            audience (str | None): The audience for which the token is intended.
-            issuer (str | None): The issuer of the token.
+            auth_config (AuthConfig): The authorization configuration.
             url (str | None): The URL associated with the token.
         Returns:
             Dict[str, Any]: A dictionary containing the token details.
         """
-        logger.debug(f"Saving token for audience '{audience}' and issuer '{issuer}'")
+        logger.debug(
+            f"Saving token for audience '{audience}' and issuer '{issuer}': {token_dict=} {state_decoded=}"
+        )
 
         if issuer is None:
             raise ValueError("issuer must not be None")
