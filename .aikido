@@ -7,3 +7,4 @@ exclude:
     - docker-compose-keycloak.yml
     - Makefile
     - docker-compose-mcp-fhir-agent.yml
+    - docker-compose.yml
