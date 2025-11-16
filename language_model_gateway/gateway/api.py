@@ -39,9 +39,6 @@ from oidcauthlib.container.inject import Inject
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
-# register our container
-ContainerRegistry.set_default(LanguageModelGatewayContainerFactory.create_container())
-
 logger = logging.getLogger(__name__)
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -91,6 +88,10 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
 
 
 def create_app() -> FastAPI:
+    # register our container
+    ContainerRegistry.set_default(
+        LanguageModelGatewayContainerFactory.create_container()
+    )
     app1: FastAPI = FastAPI(title="OpenAI-compatible API", lifespan=lifespan)
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
