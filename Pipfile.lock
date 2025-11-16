@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5e70f66d75f08ec4e206b96196908b7e6fa9966ceace10bf773b9013f6782227"
+            "sha256": "50ccb48220d487617575b7fa39aa3f2718793aa0a73fd21ddf1b611d677428f4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1985,12 +1985,12 @@
         },
         "oidcauthlib": {
             "hashes": [
-                "sha256:3b6d30bb5296b06035899ca0f29903cd1884491151e0965536829d4257acb578",
-                "sha256:62c2e00ab95ce0c99d3fe32aabd91c56ccdda8535b5c5115fed9e4bfbe7858df"
+                "sha256:1506a25e1314c000f4b67566c5e6a6e0ae133516c3d71d9bfbfc29ee1a35d600",
+                "sha256:7397f51f5db08a580499bff8a5407b750e671792bfe85275eaebbaa987986951"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==1.0.6"
+            "version": "==1.0.7"
         },
         "openai": {
             "hashes": [

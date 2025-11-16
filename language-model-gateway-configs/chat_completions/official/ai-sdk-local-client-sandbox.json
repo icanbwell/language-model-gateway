@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "ai_sdk_local_dev",
+  "name": "AI SDK Local Dev Fhir",
+  "description": "This is a language model that can access data in FHIR",
+  "type": "langchain",
+  "model": {
+    "provider": "bedrock",
+    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+  },
+  "system_prompts": [
+    {
+      "role": "system",
+      "content": "You are a tool that searches and retrieves from FHIR server.  If no person id is specified by the user then use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a.  You can also access the current date using the current_date tool."
+    }
+  ],
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "name": "fhir_server",
+      "url": "http://mcp-fhir-agent-client-sandbox:5000/",
+      "auth": "jwt_token",
+      "auth_providers": [
+        "oktafhirdev"
+      ]
+    }
+  ],
+  "example_prompts": [
+    {
+      "role": "user",
+      "content": "Summarize the contents of the file at this URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing"
+    }
+  ]
+}

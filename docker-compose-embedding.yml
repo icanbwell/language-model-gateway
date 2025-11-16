@@ -29,7 +29,7 @@ services:
     image: ddosify/text-embeddings-inference:cpu-1.6.0
     # https://huggingface.github.io/text-embeddings-inference/
     ports:
-      - "5053:80"
+      - "5060:80"
     volumes:
       - ./caches/embedding-models:/data
     environment:

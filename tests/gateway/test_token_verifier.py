@@ -72,6 +72,7 @@ class MockAuthConfigReader(AuthConfigReader):
                 issuer="https://fake-issuer",
                 auth_provider="fake-auth-provider",
                 friendly_name="Fake Auth Provider",
+                scope="openid profile email",
             )
         ]
 

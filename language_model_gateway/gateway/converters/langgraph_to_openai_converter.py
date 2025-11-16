@@ -456,9 +456,19 @@ class LangGraphToOpenAIConverter:
             json_content: Any = safe_json(tool_message.content)
             if json_content is not None:
                 if isinstance(json_content, dict):
+                    text_message: str = ""
                     if "result" in json_content:
                         # https://github.com/open-webui/open-webui/discussions/11981
-                        return cast(str, json_content.get("result"))
+                        text_message += cast(str, json_content.get("result"))
+                    if "error" in json_content:
+                        error_message = json_content.get("error", "")
+                        text_message += f"\nError: {error_message}\n"
+                    if "urls" in json_content:
+                        urls = json_content.get("urls", [])
+                        if isinstance(urls, list) and len(urls) > 0:
+                            text_message += "\nRelated URLs:\n"
+                            for url in urls:
+                                text_message += f"- {url}\n"
             return tool_message.content
 
         if (
