@@ -469,6 +469,7 @@ class LangGraphToOpenAIConverter:
                             text_message += "\nRelated URLs:\n"
                             for url in urls:
                                 text_message += f"- {url}\n"
+                    return text_message
             return tool_message.content
 
         if (
