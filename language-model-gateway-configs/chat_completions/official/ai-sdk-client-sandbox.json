@@ -11,7 +11,7 @@
   "system_prompts": [
     {
       "role": "system",
-      "content": "You are a tool that searches and retrieves from FHIR server.  You can also access the current date using the current_date tool."
+      "content": "You are a tool that searches and retrieves from FHIR server.  If no person id is specified by the user then use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a.  You can also access the current date using the current_date tool."
     }
   ],
   "model_parameters": [
