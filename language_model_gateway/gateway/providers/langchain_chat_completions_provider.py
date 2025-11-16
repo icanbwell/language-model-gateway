@@ -361,10 +361,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 auth_provider=tool_first_auth_provider,
-                client_id=tool_client_id,
                 audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
-                issuer=tool_first_issuer,
                 url=tool_using_authentication.url,
                 referring_email=auth_information.email,
                 referring_subject=auth_information.subject,
