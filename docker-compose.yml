@@ -40,7 +40,7 @@ services:
       GITHUB_MAXIMUM_REPOS: "100"
       GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO: "100"
       JIRA_BASE_URL: "https://icanbwell.atlassian.net"
-#      JIRA_USERNAME: "imran.qureshi@icanbwell.com"
+#      JIRA_USERNAME: "imran.qureshi@bwell.com"
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30

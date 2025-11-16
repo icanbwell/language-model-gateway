@@ -60,7 +60,7 @@ services:
       # This is the user and password that will be created in the realm
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
-      MY_USER_EMAIL: imran.qureshi@icanbwell.com
+      MY_USER_EMAIL: imran.qureshi@bwell.com
       MY_USER_FIRST_NAME: Imran
       MY_USER_LAST_NAME: Qureshi
       MY_USER_SUB: tester-subject-id
