@@ -340,6 +340,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_config.audience if auth_config is not None else None
         )
         if not auth_information.email:
+            logger.error(
+                f"AuthInformation doesn't have email: {auth_information} in token: {auth_header}"
+            )
             raise ValueError(
                 "AuthInformation must have email to authenticate for tools."
                 + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
