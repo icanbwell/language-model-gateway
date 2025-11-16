@@ -97,7 +97,7 @@ up-mcp-server-gateway:
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
-.PHOHY: up-all
+.PHONY: up-all
 up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
 	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
