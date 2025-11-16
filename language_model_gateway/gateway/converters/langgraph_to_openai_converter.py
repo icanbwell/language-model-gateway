@@ -462,7 +462,8 @@ class LangGraphToOpenAIConverter:
                         text_message += cast(str, json_content.get("result"))
                     if "error" in json_content:
                         error_message = json_content.get("error", "")
-                        text_message += f"\nError: {error_message}\n"
+                        if error_message:
+                            text_message += f"\nError: {error_message}\n"
                     if "urls" in json_content:
                         urls = json_content.get("urls", [])
                         if isinstance(urls, list) and len(urls) > 0:

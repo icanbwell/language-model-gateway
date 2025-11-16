@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
   "id": "ai_sdk_local_client_sandbox",
-  "name": "AI SDK Local Client Sandbox Fhir",
+  "name": "AI SDK Local to Fhir Client Sandbox",
   "description": "This is a language model that can access data in FHIR",
   "type": "langchain",
   "model": {
