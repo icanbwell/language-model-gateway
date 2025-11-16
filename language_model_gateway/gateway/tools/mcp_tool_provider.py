@@ -164,7 +164,7 @@ class MCPToolProvider:
                         ) = await self.tool_auth_manager.get_token_for_tool_async(
                             auth_header=auth_header, error_message="", tool_config=tool
                         )
-                        token = token_item.get_token() if token_item else None
+                        token = token_item.get_access_token() if token_item else None
                         if token:
                             # if we have a token_item, we need to add it to the Authorization header
                             auth_header = f"Bearer {token.token}"

@@ -5,7 +5,7 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.checkpoint.mongodb import MongoDBSaver
 from langgraph.store.memory import InMemoryStore
-from langgraph.store.base import BaseStore, IndexConfig
+from langgraph.store.base import BaseStore
 from langgraph.store.mongodb import MongoDBStore
 
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
@@ -29,11 +29,13 @@ class PersistenceFactory:
     @contextmanager
     def create_store(self, persistence_type: str) -> Generator[BaseStore, None, None]:
         if persistence_type == "memory":
-            index: IndexConfig = {
-                "dims": 1536,
-                "embed": "openai:text-embedding-3-small",
-            }
-            yield InMemoryStore(index=index)
+            # index: IndexConfig = {
+            #     "dims": 1536,
+            #     "embed": "openai:text-embedding-3-small",
+            # }
+            # yield InMemoryStore(index=index)
+            # TODO: Use a local embedding model since openai requires an API key
+            yield InMemoryStore()
         elif persistence_type == "mongo":
             # https://pypi.org/project/langgraph-store-mongodb/
             # https://www.mongodb.com/docs/atlas/ai-integrations/langgraph/

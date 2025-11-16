@@ -1,5 +1,3 @@
-from typing import cast
-
 from bs4 import BeautifulSoup
 from markdownify import MarkdownConverter
 
@@ -8,7 +6,7 @@ class HtmlToMarkdownConverter:
     @staticmethod
     async def get_markdown_from_html_async(*, html_content: str) -> str:
         soup = BeautifulSoup(html_content, "html.parser")
-        return cast(str, MarkdownConverter().convert_soup(soup))
+        return MarkdownConverter().convert_soup(soup)
 
     @staticmethod
     async def get_plain_text_from_html_async(*, html_content: str) -> str:

@@ -1,9 +1,13 @@
 import logging
 from typing import override, Any, Dict
 
+from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from oidcauthlib.utilities.environment.abstract_environment_variables import (
     AbstractEnvironmentVariables,
 )
@@ -32,6 +36,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         auth_config_reader: AuthConfigReader,
         token_reader: TokenReader,
         token_exchange_manager: TokenExchangeManager,
+        well_known_configuration_manager: WellKnownConfigurationManager,
     ) -> None:
         """
         Initialize the TokenStorageAuthManager with required components.
@@ -49,6 +54,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             environment_variables=environment_variables,
             auth_config_reader=auth_config_reader,
             token_reader=token_reader,
+            well_known_configuration_manager=well_known_configuration_manager,
         )
 
         self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
@@ -66,8 +72,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         code: str | None,
         state_decoded: Dict[str, Any],
         token_dict: dict[str, Any],
-        audience: str | None,
-        issuer: str | None,
+        auth_config: AuthConfig,
         url: str | None,
     ) -> Response:
         """
@@ -79,21 +84,22 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             code (str | None): The authorization code received from the OIDC provider.
             state_decoded (Dict[str, Any]): The decoded state information.
             token_dict (dict[str, Any]): The token information as a dictionary.
-            audience (str | None): The audience for which the token is intended.
-            issuer (str | None): The issuer of the token.
+            auth_config (AuthConfig): The authorization configuration.
             url (str | None): The URL associated with the token.
         Returns:
             Dict[str, Any]: A dictionary containing the token details.
         """
-        logger.debug(f"Saving token for audience '{audience}' and issuer '{issuer}'")
+        logger.debug(
+            f"Saving token for audience '{auth_config.audience}' and issuer '{auth_config.issuer}': {token_dict=} {state_decoded=}"
+        )
 
-        if issuer is None:
+        if auth_config.issuer is None:
             raise ValueError("issuer must not be None")
 
         token_cache_item: TokenCacheItem = (
             self.token_exchange_manager.create_token_cache_item(
                 code=code,
-                issuer=issuer,
+                auth_config=auth_config,
                 state_decoded=state_decoded,
                 token=token_dict,
                 url=url,

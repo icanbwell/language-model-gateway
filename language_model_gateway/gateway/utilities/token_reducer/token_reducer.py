@@ -1,8 +1,14 @@
+import logging
 from typing import Optional, Literal
 
 import tiktoken
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
 TOKEN_REDUCER_STRATEGY = Literal["end", "beginning", "smart"]
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class TokenReducer:
@@ -24,7 +30,10 @@ class TokenReducer:
         """
         try:
             self.encoding = tiktoken.encoding_for_model(model)
-        except KeyError:
+        except KeyError as e:
+            logger.exception(
+                f"Model encoding not found for {model}, using default cl100k_base. Error: {e}"
+            )
             # Fallback to a default encoding if model not found
             self.encoding = tiktoken.get_encoding("cl100k_base")
 
@@ -66,7 +75,7 @@ class TokenReducer:
             if preserve_start and preserve_start < max_tokens:
                 preserved_start = tokens[:preserve_start]
                 remaining_tokens = max_tokens - preserve_start
-                reduced_tokens = preserved_start + tokens[-(remaining_tokens):]
+                reduced_tokens = preserved_start + tokens[-remaining_tokens:]
             else:
                 # Default to end truncation if preserve_start is not feasible
                 reduced_tokens = tokens[:max_tokens]
@@ -77,7 +86,7 @@ class TokenReducer:
         # Decode back to text
         return self.encoding.decode(reduced_tokens)
 
-    def count_tokens(self, text: str) -> int:
+    def count_tokens(self, text: str | None) -> int:
         """
         Count tokens in the given text.
 
@@ -87,4 +96,13 @@ class TokenReducer:
         Returns:
             Number of tokens in the text
         """
-        return len(self.encoding.encode(text))
+        if not text:
+            return 0
+        if not isinstance(text, str):
+            logger.error(f"Input text is not a string: {text}")
+            raise TypeError(f"Input text must be a string: {type(text)}")
+        try:
+            return len(self.encoding.encode(text))
+        except Exception as e:
+            logger.exception(f"Error encoding text for token count: {e}\nText: {text}")
+            raise ValueError(f"Error encoding text for token count: {e}\nText: {text}")

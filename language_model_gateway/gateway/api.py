@@ -1,5 +1,6 @@
 import logging
 import os
+import uuid
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
@@ -8,6 +9,7 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
@@ -38,9 +40,6 @@ from oidcauthlib.container.inject import Inject
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
-# register our container
-ContainerRegistry.set_default(LanguageModelGatewayContainerFactory.create_container())
-
 logger = logging.getLogger(__name__)
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -59,6 +58,13 @@ logging.getLogger("authlib").setLevel(SRC_LOG_LEVELS["AUTH"])
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
+
+# register our container
+ContainerRegistry.set_default(
+    LanguageModelGatewayContainerFactory.create_container(
+        source=f"{__name__}[{uuid.uuid4().hex}]"
+    )
+)
 
 
 @asynccontextmanager
@@ -127,6 +133,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app1.add_middleware(FastApiLoggingMiddleware)
+
+    app1.add_middleware(RequestScopeMiddleware)
 
     return app1
 

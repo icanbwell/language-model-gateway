@@ -19,7 +19,6 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
 )
-from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
@@ -27,7 +26,7 @@ from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariab
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_github_get_pull_request_diff(
-    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
+    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
     print()
     data_dir: Path = Path(__file__).parent.joinpath("./")
@@ -36,12 +35,10 @@ async def test_github_get_pull_request_diff(
         rmtree(temp_folder)
     makedirs(temp_folder)
 
-    test_container: IContainer = get_test_container()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
-        test_container.register(
+        test_container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: MockEnvironmentVariables(),
         )

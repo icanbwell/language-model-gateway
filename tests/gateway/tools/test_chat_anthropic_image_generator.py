@@ -29,15 +29,15 @@ from tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 
-async def test_chat_anthropic_image_generator(async_client: httpx.AsyncClient) -> None:
+async def test_chat_anthropic_image_generator(
+    async_client: httpx.AsyncClient, test_container: IContainer
+) -> None:
     print("")
-    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -45,7 +45,7 @@ async def test_chat_anthropic_image_generator(async_client: httpx.AsyncClient) -
                 )
             ),
         )
-        test_container.register(
+        test_container.singleton(
             ImageGeneratorFactory,
             lambda c: MockImageGeneratorFactory(image_generator=MockImageGenerator()),
         )
@@ -108,13 +108,11 @@ async def test_chat_anthropic_image_generator(async_client: httpx.AsyncClient) -
 
 
 async def test_chat_anthropic_image_generator_streaming(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-    test_container: IContainer = get_test_container()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -122,7 +120,7 @@ async def test_chat_anthropic_image_generator_streaming(
                 )
             ),
         )
-        test_container.register(
+        test_container.singleton(
             ImageGeneratorFactory,
             lambda c: MockImageGeneratorFactory(image_generator=MockImageGenerator()),
         )

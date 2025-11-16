@@ -99,16 +99,18 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=1.0.0"
+oidcauthlib = ">=1.0.10"
 # Core OTel bundle
-opentelemetry-distro = "0.59b0"
+opentelemetry-distro = ">=0.59b0"
 # Instrumentation
-opentelemetry-instrumentation-fastapi = "0.59b0"
-opentelemetry-instrumentation-requests = "0.59b0"
-opentelemetry-instrumentation-logging = "0.59b0"
-opentelemetry-instrumentation-mcp = "0.48.0"
+opentelemetry-instrumentation-fastapi = ">=0.59b0"
+opentelemetry-instrumentation-requests = ">=0.59b0"
+opentelemetry-instrumentation-logging = ">=0.59b0"
+opentelemetry-instrumentation-mcp = ">=0.48.0"
 # Metrics (Prometheus)
-prometheus-fastapi-instrumentator = "7.1.0"
+prometheus-fastapi-instrumentator = ">=7.1.0"
+# gunicorn is a Python WSGI HTTP server for UNIX
+"gunicorn[standard]" = ">=23.0.0"  # needed for production server
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks

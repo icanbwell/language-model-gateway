@@ -6,4 +6,7 @@
 tmp
 Makefile
 
-caches/*
+caches
+image_generation
+__pycache__
+language-model-gateway-configs

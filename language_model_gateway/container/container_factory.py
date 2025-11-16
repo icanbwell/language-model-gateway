@@ -6,6 +6,9 @@ from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from oidcauthlib.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
 
@@ -87,10 +90,10 @@ logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
 
 class LanguageModelGatewayContainerFactory:
     @classmethod
-    def create_container(cls) -> SimpleContainer:
+    def create_container(cls, *, source: str) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = SimpleContainer()
+        container = SimpleContainer(source=source)
 
         container = OidcAuthLibContainerFactory().register_services_in_container(
             container=container
@@ -98,13 +101,16 @@ class LanguageModelGatewayContainerFactory:
 
         # Register our own FastAPIManager so we can save the token
         # Must be done AFTER the OidcContainerFactory to override the registration
-        container.register(
+        container.singleton(
             FastAPIAuthManager,
             lambda c: TokenStorageAuthManager(
                 environment_variables=c.resolve(EnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
                 token_exchange_manager=c.resolve(TokenExchangeManager),
+                well_known_configuration_manager=c.resolve(
+                    WellKnownConfigurationManager
+                ),
             ),
         )
 
@@ -133,35 +139,35 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(HttpClientFactory, lambda c: HttpClientFactory())
+        container.singleton(HttpClientFactory, lambda c: HttpClientFactory())
 
-        container.register(
+        container.singleton(
             OpenAiChatCompletionsProvider,
             lambda c: OpenAiChatCompletionsProvider(
                 http_client_factory=c.resolve(HttpClientFactory)
             ),
         )
-        container.register(ModelFactory, lambda c: ModelFactory())
+        container.singleton(ModelFactory, lambda c: ModelFactory())
 
-        container.register(
+        container.singleton(
             AwsClientFactory,
             lambda c: AwsClientFactory(),
         )
 
-        container.register(
+        container.singleton(
             ImageGeneratorFactory,
             lambda c: ImageGeneratorFactory(
                 aws_client_factory=c.resolve(AwsClientFactory)
             ),
         )
-        container.register(
+        container.singleton(
             FileManagerFactory,
             lambda c: FileManagerFactory(
                 aws_client_factory=c.resolve(AwsClientFactory),
             ),
         )
 
-        container.register(
+        container.singleton(
             LangGraphToOpenAIConverter,
             lambda c: LangGraphToOpenAIConverter(
                 environment_variables=c.resolve(
@@ -171,7 +177,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             OCRExtractorFactory,
             lambda c: OCRExtractorFactory(
                 aws_client_factory=c.resolve(AwsClientFactory),
@@ -179,12 +185,12 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: LanguageModelGatewayEnvironmentVariables(),
         )
 
-        container.register(
+        container.singleton(
             GithubPullRequestHelper,
             lambda c: GithubPullRequestHelper(
                 org_name=c.resolve(LanguageModelGatewayEnvironmentVariables).github_org,
@@ -195,7 +201,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             JiraIssueHelper,
             lambda c: JiraIssueHelper(
                 http_client_factory=c.resolve(HttpClientFactory),
@@ -211,7 +217,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             ConfluenceHelper,
             lambda c: ConfluenceHelper(
                 http_client_factory=c.resolve(HttpClientFactory),
@@ -227,12 +233,12 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             DatabricksHelper,
             lambda c: DatabricksHelper(),
         )
 
-        container.register(
+        container.singleton(
             ToolProvider,
             lambda c: ToolProvider(
                 image_generator_factory=c.resolve(ImageGeneratorFactory),
@@ -248,7 +254,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             ToolAuthManager,
             lambda c: ToolAuthManager(
                 auth_manager=c.resolve(AuthManager),
@@ -257,7 +263,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 cache=c.resolve(McpToolsMetadataExpiringCache),
@@ -269,7 +275,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
@@ -287,10 +293,10 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             ConfigReader, lambda c: ConfigReader(cache=c.resolve(ConfigExpiringCache))
         )
-        container.register(
+        container.singleton(
             ChatCompletionManager,
             lambda c: ChatCompletionManager(
                 open_ai_provider=c.resolve(OpenAiChatCompletionsProvider),
@@ -299,25 +305,25 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             ImageGenerationProvider,
             lambda c: ImageGenerationProvider(
                 image_generator_factory=c.resolve(ImageGeneratorFactory),
                 file_manager_factory=c.resolve(FileManagerFactory),
             ),
         )
-        container.register(
+        container.singleton(
             ImageGenerationManager,
             lambda c: ImageGenerationManager(
                 image_generation_provider=c.resolve(ImageGenerationProvider)
             ),
         )
 
-        container.register(
+        container.singleton(
             ModelManager, lambda c: ModelManager(config_reader=c.resolve(ConfigReader))
         )
 
-        container.register(
+        container.singleton(
             TokenExchangeManager,
             lambda c: TokenExchangeManager(
                 environment_variables=c.resolve(
@@ -333,7 +339,7 @@ class LanguageModelGatewayContainerFactory:
         truncation_strategy: TOKEN_REDUCER_STRATEGY = cast(
             TOKEN_REDUCER_STRATEGY, truncation_strategy_env
         )
-        container.register(
+        container.singleton(
             TokenReducer,
             lambda c: TokenReducer(
                 model=os.environ.get("DEFAULT_LLM_MODEL", "gpt-3.5-turbo"),
@@ -341,7 +347,7 @@ class LanguageModelGatewayContainerFactory:
             ),
         )
 
-        container.register(
+        container.singleton(
             PersistenceFactory,
             lambda c: PersistenceFactory(
                 environment_variables=c.resolve(

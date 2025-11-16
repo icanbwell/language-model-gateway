@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "bailey_client_sandbox",
-  "name": "Bailey AI Client Sandbox",
+  "id": "ai_sdk_dev",
+  "name": "AI SDK Dev",
   "description": "This is a language model that can access data in FHIR",
   "type": "langchain",
   "model": {
@@ -11,7 +11,7 @@
   "system_prompts": [
     {
       "role": "system",
-      "content": "You are a tool that searches and retrieves from FHIR server.  You can also access the current date using the current_date tool."
+      "content": "You are a tool that searches and retrieves from FHIR server.  If no person id is specified by the user then use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09.  You can also access the current date using the current_date tool."
     }
   ],
   "model_parameters": [
@@ -38,10 +38,10 @@
     },
     {
       "name": "fhir_server",
-      "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/",
+      "url": "https://mcpfhiragent.dev.icanbwell.com/",
       "auth": "jwt_token",
       "auth_providers": [
-        "oktafhirclientsandbox"
+        "oktafhirdev"
       ]
     }
   ],

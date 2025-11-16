@@ -13,8 +13,12 @@ devsetup: ## one time setup for devs
 	make tests && \
 	make up
 
+.PHONY: create-docker-network
+create-docker-network: ## creates the docker network
+	docker network create language-model-gateway_web || true
+
 .PHONY:build
-build: ## Builds the docker for dev
+build: create-docker-network ## Builds the docker for dev
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
@@ -22,7 +26,7 @@ build: ## Builds the docker for dev
 	 build --parallel;
 
 .PHONY: up
-up: fix-script-permissions ## starts docker containers
+up: create-docker-network fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
@@ -43,34 +47,63 @@ up-integration: fix-script-permissions ## starts docker containers
 .PHONY: up-open-webui
 up-open-webui: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml up --build -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
-	echo ""
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1
+	@echo ""
 	@echo OpenWebUI: http://localhost:3050
 
 .PHONY: up-open-webui-ssl
 up-open-webui-ssl: fix-script-permissions clean-database ## starts docker containers
 	docker compose --progress=plain -f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml up --build -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi && \
-	echo ""
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1
+	@echo ""
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## starts docker containers
-	docker compose --progress=plain \
-	  -f docker-compose-keycloak.yml \
+up-open-webui-auth: create-docker-network fix-script-permissions create-certs check-cert-expiry ## starts docker containers
+	docker compose \
+	-f docker-compose-keycloak.yml \
+	-f docker-compose-mongo.yml \
 	-f docker-compose.yml \
-	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
-	-f docker-compose-mcp-server-gateway.yml \
+	-f docker-compose-openwebui.yml \
+	-f docker-compose-openwebui-ssl.yml \
+	-f docker-compose-openwebui-auth.yml \
 	up -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 && \
-	if [ $? -ne 0 ]; then exit 1; fi
-	sh scripts/wait-for-healthy.sh mcp-server-gateway && \
-	if [ $? -ne 0 ]; then exit 1; fi
-
+	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
+	@echo OpenWebUI: https://open-webui.localhost
+	@echo Click 'Continue with Keycloak' to login
+	@echo Use the following credentials:
+	@echo Admin User: admin/password
+	@echo Normal User: tester/password
+	@echo Keycloak: http://keycloak:8080 admin/password
+	@echo OIDC debugger: http://localhost:8085
+	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
+	@echo OpenWebUI API docs: https://open-webui.localhost//docs
+
+.PHONY: up-mcp-fhir-agent
+up-mcp-fhir-agent:
+	docker compose \
+	-f docker-compose-keycloak.yml \
+	-f docker-compose-mongo.yml \
+	-f docker-compose-fhir.yml \
+	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
+	up -d
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp-fhir-agent-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp-fhir-agent-dev-1 || exit 1
+
+.PHONY: up-mcp-server-gateway
+up-mcp-server-gateway:
+	docker compose \
+	-f docker-compose-keycloak.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	up -d
+	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
+
+.PHONY: up-all
+up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
+	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
 	@echo Use the following credentials:

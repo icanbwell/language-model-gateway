@@ -18,6 +18,13 @@ from oidcauthlib.auth.token_reader import TokenReader
 from joserfc import jwt
 import time
 
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_cache import (
+    WellKnownConfigurationCache,
+)
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
+
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
@@ -64,15 +71,18 @@ class MockAuthConfigReader(AuthConfigReader):
                 well_known_uri=openid_configuration,
                 issuer="https://fake-issuer",
                 auth_provider="fake-auth-provider",
+                friendly_name="Fake Auth Provider",
+                scope="openid profile email",
             )
         ]
 
 
+class MocKWellKnownConfigurationManager(WellKnownConfigurationManager):
+    pass
+
+
 class MockTokenReader(TokenReader):
     pass
-    # @override
-    # async def fetch_well_known_config_and_jwks_async(self) -> None:
-    #     self.jwks = KeySet.import_key_set(JWKS)
 
 
 def create_jwt_token(exp_offset: int = 60) -> str:
@@ -91,10 +101,20 @@ def create_jwt_token(exp_offset: int = 60) -> str:
 
 
 def test_extract_token() -> None:
+    environment_variables = LanguageModelGatewayEnvironmentVariables()
+    auth_config_reader = MockAuthConfigReader(
+        environment_variables=environment_variables
+    )
+    well_known_configuration_cache: WellKnownConfigurationCache = (
+        WellKnownConfigurationCache()
+    )
+    well_known_configuration_manager = MocKWellKnownConfigurationManager(
+        auth_config_reader=auth_config_reader,
+        cache=well_known_configuration_cache,
+    )
     token_reader: TokenReader = MockTokenReader(
-        auth_config_reader=MockAuthConfigReader(
-            environment_variables=LanguageModelGatewayEnvironmentVariables()
-        )
+        auth_config_reader=auth_config_reader,
+        well_known_config_manager=well_known_configuration_manager,
     )
     header: str = "Bearer sometoken"
     assert token_reader.extract_token(authorization_header=header) == "sometoken"
@@ -104,11 +124,20 @@ def test_extract_token() -> None:
 
 
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:
+    auth_config_reader = MockAuthConfigReader(
+        environment_variables=LanguageModelGatewayEnvironmentVariables()
+    )
+    well_known_configuration_cache: WellKnownConfigurationCache = (
+        WellKnownConfigurationCache()
+    )
+    well_known_configuration_manager = MocKWellKnownConfigurationManager(
+        auth_config_reader=auth_config_reader,
+        cache=well_known_configuration_cache,
+    )
     token_reader: TokenReader = MockTokenReader(
-        auth_config_reader=MockAuthConfigReader(
-            environment_variables=LanguageModelGatewayEnvironmentVariables()
-        ),
+        auth_config_reader=auth_config_reader,
         algorithms=[ALGORITHM],
+        well_known_config_manager=well_known_configuration_manager,
     )
     token: str = create_jwt_token()
     token_item: Token | None = await token_reader.verify_token_async(token=token)
@@ -120,11 +149,20 @@ async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -
 async def test_verify_token_expired(
     mock_jwks: Any, mock_well_known_config: Any
 ) -> None:
+    auth_config_reader = MockAuthConfigReader(
+        environment_variables=LanguageModelGatewayEnvironmentVariables()
+    )
+    well_known_configuration_cache: WellKnownConfigurationCache = (
+        WellKnownConfigurationCache()
+    )
+    well_known_configuration_manager = MocKWellKnownConfigurationManager(
+        auth_config_reader=auth_config_reader,
+        cache=well_known_configuration_cache,
+    )
     token_reader: TokenReader = MockTokenReader(
-        auth_config_reader=MockAuthConfigReader(
-            environment_variables=LanguageModelGatewayEnvironmentVariables()
-        ),
+        auth_config_reader=auth_config_reader,
         algorithms=[ALGORITHM],
+        well_known_config_manager=well_known_configuration_manager,
     )
     token: str = create_jwt_token(exp_offset=-60)
     with pytest.raises(

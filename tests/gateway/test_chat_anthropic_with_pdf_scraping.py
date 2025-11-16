@@ -20,15 +20,15 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 
 async def test_chat_anthropic_with_pdf_scraping(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
-    test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        model_factory: ModelFactory = test_container.resolve(ModelFactory)
+        print(f"Using Model Factory Before: {type(model_factory)}")
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -36,6 +36,8 @@ async def test_chat_anthropic_with_pdf_scraping(
                 )
             ),
         )
+        model_factory = test_container.resolve(ModelFactory)
+        print(f"Using Model Factory After: {type(model_factory)}")
 
     # set the model configuration for this test
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
@@ -96,11 +98,10 @@ async def test_chat_anthropic_with_pdf_scraping(
 
 
 async def test_chat_anthropic_with_pdf_ocr_scraping(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
-    test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(

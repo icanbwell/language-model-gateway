@@ -29,19 +29,19 @@ from tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 
-async def test_store_and_read_memories_tool(async_client: httpx.AsyncClient) -> None:
+async def test_store_and_read_memories_tool(
+    async_client: httpx.AsyncClient, test_container: IContainer
+) -> None:
     print("")
     access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
     assert access_token is not None
-    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -49,7 +49,7 @@ async def test_store_and_read_memories_tool(async_client: httpx.AsyncClient) -> 
                 )
             ),
         )
-        test_container.register(
+        test_container.singleton(
             ImageGeneratorFactory,
             lambda c: MockImageGeneratorFactory(image_generator=MockImageGenerator()),
         )
