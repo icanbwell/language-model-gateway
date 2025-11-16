@@ -124,7 +124,7 @@ class TokenExchangeManager:
             model_class=TokenCacheItem,
             fields={
                 "referring_email": referring_email,
-                "auth_provider": auth_provider,
+                "auth_provider": auth_provider.lower(),
             },
         )
         return token
@@ -161,7 +161,8 @@ class TokenExchangeManager:
             )
             if token:
                 logger.debug(
-                    f"Found token for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json()}"
+                    f"Found token for auth_provider {auth_provider}, audience {audience} "
+                    f"and referring_email {referring_email}: {token.model_dump_json()}"
                 )
                 # we really care about the id token
                 if token.is_valid_id_token():
@@ -202,7 +203,7 @@ class TokenExchangeManager:
             raise Exception("tool_config must be an instance of AgentConfig")
 
         tool_auth_providers: List[str] = (
-            [ap.upper() for ap in tool_config.auth_providers]
+            [ap.lower() for ap in tool_config.auth_providers]
             if tool_config.auth_providers
             else []
         )
@@ -264,7 +265,7 @@ class TokenExchangeManager:
                     # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
-                        auth_provider=token_auth_provider
+                        auth_provider=token_auth_provider.lower()
                         if token_auth_provider
                         else "unknown",
                         referring_email=token_item.email,
@@ -516,7 +517,7 @@ class TokenExchangeManager:
             issuer=auth_config.issuer,
             audience=auth_config.audience,
             referrer=url,
-            auth_provider=auth_config.auth_provider,
+            auth_provider=auth_config.auth_provider.lower(),
             client_id=auth_config.client_id,
             created=datetime.now(UTC),
             referring_email=referring_email,
