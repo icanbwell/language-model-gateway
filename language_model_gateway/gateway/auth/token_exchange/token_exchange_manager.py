@@ -3,6 +3,7 @@ from datetime import datetime, UTC
 from typing import List, Any
 
 from bson import ObjectId
+from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.exceptions.authorization_bearer_token_missing_exception import (
     AuthorizationBearerTokenMissingException,
 )
@@ -128,28 +129,6 @@ class TokenExchangeManager:
         )
         return token
 
-    async def store_token_async(
-        self, *, token: TokenCacheItem, email: str, audience: str
-    ) -> None:
-        """
-        Store the token in the cache or MongoDB.
-
-        This method stores the token in the cache or MongoDB based on the email and tool name.
-        Args:
-            token (Token): The token to store.
-            email (str): The email associated with the token.
-            audience (str): The name of the OIDC provider.
-        """
-        await self.token_repository.insert_or_update(
-            collection_name=self.token_collection_name,
-            model_class=TokenCacheItem,
-            item=token,
-            keys={
-                "email": email,
-                "name": audience,
-            },
-        )
-
     async def get_token_cache_item_for_auth_providers_async(
         self, *, auth_providers: List[str], referring_email: str
     ) -> TokenCacheItem | None:
@@ -259,14 +238,12 @@ class TokenExchangeManager:
                 if token_item is None:
                     raise ValueError("Token verification failed: token_item is None.")
                 # get the audience from the token
-                token_audience: str | List[str] | None = token_item.audience
+                client_id: str | None = token_item.client_id
                 token_auth_provider: str | None = (
-                    self.auth_config_reader.get_provider_for_audience(
-                        audience=token_audience
-                        if isinstance(token_audience, str)
-                        else token_audience[0]
+                    self.auth_config_reader.get_provider_for_client_id(
+                        client_id=client_id
                     )
-                    if token_audience
+                    if client_id
                     else "unknown"
                 )
                 if (
@@ -332,7 +309,7 @@ class TokenExchangeManager:
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
                             message="Token provided in Authorization header has wrong auth provider:"
-                            + f"\nFound auth provider: {token_auth_provider} for audience {token_audience}"
+                            + f"\nFound auth provider: {token_auth_provider} for client_id {client_id}."
                             + f", Expected auth provider: {','.join(tool_auth_providers)}."
                             + f"\nEmail (sub) in token: {email}."
                             + f"\nCould not find a cached token for the tool for auth_providers {','.join(tool_auth_providers)} and email {email}."
@@ -408,8 +385,7 @@ class TokenExchangeManager:
             item=token_cache_item,
             keys={
                 "email": token_cache_item.email,
-                "audience": token_cache_item.audience,
-                "issuer": token_cache_item.issuer,
+                "auth_provider": token_cache_item.auth_provider
             },
             model_class=TokenCacheItem,
             on_insert=on_insert,
@@ -480,11 +456,12 @@ class TokenExchangeManager:
         )
         return new_token_item
 
+    # noinspection PyMethodMayBeStatic
     def create_token_cache_item(
         self,
         *,
         code: str | None,
-        issuer: str,
+        auth_config: AuthConfig,
         state_decoded: dict[str, Any],
         token: dict[str, Any],
         url: str | None,
@@ -521,22 +498,6 @@ class TokenExchangeManager:
         logger.debug(f"Subject received: {subject}")
         referring_email = state_decoded.get("referring_email")
         referring_subject = state_decoded.get("referring_subject")
-        # content = {
-        #     "token": token,
-        #     "state": state_decoded,
-        #     "code": code,
-        #     "subject": subject,
-        #     "email": email,
-        #     "issuer": issuer,
-        #     "referring_email": referring_email,
-        #     "referring_subject": referring_subject,
-        # }
-        audience = state_decoded["audience"]
-        auth_provider: str | None = (
-            self.auth_config_reader.get_provider_for_audience(audience=audience)
-            if audience
-            else "unknown"
-        )
 
         if not referring_email:
             raise ValueError("referring_email must be provided in the state")
@@ -550,10 +511,11 @@ class TokenExchangeManager:
             refresh_token=refresh_token_item,
             email=email,
             subject=subject,
-            issuer=issuer,
-            audience=audience,
+            issuer=auth_config.issuer,
+            audience=auth_config.audience,
             referrer=url,
-            auth_provider=auth_provider if auth_provider else "unknown",
+            auth_provider=auth_config.auth_provider,
+            client_id=auth_config.client_id,
             created=datetime.now(UTC),
             referring_email=referring_email,
             referring_subject=referring_subject,

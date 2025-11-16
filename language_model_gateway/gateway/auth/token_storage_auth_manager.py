@@ -85,15 +85,18 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             Dict[str, Any]: A dictionary containing the token details.
         """
         logger.debug(
-            f"Saving token for audience '{audience}' and issuer '{issuer}': {token_dict=} {state_decoded=}"
+            f"Saving token for audience '{auth_config.audience}' and issuer '{auth_config.issuer}': {token_dict=} {state_decoded=}"
         )
 
-        if issuer is None:
+        issuer = auth_config.issuer
+
+        if auth_config.issuer is None:
             raise ValueError("issuer must not be None")
 
         token_cache_item: TokenCacheItem = (
             self.token_exchange_manager.create_token_cache_item(
                 code=code,
+                auth_provider=auth_config.auth_provider,
                 issuer=issuer,
                 state_decoded=state_decoded,
                 token=token_dict,
