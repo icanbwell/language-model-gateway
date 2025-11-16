@@ -148,7 +148,7 @@ class ToolAuthManager:
         )
         client: StarletteOAuth2App = await self.auth_manager.create_oauth_client(
             name=token_cache_item.auth_provider
-        )
+        )  # type: ignore[misc]
         if client is None:
             raise ValueError(f"OIDC client for audience '{audience}' not found.")
 

@@ -93,8 +93,6 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             f"Saving token for audience '{auth_config.audience}' and issuer '{auth_config.issuer}': {token_dict=} {state_decoded=}"
         )
 
-        issuer = auth_config.issuer
-
         if auth_config.issuer is None:
             raise ValueError("issuer must not be None")
 
