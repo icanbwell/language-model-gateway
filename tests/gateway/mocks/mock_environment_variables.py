@@ -1,11 +1,9 @@
 from typing import override
 
-from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
-    LanguageModelGatewayEnvironmentVariables,
-)
+from tests.common import TestLanguageModelGatewayEnvironmentVariables
 
 
-class MockEnvironmentVariables(LanguageModelGatewayEnvironmentVariables):
+class MockEnvironmentVariables(TestLanguageModelGatewayEnvironmentVariables):
     @override
     @property
     def github_org(self) -> str:
@@ -15,3 +13,4 @@ class MockEnvironmentVariables(LanguageModelGatewayEnvironmentVariables):
     @property
     def github_token(self) -> str:
         return "github_token"
+

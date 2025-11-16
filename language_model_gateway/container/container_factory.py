@@ -90,10 +90,10 @@ logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
 
 class LanguageModelGatewayContainerFactory:
     @classmethod
-    def create_container(cls) -> SimpleContainer:
+    def create_container(cls, *, source: str) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = SimpleContainer()
+        container = SimpleContainer(source=source)
 
         container = OidcAuthLibContainerFactory().register_services_in_container(
             container=container

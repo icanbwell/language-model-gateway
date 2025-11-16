@@ -6,13 +6,13 @@ from asgi_lifespan import LifespanManager
 from oidcauthlib.container.container_registry import ContainerRegistry
 from oidcauthlib.container.interfaces import IContainer
 
-from language_model_gateway.gateway.api import create_app
+from language_model_gateway.gateway.api import create_app, app
 from tests.common import create_test_container
 
 
 @pytest.fixture
 async def async_client() -> AsyncGenerator[httpx.AsyncClient, None]:
-    async with LifespanManager(create_app()) as manager:
+    async with LifespanManager(app=app) as manager:
         async with httpx.AsyncClient(
             transport=httpx.ASGITransport(app=manager.app), base_url="http://test"
         ) as client:

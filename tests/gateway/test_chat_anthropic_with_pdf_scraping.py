@@ -26,6 +26,8 @@ async def test_chat_anthropic_with_pdf_scraping(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
+        model_factory: ModelFactory = test_container.resolve(ModelFactory)
+        print(f"Using Model Factory Before: {type(model_factory)}")
         test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
@@ -34,6 +36,8 @@ async def test_chat_anthropic_with_pdf_scraping(
                 )
             ),
         )
+        model_factory: ModelFactory = test_container.resolve(ModelFactory)
+        print(f"Using Model Factory After: {type(model_factory)}")
 
     # set the model configuration for this test
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(

@@ -1,5 +1,6 @@
 import logging
 import os
+import uuid
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
@@ -58,6 +59,12 @@ logging.getLogger("authlib").setLevel(SRC_LOG_LEVELS["AUTH"])
 uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
 
+# register our container
+ContainerRegistry.set_default(
+    LanguageModelGatewayContainerFactory.create_container(
+        source=f"{__name__}[{uuid.uuid4().hex}]"
+    )
+)
 
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
@@ -88,10 +95,6 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
 
 
 def create_app() -> FastAPI:
-    # register our container
-    ContainerRegistry.set_default(
-        LanguageModelGatewayContainerFactory.create_container()
-    )
     app1: FastAPI = FastAPI(title="OpenAI-compatible API", lifespan=lifespan)
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())

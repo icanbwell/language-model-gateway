@@ -1,3 +1,4 @@
+import uuid
 from typing import override
 
 from oidcauthlib.container.simple_container import SimpleContainer
@@ -23,7 +24,9 @@ class TestLanguageModelGatewayEnvironmentVariables(
 
 
 def create_test_container() -> SimpleContainer:
-    container: SimpleContainer = LanguageModelGatewayContainerFactory.create_container()
+    container: SimpleContainer = LanguageModelGatewayContainerFactory.create_container(
+        source=f"{__name__}[{uuid.uuid4().hex}]"
+    )
     test_language_model_gateway_environment_variables = (
         TestLanguageModelGatewayEnvironmentVariables()
     )
