@@ -13,8 +13,12 @@ devsetup: ## one time setup for devs
 	make tests && \
 	make up
 
+.PHONY: create-docker-network
+create-docker-network: ## creates the docker network
+	docker network create language-model-gateway_web || true
+
 .PHONY:build
-build: ## Builds the docker for dev
+build: create-docker-network ## Builds the docker for dev
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
@@ -22,7 +26,7 @@ build: ## Builds the docker for dev
 	 build --parallel;
 
 .PHONY: up
-up: fix-script-permissions ## starts docker containers
+up: create-docker-network fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
@@ -55,7 +59,7 @@ up-open-webui-ssl: fix-script-permissions clean-database ## starts docker contai
 	@echo OpenWebUI: http://localhost:3050 https://open-webui.localhost
 
 .PHONY: up-open-webui-auth
-up-open-webui-auth: fix-script-permissions create-certs check-cert-expiry ## starts docker containers
+up-open-webui-auth: create-docker-network fix-script-permissions create-certs check-cert-expiry ## starts docker containers
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose-mongo.yml \
