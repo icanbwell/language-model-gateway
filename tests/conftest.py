@@ -6,7 +6,7 @@ from asgi_lifespan import LifespanManager
 from oidcauthlib.container.container_registry import ContainerRegistry
 from oidcauthlib.container.interfaces import IContainer
 
-from language_model_gateway.gateway.api import create_app, app
+from language_model_gateway.gateway.api import app
 from tests.common import create_test_container
 
 

@@ -13,4 +13,3 @@ class MockEnvironmentVariables(TestLanguageModelGatewayEnvironmentVariables):
     @property
     def github_token(self) -> str:
         return "github_token"
-

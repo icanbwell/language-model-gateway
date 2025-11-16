@@ -66,6 +66,7 @@ ContainerRegistry.set_default(
     )
 )
 
+
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     # Startup: This runs when the first request comes in

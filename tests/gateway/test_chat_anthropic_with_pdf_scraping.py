@@ -36,7 +36,7 @@ async def test_chat_anthropic_with_pdf_scraping(
                 )
             ),
         )
-        model_factory: ModelFactory = test_container.resolve(ModelFactory)
+        model_factory = test_container.resolve(ModelFactory)
         print(f"Using Model Factory After: {type(model_factory)}")
 
     # set the model configuration for this test
