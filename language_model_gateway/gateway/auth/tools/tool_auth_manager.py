@@ -146,9 +146,9 @@ class ToolAuthManager:
         logger.debug(
             f"Refreshing token for audience '{audience}' with token_cache_item:\n{token_cache_item.model_dump_json()}"
         )
-        client: StarletteOAuth2App = self.auth_manager.oauth.create_client(
-            name=audience
-        )  # type: ignore[no-untyped-call]
+        client: StarletteOAuth2App = await self.auth_manager.create_oauth_client(
+            name=token_cache_item.auth_provider
+        )
         if client is None:
             raise ValueError(f"OIDC client for audience '{audience}' not found.")
 

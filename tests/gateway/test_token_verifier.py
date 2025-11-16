@@ -64,15 +64,13 @@ class MockAuthConfigReader(AuthConfigReader):
                 well_known_uri=openid_configuration,
                 issuer="https://fake-issuer",
                 auth_provider="fake-auth-provider",
+                friendly_name="Fake Auth Provider",
             )
         ]
 
 
 class MockTokenReader(TokenReader):
     pass
-    # @override
-    # async def fetch_well_known_config_and_jwks_async(self) -> None:
-    #     self.jwks = KeySet.import_key_set(JWKS)
 
 
 def create_jwt_token(exp_offset: int = 60) -> str:

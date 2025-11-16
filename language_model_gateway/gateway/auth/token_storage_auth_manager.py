@@ -5,6 +5,9 @@ from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from oidcauthlib.utilities.environment.abstract_environment_variables import (
     AbstractEnvironmentVariables,
 )
@@ -33,6 +36,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         auth_config_reader: AuthConfigReader,
         token_reader: TokenReader,
         token_exchange_manager: TokenExchangeManager,
+        well_known_configuration_manager: WellKnownConfigurationManager,
     ) -> None:
         """
         Initialize the TokenStorageAuthManager with required components.
@@ -50,6 +54,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             environment_variables=environment_variables,
             auth_config_reader=auth_config_reader,
             token_reader=token_reader,
+            well_known_configuration_manager=well_known_configuration_manager,
         )
 
         self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
@@ -96,8 +101,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         token_cache_item: TokenCacheItem = (
             self.token_exchange_manager.create_token_cache_item(
                 code=code,
-                auth_provider=auth_config.auth_provider,
-                issuer=issuer,
+                auth_config=auth_config,
                 state_decoded=state_decoded,
                 token=token_dict,
                 url=url,

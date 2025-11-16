@@ -333,11 +333,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "Tool using authentication must have at least one issuer or use the default issuer."
             )
         tool_first_audience: str | None = (
-            self.auth_config_reader.get_audience_for_provider(
-                auth_provider=tool_first_auth_provider
-            )
-            if tool_first_auth_provider is not None
-            else None
+            auth_config.audience if auth_config is not None else None
         )
         if not auth_information.email:
             raise ValueError(
@@ -351,8 +347,17 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             )
         if not tool_first_audience:
             raise ValueError("Tool using authentication must have an audience.")
+        if not tool_first_auth_provider:
+            raise ValueError("Tool using authentication must have an auth provider.")
+        tool_client_id: str | None = (
+            auth_config.client_id if auth_config is not None else None
+        )
+        if not tool_client_id:
+            raise ValueError("Tool using authentication must have a client ID.")
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
+                auth_provider=tool_first_auth_provider,
+                client_id=tool_client_id,
                 audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
                 issuer=tool_first_issuer,

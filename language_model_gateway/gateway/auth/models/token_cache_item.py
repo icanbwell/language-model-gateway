@@ -14,22 +14,56 @@ class TokenCacheItem(BaseDbModel):
     Represents a token cache item in the database.
     """
 
-    created: datetime = Field(description="The creation time of the token as a datetime object.")
-    updated: Optional[datetime] = Field(default=None, description="The last update time of the token as a datetime object.")
-    refreshed: Optional[datetime] = Field(default=None, description="The last refresh time of the token as a datetime object.")
+    created: datetime = Field(
+        description="The creation time of the token as a datetime object."
+    )
+    updated: Optional[datetime] = Field(
+        default=None,
+        description="The last update time of the token as a datetime object.",
+    )
+    refreshed: Optional[datetime] = Field(
+        default=None,
+        description="The last refresh time of the token as a datetime object.",
+    )
 
-    auth_provider: str = Field(description="The authentication provider associated with the token.")
-    client_id: Optional[str] = Field(default=None, description="The client ID associated with the token, if applicable.")
-    issuer: str | None = Field(default=None, description="The issuer of the token, typically the authorization server.")
-    audience: str = Field(description="The intended audience for the token, usually the resource server.")
-    email: str = Field(description="The email associated with the token, used for user identification.")
-    subject: str = Field(description="The subject of the token, typically the user ID or unique identifier.")
-    referring_email: str = Field(description="The email of the original token that is linked to this token, if applicable.")
-    referring_subject: str = Field(description="The subject of the original token that is linked to this token, if applicable.")
-    referrer: Optional[str] = Field(default=None, description="The URL associated with the token, if applicable.")
-    access_token: Optional[Token] = Field(default=None, description="The access token used for authentication.")
-    id_token: Optional[Token] = Field(default=None, description="The ID token containing user information.")
-    refresh_token: Optional[Token] = Field(default=None, description="The refresh token used to obtain new access tokens.")
+    auth_provider: str = Field(
+        description="The authentication provider associated with the token."
+    )
+    client_id: Optional[str] = Field(
+        default=None,
+        description="The client ID associated with the token, if applicable.",
+    )
+    issuer: str | None = Field(
+        default=None,
+        description="The issuer of the token, typically the authorization server.",
+    )
+    audience: str = Field(
+        description="The intended audience for the token, usually the resource server."
+    )
+    email: str = Field(
+        description="The email associated with the token, used for user identification."
+    )
+    subject: str = Field(
+        description="The subject of the token, typically the user ID or unique identifier."
+    )
+    referring_email: str = Field(
+        description="The email of the original token that is linked to this token, if applicable."
+    )
+    referring_subject: str = Field(
+        description="The subject of the original token that is linked to this token, if applicable."
+    )
+    referrer: Optional[str] = Field(
+        default=None, description="The URL associated with the token, if applicable."
+    )
+    access_token: Optional[Token] = Field(
+        default=None, description="The access token used for authentication."
+    )
+    id_token: Optional[Token] = Field(
+        default=None, description="The ID token containing user information."
+    )
+    refresh_token: Optional[Token] = Field(
+        default=None, description="The refresh token used to obtain new access tokens."
+    )
 
     def is_valid_id_token(self) -> bool:
         """

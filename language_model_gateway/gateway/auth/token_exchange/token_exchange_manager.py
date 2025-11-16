@@ -385,7 +385,7 @@ class TokenExchangeManager:
             item=token_cache_item,
             keys={
                 "email": token_cache_item.email,
-                "auth_provider": token_cache_item.auth_provider
+                "auth_provider": token_cache_item.auth_provider,
             },
             model_class=TokenCacheItem,
             on_insert=on_insert,

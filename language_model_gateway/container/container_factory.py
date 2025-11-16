@@ -6,6 +6,9 @@ from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from oidcauthlib.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
 
@@ -105,6 +108,9 @@ class LanguageModelGatewayContainerFactory:
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
                 token_exchange_manager=c.resolve(TokenExchangeManager),
+                well_known_configuration_manager=c.resolve(
+                    WellKnownConfigurationManager
+                ),
             ),
         )
 
