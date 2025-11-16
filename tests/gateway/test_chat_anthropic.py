@@ -13,15 +13,15 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 
 @pytest.mark.asyncio
-async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
+async def test_chat_completions(
+    async_client: httpx.AsyncClient, test_container: IContainer
+) -> None:
     print("")
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container: IContainer = get_test_container()
         test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
@@ -96,13 +96,11 @@ async def test_chat_completions(async_client: httpx.AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_chat_completions_with_chat_history(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container: IContainer = get_test_container()
-
         test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(

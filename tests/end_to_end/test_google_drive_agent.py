@@ -53,7 +53,6 @@ from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 logger = logging.getLogger(__name__)
 
@@ -233,7 +232,7 @@ def verify_aws_boto3_authentication() -> None:
     reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
 )
 async def test_chat_completions_with_google_drive(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
     access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
@@ -242,7 +241,6 @@ async def test_chat_completions_with_google_drive(
     assert access_token is not None
     url: str = "http://mcp_server_gateway:5000/google_drive"
 
-    test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.singleton(
             ModelFactory,

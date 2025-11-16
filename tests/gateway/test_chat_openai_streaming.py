@@ -24,17 +24,14 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 from oidcauthlib.container.interfaces import IContainer
-from tests.common import get_test_container
 
 
 @pytest.mark.httpx_mock(
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_chat_open_ai_completions_streaming(
-    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
+    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
-    test_container: IContainer = get_test_container()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         chunks_json: List[ChatCompletionChunk] = [
             ChatCompletionChunk(

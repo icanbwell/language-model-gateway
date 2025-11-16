@@ -8,6 +8,7 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
@@ -127,6 +128,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app1.add_middleware(FastApiLoggingMiddleware)
+
+    app1.add_middleware(RequestScopeMiddleware)
 
     return app1
 

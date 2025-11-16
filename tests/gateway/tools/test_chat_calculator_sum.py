@@ -15,7 +15,6 @@ from language_model_gateway.gateway.utilities.cache.config_expiring_cache import
     ConfigExpiringCache,
 )
 
-from tests.common import get_test_container
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
@@ -28,11 +27,10 @@ def build_prompt(numbers: List[float]) -> str:
 
 
 async def test_chat_calculator_sum_tool_bedrock(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
     print("")
-    test_container: IContainer = get_test_container()
 
     # set the model configuration for this test
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(

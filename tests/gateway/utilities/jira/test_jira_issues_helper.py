@@ -27,14 +27,15 @@ from language_model_gateway.gateway.utilities.jira.jira_issue_result import (
 from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
-from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
 @pytest.mark.httpx_mock(
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
-async def test_jira_get_summarized_issues(httpx_mock: HTTPXMock) -> None:
+async def test_jira_get_summarized_issues(
+    httpx_mock: HTTPXMock, test_container: IContainer
+) -> None:
     print()
     data_dir: Path = Path(__file__).parent.joinpath("./")
     temp_folder = data_dir.joinpath("./temp")
@@ -43,8 +44,6 @@ async def test_jira_get_summarized_issues(httpx_mock: HTTPXMock) -> None:
     makedirs(temp_folder)
 
     max_projects = 2
-
-    test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         os.environ["JIRA_USERNAME"] = "dummy_username"

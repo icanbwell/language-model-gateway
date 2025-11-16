@@ -29,7 +29,6 @@ from language_model_gateway.gateway.utilities.github.github_pull_request_per_con
 from language_model_gateway.gateway.utilities.github.github_pull_request_result import (
     GithubPullRequestResult,
 )
-from tests.common import get_test_container
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 
 
@@ -37,7 +36,7 @@ from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariab
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_github_get_summarized_pull_requests_from_one_repo(
-    httpx_mock: HTTPXMock,
+    httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
     print()
     data_dir: Path = Path(__file__).parent.joinpath("./")
@@ -45,8 +44,6 @@ async def test_github_get_summarized_pull_requests_from_one_repo(
     if path.isdir(temp_folder):
         rmtree(temp_folder)
     makedirs(temp_folder)
-
-    test_container: IContainer = get_test_container()
 
     max_pull_requests = 2
     max_repos = 2
