@@ -37,12 +37,12 @@ async def test_github_pull_request_diff_tool(async_client: httpx.AsyncClient) ->
     test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: MockEnvironmentVariables(),
         )
 
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -121,11 +121,11 @@ async def test_github_pull_request_diff_combined_tool(
     test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: MockEnvironmentVariables(),
         )
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(

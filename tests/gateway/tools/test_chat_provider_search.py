@@ -37,7 +37,7 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
     test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -45,7 +45,7 @@ async def test_chat_provider_search(async_client: httpx.AsyncClient) -> None:
                 )
             ),
         )
-        test_container.register(
+        test_container.singleton(
             ImageGeneratorFactory,
             lambda c: MockImageGeneratorFactory(image_generator=MockImageGenerator()),
         )
@@ -116,7 +116,7 @@ async def test_chat_provider_search_streaming(
     test_container: IContainer = get_test_container()
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
@@ -124,7 +124,7 @@ async def test_chat_provider_search_streaming(
                 )
             ),
         )
-        test_container.register(
+        test_container.singleton(
             ImageGeneratorFactory,
             lambda c: MockImageGeneratorFactory(image_generator=MockImageGenerator()),
         )

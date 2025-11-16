@@ -32,7 +32,7 @@ async def test_google_drive_mcp_server_with_fake_api_key(
 ) -> None:
     test_container: IContainer = get_test_container()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(

@@ -50,7 +50,7 @@ async def test_jira_get_summarized_issues(httpx_mock: HTTPXMock) -> None:
         os.environ["JIRA_USERNAME"] = "dummy_username"
         jira_base_url: str = "https://icanbwell.atlassian.net"
         access_token: Optional[str] = "fake_token"
-        test_container.register(
+        test_container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: MockEnvironmentVariables(),
         )

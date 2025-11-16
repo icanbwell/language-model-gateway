@@ -52,7 +52,7 @@ async def test_github_get_summarized_pull_requests(httpx_mock: HTTPXMock) -> Non
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
-        test_container.register(
+        test_container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: MockEnvironmentVariables(),
         )
