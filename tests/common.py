@@ -21,11 +21,6 @@ class TestLanguageModelGatewayEnvironmentVariables(
     def llm_storage_type(self) -> str:
         return "memory"
 
-    @override
-    @property
-    def enable_llm_memory(self) -> bool:
-        return False
-
 
 def create_test_container() -> SimpleContainer:
     container: SimpleContainer = LanguageModelGatewayContainerFactory.create_container()
