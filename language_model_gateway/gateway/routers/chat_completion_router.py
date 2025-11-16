@@ -228,7 +228,12 @@ class ChatCompletionsRouter:
                 auth_information.claims = token_item.claims
                 auth_information.expires_at = token_item.expires
                 auth_information.audience = token_item.audience
-                auth_information.email = token_item.email
+                # Okta sets email in subject sometimes, so check both
+                auth_information.email = token_item.email or (
+                    token_item.subject
+                    if token_item.subject and "@" in token_item.subject
+                    else None
+                )
                 auth_information.subject = token_item.subject or token_item.email
                 auth_information.user_name = token_item.name
             else:
