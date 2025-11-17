@@ -97,7 +97,7 @@ services:
       #      S3_VECTOR_REGION: "us-east-1"
       # Whether to write oauth cookie or not
       # We now get it directly in the language_model_gateway.py so we don't need this
-      ENABLE_OAUTH_ID_TOKEN_COOKIE: False
+      ENABLE_OAUTH_ID_TOKEN_COOKIE: True
       # https://docs.openwebui.com/getting-started/env-configuration/#default_prompt_suggestions
       DEFAULT_PROMPT_SUGGESTIONS: '[{
         "title": [

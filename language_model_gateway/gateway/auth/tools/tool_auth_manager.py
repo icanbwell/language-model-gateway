@@ -71,7 +71,8 @@ class ToolAuthManager:
             AuthorizationNeededException: If the token is not found and authorization is needed.
         """
         logger.debug(
-            f"Getting token for tool '{tool_config.name}' with auth providers {tool_config.auth_providers} with auth_header: {auth_header}"
+            f"Getting token for tool '{tool_config.name}' "
+            f"with auth providers {tool_config.auth_providers} with auth_header: {auth_header}"
         )
 
         try:
