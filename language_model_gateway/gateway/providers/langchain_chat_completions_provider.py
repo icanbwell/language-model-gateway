@@ -296,9 +296,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             auth_information (AuthInformation): The authentication information.
             tool_using_authentication (AgentConfig): The tool configuration requiring authentication.
         """
-        logger.info(
-            f"Checking token for tool {tool_using_authentication.name} with auth_header: {auth_header}."
-        )
+
         tool_auth_providers: list[str] | None = tool_using_authentication.auth_providers
         if (
             tool_using_authentication.auth_providers is None
