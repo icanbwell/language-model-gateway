@@ -321,12 +321,11 @@ class TokenExchangeManager:
                             + f"\nFound: {token_auth_provider}, Expected: {','.join(tool_auth_providers)}."
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
-                            message="Token provided in Authorization header has wrong auth provider:"
-                            + f"\nFound auth provider: {token_auth_provider} for client_id :{client_id}."
-                            + f", Expected auth provider: {','.join(tool_auth_providers)}."
-                            + f"\nSubject (sub) in token: {subject}."
-                            + "\nCould not find a cached token for the tool for auth_providers"
-                            + f" {','.join(tool_auth_providers)} and subject {subject}."
+                            message="```\nToken provided in Authorization header has wrong auth provider:"
+                            + f"\nFound auth provider: {token_auth_provider} for client_id: {client_id}"
+                            + f"\nTool expects auth provider: {','.join(tool_auth_providers)}"
+                            + "\nCould not find a cached token for the tool for:\nauth_providers:"
+                            + f" {','.join(tool_auth_providers)} and subject: {subject}\n```\n"
                             + error_message,
                             tool_auth_providers=tool_auth_providers,
                         )

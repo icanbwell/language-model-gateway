@@ -162,7 +162,9 @@ class MCPToolProvider:
                         token_item: (
                             TokenCacheItem | None
                         ) = await self.tool_auth_manager.get_token_for_tool_async(
-                            auth_header=auth_header, error_message="", tool_config=tool
+                            auth_header=auth_header,
+                            error_message=f"No auth found for  {tool.name}",
+                            tool_config=tool,
                         )
                         token = token_item.get_access_token() if token_item else None
                         if token:
