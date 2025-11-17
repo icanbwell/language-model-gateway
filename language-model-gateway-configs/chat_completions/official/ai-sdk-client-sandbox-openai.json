@@ -1,20 +1,37 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "ai_sdk_local_dev",
-  "name": "AI SDK Local to Fhir Dev",
   "description": "This is a language model that can access data in FHIR",
-  "type": "langchain",
+  "example_prompts": [
+    {
+      "content": "Retrieve patient information from the FHIR server.",
+      "role": "user"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "ai_sdk_client_sandbox_openai",
   "model": {
-    "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "model": "gpt-4o",
+    "provider": "openai"
   },
-   "system_prompts": [
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "name": "AI SDK Client Sandbox OpenAI",
+  "system_prompts": [
     {
       "content": "You are a tool that searches and retrieves from FHIR server.",
       "role": "system"
     },
     {
-      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.",
+      "content": "If a user does not provide a person ID, use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a as the default person ID.",
       "role": "system"
     },
     {
@@ -30,18 +47,6 @@
       "role": "system"
     }
   ],
-  "model_parameters": [
-    {
-      "key": "temperature",
-      "value": "0.5"
-    }
-  ],
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": "Bearer OPENAI_API_KEY"
-    }
-  ],
   "tools": [
     {
       "name": "current_date",
@@ -53,18 +58,13 @@
       ]
     },
     {
-      "name": "fhir_server",
-      "url": "http://mcp-fhir-agent-dev:5000/",
       "auth": "jwt_token",
       "auth_providers": [
-        "oktafhirdev"
-      ]
+        "oktafhirclientsandbox"
+      ],
+      "name": "fhir_server",
+      "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
     }
   ],
-  "example_prompts": [
-    {
-      "role": "user",
-      "content": "Summarize the contents of the file at this URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing"
-    }
-  ]
+  "type": "langchain"
 }

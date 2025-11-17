@@ -1,20 +1,41 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "ai_sdk_dev",
-  "name": "AI SDK Dev",
   "description": "This is a language model that can access data in FHIR",
-  "type": "langchain",
+  "example_prompts": [
+    {
+      "content": "Retrieve patient information for patient ID 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 from the FHIR server.",
+      "role": "user"
+    },
+    {
+      "content": "What is the current date?",
+      "role": "user"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "ai_sdk_dev",
   "model": {
-    "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0",
+    "provider": "bedrock"
   },
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "name": "AI SDK Dev",
   "system_prompts": [
     {
-      "content": "You are a tool that searches and retrieves from FHIR server. ",
+      "content": "You are a tool that searches and retrieves from FHIR server.",
       "role": "system"
     },
     {
-      "content": "If a user does not provide a patient ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default patient ID.",
+      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.",
       "role": "system"
     },
     {
@@ -24,18 +45,10 @@
     {
       "content": "Use debug parameter when calling tools if they support it.",
       "role": "system"
-    }
-  ],
-  "model_parameters": [
+    },
     {
-      "key": "temperature",
-      "value": "0.5"
-    }
-  ],
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": "Bearer OPENAI_API_KEY"
+      "content": "Remind the user that they can provide a different person id if they want health data for a different person.",
+      "role": "system"
     }
   ],
   "tools": [
@@ -49,18 +62,13 @@
       ]
     },
     {
-      "name": "fhir_server",
-      "url": "https://mcpfhiragent.dev.icanbwell.com/",
       "auth": "jwt_token",
       "auth_providers": [
         "oktafhirdev"
-      ]
+      ],
+      "name": "fhir_server",
+      "url": "https://mcpfhiragent.dev.icanbwell.com/"
     }
   ],
-  "example_prompts": [
-    {
-      "role": "user",
-      "content": "Summarize the contents of the file at this URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing"
-    }
-  ]
+  "type": "langchain"
 }
