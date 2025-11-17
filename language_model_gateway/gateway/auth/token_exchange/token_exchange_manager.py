@@ -145,15 +145,12 @@ class TokenExchangeManager:
         """
         if auth_providers is None:
             raise ValueError("auth_providers must be provided.")
-        # check if the bearer token has audience same as the auth provider name
+
         if not referring_subject:
             return None
 
         found_cache_item: TokenCacheItem | None = None
         for auth_provider in auth_providers:
-            audience: str = self.auth_config_reader.get_audience_for_provider(
-                auth_provider=auth_provider
-            )
             token: (
                 TokenCacheItem | None
             ) = await self.get_token_for_auth_provider_and_referring_subject(
@@ -161,27 +158,27 @@ class TokenExchangeManager:
             )
             if token:
                 logger.debug(
-                    f"Found token for auth_provider {auth_provider}, audience {audience} "
-                    f"and referring_sub {referring_subject}: {token.model_dump_json()}"
+                    f"Found token for auth_provider {auth_provider}"
+                    f" and referring_sub {referring_subject}: {token.model_dump_json()}"
                 )
                 # we really care about the id token
                 if token.is_valid_id_token():
                     logger.debug(
-                        f"Found valid token for auth_provider {auth_provider}, audience {audience} "
-                        f"and referring_subject {referring_subject}"
+                        f"Found valid token for auth_provider {auth_provider} "
+                        f" and referring_subject {referring_subject}"
                     )
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} "
-                        f"and referring_subject {referring_subject}: "
-                        f"{token.model_dump_json() if token is not None else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}"
+                        f" and referring_subject {referring_subject}: "
+                        f" {token.model_dump_json() if token is not None else 'None'}"
                     )
                     found_cache_item = token
 
         logger.debug(
-            f"Found token cache item for auth providers {auth_providers} "
-            f"referring_subject {referring_subject}: {found_cache_item}"
+            f"Found token cache item for auth providers {auth_providers}"
+            f" referring_subject {referring_subject}: {found_cache_item}"
         )
         return found_cache_item
 
@@ -262,20 +259,16 @@ class TokenExchangeManager:
                     else None
                 )
 
-                if not token_auth_provider:
-                    logger.debug(
-                        f"Could not find auth provider for client_id {client_id} "
-                        f"for tool {tool_config.name}."
-                    )
-                    raise ValueError(
-                        f"Could not find auth provider for client_id {client_id}."
-                    )
-
+                # see if this token is valid for this tool or if we need to do a token exchange
                 if (
-                    # token's auth provider matches one of the tool's auth providers
-                    token_auth_provider.lower()
-                    in [c.lower() for c in tool_auth_providers]
-                ):  # token is valid
+                    # either we have an auth provider for the client id in the token
+                    token_auth_provider
+                    and (  # and token's auth provider matches one of the tool's auth providers
+                        token_auth_provider.lower()
+                        in [c.lower() for c in tool_auth_providers]
+                    )
+                ):
+                    # token is valid but check if it's expired
                     logger.debug(
                         f"Token is valid for tool {tool_config.name} "
                         f"with token_auth_provider {token_auth_provider}."
@@ -292,7 +285,8 @@ class TokenExchangeManager:
                         referring_subject=token_item.subject,
                     )
                 else:
-                    # see if we have a token for this audience and subject in the cache
+                    # the current token is not valid for this tool, so
+                    # see if we have a token for this auth_provider and subject in the cache
                     subject: str | None = token_item.subject
                     if not subject:
                         raise ValueError("Token must contain a subject (sub) claim.")
