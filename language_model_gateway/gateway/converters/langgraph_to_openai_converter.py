@@ -459,7 +459,9 @@ class LangGraphToOpenAIConverter:
                     text_message: str = ""
                     if "result" in json_content:
                         # https://github.com/open-webui/open-webui/discussions/11981
-                        text_message += cast(str, json_content.get("result"))
+                        result = json_content.get("result")
+                        if result:
+                            text_message += cast(str, json_content.get("result"))
                     if "error" in json_content:
                         error_message = json_content.get("error", "")
                         if error_message:
