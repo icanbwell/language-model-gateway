@@ -76,8 +76,6 @@ services:
       ENABLE_OAUTH_SIGNUP: True
       # Controls whether OAuth-related settings are persisted in the database after the first launch.
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
-      # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
-      OAUTH_SUB_CLAIM: "username"
       # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
       # Enables API key authentication.  Needed for our script in Makefile to set up configuration

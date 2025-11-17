@@ -12,7 +12,7 @@ from oidcauthlib.utilities.environment.abstract_environment_variables import (
     AbstractEnvironmentVariables,
 )
 from starlette.requests import Request
-from starlette.responses import JSONResponse, Response
+from starlette.responses import HTMLResponse, JSONResponse, Response
 
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
@@ -153,7 +153,117 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             content["id_token_decoded"] = id_token_decoded
             content["refresh_token_decoded"] = refresh_token_decoded
 
-        return JSONResponse(content)
+            return JSONResponse(content)
+
+        html_content = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Authentication Successful</title>
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    min-height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                }
+                .container {
+                    background: white;
+                    border-radius: 16px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                    padding: 48px;
+                    max-width: 500px;
+                    text-align: center;
+                    animation: fadeIn 0.5s ease-in;
+                }
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .checkmark {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    margin-bottom: 24px;
+                    position: relative;
+                    animation: scaleIn 0.5s ease-in-out;
+                }
+                @keyframes scaleIn {
+                    from {
+                        transform: scale(0);
+                    }
+                    to {
+                        transform: scale(1);
+                    }
+                }
+                .checkmark::after {
+                    content: '✓';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-size: 48px;
+                    font-weight: bold;
+                }
+                h1 {
+                    color: #2d3748;
+                    font-size: 32px;
+                    margin-bottom: 16px;
+                    font-weight: 700;
+                }
+                p {
+                    color: #4a5568;
+                    font-size: 18px;
+                    line-height: 1.6;
+                    margin-bottom: 12px;
+                }
+                .highlight {
+                    color: #667eea;
+                    font-weight: 600;
+                }
+                .footer {
+                    margin-top: 32px;
+                    padding-top: 24px;
+                    border-top: 1px solid #e2e8f0;
+                    color: #718096;
+                    font-size: 14px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="checkmark"></div>
+                <h1>Authentication Successful!</h1>
+                <p>You have been successfully authenticated.</p>
+                <p>You can now go back to <span class="highlight">Aiden</span> and retry your question.</p>
+                <div class="footer">
+                    You may close this window.
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        return HTMLResponse(content=html_content)
 
     @override
     async def process_sign_out_async(
