@@ -40,13 +40,13 @@ class TokenCacheItem(BaseDbModel):
     audience: str = Field(
         description="The intended audience for the token, usually the resource server."
     )
-    email: str = Field(
+    email: Optional[str] = Field(
         description="The email associated with the token, used for user identification."
     )
     subject: str = Field(
         description="The subject of the token, typically the user ID or unique identifier."
     )
-    referring_email: str = Field(
+    referring_email: Optional[str] = Field(
         description="The email of the original token that is linked to this token, if applicable."
     )
     referring_subject: str = Field(
@@ -119,7 +119,7 @@ class TokenCacheItem(BaseDbModel):
         *,
         token: Token,
         auth_provider: str,
-        referring_email: str,
+        referring_email: Optional[str],
         referring_subject: str,
     ) -> "TokenCacheItem":
         # see what the token this is
@@ -134,8 +134,6 @@ class TokenCacheItem(BaseDbModel):
         if audience is None:
             raise ValueError("Audience must be a string or a list with one string.")
 
-        if token.email is None:
-            raise ValueError("Token must have an email claim.")
         if token.subject is None:
             raise ValueError("Token must have a subject claim.")
 

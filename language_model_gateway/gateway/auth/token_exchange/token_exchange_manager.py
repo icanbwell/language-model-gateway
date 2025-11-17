@@ -102,18 +102,18 @@ class TokenExchangeManager:
         if not isinstance(self.auth_config_reader, AuthConfigReader):
             raise TypeError("auth_config_reader must be an AuthConfigReader instance.")
 
-    async def get_token_for_auth_provider_and_referring_email(
-        self, *, auth_provider: str, referring_email: str
+    async def get_token_for_auth_provider_and_referring_subject(
+        self, *, auth_provider: str, referring_subject: str
     ) -> TokenCacheItem | None:
         """
         Get the token for the OIDC provider.
 
-        This method retrieves the token from the cache or MongoDB based on the email and tool name.
+        This method retrieves the token from the cache or MongoDB based on the subject and tool name.
         It returns a dictionary containing the token information.
 
         Args:
             auth_provider (str): The name of the OIDC provider.
-            referring_email (str): The email associated with the token.
+            referring_subject (str): The sub associated with the token.
         Returns:
             dict[str, Any]: A dictionary containing the token information.
         """
@@ -123,61 +123,62 @@ class TokenExchangeManager:
             collection_name=self.token_collection_name,
             model_class=TokenCacheItem,
             fields={
-                "referring_email": referring_email,
+                "referring_subject": referring_subject,
                 "auth_provider": auth_provider.lower(),
             },
         )
         return token
 
     async def get_token_cache_item_for_auth_providers_async(
-        self, *, auth_providers: List[str], referring_email: str
+        self, *, auth_providers: List[str], referring_subject: str
     ) -> TokenCacheItem | None:
         """
-        Check if a valid token exists for the given OIDC provider and email.
+        Check if a valid token exists for the given OIDC provider and subject.
         If no valid token is found then it will return the last found token.
 
         Args:
             auth_providers (List[str]): The OIDC providers to check.
-            referring_email (str): The email associated with the token.
+            referring_subject (str): The subject associated with the token.
 
         Returns:
             bool: True if a valid token exists, False otherwise.
         """
         if auth_providers is None:
             raise ValueError("auth_providers must be provided.")
-        # check if the bearer token has audience same as the auth provider name
-        if not referring_email:
+
+        if not referring_subject:
             return None
 
         found_cache_item: TokenCacheItem | None = None
         for auth_provider in auth_providers:
-            audience: str = self.auth_config_reader.get_audience_for_provider(
-                auth_provider=auth_provider
-            )
             token: (
                 TokenCacheItem | None
-            ) = await self.get_token_for_auth_provider_and_referring_email(
-                auth_provider=auth_provider, referring_email=referring_email
+            ) = await self.get_token_for_auth_provider_and_referring_subject(
+                auth_provider=auth_provider, referring_subject=referring_subject
             )
             if token:
                 logger.debug(
-                    f"Found token for auth_provider {auth_provider}, audience {audience} "
-                    f"and referring_email {referring_email}: {token.model_dump_json()}"
+                    f"Found token for auth_provider {auth_provider}"
+                    f" and referring_sub {referring_subject}: {token.model_dump_json()}"
                 )
                 # we really care about the id token
                 if token.is_valid_id_token():
                     logger.debug(
-                        f"Found valid token for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}"
+                        f"Found valid token for auth_provider {auth_provider} "
+                        f" and referring_subject {referring_subject}"
                     )
                     return token
                 else:
                     logger.info(
-                        f"Token found is not valid for auth_provider {auth_provider}, audience {audience} and referring_email {referring_email}: {token.model_dump_json() if token is not None else 'None'}"
+                        f"Token found is not valid for auth_provider {auth_provider}"
+                        f" and referring_subject {referring_subject}: "
+                        f" {token.model_dump_json() if token is not None else 'None'}"
                     )
                     found_cache_item = token
 
         logger.debug(
-            f"Found token cache item for auth providers {auth_providers} referring_email {referring_email}: {found_cache_item}"
+            f"Found token cache item for auth providers {auth_providers}"
+            f" referring_subject {referring_subject}: {found_cache_item}"
         )
         return found_cache_item
 
@@ -202,11 +203,14 @@ class TokenExchangeManager:
         if not isinstance(tool_config, AgentConfig):
             raise Exception("tool_config must be an instance of AgentConfig")
 
-        tool_auth_providers: List[str] = (
-            [ap.lower() for ap in tool_config.auth_providers]
-            if tool_config.auth_providers
-            else []
-        )
+        if not tool_config.auth_providers:
+            raise ValueError(
+                f"Tool '{tool_config.name}' has no auth_providers configured."
+            )
+
+        tool_auth_providers: List[str] = [
+            ap.lower() for ap in tool_config.auth_providers
+        ]
 
         logger.debug(
             f"Getting token for tool {tool_config.name} with auth_providers {tool_auth_providers}."
@@ -238,67 +242,73 @@ class TokenExchangeManager:
                 )
                 if token_item is None:
                     raise ValueError("Token verification failed: token_item is None.")
-                # get the audience from the token
+
+                # get the client_id from the token
                 client_id: str | None = token_item.client_id
+                if not client_id:
+                    logger.debug(
+                        f"Token does not contain client_id claim for tool {tool_config.name}."
+                    )
+                    raise ValueError("Token must contain client_id claim.")
+
                 token_auth_provider: str | None = (
                     self.auth_config_reader.get_provider_for_client_id(
                         client_id=client_id
                     )
                     if client_id
-                    else "unknown"
+                    else None
                 )
+
+                # see if this token is valid for this tool or if we need to do a token exchange
                 if (
-                    not tool_auth_providers
-                    or not token_auth_provider
-                    or token_auth_provider.lower()
-                    in [c.lower() for c in tool_auth_providers]
-                ):  # token is valid
+                    # either we have an auth provider for the client id in the token
+                    token_auth_provider
+                    and (  # and token's auth provider matches one of the tool's auth providers
+                        token_auth_provider.lower()
+                        in [c.lower() for c in tool_auth_providers]
+                    )
+                ):
+                    # token is valid but check if it's expired
                     logger.debug(
-                        f"Token is valid for tool {tool_config.name} with token_auth_provider {token_auth_provider}."
+                        f"Token is valid for tool {tool_config.name} "
+                        f"with token_auth_provider {token_auth_provider}."
                     )
 
-                    if not token_item.email:
-                        raise ValueError("Token must have an email claim.")
                     if not token_item.subject:
                         raise ValueError("Token must have a subject claim.")
 
                     # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
-                        auth_provider=token_auth_provider.lower()
-                        if token_auth_provider
-                        else "unknown",
+                        auth_provider=token_auth_provider.lower(),
                         referring_email=token_item.email,
                         referring_subject=token_item.subject,
                     )
                 else:
-                    # see if we have a token for this audience and email in the cache
-                    email: (
-                        str | None
-                    ) = await self.token_reader.get_subject_from_token_async(
-                        token=token
-                    )
-                    if not email:
-                        raise ValueError(
-                            "Token must contain a subject (email or sub) claim."
-                        )
+                    # the current token is not valid for this tool, so
+                    # see if we have a token for this auth_provider and subject in the cache
+                    subject: str | None = token_item.subject
+                    if not subject:
+                        raise ValueError("Token must contain a subject (sub) claim.")
 
-                    # now find token for this email and auth provider
+                    # now find token for this subject and auth provider
                     token_for_tool: (
                         TokenCacheItem | None
                     ) = await self.get_token_cache_item_for_auth_providers_async(
                         auth_providers=tool_auth_providers,
-                        referring_email=email,
+                        referring_subject=subject,
                     )
                     if token_for_tool:
                         if token_for_tool.is_valid_access_token():
                             logger.debug(
-                                f"Found Token in cache for tool {tool_config.name} for email {email} and auth_provider {token_auth_provider}."
+                                f"Found Token in cache for tool {tool_config.name} "
+                                f"for sub {subject} and auth_provider {token_auth_provider}."
                             )
                             return token_for_tool
                         else:
                             logger.debug(
-                                f"Token has expired for tool {tool_config.name} for email {email} and auth_provider {token_auth_provider}."
+                                f"Token has expired for tool {tool_config.name} "
+                                f"for sub {subject} and auth_provider {token_auth_provider}."
                             )
                             raise AuthorizationTokenCacheItemExpiredException(
                                 message=f"Your token has expired for tool {tool_config.name}."
@@ -311,11 +321,11 @@ class TokenExchangeManager:
                             + f"\nFound: {token_auth_provider}, Expected: {','.join(tool_auth_providers)}."
                         )
                         raise AuthorizationTokenCacheItemNotFoundException(
-                            message="Token provided in Authorization header has wrong auth provider:"
-                            + f"\nFound auth provider: {token_auth_provider} for client_id :{client_id}."
-                            + f", Expected auth provider: {','.join(tool_auth_providers)}."
-                            + f"\nEmail (sub) in token: {email}."
-                            + f"\nCould not find a cached token for the tool for auth_providers {','.join(tool_auth_providers)} and email {email}."
+                            message="```\nToken provided in Authorization header has wrong auth provider:"
+                            + f"\nFound auth provider: {token_auth_provider} for client_id: {client_id}"
+                            + f"\nTool expects auth provider: {','.join(tool_auth_providers)}"
+                            + "\nCould not find a cached token for the tool for:\nauth_providers:"
+                            + f" {','.join(tool_auth_providers)} and subject: {subject}\n```\n"
                             + error_message,
                             tool_auth_providers=tool_auth_providers,
                         )
@@ -387,7 +397,7 @@ class TokenExchangeManager:
             collection_name=collection_name,
             item=token_cache_item,
             keys={
-                "email": token_cache_item.email,
+                "subject": token_cache_item.subject,
                 "auth_provider": token_cache_item.auth_provider,
             },
             model_class=TokenCacheItem,
@@ -492,8 +502,6 @@ class TokenExchangeManager:
             or (id_token_item.subject if id_token_item else None)
         )
 
-        if not email:
-            raise ValueError("email must be provided in the token")
         if not subject:
             raise ValueError("subject must be provided in the token")
 
@@ -502,8 +510,6 @@ class TokenExchangeManager:
         referring_email = state_decoded.get("referring_email")
         referring_subject = state_decoded.get("referring_subject")
 
-        if not referring_email:
-            raise ValueError("referring_email must be provided in the state")
         if not referring_subject:
             raise ValueError("referring_subject must be provided in the state")
 

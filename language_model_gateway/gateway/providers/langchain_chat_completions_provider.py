@@ -9,7 +9,6 @@ from typing import (
     AsyncGenerator,
     ContextManager,
     override,
-    Optional,
 )
 
 from langchain_core.language_models import BaseChatModel
@@ -313,7 +312,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tool_first_auth_provider: str | None = (
             tool_auth_providers[0] if tool_auth_providers is not None else None
         )
-        tool_auth_issuers: Optional[list[str]] = tool_using_authentication.issuers
         auth_config: AuthConfig | None = (
             self.auth_config_reader.get_config_for_auth_provider(
                 auth_provider=tool_first_auth_provider
@@ -323,34 +321,17 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         if auth_config is None:
             raise ValueError(
-                f"AuthConfig not found for auth provider {tool_first_auth_provider} used by tool {tool_using_authentication.name}."
-            )
-        tool_first_issuer: str | None = (
-            tool_auth_issuers[0]
-            if tool_auth_issuers is not None
-            else auth_config.issuer
-            if auth_config is not None
-            else None
-        )
-        if not tool_first_issuer:
-            raise ValueError(
-                "Tool using authentication must have at least one issuer or use the default issuer."
-            )
-        tool_first_audience: str | None = (
-            auth_config.audience if auth_config is not None else None
-        )
-        if not auth_information.email:
-            raise ValueError(
-                "AuthInformation must have email to authenticate for tools."
-                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
+                f"AuthConfig not found for auth provider {tool_first_auth_provider}"
+                f" used by tool {tool_using_authentication.name}."
             )
         if not auth_information.subject:
+            logger.error(
+                f"AuthInformation doesn't have subject: {auth_information} in token: {auth_header}"
+            )
             raise ValueError(
                 "AuthInformation must have subject to authenticate for tools."
                 + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
             )
-        if not tool_first_audience:
-            raise ValueError("Tool using authentication must have an audience.")
         if not tool_first_auth_provider:
             raise ValueError("Tool using authentication must have an auth provider.")
         tool_client_id: str | None = (
@@ -358,10 +339,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         if not tool_client_id:
             raise ValueError("Tool using authentication must have a client ID.")
+
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 auth_provider=tool_first_auth_provider,
-                audience=tool_first_audience,  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
                 url=tool_using_authentication.url,
                 referring_email=auth_information.email,
@@ -372,7 +353,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         error_message: str = (
             f"\nFollowing tools require authentication: {tool_using_authentication.name}."
-            + f"\nClick here to authenticate: [Login to {auth_config.friendly_name}]({authorization_url})."
+            + f"\nClick here to [Login to {auth_config.friendly_name}]({authorization_url})."
         )
         # we don't care about the token but just verify it exists so we can throw an error if it doesn't
         await self.tool_auth_manager.get_token_for_tool_async(

@@ -8,7 +8,7 @@ services:
     environment:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
-      LOG_LEVEL: DEBUG
+      LOG_LEVEL: INFO
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
@@ -65,14 +65,14 @@ services:
       AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
       # Okta FHIR Dev
       AUTH_ISSUER_OKTAFHIRDEV: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRDEV: "0oarf29h6x2DaWCkT697"
+      AUTH_AUDIENCE_OKTAFHIRDEV: "https://icanbwell.okta.com"
       AUTH_FRIENDLY_NAME_OKTAFHIRDEV: "Okta FHIR Dev"
       AUTH_CLIENT_ID_OKTAFHIRDEV: "0oarf29h6x2DaWCkT697"
       AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"
+      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
       AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX: "Okta FHIR Client Sandbox"
       AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"
       AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com/.well-known/openid-configuration"

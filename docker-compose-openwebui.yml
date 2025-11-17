@@ -76,8 +76,6 @@ services:
       ENABLE_OAUTH_SIGNUP: True
       # Controls whether OAuth-related settings are persisted in the database after the first launch.
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
-      # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
-      OAUTH_SUB_CLAIM: "username"
       # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
       # Enables API key authentication.  Needed for our script in Makefile to set up configuration
@@ -97,7 +95,7 @@ services:
       #      S3_VECTOR_REGION: "us-east-1"
       # Whether to write oauth cookie or not
       # We now get it directly in the language_model_gateway.py so we don't need this
-      ENABLE_OAUTH_ID_TOKEN_COOKIE: False
+      ENABLE_OAUTH_ID_TOKEN_COOKIE: True
       # https://docs.openwebui.com/getting-started/env-configuration/#default_prompt_suggestions
       DEFAULT_PROMPT_SUGGESTIONS: '[{
         "title": [
