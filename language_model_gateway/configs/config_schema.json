@@ -152,7 +152,7 @@
             "description": "Parameter name."
           },
           "value": {
-            "type": "number",
+            "type": ["number", "string", "integer", "boolean"],
             "description": "Parameter value."
           }
         }
