@@ -206,11 +206,14 @@ class TokenExchangeManager:
         if not isinstance(tool_config, AgentConfig):
             raise Exception("tool_config must be an instance of AgentConfig")
 
-        tool_auth_providers: List[str] = (
-            [ap.lower() for ap in tool_config.auth_providers]
-            if tool_config.auth_providers
-            else []
-        )
+        if not tool_config.auth_providers:
+            raise ValueError(
+                f"Tool '{tool_config.name}' has no auth_providers configured."
+            )
+
+        tool_auth_providers: List[str] = [
+            ap.lower() for ap in tool_config.auth_providers
+        ]
 
         logger.debug(
             f"Getting token for tool {tool_config.name} with auth_providers {tool_auth_providers}."
@@ -242,23 +245,40 @@ class TokenExchangeManager:
                 )
                 if token_item is None:
                     raise ValueError("Token verification failed: token_item is None.")
-                # get the audience from the token
+
+                # get the client_id from the token
                 client_id: str | None = token_item.client_id
+                if not client_id:
+                    logger.debug(
+                        f"Token does not contain client_id claim for tool {tool_config.name}."
+                    )
+                    raise ValueError("Token must contain client_id claim.")
+
                 token_auth_provider: str | None = (
                     self.auth_config_reader.get_provider_for_client_id(
                         client_id=client_id
                     )
                     if client_id
-                    else "unknown"
+                    else None
                 )
+
+                if not token_auth_provider:
+                    logger.debug(
+                        f"Could not find auth provider for client_id {client_id} "
+                        f"for tool {tool_config.name}."
+                    )
+                    raise ValueError(
+                        f"Could not find auth provider for client_id {client_id}."
+                    )
+
                 if (
-                    not tool_auth_providers
-                    or not token_auth_provider
-                    or token_auth_provider.lower()
+                    # token's auth provider matches one of the tool's auth providers
+                    token_auth_provider.lower()
                     in [c.lower() for c in tool_auth_providers]
                 ):  # token is valid
                     logger.debug(
-                        f"Token is valid for tool {tool_config.name} with token_auth_provider {token_auth_provider}."
+                        f"Token is valid for tool {tool_config.name} "
+                        f"with token_auth_provider {token_auth_provider}."
                     )
 
                     if not token_item.subject:
@@ -267,9 +287,7 @@ class TokenExchangeManager:
                     # now create a TokenCacheItem from the token to store in the db
                     return TokenCacheItem.create(
                         token=token_item,
-                        auth_provider=token_auth_provider.lower()
-                        if token_auth_provider
-                        else "unknown",
+                        auth_provider=token_auth_provider.lower(),
                         referring_email=token_item.email,
                         referring_subject=token_item.subject,
                     )
@@ -289,12 +307,14 @@ class TokenExchangeManager:
                     if token_for_tool:
                         if token_for_tool.is_valid_access_token():
                             logger.debug(
-                                f"Found Token in cache for tool {tool_config.name} for sub {subject} and auth_provider {token_auth_provider}."
+                                f"Found Token in cache for tool {tool_config.name} "
+                                f"for sub {subject} and auth_provider {token_auth_provider}."
                             )
                             return token_for_tool
                         else:
                             logger.debug(
-                                f"Token has expired for tool {tool_config.name} for sub {subject} and auth_provider {token_auth_provider}."
+                                f"Token has expired for tool {tool_config.name} "
+                                f"for sub {subject} and auth_provider {token_auth_provider}."
                             )
                             raise AuthorizationTokenCacheItemExpiredException(
                                 message=f"Your token has expired for tool {tool_config.name}."

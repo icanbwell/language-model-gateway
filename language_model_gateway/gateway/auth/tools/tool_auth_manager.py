@@ -72,8 +72,14 @@ class ToolAuthManager:
         """
         logger.debug(
             f"Getting token for tool '{tool_config.name}' "
-            f"with auth providers {tool_config.auth_providers} with auth_header: {auth_header}"
+            f"with auth providers {tool_config.auth_providers} "
+            f"with auth_header: {auth_header}"
         )
+
+        if not tool_config.auth_providers:
+            raise ValueError(
+                f"Tool '{tool_config.name}' has no auth_providers configured."
+            )
 
         try:
             token_cache_item: (

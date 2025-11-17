@@ -339,14 +339,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
         if not tool_client_id:
             raise ValueError("Tool using authentication must have a client ID.")
-        tool_first_audience: str | None = (
-            auth_config.audience if auth_config is not None else None
-        )
+
         authorization_url: str | None = (
             await self.auth_manager.create_authorization_url(
                 auth_provider=tool_first_auth_provider,
-                audience=tool_first_audience
-                or "",  # use the first audience to get a new authorization URL
                 redirect_uri=auth_information.redirect_uri,
                 url=tool_using_authentication.url,
                 referring_email=auth_information.email,
