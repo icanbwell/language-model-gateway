@@ -30,6 +30,9 @@ from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
 
+# Cache TTL in seconds (60 minutes)
+CACHE_TTL_SECONDS = 60 * 60
+
 
 class Pipe:
     """
@@ -288,7 +291,7 @@ HTTPX Response Log:
         Main pipe method supporting both streaming and non-streaming responses.
         """
         if not __oauth_token__ or "access_token" not in __oauth_token__:
-            yield "Oops, looks like your Auth token has expired.  Please logout and login to Aiden to get a new Auth token."
+            yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
             return
         access_token: Optional[str] = __oauth_token__.get("access_token")
         id_token: Optional[str] = __oauth_token__.get("id_token")
@@ -391,20 +394,11 @@ HTTPX Response Log:
             response.raise_for_status()
             models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
-        if self.valves.restrict_to_model_ids:
-            models = [
-                model
-                for model in models
-                if model["id"] in self.valves.restrict_to_model_ids
-            ]
-            logger.debug(f"Filtered models: {models}")
         # Update cache timestamp
         self.pipelines_last_updated = time.time()
         return [{"id": model["id"], "name": model["id"]} for model in models]
 
     async def pipes(self) -> List[Dict[str, str]]:
-        # Cache TTL in seconds (60 minutes)
-        CACHE_TTL_SECONDS = 60 * 60
         now = time.time()
         cache_expired = (
             self.pipelines is None
@@ -414,4 +408,13 @@ HTTPX Response Log:
         if cache_expired:
             logger.debug("Model cache expired or not set. Fetching models.")
             self.pipelines = await self.get_models()
-        return self.pipelines or []
+
+        models = self.pipelines or []
+        if self.valves.restrict_to_model_ids:
+            models = [
+                model
+                for model in models
+                if model["id"] in self.valves.restrict_to_model_ids
+            ]
+
+        return models
