@@ -277,13 +277,22 @@ class TokenExchangeManager:
                     if not token_item.subject:
                         raise ValueError("Token must have a subject claim.")
 
-                    # now create a TokenCacheItem from the token to store in the db
-                    return TokenCacheItem.create(
+                    # now create a TokenCacheItem from the existing token on the fly
+                    token_cache_item = TokenCacheItem.create(
                         token=token_item,
                         auth_provider=token_auth_provider.lower(),
                         referring_email=token_item.email,
                         referring_subject=token_item.subject,
                     )
+
+                    if not token_cache_item.is_valid_access_token():
+                        raise AuthorizationTokenCacheItemExpiredException(
+                            message=f"Your token has expired for tool {tool_config.name}."
+                            + error_message,
+                            token_cache_item=token_cache_item,
+                        )
+
+                    return token_cache_item
                 else:
                     # the current token is not valid for this tool, so
                     # see if we have a token for this auth_provider and subject in the cache
@@ -496,11 +505,11 @@ class TokenExchangeManager:
             or (access_token_item.email if access_token_item else None)
             or (id_token_item.email if id_token_item else None)
         )
-        subject: str | None = (
-            token.get("userinfo", {}).get("sub")
-            or (access_token_item.subject if access_token_item else None)
-            or (id_token_item.subject if id_token_item else None)
-        )
+
+        if access_token_item is None:
+            raise ValueError("access_token must be provided in the token")
+
+        subject: str | None = access_token_item.subject
 
         if not subject:
             raise ValueError("subject must be provided in the token")
