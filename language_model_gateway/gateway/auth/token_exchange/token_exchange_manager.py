@@ -505,11 +505,11 @@ class TokenExchangeManager:
             or (access_token_item.email if access_token_item else None)
             or (id_token_item.email if id_token_item else None)
         )
-
-        if access_token_item is None:
-            raise ValueError("access_token must be provided in the token")
-
-        subject: str | None = access_token_item.subject
+        subject: str | None = (
+            token.get("userinfo", {}).get("sub")
+            or (access_token_item.subject if access_token_item else None)
+            or (id_token_item.subject if id_token_item else None)
+        )
 
         if not subject:
             raise ValueError("subject must be provided in the token")
