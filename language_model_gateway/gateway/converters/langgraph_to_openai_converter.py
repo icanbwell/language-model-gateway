@@ -136,6 +136,21 @@ class LangGraphToOpenAIConverter:
         """
         request_id = request_information.request_id
 
+        # Track tool start times for concurrent tool runs
+        tool_start_times: Dict[str, float] = {}
+
+        def make_tool_key(
+            tool_name1: Optional[str], tool_input1: Optional[Dict[str, Any]]
+        ) -> str:
+            # Use tool name and a hash of the input for uniqueness
+            if tool_name1 is None:
+                tool_name1 = "unknown"
+            try:
+                tool_input_str = json.dumps(tool_input1, sort_keys=True, default=str)
+            except Exception:
+                tool_input_str = str(tool_input1)
+            return f"{tool_name1}:{hash(tool_input_str)}"
+
         try:
             # Process streamed events from the graph and yield messages over the SSE stream.
             event: StandardStreamEvent | CustomStreamEvent
@@ -265,6 +280,10 @@ class LangGraphToOpenAIConverter:
                         if tool_input_display and "state" in tool_input_display:
                             tool_input_display["state"] = "***"
 
+                        # Track start time for this tool invocation
+                        tool_key = make_tool_key(tool_name, tool_input)
+                        tool_start_times[tool_key] = time.time()
+
                         if tool_name:
                             logger.debug(
                                 f"on_tool_start: {tool_name} {tool_input_display}"
@@ -299,15 +318,35 @@ class LangGraphToOpenAIConverter:
                         tool_message: ToolMessage | None = event_dict.get(
                             "data", {}
                         ).get("output")
+                        # Try to get tool name and input from tool_message or event_dict
+                        tool_name2: Optional[str] = None
+                        tool_input2: Optional[Dict[str, Any]] = None
+                        if tool_message:
+                            tool_name2 = getattr(tool_message, "name", None)
+                            tool_input2 = getattr(tool_message, "input", None)
+                        if not tool_name2:
+                            tool_name2 = event_dict.get("name", None)
+                        if not tool_input2:
+                            tool_input2 = event_dict.get("data", {}).get("input")
+                        tool_key = make_tool_key(tool_name2, tool_input2)
+                        start_time = tool_start_times.pop(tool_key, None)
+                        runtime_str = ""
+                        if start_time is not None:
+                            elapsed = time.time() - start_time
+                            runtime_str = f"{elapsed:.2f}s"
+                            logger.info(
+                                f"Tool {tool_name2} completed in {elapsed:.2f} seconds."
+                            )
+                        else:
+                            logger.warning(
+                                f"Tool {tool_name2} end event received without matching start event."
+                            )
                         if tool_message:
                             artifact: Optional[Any] = tool_message.artifact
-
-                            # print(f"on_tool_end: {tool_message}")
                             return_raw_tool_output: bool = (
                                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
                             )
                             if artifact or return_raw_tool_output:
-                                # tool_message_content_type = type(tool_message.content)
                                 tool_message_content: str = (
                                     self.convert_message_content_into_string(
                                         tool_message=tool_message
@@ -327,9 +366,9 @@ class LangGraphToOpenAIConverter:
                                 tool_progress_message: str = (
                                     (
                                         f"```"
-                                        f"\n==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] ====="
                                         f"\n{tool_message_content}"
-                                        f"\n==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
+                                        f"\n==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] ====="
                                         f"\n```\n"
                                     )
                                     if return_raw_tool_output
@@ -374,7 +413,7 @@ class LangGraphToOpenAIConverter:
                                         index=0,
                                         delta=ChoiceDelta(
                                             role="assistant",
-                                            content="\n\n> Tool completed with no output.\n",
+                                            content=f"\n\n> Tool completed with no output.{runtime_str}\n",
                                         ),
                                     )
                                 ],
