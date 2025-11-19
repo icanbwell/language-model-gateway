@@ -3,8 +3,8 @@ import logging
 from typing import override, List, Dict, Any, cast, Optional
 from uuid import UUID, uuid4
 
-from httpx import HTTPStatusError, ConnectError
-from langchain_core.tools import BaseTool
+from httpx import HTTPStatusError, ConnectError, Headers
+from langchain_core.tools import BaseTool, ToolException
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection, StreamableHttpConnection
 from langchain_mcp_adapters.sessions import create_session
@@ -410,7 +410,26 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                 raise ValueError(
                     "Either a session or a connection config must be provided"
                 )
-            return _convert_call_tool_result(call_tool_result)
+            try:
+                return _convert_call_tool_result(call_tool_result)
+            except ToolException as e:
+                http_connection: StreamableHttpConnection | None = (
+                    cast(StreamableHttpConnection, connection) if connection else None
+                )
+                headers_dict = (
+                    http_connection.get("headers") if http_connection else None
+                )
+                headers_obj = (
+                    Headers(headers_dict) if headers_dict is not None else None
+                )
+                raise McpToolUnknownException(
+                    message=f"Unknown Error calling MCP tool '{tool.name}'",
+                    status_code=0,
+                    headers=headers_obj,
+                    url=(http_connection.get("url") or "unknown")
+                    if http_connection
+                    else "unknown",
+                ) from e
 
         return StructuredToolWithOutputLimits(
             name=tool.name,
