@@ -33,6 +33,8 @@ logger = logging.getLogger(__name__)
 # Cache TTL in seconds (60 minutes)
 CACHE_TTL_SECONDS = 60 * 60
 
+LLM_CALL_TIMEOUT = 60 * 5  # 5 minutes
+
 
 class Pipe:
     """
@@ -346,7 +348,7 @@ HTTPX Response Log:
                     url=url,
                     json=payload,
                     headers=headers,
-                    timeout=30.0,
+                    timeout=LLM_CALL_TIMEOUT,
                     follow_redirects=True,
                 )
                 response.raise_for_status()
