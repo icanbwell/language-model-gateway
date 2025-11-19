@@ -539,3 +539,21 @@ class TokenExchangeManager:
             referring_subject=referring_subject,
         )
         return token_cache_item
+
+    async def delete_token_async(
+        self, referring_subject: str, auth_provider: str
+    ) -> None:
+        # delete any matching tokens
+        results: list[TokenCacheItem] = await self.token_repository.find_many(
+            collection_name=self.token_collection_name,
+            model_class=TokenCacheItem,
+            filter_dict={
+                "referring_subject": referring_subject,
+                "auth_provider": auth_provider.lower(),
+            },
+        )
+        for item in results:
+            await self.token_repository.delete_by_id(
+                collection_name=self.token_collection_name,
+                document_id=item.id,
+            )
