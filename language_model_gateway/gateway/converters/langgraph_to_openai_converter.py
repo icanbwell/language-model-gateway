@@ -511,6 +511,13 @@ class LangGraphToOpenAIConverter:
                             text_message += "\nRelated URLs:\n"
                             for url in urls:
                                 text_message += f"- {url}\n"
+                    # if none of the above fields are present, return the original content
+                    if (
+                        "result" not in json_content
+                        and "error" not in json_content
+                        and "urls" not in json_content
+                    ):
+                        return tool_message.content
                     return text_message
             return tool_message.content
 
