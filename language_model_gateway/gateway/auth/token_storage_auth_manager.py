@@ -1,6 +1,9 @@
 import logging
-from typing import override, Any, Dict
+import uuid
+from typing import override, Any, Dict, cast
 
+from authlib.integrations.starlette_client import StarletteOAuth2App
+from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
@@ -66,6 +69,62 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             )
 
     @override
+    async def create_authorization_url(
+        self,
+        *,
+        auth_provider: str,
+        redirect_uri: str,
+        url: str | None,
+        referring_email: str | None,
+        referring_subject: str | None,
+    ) -> str:
+        """
+        Create the authorization URL for the OIDC provider.
+
+        This method generates the authorization URL with the necessary parameters,
+        including the redirect URI and state. The state is encoded to include the tool name,
+        which is used to identify the tool that initiated the authentication process.
+        Args:
+            auth_provider (str): The name of the OIDC provider.
+            redirect_uri (str): The redirect URI to which the OIDC provider will send the user
+                after authentication.
+            url (str): The URL of the tool that has requested this.
+            referring_email (str): The email of the user who initiated the request.
+            referring_subject (str): The subject of the user who initiated the request.
+        Returns:
+            str: The authorization URL to redirect the user to for authentication.
+        """
+        # default to first audience
+        client: StarletteOAuth2App = await self.create_oauth_client(name=auth_provider)
+        if client is None:
+            raise ValueError(f"Client for auth_provider {auth_provider} not found")
+        state_content: Dict[str, str | None] = {
+            "auth_provider": auth_provider,
+            "referring_email": referring_email,
+            "referring_subject": referring_subject,
+            "url": url,  # the URL of the tool that has requested this
+            # include a unique request ID so we don't get cache for another request
+            # This will create a unique state for each request
+            # the callback will use this state to find the correct token
+            "request_id": uuid.uuid4().hex,
+        }
+        # convert state_content to a string
+        state: str = AuthHelper.encode_state(state_content)
+
+        logger.debug(
+            f"Creating authorization URL for auth_provider {auth_provider}"
+            f" with state {state_content} and encoded state {state}"
+        )
+
+        rv: Dict[str, Any] = await client.create_authorization_url(  # type: ignore[no-untyped-call]
+            redirect_uri=redirect_uri, state=state
+        )
+        logger.debug(f"Authorization URL created: {rv}")
+        # request is only needed if we are using the session to store the state
+        await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)  # type: ignore[no-untyped-call]
+        return cast(str, rv["url"])
+
+    @override
     async def process_token_async(
         self,
         *,
@@ -106,6 +165,12 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             )
         )
         content: Dict[str, Any] = token_cache_item.model_dump(mode="json")
+
+        # delete any existing tokens with same referring_subject and auth_provider
+        await self.token_exchange_manager.delete_token_async(
+            referring_subject=token_cache_item.referring_subject,
+            auth_provider=token_cache_item.auth_provider,
+        )
 
         await self.token_exchange_manager.save_token_async(
             token_cache_item=token_cache_item, refreshed=False

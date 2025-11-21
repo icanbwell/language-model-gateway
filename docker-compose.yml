@@ -47,7 +47,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging}
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -77,6 +77,13 @@ services:
       AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"
       AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRCLIENTSANDBOX: "openid email profile groups"
+      # Okta FHIR Client Staging
+      AUTH_ISSUER_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRSTAGING: "Okta FHIR Staging"
+      AUTH_CLIENT_ID_OKTAFHIRSTAGING: "0oarhz13sa21nfecS697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       # Mongo DB settings for storing tokens

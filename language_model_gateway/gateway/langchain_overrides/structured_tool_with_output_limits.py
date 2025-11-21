@@ -1,5 +1,6 @@
 import json
 import logging
+from json import JSONDecodeError
 from typing import override, Any, Optional, Dict, List
 
 from langchain_core.callbacks import AsyncCallbackManagerForToolRun
@@ -65,58 +66,63 @@ class StructuredToolWithOutputLimits(StructuredTool):
             elif isinstance(result, tuple):
                 result_dict_str: str
                 result_dict_str, _ = result
-                result_dict: Dict[str, Any] | List[Dict[str, Any]] = json.loads(
-                    result_dict_str
-                )
-                # find the largest string in the dict or list of dicts and apply truncation to it
-                if isinstance(result_dict, dict):
-                    largest_str_key = max(
-                        result_dict,
-                        key=lambda k: len(result_dict[k])
-                        if isinstance(result_dict[k], str)
-                        else 0,
+                try:
+                    result_dict: Dict[str, Any] | List[Dict[str, Any]] = json.loads(
+                        result_dict_str
                     )
-                    if isinstance(result_dict[largest_str_key], str):
-                        token_count = self.token_reducer.count_tokens(
-                            result_dict[largest_str_key]
+                    # find the largest string in the dict or list of dicts and apply truncation to it
+                    if isinstance(result_dict, dict):
+                        largest_str_key = max(
+                            result_dict,
+                            key=lambda k: len(result_dict[k])
+                            if isinstance(result_dict[k], str)
+                            else 0,
                         )
-                        if token_count > self.limit_output_tokens:
-                            result_dict[largest_str_key] = (
-                                self.token_reducer.reduce_tokens(
-                                    text=result_dict[largest_str_key],
-                                    max_tokens=self.limit_output_tokens,
-                                    preserve_start=0,
-                                )
+                        if isinstance(result_dict[largest_str_key], str):
+                            token_count = self.token_reducer.count_tokens(
+                                result_dict[largest_str_key]
                             )
-                            result = (json.dumps(result_dict), None)
-                            logger.info(
-                                f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
-                            )
-
-                elif isinstance(result_dict, list):
-                    for item in result_dict:
-                        if isinstance(item, dict):
-                            largest_str_key = max(
-                                item,
-                                key=lambda k: len(item[k])
-                                if isinstance(item[k], str)
-                                else 0,
-                            )
-                            if isinstance(item[largest_str_key], str):
-                                token_count = self.token_reducer.count_tokens(
-                                    item[largest_str_key]
-                                )
-                                if token_count > self.limit_output_tokens:
-                                    item[largest_str_key] = (
-                                        self.token_reducer.reduce_tokens(
-                                            text=item[largest_str_key],
-                                            max_tokens=self.limit_output_tokens,
-                                            preserve_start=0,
-                                        )
+                            if token_count > self.limit_output_tokens:
+                                result_dict[largest_str_key] = (
+                                    self.token_reducer.reduce_tokens(
+                                        text=result_dict[largest_str_key],
+                                        max_tokens=self.limit_output_tokens,
+                                        preserve_start=0,
                                     )
-                    result = (json.dumps(result_dict), None)
-                    logger.info(
-                        f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
+                                )
+                                result = (json.dumps(result_dict), None)
+                                logger.info(
+                                    f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
+                                )
+
+                    elif isinstance(result_dict, list):
+                        for item in result_dict:
+                            if isinstance(item, dict):
+                                largest_str_key = max(
+                                    item,
+                                    key=lambda k: len(item[k])
+                                    if isinstance(item[k], str)
+                                    else 0,
+                                )
+                                if isinstance(item[largest_str_key], str):
+                                    token_count = self.token_reducer.count_tokens(
+                                        item[largest_str_key]
+                                    )
+                                    if token_count > self.limit_output_tokens:
+                                        item[largest_str_key] = (
+                                            self.token_reducer.reduce_tokens(
+                                                text=item[largest_str_key],
+                                                max_tokens=self.limit_output_tokens,
+                                                preserve_start=0,
+                                            )
+                                        )
+                        result = (json.dumps(result_dict), None)
+                        logger.info(
+                            f"StructuredToolWithOutputLimits output after truncation: {type(result)}\n{result}"
+                        )
+                except JSONDecodeError:
+                    logger.warning(
+                        f"StructuredToolWithOutputLimits could not decode JSON from result for token limiting [type={type(result_dict_str)}]: {result}"
                     )
 
             else:

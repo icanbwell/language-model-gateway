@@ -35,7 +35,7 @@ services:
       # service account used to connect to OAuth IDP
       CLIENT_ID: ${CLIENT_ID:-bwell-client-id}
       CLIENT_SECRET: ${CLIENT_SECRET:-bwell-secret}
-      MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-8000}
+      MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-10000}
       # Below we specify the client id, client secret and well-known URI for each client
       # For list-like env vars, do NOT use quotes in the default value to avoid extra quotes in Python parsing
       AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox}
@@ -156,7 +156,7 @@ services:
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
     env_file: docker.env
     ports:
-      - '5051:5000'
+      - '5061:5000'
     volumes:
       - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
       - ~/.config/gh:/root/.config/gh
@@ -185,7 +185,7 @@ services:
       ENABLE_ELICITATION: "false"
     env_file: docker.env
     ports:
-      - '5052:5000'
+      - '5062:5000'
     volumes:
       - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
       - ~/.config/gh:/root/.config/gh
@@ -214,7 +214,36 @@ services:
       ENABLE_ELICITATION: "false"
     env_file: docker.env
     ports:
-      - '5053:5000'
+      - '5063:5000'
+    volumes:
+      - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
+      - ~/.config/gh:/root/.config/gh
+      # uncomment this to use local fhir_to_llm code
+      # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
+      # ==== For bailey model testing - mount the AWS credentials ====
+      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      - ~/.aws/:/etc/appuser/.aws/
+    # uncomment the below to get the code from local folders instead of pypi
+    #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/health || exit 1
+    networks:
+      - web
+
+  # This is another instance of the mcp-fhir-agent but points to dev FHIR server
+  mcp-fhir-agent-staging:
+    image: mcp-fhir-agent:local
+    environment:
+      <<: *agent_env
+      # You can override any environment variables here
+      FHIR_SERVER_GET_URL: 'https://fhir-internal.staging.bwell.zone/4_0_0/'
+      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
+      # disable until language model gateway supports elicitation
+      ENABLE_ELICITATION: "false"
+    env_file: docker.env
+    ports:
+      - '5064:5000'
     volumes:
       - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
       - ~/.config/gh:/root/.config/gh

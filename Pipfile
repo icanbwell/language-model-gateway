@@ -81,11 +81,11 @@ langchain_mcp_adapters = ">=0.1.11"
 # authlib is a Python library for OAuth and OpenID Connect
 authlib = ">=1.6.5"
 # joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)
-joserfc = ">=1.2.2"
+joserfc = ">=1.4.3"
 # aiocache is a Python library for caching with asyncio support
 aiocache = ">=0.12.3"
 # pymongo is a Python library for working with MongoDB
-pymongo = { version = ">=4.14.0", extras = ["srv"] }
+pymongo = { version = ">=4.15.4", extras = ["srv"] }
 # redis is a Python library for working with Redis
 redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
@@ -99,7 +99,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=1.0.15"
+oidcauthlib = ">=1.0.18"
 # Core OTel bundle
 opentelemetry-distro = ">=0.59b0"
 # Instrumentation
@@ -127,7 +127,7 @@ pytest-asyncio = ">=0.25.3"
 black = ">=25.1.0"
 # deepdiff is a Python library for comparing objects
 deepdiff = { version = ">=8.1.1", extras = ["murmur"] }
-types-requests = "*"
+types-requests = ">=2.32.4"
 # pytest-httpx is a Python library for mocking HTTPX tests
 pytest-httpx = ">=0.35.0"
 # types-beautifulsoup is a Python library for typing BeautifulSoup

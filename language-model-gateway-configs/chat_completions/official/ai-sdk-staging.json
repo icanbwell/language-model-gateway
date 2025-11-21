@@ -1,0 +1,74 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "description": "This is a language model that can access data in FHIR",
+  "example_prompts": [
+    {
+      "content": "Retrieve patient information for patient ID 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 from the FHIR server.",
+      "role": "user"
+    },
+    {
+      "content": "What is the current date?",
+      "role": "user"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "ai_sdk_staging",
+  "model": {
+    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0",
+    "provider": "bedrock"
+  },
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.5"
+    }
+  ],
+  "name": "AI SDK Staging",
+  "system_prompts": [
+    {
+      "content": "You are a tool that searches and retrieves from FHIR server.",
+      "role": "system"
+    },
+    {
+      "content": "If a user does not provide a person ID, use 8835f0de-f1b7-4bdd-b863-c717112358b5 as the default person ID.",
+      "role": "system"
+    },
+    {
+      "content": "for any answers you give me, tell me what tools you have and why you chose to use or not use each one.",
+      "role": "system"
+    },
+    {
+      "content": "Use debug parameter when calling tools if they support it.",
+      "role": "system"
+    },
+    {
+      "content": "Remind the user that they can provide a different person id if they want health data for a different person.",
+      "role": "system"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "auth": "jwt_token",
+      "auth_providers": [
+        "oktafhirstaging"
+      ],
+      "name": "fhir_server",
+      "url": "https://mcpfhiragent.staging.icanbwell.com/"
+    }
+  ],
+  "type": "langchain"
+}

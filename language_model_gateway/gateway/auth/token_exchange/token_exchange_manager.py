@@ -505,11 +505,11 @@ class TokenExchangeManager:
             or (access_token_item.email if access_token_item else None)
             or (id_token_item.email if id_token_item else None)
         )
-
-        if access_token_item is None:
-            raise ValueError("access_token must be provided in the token")
-
-        subject: str | None = access_token_item.subject
+        subject: str | None = (
+            token.get("userinfo", {}).get("sub")
+            or (access_token_item.subject if access_token_item else None)
+            or (id_token_item.subject if id_token_item else None)
+        )
 
         if not subject:
             raise ValueError("subject must be provided in the token")
@@ -539,3 +539,21 @@ class TokenExchangeManager:
             referring_subject=referring_subject,
         )
         return token_cache_item
+
+    async def delete_token_async(
+        self, referring_subject: str, auth_provider: str
+    ) -> None:
+        # delete any matching tokens
+        results: list[TokenCacheItem] = await self.token_repository.find_many(
+            collection_name=self.token_collection_name,
+            model_class=TokenCacheItem,
+            filter_dict={
+                "referring_subject": referring_subject,
+                "auth_provider": auth_provider.lower(),
+            },
+        )
+        for item in results:
+            await self.token_repository.delete_by_id(
+                collection_name=self.token_collection_name,
+                document_id=item.id,
+            )
