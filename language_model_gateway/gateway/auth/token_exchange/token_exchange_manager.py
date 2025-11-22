@@ -119,15 +119,21 @@ class TokenExchangeManager:
         """
 
         # see if the token is in the cache
-        token: TokenCacheItem | None = await self.token_repository.find_by_fields(
+        tokens: list[TokenCacheItem] = await self.token_repository.find_many(
             collection_name=self.token_collection_name,
             model_class=TokenCacheItem,
-            fields={
+            filter_dict={
                 "referring_subject": referring_subject,
                 "auth_provider": auth_provider.lower(),
             },
         )
-        return token
+        if len(tokens) > 1:
+            raise RuntimeError(
+                f"Multiple tokens found for auth_provider {auth_provider.lower()} "
+                f"and referring_subject {referring_subject}."
+                f" Tokens: {[t.model_dump_json() for t in tokens]}"
+            )
+        return tokens[0] if tokens else None
 
     async def get_token_cache_item_for_auth_providers_async(
         self, *, auth_providers: List[str], referring_subject: str

@@ -505,12 +505,22 @@ class LangGraphToOpenAIConverter:
                         error_message = json_content.get("error", "")
                         if error_message:
                             text_message += f"\nError: {error_message}\n"
+                    if "meta" in json_content:
+                        meta = json_content.get("meta", {})
+                        if isinstance(meta, dict) and len(meta) > 0:
+                            text_message += "\nMetadata:\n"
+                            for key, value in meta.items():
+                                text_message += f"- {key}: {value}\n"
                     if "urls" in json_content:
                         urls = json_content.get("urls", [])
                         if isinstance(urls, list) and len(urls) > 0:
                             text_message += "\nRelated URLs:\n"
                             for url in urls:
                                 text_message += f"- {url}\n"
+
+                    # if none of the above fields are present, return the original content
+                    if not json_content.get("result") and not json_content.get("error"):
+                        return tool_message.content
                     return text_message
             return tool_message.content
 

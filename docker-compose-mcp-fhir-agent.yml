@@ -231,7 +231,7 @@ services:
     networks:
       - web
 
-  # This is another instance of the mcp-fhir-agent but points to dev FHIR server
+  # This is another instance of the mcp-fhir-agent but points to staging FHIR server
   mcp-fhir-agent-staging:
     image: mcp-fhir-agent:local
     environment:
@@ -244,6 +244,36 @@ services:
     env_file: docker.env
     ports:
       - '5064:5000'
+    volumes:
+      - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
+      - ~/.config/gh:/root/.config/gh
+      # uncomment this to use local fhir_to_llm code
+      # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
+      # ==== For bailey model testing - mount the AWS credentials ====
+      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      - ~/.aws/:/etc/appuser/.aws/
+    # uncomment the below to get the code from local folders instead of pypi
+    #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/health || exit 1
+    networks:
+      - web
+
+  # This is another instance of the mcp-fhir-agent but points to production FHIR server
+  mcp-fhir-agent-production:
+    image: mcp-fhir-agent:local
+    environment:
+      <<: *agent_env
+      # You can override any environment variables here
+      FHIR_SERVER_GET_URL: 'https://fhir-mcp.prod.bwell.zone/4_0_0/'
+      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
+      # disable until language model gateway supports elicitation
+      ENABLE_ELICITATION: "false"
+
+    env_file: docker.env
+    ports:
+      - '5065:5000'
     volumes:
       - ../mcp-fhir-agent:/usr/src/mcp-fhir-agent/
       - ~/.config/gh:/root/.config/gh
