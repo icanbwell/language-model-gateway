@@ -84,7 +84,7 @@ services:
       AUTH_CLIENT_ID_OKTAFHIRSTAGING: "0oarhz13sa21nfecS697"
       AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
-      # Okta FHIR Client Staging
+      # Okta FHIR Production
       AUTH_ISSUER_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
       AUTH_AUDIENCE_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
       AUTH_FRIENDLY_NAME_OKTAFHIRPRODUCTION: "Okta FHIR Production"
