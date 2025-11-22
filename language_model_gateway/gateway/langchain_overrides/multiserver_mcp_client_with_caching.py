@@ -423,7 +423,10 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
                     Headers(headers_dict) if headers_dict is not None else None
                 )
                 raise McpToolUnknownException(
-                    message=f"Unknown Error calling MCP tool '{tool.name}'\n{headers_obj}",
+                    message=(
+                        f"Unknown Error calling MCP tool '{tool.name}'\n"
+                        f"Headers: {dict(headers_obj) if headers_obj is not None else 'None'}"
+                    ),
                     status_code=0,
                     headers=headers_obj,
                     url=(http_connection.get("url") or "unknown")
