@@ -95,9 +95,9 @@ services:
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
-      MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
-      MONGO_DB_USERNAME: root
-      MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
+      MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=fhir-server}
+      MONGO_DB_USERNAME: ${LANGUAGE_MODEL_GATEWAY_MONGO_USERNAME:-root}
+      MONGO_DB_PASSWORD: ${LANGUAGE_MODEL_GATEWAY_MONGO_PASSWORD:-test123}  # pragma: allowlist secret
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
 #      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens

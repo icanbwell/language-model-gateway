@@ -219,6 +219,7 @@ services:
       MONGO_VECTOR_EMBEDDINGS_COLLECTION: "clinical-notes"
       MONGO_VECTOR_INDEX_NAME: "vector_index"
       EMBEDDING_MODEL: "cohere.embed-v4:0"
+      OAUTH_CACHE: "mongo"
     env_file: docker.env
     ports:
       - '5063:5000'
@@ -280,10 +281,11 @@ services:
       MONGO_URL: "mongodb+srv://cl-prod-services-pl-0.21mit.mongodb.net/?retryWrites=true&w=majority&appName=mcp-fhir-agent"
       MONGO_DB_NAME: "mcp-fhir-agent"
       MONGO_DB_USERNAME: "prod-svc-mcp-fhir-agent"
-      MONGO_DB_PASSWORD: ${PROD_MONGO_DB_PASSWORD}
+      MONGO_DB_PASSWORD: ${PROD_MONGO_DB_PASSWORD:-}
       MONGO_VECTOR_EMBEDDINGS_COLLECTION: "clinical-notes"
       MONGO_VECTOR_INDEX_NAME: "vector_index"
       EMBEDDING_MODEL: "cohere.embed-v4:0"
+      OAUTH_CACHE: "mongo"
     env_file: docker.env
     ports:
       - '5065:5000'
