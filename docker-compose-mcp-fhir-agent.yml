@@ -267,7 +267,7 @@ services:
     networks:
       - web
 
-  # This is another instance of the mcp-fhir-agent but points to staging FHIR server
+  # This is another instance of the mcp-fhir-agent but points to production FHIR server
   mcp-fhir-agent-production:
     image: mcp-fhir-agent:local
     environment:
