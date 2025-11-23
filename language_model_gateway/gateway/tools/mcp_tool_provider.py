@@ -52,7 +52,11 @@ class MCPToolProvider:
         token_reducer: TokenReducer,
     ) -> None:
         """
-        Initialize the MCPToolProvider with a cache.
+        Initialize the MCPToolProvider with authentication and token management.
+        Accepts:
+            tool_auth_manager (ToolAuthManager): Manages tool authentication.
+            environment_variables (LanguageModelGatewayEnvironmentVariables): Provides environment configuration.
+            token_reducer (TokenReducer): Handles token management and reduction.
         """
         self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
 
