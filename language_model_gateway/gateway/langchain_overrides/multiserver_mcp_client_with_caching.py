@@ -59,7 +59,7 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
         token_reducer: TokenReducer,
     ) -> None:
         """
-        Initialize the async config reader
+        Initialize the MultiServerMCPClientWithCaching.
 
         Args:
             connections: Optional dictionary of server name to connection config.
@@ -77,53 +77,6 @@ class MultiServerMCPClientWithCaching(MultiServerMCPClient):
             )
         self.token_reducer = token_reducer
         super().__init__(connections=connections)
-
-    async def load_tools_metadata_cache(
-        self, *, server_name: str | None = None, tool_names: List[str] | None
-    ) -> Dict[str, List[Tool]]:
-        """Get a list of all tools from all connected servers, always loading metadata.
-
-        Args:
-            server_name: Optional name of the server to get tools from.
-                If None, all tools from all servers will be returned (default).
-            tool_names: Optional list of tool names to filter the tools.
-
-        Returns:
-            Dictionary mapping connection URLs to lists of Tool objects.
-        """
-        async with self._lock:
-            tools_metadata: Dict[str, List[Tool]] = {}
-            if server_name is not None:
-                if server_name not in self.connections:
-                    msg = f"Couldn't find a server with name '{server_name}', expected one of '{list(self.connections.keys())}'"
-                    raise ValueError(msg)
-                connection_for_server: StreamableHttpConnection = cast(
-                    StreamableHttpConnection, self.connections[server_name]
-                )
-                tools_metadata[
-                    connection_for_server["url"]
-                ] = await self.load_metadata_for_mcp_tools(
-                    session=None,
-                    connection=connection_for_server,
-                    tool_names=tool_names,
-                )
-                logger.info(
-                    f"Loaded tools for connection {connection_for_server['url']}"
-                )
-            else:
-                connection: StreamableHttpConnection
-                for connection in [
-                    cast(StreamableHttpConnection, c) for c in self.connections.values()
-                ]:
-                    tools_metadata[
-                        connection["url"]
-                    ] = await self.load_metadata_for_mcp_tools(
-                        session=None,
-                        connection=connection,
-                        tool_names=self._tool_names,
-                    )
-                    logger.info(f"Loaded tools for connection {connection['url']}")
-            return tools_metadata
 
     @override
     async def get_tools(self, *, server_name: str | None = None) -> list[BaseTool]:
