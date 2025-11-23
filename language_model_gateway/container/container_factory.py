@@ -57,9 +57,6 @@ from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
-    McpToolsMetadataExpiringCache,
-)
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
     ConfluenceHelper,
 )
@@ -125,17 +122,6 @@ class LanguageModelGatewayContainerFactory:
                     if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
                     else 60 * 60
                 )
-            ),
-        )
-        container.singleton(
-            McpToolsMetadataExpiringCache,
-            lambda c: McpToolsMetadataExpiringCache(
-                ttl_seconds=(
-                    int(os.environ["MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS"])
-                    if os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS")
-                    else 60 * 60
-                ),
-                init_value={},
             ),
         )
 
@@ -266,7 +252,6 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             MCPToolProvider,
             lambda c: MCPToolProvider(
-                cache=c.resolve(McpToolsMetadataExpiringCache),
                 tool_auth_manager=c.resolve(ToolAuthManager),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables

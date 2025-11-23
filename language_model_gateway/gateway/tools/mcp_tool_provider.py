@@ -22,9 +22,6 @@ from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_w
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
-from language_model_gateway.gateway.utilities.cache.mcp_tools_expiring_cache import (
-    McpToolsMetadataExpiringCache,
-)
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
@@ -50,21 +47,14 @@ class MCPToolProvider:
     def __init__(
         self,
         *,
-        cache: McpToolsMetadataExpiringCache,
         tool_auth_manager: ToolAuthManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
     ) -> None:
         """
         Initialize the MCPToolProvider with a cache.
-
-        Args:
-            cache: An ExpiringCache instance to store tools by their MCP URLs.
         """
         self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
-        self._cache: McpToolsMetadataExpiringCache = cache
-        if self._cache is None:
-            raise ValueError("Cache must be provided")
 
         self.tool_auth_manager = tool_auth_manager
         if self.tool_auth_manager is None:
@@ -214,7 +204,6 @@ class MCPToolProvider:
 
             tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
             client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
-                cache=self._cache,
                 connections={
                     f"{tool.name}": mcp_tool_config,
                 },
