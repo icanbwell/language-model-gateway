@@ -6,8 +6,13 @@ import httpx
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.interceptors import MCPToolCallRequest, MCPToolCallResult
+from langchain_mcp_adapters.interceptors import (
+    MCPToolCallRequest,
+    MCPToolCallResult,
+    ToolCallInterceptor,
+)
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from mcp.types import ContentBlock, TextContent
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
 
@@ -100,25 +105,53 @@ class MCPToolProvider:
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
         )
 
-    @staticmethod
-    async def tool_interceptor_truncation(
-        request: MCPToolCallRequest,
-        handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
-    ) -> MCPToolCallResult:
+    def get_tool_interceptor_truncation(self) -> ToolCallInterceptor:
         """
-        Interceptor to truncate tool output based on token limits.
-        This interceptor checks if the tool has a specified output token limit
-        and truncates the output accordingly using a TokenReducer.
-
-        Args:
-            request: The MCPToolCallRequest containing tool call details.
-            handler: The next handler in the interceptor chain.
-            Returns:
-                An MCPToolCallResult with potentially truncated output.
+        Get an interceptor to truncate tool output based on token limits.
         """
-        result: MCPToolCallResult = await handler(request)
 
-        return result
+        async def tool_interceptor_truncation(
+            request: MCPToolCallRequest,
+            handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
+        ) -> MCPToolCallResult:
+            """
+            Interceptor to truncate tool output based on token limits.
+            This interceptor checks if the tool has a specified output token limit
+            and truncates the output accordingly using a TokenReducer.
+
+            Args:
+                request: The MCPToolCallRequest containing tool call details.
+                handler: The next handler in the interceptor chain.
+                Returns:
+                    An MCPToolCallResult with potentially truncated output.
+            """
+            result: MCPToolCallResult = await handler(request)
+
+            max_token_limit: int = (
+                self.environment_variables.tool_output_token_limit or -1
+            )
+            tokens_limit_left: int = max_token_limit
+
+            content_block: ContentBlock
+            for content_block in result.content:
+                if isinstance(content_block, TextContent):
+                    text: str = content_block.text
+                    token_count: int = self.token_reducer.count_tokens(text=text)
+                    if max_token_limit > 0 and token_count > tokens_limit_left:
+                        truncated_text = self.token_reducer.reduce_tokens(
+                            text=text,
+                            max_tokens=tokens_limit_left,
+                            preserve_start=0,
+                        )
+                        logger.debug(
+                            f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
+                        )
+                        content_block.text = truncated_text
+                    else:
+                        tokens_limit_left -= token_count
+            return result
+
+        return tool_interceptor_truncation
 
     async def get_tools_by_url_async(
         self, *, tool: AgentConfig, headers: Dict[str, str]
@@ -225,7 +258,7 @@ class MCPToolProvider:
                 connections={
                     f"{tool.name}": mcp_tool_config,
                 },
-                tool_interceptors=[self.tool_interceptor_truncation],
+                tool_interceptors=[self.get_tool_interceptor_truncation()],
             )
             tools: List[BaseTool] = await client.get_tools()
             if tool_names and tools:
