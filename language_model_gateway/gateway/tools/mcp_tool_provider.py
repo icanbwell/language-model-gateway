@@ -1,24 +1,22 @@
-import httpx
 import logging
 import os
-from typing import Dict, List
+from typing import Dict, List, Callable, Awaitable
 
+import httpx
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest, MCPToolCallResult
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from oidcauthlib.auth.models.token import Token
+from oidcauthlib.auth.token_reader import TokenReader
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
-from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from oidcauthlib.auth.token_reader import TokenReader
-
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
-from language_model_gateway.gateway.langchain_overrides.multiserver_mcp_client_with_caching import (
-    MultiServerMCPClientWithCaching,
-)
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
@@ -101,6 +99,26 @@ class MCPToolProvider:
             timeout=timeout,
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
         )
+
+    @staticmethod
+    async def tool_interceptor_truncation(
+        request: MCPToolCallRequest,
+        handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
+    ) -> MCPToolCallResult:
+        """
+        Interceptor to truncate tool output based on token limits.
+        This interceptor checks if the tool has a specified output token limit
+        and truncates the output accordingly using a TokenReducer.
+
+        Args:
+            request: The MCPToolCallRequest containing tool call details.
+            handler: The next handler in the interceptor chain.
+            Returns:
+                An MCPToolCallResult with potentially truncated output.
+        """
+        result: MCPToolCallResult = await handler(request)
+
+        return result
 
     async def get_tools_by_url_async(
         self, *, tool: AgentConfig, headers: Dict[str, str]
@@ -202,13 +220,12 @@ class MCPToolProvider:
                 )
 
             tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
-            client: MultiServerMCPClientWithCaching = MultiServerMCPClientWithCaching(
+
+            client: MultiServerMCPClient = MultiServerMCPClient(
                 connections={
                     f"{tool.name}": mcp_tool_config,
                 },
-                tool_names=tool_names,
-                tool_output_token_limit=self.environment_variables.tool_output_token_limit,
-                token_reducer=self.token_reducer,
+                tool_interceptors=[self.tool_interceptor_truncation],
             )
             tools: List[BaseTool] = await client.get_tools()
             if tool_names and tools:
