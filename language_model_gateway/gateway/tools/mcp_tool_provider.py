@@ -58,8 +58,6 @@ class MCPToolProvider:
             environment_variables (LanguageModelGatewayEnvironmentVariables): Provides environment configuration.
             token_reducer (TokenReducer): Handles token management and reduction.
         """
-        self.tools_by_mcp_url: Dict[str, List[BaseTool]] = {}
-
         self.tool_auth_manager = tool_auth_manager
         if self.tool_auth_manager is None:
             raise ValueError("ToolAuthManager must be provided")
@@ -126,9 +124,6 @@ class MCPToolProvider:
             url: str | None = tool.url
             if url is None:
                 raise ValueError("Tool URL must be provided")
-            # first see if the url is already loaded
-            if url in self.tools_by_mcp_url:
-                return self.tools_by_mcp_url[url]
 
             mcp_tool_config: StreamableHttpConnection = {
                 "url": url,
@@ -219,7 +214,6 @@ class MCPToolProvider:
             if tool_names and tools:
                 # filter tools by tool_name if provided
                 tools = [t for t in tools if t.name in tool_names]
-            self.tools_by_mcp_url[url] = tools
             return tools
         except* HTTPStatusError as e:
             url = tool.url if tool.url else "unknown"
