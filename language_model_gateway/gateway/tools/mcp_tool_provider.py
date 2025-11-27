@@ -161,14 +161,19 @@ class MCPToolProvider:
             for content_block in result.content:
                 if isinstance(content_block, TextContent):
                     text: str = content_block.text
-                    # append the un-truncated part as a separate content block
-                    # Non TextContent blocks are turned into artifacts instead of messages
+                    # append the un-truncated part as a separate content block of type EmbeddedResource
+                    # Content blocks that are not of type TextContent  are turned into artifacts instead of messages
                     # by LangChain
+                    # See _convert_call_tool_result function in langchain_mcp_adapters/tools.py
+                    # It returns a tuple.  The first element is the message and the second is the artifact.
+                    # This is received by on_tool_end event by StreamingManager.
                     content_block_list.append(
                         EmbeddedResource(
                             resource=TextResourceContents(
                                 text=text,
-                                uri=HttpUrl("https://example.com/resource.txt"),
+                                uri=HttpUrl(
+                                    "https://example.com/resource.txt"
+                                ),  # mandatory field but not used
                             ),
                             type="resource",
                         )
@@ -184,6 +189,7 @@ class MCPToolProvider:
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
                         content_block.text = truncated_text
+                        tokens_limit_left -= token_count
                         content_block_list.append(content_block)
                     else:
                         tokens_limit_left -= token_count

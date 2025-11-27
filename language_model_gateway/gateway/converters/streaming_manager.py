@@ -293,8 +293,15 @@ class LangGraphStreamingManager:
             )
         if tool_message:
             artifact: Optional[Any] = tool_message.artifact
-            # remove artifact from ToolMessage otherwise we get error: TypeError: Type is not msgpack serializable: ToolMessage
-            if artifact is not None:
+            # If we're calling an MCP tool then the tool_interceptor_truncation function separates the result
+            # into message and artifact.  In that case, message is the truncated version that is shared with the LLM
+            # while artifact is the full result that we can make available for download.
+            # The artifact is then a list of EmbeddedResources
+
+            # remove artifact from ToolMessage otherwise we get error:
+            # TypeError: Type is not msgpack serializable: ToolMessage
+            # This is because artifact may be of any type, including non-serializable types such as EmbeddedResource
+            if artifact is not None and not isinstance(artifact, str):
                 tool_message.artifact = None
 
             return_raw_tool_output: bool = (
