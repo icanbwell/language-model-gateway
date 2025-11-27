@@ -23,6 +23,7 @@ from mcp.types import (
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
+from pydantic import HttpUrl
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -188,6 +189,17 @@ class MCPToolProvider:
                     if isinstance(content_block.resource, TextResourceContents):
                         logger.info(f"EmbeddedResource: {content_block.resource.text}")
             logger.info("===== End of tool output after truncation =====")
+
+            # add a test EmbeddedResource to verify multiple content blocks are handled correctly
+            content_block_list.append(
+                EmbeddedResource(
+                    resource=TextResourceContents(
+                        text="Hello Imran",
+                        uri=HttpUrl("data:text/plain;base64"),
+                    ),
+                    type="resource",
+                )
+            )
             return result
 
         return tool_interceptor_truncation

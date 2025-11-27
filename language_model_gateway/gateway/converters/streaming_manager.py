@@ -126,8 +126,10 @@ class LangGraphStreamingManager:
                     tool_start_times=tool_start_times,
                 ):
                     yield chunk
+            case "on_tool_error":
+                logger.error(f"on_tool_error: {event}")
             case _:
-                pass
+                logger.info(f"Skipped event type: {event_type}: {event}")
 
     async def _handle_on_chat_model_stream(
         self,
@@ -254,7 +256,7 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
+        logger.info(f"on_tool_end: {event}")
         data = event["data"] if "data" in event else {}
         tool_message: Optional[ToolMessage] = data.get("output")
         tool_name2: Optional[str] = None
