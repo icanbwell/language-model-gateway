@@ -23,7 +23,6 @@ from mcp.types import (
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
-from pydantic import HttpUrl
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -138,12 +137,12 @@ class MCPToolProvider:
             """
             result: MCPToolCallResult = await handler(request)
 
-            logger.debug("=== Received tool output before truncation ===")
+            logger.info("=== Received tool output before truncation ===")
             content_block: ContentBlock
             for content_block in result.content:
                 if isinstance(content_block, TextContent):
-                    logger.debug(f"{content_block.text}")
-            logger.debug("=== End of tool output before truncation ===")
+                    logger.info(f"{content_block.text}")
+            logger.info("=== End of tool output before truncation ===")
 
             max_token_limit: int = (
                 self.environment_variables.tool_output_token_limit or -1
@@ -166,20 +165,29 @@ class MCPToolProvider:
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
                         # append the un-truncated part as a separate content block if needed
-                        content_block_list.append(
-                            EmbeddedResource(
-                                resource=TextResourceContents(
-                                    text=text,
-                                    uri=HttpUrl("data:text/plain;base64"),
-                                ),
-                                type="resource",
-                            )
-                        )
+                        # content_block_list.append(
+                        #     EmbeddedResource(
+                        #         resource=TextResourceContents(
+                        #             text=text,
+                        #             uri=HttpUrl("data:text/plain;base64"),
+                        #         ),
+                        #         type="resource",
+                        #     )
+                        # )
                         content_block.text = truncated_text
                     else:
                         tokens_limit_left -= token_count
                         # append the original content block if no truncation is needed
                         content_block_list.append(content_block)
+
+            logger.info("===== Returning tool output after truncation =====")
+            for content_block in content_block_list:
+                if isinstance(content_block, TextContent):
+                    logger.info(f"TextContent: {content_block.text}")
+                elif isinstance(content_block, EmbeddedResource):
+                    if isinstance(content_block.resource, TextResourceContents):
+                        logger.info(f"EmbeddedResource: {content_block.resource.text}")
+            logger.info("===== End of tool output after truncation =====")
             return result
 
         return tool_interceptor_truncation
