@@ -301,7 +301,7 @@ class LangGraphStreamingManager:
                     > self.environment_variables.maximum_inline_tool_output_size
                 ):
                     # Save to file and provide link
-                    output_folder = os.environ.get("TOOL_OUTPUT_FILE_PATH")
+                    output_folder = os.environ.get("IMAGE_GENERATION_PATH")
                     if output_folder:
                         file_manager = self.file_manager_factory.get_file_manager(
                             folder=output_folder
@@ -386,7 +386,7 @@ class LangGraphStreamingManager:
                                 index=0,
                                 delta=ChoiceDelta(
                                     role="assistant",
-                                    content=f"[Click to download Tool Output]({file_url})\n",
+                                    content=f"\n\n[Click to download Tool Output]({file_url})\n\n",
                                 ),
                             )
                         ],

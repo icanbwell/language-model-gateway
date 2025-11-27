@@ -3,6 +3,7 @@ import os
 from typing import Dict, List, Callable, Awaitable
 
 import httpx
+from datetime import timedelta
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
@@ -137,6 +138,13 @@ class MCPToolProvider:
             """
             result: MCPToolCallResult = await handler(request)
 
+            logger.debug("=== Received tool output before truncation ===")
+            content_block: ContentBlock
+            for content_block in result.content:
+                if isinstance(content_block, TextContent):
+                    logger.debug(f"{content_block.text}")
+            logger.debug("=== End of tool output before truncation ===")
+
             max_token_limit: int = (
                 self.environment_variables.tool_output_token_limit or -1
             )
@@ -144,7 +152,6 @@ class MCPToolProvider:
 
             content_block_list: List[ContentBlock] = []
 
-            content_block: ContentBlock
             for content_block in result.content:
                 if isinstance(content_block, TextContent):
                     text: str = content_block.text
@@ -225,6 +232,8 @@ class MCPToolProvider:
                 "url": url,
                 "transport": "streamable_http",
                 "httpx_client_factory": self.get_httpx_async_client,
+                "timeout": timedelta(minutes=10),
+                "sse_read_timeout": timedelta(minutes=10),
             }
             if tool.headers:
                 # replace the strings with os.path.expandvars # to allow for environment variable expansion
