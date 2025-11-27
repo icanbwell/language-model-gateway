@@ -456,7 +456,32 @@ class LangGraphStreamingManager:
                 for item in artifact:
                     if isinstance(item, EmbeddedResource):
                         if isinstance(item.resource, TextResourceContents):
-                            result += item.resource.text + "\n"
+                            # see if text is a json string
+                            json_object: Any = LangGraphStreamingManager.safe_json(item.resource.text)
+                            if json_object is not None and isinstance(json_object, dict):
+                                if "result" in json_object:
+                                    result += str(json_object.get("result")) + "\n"
+                                if "error" in json_object:
+                                    result += "Error: " + str(json_object.get("error")) + "\n"
+                                if "meta" in json_object:
+                                    meta = json_object.get("meta", {})
+                                    if isinstance(meta, dict) and len(meta) > 0:
+                                        result += "Metadata:\n"
+                                        for key, value in meta.items():
+                                            result += f"- {key}: {value}\n"
+                                if "urls" in json_object:
+                                    urls = json_object.get("urls", [])
+                                    if isinstance(urls, list) and len(urls) > 0:
+                                        result += "Related URLs:\n"
+                                        for url in urls:
+                                            result += f"- {url}\n"
+                                if (
+                                    "result" not in json_object
+                                    and "error" not in json_object
+                                ):
+                                    result += item.resource.text + "\n"
+                            else:
+                                result += item.resource.text + "\n"
                 return result.strip()
             # finally try to convert to str
             return str(artifact)
@@ -534,17 +559,20 @@ class LangGraphStreamingManager:
         return f"{tool_name1}:{hash(tool_input_str)}"
 
     @staticmethod
+    def safe_json(string: str) -> Any:
+        try:
+            return json.loads(string)
+        except json.JSONDecodeError:
+            return None
+
+    @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
-        def safe_json(string: str) -> Any:
-            try:
-                return json.loads(string)
-            except json.JSONDecodeError:
-                return None
+
 
         if isinstance(tool_message.content, str):
             # the content is str then just return it
             # see if this is a json object embedded in text
-            json_content: Any = safe_json(tool_message.content)
+            json_content: Any = LangGraphStreamingManager.safe_json(tool_message.content)
             if json_content is not None:
                 if isinstance(json_content, dict):
                     text_message: str = ""
