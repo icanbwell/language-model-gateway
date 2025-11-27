@@ -115,7 +115,9 @@ class LangGraphStreamingManager:
         request: ChatRequest,
         request_id: str,
     ) -> AsyncGenerator[str, None]:
-        chunk: AIMessageChunk | None = event.get("data", {}).get("chunk")
+        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
+        data = event["data"] if "data" in event else {}
+        chunk: AIMessageChunk | None = data.get("chunk")
         if chunk is not None:
             content: str | list[str | dict[str, Any]] = chunk.content
             usage_metadata: Optional[UsageMetadata] = chunk.usage_metadata
@@ -157,8 +159,10 @@ class LangGraphStreamingManager:
         request: ChatRequest,
         request_id: str,
     ) -> AsyncGenerator[str, None]:
-        output: Dict[str, Any] | str | None = event.get("data", {}).get("output")
-        if output and isinstance(output, dict) and output.get("usage_metadata"):
+        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
+        data = event["data"] if "data" in event else {}
+        output: Dict[str, Any] | str | None = data.get("output")
+        if output and isinstance(output, dict) and "usage_metadata" in output:
             completion_usage_metadata: CompletionUsage = (
                 self.convert_usage_meta_data_to_openai(
                     usages=[output["usage_metadata"]]
@@ -184,8 +188,10 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        tool_name: Optional[str] = event.get("name", None)
-        tool_input: Optional[Dict[str, Any]] = event.get("data", {}).get("input")
+        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
+        tool_name: Optional[str] = event["name"] if "name" in event else None
+        data = event["data"] if "data" in event else {}
+        tool_input: Optional[Dict[str, Any]] = data.get("input")
         tool_input_display: Optional[Dict[str, Any]] = (
             tool_input.copy() if tool_input is not None else None
         )
@@ -227,16 +233,18 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        tool_message: Optional[ToolMessage] = event.get("data", {}).get("output")
+        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
+        data = event["data"] if "data" in event else {}
+        tool_message: Optional[ToolMessage] = data.get("output")
         tool_name2: Optional[str] = None
         tool_input2: Optional[Dict[str, Any]] = None
         if tool_message:
             tool_name2 = getattr(tool_message, "name", None)
             tool_input2 = getattr(tool_message, "input", None)
         if not tool_name2:
-            tool_name2 = event.get("name", None)
+            tool_name2 = event["name"] if "name" in event else None
         if not tool_input2:
-            tool_input2 = event.get("data", {}).get("input")
+            tool_input2 = data.get("input")
         tool_key: str = self.make_tool_key(tool_name2, tool_input2)
         start_time: Optional[float] = tool_start_times.pop(tool_key, None)
         runtime_str: str = ""
