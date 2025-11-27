@@ -33,7 +33,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": "0.5"
+      "value": "0.0"
     }
   ],
   "headers": [
@@ -58,7 +58,10 @@
       "auth": "jwt_token",
       "auth_providers": [
         "client1"
-      ]
+      ],
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "example_prompts": [

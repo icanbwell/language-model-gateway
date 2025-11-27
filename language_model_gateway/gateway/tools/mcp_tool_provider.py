@@ -242,13 +242,13 @@ class MCPToolProvider:
         )
 
     async def get_tools_by_url_async(
-        self, *, tool: AgentConfig, headers: Dict[str, str]
+        self, *, tool_config: AgentConfig, headers: Dict[str, str]
     ) -> List[BaseTool]:
         """
         Get tools by their MCP URL asynchronously.
         This method retrieves tools from the MCP based on the provided URL and headers.
         Args:
-            tool: An AgentConfig instance containing the tool's configuration.
+            tool_config: An AgentConfig instance containing the tool's configuration.
             headers: A dictionary of headers to include in the request, such as Authorization.
         Returns:
             A list of BaseTool instances retrieved from the MCP.
@@ -256,26 +256,30 @@ class MCPToolProvider:
         token: Token | None = None
 
         logger.info(
-            f"get_tools_by_url_async called for tool: {tool.name}, url: {tool.url}, headers: {headers}"
+            f"get_tools_by_url_async called for tool: {tool_config.name}, url: {tool_config.url}, headers: {headers}"
         )
 
         try:
-            url: str | None = tool.url
+            url: str | None = tool_config.url
             if url is None:
                 raise ValueError("Tool URL must be provided")
+
+            tool_call_timeout_seconds: int = (
+                self.environment_variables.tool_call_timeout_seconds
+            )
 
             mcp_tool_config: StreamableHttpConnection = {
                 "url": url,
                 "transport": "streamable_http",
                 "httpx_client_factory": self.get_httpx_async_client,
-                "timeout": timedelta(minutes=10),
-                "sse_read_timeout": timedelta(minutes=10),
+                "timeout": timedelta(seconds=tool_call_timeout_seconds),
+                "sse_read_timeout": timedelta(seconds=tool_call_timeout_seconds),
             }
-            if tool.headers:
+            if tool_config.headers:
                 # replace the strings with os.path.expandvars # to allow for environment variable expansion
                 mcp_tool_config["headers"] = {
                     key: os.path.expandvars(value)
-                    for key, value in tool.headers.items()
+                    for key, value in tool_config.headers.items()
                 }
 
             # pass Authorization header if provided
@@ -287,14 +291,14 @@ class MCPToolProvider:
                 ]
                 auth_header: str | None = auth_headers[0] if auth_headers else None
                 if auth_header:
-                    if tool.auth_providers:
+                    if tool_config.auth_providers:
                         # get the appropriate token_item for this tool
                         token_item: (
                             TokenCacheItem | None
                         ) = await self.tool_auth_manager.get_token_for_tool_async(
                             auth_header=auth_header,
-                            error_message=f"No auth found for  {tool.name}",
-                            tool_config=tool,
+                            error_message=f"No auth found for  {tool_config.name}",
+                            tool_config=tool_config,
                         )
                         token = token_item.get_access_token() if token_item else None
                         if token:
@@ -311,10 +315,10 @@ class MCPToolProvider:
                                 else None
                             )
 
-                            if not auth_token and not tool.auth_optional:
+                            if not auth_token and not tool_config.auth_optional:
                                 raise AuthorizationMcpToolTokenInvalidException(
                                     message=f"No token found.  Authorization needed for MCP tools at {url}. "
-                                    + f" for auth providers {tool.auth_providers}"
+                                    + f" for auth providers {tool_config.auth_providers}"
                                     + f", token_email: {auth_token.email if auth_token else 'None'}"
                                     + f", token_audience: {auth_token.audience if auth_token else 'None'}"
                                     + f", token_subject: {auth_token.subject if auth_token else 'None'}",
@@ -329,7 +333,7 @@ class MCPToolProvider:
                             "Authorization": auth_header,
                         }
                     elif (
-                        tool.auth
+                        tool_config.auth
                     ):  # no specific auth providers are specified for the tool
                         # just pass through the current Authorization header
                         # add the Authorization header to the mcp_tool_config headers
@@ -342,11 +346,13 @@ class MCPToolProvider:
                     f"Loading MCP tools with Authorization header: {auth_header}"
                 )
 
-            tool_names: List[str] | None = tool.tools.split(",") if tool.tools else None
+            tool_names: List[str] | None = (
+                tool_config.tools.split(",") if tool_config.tools else None
+            )
 
             client: MultiServerMCPClient = MultiServerMCPClient(
                 connections={
-                    f"{tool.name}": mcp_tool_config,
+                    f"{tool_config.name}": mcp_tool_config,
                 },
                 callbacks=Callbacks(
                     on_progress=self.on_mcp_tool_progress,
@@ -360,7 +366,7 @@ class MCPToolProvider:
                 tools = [t for t in tools if t.name in tool_names]
             return tools
         except* HTTPStatusError as e:
-            url = tool.url if tool.url else "unknown"
+            url = tool_config.url if tool_config.url else "unknown"
             first_exception1 = e.exceptions[0]
             logger.error(
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(first_exception1)} {first_exception1}"
@@ -373,7 +379,7 @@ class MCPToolProvider:
                 token=token,
             ) from e
         except* McpToolUnauthorizedException as e:
-            url = tool.url if tool.url else "unknown"
+            url = tool_config.url if tool_config.url else "unknown"
             first_exception2 = e.exceptions[0]
             logger.error(
                 f"get_tools_by_url_async MCP Tool UnAuthorized error while loading MCP tools from {url}: {type(first_exception2)} {first_exception2}"
@@ -386,7 +392,7 @@ class MCPToolProvider:
                 token=token,
             ) from e
         except* Exception as e:
-            url = tool.url if tool.url else "unknown"
+            url = tool_config.url if tool_config.url else "unknown"
             logger.error(
                 f"get_tools_by_url_async Failed to load MCP tools from {url}: {type(e.exceptions[0])} {e}"
             )
@@ -401,7 +407,7 @@ class MCPToolProvider:
             if tool.url is not None:
                 try:
                     tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
-                        tool=tool, headers=headers
+                        tool_config=tool, headers=headers
                     )
                     all_tools.extend(tools_by_url)
                 except* Exception as e:

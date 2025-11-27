@@ -25,7 +25,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": "0.5"
+      "value": "0.0"
     }
   ],
   "name": "AI SDK Dev",
@@ -46,7 +46,7 @@
       "content": "Use debug parameter when calling tools if they support it.",
       "role": "system"
     },
-        {
+    {
       "content": "Don't interpret the data from the FHIR server, just present it as is.  If the user asks for interpretation, tell them you are not qualified to do so and they should use Bailey, the Health AI assistant.",
       "role": "system"
     },
@@ -71,7 +71,10 @@
         "oktafhirdev"
       ],
       "name": "fhir_server",
-      "url": "https://mcpfhiragent.dev.icanbwell.com/"
+      "url": "https://mcpfhiragent.dev.icanbwell.com/",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "type": "langchain"

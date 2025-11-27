@@ -25,7 +25,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": "0.5"
+      "value": "0.0"
     }
   ],
   "name": "AI SDK Staging",
@@ -71,7 +71,10 @@
         "oktafhirstaging"
       ],
       "name": "fhir_server",
-      "url": "https://mcpfhiragent.staging.icanbwell.com/"
+      "url": "https://mcpfhiragent.staging.icanbwell.com/",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "type": "langchain"

@@ -21,7 +21,7 @@
   "model_parameters": [
     {
       "key": "temperature",
-      "value": "0.5"
+      "value": "0.0"
     }
   ],
   "name": "AI SDK Client Sandbox OpenAI",
@@ -67,7 +67,10 @@
         "oktafhirclientsandbox"
       ],
       "name": "fhir_server",
-      "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
+      "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "type": "langchain"
