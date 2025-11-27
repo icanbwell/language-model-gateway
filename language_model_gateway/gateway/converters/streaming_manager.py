@@ -293,7 +293,7 @@ class LangGraphStreamingManager:
 
                 tool_message_content_length: int = len(tool_message_content)
                 token_count: int = self.token_reducer.count_tokens(
-                    tool_message_content if return_raw_tool_output else str(artifact)
+                    tool_message_content if not artifact else str(artifact)
                 )
                 file_url: Optional[str] = None
                 if (

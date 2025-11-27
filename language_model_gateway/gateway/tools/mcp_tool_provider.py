@@ -13,9 +13,16 @@ from langchain_mcp_adapters.interceptors import (
     ToolCallInterceptor,
 )
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
-from mcp.types import ContentBlock, TextContent, LoggingMessageNotificationParams
+from mcp.types import (
+    ContentBlock,
+    TextContent,
+    LoggingMessageNotificationParams,
+    EmbeddedResource,
+    TextResourceContents,
+)
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
+from pydantic import HttpUrl
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -135,6 +142,8 @@ class MCPToolProvider:
             )
             tokens_limit_left: int = max_token_limit
 
+            content_block_list: List[ContentBlock] = []
+
             content_block: ContentBlock
             for content_block in result.content:
                 if isinstance(content_block, TextContent):
@@ -149,9 +158,21 @@ class MCPToolProvider:
                         logger.debug(
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
+                        # append the un-truncated part as a separate content block if needed
+                        content_block_list.append(
+                            EmbeddedResource(
+                                resource=TextResourceContents(
+                                    text=text,
+                                    uri=HttpUrl("data:text/plain;base64"),
+                                ),
+                                type="resource",
+                            )
+                        )
                         content_block.text = truncated_text
                     else:
                         tokens_limit_left -= token_count
+                        # append the original content block if no truncation is needed
+                        content_block_list.append(content_block)
             return result
 
         return tool_interceptor_truncation
