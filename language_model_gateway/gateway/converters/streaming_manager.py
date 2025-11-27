@@ -446,6 +446,39 @@ class LangGraphStreamingManager:
             yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
     @staticmethod
+    def _format_text_resource_contents(text: str) -> str:
+        """
+        Helper to format TextResourceContents, extracting JSON fields if possible.
+        """
+        result = ""
+        json_object: Any = LangGraphStreamingManager.safe_json(text)
+        if json_object is not None and isinstance(json_object, dict):
+            if "result" in json_object:
+                result += str(json_object.get("result")) + "\n"
+            if "error" in json_object:
+                result += "Error: " + str(json_object.get("error")) + "\n"
+            if "meta" in json_object:
+                meta = json_object.get("meta", {})
+                if isinstance(meta, dict) and len(meta) > 0:
+                    result += "Metadata:\n"
+                    for key, value in meta.items():
+                        result += f"- {key}: {value}\n"
+            if "urls" in json_object:
+                urls = json_object.get("urls", [])
+                if isinstance(urls, list) and len(urls) > 0:
+                    result += "Related URLs:\n"
+                    for url in urls:
+                        result += f"- {url}\n"
+            if (
+                "result" not in json_object
+                and "error" not in json_object
+            ):
+                result += text + "\n"
+        else:
+            result += text + "\n"
+        return result
+
+    @staticmethod
     async def convert_tool_artifact_to_text(*, artifact: Any | None) -> str:
         try:
             if isinstance(artifact, str):
@@ -456,32 +489,9 @@ class LangGraphStreamingManager:
                 for item in artifact:
                     if isinstance(item, EmbeddedResource):
                         if isinstance(item.resource, TextResourceContents):
-                            # see if text is a json string
-                            json_object: Any = LangGraphStreamingManager.safe_json(item.resource.text)
-                            if json_object is not None and isinstance(json_object, dict):
-                                if "result" in json_object:
-                                    result += str(json_object.get("result")) + "\n"
-                                if "error" in json_object:
-                                    result += "Error: " + str(json_object.get("error")) + "\n"
-                                if "meta" in json_object:
-                                    meta = json_object.get("meta", {})
-                                    if isinstance(meta, dict) and len(meta) > 0:
-                                        result += "Metadata:\n"
-                                        for key, value in meta.items():
-                                            result += f"- {key}: {value}\n"
-                                if "urls" in json_object:
-                                    urls = json_object.get("urls", [])
-                                    if isinstance(urls, list) and len(urls) > 0:
-                                        result += "Related URLs:\n"
-                                        for url in urls:
-                                            result += f"- {url}\n"
-                                if (
-                                    "result" not in json_object
-                                    and "error" not in json_object
-                                ):
-                                    result += item.resource.text + "\n"
-                            else:
-                                result += item.resource.text + "\n"
+                            result += LangGraphStreamingManager._format_text_resource_contents(
+                                item.resource.text
+                            )
                 return result.strip()
             # finally try to convert to str
             return str(artifact)
@@ -567,42 +577,12 @@ class LangGraphStreamingManager:
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
-
-
         if isinstance(tool_message.content, str):
             # the content is str then just return it
             # see if this is a json object embedded in text
-            json_content: Any = LangGraphStreamingManager.safe_json(tool_message.content)
-            if json_content is not None:
-                if isinstance(json_content, dict):
-                    text_message: str = ""
-                    if "result" in json_content:
-                        # https://github.com/open-webui/open-webui/discussions/11981
-                        result = json_content.get("result")
-                        if result:
-                            text_message += cast(str, json_content.get("result"))
-                    if "error" in json_content:
-                        error_message = json_content.get("error", "")
-                        if error_message:
-                            text_message += f"\nError: {error_message}\n"
-                    if "meta" in json_content:
-                        meta = json_content.get("meta", {})
-                        if isinstance(meta, dict) and len(meta) > 0:
-                            text_message += "\nMetadata:\n"
-                            for key, value in meta.items():
-                                text_message += f"- {key}: {value}\n"
-                    if "urls" in json_content:
-                        urls = json_content.get("urls", [])
-                        if isinstance(urls, list) and len(urls) > 0:
-                            text_message += "\nRelated URLs:\n"
-                            for url in urls:
-                                text_message += f"- {url}\n"
-
-                    # if none of the above fields are present, return the original content
-                    if not json_content.get("result") and not json_content.get("error"):
-                        return tool_message.content
-                    return text_message
-            return tool_message.content
+            return LangGraphStreamingManager._format_text_resource_contents(
+                text=tool_message.content
+            )
 
         if (
             isinstance(tool_message.content, list)
