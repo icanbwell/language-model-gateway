@@ -140,7 +140,7 @@ class LangGraphStreamingManager:
                     ):
                         yield chunk
                 case _:
-                    logger.info(f"Skipped event type: {event_type}")
+                    logger.debug(f"Skipped event type: {event_type}")
         except Exception as e:
             logger.error(f"Error handling langchain event: {e}")
 
@@ -224,7 +224,6 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
         tool_name: Optional[str] = event["name"] if "name" in event else None
         data = event["data"] if "data" in event else {}
         tool_input: Optional[Dict[str, Any]] = data.get("input")
@@ -269,7 +268,7 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        logger.info(f"on_tool_end: {event}")
+        logger.debug(f"on_tool_end: {event}")
         data = event["data"] if "data" in event else {}
         tool_message: Optional[ToolMessage] = data.get("output")
         tool_name2: Optional[str] = None
@@ -287,7 +286,7 @@ class LangGraphStreamingManager:
         if start_time is not None:
             elapsed: float = time.time() - start_time
             runtime_str = f"{elapsed:.2f}s"
-            logger.info(f"Tool {tool_name2} completed in {elapsed:.2f} seconds.")
+            logger.debug(f"Tool {tool_name2} completed in {elapsed:.2f} seconds.")
         else:
             logger.warning(
                 f"Tool {tool_name2} end event received without matching start event."
@@ -306,7 +305,7 @@ class LangGraphStreamingManager:
                     tool_message=tool_message
                 )
                 if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                    logger.info(
+                    logger.debug(
                         f"Returning artifact: {artifact if artifact else tool_message_content}"
                     )
 
@@ -367,12 +366,7 @@ class LangGraphStreamingManager:
 """
                     )
                     if return_raw_tool_output
-                    else f"\n> {artifact}"
-                    + (
-                        f" [tokens: {token_count}]"
-                        if logger.isEnabledFor(logging.DEBUG) > 0
-                        else ""
-                    )
+                    else f"\n> {artifact}" + (f" [tokens: {token_count}]")
                 )
                 chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                     id=request_id,
@@ -455,9 +449,6 @@ class LangGraphStreamingManager:
         json_object: Any = LangGraphStreamingManager.safe_json(text)
         if json_object is not None and isinstance(json_object, dict):
             if "result" in json_object:
-                logger.info(
-                    f"Extracted result from JSON object:>>> {json_object.get('result')} <<<"
-                )
                 result += str(json_object.get("result")) + "\n"
             if "error" in json_object:
                 result += "Error: " + str(json_object.get("error")) + "\n"
@@ -477,8 +468,6 @@ class LangGraphStreamingManager:
                 result += text + "\n"
         else:
             result += text + "\n"
-
-        logger.info(f"Formatted text resource contents: {result}")
         return result
 
     @staticmethod
@@ -491,7 +480,6 @@ class LangGraphStreamingManager:
                 result = ""
                 for item in artifact:
                     if hasattr(item, "resource") and hasattr(item.resource, "text"):
-                        logger.info(f"Processing artifact item: {item}")
                         result += (
                             LangGraphStreamingManager._format_text_resource_contents(
                                 item.resource.text

@@ -168,7 +168,7 @@ run-pre-commit: setup-pre-commit ## runs pre-commit on all files
 clean: down clean-database ## Cleans all the local docker setup
 
 .PHONY: nuclear
-nuclear: clean ## Cleans all the local docker setup
+nuclear: clean ## Cleans fully docker storage
 	docker system prune -a -y
 	docker builder prune --force || true
 	docker rmi $$(docker images -a -q) --force || true
