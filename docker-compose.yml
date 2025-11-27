@@ -113,7 +113,7 @@ services:
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
       # truncates the tool output to the specified number of tokens
-      TOOL_OUTPUT_TOKEN_LIMIT: 100000
+      TOOL_OUTPUT_TOKEN_LIMIT: -1
       # Control logging by code area
       HTTP_TRACING_LOG_LEVEL: 'DEBUG'
       # configures retry behavior for AWS SDK calls
