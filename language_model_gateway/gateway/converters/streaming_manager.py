@@ -328,6 +328,12 @@ class LangGraphStreamingManager:
                                 "Tool output too large to display inline, "
                                 "and failed to save to file."
                             )
+                    else:
+                        tool_message_content = (
+                            f"Tool output too large to display inline,"
+                            f" {tool_message_content_length} > {self.environment_variables.maximum_inline_tool_output_size}"
+                            " and TOOL_OUTPUT_FILE_PATH is not set."
+                        )
 
                 tool_progress_message: str = (
                     (
