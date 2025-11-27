@@ -39,7 +39,7 @@ from fastapi import UploadFile
 # Import OpenWebUI file handling functions
 try:
     from open_webui.routers.files import upload_file  # type: ignore[import-not-found]
-    from open_webui.models.users import Users, UserModel # type: ignore[import-not-found]
+    from open_webui.models.users import Users, UserModel  # type: ignore[import-not-found]
 
     FILE_SUPPORT_AVAILABLE = True
 except ImportError:
@@ -301,7 +301,7 @@ HTTPX Response Log:
         self,
         *,
         request: Request,
-        user_dict: Dict[str, Any],
+        user_dict: Dict[str, Any] | None,
         file_content: bytes,
         filename: str,
         mime_type: str,
@@ -323,9 +323,13 @@ HTTPX Response Log:
             logger.warning("File support not available. Cannot upload file.")
             return f"[File: {filename}] (upload not available)"
 
+        if not user_dict or "id" not in user_dict:
+            logger.warning("User information not available. Cannot upload file.")
+            return f"[File: {filename}] (upload failed: user not authenticated)"
+
         try:
             # Get user model from user dict
-            user: UserModel = Users.get_user_by_id(user_dict["id"])
+            user: UserModel = Users.get_user_by_id(user_dict["id"])  # type: ignore[no-any-unimported]
 
             # Create UploadFile object
             upload_file_obj = UploadFile(
@@ -407,7 +411,7 @@ HTTPX Response Log:
         *,
         response: httpx.Response,
         request: Request,
-        user: Dict[str, Any],
+        user: Dict[str, Any] | None,
     ) -> AsyncGenerator[str, None]:
         """
         Process streaming response and handle file data at the end of stream.
@@ -530,7 +534,7 @@ HTTPX Response Log:
         *,
         response_data: Dict[str, Any],
         request: Request,
-        user: Dict[str, Any],
+        user: Dict[str, Any] | None,
     ) -> str:
         """
         Process non-streaming response and handle any file content.

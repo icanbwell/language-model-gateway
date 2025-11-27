@@ -24,6 +24,9 @@ from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFacto
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
+from language_model_gateway.gateway.converters.streaming_manager import (
+    LangGraphStreamingManager,
+)
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -154,12 +157,20 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            LangGraphStreamingManager,
+            lambda c: LangGraphStreamingManager(
+                token_reducer=c.resolve(TokenReducer),
+            ),
+        )
+
+        container.singleton(
             LangGraphToOpenAIConverter,
             lambda c: LangGraphToOpenAIConverter(
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 token_reducer=c.resolve(TokenReducer),
+                streaming_manager=c.resolve(LangGraphStreamingManager),
             ),
         )
 
