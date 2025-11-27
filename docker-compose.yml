@@ -119,6 +119,8 @@ services:
       # configures retry behavior for AWS SDK calls
       AWS_BEDROCK_MAX_RETRIES: '1'
       AWS_BEDROCK_RETRY_MODE: 'standard'
+      # determines when to return tool outputs in responses
+      MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '10'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:

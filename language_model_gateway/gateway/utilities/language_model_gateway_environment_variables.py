@@ -92,4 +92,4 @@ class LanguageModelGatewayEnvironmentVariables(EnvironmentVariables):
     @property
     def maximum_inline_tool_output_size(self) -> int:
         """Maximum size in characters for tool output to be inlined in responses."""
-        return int(os.environ.get("MAXIMUM_INLINE_TOOL_OUTPUT_SIZE", 1000))
+        return int(os.environ.get("MAXIMUM_INLINE_TOOL_OUTPUT_SIZE", "100"))
