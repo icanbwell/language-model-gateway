@@ -37,10 +37,14 @@ from language_model_gateway.gateway.schema.openai.completions import (
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     convert_message_content_to_string,
 )
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
+)
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
+from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -48,7 +52,11 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 class LangGraphStreamingManager:
     def __init__(
-        self, *, token_reducer: TokenReducer, file_manager_factory: FileManagerFactory
+        self,
+        *,
+        token_reducer: TokenReducer,
+        file_manager_factory: FileManagerFactory,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
     ) -> None:
         self.token_reducer: TokenReducer = token_reducer
         if self.token_reducer is None:
@@ -62,6 +70,19 @@ class LangGraphStreamingManager:
         if not isinstance(self.file_manager_factory, FileManagerFactory):
             raise TypeError(
                 "file_manager_factory must be an instance of FileManagerFactory"
+            )
+
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(
+            self.environment_variables,
+            LanguageModelGatewayEnvironmentVariables,
+        ):
+            raise TypeError(
+                "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
     async def handle_langchain_event(
@@ -269,9 +290,45 @@ class LangGraphStreamingManager:
                     logger.info(
                         f"Returning artifact: {artifact if artifact else tool_message_content}"
                     )
+
+                tool_message_content_length: int = len(tool_message_content)
                 token_count: int = self.token_reducer.count_tokens(
                     tool_message_content if return_raw_tool_output else str(artifact)
                 )
+                file_url: Optional[str] = None
+                if (
+                    tool_message_content_length
+                    > self.environment_variables.maximum_inline_tool_output_size
+                ):
+                    # Save to file and provide link
+                    output_folder = os.environ.get("TOOL_OUTPUT_FILE_PATH")
+                    if output_folder:
+                        file_manager = self.file_manager_factory.get_file_manager(
+                            folder=output_folder
+                        )
+                        filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
+                        file_path: Optional[str] = await file_manager.save_file_async(
+                            file_data=tool_message_content.encode("utf-8"),
+                            folder=output_folder,
+                            filename=filename,
+                        )
+                        if file_path:
+                            tool_message_content = (
+                                "Tool output too large to display inline."
+                            )
+                            file_url = UrlParser.get_url_for_file_name(filename)
+                            if file_url is not None:
+                                tool_message_content += f" (URL: {file_url})"
+                            else:
+                                tool_message_content += (
+                                    " Tool output file URL could not be generated."
+                                )
+                        else:
+                            tool_message_content = (
+                                "Tool output too large to display inline, "
+                                "and failed to save to file."
+                            )
+
                 tool_progress_message: str = (
                     (
                         f"""```
@@ -312,6 +369,31 @@ class LangGraphStreamingManager:
                 yield format_chat_completion_chunk_sse(
                     chat_stream_response.model_dump()
                 )
+                if file_url:
+                    # send a follow-up message with the file URL
+                    chat_stream_response_file_url: ChatCompletionChunk = ChatCompletionChunk(
+                        id=request_id,
+                        created=int(time.time()),
+                        model=request["model"],
+                        choices=[
+                            ChunkChoice(
+                                index=0,
+                                delta=ChoiceDelta(
+                                    role="assistant",
+                                    content=f"[Click to download Tool Output]({file_url})\n",
+                                ),
+                            )
+                        ],
+                        usage=CompletionUsage(
+                            prompt_tokens=0,
+                            completion_tokens=0,
+                            total_tokens=0,
+                        ),
+                        object="chat.completion.chunk",
+                    )
+                    yield format_chat_completion_chunk_sse(
+                        chat_stream_response_file_url.model_dump()
+                    )
         else:
             logger.debug("on_tool_end: no tool message output")
             chat_stream_response = ChatCompletionChunk(

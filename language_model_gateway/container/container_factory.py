@@ -161,6 +161,9 @@ class LanguageModelGatewayContainerFactory:
             lambda c: LangGraphStreamingManager(
                 token_reducer=c.resolve(TokenReducer),
                 file_manager_factory=c.resolve(FileManagerFactory),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 
