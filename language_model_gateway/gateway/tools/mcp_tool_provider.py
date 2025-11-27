@@ -5,6 +5,7 @@ from typing import Dict, List, Callable, Awaitable
 import httpx
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
+from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.interceptors import (
     MCPToolCallRequest,
@@ -12,7 +13,7 @@ from langchain_mcp_adapters.interceptors import (
     ToolCallInterceptor,
 )
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
-from mcp.types import ContentBlock, TextContent
+from mcp.types import ContentBlock, TextContent, LoggingMessageNotificationParams
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
 
@@ -98,6 +99,7 @@ class MCPToolProvider:
         Returns:
             An instance of httpx.AsyncClient configured for MCP tool requests.
         """
+        # https://github.com/langchain-ai/langchain-mcp-adapters/blob/main/tests/test_tools.py#L387
         return httpx.AsyncClient(
             auth=auth,
             headers=headers,
@@ -122,8 +124,9 @@ class MCPToolProvider:
             Args:
                 request: The MCPToolCallRequest containing tool call details.
                 handler: The next handler in the interceptor chain.
-                Returns:
-                    An MCPToolCallResult with potentially truncated output.
+
+            Returns:
+                An MCPToolCallResult with potentially truncated output.
             """
             result: MCPToolCallResult = await handler(request)
 
@@ -152,6 +155,27 @@ class MCPToolProvider:
             return result
 
         return tool_interceptor_truncation
+
+    @staticmethod
+    async def on_mcp_tool_logging(
+        params: LoggingMessageNotificationParams,
+        context: CallbackContext,
+    ) -> None:
+        """Execute callback on logging message notification."""
+        logger.info(
+            f"MCP Tool Logging - Server: {context.server_name}, Level: {params.level}, Message: {params.data}"
+        )
+
+    @staticmethod
+    async def on_mcp_tool_progress(
+        progress: float,
+        total: float | None,
+        message: str | None,
+        context: CallbackContext,
+    ) -> None:
+        logger.info(
+            f"MCP Tool Progress - Server: {context.server_name}, Progress: {progress}, Total: {total}, Message: {message}"
+        )
 
     async def get_tools_by_url_async(
         self, *, tool: AgentConfig, headers: Dict[str, str]
@@ -258,6 +282,10 @@ class MCPToolProvider:
                 connections={
                     f"{tool.name}": mcp_tool_config,
                 },
+                callbacks=Callbacks(
+                    on_progress=self.on_mcp_tool_progress,
+                    on_logging_message=self.on_mcp_tool_logging,
+                ),
                 tool_interceptors=[self.get_tool_interceptor_truncation()],
             )
             tools: List[BaseTool] = await client.get_tools()

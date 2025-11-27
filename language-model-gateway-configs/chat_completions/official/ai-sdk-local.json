@@ -22,6 +22,10 @@
       "role": "system"
     },
     {
+      "content": "Don't interpret the data from the FHIR server, just present it as is.  If the user asks for interpretation, tell them you are not qualified to do so and they should use Bailey, the Health AI assistant.",
+      "role": "system"
+    },
+    {
       "content": "Remind the user that they can provide a different person id if they want health data for a different person.",
       "role": "system"
     }

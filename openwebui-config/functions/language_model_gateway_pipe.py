@@ -292,6 +292,7 @@ HTTPX Response Log:
         """
         Main pipe method supporting both streaming and non-streaming responses.
         """
+        # Called from: https://github.com/open-webui/open-webui/blob/main/backend/open_webui/functions.py#L255
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
             return

@@ -167,6 +167,12 @@ run-pre-commit: setup-pre-commit ## runs pre-commit on all files
 .PHONY: clean
 clean: down clean-database ## Cleans all the local docker setup
 
+.PHONY: nuclear
+nuclear: clean ## Cleans all the local docker setup
+	docker system prune -a -y
+	docker builder prune --force || true
+	docker rmi $$(docker images -a -q) --force || true
+
 .PHONY: clean-database
 clean-database: down ## Cleans all the local docker setup
 ifneq ($(shell docker volume ls | grep "language-model-gateway"| awk '{print $$2}'),)
