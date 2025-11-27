@@ -19,6 +19,7 @@ from langchain_core.messages import (
 )
 from langchain_core.messages.ai import UsageMetadata
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
+from mcp.types import EmbeddedResource, TextResourceContents
 from openai.types import CompletionUsage
 from openai.types.chat import (
     ChatCompletionChunk,
@@ -139,7 +140,7 @@ class LangGraphStreamingManager:
                 ):
                     yield chunk
             case _:
-                logger.info(f"Skipped event type: {event_type}: {event}")
+                logger.info(f"Skipped event type: {event_type}")
 
     async def _handle_on_chat_model_stream(
         self,
@@ -304,8 +305,9 @@ class LangGraphStreamingManager:
                     )
 
                 tool_message_content_length: int = len(tool_message_content)
+                artifact_text = await self.convert_tool_artifact_to_text(artifact=artifact)
                 token_count: int = self.token_reducer.count_tokens(
-                    tool_message_content if not artifact else str(artifact)
+                    tool_message_content if not artifact else artifact_text
                 )
                 file_url: Optional[str] = None
                 if (
@@ -435,6 +437,24 @@ class LangGraphStreamingManager:
                 object="chat.completion.chunk",
             )
             yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
+
+    @staticmethod
+    async def convert_tool_artifact_to_text(*, artifact: Any | None) -> str:
+        if isinstance(artifact, str):
+            return artifact
+        if isinstance(artifact, list):
+            # each entry may be an EmbeddableResource
+            result = ""
+            for item in artifact:
+                if isinstance(item, EmbeddedResource):
+                    if isinstance(item.resource, TextResourceContents):
+                        result += item.resource.text + "\n"
+            return result.strip()
+        # finally try to convert to str
+        try:
+            return str(artifact)
+        except Exception:
+            return f"Could not convert artifact of type {type(artifact)} to string."
 
     async def _handle_on_tool_error(
         self,
