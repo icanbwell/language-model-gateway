@@ -176,6 +176,7 @@ class MCPToolProvider:
                         #     )
                         # )
                         content_block.text = truncated_text
+                        content_block_list.append(content_block)
                     else:
                         tokens_limit_left -= token_count
                         # append the original content block if no truncation is needed
