@@ -72,9 +72,8 @@ class LangGraphStreamingManager:
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
         event_type: str = event["event"]
-        # events are described here: https://python.langchain.com/docs/how_to/streaming/#using-stream-events
-
-        event_object = cast(object, event)
+        # Events defined here:
+        # https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.astream_events
         match event_type:
             case "on_chain_start":
                 pass
@@ -82,17 +81,17 @@ class LangGraphStreamingManager:
                 pass
             case "on_chat_model_stream":
                 async for chunk in self._handle_on_chat_model_stream(
-                    event_object=event_object, request=request, request_id=request_id
+                    event=event, request=request, request_id=request_id
                 ):
                     yield chunk
             case "on_chain_end":
                 async for chunk in self._handle_on_chain_end(
-                    event_object=event_object, request=request, request_id=request_id
+                    event=event, request=request, request_id=request_id
                 ):
                     yield chunk
             case "on_tool_start":
                 async for chunk in self._handle_on_tool_start(
-                    event_object=event_object,
+                    event=event,
                     request=request,
                     request_id=request_id,
                     tool_start_times=tool_start_times,
@@ -100,7 +99,7 @@ class LangGraphStreamingManager:
                     yield chunk
             case "on_tool_end":
                 async for chunk in self._handle_on_tool_end(
-                    event_object=event_object,
+                    event=event,
                     request=request,
                     request_id=request_id,
                     tool_start_times=tool_start_times,
@@ -110,10 +109,13 @@ class LangGraphStreamingManager:
                 pass
 
     async def _handle_on_chat_model_stream(
-        self, *, event_object: object, request: ChatRequest, request_id: str
+        self,
+        *,
+        event: StandardStreamEvent | CustomStreamEvent,
+        request: ChatRequest,
+        request_id: str,
     ) -> AsyncGenerator[str, None]:
-        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
-        chunk: AIMessageChunk | None = event_dict.get("data", {}).get("chunk")
+        chunk: AIMessageChunk | None = event.get("data", {}).get("chunk")
         if chunk is not None:
             content: str | list[str | dict[str, Any]] = chunk.content
             usage_metadata: Optional[UsageMetadata] = chunk.usage_metadata
@@ -149,10 +151,13 @@ class LangGraphStreamingManager:
                 )
 
     async def _handle_on_chain_end(
-        self, *, event_object: object, request: ChatRequest, request_id: str
+        self,
+        *,
+        event: StandardStreamEvent | CustomStreamEvent,
+        request: ChatRequest,
+        request_id: str,
     ) -> AsyncGenerator[str, None]:
-        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
-        output: Dict[str, Any] | str | None = event_dict.get("data", {}).get("output")
+        output: Dict[str, Any] | str | None = event.get("data", {}).get("output")
         if output and isinstance(output, dict) and output.get("usage_metadata"):
             completion_usage_metadata: CompletionUsage = (
                 self.convert_usage_meta_data_to_openai(
@@ -174,14 +179,13 @@ class LangGraphStreamingManager:
     async def _handle_on_tool_start(
         self,
         *,
-        event_object: object,
+        event: StandardStreamEvent | CustomStreamEvent,
         request: ChatRequest,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
-        tool_name: Optional[str] = event_dict.get("name", None)
-        tool_input: Optional[Dict[str, Any]] = event_dict.get("data", {}).get("input")
+        tool_name: Optional[str] = event.get("name", None)
+        tool_input: Optional[Dict[str, Any]] = event.get("data", {}).get("input")
         tool_input_display: Optional[Dict[str, Any]] = (
             tool_input.copy() if tool_input is not None else None
         )
@@ -218,22 +222,21 @@ class LangGraphStreamingManager:
     async def _handle_on_tool_end(
         self,
         *,
-        event_object: object,
+        event: StandardStreamEvent | CustomStreamEvent,
         request: ChatRequest,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
-        tool_message: Optional[ToolMessage] = event_dict.get("data", {}).get("output")
+        tool_message: Optional[ToolMessage] = event.get("data", {}).get("output")
         tool_name2: Optional[str] = None
         tool_input2: Optional[Dict[str, Any]] = None
         if tool_message:
             tool_name2 = getattr(tool_message, "name", None)
             tool_input2 = getattr(tool_message, "input", None)
         if not tool_name2:
-            tool_name2 = event_dict.get("name", None)
+            tool_name2 = event.get("name", None)
         if not tool_input2:
-            tool_input2 = event_dict.get("data", {}).get("input")
+            tool_input2 = event.get("data", {}).get("input")
         tool_key: str = self.make_tool_key(tool_name2, tool_input2)
         start_time: Optional[float] = tool_start_times.pop(tool_key, None)
         runtime_str: str = ""
