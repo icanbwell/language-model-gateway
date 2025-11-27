@@ -96,6 +96,10 @@ class LangGraphStreamingManager:
         # Events defined here:
         # https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.astream_events
         match event_type:
+            case "on_chat_model_start":
+                pass
+            case "on_chat_model_end":
+                pass
             case "on_chain_start":
                 pass
             case "on_chain_stream":
@@ -127,7 +131,13 @@ class LangGraphStreamingManager:
                 ):
                     yield chunk
             case "on_tool_error":
-                logger.error(f"on_tool_error: {event}")
+                async for chunk in self._handle_on_tool_error(
+                    event=event,
+                    request=request,
+                    request_id=request_id,
+                    tool_start_times=tool_start_times,
+                ):
+                    yield chunk
             case _:
                 logger.info(f"Skipped event type: {event_type}: {event}")
 
@@ -426,7 +436,46 @@ class LangGraphStreamingManager:
             )
             yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
-            # noinspection PyMethodMayBeStatic
+    async def _handle_on_tool_error(
+        self,
+        *,
+        event: StandardStreamEvent | CustomStreamEvent,
+        request: ChatRequest,
+        request_id: str,
+        tool_start_times: dict[str, float],
+    ) -> AsyncGenerator[str, None]:
+        # Extract error details
+        tool_name: Optional[str] = event["name"] if "name" in event else None
+        data = event["data"] if "data" in event else {}
+        error_message: Optional[str] = data.get("error") or str(event)
+        runtime_str: str = ""
+        tool_key: str = self.make_tool_key(tool_name, data.get("input"))
+        start_time: Optional[float] = tool_start_times.pop(tool_key, None)
+        if start_time is not None:
+            elapsed: float = time.time() - start_time
+            runtime_str = f"{elapsed:.2f}s"
+        logger.error(f"Tool error in {tool_name}: {error_message} [runtime: {runtime_str}]")
+        chat_stream_response = ChatCompletionChunk(
+            id=request_id,
+            created=int(time.time()),
+            model=request["model"],
+            choices=[
+                ChunkChoice(
+                    index=0,
+                    delta=ChoiceDelta(
+                        role="assistant",
+                        content=f"\n\n> Tool {tool_name} encountered an error: {error_message} [runtime: {runtime_str}]\n",
+                    ),
+                )
+            ],
+            usage=CompletionUsage(
+                prompt_tokens=0,
+                completion_tokens=0,
+                total_tokens=0,
+            ),
+            object="chat.completion.chunk",
+        )
+        yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
     @staticmethod
     def convert_usage_meta_data_to_openai(
