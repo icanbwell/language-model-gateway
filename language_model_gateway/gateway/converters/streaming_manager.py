@@ -440,21 +440,22 @@ class LangGraphStreamingManager:
 
     @staticmethod
     async def convert_tool_artifact_to_text(*, artifact: Any | None) -> str:
-        if isinstance(artifact, str):
-            return artifact
-        if isinstance(artifact, list):
-            # each entry may be an EmbeddableResource
-            result = ""
-            for item in artifact:
-                if isinstance(item, EmbeddedResource):
-                    if isinstance(item.resource, TextResourceContents):
-                        result += item.resource.text + "\n"
-            return result.strip()
-        # finally try to convert to str
         try:
-            return str(artifact)
-        except Exception:
-            return f"Could not convert artifact of type {type(artifact)} to string."
+            if isinstance(artifact, str):
+                return artifact
+            if isinstance(artifact, list):
+                # each entry may be an EmbeddableResource
+                result = ""
+                for item in artifact:
+                    if isinstance(item, EmbeddedResource):
+                        if isinstance(item.resource, TextResourceContents):
+                            result += item.resource.text + "\n"
+                return result.strip()
+            # finally try to convert to str
+            # return str(artifact)
+            return f"Could not convert artifact of type {type(artifact)} to string"
+        except Exception as e:
+            return f"Could not convert artifact of type {type(artifact)} to string: {e}."
 
     async def _handle_on_tool_error(
         self,
