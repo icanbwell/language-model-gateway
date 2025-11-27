@@ -159,9 +159,9 @@ class LangGraphToOpenAIConverter:
                 if not event:
                     continue
 
-                async with self.streaming_manager.handle_langchain_event(
+                async for chunk in self.streaming_manager.handle_langchain_event(
                     event, request, request_id, tool_start_times
-                ) as chunk:
+                ):
                     yield chunk
         except TokenRetrievalError as e:
             logger.exception(e, stack_info=True)
