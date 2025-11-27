@@ -19,7 +19,6 @@ from langchain_core.messages import (
 )
 from langchain_core.messages.ai import UsageMetadata
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
-from mcp.types import EmbeddedResource, TextResourceContents
 from openai.types import CompletionUsage
 from openai.types.chat import (
     ChatCompletionChunk,
@@ -312,7 +311,9 @@ class LangGraphStreamingManager:
                     )
 
                 tool_message_content_length: int = len(tool_message_content)
-                artifact_text = await self.convert_tool_artifact_to_text(artifact=artifact)
+                artifact_text = await self.convert_tool_artifact_to_text(
+                    artifact=artifact
+                )
                 token_count: int = self.token_reducer.count_tokens(
                     tool_message_content if not artifact else artifact_text
                 )
@@ -454,6 +455,9 @@ class LangGraphStreamingManager:
         json_object: Any = LangGraphStreamingManager.safe_json(text)
         if json_object is not None and isinstance(json_object, dict):
             if "result" in json_object:
+                logger.info(
+                    f"Extracted result from JSON object: {json_object.get('result')}"
+                )
                 result += str(json_object.get("result")) + "\n"
             if "error" in json_object:
                 result += "Error: " + str(json_object.get("error")) + "\n"
@@ -469,13 +473,12 @@ class LangGraphStreamingManager:
                     result += "Related URLs:\n"
                     for url in urls:
                         result += f"- {url}\n"
-            if (
-                "result" not in json_object
-                and "error" not in json_object
-            ):
+            if "result" not in json_object and "error" not in json_object:
                 result += text + "\n"
         else:
             result += text + "\n"
+
+        logger.info(f"Formatted text resource contents: {result}")
         return result
 
     @staticmethod
@@ -487,16 +490,20 @@ class LangGraphStreamingManager:
                 # each entry may be an EmbeddableResource
                 result = ""
                 for item in artifact:
-                    if isinstance(item, EmbeddedResource):
-                        if isinstance(item.resource, TextResourceContents):
-                            result += LangGraphStreamingManager._format_text_resource_contents(
+                    if hasattr(item, "resource") and hasattr(item.resource, "text"):
+                        logger.info(f"Processing artifact item: {item}")
+                        result += (
+                            LangGraphStreamingManager._format_text_resource_contents(
                                 item.resource.text
                             )
+                        )
                 return result.strip()
             # finally try to convert to str
             return str(artifact)
         except Exception as e:
-            return f"Could not convert artifact of type {type(artifact)} to string: {e}."
+            return (
+                f"Could not convert artifact of type {type(artifact)} to string: {e}."
+            )
 
     async def _handle_on_tool_error(
         self,
@@ -509,14 +516,16 @@ class LangGraphStreamingManager:
         # Extract error details
         tool_name: Optional[str] = event["name"] if "name" in event else None
         data = event["data"] if "data" in event else {}
-        error_message: Optional[str] = data.get("error") or str(event)
+        error_message: BaseException | Any | str = data.get("error") or str(event)
         runtime_str: str = ""
         tool_key: str = self.make_tool_key(tool_name, data.get("input"))
         start_time: Optional[float] = tool_start_times.pop(tool_key, None)
         if start_time is not None:
             elapsed: float = time.time() - start_time
             runtime_str = f"{elapsed:.2f}s"
-        logger.error(f"Tool error in {tool_name}: {error_message} [runtime: {runtime_str}]")
+        logger.error(
+            f"Tool error in {tool_name}: {error_message} [runtime: {runtime_str}]"
+        )
         chat_stream_response = ChatCompletionChunk(
             id=request_id,
             created=int(time.time()),

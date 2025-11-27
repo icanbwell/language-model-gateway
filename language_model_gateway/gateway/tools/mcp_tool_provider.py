@@ -138,12 +138,16 @@ class MCPToolProvider:
             """
             result: MCPToolCallResult = await handler(request)
 
-            logger.info("=== Received tool output before truncation ===")
+            logger.info(
+                f"=== Received tool output before truncation {len(result.content)} blocks ==="
+            )
             content_block: ContentBlock
-            for content_block in result.content:
+            for content_index, content_block in enumerate(result.content):
                 if isinstance(content_block, TextContent):
-                    logger.info(f"{content_block.text}")
-            logger.info("=== End of tool output before truncation ===")
+                    logger.info(f"[{content_index}] {content_block.text}")
+            logger.info(
+                f"=== End of tool output before truncation {len(result.content)} blocks ==="
+            )
 
             max_token_limit: int = (
                 self.environment_variables.tool_output_token_limit or -1
@@ -155,6 +159,16 @@ class MCPToolProvider:
             for content_block in result.content:
                 if isinstance(content_block, TextContent):
                     text: str = content_block.text
+                    # append the un-truncated part as a separate content block if needed
+                    content_block_list.append(
+                        EmbeddedResource(
+                            resource=TextResourceContents(
+                                text=text,
+                                uri=HttpUrl("https://example.com/resource.txt"),
+                            ),
+                            type="resource",
+                        )
+                    )
                     token_count: int = self.token_reducer.count_tokens(text=text)
                     if max_token_limit > 0 and token_count > tokens_limit_left:
                         truncated_text = self.token_reducer.reduce_tokens(
@@ -165,16 +179,6 @@ class MCPToolProvider:
                         logger.debug(
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
-                        # append the un-truncated part as a separate content block if needed
-                        # content_block_list.append(
-                        #     EmbeddedResource(
-                        #         resource=TextResourceContents(
-                        #             text=text,
-                        #             uri=HttpUrl("https://example.com/resource.txt"),
-                        #         ),
-                        #         type="resource",
-                        #     )
-                        # )
                         content_block.text = truncated_text
                         content_block_list.append(content_block)
                     else:
@@ -182,25 +186,31 @@ class MCPToolProvider:
                         # append the original content block if no truncation is needed
                         content_block_list.append(content_block)
 
-            logger.info("===== Returning tool output after truncation =====")
-            for content_block in content_block_list:
+            logger.info(
+                f"===== Returning tool output after truncation {len(content_block_list)} blocks ====="
+            )
+            for content_index, content_block in enumerate(content_block_list):
                 if isinstance(content_block, TextContent):
-                    logger.info(f"TextContent: {content_block.text}")
+                    logger.info(f"[{content_index}] TextContent: {content_block.text}")
                 elif isinstance(content_block, EmbeddedResource):
                     if isinstance(content_block.resource, TextResourceContents):
-                        logger.info(f"EmbeddedResource: {content_block.resource.text}")
-            logger.info("===== End of tool output after truncation =====")
+                        logger.info(
+                            f"[{content_index}] EmbeddedResource: {content_block.resource.text}"
+                        )
+            logger.info(
+                f"===== End of tool output after truncation {len(content_block_list)} blocks ====="
+            )
 
             # # add a test EmbeddedResource to verify multiple content blocks are handled correctly
-            content_block_list.append(
-                EmbeddedResource(
-                    resource=TextResourceContents(
-                        text="Hello Imran",
-                        uri=HttpUrl("https://example.com/resource.txt"),
-                    ),
-                    type="resource",
-                )
-            )
+            # content_block_list.append(
+            #     EmbeddedResource(
+            #         resource=TextResourceContents(
+            #             text="Hello Imran",
+            #             uri=HttpUrl("https://example.com/resource.txt"),
+            #         ),
+            #         type="resource",
+            #     )
+            # )
             # now set this as the new result content
             result.content = content_block_list
             return result
