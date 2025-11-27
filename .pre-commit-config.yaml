@@ -126,12 +126,12 @@ repos:
     rev: 0.35.0
     hooks:
       - id: check-github-workflows
-        name: github-actions · Validate gh workflow files
+        name: "github-actions · Validate gh workflow files"
         args: ["--verbose"]
       - id: check-taskfile
         name: "taskfile · Validate Task configuration"
       - id: check-jsonschema
-        name: Validate language-model-gateway-configs against schema
+        name: "Validate language-model-gateway-configs against schema"
         files: ^language-model-gateway-configs/.*\.json$
         args:
           - "--schemafile"
