@@ -166,15 +166,15 @@ class MCPToolProvider:
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
                         # append the un-truncated part as a separate content block if needed
-                        content_block_list.append(
-                            EmbeddedResource(
-                                resource=TextResourceContents(
-                                    text=text,
-                                    uri=HttpUrl("https://example.com/resource.txt"),
-                                ),
-                                type="resource",
-                            )
-                        )
+                        # content_block_list.append(
+                        #     EmbeddedResource(
+                        #         resource=TextResourceContents(
+                        #             text=text,
+                        #             uri=HttpUrl("https://example.com/resource.txt"),
+                        #         ),
+                        #         type="resource",
+                        #     )
+                        # )
                         content_block.text = truncated_text
                     else:
                         tokens_limit_left -= token_count
@@ -191,15 +191,15 @@ class MCPToolProvider:
             logger.info("===== End of tool output after truncation =====")
 
             # # add a test EmbeddedResource to verify multiple content blocks are handled correctly
-            content_block_list.append(
-                EmbeddedResource(
-                    resource=TextResourceContents(
-                        text="Hello Imran",
-                        uri=HttpUrl("https://example.com/resource.txt"),
-                    ),
-                    type="resource",
-                )
-            )
+            # content_block_list.append(
+            #     EmbeddedResource(
+            #         resource=TextResourceContents(
+            #             text="Hello Imran",
+            #             uri=HttpUrl("https://example.com/resource.txt"),
+            #         ),
+            #         type="resource",
+            #     )
+            # )
             # now set this as the new result content
             result.content = content_block_list
             return result

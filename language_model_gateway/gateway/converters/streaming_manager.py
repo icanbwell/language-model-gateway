@@ -93,54 +93,57 @@ class LangGraphStreamingManager:
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
-        event_type: str = event["event"]
-        # Events defined here:
-        # https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.astream_events
-        match event_type:
-            case "on_chat_model_start":
-                pass
-            case "on_chat_model_end":
-                pass
-            case "on_chain_start":
-                pass
-            case "on_chain_stream":
-                pass
-            case "on_chat_model_stream":
-                async for chunk in self._handle_on_chat_model_stream(
-                    event=event, request=request, request_id=request_id
-                ):
-                    yield chunk
-            case "on_chain_end":
-                async for chunk in self._handle_on_chain_end(
-                    event=event, request=request, request_id=request_id
-                ):
-                    yield chunk
-            case "on_tool_start":
-                async for chunk in self._handle_on_tool_start(
-                    event=event,
-                    request=request,
-                    request_id=request_id,
-                    tool_start_times=tool_start_times,
-                ):
-                    yield chunk
-            case "on_tool_end":
-                async for chunk in self._handle_on_tool_end(
-                    event=event,
-                    request=request,
-                    request_id=request_id,
-                    tool_start_times=tool_start_times,
-                ):
-                    yield chunk
-            case "on_tool_error":
-                async for chunk in self._handle_on_tool_error(
-                    event=event,
-                    request=request,
-                    request_id=request_id,
-                    tool_start_times=tool_start_times,
-                ):
-                    yield chunk
-            case _:
-                logger.info(f"Skipped event type: {event_type}")
+        try:
+            event_type: str = event["event"]
+            # Events defined here:
+            # https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.astream_events
+            match event_type:
+                case "on_chat_model_start":
+                    pass
+                case "on_chat_model_end":
+                    pass
+                case "on_chain_start":
+                    pass
+                case "on_chain_stream":
+                    pass
+                case "on_chat_model_stream":
+                    async for chunk in self._handle_on_chat_model_stream(
+                        event=event, request=request, request_id=request_id
+                    ):
+                        yield chunk
+                case "on_chain_end":
+                    async for chunk in self._handle_on_chain_end(
+                        event=event, request=request, request_id=request_id
+                    ):
+                        yield chunk
+                case "on_tool_start":
+                    async for chunk in self._handle_on_tool_start(
+                        event=event,
+                        request=request,
+                        request_id=request_id,
+                        tool_start_times=tool_start_times,
+                    ):
+                        yield chunk
+                case "on_tool_end":
+                    async for chunk in self._handle_on_tool_end(
+                        event=event,
+                        request=request,
+                        request_id=request_id,
+                        tool_start_times=tool_start_times,
+                    ):
+                        yield chunk
+                case "on_tool_error":
+                    async for chunk in self._handle_on_tool_error(
+                        event=event,
+                        request=request,
+                        request_id=request_id,
+                        tool_start_times=tool_start_times,
+                    ):
+                        yield chunk
+                case _:
+                    logger.info(f"Skipped event type: {event_type}")
+        except Exception as e:
+            logger.error(f"Error handling langchain event: {e}")
 
     async def _handle_on_chat_model_stream(
         self,
@@ -452,8 +455,7 @@ class LangGraphStreamingManager:
                             result += item.resource.text + "\n"
                 return result.strip()
             # finally try to convert to str
-            # return str(artifact)
-            return f"Could not convert artifact of type {type(artifact)} to string"
+            return str(artifact)
         except Exception as e:
             return f"Could not convert artifact of type {type(artifact)} to string: {e}."
 
