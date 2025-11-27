@@ -192,15 +192,15 @@ class MCPToolProvider:
             logger.info("===== End of tool output after truncation =====")
 
             # # add a test EmbeddedResource to verify multiple content blocks are handled correctly
-            # content_block_list.append(
-            #     EmbeddedResource(
-            #         resource=TextResourceContents(
-            #             text="Hello Imran",
-            #             uri=HttpUrl("https://example.com/resource.txt"),
-            #         ),
-            #         type="resource",
-            #     )
-            # )
+            content_block_list.append(
+                EmbeddedResource(
+                    resource=TextResourceContents(
+                        text="Hello Imran",
+                        uri=HttpUrl("https://example.com/resource.txt"),
+                    ),
+                    type="resource",
+                )
+            )
             # now set this as the new result content
             result.content = content_block_list
             return result

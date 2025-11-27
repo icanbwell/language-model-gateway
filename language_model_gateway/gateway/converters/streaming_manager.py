@@ -295,6 +295,10 @@ class LangGraphStreamingManager:
             )
         if tool_message:
             artifact: Optional[Any] = tool_message.artifact
+            # remove artifact from ToolMessage otherwise we get error: TypeError: Type is not msgpack serializable: ToolMessage
+            if artifact is not None:
+                tool_message.artifact = None
+
             return_raw_tool_output: bool = (
                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
             )
