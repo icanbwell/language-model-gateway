@@ -28,6 +28,9 @@ from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as Chunk
 from language_model_gateway.gateway.converters.streaming_utils import (
     format_chat_completion_chunk_sse,
 )
+from language_model_gateway.gateway.file_managers.file_manager_factory import (
+    FileManagerFactory,
+)
 from language_model_gateway.gateway.schema.openai.completions import (
     ChatRequest,
 )
@@ -44,8 +47,22 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangGraphStreamingManager:
-    def __init__(self, token_reducer: TokenReducer) -> None:
+    def __init__(
+        self, *, token_reducer: TokenReducer, file_manager_factory: FileManagerFactory
+    ) -> None:
         self.token_reducer: TokenReducer = token_reducer
+        if self.token_reducer is None:
+            raise ValueError("token_reducer must not be None")
+        if not isinstance(self.token_reducer, TokenReducer):
+            raise TypeError("token_reducer must be an instance of TokenReducer")
+
+        self.file_manager_factory: FileManagerFactory = file_manager_factory
+        if self.file_manager_factory is None:
+            raise ValueError("file_manager_factory must not be None")
+        if not isinstance(self.file_manager_factory, FileManagerFactory):
+            raise TypeError(
+                "file_manager_factory must be an instance of FileManagerFactory"
+            )
 
     async def handle_langchain_event(
         self,
@@ -55,257 +72,258 @@ class LangGraphStreamingManager:
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
         event_type: str = event["event"]
-
         # events are described here: https://python.langchain.com/docs/how_to/streaming/#using-stream-events
-
-        # print(f"===== {event_type} =====\n{event}\n")
 
         event_object = cast(object, event)
         match event_type:
             case "on_chain_start":
-                # Handle the start of the chain event
                 pass
             case "on_chain_stream":
-                # Handle the chain stream event.  Be sure not to write duplicate responses to what is done in the on_chat_model_stream event.
                 pass
             case "on_chat_model_stream":
-                # Handle the chat model stream event
-                event_dict = cast(dict[str, Any], event_object)
-                chunk: AIMessageChunk | None = event_dict.get("data", {}).get("chunk")
-                if chunk is not None:
-                    content: str | list[str | dict[str, Any]] = chunk.content
-
-                    # print(f"chunk: {chunk}")
-
-                    usage_metadata = chunk.usage_metadata
-                    completion_usage_metadata = self.convert_usage_meta_data_to_openai(
-                        usages=[usage_metadata] if usage_metadata else []
-                    )
-
-                    content_text: str = convert_message_content_to_string(content)
-                    if not isinstance(content_text, str):
-                        raise TypeError(
-                            f"content_text must be str, got {type(content_text)}"
-                        )
-
-                    if (
-                        os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1"
-                        and content_text
-                    ):
-                        logger.debug(f"Returning content: {content_text}")
-
-                    if content_text:
-                        chat_model_stream_response: ChatCompletionChunk = (
-                            ChatCompletionChunk(
-                                id=request_id,
-                                created=int(time.time()),
-                                model=request["model"],
-                                choices=[
-                                    ChunkChoice(
-                                        index=0,
-                                        delta=ChoiceDelta(
-                                            role="assistant",
-                                            content=content_text,
-                                        ),
-                                    )
-                                ],
-                                usage=completion_usage_metadata,
-                                object="chat.completion.chunk",
-                            )
-                        )
-                        yield format_chat_completion_chunk_sse(
-                            chat_model_stream_response.model_dump()
-                        )
+                async for chunk in self._handle_on_chat_model_stream(
+                    event_object=event_object, request=request, request_id=request_id
+                ):
+                    yield chunk
             case "on_chain_end":
-                # print(f"===== {event_type} =====\n{event}\n")
-                event_dict = cast(dict[str, Any], event_object)
-                output: Dict[str, Any] | str | None = event_dict.get("data", {}).get(
-                    "output"
-                )
-                if output and isinstance(output, dict) and output.get("usage_metadata"):
-                    completion_usage_metadata = self.convert_usage_meta_data_to_openai(
-                        usages=[output["usage_metadata"]]
-                    )
-
-                    # Handle the end of the chain event
-                    chat_end_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                        id=request_id,
-                        created=int(time.time()),
-                        model=request["model"],
-                        choices=[],
-                        usage=completion_usage_metadata,
-                        object="chat.completion.chunk",
-                    )
-                    yield format_chat_completion_chunk_sse(
-                        chat_end_stream_response.model_dump()
-                    )
+                async for chunk in self._handle_on_chain_end(
+                    event_object=event_object, request=request, request_id=request_id
+                ):
+                    yield chunk
             case "on_tool_start":
-                # Handle the start of the tool event
-                event_dict = cast(dict[str, Any], event_object)
-                tool_name: Optional[str] = event_dict.get("name", None)
-                tool_input: Dict[str, Any] | None = event_dict.get("data", {}).get(
-                    "input"
-                )
-
-                # copy the tool_input to avoid modifying the original
-                tool_input_display = (
-                    tool_input.copy() if tool_input is not None else None
-                )
-                # remove auth_token from tool_input
-                if tool_input_display and "auth_token" in tool_input_display:
-                    tool_input_display["auth_token"] = "***"
-                if tool_input_display and "state" in tool_input_display:
-                    tool_input_display["state"] = "***"
-
-                # Track start time for this tool invocation
-                tool_key = self.make_tool_key(tool_name, tool_input)
-                tool_start_times[tool_key] = time.time()
-
-                if tool_name:
-                    logger.debug(f"on_tool_start: {tool_name} {tool_input_display}")
-                    chat_stream_response = ChatCompletionChunk(
-                        id=request_id,
-                        created=int(time.time()),
-                        model=request["model"],
-                        choices=[
-                            ChunkChoice(
-                                index=0,
-                                delta=ChoiceDelta(
-                                    role="assistant",
-                                    content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
-                                ),
-                            )
-                        ],
-                        usage=CompletionUsage(
-                            prompt_tokens=0,
-                            completion_tokens=0,
-                            total_tokens=0,
-                        ),
-                        object="chat.completion.chunk",
-                    )
-                    yield format_chat_completion_chunk_sse(
-                        chat_stream_response.model_dump()
-                    )
-
+                async for chunk in self._handle_on_tool_start(
+                    event_object=event_object,
+                    request=request,
+                    request_id=request_id,
+                    tool_start_times=tool_start_times,
+                ):
+                    yield chunk
             case "on_tool_end":
-                # Handle the end of the tool event
-                event_dict = cast(dict[str, Any], event_object)
-                tool_message: ToolMessage | None = event_dict.get("data", {}).get(
-                    "output"
-                )
-                # Try to get tool name and input from tool_message or event_dict
-                tool_name2: Optional[str] = None
-                tool_input2: Optional[Dict[str, Any]] = None
-                if tool_message:
-                    tool_name2 = getattr(tool_message, "name", None)
-                    tool_input2 = getattr(tool_message, "input", None)
-                if not tool_name2:
-                    tool_name2 = event_dict.get("name", None)
-                if not tool_input2:
-                    tool_input2 = event_dict.get("data", {}).get("input")
-                tool_key = self.make_tool_key(tool_name2, tool_input2)
-                start_time = tool_start_times.pop(tool_key, None)
-                runtime_str = ""
-                if start_time is not None:
-                    elapsed = time.time() - start_time
-                    runtime_str = f"{elapsed:.2f}s"
-                    logger.info(
-                        f"Tool {tool_name2} completed in {elapsed:.2f} seconds."
-                    )
-                else:
-                    logger.warning(
-                        f"Tool {tool_name2} end event received without matching start event."
-                    )
-                if tool_message:
-                    artifact: Optional[Any] = tool_message.artifact
-                    return_raw_tool_output: bool = (
-                        os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
-                    )
-                    if artifact or return_raw_tool_output:
-                        tool_message_content: str = (
-                            self.convert_message_content_into_string(
-                                tool_message=tool_message
-                            )
-                        )
-                        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                            logger.info(
-                                f"Returning artifact: {artifact if artifact else tool_message_content}"
-                            )
-
-                        token_count: int = self.token_reducer.count_tokens(
-                            tool_message_content
-                            if return_raw_tool_output
-                            else str(artifact)
-                        )
-
-                        tool_progress_message: str = (
-                            (
-                                f"```"
-                                f"\n==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] ====="
-                                f"\n{tool_message_content}"
-                                f"\n==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] ====="
-                                f"\n```\n"
-                            )
-                            if return_raw_tool_output
-                            else f"\n> {artifact}"
-                            + (
-                                f" [tokens: {token_count}]"
-                                if logger.isEnabledFor(logging.DEBUG) > 0
-                                else ""
-                            )
-                        )
-                        chat_stream_response = ChatCompletionChunk(
-                            id=request_id,
-                            created=int(time.time()),
-                            model=request["model"],
-                            choices=[
-                                ChunkChoice(
-                                    index=0,
-                                    delta=ChoiceDelta(
-                                        role="assistant",
-                                        content=tool_progress_message,
-                                    ),
-                                )
-                            ],
-                            usage=CompletionUsage(
-                                prompt_tokens=0,
-                                completion_tokens=0,
-                                total_tokens=0,
-                            ),
-                            object="chat.completion.chunk",
-                        )
-                        yield format_chat_completion_chunk_sse(
-                            chat_stream_response.model_dump()
-                        )
-                else:
-                    logger.debug("on_tool_end: no tool message output")
-                    chat_stream_response = ChatCompletionChunk(
-                        id=request_id,
-                        created=int(time.time()),
-                        model=request["model"],
-                        choices=[
-                            ChunkChoice(
-                                index=0,
-                                delta=ChoiceDelta(
-                                    role="assistant",
-                                    content=f"\n\n> Tool completed with no output.{runtime_str}\n",
-                                ),
-                            )
-                        ],
-                        usage=CompletionUsage(
-                            prompt_tokens=0,
-                            completion_tokens=0,
-                            total_tokens=0,
-                        ),
-                        object="chat.completion.chunk",
-                    )
-                    yield format_chat_completion_chunk_sse(
-                        chat_stream_response.model_dump()
-                    )
-
+                async for chunk in self._handle_on_tool_end(
+                    event_object=event_object,
+                    request=request,
+                    request_id=request_id,
+                    tool_start_times=tool_start_times,
+                ):
+                    yield chunk
             case _:
-                # Handle other event types
                 pass
+
+    async def _handle_on_chat_model_stream(
+        self, *, event_object: object, request: ChatRequest, request_id: str
+    ) -> AsyncGenerator[str, None]:
+        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
+        chunk: AIMessageChunk | None = event_dict.get("data", {}).get("chunk")
+        if chunk is not None:
+            content: str | list[str | dict[str, Any]] = chunk.content
+            usage_metadata: Optional[UsageMetadata] = chunk.usage_metadata
+            completion_usage_metadata: CompletionUsage = (
+                self.convert_usage_meta_data_to_openai(
+                    usages=[usage_metadata] if usage_metadata else []
+                )
+            )
+            content_text: str = convert_message_content_to_string(content)
+            if not isinstance(content_text, str):
+                raise TypeError(f"content_text must be str, got {type(content_text)}")
+            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and content_text:
+                logger.debug(f"Returning content: {content_text}")
+            if content_text:
+                chat_model_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                    id=request_id,
+                    created=int(time.time()),
+                    model=request["model"],
+                    choices=[
+                        ChunkChoice(
+                            index=0,
+                            delta=ChoiceDelta(
+                                role="assistant",
+                                content=content_text,
+                            ),
+                        )
+                    ],
+                    usage=completion_usage_metadata,
+                    object="chat.completion.chunk",
+                )
+                yield format_chat_completion_chunk_sse(
+                    chat_model_stream_response.model_dump()
+                )
+
+    async def _handle_on_chain_end(
+        self, *, event_object: object, request: ChatRequest, request_id: str
+    ) -> AsyncGenerator[str, None]:
+        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
+        output: Dict[str, Any] | str | None = event_dict.get("data", {}).get("output")
+        if output and isinstance(output, dict) and output.get("usage_metadata"):
+            completion_usage_metadata: CompletionUsage = (
+                self.convert_usage_meta_data_to_openai(
+                    usages=[output["usage_metadata"]]
+                )
+            )
+            chat_end_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[],
+                usage=completion_usage_metadata,
+                object="chat.completion.chunk",
+            )
+            yield format_chat_completion_chunk_sse(
+                chat_end_stream_response.model_dump()
+            )
+
+    async def _handle_on_tool_start(
+        self,
+        *,
+        event_object: object,
+        request: ChatRequest,
+        request_id: str,
+        tool_start_times: dict[str, float],
+    ) -> AsyncGenerator[str, None]:
+        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
+        tool_name: Optional[str] = event_dict.get("name", None)
+        tool_input: Optional[Dict[str, Any]] = event_dict.get("data", {}).get("input")
+        tool_input_display: Optional[Dict[str, Any]] = (
+            tool_input.copy() if tool_input is not None else None
+        )
+        if tool_input_display and "auth_token" in tool_input_display:
+            tool_input_display["auth_token"] = "***"
+        if tool_input_display and "state" in tool_input_display:
+            tool_input_display["state"] = "***"
+        tool_key: str = self.make_tool_key(tool_name, tool_input)
+        tool_start_times[tool_key] = time.time()
+        if tool_name:
+            logger.debug(f"on_tool_start: {tool_name} {tool_input_display}")
+            chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[
+                    ChunkChoice(
+                        index=0,
+                        delta=ChoiceDelta(
+                            role="assistant",
+                            content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
+                        ),
+                    )
+                ],
+                usage=CompletionUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                ),
+                object="chat.completion.chunk",
+            )
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
+
+    async def _handle_on_tool_end(
+        self,
+        *,
+        event_object: object,
+        request: ChatRequest,
+        request_id: str,
+        tool_start_times: dict[str, float],
+    ) -> AsyncGenerator[str, None]:
+        event_dict: dict[str, Any] = cast(dict[str, Any], event_object)
+        tool_message: Optional[ToolMessage] = event_dict.get("data", {}).get("output")
+        tool_name2: Optional[str] = None
+        tool_input2: Optional[Dict[str, Any]] = None
+        if tool_message:
+            tool_name2 = getattr(tool_message, "name", None)
+            tool_input2 = getattr(tool_message, "input", None)
+        if not tool_name2:
+            tool_name2 = event_dict.get("name", None)
+        if not tool_input2:
+            tool_input2 = event_dict.get("data", {}).get("input")
+        tool_key: str = self.make_tool_key(tool_name2, tool_input2)
+        start_time: Optional[float] = tool_start_times.pop(tool_key, None)
+        runtime_str: str = ""
+        if start_time is not None:
+            elapsed: float = time.time() - start_time
+            runtime_str = f"{elapsed:.2f}s"
+            logger.info(f"Tool {tool_name2} completed in {elapsed:.2f} seconds.")
+        else:
+            logger.warning(
+                f"Tool {tool_name2} end event received without matching start event."
+            )
+        if tool_message:
+            artifact: Optional[Any] = tool_message.artifact
+            return_raw_tool_output: bool = (
+                os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
+            )
+            if artifact or return_raw_tool_output:
+                tool_message_content: str = self.convert_message_content_into_string(
+                    tool_message=tool_message
+                )
+                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                    logger.info(
+                        f"Returning artifact: {artifact if artifact else tool_message_content}"
+                    )
+                token_count: int = self.token_reducer.count_tokens(
+                    tool_message_content if return_raw_tool_output else str(artifact)
+                )
+                tool_progress_message: str = (
+                    (
+                        f"""```
+==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] =====
+{tool_message_content}
+==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] [runtime: {runtime_str}] =====
+```
+"""
+                    )
+                    if return_raw_tool_output
+                    else f"\n> {artifact}"
+                    + (
+                        f" [tokens: {token_count}]"
+                        if logger.isEnabledFor(logging.DEBUG) > 0
+                        else ""
+                    )
+                )
+                chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                    id=request_id,
+                    created=int(time.time()),
+                    model=request["model"],
+                    choices=[
+                        ChunkChoice(
+                            index=0,
+                            delta=ChoiceDelta(
+                                role="assistant",
+                                content=tool_progress_message,
+                            ),
+                        )
+                    ],
+                    usage=CompletionUsage(
+                        prompt_tokens=0,
+                        completion_tokens=0,
+                        total_tokens=0,
+                    ),
+                    object="chat.completion.chunk",
+                )
+                yield format_chat_completion_chunk_sse(
+                    chat_stream_response.model_dump()
+                )
+        else:
+            logger.debug("on_tool_end: no tool message output")
+            chat_stream_response = ChatCompletionChunk(
+                id=request_id,
+                created=int(time.time()),
+                model=request["model"],
+                choices=[
+                    ChunkChoice(
+                        index=0,
+                        delta=ChoiceDelta(
+                            role="assistant",
+                            content=f"\n\n> Tool completed with no output.{runtime_str}\n",
+                        ),
+                    )
+                ],
+                usage=CompletionUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                ),
+                object="chat.completion.chunk",
+            )
+            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
             # noinspection PyMethodMayBeStatic
 
