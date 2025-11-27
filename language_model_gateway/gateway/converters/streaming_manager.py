@@ -330,7 +330,7 @@ class LangGraphStreamingManager:
                         )
                         filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
                         file_path: Optional[str] = await file_manager.save_file_async(
-                            file_data=tool_message_content.encode("utf-8"),
+                            file_data=artifact_text.encode("utf-8"),
                             folder=output_folder,
                             filename=filename,
                         )
@@ -456,7 +456,7 @@ class LangGraphStreamingManager:
         if json_object is not None and isinstance(json_object, dict):
             if "result" in json_object:
                 logger.info(
-                    f"Extracted result from JSON object: {json_object.get('result')}"
+                    f"Extracted result from JSON object:>>> {json_object.get('result')} <<<"
                 )
                 result += str(json_object.get("result")) + "\n"
             if "error" in json_object:

@@ -530,9 +530,26 @@ class LangGraphToOpenAIConverter:
                 "user_id": request_information.user_id,
             }
         }
-        output: Dict[str, Any] = await compiled_state_graph.ainvoke(
-            input=input_, config=config
-        )
+        try:
+            output: Dict[str, Any] = await compiled_state_graph.ainvoke(
+                input=input_, config=config
+            )
+        except AttributeError as e:
+            # Fallback if errorfactory is not available
+            logger.error(f"AttributeError in throttling handling: {e}")
+            raise
+        except Exception as e:
+            # Try to catch ThrottlingException dynamically
+            if (
+                hasattr(e, "__class__")
+                and e.__class__.__name__ == "ThrottlingException"
+            ):
+                logger.error(f"AWS ThrottlingException: {e}")
+                raise HTTPException(
+                    status_code=429,
+                    detail="AWS request throttled. Please try again later.",
+                )
+            raise
         out_messages: List[AnyMessage] = output["messages"]
         return out_messages
 
