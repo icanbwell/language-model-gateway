@@ -433,8 +433,9 @@ class LangGraphStreamingManager:
         total_usage_metadata: CompletionUsage = CompletionUsage(
             prompt_tokens=0, completion_tokens=0, total_tokens=0
         )
-        usage_metadata: UsageMetadata
         for usage_metadata in usages:
+            if usage_metadata is None:
+                continue  # Skip None values to avoid TypeError
             total_usage_metadata.prompt_tokens += usage_metadata["input_tokens"]
             total_usage_metadata.completion_tokens += usage_metadata["output_tokens"]
             total_usage_metadata.total_tokens += usage_metadata["total_tokens"]
