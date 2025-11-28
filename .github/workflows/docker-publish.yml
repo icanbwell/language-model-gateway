@@ -65,14 +65,29 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Set manifest tag variable
+        run: |
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG=${{ github.sha }}" >> $GITHUB_ENV
+          fi
+      - name: Validate platform images exist
+        run: |
+          for tag in "$TAG-amd64" "$TAG-arm64" "latest-amd64" "latest-arm64"; do
+            if ! docker manifest inspect ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$tag > /dev/null; then
+              echo "Error: Image ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$tag does not exist."
+              exit 1
+            fi
+          done
       - name: Create and push multi-arch manifest
         run: |
-          docker manifest create \
-            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }} \
-            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}-amd64 \
-            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}-arm64
-          docker manifest push ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}
-          docker manifest create \
+          docker manifest create --amend \
+            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$TAG \
+            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$TAG-amd64 \
+            ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$TAG-arm64
+          docker manifest push ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:$TAG
+          docker manifest create --amend \
             ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:latest \
             ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:latest-amd64 \
             ${{ env.REPOSITORY_URL }}/${{ env.IMAGE_NAME }}:latest-arm64
