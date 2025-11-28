@@ -254,7 +254,7 @@ class TokenStorageAuthManager(FastAPIAuthManager):
                 <div class="token-container">
                     <div class="token-label">Access Token:</div>
                     <button class="show-btn" onclick="toggleToken()">Show Access Token</button>
-                    <div id="access-token" class="token-value">{access_token if "access_token" in locals() and access_token else ""}</div>
+                    <div id="access-token" class="token-value">{access_token or ""}</div>
                 </div>
                 <div class="footer">
                     You may close this window.
