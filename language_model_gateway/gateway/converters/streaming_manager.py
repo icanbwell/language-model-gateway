@@ -558,9 +558,9 @@ class LangGraphStreamingManager:
         for usage_metadata in usages:
             if usage_metadata is None:
                 continue  # Skip None values to avoid TypeError
-            total_usage_metadata.prompt_tokens += usage_metadata["input_tokens"]
-            total_usage_metadata.completion_tokens += usage_metadata["output_tokens"]
-            total_usage_metadata.total_tokens += usage_metadata["total_tokens"]
+            total_usage_metadata.prompt_tokens += usage_metadata.get("input_tokens", 0)
+            total_usage_metadata.completion_tokens += usage_metadata.get("output_tokens", 0)
+            total_usage_metadata.total_tokens += usage_metadata.get("total_tokens", 0)
         return total_usage_metadata
 
     @staticmethod
