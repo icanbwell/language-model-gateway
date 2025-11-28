@@ -353,9 +353,7 @@ class LangGraphStreamingManager:
                                         " Tool output file URL could not be generated."
                                     )
                             except KeyError:
-                                tool_message_content += (
-                                    " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
-                                )
+                                tool_message_content += " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
                         else:
                             tool_message_content = (
                                 "Tool output too large to display inline, "
@@ -559,7 +557,9 @@ class LangGraphStreamingManager:
             if usage_metadata is None:
                 continue  # Skip None values to avoid TypeError
             total_usage_metadata.prompt_tokens += usage_metadata.get("input_tokens", 0)
-            total_usage_metadata.completion_tokens += usage_metadata.get("output_tokens", 0)
+            total_usage_metadata.completion_tokens += usage_metadata.get(
+                "output_tokens", 0
+            )
             total_usage_metadata.total_tokens += usage_metadata.get("total_tokens", 0)
         return total_usage_metadata
 
