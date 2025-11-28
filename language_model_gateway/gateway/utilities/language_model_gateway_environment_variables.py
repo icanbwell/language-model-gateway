@@ -96,4 +96,4 @@ class LanguageModelGatewayEnvironmentVariables(EnvironmentVariables):
 
     @property
     def tool_call_timeout_seconds(self) -> int:
-        return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "3600"))
+        return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))
