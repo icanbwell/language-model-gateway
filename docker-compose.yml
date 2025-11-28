@@ -14,7 +14,7 @@ services:
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
 #      DEFAULT_WEB_SEARCH_TOOL: "duckduckgo_search"
       DEFAULT_WEB_SEARCH_TOOL: "google_search"
-      IMAGE_GENERATION_PATH: "/usr/src/language_model_gateway/image_generation"
+      IMAGE_GENERATION_PATH: "/usr/src/tool_outputs"
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
@@ -119,6 +119,10 @@ services:
       # configures retry behavior for AWS SDK calls
       AWS_BEDROCK_MAX_RETRIES: '1'
       AWS_BEDROCK_RETRY_MODE: 'standard'
+      # determines when to return tool outputs in responses
+      MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '100'
+      # wait time for tool calls before timing out (in seconds)
+      TOOL_CALL_TIMEOUT_SECONDS: '600'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
@@ -126,6 +130,7 @@ services:
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
     - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
 #    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs

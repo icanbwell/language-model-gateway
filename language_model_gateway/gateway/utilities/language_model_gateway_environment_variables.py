@@ -88,3 +88,12 @@ class LanguageModelGatewayEnvironmentVariables(EnvironmentVariables):
     @property
     def enable_llm_checkpointer(self) -> bool:
         return self.str2bool(os.environ.get("ENABLE_LLM_CHECKPOINTER", "false"))
+
+    @property
+    def maximum_inline_tool_output_size(self) -> int:
+        """Maximum size in characters for tool output to be inlined in responses."""
+        return int(os.environ.get("MAXIMUM_INLINE_TOOL_OUTPUT_SIZE", "100"))
+
+    @property
+    def tool_call_timeout_seconds(self) -> int:
+        return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))

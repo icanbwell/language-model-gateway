@@ -30,10 +30,10 @@ class LocalFileManager(FileManager):
         if file_data:
             with open(file_path, "wb") as f:
                 f.write(file_data)
-            logger.info(f"Image saved as {file_path}")
+            logger.info(f"File saved as {file_path}")
             return str(file_path)
         else:
-            logger.error("No image to save")
+            logger.error("No file to save")
             return None
 
     @override
