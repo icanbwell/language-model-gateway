@@ -344,12 +344,17 @@ class LangGraphStreamingManager:
                             tool_message_content = (
                                 "Tool output too large to display inline."
                             )
-                            file_url = UrlParser.get_url_for_file_name(filename)
-                            if file_url is not None:
-                                tool_message_content += f" (URL: {file_url})"
-                            else:
+                            try:
+                                file_url = UrlParser.get_url_for_file_name(filename)
+                                if file_url is not None:
+                                    tool_message_content += f" (URL: {file_url})"
+                                else:
+                                    tool_message_content += (
+                                        " Tool output file URL could not be generated."
+                                    )
+                            except KeyError:
                                 tool_message_content += (
-                                    " Tool output file URL could not be generated."
+                                    " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
                                 )
                         else:
                             tool_message_content = (
