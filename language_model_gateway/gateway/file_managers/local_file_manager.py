@@ -23,7 +23,7 @@ class LocalFileManager(FileManager):
         file_data: bytes,
         folder: str,
         filename: str,
-        content_type: str = "image/png",
+        content_type: str,
     ) -> Optional[str]:
         """Save the generated image to a file"""
         file_path: str = self.get_full_path(filename=filename, folder=folder)
