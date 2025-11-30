@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Step 1: Download the model first
+  embeddings-model-downloader:
+    profiles: ["ml-init"]  # not part of default up
+    image: python:3.12-slim
+    volumes:
+      - ./caches/embedding-models:/data
+      - ./scripts/download_model.py:/download_model.py:ro
+    environment:
+      - HF_HOME=/data
+      - MODEL_ID=BAAI/bge-large-en-v1.5
+      - CACHE_DIR=/data
+      - REVISION=main
+    command: >
+      bash -c '
+        set -e
+        echo "Installing huggingface_hub..."
+        pip install -q huggingface_hub
+        echo "Running model download script..."
+        python /download_model.py
+      '
+    networks:
+      - web
+
+  text-embeddings:
+    depends_on: {}
+    image: ddosify/text-embeddings-inference:cpu-1.6.0
+    # https://huggingface.github.io/text-embeddings-inference/
+    ports:
+      - "5060:80"
+    volumes:
+      - ./caches/embedding-models:/data
+    environment:
+      - MODEL_ID=BAAI/bge-large-en-v1.5
+      - REVISION=main
+      - MAX_CONCURRENT_REQUESTS=512
+      - MAX_BATCH_TOKENS=16384
+      - HF_HOME=/data
+      - TRANSFORMERS_CACHE=/data
+    command:
+      - --model-id
+      - BAAI/bge-large-en-v1.5
+      - --revision
+      - main
+      - --port
+      - "80"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:80/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: language-model-gateway_web

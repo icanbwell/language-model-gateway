@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Type, Literal, Tuple, Optional
+from typing import Type, Literal, Tuple, Optional, override
 from uuid import uuid4
 
 from graphviz import Digraph
@@ -51,6 +51,7 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
 
+    @override
     def _run(self, dot_input: str) -> Tuple[str, str]:
         """
         Run the tool to generate a diagram from DOT input.
@@ -59,6 +60,7 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
         """
         raise NotImplementedError("Call the asynchronous version of the tool")
 
+    @override
     async def _arun(self, dot_input: str) -> Tuple[str, str]:
         """
         Asynchronous version of the tool.

@@ -17,19 +17,16 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
+from oidcauthlib.container.interfaces import IContainer
 
 
 async def test_chat_completions_streaming(
-    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
+    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
-    test_container: SimpleContainer = await get_container_async()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         chunks_json: List[ChatCompletionChunk] = [
             ChatCompletionChunk(

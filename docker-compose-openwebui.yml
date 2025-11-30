@@ -3,11 +3,13 @@ services:
   open-webui:
     # https://github.com/open-webui/open-webui/releases
     depends_on:
-      - open-webui-db
+      open-webui-db:
+        condition: service_healthy
     # https://github.com/open-webui/open-webui/pkgs/container/open-webui/versions
     # Slim image excludes embedded AI models and Ollama installation
-    #    image: ghcr.io/open-webui/open-webui:v0.6.31-slim
+#    image: ghcr.io/open-webui/open-webui:v0.6.33-slim
     build:
+      # use a dockerfile to preinstall the sentence-transformers package and download the all-MiniLM-L6-v2 model
       dockerfile: ./openwebui-config/functions/open-webui.Dockerfile
       context: .
     env_file:
@@ -33,7 +35,8 @@ services:
       CORS_ALLOW_ORIGIN: '*'
       OPENAI_API_KEY: 'bedrock'
       #      DEFAULT_MODELS: "General Purpose"
-      DEFAULT_MODELS: "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+      DEFAULT_MODELS: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+      ENABLE_FOLLOW_UP_GENERATION: False
       ENABLE_MODEL_FILTER: True
       #      MODEL_FILTER_LIST: "anthropic.claude-3-5-sonnet-20240620-v1:0"
       WEBUI_DB_HOST: "open-webui-db"
@@ -73,8 +76,6 @@ services:
       ENABLE_OAUTH_SIGNUP: True
       # Controls whether OAuth-related settings are persisted in the database after the first launch.
       ENABLE_OAUTH_PERSISTENT_CONFIG: False
-      # identify a user's unique ID (sub) from the OAuth/OIDC provider's user info response
-      OAUTH_SUB_CLAIM: "username"
       # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
       # Enables API key authentication.  Needed for our script in Makefile to set up configuration
@@ -82,7 +83,7 @@ services:
       # Use S3 for file storage: https://docs.openwebui.com/tutorials/s3-storage/
       STORAGE_PROVIDER: s3
       S3_ENDPOINT_URL: "https://s3.us-east-1.amazonaws.com"
-      S3_BUCKET_NAME: "bwell-dev-data-science-ue1"
+      S3_BUCKET_NAME: "bwell-services-data-science-ue1"
       S3_REGION_NAME: "us-east-1"
       S3_KEY_PREFIX: "aiden/uploads/"
       # Embeddings config
@@ -94,14 +95,14 @@ services:
       #      S3_VECTOR_REGION: "us-east-1"
       # Whether to write oauth cookie or not
       # We now get it directly in the language_model_gateway.py so we don't need this
-      ENABLE_OAUTH_ID_TOKEN_COOKIE: False
+      ENABLE_OAUTH_ID_TOKEN_COOKIE: True
       # https://docs.openwebui.com/getting-started/env-configuration/#default_prompt_suggestions
       DEFAULT_PROMPT_SUGGESTIONS: '[{
         "title": [
-          "Do I need a vaccine?",
-          "search your vaccination history"
+          "Tell me a summary of my past few visits to the doctor",
+          "Understand my recent doctor visits"
         ],
-        "content": "Do I need a vaccine?"
+        "content": "Tell me a summary of my past few visits to the doctor"
       },
       {
         "title": [
@@ -112,29 +113,24 @@ services:
       },
       {
         "title": [
-          "When did I see a doctor?",
-          "search your past visits"
+          "I want to connect to my health records",
+          "See my health records"
         ],
-        "content": "When did I see a doctor?"
-      },
-      {
-        "title": [
-          "What insurance did I have in 2025?",
-          "search your past insurance plans"
-        ],
-        "content": "What insurance did I have in 2025?"
+        "content": "I want to connect to my health records"
       }]'
     volumes:
       # Mount AWS credentials if using S3 storage
-      - ~/.aws/:/root/.aws:ro-
+      - ~/.aws/:/root/.aws:ro
+      # Mount local model cache to container's embedding model cache
+      - ./caches/open-webui-models:/app/backend/data/cache
     networks:
       - web
     healthcheck:
       test: [ "CMD-SHELL", "curl --silent --fail http://localhost:8080/health | jq -ne 'input.status == true' || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      start_period: 10s
-      retries: 20
+      interval: 15s
+      timeout: 10s
+      start_period: 15s
+      retries: 40
 
   open-webui-db:
     image: public.ecr.aws/docker/library/postgres:18.0-alpine3.22
@@ -162,4 +158,5 @@ volumes:
 
 networks:
   web:
-    driver: bridge
+    external: true
+    name: language-model-gateway_web

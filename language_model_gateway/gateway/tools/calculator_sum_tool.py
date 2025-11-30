@@ -1,5 +1,5 @@
 import asyncio
-from typing import List
+from typing import List, override
 import logging
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
@@ -22,6 +22,7 @@ class CalculatorSumTool(ResilientBaseTool):
         "Useful for when you need to calculate the sum of a list of numbers"
     )
 
+    @override
     async def _arun(self, numbers: List[float]) -> str:
         """Run the tool to calculate the sum of a list of numbers"""
         logger.debug(f"Received numbers for sum: {numbers}")
@@ -34,6 +35,7 @@ class CalculatorSumTool(ResilientBaseTool):
         logger.info(f"Calculated sum: {total}")
         return f"The sum of the provided numbers is: {total}"
 
+    @override
     def _run(self, numbers: List[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(numbers=numbers))

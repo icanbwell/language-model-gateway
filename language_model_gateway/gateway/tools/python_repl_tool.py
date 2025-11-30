@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Type
+from typing import Type, override
 
 from langchain_experimental.utilities import PythonREPL
 from pydantic import BaseModel, Field
@@ -21,6 +21,7 @@ class PythonReplTool(ResilientBaseTool):
     description: str = "A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`."
     args_schema: Type[BaseModel] = PythonReplToolInput
 
+    @override
     async def _arun(self, query: str) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         try:
@@ -36,6 +37,7 @@ class PythonReplTool(ResilientBaseTool):
             logger.exception(e, stack_info=True)
             return f"Error running Python Repl: {e}"
 
+    @override
     def _run(self, query: str) -> str:
         try:
             python_repl = PythonREPL()

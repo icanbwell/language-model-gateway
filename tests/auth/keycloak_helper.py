@@ -4,7 +4,7 @@ import os
 from language_model_gateway.gateway.auth.authenticator.oauth_authenticator import (
     OAuthAuthenticator,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 
 logger = logging.getLogger(__name__)
 

@@ -16,7 +16,7 @@ logger.setLevel(SRC_LOG_LEVELS["FILES"])
 
 
 class LocalFileManager(FileManager):
-    # noinspection PyMethodMayBeStatic
+    @override
     async def save_file_async(
         self,
         *,
@@ -30,13 +30,13 @@ class LocalFileManager(FileManager):
         if file_data:
             with open(file_path, "wb") as f:
                 f.write(file_data)
-            logger.info(f"Image saved as {file_path}")
+            logger.info(f"File saved as {file_path}")
             return str(file_path)
         else:
-            logger.error("No image to save")
+            logger.error("No file to save")
             return None
 
-    # noinspection PyMethodMayBeStatic
+    @override
     def get_full_path(self, *, filename: str, folder: str) -> str:
         image_generation_path = Path(folder)
         makedirs(image_generation_path, exist_ok=True)

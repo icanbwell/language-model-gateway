@@ -1,5 +1,5 @@
 import logging
-from typing import Type, Optional, Tuple, Literal
+from typing import Type, Optional, Tuple, Literal, override
 
 from pydantic import BaseModel, Field
 
@@ -40,6 +40,7 @@ class GitHubPullRequestDiffTool(ResilientBaseTool):
 
     github_pull_request_helper: GithubPullRequestHelper
 
+    @override
     def _run(
         self,
         url: Optional[str] = None,
@@ -53,6 +54,7 @@ class GitHubPullRequestDiffTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self,
         url: Optional[str] = None,

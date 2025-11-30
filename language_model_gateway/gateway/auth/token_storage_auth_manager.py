@@ -1,0 +1,293 @@
+import logging
+import uuid
+from typing import override, Any, Dict, cast
+
+from authlib.integrations.starlette_client import StarletteOAuth2App
+from oidcauthlib.auth.auth_helper import AuthHelper
+from oidcauthlib.auth.config.auth_config import AuthConfig
+from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
+from oidcauthlib.auth.token_reader import TokenReader
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
+from oidcauthlib.utilities.environment.abstract_environment_variables import (
+    AbstractEnvironmentVariables,
+)
+from starlette.requests import Request
+from starlette.responses import HTMLResponse, JSONResponse, Response
+
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
+from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+    TokenExchangeManager,
+)
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["AUTH"])
+
+
+class TokenStorageAuthManager(FastAPIAuthManager):
+    """
+    AuthManager that uses token storage for managing tokens
+    """
+
+    def __init__(
+        self,
+        *,
+        environment_variables: AbstractEnvironmentVariables,
+        auth_config_reader: AuthConfigReader,
+        token_reader: TokenReader,
+        token_exchange_manager: TokenExchangeManager,
+        well_known_configuration_manager: WellKnownConfigurationManager,
+    ) -> None:
+        """
+        Initialize the TokenStorageAuthManager with required components.
+        Args:
+            environment_variables (AbstractEnvironmentVariables): Environment variables handler.
+            auth_config_reader (AuthConfigReader): Reader for authentication configuration.
+            token_reader (TokenReader): Reader for decoding and validating tokens.
+            token_exchange_manager (TokenExchangeManager): Manager for token exchange and storage.
+        Raises:
+            ValueError: If token_exchange_manager is None.
+            TypeError: If token_exchange_manager is not an instance of TokenExchangeManager.
+        """
+        logger.debug(f"Initializing {self.__class__.__name__}")
+        super().__init__(
+            environment_variables=environment_variables,
+            auth_config_reader=auth_config_reader,
+            token_reader=token_reader,
+            well_known_configuration_manager=well_known_configuration_manager,
+        )
+
+        self.token_exchange_manager: TokenExchangeManager = token_exchange_manager
+        if self.token_exchange_manager is None:
+            raise ValueError("TokenExchangeManager instance is required")
+        if not isinstance(self.token_exchange_manager, TokenExchangeManager):
+            raise TypeError(
+                "token_exchange_manager must be an instance of TokenExchangeManager"
+            )
+
+    @override
+    async def create_authorization_url(
+        self,
+        *,
+        auth_provider: str,
+        redirect_uri: str,
+        url: str | None,
+        referring_email: str | None,
+        referring_subject: str | None,
+    ) -> str:
+        """
+        Create the authorization URL for the OIDC provider.
+
+        This method generates the authorization URL with the necessary parameters,
+        including the redirect URI and state. The state is encoded to include the tool name,
+        which is used to identify the tool that initiated the authentication process.
+        Args:
+            auth_provider (str): The name of the OIDC provider.
+            redirect_uri (str): The redirect URI to which the OIDC provider will send the user
+                after authentication.
+            url (str): The URL of the tool that has requested this.
+            referring_email (str): The email of the user who initiated the request.
+            referring_subject (str): The subject of the user who initiated the request.
+        Returns:
+            str: The authorization URL to redirect the user to for authentication.
+        """
+        # default to first audience
+        client: StarletteOAuth2App = await self.create_oauth_client(name=auth_provider)
+        if client is None:
+            raise ValueError(f"Client for auth_provider {auth_provider} not found")
+        state_content: Dict[str, str | None] = {
+            "auth_provider": auth_provider,
+            "referring_email": referring_email,
+            "referring_subject": referring_subject,
+            "url": url,  # the URL of the tool that has requested this
+            # include a unique request ID so we don't get cache for another request
+            # This will create a unique state for each request
+            # the callback will use this state to find the correct token
+            "request_id": uuid.uuid4().hex,
+        }
+        # convert state_content to a string
+        state: str = AuthHelper.encode_state(state_content)
+
+        logger.debug(
+            f"Creating authorization URL for auth_provider {auth_provider}"
+            f" with state {state_content} and encoded state {state}"
+        )
+
+        rv: Dict[str, Any] = await client.create_authorization_url(  # type: ignore[no-untyped-call]
+            redirect_uri=redirect_uri, state=state
+        )
+        logger.debug(f"Authorization URL created: {rv}")
+        # request is only needed if we are using the session to store the state
+        await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)  # type: ignore[no-untyped-call]
+        return cast(str, rv["url"])
+
+    @override
+    async def process_token_async(
+        self,
+        *,
+        code: str | None,
+        state_decoded: Dict[str, Any],
+        token_dict: dict[str, Any],
+        auth_config: AuthConfig,
+        url: str | None,
+    ) -> Response:
+        """
+        Process the token received from the OIDC provider.
+
+        This method creates a TokenCacheItem from the token information,
+        saves it using the TokenExchangeManager, and returns the token details.
+        Args:
+            code (str | None): The authorization code received from the OIDC provider.
+            state_decoded (Dict[str, Any]): The decoded state information.
+            token_dict (dict[str, Any]): The token information as a dictionary.
+            auth_config (AuthConfig): The authorization configuration.
+            url (str | None): The URL associated with the token.
+        Returns:
+            Dict[str, Any]: A dictionary containing the token details.
+        """
+        logger.debug(
+            f"Saving token for audience '{auth_config.audience}' and issuer '{auth_config.issuer}': {token_dict=} {state_decoded=}"
+        )
+
+        if auth_config.issuer is None:
+            raise ValueError("issuer must not be None")
+
+        token_cache_item: TokenCacheItem = (
+            self.token_exchange_manager.create_token_cache_item(
+                code=code,
+                auth_config=auth_config,
+                state_decoded=state_decoded,
+                token=token_dict,
+                url=url,
+            )
+        )
+        content: Dict[str, Any] = token_cache_item.model_dump(mode="json")
+
+        # delete any existing tokens with same referring_subject and auth_provider
+        await self.token_exchange_manager.delete_token_async(
+            referring_subject=token_cache_item.referring_subject,
+            auth_provider=token_cache_item.auth_provider,
+        )
+
+        await self.token_exchange_manager.save_token_async(
+            token_cache_item=token_cache_item, refreshed=False
+        )
+        access_token: str | None = (
+            token_cache_item.access_token.token
+            if token_cache_item.access_token
+            else None
+        )
+        if logger.isEnabledFor(logging.DEBUG):
+            access_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=access_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if access_token
+                else None
+            )
+            id_token: str | None = (
+                token_cache_item.id_token.token if token_cache_item.id_token else None
+            )
+            id_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=id_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if id_token
+                else None
+            )
+            refresh_token: str | None = (
+                token_cache_item.refresh_token.token
+                if token_cache_item.refresh_token
+                else None
+            )
+            refresh_token_decoded: Dict[str, Any] | None = (
+                await self.token_reader.decode_token_async(
+                    token=refresh_token.strip("\n"),
+                    verify_signature=False,
+                )
+                if refresh_token
+                else None
+            )
+            content["access_token_decoded"] = access_token_decoded
+            content["id_token_decoded"] = id_token_decoded
+            content["refresh_token_decoded"] = refresh_token_decoded
+
+            return JSONResponse(content)
+
+        html_content = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Authentication Successful</title>
+            <style>
+                * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }}
+                .container {{ background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); padding: 48px; max-width: 500px; text-align: center; animation: fadeIn 0.5s ease-in; }}
+                @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(-20px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+                .checkmark {{ width: 80px; height: 80px; border-radius: 50%; display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 24px; position: relative; animation: scaleIn 0.5s ease-in-out; }}
+                @keyframes scaleIn {{ from {{ transform: scale(0); }} to {{ transform: scale(1); }} }}
+                .checkmark::after {{ content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: bold; }}
+                h1 {{ color: #2d3748; font-size: 32px; margin-bottom: 16px; font-weight: 700; }}
+                p {{ color: #4a5568; font-size: 18px; line-height: 1.6; margin-bottom: 12px; }}
+                .highlight {{ color: #667eea; font-weight: 600; }}
+                .footer {{ margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; color: #718096; font-size: 14px; }}
+                .token-container {{ margin-top: 24px; }}
+                .token-label {{ font-weight: 600; color: #2d3748; margin-bottom: 8px; }}
+                .token-value {{ display: none; word-break: break-all; background: #f7fafc; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 15px; color: #4a5568; }}
+                .show-btn {{ background: #667eea; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-size: 15px; margin-top: 8px; }}
+                .show-btn:active {{ background: #764ba2; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="checkmark"></div>
+                <h1>Authentication Successful!</h1>
+                <p>You have been successfully authenticated.</p>
+                <p>You can now go back to <span class="highlight">Aiden</span> and retry your question.</p>
+                <div class="token-container">
+                    <div class="token-label">Access Token:</div>
+                    <button class="show-btn" onclick="toggleToken()">Show Access Token</button>
+                    <div id="access-token" class="token-value">{access_token or ""}</div>
+                </div>
+                <div class="footer">
+                    You may close this window.
+                </div>
+            </div>
+            <script>
+                function toggleToken() {{
+                    var tokenDiv = document.getElementById('access-token');
+                    var btn = document.querySelector('.show-btn');
+                    if (tokenDiv.style.display === 'none' || tokenDiv.style.display === '') {{
+                        tokenDiv.style.display = 'block';
+                        btn.textContent = 'Hide Access Token';
+                    }} else {{
+                        tokenDiv.style.display = 'none';
+                        btn.textContent = 'Show Access Token';
+                    }}
+                }}
+            </script>
+        </body>
+        </html>
+        """
+
+        return HTMLResponse(content=html_content)
+
+    @override
+    async def process_sign_out_async(
+        self,
+        *,
+        request: Request,
+    ) -> None:
+        """
+        Process sign out by clearing stored tokens.
+        """
+
+        # TODO: extract the bearer token from the request and use it to identify the token to be deleted
+        pass

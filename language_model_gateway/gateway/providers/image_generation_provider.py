@@ -2,7 +2,7 @@ import base64
 import logging
 import os
 import time
-from typing import Dict, List, Literal, Optional, Union
+from typing import Dict, List, Literal, Optional, Union, override
 from uuid import uuid4
 
 from openai import NotGiven
@@ -54,6 +54,7 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
                 "file_manager_factory must be an instance of FileManagerFactory"
             )
 
+    @override
     async def generate_image_async(
         self,
         *,

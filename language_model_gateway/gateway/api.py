@@ -1,5 +1,6 @@
 import logging
 import os
+import uuid
 from contextlib import asynccontextmanager
 from os import makedirs, environ
 from pathlib import Path
@@ -8,6 +9,8 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
+from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -15,11 +18,12 @@ from starlette.staticfiles import StaticFiles
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.api_container import get_config_reader
+from language_model_gateway.container.container_factory import (
+    LanguageModelGatewayContainerFactory,
+)
 from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
     FastApiLoggingMiddleware,
 )
-from language_model_gateway.gateway.routers.auth_router import AuthRouter
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -30,6 +34,9 @@ from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+from oidcauthlib.container.container_registry import ContainerRegistry
+from oidcauthlib.container.inject import Inject
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
@@ -51,6 +58,13 @@ logging.getLogger("authlib").setLevel(SRC_LOG_LEVELS["AUTH"])
 # disable logging calls to /health endpoint
 uvicorn_logger = logging.getLogger("uvicorn.access")
 uvicorn_logger.addFilter(EndpointFilter(path="/health"))
+
+# register our container
+ContainerRegistry.set_default(
+    LanguageModelGatewayContainerFactory.create_container(
+        source=f"{__name__}[{uuid.uuid4().hex}]"
+    )
+)
 
 
 @asynccontextmanager
@@ -86,7 +100,7 @@ def create_app() -> FastAPI:
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
-    app1.include_router(AuthRouter().get_router())
+    app1.include_router(AuthRouter(prefix="/auth").get_router())
     # Mount the static directory
     app1.mount(
         "/static",
@@ -120,6 +134,8 @@ def create_app() -> FastAPI:
     )
     app1.add_middleware(FastApiLoggingMiddleware)
 
+    app1.add_middleware(RequestScopeMiddleware)
+
     return app1
 
 
@@ -143,7 +159,8 @@ async def favicon() -> FileResponse:
 
 @app.get("/refresh")
 async def refresh_data(
-    request: Request, config_reader: Annotated[ConfigReader, Depends(get_config_reader)]
+    request: Request,
+    config_reader: Annotated[ConfigReader, Depends(Inject(ConfigReader))],
 ) -> JSONResponse:
     if config_reader is None:
         raise ValueError("config_reader must not be None")

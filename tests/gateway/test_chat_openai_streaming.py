@@ -1,7 +1,9 @@
 import json
+import os
 from typing import List
 
 import httpx
+import pytest
 from httpx import Response
 from openai import AsyncOpenAI, AsyncStream
 from openai.types import CompletionUsage
@@ -17,19 +19,19 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
+from oidcauthlib.container.interfaces import IContainer
 
 
-async def test_chat_completions_streaming(
-    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
+@pytest.mark.httpx_mock(
+    should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
+)
+async def test_chat_open_ai_completions_streaming(
+    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
-    test_container: SimpleContainer = await get_container_async()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         chunks_json: List[ChatCompletionChunk] = [
             ChatCompletionChunk(
@@ -92,8 +94,6 @@ async def test_chat_completions_streaming(
             ),
             url="http://host.docker.internal:5055/api/v1/chat/completions",
         )
-    else:
-        return  # this test only works with AI Agent
 
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache

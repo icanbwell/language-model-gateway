@@ -1,7 +1,7 @@
 import logging
 import os
 from datetime import datetime
-from typing import Type, Optional, List, Tuple, Literal
+from typing import Type, Optional, List, Tuple, Literal, override
 
 from pydantic import BaseModel, Field
 
@@ -115,7 +115,7 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
 
     jira_issues_helper: JiraIssueHelper
 
-    # noinspection PyPep8Naming
+    @override
     def _run(
         self,
         project_name: Optional[str] = None,
@@ -139,7 +139,7 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
-    # noinspection PyPep8Naming
+    @override
     async def _arun(
         self,
         project_name: Optional[str] = None,

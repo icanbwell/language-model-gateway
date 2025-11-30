@@ -31,3 +31,8 @@ services:
     volumes:
       - "./certs/open-webui.localhost.pem:/etc/ssl/certs/open-webui.localhost.crt:ro"
       - "./certs/open-webui.localhost-key.pem:/etc/ssl/private/open-webui.localhost.key:ro"
+
+networks:
+  web:
+    external: true
+    name: language-model-gateway_web

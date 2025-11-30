@@ -30,6 +30,11 @@ from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
 
+# Cache TTL in seconds (60 minutes)
+CACHE_TTL_SECONDS = 60 * 60
+
+LLM_CALL_TIMEOUT = 60 * 5  # 5 minutes
+
 
 class Pipe:
     """
@@ -72,6 +77,9 @@ class Pipe:
         self.name: str = self.valves.model_name_prefix
         self.last_emit_time: float = 0
         self.pipelines: Optional[List[Dict[str, Any]]] = None
+        self.pipelines_last_updated: Optional[float] = (
+            None  # Track last cache update time
+        )
 
     @staticmethod
     def read_base_url() -> Optional[str]:
@@ -285,7 +293,7 @@ HTTPX Response Log:
         Main pipe method supporting both streaming and non-streaming responses.
         """
         if not __oauth_token__ or "access_token" not in __oauth_token__:
-            yield "Error: User is not authenticated via OAuth or token is unavailable."
+            yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
             return
         access_token: Optional[str] = __oauth_token__.get("access_token")
         id_token: Optional[str] = __oauth_token__.get("id_token")
@@ -340,7 +348,7 @@ HTTPX Response Log:
                     url=url,
                     json=payload,
                     headers=headers,
-                    timeout=30.0,
+                    timeout=LLM_CALL_TIMEOUT,
                     follow_redirects=True,
                 )
                 response.raise_for_status()
@@ -388,17 +396,27 @@ HTTPX Response Log:
             response.raise_for_status()
             models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
+        # Update cache timestamp
+        self.pipelines_last_updated = time.time()
+        return [{"id": model["id"], "name": model["id"]} for model in models]
+
+    async def pipes(self) -> List[Dict[str, str]]:
+        now = time.time()
+        cache_expired = (
+            self.pipelines is None
+            or self.pipelines_last_updated is None
+            or (now - self.pipelines_last_updated) > CACHE_TTL_SECONDS
+        )
+        if cache_expired:
+            logger.debug("Model cache expired or not set. Fetching models.")
+            self.pipelines = await self.get_models()
+
+        models = self.pipelines or []
         if self.valves.restrict_to_model_ids:
             models = [
                 model
                 for model in models
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
-            logger.debug(f"Filtered models: {models}")
-        return [{"id": model["id"], "name": model["id"]} for model in models]
 
-    async def pipes(self) -> List[Dict[str, str]]:
-        if self.pipelines is None:
-            logger.debug("Fetching models for the first time.")
-            self.pipelines = await self.get_models()
-        return self.pipelines or []
+        return models

@@ -121,7 +121,7 @@ USER appuser
 
 # Development CMD with hot reload enabled
 CMD ["sh", "-c", "\
-    ddtrace-run uvicorn language_model_gateway.gateway.api:app \
+    uvicorn language_model_gateway.gateway.api:app \
         --host 0.0.0.0 \
         --port 5000 \
         --reload \
@@ -199,15 +199,15 @@ RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-pack
 USER appuser
 
 # The number of workers can be controlled using the NUM_WORKERS environment variable
-# Otherwise the number of workers for uvicorn (using the multiprocessing worker) is  chosen based on these guidelines:
+# Otherwise the number of workers for uvicorn (using the multiprocessing worker) is chosen based on these guidelines:
 # (https://sentry.io/answers/number-of-uvicorn-workers-needed-in-production/)
-# basically (cores _threads + 1)
+# basically (cores * threads + 1)
 CMD ["sh", "-c", "\
     # Get CPU info \
     CORE_COUNT=$(nproc) && \
     THREAD_COUNT=$(nproc --all) && \
     \
-    # Calculate workers using formula: (cores_ threads + 1) \
+    # Calculate workers using formula: (cores * threads + 1) \
     WORKER_COUNT=$((CORE_COUNT * THREAD_COUNT + 1)) && \
     FINAL_WORKERS=${NUM_WORKERS:-$WORKER_COUNT} && \
     \
@@ -215,7 +215,7 @@ CMD ["sh", "-c", "\
     echo \"Starting with $FINAL_WORKERS workers (cores: $CORE_COUNT, threads: $THREAD_COUNT)\" && \
     \
     # Start the application \
-    ddtrace-run uvicorn language_model_gateway.gateway.api:app \
+    uvicorn language_model_gateway.gateway.api:app \
         --host 0.0.0.0 \
         --port 5000 \
         --workers $FINAL_WORKERS \

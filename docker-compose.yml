@@ -14,18 +14,18 @@ services:
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
 #      DEFAULT_WEB_SEARCH_TOOL: "duckduckgo_search"
       DEFAULT_WEB_SEARCH_TOOL: "google_search"
-      IMAGE_GENERATION_PATH: "/usr/src/language_model_gateway/image_generation"
+      IMAGE_GENERATION_PATH: "/usr/src/tool_outputs"
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
-      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/official"
-      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions/testing"
+      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
+      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
 #      MODELS_OFFICIAL_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/testing"
-      MODELS_PATH_BACKUP: "/usr/src/language_model_gateway/language_model_gateway/configs/chat_completions"
+      MODELS_PATH_BACKUP: "/usr/src/language-model-gateway-configs/chat_completions"
       CONFIG_CACHE_TIMEOUT_SECONDS: 120
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -35,51 +35,80 @@ services:
       LOG_INPUT_AND_OUTPUT: 1
       RETURN_RAW_TOOL_OUTPUT: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
-      DEFAULT_MODEL_NAME: "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+      DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
       GITHUB_MAXIMUM_REPOS: "100"
       GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO: "100"
       JIRA_BASE_URL: "https://icanbwell.atlassian.net"
-#      JIRA_USERNAME: "imran.qureshi@icanbwell.com"
+#      JIRA_USERNAME: "imran.qureshi@bwell.com"
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: "client1,client3,okta"
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirproduction}
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
+      AUTH_FRIENDLY_NAME_CLIENT1: "Keycloak BWell Realm"
       AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
       AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
       AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      AUTH_SCOPE_CLIENT1: "openid email profile"
       # second client for testing
       AUTH_ISSUER_CLIENT3: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT3: "client3"
+      AUTH_FRIENDLY_NAME_CLIENT3: "Keycloak BWell Realm Client 3"
       AUTH_CLIENT_ID_CLIENT3: "bwell-client-id-3"
       AUTH_CLIENT_SECRET_CLIENT3: "bwell-secret-3"
       AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      # Okta for dev and production
-      AUTH_ISSUER_OKTA: "https://icanbwell.okta.com"
-      # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
-      AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      # Okta FHIR Dev
+      AUTH_ISSUER_OKTAFHIRDEV: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRDEV: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRDEV: "Okta FHIR Dev"
+      AUTH_CLIENT_ID_OKTAFHIRDEV: "0oarf29h6x2DaWCkT697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
+      # Okta FHIR Client Sandbox
+      AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX: "Okta FHIR Client Sandbox"
+      AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRCLIENTSANDBOX: "openid email profile groups"
+      # Okta FHIR Client Staging
+      AUTH_ISSUER_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRSTAGING: "Okta FHIR Staging"
+      AUTH_CLIENT_ID_OKTAFHIRSTAGING: "0oarhz13sa21nfecS697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
+      # Okta FHIR Production
+      AUTH_ISSUER_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRPRODUCTION: "Okta FHIR Production"
+      AUTH_CLIENT_ID_OKTAFHIRPRODUCTION: "0oargxz9fkFFcSM38697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRPRODUCTION: "openid email profile groups"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
-      MONGO_URL: 'mongodb://mongo:27017?appName=fhir-server'
-      MONGO_DB_USERNAME: root
-      MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
+      MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=fhir-server}
+      MONGO_DB_USERNAME: ${LANGUAGE_MODEL_GATEWAY_MONGO_USERNAME:-root}
+      MONGO_DB_PASSWORD: ${LANGUAGE_MODEL_GATEWAY_MONGO_PASSWORD:-test123}  # pragma: allowlist secret
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
-      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
+#      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
+      OAUTH_CACHE: mongo
       # for LLM memory
+      ENABLE_LLM_STORE: 'true'
+      ENABLE_LLM_CHECKPOINTER: 'true'
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"
       LLM_STORAGE_TYPE: "mongo"
-      OAUTH_CACHE: mongo
       # This is the user and password that can be used for testing
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
@@ -87,14 +116,28 @@ services:
       TOOL_OUTPUT_TOKEN_LIMIT: 100000
       # Control logging by code area
       HTTP_TRACING_LOG_LEVEL: 'DEBUG'
+      # configures retry behavior for AWS SDK calls
+      AWS_BEDROCK_MAX_RETRIES: '1'
+      AWS_BEDROCK_RETRY_MODE: 'standard'
+      # determines when to return tool outputs in responses
+      MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '100'
+      # wait time for tool calls before timing out (in seconds)
+      TOOL_CALL_TIMEOUT_SECONDS: '600'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
+    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ./outputs/tools:/usr/src/tool_outputs
+    # mount cache
+#    - ./caches/pip:/etc/appuser/.cache/pip
+#    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
+    # uncomment the below to get the code from local folders instead of pypi
+#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
@@ -103,25 +146,7 @@ services:
     networks:
       - web
 
-  mongo:
-    image: mongodb/mongodb-atlas-local:8.2.0
-    # https://github.com/mongodb/mongodb-atlas-cli/releases
-    # https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/
-    ports:
-      - "27017:27017"
-    container_name: mongo
-    environment:
-      #      ALLOW_EMPTY_PASSWORD: yes
-      MONGO_VECTOR_DATABASE: data-science
-      MONGO_VECTOR_COLLECTION: complaints_cache
-      MONGODB_INITDB_ROOT_USERNAME: root
-      MONGODB_INITDB_ROOT_PASSWORD: "test123" # pragma: allowlist secret
-      MONGO_VECTOR_PORT: 27017
-      MONGO_EMBEDDINGS_CACHE_COLLECTION: embeddings_cache
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
-    networks:
-      - web
 networks:
   web:
-    driver: bridge
+    external: true
+    name: language-model-gateway_web

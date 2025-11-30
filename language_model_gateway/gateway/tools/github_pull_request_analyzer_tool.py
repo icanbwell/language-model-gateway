@@ -1,7 +1,7 @@
 import logging
 import os
 from datetime import datetime
-from typing import Type, Optional, List, Tuple, Literal, Dict, Annotated
+from typing import Type, Optional, List, Tuple, Literal, Dict, Annotated, override
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.prebuilt import InjectedState
@@ -171,7 +171,7 @@ class GitHubPullRequestAnalyzerTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     github_pull_request_helper: GithubPullRequestHelper
 
-    # noinspection PyPep8Naming
+    @override
     def _run(
         self,
         *,
@@ -198,7 +198,7 @@ class GitHubPullRequestAnalyzerTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
-    # noinspection PyPep8Naming
+    @override
     async def _arun(
         self,
         *,

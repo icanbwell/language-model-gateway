@@ -1,4 +1,3 @@
-import json
 import logging
 import os
 import re
@@ -7,7 +6,6 @@ from typing import (
     Any,
     List,
     Sequence,
-    cast,
     Optional,
     Tuple,
     Literal,
@@ -21,8 +19,10 @@ from typing import (
 import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
+from langchain_community.adapters.openai import (
+    convert_message_to_dict,
+)
 from langchain_core.language_models import BaseChatModel
-from langchain_core.messages import AIMessageChunk
 from langchain_core.messages import (
     AnyMessage,
     ToolMessage,
@@ -38,6 +38,9 @@ from langgraph.store.base import BaseStore
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from language_model_gateway.gateway.converters.streaming_manager import (
+    LangGraphStreamingManager,
+)
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
@@ -47,14 +50,17 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
+from language_model_gateway.gateway.converters.streaming_utils import (
+    format_done_sse,
+)
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.utilities.chat_message_helpers import (
-    convert_message_content_to_string,
-)
 from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+    langchain_to_chat_message,
+)
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
@@ -69,11 +75,16 @@ class LangGraphToOpenAIConverter:
     def __init__(
         self,
         *,
-        environment_variables: EnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
+        streaming_manager: LangGraphStreamingManager,
     ) -> None:
-        self.environment_variables: EnvironmentVariables = environment_variables
-        if not isinstance(self.environment_variables, EnvironmentVariables):
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
             raise TypeError(
                 f"environment_variables must be EnvironmentVariables, got {type(self.environment_variables)}"
             )
@@ -85,6 +96,13 @@ class LangGraphToOpenAIConverter:
         if not isinstance(self.token_reducer, TokenReducer):
             raise TypeError(
                 f"token_reducer must be TokenReducer, got {type(self.token_reducer)}"
+            )
+        self.streaming_manager = streaming_manager
+        if self.streaming_manager is None:
+            raise ValueError("streaming_manager must not be None")
+        if not isinstance(self.streaming_manager, LangGraphStreamingManager):
+            raise TypeError(
+                f"streaming_manager must be LangGraphStreamingManager, got {type(self.streaming_manager)}"
             )
 
     async def _stream_resp_async_generator(
@@ -109,6 +127,9 @@ class LangGraphToOpenAIConverter:
         """
         request_id = request_information.request_id
 
+        # Track tool start times for concurrent tool runs
+        tool_start_times: Dict[str, float] = {}
+
         try:
             # Process streamed events from the graph and yield messages over the SSE stream.
             event: StandardStreamEvent | CustomStreamEvent
@@ -121,155 +142,10 @@ class LangGraphToOpenAIConverter:
                 if not event:
                     continue
 
-                event_type: str = event["event"]
-
-                # events are described here: https://python.langchain.com/docs/how_to/streaming/#using-stream-events
-
-                # print(f"===== {event_type} =====\n{event}\n")
-
-                event_object = cast(object, event)
-                match event_type:
-                    case "on_chain_start":
-                        # Handle the start of the chain event
-                        pass
-                    case "on_chain_stream":
-                        # Handle the chain stream event.  Be sure not to write duplicate responses to what is done in the on_chat_model_stream event.
-                        pass
-                    case "on_chat_model_stream":
-                        # Handle the chat model stream event
-                        event_dict = cast(dict[str, Any], event_object)
-                        chunk: AIMessageChunk | None = event_dict.get("data", {}).get(
-                            "chunk"
-                        )
-                        if chunk is not None:
-                            content: str | list[str | dict[str, Any]] = chunk.content
-
-                            # print(f"chunk: {chunk}")
-
-                            usage_metadata = chunk.usage_metadata
-
-                            content_text: str = convert_message_content_to_string(
-                                content
-                            )
-                            if not isinstance(content_text, str):
-                                raise TypeError(
-                                    f"content_text must be str, got {type(content_text)}"
-                                )
-
-                            if (
-                                os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1"
-                                and content_text
-                            ):
-                                logger.debug(f"Returning content: {content_text}")
-
-                            # if there is no content then don't yield a message
-                            if content_text:
-                                yield chat_request_wrapper.create_sse_message(
-                                    content=content_text,
-                                    request_id=request_id,
-                                    usage_metadata=usage_metadata,
-                                )
-
-                    case "on_chain_end":
-                        # print(f"===== {event_type} =====\n{event}\n")
-                        event_dict = cast(dict[str, Any], event_object)
-                        output: Dict[str, Any] | str | None = event_dict.get(
-                            "data", {}
-                        ).get("output")
-                        if (
-                            output
-                            and isinstance(output, dict)
-                            and output.get("usage_metadata")
-                        ):
-                            # Handle the end of the chain event
-                            yield chat_request_wrapper.create_sse_message(
-                                request_id=request_id,
-                                usage_metadata=output["usage_metadata"],
-                                content=None,
-                            )
-                    case "on_tool_start":
-                        # Handle the start of the tool event
-                        event_dict = cast(dict[str, Any], event_object)
-                        tool_name: Optional[str] = event_dict.get("name", None)
-                        tool_input: Dict[str, Any] | None = event_dict.get(
-                            "data", {}
-                        ).get("input")
-
-                        # copy the tool_input to avoid modifying the original
-                        tool_input_display = (
-                            tool_input.copy() if tool_input is not None else None
-                        )
-                        # remove auth_token from tool_input
-                        if tool_input_display and "auth_token" in tool_input_display:
-                            tool_input_display["auth_token"] = "***"
-                        if tool_input_display and "state" in tool_input_display:
-                            tool_input_display["state"] = "***"
-
-                        if tool_name:
-                            logger.debug(
-                                f"on_tool_start: {tool_name} {tool_input_display}"
-                            )
-                            yield chat_request_wrapper.create_sse_message(
-                                request_id=request_id,
-                                usage_metadata=None,
-                                content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
-                            )
-
-                    case "on_tool_end":
-                        # Handle the end of the tool event
-                        event_dict = cast(dict[str, Any], event_object)
-                        tool_message: ToolMessage | None = event_dict.get(
-                            "data", {}
-                        ).get("output")
-                        if tool_message:
-                            artifact: Optional[Any] = tool_message.artifact
-
-                            # print(f"on_tool_end: {tool_message}")
-                            return_raw_tool_output: bool = (
-                                os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
-                            )
-                            if artifact or return_raw_tool_output:
-                                # tool_message_content_type = type(tool_message.content)
-                                tool_message_content: str = (
-                                    self.convert_message_content_into_string(
-                                        tool_message=tool_message
-                                    )
-                                )
-                                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                                    logger.info(
-                                        f"Returning artifact: {artifact if artifact else tool_message_content}"
-                                    )
-
-                                token_count: int = self.token_reducer.count_tokens(
-                                    tool_message_content
-                                    if return_raw_tool_output
-                                    else str(artifact)
-                                )
-
-                                tool_progress_message: str = (
-                                    (
-                                        f"```"
-                                        f"\n==== Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
-                                        f"\n{tool_message_content}"
-                                        f"\n==== End Raw responses from Agent {tool_message.name} [tokens: {token_count}] ====="
-                                        f"\n```\n"
-                                    )
-                                    if return_raw_tool_output
-                                    else f"\n> {artifact}"
-                                    + (
-                                        f" [tokens: {token_count}]"
-                                        if logger.isEnabledFor(logging.DEBUG) > 0
-                                        else ""
-                                    )
-                                )
-                                yield chat_request_wrapper.create_sse_message(
-                                    request_id=request_id,
-                                    usage_metadata=None,
-                                    content=tool_progress_message,
-                                )
-                    case _:
-                        # Handle other event types
-                        pass
+                async for chunk in self.streaming_manager.handle_langchain_event(
+                    event, request, request_id, tool_start_times
+                ):
+                    yield chunk
         except TokenRetrievalError as e:
             logger.exception(e, stack_info=True)
             message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
@@ -294,37 +170,7 @@ class LangGraphToOpenAIConverter:
             request_id=request_id, usage_metadata=None
         )
 
-    @staticmethod
-    def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
-        def safe_json(string: str) -> Any:
-            try:
-                return json.loads(string)
-            except json.JSONDecodeError:
-                return None
-
-        if isinstance(tool_message.content, str):
-            # the content is str then just return it
-            # see if this is a json object embedded in text
-            json_content: Any = safe_json(tool_message.content)
-            if json_content is not None:
-                if isinstance(json_content, dict):
-                    if "result" in json_content:
-                        # https://github.com/open-webui/open-webui/discussions/11981
-                        return cast(str, json_content.get("result"))
-            return tool_message.content
-
-        if (
-            isinstance(tool_message.content, list)
-            and len(tool_message.content) == 1
-            and isinstance(tool_message.content[0], dict)
-            and "result" in tool_message.content[0]
-        ):
-            return cast(str, tool_message.content[0].get("result"))
-
-        return (
-            # otherwise if content is a list, convert each item to str and join the items with a space
-            " ".join([str(c) for c in tool_message.content])
-        )
+        yield format_done_sse()
 
     async def call_agent_with_input(
         self,
@@ -351,7 +197,7 @@ class LangGraphToOpenAIConverter:
 
         if chat_request_wrapper.stream:
             return StreamingResponse(
-                await self.get_streaming_response_async(
+                content=await self.get_streaming_response_async(
                     chat_request_wrapper=chat_request_wrapper,
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,
@@ -381,6 +227,25 @@ class LangGraphToOpenAIConverter:
                     system_messages=system_messages,
                     request_information=request_information,
                 )
+                # add usage metadata from each message into a total usage metadata
+                total_usage_metadata: CompletionUsage = (
+                    self.streaming_manager.convert_usage_meta_data_to_openai(
+                        usages=[
+                            m.usage_metadata
+                            for m in responses
+                            if hasattr(m, "usage_metadata") and m.usage_metadata
+                        ]
+                    )
+                )
+
+                output_messages_raw: List[ChatCompletionMessage | None] = [
+                    langchain_to_chat_message(m)
+                    for m in responses
+                    if isinstance(m, AIMessage) or isinstance(m, ToolMessage)
+                ]
+                output_messages: List[ChatCompletionMessage] = [
+                    m for m in output_messages_raw if m is not None
+                ]
 
                 content_json: Dict[str, Any] = (
                     chat_request_wrapper.create_non_streaming_response(
@@ -516,7 +381,9 @@ class LangGraphToOpenAIConverter:
                 chat_request_wrapper.append_message(message=json_schema_system_message)
                 return chat_request_wrapper, json_response_requested
             case _:
-                raise ValueError(f"Unexpected response format type: {response_format}")
+                raise ValueError(
+                    f"Unexpected response format type: {response_format.get('type', None)}"
+                )
 
     async def get_streaming_response_async(
         self,
@@ -583,9 +450,26 @@ class LangGraphToOpenAIConverter:
                 "user_id": request_information.user_id,
             }
         }
-        output: Dict[str, Any] = await compiled_state_graph.ainvoke(
-            input=input_, config=config
-        )
+        try:
+            output: Dict[str, Any] = await compiled_state_graph.ainvoke(
+                input=input_, config=config
+            )
+        except AttributeError as e:
+            # Fallback if errorfactory is not available
+            logger.error(f"AttributeError in throttling handling: {e}")
+            raise
+        except Exception as e:
+            # Try to catch ThrottlingException dynamically
+            if (
+                hasattr(e, "__class__")
+                and e.__class__.__name__ == "ThrottlingException"
+            ):
+                logger.error(f"AWS ThrottlingException: {e}")
+                raise HTTPException(
+                    status_code=429,
+                    detail="AWS request throttled. Please try again later.",
+                )
+            raise
         out_messages: List[AnyMessage] = output["messages"]
         return out_messages
 
@@ -614,16 +498,25 @@ class LangGraphToOpenAIConverter:
                 "user_id": request_information.user_id,
             }
         }
-        event: StandardStreamEvent | CustomStreamEvent
-        async for event in compiled_state_graph.astream_events(
-            input=self.create_state(
-                messages=messages,
-                request_information=request_information,
-            ),
-            version="v2",
-            config=config,
-        ):
-            yield event
+        try:
+            event: StandardStreamEvent | CustomStreamEvent
+            async for event in compiled_state_graph.astream_events(
+                input=self.create_state(
+                    messages=messages,
+                    request_information=request_information,
+                ),
+                version="v2",
+                config=config,
+            ):
+                yield event
+        except Exception as e:
+            messages_dict: List[dict[str, Any]] = [
+                convert_message_to_dict(m) for m in messages
+            ]
+            logger.exception(
+                f"Exception occurred: {e}. Messages: {messages_dict}", stack_info=True
+            )
+            raise
 
     # noinspection SpellCheckingInspection
     async def ainvoke(

@@ -1,8 +1,7 @@
-# pragma: allowlist secret
 services:
   keycloak:
     # https://github.com/keycloak/keycloak/releases
-    image: quay.io/keycloak/keycloak:26.3.5
+    image: quay.io/keycloak/keycloak:26.4.2
     #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/keycloak/keycloak:26.3.2
     #    container_name: keycloak
     #    build:
@@ -22,16 +21,17 @@ services:
     command: [ "start-dev", "--verbose" ]
     healthcheck:
       test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q 'HTTP/1.1 200 OK' <&3" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 15s
+      timeout: 10s
+      retries: 20
     networks:
       - web
 
   keycloak-init:
     # This container is used to initialize Keycloak with test data
     depends_on:
-      - keycloak
+      keycloak:
+        condition: service_healthy
 #    image: public.ecr.aws/docker/library/python:3.12-alpine3.20
     build:
         dockerfile: keycloak-config/keycloak-init.Dockerfile
@@ -60,7 +60,7 @@ services:
       # This is the user and password that will be created in the realm
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
-      MY_USER_EMAIL: imran.qureshi@icanbwell.com
+      MY_USER_EMAIL: imran.qureshi@bwell.com
       MY_USER_FIRST_NAME: Imran
       MY_USER_LAST_NAME: Qureshi
       MY_USER_SUB: tester-subject-id
@@ -91,7 +91,7 @@ services:
       SERVICE_ACCOUNT_SCOPE: user/*.* access/*.*
       SERVICE_ACCOUNT_GROUPS: user/*.* access/*.*
       # These are the custom claims that will be added to any generated token
-      MY_USER_CLIENT_PERSON_ID: 0b2ad38a-20bc-5cf5-9739-13f242b05892
+      MY_USER_CLIENT_PERSON_ID: 072b2b1c-942d-542c-8e51-f9dc0dadcc0a
       MY_USER_CLIENT_PATIENT_ID: d58b4c4d-e820-5935-adfc-4cb372a91c22
       MY_USER_BWELL_PERSON_ID: 0eb80391-0f61-5ce6-b221-a5428f2f38a7
       MY_USER_BWELL_PATIENT_ID: patient2
@@ -107,4 +107,5 @@ services:
 
 networks:
   web:
-    driver: bridge
+    external: true
+    name: language-model-gateway_web

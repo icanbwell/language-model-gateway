@@ -1,4 +1,5 @@
 import logging
+from typing import override
 
 import httpx
 
@@ -32,6 +33,7 @@ class LoggingTransport(httpx.AsyncBaseTransport):
         """
         self.transport: httpx.AsyncBaseTransport = transport
 
+    @override
     async def handle_async_request(self, request: httpx.Request) -> LoggingResponse:
         """
         Handle an asynchronous HTTP request, logging the request details and returning a LoggingResponse.

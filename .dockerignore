@@ -5,3 +5,9 @@
 .pytest_cache
 tmp
 Makefile
+
+caches
+image_generation
+__pycache__
+language-model-gateway-configs
+outputs

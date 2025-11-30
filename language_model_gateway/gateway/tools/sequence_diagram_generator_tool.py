@@ -1,7 +1,7 @@
 import logging
 import os
 import tempfile
-from typing import Type, Literal, Tuple, Optional, List
+from typing import Type, Literal, Tuple, Optional, List, override
 from uuid import uuid4
 
 from graphviz import Digraph
@@ -64,6 +64,7 @@ class SequenceDiagramGeneratorTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
 
+    @override
     def _run(
         self,
         participants: List[str],
@@ -75,6 +76,7 @@ class SequenceDiagramGeneratorTool(ResilientBaseTool):
         """
         raise NotImplementedError("Call the asynchronous version of the tool")
 
+    @override
     async def _arun(
         self,
         participants: List[str],

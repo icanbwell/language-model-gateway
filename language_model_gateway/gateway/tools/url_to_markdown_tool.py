@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Type, Literal, Tuple, Optional
+from typing import Type, Literal, Tuple, Optional, override
 
 import httpx
 from httpx import Headers
@@ -37,6 +37,7 @@ class URLToMarkdownTool(ResilientBaseTool):
     args_schema: Type[BaseModel] = URLToMarkdownToolInput
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
 
+    @override
     def _run(
         self, url: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
@@ -47,6 +48,7 @@ class URLToMarkdownTool(ResilientBaseTool):
         """
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(
         self, url: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:

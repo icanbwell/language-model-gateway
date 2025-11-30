@@ -142,3 +142,9 @@ dmypy.json
 /certs/*
 /letsencrypt/*
 /keycloak-config/public_key.json
+
+/caches/*
+!/caches/**/readme.md
+
+/outputs/*
+!/outputs/**/readme.md

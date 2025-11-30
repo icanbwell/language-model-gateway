@@ -6,16 +6,15 @@ from typing import Optional
 
 import httpx
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
     GithubPullRequestHelper,
@@ -27,7 +26,7 @@ from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariab
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
 async def test_github_get_pull_request_diff(
-    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock
+    async_client: httpx.AsyncClient, httpx_mock: HTTPXMock, test_container: IContainer
 ) -> None:
     print()
     data_dir: Path = Path(__file__).parent.joinpath("./")
@@ -36,13 +35,12 @@ async def test_github_get_pull_request_diff(
         rmtree(temp_folder)
     makedirs(temp_folder)
 
-    test_container: SimpleContainer = await get_container_async()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
-        test_container.register(
-            EnvironmentVariables, lambda c: MockEnvironmentVariables()
+        test_container.singleton(
+            LanguageModelGatewayEnvironmentVariables,
+            lambda c: MockEnvironmentVariables(),
         )
         sample_diff_content = """diff --git a/configs/chat_completions/testing/searchmining_claudehaiku3.json b/configs/chat_completions/testing/searchmining_claudehaiku3.json
 new file mode 100644

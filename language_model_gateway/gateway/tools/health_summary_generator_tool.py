@@ -4,7 +4,7 @@ from language_model_gateway.gateway.file_managers.file_manager_factory import (
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 from pydantic import BaseModel, Field
-from typing import Type, Tuple, Literal
+from typing import Type, Tuple, Literal, override
 from starlette.responses import Response, StreamingResponse
 
 from language_model_gateway.gateway.utilities.s3_url import S3Url
@@ -48,6 +48,7 @@ class HealthSummaryGeneratorTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
 
+    @override
     async def _arun(self, s3_uri: str) -> Tuple[str, str]:
         """
         Asynchronous version of the health summary generator tool.
@@ -76,6 +77,7 @@ class HealthSummaryGeneratorTool(ResilientBaseTool):
         content = await file_manager.extract_content(response)
         return content, "File successfully fetched"
 
+    @override
     def _run(self, s3_uri: str) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).

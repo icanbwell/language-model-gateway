@@ -25,7 +25,7 @@ class ModelParameterConfig(BaseModel):
     key: str
     """The key of the parameter"""
 
-    value: float
+    value: float | str | int | bool
     """The value of the parameter"""
 
 

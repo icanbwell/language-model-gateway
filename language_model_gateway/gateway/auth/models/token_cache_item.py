@@ -1,12 +1,12 @@
 from typing import Optional
 
 from bson import ObjectId
+from oidcauthlib.auth.models.base_db_model import BaseDbModel
 from pydantic import Field
 
-from language_model_gateway.gateway.auth.models.base_db_model import BaseDbModel
 from datetime import datetime, UTC
 
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 
 
 class TokenCacheItem(BaseDbModel):
@@ -14,35 +14,56 @@ class TokenCacheItem(BaseDbModel):
     Represents a token cache item in the database.
     """
 
-    created: datetime = Field()
-    """The creation time of the token as a datetime object."""
-    updated: Optional[datetime] = Field(default=None)
-    """The last update time of the token as a datetime object."""
-    refreshed: Optional[datetime] = Field(default=None)
-    """The last refresh time of the token as a datetime object."""
+    created: datetime = Field(
+        description="The creation time of the token as a datetime object."
+    )
+    updated: Optional[datetime] = Field(
+        default=None,
+        description="The last update time of the token as a datetime object.",
+    )
+    refreshed: Optional[datetime] = Field(
+        default=None,
+        description="The last refresh time of the token as a datetime object.",
+    )
 
-    auth_provider: str = Field()
-    """The authentication provider associated with the token."""
-    issuer: str | None = Field(default=None)
-    """The issuer of the token, typically the authorization server."""
-    audience: str = Field()
-    """The intended audience for the token, usually the resource server."""
-    email: str = Field()
-    """The email associated with the token, used for user identification."""
-    subject: str = Field()
-    """The subject of the token, typically the user ID or unique identifier."""
-    referring_email: str = Field()
-    """The email of the original token that is linked to this token, if applicable."""
-    referring_subject: str = Field()
-    """The subject of the original token that is linked to this token, if applicable."""
-    referrer: Optional[str] = Field(default=None)
-    """The URL associated with the token, if applicable."""
-    access_token: Optional[Token] = Field(default=None)
-    """The access token used for authentication."""
-    id_token: Optional[Token] = Field(default=None)
-    """The ID token containing user information."""
-    refresh_token: Optional[Token] = Field(default=None)
-    """The refresh token used to obtain new access tokens."""
+    auth_provider: str = Field(
+        description="The authentication provider associated with the token."
+    )
+    client_id: Optional[str] = Field(
+        default=None,
+        description="The client ID associated with the token, if applicable.",
+    )
+    issuer: str | None = Field(
+        default=None,
+        description="The issuer of the token, typically the authorization server.",
+    )
+    audience: str = Field(
+        description="The intended audience for the token, usually the resource server."
+    )
+    email: Optional[str] = Field(
+        description="The email associated with the token, used for user identification."
+    )
+    subject: str = Field(
+        description="The subject of the token, typically the user ID or unique identifier."
+    )
+    referring_email: Optional[str] = Field(
+        description="The email of the original token that is linked to this token, if applicable."
+    )
+    referring_subject: str = Field(
+        description="The subject of the original token that is linked to this token, if applicable."
+    )
+    referrer: Optional[str] = Field(
+        default=None, description="The URL associated with the token, if applicable."
+    )
+    access_token: Optional[Token] = Field(
+        default=None, description="The access token used for authentication."
+    )
+    id_token: Optional[Token] = Field(
+        default=None, description="The ID token containing user information."
+    )
+    refresh_token: Optional[Token] = Field(
+        default=None, description="The refresh token used to obtain new access tokens."
+    )
 
     def is_valid_id_token(self) -> bool:
         """
@@ -68,13 +89,29 @@ class TokenCacheItem(BaseDbModel):
         """
         return self.access_token.is_valid() if self.access_token else False
 
-    def get_token(self) -> Optional[Token]:
+    def get_access_token(self) -> Optional[Token]:
         """
         Gets the ID token if it is valid, otherwise returns the access token.
         Returns:
             Optional[str]: The id token if valid, otherwise the access token.
         """
-        return self.id_token if self.id_token else self.access_token
+        return self.access_token if self.access_token else None
+
+    def get_id_token(self) -> Optional[Token]:
+        """
+        Gets the ID token if it is valid, otherwise returns the access token.
+        Returns:
+            Optional[str]: The id token if valid, otherwise the access token.
+        """
+        return self.id_token if self.id_token else None
+
+    def get_refresh_token(self) -> Optional[Token]:
+        """
+        Gets the refresh token if it is valid.
+        Returns:
+            Optional[str]: The refresh token if valid, otherwise None.
+        """
+        return self.refresh_token if self.refresh_token else None
 
     @classmethod
     def create(
@@ -82,7 +119,7 @@ class TokenCacheItem(BaseDbModel):
         *,
         token: Token,
         auth_provider: str,
-        referring_email: str,
+        referring_email: Optional[str],
         referring_subject: str,
     ) -> "TokenCacheItem":
         # see what the token this is
@@ -97,8 +134,6 @@ class TokenCacheItem(BaseDbModel):
         if audience is None:
             raise ValueError("Audience must be a string or a list with one string.")
 
-        if token.email is None:
-            raise ValueError("Token must have an email claim.")
         if token.subject is None:
             raise ValueError("Token must have a subject claim.")
 

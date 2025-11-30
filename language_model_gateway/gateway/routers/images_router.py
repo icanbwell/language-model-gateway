@@ -7,13 +7,13 @@ from fastapi import params
 from starlette.requests import Request
 from starlette.responses import Response, StreamingResponse
 
-from language_model_gateway.gateway.api_container import get_file_manager_factory
 from language_model_gateway.gateway.file_managers.file_manager import FileManager
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.url_parser import UrlParser
+from oidcauthlib.container.inject import Inject
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])
@@ -69,7 +69,7 @@ class ImagesRouter:
         request: Request,
         file_path: str,  # Add this parameter to capture the file path
         file_manager_factory: Annotated[
-            FileManagerFactory, Depends(get_file_manager_factory)
+            FileManagerFactory, Depends(Inject(FileManagerFactory))
         ],
     ) -> Response | StreamingResponse:
         """

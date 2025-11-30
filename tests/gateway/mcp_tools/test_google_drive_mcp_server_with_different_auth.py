@@ -2,6 +2,7 @@ import os
 
 import pytest
 import httpx
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from language_model_gateway.configs.config_schema import (
@@ -9,12 +10,10 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -29,16 +28,15 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
     reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
 )
 async def test_chat_completions_with_mcp_google_drive_with_different_auth(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
         username="tester", password="password"
     )
     assert access_token is not None
 
-    test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(

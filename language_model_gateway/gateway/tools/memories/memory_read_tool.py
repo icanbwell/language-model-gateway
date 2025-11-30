@@ -1,6 +1,6 @@
 import logging
 import typing
-from typing import Type, List, Optional, Literal, Dict, Any
+from typing import Type, List, Optional, Literal, Dict, Any, override
 
 from langgraph.config import get_store
 from langgraph.store.base import BaseStore, SearchItem
@@ -44,6 +44,7 @@ class MemoryReadTool(ResilientBaseTool):
     actions_permitted: Optional[tuple[Literal["search"], ...]] = ("search",)
     store: Optional[BaseStore] = None
 
+    @override
     def _run(
         self,
         *,
@@ -57,6 +58,7 @@ class MemoryReadTool(ResilientBaseTool):
             "Synchronous execution is not supported. Use the asynchronous method instead."
         )
 
+    @override
     async def _arun(
         self,
         *,

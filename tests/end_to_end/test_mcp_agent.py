@@ -22,6 +22,7 @@ from openai import AsyncOpenAI
 from openai.types.responses import Response
 from openai.types.responses.tool_param import Mcp
 
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
@@ -104,7 +105,7 @@ async def test_mcp_agent() -> None:
         response = model.bind_tools(tools).invoke(state["messages"])
         return {"messages": response}
 
-    builder = StateGraph(MessagesState)
+    builder = StateGraph(MyMessagesState)
     builder.add_node(call_model)
     builder.add_node(StreamingToolNode(tools))
     builder.add_edge(START, "call_model")

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Type, Optional, Tuple, Literal, Any
+from typing import Type, Optional, Tuple, Literal, Any, override
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
 from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
     DatabricksHelper,
@@ -39,12 +39,14 @@ class DatabricksSQLTool(ResilientBaseTool):
 
     databricks_helper: DatabricksHelper
 
+    @override
     def _run(
         self,
         fhir_request: Optional[str] = None,
     ) -> Tuple[str, Any]:
         raise NotImplementedError("Use async version of this tool")
 
+    @override
     async def _arun(self, fhir_request: str) -> Tuple[str, str]:
         if not fhir_request or not fhir_request.strip():
             raise ValueError("Query cannot be empty or None")

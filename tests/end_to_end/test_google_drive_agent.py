@@ -22,7 +22,7 @@ from mcp.types import (
     EmbeddedResource,
 )
 
-from language_model_gateway.gateway.auth.models.token import Token
+from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -45,8 +45,6 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -54,6 +52,7 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
+from oidcauthlib.container.interfaces import IContainer
 
 logger = logging.getLogger(__name__)
 
@@ -233,7 +232,7 @@ def verify_aws_boto3_authentication() -> None:
     reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
 )
 async def test_chat_completions_with_google_drive(
-    async_client: httpx.AsyncClient,
+    async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
     access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
@@ -242,9 +241,8 @@ async def test_chat_completions_with_google_drive(
     assert access_token is not None
     url: str = "http://mcp_server_gateway:5000/google_drive"
 
-    test_container: SimpleContainer = await get_container_async()
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.register(
+        test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(

@@ -7,16 +7,15 @@ from shutil import rmtree
 from typing import Dict, List, Optional, Any
 
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.container.simple_container import SimpleContainer
-from language_model_gateway.gateway.api_container import get_container_async
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from language_model_gateway.gateway.utilities.environment_variables import (
-    EnvironmentVariables,
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.github.github_pull_request import (
     GithubPullRequest,
@@ -36,7 +35,9 @@ from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariab
 @pytest.mark.httpx_mock(
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
-async def test_github_get_summarized_pull_requests(httpx_mock: HTTPXMock) -> None:
+async def test_github_get_summarized_pull_requests(
+    httpx_mock: HTTPXMock, test_container: IContainer
+) -> None:
     print()
     data_dir: Path = Path(__file__).parent.joinpath("./")
     temp_folder = data_dir.joinpath("./temp")
@@ -47,13 +48,12 @@ async def test_github_get_summarized_pull_requests(httpx_mock: HTTPXMock) -> Non
     max_repos = 2
     max_pull_requests = 10
 
-    test_container: SimpleContainer = await get_container_async()
-
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         org_name: str = "icanbwell"
         access_token: Optional[str] = "fake_token"
-        test_container.register(
-            EnvironmentVariables, lambda c: MockEnvironmentVariables()
+        test_container.singleton(
+            LanguageModelGatewayEnvironmentVariables,
+            lambda c: MockEnvironmentVariables(),
         )
 
         sample_content: List[Dict[str, Any]] = [

@@ -63,11 +63,25 @@ repos:
         entry: mypy
         require_serial: true
         args: [
+          --explicit-package-bases,
           --strict,
           --python-version=3.12,
           --show-error-codes,
-          --allow-untyped-decorators,
-          --ignore-missing-imports
+          --enable-error-code=unused-awaitable,
+          --disallow-any-generics,
+          --disallow-untyped-defs,
+          --warn-redundant-casts,
+          --strict-equality,
+          --disallow-untyped-calls,
+          --warn-return-any,
+          --disallow-any-unimported,
+          --report-deprecated-as-note,
+          --enable-error-code=possibly-undefined,
+          --enable-error-code=truthy-bool,
+          --enable-error-code=ignore-without-code,
+          --enable-error-code=unused-ignore,
+          --enable-error-code=explicit-override,
+          --enable-error-code=exhaustive-match
         ]
 
       # Bandit for security scanning
@@ -107,3 +121,19 @@ repos:
             docker-compose.*\.yml|
             .helm/.*
           )$
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.35.0
+    hooks:
+      - id: check-github-workflows
+        name: "github-actions · Validate gh workflow files"
+        args: ["--verbose"]
+      - id: check-taskfile
+        name: "taskfile · Validate Task configuration"
+      - id: check-jsonschema
+        name: "Validate language-model-gateway-configs against schema"
+        files: ^language-model-gateway-configs/.*\.json$
+        args:
+          - "--schemafile"
+          - "language_model_gateway/configs/config_schema.json"
+          - "--verbose"
