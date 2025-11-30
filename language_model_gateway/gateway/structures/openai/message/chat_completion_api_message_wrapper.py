@@ -1,4 +1,4 @@
-from typing import Optional, cast
+from typing import Optional, cast, override
 
 from langchain_community.adapters.openai import convert_dict_to_message
 from langchain_core.messages import BaseMessage
@@ -28,6 +28,7 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
             message=ChatCompletionSystemMessageParam(role="system", content=content)
         )
 
+    @override
     @property
     def system_message(self) -> bool:
         # Use getattr with default to avoid mypy union-attr error
@@ -38,6 +39,7 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
             return self.message.get("role") == "system"
         return False
 
+    @override
     @property
     def content(self) -> str | None:
         # Use getattr with default to avoid mypy union-attr error
@@ -48,6 +50,7 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
             return cast(Optional[str], self.message.get("content"))
         return None
 
+    @override
     def to_langchain_message(self) -> BaseMessage:
         return self.from_chat_completion_message_to_langchain_message(
             message=self.message

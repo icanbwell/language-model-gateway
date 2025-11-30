@@ -69,6 +69,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         return cast(str, self.request.model)
 
     @property
+    @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
 

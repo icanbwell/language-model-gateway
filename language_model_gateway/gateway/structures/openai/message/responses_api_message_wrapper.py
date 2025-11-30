@@ -1,4 +1,4 @@
-from typing import Optional, cast
+from typing import Optional, cast, override
 
 from langchain_core.messages import BaseMessage
 from openai.types.responses import ResponseInputItemParam, EasyInputMessageParam
@@ -11,7 +11,7 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 class ResponsesApiMessageWrapper(ChatMessageWrapper):
     def __init__(self, *, input_: ResponseInputItemParam) -> None:
         """
-        Wraps a message from the OpenAI /responses API and provides a unified interface so the code can use either
+        Wraps a message from the OpenAI /responses API and provides a unified interface so the code can use either one.
 
         """
         self.input_: ResponseInputItemParam = input_
@@ -20,6 +20,7 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
     def create_system_message(cls, *, content: str) -> "ResponsesApiMessageWrapper":
         return cls(input_=EasyInputMessageParam(role="system", content=content))
 
+    @override
     @property
     def system_message(self) -> bool:
         # Use getattr with default to avoid mypy union-attr error
@@ -30,6 +31,7 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
             return self.input_.get("role") == "system"
         return False
 
+    @override
     @property
     def content(self) -> str | None:
         # Use getattr with default to avoid mypy union-attr error
@@ -40,6 +42,7 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
             return cast(Optional[str], self.input_.get("content"))
         return None
 
+    @override
     def to_langchain_message(self) -> BaseMessage:
         raise ValueError(
             "Cannot convert Responses API message to LangChain message directly."

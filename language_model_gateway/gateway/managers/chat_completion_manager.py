@@ -25,10 +25,6 @@ from oidcauthlib.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
-from language_model_gateway.gateway.auth.exceptions.authorization_needed_exception import (
-    AuthorizationNeededException,
-)
-from language_model_gateway.gateway.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )

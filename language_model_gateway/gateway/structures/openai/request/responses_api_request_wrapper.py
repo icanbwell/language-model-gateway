@@ -46,12 +46,13 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         else:
             return []
 
-    @override
     @property
+    @override
     def model(self) -> str:
         return self.request.model
 
     @property
+    @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
 

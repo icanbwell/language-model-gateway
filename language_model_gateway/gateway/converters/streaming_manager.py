@@ -31,8 +31,8 @@ from language_model_gateway.gateway.converters.streaming_utils import (
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
-from language_model_gateway.gateway.schema.openai.completions import (
-    ChatRequest,
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+    ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     convert_message_content_to_string,
@@ -87,8 +87,9 @@ class LangGraphStreamingManager:
 
     async def handle_langchain_event(
         self,
+        *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
@@ -107,18 +108,22 @@ class LangGraphStreamingManager:
                     pass
                 case "on_chat_model_stream":
                     async for chunk in self._handle_on_chat_model_stream(
-                        event=event, request=request, request_id=request_id
+                        event=event,
+                        chat_request_wrapper=chat_request_wrapper,
+                        request_id=request_id,
                     ):
                         yield chunk
                 case "on_chain_end":
                     async for chunk in self._handle_on_chain_end(
-                        event=event, request=request, request_id=request_id
+                        event=event,
+                        chat_request_wrapper=chat_request_wrapper,
+                        request_id=request_id,
                     ):
                         yield chunk
                 case "on_tool_start":
                     async for chunk in self._handle_on_tool_start(
                         event=event,
-                        request=request,
+                        chat_request_wrapper=chat_request_wrapper,
                         request_id=request_id,
                         tool_start_times=tool_start_times,
                     ):
@@ -126,7 +131,7 @@ class LangGraphStreamingManager:
                 case "on_tool_end":
                     async for chunk in self._handle_on_tool_end(
                         event=event,
-                        request=request,
+                        chat_request_wrapper=chat_request_wrapper,
                         request_id=request_id,
                         tool_start_times=tool_start_times,
                     ):
@@ -134,7 +139,7 @@ class LangGraphStreamingManager:
                 case "on_tool_error":
                     async for chunk in self._handle_on_tool_error(
                         event=event,
-                        request=request,
+                        chat_request_wrapper=chat_request_wrapper,
                         request_id=request_id,
                         tool_start_times=tool_start_times,
                     ):
@@ -148,7 +153,7 @@ class LangGraphStreamingManager:
         self,
         *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
     ) -> AsyncGenerator[str, None]:
         # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
@@ -171,7 +176,7 @@ class LangGraphStreamingManager:
                 chat_model_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                     id=request_id,
                     created=int(time.time()),
-                    model=request["model"],
+                    model=chat_request_wrapper.model,
                     choices=[
                         ChunkChoice(
                             index=0,
@@ -192,7 +197,7 @@ class LangGraphStreamingManager:
         self,
         *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
     ) -> AsyncGenerator[str, None]:
         # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
@@ -207,7 +212,7 @@ class LangGraphStreamingManager:
             chat_end_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
-                model=request["model"],
+                model=chat_request_wrapper.model,
                 choices=[],
                 usage=completion_usage_metadata,
                 object="chat.completion.chunk",
@@ -220,7 +225,7 @@ class LangGraphStreamingManager:
         self,
         *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
@@ -241,7 +246,7 @@ class LangGraphStreamingManager:
             chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
-                model=request["model"],
+                model=chat_request_wrapper.model,
                 choices=[
                     ChunkChoice(
                         index=0,
@@ -264,7 +269,7 @@ class LangGraphStreamingManager:
         self,
         *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
@@ -376,12 +381,12 @@ class LangGraphStreamingManager:
 """
                     )
                     if return_raw_tool_output
-                    else f"\n> {artifact}" + (f" [tokens: {token_count}]")
+                    else f"\n> {artifact}" + f" [tokens: {token_count}]"
                 )
                 chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                     id=request_id,
                     created=int(time.time()),
-                    model=request["model"],
+                    model=chat_request_wrapper.model,
                     choices=[
                         ChunkChoice(
                             index=0,
@@ -406,7 +411,7 @@ class LangGraphStreamingManager:
                     chat_stream_response_file_url: ChatCompletionChunk = ChatCompletionChunk(
                         id=request_id,
                         created=int(time.time()),
-                        model=request["model"],
+                        model=chat_request_wrapper.model,
                         choices=[
                             ChunkChoice(
                                 index=0,
@@ -431,7 +436,7 @@ class LangGraphStreamingManager:
             chat_stream_response = ChatCompletionChunk(
                 id=request_id,
                 created=int(time.time()),
-                model=request["model"],
+                model=chat_request_wrapper.model,
                 choices=[
                     ChunkChoice(
                         index=0,
@@ -507,7 +512,7 @@ class LangGraphStreamingManager:
         self,
         *,
         event: StandardStreamEvent | CustomStreamEvent,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
@@ -527,7 +532,7 @@ class LangGraphStreamingManager:
         chat_stream_response = ChatCompletionChunk(
             id=request_id,
             created=int(time.time()),
-            model=request["model"],
+            model=chat_request_wrapper.model,
             choices=[
                 ChunkChoice(
                     index=0,

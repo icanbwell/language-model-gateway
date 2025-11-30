@@ -25,7 +25,6 @@ from langchain_community.adapters.openai import (
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AnyMessage,
-    ToolMessage,
     BaseMessage,
 )
 from langchain_core.runnables import RunnableConfig
@@ -55,9 +54,6 @@ from language_model_gateway.gateway.converters.streaming_utils import (
 )
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
-)
-from language_model_gateway.gateway.utilities.environment_variables import (
-    langchain_to_chat_message,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
@@ -143,7 +139,10 @@ class LangGraphToOpenAIConverter:
                     continue
 
                 async for chunk in self.streaming_manager.handle_langchain_event(
-                    event, request, request_id, tool_start_times
+                    event=event,
+                    chat_request_wrapper=chat_request_wrapper,
+                    request_id=request_id,
+                    tool_start_times=tool_start_times,
                 ):
                     yield chunk
         except TokenRetrievalError as e:
@@ -227,25 +226,6 @@ class LangGraphToOpenAIConverter:
                     system_messages=system_messages,
                     request_information=request_information,
                 )
-                # add usage metadata from each message into a total usage metadata
-                total_usage_metadata: CompletionUsage = (
-                    self.streaming_manager.convert_usage_meta_data_to_openai(
-                        usages=[
-                            m.usage_metadata
-                            for m in responses
-                            if hasattr(m, "usage_metadata") and m.usage_metadata
-                        ]
-                    )
-                )
-
-                output_messages_raw: List[ChatCompletionMessage | None] = [
-                    langchain_to_chat_message(m)
-                    for m in responses
-                    if isinstance(m, AIMessage) or isinstance(m, ToolMessage)
-                ]
-                output_messages: List[ChatCompletionMessage] = [
-                    m for m in output_messages_raw if m is not None
-                ]
 
                 content_json: Dict[str, Any] = (
                     chat_request_wrapper.create_non_streaming_response(

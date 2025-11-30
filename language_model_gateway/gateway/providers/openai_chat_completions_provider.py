@@ -58,7 +58,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
 
         :return:
         """
-        if not chat_request_wrapper:
+        if chat_request_wrapper is None:
             raise ValueError("chat_request must not be None")
 
         request_id: str = str(randint(1, 1000))
