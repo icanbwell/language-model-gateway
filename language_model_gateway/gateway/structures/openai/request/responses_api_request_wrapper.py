@@ -51,7 +51,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def model(self) -> str:
         return self.request.model
 
-    @property
+    @property  # type: ignore[explicit-override]
     @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages

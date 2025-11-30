@@ -63,12 +63,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     ) -> list[ChatMessageWrapper]:
         return [ChatCompletionApiMessageWrapper(message=msg) for msg in messages]
 
-    @override
     @property
+    @override
     def model(self) -> str:
         return cast(str, self.request.model)
 
-    @property
+    @property  # type: ignore[explicit-override]
     @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
@@ -89,13 +89,13 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             else ChatCompletionApiMessageWrapper.create_system_message(content=content)
         )
 
-    @override
     @property
+    @override
     def stream(self) -> Literal[False, True] | None | bool:
         return self.request.stream
 
-    @override
     @property
+    @override
     def response_format(self) -> Literal["text", "json_object", "json_schema"] | None:
         request_response_format = self.request.response_format
         # Convert NotGiven to None for type safety
@@ -116,8 +116,8 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
                 return "text"
         return "text"
 
-    @override
     @property
+    @override
     def response_json_schema(self) -> str | None:
         json_response_format: ResponseFormatJSONSchema = cast(
             ResponseFormatJSONSchema,
