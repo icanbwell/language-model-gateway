@@ -1,6 +1,7 @@
 import httpx
 import pytest
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, AsyncStream
+from openai.types.responses import EasyInputMessageParam, ResponseStreamEvent
 
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
@@ -33,10 +34,13 @@ async def test_openai_responses_streaming(
         http_client=async_client,
     )
 
-    prompt = "what is the first name of Obama?"
-    stream = await client.responses.create(
+    prompt: EasyInputMessageParam = {
+        "content": "what is the first name of Obama?",
+        "role": "user",
+    }
+    stream: AsyncStream[ResponseStreamEvent] = await client.responses.create(
         model="General Purpose",
-        input=prompt,
+        input=[prompt],
         stream=True,
         max_output_tokens=20,
     )

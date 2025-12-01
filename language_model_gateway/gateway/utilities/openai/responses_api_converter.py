@@ -122,58 +122,70 @@ def convert_responses_api_to_messages(response: Mapping[str, Any]) -> List[BaseM
     return messages
 
 
-def convert_responses_api_to_single_message(response: Mapping[str, Any]) -> BaseMessage:
-    """Convert an OpenAI Responses API response to a single LangChain message.
-
-    This function is useful when you expect a single assistant response.
-    It combines all message outputs into one AIMessage.
+def convert_responses_api_to_single_message(
+    response: Mapping[str, Any],
+) -> BaseMessage:
+    """Convert a single output item from the OpenAI Responses API to a LangChain message.
 
     Args:
-        response: The complete response object from the Responses API.
+        response: A single output item from the Responses API output field.
 
     Returns:
         A single LangChain BaseMessage (typically AIMessage).
 
     Raises:
-        ValueError: If no valid message output is found in the response.
+        ValueError: If no valid message output is found in the output_item.
     """
-    output_items = response.get("output", [])
-
-    # Collect all content and additional_kwargs
+    output_type = response.get("type")
     combined_content = ""
     combined_kwargs: Dict[str, Any] = {}
     function_calls_list: List[Dict[str, Any]] = []
 
-    for output_item in output_items:
-        output_type = output_item.get("type")
+    if output_type == "message" and response.get("role") == "assistant":
+        content_list = response.get("content", [])
+        for content_item in content_list:
+            if content_item.get("type") in ("output_text", "input_text"):
+                combined_content += content_item.get("text", "")
 
-        if output_type == "message" and output_item.get("role") == "assistant":
-            content_list = output_item.get("content", [])
-            for content_item in content_list:
-                if content_item.get("type") in ("output_text", "input_text"):
-                    combined_content += content_item.get("text", "")
+    elif output_type == "function_call":
+        function_calls_list.append(
+            {
+                "id": response.get("call_id"),
+                "name": response.get("name"),
+                "arguments": response.get("arguments", {}),
+                "type": "function",
+            }
+        )
 
-        elif output_type == "function_call":
-            function_calls_list.append(
-                {
-                    "id": output_item.get("call_id"),
-                    "name": output_item.get("name"),
-                    "arguments": output_item.get("arguments", {}),
-                    "type": "function",
-                }
-            )
+    elif output_type == "easy_input_message_param":
+        # Handle EasyInputMessageParam type
+        content = response.get("content", "")
+        params = response.get("params", {})
+        if content:
+            combined_content += content
+        if params:
+            combined_kwargs["easy_input_params"] = params
 
     # Add function calls to additional_kwargs if present
     if function_calls_list:
         combined_kwargs["tool_calls"] = function_calls_list
-        # If only function calls, content should be None not empty string
         if not combined_content:
             combined_content = ""
 
     if not combined_content and not combined_kwargs:
-        raise ValueError("No valid message content found in response")
+        raise ValueError("No valid message content found in output_item")
 
     return AIMessage(content=combined_content, additional_kwargs=combined_kwargs)
+
+
+def convert_responses_api_to_single_message_from_response(
+    response: Mapping[str, Any],
+) -> BaseMessage:
+    """Backward-compatible wrapper to accept the full response dict and use the first output item."""
+    output_items = response.get("output", [])
+    if not output_items:
+        raise ValueError("No output items found in response")
+    return convert_responses_api_to_single_message(output_items[0])
 
 
 def extract_output_text(response: Mapping[str, Any]) -> str:
