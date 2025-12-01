@@ -195,6 +195,7 @@ class NetworkTopologyGeneratorTool(ResilientBaseTool):
                 file_data=image_data,
                 folder=image_generation_path_,
                 filename=image_file_name,
+                content_type="image/png",
             )
             # Attempt to save the file
             if file_path is None:

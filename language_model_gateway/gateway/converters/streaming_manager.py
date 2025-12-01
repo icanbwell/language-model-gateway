@@ -344,6 +344,7 @@ class LangGraphStreamingManager:
                             file_data=artifact_text.encode("utf-8"),
                             folder=output_folder,
                             filename=filename,
+                            content_type="text/plain",
                         )
                         if file_path:
                             tool_message_content = (

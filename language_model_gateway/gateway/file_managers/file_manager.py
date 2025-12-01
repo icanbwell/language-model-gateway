@@ -17,7 +17,7 @@ class FileManager:
         file_data: bytes,
         folder: str,
         filename: str,
-        content_type: str = "image/png",
+        content_type: str,
     ) -> Optional[str]:
         raise NotImplementedError("Must be implemented in a subclass")
 
