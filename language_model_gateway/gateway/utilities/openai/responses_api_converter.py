@@ -157,14 +157,11 @@ def convert_responses_api_to_single_message(
             }
         )
 
-    elif output_type == "easy_input_message_param":
+    else:
         # Handle EasyInputMessageParam type
         content = response.get("content", "")
-        params = response.get("params", {})
         if content:
             combined_content += content
-        if params:
-            combined_kwargs["easy_input_params"] = params
 
     # Add function calls to additional_kwargs if present
     if function_calls_list:
