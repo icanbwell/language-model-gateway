@@ -430,9 +430,11 @@ HTTPX Response Log:
         # Always put default_model at the top
         default_model_id = self.valves.default_model
         if default_model_id:
-            # Remove any existing entry for default_model
-            models = [m for m in models if m["id"] != default_model_id]
-            # Insert default_model at the top
-            models.insert(0, {"id": default_model_id, "name": default_model_id})
+            # Only insert default_model if it exists in the models list
+            if any(m["id"] == default_model_id for m in self.pipelines or []):
+                # Remove any existing entry for default_model
+                models = [m for m in models if m["id"] != default_model_id]
+                # Insert default_model at the top
+                models.insert(0, {"id": default_model_id, "name": default_model_id})
 
         return models
