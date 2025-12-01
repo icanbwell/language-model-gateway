@@ -53,8 +53,8 @@ class Pipe:
             default=None,
             description="Base URL for OpenAI API, e.g., https://api.openai.com/v1",
         )
-        model_name_prefix: str = Field(
-            default="MCP: ", description="Prefix for model names in the dropdown"
+        model_name_prefix: Optional[str] = Field(
+            default=None, description="Prefix for model names in the dropdown"
         )
         restrict_to_admins: bool = Field(
             default=False,
@@ -68,17 +68,27 @@ class Pipe:
             default=False,
             description="Enable debug mode for additional logging and debugging information",
         )
+        default_model: Optional[str] = Field(
+            default="General Purpose", description="Default model to use"
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
         self.id: str = "language_model_gateway"
         openai_api_base_url_ = self.read_base_url()
         self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
-        self.name: str = self.valves.model_name_prefix
+        self.name: str = (
+            self.valves.model_name_prefix.strip()
+            if self.valves.model_name_prefix
+            else ""
+        )
         self.last_emit_time: float = 0
         self.pipelines: Optional[List[Dict[str, Any]]] = None
         self.pipelines_last_updated: Optional[float] = (
             None  # Track last cache update time
+        )
+        self.default_model: Optional[str] = (
+            os.getenv("DEFAULT_MODELS") or self.valves.default_model
         )
 
     @staticmethod
@@ -418,5 +428,13 @@ HTTPX Response Log:
                 for model in models
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
+
+        # Always put default_model at the top
+        default_model_id = self.valves.default_model
+        if default_model_id:
+            # Remove any existing entry for default_model
+            models = [m for m in models if m["id"] != default_model_id]
+            # Insert default_model at the top
+            models.insert(0, {"id": default_model_id, "name": default_model_id})
 
         return models
