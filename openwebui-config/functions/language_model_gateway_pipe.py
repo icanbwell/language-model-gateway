@@ -87,9 +87,7 @@ class Pipe:
         self.pipelines_last_updated: Optional[float] = (
             None  # Track last cache update time
         )
-        self.default_model: Optional[str] = (
-            os.getenv("DEFAULT_MODELS") or self.valves.default_model
-        )
+        # self.default_model is not used; removed to avoid confusion
 
     @staticmethod
     def read_base_url() -> Optional[str]:
