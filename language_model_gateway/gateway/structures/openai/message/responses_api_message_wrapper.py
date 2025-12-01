@@ -44,7 +44,9 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
 
     @override
     def to_langchain_message(self) -> BaseMessage:
-        raise ValueError(
-            "Cannot convert Responses API message to LangChain message directly."
-            " Use from_chat_completion_message_to_langchain_message instead."
-        )
+        # Use the correct conversion for ResponsesApiMessageWrapper
+        raise NotImplementedError("TODO: not implemented yet")
+
+    @override
+    def to_langchain_message_for_response(self) -> BaseMessage:
+        raise NotImplementedError("TODO: not implemented yet")

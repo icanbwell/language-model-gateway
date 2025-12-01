@@ -361,9 +361,7 @@ class LangGraphToOpenAIConverter:
                 chat_request_wrapper.append_message(message=json_schema_system_message)
                 return chat_request_wrapper, json_response_requested
             case _:
-                raise ValueError(
-                    f"Unexpected response format type: {response_format.get('type', None)}"
-                )
+                raise ValueError(f"Unexpected response format type: {response_format}")
 
     async def get_streaming_response_async(
         self,
@@ -574,8 +572,10 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of role and incoming message type tuples.
         """
-        messages_: List[BaseMessage] = [m.to_langchain_message() for m in messages]
 
+        messages_: List[BaseMessage] = [
+            m.to_langchain_message_for_response() for m in messages
+        ]
         return messages_
 
     async def run_graph_async(
