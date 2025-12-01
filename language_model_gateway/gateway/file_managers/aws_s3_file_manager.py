@@ -32,7 +32,7 @@ class AwsS3FileManager(FileManager):
         file_data: bytes,
         folder: str,
         filename: str,
-        content_type: str = "image/png",
+        content_type: str,
     ) -> Optional[str]:
         if "s3://" not in folder:
             raise ValueError("folder should contain s3://")

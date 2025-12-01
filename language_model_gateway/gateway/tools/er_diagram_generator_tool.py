@@ -202,6 +202,7 @@ class ERDiagramGeneratorTool(ResilientBaseTool):
                 file_data=image_data,
                 folder=image_generation_path_,
                 filename=image_file_name,
+                content_type="image/png",
             )
 
             if file_path is None:

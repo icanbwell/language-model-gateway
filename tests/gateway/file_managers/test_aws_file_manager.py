@@ -140,6 +140,7 @@ async def test_save_file_async_success(
             file_data=case["image_data"],
             folder=case["folder"],
             filename=filename_,
+            content_type="image/png",
         )
 
         # Assertions
@@ -171,20 +172,29 @@ async def test_save_file_async_edge_cases(
     """
     # Test empty file
     result = await aws_s3_file_manager.save_file_async(
-        file_data=b"", folder="s3://test-bucket/images", filename="empty.jpg"
+        file_data=b"",
+        folder="s3://test-bucket/images",
+        filename="empty.jpg",
+        content_type="image/jpeg",
     )
     assert result is None
 
     # Test invalid folder (missing s3://)
     with pytest.raises(ValueError, match="folder should contain s3://"):
         await aws_s3_file_manager.save_file_async(
-            file_data=b"test", folder="invalid-bucket", filename="test.jpg"
+            file_data=b"test",
+            folder="invalid-bucket",
+            filename="test.jpg",
+            content_type="image/jpeg",
         )
 
     # Test invalid filename (contains s3://)
     with pytest.raises(ValueError, match="filename should not contain s3://"):
         await aws_s3_file_manager.save_file_async(
-            file_data=b"test", folder="s3://test-bucket", filename="s3://test.jpg"
+            file_data=b"test",
+            folder="s3://test-bucket",
+            filename="s3://test.jpg",
+            content_type="image/jpeg",
         )
 
 

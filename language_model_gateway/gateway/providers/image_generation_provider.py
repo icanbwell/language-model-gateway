@@ -115,6 +115,7 @@ class ImageGenerationProvider(BaseImageGenerationProvider):
                 file_data=image_bytes,
                 folder=image_generation_path_,
                 filename=image_file_name,
+                content_type="image/png",
             )
             url = (
                 UrlParser.get_url_for_file_name(image_file_name) if file_path else None
