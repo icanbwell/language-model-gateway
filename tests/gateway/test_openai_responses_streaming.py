@@ -37,6 +37,7 @@ async def test_openai_responses_streaming(
     prompt: EasyInputMessageParam = {
         "content": "what is the first name of Obama?",
         "role": "user",
+        "type": "message",
     }
     stream: AsyncStream[ResponseStreamEvent] = await client.responses.create(
         model="General Purpose",

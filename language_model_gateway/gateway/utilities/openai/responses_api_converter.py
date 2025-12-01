@@ -81,8 +81,6 @@ def convert_responses_api_output_to_message(
             content=output_content, tool_call_id=call_id or "", additional_kwargs={}
         )
 
-    # For other types (image_generation_call, mcp_approval_request, etc.)
-    # we return None as they don't map directly to standard LangChain messages
     return None
 
 
@@ -125,7 +123,8 @@ def convert_responses_api_to_messages(response: Mapping[str, Any]) -> List[BaseM
 def convert_responses_api_to_single_message(
     response: Mapping[str, Any],
 ) -> BaseMessage:
-    """Convert a single output item from the OpenAI Responses API to a LangChain message.
+    """
+    Convert a single output item from the OpenAI Responses API to a LangChain message.
 
     Args:
         response: A single output item from the Responses API output field.
@@ -135,7 +134,11 @@ def convert_responses_api_to_single_message(
 
     Raises:
         ValueError: If no valid message output is found in the output_item.
+        TypeError: If input is not a Mapping.
     """
+    if not isinstance(response, Mapping):
+        raise TypeError(f"Input must be a Mapping, got {type(response)}")
+
     output_type = response.get("type")
     combined_content = ""
     combined_kwargs: Dict[str, Any] = {}
@@ -158,12 +161,10 @@ def convert_responses_api_to_single_message(
         )
 
     else:
-        # Handle EasyInputMessageParam type
         content = response.get("content", "")
         if content:
             combined_content += content
 
-    # Add function calls to additional_kwargs if present
     if function_calls_list:
         combined_kwargs["tool_calls"] = function_calls_list
         if not combined_content:
