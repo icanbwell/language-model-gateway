@@ -56,10 +56,6 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
             message=self.message
         )
 
-    @override
-    def to_langchain_message_for_response(self) -> BaseMessage:
-        return self.from_chat_completion_message_to_langchain_message(self.message)
-
     @staticmethod
     def from_chat_completion_message_to_langchain_message(
         message: ChatCompletionMessageParam,

@@ -573,9 +573,7 @@ class LangGraphToOpenAIConverter:
             The list of role and incoming message type tuples.
         """
 
-        messages_: List[BaseMessage] = [
-            m.to_langchain_message_for_response() for m in messages
-        ]
+        messages_: List[BaseMessage] = [m.to_langchain_message() for m in messages]
         return messages_
 
     async def run_graph_async(

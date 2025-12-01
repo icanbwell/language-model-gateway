@@ -21,6 +21,3 @@ class ChatMessageWrapper(abc.ABC):
 
     @abstractmethod
     def to_langchain_message(self) -> BaseMessage: ...
-
-    @abstractmethod
-    def to_langchain_message_for_response(self) -> BaseMessage: ...

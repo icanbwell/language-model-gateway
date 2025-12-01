@@ -6,6 +6,9 @@ from openai.types.responses import ResponseInputItemParam, EasyInputMessageParam
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
 )
+from language_model_gateway.gateway.utilities.openai.responses_api_converter import (
+    convert_responses_api_to_single_message,
+)
 
 
 class ResponsesApiMessageWrapper(ChatMessageWrapper):
@@ -45,8 +48,4 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
     @override
     def to_langchain_message(self) -> BaseMessage:
         # Use the correct conversion for ResponsesApiMessageWrapper
-        raise NotImplementedError("TODO: not implemented yet")
-
-    @override
-    def to_langchain_message_for_response(self) -> BaseMessage:
-        raise NotImplementedError("TODO: not implemented yet")
+        return convert_responses_api_to_single_message(response=self.input_)
