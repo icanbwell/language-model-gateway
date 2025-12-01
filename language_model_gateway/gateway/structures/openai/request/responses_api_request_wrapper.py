@@ -1,11 +1,12 @@
 from typing import Literal, Union, override, Optional, List, Any
-import json
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
 from openai.types.responses import (
     ResponseInputParam,
     EasyInputMessageParam,
+    ResponseTextDeltaEvent,
+    ResponseTextDoneEvent,
 )
 
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
@@ -95,39 +96,33 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         # Format a single SSE message chunk for streaming
         if content is None:
             return ""
-        message: dict[str, Any] = {
-            "id": request_id,
-            "object": "response.chunk",
-            "model": self.model,
-            "choices": [
-                {
-                    "index": 0,
-                    "message": {
-                        "role": "assistant",
-                        "content": content,
-                    },
-                    "finish_reason": None,
-                }
-            ],
-        }
-        if usage_metadata:
-            message["usage"] = dict(usage_metadata)
-        return f"data: {json.dumps(message)}\n\n"
+
+        message: ResponseTextDeltaEvent = ResponseTextDeltaEvent(
+            item_id=request_id,
+            content_index=0,
+            output_index=len(self._messages),
+            delta=content,
+            type="response.output_text.delta",
+            sequence_number=len(self._messages),
+            logprobs=[],
+        )
+        return f"data: {message.model_dump()}\n\n"
 
     @override
     def create_final_sse_message(
         self, *, request_id: str, usage_metadata: UsageMetadata | None
     ) -> str:
         # Format the final SSE message chunk
-        message: dict[str, Any] = {
-            "id": request_id,
-            "object": "response",
-            "model": self.model,
-            "choices": [],
-        }
-        if usage_metadata:
-            message["usage"] = dict(usage_metadata)
-        return f"data: {json.dumps(message)}\n\n"
+        message: ResponseTextDoneEvent = ResponseTextDoneEvent(
+            item_id=request_id,
+            content_index=0,
+            output_index=len(self._messages),
+            type="response.output_text.done",
+            sequence_number=len(self._messages),
+            logprobs=[],
+            text="",
+        )
+        return f"data: {message.model_dump()}\n\n"
 
     @override
     def create_non_streaming_response(

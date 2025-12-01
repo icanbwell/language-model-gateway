@@ -4,7 +4,6 @@ import os
 import time
 from typing import (
     Any,
-    List,
     cast,
     Optional,
 )
@@ -17,17 +16,8 @@ from langchain_core.messages import AIMessageChunk
 from langchain_core.messages import (
     ToolMessage,
 )
-from langchain_core.messages.ai import UsageMetadata
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
-from openai.types import CompletionUsage
-from openai.types.chat import (
-    ChatCompletionChunk,
-)
-from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 
-from language_model_gateway.gateway.converters.streaming_utils import (
-    format_chat_completion_chunk_sse,
-)
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -161,36 +151,16 @@ class LangGraphStreamingManager:
         chunk: AIMessageChunk | None = data.get("chunk")
         if chunk is not None:
             content: str | list[str | dict[str, Any]] = chunk.content
-            usage_metadata: Optional[UsageMetadata] = chunk.usage_metadata
-            completion_usage_metadata: CompletionUsage = (
-                self.convert_usage_meta_data_to_openai(
-                    usages=[usage_metadata] if usage_metadata else []
-                )
-            )
             content_text: str = convert_message_content_to_string(content)
             if not isinstance(content_text, str):
                 raise TypeError(f"content_text must be str, got {type(content_text)}")
             if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and content_text:
                 logger.debug(f"Returning content: {content_text}")
             if content_text:
-                chat_model_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                    id=request_id,
-                    created=int(time.time()),
-                    model=chat_request_wrapper.model,
-                    choices=[
-                        ChunkChoice(
-                            index=0,
-                            delta=ChoiceDelta(
-                                role="assistant",
-                                content=content_text,
-                            ),
-                        )
-                    ],
-                    usage=completion_usage_metadata,
-                    object="chat.completion.chunk",
-                )
-                yield format_chat_completion_chunk_sse(
-                    chat_model_stream_response.model_dump()
+                yield chat_request_wrapper.create_sse_message(
+                    request_id=request_id,
+                    content=content_text,
+                    usage_metadata=chunk.usage_metadata,
                 )
 
     async def _handle_on_chain_end(
@@ -204,21 +174,9 @@ class LangGraphStreamingManager:
         data = event["data"] if "data" in event else {}
         output: Dict[str, Any] | str | None = data.get("output")
         if output and isinstance(output, dict) and "usage_metadata" in output:
-            completion_usage_metadata: CompletionUsage = (
-                self.convert_usage_meta_data_to_openai(
-                    usages=[output["usage_metadata"]]
-                )
-            )
-            chat_end_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=chat_request_wrapper.model,
-                choices=[],
-                usage=completion_usage_metadata,
-                object="chat.completion.chunk",
-            )
-            yield format_chat_completion_chunk_sse(
-                chat_end_stream_response.model_dump()
+            yield chat_request_wrapper.create_final_sse_message(
+                request_id=request_id,
+                usage_metadata=output["usage_metadata"],
             )
 
     async def _handle_on_tool_start(
@@ -243,27 +201,14 @@ class LangGraphStreamingManager:
         tool_start_times[tool_key] = time.time()
         if tool_name:
             logger.debug(f"on_tool_start: {tool_name} {tool_input_display}")
-            chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=chat_request_wrapper.model,
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n\n> Running Agent {tool_name}: {tool_input_display}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0,
-                    completion_tokens=0,
-                    total_tokens=0,
-                ),
-                object="chat.completion.chunk",
+            content_text: str = (
+                f"\n\n> Running Agent {tool_name}: {tool_input_display}\n"
             )
-            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                content=content_text,
+                usage_metadata=None,
+            )
 
     async def _handle_on_tool_end(
         self,
@@ -384,77 +329,27 @@ class LangGraphStreamingManager:
                     if return_raw_tool_output
                     else f"\n> {artifact}" + f" [tokens: {token_count}]"
                 )
-                chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                    id=request_id,
-                    created=int(time.time()),
-                    model=chat_request_wrapper.model,
-                    choices=[
-                        ChunkChoice(
-                            index=0,
-                            delta=ChoiceDelta(
-                                role="assistant",
-                                content=tool_progress_message,
-                            ),
-                        )
-                    ],
-                    usage=CompletionUsage(
-                        prompt_tokens=0,
-                        completion_tokens=0,
-                        total_tokens=0,
-                    ),
-                    object="chat.completion.chunk",
-                )
-                yield format_chat_completion_chunk_sse(
-                    chat_stream_response.model_dump()
+                yield chat_request_wrapper.create_sse_message(
+                    request_id=request_id,
+                    content=tool_progress_message,
+                    usage_metadata=None,
                 )
                 if file_url:
                     # send a follow-up message with the file URL
-                    chat_stream_response_file_url: ChatCompletionChunk = ChatCompletionChunk(
-                        id=request_id,
-                        created=int(time.time()),
-                        model=chat_request_wrapper.model,
-                        choices=[
-                            ChunkChoice(
-                                index=0,
-                                delta=ChoiceDelta(
-                                    role="assistant",
-                                    content=f"\n\n[Click to download Tool Output]({file_url})\n\n",
-                                ),
-                            )
-                        ],
-                        usage=CompletionUsage(
-                            prompt_tokens=0,
-                            completion_tokens=0,
-                            total_tokens=0,
-                        ),
-                        object="chat.completion.chunk",
+                    content_text: str = (
+                        f"\n\n[Click to download Tool Output]({file_url})\n\n"
                     )
-                    yield format_chat_completion_chunk_sse(
-                        chat_stream_response_file_url.model_dump()
+                    yield chat_request_wrapper.create_sse_message(
+                        request_id=request_id, content=content_text, usage_metadata=None
                     )
         else:
             logger.debug("on_tool_end: no tool message output")
-            chat_stream_response = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=chat_request_wrapper.model,
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n\n> Tool completed with no output.{runtime_str}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0,
-                    completion_tokens=0,
-                    total_tokens=0,
-                ),
-                object="chat.completion.chunk",
+            content_text = f"\n\n> Tool completed with no output.{runtime_str}\n"
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                content=content_text,
+                usage_metadata=None,
             )
-            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
     @staticmethod
     def _format_text_resource_contents(text: str) -> str:
@@ -530,44 +425,12 @@ class LangGraphStreamingManager:
         logger.error(
             f"Tool error in {tool_name}: {error_message} [runtime: {runtime_str}]"
         )
-        chat_stream_response = ChatCompletionChunk(
-            id=request_id,
-            created=int(time.time()),
-            model=chat_request_wrapper.model,
-            choices=[
-                ChunkChoice(
-                    index=0,
-                    delta=ChoiceDelta(
-                        role="assistant",
-                        content=f"\n\n> Tool {tool_name} encountered an error: {error_message} [runtime: {runtime_str}]\n",
-                    ),
-                )
-            ],
-            usage=CompletionUsage(
-                prompt_tokens=0,
-                completion_tokens=0,
-                total_tokens=0,
-            ),
-            object="chat.completion.chunk",
+        content_text: str = f"\n\n> Tool {tool_name} encountered an error: {error_message} [runtime: {runtime_str}]\n"
+        yield chat_request_wrapper.create_sse_message(
+            request_id=request_id,
+            content=content_text,
+            usage_metadata=None,
         )
-        yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
-
-    @staticmethod
-    def convert_usage_meta_data_to_openai(
-        *, usages: List[UsageMetadata]
-    ) -> CompletionUsage:
-        total_usage_metadata: CompletionUsage = CompletionUsage(
-            prompt_tokens=0, completion_tokens=0, total_tokens=0
-        )
-        for usage_metadata in usages:
-            if usage_metadata is None:
-                continue  # Skip None values to avoid TypeError
-            total_usage_metadata.prompt_tokens += usage_metadata.get("input_tokens", 0)
-            total_usage_metadata.completion_tokens += usage_metadata.get(
-                "output_tokens", 0
-            )
-            total_usage_metadata.total_tokens += usage_metadata.get("total_tokens", 0)
-        return total_usage_metadata
 
     @staticmethod
     def make_tool_key(

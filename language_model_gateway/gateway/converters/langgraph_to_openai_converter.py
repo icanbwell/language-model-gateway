@@ -49,9 +49,6 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.converters.streaming_utils import (
-    format_done_sse,
-)
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
@@ -168,8 +165,6 @@ class LangGraphToOpenAIConverter:
         yield chat_request_wrapper.create_final_sse_message(
             request_id=request_id, usage_metadata=None
         )
-
-        yield format_done_sse()
 
     async def call_agent_with_input(
         self,
