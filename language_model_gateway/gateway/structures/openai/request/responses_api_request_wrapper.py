@@ -106,7 +106,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
             sequence_number=len(self._messages),
             logprobs=[],
         )
-        return f"data: {message.model_dump()}\n\n"
+        return f"data: {message.model_dump_json()}\n\n"
 
     @override
     def create_final_sse_message(
@@ -122,7 +122,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
             logprobs=[],
             text="",
         )
-        return f"data: {message.model_dump()}\n\n"
+        return f"data: {message.model_dump_json()}\n\n"
 
     @override
     def create_non_streaming_response(
