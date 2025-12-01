@@ -13,6 +13,7 @@ from openai.types import ResponseFormatJSONObject, CompletionUsage
 from openai.types.chat import (
     ChatCompletion,
     ChatCompletionMessage,
+    completion_create_params,
 )
 from openai.types.chat import (
     ChatCompletionMessageParam,
@@ -20,10 +21,6 @@ from openai.types.chat import (
 )
 from openai.types.chat.chat_completion import Choice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
-from openai.types.shared_params.response_format_json_schema import (
-    JSONSchema,
-    ResponseFormatJSONSchema,
-)
 
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
@@ -119,13 +116,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     @property
     @override
     def response_json_schema(self) -> str | None:
-        json_response_format: ResponseFormatJSONSchema = cast(
-            ResponseFormatJSONSchema,
-            self.request.response_format,
+        json_response_format: Optional[completion_create_params.ResponseFormat] = (
+            self.request.response_format
         )
-        response_json_schema: JSONSchema | None = json_response_format.get(
-            "json_schema"
-        )
+        if json_response_format is None:
+            return None
+        response_json_schema = json_response_format.get("json_schema")
         return str(response_json_schema) if response_json_schema else None
 
     @override
