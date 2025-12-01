@@ -156,7 +156,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             usage=completion_usage_metadata,
             object="chat.completion.chunk",
         )
-        return f"data: {json.dumps(chat_model_stream_response.model_dump())}\n\n"
+        return f"data: {chat_model_stream_response.model_dump_json()}\n\n"
 
     @override
     def create_non_streaming_response(

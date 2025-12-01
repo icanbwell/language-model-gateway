@@ -1,7 +1,11 @@
 import httpx
 import pytest
 from openai import AsyncOpenAI, AsyncStream
-from openai.types.responses import EasyInputMessageParam, ResponseStreamEvent
+from openai.types.responses import (
+    EasyInputMessageParam,
+    ResponseStreamEvent,
+    ResponseTextDeltaEvent,
+)
 
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
@@ -47,10 +51,13 @@ async def test_openai_responses_streaming(
     )
     content: str = ""
     i: int = 0
+    chunk: ResponseStreamEvent
     async for chunk in stream:
         i += 1
         print(f"======== Chunk {i} ========")
-        delta_content = getattr(chunk, "output_text", "")
+        delta_content = (
+            chunk.delta if isinstance(chunk, ResponseTextDeltaEvent) else None
+        )
         content += delta_content or ""
         print(delta_content or "")
         print(f"\n{chunk}\n")
