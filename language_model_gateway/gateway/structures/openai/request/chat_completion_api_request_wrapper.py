@@ -244,3 +244,21 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         self, *, request_id: str, usage_metadata: UsageMetadata | None
     ) -> str:
         return "data: [DONE]\n\n"
+
+    @override
+    def to_dict(self) -> dict[str, Any]:
+        """
+        Returns a JSON-serializable dictionary representation of the request wrapper.
+        """
+        return {
+            "model": self.model,
+            "messages": [
+                m.to_dict() if hasattr(m, "to_dict") else str(m) for m in self._messages
+            ],
+            "stream": self.stream,
+            "response_format": self.response_format,
+            "response_json_schema": self.response_json_schema,
+            "request": self.request.model_dump()
+            if hasattr(self.request, "model_dump")
+            else str(self.request),
+        }

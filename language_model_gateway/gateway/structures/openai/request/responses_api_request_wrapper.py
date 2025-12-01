@@ -110,3 +110,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         responses: List[AnyMessage],
     ) -> dict[str, Any]:
         raise NotImplementedError()
+
+    @override
+    def to_dict(self) -> dict[str, Any]:
+        return self.request.model_dump(mode="json")

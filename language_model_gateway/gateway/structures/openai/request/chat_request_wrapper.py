@@ -68,3 +68,6 @@ class ChatRequestWrapper(abc.ABC):
         json_output_requested: Optional[bool],
         responses: List[AnyMessage],
     ) -> dict[str, Any]: ...
+
+    @abstractmethod
+    def to_dict(self) -> dict[str, Any]: ...

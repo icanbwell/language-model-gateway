@@ -84,7 +84,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
             try:
                 agent_response: Response = await client.post(
                     agent_url,
-                    json=chat_request_wrapper,
+                    json=chat_request_wrapper.to_dict(),
                     timeout=60 * 60,
                     headers=headers,
                 )
@@ -149,7 +149,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                     client,
                     "POST",
                     agent_url,
-                    json=chat_request_wrapper,
+                    json=chat_request_wrapper.to_dict(),
                     timeout=60 * 60,
                     headers=headers,
                 ) as event_source:
