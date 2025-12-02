@@ -20,7 +20,7 @@ services:
       # redirect on logout
       WEBUI_AUTH_SIGNOUT_REDIRECT_URL: "https://open-webui.localhost"
       # Sets the JWT expiration time in seconds. Valid time units: s, m, h, d, w or -1 for no expiration
-      JWT_EXPIRES_IN: "5m"
+      JWT_EXPIRES_IN: "1h"
       # Use the settings below to simulate Aiden in services environment
 #      OAUTH_CLIENT_ID: "0oakho3xcj8GKejBr697"
 #      OPENID_PROVIDER_URL: "https://icanbwell.okta.com/.well-known/openid-configuration"
