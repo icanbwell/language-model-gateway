@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from typing import Literal, Union, override, Optional, List, Any
+from typing import Literal, Union, override, Optional, List, Any, cast
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
@@ -207,13 +207,27 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
 
         # check if this is a mcp tool
         mcp_tools: list[Mcp] = [
-            Mcp(**tool) for tool in tools_in_request if tool["type"] == "mcp"
+            Mcp(
+                server_url=cast(str, tool.get("server_url")),
+                server_label=cast(str, tool.get("server_label")),
+                server_description=cast(str, tool.get("server_description")),
+                type="mcp",
+                allowed_tools=tool.get("allowed_tools"),
+                headers=tool.get("headers"),
+            )
+            for tool in tools_in_request
+            if tool["type"] == "mcp"
+            and "server_url" in tool
+            and "server_label" in tool
+            and "allowed_tools" in tool
         ]
         return [
             AgentConfig(
                 url=tool["server_url"],
                 name=tool["server_label"],
-                tools=tool["allowed_tools"],
+                tools=",".join(list(tool["allowed_tools"]))
+                if tool.get("allowed_tools")
+                else None,
                 headers=tool["headers"],
                 auth="headers",
             )
