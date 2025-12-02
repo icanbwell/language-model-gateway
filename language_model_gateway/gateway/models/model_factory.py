@@ -4,6 +4,7 @@ from typing import List, Any, Dict, cast, Literal
 
 import boto3
 from boto3 import Session
+from langchain_ollama import ChatOllama
 from langchain_core.language_models import BaseChatModel
 from langchain_openai import ChatOpenAI
 from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
@@ -101,6 +102,8 @@ class ModelFactory:
             )
         elif model_config.provider == "openai":
             llm = ChatOpenAI(**model_parameters_dict)
+        elif model_config.provider == "ollama":
+            llm = ChatOllama(**model_parameters_dict)
         else:
             raise ValueError(
                 f"Unsupported model vendor: {model_vendor} and model_provider: {model_config.provider} for {model_name}"
