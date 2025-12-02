@@ -121,7 +121,7 @@ def convert_responses_api_to_messages(response: Mapping[str, Any]) -> List[BaseM
 
 
 def convert_responses_api_to_single_message(
-    response: Mapping[str, Any],
+    response: Mapping[str, Any] | str,
 ) -> BaseMessage:
     """
     Convert a single output item from the OpenAI Responses API to a LangChain message.
@@ -134,10 +134,14 @@ def convert_responses_api_to_single_message(
 
     Raises:
         ValueError: If no valid message output is found in the output_item.
-        TypeError: If input is not a Mapping.
+        TypeError: If input is not a Mapping or str.
     """
+    # Handle str input gracefully
+    if isinstance(response, str):
+        # Treat as simple assistant message
+        return AIMessage(content=response)
     if not isinstance(response, Mapping):
-        raise TypeError(f"Input must be a Mapping, got {type(response)}")
+        raise TypeError(f"Input must be a Mapping or str, got {type(response)}")
 
     output_type = response.get("type")
     combined_content = ""
@@ -147,8 +151,12 @@ def convert_responses_api_to_single_message(
     if output_type == "message" and response.get("role") == "assistant":
         content_list = response.get("content", [])
         for content_item in content_list:
-            if content_item.get("type") in ("output_text", "input_text"):
-                combined_content += content_item.get("text", "")
+            # Handle both dict and str content_item
+            if isinstance(content_item, dict):
+                if content_item.get("type") in ("output_text", "input_text"):
+                    combined_content += content_item.get("text", "")
+            elif isinstance(content_item, str):
+                combined_content += content_item
 
     elif output_type == "function_call":
         function_calls_list.append(

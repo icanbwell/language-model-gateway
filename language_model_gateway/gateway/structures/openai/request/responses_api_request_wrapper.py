@@ -1,3 +1,4 @@
+from datetime import datetime, UTC
 from typing import Literal, Union, override, Optional, List, Any
 
 from langchain_core.messages import AnyMessage
@@ -7,6 +8,11 @@ from openai.types.responses import (
     EasyInputMessageParam,
     ResponseTextDeltaEvent,
     ResponseTextDoneEvent,
+    Response,
+    ResponseOutputItem,
+    ResponseOutputMessage,
+    ResponseOutputText,
+    ResponseOutputRefusal,
 )
 
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
@@ -124,6 +130,31 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         )
         return f"data: {message.model_dump_json()}\n\n"
 
+    @staticmethod
+    def convert_message_content(
+        input_content: str | list[str | dict[str, Any]],
+    ) -> list[ResponseOutputText | ResponseOutputRefusal]:
+        if isinstance(input_content, str):
+            return [
+                ResponseOutputText(
+                    text=input_content, type="output_text", annotations=[]
+                )
+            ]
+        elif isinstance(input_content, list):
+            output_texts: list[ResponseOutputText | ResponseOutputRefusal] = []
+            for item in input_content:
+                if isinstance(item, str):
+                    output_texts.append(
+                        ResponseOutputText(
+                            text=item, type="output_text", annotations=[]
+                        )
+                    )
+                elif isinstance(item, dict):
+                    output_texts.append(ResponseOutputText(**item))
+            return output_texts
+        else:
+            return []
+
     @override
     def create_non_streaming_response(
         self,
@@ -133,27 +164,30 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         responses: List[AnyMessage],
     ) -> dict[str, Any]:
         # Build a non-streaming response dict
-        choices = []
+        output: list[ResponseOutputItem] = []
         for idx, msg in enumerate(responses):
-            content = getattr(msg, "content", None)
-            choices.append(
-                {
-                    "index": idx,
-                    "message": {
-                        "role": "assistant",
-                        "content": content,
-                    },
-                    "finish_reason": None,
-                }
+            content: str | list[str | dict[str, Any]] = msg.content
+            output.append(
+                ResponseOutputMessage(
+                    id=str(idx),
+                    content=self.convert_message_content(input_content=content),
+                    role="assistant",
+                    status="completed",
+                    type="message",
+                )
             )
-        response = {
-            "id": request_id,
-            "object": "response",
-            "model": self.model,
-            "choices": choices,
-        }
+        response: Response = Response(
+            id=request_id,
+            created_at=datetime.now(UTC).timestamp(),
+            output=output,
+            model=self.model,
+            object="response",
+            parallel_tool_calls=False,
+            tools=[],
+            tool_choice="auto",
+        )
         # Usage metadata is not passed here, but could be added if available
-        return response
+        return response.model_dump(mode="json")
 
     @override
     def to_dict(self) -> dict[str, Any]:

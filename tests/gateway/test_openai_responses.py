@@ -1,7 +1,9 @@
+from typing import cast
+
 import httpx
 import pytest
 from openai import AsyncOpenAI
-from openai.types.responses import EasyInputMessageParam, Response
+from openai.types.responses import EasyInputMessageParam, Response, ResponseInputParam
 
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
@@ -117,13 +119,15 @@ async def test_openai_responses_with_history(
 
     response: Response = await client.responses.create(
         model="General Purpose",
-        input=prompts,
+        input=cast(ResponseInputParam, prompts),
         max_output_tokens=20,
     )
     print("========  Response ======")
     print(response)
     print("====== End of Response ======")
-    content: str = response.output_text if response.output else ""
+    content: str = response.output_text if response.output_text else ""
     assert content is not None
+    print("======= Response Content =======")
     print(content)
+    print("==== End of Response Content ====")
     assert "Barack" in content
