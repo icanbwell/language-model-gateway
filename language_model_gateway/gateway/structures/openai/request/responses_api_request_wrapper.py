@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from typing import Literal, Union, override, Optional, List, Any, cast
+from typing import Literal, Union, override, Optional, List, Any
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
@@ -14,7 +14,6 @@ from openai.types.responses import (
     ResponseOutputText,
     ResponseOutputRefusal,
 )
-from openai.types.responses.tool_param import Mcp
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
@@ -195,25 +194,27 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def to_dict(self) -> dict[str, Any]:
         return self.request.model_dump(mode="json")
 
-    @override
-    def get_tools(self) -> list[AgentConfig]:
+    @staticmethod
+    def extract_mcp_agent_configs(
+        tools_in_request: list[dict[str, Any]],
+    ) -> list[AgentConfig]:
         """
-        Return a list of tools passed in the request.
+        Extract AgentConfig objects for MCP tools from the tools_in_request list.
         """
-
-        tools_in_request: list[dict[str, Any]] | None = self.request.tools
-        if tools_in_request is None:
-            return []
-
-        # check if this is a mcp tool
-        mcp_tools: list[Mcp] = [
-            Mcp(
-                server_url=cast(str, tool.get("server_url")),
-                server_label=cast(str, tool.get("server_label")),
-                server_description=cast(str, tool.get("server_description")),
-                type="mcp",
-                allowed_tools=tool.get("allowed_tools"),
+        return [
+            AgentConfig(
+                url=tool["server_url"],
+                name=tool["server_label"],
+                tools=",".join(
+                    [
+                        t["name"] if isinstance(t, dict) and "name" in t else str(t)
+                        for t in tool["allowed_tools"]
+                    ]
+                )
+                if isinstance(tool["allowed_tools"], (list, tuple))
+                else "",
                 headers=tool.get("headers"),
+                auth="headers",
             )
             for tool in tools_in_request
             if tool["type"] == "mcp"
@@ -221,15 +222,13 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
             and "server_label" in tool
             and "allowed_tools" in tool
         ]
-        return [
-            AgentConfig(
-                url=tool["server_url"],
-                name=tool["server_label"],
-                tools=",".join(list(tool["allowed_tools"]))
-                if tool.get("allowed_tools")
-                else None,
-                headers=tool["headers"],
-                auth="headers",
-            )
-            for tool in mcp_tools
-        ]
+
+    @override
+    def get_tools(self) -> list[AgentConfig]:
+        """
+        Return a list of tools passed in the request.
+        """
+        tools_in_request: list[dict[str, Any]] | None = self.request.tools
+        if tools_in_request is None:
+            return []
+        return self.extract_mcp_agent_configs(tools_in_request)
