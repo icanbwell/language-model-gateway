@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # Local LLM (DeepSeek-R1)
+  ollama:
+    image: ollama/ollama:latest
+    environment:
+      - OLLAMA_NO_GPU=1
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./caches/ollama:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ollama --version || exit 1
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    networks:
+      - web
+
+  # Pull model on startup
+  ollama-setup:
+    image: ollama/ollama:latest
+    environment:
+      - OLLAMA_NO_GPU=1
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ./caches/ollama:/root/.ollama
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      echo '========================================' &&
+      echo 'Ollama Multi-Model Setup' &&
+      echo '========================================' &&
+      echo 'Waiting for Ollama to be ready...' &&
+      sleep 5 &&
+      echo '' &&
+      echo '📥 Pulling DeepSeek-R1 8B (reasoning model)...' &&
+      if ollama list | grep -q 'deepseek-r1:8b'; then
+        echo '✅ DeepSeek-R1 8B already exists'
+      else
+        ollama pull deepseek-r1:8b
+      fi &&
+      echo '' &&
+      echo '📥 Pulling Qwen3 14B (tool-calling model)...' &&
+      if ollama list | grep -q 'qwen3:14b'; then
+        echo '✅ Qwen3 14B already exists'
+      else
+        ollama pull qwen3:14b
+      fi &&
+      echo '' &&
+      echo '📥 Pulling Qwen3 8B (tool-calling model)...' &&
+      if ollama list | grep -q 'qwen3:8b'; then
+        echo '✅ Qwen3 8B already exists'
+      else
+        ollama pull qwen3:8b
+      fi &&
+      echo '' &&
+      echo '📥 Pulling GPT-OSS 20B (open-source model)...' &&
+      if ollama list | grep -q 'gpt-oss:20b'; then
+        echo '✅ GPT-OSS 20B already exists'
+      else
+        ollama pull gpt-oss:20b
+      fi &&
+      echo '' &&
+      echo '📥 Pulling Gemma3 4B (open-source model)...' &&
+      if ollama list | grep -q 'gemma3:4b'; then
+        echo '✅ Gemma3 4B already exists'
+      else
+        ollama pull gemma3:4b
+      fi &&
+      echo '' &&
+      echo '========================================' &&
+      echo '✅ Setup Complete! Available models:' &&
+      ollama list &&
+      echo '========================================' &&
+      echo '🧠 Reasoning: deepseek-r1:8b' &&
+      echo '🔧 Tools: qwen3:14b, qwen3:8b' &&
+      echo '🟢 Open Source: gpt-oss:20b, gemma3:4b' &&
+      echo '========================================'
+      "
+    restart: "no"
+    networks:
+      - web
+
+  # Responses API Server (OpenAI-compatible)
+  responses-api:
+    build:
+      context: ./responses_api
+      dockerfile: Dockerfile
+    depends_on:
+      ollama:
+        condition: service_healthy
+      ollama-setup:
+        condition: service_completed_successfully
+    ports:
+      - "5061:5000"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - MCP_SERVER_URL=http://mcagent
+    volumes:
+      - ./responses_api:/app
+    command: [ "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    healthcheck:
+      # Check if the API is responding with valid JSON
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider --timeout=5 http://localhost:5000/health && wget -qO- http://localhost:5000/health | grep -q 'healthy' || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
