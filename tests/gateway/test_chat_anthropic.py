@@ -4,20 +4,18 @@ from typing import Optional
 
 import httpx
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI
-from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
+from openai.types.chat import (
+    ChatCompletion,
+    ChatCompletionUserMessageParam,
+    ChatCompletionAssistantMessageParam,
+)
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
-from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.utilities.environment_reader import (
-    EnvironmentReader,
-)
-from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
 
 
 @pytest.mark.asyncio
@@ -80,19 +78,45 @@ async def test_chat_completions_with_chat_history(
 ) -> None:
     print("")
 
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Barack"
-                )
-            ),
-        )
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+    assert ollama_base_url is not None, (
+        "OLLAMA_BASE_URL environment variable is not set"
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
+                type="langchain",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
 
-    # Test health endpoint
-    # response = await async_client.get("/health")
-    # assert response.status_code == 200
+    message1: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Who was the 44th president of United States? ",
+    }
+
+    message2: ChatCompletionAssistantMessageParam = {
+        "role": "assistant",
+        "content": "Barack Obama",
+    }
+    message3: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is his first name?",
+    }
+    messages: list[
+        ChatCompletionUserMessageParam | ChatCompletionAssistantMessageParam
+    ] = [
+        message1,
+        message2,
+        message3,
+    ]
 
     # init client and connect to localhost server
     client = AsyncOpenAI(
@@ -103,18 +127,8 @@ async def test_chat_completions_with_chat_history(
 
     # call API
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Who was the 44th president of United States? ",
-            },
-            {"role": "assistant", "content": "Barack Obama"},
-            {
-                "role": "user",
-                "content": "what is his first name?",
-            },
-        ],
-        model="General Purpose",
+        messages=messages,
+        model="Test Model",
     )
 
     # print the top "choice"
