@@ -15,7 +15,7 @@ from language_model_gateway.gateway.structures.openai.message.chat_message_wrapp
 class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     def __init__(self, *, message: ChatCompletionMessageParam) -> None:
         """
-        Wraps a chat message from the OpenAI /chat/completion API and provides a unified interface so the code can use either
+        Wraps a chat message from the OpenAI /chat/completion API and provides a unified interface so the code can use either chat completion API messages or other message types.
 
         """
         self.message: ChatCompletionMessageParam = message
