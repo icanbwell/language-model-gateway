@@ -8,7 +8,6 @@ from openai.types.chat import ChatCompletion
 from language_model_gateway.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
-    AgentConfig,
 )
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -85,17 +84,11 @@ async def test_chat_completions_with_chat_history(
     await model_configuration_cache.set(
         [
             ChatModelConfig(
-                id="chat_gpt",
-                name="ChatGPT",
-                description="General Purpose Language Model",
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
                 type="langchain",
-                model=ModelConfig(
-                    provider="openai",
-                    model="gpt-4o",
-                ),
-                tools=[
-                    AgentConfig(name="image_generator_openai"),
-                ],
+                model=ModelConfig(provider="openai"),
             )
         ]
     )
@@ -120,7 +113,7 @@ async def test_chat_completions_with_chat_history(
                 "content": "what is his first name?",
             },
         ],
-        model="ChatGPT",
+        model="Test Model",
     )
 
     # print the top "choice"

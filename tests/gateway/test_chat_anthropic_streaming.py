@@ -1,19 +1,17 @@
 import httpx
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI, AsyncStream
-from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
+from openai.types.chat import (
+    ChatCompletionChunk,
+    ChatCompletionUserMessageParam,
+    ChatCompletionAssistantMessageParam,
+)
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
-from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.utilities.environment_reader import (
-    EnvironmentReader,
-)
-from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
 
 
 @pytest.mark.asyncio
@@ -21,50 +19,43 @@ async def test_chat_completions(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "His first name is Barack"
-                )
-            ),
-        )
-
-    # init client and connect to localhost server
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
+                type="langchain",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
     client = AsyncOpenAI(
         api_key="fake-api-key",
-        base_url="http://localhost:5000/api/v1",  # change the default port if needed
+        base_url="http://localhost:5000/api/v1",
         http_client=async_client,
     )
-
-    # call API
     message: ChatCompletionUserMessageParam = {
         "role": "user",
         "content": "what is the first name of Obama?",
     }
     stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
         messages=[message],
-        model="General Purpose",
+        model="Test Model",
         stream=True,
     )
     content: str = ""
     i: int = 0
     async for chunk in stream:
         i += 1
-        print(f"======== Chunk {i} ========")
         delta_content = "\n".join(
             [choice.delta.content or "" for choice in chunk.choices]
         )
         content += delta_content or ""
-        print(delta_content or "")
-        print(f"\n{chunk}\n")
-        print(f"====== End of Chunk {i} ======")
-
-    print("======== Final Content ========")
     print(content)
-    print("====== End of Final Content ======")
     assert "Barack" in content
 
 
@@ -118,53 +109,53 @@ async def test_chat_completions_with_chat_history_streaming(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "His first name is Barack"
-                )
-            ),
-        )
-
-    # init client and connect to localhost server
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
+                type="langchain",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
     client = AsyncOpenAI(
         api_key="fake-api-key",
-        base_url="http://localhost:5000/api/v1",  # change the default port if needed
+        base_url="http://localhost:5000/api/v1",
         http_client=async_client,
     )
-
-    # call API
+    message1: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Who was the 44th president of United States? ",
+    }
+    message2: ChatCompletionAssistantMessageParam = {
+        "role": "assistant",
+        "content": "Barack Obama",
+    }
+    message3: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is his first name?",
+    }
     stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
         messages=[
-            {
-                "role": "user",
-                "content": "Who was the 44th president of United States? ",
-            },
-            {"role": "assistant", "content": "Barack Obama"},
-            {
-                "role": "user",
-                "content": "what is his first name?",
-            },
+            message1,
+            message2,
+            message3,
         ],
-        model="General Purpose",
+        model="Test Model",
         stream=True,
     )
     content: str = ""
     i: int = 0
     async for chunk in stream:
         i += 1
-        print(f"======== Chunk {i} ========")
         delta_content = "\n".join(
             [choice.delta.content or "" for choice in chunk.choices]
         )
         content += delta_content or ""
-        print(delta_content or "")
-        print(f"====== End of Chunk {i} ======")
-
-    print("======== Final Content ========")
     print(content)
-    print("====== End of Final Content ======")
     assert "Barack" in content
