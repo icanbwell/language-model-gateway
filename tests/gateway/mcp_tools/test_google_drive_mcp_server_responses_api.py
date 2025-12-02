@@ -83,12 +83,8 @@ async def test_responses_api_with_mcp_google_drive(
     )
 
     # Use the responses API instead of chat completions
-    message = {
-        "role": "user",
-        "content": "Download https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing",
-    }
     prompt: EasyInputMessageParam = {
-        "content": message["content"],
+        "content": "Download https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing",
         "role": "user",
         "type": "message",
     }
