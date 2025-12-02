@@ -6,7 +6,11 @@ import pytest
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 
+from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
@@ -30,6 +34,21 @@ async def test_chat_completions(
                 )
             ),
         )
+
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="b_well_phr",
+                name="ChatGPT",
+                description="ChatGPT",
+                type="openai",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
 
     # init client and connect to localhost server
     client = AsyncOpenAI(

@@ -47,7 +47,7 @@ class ModelFactory:
             )
 
         model_vendor: str = model_config.provider
-        model_name: str = model_config.model
+        model_name: str | None = model_config.model
 
         model_parameters: List[ModelParameterConfig] | None = (
             chat_model_config.model_parameters
