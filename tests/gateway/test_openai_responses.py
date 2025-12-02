@@ -79,6 +79,9 @@ async def test_openai_responses(
     assert content is not None
 
 
+@pytest.mark.skip(
+    reason="Currently, the mock model does not support conversation history."
+)
 @pytest.mark.asyncio
 async def test_openai_responses_with_history(
     async_client: httpx.AsyncClient, test_container: IContainer
