@@ -188,6 +188,18 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
+        # finally read any tools from the Responses API request
+        tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
+        if tool_configs_from_request:
+            tools_from_request: Sequence[BaseTool] = (
+                self.tool_provider.get_tools(
+                    tools=tool_configs_from_request, headers=headers
+                )
+                if tool_configs_from_request is not None
+                else []
+            )
+            tools = [t for t in tools] + [t for t in tools_from_request]
+
         # Use context managers only for the duration of streaming
         # we can't use async with because we need to return the StreamingResponse
         store_cm: ContextManager[BaseStore] = self.persistence_factory.create_store(

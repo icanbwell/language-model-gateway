@@ -5,6 +5,7 @@ from typing import Literal, Any, List, Optional
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
 
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
 )
@@ -71,3 +72,6 @@ class ChatRequestWrapper(abc.ABC):
 
     @abstractmethod
     def to_dict(self) -> dict[str, Any]: ...
+
+    @abstractmethod
+    def get_tools(self) -> list[AgentConfig]: ...

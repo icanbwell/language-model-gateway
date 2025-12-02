@@ -22,6 +22,7 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion import Choice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
 from language_model_gateway.gateway.structures.openai.message.chat_completion_api_message_wrapper import (
@@ -258,3 +259,11 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             if hasattr(self.request, "model_dump")
             else str(self.request),
         }
+
+    @override
+    def get_tools(self) -> list[AgentConfig]:
+        """
+        Returns an empty list as tools are not applicable for ChatCompletionApiRequestWrapper.
+        """
+        # ChatCompletions API does not support passing in tools.
+        return []

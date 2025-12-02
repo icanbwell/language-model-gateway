@@ -14,7 +14,9 @@ from openai.types.responses import (
     ResponseOutputText,
     ResponseOutputRefusal,
 )
+from openai.types.responses.tool_param import Mcp
 
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
@@ -192,3 +194,28 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     @override
     def to_dict(self) -> dict[str, Any]:
         return self.request.model_dump(mode="json")
+
+    @override
+    def get_tools(self) -> list[AgentConfig]:
+        """
+        Return a list of tools passed in the request.
+        """
+
+        tools_in_request: list[dict[str, Any]] | None = self.request.tools
+        if tools_in_request is None:
+            return []
+
+        # check if this is a mcp tool
+        mcp_tools: list[Mcp] = [
+            Mcp(**tool) for tool in tools_in_request if tool["type"] == "mcp"
+        ]
+        return [
+            AgentConfig(
+                url=tool["server_url"],
+                name=tool["server_label"],
+                tools=tool["allowed_tools"],
+                headers=tool["headers"],
+                auth="headers",
+            )
+            for tool in mcp_tools
+        ]
