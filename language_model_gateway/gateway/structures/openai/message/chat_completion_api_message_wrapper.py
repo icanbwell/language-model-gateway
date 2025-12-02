@@ -34,7 +34,7 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
         # Use getattr with default to avoid mypy union-attr error
         role = getattr(self.message, "role", None)
         if role is not None:
-            return role == "system"
+            return True if role == "system" else False
         elif isinstance(self.message, dict):
             return self.message.get("role") == "system"
         return False

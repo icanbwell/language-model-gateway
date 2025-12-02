@@ -152,7 +152,9 @@ async def test_responses_with_history_streaming(
             }
             conversation_history.append(assistant_message)
 
-    complete_answer: str = " ".join([entry["answer"] for entry in messages_and_answers])
+    complete_answer: str = " ".join(
+        [str(entry["answer"]) for entry in messages_and_answers]
+    )
     # Print results
     for idx, entry in enumerate(messages_and_answers):
         print(f"======== Message {idx + 1} ========")

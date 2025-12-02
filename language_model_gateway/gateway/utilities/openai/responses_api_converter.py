@@ -151,12 +151,15 @@ def convert_responses_api_to_single_message(
     if output_type == "message" and response.get("role") == "assistant":
         content_list = response.get("content", [])
         for content_item in content_list:
-            # Handle both dict and str content_item
-            if isinstance(content_item, dict):
-                if content_item.get("type") in ("output_text", "input_text"):
-                    combined_content += content_item.get("text", "")
-            elif isinstance(content_item, str):
-                combined_content += content_item
+            # According to OpenAI Responses API spec, content should be a list of dicts (structured objects).
+            # Ignore any non-dict items to prevent unexpected behavior.
+            if not isinstance(content_item, dict):
+                # Optionally, log or raise an error here if strict compliance is needed
+                raise TypeError(
+                    f"Content items must be dicts, got {type(content_item)}"
+                )
+            if content_item.get("type") in ("output_text", "input_text"):
+                combined_content += content_item.get("text", "")
 
     elif output_type == "function_call":
         function_calls_list.append(
