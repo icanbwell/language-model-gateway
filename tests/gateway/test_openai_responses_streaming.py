@@ -117,42 +117,42 @@ async def test_responses_with_history_streaming(
 
     prompt: EasyInputMessageParam
     for prompt in prompts:
-        # Add current message to history
-        conversation_history.append(prompt)
+        # Only add user messages to history before sending to model
+        if prompt["role"] == "user":
+            conversation_history.append(prompt)
 
-        # Only process user messages (skip assistant messages as they're just history)
-        if prompt["role"] != "user":
-            continue
-
-        # Send the full conversation history up to this point
-        stream: AsyncStream[ResponseStreamEvent] = await client.responses.create(
-            model="General Purpose",
-            input=conversation_history,  # Pass the full history including current user message
-            stream=True,
-            max_output_tokens=20,
-        )
-
-        content: str = ""
-        i: int = 0
-        chunk: ResponseStreamEvent
-
-        async for chunk in stream:
-            i += 1
-            delta_content: str | None = (
-                chunk.delta if isinstance(chunk, ResponseTextDeltaEvent) else None
+            # Send the full conversation history up to this point
+            stream: AsyncStream[ResponseStreamEvent] = await client.responses.create(
+                model="General Purpose",
+                input=conversation_history,  # Pass the full history including current user message
+                stream=True,
+                max_output_tokens=20,
             )
-            content += delta_content or ""
 
-        messages_and_answers.append({"prompt": prompt["content"], "answer": content})
+            content: str = ""
+            i: int = 0
+            chunk: ResponseStreamEvent
 
-        # Add the assistant's response to history for next iteration
-        assistant_message: EasyInputMessageParam = {
-            "content": content,
-            "role": "assistant",
-            "type": "message",
-        }
-        conversation_history.append(assistant_message)
+            async for chunk in stream:
+                i += 1
+                delta_content: str | None = (
+                    chunk.delta if isinstance(chunk, ResponseTextDeltaEvent) else None
+                )
+                content += delta_content or ""
 
+            messages_and_answers.append(
+                {"prompt": prompt["content"], "answer": content}
+            )
+
+            # Add the assistant's response to history for next iteration
+            assistant_message: EasyInputMessageParam = {
+                "content": content,
+                "role": "assistant",
+                "type": "message",
+            }
+            conversation_history.append(assistant_message)
+
+    complete_answer: str = " ".join([entry["answer"] for entry in messages_and_answers])
     # Print results
     for idx, entry in enumerate(messages_and_answers):
         print(f"======== Message {idx + 1} ========")
@@ -161,6 +161,6 @@ async def test_responses_with_history_streaming(
         print(f"====== End of Message {idx + 1} ======")
 
     # Verify that at least one response contains "Barack"
-    assert any("Barack" in entry["answer"] for entry in messages_and_answers), (
+    assert "Barack" in complete_answer, (
         "Expected at least one response to contain 'Barack'"
     )
