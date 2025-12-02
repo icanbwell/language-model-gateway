@@ -192,7 +192,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
         if tool_configs_from_request:
             tools_from_request: Sequence[BaseTool] = (
-                self.tool_provider.get_tools(
+                await self.mcp_tool_provider.get_tools_async(
                     tools=tool_configs_from_request, headers=headers
                 )
                 if tool_configs_from_request is not None
