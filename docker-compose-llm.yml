@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Local LLM (DeepSeek-R1)
+  # Local LLM (Qwen3 8B)
   ollama:
     image: ollama/ollama:latest
     environment:
