@@ -2,17 +2,19 @@ from typing import cast
 
 import httpx
 import pytest
+from oidcauthlib.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.responses import EasyInputMessageParam, Response, ResponseInputParam
 
+from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
 from language_model_gateway.gateway.models.model_factory import ModelFactory
+from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+    ConfigExpiringCache,
+)
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
-
 from tests.gateway.mocks.mock_responses_model import MockResponsesModel
 
 
@@ -21,16 +23,21 @@ async def test_openai_responses(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Barack"
-                )
-            ),
-        )
+    # Always set the Test Model in the cache
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="General Purpose",
+                type="langchain",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
 
     client = AsyncOpenAI(
         api_key="fake-api-key",
@@ -44,7 +51,7 @@ async def test_openai_responses(
         "type": "message",
     }
     response: Response = await client.responses.create(
-        model="General Purpose",
+        model="test_model",
         input=[prompt],
         max_output_tokens=20,
     )
@@ -58,7 +65,7 @@ async def test_openai_responses(
         "type": "message",
     }
     response = await client.responses.create(
-        model="General Purpose",
+        model="test_model",
         input=[prompt],
         max_output_tokens=20,
     )
@@ -71,7 +78,7 @@ async def test_openai_responses(
         "type": "message",
     }
     response = await client.responses.create(
-        model="General Purpose",
+        model="test_model",
         input=[prompt],
         max_output_tokens=20,
     )
@@ -87,6 +94,29 @@ async def test_openai_responses_with_history(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
+    # Always set the Test Model in the cache
+    from language_model_gateway.configs.config_schema import (
+        ChatModelConfig,
+        ModelConfig,
+    )
+    from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+        ConfigExpiringCache,
+    )
+
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="General Purpose",
+                type="langchain",
+                model=ModelConfig(provider="openai"),
+            )
+        ]
+    )
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.singleton(
@@ -123,7 +153,7 @@ async def test_openai_responses_with_history(
     ]
 
     response: Response = await client.responses.create(
-        model="General Purpose",
+        model="test_model",
         input=cast(ResponseInputParam, prompts),
         max_output_tokens=20,
     )
