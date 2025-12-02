@@ -13,6 +13,8 @@ from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
 
+from tests.gateway.mocks.mock_responses_model import MockResponsesModel
+
 
 @pytest.mark.asyncio
 async def test_openai_responses(
@@ -87,7 +89,7 @@ async def test_openai_responses_with_history(
         test_container.singleton(
             ModelFactory,
             lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
+                fn_get_model=lambda chat_model_config: MockResponsesModel(
                     fn_get_response=lambda messages: "Barack"
                 )
             ),
