@@ -53,7 +53,9 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         elif isinstance(input_, list):
             return [ResponsesApiMessageWrapper(input_=item) for item in input_]
         else:
-            return []
+            raise TypeError(
+                f"input_ must be a str or list, got {type(input_).__name__}: {input_!r}"
+            )
 
     @property
     @override
