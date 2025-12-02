@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3c79c6c82b000062b7141b54662e4d21360b6a7cb758b813f2a090570d0f2a99"
+            "sha256": "7d240b41315f6d486cc8b63daad70b281b4a2bcee88d4103ea9e88a9b6d895a2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -2779,12 +2779,12 @@
         },
         "pypdf": {
             "hashes": [
-                "sha256:2d5f9741e851e378908692d571374b3cbd94582fdd1c740fcf7c029ec35ac0e6",
-                "sha256:d066a2fdf8195e1811ae5a9d5a2f97f5bed0e1e7954297295eadee6357e76c5d"
+                "sha256:4769d471f8ddc3341193ecc5d6560fa44cf8cd0abfabf21af4e195cc0c224072",
+                "sha256:55ab9837ed97fd7fcc5c131d52fcc2223bc5c6b8a1488bbf7c0e27f1f0023a79"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==6.3.0"
+            "version": "==6.4.0"
         },
         "python-crfsuite": {
             "hashes": [
