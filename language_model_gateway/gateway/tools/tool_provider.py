@@ -59,7 +59,7 @@ from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksS
 from language_model_gateway.gateway.tools.jira_issue_retriever import (
     JiraIssueRetriever,
 )
-from language_model_gateway.gateway.tools.memories.get_user_profile_tool import (
+from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import (
     GetUserProfileTool,
 )
 from language_model_gateway.gateway.tools.memories.memory_read_tool import (
@@ -68,7 +68,7 @@ from language_model_gateway.gateway.tools.memories.memory_read_tool import (
 from language_model_gateway.gateway.tools.memories.memory_write_tool import (
     MemoryWriteTool,
 )
-from language_model_gateway.gateway.tools.memories.store_user_profile_tool import (
+from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import (
     StoreUserProfileTool,
 )
 from language_model_gateway.gateway.tools.network_topology_diagram_tool import (

@@ -44,7 +44,7 @@ def test_login_route() -> None:
     reason="Have to use the password grant flow for real LLM tests",
 )
 def test_callback_route() -> None:
-    client_id = os.getenv("AUTH_CLIENT_ID_bwell-client-id-3")
+    client_id = os.getenv("AUTH_CLIENT_ID_CLIENT3")
     redirect_uri = os.getenv("AUTH_REDIRECT_URI")
     well_known_url = (
         "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
@@ -101,7 +101,7 @@ def test_callback_route() -> None:
         # it should match the authorization_endpoint in the well-known configuration
         # and the client_id and redirect_uri should match the ones in the environment variables
         assert client_id is not None, (
-            "AUTH_CLIENT_ID_bwell-client-id environment variable must be set"
+            "AUTH_CLIENT_ID_CLIENT3 environment variable must be set"
         )
         assert redirect_uri is not None, (
             "AUTH_REDIRECT_URI environment variable must be set"

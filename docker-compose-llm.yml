@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Local LLM (Qwen3 8B)
+  ollama:
+    image: ollama/ollama:latest
+    environment:
+      - OLLAMA_NO_GPU=1
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./caches/ollama:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ollama --version || exit 1
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    networks:
+      - web
+
+  # Pull model on startup
+  ollama-setup:
+    image: ollama/ollama:latest
+    environment:
+      - OLLAMA_NO_GPU=1
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ./caches/ollama:/root/.ollama
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      echo '========================================' &&
+      echo 'Ollama Multi-Model Setup' &&
+      echo '========================================' &&
+      echo 'Waiting for Ollama to be ready...' &&
+      sleep 5 &&
+      echo '' &&
+      echo '📥 Pulling Qwen3 8B (tool-calling model)...' &&
+      if ollama list | grep -q 'qwen3:8b'; then
+        echo '✅ Qwen3 8B already exists'
+      else
+        ollama pull qwen3:8b
+      fi &&
+      echo '' &&
+      echo '========================================' &&
+      echo '✅ Setup Complete! Available models:' &&
+      ollama list &&
+      echo '========================================' &&
+      echo '🔧 Tools: qwen3:8b' &&
+      echo '========================================'
+      "
+    restart: "no"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge

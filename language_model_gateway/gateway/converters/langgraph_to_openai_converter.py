@@ -1,16 +1,14 @@
-import json
 import logging
 import os
 import re
-import time
 import traceback
 from typing import (
     Any,
     List,
     Sequence,
-    cast,
     Optional,
     Tuple,
+    Literal,
 )
 from typing import (
     Dict,
@@ -22,14 +20,11 @@ import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
 from langchain_community.adapters.openai import (
-    convert_openai_messages,
     convert_message_to_dict,
 )
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
-    AIMessage,
     AnyMessage,
-    ToolMessage,
     BaseMessage,
 )
 from langchain_core.runnables import RunnableConfig
@@ -39,20 +34,6 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
-from openai import NotGiven, NOT_GIVEN
-from openai.types import CompletionUsage
-from openai.types.chat import (
-    ChatCompletionChunk,
-    ChatCompletion,
-    ChatCompletionMessage,
-    ChatCompletionSystemMessageParam,
-)
-from openai.types.chat import ChatCompletionMessageParam
-from openai.types.chat.chat_completion import Choice
-from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
-from openai.types.chat.completion_create_params import ResponseFormat
-from openai.types.shared_params import ResponseFormatJSONSchema
-from openai.types.shared_params.response_format_json_schema import JSONSchema
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
@@ -62,20 +43,15 @@ from language_model_gateway.gateway.converters.streaming_manager import (
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
-from language_model_gateway.gateway.converters.streaming_utils import (
-    format_chat_completion_chunk_sse,
-    format_done_sse,
+from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
+    ChatMessageWrapper,
 )
-from language_model_gateway.gateway.schema.openai.completions import (
-    ChatRequest,
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+    ChatRequestWrapper,
 )
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.utilities.chat_message_helpers import (
-    langchain_to_chat_message,
-)
-from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
@@ -125,16 +101,16 @@ class LangGraphToOpenAIConverter:
     async def _stream_resp_async_generator(
         self,
         *,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
-        messages: List[ChatCompletionMessageParam],
+        messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
     ) -> AsyncGenerator[str, None]:
         """
         Asynchronously generate streaming responses from the agent.
 
         Args:
-            request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             messages: The list of chat completion message parameters.
             request_information: The request information.
@@ -151,7 +127,7 @@ class LangGraphToOpenAIConverter:
             # Process streamed events from the graph and yield messages over the SSE stream.
             event: StandardStreamEvent | CustomStreamEvent
             async for event in self.astream_events(
-                request=request,
+                chat_request_wrapper=chat_request_wrapper,
                 compiled_state_graph=compiled_state_graph,
                 messages=messages,
                 request_information=request_information,
@@ -160,72 +136,49 @@ class LangGraphToOpenAIConverter:
                     continue
 
                 async for chunk in self.streaming_manager.handle_langchain_event(
-                    event, request, request_id, tool_start_times
+                    event=event,
+                    chat_request_wrapper=chat_request_wrapper,
+                    request_id=request_id,
+                    tool_start_times=tool_start_times,
                 ):
                     yield chunk
         except TokenRetrievalError as e:
             logger.exception(e, stack_info=True)
             message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
-            chat_stream_response = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=request["model"],
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n{message}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0
-                ),
-                object="chat.completion.chunk",
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                usage_metadata=None,
+                content=message,
             )
-            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
         except Exception as e:
             tb = traceback.format_exc()
             logger.error(
                 f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
             )
             error_message = f"Error: {e}\nTraceback:\n{tb}"
-            chat_stream_response = ChatCompletionChunk(
-                id=request_id,
-                created=int(time.time()),
-                model=request["model"],
-                choices=[
-                    ChunkChoice(
-                        index=0,
-                        delta=ChoiceDelta(
-                            role="assistant",
-                            content=f"\n{error_message}\n",
-                        ),
-                    )
-                ],
-                usage=CompletionUsage(
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0
-                ),
-                object="chat.completion.chunk",
+            yield chat_request_wrapper.create_sse_message(
+                request_id=request_id,
+                usage_metadata=None,
+                content=f"\n{error_message}\n",
             )
-            yield format_chat_completion_chunk_sse(chat_stream_response.model_dump())
 
-        yield format_done_sse()
+        yield chat_request_wrapper.create_final_sse_message(
+            request_id=request_id, usage_metadata=None
+        )
 
     async def call_agent_with_input(
         self,
         *,
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
-        system_messages: List[ChatCompletionSystemMessageParam],
+        system_messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
     ) -> StreamingResponse | JSONResponse:
         """
         Call the agent with the provided input and return the response.
 
         Args:
-            chat_request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
             request_information: The request information.
@@ -233,13 +186,13 @@ class LangGraphToOpenAIConverter:
         Returns:
             The response as a StreamingResponse or JSONResponse.
         """
-        if chat_request is None:
+        if chat_request_wrapper is None:
             raise ValueError("chat_request must not be None")
 
-        if chat_request.get("stream"):
+        if chat_request_wrapper.stream:
             return StreamingResponse(
                 content=await self.get_streaming_response_async(
-                    request=chat_request,
+                    chat_request_wrapper=chat_request_wrapper,
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,
                     request_information=request_information,
@@ -249,12 +202,14 @@ class LangGraphToOpenAIConverter:
         else:
             try:
                 json_output_requested: bool
-                chat_request, json_output_requested = self.add_system_messages_for_json(
-                    chat_request=chat_request
+                chat_request_wrapper, json_output_requested = (
+                    self.add_system_messages_for_json(
+                        chat_request_wrapper=chat_request_wrapper
+                    )
                 )
 
-                chat_request = self.add_system_message_for_user_info(
-                    chat_request=chat_request,
+                chat_request_wrapper = self.add_system_message_for_user_info(
+                    chat_request_wrapper=chat_request_wrapper,
                     user_id=request_information.user_id,
                     user_name=request_information.user_name,
                     email=request_information.user_email,
@@ -262,68 +217,22 @@ class LangGraphToOpenAIConverter:
 
                 responses: List[AnyMessage] = await self.ainvoke(
                     compiled_state_graph=compiled_state_graph,
-                    request=chat_request,
+                    chat_request_wrapper=chat_request_wrapper,
                     system_messages=system_messages,
                     request_information=request_information,
                 )
-                # add usage metadata from each message into a total usage metadata
-                total_usage_metadata: CompletionUsage = (
-                    self.streaming_manager.convert_usage_meta_data_to_openai(
-                        usages=[
-                            m.usage_metadata
-                            for m in responses
-                            if hasattr(m, "usage_metadata") and m.usage_metadata
-                        ]
+
+                content_json: Dict[str, Any] = (
+                    chat_request_wrapper.create_non_streaming_response(
+                        request_id=request_information.request_id,
+                        responses=responses,
+                        json_output_requested=json_output_requested,
                     )
                 )
+                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and content_json:
+                    logger.info(f"Returning content: {content_json}")
 
-                output_messages_raw: List[ChatCompletionMessage | None] = [
-                    langchain_to_chat_message(m)
-                    for m in responses
-                    if isinstance(m, AIMessage) or isinstance(m, ToolMessage)
-                ]
-                output_messages: List[ChatCompletionMessage] = [
-                    m for m in output_messages_raw if m is not None
-                ]
-
-                choices: List[Choice] = [
-                    Choice(index=i, message=m, finish_reason="stop")
-                    for i, m in enumerate(output_messages)
-                ]
-
-                choices_text = "\n".join([f"{c.message.content}" for c in choices])
-
-                if json_output_requested:
-                    # extract the json content from response and just return that
-                    json_content_raw: Dict[str, Any] | List[Dict[str, Any]] | str = (
-                        (JsonExtractor.extract_structured_output(text=choices_text))
-                        if choices_text
-                        else choices_text
-                    )
-                    json_content: str = json.dumps(json_content_raw)
-                    choices = [
-                        Choice(
-                            index=i,
-                            message=ChatCompletionMessage(
-                                content=json_content, role="assistant"
-                            ),
-                            finish_reason="stop",
-                        )
-                        for i in range(1)
-                    ]
-
-                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1" and choices_text:
-                    logger.info(f"Returning content: {choices_text}")
-
-                chat_response: ChatCompletion = ChatCompletion(
-                    id=request_information.request_id,
-                    model=chat_request["model"],
-                    choices=choices,
-                    usage=total_usage_metadata,
-                    created=int(time.time()),
-                    object="chat.completion",
-                )
-                return JSONResponse(content=chat_response.model_dump())
+                return JSONResponse(content=content_json)
             except* TokenRetrievalError as e:
                 logger.exception(e, stack_info=True)
                 first_exception = e.exceptions[0]
@@ -368,47 +277,46 @@ class LangGraphToOpenAIConverter:
     @staticmethod
     def add_system_message_for_user_info(
         *,
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         user_id: Optional[str],
         user_name: Optional[str],
         email: Optional[str],
-    ) -> ChatRequest:
+    ) -> ChatRequestWrapper:
         content: str = (
             f"You are interacting with user_id: {user_id} who is named {user_name} and has email {email}"
             if user_id
             else "You are interacting with an anonymous user"
         )
 
-        new_system_message: ChatCompletionSystemMessageParam = (
-            ChatCompletionSystemMessageParam(role="system", content=content)
+        new_system_message: ChatMessageWrapper = (
+            chat_request_wrapper.create_system_message(content=content)
         )
-        chat_request["messages"] = [r for r in chat_request["messages"]] + [
-            new_system_message
-        ]
-        return chat_request
+        chat_request_wrapper.append_message(message=new_system_message)
+
+        return chat_request_wrapper
 
     @staticmethod
     def add_system_messages_for_json(
-        *, chat_request: ChatRequest
-    ) -> Tuple[ChatRequest, bool]:
+        *, chat_request_wrapper: ChatRequestWrapper
+    ) -> Tuple[ChatRequestWrapper, bool]:
         """
         If the user is requesting json_object or json_schema output, add system messages to the chat request
         to generate JSON output.
 
 
-        :param chat_request:
+        :param chat_request_wrapper:
         :return:
         """
         json_response_requested: bool = False
-        response_format: ResponseFormat | NotGiven = chat_request.get(
-            "response_format", NOT_GIVEN
+        response_format: Literal["text", "json_object", "json_schema"] | None = (
+            chat_request_wrapper.response_format
         )
-        if isinstance(response_format, NotGiven):
-            return chat_request, json_response_requested
+        if not response_format:
+            return chat_request_wrapper, json_response_requested
 
-        match response_format.get("type", None):
+        match response_format:
             case "text":
-                return chat_request, json_response_requested
+                return chat_request_wrapper, json_response_requested
             case "json_object":
                 json_response_requested = True
                 json_object_system_message_text: str = """
@@ -418,22 +326,16 @@ class LangGraphToOpenAIConverter:
                 <json>
                 json  here
                 </json>"""
-                json_object_system_message: ChatCompletionSystemMessageParam = (
-                    ChatCompletionSystemMessageParam(
-                        role="system", content=json_object_system_message_text
+                json_object_system_message: ChatMessageWrapper = (
+                    chat_request_wrapper.create_system_message(
+                        content=json_object_system_message_text
                     )
                 )
-                chat_request["messages"] = [r for r in chat_request["messages"]] + [
-                    json_object_system_message
-                ]
-                return chat_request, json_response_requested
+                chat_request_wrapper.append_message(message=json_object_system_message)
+                return chat_request_wrapper, json_response_requested
             case "json_schema":
                 json_response_requested = True
-                json_response_format: ResponseFormatJSONSchema = cast(
-                    ResponseFormatJSONSchema,
-                    response_format,
-                )
-                json_schema: JSONSchema | None = json_response_format.get("json_schema")
+                json_schema: str | None = chat_request_wrapper.response_json_schema
                 if json_schema is None:
                     raise ValueError(
                         "json_schema should be specified in response_format if type is json_schema"
@@ -446,33 +348,29 @@ class LangGraphToOpenAIConverter:
                 <json>
                 json  here
                 </json>"""
-                json_schema_system_message: ChatCompletionSystemMessageParam = (
-                    ChatCompletionSystemMessageParam(
-                        role="system", content=json_schema_system_message_text
+                json_schema_system_message: ChatMessageWrapper = (
+                    chat_request_wrapper.create_system_message(
+                        content=json_schema_system_message_text
                     )
                 )
-                chat_request["messages"] = [r for r in chat_request["messages"]] + [
-                    json_schema_system_message
-                ]
-                return chat_request, json_response_requested
+                chat_request_wrapper.append_message(message=json_schema_system_message)
+                return chat_request_wrapper, json_response_requested
             case _:
-                raise ValueError(
-                    f"Unexpected response format type: {response_format.get('type', None)}"
-                )
+                raise ValueError(f"Unexpected response format type: {response_format}")
 
     async def get_streaming_response_async(
         self,
         *,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
-        system_messages: List[ChatCompletionSystemMessageParam],
+        system_messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
     ) -> AsyncGenerator[str, None]:
         """
         Get the streaming response asynchronously.
 
         Args:
-            request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
             request_information: The request information.
@@ -481,16 +379,14 @@ class LangGraphToOpenAIConverter:
             The streaming response as an async generator.
         """
 
-        new_messages: List[ChatCompletionMessageParam] = [
-            m for m in request["messages"]
+        new_messages: List[ChatMessageWrapper] = [
+            m for m in chat_request_wrapper.messages
         ]
-        messages: List[ChatCompletionMessageParam] = [
-            s for s in system_messages
-        ] + new_messages
+        messages: List[ChatMessageWrapper] = [s for s in system_messages] + new_messages
 
         logger.info(f"Streaming response {request_information.request_id} from agent")
         generator: AsyncGenerator[str, None] = self._stream_resp_async_generator(
-            request=request,
+            chat_request_wrapper=chat_request_wrapper,
             compiled_state_graph=compiled_state_graph,
             messages=messages,
             request_information=request_information,
@@ -501,7 +397,6 @@ class LangGraphToOpenAIConverter:
     async def _run_graph_with_messages_async(
         self,
         *,
-        chat_request: ChatRequest,
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
@@ -512,7 +407,6 @@ class LangGraphToOpenAIConverter:
         Args:
             messages: The list of role and incoming message type tuples.
             compiled_state_graph: The compiled state graph.
-            chat_request: The chat request.
             request_information: The request information.
 
         Returns:
@@ -520,7 +414,6 @@ class LangGraphToOpenAIConverter:
         """
 
         input_: MyMessagesState = self.create_state(
-            chat_request=chat_request,
             messages=messages,
             request_information=request_information,
         )
@@ -557,7 +450,6 @@ class LangGraphToOpenAIConverter:
     async def _stream_graph_with_messages_async(
         self,
         *,
-        request: ChatRequest,
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
@@ -566,7 +458,6 @@ class LangGraphToOpenAIConverter:
         Stream the graph with the provided messages asynchronously.
 
         Args:
-            request: The chat request.
             messages: The list of role and incoming message type tuples.
             compiled_state_graph: The compiled state graph.
 
@@ -584,7 +475,6 @@ class LangGraphToOpenAIConverter:
             event: StandardStreamEvent | CustomStreamEvent
             async for event in compiled_state_graph.astream_events(
                 input=self.create_state(
-                    chat_request=request,
                     messages=messages,
                     request_information=request_information,
                 ),
@@ -605,16 +495,16 @@ class LangGraphToOpenAIConverter:
     async def ainvoke(
         self,
         *,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
-        system_messages: Iterable[ChatCompletionSystemMessageParam],
+        system_messages: Iterable[ChatMessageWrapper],
         request_information: RequestInformation,
     ) -> List[AnyMessage]:
         """
         Run the agent asynchronously.
 
         Args:
-            request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             system_messages: The iterable of chat completion message parameters.
             request_information: The request information.
@@ -622,18 +512,15 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of any messages.
         """
-        if request is None:
+        if chat_request_wrapper is None:
             raise ValueError("request must not be None")
 
-        new_messages: List[ChatCompletionMessageParam] = [
-            m for m in request["messages"]
+        new_messages: List[ChatMessageWrapper] = [
+            m for m in chat_request_wrapper.messages
         ]
-        messages: List[ChatCompletionMessageParam] = [
-            s for s in system_messages
-        ] + new_messages
+        messages: List[ChatMessageWrapper] = [s for s in system_messages] + new_messages
 
         return await self._run_graph_with_messages_async(
-            chat_request=request,
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
             request_information=request_information,
@@ -642,16 +529,16 @@ class LangGraphToOpenAIConverter:
     async def astream_events(
         self,
         *,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         request_information: RequestInformation,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
-        messages: Iterable[ChatCompletionMessageParam],
+        messages: Iterable[ChatMessageWrapper],
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream events asynchronously.
 
         Args:
-            request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             messages: The iterable of chat completion message parameters.
             request_information: The request information.
@@ -661,7 +548,6 @@ class LangGraphToOpenAIConverter:
         """
         event: StandardStreamEvent | CustomStreamEvent
         async for event in self._stream_graph_with_messages_async(
-            request=request,
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
             request_information=request_information,
@@ -670,7 +556,7 @@ class LangGraphToOpenAIConverter:
 
     # noinspection PyMethodMayBeStatic
     def create_messages_for_graph(
-        self, *, messages: Iterable[ChatCompletionMessageParam]
+        self, *, messages: Iterable[ChatMessageWrapper]
     ) -> List[BaseMessage]:
         """
         Create messages for the graph.
@@ -681,15 +567,14 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of role and incoming message type tuples.
         """
-        messages_: List[BaseMessage] = convert_openai_messages(
-            messages=[cast(dict[str, Any], cast(object, m)) for m in messages]
-        )
+
+        messages_: List[BaseMessage] = [m.to_langchain_message() for m in messages]
         return messages_
 
     async def run_graph_async(
         self,
         *,
-        request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
     ) -> List[AnyMessage]:
@@ -697,7 +582,7 @@ class LangGraphToOpenAIConverter:
         Run the graph asynchronously.
 
         Args:
-            request: The chat request.
+            chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             request_information: The request information.
 
@@ -705,20 +590,18 @@ class LangGraphToOpenAIConverter:
             The list of any messages.
         """
         messages: List[BaseMessage] = self.create_messages_for_graph(
-            messages=request["messages"]
+            messages=chat_request_wrapper.messages
         )
 
         output_messages: List[AnyMessage] = await self._run_graph_with_messages_async(
-            chat_request=request,
             compiled_state_graph=compiled_state_graph,
             messages=messages,
             request_information=request_information,
         )
         return output_messages
 
-    # noinspection PyMethodMayBeStatic
+    @staticmethod
     async def create_graph_for_llm_async(
-        self,
         *,
         llm: BaseChatModel,
         tools: Sequence[BaseTool],
@@ -753,29 +636,8 @@ class LangGraphToOpenAIConverter:
         return compiled_state_graph
 
     @staticmethod
-    def add_completion_usage(
-        *, original: CompletionUsage, new_one: CompletionUsage
-    ) -> CompletionUsage:
-        """
-        Add completion usage metadata.
-
-        Args:
-            original: The original completion usage metadata.
-            new_one: The new completion usage metadata.
-
-        Returns:
-            The completion usage metadata.
-        """
-        return CompletionUsage(
-            prompt_tokens=original.prompt_tokens + new_one.prompt_tokens,
-            completion_tokens=original.completion_tokens + new_one.completion_tokens,
-            total_tokens=original.total_tokens + new_one.total_tokens,
-        )
-
-    @staticmethod
     def create_state(
         *,
-        chat_request: ChatRequest,
         messages: List[BaseMessage],
         request_information: RequestInformation,
     ) -> MyMessagesState:

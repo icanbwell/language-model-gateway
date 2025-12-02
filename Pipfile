@@ -67,7 +67,7 @@ cachetools = ">=5.5.0"
 # aiofiles is a Python library for working with files asynchronously
 #aiofiles = ">=24.1.0"
 # pypdf is a Python library for working with PDFs
-pypdf = ">=5.2.0"
+pypdf = ">=6.4.0"
 # backoff is a Python library for retrying requests
 backoff = ">=2.2.1"
 # Databricks SDK is a Python library for interacting with Databricks
@@ -118,7 +118,7 @@ pre-commit = ">=3.8.0"
 # autoflake is a Python library for removing unused imports
 autoflake = ">=2.3.1"
 # mypy is a Python library for type checking
-mypy = ">=1.13.0"
+mypy = ">=1.19.0"
 # pytest is a Python library for running tests
 pytest = ">=8.3.3"
 # pytest-asyncio is a Python library for running asyncio tests
@@ -131,7 +131,7 @@ types-requests = ">=2.32.4"
 # pytest-httpx is a Python library for mocking HTTPX tests
 pytest-httpx = ">=0.35.0"
 # types-beautifulsoup is a Python library for typing BeautifulSoup
-types-beautifulsoup4 = ">=4.12.0.20241020"
+types-beautifulsoup4 = ">=4.12.0"
 # types-cachetools is a Python library for typing cachetools
 types-cachetools = ">=5.5.0"
 # moto is a Python library for mocking AWS services

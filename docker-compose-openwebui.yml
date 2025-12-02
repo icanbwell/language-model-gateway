@@ -79,7 +79,8 @@ services:
       # merges OAuth accounts with existing accounts using the same email address
       OAUTH_MERGE_ACCOUNTS_BY_EMAIL: True
       # Enables API key authentication.  Needed for our script in Makefile to set up configuration
-      ENABLE_API_KEY: True
+      # https://docs.openwebui.com/getting-started/env-configuration#enable_api_keys
+      ENABLE_API_KEYS: True
       # Use S3 for file storage: https://docs.openwebui.com/tutorials/s3-storage/
       STORAGE_PROVIDER: s3
       S3_ENDPOINT_URL: "https://s3.us-east-1.amazonaws.com"

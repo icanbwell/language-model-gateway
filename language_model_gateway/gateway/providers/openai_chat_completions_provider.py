@@ -13,17 +13,16 @@ from openai.types.chat import (
     ChatCompletion,
 )
 from pydantic_core import ValidationError
+from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
-
-
-from starlette.responses import StreamingResponse, JSONResponse
-
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__file__)
@@ -46,20 +45,20 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         """
         Call the OpenAI API to get chat completions
 
         :param headers:
-        :param chat_request:
+        :param chat_request_wrapper:
         :param model_config:
         :param auth_information:
 
         :return:
         """
-        if not chat_request:
+        if chat_request_wrapper is None:
             raise ValueError("chat_request must not be None")
 
         request_id: str = str(randint(1, 1000))
@@ -67,13 +66,13 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         if not agent_url:
             raise ValueError("agent_url must not be None")
 
-        if chat_request.get("stream"):
+        if chat_request_wrapper.stream:
             return StreamingResponse(
                 await self.get_streaming_response_async(
                     agent_url=agent_url,
                     request_id=request_id,
                     headers=headers,
-                    chat_request=chat_request,
+                    chat_request_wrapper=chat_request_wrapper,
                 ),
                 media_type="text/event-stream",
             )
@@ -85,7 +84,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
             try:
                 agent_response: Response = await client.post(
                     agent_url,
-                    json=chat_request,
+                    json=chat_request_wrapper.to_dict(),
                     timeout=60 * 60,
                     headers=headers,
                 )
@@ -122,13 +121,13 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         agent_url: str,
         request_id: str,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
     ) -> AsyncGenerator[str, None]:
         logger.info(f"Streaming response {request_id} from agent")
         generator: AsyncGenerator[str, None] = self._stream_resp_async_generator(
             agent_url=agent_url,
             request_id=request_id,
-            chat_request=chat_request,
+            chat_request_wrapper=chat_request_wrapper,
             headers=headers,
         )
         return generator
@@ -138,7 +137,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
         *,
         request_id: str,
         agent_url: str,
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         headers: Dict[str, str],
     ) -> AsyncGenerator[str, None]:
         logger.info(f"Streaming response {request_id} from agent")
@@ -150,7 +149,7 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                     client,
                     "POST",
                     agent_url,
-                    json=chat_request,
+                    json=chat_request_wrapper.to_dict(),
                     timeout=60 * 60,
                     headers=headers,
                 ) as event_source:

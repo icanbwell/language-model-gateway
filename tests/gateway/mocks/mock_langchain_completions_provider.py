@@ -20,7 +20,9 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+    ChatRequestWrapper,
+)
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from oidcauthlib.auth.token_reader import TokenReader
@@ -66,12 +68,12 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         *,
         model_config: ChatModelConfig,
         headers: Dict[str, str],
-        chat_request: ChatRequest,
+        chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         result: Dict[str, Any] = self.fn_get_response(
             model_config=model_config,
             headers=headers,
-            chat_request=chat_request,
+            chat_request_wrapper=chat_request_wrapper,
         )
         return JSONResponse(content=result)
