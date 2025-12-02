@@ -1,3 +1,4 @@
+import os
 from random import randint
 from typing import Optional
 
@@ -25,26 +26,20 @@ async def test_chat_completions(
 ) -> None:
     print("")
 
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Barack"
-                )
-            ),
-        )
-
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
+    )
+    ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+    assert ollama_base_url is not None, (
+        "OLLAMA_BASE_URL environment variable is not set"
     )
     await model_configuration_cache.set(
         [
             ChatModelConfig(
-                id="b_well_phr",
-                name="ChatGPT",
+                id="test_model",
+                name="Test Model",
                 description="ChatGPT",
-                type="openai",
+                type="langchain",
                 model=ModelConfig(provider="ollama"),
             )
         ]
@@ -60,12 +55,12 @@ async def test_chat_completions(
     # call API
     message: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "I'm 60 years old and have been programming for 5 days.",
+        "content": "Who was the president of United States in 2012? ",
     }
     chat_id: str = str(randint(1, 1000))
     chat_completion: ChatCompletion = await client.chat.completions.create(
         messages=[message],
-        model="General Purpose",
+        model="Test Model",
         extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
     )
 
@@ -76,41 +71,7 @@ async def test_chat_completions(
 
     assert content is not None
     print(content)
-    # assert "Barack" in content
-
-    message = {
-        "role": "user",
-        "content": "let’s talk about football",
-    }
-    chat_completion = await client.chat.completions.create(
-        messages=[message],
-        model="General Purpose",
-        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
-    )
-
-    # print the top "choice"
-    content = "\n".join(
-        choice.message.content or "" for choice in chat_completion.choices
-    )
-
-    assert content is not None
-
-    message = {
-        "role": "user",
-        "content": "look up my user profile",
-    }
-    chat_completion = await client.chat.completions.create(
-        messages=[message],
-        model="General Purpose",
-        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
-    )
-
-    # print the top "choice"
-    content = "\n".join(
-        choice.message.content or "" for choice in chat_completion.choices
-    )
-
-    assert content is not None
+    assert "Barack" in content
 
 
 @pytest.mark.asyncio

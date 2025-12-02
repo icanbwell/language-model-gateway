@@ -124,7 +124,7 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       # url for ollama service
-      OLLAMA_URL: 'http://ollama:11434'
+      OLLAMA_BASE_URL: 'http://ollama:11434'
       DEFAULT_OLLAMA_MODEL: 'qwen3:8b'
     env_file: docker.env
     command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]

@@ -109,7 +109,10 @@ class ModelFactory:
                     "OLLAMA_BASE_URL environment variable must be set for ollama models"
                 )
             model_parameters_dict["base_url"] = ollama_base_url
-            if "model" not in model_parameters_dict:
+            if (
+                "model" not in model_parameters_dict
+                or not model_parameters_dict["model"]
+            ):
                 default_ollama_model = os.getenv("DEFAULT_OLLAMA_MODEL")
                 if not default_ollama_model:
                     raise ValueError(
