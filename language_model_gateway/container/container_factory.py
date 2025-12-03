@@ -55,8 +55,11 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
+from language_model_gateway.gateway.tools.google_search_tool import GoogleSearchTool
 from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
+from language_model_gateway.gateway.tools.pdf_extraction_tool import PDFExtractionTool
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
+from language_model_gateway.gateway.tools.url_to_markdown_tool import URLToMarkdownTool
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -240,6 +243,27 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            PDFExtractionTool,
+            lambda c: PDFExtractionTool(
+                ocr_extractor_factory=c.resolve(OCRExtractorFactory),
+            )
+        )
+
+        container.singleton(
+            GoogleSearchTool,
+            lambda c: GoogleSearchTool(
+
+            )
+        )
+
+        container.singleton(
+            URLToMarkdownTool,
+            lambda c: URLToMarkdownTool(
+
+            )
+        )
+
+        container.singleton(
             ToolProvider,
             lambda c: ToolProvider(
                 image_generator_factory=c.resolve(ImageGeneratorFactory),
@@ -252,6 +276,9 @@ class LanguageModelGatewayContainerFactory:
                 jira_issues_helper=c.resolve(JiraIssueHelper),
                 confluence_helper=c.resolve(ConfluenceHelper),
                 databricks_helper=c.resolve(DatabricksHelper),
+                pdf_text_extractor=c.resolve(PDFExtractionTool),
+                google_search_tool=c.resolve(GoogleSearchTool),
+                url_to_markdown_tool=c.resolve(URLToMarkdownTool)
             ),
         )
 

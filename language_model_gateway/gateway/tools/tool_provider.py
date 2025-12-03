@@ -127,6 +127,9 @@ class ToolProvider:
         jira_issues_helper: JiraIssueHelper,
         confluence_helper: ConfluenceHelper,
         databricks_helper: DatabricksHelper,
+        pdf_text_extractor: PDFExtractionTool,
+        google_search_tool: GoogleSearchTool,
+        url_to_markdown_tool: URLToMarkdownTool,
     ) -> None:
         web_search_tool: Optional[BaseTool] = None
         default_web_search_tool: str = environ.get(
@@ -136,7 +139,7 @@ class ToolProvider:
             case "duckduckgo_search":
                 web_search_tool = DuckDuckGoSearchRun()
             case "google_search":
-                web_search_tool = GoogleSearchTool()
+                web_search_tool = google_search_tool
             case _:
                 raise ValueError(
                     f"Unknown default web search tool: {default_web_search_tool}"
@@ -150,10 +153,10 @@ class ToolProvider:
             "calculator_length": CalculatorLengthTool(),
             "web_search": web_search_tool,
             "pubmed": PubmedQueryRun(),
-            "google_search": GoogleSearchTool(),
+            "google_search": google_search_tool,
             "duckduckgo_search": DuckDuckGoSearchRun(),
             "python_repl": PythonReplTool(),
-            "get_web_page": URLToMarkdownTool(),
+            "get_web_page": url_to_markdown_tool,
             "arxiv_search": ArxivQueryRun(),
             "health_summary_generator": HealthSummaryGeneratorTool(
                 file_manager_factory=file_manager_factory,
@@ -187,9 +190,7 @@ class ToolProvider:
                 api_key=environ.get("SCRAPING_BEE_API_KEY")
             ),
             "provider_search": ProviderSearchTool(),
-            "pdf_text_extractor": PDFExtractionTool(
-                ocr_extractor_factory=ocr_extractor_factory
-            ),
+            "pdf_text_extractor": pdf_text_extractor,
             "github_pull_request_analyzer": GitHubPullRequestAnalyzerTool(
                 github_pull_request_helper=github_pull_request_helper
             ),

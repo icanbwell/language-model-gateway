@@ -34,7 +34,9 @@ async def test_chat_anthropic_with_web_scraping(
                 system_prompts=[
                     PromptConfig(
                         role="system",
-                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
+                        content="You are an assistant that parses web pages."
+                                "  Let’s think step by step and take your time to get the right answer."
+                                "  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
                     )
                 ],
                 tools=[
