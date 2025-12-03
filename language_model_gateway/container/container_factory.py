@@ -87,6 +87,37 @@ from oidcauthlib.container.oidc_authlib_container_factory import (
     OidcAuthLibContainerFactory,
 )
 
+from language_model_gateway.gateway.tools.current_time_tool import CurrentTimeTool
+from language_model_gateway.gateway.tools.calculator_average_tool import CalculatorAverageTool
+from language_model_gateway.gateway.tools.calculator_stddev_tool import CalculatorStddevTool
+from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
+from language_model_gateway.gateway.tools.calculator_length_tool import CalculatorLengthTool
+from langchain_community.tools import DuckDuckGoSearchRun, ArxivQueryRun
+from langchain_community.tools.pubmed.tool import PubmedQueryRun
+from language_model_gateway.gateway.tools.health_summary_generator_tool import HealthSummaryGeneratorTool
+from language_model_gateway.gateway.tools.image_generator_tool import ImageGeneratorTool
+from language_model_gateway.gateway.tools.graph_viz_diagram_generator_tool import GraphVizDiagramGeneratorTool
+from language_model_gateway.gateway.tools.sequence_diagram_generator_tool import SequenceDiagramGeneratorTool
+from language_model_gateway.gateway.tools.flow_chart_generator_tool import FlowChartGeneratorTool
+from language_model_gateway.gateway.tools.er_diagram_generator_tool import ERDiagramGeneratorTool
+from language_model_gateway.gateway.tools.network_topology_diagram_tool import NetworkTopologyGeneratorTool
+from language_model_gateway.gateway.tools.scraping_bee_web_scraper_tool import ScrapingBeeWebScraperTool
+from language_model_gateway.gateway.tools.provider_search_tool import ProviderSearchTool
+from language_model_gateway.gateway.tools.github_pull_request_analyzer_tool import GitHubPullRequestAnalyzerTool
+from language_model_gateway.gateway.tools.github_pull_request_diff_tool import GitHubPullRequestDiffTool
+from language_model_gateway.gateway.tools.jira_issues_analyzer_tool import JiraIssuesAnalyzerTool
+from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksSQLTool
+from language_model_gateway.gateway.tools.fhir_graphql_schema_provider import GraphqlSchemaProviderTool
+from language_model_gateway.gateway.tools.jira_issue_retriever import JiraIssueRetriever
+from language_model_gateway.gateway.tools.github_pull_request_retriever_tool import GitHubPullRequestRetriever
+from language_model_gateway.gateway.tools.confluence_search_tool import ConfluenceSearchTool
+from language_model_gateway.gateway.tools.confluence_page_retriever import ConfluencePageRetriever
+from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import GetUserProfileTool
+from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import StoreUserProfileTool
+from language_model_gateway.gateway.tools.memories.memory_write_tool import MemoryWriteTool
+from language_model_gateway.gateway.tools.memories.memory_read_tool import MemoryReadTool
+from language_model_gateway.gateway.tools.python_repl_tool import PythonReplTool
+
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["INITIALIZATION"])
 
@@ -263,60 +294,123 @@ class LanguageModelGatewayContainerFactory:
             )
         )
 
+        # Register all ToolProvider tool dependencies as singletons (with required dependencies)
+        container.singleton(CurrentTimeTool, lambda c: CurrentTimeTool())
+        container.singleton(CalculatorAverageTool, lambda c: CalculatorAverageTool())
+        container.singleton(CalculatorStddevTool, lambda c: CalculatorStddevTool())
+        container.singleton(CalculatorSumTool, lambda c: CalculatorSumTool())
+        container.singleton(CalculatorLengthTool, lambda c: CalculatorLengthTool())
+        container.singleton(DuckDuckGoSearchRun, lambda c: DuckDuckGoSearchRun())
+        container.singleton(PubmedQueryRun, lambda c: PubmedQueryRun())
+        container.singleton(ArxivQueryRun, lambda c: ArxivQueryRun())
+        container.singleton(HealthSummaryGeneratorTool, lambda c: HealthSummaryGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        # For image_generator_tool_aws and image_generator_tool_openai, you may want to distinguish by config or use two factories
+        container.singleton(ImageGeneratorTool, lambda c: ImageGeneratorTool(
+            image_generator_factory=c.resolve(ImageGeneratorFactory),
+            file_manager_factory=c.resolve(FileManagerFactory),
+            model_provider=None  # or set as needed
+        ))
+        container.singleton(GraphVizDiagramGeneratorTool, lambda c: GraphVizDiagramGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        container.singleton(SequenceDiagramGeneratorTool, lambda c: SequenceDiagramGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        container.singleton(FlowChartGeneratorTool, lambda c: FlowChartGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        container.singleton(ERDiagramGeneratorTool, lambda c: ERDiagramGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        container.singleton(NetworkTopologyGeneratorTool, lambda c: NetworkTopologyGeneratorTool(
+            file_manager_factory=c.resolve(FileManagerFactory)
+        ))
+        container.singleton(ScrapingBeeWebScraperTool, lambda c: ScrapingBeeWebScraperTool(
+            api_key=os.environ.get("SCRAPING_BEE_API_KEY", "")
+        ))
+        container.singleton(ProviderSearchTool, lambda c: ProviderSearchTool())
+        container.singleton(GitHubPullRequestAnalyzerTool, lambda c: GitHubPullRequestAnalyzerTool(
+            github_pull_request_helper=c.resolve(GithubPullRequestHelper)
+        ))
+        container.singleton(GitHubPullRequestDiffTool, lambda c: GitHubPullRequestDiffTool(
+            github_pull_request_helper=c.resolve(GithubPullRequestHelper)
+        ))
+        container.singleton(JiraIssuesAnalyzerTool, lambda c: JiraIssuesAnalyzerTool(
+            jira_issues_helper=c.resolve(JiraIssueHelper)
+        ))
+        container.singleton(DatabricksSQLTool, lambda c: DatabricksSQLTool(
+            databricks_helper=c.resolve(DatabricksHelper)
+        ))
+        container.singleton(GraphqlSchemaProviderTool, lambda c: GraphqlSchemaProviderTool())
+        container.singleton(JiraIssueRetriever, lambda c: JiraIssueRetriever(
+            jira_issues_helper=c.resolve(JiraIssueHelper)
+        ))
+        container.singleton(GitHubPullRequestRetriever, lambda c: GitHubPullRequestRetriever(
+            github_pull_request_helper=c.resolve(GithubPullRequestHelper)
+        ))
+        container.singleton(ConfluenceSearchTool, lambda c: ConfluenceSearchTool(
+            confluence_helper=c.resolve(ConfluenceHelper)
+        ))
+        container.singleton(ConfluencePageRetriever, lambda c: ConfluencePageRetriever(
+            confluence_helper=c.resolve(ConfluenceHelper)
+        ))
+        container.singleton(GetUserProfileTool, lambda c: GetUserProfileTool())
+        container.singleton(StoreUserProfileTool, lambda c: StoreUserProfileTool())
+        container.singleton(MemoryWriteTool, lambda c: MemoryWriteTool())
+        container.singleton(MemoryReadTool, lambda c: MemoryReadTool())
+        container.singleton(PythonReplTool, lambda c: PythonReplTool())
+        # For image_generator_tool_openai, create a separate singleton if needed (see above)
+        # ...existing code...
+
+        # Update ToolProvider registration to inject all dependencies
         container.singleton(
             ToolProvider,
             lambda c: ToolProvider(
                 image_generator_factory=c.resolve(ImageGeneratorFactory),
                 file_manager_factory=c.resolve(FileManagerFactory),
                 ocr_extractor_factory=c.resolve(OCRExtractorFactory),
-                environment_variables=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ),
+                environment_variables=c.resolve(LanguageModelGatewayEnvironmentVariables),
                 github_pull_request_helper=c.resolve(GithubPullRequestHelper),
                 jira_issues_helper=c.resolve(JiraIssueHelper),
                 confluence_helper=c.resolve(ConfluenceHelper),
                 databricks_helper=c.resolve(DatabricksHelper),
                 pdf_text_extractor=c.resolve(PDFExtractionTool),
                 google_search_tool=c.resolve(GoogleSearchTool),
-                url_to_markdown_tool=c.resolve(URLToMarkdownTool)
-            ),
-        )
-
-        container.singleton(
-            ToolAuthManager,
-            lambda c: ToolAuthManager(
-                auth_manager=c.resolve(AuthManager),
-                token_exchange_manager=c.resolve(TokenExchangeManager),
-                auth_config_reader=c.resolve(AuthConfigReader),
-            ),
-        )
-
-        container.singleton(
-            MCPToolProvider,
-            lambda c: MCPToolProvider(
-                tool_auth_manager=c.resolve(ToolAuthManager),
-                environment_variables=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ),
-                token_reducer=c.resolve(TokenReducer),
-            ),
-        )
-
-        container.singleton(
-            LangChainCompletionsProvider,
-            lambda c: LangChainCompletionsProvider(
-                model_factory=c.resolve(ModelFactory),
-                lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
-                tool_provider=c.resolve(ToolProvider),
-                mcp_tool_provider=c.resolve(MCPToolProvider),
-                token_reader=c.resolve(TokenReader),
-                auth_manager=c.resolve(AuthManager),
-                tool_auth_manager=c.resolve(ToolAuthManager),
-                environment_variables=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ),
-                auth_config_reader=c.resolve(AuthConfigReader),
-                persistence_factory=c.resolve(PersistenceFactory),
+                url_to_markdown_tool=c.resolve(URLToMarkdownTool),
+                current_time_tool=c.resolve(CurrentTimeTool),
+                calculator_average_tool=c.resolve(CalculatorAverageTool),
+                calculator_stddev_tool=c.resolve(CalculatorStddevTool),
+                calculator_sum_tool=c.resolve(CalculatorSumTool),
+                calculator_length_tool=c.resolve(CalculatorLengthTool),
+                duckduckgo_search_tool=c.resolve(DuckDuckGoSearchRun),
+                pubmed_query_tool=c.resolve(PubmedQueryRun),
+                arxiv_query_tool=c.resolve(ArxivQueryRun),
+                health_summary_generator_tool=c.resolve(HealthSummaryGeneratorTool),
+                image_generator_tool_aws=c.resolve(ImageGeneratorTool),
+                image_generator_tool_openai=c.resolve(ImageGeneratorTool),
+                graph_viz_diagram_generator_tool=c.resolve(GraphVizDiagramGeneratorTool),
+                sequence_diagram_generator_tool=c.resolve(SequenceDiagramGeneratorTool),
+                flow_chart_generator_tool=c.resolve(FlowChartGeneratorTool),
+                er_diagram_generator_tool=c.resolve(ERDiagramGeneratorTool),
+                network_topology_generator_tool=c.resolve(NetworkTopologyGeneratorTool),
+                scraping_bee_web_scraper_tool=c.resolve(ScrapingBeeWebScraperTool),
+                provider_search_tool=c.resolve(ProviderSearchTool),
+                github_pull_request_analyzer_tool=c.resolve(GitHubPullRequestAnalyzerTool),
+                github_pull_request_diff_tool=c.resolve(GitHubPullRequestDiffTool),
+                jira_issues_analyzer_tool=c.resolve(JiraIssuesAnalyzerTool),
+                databricks_query_validator_tool=c.resolve(DatabricksSQLTool),
+                fhir_graphql_schema_provider_tool=c.resolve(GraphqlSchemaProviderTool),
+                jira_issue_retriever_tool=c.resolve(JiraIssueRetriever),
+                github_pull_request_retriever_tool=c.resolve(GitHubPullRequestRetriever),
+                confluence_search_tool=c.resolve(ConfluenceSearchTool),
+                confluence_page_retriever_tool=c.resolve(ConfluencePageRetriever),
+                get_user_profile_tool=c.resolve(GetUserProfileTool),
+                store_user_profile_tool=c.resolve(StoreUserProfileTool),
+                memory_writer_tool=c.resolve(MemoryWriteTool),
+                memory_reader_tool=c.resolve(MemoryReadTool),
+                python_repl_tool=c.resolve(PythonReplTool),
             ),
         )
 
