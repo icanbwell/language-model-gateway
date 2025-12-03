@@ -23,6 +23,7 @@ build: create-docker-network ## Builds the docker for dev
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
+	-f docker-compose-llm.yml \
 	 build --parallel;
 
 .PHONY: up
@@ -31,6 +32,7 @@ up: create-docker-network fix-script-permissions ## starts docker containers
 	-f docker-compose-keycloak.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
 	docker compose --progress=plain \
+	-f docker-compose-llm.yml \
 	-f docker-compose.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway || exit 1 && \
 	echo ""
@@ -101,8 +103,12 @@ up-mcp-server-gateway:
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
+.PHONY: up-llm
+up-llm: ## starts docker containers
+	docker compose -f docker-compose-llm.yml up -d
+
 .PHONY: up-all
-up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
+up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-llm ## starts all docker containers
 	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
@@ -119,8 +125,11 @@ down: ## stops docker containers
 	docker compose --progress=plain \
 	  -f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
-	-f docker-compose-openwebui.yml -f docker-compose-openwebui-ssl.yml -f docker-compose-openwebui-auth.yml \
+	-f docker-compose-openwebui.yml \
+	-f docker-compose-openwebui-ssl.yml \
+	-f docker-compose-openwebui-auth.yml \
 	-f docker-compose-mcp-server-gateway.yml \
+	-f docker-compose-llm.yml \
 	down --remove-orphans
 
 .PHONY:update

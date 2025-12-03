@@ -13,28 +13,12 @@ from language_model_gateway.configs.config_schema import (
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.utilities.environment_reader import (
-    EnvironmentReader,
-)
-from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
 
 
 async def test_chat_anthropic_with_web_scraping(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
-    if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
-        test_container.singleton(
-            ModelFactory,
-            lambda c: MockModelFactory(
-                fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "3800 Reservoir Road Northwest"
-                )
-            ),
-        )
-
     # set the model configuration for this test
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
@@ -46,14 +30,13 @@ async def test_chat_anthropic_with_web_scraping(
                 name="Parse Web Page",
                 description="Parse Web Page",
                 type="langchain",
-                model=ModelConfig(
-                    provider="bedrock",
-                    model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
-                ),
+                model=ModelConfig(provider="ollama"),
                 system_prompts=[
                     PromptConfig(
                         role="system",
-                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
+                        content="You are an assistant that parses web pages."
+                        "  Let’s think step by step and take your time to get the right answer."
+                        "  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
                     )
                 ],
                 tools=[

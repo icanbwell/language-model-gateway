@@ -22,6 +22,29 @@ async def test_chat_anthropic_image_generation(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
+    # Set the Test Model in the cache
+    from language_model_gateway.configs.config_schema import (
+        ChatModelConfig,
+        ModelConfig,
+    )
+    from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+        ConfigExpiringCache,
+    )
+
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="Image Generation Model",
+                type="langchain",
+                model=ModelConfig(provider="openai"),
+            )
+        ]
+    )
 
     if not EnvironmentReader.is_environment_variable_set("RUN_TESTS_WITH_REAL_LLM"):
         test_container.singleton(
@@ -46,7 +69,7 @@ async def test_chat_anthropic_image_generation(
 
     # call API
     response: ImagesResponse = await client.images.generate(
-        model="dall-e-3",
+        model="Test Model",
         prompt="a white siamese cat",
         size="1024x1024",
         quality="standard",

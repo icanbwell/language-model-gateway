@@ -1,3 +1,5 @@
+import os
+from random import randint
 from typing import Optional
 
 import httpx
@@ -10,37 +12,33 @@ from openai.types.chat import (
     ChatCompletionAssistantMessageParam,
 )
 
-from language_model_gateway.configs.config_schema import (
-    ChatModelConfig,
-    ModelConfig,
-    AgentConfig,
-)
+from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 
 
 @pytest.mark.asyncio
-async def test_chat_completions_with_web_search(
+async def test_chat_completions(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-    # set the model configuration for this test
+
     model_configuration_cache: ConfigExpiringCache = test_container.resolve(
         ConfigExpiringCache
+    )
+    ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+    assert ollama_base_url is not None, (
+        "OLLAMA_BASE_URL environment variable is not set"
     )
     await model_configuration_cache.set(
         [
             ChatModelConfig(
-                id="general_purpose",
-                name="General Purpose",
-                description="General Purpose Language Model",
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
                 type="langchain",
                 model=ModelConfig(provider="ollama"),
-                tools=[
-                    AgentConfig(name="google_search"),
-                    AgentConfig(name="get_web_page"),
-                ],
             )
         ]
     )
@@ -53,28 +51,73 @@ async def test_chat_completions_with_web_search(
     )
 
     # call API
-    message1: ChatCompletionUserMessageParam = {
+    message: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "Who won the last US election?",
+        "content": "Who was the president of United States in 2012? ",
     }
+    chat_id: str = str(randint(1, 1000))
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[message1],
-        model="General Purpose",
+        messages=[message],
+        model="Test Model",
+        extra_headers={"X-Chat-Id": chat_id, "x-openwebui-user-id": "test_user_id"},
     )
 
     # print the top "choice"
     content: Optional[str] = "\n".join(
         choice.message.content or "" for choice in chat_completion.choices
     )
+
     assert content is not None
     print(content)
-    assert "Trump" in content
+    assert "Barack" in content
 
 
 @pytest.mark.asyncio
-async def test_chat_completions_with_chat_history_and_web_search(
+async def test_chat_completions_with_chat_history(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
+    print("")
+
+    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
+        ConfigExpiringCache
+    )
+    ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+    assert ollama_base_url is not None, (
+        "OLLAMA_BASE_URL environment variable is not set"
+    )
+    await model_configuration_cache.set(
+        [
+            ChatModelConfig(
+                id="test_model",
+                name="Test Model",
+                description="ChatGPT",
+                type="langchain",
+                model=ModelConfig(provider="ollama"),
+            )
+        ]
+    )
+
+    message1: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "Who was the 44th president of United States? ",
+    }
+
+    message2: ChatCompletionAssistantMessageParam = {
+        "role": "assistant",
+        "content": "Barack Obama",
+    }
+    message3: ChatCompletionUserMessageParam = {
+        "role": "user",
+        "content": "what is his first name?",
+    }
+    messages: list[
+        ChatCompletionUserMessageParam | ChatCompletionAssistantMessageParam
+    ] = [
+        message1,
+        message2,
+        message3,
+    ]
+
     # init client and connect to localhost server
     client = AsyncOpenAI(
         api_key="fake-api-key",
@@ -83,25 +126,9 @@ async def test_chat_completions_with_chat_history_and_web_search(
     )
 
     # call API
-    message1: ChatCompletionUserMessageParam = {
-        "role": "user",
-        "content": "I want to talk about United States",
-    }
-    message2: ChatCompletionAssistantMessageParam = {
-        "role": "assistant",
-        "content": "Ok",
-    }
-    message3: ChatCompletionUserMessageParam = {
-        "role": "user",
-        "content": "who won the last election?",
-    }
     chat_completion: ChatCompletion = await client.chat.completions.create(
-        messages=[
-            message1,
-            message2,
-            message3,
-        ],
-        model="General Purpose",
+        messages=messages,
+        model="Test Model",
     )
 
     # print the top "choice"
@@ -113,4 +140,4 @@ async def test_chat_completions_with_chat_history_and_web_search(
     )
     assert content is not None
     print(content)
-    assert "Trump" in content
+    assert "Barack" in content

@@ -4,6 +4,7 @@ from typing import List, Any, Dict, cast, Literal
 
 import boto3
 from boto3 import Session
+from langchain_ollama import ChatOllama
 from langchain_core.language_models import BaseChatModel
 from langchain_openai import ChatOpenAI
 from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
@@ -46,7 +47,7 @@ class ModelFactory:
             )
 
         model_vendor: str = model_config.provider
-        model_name: str = model_config.model
+        model_name: str | None = model_config.model
 
         model_parameters: List[ModelParameterConfig] | None = (
             chat_model_config.model_parameters
@@ -101,6 +102,24 @@ class ModelFactory:
             )
         elif model_config.provider == "openai":
             llm = ChatOpenAI(**model_parameters_dict)
+        elif model_config.provider == "ollama":
+            ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+            if not ollama_base_url:
+                raise ValueError(
+                    "OLLAMA_BASE_URL environment variable must be set for ollama models"
+                )
+            model_parameters_dict["base_url"] = ollama_base_url
+            if (
+                "model" not in model_parameters_dict
+                or not model_parameters_dict["model"]
+            ):
+                default_ollama_model = os.getenv("DEFAULT_OLLAMA_MODEL")
+                if not default_ollama_model:
+                    raise ValueError(
+                        "DEFAULT_OLLAMA_MODEL environment variable must be set for ollama models"
+                    )
+                model_parameters_dict["model"] = default_ollama_model
+            llm = ChatOllama(**model_parameters_dict)
         else:
             raise ValueError(
                 f"Unsupported model vendor: {model_vendor} and model_provider: {model_config.provider} for {model_name}"

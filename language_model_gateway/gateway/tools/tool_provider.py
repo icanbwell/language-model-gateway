@@ -6,16 +6,20 @@ from langchain_community.tools import (
     DuckDuckGoSearchRun,
     ArxivQueryRun,
 )
+from langchain_community.tools.pubmed.tool import PubmedQueryRun
 from langchain_core.tools import BaseTool
 
 from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
-    FileManagerFactory,
+from language_model_gateway.gateway.tools.calculator_average_tool import (
+    CalculatorAverageTool,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
-    ImageGeneratorFactory,
+from language_model_gateway.gateway.tools.calculator_length_tool import (
+    CalculatorLengthTool,
 )
-from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
+from language_model_gateway.gateway.tools.calculator_stddev_tool import (
+    CalculatorStddevTool,
+)
+from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
 from language_model_gateway.gateway.tools.confluence_page_retriever import (
     ConfluencePageRetriever,
 )
@@ -23,16 +27,15 @@ from language_model_gateway.gateway.tools.confluence_search_tool import (
     ConfluenceSearchTool,
 )
 from language_model_gateway.gateway.tools.current_time_tool import CurrentTimeTool
-from langchain_community.tools.pubmed.tool import PubmedQueryRun
-
+from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksSQLTool
 from language_model_gateway.gateway.tools.er_diagram_generator_tool import (
     ERDiagramGeneratorTool,
 )
+from language_model_gateway.gateway.tools.fhir_graphql_schema_provider import (
+    GraphqlSchemaProviderTool,
+)
 from language_model_gateway.gateway.tools.flow_chart_generator_tool import (
     FlowChartGeneratorTool,
-)
-from language_model_gateway.gateway.tools.health_summary_generator_tool import (
-    HealthSummaryGeneratorTool,
 )
 from language_model_gateway.gateway.tools.github_pull_request_analyzer_tool import (
     GitHubPullRequestAnalyzerTool,
@@ -47,29 +50,21 @@ from language_model_gateway.gateway.tools.google_search_tool import GoogleSearch
 from language_model_gateway.gateway.tools.graph_viz_diagram_generator_tool import (
     GraphVizDiagramGeneratorTool,
 )
-from language_model_gateway.gateway.tools.fhir_graphql_schema_provider import (
-    GraphqlSchemaProviderTool,
+from language_model_gateway.gateway.tools.health_summary_generator_tool import (
+    HealthSummaryGeneratorTool,
 )
 from language_model_gateway.gateway.tools.image_generator_tool import ImageGeneratorTool
-from language_model_gateway.gateway.tools.jira_issues_analyzer_tool import (
-    JiraIssuesAnalyzerTool,
-)
-from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksSQLTool
-
 from language_model_gateway.gateway.tools.jira_issue_retriever import (
     JiraIssueRetriever,
 )
-from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import (
-    GetUserProfileTool,
+from language_model_gateway.gateway.tools.jira_issues_analyzer_tool import (
+    JiraIssuesAnalyzerTool,
 )
 from language_model_gateway.gateway.tools.memories.memory_read_tool import (
     MemoryReadTool,
 )
 from language_model_gateway.gateway.tools.memories.memory_write_tool import (
     MemoryWriteTool,
-)
-from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import (
-    StoreUserProfileTool,
 )
 from language_model_gateway.gateway.tools.network_topology_diagram_tool import (
     NetworkTopologyGeneratorTool,
@@ -84,30 +79,11 @@ from language_model_gateway.gateway.tools.sequence_diagram_generator_tool import
     SequenceDiagramGeneratorTool,
 )
 from language_model_gateway.gateway.tools.url_to_markdown_tool import URLToMarkdownTool
-from language_model_gateway.gateway.tools.calculator_average_tool import (
-    CalculatorAverageTool,
+from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import (
+    GetUserProfileTool,
 )
-from language_model_gateway.gateway.tools.calculator_stddev_tool import (
-    CalculatorStddevTool,
-)
-from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
-from language_model_gateway.gateway.tools.calculator_length_tool import (
-    CalculatorLengthTool,
-)
-from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
-    ConfluenceHelper,
-)
-from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
-    LanguageModelGatewayEnvironmentVariables,
-)
-from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
-    GithubPullRequestHelper,
-)
-from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
-    JiraIssueHelper,
-)
-from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
-    DatabricksHelper,
+from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import (
+    StoreUserProfileTool,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -119,14 +95,41 @@ class ToolProvider:
     def __init__(
         self,
         *,
-        image_generator_factory: ImageGeneratorFactory,
-        file_manager_factory: FileManagerFactory,
-        ocr_extractor_factory: OCRExtractorFactory,
-        environment_variables: LanguageModelGatewayEnvironmentVariables,
-        github_pull_request_helper: GithubPullRequestHelper,
-        jira_issues_helper: JiraIssueHelper,
-        confluence_helper: ConfluenceHelper,
-        databricks_helper: DatabricksHelper,
+        pdf_text_extractor: PDFExtractionTool,
+        google_search_tool: GoogleSearchTool,
+        url_to_markdown_tool: URLToMarkdownTool,
+        current_time_tool: CurrentTimeTool,
+        calculator_average_tool: CalculatorAverageTool,
+        calculator_stddev_tool: CalculatorStddevTool,
+        calculator_sum_tool: CalculatorSumTool,
+        calculator_length_tool: CalculatorLengthTool,
+        duckduckgo_search_tool: DuckDuckGoSearchRun,
+        pubmed_query_tool: PubmedQueryRun,
+        arxiv_query_tool: ArxivQueryRun,
+        health_summary_generator_tool: HealthSummaryGeneratorTool,
+        image_generator_tool_aws: ImageGeneratorTool,
+        image_generator_tool_openai: ImageGeneratorTool,
+        graph_viz_diagram_generator_tool: GraphVizDiagramGeneratorTool,
+        sequence_diagram_generator_tool: SequenceDiagramGeneratorTool,
+        flow_chart_generator_tool: FlowChartGeneratorTool,
+        er_diagram_generator_tool: ERDiagramGeneratorTool,
+        network_topology_generator_tool: NetworkTopologyGeneratorTool,
+        scraping_bee_web_scraper_tool: ScrapingBeeWebScraperTool,
+        provider_search_tool: ProviderSearchTool,
+        github_pull_request_analyzer_tool: GitHubPullRequestAnalyzerTool,
+        github_pull_request_diff_tool: GitHubPullRequestDiffTool,
+        jira_issues_analyzer_tool: JiraIssuesAnalyzerTool,
+        databricks_query_validator_tool: DatabricksSQLTool,
+        fhir_graphql_schema_provider_tool: GraphqlSchemaProviderTool,
+        jira_issue_retriever_tool: JiraIssueRetriever,
+        github_pull_request_retriever_tool: GitHubPullRequestRetriever,
+        confluence_search_tool: ConfluenceSearchTool,
+        confluence_page_retriever_tool: ConfluencePageRetriever,
+        get_user_profile_tool: GetUserProfileTool,
+        store_user_profile_tool: StoreUserProfileTool,
+        memory_writer_tool: MemoryWriteTool,
+        memory_reader_tool: MemoryReadTool,
+        python_repl_tool: PythonReplTool,
     ) -> None:
         web_search_tool: Optional[BaseTool] = None
         default_web_search_tool: str = environ.get(
@@ -134,91 +137,51 @@ class ToolProvider:
         )
         match default_web_search_tool:
             case "duckduckgo_search":
-                web_search_tool = DuckDuckGoSearchRun()
+                web_search_tool = duckduckgo_search_tool
             case "google_search":
-                web_search_tool = GoogleSearchTool()
+                web_search_tool = google_search_tool
             case _:
                 raise ValueError(
                     f"Unknown default web search tool: {default_web_search_tool}"
                 )
 
         self.tools: Dict[str, BaseTool] = {
-            "current_date": CurrentTimeTool(),
-            "calculator_average": CalculatorAverageTool(),
-            "calculator_stddev": CalculatorStddevTool(),
-            "calculator_sum": CalculatorSumTool(),
-            "calculator_length": CalculatorLengthTool(),
+            "current_date": current_time_tool,
+            "calculator_average": calculator_average_tool,
+            "calculator_stddev": calculator_stddev_tool,
+            "calculator_sum": calculator_sum_tool,
+            "calculator_length": calculator_length_tool,
             "web_search": web_search_tool,
-            "pubmed": PubmedQueryRun(),
-            "google_search": GoogleSearchTool(),
-            "duckduckgo_search": DuckDuckGoSearchRun(),
-            "python_repl": PythonReplTool(),
-            "get_web_page": URLToMarkdownTool(),
-            "arxiv_search": ArxivQueryRun(),
-            "health_summary_generator": HealthSummaryGeneratorTool(
-                file_manager_factory=file_manager_factory,
-            ),
-            "image_generator": ImageGeneratorTool(
-                image_generator_factory=image_generator_factory,
-                file_manager_factory=file_manager_factory,
-                model_provider="aws",
-            ),
-            "image_generator_openai": ImageGeneratorTool(
-                image_generator_factory=image_generator_factory,
-                file_manager_factory=file_manager_factory,
-                model_provider="openai",
-            ),
-            "graph_viz_diagram_generator": GraphVizDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
-            ),
-            "sequence_diagram_generator": SequenceDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
-            ),
-            "flow_chart_generator": FlowChartGeneratorTool(
-                file_manager_factory=file_manager_factory
-            ),
-            "er_diagram_generator": ERDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
-            ),
-            "network_topology_generator": NetworkTopologyGeneratorTool(
-                file_manager_factory=file_manager_factory
-            ),
-            "scraping_bee_web_scraper": ScrapingBeeWebScraperTool(
-                api_key=environ.get("SCRAPING_BEE_API_KEY")
-            ),
-            "provider_search": ProviderSearchTool(),
-            "pdf_text_extractor": PDFExtractionTool(
-                ocr_extractor_factory=ocr_extractor_factory
-            ),
-            "github_pull_request_analyzer": GitHubPullRequestAnalyzerTool(
-                github_pull_request_helper=github_pull_request_helper
-            ),
-            "github_pull_request_diff": GitHubPullRequestDiffTool(
-                github_pull_request_helper=github_pull_request_helper
-            ),
-            "jira_issues_analyzer": JiraIssuesAnalyzerTool(
-                jira_issues_helper=jira_issues_helper
-            ),
-            "databricks_query_validator": DatabricksSQLTool(
-                databricks_helper=databricks_helper
-            ),
-            "fhir_graphql_schema_provider": GraphqlSchemaProviderTool(),
-            "jira_issue_retriever": JiraIssueRetriever(
-                jira_issues_helper=jira_issues_helper
-            ),
-            "github_pull_request_retriever": GitHubPullRequestRetriever(
-                github_pull_request_helper=github_pull_request_helper
-            ),
-            "confluence_search_tool": ConfluenceSearchTool(
-                confluence_helper=confluence_helper
-            ),
-            "confluence_page_retriever": ConfluencePageRetriever(
-                confluence_helper=confluence_helper
-            ),
-            "get_user_profile": GetUserProfileTool(),
-            "store_user_profile": StoreUserProfileTool(),
-            "memory_writer": MemoryWriteTool(),
-            "memory_reader": MemoryReadTool(),
+            "pubmed": pubmed_query_tool,
+            "google_search": google_search_tool,
+            "duckduckgo_search": duckduckgo_search_tool,
+            "python_repl": python_repl_tool,
+            "get_web_page": url_to_markdown_tool,
+            "arxiv_search": arxiv_query_tool,
+            "health_summary_generator": health_summary_generator_tool,
+            "image_generator": image_generator_tool_aws,
+            "image_generator_openai": image_generator_tool_openai,
+            "graph_viz_diagram_generator": graph_viz_diagram_generator_tool,
+            "sequence_diagram_generator": sequence_diagram_generator_tool,
+            "flow_chart_generator": flow_chart_generator_tool,
+            "er_diagram_generator": er_diagram_generator_tool,
+            "network_topology_generator": network_topology_generator_tool,
+            "scraping_bee_web_scraper": scraping_bee_web_scraper_tool,
+            "provider_search": provider_search_tool,
+            "pdf_text_extractor": pdf_text_extractor,
+            "github_pull_request_analyzer": github_pull_request_analyzer_tool,
+            "github_pull_request_diff": github_pull_request_diff_tool,
+            "jira_issues_analyzer": jira_issues_analyzer_tool,
+            "databricks_query_validator": databricks_query_validator_tool,
+            "fhir_graphql_schema_provider": fhir_graphql_schema_provider_tool,
+            "jira_issue_retriever": jira_issue_retriever_tool,
+            "github_pull_request_retriever": github_pull_request_retriever_tool,
+            "confluence_search_tool": confluence_search_tool,
+            "confluence_page_retriever": confluence_page_retriever_tool,
+            "get_user_profile": get_user_profile_tool,
+            "store_user_profile": store_user_profile_tool,
+            "memory_writer": memory_writer_tool,
+            "memory_reader": memory_reader_tool,
             # "sql_query": QuerySQLDataBaseTool(
             #     db=SQLDatabase(
             #         engine=Engine(

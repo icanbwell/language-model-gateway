@@ -1,0 +1,1 @@
+This is where we store weights for various embedding models used in our projects. These models are typically pre-trained and can be loaded quickly to generate embeddings for text data.

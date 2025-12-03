@@ -1,11 +1,12 @@
 import logging
 import os
 from logging import DEBUG
-from typing import Dict, List, Callable, Awaitable
+from typing import Dict, List, Callable, Awaitable, Any
 
 import httpx
 from datetime import timedelta
 from httpx import HTTPStatusError
+from langchain_core.messages import ToolMessage
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -21,6 +22,10 @@ from mcp.types import (
     LoggingMessageNotificationParams,
     EmbeddedResource,
     TextResourceContents,
+    CallToolResult,
+    ImageContent,
+    AudioContent,
+    ResourceLink,
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
@@ -139,11 +144,22 @@ class MCPToolProvider:
             """
             result: MCPToolCallResult = await handler(request)
 
+            if not isinstance(result, CallToolResult) and not isinstance(
+                result, ToolMessage
+            ):
+                raise TypeError(
+                    f"tool_interceptor_truncation expected MCPToolCallResult: got {type(result)}"
+                )
+
             if logger.isEnabledFor(DEBUG):
                 logger.debug(
                     f"=== Received tool output before truncation {len(result.content)} blocks ==="
                 )
                 content_block: ContentBlock
+                if not isinstance(result.content, ContentBlock):
+                    raise TypeError(
+                        f"tool_interceptor_truncation expected result.content to be List[ContentBlock], got {type(result.content)}"
+                    )
                 for content_index, content_block in enumerate(result.content):
                     if isinstance(content_block, TextContent):
                         logger.debug(f"[{content_index}] {content_block.text}")
@@ -158,9 +174,22 @@ class MCPToolProvider:
 
             content_block_list: List[ContentBlock] = []
 
-            for content_block in result.content:
-                if isinstance(content_block, TextContent):
-                    text: str = content_block.text
+            content_block1: (
+                TextContent
+                | ImageContent
+                | AudioContent
+                | ResourceLink
+                | EmbeddedResource
+                | str
+                | dict[Any, Any]
+            )
+            for content_block1 in result.content:
+                if not isinstance(content_block1, TextContent):
+                    raise TypeError(
+                        f"tool_interceptor_truncation expected content_block to be TextContent, got {type(content_block1)}"
+                    )
+                if isinstance(content_block1, TextContent):
+                    text: str = content_block1.text
                     # append the un-truncated part as a separate content block of type EmbeddedResource
                     # Content blocks that are not of type TextContent  are turned into artifacts instead of messages
                     # by LangChain
@@ -188,13 +217,13 @@ class MCPToolProvider:
                         logger.debug(
                             f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
                         )
-                        content_block.text = truncated_text
+                        content_block1.text = truncated_text
                         tokens_limit_left -= token_count
-                        content_block_list.append(content_block)
+                        content_block_list.append(content_block1)
                     else:
                         tokens_limit_left -= token_count
                         # append the original content block if no truncation is needed
-                        content_block_list.append(content_block)
+                        content_block_list.append(content_block1)
 
             if logger.isEnabledFor(DEBUG):
                 logger.debug(
