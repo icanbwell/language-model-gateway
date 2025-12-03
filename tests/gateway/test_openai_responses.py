@@ -5,7 +5,9 @@ from openai import AsyncOpenAI
 from openai.types.responses import (
     EasyInputMessageParam,
     Response,
-    ResponseOutputMessage, ResponseInputParam,
+    ResponseOutputMessage,
+    ResponseInputParam,
+    ResponseOutputText,
 )
 
 from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
@@ -130,17 +132,17 @@ async def test_openai_responses_with_history(
     print("==== End of Response 1 Content ====")
     # Step 2: Append first response's output to context
     if res1.output:
+        assert isinstance(res1.output[-1], ResponseOutputMessage)
         last_output: ResponseOutputMessage = res1.output[-1]
         assert last_output.content
-        last_output_content_: str = last_output.content[0].text
+        assert isinstance(last_output.content, ResponseOutputText)
+        # last_output_content_: str = last_output.content[0].text
         message_out: EasyInputMessageParam = {
             "role": "assistant",
             "content": "Paris",
             "type": "message",
         }
-        context.append(
-            message_out
-        )
+        context.append(message_out)
     # Step 3: Add next user message
     message2: EasyInputMessageParam = {
         "role": "user",

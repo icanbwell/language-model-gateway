@@ -6,16 +6,20 @@ from langchain_community.tools import (
     DuckDuckGoSearchRun,
     ArxivQueryRun,
 )
+from langchain_community.tools.pubmed.tool import PubmedQueryRun
 from langchain_core.tools import BaseTool
 
 from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
-    FileManagerFactory,
+from language_model_gateway.gateway.tools.calculator_average_tool import (
+    CalculatorAverageTool,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
-    ImageGeneratorFactory,
+from language_model_gateway.gateway.tools.calculator_length_tool import (
+    CalculatorLengthTool,
 )
-from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
+from language_model_gateway.gateway.tools.calculator_stddev_tool import (
+    CalculatorStddevTool,
+)
+from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
 from language_model_gateway.gateway.tools.confluence_page_retriever import (
     ConfluencePageRetriever,
 )
@@ -23,16 +27,15 @@ from language_model_gateway.gateway.tools.confluence_search_tool import (
     ConfluenceSearchTool,
 )
 from language_model_gateway.gateway.tools.current_time_tool import CurrentTimeTool
-from langchain_community.tools.pubmed.tool import PubmedQueryRun
-
+from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksSQLTool
 from language_model_gateway.gateway.tools.er_diagram_generator_tool import (
     ERDiagramGeneratorTool,
 )
+from language_model_gateway.gateway.tools.fhir_graphql_schema_provider import (
+    GraphqlSchemaProviderTool,
+)
 from language_model_gateway.gateway.tools.flow_chart_generator_tool import (
     FlowChartGeneratorTool,
-)
-from language_model_gateway.gateway.tools.health_summary_generator_tool import (
-    HealthSummaryGeneratorTool,
 )
 from language_model_gateway.gateway.tools.github_pull_request_analyzer_tool import (
     GitHubPullRequestAnalyzerTool,
@@ -47,29 +50,21 @@ from language_model_gateway.gateway.tools.google_search_tool import GoogleSearch
 from language_model_gateway.gateway.tools.graph_viz_diagram_generator_tool import (
     GraphVizDiagramGeneratorTool,
 )
-from language_model_gateway.gateway.tools.fhir_graphql_schema_provider import (
-    GraphqlSchemaProviderTool,
+from language_model_gateway.gateway.tools.health_summary_generator_tool import (
+    HealthSummaryGeneratorTool,
 )
 from language_model_gateway.gateway.tools.image_generator_tool import ImageGeneratorTool
-from language_model_gateway.gateway.tools.jira_issues_analyzer_tool import (
-    JiraIssuesAnalyzerTool,
-)
-from language_model_gateway.gateway.tools.databricks_sql_tool import DatabricksSQLTool
-
 from language_model_gateway.gateway.tools.jira_issue_retriever import (
     JiraIssueRetriever,
 )
-from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import (
-    GetUserProfileTool,
+from language_model_gateway.gateway.tools.jira_issues_analyzer_tool import (
+    JiraIssuesAnalyzerTool,
 )
 from language_model_gateway.gateway.tools.memories.memory_read_tool import (
     MemoryReadTool,
 )
 from language_model_gateway.gateway.tools.memories.memory_write_tool import (
     MemoryWriteTool,
-)
-from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import (
-    StoreUserProfileTool,
 )
 from language_model_gateway.gateway.tools.network_topology_diagram_tool import (
     NetworkTopologyGeneratorTool,
@@ -84,30 +79,11 @@ from language_model_gateway.gateway.tools.sequence_diagram_generator_tool import
     SequenceDiagramGeneratorTool,
 )
 from language_model_gateway.gateway.tools.url_to_markdown_tool import URLToMarkdownTool
-from language_model_gateway.gateway.tools.calculator_average_tool import (
-    CalculatorAverageTool,
+from language_model_gateway.gateway.tools.user_profile.get_user_profile_tool import (
+    GetUserProfileTool,
 )
-from language_model_gateway.gateway.tools.calculator_stddev_tool import (
-    CalculatorStddevTool,
-)
-from language_model_gateway.gateway.tools.calculator_sum_tool import CalculatorSumTool
-from language_model_gateway.gateway.tools.calculator_length_tool import (
-    CalculatorLengthTool,
-)
-from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
-    ConfluenceHelper,
-)
-from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
-    LanguageModelGatewayEnvironmentVariables,
-)
-from language_model_gateway.gateway.utilities.github.github_pull_request_helper import (
-    GithubPullRequestHelper,
-)
-from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
-    JiraIssueHelper,
-)
-from language_model_gateway.gateway.utilities.databricks.databricks_helper import (
-    DatabricksHelper,
+from language_model_gateway.gateway.tools.user_profile.store_user_profile_tool import (
+    StoreUserProfileTool,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -119,14 +95,6 @@ class ToolProvider:
     def __init__(
         self,
         *,
-        image_generator_factory: ImageGeneratorFactory,
-        file_manager_factory: FileManagerFactory,
-        ocr_extractor_factory: OCRExtractorFactory,
-        environment_variables: LanguageModelGatewayEnvironmentVariables,
-        github_pull_request_helper: GithubPullRequestHelper,
-        jira_issues_helper: JiraIssueHelper,
-        confluence_helper: ConfluenceHelper,
-        databricks_helper: DatabricksHelper,
         pdf_text_extractor: PDFExtractionTool,
         google_search_tool: GoogleSearchTool,
         url_to_markdown_tool: URLToMarkdownTool,
