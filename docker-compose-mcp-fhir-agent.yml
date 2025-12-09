@@ -279,9 +279,9 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-      MONGO_VECTOR_URL: ${PRODUCTION_MONGO_VECTOR_URL-}
-      MONGO_VECTOR_DB_USERNAME: ${PRODUCTION_MONGO_DB_USERNAME-}
-      MONGO_VECTOR_DB_PASSWORD: ${PRODUCTION_MONGO_DB_PASSWORD-}
+#      MONGO_VECTOR_URL: ${PRODUCTION_MONGO_VECTOR_URL-}
+#      MONGO_VECTOR_DB_USERNAME: ${PRODUCTION_MONGO_DB_USERNAME-}
+#      MONGO_VECTOR_DB_PASSWORD: ${PRODUCTION_MONGO_DB_PASSWORD-}
     env_file: docker.env
     ports:
       - '5065:5000'
