@@ -70,7 +70,7 @@ services:
       AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/auth_test/callback}
       # This is used to store state and nonce for OIDC auth code flow
       MONGO_URL: "mongodb://mongo:27017?appName=mcp-fhir-agent"
-      MONGO_DB_NAME: mcp_fhir_agent
+      MONGO_DB_NAME: "mcp-fhir-agent"
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
       MONGO_DB_USERNAME: "root"
       MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
@@ -124,7 +124,7 @@ services:
       # ---- End bailey config ----
       # AWS_REGION: "us-east-2"
       # vector store for embeddings
-      MONGO_VECTOR_DATABASE: data-science
+      MONGO_VECTOR_DATABASE: mcp-fhir-agent
       MONGO_VECTOR_EMBEDDINGS_COLLECTION: clinical-notes
       # vector index settings
       MONGO_VECTOR_INDEX_NAME: vector_index
@@ -154,6 +154,11 @@ services:
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-1acf47d258e5f8401cb0924ee7cba4ab}
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
+      # Tool client settings.  Follows mcpfhiragent/mcp_servers/tools/config/tool_config.py
+      # The client id is passed by the Client in either the X-Client-ID or Client-ID header
+      CLIENT_TOOL_CONFIGS: '[{"client_id":"aiden","tools":[{"tool_name":"dump_fhir_record","tool_parameters":{"enabled":true}}]},{"client_id":"default","tools":[{"tool_name":"dump_fhir_record","tool_parameters":{"enabled":false}}]}]'
+      # which compositions to skip retrieving because they have issues
+      SKIP_COMPOSITIONS: "Lab,Vitals,Procedure,Immunization,Condition,CarePlan,DiagnosticReport,Encounter"
     env_file: docker.env
     ports:
       - '5061:5000'
@@ -167,6 +172,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -196,6 +202,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -225,6 +232,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -254,6 +262,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -270,7 +279,9 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-
+      MONGO_VECTOR_URL: ${PRODUCTION_MONGO_VECTOR_URL-}
+      MONGO_VECTOR_DB_USERNAME: ${PRODUCTION_MONGO_DB_USERNAME-}
+      MONGO_VECTOR_DB_PASSWORD: ${PRODUCTION_MONGO_DB_PASSWORD-}
     env_file: docker.env
     ports:
       - '5065:5000'
@@ -284,6 +295,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
