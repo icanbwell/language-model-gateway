@@ -12,6 +12,11 @@ services:
       # use a dockerfile to preinstall the sentence-transformers package and download the all-MiniLM-L6-v2 model
       dockerfile: ./openwebui-config/functions/open-webui.Dockerfile
       context: .
+      args:
+        RAG_EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+        WHISPER_MODEL: "tiny"
+        WHISPER_MODEL_DIR: "/app/backend/data/cache/whisper/models"
+        TIKTOKEN_ENCODING_NAME: "cl100k_base"
     env_file:
       - docker.env
     ports:
