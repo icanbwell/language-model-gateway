@@ -19,11 +19,17 @@ create-docker-network: ## creates the docker network
 
 .PHONY:build
 build: create-docker-network ## Builds the docker for dev
+	DOCKER_BUILDKIT=1 docker buildx build \
+	--build-arg RUN_PIPENV_LOCK=true \
+	--build-arg CACHE_MOUNT=./caches/open-webui-models:/app/backend/data/cache \
+	-t openwebui:latest \
+	-f openwebui-config/functions/open-webui.Dockerfile \
+	.
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
-	 build --parallel;
+	build --parallel
 
 .PHONY: up
 up: create-docker-network fix-script-permissions ## starts docker containers
