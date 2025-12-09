@@ -5,9 +5,26 @@ FROM ghcr.io/open-webui/open-webui:v0.6.40-slim AS model-downloader
 RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
 RUN pip install sentence-transformers faster-whisper tiktoken
 
-RUN python -c "import os; from sentence_transformers import SentenceTransformer; SentenceTransformer(os.environ['RAG_EMBEDDING_MODEL'], device='cpu')" && \
-    python -c "import os; from faster_whisper import WhisperModel; WhisperModel(os.environ['WHISPER_MODEL'], device='cpu', compute_type='int8', download_root=os.environ['WHISPER_MODEL_DIR'])" && \
-    python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"
+RUN ls -halt /app/backend/data/cache
+
+# Only download embedding model if not already cached
+RUN if [ ! -d "/app/backend/data/cache/embedding/models/" ]; then \
+    python -c "import os; from sentence_transformers import SentenceTransformer; SentenceTransformer(os.environ['RAG_EMBEDDING_MODEL'], device='cpu')"; \
+  else \
+    echo "Embedding model already cached."; \
+  fi
+# Only download whisper model if not already cached
+RUN if [ ! -d "${WHISPER_MODEL_DIR}/${WHISPER_MODEL}" ]; then \
+    python -c "import os; from faster_whisper import WhisperModel; WhisperModel(os.environ['WHISPER_MODEL'], device='cpu', compute_type='int8', download_root=os.environ['WHISPER_MODEL_DIR'])"; \
+  else \
+    echo "Whisper model already cached."; \
+  fi
+# Only download tiktoken encoding if not already cached
+RUN if [ ! -d "/app/backend/data/cache/tiktoken/${TIKTOKEN_ENCODING_NAME}" ]; then \
+    python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"; \
+  else \
+    echo "Tiktoken encoding already cached."; \
+  fi
 
 # Stage 2: Final image
 FROM ghcr.io/open-webui/open-webui:v0.6.40-slim
