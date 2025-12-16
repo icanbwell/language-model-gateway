@@ -154,9 +154,6 @@ services:
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-1acf47d258e5f8401cb0924ee7cba4ab}
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
-      # Tool client settings.  Follows mcpfhiragent/mcp_servers/tools/config/tool_config.py
-      # The client id is passed by the Client in either the X-Client-ID or Client-ID header
-      CLIENT_TOOL_CONFIGS: '[{"client_id":"aiden","tools":[{"tool_name":"dump_fhir_record","tool_parameters":{"enabled":true}}]},{"client_id":"default","tools":[{"tool_name":"dump_fhir_record","tool_parameters":{"enabled":false}}]}]'
       # which compositions to skip retrieving because they have issues
       SKIP_COMPOSITIONS: "Lab,Vitals,Procedure,Immunization,Condition,CarePlan,DiagnosticReport,Encounter"
     env_file: docker.env
@@ -172,7 +169,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -202,7 +199,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -232,7 +229,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -262,7 +259,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
@@ -295,7 +292,8 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../fhir-notes-vector-store/fhirnotesvectorstore:/usr/local/lib/python3.12/site-packages/fhirnotesvectorstore:ro
     command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1

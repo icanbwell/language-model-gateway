@@ -278,9 +278,14 @@ class LangGraphStreamingManager:
                     tool_message_content_length
                     > self.environment_variables.maximum_inline_tool_output_size
                 ):
-                    # Save to file and provide link
+                    logger.info(
+                        f"Tool output too large to display inline. Length: {tool_message_content_length}, threshold: {self.environment_variables.maximum_inline_tool_output_size}"
+                    )
                     output_folder = os.environ.get("IMAGE_GENERATION_PATH")
                     if output_folder:
+                        logger.info(
+                            f"Attempting to save tool output to file. Output folder: {output_folder}"
+                        )
                         file_manager = self.file_manager_factory.get_file_manager(
                             folder=output_folder
                         )
@@ -292,30 +297,63 @@ class LangGraphStreamingManager:
                             content_type="text/plain",
                         )
                         if file_path:
+                            logger.info(f"Tool output saved successfully: {file_path}")
                             tool_message_content = (
                                 "Tool output too large to display inline."
                             )
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
+                                    logger.info(f"Generated file URL: {file_url}")
                                     tool_message_content += f" (URL: {file_url})"
                                 else:
+                                    logger.warning(
+                                        "Tool output file URL could not be generated."
+                                    )
                                     tool_message_content += (
                                         " Tool output file URL could not be generated."
                                     )
                             except KeyError:
+                                logger.error(
+                                    "Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
+                                )
                                 tool_message_content += " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
                         else:
-                            tool_message_content = (
-                                "Tool output too large to display inline, "
-                                "and failed to save to file."
+                            logger.warning(
+                                f"Failed to save tool output to {output_folder}/{filename}"
                             )
+                            file_url = UrlParser.get_url_for_file_name(filename)
+                            if file_url:
+                                logger.info(
+                                    f"Generated file URL (file not saved): {file_url}"
+                                )
+                            else:
+                                logger.warning(
+                                    "Tool output file URL could not be generated (file not saved)."
+                                )
+                            tool_message_content = (
+                                "Tool output too large to display inline. "
+                                "[ERROR: File was not saved, URL will not work.] "
+                            )
+                            if file_url:
+                                tool_message_content += f"(URL: {file_url}) "
+                            else:
+                                tool_message_content += (
+                                    "Tool output file URL could not be generated. "
+                                )
+                            tool_message_content += "and failed to save to file."
                     else:
+                        logger.warning(
+                            "IMAGE_GENERATION_PATH is not set. Tool output will not be saved and no file URL will be valid."
+                        )
                         tool_message_content = (
                             f"Tool output too large to display inline,"
-                            f" {tool_message_content_length} > {self.environment_variables.maximum_inline_tool_output_size}"
-                            " and TOOL_OUTPUT_FILE_PATH is not set."
+                            f" {tool_message_content_length} > {self.environment_variables.maximum_inline_tool_output_size} "
+                            "and TOOL_OUTPUT_FILE_PATH is not set. [ERROR: No file was saved, no download link will work.]"
                         )
+                    logger.info(
+                        f"Final tool_message_content sent to user: {tool_message_content}"
+                    )
 
                 tool_progress_message: str = (
                     (

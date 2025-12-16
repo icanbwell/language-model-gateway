@@ -39,6 +39,7 @@ class AwsS3FileManager(FileManager):
         if "s3://" in filename:
             raise ValueError("filename should not contain s3://")
 
+        logger.info(f"Saving image to S3: {folder}/{filename}")
         # Parse S3 URL
         # bucket_name: str
         # prefix: str

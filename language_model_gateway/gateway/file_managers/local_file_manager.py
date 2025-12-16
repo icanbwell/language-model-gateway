@@ -26,6 +26,7 @@ class LocalFileManager(FileManager):
         content_type: str,
     ) -> Optional[str]:
         """Save the generated image to a file"""
+        logger.info(f"Saving image to {folder}/{filename}")
         file_path: str = self.get_full_path(filename=filename, folder=folder)
         if file_data:
             with open(file_path, "wb") as f:
