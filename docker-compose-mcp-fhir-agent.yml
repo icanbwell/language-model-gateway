@@ -38,7 +38,7 @@ services:
       MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-10000}
       # Below we specify the client id, client secret and well-known URI for each client
       # For list-like env vars, do NOT use quotes in the default value to avoid extra quotes in Python parsing
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirprod}
       #      AUTH_PROVIDERS: "client1,client3,okta,clientsandbox,cognito"
       # first client for testing
       AUTH_ISSUER_CLIENT1: ${AUTH_ISSUER_CLIENT1:-http://keycloak:8080/realms/bwell-realm}
@@ -61,12 +61,21 @@ services:
       AUTH_AUDIENCE_OKTAFHIRDEV: ${AUTH_AUDIENCE_OKTAFHIRDEV:-https://icanbwell.okta.com}
       AUTH_CLIENT_ID_OKTAFHIRDEV: ${AUTH_CLIENT_ID_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
       AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: ${AUTH_WELL_KNOWN_URI_OKTAFHIRDEV:-https://icanbwell.okta.com/.well-known/openid-configuration}
+      AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: ${AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
       AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: ${AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
       AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: ${AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
       AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: ${AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com/.well-known/openid-configuration}
-      # This is the URL that the user will be redirected to after authentication
+      AUTH_SCOPE_OKTAFHIRCLIENTSANDBOX: "openid email profile groups"
+      # Okta FHIR Prod
+      AUTH_ISSUER_OKTAFHIRPROD: ${AUTH_ISSUER_OKTAFHIRPROD:-https://icanbwell.okta.com}
+      AUTH_AUDIENCE_OKTAFHIRPROD: ${AUTH_AUDIENCE_OKTAFHIRPROD:-https://icanbwell.okta.com}
+      AUTH_CLIENT_ID_OKTAFHIRPROD: ${AUTH_CLIENT_ID_OKTAFHIRPROD:-0oargxz9fkFFcSM38697}
+      AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: ${AUTH_WELL_KNOWN_URI_OKTAFHIRPROD:-https://icanbwell.okta.com/.well-known/openid-configuration}
+      AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
+
+    # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/auth_test/callback}
       # This is used to store state and nonce for OIDC auth code flow
       MONGO_URL: "mongodb://mongo:27017?appName=mcp-fhir-agent"
@@ -154,6 +163,8 @@ services:
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-1acf47d258e5f8401cb0924ee7cba4ab}
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
+      # set max inline size in KB before w use GridFS
+      MAX_MONGO_INLINE_SIZE: 1
     env_file: docker.env
     ports:
       - '5061:5000'

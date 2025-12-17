@@ -257,6 +257,15 @@ class LangGraphStreamingManager:
             return_raw_tool_output: bool = (
                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
             )
+            structured_data: dict[str, Any] | None = (
+                self.get_structured_content_from_tool_message(tool_message=tool_message)
+            )
+            structured_data_without_result: dict[str, Any] | None = (
+                structured_data.copy() if structured_data is not None else None
+            )
+            if structured_data_without_result:
+                structured_data_without_result.pop("result", None)
+
             if artifact or return_raw_tool_output:
                 tool_message_content: str = self.convert_message_content_into_string(
                     tool_message=tool_message
@@ -292,19 +301,22 @@ class LangGraphStreamingManager:
                             content_type="text/plain",
                         )
                         if file_path:
-                            tool_message_content = (
-                                "Tool output too large to display inline."
+                            tool_message_content += (
+                                json.dumps(structured_data_without_result)
+                                if structured_data_without_result
+                                else ""
                             )
+                            tool_message_content += f"\n{type(tool_message.content).__name__}: {tool_message.content}"
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
-                                    tool_message_content += f" (URL: {file_url})"
+                                    tool_message_content += f"\n(URL: {file_url})"
                                 else:
                                     tool_message_content += (
-                                        " Tool output file URL could not be generated."
+                                        "\nTool output file URL could not be generated."
                                     )
                             except KeyError:
-                                tool_message_content += " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
+                                tool_message_content += "\nTool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
                         else:
                             tool_message_content = (
                                 "Tool output too large to display inline, "
@@ -474,3 +486,18 @@ class LangGraphStreamingManager:
             # otherwise if content is a list, convert each item to str and join the items with a space
             " ".join([str(c) for c in tool_message.content])
         )
+
+    @staticmethod
+    def get_structured_content_from_tool_message(
+        *, tool_message: ToolMessage
+    ) -> dict[str, Any] | None:
+        content_dict: Dict[str, Any] | None = None
+        if isinstance(tool_message.content, dict):
+            content_dict = tool_message.content
+        elif (
+            isinstance(tool_message.content, list)
+            and len(tool_message.content) == 1
+            and isinstance(tool_message.content[0], dict)
+        ):
+            content_dict = tool_message.content[0]
+        return content_dict

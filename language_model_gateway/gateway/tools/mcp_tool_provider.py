@@ -139,7 +139,7 @@ class MCPToolProvider:
             """
             result: MCPToolCallResult = await handler(request)
 
-            if logger.isEnabledFor(DEBUG):
+            if logger.isEnabledFor(DEBUG) and isinstance(result, MCPToolCallResult):
                 logger.debug(
                     f"=== Received tool output before truncation {len(result.content)} blocks ==="
                 )
