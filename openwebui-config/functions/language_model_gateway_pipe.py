@@ -71,6 +71,19 @@ class Pipe:
         default_model: Optional[str] = Field(
             default="General Purpose", description="Default model to use"
         )
+        # New valves for previously hardcoded constants
+        model_cache_ttl_seconds: int = Field(
+            default=CACHE_TTL_SECONDS,
+            description="Cache TTL in seconds for the models list",
+        )
+        llm_call_timeout_seconds: float = Field(
+            default=LLM_CALL_TIMEOUT,
+            description="Timeout in seconds for LLM chat/completions API calls",
+        )
+        models_list_timeout_seconds: float = Field(
+            default=30.0,
+            description="Timeout in seconds for fetching the models list",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
@@ -356,7 +369,7 @@ HTTPX Response Log:
                     url=url,
                     json=payload,
                     headers=headers,
-                    timeout=LLM_CALL_TIMEOUT,
+                    timeout=self.valves.llm_call_timeout_seconds,
                     follow_redirects=True,
                 )
                 response.raise_for_status()
@@ -400,7 +413,9 @@ HTTPX Response Log:
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         logger.debug(f"Calling models endpoint: {model_url}")
         async with httpx.AsyncClient() as client:
-            response = await client.get(url=model_url, timeout=30.0)
+            response = await client.get(
+                url=model_url, timeout=self.valves.models_list_timeout_seconds
+            )
             response.raise_for_status()
             models = response.json().get("data", [])
         logger.debug(f"Received models from {model_url}: {models}")
@@ -413,7 +428,7 @@ HTTPX Response Log:
         cache_expired = (
             self.pipelines is None
             or self.pipelines_last_updated is None
-            or (now - self.pipelines_last_updated) > CACHE_TTL_SECONDS
+            or (now - self.pipelines_last_updated) > self.valves.model_cache_ttl_seconds
         )
         if cache_expired:
             logger.debug("Model cache expired or not set. Fetching models.")

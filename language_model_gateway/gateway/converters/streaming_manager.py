@@ -1,3 +1,4 @@
+import copy  # For deepcopy
 import json
 import logging
 import os
@@ -188,6 +189,7 @@ class LangGraphStreamingManager:
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
         tool_name: Optional[str] = event["name"] if "name" in event else None
+        logger.debug(f"on_tool_start: {tool_name}: {event}")
         data = event["data"] if "data" in event else {}
         tool_input: Optional[Dict[str, Any]] = data.get("input")
         tool_input_display: Optional[Dict[str, Any]] = (
@@ -197,6 +199,10 @@ class LangGraphStreamingManager:
             tool_input_display["auth_token"] = "***"
         if tool_input_display and "state" in tool_input_display:
             tool_input_display["state"] = "***"
+        if tool_input_display and "runtime" in tool_input_display:
+            tool_input_display.pop(
+                "runtime"
+            )  # runtime has the chat history and other data we don't need to show
         tool_key: str = self.make_tool_key(tool_name, tool_input)
         tool_start_times[tool_key] = time.time()
         if tool_name:
@@ -243,21 +249,30 @@ class LangGraphStreamingManager:
             )
         if tool_message:
             artifact: Optional[Any] = tool_message.artifact
-            # If we're calling an MCP tool then the tool_interceptor_truncation function separates the result
-            # into message and artifact.  In that case, message is the truncated version that is shared with the LLM
-            # while artifact is the full result that we can make available for download.
-            # The artifact is then a list of EmbeddedResources
 
-            # remove artifact from ToolMessage otherwise we get error:
-            # TypeError: Type is not msgpack serializable: ToolMessage
-            # This is because artifact may be of any type, including non-serializable types such as EmbeddedResource
-            if artifact is not None and not isinstance(artifact, str):
-                tool_message.artifact = None
+            logger.debug(
+                f"Tool {tool_name2} has artifact of type {type(artifact)}: {artifact}"
+            )
 
             return_raw_tool_output: bool = (
                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
             )
-            if artifact or return_raw_tool_output:
+            structured_data: dict[str, Any] | None = (
+                artifact if isinstance(artifact, dict) else None
+            )
+            structured_data_without_result: dict[str, Any] | None = (
+                copy.deepcopy(structured_data) if structured_data is not None else None
+            )
+            if structured_data_without_result:
+                structured_data_without_result.pop("result", None)
+                structured_content = structured_data_without_result.get(
+                    "structured_content"
+                )
+                # Only pop from structured_content if it is a dict
+                if isinstance(structured_content, dict):
+                    structured_content.pop("result", None)
+
+            if return_raw_tool_output:
                 tool_message_content: str = self.convert_message_content_into_string(
                     tool_message=tool_message
                 )
@@ -267,12 +282,7 @@ class LangGraphStreamingManager:
                     )
 
                 tool_message_content_length: int = len(tool_message_content)
-                artifact_text = await self.convert_tool_artifact_to_text(
-                    artifact=artifact
-                )
-                token_count: int = self.token_reducer.count_tokens(
-                    tool_message_content if not artifact else artifact_text
-                )
+                token_count: int = self.token_reducer.count_tokens(tool_message_content)
                 file_url: Optional[str] = None
                 if (
                     tool_message_content_length
@@ -286,25 +296,35 @@ class LangGraphStreamingManager:
                         )
                         filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
                         file_path: Optional[str] = await file_manager.save_file_async(
-                            file_data=artifact_text.encode("utf-8"),
+                            file_data=tool_message_content.encode("utf-8"),
                             folder=output_folder,
                             filename=filename,
                             content_type="text/plain",
                         )
                         if file_path:
                             tool_message_content = (
-                                "Tool output too large to display inline."
+                                ""  # clear the content since we're using a file
                             )
+                            if structured_data_without_result:
+                                tool_message_content += (
+                                    "\n--- Structured Content (w/o result) ---\n"
+                                )
+                                tool_message_content += json.dumps(
+                                    structured_data_without_result
+                                )
+                                tool_message_content += (
+                                    "\n--- End Structured Content ---\n"
+                                )
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
-                                    tool_message_content += f" (URL: {file_url})"
+                                    tool_message_content += f"\n(URL: {file_url})"
                                 else:
                                     tool_message_content += (
-                                        " Tool output file URL could not be generated."
+                                        "\nTool output file URL could not be generated."
                                     )
                             except KeyError:
-                                tool_message_content += " Tool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
+                                tool_message_content += "\nTool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
                         else:
                             tool_message_content = (
                                 "Tool output too large to display inline, "
@@ -336,9 +356,7 @@ class LangGraphStreamingManager:
                 )
                 if file_url:
                     # send a follow-up message with the file URL
-                    content_text: str = (
-                        f"\n\n[Click to download Tool Output]({file_url})\n\n"
-                    )
+                    content_text: str = f"\n\n[Click to download {tool_message.name} Output]({file_url})\n\n"
                     yield chat_request_wrapper.create_sse_message(
                         request_id=request_id, content=content_text, usage_metadata=None
                     )
@@ -380,29 +398,6 @@ class LangGraphStreamingManager:
         else:
             result += text + "\n"
         return result
-
-    @staticmethod
-    async def convert_tool_artifact_to_text(*, artifact: Any | None) -> str:
-        try:
-            if isinstance(artifact, str):
-                return artifact
-            if isinstance(artifact, list):
-                # each entry may be an EmbeddableResource
-                result = ""
-                for item in artifact:
-                    if hasattr(item, "resource") and hasattr(item.resource, "text"):
-                        result += (
-                            LangGraphStreamingManager._format_text_resource_contents(
-                                item.resource.text
-                            )
-                        )
-                return result.strip()
-            # finally try to convert to str
-            return str(artifact)
-        except Exception as e:
-            return (
-                f"Could not convert artifact of type {type(artifact)} to string: {e}."
-            )
 
     async def _handle_on_tool_error(
         self,
@@ -462,15 +457,37 @@ class LangGraphStreamingManager:
                 text=tool_message.content
             )
 
+        # tool_message.content is a list of dicts (TextContent) where the text field
+        # is a stringified json of the structured content
         if (
             isinstance(tool_message.content, list)
             and len(tool_message.content) == 1
             and isinstance(tool_message.content[0], dict)
-            and "result" in tool_message.content[0]
+            and "text" in tool_message.content[0]
         ):
-            return cast(str, tool_message.content[0].get("result"))
+            text = tool_message.content[0]["text"]
+            # see if text is json
+            json_object: dict[str, Any] = LangGraphStreamingManager.safe_json(text)
+            if json_object is not None and isinstance(json_object, dict):
+                if "result" in json_object:
+                    return cast(str, json_object.get("result"))
 
         return (
             # otherwise if content is a list, convert each item to str and join the items with a space
             " ".join([str(c) for c in tool_message.content])
         )
+
+    @staticmethod
+    def get_structured_content_from_tool_message(
+        *, tool_message: ToolMessage
+    ) -> dict[str, Any] | None:
+        content_dict: Dict[str, Any] | None = None
+        if isinstance(tool_message.content, dict):
+            content_dict = tool_message.content
+        elif (
+            isinstance(tool_message.content, list)
+            and len(tool_message.content) == 1
+            and isinstance(tool_message.content[0], dict)
+        ):
+            content_dict = tool_message.content[0]
+        return content_dict

@@ -9,6 +9,8 @@ services:
       DEBUG_METRICS: 0
       DD_TRACE_ENABLED: "false"
       LOG_LEVEL: INFO
+      MCP_LOG_LEVEL: DEBUG
+      LLM_LOG_LEVEL: DEBUG
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"
