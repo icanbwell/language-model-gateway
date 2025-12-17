@@ -5,6 +5,7 @@ from typing import (
     AsyncIterator,
     Optional,
     override,
+    cast,
 )
 
 from langchain_core.runnables import RunnableConfig
@@ -35,7 +36,17 @@ class StreamingToolNode(ToolNode):
         Yields:
             The output of the Runnable.
         """
-        yield await self.ainvoke(input, config, **kwargs)
+        try:
+            yield await self.ainvoke(input, config, **kwargs)
+        except Exception as e:
+            tool_call: dict[str, Any] = (
+                cast(dict[str, Any], input.get("tool_call"))
+                if isinstance(input, dict)
+                else {}
+            )
+            raise Exception(
+                f"Exception in tool {tool_call.get('name')} {tool_call.get('args')}: {type(e)}: {e}"
+            ) from e
 
     # async def _arun_one(
     #     self,
