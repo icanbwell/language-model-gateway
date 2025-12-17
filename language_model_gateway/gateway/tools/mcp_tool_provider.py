@@ -166,25 +166,49 @@ class MCPToolProvider:
                 content_block_list: List[ContentBlock] = []
                 content_block1: ContentBlock
                 for content_block1 in result.content:
+                    # If there's a positive limit and we've exhausted it, stop processing further blocks
+                    if max_token_limit > 0 and tokens_limit_left <= 0:
+                        break
+
                     if isinstance(content_block1, TextContent):
                         text: str = content_block1.text
                         token_count: int = self.token_reducer.count_tokens(text=text)
+
                         if max_token_limit > 0 and token_count > tokens_limit_left:
+                            # Truncate to the remaining budget and re-count using the truncated text
                             truncated_text = self.token_reducer.reduce_tokens(
                                 text=text,
                                 max_tokens=tokens_limit_left,
                                 preserve_start=0,
                             )
-                            logger.debug(
-                                f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
+                            truncated_count: int = self.token_reducer.count_tokens(
+                                text=truncated_text
                             )
-                            content_block1.text = truncated_text
-                            tokens_limit_left -= token_count
-                            content_block_list.append(content_block1)
+                            logger.debug(
+                                f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}\nOriginal tokens:{token_count}, Truncated tokens:{truncated_count}, Remaining before:{tokens_limit_left}"
+                            )
+
+                            # Only append if truncation produced some tokens
+                            if truncated_count > 0:
+                                content_block1.text = truncated_text
+                                content_block_list.append(content_block1)
+                                tokens_limit_left -= truncated_count
+                            # If budget exhausted (or zero-length), stop
+                            if max_token_limit > 0 and tokens_limit_left <= 0:
+                                tokens_limit_left = 0
+                                break
                         else:
-                            tokens_limit_left -= token_count
-                            # append the original content block if no truncation is needed
+                            # No truncation needed (or no limit in effect)
                             content_block_list.append(content_block1)
+                            if max_token_limit > 0:
+                                tokens_limit_left -= token_count
+                                if tokens_limit_left <= 0:
+                                    tokens_limit_left = 0
+                                    # Budget met exactly/exhausted after this block
+                                    break
+                    else:
+                        # Preserve non-text content blocks unchanged
+                        content_block_list.append(content_block1)
 
                 if logger.isEnabledFor(DEBUG):
                     logger.debug(

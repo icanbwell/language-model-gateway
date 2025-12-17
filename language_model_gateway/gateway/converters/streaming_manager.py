@@ -265,10 +265,12 @@ class LangGraphStreamingManager:
             )
             if structured_data_without_result:
                 structured_data_without_result.pop("result", None)
-                if structured_data_without_result.get("structured_content"):
-                    structured_data_without_result["structured_content"].pop(
-                        "result", None
-                    )
+                structured_content = structured_data_without_result.get(
+                    "structured_content"
+                )
+                # Only pop from structured_content if it is a dict
+                if isinstance(structured_content, dict):
+                    structured_content.pop("result", None)
 
             if return_raw_tool_output:
                 tool_message_content: str = self.convert_message_content_into_string(

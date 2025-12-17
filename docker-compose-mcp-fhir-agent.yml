@@ -75,7 +75,7 @@ services:
       AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: ${AUTH_WELL_KNOWN_URI_OKTAFHIRPROD:-https://icanbwell.okta.com/.well-known/openid-configuration}
       AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
 
-    # This is the URL that the user will be redirected to after authentication
+      # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/auth_test/callback}
       # This is used to store state and nonce for OIDC auth code flow
       MONGO_URL: "mongodb://mongo:27017?appName=mcp-fhir-agent"
