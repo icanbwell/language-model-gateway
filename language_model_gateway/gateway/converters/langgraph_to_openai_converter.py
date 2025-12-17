@@ -29,13 +29,16 @@ from langchain_core.messages import (
 )
 from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, ToolException
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
 from starlette.responses import StreamingResponse, JSONResponse
 
+from language_model_gateway.gateway.converters.language_model_gateway_exception import (
+    LanguageModelGatewayException,
+)
 from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.converters.streaming_manager import (
     LangGraphStreamingManager,
@@ -482,14 +485,25 @@ class LangGraphToOpenAIConverter:
                 config=config,
             ):
                 yield event
-        except Exception as e:
+        except ToolException as e:
             messages_dict: List[dict[str, Any]] = [
                 convert_message_to_dict(m) for m in messages
             ]
             logger.exception(
+                f"ToolException occurred: {e}. Messages: {messages_dict}",
+                stack_info=True,
+            )
+            raise LanguageModelGatewayException(
+                f"Tool Error streaming graph with messages: {e}"
+            ) from e
+        except Exception as e:
+            messages_dict = [convert_message_to_dict(m) for m in messages]
+            logger.exception(
                 f"Exception occurred: {e}. Messages: {messages_dict}", stack_info=True
             )
-            raise
+            raise LanguageModelGatewayException(
+                f"Error streaming graph with messages: {e}"
+            ) from e
 
     # noinspection SpellCheckingInspection
     async def ainvoke(

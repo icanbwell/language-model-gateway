@@ -15,7 +15,7 @@ services:
     image: mcp-fhir-agent:local
     environment: &agent_env
       DEBUG_METRICS: 0
-      LOG_LEVEL: DEBUG
+      LOG_LEVEL: INFO
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       DEFAULT_PATIENT_ID: "d58b4c4d-e820-5935-adfc-4cb372a91c22"
       DEFAULT_PERSON_ID: "072b2b1c-942d-542c-8e51-f9dc0dadcc0a"
@@ -163,8 +163,8 @@ services:
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-1acf47d258e5f8401cb0924ee7cba4ab}
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
-      # set max inline size in KB before w use GridFS
-      MAX_MONGO_INLINE_SIZE: 1
+      # set max inline size in KB before we use GridFS
+      MAX_MONGO_INLINE_SIZE_KB: 10
     env_file: docker.env
     ports:
       - '5061:5000'
