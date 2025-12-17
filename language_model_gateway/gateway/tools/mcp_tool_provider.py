@@ -21,6 +21,7 @@ from mcp.types import (
     LoggingMessageNotificationParams,
     EmbeddedResource,
     TextResourceContents,
+    CallToolResult,
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
@@ -138,84 +139,84 @@ class MCPToolProvider:
                 An MCPToolCallResult with potentially truncated output.
             """
             result: MCPToolCallResult = await handler(request)
-
-            if logger.isEnabledFor(DEBUG) and isinstance(result, MCPToolCallResult):
-                logger.debug(
-                    f"=== Received tool output before truncation {len(result.content)} blocks ==="
-                )
-                content_block: ContentBlock
-                for content_index, content_block in enumerate(result.content):
-                    if isinstance(content_block, TextContent):
-                        logger.debug(f"[{content_index}] {content_block.text}")
-                logger.debug(
-                    f"=== End of tool output before truncation {len(result.content)} blocks ==="
-                )
-
-            max_token_limit: int = (
-                self.environment_variables.tool_output_token_limit or -1
-            )
-            tokens_limit_left: int = max_token_limit
-
-            content_block_list: List[ContentBlock] = []
-
-            for content_block in result.content:
-                if isinstance(content_block, TextContent):
-                    text: str = content_block.text
-                    # append the un-truncated part as a separate content block of type EmbeddedResource
-                    # Content blocks that are not of type TextContent  are turned into artifacts instead of messages
-                    # by LangChain
-                    # See _convert_call_tool_result function in langchain_mcp_adapters/tools.py
-                    # It returns a tuple.  The first element is the message and the second is the artifact.
-                    # This is received by on_tool_end event by StreamingManager.
-                    content_block_list.append(
-                        EmbeddedResource(
-                            resource=TextResourceContents(
-                                text=text,
-                                uri=HttpUrl(
-                                    "https://example.com/resource.txt"
-                                ),  # mandatory field but not used
-                            ),
-                            type="resource",
-                        )
+            if isinstance(result, CallToolResult):
+                if logger.isEnabledFor(DEBUG):
+                    logger.debug(
+                        f"=== Received tool output before truncation {len(result.content)} blocks ==="
                     )
-                    token_count: int = self.token_reducer.count_tokens(text=text)
-                    if max_token_limit > 0 and token_count > tokens_limit_left:
-                        truncated_text = self.token_reducer.reduce_tokens(
-                            text=text,
-                            max_tokens=tokens_limit_left,
-                            preserve_start=0,
-                        )
-                        logger.debug(
-                            f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
-                        )
-                        content_block.text = truncated_text
-                        tokens_limit_left -= token_count
-                        content_block_list.append(content_block)
-                    else:
-                        tokens_limit_left -= token_count
-                        # append the original content block if no truncation is needed
-                        content_block_list.append(content_block)
+                    content_block: ContentBlock
+                    for content_index, content_block in enumerate(result.content):
+                        if isinstance(content_block, TextContent):
+                            logger.debug(f"[{content_index}] {content_block.text}")
+                    logger.debug(
+                        f"=== End of tool output before truncation {len(result.content)} blocks ==="
+                    )
 
-            if logger.isEnabledFor(DEBUG):
-                logger.debug(
-                    f"===== Returning tool output after truncation {len(content_block_list)} blocks ====="
+                max_token_limit: int = (
+                    self.environment_variables.tool_output_token_limit or -1
                 )
-                for content_index, content_block in enumerate(content_block_list):
-                    if isinstance(content_block, TextContent):
-                        logger.debug(
-                            f"[{content_index}] TextContent: {content_block.text}"
-                        )
-                    elif isinstance(content_block, EmbeddedResource):
-                        if isinstance(content_block.resource, TextResourceContents):
-                            logger.debug(
-                                f"[{content_index}] EmbeddedResource: {content_block.resource.text}"
+                tokens_limit_left: int = max_token_limit
+
+                content_block_list: List[ContentBlock] = []
+                content_block1: ContentBlock
+                for content_block1 in result.content:
+                    if isinstance(content_block1, TextContent):
+                        text: str = content_block1.text
+                        # append the un-truncated part as a separate content block of type EmbeddedResource
+                        # Content blocks that are not of type TextContent  are turned into artifacts instead of messages
+                        # by LangChain
+                        # See _convert_call_tool_result function in langchain_mcp_adapters/tools.py
+                        # It returns a tuple.  The first element is the message and the second is the artifact.
+                        # This is received by on_tool_end event by StreamingManager.
+                        content_block_list.append(
+                            EmbeddedResource(
+                                resource=TextResourceContents(
+                                    text=text,
+                                    uri=HttpUrl(
+                                        "https://example.com/resource.txt"
+                                    ),  # mandatory field but not used
+                                ),
+                                type="resource",
                             )
-                logger.debug(
-                    f"===== End of tool output after truncation {len(content_block_list)} blocks ====="
-                )
+                        )
+                        token_count: int = self.token_reducer.count_tokens(text=text)
+                        if max_token_limit > 0 and token_count > tokens_limit_left:
+                            truncated_text = self.token_reducer.reduce_tokens(
+                                text=text,
+                                max_tokens=tokens_limit_left,
+                                preserve_start=0,
+                            )
+                            logger.debug(
+                                f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}"
+                            )
+                            content_block1.text = truncated_text
+                            tokens_limit_left -= token_count
+                            content_block_list.append(content_block1)
+                        else:
+                            tokens_limit_left -= token_count
+                            # append the original content block if no truncation is needed
+                            content_block_list.append(content_block1)
 
-            # now set this as the new result content
-            result.content = content_block_list
+                if logger.isEnabledFor(DEBUG):
+                    logger.debug(
+                        f"===== Returning tool output after truncation {len(content_block_list)} blocks ====="
+                    )
+                    for content_index, content_block in enumerate(content_block_list):
+                        if isinstance(content_block, TextContent):
+                            logger.debug(
+                                f"[{content_index}] TextContent: {content_block.text}"
+                            )
+                        elif isinstance(content_block, EmbeddedResource):
+                            if isinstance(content_block.resource, TextResourceContents):
+                                logger.debug(
+                                    f"[{content_index}] EmbeddedResource: {content_block.resource.text}"
+                                )
+                    logger.debug(
+                        f"===== End of tool output after truncation {len(content_block_list)} blocks ====="
+                    )
+
+                # now set this as the new result content
+                result.content = content_block_list
             return result
 
         return tool_interceptor_truncation
