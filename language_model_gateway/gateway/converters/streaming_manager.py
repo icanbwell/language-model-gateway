@@ -188,6 +188,7 @@ class LangGraphStreamingManager:
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
         tool_name: Optional[str] = event["name"] if "name" in event else None
+        logger.debug(f"on_tool_start: {tool_name}: {event}")
         data = event["data"] if "data" in event else {}
         tool_input: Optional[Dict[str, Any]] = data.get("input")
         tool_input_display: Optional[Dict[str, Any]] = (
@@ -197,6 +198,10 @@ class LangGraphStreamingManager:
             tool_input_display["auth_token"] = "***"
         if tool_input_display and "state" in tool_input_display:
             tool_input_display["state"] = "***"
+        if tool_input_display and "runtime" in tool_input_display:
+            tool_input_display.pop(
+                "runtime"
+            )  # runtime has the chat history and other data we don't need to show
         tool_key: str = self.make_tool_key(tool_name, tool_input)
         tool_start_times[tool_key] = time.time()
         if tool_name:
@@ -259,6 +264,10 @@ class LangGraphStreamingManager:
             )
             if structured_data_without_result:
                 structured_data_without_result.pop("result", None)
+                if structured_data_without_result.get("structured_content"):
+                    structured_data_without_result["structured_content"].pop(
+                        "result", None
+                    )
 
             if artifact or return_raw_tool_output:
                 tool_message_content: str = self.convert_message_content_into_string(
@@ -295,14 +304,18 @@ class LangGraphStreamingManager:
                             content_type="text/plain",
                         )
                         if file_path:
-                            tool_message_content += "\n--- Structured Content ---\n"
+                            tool_message_content = (
+                                ""  # clear the content since we're using a file
+                            )
+                            tool_message_content += (
+                                "\n--- Structured Content (w/o result) ---\n"
+                            )
                             tool_message_content += (
                                 json.dumps(structured_data_without_result)
                                 if structured_data_without_result
                                 else ""
                             )
                             tool_message_content += "\n--- End Structured Content ---\n"
-                            tool_message_content += f"\n{type(tool_message.content).__name__}: {tool_message.content}"
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
