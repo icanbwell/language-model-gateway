@@ -354,9 +354,7 @@ class LangGraphStreamingManager:
                 )
                 if file_url:
                     # send a follow-up message with the file URL
-                    content_text: str = (
-                        f"\n\n[Click to download Tool Output]({file_url})\n\n"
-                    )
+                    content_text: str = f"\n\n[Click to download {tool_message.name} Output]({file_url})\n\n"
                     yield chat_request_wrapper.create_sse_message(
                         request_id=request_id, content=content_text, usage_metadata=None
                     )
