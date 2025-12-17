@@ -270,7 +270,7 @@ class LangGraphStreamingManager:
                         "result", None
                     )
 
-            if artifact or return_raw_tool_output:
+            if return_raw_tool_output:
                 tool_message_content: str = self.convert_message_content_into_string(
                     tool_message=tool_message
                 )
@@ -280,12 +280,7 @@ class LangGraphStreamingManager:
                     )
 
                 tool_message_content_length: int = len(tool_message_content)
-                artifact_text = await self.convert_tool_artifact_to_text(
-                    artifact=artifact
-                )
-                token_count: int = self.token_reducer.count_tokens(
-                    tool_message_content if not artifact else artifact_text
-                )
+                token_count: int = self.token_reducer.count_tokens(tool_message_content)
                 file_url: Optional[str] = None
                 if (
                     tool_message_content_length
@@ -299,7 +294,7 @@ class LangGraphStreamingManager:
                         )
                         filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
                         file_path: Optional[str] = await file_manager.save_file_async(
-                            file_data=artifact_text.encode("utf-8"),
+                            file_data=tool_message_content.encode("utf-8"),
                             folder=output_folder,
                             filename=filename,
                             content_type="text/plain",
@@ -308,15 +303,16 @@ class LangGraphStreamingManager:
                             tool_message_content = (
                                 ""  # clear the content since we're using a file
                             )
-                            tool_message_content += (
-                                "\n--- Structured Content (w/o result) ---\n"
-                            )
-                            tool_message_content += (
-                                json.dumps(structured_data_without_result)
-                                if structured_data_without_result
-                                else ""
-                            )
-                            tool_message_content += "\n--- End Structured Content ---\n"
+                            if structured_data_without_result:
+                                tool_message_content += (
+                                    "\n--- Structured Content (w/o result) ---\n"
+                                )
+                                tool_message_content += json.dumps(
+                                    structured_data_without_result
+                                )
+                                tool_message_content += (
+                                    "\n--- End Structured Content ---\n"
+                                )
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
@@ -403,29 +399,6 @@ class LangGraphStreamingManager:
             result += text + "\n"
         return result
 
-    @staticmethod
-    async def convert_tool_artifact_to_text(*, artifact: Any | None) -> str:
-        try:
-            if isinstance(artifact, str):
-                return artifact
-            if isinstance(artifact, list):
-                # each entry may be an EmbeddableResource
-                result = ""
-                for item in artifact:
-                    if hasattr(item, "resource") and hasattr(item.resource, "text"):
-                        result += (
-                            LangGraphStreamingManager._format_text_resource_contents(
-                                item.resource.text
-                            )
-                        )
-                return result.strip()
-            # finally try to convert to str
-            return str(artifact)
-        except Exception as e:
-            return (
-                f"Could not convert artifact of type {type(artifact)} to string: {e}."
-            )
-
     async def _handle_on_tool_error(
         self,
         *,
@@ -484,13 +457,20 @@ class LangGraphStreamingManager:
                 text=tool_message.content
             )
 
+        # tool_message.content is a list of dicts (TextContent) where the text field
+        # is a stringified json of the structured content
         if (
             isinstance(tool_message.content, list)
             and len(tool_message.content) == 1
             and isinstance(tool_message.content[0], dict)
-            and "result" in tool_message.content[0]
+            and "text" in tool_message.content[0]
         ):
-            return cast(str, tool_message.content[0].get("result"))
+            text = tool_message.content[0]["text"]
+            # see if text is json
+            json_object: dict[str, Any] = LangGraphStreamingManager.safe_json(text)
+            if json_object is not None and isinstance(json_object, dict):
+                if "result" in json_object:
+                    return cast(str, json_object.get("result"))
 
         return (
             # otherwise if content is a list, convert each item to str and join the items with a space
