@@ -1,7 +1,7 @@
 import logging
 import os
 from logging import DEBUG
-from typing import Dict, List, Callable, Awaitable
+from typing import Dict, List, Callable, Awaitable, Any
 
 import httpx
 from datetime import timedelta
@@ -25,7 +25,6 @@ from mcp.types import (
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
-from pydantic import HttpUrl
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -141,6 +140,11 @@ class MCPToolProvider:
             result: MCPToolCallResult = await handler(request)
             if isinstance(result, CallToolResult):
                 if logger.isEnabledFor(DEBUG):
+                    # See if there is structured_content
+                    structured_content: dict[str, Any] | None = result.structuredContent
+                    logger.debug(
+                        f"=== Tool structured output received: {type(structured_content)}: {structured_content} ==="
+                    )
                     logger.debug(
                         f"=== Received tool output before truncation {len(result.content)} blocks ==="
                     )
@@ -162,23 +166,6 @@ class MCPToolProvider:
                 for content_block1 in result.content:
                     if isinstance(content_block1, TextContent):
                         text: str = content_block1.text
-                        # append the un-truncated part as a separate content block of type EmbeddedResource
-                        # Content blocks that are not of type TextContent  are turned into artifacts instead of messages
-                        # by LangChain
-                        # See _convert_call_tool_result function in langchain_mcp_adapters/tools.py
-                        # It returns a tuple.  The first element is the message and the second is the artifact.
-                        # This is received by on_tool_end event by StreamingManager.
-                        content_block_list.append(
-                            EmbeddedResource(
-                                resource=TextResourceContents(
-                                    text=text,
-                                    uri=HttpUrl(
-                                        "https://example.com/resource.txt"
-                                    ),  # mandatory field but not used
-                                ),
-                                type="resource",
-                            )
-                        )
                         token_count: int = self.token_reducer.count_tokens(text=text)
                         if max_token_limit > 0 and token_count > tokens_limit_left:
                             truncated_text = self.token_reducer.reduce_tokens(
