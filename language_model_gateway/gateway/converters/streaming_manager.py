@@ -1,3 +1,4 @@
+import copy  # For deepcopy
 import json
 import logging
 import os
@@ -260,7 +261,7 @@ class LangGraphStreamingManager:
                 artifact if isinstance(artifact, dict) else None
             )
             structured_data_without_result: dict[str, Any] | None = (
-                structured_data.copy() if structured_data is not None else None
+                copy.deepcopy(structured_data) if structured_data is not None else None
             )
             if structured_data_without_result:
                 structured_data_without_result.pop("result", None)
