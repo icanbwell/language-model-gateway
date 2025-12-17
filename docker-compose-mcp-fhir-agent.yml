@@ -79,7 +79,7 @@ services:
       AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/auth_test/callback}
       # This is used to store state and nonce for OIDC auth code flow
       MONGO_URL: "mongodb://mongo:27017?appName=mcp-fhir-agent"
-      MONGO_DB_NAME: mcp_fhir_agent
+      MONGO_DB_NAME: mcp-fhir-agent
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
       MONGO_DB_USERNAME: "root"
       MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
@@ -164,7 +164,7 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
       # set max inline size in KB before we use GridFS
-      MAX_MONGO_INLINE_SIZE_KB: 10
+      MAX_MONGO_INLINE_SIZE_KB: 50
     env_file: docker.env
     ports:
       - '5061:5000'
