@@ -243,22 +243,16 @@ class LangGraphStreamingManager:
             )
         if tool_message:
             artifact: Optional[Any] = tool_message.artifact
-            # If we're calling an MCP tool then the tool_interceptor_truncation function separates the result
-            # into message and artifact.  In that case, message is the truncated version that is shared with the LLM
-            # while artifact is the full result that we can make available for download.
-            # The artifact is then a list of EmbeddedResources
 
-            # remove artifact from ToolMessage otherwise we get error:
-            # TypeError: Type is not msgpack serializable: ToolMessage
-            # This is because artifact may be of any type, including non-serializable types such as EmbeddedResource
-            if artifact is not None and not isinstance(artifact, str):
-                tool_message.artifact = None
+            logger.debug(
+                f"Tool {tool_name2} has artifact of type {type(artifact)}: {artifact}"
+            )
 
             return_raw_tool_output: bool = (
                 os.environ.get("RETURN_RAW_TOOL_OUTPUT", "0") == "1"
             )
             structured_data: dict[str, Any] | None = (
-                self.get_structured_content_from_tool_message(tool_message=tool_message)
+                artifact if isinstance(artifact, dict) else None
             )
             structured_data_without_result: dict[str, Any] | None = (
                 structured_data.copy() if structured_data is not None else None
@@ -301,11 +295,13 @@ class LangGraphStreamingManager:
                             content_type="text/plain",
                         )
                         if file_path:
+                            tool_message_content += "\n--- Structured Content ---\n"
                             tool_message_content += (
                                 json.dumps(structured_data_without_result)
                                 if structured_data_without_result
                                 else ""
                             )
+                            tool_message_content += "\n--- End Structured Content ---\n"
                             tool_message_content += f"\n{type(tool_message.content).__name__}: {tool_message.content}"
                             try:
                                 file_url = UrlParser.get_url_for_file_name(filename)

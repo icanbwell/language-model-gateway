@@ -151,7 +151,9 @@ class MCPToolProvider:
                     content_block: ContentBlock
                     for content_index, content_block in enumerate(result.content):
                         if isinstance(content_block, TextContent):
-                            logger.debug(f"[{content_index}] {content_block.text}")
+                            logger.debug(
+                                f"Content Block [{content_index}] {content_block.text}"
+                            )
                     logger.debug(
                         f"=== End of tool output before truncation {len(result.content)} blocks ==="
                     )
