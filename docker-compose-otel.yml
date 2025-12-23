@@ -1,233 +1,58 @@
 version: "3"
-# From https://github.com/SigNoz/signoz/tree/main/deploy/docker
-x-common: &common
-  restart: unless-stopped
-  logging:
-    options:
-      max-size: 50m
-      max-file: "3"
-x-clickhouse-defaults: &clickhouse-defaults
-  !!merge <<: *common
-  # adding non LTS version due to this fix https://github.com/ClickHouse/ClickHouse/commit/32caf8716352f45c1b617274c7508c86b7d1afab
-  image: clickhouse/clickhouse-server:24.1.2-alpine
-  tty: true
-  labels:
-    signoz.io/scrape: "true"
-    signoz.io/port: "9363"
-    signoz.io/path: "/metrics"
-  depends_on:
-    init-clickhouse:
-      condition: service_completed_successfully
-    zookeeper-1:
-      condition: service_healthy
-  healthcheck:
-    test:
-      - CMD
-      - wget
-      - --spider
-      - -q
-      - 0.0.0.0:8123/ping
-    interval: 30s
-    timeout: 5s
-    retries: 3
-  ulimits:
-    nproc: 65535
-    nofile:
-      soft: 262144
-      hard: 262144
-x-zookeeper-defaults: &zookeeper-defaults
-  !!merge <<: *common
-  image: zookeeper:3.9
-  user: root
-  labels:
-    signoz.io/scrape: "true"
-    signoz.io/port: "9141"
-    signoz.io/path: "/metrics"
-  healthcheck:
-    test:
-      - CMD-SHELL
-      - echo ruok | nc 127.0.0.1 2181 | grep imok
-    interval: 30s
-    timeout: 5s
-    retries: 3
-x-db-depend: &db-depend
-  !!merge <<: *common
-  depends_on:
-    clickhouse:
-      condition: service_healthy
-    schema-migrator-sync:
-      condition: service_completed_successfully
+
 services:
-  init-clickhouse:
-    !!merge <<: *common
-    image: clickhouse/clickhouse-server:24.1.2-alpine
-    container_name: signoz-init-clickhouse
-    command:
-      - bash
-      - -c
-      - |
-        version="v0.0.1"
-        node_os=$$(uname -s | tr '[:upper:]' '[:lower:]')
-        node_arch=$$(uname -m | sed s/aarch64/arm64/ | sed s/x86_64/amd64/)
-        echo "Fetching histogram-binary for $${node_os}/$${node_arch}"
-        cd /tmp
-        wget -O histogram-quantile.tar.gz "https://github.com/SigNoz/signoz/releases/download/histogram-quantile%2F$${version}/histogram-quantile_$${node_os}_$${node_arch}.tar.gz"
-        tar -xvzf histogram-quantile.tar.gz
-        mv histogram-quantile /var/lib/clickhouse/user_scripts/histogramQuantile
-    restart: on-failure
-    volumes:
-      - ./observability/clickhouse/user_scripts:/var/lib/clickhouse/user_scripts/
-    networks:
-      - web
-
-  zookeeper-1:
-    !!merge <<: *zookeeper-defaults
-    container_name: signoz-zookeeper-1
-    # ports:
-    #   - "2181:2181"
-    #   - "2888:2888"
-    #   - "3888:3888"
-    volumes:
-      - zookeeper-1:/data
+  # Jaeger all-in-one provides collector (including OTLP), query, and UI in one container
+  jaeger:
+    image: jaegertracing/all-in-one:1.76.0
+    container_name: jaeger
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
     environment:
-      - ZOO_MY_ID=1
-      - ZOO_AUTOPURGE_PURGE_INTERVAL=1
-      - ZOO_4LW_COMMANDS_WHITELIST=srvr,ruok
-    networks:
-      - web
-
-  clickhouse:
-    !!merge <<: *clickhouse-defaults
-    container_name: signoz-clickhouse
+      # Enable OTLP HTTP and gRPC receivers
+      - COLLECTOR_OTLP_ENABLED=true
+      - COLLECTOR_OTLP_HTTP_ENABLED=true
+      # Optional: reduce memory usage
+      - MEMORY_MAX_TRACES=50000
     ports:
-      - "9000:9000"
-      - "8123:8123"
-    #   - "9181:9181"
-    volumes:
-      - ./observability/clickhouse/config.xml:/etc/clickhouse-server/config.xml
-      - ./observability/clickhouse/users.xml:/etc/clickhouse-server/users.xml
-      - ./observability/clickhouse/custom-function.xml:/etc/clickhouse-server/custom-function.xml
-      - ./observability/clickhouse/user_scripts:/var/lib/clickhouse/user_scripts/
-      - ./observability/clickhouse/cluster.xml:/etc/clickhouse-server/config.d/cluster.xml
-      - clickhouse:/var/lib/clickhouse/
-      # - ./observability/clickhouse/storage.xml:/etc/clickhouse-server/config.d/storage.xml
+      - "16686:16686" # Jaeger UI
+      - "14268:14268" # HTTP Jaeger collector (Thrift)
+      - "14250:14250" # gRPC Jaeger collector
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "5775:5775/udp" # Zipkin compact thrift (agent legacy)
+      - "6831:6831/udp" # Jaeger UDP (agent)
+      - "6832:6832/udp" # Jaeger UDP (agent)
+      - "5778:5778"     # Agent admin
     networks:
       - web
-
-  signoz:
-    !!merge <<: *db-depend
-    image: signoz/signoz:${DOCKER_TAG:-v0.76.2}
-    container_name: signoz
-    command:
-      - --config=/root/config/prometheus.yml
-      - --use-logs-new-schema=true
-      - --use-trace-new-schema=true
-    ports:
-      - "3303:8080" # signoz port
-    #   - "6060:6060"     # pprof port
-    volumes:
-      - ./observability/signoz/prometheus.yml:/root/config/prometheus.yml
-      - ./observability/dashboards:/root/config/dashboards
-      - sqlite:/var/lib/signoz/
-    environment:
-      - SIGNOZ_ALERTMANAGER_PROVIDER=signoz
-      - SIGNOZ_TELEMETRYSTORE_CLICKHOUSE_DSN=tcp://clickhouse:9000
-      - SIGNOZ_SQLSTORE_SQLITE_PATH=/var/lib/signoz/signoz.db
-      - DASHBOARDS_PATH=/root/config/dashboards
-      - STORAGE=clickhouse
-      - GODEBUG=netdns=go
-      - TELEMETRY_ENABLED=true
-      - DEPLOYMENT_TYPE=docker-standalone-amd
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://localhost:8080/api/v1/health || exit 1" ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    networks:
-      - web
-
-  otel-collector:
-    !!merge <<: *db-depend
-    image: signoz/signoz-otel-collector:${OTELCOL_TAG:-0.111.30}
-    container_name: signoz-otel-collector
-    command:
-      - --config=/etc/otel-collector-config.yaml
-      - --manager-config=/etc/manager-config.yaml
-      - --copy-path=/var/tmp/collector-config.yaml
-      - --feature-gates=-pkg.translator.prometheus.NormalizeName
-    volumes:
-      - ./observability/otel-collector-config.yaml:/etc/otel-collector-config.yaml
-      - ./observability/signoz/otel-collector-opamp-config.yaml:/etc/manager-config.yaml
-    environment:
-      - OTEL_RESOURCE_ATTRIBUTES=host.name=signoz-host,os.type=linux
-      - LOW_CARDINAL_EXCEPTION_GROUPING=false
-    ports:
-      # - "1777:1777"     # pprof extension
-      - "4317:4317" # OTLP gRPC receiver
-      - "4318:4318" # OTLP HTTP receiver
-      - "55679:55679" # zpages extension
-    depends_on:
-      signoz:
-        condition: service_healthy
-    networks:
-      - web
-
-  schema-migrator-sync:
-    !!merge <<: *common
-    image: signoz/signoz-schema-migrator:${OTELCOL_TAG:-0.111.30}
-    container_name: schema-migrator-sync
-    command:
-      - sync
-      - --dsn=tcp://clickhouse:9000
-      - --up=
-    depends_on:
-      clickhouse:
-        condition: service_healthy
-    restart: on-failure
-    networks:
-      - web
-
-  schema-migrator-async:
-    !!merge <<: *db-depend
-    image: signoz/signoz-schema-migrator:${OTELCOL_TAG:-0.111.30}
-    container_name: schema-migrator-async
-    command:
-      - async
-      - --dsn=tcp://clickhouse:9000
-      - --up=
-    restart: on-failure
-    networks:
-      - web
-
-  #  dev:
-#    environment:
-#    #     enable telemetry for all pipelines
-#      TELEMETRY_ENABLE: 1
 
   language-model-gateway:
     extends:
       service: language-model-gateway
       file: docker-compose.yml
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
     environment:
       OTEL_SERVICE_NAME: "language-model-gateway"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
-      # Export traces and metrics via OTLP HTTP to SigNoz collector
+      # Export traces and metrics via OTLP HTTP to Jaeger all-in-one
       OTEL_TRACES_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "otlp"
       OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4318"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
     depends_on:
-      otel-collector:
+      jaeger:
         condition: service_started
     networks:
       - web
-
-volumes:
-  clickhouse:
-  sqlite:
-  zookeeper-1:
 
 networks:
   web:

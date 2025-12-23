@@ -124,22 +124,8 @@ services:
       MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '100'
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
-      # OpenTelemetry configuration
-      OTEL_SERVICE_NAME: language-model-gateway
-      # gRPC OTLP default; change to http/protobuf with 4318 if your collector uses HTTP
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
-      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT}
-      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT}
-      OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT}
-      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
-      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=dev
-      OTEL_LOG_LEVEL: info
-      OTEL_PYTHON_DISABLED_INSTRUMENTATIONS: ''
-      OTEL_PYTHON_LOG_CORRELATION: 'true'
-      OTEL_TRACES_SAMPLER: parentbased_traceidratio
-      OTEL_TRACES_SAMPLER_ARG: '1.0'
     env_file: docker.env
-    command: ["opentelemetry-instrument", "--traces_exporter", "otlp", "--metrics_exporter", "otlp", "--logs_exporter", "otlp", "uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
+    command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
       - '5050:5000'
     volumes:

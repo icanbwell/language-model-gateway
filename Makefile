@@ -274,10 +274,9 @@ fix-script-permissions:
 .PHONY: up-aspire
 up-aspire:
 	@echo "Starting Aspire Dashboard and mcp-fhir-agent with OTLP to Aspire..."
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d aspire-dashboard
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d language-model-gateway
+	docker compose -f docker-compose.yml -f docker-compose-aspire.yml up -d aspire-dashboard
+	docker compose -f docker-compose.yml -f docker-compose-aspire.yml up -d language-model-gateway
 	@echo "Aspire UI: http://localhost:18888"
-	@echo "mcp-fhir-agent: http://localhost:5051 (Traefik proxy may expose https://mcpfhiragent.localhost)"
 
 .PHONY: open-aspire
 open-aspire:
@@ -287,4 +286,23 @@ open-aspire:
 .PHONY: down-aspire
 down-aspire:
 	@echo "Stopping Aspire Dashboard and mcp-fhir-agent (compose override)..."
+	docker compose -f docker-compose.yml -f docker-compose-aspire.yml down
+
+# Updated OTEL targets to use Jaeger all-in-one locally
+.PHONY: up-otel
+up-otel: create-docker-network ## starts Jaeger (all-in-one) and gateway with OTLP to Jaeger
+	@echo "Starting Jaeger all-in-one stack and language-model-gateway..."
+	# Bring up Jaeger services defined in docker-compose-otel.yml
+	docker compose -f docker-compose-otel.yml up -d
+	@echo "Jaeger UI: http://localhost:16686"
+	@echo "language-model-gateway: http://localhost:5050/graphql"
+
+.PHONY: open-otel
+open-otel: ## opens Jaeger UI
+	@echo "Opening Jaeger UI..."
+	open http://localhost:16686
+
+.PHONY: down-otel
+down-otel: ## stops Jaeger and gateway (compose override)
+	@echo "Stopping Jaeger and language-model-gateway (compose override)..."
 	docker compose -f docker-compose.yml -f docker-compose-otel.yml down
