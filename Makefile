@@ -293,9 +293,8 @@ down-aspire:
 up-otel: create-docker-network ## starts Jaeger (all-in-one) and gateway with OTLP to Jaeger
 	@echo "Starting Jaeger all-in-one stack and language-model-gateway..."
 	# Bring up Jaeger services defined in docker-compose-otel.yml
-	docker compose -f docker-compose-otel.yml up -d
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d
 	@echo "Jaeger UI: http://localhost:16686"
-	@echo "language-model-gateway: http://localhost:5050/graphql"
 
 .PHONY: open-otel
 open-otel: ## opens Jaeger UI

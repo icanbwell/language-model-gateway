@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   # Jaeger all-in-one provides collector (including OTLP), query, and UI in one container
   jaeger:
