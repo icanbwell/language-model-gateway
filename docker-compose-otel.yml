@@ -1,7 +1,6 @@
 services:
   aspire-dashboard:
     image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
-    container_name: aspire-dashboard
     environment:
       # Listen on default ports; dashboard UI and OTLP ingestion
       ASPNETCORE_URLS: "http://0.0.0.0:18888"
@@ -41,5 +40,7 @@ services:
 
 networks:
   web:
-    driver: bridge
+    external: true
+    name: language-model-gateway_web
+
 

@@ -270,3 +270,21 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 .PHONY: fix-script-permissions
 fix-script-permissions:
 	chmod +x ./scripts/wait-for-healthy.sh
+
+.PHONY: up-aspire
+up-aspire:
+	@echo "Starting Aspire Dashboard and mcp-fhir-agent with OTLP to Aspire..."
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d aspire-dashboard
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d language-model-gateway
+	@echo "Aspire UI: http://localhost:18888"
+	@echo "mcp-fhir-agent: http://localhost:5051 (Traefik proxy may expose https://mcpfhiragent.localhost)"
+
+.PHONY: open-aspire
+open-aspire:
+	@echo "Opening Aspire Dashboard..."
+	open http://localhost:18888
+
+.PHONY: down-aspire
+down-aspire:
+	@echo "Stopping Aspire Dashboard and mcp-fhir-agent (compose override)..."
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml down
