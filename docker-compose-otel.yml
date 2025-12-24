@@ -39,11 +39,10 @@ services:
     environment:
       OTEL_SERVICE_NAME: "language-model-gateway"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
-      # Export traces and metrics via OTLP HTTP to Jaeger all-in-one
+      # Export traces and metrics via OTLP gRPC to Jaeger all-in-one
       OTEL_TRACES_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "otlp"
-      OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4318"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4317"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
     depends_on:
