@@ -43,6 +43,8 @@ services:
       OTEL_TRACES_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "otlp"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4317"
+      OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
+      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
     depends_on:

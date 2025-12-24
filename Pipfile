@@ -103,6 +103,9 @@ oidcauthlib = ">=1.0.18"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
+# Explicit OTLP gRPC exporter to satisfy 'otlp_proto_grpc' component resolution
+opentelemetry-exporter-otlp-proto-grpc = ">=1.39.1"
+opentelemetry-exporter-otlp-proto-http = ">=1.39.1"
 # OpenTelemetry Instrumentation (auto-instruments FastAPI, httpx, etc.)
 opentelemetry-instrumentation-fastapi = ">=0.60b0"
 opentelemetry-instrumentation-requests = ">=0.60b0"
