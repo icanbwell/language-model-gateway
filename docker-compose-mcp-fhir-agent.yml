@@ -165,6 +165,22 @@ services:
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
       # set max inline size in KB before we use GridFS
       MAX_MONGO_INLINE_SIZE_KB: 50
+      # Open Telemetry settings
+      OTEL_SERVICE_NAME: "mcp-fhir-agent"
+      OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
+      # Export traces and metrics via OTLP gRPC to Jaeger all-in-one
+      OTEL_TRACES_EXPORTER: "otlp"
+      OTEL_METRICS_EXPORTER: "otlp"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4317"
+      OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
+      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+      OTEL_TRACES_SAMPLER: "always_on"
+      OTEL_PYTHON_FASTAPI_EXCLUDED_URLS: "/health,/metrics"
+#      GRPC_VERBOSITY: "debug"
+#      GRPC_TRACE: "http,call_error,connectivity_state"
+      # Optional: enable logs in future
+      # OTEL_LOGS_EXPORTER: "otlp"
     env_file: docker.env
     ports:
       - '5061:5000'
