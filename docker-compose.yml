@@ -127,6 +127,7 @@ services:
     env_file: docker.env
     command:
       - gunicorn
+      - --reload
       - language_model_gateway.gateway.api:app
       - --workers=1
       - --worker-class

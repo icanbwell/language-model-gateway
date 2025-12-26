@@ -178,7 +178,21 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    command:
+      - gunicorn
+      - --reload
+      - mcpfhiragent.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
+      - --preload
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -207,7 +221,21 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    command:
+      - gunicorn
+      - --reload
+      - mcpfhiragent.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
+      - --preload
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -236,7 +264,21 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    command:
+      - gunicorn
+      - --reload
+      - mcpfhiragent.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
+      - --preload
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -265,7 +307,21 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    command:
+      - gunicorn
+      - --reload
+      - mcpfhiragent.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
+      - --preload
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -281,7 +337,6 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-
     env_file: docker.env
     ports:
       - '5065:5000'
@@ -295,7 +350,21 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
+    command:
+      - gunicorn
+      - --reload
+      - mcpfhiragent.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
+      - --preload
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
