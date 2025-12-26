@@ -107,6 +107,7 @@ opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
 opentelemetry-exporter-otlp-proto-grpc = ">=1.39.1"
 opentelemetry-exporter-otlp-proto-http = ">=1.39.1"
 # OpenTelemetry Instrumentation (auto-instruments FastAPI, httpx, etc.)
+# https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation#readme
 opentelemetry-instrumentation-fastapi = ">=0.60b0"
 opentelemetry-instrumentation-requests = ">=0.60b0"
 opentelemetry-instrumentation-logging = ">=0.60b0"
@@ -115,6 +116,10 @@ opentelemetry-instrumentation-aiohttp-client = ">=0.60b0"
 opentelemetry-instrumentation-asyncio = ">=0.60b0"
 opentelemetry-instrumentation-pymongo = ">=0.60b0"
 opentelemetry-instrumentation-wsgi = ">=0.60b0"
+openinference-instrumentation-langchain = ">=0.1.57"
+opentelemetry-instrumentation-redis = ">=0.60b0"
+opentelemetry-instrumentation-aiohttp-client = ">=0.60b0"
+openinference-instrumentation-bedrock = ">=0.1.32"
 # Metrics (Prometheus)
 prometheus-fastapi-instrumentator = ">=7.1.0"
 # gunicorn is a Python WSGI HTTP server for UNIX
