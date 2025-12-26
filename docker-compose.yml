@@ -126,6 +126,7 @@ services:
       TOOL_CALL_TIMEOUT_SECONDS: '600'
     env_file: docker.env
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
