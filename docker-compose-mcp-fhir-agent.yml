@@ -192,7 +192,7 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
+
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -235,7 +235,7 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
+
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -278,7 +278,7 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
+
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -321,7 +321,7 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
+
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -364,7 +364,7 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
+
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:

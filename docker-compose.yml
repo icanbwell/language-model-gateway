@@ -139,7 +139,6 @@ services:
       - --graceful-timeout=30
       - --log-level
       - info
-      - --preload
     ports:
       - '5050:5000'
     volumes:

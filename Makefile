@@ -102,7 +102,7 @@ up-mcp-server-gateway:
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
 .PHONY: up-all
-up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
+up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-otel ## starts all docker containers
 	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
