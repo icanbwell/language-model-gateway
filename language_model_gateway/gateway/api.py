@@ -1,3 +1,7 @@
+from opentelemetry.instrumentation.auto_instrumentation import initialize
+
+initialize()
+
 import logging
 import os
 import uuid
