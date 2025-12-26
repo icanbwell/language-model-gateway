@@ -2,6 +2,7 @@ import logging
 import os
 from logging import DEBUG
 from typing import Dict, List, Callable, Awaitable, Any
+import json
 
 import httpx
 from datetime import timedelta
@@ -25,6 +26,10 @@ from mcp.types import (
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
+
+# OpenTelemetry propagation for trace context
+from opentelemetry.propagate import inject
+from opentelemetry.trace import get_tracer, SpanKind
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -234,6 +239,63 @@ class MCPToolProvider:
 
         return tool_interceptor_truncation
 
+    def get_tool_interceptor_tracing(self) -> ToolCallInterceptor:
+        """
+        Interceptor that wraps each MCP tool call in an OpenTelemetry span.
+        Captures useful attributes and marks errors on exceptions.
+        """
+
+        tracer = get_tracer(__name__)
+
+        async def tool_interceptor_tracing(
+            request: MCPToolCallRequest,
+            handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
+        ) -> MCPToolCallResult:
+            span_name = f"mcp.tool.{getattr(request, 'tool_name', 'call')}"
+            # Start span as current so downstream HTTP client propagation uses the active context
+            with tracer.start_as_current_span(span_name, kind=SpanKind.CLIENT) as span:
+                # Add common attributes for filtering/analysis
+                try:
+                    span.set_attribute(
+                        "mcp.server_name", getattr(request, "server_name", "unknown")
+                    )
+                    span.set_attribute(
+                        "mcp.tool_name", getattr(request, "tool_name", "unknown")
+                    )
+                    # Serialize complex arguments into JSON string to satisfy OTEL attribute type requirements
+                    args_val: Any = getattr(request, "arguments", {})
+                    try:
+                        args_str = json.dumps(args_val, ensure_ascii=False)
+                    except Exception:
+                        args_str = str(args_val)
+                    span.set_attribute("mcp.arguments", args_str)
+                except Exception:
+                    # defensive: attribute setting should not break the call
+                    pass
+                try:
+                    result = await handler(request)
+                    # Optionally record result metadata size
+                    try:
+                        if isinstance(result, CallToolResult):
+                            span.set_attribute(
+                                "mcp.result.content_blocks", len(result.content)
+                            )
+                            if result.structuredContent is not None:
+                                span.set_attribute("mcp.result.structured", True)
+                    except Exception:
+                        pass
+                    return result
+                except Exception as err:
+                    # Record exception on span, mark status error, then re-raise
+                    try:
+                        span.record_exception(err)
+                        # status API may differ by SDK version; recording exception is sufficient
+                    except Exception:
+                        pass
+                    raise
+
+        return tool_interceptor_tracing
+
     @staticmethod
     async def on_mcp_tool_logging(
         params: LoggingMessageNotificationParams,
@@ -295,6 +357,19 @@ class MCPToolProvider:
                     key: os.path.expandvars(value)
                     for key, value in tool_config.headers.items()
                 }
+
+            # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
+            existing_headers = mcp_tool_config.get("headers") or {}
+            try:
+                # inject uses the current context by default and writes W3C trace headers into the carrier
+                inject(existing_headers)
+                if logger.isEnabledFor(DEBUG):
+                    logger.debug(
+                        f"Injected OpenTelemetry context into MCP headers: {existing_headers}"
+                    )
+            except Exception as otel_err:
+                # Do not fail tool loading if OTEL propagation fails; just log
+                logger.debug(f"OTEL inject failed: {type(otel_err)} {otel_err}")
 
             # pass Authorization header if provided
             if headers:
@@ -372,7 +447,10 @@ class MCPToolProvider:
                     on_progress=self.on_mcp_tool_progress,
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
-                tool_interceptors=[self.get_tool_interceptor_truncation()],
+                tool_interceptors=[
+                    self.get_tool_interceptor_truncation(),
+                    self.get_tool_interceptor_tracing(),
+                ],
             )
             tools: List[BaseTool] = await client.get_tools()
             if tool_names and tools:

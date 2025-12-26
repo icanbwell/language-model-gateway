@@ -179,6 +179,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - mcpfhiragent.api:app
@@ -222,6 +223,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - mcpfhiragent.api:app
@@ -265,6 +267,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - mcpfhiragent.api:app
@@ -308,6 +311,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - mcpfhiragent.api:app
@@ -351,6 +355,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     command:
+      - opentelemetry-instrument
       - gunicorn
       - --reload
       - mcpfhiragent.api:app
