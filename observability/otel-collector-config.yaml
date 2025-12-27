@@ -11,7 +11,7 @@ exporters:
     tls:
       insecure: true
   # Optional: useful for local debugging
-  logging:
+  debug:
     verbosity: detailed
 
 processors:
@@ -22,13 +22,12 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, logging]
+      exporters: [otlp, debug]
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, logging]
+      exporters: [otlp, debug]
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, logging]
-
+      exporters: [otlp, debug]

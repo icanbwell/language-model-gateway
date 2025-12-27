@@ -22,7 +22,7 @@ services:
 
   # OpenTelemetry Collector to aggregate and forward telemetry to Aspire
   otel-collector:
-    image: otel/opentelemetry-collector:latest
+    image: otel/opentelemetry-collector:0.133.0
     command: ["--config=/etc/otelcol/config.yaml"]
     volumes:
       - ./observability/otel-collector-config.yaml:/etc/otelcol/config.yaml:ro
@@ -31,9 +31,6 @@ services:
       options:
         max-size: 50m
         max-file: "3"
-    ports:
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
     depends_on:
       aspire-dashboard:
         condition: service_started
