@@ -168,10 +168,10 @@ services:
       # Open Telemetry settings
       OTEL_SERVICE_NAME: "mcp-fhir-agent"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
-      # Export traces and metrics via OTLP gRPC to Jaeger all-in-one
+      # Export traces and metrics via OTLP gRPC to Aspire all-in-one
       OTEL_TRACES_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "otlp"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4317"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
       OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"

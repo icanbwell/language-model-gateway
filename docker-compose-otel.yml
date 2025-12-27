@@ -1,29 +1,42 @@
 services:
-  # Jaeger all-in-one provides collector (including OTLP), query, and UI in one container
-  jaeger:
-    image: jaegertracing/all-in-one:1.76.0
-    container_name: jaeger
+    # Microsoft Aspire Dashboard provides OTLP receivers and a web UI for observability
+  aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:8.0
     restart: unless-stopped
     logging:
       options:
         max-size: 50m
         max-file: "3"
     environment:
-      # Enable OTLP HTTP and gRPC receivers
-      - COLLECTOR_OTLP_ENABLED=true
-      - COLLECTOR_OTLP_HTTP_ENABLED=true
-      # Optional: reduce memory usage
-      - MEMORY_MAX_TRACES=50000
+      # Enable OTLP HTTP and gRPC receivers (enabled by default in Aspire Dashboard)
+      - DASHBOARD__OTLP__ENABLEHTTP=true
+      - DASHBOARD__OTLP__ENABLEGRPC=true
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+      # Optional: resource limits/settings can be added here if needed
     ports:
-      - "16686:16686" # Jaeger UI
-      - "14268:14268" # HTTP Jaeger collector (Thrift)
-      - "14250:14250" # gRPC Jaeger collector
+      - "18888:18888" # Aspire Dashboard UI
       - "4317:4317"   # OTLP gRPC receiver
       - "4318:4318"   # OTLP HTTP receiver
-      - "5775:5775/udp" # Zipkin compact thrift (agent legacy)
-      - "6831:6831/udp" # Jaeger UDP (agent)
-      - "6832:6832/udp" # Jaeger UDP (agent)
-      - "5778:5778"     # Agent admin
+    networks:
+      - web
+
+  # OpenTelemetry Collector to aggregate and forward telemetry to Aspire
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./observability/otel-collector-config.yaml:/etc/otelcol/config.yaml:ro
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+    depends_on:
+      aspire-dashboard:
+        condition: service_started
     networks:
       - web
 
@@ -39,10 +52,10 @@ services:
     environment:
       OTEL_SERVICE_NAME: "language-model-gateway"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
-      # Export traces and metrics via OTLP gRPC to Jaeger all-in-one
+      # Export traces and metrics via OTLP gRPC to Aspire all-in-one
       OTEL_TRACES_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "otlp"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://jaeger:4317"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
       OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
@@ -52,9 +65,6 @@ services:
 #      GRPC_TRACE: "http,call_error,connectivity_state"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
-    depends_on:
-      jaeger:
-        condition: service_started
     networks:
       - web
 

@@ -1,0 +1,34 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  # Forward to Aspire Dashboard via OTLP gRPC
+  otlp:
+    endpoint: aspire-dashboard:4317
+    tls:
+      insecure: true
+  # Optional: useful for local debugging
+  logging:
+    verbosity: detailed
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp, logging]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp, logging]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp, logging]
+
