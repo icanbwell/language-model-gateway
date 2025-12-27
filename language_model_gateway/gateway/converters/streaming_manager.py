@@ -310,7 +310,7 @@ class LangGraphStreamingManager:
                                     "\n--- Structured Content (w/o result) ---\n"
                                 )
                                 tool_message_content += json.dumps(
-                                    structured_data_without_result, indent=4
+                                    structured_data_without_result, indent=2
                                 )
                                 tool_message_content += (
                                     "\n--- End Structured Content ---\n"

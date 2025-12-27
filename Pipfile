@@ -185,6 +185,8 @@ asgi-lifespan = ">=2.1.0"
 pytest-opentelemetry = ">=1.1.0"
 # watchfiles is a Python library for watching files for changes
 watchfiles= ">=1.1.1"
+# inotify is a Python library for monitoring filesystem events (Linux only).  Used by gunicorn reloader
+inotify = ">=0.2.12"
 
 [requires]
 python_version = "3.12"
