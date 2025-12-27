@@ -1,42 +1,4 @@
 services:
-    # Microsoft Aspire Dashboard provides OTLP receivers and a web UI for observability
-  aspire-dashboard:
-    image: mcr.microsoft.com/dotnet/aspire-dashboard:8.0
-    restart: unless-stopped
-    logging:
-      options:
-        max-size: 50m
-        max-file: "3"
-    environment:
-      # Enable OTLP HTTP and gRPC receivers (enabled by default in Aspire Dashboard)
-      - DASHBOARD__OTLP__ENABLEHTTP=true
-      - DASHBOARD__OTLP__ENABLEGRPC=true
-      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
-      # Optional: resource limits/settings can be added here if needed
-    ports:
-      - "18888:18888" # Aspire Dashboard UI
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
-    networks:
-      - web
-
-  # OpenTelemetry Collector to aggregate and forward telemetry to Aspire
-  otel-collector:
-    image: otel/opentelemetry-collector:0.133.0
-    command: ["--config=/etc/otelcol/config.yaml"]
-    volumes:
-      - ./observability/otel-collector-config.yaml:/etc/otelcol/config.yaml:ro
-    restart: unless-stopped
-    logging:
-      options:
-        max-size: 50m
-        max-file: "3"
-    depends_on:
-      aspire-dashboard:
-        condition: service_started
-    networks:
-      - web
-
   language-model-gateway:
     extends:
       service: language-model-gateway

@@ -293,7 +293,7 @@ down-aspire:
 up-otel: create-docker-network ## starts Aspire (all-in-one) and gateway with OTLP to Aspire
 	@echo "Starting Aspire all-in-one stack and language-model-gateway..."
 	# Bring up Aspire services defined in docker-compose-otel.yml
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml -f docker-compose.services.observability.yml up -d
 	@echo "Aspire UI: http://localhost:18888"
 
 .PHONY: open-otel

@@ -17,7 +17,7 @@ services:
     ports:
       - "8080:8080"
       # 9000 is for health checks: https://www.keycloak.org/observability/health
-      - "9000:9000"
+#      - "9050:9000"
     command: [ "start-dev", "--verbose" ]
     healthcheck:
       test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e \"GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q 'HTTP/1.1 200 OK' <&3" ]
