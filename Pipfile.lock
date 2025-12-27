@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "aa64bf81d3d6f4e09792e1d96a0d7ab3f13375f68b3d7320b78e93d1225d4872"
+            "sha256": "c05192847e25b9a0873b6bcc9ee5156497e30ac133e0dc7cda31cdc3db69679c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1391,20 +1391,20 @@
         },
         "langchain-aws": {
             "hashes": [
-                "sha256:7835213de92a6d79af3778ec37d622812519e632ad6be8226d8f1f4d95a24cba",
-                "sha256:a278de3d86349c605e0a8bd8e2eb1575bb13c2c1a6c858749fd7dcd7844a67e3"
+                "sha256:1e2f8570328eae4907c3cf7e900dc68d8034ddc865d9dc96823c9f9d8cccb901",
+                "sha256:8ec074615b42839e035354063717374c32c63f5028ef5221ba073fd5f3ef5e37"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.1.1"
+            "version": "==1.1.0"
         },
         "langchain-classic": {
             "hashes": [
-                "sha256:97f71f150c10123f5511c08873f030e35ede52311d729a7688c721b4e1e01f33",
-                "sha256:a63655609254ebc36d660eb5ad7c06c778b2e6733c615ffdac3eac4fbe2b12c5"
+                "sha256:131d83a02bb80044c68fedc1ab4ae885d5b8f8c2c742d8ab9e7534ad9cda8e80",
+                "sha256:40a499684df36b005a1213735dc7f8dca8f5eb67978d6ec763e7a49780864fdc"
             ],
             "markers": "python_full_version >= '3.10.0' and python_full_version < '4.0.0'",
-            "version": "==1.0.0"
+            "version": "==1.0.1"
         },
         "langchain-community": {
             "hashes": [
@@ -1417,12 +1417,12 @@
         },
         "langchain-core": {
             "hashes": [
-                "sha256:1e01c06f98b9904af0de39d2a290d11b4c4e07888dacbbf4bdc7cef259f5a80e",
-                "sha256:29ced7690688c85d66a797eb2866815f55c90cc83a94cf8b0ecad949e913f99f"
+                "sha256:3255944ef4e21b2551facb319bfc426057a40247c0a05de5bd6f2fc021fbfa34",
+                "sha256:d674f6df42f07e846859b9d3afe547cad333d6bf9763e92c88eb4f8aaedcd3cc"
             ],
             "index": "pypi",
             "markers": "python_full_version >= '3.10.0' and python_full_version < '4.0.0'",
-            "version": "==1.2.4"
+            "version": "==1.2.5"
         },
         "langchain-experimental": {
             "hashes": [

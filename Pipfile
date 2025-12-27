@@ -27,7 +27,7 @@ langchain = ">=1.0.0"
 # pydantic is a Python library for data validation
 pydantic = ">=2.0,<3.0.0"  # needed by langchain
 # langchain-core is a Python library for building language models
-langchain-core = ">=1.0.0"
+langchain-core = ">=1.2.5"
 # langchain-aws is a Python library for interacting with AWS services
 langchain-aws = ">=1.0.0"
 # openai is a Python library for interacting with OpenAI
