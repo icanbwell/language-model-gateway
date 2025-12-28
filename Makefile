@@ -271,37 +271,19 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 fix-script-permissions:
 	chmod +x ./scripts/wait-for-healthy.sh
 
-.PHONY: up-aspire
-up-aspire:
-	@echo "Starting Aspire Dashboard and mcp-fhir-agent with OTLP to Aspire..."
-	docker compose -f docker-compose.yml -f docker-compose-aspire.yml up -d aspire-dashboard
-	docker compose -f docker-compose.yml -f docker-compose-aspire.yml up -d language-model-gateway
-	@echo "Aspire UI: http://localhost:18888"
-
-.PHONY: open-aspire
-open-aspire:
-	@echo "Opening Aspire Dashboard..."
-	open http://localhost:18888
-
-.PHONY: down-aspire
-down-aspire:
-	@echo "Stopping Aspire Dashboard and mcp-fhir-agent (compose override)..."
-	docker compose -f docker-compose.yml -f docker-compose-aspire.yml down
-
-# Updated OTEL targets to use Aspire all-in-one locally
 .PHONY: up-otel
-up-otel: create-docker-network ## starts Aspire (all-in-one) and gateway with OTLP to Aspire
-	@echo "Starting Aspire all-in-one stack and language-model-gateway..."
-	# Bring up Aspire services defined in docker-compose-otel.yml
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml -f docker-compose.services.observability.yml up -d
-	@echo "Aspire UI: http://localhost:18888"
+up-otel: create-docker-network ## starts Jaeger (all-in-one) and gateway with OTLP to Aspire
+	@echo "Starting Jaeger all-in-one stack and language-model-gateway..."
+	# Bring up Jaeger services defined in docker-compose-otel.yml
+	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d
+	@echo "Jaeger UI: http://localhost:16686"
 
 .PHONY: open-otel
-open-otel: ## opens Aspire UI
-	@echo "Opening Aspire UI..."
+open-otel: ## opens Jaeger UI
+	@echo "Opening Jaeger UI..."
 	open http://localhost:16686
 
 .PHONY: down-otel
-down-otel: ## stops Aspire and gateway (compose override)
-	@echo "Stopping Aspire and language-model-gateway (compose override)..."
+down-otel: ## stops Jaeger and gateway (compose override)
+	@echo "Stopping Jaeger and language-model-gateway (compose override)..."
 	docker compose -f docker-compose.yml -f docker-compose-otel.yml down
