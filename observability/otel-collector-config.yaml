@@ -1,3 +1,4 @@
+# https://opentelemetry.io/docs/collector/configuration/
 receivers:
   otlp:
     protocols:
@@ -5,29 +6,34 @@ receivers:
       http:
 
 exporters:
-  # Forward to Aspire Dashboard via OTLP gRPC
+  # Forward to Jaeger via OTLP gRPC (Jaeger all-in-one has an OTLP receiver)
   otlp:
     endpoint: jaeger:4317
     tls:
       insecure: true
-  # Optional: useful for local debugging
+  # Optional: local debug exporter (disabled in pipelines to reduce noise)
   debug:
-    verbosity: detailed
+    verbosity: basic
 
 processors:
   batch:
 
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
 service:
+  extensions: [health_check]
   pipelines:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, debug]
+      exporters: [otlp]
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
+      exporters: []
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
+      exporters: []

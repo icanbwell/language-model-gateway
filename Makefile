@@ -67,6 +67,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	-f docker-compose-openwebui.yml \
 	-f docker-compose-openwebui-ssl.yml \
 	-f docker-compose-openwebui-auth.yml \
+	-f docker-compose-otel.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
 	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
@@ -80,6 +81,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
+	@echo Jaeger UI: http://localhost:16686
 
 .PHONY: up-mcp-fhir-agent
 up-mcp-fhir-agent:
@@ -102,7 +104,7 @@ up-mcp-server-gateway:
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
 .PHONY: up-all
-up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-otel ## starts all docker containers
+up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
 	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
