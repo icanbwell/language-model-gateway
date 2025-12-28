@@ -115,6 +115,7 @@ up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
+	@echo Jaeger UI: http://localhost:16686
 
 .PHONY: down
 down: ## stops docker containers
