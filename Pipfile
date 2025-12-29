@@ -99,7 +99,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=1.0.18"
+oidcauthlib = ">=1.0.22"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
