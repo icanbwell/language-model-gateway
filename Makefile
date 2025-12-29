@@ -273,20 +273,3 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 .PHONY: fix-script-permissions
 fix-script-permissions:
 	chmod +x ./scripts/wait-for-healthy.sh
-
-.PHONY: up-otel
-up-otel: create-docker-network ## starts Jaeger (all-in-one) and gateway with OTLP to Aspire
-	@echo "Starting Jaeger all-in-one stack and language-model-gateway..."
-	# Bring up Jaeger services defined in docker-compose-otel.yml
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml up -d
-	@echo "Jaeger UI: http://localhost:16686"
-
-.PHONY: open-otel
-open-otel: ## opens Jaeger UI
-	@echo "Opening Jaeger UI..."
-	open http://localhost:16686
-
-.PHONY: down-otel
-down-otel: ## stops Jaeger and gateway (compose override)
-	@echo "Stopping Jaeger and language-model-gateway (compose override)..."
-	docker compose -f docker-compose.yml -f docker-compose-otel.yml down
