@@ -182,7 +182,7 @@ pandas-stubs = ">=2.3.2"
 # asgi-lifespan is a Python library for managing ASGI lifespan events
 asgi-lifespan = ">=2.1.0"
 # watchfiles is a Python library for watching files for changes
-watchfiles= ">=1.1.1"
+watchfiles = ">=1.1.1"
 # inotify is a Python library for monitoring filesystem events (Linux only).  Used by gunicorn reloader
 inotify = ">=0.2.12"
 
