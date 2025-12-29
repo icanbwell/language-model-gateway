@@ -7,7 +7,6 @@ services:
     container_name: language-model-gateway
     environment:
       DEBUG_METRICS: 0
-      DD_TRACE_ENABLED: "false"
       LOG_LEVEL: INFO
       MCP_LOG_LEVEL: DEBUG
       LLM_LOG_LEVEL: DEBUG
@@ -126,7 +125,21 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
     env_file: docker.env
-    command: ["uvicorn", "language_model_gateway.gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
+    command:
+      - opentelemetry-instrument
+      - gunicorn
+      - --reload
+      - language_model_gateway.gateway.api:app
+      - --workers=1
+      - --worker-class
+      - uvicorn.workers.UvicornWorker
+      - --bind
+      - 0.0.0.0:5000
+      - --timeout=60
+      - --keep-alive=45
+      - --graceful-timeout=30
+      - --log-level
+      - info
     ports:
       - '5050:5000'
     volumes:

@@ -116,12 +116,12 @@ class TokenStorageAuthManager(FastAPIAuthManager):
             f" with state {state_content} and encoded state {state}"
         )
 
-        rv: Dict[str, Any] = await client.create_authorization_url(  # type: ignore[no-untyped-call]
+        rv: Dict[str, Any] = await client.create_authorization_url(
             redirect_uri=redirect_uri, state=state
         )
         logger.debug(f"Authorization URL created: {rv}")
         # request is only needed if we are using the session to store the state
-        await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)  # type: ignore[no-untyped-call]
+        await client.save_authorize_data(request=None, redirect_uri=redirect_uri, **rv)
         return cast(str, rv["url"])
 
     @override

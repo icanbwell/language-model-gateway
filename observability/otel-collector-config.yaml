@@ -1,0 +1,32 @@
+# https://opentelemetry.io/docs/collector/configuration/
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  # Forward to Jaeger via OTLP gRPC (Jaeger all-in-one has an OTLP receiver)
+  otlp:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+  # Optional: local debug exporter (disabled in pipelines to reduce noise)
+  debug:
+    verbosity: basic
+
+processors:
+  batch:
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+
