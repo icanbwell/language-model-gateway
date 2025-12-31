@@ -92,9 +92,9 @@ services:
         max-size: 50m
         max-file: "3"
     environment:
-      ENABLE_OTEL: True
-      ENABLE_OTEL_TRACES: True
-      ENABLE_OTEL_METRICS: True
+      ENABLE_OTEL: "true"
+      ENABLE_OTEL_TRACES: "true"
+      ENABLE_OTEL_METRICS: "true"
       OTEL_SERVICE_NAME: "open-webui"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
