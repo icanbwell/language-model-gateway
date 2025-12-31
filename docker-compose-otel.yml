@@ -93,8 +93,9 @@ services:
         max-file: "3"
     environment:
       ENABLE_OTEL: "true"
-      ENABLE_OTEL_TRACES: "true"
-      ENABLE_OTEL_METRICS: "true"
+      # OpenWebUI has a lot of traces so disable unless needed for troubleshooting
+      ENABLE_OTEL_TRACES: "false"
+      ENABLE_OTEL_METRICS: "false"
       OTEL_SERVICE_NAME: "open-webui"
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
