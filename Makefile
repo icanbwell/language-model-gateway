@@ -186,7 +186,7 @@ endif
 insert-admin-user: ## Inserts an admin user with email 'admin@localhost' if it does not already exist
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
     "INSERT INTO public.\"user\" (id, name, email, \"role\", profile_image_url, created_at, updated_at, last_active_at, settings, info, username, bio, gender, date_of_birth, profile_banner_image_url, timezone, presence_state, status_emoji, status_message, status_expires_at, oauth) \
-    SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286', 'User', 'admin@localhost', 'admin', '/user.png', 1735089600, 1735089600, 1735089609, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL \
+    SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286', 'User', 'admin@localhost.com', 'admin', '/user.png', 1735089600, 1735089600, 1735089609, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL \
     WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE id = '8d967d73-99b8-40ff-ac3b-c71ac19e1286');"
 
 .PHONY: insert-admin-user-2
