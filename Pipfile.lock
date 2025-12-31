@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b281a815d3e1a5eb283ef44cf0cdf2380f3a876b14c04bb128c30fb38dc82892"
+            "sha256": "551f7abe7da209da8ba9a7c01782830286e290ea52748e479e3f7d13c779c4b2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -2164,12 +2164,12 @@
         },
         "oidcauthlib": {
             "hashes": [
-                "sha256:57b46bf839e19726328738bb1bc78ec6fde7aca70c7cfbddf88e4219a5fbc1ef",
-                "sha256:a76c8492d74ff134e0b005df06af06a89214f9609f58b75dbddcb31554dd68df"
+                "sha256:4570eff94d1f498551b9b97fc5d44595b5b2f3ca279cb2c17469f6dae7acdaf0",
+                "sha256:54a1b2aaa5e5e0f1fabbdb0a9d63d928b068e195bc3e66e03cf771b2767208cc"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==1.0.24"
+            "version": "==1.0.25"
         },
         "openai": {
             "hashes": [
@@ -3687,11 +3687,11 @@
         },
         "sse-starlette": {
             "hashes": [
-                "sha256:bb38f71ae74cfd86b529907a9fda5632195dfa6ae120f214ea4c890c7ee9d436",
-                "sha256:bffa531420c1793ab224f63648c059bcadc412bf9fdb1301ac8de1cf9a67b7fb"
+                "sha256:55eff034207a83a0eb86de9a68099bd0157838f0b8b999a1b742005c71e33618",
+                "sha256:cd800dd349f4521b317b9391d3796fa97b71748a4da9b9e00aafab32dda375c8"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==3.1.1"
+            "version": "==3.1.2"
         },
         "starlette": {
             "hashes": [
@@ -5059,12 +5059,12 @@
         },
         "fastmcp": {
             "hashes": [
-                "sha256:132725cbf77b68fa3c3d165eff0cfa47e40c1479457419e6a2cfda65bd84c8d6",
-                "sha256:fb3e365cc1d52573ab89caeba9944dd4b056149097be169bce428e011f0a57e5"
+                "sha256:bd23d1b808b6f446444f10114dac468b11bfb9153ed78628f5619763d0cf573e",
+                "sha256:e33cd622e1ebd5110af6a981804525b6cd41072e3c7d68268ed69ef3be651aca"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==2.14.1"
+            "version": "==2.14.2"
         },
         "filelock": {
             "hashes": [
@@ -6492,11 +6492,11 @@
         },
         "sse-starlette": {
             "hashes": [
-                "sha256:bb38f71ae74cfd86b529907a9fda5632195dfa6ae120f214ea4c890c7ee9d436",
-                "sha256:bffa531420c1793ab224f63648c059bcadc412bf9fdb1301ac8de1cf9a67b7fb"
+                "sha256:55eff034207a83a0eb86de9a68099bd0157838f0b8b999a1b742005c71e33618",
+                "sha256:cd800dd349f4521b317b9391d3796fa97b71748a4da9b9e00aafab32dda375c8"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==3.1.1"
+            "version": "==3.1.2"
         },
         "starlette": {
             "hashes": [
