@@ -2,7 +2,9 @@ import uuid
 from typing import override
 
 from oidcauthlib.container.simple_container import SimpleContainer
-from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
+from oidcauthlib.utilities.environment.oidc_environment_variables import (
+    OidcEnvironmentVariables,
+)
 
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
@@ -31,7 +33,7 @@ def create_test_container() -> SimpleContainer:
         TestLanguageModelGatewayEnvironmentVariables()
     )
     container.singleton(
-        EnvironmentVariables,
+        OidcEnvironmentVariables,
         lambda c: test_language_model_gateway_environment_variables,
     )
     container.singleton(

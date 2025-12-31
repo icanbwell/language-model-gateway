@@ -85,7 +85,7 @@ joserfc = ">=1.4.3"
 # aiocache is a Python library for caching with asyncio support
 aiocache = ">=0.12.3"
 # pymongo is a Python library for working with MongoDB
-pymongo = { version = ">=4.15.4", extras = ["srv"] }
+pymongo = { version = ">=4.15.3", extras = ["snappy"] }
 # redis is a Python library for working with Redis
 redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
@@ -99,7 +99,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=1.0.22"
+oidcauthlib = ">=1.0.23"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }

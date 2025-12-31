@@ -1,10 +1,12 @@
 import os
 from typing import Optional
 
-from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
+from oidcauthlib.utilities.environment.oidc_environment_variables import (
+    OidcEnvironmentVariables,
+)
 
 
-class LanguageModelGatewayEnvironmentVariables(EnvironmentVariables):
+class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     @property
     def github_org(self) -> Optional[str]:
         return os.environ.get("GITHUB_ORGANIZATION_NAME")
