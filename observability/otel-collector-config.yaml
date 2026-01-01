@@ -24,10 +24,6 @@ exporters:
     sampling_thereafter: 200  # Optional: sample 1 in 200 after initial
 
 processors:
-  batch:
-    timeout: 10s  # Optional: explicit timeout
-    send_batch_size: 1024  # Optional: tune for your workload
-
   # Optional: Add memory limiter to prevent OOM
   memory_limiter:
     check_interval: 1s
@@ -47,17 +43,14 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]  # Add memory_limiter if included: [memory_limiter, batch]
       exporters: [otlp]
 
     # Jaeger does not accept metrics via OTLP; send to debug for visibility.
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [debug]
 
     # Jaeger does not accept logs via OTLP; send to debug for visibility.
     logs:
       receivers: [otlp]
-      processors: [batch]
       exporters: [debug]
