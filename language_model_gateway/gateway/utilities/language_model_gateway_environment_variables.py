@@ -98,4 +98,5 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
 
     @property
     def tool_call_timeout_seconds(self) -> int:
+        """Timeout in seconds for tool calls."""
         return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))
