@@ -181,6 +181,8 @@ services:
 #      GRPC_TRACE: "http,call_error,connectivity_state"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
+      # set log level for fhir client calls
+      FHIR_CLIENT_LOG_LEVEL: "DEBUG"
     env_file: docker.env
     ports:
       - '5061:5000'
