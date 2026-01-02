@@ -28,8 +28,10 @@ build: create-docker-network ## Builds the docker for dev
 .PHONY: up
 up: create-docker-network fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
-	-f docker-compose-keycloak.yml up -d && \
+	-f docker-compose-keycloak.yml \
+	 -f docker-compose-mongo.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-mongo-1 || exit 1 && \
 	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway || exit 1 && \
@@ -210,7 +212,6 @@ CERT_KEY := $(CERT_DIR)/open-webui.localhost-key.pem
 CERT_CRT := $(CERT_DIR)/open-webui.localhost.pem
 
 .PHONY: all install-ca create-certs check-cert-expiry
-
 # Install local Certificate Authority
 install-ca: ## Installs a local CA using mkcert
 	mkcert -install
