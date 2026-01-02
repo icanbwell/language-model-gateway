@@ -278,3 +278,15 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 .PHONY: fix-script-permissions
 fix-script-permissions:
 	chmod +x ./scripts/wait-for-healthy.sh
+
+.PHONY:show-dependency-graph
+show-dependency-graph: build ## Generates a dependency graph of the Python packages and writes to dependency_graph.json
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree --reverse --output json-tree" > dependency_graph_reverse.json && \
+		echo "Dependency graph written to dependency_graph_reverse.json"
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree --reverse" > dependency_graph_reverse.txt && \
+		echo "Dependency graph written to dependency_graph_reverse.txt"
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree" > dependency_graph.txt && \
+		echo "Dependency graph written to dependency_graph.txt"

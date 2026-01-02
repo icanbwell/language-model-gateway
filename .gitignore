@@ -148,3 +148,5 @@ dmypy.json
 
 /outputs/*
 !/outputs/**/readme.md
+
+/dependency_graph*.*
