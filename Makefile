@@ -28,8 +28,10 @@ build: create-docker-network ## Builds the docker for dev
 .PHONY: up
 up: create-docker-network fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
-	-f docker-compose-keycloak.yml up -d && \
+	-f docker-compose-keycloak.yml \
+	 -f docker-compose-mongo.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-mongo-1 || exit 1 && \
 	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
 	sh scripts/wait-for-healthy.sh language-model-gateway || exit 1 && \
@@ -185,16 +187,20 @@ endif
 .PHONY: insert-admin-user
 insert-admin-user: ## Inserts an admin user with email 'admin@localhost' if it does not already exist
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
-    "INSERT INTO public.\"user\" (id,name,email,\"role\",profile_image_url,api_key,created_at,updated_at,last_active_at,settings,info,oauth_sub) \
-    SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286','User','admin@localhost','admin','/user.png',NULL,1735089600,1735089600,1735089609,'{"ui": {"version": "0.4.8"}}','null',NULL \
+    "INSERT INTO public.\"user\" (id, name, email, \"role\", profile_image_url, created_at, updated_at, last_active_at, settings, info, username, bio, gender, date_of_birth, profile_banner_image_url, timezone, presence_state, status_emoji, status_message, status_expires_at, oauth) \
+    SELECT '8d967d73-99b8-40ff-ac3b-c71ac19e1286', 'User', 'admin@localhost.com', 'admin', '/user.png', 1735089600, 1735089600, 1735089609, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL \
     WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE id = '8d967d73-99b8-40ff-ac3b-c71ac19e1286');"
 
 .PHONY: insert-admin-user-2
 insert-admin-user-2: ## Inserts an admin user with email 'admin@tester.com' and api_key 'sk-my-api-key' if it does not already exist
 	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
-    "INSERT INTO public.user (id, name, email, role, profile_image_url, api_key, created_at, updated_at, last_active_at, settings, info, oauth_sub, username, bio, gender, date_of_birth) \
-	SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', 'sk-my-api-key', 1756681388, 1756681388, 1756681389, 'null', 'null', 'oidc@admin', NULL, NULL, NULL, NULL \
-    WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE email='admin@tester.com');"
+    "INSERT INTO public.\"user\" (id, name, email, \"role\", profile_image_url, created_at, updated_at, last_active_at, settings, info, username, bio, gender, date_of_birth, profile_banner_image_url, timezone, presence_state, status_emoji, status_message, status_expires_at, oauth) \
+    SELECT 'f841d162-89a8-46f7-89c2-bf112029d19c', 'admin@tester.com', 'admin@tester.com', 'admin', '/user.png', 1756681388, 1756681388, 1756681389, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL \
+    WHERE NOT EXISTS (SELECT 1 FROM public.\"user\" WHERE email='admin@tester.com');" && \
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+    "INSERT INTO public.api_key (id, user_id, \"key\", \"data\", expires_at, last_used_at, created_at, updated_at) \
+    SELECT '2e9a3b4c-1234-5678-9abc-def012345678', 'f841d162-89a8-46f7-89c2-bf112029d19c', 'sk-my-api-key', NULL, NULL, NULL, 1756681388, 1756681388 \
+    WHERE NOT EXISTS (SELECT 1 FROM public.api_key WHERE \"key\"='sk-my-api-key');"
 
 .PHONY: set-admin-user-role
 set-admin-user-role: ## Sets the role of the user 'admin@tester.com' to admin
@@ -206,7 +212,6 @@ CERT_KEY := $(CERT_DIR)/open-webui.localhost-key.pem
 CERT_CRT := $(CERT_DIR)/open-webui.localhost.pem
 
 .PHONY: all install-ca create-certs check-cert-expiry
-
 # Install local Certificate Authority
 install-ca: ## Installs a local CA using mkcert
 	mkcert -install
@@ -273,3 +278,15 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 .PHONY: fix-script-permissions
 fix-script-permissions:
 	chmod +x ./scripts/wait-for-healthy.sh
+
+.PHONY:show-dependency-graph
+show-dependency-graph: build ## Generates a dependency graph of the Python packages and writes to dependency_graph.json
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree --reverse --output json-tree" > dependency_graph_reverse.json && \
+		echo "Dependency graph written to dependency_graph_reverse.json"
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree --reverse" > dependency_graph_reverse.txt && \
+		echo "Dependency graph written to dependency_graph_reverse.txt"
+	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
+	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree" > dependency_graph.txt && \
+		echo "Dependency graph written to dependency_graph.txt"

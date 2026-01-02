@@ -1,32 +1,56 @@
 # https://opentelemetry.io/docs/collector/configuration/
+# Note: Jaeger v2 supports OTLP traces only. It does not ingest metrics or logs.
+# Keep traces exporting to Jaeger via OTLP and route metrics/logs to debug.
+
 receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: 0.0.0.0:4317  # Explicit endpoint (optional but clear)
       http:
+        endpoint: 0.0.0.0:4318  # Explicit endpoint (optional but clear)
 
 exporters:
-  # Forward to Jaeger via OTLP gRPC (Jaeger all-in-one has an OTLP receiver)
+  # Forward traces to Jaeger via OTLP gRPC (Jaeger all-in-one has an OTLP receiver)
   otlp:
     endpoint: jaeger:4317
     tls:
-      insecure: true
-  # Optional: local debug exporter (disabled in pipelines to reduce noise)
+      insecure: true  # ⚠️ Set to false in production with proper certificates
+
+  # Local debug exporter for non-trace signals
   debug:
-    verbosity: basic
+    verbosity: basic  # Options: basic, normal, detailed
+    sampling_initial: 5  # Optional: limit output volume
+    sampling_thereafter: 200  # Optional: sample 1 in 200 after initial
 
 processors:
-  batch:
+  # Optional: Add memory limiter to prevent OOM
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
 
 extensions:
   health_check:
     endpoint: 0.0.0.0:13133
 
+  # Optional: Add pprof for performance debugging
+  pprof:
+    endpoint: 0.0.0.0:1777
+
 service:
-  extensions: [health_check]
+  extensions: [health_check]  # Add pprof if included above
+
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [otlp]
 
+    # Jaeger does not accept metrics via OTLP; send to debug for visibility.
+    metrics:
+      receivers: [otlp]
+      exporters: [debug]
+
+    # Jaeger does not accept logs via OTLP; send to debug for visibility.
+    logs:
+      receivers: [otlp]
+      exporters: [debug]

@@ -23,7 +23,7 @@ services:
       BYPASS_MODEL_ACCESS_CONTROL: True
       # Set default user role to 'user' (other option is 'admin')
       DEFAULT_USER_ROLE: user
-      WEBUI_AUTH: 0
+#      WEBUI_AUTH: 0
       #      OPENAI_API_BASE_URL: 'https://api.openai.com/v1'
       GLOBAL_LOG_LEVEL: debug
       SRC_LOG_LEVELS: '{"SOCKET": "DEBUG", "MAIN": "DEBUG", "MODELS": "DEBUG", "OPENAI": "DEBUG", "OAUTH": "DEBUG", "CONFIG": "DEBUG", "DB": "DEBUG", "RAG": "DEBUG", "TOOLS": "DEBUG", "AUDIO": "DEBUG"}'

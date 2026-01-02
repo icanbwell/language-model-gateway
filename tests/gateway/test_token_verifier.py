@@ -106,7 +106,7 @@ def test_extract_token() -> None:
         environment_variables=environment_variables
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache()
+        WellKnownConfigurationCache(well_known_store=None)
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,
@@ -128,7 +128,7 @@ async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -
         environment_variables=LanguageModelGatewayEnvironmentVariables()
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache()
+        WellKnownConfigurationCache(well_known_store=None)
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,
@@ -153,7 +153,7 @@ async def test_verify_token_expired(
         environment_variables=LanguageModelGatewayEnvironmentVariables()
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache()
+        WellKnownConfigurationCache(well_known_store=None)
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,

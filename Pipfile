@@ -42,8 +42,6 @@ grpcio = ">=1.74.0"
 langchain-google-community = ">=3.0.0"
 # langgraph is a Python library for building language models
 langgraph = ">=1.0.0"
-# langchainhub is a Python library for interacting with the LangChainHub API
-langchainhub = ">=0.1.21"
 # furl is a Python library for working with URLs
 furl = ">=2.1.3"
 # tiktoken is a fast BPE tokeniser for use with OpenAI's models
@@ -85,7 +83,7 @@ joserfc = ">=1.4.3"
 # aiocache is a Python library for caching with asyncio support
 aiocache = ">=0.12.3"
 # pymongo is a Python library for working with MongoDB
-pymongo = { version = ">=4.15.4", extras = ["srv"] }
+pymongo = { version = ">=4.15.4", extras = ["snappy"] }
 # redis is a Python library for working with Redis
 redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
@@ -99,7 +97,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=1.0.18"
+oidcauthlib = ">=2.0.2"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
@@ -120,9 +118,9 @@ opentelemetry-instrumentation-aiohttp-client = ">=0.60b0"
 opentelemetry-instrumentation-asyncio = ">=0.60b0"
 opentelemetry-instrumentation-pymongo = ">=0.60b0"
 opentelemetry-instrumentation-wsgi = ">=0.60b0"
-openinference-instrumentation-langchain = ">=0.1.57"
+opentelemetry-instrumentation-langchain = ">=0.50.1"
 opentelemetry-instrumentation-redis = ">=0.60b0"
-openinference-instrumentation-bedrock = ">=0.1.32"
+opentelemetry-instrumentation-bedrock = ">=0.50.1"
 opentelemetry-instrumentation-openai-v2 = ">=2.3b0"
 opentelemetry-instrumentation-mcp = ">=0.50.1"
 # Metrics (Prometheus)

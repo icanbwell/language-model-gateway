@@ -10,7 +10,9 @@ from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager 
     WellKnownConfigurationManager,
 )
 from oidcauthlib.container.simple_container import SimpleContainer
-from oidcauthlib.utilities.environment.environment_variables import EnvironmentVariables
+from oidcauthlib.utilities.environment.oidc_environment_variables import (
+    OidcEnvironmentVariables,
+)
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
@@ -104,7 +106,7 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             FastAPIAuthManager,
             lambda c: TokenStorageAuthManager(
-                environment_variables=c.resolve(EnvironmentVariables),
+                environment_variables=c.resolve(OidcEnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
                 token_exchange_manager=c.resolve(TokenExchangeManager),

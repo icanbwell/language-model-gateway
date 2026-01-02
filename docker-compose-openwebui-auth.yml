@@ -2,9 +2,9 @@ services:
   open-webui:
     environment:
       # https://docs.openwebui.com/getting-started/advanced-topics/env-configuration
-      WEBUI_AUTH: True
-      ENABLE_FORWARD_USER_INFO_HEADERS: True
-      ENABLE_FORWARD_OAUTH_TOKEN: True
+      WEBUI_AUTH: "true"
+      ENABLE_FORWARD_USER_INFO_HEADERS: "true"
+      ENABLE_FORWARD_OAUTH_TOKEN: "true"
       # Authentication settings (https://docs.openwebui.com/features/sso#oidc)
       ENABLE_SIGNUP: True
       OAUTH_CLIENT_ID: "bwell-client-id"

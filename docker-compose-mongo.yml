@@ -6,7 +6,6 @@ services:
     # https://hub.docker.com/r/mongodb/mongodb-atlas-local
     ports:
       - "27017:27017"
-    container_name: mongo
     environment:
       #      ALLOW_EMPTY_PASSWORD: yes
       MONGODB_INITDB_ROOT_USERNAME: root

@@ -64,18 +64,51 @@ services:
       # https://opentelemetry.io/docs/zero-code/python/configuration/
       OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
       # Export traces and metrics via OTLP gRPC to the local collector
-      # OTEL_TRACES_EXPORTER: "console,otlp"
+      OTEL_TRACES_EXPORTER: "otlp"
       # OTEL_METRICS_EXPORTER: "console,otlp"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
       OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
-      # OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
       OTEL_TRACES_SAMPLER: "always_on"
       OTEL_PYTHON_FASTAPI_EXCLUDED_URLS: "/health,/metrics"
-      # GRPC_VERBOSITY: "debug"
-      # GRPC_TRACE: "http,call_error,connectivity_state"
+      # Enable metrics export via OTLP gRPC
+      OTEL_METRICS_EXPORTER: "otlp"
+      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
+    depends_on:
+      otel-collector:
+        condition: service_started
+    networks:
+      - web
+
+  open-webui:
+    extends:
+      service: open-webui
+      file: docker-compose-openwebui.yml
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
+    environment:
+      ENABLE_OTEL: "true"
+      # OpenWebUI has a lot of traces so disable unless needed for troubleshooting
+      ENABLE_OTEL_TRACES: "false"
+      ENABLE_OTEL_METRICS: "false"
+      OTEL_SERVICE_NAME: "open-webui"
+      OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
+      OTEL_EXPORTER_OTLP_INSECURE: "true"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+      OTEL_TRACES_SAMPLER: "always_on"
+      # Exclude health endpoint if applicable
+      OTEL_PYTHON_FASTAPI_EXCLUDED_URLS: "/health"
+      # Enable tracing for web frameworks (OpenWebUI is FastAPI-based)
+      OTEL_PYTHON_TRACER_PROVIDER: "sdk"
+      # Enable metrics export via OTLP gRPC
+      OTEL_METRICS_EXPORTER: "otlp"
+      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
     depends_on:
       otel-collector:
         condition: service_started
