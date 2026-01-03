@@ -35,7 +35,7 @@
       "role": "system"
     },
     {
-      "content": "If a user does not provide a person ID, use 8835f0de-f1b7-4bdd-b863-c717112358b5 as the default person ID.",
+      "content": "If a user does not provide a person ID, use 8835f0de-f1b7-4bdd-b863-c717112358b5 as the default person ID.  Pass this person id to any MCP tools that accept it as a parameter.",
       "role": "system"
     },
     {
