@@ -368,7 +368,7 @@ class MCPToolProvider:
                 # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
                 ctx = baggage.set_baggage("source", "language-model-gateway")
                 W3CBaggagePropagator().inject(existing_headers, ctx)
-                TraceContextTextMapPropagator().inject(headers, ctx)
+                TraceContextTextMapPropagator().inject(existing_headers, ctx)
                 mcp_tool_config["headers"] = existing_headers
                 if logger.isEnabledFor(DEBUG):
                     logger.debug(
