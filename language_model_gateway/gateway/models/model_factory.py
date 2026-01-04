@@ -4,6 +4,7 @@ from typing import List, Any, Dict, cast, Literal
 
 import boto3
 from boto3 import Session
+from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_openai import ChatOpenAI
 from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
@@ -12,9 +13,6 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     ModelParameterConfig,
     ChatModelConfig,
-)
-from language_model_gateway.gateway.langchain_overrides.bedrock_converse_with_logging import (
-    ChatBedrockConverseWithLogging,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from botocore.config import Config as BotoConfig
@@ -91,7 +89,7 @@ class ModelFactory:
                 config=config,
                 region_name=aws_region_name,
             )
-            llm = ChatBedrockConverseWithLogging(
+            llm = ChatBedrockConverse(
                 client=bedrock_client,
                 provider="anthropic",
                 credentials_profile_name=aws_credentials_profile,

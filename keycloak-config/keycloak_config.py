@@ -83,7 +83,7 @@ def configure_keycloak() -> None:
 
         # Get current profile
         profile_url = f"{keycloak_server_url}/admin/realms/{realm_name}/users/profile"
-        profiles = keycloak_connection.raw_get(profile_url)  # type: ignore[arg-type]
+        profiles = keycloak_connection.raw_get(profile_url)
         attributes = profiles.json()["attributes"]
 
         # Add unmanaged Attribute
@@ -106,7 +106,7 @@ def configure_keycloak() -> None:
         }
 
         # Update profile
-        result = keycloak_connection.raw_put(profile_url, json.dumps(new_profiles))  # type: ignore[arg-type]
+        result = keycloak_connection.raw_put(profile_url, json.dumps(new_profiles))
         print(result)
 
         # Define protocol mappers for use in client scopes

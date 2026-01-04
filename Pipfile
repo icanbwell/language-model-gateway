@@ -29,11 +29,11 @@ pydantic = ">=2.0,<3.0.0"  # needed by langchain
 # langchain-core is a Python library for building language models
 langchain-core = ">=1.2.5"
 # langchain-aws is a Python library for interacting with AWS services
-langchain-aws = ">=1.0.0"
+langchain-aws = ">=1.2.0"
 # openai is a Python library for interacting with OpenAI
 openai = ">=2.5.0"
 # langchain-openai is a Python library for interacting with OpenAI
-langchain-openai = ">=1.0.0"
+langchain-openai = ">=1.1.6"
 # langchain-community is a Python library that contains ommmunity extensions
 langchain-community = ">=0.4"
 # grpcio is a Python library for working with gRPC.   Needed by Google Vertex AI
@@ -89,7 +89,7 @@ redis = ">=6.4.0"
 # ddgs is a Python library for searching DuckDuckGo web results asynchronously
 ddgs = ">=8.1.1"
 # langmem is a Python library for managing language model memory
-langmem = ">=0.0.29"
+langmem = ">=0.0.30"
 # langgraph-checkpoint is a Python library for working with checkpoints in LangGraph
 langgraph-checkpoint = ">=3.0.0"
 # langgraph-checkpoint-mongodb is a Python library for working with MongoDB checkpoints in LangGraph
@@ -97,7 +97,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=2.0.4"
+oidcauthlib = ">=2.0.6"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }

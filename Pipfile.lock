@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "43cc7f5fd7ed3fc2992f4f5e726ef3a3cbba4318f22b14752f48905d30d904ad"
+            "sha256": "e2755a36ba849dbffd7cbc490bb0e74e2d4ea2bcba1964aa53df906d6b721a2b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -2155,12 +2155,12 @@
         },
         "oidcauthlib": {
             "hashes": [
-                "sha256:27c9dde539e9594535be7c9837f1d7441fc8699a8df2671ada200e5e9e297569",
-                "sha256:c54c525fd47fbc27bf196b4e407282d963f184f996de28e6609b5cd3e68fae31"
+                "sha256:4b2bda2d273411e665be2411bf9f29f6f888f49bda12fb228cea706111e37cbb",
+                "sha256:7a1d3d88dc9f6e08dcf0c395f58895bb26a109bc10243272f8ef5ccb78bc3d2c"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==2.0.4"
+            "version": "==2.0.6"
         },
         "openai": {
             "hashes": [
@@ -4419,13 +4419,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==2.1.0"
         },
-        "async-property": {
-            "hashes": [
-                "sha256:17d9bd6ca67e27915a75d92549df64b5c7174e9dc806b30a3934dc4ff0506380",
-                "sha256:8924d792b5843994537f8ed411165700b27b2bd966cefc4daeefc1253442a9d7"
-            ],
-            "version": "==0.2.2"
-        },
         "attrs": {
             "hashes": [
                 "sha256:16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11",
@@ -6111,12 +6104,12 @@
         },
         "python-keycloak": {
             "hashes": [
-                "sha256:6f6697a0a894d6ded077aa86e12aa41433a0afffa27aa0b9e38395dd69a94009",
-                "sha256:87271d381639f4179a9add88afbb3dbbe9689509cf240d1cf883e44beff4d8f9"
+                "sha256:49b2df78ae7fd86469e0f557504bbb0a3507955b0e72bb6bbd09edeb4151bebb",
+                "sha256:8b1182ba9f348df82202afe8cd4cc7425d676fa9ad24c742eab5ca8bfaa071c1"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.9' and python_version < '4.0'",
-            "version": "==6.0.0"
+            "markers": "python_version <= '3.14' and python_version >= '3.9'",
+            "version": "==7.0.0"
         },
         "python-multipart": {
             "hashes": [

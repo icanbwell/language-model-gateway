@@ -106,7 +106,9 @@ def test_extract_token() -> None:
         environment_variables=environment_variables
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache(well_known_store=None)
+        WellKnownConfigurationCache(
+            well_known_store=None, environment_variables=environment_variables
+        )
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,
@@ -124,11 +126,14 @@ def test_extract_token() -> None:
 
 
 async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -> None:
+    environment_variables = LanguageModelGatewayEnvironmentVariables()
     auth_config_reader = MockAuthConfigReader(
-        environment_variables=LanguageModelGatewayEnvironmentVariables()
+        environment_variables=environment_variables
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache(well_known_store=None)
+        WellKnownConfigurationCache(
+            well_known_store=None, environment_variables=environment_variables
+        )
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,
@@ -149,11 +154,14 @@ async def test_verify_token_valid(mock_jwks: Any, mock_well_known_config: Any) -
 async def test_verify_token_expired(
     mock_jwks: Any, mock_well_known_config: Any
 ) -> None:
+    environment_variables = LanguageModelGatewayEnvironmentVariables()
     auth_config_reader = MockAuthConfigReader(
-        environment_variables=LanguageModelGatewayEnvironmentVariables()
+        environment_variables=environment_variables
     )
     well_known_configuration_cache: WellKnownConfigurationCache = (
-        WellKnownConfigurationCache(well_known_store=None)
+        WellKnownConfigurationCache(
+            well_known_store=None, environment_variables=environment_variables
+        )
     )
     well_known_configuration_manager = MocKWellKnownConfigurationManager(
         auth_config_reader=auth_config_reader,

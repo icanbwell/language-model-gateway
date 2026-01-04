@@ -274,6 +274,21 @@ class MCPToolProvider:
                 except Exception:
                     # defensive: attribute setting should not break the call
                     pass
+
+                # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
+                try:
+                    # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
+                    ctx = baggage.set_baggage("source", "language-model-gateway")
+                    W3CBaggagePropagator().inject(request.headers, ctx)
+                    TraceContextTextMapPropagator().inject(request.headers, ctx)
+                    if logger.isEnabledFor(DEBUG):
+                        logger.debug(
+                            f"Injected OpenTelemetry context into MCP headers: {request.headers}"
+                        )
+                except Exception as otel_err:
+                    # Do not fail tool loading if OTEL propagation fails; just log
+                    logger.debug(f"OTEL inject failed: {type(otel_err)} {otel_err}")
+
                 try:
                     result = await handler(request)
                     # Optionally record result metadata size
@@ -359,24 +374,6 @@ class MCPToolProvider:
                     key: os.path.expandvars(value)
                     for key, value in tool_config.headers.items()
                 }
-
-            # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
-            existing_headers = mcp_tool_config.get("headers")
-            if existing_headers is None:
-                existing_headers = {}
-            try:
-                # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
-                ctx = baggage.set_baggage("source", "language-model-gateway")
-                W3CBaggagePropagator().inject(existing_headers, ctx)
-                TraceContextTextMapPropagator().inject(existing_headers, ctx)
-                mcp_tool_config["headers"] = existing_headers
-                if logger.isEnabledFor(DEBUG):
-                    logger.debug(
-                        f"Injected OpenTelemetry context into MCP headers: {existing_headers}"
-                    )
-            except Exception as otel_err:
-                # Do not fail tool loading if OTEL propagation fails; just log
-                logger.debug(f"OTEL inject failed: {type(otel_err)} {otel_err}")
 
             # pass Authorization header if provided
             if headers:
