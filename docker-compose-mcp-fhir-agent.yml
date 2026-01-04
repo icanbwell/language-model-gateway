@@ -239,7 +239,10 @@ services:
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-    #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+#      - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+#      - ../fhir-notes-vector-store/fhirnotesvectorstore:/usr/local/lib/python3.12/site-packages/fhirnotesvectorstore:ro
+#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
+#      - ../compressed-fhir/compressedfhir:/usr/local/lib/python3.12/site-packages/compressedfhir:ro
     command:
       - opentelemetry-instrument
       - gunicorn

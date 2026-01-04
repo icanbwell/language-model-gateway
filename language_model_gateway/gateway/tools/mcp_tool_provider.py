@@ -26,10 +26,12 @@ from mcp.types import (
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
+from opentelemetry import baggage
+from opentelemetry.baggage.propagation import W3CBaggagePropagator
 
 # OpenTelemetry propagation for trace context
-from opentelemetry.propagate import inject
 from opentelemetry.trace import get_tracer, SpanKind
+from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -359,10 +361,15 @@ class MCPToolProvider:
                 }
 
             # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
-            existing_headers = mcp_tool_config.get("headers") or {}
+            existing_headers = mcp_tool_config.get("headers")
+            if existing_headers is None:
+                existing_headers = {}
             try:
-                # inject uses the current context by default and writes W3C trace headers into the carrier
-                inject(existing_headers)
+                # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
+                ctx = baggage.set_baggage("source", "language-model-gateway")
+                W3CBaggagePropagator().inject(existing_headers, ctx)
+                TraceContextTextMapPropagator().inject(existing_headers, ctx)
+                mcp_tool_config["headers"] = existing_headers
                 if logger.isEnabledFor(DEBUG):
                     logger.debug(
                         f"Injected OpenTelemetry context into MCP headers: {existing_headers}"

@@ -1,7 +1,8 @@
 services:
   # Jaeger all-in-one provides collector (including OTLP), query, and UI in one container
   jaeger:
-    image: jaegertracing/jaeger:2.13.0
+    # https://github.com/jaegertracing/jaeger/releases/
+    image: jaegertracing/jaeger:2.14.1
     restart: unless-stopped
     logging:
       options:
