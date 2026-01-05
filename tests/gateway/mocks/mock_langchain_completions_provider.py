@@ -23,7 +23,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
+from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

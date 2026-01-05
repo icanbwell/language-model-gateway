@@ -1,38 +1,19 @@
 import logging
 import os
-from logging import DEBUG
-from typing import Dict, List, Callable, Awaitable, Any
-import json
+from datetime import timedelta
+from typing import Dict, List
 
 import httpx
-from datetime import timedelta
 from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.interceptors import (
-    MCPToolCallRequest,
-    MCPToolCallResult,
-    ToolCallInterceptor,
-)
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 from mcp.types import (
-    ContentBlock,
-    TextContent,
     LoggingMessageNotificationParams,
-    EmbeddedResource,
-    TextResourceContents,
-    CallToolResult,
 )
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
-from opentelemetry import baggage
-from opentelemetry.baggage.propagation import W3CBaggagePropagator
-from opentelemetry.context import Context
-
-# OpenTelemetry propagation for trace context
-from opentelemetry.trace import get_tracer, SpanKind
-from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
@@ -42,6 +23,12 @@ from language_model_gateway.gateway.auth.models.token_cache_item import TokenCac
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
+)
+from language_model_gateway.gateway.mcp.interceptors.tracing import (
+    TracingMcpCallInterceptor,
+)
+from language_model_gateway.gateway.mcp.interceptors.truncation import (
+    TruncationMcpCallInterceptor,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
@@ -53,6 +40,8 @@ from language_model_gateway.gateway.utilities.logger.logging_transport import (
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
+
+# OpenTelemetry propagation for trace context
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["MCP"])
@@ -71,6 +60,8 @@ class MCPToolProvider:
         tool_auth_manager: ToolAuthManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
+        truncation_interceptor: TruncationMcpCallInterceptor,
+        tracing_interceptor: TracingMcpCallInterceptor,
     ) -> None:
         """
         Initialize the MCPToolProvider with authentication and token management.
@@ -101,6 +92,22 @@ class MCPToolProvider:
         if not isinstance(self.token_reducer, TokenReducer):
             raise TypeError("token_reducer must be an instance of TokenReducer")
 
+        self.truncation_interceptor = truncation_interceptor
+        if self.truncation_interceptor is None:
+            raise ValueError("TruncationMcpCallInterceptor must be provided")
+        if not isinstance(self.truncation_interceptor, TruncationMcpCallInterceptor):
+            raise TypeError(
+                "truncation_interceptor must be an instance of TruncationMcpCallInterceptor"
+            )
+
+        self.tracing_interceptor = tracing_interceptor
+        if self.tracing_interceptor is None:
+            raise ValueError("TracingMcpCallInterceptor must be provided")
+        if not isinstance(self.tracing_interceptor, TracingMcpCallInterceptor):
+            raise TypeError(
+                "tracing_interceptor must be an instance of TracingMcpCallInterceptor"
+            )
+
     async def load_async(self) -> None:
         pass
 
@@ -123,206 +130,6 @@ class MCPToolProvider:
             timeout=timeout,
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
         )
-
-    def get_tool_interceptor_truncation(self) -> ToolCallInterceptor:
-        """
-        Get an interceptor to truncate tool output based on token limits.
-        """
-
-        async def tool_interceptor_truncation(
-            request: MCPToolCallRequest,
-            handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
-        ) -> MCPToolCallResult:
-            """
-            Interceptor to truncate tool output based on token limits.
-            This interceptor checks if the tool has a specified output token limit
-            and truncates the output accordingly using a TokenReducer.
-
-            Args:
-                request: The MCPToolCallRequest containing tool call details.
-                handler: The next handler in the interceptor chain.
-
-            Returns:
-                An MCPToolCallResult with potentially truncated output.
-            """
-            result: MCPToolCallResult = await handler(request)
-            if isinstance(result, CallToolResult):
-                if logger.isEnabledFor(DEBUG):
-                    # See if there is structured_content
-                    structured_content: dict[str, Any] | None = result.structuredContent
-                    logger.debug(
-                        f"=== Tool structured output received: {type(structured_content)}: {structured_content} ==="
-                    )
-                    logger.debug(
-                        f"=== Received tool output before truncation {len(result.content)} blocks ==="
-                    )
-                    content_block: ContentBlock
-                    for content_index, content_block in enumerate(result.content):
-                        if isinstance(content_block, TextContent):
-                            logger.debug(
-                                f"Content Block [{content_index}] {content_block.text}"
-                            )
-                    logger.debug(
-                        f"=== End of tool output before truncation {len(result.content)} blocks ==="
-                    )
-
-                max_token_limit: int = (
-                    self.environment_variables.tool_output_token_limit or -1
-                )
-                tokens_limit_left: int = max_token_limit
-
-                content_block_list: List[ContentBlock] = []
-                content_block1: ContentBlock
-                for content_block1 in result.content:
-                    # If there's a positive limit and we've exhausted it, stop processing further blocks
-                    if max_token_limit > 0 and tokens_limit_left <= 0:
-                        break
-
-                    if isinstance(content_block1, TextContent):
-                        text: str = content_block1.text
-                        token_count: int = self.token_reducer.count_tokens(text=text)
-
-                        if max_token_limit > 0 and token_count > tokens_limit_left:
-                            # Truncate to the remaining budget and re-count using the truncated text
-                            truncated_text = self.token_reducer.reduce_tokens(
-                                text=text,
-                                max_tokens=tokens_limit_left,
-                                preserve_start=0,
-                            )
-                            truncated_count: int = self.token_reducer.count_tokens(
-                                text=truncated_text
-                            )
-                            logger.debug(
-                                f"Truncated text:\nOriginal:{text}\nTruncated:{truncated_text}\nOriginal tokens:{token_count}, Truncated tokens:{truncated_count}, Remaining before:{tokens_limit_left}"
-                            )
-
-                            # Only append if truncation produced some tokens
-                            if truncated_count > 0:
-                                content_block1.text = truncated_text
-                                content_block_list.append(content_block1)
-                                tokens_limit_left -= truncated_count
-                            # If budget exhausted (or zero-length), stop
-                            if max_token_limit > 0 and tokens_limit_left <= 0:
-                                tokens_limit_left = 0
-                                break
-                        else:
-                            # No truncation needed (or no limit in effect)
-                            content_block_list.append(content_block1)
-                            if max_token_limit > 0:
-                                tokens_limit_left -= token_count
-                                if tokens_limit_left <= 0:
-                                    tokens_limit_left = 0
-                                    # Budget met exactly/exhausted after this block
-                                    break
-                    else:
-                        # Preserve non-text content blocks unchanged
-                        content_block_list.append(content_block1)
-
-                if logger.isEnabledFor(DEBUG):
-                    logger.debug(
-                        f"===== Returning tool output after truncation {len(content_block_list)} blocks ====="
-                    )
-                    for content_index, content_block in enumerate(content_block_list):
-                        if isinstance(content_block, TextContent):
-                            logger.debug(
-                                f"[{content_index}] TextContent: {content_block.text}"
-                            )
-                        elif isinstance(content_block, EmbeddedResource):
-                            if isinstance(content_block.resource, TextResourceContents):
-                                logger.debug(
-                                    f"[{content_index}] EmbeddedResource: {content_block.resource.text}"
-                                )
-                    logger.debug(
-                        f"===== End of tool output after truncation {len(content_block_list)} blocks ====="
-                    )
-
-                # now set this as the new result content
-                result.content = content_block_list
-            return result
-
-        return tool_interceptor_truncation
-
-    def get_tool_interceptor_tracing(self) -> ToolCallInterceptor:
-        """
-        Interceptor that wraps each MCP tool call in an OpenTelemetry span.
-        Captures useful attributes and marks errors on exceptions.
-        """
-
-        async def tool_interceptor_tracing(
-            request: MCPToolCallRequest,
-            handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
-        ) -> MCPToolCallResult:
-            span_name = f"mcp.tool.{getattr(request, 'tool_name', 'call')}"
-            tracer = get_tracer(__name__)
-            # Start span as current so downstream HTTP client propagation uses the active context
-            with tracer.start_as_current_span(span_name, kind=SpanKind.CLIENT) as span:
-                # Add common attributes for filtering/analysis
-                try:
-                    span.set_attribute(
-                        "mcp.server_name", getattr(request, "server_name", "unknown")
-                    )
-                    span.set_attribute(
-                        "mcp.tool_name", getattr(request, "tool_name", "unknown")
-                    )
-                    # Serialize complex arguments into JSON string to satisfy OTEL attribute type requirements
-                    args_val: Any = getattr(request, "arguments", {})
-                    try:
-                        args_str = json.dumps(args_val, ensure_ascii=False)
-                    except Exception:
-                        args_str = str(args_val)
-                    span.set_attribute("mcp.arguments", args_str)
-                except Exception:
-                    # defensive: attribute setting should not break the call
-                    pass
-
-                # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
-                try:
-                    # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
-                    ctx: Context = baggage.set_baggage(
-                        "source", "language-model-gateway"
-                    )
-                    W3CBaggagePropagator().inject(carrier=request.headers, context=ctx)
-                    TraceContextTextMapPropagator().inject(
-                        carrier=request.headers, context=ctx
-                    )
-                    if logger.isEnabledFor(DEBUG):
-                        logger.debug(
-                            f"Injected OpenTelemetry context into MCP headers: {request.headers}"
-                        )
-                except Exception as otel_err:
-                    # Do not fail tool loading if OTEL propagation fails; just log
-                    logger.debug(f"OTEL inject failed: {type(otel_err)} {otel_err}")
-
-                try:
-                    logger.debug(
-                        f"Starting MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
-                    )
-                    result = await handler(request)
-                    # Optionally record result metadata size
-                    try:
-                        if isinstance(result, CallToolResult):
-                            span.set_attribute(
-                                "mcp.result.content_blocks", len(result.content)
-                            )
-                            if result.structuredContent is not None:
-                                span.set_attribute("mcp.result.structured", True)
-                    except Exception:
-                        logger.debug(f"MCP tool call failed: {type(result)} {result}")
-                        pass
-                    logger.debug(
-                        f"Completed MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
-                    )
-                    return result
-                except Exception as err:
-                    # Record exception on span, mark status error, then re-raise
-                    try:
-                        span.record_exception(err)
-                        # status API may differ by SDK version; recording exception is sufficient
-                    except Exception:
-                        pass
-                    raise
-
-        return tool_interceptor_tracing
 
     @staticmethod
     async def on_mcp_tool_logging(
@@ -463,8 +270,8 @@ class MCPToolProvider:
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
                 tool_interceptors=[  # First interceptor in list becomes outermost layer.
-                    self.get_tool_interceptor_tracing(),
-                    self.get_tool_interceptor_truncation(),
+                    self.tracing_interceptor.get_tool_interceptor_tracing(),
+                    self.truncation_interceptor.get_tool_interceptor_truncation(),
                 ],
             )
             tools: List[BaseTool] = await client.get_tools()

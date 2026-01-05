@@ -44,7 +44,7 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
 from language_model_gateway.gateway.structures.request_information import (
     RequestInformation,
 )
-from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
+from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
