@@ -102,7 +102,7 @@ class TruncationMcpCallInterceptor:
                 content_block1: ContentBlock
                 for content_block1 in result.content:
                     # If there's a positive limit and we've exhausted it, stop processing further blocks
-                    if max_token_limit > 0 and tokens_limit_left <= 0:
+                    if max_token_limit > 0 >= tokens_limit_left:
                         break
 
                     if isinstance(content_block1, TextContent):

@@ -54,20 +54,16 @@ class TracingMcpCallInterceptor:
             request: MCPToolCallRequest,
             handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
         ) -> MCPToolCallResult:
-            span_name = f"mcp.tool.{getattr(request, 'tool_name', 'call')}"
+            span_name = f"mcp.tool.{request.name}"
             tracer = get_tracer(__name__)
             # Start span as current so downstream HTTP client propagation uses the active context
             with tracer.start_as_current_span(span_name, kind=SpanKind.CLIENT) as span:
                 # Add common attributes for filtering/analysis
                 try:
-                    span.set_attribute(
-                        "mcp.server_name", getattr(request, "server_name", "unknown")
-                    )
-                    span.set_attribute(
-                        "mcp.tool_name", getattr(request, "tool_name", "unknown")
-                    )
+                    span.set_attribute("mcp.server_name", request.server_name)
+                    span.set_attribute("mcp.tool_name", request.name)
                     # Serialize complex arguments into JSON string to satisfy OTEL attribute type requirements
-                    args_val: Any = getattr(request, "arguments", {})
+                    args_val: Any = request.args
                     try:
                         args_str = json.dumps(args_val, ensure_ascii=False)
                     except Exception:
@@ -111,7 +107,7 @@ class TracingMcpCallInterceptor:
 
                 try:
                     logger.debug(
-                        f"Starting MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
+                        f"Starting MCP tool call span: {span_name} for tool: {request.name}"
                     )
                     result = await handler(request)
                     # Optionally record result metadata size
@@ -123,10 +119,12 @@ class TracingMcpCallInterceptor:
                             if result.structuredContent is not None:
                                 span.set_attribute("mcp.result.structured", True)
                     except Exception:
-                        logger.debug(f"MCP tool call failed: {type(result)} {result}")
+                        logger.info(
+                            f"MCP tool call failed for tool: {request.name}: {type(result)} {result}"
+                        )
                         pass
                     logger.debug(
-                        f"Completed MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
+                        f"Completed MCP tool call span: {span_name} for tool: {request.name}"
                     )
                     return result
                 except Exception as err:
