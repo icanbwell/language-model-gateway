@@ -28,6 +28,7 @@ from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
 from opentelemetry import baggage
 from opentelemetry.baggage.propagation import W3CBaggagePropagator
+from opentelemetry.context import Context
 
 # OpenTelemetry propagation for trace context
 from opentelemetry.trace import get_tracer, SpanKind
@@ -247,13 +248,12 @@ class MCPToolProvider:
         Captures useful attributes and marks errors on exceptions.
         """
 
-        tracer = get_tracer(__name__)
-
         async def tool_interceptor_tracing(
             request: MCPToolCallRequest,
             handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
         ) -> MCPToolCallResult:
             span_name = f"mcp.tool.{getattr(request, 'tool_name', 'call')}"
+            tracer = get_tracer(__name__)
             # Start span as current so downstream HTTP client propagation uses the active context
             with tracer.start_as_current_span(span_name, kind=SpanKind.CLIENT) as span:
                 # Add common attributes for filtering/analysis
@@ -278,9 +278,13 @@ class MCPToolProvider:
                 # Ensure OpenTelemetry trace context is propagated to downstream MCP tools
                 try:
                     # https://opentelemetry.io/docs/languages/python/propagation/#manual-context-propagation
-                    ctx = baggage.set_baggage("source", "language-model-gateway")
-                    W3CBaggagePropagator().inject(request.headers, ctx)
-                    TraceContextTextMapPropagator().inject(request.headers, ctx)
+                    ctx: Context = baggage.set_baggage(
+                        "source", "language-model-gateway"
+                    )
+                    W3CBaggagePropagator().inject(carrier=request.headers, context=ctx)
+                    TraceContextTextMapPropagator().inject(
+                        carrier=request.headers, context=ctx
+                    )
                     if logger.isEnabledFor(DEBUG):
                         logger.debug(
                             f"Injected OpenTelemetry context into MCP headers: {request.headers}"
@@ -290,6 +294,9 @@ class MCPToolProvider:
                     logger.debug(f"OTEL inject failed: {type(otel_err)} {otel_err}")
 
                 try:
+                    logger.debug(
+                        f"Starting MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
+                    )
                     result = await handler(request)
                     # Optionally record result metadata size
                     try:
@@ -300,7 +307,11 @@ class MCPToolProvider:
                             if result.structuredContent is not None:
                                 span.set_attribute("mcp.result.structured", True)
                     except Exception:
+                        logger.debug(f"MCP tool call failed: {type(result)} {result}")
                         pass
+                    logger.debug(
+                        f"Completed MCP tool call span: {span_name} for tool: {getattr(request, 'tool_name', 'unknown')}"
+                    )
                     return result
                 except Exception as err:
                     # Record exception on span, mark status error, then re-raise
@@ -451,9 +462,9 @@ class MCPToolProvider:
                     on_progress=self.on_mcp_tool_progress,
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
-                tool_interceptors=[
-                    self.get_tool_interceptor_truncation(),
+                tool_interceptors=[  # First interceptor in list becomes outermost layer.
                     self.get_tool_interceptor_tracing(),
+                    self.get_tool_interceptor_truncation(),
                 ],
             )
             tools: List[BaseTool] = await client.get_tools()
