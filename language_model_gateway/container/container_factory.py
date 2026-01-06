@@ -43,6 +43,12 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.mcp.interceptors.tracing import (
+    TracingMcpCallInterceptor,
+)
+from language_model_gateway.gateway.mcp.interceptors.truncation import (
+    TruncationMcpCallInterceptor,
+)
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
 from language_model_gateway.gateway.persistence.persistence_factory import (
@@ -57,7 +63,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.tools.mcp_tool_provider import MCPToolProvider
+from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -267,6 +273,25 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            TruncationMcpCallInterceptor,
+            lambda c: TruncationMcpCallInterceptor(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                token_reducer=c.resolve(TokenReducer),
+            ),
+        )
+
+        container.singleton(
+            TracingMcpCallInterceptor,
+            lambda c: TracingMcpCallInterceptor(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
+        )
+
+        container.singleton(
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 tool_auth_manager=c.resolve(ToolAuthManager),
@@ -274,6 +299,8 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 token_reducer=c.resolve(TokenReducer),
+                tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
+                truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
             ),
         )
 
