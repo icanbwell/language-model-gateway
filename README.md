@@ -160,6 +160,10 @@ make tests
 
 Refer to the [add_new_agent.md](add_new_agent.md) file for detailed instructions on how to add a new AI Agent.
 
+### Where is caching done in this tool?
+
+Refer to the [CACHING.md](CACHING.md) file for comprehensive documentation on all caching mechanisms used in the Language Model Gateway, including model configuration caching, token/authentication caching, MCP tools metadata caching, and function result caching.
+
 ## Troubleshooting Tips
 
 - If you encounter issues with Docker, try restarting the Docker service.
