@@ -129,9 +129,7 @@ class ModelFactory:
             )
         logger.debug(f"GOOGLE_CREDENTIALS_JSON: {creds_info}")
         required_fields = ["client_email", "private_key", "project_id"]
-        missing_fields = [
-            field for field in required_fields if field not in creds_info
-        ]
+        missing_fields = [field for field in required_fields if field not in creds_info]
         if missing_fields:
             raise RuntimeError(
                 f"Missing required fields in credentials: {', '.join(missing_fields)}. Please check your service account JSON."

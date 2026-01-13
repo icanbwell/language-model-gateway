@@ -6,7 +6,7 @@
   "type": "langchain",
   "model": {
     "provider": "google",
-    "model": "gemini-3-pro-preview"
+    "model": "gemini-2.5-pro"
   },
   "system_prompts": [
     {
