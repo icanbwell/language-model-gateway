@@ -86,12 +86,12 @@ services:
       AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
       # Okta FHIR Production
-      AUTH_ISSUER_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRPRODUCTION: "Okta FHIR Production"
-      AUTH_CLIENT_ID_OKTAFHIRPRODUCTION: "0oargxz9fkFFcSM38697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRPRODUCTION: "openid email profile groups"
+      AUTH_ISSUER_OKTAFHIRPROD: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRPROD: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRPROD: "Okta FHIR Production"
+      AUTH_CLIENT_ID_OKTAFHIRPROD: "0oargxz9fkFFcSM38697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       # Mongo DB settings for storing tokens
@@ -125,7 +125,7 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OTEL_EXCLUDED_SPAN_NAMES: "health,metrics"
-    env_file: docker.env
+    env_file: .env
     command:
       - opentelemetry-instrument
       - gunicorn

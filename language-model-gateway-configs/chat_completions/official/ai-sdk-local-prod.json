@@ -61,7 +61,7 @@
       "url": "http://mcp-fhir-agent-production:5000/",
       "auth": "jwt_token",
       "auth_providers": [
-        "oktafhirproduction"
+        "oktafhirprod"
       ],
       "headers": {
         "X-Client-Id": "Aiden"
