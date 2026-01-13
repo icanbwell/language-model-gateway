@@ -65,7 +65,7 @@ cachetools = ">=5.5.0"
 # aiofiles is a Python library for working with files asynchronously
 #aiofiles = ">=24.1.0"
 # pypdf is a Python library for working with PDFs
-pypdf = ">=6.4.0"
+pypdf = ">=6.6.0"
 # backoff is a Python library for retrying requests
 backoff = ">=2.2.1"
 # Databricks SDK is a Python library for interacting with Databricks
@@ -97,7 +97,7 @@ langgraph-checkpoint-mongodb = ">=0.2.1"
 # langgraph-store-mongodb is a Python library for working with MongoDB stores in LangGraph
 langgraph-store-mongodb = ">=0.1.0"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=2.0.6"
+oidcauthlib = ">=2.0.8"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
