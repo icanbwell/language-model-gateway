@@ -34,7 +34,7 @@ services:
       AWS_REGION: 'us-east-1'
       HELP_KEYWORDS: "help;/help;aid"
       LOG_INPUT_AND_OUTPUT: 1
-      RETURN_RAW_TOOL_OUTPUT: 0
+      RETURN_RAW_TOOL_OUTPUT: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
@@ -48,7 +48,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirproduction}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod}
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
