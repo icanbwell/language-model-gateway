@@ -1,20 +1,37 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "ai_sdk_local_dev",
-  "name": "AI SDK Local to Fhir Dev",
   "description": "This is a language model that can access data in FHIR",
-  "type": "langchain",
+  "example_prompts": [
+    {
+      "content": "Retrieve patient information from the FHIR server.",
+      "role": "user"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "ai_sdk_prod",
   "model": {
-    "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0",
+    "provider": "bedrock"
   },
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.0"
+    }
+  ],
+  "name": "AI SDK Prod",
   "system_prompts": [
     {
       "content": "You are a tool that searches and retrieves from FHIR server.",
       "role": "system"
     },
     {
-      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.  Pass this person id to any MCP tools that accept it as a parameter.",
+      "content": "If a user does not provide a person ID, use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a as the default person ID.  Pass this person id to any MCP tools that accept it as a parameter.",
       "role": "system"
     },
     {
@@ -32,18 +49,10 @@
     {
       "content": "Remind the user that they can provide a different person id if they want health data for a different person.",
       "role": "system"
-    }
-  ],
-  "model_parameters": [
+    },
     {
-      "key": "temperature",
-      "value": "0.0"
-    }
-  ],
-  "headers": [
-    {
-      "key": "Authorization",
-      "value": "Bearer OPENAI_API_KEY"
+      "content": "Always inform the user when there are additional tools or capabilities available that could help them act on the information provided. However, do not interpret the FHIR data to identify healthcare needs. Only offer to use relevant tools when the user explicitly requests help or when it is clear from the user's query, without making your own interpretations of the FHIR data.",
+      "role": "system"
     }
   ],
   "tools": [
@@ -57,21 +66,16 @@
       ]
     },
     {
-      "name": "fhir_server",
-      "url": "http://mcp-fhir-agent-dev:5000/",
       "auth": "jwt_token",
       "auth_providers": [
-        "oktafhirdev"
+        "oktafhirprod"
       ],
       "headers": {
         "X-Client-Id": "Aiden"
-      }
+      },
+      "name": "fhir_server",
+      "url": "https://mcpfhiragent.prod.icanbwell.com/"
     }
   ],
-  "example_prompts": [
-    {
-      "role": "user",
-      "content": "Show my health summary"
-    }
-  ]
+  "type": "langchain"
 }

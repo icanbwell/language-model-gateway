@@ -71,7 +71,7 @@
   "example_prompts": [
     {
       "role": "user",
-      "content": "Summarize the contents of the file at this URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing"
+      "content": "Show my health summary"
     }
   ]
 }
