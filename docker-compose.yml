@@ -150,7 +150,7 @@ services:
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
 #    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro

@@ -54,7 +54,7 @@ services:
       AUTH_WELL_KNOWN_URI_CLIENT3: ${AUTH_WELL_KNOWN_URI_CLIENT3:-http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration}
       # Okta for dev and production
       AUTH_ISSUER_OKTA: ${AUTH_ISSUER_OKTA:-https://icanbwell.okta.com}
-      # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
+      # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the .env file
       AUTH_WELL_KNOWN_URI_OKTA: ${AUTH_WELL_KNOWN_URI_OKTA:-https://icanbwell.okta.com/.well-known/openid-configuration}
       # Okta FHIR Dev
       AUTH_ISSUER_OKTAFHIRDEV: ${AUTH_ISSUER_OKTAFHIRDEV:-https://icanbwell.okta.com}
@@ -193,7 +193,7 @@ services:
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
@@ -237,7 +237,7 @@ services:
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #      - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
@@ -284,7 +284,7 @@ services:
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
@@ -328,7 +328,7 @@ services:
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
@@ -372,7 +372,7 @@ services:
       # uncomment this to use local fhir_to_llm code
       # - ../fhir_to_llm/fhir_to_llm:/usr/src/ai_agent_fhir/fhir_to_llm
       # ==== For bailey model testing - mount the AWS credentials ====
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro

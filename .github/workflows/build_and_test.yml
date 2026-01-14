@@ -29,9 +29,9 @@ jobs:
 #        id: login-ecr
 #        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: create docker.env
+      - name: create .env
         run: |
-          touch ${{ github.workspace }}/docker.env
+          touch ${{ github.workspace }}/.env
 
       - name: pre-commit
         run: make run-pre-commit && make clean-pre-commit

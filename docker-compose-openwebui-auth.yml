@@ -29,4 +29,4 @@ services:
 #      OAUTH_PROVIDER_NAME: "Okta"
 #      OAUTH_SCOPES: "openid email profile groups"
 #      OAUTH_USERNAME_CLAIM: "email"
-#    env_file: docker.env
+#    env_file: .env

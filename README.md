@@ -20,7 +20,7 @@ To run the project locally, follow these steps:
     cd <repository-directory>
     ```
 
-2. Create `docker.env` file in the root of the project based on the `docker.env.example`. 
+2. Create `.env` file in the root of the project based on the `.env.example`. 
 Update the keys for the functionality/providers you're planning on using.
 `AWS_CREDENTIALS_PROFILE` is the only one that is absolutely required to get going.  Set this to the AWS profile you're part of e.g., `admin_dev`.
 
@@ -147,7 +147,7 @@ If you encounter any issues, please report them by creating a new issue in the r
 
 ### How do I set up the environment variables?
 
-Create a `docker.env` file in the root of the project based on the `docker.env.example` file. Update the keys for the functionality/providers you're planning on using.
+Create a `.env` file in the root of the project based on the `.env.example` file. Update the keys for the functionality/providers you're planning on using.
 
 ### How do I run the tests?
 
