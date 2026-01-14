@@ -127,7 +127,12 @@ class ModelFactory:
             raise RuntimeError(
                 "GOOGLE_CREDENTIALS_JSON is not valid JSON. Please check the formatting of your credentials."
             )
-        logger.debug(f"GOOGLE_CREDENTIALS_JSON: {creds_info}")
+        logger.debug(
+            "Loaded GOOGLE_CREDENTIALS_JSON for client_email=%s, project_id=%s, available_keys=%s",
+            creds_info.get("client_email"),
+            creds_info.get("project_id"),
+            [key for key in creds_info.keys() if key != "private_key"],
+        )
         required_fields = ["client_email", "private_key", "project_id"]
         missing_fields = [field for field in required_fields if field not in creds_info]
         if missing_fields:
