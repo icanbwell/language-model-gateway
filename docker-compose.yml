@@ -34,7 +34,7 @@ services:
       AWS_REGION: 'us-east-1'
       HELP_KEYWORDS: "help;/help;aid"
       LOG_INPUT_AND_OUTPUT: 1
-      RETURN_RAW_TOOL_OUTPUT: 0
+      RETURN_RAW_TOOL_OUTPUT: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
