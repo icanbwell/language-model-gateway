@@ -1,0 +1,61 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "description": "This is a language model that can access data in FHIR",
+  "example_prompts": [
+    {
+      "content": "Retrieve patient information from the FHIR server.",
+      "role": "user"
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "ai_sdk_prod_gemini",
+  "model": {
+    "provider": "google",
+    "model": "gemini-2.5-pro"
+  },
+  "model_parameters": [
+    {
+      "key": "temperature",
+      "value": "0.0"
+    }
+  ],
+  "name": "AI SDK Prod Gemini",
+  "system_prompts": [
+    {
+      "content": "You are a tool that searches and retrieves from FHIR server.",
+      "role": "system"
+    },
+    {
+      "content": "If a user does not provide a person ID, use c9ab6abe-ae18-4226-b60f-99cfacff7171 as the default person ID.  You must pass this person id to any MCP tools that accept person_id as a parameter.",
+      "role": "system"
+    }
+  ],
+  "tools": [
+    {
+      "name": "current_date",
+      "parameters": [
+        {
+          "key": "format",
+          "value": "YYYY-MM-DD"
+        }
+      ]
+    },
+    {
+      "auth": "jwt_token",
+      "auth_providers": [
+        "oktafhirprod"
+      ],
+      "headers": {
+        "X-Client-Id": "Aiden"
+      },
+      "name": "fhir_server",
+      "url": "https://mcpfhiragent.prod.icanbwell.com/"
+    }
+  ],
+  "type": "langchain"
+}

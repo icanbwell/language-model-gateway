@@ -14,7 +14,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration,https://icanbwell.okta.com/.well-known/openid-configuration"
       PSS_BASE_URL: "https://provider-search.dev.bwell.zone/sdk/graphql"
-    env_file: docker.env
+    env_file: .env
     command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
       - '5054:5000'

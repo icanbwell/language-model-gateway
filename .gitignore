@@ -136,7 +136,7 @@ dmypy.json
 /data/
 /tests_integration/index/
 /openwebui/
-/docker.env
+/.env
 /**/temp/
 /image_generation/*.png
 /certs/*
