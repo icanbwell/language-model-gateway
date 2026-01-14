@@ -298,14 +298,17 @@ class ChatCompletionManager:
                         role="assistant", content=f"Model owner: {model_config.owner}"
                     )
                 )
-            if model_config.model.provider is not None:
+            if (
+                model_config.model is not None
+                and model_config.model.provider is not None
+            ):
                 response_messages.append(
                     ChatCompletionMessage(
                         role="assistant",
                         content=f"Model Provider: {model_config.model.provider}",
                     )
                 )
-            if model_config.model.model is not None:
+            if model_config.model is not None and model_config.model.model is not None:
                 response_messages.append(
                     ChatCompletionMessage(
                         role="assistant", content=f"Model: {model_config.model.model}"
