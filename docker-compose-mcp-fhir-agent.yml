@@ -377,6 +377,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+#      - ../helix.fhir.client.sdk/helix_fhir_client_sdk:/usr/local/lib/python3.12/site-packages/helix_fhir_client_sdk:ro
     command:
       - opentelemetry-instrument
       - gunicorn
