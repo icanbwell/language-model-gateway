@@ -79,7 +79,7 @@ services:
       # OTEL_LOGS_EXPORTER: "otlp"
       # Span filtering configuration
       OTEL_SPAN_FILTER_ENABLED: "true"
-      OTEL_SPAN_FILTER_PATTERNS: "saslStart,saslContinue"
+      OTEL_SPAN_FILTER_PATTERNS: "admin.saslStart,admin.saslContinue,llm_storage.listIndexes,llm_storage.listCollections"
       OTEL_SPAN_FILTER_DEBUG: "false"
       OTEL_ENABLE_FILTERING_SPANS: 1
       # https://opentelemetry.io/docs/zero-code/python/example/

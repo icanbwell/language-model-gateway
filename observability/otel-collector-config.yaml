@@ -16,6 +16,15 @@ exporters:
     endpoint: jaeger:4317
     tls:
       insecure: true  # ⚠️ Set to false in production with proper certificates
+    sending_queue:
+      enabled: true
+      queue_size: 2048
+      num_consumers: 4
+    retry_on_failure:
+      enabled: true
+      initial_interval: 1s
+      max_interval: 30s
+      max_elapsed_time: 5m
 
   # Local debug exporter for non-trace signals
   debug:
@@ -31,8 +40,9 @@ processors:
     spike_limit_mib: 512
 
   batch:
-    send_batch_size: 256
-    timeout: 1s
+    send_batch_size: 128
+    send_batch_max_size: 1024
+    timeout: 5s
 
 extensions:
   health_check:
