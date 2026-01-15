@@ -27,7 +27,12 @@ processors:
   # Optional: Add memory limiter to prevent OOM
   memory_limiter:
     check_interval: 1s
-    limit_mib: 512
+    limit_mib: 1024
+    spike_limit_mib: 512
+
+  batch:
+    send_batch_size: 256
+    timeout: 1s
 
 extensions:
   health_check:
@@ -43,14 +48,17 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
+      processors: [memory_limiter, batch]
       exporters: [otlp]
 
     # Jaeger does not accept metrics via OTLP; send to debug for visibility.
     metrics:
       receivers: [otlp]
+      processors: [memory_limiter, batch]
       exporters: [debug]
 
     # Jaeger does not accept logs via OTLP; send to debug for visibility.
     logs:
       receivers: [otlp]
+      processors: [memory_limiter, batch]
       exporters: [debug]

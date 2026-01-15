@@ -11,7 +11,7 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
-from oidcauthlib.open_telemetry.otel_setup import apply_span_filtering
+from oidcauthlib.open_telemetry.otel_initializer import OtelInitializer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
@@ -83,16 +83,16 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         if OidcEnvironmentVariables.str2bool(
             os.getenv("OTEL_ENABLE_FILTERING_SPANS", "true")
         ):
-            # ADD THIS: Apply OpenTelemetry span filtering
-            # This filters out noisy MongoDB authentication spans (saslStart, saslContinue, etc.)
+            # Initialize OpenTelemetry span filtering
             try:
-                logger.info("Applying OpenTelemetry span filtering...")
-                apply_span_filtering(
-                    min_duration_ms=1000.0,  # Filter out spans shorter than 1 second
-                    exclude_root_spans_from_duration_filter=True,
-                )
+                logger.info("Initializing OpenTelemetry span filtering...")
+                OtelInitializer.initialize()
+                logger.info("OpenTelemetry span filtering initialized")
             except Exception:
-                logger.exception("Failed to apply OpenTelemetry span filtering")
+                logger.exception(
+                    "Failed to initialize OpenTelemetry span filtering. "
+                    "Continuing without filtering."
+                )
 
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
