@@ -124,7 +124,13 @@ services:
       MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '100'
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
-      OTEL_EXCLUDED_SPAN_NAMES: "health,metrics"
+      OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
+      OTEL_EXCLUDED_SPAN_NAMES: "saslStart,saslContinue,isMaster,ping"
+      OTEL_ENABLE_FILTERING_SPANS: 1
+      # https://opentelemetry.io/docs/zero-code/python/example/
+      OTEL_INSTRUMENTATION_HTTP_CAPTURE_HEADERS_SERVER_REQUEST: "Accept-Encoding,User-Agent,Referer"
+      OTEL_INSTRUMENTATION_HTTP_CAPTURE_HEADERS_SERVER_RESPONSE: "Last-Modified,Content-Type"
+      OTEL_INSTRUMENTATION_HTTP_CAPTURE_HEADERS_SANITIZE_FIELDS: ".*session.*,set-cookie"
     env_file: .env
     command:
       - opentelemetry-instrument
@@ -153,7 +159,7 @@ services:
       # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s

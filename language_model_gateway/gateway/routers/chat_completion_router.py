@@ -10,6 +10,7 @@ from fastapi import params
 from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
+from opentelemetry.trace import get_tracer
 from starlette.requests import Request
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -138,16 +139,25 @@ class ChatCompletionsRouter:
         if chat_manager is None:
             raise ValueError("chat_manager must not be None")
 
-        chat_request_typed: ChatRequest = ChatRequest.model_construct(**chat_request)
-
-        return await self._chat_completions(
-            request=request,
-            chat_request_wrapper=ChatCompletionApiRequestWrapper(chat_request_typed),
-            chat_manager=chat_manager,
-            token_reader=token_reader,
-            auth_manager=auth_manager,
-            environment_variables=environment_variables,
+        tracer = get_tracer(
+            "language_model_gateway.gateway.routers.chat_completion_router"
         )
+        # Start span as current so downstream HTTP client propagation uses the active context
+        with tracer.start_as_current_span("chat_completions_endpoint"):
+            chat_request_typed: ChatRequest = ChatRequest.model_construct(
+                **chat_request
+            )
+
+            return await self._chat_completions(
+                request=request,
+                chat_request_wrapper=ChatCompletionApiRequestWrapper(
+                    chat_request_typed
+                ),
+                chat_manager=chat_manager,
+                token_reader=token_reader,
+                auth_manager=auth_manager,
+                environment_variables=environment_variables,
+            )
 
     # noinspection PyMethodMayBeStatic
     async def chat_responses(
