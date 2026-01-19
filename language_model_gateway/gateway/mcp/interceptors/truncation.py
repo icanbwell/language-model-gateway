@@ -73,6 +73,11 @@ class TruncationMcpCallInterceptor:
                 An MCPToolCallResult with potentially truncated output.
             """
             result: MCPToolCallResult = await handler(request)
+
+            logger.debug(
+                f"Tool Interceptor Truncation invoked for tool: {request.name}"
+            )
+
             if isinstance(result, CallToolResult):
                 if logger.isEnabledFor(DEBUG):
                     # See if there is structured_content
@@ -129,7 +134,7 @@ class TruncationMcpCallInterceptor:
                                 content_block_list.append(content_block1)
                                 tokens_limit_left -= truncated_count
                             # If budget exhausted (or zero-length), stop
-                            if max_token_limit > 0 and tokens_limit_left <= 0:
+                            if max_token_limit > 0 >= tokens_limit_left:
                                 tokens_limit_left = 0
                                 break
                         else:
