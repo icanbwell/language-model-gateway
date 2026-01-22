@@ -183,6 +183,13 @@ services:
 #      GRPC_TRACE: "http,call_error,connectivity_state"
       # Optional: enable logs in future
       # OTEL_LOGS_EXPORTER: "otlp"
+      # OTEL Configurations
+      OTEL_BSP_EXPORT_TIMEOUT: ${OTEL_BSP_EXPORT_TIMEOUT:-30000}
+      OTEL_BSP_SCHEDULE_DELAY: ${OTEL_BSP_SCHEDULE_DELAY:-500}
+      FHIR_USE_PERSISTENT_SESSION: 'true'
+      OTEL_SPAN_FILTER_ENABLED: 'true'
+      OTEL_SPAN_FILTER_PATTERNS: 'saslStart,saslContinue'
+      OTEL_SPAN_FILTER_DEBUG: 'false'
       # set log level for fhir client calls
       FHIR_CLIENT_LOG_LEVEL: "DEBUG"
     env_file: .env

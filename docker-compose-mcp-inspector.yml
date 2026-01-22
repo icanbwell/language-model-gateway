@@ -1,0 +1,20 @@
+services:
+  # Jaeger all-in-one provides collector (including OTLP), query, and UI in one container
+  inspector:
+    # https://github.com/jaegertracing/jaeger/releases/
+    image: ghcr.io/modelcontextprotocol/inspector:latest
+    restart: unless-stopped
+    environment:
+      # Enable OTLP HTTP and gRPC receivers
+      - MCP_AUTO_OPEN_ENABLED=false
+      - HOST=0.0.0.0
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: language-model-gateway_web
