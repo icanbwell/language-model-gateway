@@ -11,10 +11,6 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
-from oidcauthlib.open_telemetry.otel_initializer import OtelInitializer
-from oidcauthlib.utilities.environment.oidc_environment_variables import (
-    OidcEnvironmentVariables,
-)
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -80,19 +76,6 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
         # perform any startup tasks here
-        if OidcEnvironmentVariables.str2bool(
-            os.getenv("OTEL_ENABLE_FILTERING_SPANS", "true")
-        ):
-            # Initialize OpenTelemetry span filtering
-            try:
-                logger.info("Initializing OpenTelemetry span filtering...")
-                OtelInitializer.initialize()
-                logger.info("OpenTelemetry span filtering initialized")
-            except Exception:
-                logger.exception(
-                    "Failed to initialize OpenTelemetry span filtering. "
-                    "Continuing without filtering."
-                )
 
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
