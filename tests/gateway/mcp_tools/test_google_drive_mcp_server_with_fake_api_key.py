@@ -34,7 +34,9 @@ async def test_google_drive_mcp_server_with_fake_api_key(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "ABCDGX Test File Shared With b.well"
+                    fn_get_response=lambda messages: (
+                        "ABCDGX Test File Shared With b.well"
+                    )
                 )
             ),
         )

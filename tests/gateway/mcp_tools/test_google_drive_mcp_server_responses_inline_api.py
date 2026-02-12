@@ -51,7 +51,9 @@ async def test_responses_inline_api_with_mcp_google_drive(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "ABCDGX Test File Shared With b.well"
+                    fn_get_response=lambda messages: (
+                        "ABCDGX Test File Shared With b.well"
+                    )
                 )
             ),
         )

@@ -1,7 +1,7 @@
 export LANG
 
 .PHONY: Pipfile.lock
-Pipfile.lock: # Locks Pipfile and updates the Pipfile.lock on the local file system
+Pipfile.lock: create-docker-network # Locks Pipfile and updates the Pipfile.lock on the local file system
 	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
 	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
 
@@ -15,7 +15,13 @@ devsetup: ## one time setup for devs
 
 .PHONY: create-docker-network
 create-docker-network: ## creates the docker network
-	docker network create language-model-gateway_web || true
+	@set -e; \
+	docker network rm language-model-gateway_web >/dev/null 2>&1 && echo "Removed existing web network" || true; \
+	echo "Creating web docker network with compose labels"; \
+	docker network create --driver bridge \
+		--label com.docker.compose.project=baileyai \
+		--label com.docker.compose.network=language-model-gateway_web \
+		language-model-gateway_web >/dev/null
 
 .PHONY:build
 build: create-docker-network ## Builds the docker for dev
