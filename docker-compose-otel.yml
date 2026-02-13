@@ -12,7 +12,6 @@ services:
       # Enable OTLP HTTP and gRPC receivers
       - COLLECTOR_OTLP_ENABLED=true
       - COLLECTOR_OTLP_HTTP_ENABLED=true
-      - COLLECTOR_OTLP_ENABLED=true
       - COLLECTOR_OTLP_GRPC_MAX_RECEIVE_MESSAGE_LENGTH=33554432
       - COLLECTOR_OTLP_HTTP_MAX_REQUEST_BODY_SIZE=33554432
       # Optional: reduce memory usage
