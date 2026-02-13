@@ -129,6 +129,8 @@ opentelemetry-instrumentation-mcp = ">=0.50.1"
 prometheus-fastapi-instrumentator = ">=7.1.0"
 # gunicorn is a Python WSGI HTTP server for UNIX
 "gunicorn[standard]" = ">=23.0.0"  # needed for production server
+# py-key-value-aio 0.4.0 has issues
+py-key-value-aio = "!=0.4.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
