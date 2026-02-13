@@ -67,6 +67,9 @@ from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
     PassThroughChatCompletionsProvider,
 )
+from language_model_gateway.gateway.providers.pass_through_token_manager import (
+    PassThroughTokenManager,
+)
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -276,6 +279,15 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            PassThroughTokenManager,
+            lambda c: PassThroughTokenManager(
+                auth_manager=c.resolve(AuthManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
+                tool_auth_manager=c.resolve(ToolAuthManager),
+            ),
+        )
+
+        container.singleton(
             TruncationMcpCallInterceptor,
             lambda c: TruncationMcpCallInterceptor(
                 environment_variables=c.resolve(
@@ -315,12 +327,10 @@ class LanguageModelGatewayContainerFactory:
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
                 token_reader=c.resolve(TokenReader),
-                auth_manager=c.resolve(AuthManager),
-                tool_auth_manager=c.resolve(ToolAuthManager),
+                pass_through_token_manager=c.resolve(PassThroughTokenManager),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
-                auth_config_reader=c.resolve(AuthConfigReader),
                 persistence_factory=c.resolve(PersistenceFactory),
             ),
         )
