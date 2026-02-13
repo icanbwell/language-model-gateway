@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import Dict, Optional, AsyncGenerator, override
 
 from oidcauthlib.auth.models.auth import AuthInformation
@@ -14,6 +15,11 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
 
 from openai import AsyncOpenAI, AsyncStream
 from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
+
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["BAILEY"])
 
 
 class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
@@ -45,6 +51,9 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     "error": "Model configuration is not provided for this model."
                 },
             )
+        logger.info(
+            f"Forwarding chat completion request to pass through URL: {pass_through_url} with model: {model_config.model.model}"
+        )
         client = AsyncOpenAI(
             api_key="fake-api-key",  # pragma: allowlist secret
             # this api key is ignored for now.  suggest setting it to something that identifies your calling code
