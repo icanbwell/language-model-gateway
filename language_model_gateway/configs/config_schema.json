@@ -25,7 +25,8 @@
       "default": "langchain",
       "enum": [
         "langchain",
-        "openai"
+        "openai",
+        "passthru"
       ]
     },
     "owner": {
@@ -58,7 +59,8 @@
           "enum": [
             "bedrock",
             "openai",
-            "google"
+            "google",
+            "passthru"
           ]
         },
         "model": {

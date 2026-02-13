@@ -64,6 +64,9 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
     OpenAiChatCompletionsProvider,
 )
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
+    PassThroughChatCompletionsProvider,
+)
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -330,6 +333,7 @@ class LanguageModelGatewayContainerFactory:
             lambda c: ChatCompletionManager(
                 open_ai_provider=c.resolve(OpenAiChatCompletionsProvider),
                 langchain_provider=c.resolve(LangChainCompletionsProvider),
+                pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
             ),
         )
@@ -383,6 +387,11 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 )
             ),
+        )
+
+        container.singleton(
+            PassThroughChatCompletionsProvider,
+            lambda c: PassThroughChatCompletionsProvider(),
         )
 
         logger.info("DI container initialized")

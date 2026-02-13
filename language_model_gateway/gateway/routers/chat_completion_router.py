@@ -226,7 +226,7 @@ class ChatCompletionsRouter:
         ],
     ) -> StreamingResponse | JSONResponse:
         try:
-            auth_information = await self.read_auth_information(
+            auth_information: AuthInformation = await self.read_auth_information(
                 environment_variables=environment_variables,
                 request=request,
                 token_reader=token_reader,
