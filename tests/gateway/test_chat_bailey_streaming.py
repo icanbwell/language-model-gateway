@@ -142,7 +142,7 @@ async def test_chat_bailey_streaming(
         "content": "Say this is a test",
     }
     stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
-        model="ChatGPT",
+        model="Bailey",
         messages=[message],
         stream=True,
     )

@@ -69,7 +69,6 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
             messages=[message],
             model=model_config.model.model,
-            # choose the task model - same as the task models in https://openwebui.services.bwell.zone/
             stream=True,  # enables streaming
         )
 
