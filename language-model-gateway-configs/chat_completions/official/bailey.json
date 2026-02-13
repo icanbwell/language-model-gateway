@@ -4,7 +4,7 @@
   "name": "Bailey",
   "description": "Calls Bailey",
   "type": "passthru",
-  "url": "https://baileyai.dev.bwell.zone//bailey/v1",
+  "url": "https://baileyai.dev.bwell.zone/bailey/v1",
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
