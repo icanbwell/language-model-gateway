@@ -6,6 +6,10 @@ from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 from typing import Optional
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 @pytest.mark.integration
 async def test_aiden_api() -> None:
     """

@@ -1,5 +1,4 @@
 import json
-import os
 from typing import Any, Dict, List
 
 import httpx
@@ -35,10 +34,6 @@ from tests.gateway.mocks.mock_open_ai_completions_provider import (
 )
 
 
-@pytest.mark.skipif(
-    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
-    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
-)
 @pytest.mark.asyncio
 async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
     print("")
