@@ -74,7 +74,7 @@ async def test_chat_completions_with_web_search(
         messages=[
             {
                 "role": "user",
-                "content": "Who won the last US election?",
+                "content": "Who won the last US election in 2024?",
             }
         ],
         model="General Purpose",
