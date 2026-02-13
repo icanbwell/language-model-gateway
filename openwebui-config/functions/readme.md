@@ -1,7 +1,7 @@
 # Pipes for installing and running in OpenWebUI
 
 ## Specifying the AWS Credentials Profile
-Set `AWS_CREDENTIALS_PROFILE='{profile}'` where profile is the name of your AWS profile in docker.env
+Set `AWS_CREDENTIALS_PROFILE='{profile}'` where profile is the name of your AWS profile in .env
 
 This is needed for accessing AWS Bedrock for testing.
 

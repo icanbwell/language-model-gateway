@@ -45,7 +45,9 @@ async def test_store_and_read_memories_tool(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "tester-subject-id profile diabetes"
+                    fn_get_response=lambda messages: (
+                        "tester-subject-id profile diabetes"
+                    )
                 )
             ),
         )

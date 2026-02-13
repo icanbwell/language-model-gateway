@@ -10,181 +10,257 @@ services:
     build:
       context: ../mcp-fhir-agent
       dockerfile: Dockerfile
+      secrets:
+        - GITHUB_TOKEN
       args:
         GITHUB_TOKEN: ${GITHUB_TOKEN}
     image: mcp-fhir-agent:local
     environment: &agent_env
+      # Enables optional OTEL/Prometheus diagnostic metrics.
       DEBUG_METRICS: 0
+      # Controls the root logging level for the app loggers.
       LOG_LEVEL: INFO
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       DEFAULT_PATIENT_ID: "d58b4c4d-e820-5935-adfc-4cb372a91c22"
+      # Default Person UUID aligned with the patient for demo flows.
       DEFAULT_PERSON_ID: "072b2b1c-942d-542c-8e51-f9dc0dadcc0a"
-      # Disable AWS EC2 metadata service to speed up tests and silence IMDS probing
+      # Prevents boto/AWS SDK calls from hitting the metadata service locally.
       AWS_EC2_METADATA_DISABLED: "true"
+      # Default AWS region for Bedrock and other AWS SDK interactions.
       AWS_DEFAULT_REGION: "us-east-1"
-      # configuration for local testing
+      # GraphQL endpoint the FHIR data loader queries in dev.
       FHIR_SERVER_GRAPHQL_URL: 'http://fhir:3000/4_0_0/$$graphqlv2'
+      # Merge endpoint used by data loading fixtures.
       FHIR_SERVER_MERGE_URL: 'http://fhir:3000/4_0_0/Bundle/$$merge'
+      # REST base URL for direct FHIR GETs (overridable for remote stacks).
       FHIR_SERVER_GET_URL: ${FHIR_SERVER_GET_URL:-http://fhir:3000/4_0_0/}
-      # FHIR_SERVER_GET_URL: 'https://fhir-internal.staging.bwell.zone/4_0_0/'
-      # FHIR_SERVER_GET_URL: 'https://fhir-internal.client-sandbox.bwell.zone/4_0_0/'
-      #      FHIR_SERVER_GET_URL: 'https://fhir-internal.dev.bwell.zone/4_0_0/'
+      # Admin username for seeding the local HAPI FHIR server.
       FHIR_ADMIN_USERNAME: 'admin'
+      # Admin password for local FHIR maintenance routines.
       FHIR_ADMIN_PASSWORD: 'password'
+      # Page size limit for REST-based FHIR fetches.
       FHIR_SERVER_GET_LIMIT: 100
-      # service account used to connect to OAuth IDP
+      # Keycloak client_id used for service-account token exchanges.
       CLIENT_ID: ${CLIENT_ID:-bwell-client-id}
+      # Keycloak client_secret paired with CLIENT_ID for SA auth.
       CLIENT_SECRET: ${CLIENT_SECRET:-bwell-secret}
-      MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-10000}
-      # Below we specify the client id, client secret and well-known URI for each client
-      # For list-like env vars, do NOT use quotes in the default value to avoid extra quotes in Python parsing
+      # Max response tokens allowed when FastMCP formats LLM output.
+      MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-8000}
+      # Ordered list of OIDC providers the auth layer initializes.
       AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirprod}
-      #      AUTH_PROVIDERS: "client1,client3,okta,clientsandbox,cognito"
-      # first client for testing
-      AUTH_ISSUER_CLIENT1: ${AUTH_ISSUER_CLIENT1:-http://keycloak:8080/realms/bwell-realm}
-      AUTH_AUDIENCE_CLIENT1: ${AUTH_AUDIENCE_CLIENT1:-client1}
-      AUTH_CLIENT_ID_CLIENT1: ${AUTH_CLIENT_ID_CLIENT1:-bwell-client-id}
-      AUTH_CLIENT_SECRET_CLIENT1: ${AUTH_CLIENT_SECRET_CLIENT1:-bwell-secret}
-      AUTH_WELL_KNOWN_URI_CLIENT1: ${AUTH_WELL_KNOWN_URI_CLIENT1:-http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration}
-      # second client for testing
-      AUTH_ISSUER_CLIENT3: ${AUTH_ISSUER_CLIENT3:-http://keycloak:8080/realms/bwell-realm}
-      AUTH_AUDIENCE_CLIENT3: ${AUTH_AUDIENCE_CLIENT3:-client3}
-      AUTH_CLIENT_ID_CLIENT3: ${AUTH_CLIENT_ID_CLIENT3:-bwell-client-id-3}
-      AUTH_CLIENT_SECRET_CLIENT3: ${AUTH_CLIENT_SECRET_CLIENT3:-bwell-secret-3}
-      AUTH_WELL_KNOWN_URI_CLIENT3: ${AUTH_WELL_KNOWN_URI_CLIENT3:-http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration}
-      # Okta for dev and production
-      AUTH_ISSUER_OKTA: ${AUTH_ISSUER_OKTA:-https://icanbwell.okta.com}
-      # AUTH_CLIENT_ID_OKTA and AUTH_CLIENT_SECRET_OKTA are read from the docker.env file
-      AUTH_WELL_KNOWN_URI_OKTA: ${AUTH_WELL_KNOWN_URI_OKTA:-https://icanbwell.okta.com/.well-known/openid-configuration}
-      # Okta FHIR Dev
-      AUTH_ISSUER_OKTAFHIRDEV: ${AUTH_ISSUER_OKTAFHIRDEV:-https://icanbwell.okta.com}
-      AUTH_AUDIENCE_OKTAFHIRDEV: ${AUTH_AUDIENCE_OKTAFHIRDEV:-https://icanbwell.okta.com}
-      AUTH_CLIENT_ID_OKTAFHIRDEV: ${AUTH_CLIENT_ID_OKTAFHIRDEV:-0oarf29h6x2DaWCkT697}
-      AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: ${AUTH_WELL_KNOWN_URI_OKTAFHIRDEV:-https://icanbwell.okta.com/.well-known/openid-configuration}
+      # This specifies the provider used for dynamic client registration
+      DYNAMIC_CLIENT_REGISTRATION_AUTH_PROVIDER: client1
+      # Issuer URL for the first local Keycloak test client.
+      AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
+      # Expected audience claim for CLIENT1 tokens.
+      AUTH_AUDIENCE_CLIENT1: "client1"
+      # Human-readable label shown for CLIENT1 in UI responses.
+      AUTH_FRIENDLY_NAME_CLIENT1: "Keycloak BWell Realm"
+      # OAuth client_id for CLIENT1 browser flows.
+      AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
+      # OAuth client_secret for CLIENT1 confidential flows.
+      AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
+      # Discovery endpoint for CLIENT1 (issuer metadata + JWKS).
+      AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      # Scopes requested when authenticating via CLIENT1.
+      AUTH_SCOPE_CLIENT1: "openid email profile"
+      # Issuer URL for the third Keycloak test client.
+      AUTH_ISSUER_CLIENT3: "http://keycloak:8080/realms/bwell-realm"
+      # Expected audience claim for CLIENT3 tokens.
+      AUTH_AUDIENCE_CLIENT3: "client3"
+      # Friendly name surfaced for CLIENT3 to users.
+      AUTH_FRIENDLY_NAME_CLIENT3: "Keycloak BWell Realm Client 3"
+      # OAuth client_id for CLIENT3 flows.
+      AUTH_CLIENT_ID_CLIENT3: "bwell-client-id-3"
+      # OAuth client_secret for CLIENT3 confidential flows.
+      AUTH_CLIENT_SECRET_CLIENT3: "bwell-secret-3"
+      # Discovery endpoint for CLIENT3 issuer metadata.
+      AUTH_WELL_KNOWN_URI_CLIENT3: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
+      # Okta issuer backing the oktafhirdev provider.
+      AUTH_ISSUER_OKTAFHIRDEV: "https://icanbwell.okta.com"
+      # Audience validation target for oktafhirdev tokens.
+      AUTH_AUDIENCE_OKTAFHIRDEV: "https://icanbwell.okta.com"
+      # Friendly display name for the oktafhirdev provider.
+      AUTH_FRIENDLY_NAME_OKTAFHIRDEV: "Okta FHIR Dev"
+      # OAuth client_id registered with Okta for dev flows.
+      AUTH_CLIENT_ID_OKTAFHIRDEV: "0oarf29h6x2DaWCkT697"
+      # Okta discovery endpoint for the dev environment.
+      AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      # OAuth scopes requested against oktafhirdev.
       AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
-      # Okta FHIR Client Sandbox
-      AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: ${AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
-      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: ${AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com}
-      AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: ${AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX:-0oari2d229YaZYiZD697}
-      AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: ${AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX:-https://icanbwell.okta.com/.well-known/openid-configuration}
+      # Issuer URL for the Okta client sandbox provider.
+      AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
+      # Audience validation for oktafhirclientsandbox tokens.
+      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
+      # Friendly name for the Okta client sandbox option.
+      AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX: "Okta FHIR Client Sandbox"
+      # OAuth client_id for the Okta client sandbox app.
+      AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"  # pragma: allowlist secret
+      # Okta discovery endpoint for the client sandbox issuer.
+      AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      # Requested scopes for the client sandbox provider.
       AUTH_SCOPE_OKTAFHIRCLIENTSANDBOX: "openid email profile groups"
-      # Okta FHIR Prod
+      # Issuer for the production Okta FHIR provider.
       AUTH_ISSUER_OKTAFHIRPROD: ${AUTH_ISSUER_OKTAFHIRPROD:-https://icanbwell.okta.com}
+      # Audience string enforced for production Okta tokens.
       AUTH_AUDIENCE_OKTAFHIRPROD: ${AUTH_AUDIENCE_OKTAFHIRPROD:-https://icanbwell.okta.com}
-      AUTH_CLIENT_ID_OKTAFHIRPROD: ${AUTH_CLIENT_ID_OKTAFHIRPROD:-0oargxz9fkFFcSM38697}
+      # OAuth client_id configured in production Okta.
+      AUTH_CLIENT_ID_OKTAFHIRPROD: ${AUTH_CLIENT_ID_OKTAFHIRPROD:-0oargxz9fkFFcSM38697}   # pragma: allowlist secret
+      # Discovery document for the production Okta issuer.
       AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: ${AUTH_WELL_KNOWN_URI_OKTAFHIRPROD:-https://icanbwell.okta.com/.well-known/openid-configuration}
+      # Scopes requested against the production Okta provider.
       AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
-
-      # This is the URL that the user will be redirected to after authentication
-      AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/auth_test/callback}
-      # This is used to store state and nonce for OIDC auth code flow
+      # OAuth callback URL (note: /auth_test endpoints removed for security, use Keycloak directly)
+      # AUTH_REDIRECT_URI is kept for oidcauthlib compatibility but endpoint is not publicly exposed.
+      AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI:-https://mcpfhiragent.localhost/oauth/callback}
+      # Mongo connection string storing OAuth cache, configs, and test data.
       MONGO_URL: "mongodb://mongo:27017?appName=mcp-fhir-agent"
-      MONGO_DB_NAME: mcp-fhir-agent
+      # Mongo database used for auth cache and app metadata.
+      MONGO_DB_NAME: "mcp-fhir-agent"
+      # Collection storing OAuth token cache documents.
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
+      # Username injected into the Mongo URL for authenticated access.
       MONGO_DB_USERNAME: "root"
+      # Password for the Mongo auth user (test-only value).
       MONGO_DB_PASSWORD: "test123"  # pragma: allowlist secret
+      # Selects the Mongo-backed OAuth cache implementation.
       OAUTH_CACHE: mongo
+      # Prevents test runs from deleting cache entries after use.
       MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
-      # These values are for testing
+      # Default referring email recorded during dynamic client registration.
       OAUTH_REFERRING_EMAIL: "admin@tester.com"
+      # Default referring subject recorded for dynamic client registration.
       OAUTH_REFERRING_SUBJECT: "admin@tester.com"
-      # Sets base url for OAuth
+      # Base URL used when constructing absolute links in auth flows.
       SERVER_BASE_URL: "https://mcpfhiragent.localhost/"
-      # Token Exchange settings
+      # GraphQL endpoint for exchanging service-account tokens.
       TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.client-sandbox.icanbwell.com/v1/graphql'
-      # For storing clients in case of OAuth 2.1 Dynamic Client Registration
-      MONGO_DYNAMIC_CLIENT_REGISTRATION_COLLECTION: "oauth-clients"
+      # Mongo collection storing dynamically registered OAuth clients.
+      DYNAMIC_CLIENT_REGISTRATION_COLLECTION: "oauth-clients"
+      # Mongo collection backing the MCP response cache middleware.
+      MCP_RESPONSE_CACHE_COLLECTION: "mcp-response-cache"
+      # Collection logging OAuth transaction metadata for debugging.
       MONGO_OAUTH_TRANSACTIONS_COLLECTION_NAME: "oauth-transactions"
+      # Collection storing OAuth device/client codes during PKCE flows.
       MONGO_OAUTH_CLIENT_CODES_COLLECTION_NAME: "oauth-client-codes"
-      # Enable or disable MCP response caching middleware
+      # Master switch enabling the MCP HTTP response cache middleware.
       MCP_CACHING_ENABLED: ${MCP_CACHING_ENABLED:-true}
-      # HTTP client configuration
+      # Max concurrent upstream connections for shared HTTP clients.
       HTTP_MAX_CONNECTIONS: ${HTTP_MAX_CONNECTIONS:-200}
+      # Max number of idle keep-alive connections retained per host.
       HTTP_MAX_KEEPALIVE: ${HTTP_MAX_KEEPALIVE:-50}
+      # Retry attempts applied to idempotent HTTP calls.
       HTTP_RETRY_ATTEMPTS: ${HTTP_RETRY_ATTEMPTS:-3}
+      # Initial delay (ms) for exponential backoff between HTTP retries.
       HTTP_RETRY_BASE_DELAY_MS: ${HTTP_RETRY_BASE_DELAY_MS:-100}
+      # Global timeout (seconds) for outbound HTTP requests.
       HTTP_TIMEOUT_SECONDS: ${HTTP_TIMEOUT_SECONDS:-30}
-      # For talking to provider search service
-      # PSS_BASE_URL: "https://provider-search.dev.bwell.zone/sdk/graphql"
-      #      PSS_BASE_URL: "https://provider-search.staging.bwell.zone/graphql"
+      # Maximum Motor connection pool size for Mongo.
+      MONGO_MAX_POOL_SIZE: ${MONGO_MAX_POOL_SIZE:-10}
+      # Minimum Motor pool size kept warm.
+      MONGO_MIN_POOL_SIZE: ${MONGO_MIN_POOL_SIZE:-2}
+      # Toggles the Tenacity-based circuit breaker wrappers.
+      CIRCUIT_BREAKER_ENABLED: ${CIRCUIT_BREAKER_ENABLED:-true}
+      # Error threshold before a breaker opens.
+      CIRCUIT_BREAKER_FAIL_MAX: ${CIRCUIT_BREAKER_FAIL_MAX:-5}
+      # Duration (seconds) a breaker stays open before retrying.
+      CIRCUIT_BREAKER_TIMEOUT_SECONDS: ${CIRCUIT_BREAKER_TIMEOUT_SECONDS:-60}
+      # Provider Search Service GraphQL endpoint for directory lookups.
       PSS_BASE_URL: "https://provider-search.client-sandbox.bwell.zone/graphql"
+      # Federated API gateway endpoint used for supporting data fetches.
       API_GATEWAY_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql"
-      # Test accounts
+      # Username for scripted auth tests and demo logins.
       TEST_USER_NAME: "tester"
+      # Password paired with TEST_USER_NAME for integration tests.
       TEST_USER_PASSWORD: "password"
-      # --- Configs for bailey ---
+      # Default LLM provider name chosen by the Bailey orchestration layer.
       DEFAULT_MODEL_PROVIDER: "bedrock"
+      # Default LLM model identifier when provider is set to bedrock.
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
-      # DEFAULT_MODEL_PROVIDER: "openai"
-      # DEFAULT_MODEL_NAME: "gpt-4.1"
+      # Explicit Bedrock model selection when provider == bedrock.
       DEFAULT_BEDROCK_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+      # Default OpenAI model selection when provider == openai.
       DEFAULT_OPENAI_MODEL_NAME: "gpt-4o-mini"
+      # Max number of retries AWS SDK should attempt for Bedrock calls.
       AWS_BEDROCK_MAX_RETRIES: '5'
+      # Retry strategy used by AWS SDK (adaptive handles throttling better).
       AWS_BEDROCK_RETRY_MODE: 'adaptive'
+      # Path to the official FastMCP tool config set mounted via volume.
       MODELS_OFFICIAL_PATH: "/usr/src/mcp-fhir-agent-configs/local/chat_completions/official"
+      # Path containing experimental/testing FastMCP configs.
       MODELS_TESTING_PATH: "/usr/src/mcp-fhir-agent-configs/local/chat_completions/testing"
+      # When 1, returns raw tool output without LLM summarization.
       RETURN_RAW_TOOL_OUTPUT: ${RETURN_RAW_TOOL_OUTPUT:-1}
-      # Azure OpenAI settings
+      # Azure OpenAI resource URL used when the Azure client is selected.
       AZURE_OPENAI_ENDPOINT: "https://bwell-ai.openai.azure.com/"
+      # Azure deployment name specifying which model to call.
       AZURE_OPENAI_DEPLOYMENT: "gpt-4.1"
+      # API version for Azure OpenAI requests.
       AZURE_OPENAI_API_VERSION: "2024-12-01-preview"
-      # Uses this model and ignores the model passed in if MODEL_OVERRIDE is set
+      # Forces all LLM calls to use a specific model when set.
       MODEL_OVERRIDE: ${MODEL_OVERRIDE:-}
-      # ---- End bailey config ----
-      # AWS_REGION: "us-east-2"
-      # vector store for embeddings
+      # Mongo database storing vector embeddings for retrieval.
       MONGO_VECTOR_DATABASE: data-science
+      # Mongo collection containing clinical note embeddings.
       MONGO_VECTOR_EMBEDDINGS_COLLECTION: clinical-notes
-      # vector index settings
+      # Mongo Atlas vector index name referenced by embeddings queries.
       MONGO_VECTOR_INDEX_NAME: vector_index
+      # Index type for Mongo Atlas vector search (must be vectorSearch).
       MONGO_VECTOR_INDEX_TYPE: vectorSearch
+      # Field name holding the embedding array within each document.
       MONGO_VECTOR_EMBEDDINGS_FIELD: embedding
+      # Dimensionality of the stored embeddings.
       MONGO_VECTOR_DIMENSIONS: 1536
+      # Similarity metric used during vector searches.
       MONGO_VECTOR_SIMILARITY: dotProduct
+      # Quantization strategy applied to the vector index.
       MONGO_VECTOR_QUANTIZATION: scalar
-      # embedding models
-      #      EMBEDDING_MODEL: "arn:aws:bedrock:us-east-2::foundation-model/amazon.titan-embed-002"
-      # https://docs.cohere.com/docs/cohere-embed
+      # Default embedding model identifier invoked by the embeddings client.
       EMBEDDING_MODEL: "cohere.embed-v4:0"
+      # Friendly provider/family label for the embedding model.
       EMBEDDING_MODEL_FAMILY: "cohere"
+      # Indicates whether the embedding provider supports streaming outputs.
       EMBEDDING_MODEL_SUPPORTS_STREAMING: 0
-      # This defines how big the chunks will be when splitting text for embeddings
+      # Maximum token chunk size when splitting text for embeddings.
       EMBEDDING_CHUNK_SIZE: 5000
-      # this is what the embedding model can handle in one request
+      # Maximum context window supported by the configured embedding model.
       EMBEDDING_MODEL_CONTEXT_WINDOW_SIZE: 128000  # Cohere Embed v4
-      # These are for local embedding service testing
+      # Optional local HTTP endpoint for proxying embedding requests.
       LOCAL_EMBEDDING_SERVICE_URL: "http://text-embeddings"
+      # Context window for the local embedding model option.
       LOCAL_EMBEDDING_CONTEXT_WINDOW_SIZE: 512 # Hugging Face bge-large-en-v1.5
+      # Local embedding model identifier used by the optional service.
       LOCAL_EMBEDDING_MODEL: "BAAI/bge-large-en-v1.5"
+      # Provider/family label for the local embedding model.
       LOCAL_EMBEDDING_MODEL_FAMILY: "BAAI"
+      # Expected vector dimensions when using the local Mongo instance.
       LOCAL_MONGO_VECTOR_DIMENSIONS: 1024
-      # JWT signing key
-      # This is only used in the OAuth Dynamic Client Registration flow to sign client assertions
+      # Symmetric key used to sign OAuth dynamic client registration assertions.
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-1acf47d258e5f8401cb0924ee7cba4ab}
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
+      # Enables the elicitation flow that asks clarifying questions.
       ENABLE_ELICITATION: ${ENABLE_ELICITATION:-true}
-      # set max inline size in KB before we use GridFS
-      MAX_MONGO_INLINE_SIZE_KB: 50
-      # Open Telemetry settings
-      OTEL_SERVICE_NAME: "mcp-fhir-agent"
-      OTEL_RESOURCE_ATTRIBUTES: "deployment.environment=local"
-      # Export traces and metrics via OTLP gRPC to Aspire all-in-one
-      OTEL_TRACES_EXPORTER: "otlp"
-      OTEL_METRICS_EXPORTER: "otlp"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
-      OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: "grpc"
-      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
-      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
-      OTEL_TRACES_SAMPLER: "always_on"
-      OTEL_PYTHON_FASTAPI_EXCLUDED_URLS: "/health,/metrics"
-#      OTEL_PROPAGATE_CONTEXT: "0"
-#      GRPC_VERBOSITY: "debug"
-#      GRPC_TRACE: "http,call_error,connectivity_state"
-      # Optional: enable logs in future
-      # OTEL_LOGS_EXPORTER: "otlp"
-      # set log level for fhir client calls
-      FHIR_CLIENT_LOG_LEVEL: "DEBUG"
-    env_file: docker.env
+      # Tokenizer name supplied to tiktoken for truncation calculations.
+      TIKTOKEN_MODEL_NAME: ${TIKTOKEN_MODEL_NAME:-cl100k_base}
+      # Strategy for trimming context when over token budget.
+      TRUNCATION_STRATEGY: ${TRUNCATION_STRATEGY:-end}
+      # Comma-delimited Composition types to skip when summarizing.
+      SKIP_COMPOSITIONS: "Lab,Vitals,Procedure,Immunization,Condition,CarePlan,DiagnosticReport,Encounter"
+      # Log level dedicated to the fastmcp library internals.
+      FASTMCP_LOG_LEVEL : ${FASTMCP_LOG_LEVEL:-INFO}
+      # OTEL Configurations
+      # Maximum time in milliseconds the BatchSpanProcessor waits for a span export call to complete.
+      # Default: 30000ms. Increase if your OTEL exporter/backend is slow; decrease to fail fast.
+      OTEL_BSP_EXPORT_TIMEOUT: ${OTEL_BSP_EXPORT_TIMEOUT:-30000}
+      # Delay in milliseconds between consecutive batch span export cycles.
+      # Default: 500ms. Lower values export spans more frequently at the cost of higher overhead.
+      OTEL_BSP_SCHEDULE_DELAY: ${OTEL_BSP_SCHEDULE_DELAY:-500}
+      FHIR_USE_PERSISTENT_SESSION: 'true'
+      OTEL_SPAN_FILTER_ENABLED: 'true'
+      OTEL_SPAN_FILTER_PATTERNS: 'saslStart,saslContinue'
+      OTEL_SPAN_FILTER_DEBUG: 'false'
+      ENABLE_DYNAMIC_CLIENT_REGISTRATION: 1
+      LOG_ALL_REQUESTS: 1
+    env_file: .env
     ports:
       - '5061:5000'
     volumes:
@@ -197,22 +273,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command:
-      - opentelemetry-instrument
-      - gunicorn
-      - --reload
-      - mcpfhiragent.api:app
-      - --workers=1
-      - --worker-class
-      - uvicorn.workers.UvicornWorker
-      - --bind
-      - 0.0.0.0:5000
-      - --timeout=60
-      - --keep-alive=45
-      - --graceful-timeout=30
-      - --log-level
-      - info
-
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -228,7 +289,7 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-    env_file: docker.env
+    env_file: .env
     ports:
       - '5062:5000'
     volumes:
@@ -240,26 +301,8 @@ services:
       # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#      - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-#      - ../fhir-notes-vector-store/fhirnotesvectorstore:/usr/local/lib/python3.12/site-packages/fhirnotesvectorstore:ro
-#      - ../fhir_to_llm/fhir_to_llm:/usr/local/lib/python3.12/site-packages/fhir_to_llm:ro
-#      - ../compressed-fhir/compressedfhir:/usr/local/lib/python3.12/site-packages/compressedfhir:ro
-    command:
-      - opentelemetry-instrument
-      - gunicorn
-      - --reload
-      - mcpfhiragent.api:app
-      - --workers=1
-      - --worker-class
-      - uvicorn.workers.UvicornWorker
-      - --bind
-      - 0.0.0.0:5000
-      - --timeout=60
-      - --keep-alive=45
-      - --graceful-timeout=30
-      - --log-level
-      - info
-
+    #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -275,7 +318,7 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-    env_file: docker.env
+    env_file: .env
     ports:
       - '5063:5000'
     volumes:
@@ -288,22 +331,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command:
-      - opentelemetry-instrument
-      - gunicorn
-      - --reload
-      - mcpfhiragent.api:app
-      - --workers=1
-      - --worker-class
-      - uvicorn.workers.UvicornWorker
-      - --bind
-      - 0.0.0.0:5000
-      - --timeout=60
-      - --keep-alive=45
-      - --graceful-timeout=30
-      - --log-level
-      - info
-
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -319,7 +347,7 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-    env_file: docker.env
+    env_file: .env
     ports:
       - '5064:5000'
     volumes:
@@ -332,22 +360,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command:
-      - opentelemetry-instrument
-      - gunicorn
-      - --reload
-      - mcpfhiragent.api:app
-      - --workers=1
-      - --worker-class
-      - uvicorn.workers.UvicornWorker
-      - --bind
-      - 0.0.0.0:5000
-      - --timeout=60
-      - --keep-alive=45
-      - --graceful-timeout=30
-      - --log-level
-      - info
-
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -363,7 +376,8 @@ services:
       # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
       # disable until language model gateway supports elicitation
       ENABLE_ELICITATION: "false"
-    env_file: docker.env
+
+    env_file: .env
     ports:
       - '5065:5000'
     volumes:
@@ -376,22 +390,7 @@ services:
       - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
     #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    command:
-      - opentelemetry-instrument
-      - gunicorn
-      - --reload
-      - mcpfhiragent.api:app
-      - --workers=1
-      - --worker-class
-      - uvicorn.workers.UvicornWorker
-      - --bind
-      - 0.0.0.0:5000
-      - --timeout=60
-      - --keep-alive=45
-      - --graceful-timeout=30
-      - --log-level
-      - info
-
+    command: [ "uvicorn", "mcpfhiragent.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug" ]
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
     networks:
@@ -429,3 +428,8 @@ networks:
   web:
     external: true
     name: language-model-gateway_web
+
+secrets:
+  GITHUB_TOKEN:
+    environment: GITHUB_TOKEN
+

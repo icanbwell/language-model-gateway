@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "ai_sdk_local_dev",
-  "name": "AI SDK Local to Fhir Dev",
+  "id": "ai_sdk_local_dev_openai",
+  "name": "AI SDK Local to Fhir Dev OpenAI",
   "description": "This is a language model that can access data in FHIR",
   "type": "langchain",
   "model": {
-    "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "provider": "openai",
+    "model": "gpt-4o"
   },
   "system_prompts": [
     {

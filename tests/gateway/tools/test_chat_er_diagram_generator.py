@@ -37,7 +37,9 @@ async def test_chat_er_diagram_generator(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "http://localhost:5050/image_generation/"
+                    fn_get_response=lambda messages: (
+                        "http://localhost:5050/image_generation/"
+                    )
                 )
             ),
         )

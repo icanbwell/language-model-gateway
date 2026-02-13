@@ -32,7 +32,9 @@ async def test_chat_completions_with_web_search(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Donald Trump won the last US election"
+                    fn_get_response=lambda messages: (
+                        "Donald Trump won the last US election"
+                    )
                 )
             ),
         )

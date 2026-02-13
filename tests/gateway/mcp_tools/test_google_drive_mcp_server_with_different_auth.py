@@ -40,7 +40,9 @@ async def test_chat_completions_with_mcp_google_drive_with_different_auth(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "ABCDGX Test File Shared With b.well"
+                    fn_get_response=lambda messages: (
+                        "ABCDGX Test File Shared With b.well"
+                    )
                 )
             ),
         )

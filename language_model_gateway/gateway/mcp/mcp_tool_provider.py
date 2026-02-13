@@ -253,9 +253,6 @@ class MCPToolProvider:
                             **existing_headers,
                             "Authorization": auth_header,
                         }
-                logger.debug(
-                    f"Loading MCP tools with Authorization header: {auth_header}"
-                )
 
             tool_names: List[str] | None = (
                 tool_config.tools.split(",") if tool_config.tools else None

@@ -48,7 +48,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirproduction}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod}
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -86,12 +86,12 @@ services:
       AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
       # Okta FHIR Production
-      AUTH_ISSUER_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRPRODUCTION: "Okta FHIR Production"
-      AUTH_CLIENT_ID_OKTAFHIRPRODUCTION: "0oargxz9fkFFcSM38697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRPRODUCTION: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRPRODUCTION: "openid email profile groups"
+      AUTH_ISSUER_OKTAFHIRPROD: "https://icanbwell.okta.com"
+      AUTH_AUDIENCE_OKTAFHIRPROD: "https://icanbwell.okta.com"
+      AUTH_FRIENDLY_NAME_OKTAFHIRPROD: "Okta FHIR Production"
+      AUTH_CLIENT_ID_OKTAFHIRPROD: "0oargxz9fkFFcSM38697"
+      AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       # Mongo DB settings for storing tokens
@@ -124,7 +124,9 @@ services:
       MAXIMUM_INLINE_TOOL_OUTPUT_SIZE: '100'
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
-    env_file: docker.env
+      OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
+
+    env_file: .env
     command:
       - opentelemetry-instrument
       - gunicorn
@@ -149,7 +151,7 @@ services:
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
 #    - ./caches/virtualenvs:/etc/appuser/.local/share/virtualenvs
-      # uncomment this for testing AWS models and the docker.env above (need the AWS_CREDENTIALS_PROFILE env var)
+      # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro

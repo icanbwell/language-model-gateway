@@ -285,7 +285,7 @@ class ChatCompletionManager:
             isinstance(last_message_content, str)
             and last_message_content.lower() in help_keywords
         ):
-            logger.info(f"Help requested for model {model}")
+            logger.info(f"Help requested for model {model}: {model_config}")
             response_messages: List[ChatCompletionMessage] = [
                 ChatCompletionMessage(
                     role="assistant",
@@ -296,6 +296,22 @@ class ChatCompletionManager:
                 response_messages.append(
                     ChatCompletionMessage(
                         role="assistant", content=f"Model owner: {model_config.owner}"
+                    )
+                )
+            if (
+                model_config.model is not None
+                and model_config.model.provider is not None
+            ):
+                response_messages.append(
+                    ChatCompletionMessage(
+                        role="assistant",
+                        content=f"Model Provider: {model_config.model.provider}",
+                    )
+                )
+            if model_config.model is not None and model_config.model.model is not None:
+                response_messages.append(
+                    ChatCompletionMessage(
+                        role="assistant", content=f"Model: {model_config.model.model}"
                     )
                 )
             if model_config.example_prompts is not None:

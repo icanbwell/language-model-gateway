@@ -1,7 +1,7 @@
 export LANG
 
 .PHONY: Pipfile.lock
-Pipfile.lock: # Locks Pipfile and updates the Pipfile.lock on the local file system
+Pipfile.lock: create-docker-network # Locks Pipfile and updates the Pipfile.lock on the local file system
 	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
 	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
 
@@ -15,7 +15,13 @@ devsetup: ## one time setup for devs
 
 .PHONY: create-docker-network
 create-docker-network: ## creates the docker network
-	docker network create language-model-gateway_web || true
+	@set -e; \
+	docker network rm language-model-gateway_web >/dev/null 2>&1 && echo "Removed existing web network" || true; \
+	echo "Creating web docker network with compose labels"; \
+	docker network create --driver bridge \
+		--label com.docker.compose.project=baileyai \
+		--label com.docker.compose.network=language-model-gateway_web \
+		language-model-gateway_web >/dev/null
 
 .PHONY:build
 build: create-docker-network ## Builds the docker for dev
@@ -106,7 +112,7 @@ up-mcp-server-gateway:
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
 
 .PHONY: up-all
-up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all docker containers
+up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-mcp-inspector ## starts all docker containers
 	@echo "======== All Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
@@ -118,6 +124,18 @@ up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway ## starts all
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
+
+.PHONY: up-mcp-inspector
+up-mcp-inspector:
+	docker compose \
+	-f docker-compose-keycloak.yml \
+	-f docker-compose-mongo.yml \
+	-f docker-compose-fhir.yml \
+	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
+	-f docker-compose-mcp-inspector.yml \
+	up -d
+	@echo "MCP Inspector: http://localhost:6274/"
 
 .PHONY: down
 down: ## stops docker containers
@@ -290,3 +308,13 @@ show-dependency-graph: build ## Generates a dependency graph of the Python packa
 	@docker compose run --rm --name language-model-gateway_shell language-model-gateway \
 	sh -c "pip install pipdeptree >/dev/null 2>&1 && pipdeptree" > dependency_graph.txt && \
 		echo "Dependency graph written to dependency_graph.txt"
+
+
+.PHONY: inspector
+inspector:
+	docker run --rm \
+	  -p 127.0.0.1:6274:6274 \
+	  -p 127.0.0.1:6277:6277 \
+	  -e HOST=0.0.0.0 \
+	  -e MCP_AUTO_OPEN_ENABLED=false \
+	  ghcr.io/modelcontextprotocol/inspector:latest

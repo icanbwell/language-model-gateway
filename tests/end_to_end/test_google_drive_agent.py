@@ -246,7 +246,9 @@ async def test_chat_completions_with_google_drive(
             ModelFactory,
             lambda c: MockModelFactory(
                 fn_get_model=lambda chat_model_config: MockChatModel(
-                    fn_get_response=lambda messages: "Hello, this is a test file shared with all of b.well"
+                    fn_get_response=lambda messages: (
+                        "Hello, this is a test file shared with all of b.well"
+                    )
                 )
             ),
         )
