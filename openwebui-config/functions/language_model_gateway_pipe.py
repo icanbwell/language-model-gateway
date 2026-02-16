@@ -412,16 +412,26 @@ HTTPX Response Log:
             return []
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         logger.debug(f"Calling models endpoint: {model_url}")
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                url=model_url, timeout=self.valves.models_list_timeout_seconds
-            )
-            response.raise_for_status()
-            models = response.json().get("data", [])
-        logger.debug(f"Received models from {model_url}: {models}")
-        # Update cache timestamp
-        self.pipelines_last_updated = time.time()
-        return [{"id": model["id"], "name": model["id"]} for model in models]
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    url=model_url, timeout=self.valves.models_list_timeout_seconds
+                )
+                response.raise_for_status()
+                models = response.json().get("data", [])
+            logger.debug(f"Received models from {model_url}: {models}")
+            # Update cache timestamp
+            self.pipelines_last_updated = time.time()
+            return [{"id": model["id"], "name": model["id"]} for model in models]
+        except httpx.TimeoutException as e:
+            logger.error(f"Timeout fetching models from {model_url}: {e}")
+            return []
+        except httpx.HTTPStatusError as e:
+            logger.error(f"HTTP error fetching models from {model_url}: {e.response.status_code}")
+            return []
+        except Exception as e:
+            logger.exception(f"Unexpected error fetching models from {model_url}: {e}")
+            return []
 
     async def pipes(self) -> List[Dict[str, str]]:
         now = time.time()
