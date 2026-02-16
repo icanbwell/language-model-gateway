@@ -427,7 +427,9 @@ HTTPX Response Log:
             logger.error(f"Timeout fetching models from {model_url}: {e}")
             return []
         except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error fetching models from {model_url}: {e.response.status_code}")
+            logger.error(
+                f"HTTP error fetching models from {model_url}: {e.response.status_code}"
+            )
             return []
         except Exception as e:
             logger.exception(f"Unexpected error fetching models from {model_url}: {e}")

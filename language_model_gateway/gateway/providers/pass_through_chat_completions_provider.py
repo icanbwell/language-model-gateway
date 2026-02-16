@@ -2,7 +2,10 @@ import json
 import logging
 from typing import Dict, Optional, AsyncGenerator, override
 
+import httpx
 from oidcauthlib.auth.models.auth import AuthInformation
+from openai import AsyncOpenAI, AsyncStream, OpenAIError
+from openai.types.chat import ChatCompletionChunk, ChatCompletionMessageParam
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
@@ -16,10 +19,6 @@ from language_model_gateway.gateway.providers.pass_through_token_manager import 
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-
-from openai import AsyncOpenAI, AsyncStream
-from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
-
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -76,13 +75,34 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         )
         token: TokenCacheItem | None = None
         if model_config.auth_config is not None:
-            token = (
-                await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
+            if auth_header is None:
+                logger.warning(
+                    "Authorization header missing for pass through model %s",
+                    model_config.model.model,
+                )
+                return JSONResponse(
+                    status_code=401,
+                    content={
+                        "error": "Authorization header is required to access this pass through model."
+                    },
+                )
+            try:
+                token = await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
                     auth_header=auth_header,
                     auth_information=auth_information,
                     authentication_config=model_config.auth_config,
                 )
-            )
+            except Exception as e:
+                logger.exception(
+                    "Failed to validate pass through token for model %s",
+                    model_config.model.model,
+                )
+                return JSONResponse(
+                    status_code=502,
+                    content={
+                        "error": f"{type(e)}: Unable to validate credentials for the pass through model. {e}"
+                    },
+                )
             if token is None or token.access_token is None:
                 return JSONResponse(
                     status_code=401,
@@ -101,23 +121,61 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             if token and token.access_token and token.access_token.token
             else {},
         )
-        message: ChatCompletionUserMessageParam = {
-            "role": "user",
-            "content": "Get the address of Dr. Meggin A. Sabatino at Medstar",  # specify your prompt here
-        }
-        stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
-            messages=[message],
-            model=model_config.model.model,
-            stream=True,  # enables streaming
-        )
+        messages: list[ChatCompletionMessageParam] = [
+            m.to_chat_completion_message() for m in chat_request_wrapper.messages
+        ]
+        try:
+            stream: AsyncStream[
+                ChatCompletionChunk
+            ] = await client.chat.completions.create(
+                messages=messages,
+                model=model_config.model.model,
+                stream=True,  # enables streaming
+            )
+        except (OpenAIError, httpx.HTTPError) as e:
+            logger.exception(
+                "Pass through provider failed to start stream for model %s",
+                model_config.model.model,
+            )
+            return JSONResponse(
+                status_code=502,
+                content={
+                    "error": f"{type(e)}: Pass through model failed to start streaming response. {e}"
+                },
+            )
+        except Exception as e:
+            logger.exception(
+                "Unexpected error when calling pass through model %s",
+                model_config.model.model,
+            )
+            return JSONResponse(
+                status_code=500,
+                content={
+                    "error": f"{type(e)}: Unexpected error occurred when calling the pass through model. {e}"
+                },
+            )
 
         async def stream_response(
             stream1: AsyncStream[ChatCompletionChunk],
         ) -> AsyncGenerator[str, None]:
-            chunk: ChatCompletionChunk
-            async for chunk in stream1:
-                yield f"data: {json.dumps(chunk.model_dump())}\n\n"
-            yield "data: [DONE]\n\n"
+            try:
+                chunk: ChatCompletionChunk
+                async for chunk in stream1:
+                    yield f"data: {json.dumps(chunk.model_dump())}\n\n"
+            except (OpenAIError, httpx.HTTPError):
+                logger.exception(
+                    "Pass through streaming interrupted for model %s",
+                    model_config.model.model if model_config.model else "unknown",
+                )
+                yield f"data: {json.dumps({'error': 'Streaming interrupted by upstream provider.'})}\n\n"
+            except Exception:
+                logger.exception(
+                    "Unexpected streaming error for pass through model %s",
+                    model_config.model.model if model_config.model else "unknown",
+                )
+                yield f"data: {json.dumps({'error': 'Streaming interrupted by upstream provider.'})}\n\n"
+            finally:
+                yield "data: [DONE]\n\n"
 
         return StreamingResponse(
             content=stream_response(stream1=stream),

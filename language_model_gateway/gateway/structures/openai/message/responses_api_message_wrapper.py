@@ -1,6 +1,7 @@
 from typing import Optional, cast, override
 
 from langchain_core.messages import BaseMessage
+from openai.types.chat import ChatCompletionMessageParam
 from openai.types.responses import ResponseInputItemParam, EasyInputMessageParam
 
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
@@ -49,3 +50,14 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
     def to_langchain_message(self) -> BaseMessage:
         # Use the correct conversion for ResponsesApiMessageWrapper
         return convert_responses_api_to_single_message(response=self.input_)
+
+    @override
+    def to_chat_completion_message(self) -> ChatCompletionMessageParam:
+        """Convert the message wrapper back to a ChatCompletionMessageParam, which is the same format as the original message.  This is used for tools that need to send messages back to the model in the same format as the original messages."""
+        raise NotImplementedError(
+            "Conversion from ResponsesApiMessageWrapper to ChatCompletionMessageParam is not implemented yet."
+        )
+
+    @override
+    def to_responses_api_message(self) -> ResponseInputItemParam:
+        return self.input_
