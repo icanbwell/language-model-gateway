@@ -15,6 +15,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
     ModelParameterConfig,
     PromptConfig,
+    AuthenticationConfig,
 )
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
@@ -109,6 +110,13 @@ async def test_chat_bailey_streaming(
                     provider="passthru",
                     model="Bailey AI",
                 ),
+                auth_config=AuthenticationConfig(
+                    name="bailey",
+                    url="https://baileyai.dev.bwell.zone/bailey/v1",
+                    auth="jwt_token",
+                    auth_providers=["oktafhirdev"],
+                    headers={"X-Client-Id": "Aiden"},
+                ),
                 url="https://baileyai.dev.bwell.zone//bailey/v1",
                 model_parameters=[ModelParameterConfig(key="temperature", value=0.5)],
                 system_prompts=[
@@ -135,6 +143,9 @@ async def test_chat_bailey_streaming(
         api_key="fake-api-key",
         base_url="http://localhost:5000/api/v1",  # change the default port if needed
         http_client=async_client,
+        default_headers={
+            "Authorization": f"Bearer {os.getenv('AIDEN_OKTA_TOKEN')}",
+        },
     )
 
     message: ChatCompletionUserMessageParam = {
