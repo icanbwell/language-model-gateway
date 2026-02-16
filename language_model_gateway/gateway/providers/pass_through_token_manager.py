@@ -6,7 +6,12 @@ from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.models.auth import AuthInformation
 
-from language_model_gateway.configs.config_schema import AgentConfig, ChatModelConfig
+from language_model_gateway.configs.config_schema import (
+    AgentConfig,
+    ChatModelConfig,
+    AuthenticationConfig,
+)
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -66,7 +71,7 @@ class PassThroughTokenManager:
             await self.check_tokens_are_valid_for_tool(
                 auth_header=auth_header,
                 auth_information=auth_information,
-                tool_using_authentication=tool_using_authentication,
+                authentication_config=tool_using_authentication,
             )
 
     async def check_tokens_are_valid_for_tool(
@@ -74,20 +79,20 @@ class PassThroughTokenManager:
         *,
         auth_header: str | None,
         auth_information: AuthInformation,
-        tool_using_authentication: AgentConfig,
-    ) -> None:
-        tool_auth_providers: list[str] | None = tool_using_authentication.auth_providers
+        authentication_config: AuthenticationConfig,
+    ) -> TokenCacheItem | None:
+        tool_auth_providers: list[str] | None = authentication_config.auth_providers
         if (
-            tool_using_authentication.auth_providers is None
-            or len(tool_using_authentication.auth_providers) == 0
+            authentication_config.auth_providers is None
+            or len(authentication_config.auth_providers) == 0
         ):
             logger.debug(
-                f"Tool {tool_using_authentication.name} doesn't have auth providers."
+                f"Tool {authentication_config.name} doesn't have auth providers."
             )
-            return
+            return None
         if not auth_information.redirect_uri:
             logger.debug("AuthInformation doesn't have redirect_uri.")
-            return
+            return None
 
         tool_first_auth_provider: str | None = (
             tool_auth_providers[0] if tool_auth_providers is not None else None
@@ -102,7 +107,7 @@ class PassThroughTokenManager:
         if auth_config is None:
             raise ValueError(
                 f"AuthConfig not found for auth provider {tool_first_auth_provider}"
-                f" used by tool {tool_using_authentication.name}."
+                f" used by tool {authentication_config.name}."
             )
         if not auth_information.subject:
             logger.error(
@@ -125,16 +130,16 @@ class PassThroughTokenManager:
         ) = await self.auth_manager.create_authorization_url(
             auth_provider=tool_first_auth_provider,
             redirect_uri=auth_information.redirect_uri,
-            url=tool_using_authentication.url,
+            url=authentication_config.url,
             referring_email=auth_information.email,
             referring_subject=auth_information.subject,
         )
         error_message: str = (
-            f"\nFollowing tools require authentication: {tool_using_authentication.name}."
+            f"\nFollowing tools require authentication: {authentication_config.name}."
             + f"\nClick here to [Login to {auth_config.friendly_name}]({authorization_url})."
         )
-        await self.tool_auth_manager.get_token_for_tool_async(
+        return await self.tool_auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
-            tool_config=tool_using_authentication,
+            tool_config=authentication_config,
         )

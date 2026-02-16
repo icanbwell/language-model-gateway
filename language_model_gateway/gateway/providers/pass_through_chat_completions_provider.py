@@ -6,8 +6,12 @@ from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
+from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
+)
+from language_model_gateway.gateway.providers.pass_through_token_manager import (
+    PassThroughTokenManager,
 )
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
@@ -28,6 +32,17 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
     without any modifications or additional processing.
     This provider can be used when you want to directly forward the chat completion requests to an external API
     """
+
+    def __init__(self, *, pass_through_token_manager: PassThroughTokenManager) -> None:
+        self.pass_through_token_manager: PassThroughTokenManager = (
+            pass_through_token_manager
+        )
+        if self.pass_through_token_manager is None:
+            raise ValueError("pass_through_token_manager must not be None")
+        if not isinstance(self.pass_through_token_manager, PassThroughTokenManager):
+            raise TypeError(
+                "pass_through_token_manager must be an instance of PassThroughTokenManager"
+            )
 
     @override
     async def chat_completions(
@@ -51,16 +66,40 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     "error": "Model configuration is not provided for this model."
                 },
             )
+
         logger.info(
             f"Forwarding chat completion request to pass through URL: {pass_through_url} with model: {model_config.model.model}"
         )
+        # check if we have a valid auth token
+        auth_header: str | None = headers.get("Authorization") or headers.get(
+            "authorization"
+        )
+        token: TokenCacheItem | None = None
+        if model_config.auth_config is not None:
+            token = (
+                await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
+                    auth_header=auth_header,
+                    auth_information=auth_information,
+                    authentication_config=model_config.auth_config,
+                )
+            )
+            if token is None or token.access_token is None:
+                return JSONResponse(
+                    status_code=401,
+                    content={
+                        "error": "Unauthorized. Valid token is required to access the pass through chat completion API."
+                    },
+                )
+
         client = AsyncOpenAI(
             api_key="fake-api-key",  # pragma: allowlist secret
             # this api key is ignored for now.  suggest setting it to something that identifies your calling code
             base_url=pass_through_url,
-            # default_headers={
-            #     "Authorization": f"Bearer {os.getenv('GATEWAY_TOKEN')}",
-            # }
+            default_headers={
+                "Authorization": f"Bearer {token.access_token.token}",
+            }
+            if token and token.access_token and token.access_token.token
+            else {},
         )
         message: ChatCompletionUserMessageParam = {
             "role": "user",

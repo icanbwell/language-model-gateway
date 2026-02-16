@@ -9,6 +9,15 @@
     "model": "Bailey AI",
     "provider": "passthru"
   },
+  "auth_config": {
+    "auth": "jwt_token",
+    "auth_providers": [
+      "oktafhirdev"
+    ],
+    "headers": {
+      "X-Client-Id": "Aiden"
+    }
+  },
   "system_prompts": [
     {
       "role": "system",

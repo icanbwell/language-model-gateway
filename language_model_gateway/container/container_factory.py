@@ -401,7 +401,9 @@ class LanguageModelGatewayContainerFactory:
 
         container.singleton(
             PassThroughChatCompletionsProvider,
-            lambda c: PassThroughChatCompletionsProvider(),
+            lambda c: PassThroughChatCompletionsProvider(
+                pass_through_token_manager=c.resolve(PassThroughTokenManager),
+            ),
         )
 
         logger.info("DI container initialized")
