@@ -90,6 +90,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
+	@echo App Login UI: http://localhost:5050/app/login
 
 .PHONY: up-mcp-fhir-agent
 up-mcp-fhir-agent:
@@ -124,6 +125,7 @@ up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-mcp-inspec
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
+	@echo App Login UI: http://localhost:5050/app/login
 
 .PHONY: up-mcp-inspector
 up-mcp-inspector:
