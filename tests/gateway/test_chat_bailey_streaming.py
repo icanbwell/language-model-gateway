@@ -158,9 +158,14 @@ async def test_chat_bailey_streaming(
         stream=True,
     )
 
+    collected_chunks: List[str] = []
     chunk: ChatCompletionChunk
     async for chunk in stream:
         delta_content = "\n".join(
             [choice.delta.content or "" for choice in chunk.choices]
         )
         print(delta_content)
+        collected_chunks.append(delta_content)
+
+    full_response = "".join(collected_chunks).strip()
+    assert full_response, "Expected non-empty streamed response from Bailey model"
