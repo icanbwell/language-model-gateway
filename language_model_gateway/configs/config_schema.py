@@ -66,7 +66,7 @@ class AuthenticationConfig(BaseModel):
     """The name of the authentication configuration"""
 
     url: str | None = None
-    """The MCP (Model Context Protocol) URL to access the tool"""
+    """The URL to access the authenticated resource"""
 
     headers: Dict[str, str] | None = None
     """The headers to pass to the MCP tool"""
