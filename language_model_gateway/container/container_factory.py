@@ -355,6 +355,8 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
+                auth_config_reader=c.resolve(AuthConfigReader),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
             ),
         )
 

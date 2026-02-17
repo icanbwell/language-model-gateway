@@ -219,6 +219,9 @@ class TokenStorageAuthManager(FastAPIAuthManager):
 
             return JSONResponse(content)
 
+        return await self.get_html_response(access_token)
+
+    async def get_html_response(self, access_token: str | None) -> HTMLResponse:
         html_content = f"""
         <!DOCTYPE html>
         <html lang="en">
