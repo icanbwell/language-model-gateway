@@ -184,7 +184,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         upstream_streaming_enabled: bool = (
             model_config.streaming_enabled
             if model_config.streaming_enabled is not None
-            else False
+            else True
         )
         stream: AsyncStream[ChatCompletionChunk] | None = None
         completion: ChatCompletion | None = None

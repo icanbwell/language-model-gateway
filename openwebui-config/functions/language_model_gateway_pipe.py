@@ -424,10 +424,10 @@ HTTPX Response Log:
             self.pipelines_last_updated = time.time()
             return [{"id": model["id"], "name": model["id"]} for model in models]
         except httpx.TimeoutException as e:
-            logger.error(f"Timeout fetching models from {model_url}: {e}")
+            logger.exception(f"Timeout fetching models from {model_url}: {e}")
             return []
         except httpx.HTTPStatusError as e:
-            logger.error(
+            logger.exception(
                 f"HTTP error fetching models from {model_url}: {e.response.status_code}"
             )
             return []

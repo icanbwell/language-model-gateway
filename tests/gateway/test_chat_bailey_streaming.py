@@ -168,7 +168,6 @@ async def test_chat_bailey_streaming(
         delta_content = "\n".join(
             [choice.delta.content or "" for choice in chunk.choices]
         )
-        print(delta_content)
         collected_chunks.append(delta_content)
 
     full_response = "".join(collected_chunks).strip()
