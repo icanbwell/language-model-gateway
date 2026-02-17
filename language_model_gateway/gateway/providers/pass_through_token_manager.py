@@ -1,5 +1,6 @@
 import logging
 from typing import Any, Dict, List
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config import AuthConfig
@@ -135,6 +136,7 @@ class PassThroughTokenManager:
             )
         if not tool_first_auth_provider:
             raise ValueError("Tool using authentication must have an auth provider.")
+        tool_auth_provider: str = tool_first_auth_provider
         tool_client_id: str | None = (
             auth_config.client_id if auth_config is not None else None
         )
@@ -145,7 +147,7 @@ class PassThroughTokenManager:
         authorization_url: (
             str | None
         ) = await self.auth_manager.create_authorization_url(
-            auth_provider=tool_first_auth_provider,
+            auth_provider=tool_auth_provider,
             redirect_uri=auth_information.redirect_uri,
             url=authentication_config.url,
             referring_email=auth_information.email,
@@ -153,15 +155,38 @@ class PassThroughTokenManager:
         )
 
         app_login_uri = self.environment_variables.app_login_uri
+        app_login_url_with_parameters: str | None = None
+        if app_login_uri:
+            parsed_login_uri = urlparse(app_login_uri)
+            existing_query_params = dict(
+                parse_qsl(parsed_login_uri.query, keep_blank_values=True)
+            )
+            login_query_params: dict[str, str | None] = {
+                "auth_provider": tool_auth_provider,
+                "referring_email": auth_information.email,
+                "referring_subject": auth_information.subject,
+            }
+            sanitized_login_query_params: dict[str, str] = {
+                key: value
+                for key, value in login_query_params.items()
+                if value is not None
+            }
+            merged_query_params = {
+                **existing_query_params,
+                **sanitized_login_query_params,
+            }
+            app_login_url_with_parameters = urlunparse(
+                parsed_login_uri._replace(query=urlencode(merged_query_params))
+            )
 
-        app_login_url_with_parameters: str | None = (
-            f"{app_login_uri}?auth_provider={tool_first_auth_provider}&referring_email={auth_information.email}&referring_subject={auth_information.subject}"
-        )
         error_message: str = (
             f"\nFollowing tools require authentication: {authentication_config.name}."
             + f"\nClick here to [Login to {auth_config.friendly_name}]({authorization_url})."
-            + f"\nClick here to [Login to App]({app_login_url_with_parameters})."
         )
+        if app_login_url_with_parameters:
+            error_message += (
+                f"\nClick here to [Login to App]({app_login_url_with_parameters})."
+            )
         return await self.tool_auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
             error_message=error_message,
