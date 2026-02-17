@@ -36,6 +36,7 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
+from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
@@ -345,6 +346,15 @@ class LanguageModelGatewayContainerFactory:
                 langchain_provider=c.resolve(LangChainCompletionsProvider),
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
+            ),
+        )
+        container.singleton(
+            AppLoginManager,
+            lambda c: AppLoginManager(
+                http_client_factory=c.resolve(HttpClientFactory),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 

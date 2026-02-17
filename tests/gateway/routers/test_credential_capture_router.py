@@ -4,8 +4,8 @@ from fastapi.responses import JSONResponse
 import httpx
 import respx
 
-from language_model_gateway.gateway.routers.app_login_router import (
-    AppLoginRouter,
+from language_model_gateway.gateway.routers.app_login_router import AppLoginRouter
+from language_model_gateway.gateway.models.app_login_submission import (
     CredentialSubmission,
 )
 

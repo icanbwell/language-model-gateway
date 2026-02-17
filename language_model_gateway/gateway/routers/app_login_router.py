@@ -4,13 +4,15 @@ from enum import Enum
 from typing import Annotated, Awaitable, Callable, Sequence
 
 from fastapi import APIRouter, Form, params
-from fastapi.responses import FileResponse, JSONResponse, Response
-from pydantic import BaseModel, Field
-import httpx
-from fastapi import Depends, HTTPException
+from fastapi.responses import FileResponse, Response
+from fastapi import Depends
 from oidcauthlib.container.inject import Inject
 
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
+from language_model_gateway.gateway.models.app_login_submission import (
+    CredentialSubmission,
+)
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
@@ -18,13 +20,6 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["AUTH"])
-
-
-class CredentialSubmission(BaseModel):
-    """Validated payload produced from the credential capture form."""
-
-    username: str = Field(min_length=1, max_length=255)
-    password: str = Field(min_length=1, max_length=255)
 
 
 AppLoginCallback = Callable[
@@ -57,7 +52,7 @@ class AppLoginRouter:
         self.router = APIRouter(
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
-        self._callback: AppLoginCallback = callback or self._default_callback
+        self._callback: AppLoginCallback | None = callback
         self._form_template_path: Path = (
             Path(__file__).resolve().parents[2]
             / "static"
@@ -92,6 +87,10 @@ class AppLoginRouter:
         self,
         username: Annotated[str, Form(min_length=1, max_length=255)],
         password: Annotated[str, Form(min_length=1, max_length=255)],
+        app_login_manager: Annotated[
+            AppLoginManager,
+            Depends(Inject(AppLoginManager)),
+        ],
         http_client_factory: Annotated[
             HttpClientFactory, Depends(Inject(HttpClientFactory))
         ],
@@ -101,81 +100,14 @@ class AppLoginRouter:
         ],
     ) -> Response:
         submission = CredentialSubmission(username=username.strip(), password=password)
-        return await self._callback(
-            submission,
-            http_client_factory,
-            environment_variables,
-        )
-
-    async def _default_callback(
-        self,
-        submission: CredentialSubmission,
-        http_client_factory: HttpClientFactory,
-        environment_variables: LanguageModelGatewayEnvironmentVariables,
-    ) -> Response:
-        base_url = environment_variables.app_login_base_url
-        client_key = environment_variables.app_login_client_key
-        origin = environment_variables.app_login_origin
-        referer = environment_variables.app_login_referer
-
-        if base_url is None:
-            raise HTTPException(status_code=500, detail="APP_LOGIN_BASE_URL not set")
-        if client_key is None:
-            raise HTTPException(status_code=500, detail="APP_LOGIN_CLIENT_KEY not set")
-
-        headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "clientkey": client_key,
-        }
-        if origin is not None:
-            headers["origin"] = origin
-        if referer is not None:
-            headers["referer"] = referer
-
-        try:
-            async with http_client_factory.create_http_client(
-                base_url=base_url,
-                headers=headers,
-            ) as client:
-                response = await client.post(
-                    "/identity/account/login",
-                    json={
-                        "email": submission.username,
-                        "password": submission.password,
-                    },
-                )
-                response.raise_for_status()
-        except httpx.HTTPStatusError as exc:
-            logger.warning(
-                "App login failed with HTTP status %s", exc.response.status_code
-            )
-            raise HTTPException(
-                status_code=exc.response.status_code,
-                detail="Login request failed",
-            ) from exc
-        except httpx.HTTPError as exc:
-            logger.exception("App login request could not be completed")
-            raise HTTPException(
-                status_code=502, detail="Unable to reach login service"
-            ) from exc
-
-        try:
-            payload = response.json()
-        except ValueError as exc:
-            logger.exception("Login service returned invalid JSON")
-            raise HTTPException(
-                status_code=502, detail="Invalid response from login service"
-            ) from exc
-
-        access_token = payload.get("accessToken", {}).get("jwtToken")
-        if not access_token:
-            logger.warning("Login service response did not include access token")
-            raise HTTPException(
-                status_code=502, detail="Access token missing in login response"
+        if self._callback is not None:
+            return await self._callback(
+                submission,
+                http_client_factory,
+                environment_variables,
             )
 
-        return JSONResponse({"accessToken": access_token})
+        return await app_login_manager.login(submission=submission)
 
     def get_router(self) -> APIRouter:
         return self.router
