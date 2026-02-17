@@ -143,14 +143,15 @@ class AppLoginManager:
             "id_token": payload.get("idToken", {}).get("jwtToken"),
             "refresh_token": payload.get("refreshToken", {}).get("token"),
         }
-        token_cache_item: TokenCacheItem = (
-            self.token_exchange_manager.create_token_cache_item(
-                code=None,
-                auth_config=auth_config,
-                state_decoded={},
-                token=token_dict,
-                url=None,
-            )
+        token_cache_item: TokenCacheItem = self.token_exchange_manager.create_token_cache_item(
+            code=None,
+            auth_config=auth_config,
+            state_decoded={
+                "referring_email": "imran.qureshi@bwell.com",  # TODO: get from payload or config
+                "referring_subject": "user-123",  # TODO: get from payload or config
+            },
+            token=token_dict,
+            url=None,
         )
         # content: dict[str, Any] = token_cache_item.model_dump(mode="json")
 
