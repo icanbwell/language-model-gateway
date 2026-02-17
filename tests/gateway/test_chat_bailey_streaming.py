@@ -27,6 +27,10 @@ from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as Chunk
 from oidcauthlib.container.interfaces import IContainer
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Environment Variable RUN_TESTS_WITH_REAL_LLM not set",
+)
 @pytest.mark.httpx_mock(
     should_mock=lambda request: os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1"
 )
