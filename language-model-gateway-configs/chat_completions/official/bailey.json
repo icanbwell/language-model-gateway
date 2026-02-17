@@ -5,6 +5,7 @@
   "description": "Calls Bailey",
   "type": "passthru",
   "url": "https://api.dev.icanbwell.com/bailey/v1",
+  "streaming_enabled": false,
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
@@ -20,12 +21,6 @@
       "X-Client-Id": "Aiden"
     }
   },
-  "system_prompts": [
-    {
-      "role": "system",
-      "content": "You are a tool that searches and retrieves from FHIR server.  You can also access the current date using the current_date tool."
-    }
-  ],
   "headers": [
     {
       "key": "Authorization",
