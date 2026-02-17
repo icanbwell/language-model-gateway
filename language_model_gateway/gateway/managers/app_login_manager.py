@@ -68,12 +68,16 @@ class AppLoginManager:
 
     async def login(
         self,
-        submission: CredentialSubmission,
         *,
-        auth_provider: str | None = None,
-        referring_email: str | None = None,
-        referring_subject: str | None = None,
+        submission: CredentialSubmission,
+        auth_provider: str,
+        referring_email: str,
+        referring_subject: str,
     ) -> Response:
+        if auth_provider is None:
+            logger.error("Auth provider not specified in login request")
+            raise HTTPException(status_code=400, detail="Auth provider is required")
+
         base_url = self._environment_variables.api_gateway_base_url
         client_key = self._environment_variables.app_login_client_key
 
@@ -131,14 +135,11 @@ class AppLoginManager:
                 status_code=502, detail="Access token missing in login response"
             )
 
-        resolved_auth_provider = auth_provider or "oktafhirdev"
         auth_config = self.auth_config_reader.get_config_for_auth_provider(
-            auth_provider=resolved_auth_provider
+            auth_provider=auth_provider
         )
         if auth_config is None:
-            logger.error(
-                "No auth config found for auth provider '%s'", resolved_auth_provider
-            )
+            logger.error("No auth config found for auth provider '%s'", auth_provider)
             raise HTTPException(
                 status_code=500, detail="Authentication configuration error"
             )

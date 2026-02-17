@@ -98,15 +98,9 @@ class AppLoginRouter:
         ],
         username: Annotated[str, Form(min_length=1, max_length=255)],
         password: Annotated[str, Form(min_length=1, max_length=255)],
-        auth_provider: Annotated[
-            str | None, Query(min_length=1, max_length=255)
-        ] = None,
-        referring_email: Annotated[
-            str | None, Query(min_length=3, max_length=320)
-        ] = None,
-        referring_subject: Annotated[
-            str | None, Query(min_length=1, max_length=255)
-        ] = None,
+        auth_provider: Annotated[str, Query(min_length=1, max_length=255)],
+        referring_email: Annotated[str, Query(min_length=3, max_length=320)],
+        referring_subject: Annotated[str, Query(min_length=1, max_length=255)],
     ) -> Response:
         submission = CredentialSubmission(username=username.strip(), password=password)
         if self._callback is not None:
