@@ -178,9 +178,19 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             base_url=pass_through_url,
             http_client=async_client,
         )
-        messages: list[ChatCompletionMessageParam] = [
+        system_messages: List[ChatCompletionMessageParam] = []
+        if getattr(model_config, "system_prompts", None):
+            for prompt in model_config.system_prompts:
+                system_messages.append(
+                    {
+                        "role": "system",
+                        "content": prompt,
+                    }
+                )
+        user_messages: List[ChatCompletionMessageParam] = [
             m.to_chat_completion_message() for m in chat_request_wrapper.messages
         ]
+        messages: List[ChatCompletionMessageParam] = system_messages + user_messages
         # messages: list[ChatCompletionMessageParam] = [
         #     ChatCompletionUserMessageParam(
         #         role="user",
