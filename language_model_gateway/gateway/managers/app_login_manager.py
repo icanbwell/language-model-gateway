@@ -111,7 +111,7 @@ class AppLoginManager:
             )
 
         if auth_client_key is None:
-            raise HTTPException(status_code=500, detail="APP_LOGIN_CLIENT_KEY not set")
+            raise HTTPException(status_code=500, detail="auth_client_key not set")
 
         headers = {
             "accept": "application/json",

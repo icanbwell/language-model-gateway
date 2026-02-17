@@ -161,11 +161,7 @@ class AppLoginRouter:
         if provided_client_key:
             return provided_client_key
 
-        env_client_key = environment_variables.app_login_client_key
-        if env_client_key:
-            return env_client_key
-
         raise HTTPException(
             status_code=500,
-            detail="APP_LOGIN_CLIENT_KEY not configured",
+            detail="auth_client_key not configured",
         )
