@@ -41,6 +41,10 @@ from openai.types.chat.chat_completion import Choice, ChatCompletion
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["BAILEY"])
 
+DEFAULT_PASSTHROUGH_TIMEOUT_SECONDS: float = 60.0
+CONNECT_TIMEOUT_SECONDS: float = 5.0
+WRITE_TIMEOUT_SECONDS: float = 5.0
+
 
 class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
     """
@@ -143,10 +147,29 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         auth: httpx.Auth | None = (
             BearerAuth(token=bearer_token) if bearer_token is not None else None
         )
+        timeout_seconds: float = (
+            model_config.request_timeout_seconds
+            if model_config.request_timeout_seconds is not None
+            else DEFAULT_PASSTHROUGH_TIMEOUT_SECONDS
+        )
+        if timeout_seconds <= 0:
+            logger.warning(
+                "Invalid timeout %.2f provided for model %s; using default %.2f",
+                timeout_seconds,
+                model_config.model.model,
+                DEFAULT_PASSTHROUGH_TIMEOUT_SECONDS,
+            )
+            timeout_seconds = DEFAULT_PASSTHROUGH_TIMEOUT_SECONDS
+        timeout = Timeout(
+            connect=CONNECT_TIMEOUT_SECONDS,
+            read=timeout_seconds,
+            write=WRITE_TIMEOUT_SECONDS,
+            pool=None,
+        )
         async_client = httpx.AsyncClient(
             auth=auth,
             headers=headers,
-            timeout=Timeout(timeout=5.0),
+            timeout=timeout,
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
         )
 
@@ -164,14 +187,26 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         messages: list[ChatCompletionMessageParam] = [
             m.to_chat_completion_message() for m in chat_request_wrapper.messages
         ]
+        upstream_streaming_enabled: bool = (
+            model_config.streaming_enabled
+            if model_config.streaming_enabled is not None
+            else False
+        )
+        stream: AsyncStream[ChatCompletionChunk] | None = None
+        completion: ChatCompletion | None = None
         try:
-            stream: AsyncStream[
-                ChatCompletionChunk
-            ] = await client.chat.completions.create(
-                messages=messages,
-                model=model_config.model.model,
-                stream=True,  # enables streaming
-            )
+            if upstream_streaming_enabled:
+                stream = await client.chat.completions.create(
+                    messages=messages,
+                    model=model_config.model.model,
+                    stream=True,
+                )
+            else:
+                completion = await client.chat.completions.create(
+                    messages=messages,
+                    model=model_config.model.model,
+                    stream=False,
+                )
         except (OpenAIError, httpx.HTTPError) as e:
             logger.exception(
                 "Pass through provider failed to start stream for model %s",
@@ -193,6 +228,36 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                 content={
                     "error": f"{type(e)}: Unexpected error occurred when calling the pass through model from {pass_through_url}. {e}"
                 },
+            )
+
+        if not upstream_streaming_enabled:
+            response_messages: List[ChatCompletionMessage] = (
+                [
+                    choice.message
+                    for choice in completion.choices
+                    if choice.message is not None
+                ]
+                if completion and completion.choices
+                else []
+            )
+            if not response_messages:
+                logger.warning(
+                    "Pass through model %s returned no messages; emitting raw payload",
+                    model_config.model.model,
+                )
+                response_messages = (
+                    [
+                        ChatCompletionMessage(
+                            role="assistant",
+                            content=json.dumps(completion.model_dump()),
+                        )
+                    ]
+                    if completion is not None
+                    else []
+                )
+            return self.write_response(
+                chat_request_wrapper=chat_request_wrapper,
+                response_messages=response_messages,
             )
 
         async def stream_response(
@@ -217,6 +282,17 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             finally:
                 yield "data: [DONE]\n\n"
 
+        if stream is None:
+            logger.error(
+                "Pass through streaming enabled for model %s but no stream was returned by the client.",
+                model_config.model.model,
+            )
+            return JSONResponse(
+                status_code=502,
+                content={
+                    "error": "Pass through model did not return a stream as expected. Please check the upstream provider."
+                },
+            )
         return StreamingResponse(
             content=stream_response(stream1=stream),
             media_type="text/event-stream",

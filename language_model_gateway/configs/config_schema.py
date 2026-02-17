@@ -156,6 +156,12 @@ class ChatModelConfig(BaseModel):
     auth_config: AuthenticationConfig | None = None
     """The authentication configuration for the model"""
 
+    request_timeout_seconds: float | None = None
+    """Optional override for outbound request timeout when invoking this model.  Default is to use the global default timeout which is 60 seconds."""
+
+    streaming_enabled: bool | None = None
+    """Whether the upstream model supports streaming responses; defaults to False"""
+
     def get_agents(self) -> List[AgentConfig]:
         """Get the agents for the model"""
         return self.agents or self.tools or []
