@@ -17,6 +17,7 @@ from openai.types.chat import (
     ChatCompletionChunk,
     ChatCompletionMessageParam,
     ChatCompletionMessage,
+    ChatCompletionUserMessageParam,
 )
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -168,7 +169,6 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         )
         async_client = httpx.AsyncClient(
             auth=auth,
-            headers=headers,
             timeout=timeout,
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
         )
@@ -178,14 +178,15 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             # this api key is ignored for now.  suggest setting it to something that identifies your calling code
             base_url=pass_through_url,
             http_client=async_client,
-            # default_headers={
-            #     "Authorization": f"Bearer {token.access_token.token}",
-            # }
-            # if token and token.access_token and token.access_token.token
-            # else {},
         )
+        # messages: list[ChatCompletionMessageParam] = [
+        #     m.to_chat_completion_message() for m in chat_request_wrapper.messages
+        # ]
         messages: list[ChatCompletionMessageParam] = [
-            m.to_chat_completion_message() for m in chat_request_wrapper.messages
+            ChatCompletionUserMessageParam(
+                role="user",
+                content="show vitals for person id 31c718e9-a3d0-400f-8d95-5bcd9ece5c09",
+            )
         ]
         upstream_streaming_enabled: bool = (
             model_config.streaming_enabled
@@ -215,7 +216,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             return JSONResponse(
                 status_code=502,
                 content={
-                    "error": f"{type(e)}: Pass through model failed to start streaming response from {pass_through_url}. {e}"
+                    "error": f"{type(e)}: Pass through model failed to start {'streaming' if upstream_streaming_enabled else ''} response from {pass_through_url}. {e}"
                 },
             )
         except Exception as e:
@@ -226,7 +227,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             return JSONResponse(
                 status_code=500,
                 content={
-                    "error": f"{type(e)}: Unexpected error occurred when calling the pass through model from {pass_through_url}. {e}"
+                    "error": f"{type(e)}: Unexpected error occurred when calling the pass through model from {pass_through_url} {'streaming' if upstream_streaming_enabled else ''}. {e}"
                 },
             )
 
