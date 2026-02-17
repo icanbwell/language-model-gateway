@@ -25,18 +25,18 @@ CredentialCaptureCallback = Callable[[CredentialSubmission], Awaitable[Response]
 class CredentialCaptureRouter:
     """Router that renders a credential capture form and handles submissions."""
 
-    _form_route: str = "/credential-capture"
+    _form_route: str = "/login"
 
     def __init__(
         self,
         *,
-        prefix: str = "/auth",
+        prefix: str = "/app",
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
         callback: CredentialCaptureCallback | None = None,
     ) -> None:
         self.prefix = prefix
-        self.tags = tags or ["auth"]
+        self.tags = tags or ["app"]
         self.dependencies = dependencies or []
         self.router = APIRouter(
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
@@ -94,8 +94,11 @@ class CredentialCaptureRouter:
         return await self._callback(submission)
 
     async def _default_callback(self, submission: CredentialSubmission) -> Response:
-        del submission  # no-op: credentials should not be logged or persisted
-        return JSONResponse({"message": "Credentials received"})
+        return JSONResponse(
+            {
+                "message": f"Credentials received. {submission.username=} {submission.password=}"
+            }
+        )
 
     def get_router(self) -> APIRouter:
         return self.router

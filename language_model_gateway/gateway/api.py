@@ -104,7 +104,7 @@ def create_app() -> FastAPI:
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
     app1.include_router(AuthRouter(prefix="/auth").get_router())
-    app1.include_router(CredentialCaptureRouter().get_router())
+    app1.include_router(CredentialCaptureRouter(prefix="/app").get_router())
     # Mount the static directory
     app1.mount(
         "/static",
