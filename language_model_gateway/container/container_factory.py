@@ -44,6 +44,9 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.managers.token_submission_manager import (
+    TokenSubmissionManager,
+)
 from language_model_gateway.gateway.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
 )
@@ -360,6 +363,14 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_exchange_manager=c.resolve(TokenExchangeManager),
+            ),
+        )
+        container.singleton(
+            TokenSubmissionManager,
+            lambda c: TokenSubmissionManager(
+                token_reader=c.resolve(TokenReader),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
