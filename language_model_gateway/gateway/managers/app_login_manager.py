@@ -74,13 +74,11 @@ class AppLoginManager:
         referring_email: str | None = None,
         referring_subject: str | None = None,
     ) -> Response:
-        base_url = self._environment_variables.app_login_base_url
+        base_url = self._environment_variables.api_gateway_base_url
         client_key = self._environment_variables.app_login_client_key
-        origin = self._environment_variables.app_login_origin
-        referer = self._environment_variables.app_login_referer
 
         if not base_url:
-            raise HTTPException(status_code=500, detail="APP_LOGIN_BASE_URL not set")
+            raise HTTPException(status_code=500, detail="API_GATEWAY_BASE_URL not set")
         if client_key is None:
             raise HTTPException(status_code=500, detail="APP_LOGIN_CLIENT_KEY not set")
 
@@ -89,10 +87,6 @@ class AppLoginManager:
             "content-type": "application/json",
             "clientkey": client_key,
         }
-        if origin:
-            headers["origin"] = origin
-        if referer:
-            headers["referer"] = referer
 
         try:
             async with self._http_client_factory.create_http_client(
