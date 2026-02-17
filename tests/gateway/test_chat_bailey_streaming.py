@@ -117,7 +117,7 @@ async def test_chat_bailey_streaming(
                     auth_providers=["oktafhirdev"],
                     headers={"X-Client-Id": "Aiden"},
                 ),
-                url="https://baileyai.dev.bwell.zone//bailey/v1",
+                url="https://baileyai.dev.bwell.zone/bailey/v1",
                 model_parameters=[ModelParameterConfig(key="temperature", value=0.5)],
                 system_prompts=[
                     PromptConfig(
@@ -150,7 +150,7 @@ async def test_chat_bailey_streaming(
 
     message: ChatCompletionUserMessageParam = {
         "role": "user",
-        "content": "Say this is a test",
+        "content": "Get active medications for person id 31c718e9-a3d0-400f-8d95-5bcd9ece5c09",
     }
     stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
         model="Bailey",

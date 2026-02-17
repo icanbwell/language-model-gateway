@@ -3,6 +3,8 @@ import logging
 from typing import Dict, Optional, AsyncGenerator, override
 
 import httpx
+from fastmcp.client import BearerAuth
+from httpx import Timeout
 from oidcauthlib.auth.models.auth import AuthInformation
 from openai import AsyncOpenAI, AsyncStream, OpenAIError
 from openai.types.chat import ChatCompletionChunk, ChatCompletionMessageParam
@@ -20,6 +22,9 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from language_model_gateway.gateway.utilities.logger.logging_transport import (
+    LoggingTransport,
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["BAILEY"])
@@ -111,15 +116,29 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     },
                 )
 
+        bearer_token: str | None = (
+            token.access_token.token if token and token.access_token else None
+        )
+        auth: httpx.Auth | None = (
+            BearerAuth(token=bearer_token) if bearer_token is not None else None
+        )
+        async_client = httpx.AsyncClient(
+            auth=auth,
+            headers=headers,
+            timeout=Timeout(timeout=5.0),
+            transport=LoggingTransport(httpx.AsyncHTTPTransport()),
+        )
+
         client = AsyncOpenAI(
             api_key="fake-api-key",  # pragma: allowlist secret
             # this api key is ignored for now.  suggest setting it to something that identifies your calling code
             base_url=pass_through_url,
-            default_headers={
-                "Authorization": f"Bearer {token.access_token.token}",
-            }
-            if token and token.access_token and token.access_token.token
-            else {},
+            http_client=async_client,
+            # default_headers={
+            #     "Authorization": f"Bearer {token.access_token.token}",
+            # }
+            # if token and token.access_token and token.access_token.token
+            # else {},
         )
         messages: list[ChatCompletionMessageParam] = [
             m.to_chat_completion_message() for m in chat_request_wrapper.messages
@@ -140,7 +159,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             return JSONResponse(
                 status_code=502,
                 content={
-                    "error": f"{type(e)}: Pass through model failed to start streaming response. {e}"
+                    "error": f"{type(e)}: Pass through model failed to start streaming response from {pass_through_url}. {e}"
                 },
             )
         except Exception as e:
@@ -151,7 +170,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             return JSONResponse(
                 status_code=500,
                 content={
-                    "error": f"{type(e)}: Unexpected error occurred when calling the pass through model. {e}"
+                    "error": f"{type(e)}: Unexpected error occurred when calling the pass through model from {pass_through_url}. {e}"
                 },
             )
 

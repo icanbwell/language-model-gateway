@@ -51,11 +51,18 @@ class LoggingTransport(httpx.AsyncBaseTransport):
         if request.content:
             logger.debug(f"Content: {request.content.decode('utf-8', errors='ignore')}")
 
-        response = await self.transport.handle_async_request(request)
+        try:
+            response = await self.transport.handle_async_request(request)
 
-        return LoggingResponse(
-            status_code=response.status_code,
-            headers=response.headers,
-            stream=response.stream,
-            extensions=response.extensions,
-        )
+            return LoggingResponse(
+                status_code=response.status_code,
+                headers=response.headers,
+                stream=response.stream,
+                extensions=response.extensions,
+            )
+        except httpx.HTTPError as e:
+            logger.exception(f"HTTP error occurred: {e}")
+            raise
+        except Exception as e:
+            logger.exception(f"An unexpected error occurred: {e}")
+            raise
