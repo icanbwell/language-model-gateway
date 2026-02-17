@@ -43,13 +43,13 @@ class LoggingTransport(httpx.AsyncBaseTransport):
             LoggingResponse: A custom response object that logs the response details.
         """
         # log the request
-        logger.debug(f" ====== Request: {request.method} {request.url} =====")
-        logger.debug(f"Headers: {request.headers}")
+        logger.info(f" ====== Request: {request.method} {request.url} =====")
+        logger.info(f"Headers: {request.headers}")
         # Log the actual Authorization header value if present
         if "authorization" in request.headers:
-            logger.debug(f"Authorization header: {request.headers['authorization']}")
+            logger.info(f"Authorization header: {request.headers['authorization']}")
         if request.content:
-            logger.debug(f"Content: {request.content.decode('utf-8', errors='ignore')}")
+            logger.info(f"Content: {request.content.decode('utf-8', errors='ignore')}")
 
         try:
             response = await self.transport.handle_async_request(request)
