@@ -111,7 +111,7 @@ class PassThroughTokenManager:
             )
         if not auth_information.subject:
             logger.error(
-                f"AuthInformation doesn't have subject: {auth_information} in token: {auth_header}"
+                f"AuthInformation is missing subject for tool '{authentication_config.name}'."
             )
             raise ValueError(
                 "AuthInformation must have subject to authenticate for tools."
