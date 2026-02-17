@@ -3,6 +3,7 @@ from typing import Any
 
 import httpx
 from fastapi import HTTPException
+from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from starlette.responses import HTMLResponse, Response
 
@@ -74,6 +75,7 @@ class AppLoginManager:
         *,
         submission: CredentialSubmission,
         auth_provider: str,
+        auth_client_key: str,
         referring_email: str,
         referring_subject: str,
     ) -> Response:
@@ -81,18 +83,40 @@ class AppLoginManager:
             logger.error("Auth provider not specified in login request")
             raise HTTPException(status_code=400, detail="Auth provider is required")
 
-        base_url = self._environment_variables.api_gateway_base_url
-        client_key = self._environment_variables.app_login_client_key
+        auth_config: AuthConfig | None = (
+            self.auth_config_reader.get_config_for_auth_provider(
+                auth_provider=auth_provider
+            )
+        )
+        if auth_config is None:
+            logger.error("No auth config found for auth provider '%s'", auth_provider)
+            raise HTTPException(
+                status_code=500, detail="Authentication configuration error"
+            )
+
+        auth_config_extra_info: dict[str, str] | None = auth_config.extra_info
+        base_url = (
+            auth_config_extra_info.get("api_gateway_base_url")
+            if auth_config_extra_info
+            else None
+        )
 
         if not base_url:
-            raise HTTPException(status_code=500, detail="API_GATEWAY_BASE_URL not set")
-        if client_key is None:
+            logger.error(
+                f"api_gateway_base_url not set in auth config extra_info for auth provider '{auth_provider}'"
+            )
+            raise HTTPException(
+                status_code=500,
+                detail=f"api_gateway_base_url not set in auth config extra_info for auth provider '{auth_provider}'",
+            )
+
+        if auth_client_key is None:
             raise HTTPException(status_code=500, detail="APP_LOGIN_CLIENT_KEY not set")
 
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "clientkey": client_key,
+            "clientkey": auth_client_key,
         }
 
         try:
@@ -138,14 +162,6 @@ class AppLoginManager:
                 status_code=502, detail="Access token missing in login response"
             )
 
-        auth_config = self.auth_config_reader.get_config_for_auth_provider(
-            auth_provider=auth_provider
-        )
-        if auth_config is None:
-            logger.error("No auth config found for auth provider '%s'", auth_provider)
-            raise HTTPException(
-                status_code=500, detail="Authentication configuration error"
-            )
         token_dict: dict[str, Any] = {
             "access_token": access_token_from_payload,
             "id_token": payload.get("idToken", {}).get("jwtToken"),
