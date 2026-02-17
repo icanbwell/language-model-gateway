@@ -1,13 +1,23 @@
 import json
 import logging
-from typing import Dict, Optional, AsyncGenerator, override
+import os
+import time
+from typing import Dict, Optional, AsyncGenerator, override, List
 
 import httpx
 from fastmcp.client import BearerAuth
 from httpx import Timeout
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from oidcauthlib.auth.models.auth import AuthInformation
 from openai import AsyncOpenAI, AsyncStream, OpenAIError
-from openai.types.chat import ChatCompletionChunk, ChatCompletionMessageParam
+from openai.types import CompletionUsage
+from openai.types.chat import (
+    ChatCompletionChunk,
+    ChatCompletionMessageParam,
+    ChatCompletionMessage,
+)
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
@@ -25,6 +35,8 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
+from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
+from openai.types.chat.chat_completion import Choice, ChatCompletion
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["BAILEY"])
@@ -96,6 +108,15 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     auth_header=auth_header,
                     auth_information=auth_information,
                     authentication_config=model_config.auth_config,
+                )
+            except AuthorizationNeededException as e:
+                return self.write_response(
+                    chat_request_wrapper=chat_request_wrapper,
+                    response_messages=[
+                        ChatCompletionMessage(role="assistant", content=line.strip())
+                        for line in e.message.splitlines()
+                        if line.strip()
+                    ],
                 )
             except Exception as e:
                 logger.exception(
@@ -200,3 +221,69 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             content=stream_response(stream1=stream),
             media_type="text/event-stream",
         )
+
+    # noinspection PyMethodMayBeStatic
+    def write_response(
+        self,
+        *,
+        chat_request_wrapper: ChatRequestWrapper,
+        response_messages: List[ChatCompletionMessage],
+    ) -> StreamingResponse | JSONResponse:
+        chat_model: str = chat_request_wrapper.model
+        should_stream_response: Optional[bool] = chat_request_wrapper.stream
+
+        if should_stream_response:
+
+            async def stream_response(
+                response_messages1: List[ChatCompletionMessage],
+            ) -> AsyncGenerator[str, None]:
+                for response_message in response_messages1:
+                    if response_message.content:
+                        chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                            id="1",
+                            created=int(time.time()),
+                            model=chat_model,
+                            choices=[
+                                ChunkChoice(
+                                    index=0,
+                                    delta=ChoiceDelta(
+                                        role="assistant",
+                                        content=response_message.content + "\n",
+                                    ),
+                                )
+                            ],
+                            usage=CompletionUsage(
+                                prompt_tokens=0,
+                                completion_tokens=0,
+                                total_tokens=0,
+                            ),
+                            object="chat.completion.chunk",
+                        )
+                        yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+                yield "data: [DONE]\n\n"
+
+            return StreamingResponse(
+                content=stream_response(response_messages1=response_messages),
+                media_type="text/event-stream",
+            )
+        else:
+            choices: List[Choice] = [
+                Choice(index=i, message=m, finish_reason="stop")
+                for i, m in enumerate(response_messages)
+            ]
+            chat_response: ChatCompletion = ChatCompletion(
+                id="1",
+                model=chat_model,
+                choices=choices,
+                usage=CompletionUsage(
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                ),
+                created=int(time.time()),
+                object="chat.completion",
+            )
+            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                logger.info(f"Returning help response: {chat_response.model_dump()}")
+
+            return JSONResponse(content=chat_response.model_dump())
