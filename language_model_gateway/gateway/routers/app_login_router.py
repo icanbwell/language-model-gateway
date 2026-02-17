@@ -3,7 +3,7 @@ from pathlib import Path
 from enum import Enum
 from typing import Annotated, Awaitable, Callable, Sequence
 
-from fastapi import APIRouter, Form, params
+from fastapi import APIRouter, Form, Query, params
 from fastapi.responses import FileResponse, Response
 from fastapi import Depends
 from oidcauthlib.container.inject import Inject
@@ -85,8 +85,6 @@ class AppLoginRouter:
 
     async def submit_form(
         self,
-        username: Annotated[str, Form(min_length=1, max_length=255)],
-        password: Annotated[str, Form(min_length=1, max_length=255)],
         app_login_manager: Annotated[
             AppLoginManager,
             Depends(Inject(AppLoginManager)),
@@ -98,6 +96,17 @@ class AppLoginRouter:
             LanguageModelGatewayEnvironmentVariables,
             Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
         ],
+        username: Annotated[str, Form(min_length=1, max_length=255)],
+        password: Annotated[str, Form(min_length=1, max_length=255)],
+        auth_provider: Annotated[
+            str | None, Query(min_length=1, max_length=255)
+        ] = None,
+        referring_email: Annotated[
+            str | None, Query(min_length=3, max_length=320)
+        ] = None,
+        referring_subject: Annotated[
+            str | None, Query(min_length=1, max_length=255)
+        ] = None,
     ) -> Response:
         submission = CredentialSubmission(username=username.strip(), password=password)
         if self._callback is not None:
@@ -107,7 +116,12 @@ class AppLoginRouter:
                 environment_variables,
             )
 
-        return await app_login_manager.login(submission=submission)
+        return await app_login_manager.login(
+            submission=submission,
+            auth_provider=auth_provider,
+            referring_email=referring_email,
+            referring_subject=referring_subject,
+        )
 
     def get_router(self) -> APIRouter:
         return self.router

@@ -66,7 +66,14 @@ class AppLoginManager:
                 "auth_config_reader must be an instance of AuthConfigReader"
             )
 
-    async def login(self, submission: CredentialSubmission) -> Response:
+    async def login(
+        self,
+        submission: CredentialSubmission,
+        *,
+        auth_provider: str | None = None,
+        referring_email: str | None = None,
+        referring_subject: str | None = None,
+    ) -> Response:
         base_url = self._environment_variables.app_login_base_url
         client_key = self._environment_variables.app_login_client_key
         origin = self._environment_variables.app_login_origin
@@ -130,11 +137,14 @@ class AppLoginManager:
                 status_code=502, detail="Access token missing in login response"
             )
 
+        resolved_auth_provider = auth_provider or "oktafhirdev"
         auth_config = self.auth_config_reader.get_config_for_auth_provider(
-            auth_provider="oktafhirdev"  # TODO: hardcoded for testing
+            auth_provider=resolved_auth_provider
         )
         if auth_config is None:
-            logger.error("No auth config found for auth provider 'oktafhirdev'")
+            logger.error(
+                "No auth config found for auth provider '%s'", resolved_auth_provider
+            )
             raise HTTPException(
                 status_code=500, detail="Authentication configuration error"
             )
@@ -143,15 +153,17 @@ class AppLoginManager:
             "id_token": payload.get("idToken", {}).get("jwtToken"),
             "refresh_token": payload.get("refreshToken", {}).get("token"),
         }
-        token_cache_item: TokenCacheItem = self.token_exchange_manager.create_token_cache_item(
-            code=None,
-            auth_config=auth_config,
-            state_decoded={
-                "referring_email": "imran.qureshi@bwell.com",  # TODO: get from payload or config
-                "referring_subject": "user-123",  # TODO: get from payload or config
-            },
-            token=token_dict,
-            url=None,
+        token_cache_item: TokenCacheItem = (
+            self.token_exchange_manager.create_token_cache_item(
+                code=None,
+                auth_config=auth_config,
+                state_decoded={
+                    "referring_email": referring_email,
+                    "referring_subject": referring_subject,
+                },
+                token=token_dict,
+                url=None,
+            )
         )
         # content: dict[str, Any] = token_cache_item.model_dump(mode="json")
 

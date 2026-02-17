@@ -125,7 +125,7 @@ up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-mcp-inspec
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
-	@echo App Login UI: http://localhost:5050/app/login
+	@echo App Login UI: http://localhost:5050/app/login?auth_provider=oktafhirdev&referring_email=imran.qureshi%40bwell.com&referring_subject=user-123
 
 .PHONY: up-mcp-inspector
 up-mcp-inspector:
