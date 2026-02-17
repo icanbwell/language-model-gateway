@@ -94,6 +94,7 @@ services:
       AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
+      APP_LOGIN_URI: "http://localhost:5050/app/login"
       # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=fhir-server}

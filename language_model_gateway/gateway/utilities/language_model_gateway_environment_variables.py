@@ -120,3 +120,8 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def app_login_referer(self) -> str:
         value = os.environ.get("APP_LOGIN_REFERER")
         return value if value else "https://app.dev.icanbwell.com/"
+
+    @property
+    def app_login_uri(self) -> str:
+        value = os.environ.get("APP_LOGIN_URI")
+        return value if value else "/app/login"

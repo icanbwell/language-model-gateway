@@ -285,6 +285,9 @@ class LanguageModelGatewayContainerFactory:
                 auth_manager=c.resolve(AuthManager),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 tool_auth_manager=c.resolve(ToolAuthManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 

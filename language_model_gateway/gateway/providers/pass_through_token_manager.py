@@ -13,6 +13,9 @@ from language_model_gateway.configs.config_schema import (
 )
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
+)
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -26,6 +29,7 @@ class PassThroughTokenManager:
         auth_manager: AuthManager,
         auth_config_reader: AuthConfigReader,
         tool_auth_manager: ToolAuthManager,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
     ) -> None:
         self.auth_manager: AuthManager = auth_manager
         if self.auth_manager is None:
@@ -46,6 +50,18 @@ class PassThroughTokenManager:
             raise ValueError("tool_auth_manager must not be None")
         if not isinstance(self.tool_auth_manager, ToolAuthManager):
             raise TypeError("tool_auth_manager must be an instance of ToolAuthManager")
+
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
+            raise TypeError(
+                "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
+            )
 
     async def check_tokens_are_valid_for_tools(
         self,
@@ -125,6 +141,7 @@ class PassThroughTokenManager:
         if not tool_client_id:
             raise ValueError("Tool using authentication must have a client ID.")
 
+        # This is for logging in with Okta
         authorization_url: (
             str | None
         ) = await self.auth_manager.create_authorization_url(
@@ -134,9 +151,16 @@ class PassThroughTokenManager:
             referring_email=auth_information.email,
             referring_subject=auth_information.subject,
         )
+
+        app_login_uri = self.environment_variables.app_login_uri
+
+        app_login_url_with_parameters: str | None = (
+            f"{app_login_uri}?auth_provider={tool_first_auth_provider}&referring_email={auth_information.email}&referring_subject={auth_information.subject}"
+        )
         error_message: str = (
             f"\nFollowing tools require authentication: {authentication_config.name}."
             + f"\nClick here to [Login to {auth_config.friendly_name}]({authorization_url})."
+            + f"\nClick here to [Login to App]({app_login_url_with_parameters})."
         )
         return await self.tool_auth_manager.get_token_for_tool_async(
             auth_header=auth_header,
