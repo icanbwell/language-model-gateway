@@ -1,9 +1,10 @@
 import logging
+from pathlib import Path
 from enum import Enum
 from typing import Annotated, Awaitable, Callable, Sequence
 
 from fastapi import APIRouter, Form, params
-from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
@@ -26,6 +27,7 @@ class CredentialCaptureRouter:
     """Router that renders a credential capture form and handles submissions."""
 
     _form_route: str = "/login"
+    _form_template_filename: str = "credential_capture.html"
 
     def __init__(
         self,
@@ -42,6 +44,15 @@ class CredentialCaptureRouter:
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
         self._callback: CredentialCaptureCallback = callback or self._default_callback
+        self._form_template_path: Path = (
+            Path(__file__).resolve().parents[2]
+            / "static"
+            / self._form_template_filename
+        )
+        if not self._form_template_path.exists():
+            raise FileNotFoundError(
+                f"Credential capture template not found at {self._form_template_path}"
+            )
         self._register_routes()
 
     def _register_routes(self) -> None:
@@ -49,7 +60,7 @@ class CredentialCaptureRouter:
             self._form_route,
             self.render_form,
             methods=["GET"],
-            response_class=HTMLResponse,
+            response_class=FileResponse,
             include_in_schema=False,
         )
         self.router.add_api_route(
@@ -59,31 +70,9 @@ class CredentialCaptureRouter:
             include_in_schema=False,
         )
 
-    async def render_form(self) -> HTMLResponse:
-        """Serve the username/password capture page."""
-        action_path: str = f"{self.prefix}{self._form_route}"
-        html = f"""<!DOCTYPE html>
-<html lang=\"en\">
-  <head>
-    <meta charset=\"utf-8\" />
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-    <title>Credential Capture</title>
-  </head>
-  <body style=\"font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;\">
-    <section style=\"background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.08);padding:2rem;max-width:420px;width:100%;\">
-      <h1 style=\"margin-top:0;color:#1f2a37;font-size:1.5rem;\">Sign in</h1>
-      <p style=\"color:#4a5568;font-size:0.95rem;\">Enter your credentials. They are transmitted over the existing HTTPS connection and never stored.</p>
-      <form action=\"{action_path}\" method=\"post\">
-        <label for=\"username\" style=\"display:block;margin-bottom:0.35rem;color:#1f2937;font-weight:600;\">Username</label>
-        <input id=\"username\" name=\"username\" type=\"text\" required style=\"width:100%;padding:0.65rem;border:1px solid #d1d5db;border-radius:6px;margin-bottom:1rem;\" />
-        <label for=\"password\" style=\"display:block;margin-bottom:0.35rem;color:#1f2937;font-weight:600;\">Password</label>
-        <input id=\"password\" name=\"password\" type=\"password\" required style=\"width:100%;padding:0.65rem;border:1px solid #d1d5db;border-radius:6px;margin-bottom:1.5rem;\" />
-        <button type=\"submit\" style=\"width:100%;padding:0.75rem;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:1rem;cursor:pointer;\">Continue</button>
-      </form>
-    </section>
-  </body>
-</html>"""
-        return HTMLResponse(content=html)
+    async def render_form(self) -> FileResponse:
+        """Serve the username/password capture page from the static asset."""
+        return FileResponse(path=self._form_template_path, media_type="text/html")
 
     async def submit_form(
         self,
