@@ -3,8 +3,8 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 import httpx
 
-from language_model_gateway.gateway.routers.credential_capture_router import (
-    CredentialCaptureRouter,
+from language_model_gateway.gateway.routers.app_login_router import (
+    AppLoginRouter,
     CredentialSubmission,
 )
 
@@ -12,7 +12,7 @@ from language_model_gateway.gateway.routers.credential_capture_router import (
 @pytest.mark.asyncio
 async def test_render_form_returns_html() -> None:
     app = FastAPI()
-    app.include_router(CredentialCaptureRouter().get_router())
+    app.include_router(AppLoginRouter().get_router())
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
@@ -33,7 +33,7 @@ async def test_submit_form_invokes_callback() -> None:
         return JSONResponse({"received": True})
 
     app = FastAPI()
-    app.include_router(CredentialCaptureRouter(callback=callback).get_router())
+    app.include_router(AppLoginRouter(callback=callback).get_router())
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:

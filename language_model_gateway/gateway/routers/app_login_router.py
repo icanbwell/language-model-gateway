@@ -20,10 +20,10 @@ class CredentialSubmission(BaseModel):
     password: str = Field(min_length=1, max_length=255)
 
 
-CredentialCaptureCallback = Callable[[CredentialSubmission], Awaitable[Response]]
+AppLoginCallback = Callable[[CredentialSubmission], Awaitable[Response]]
 
 
-class CredentialCaptureRouter:
+class AppLoginRouter:
     """Router that renders a credential capture form and handles submissions."""
 
     _form_route: str = "/login"
@@ -35,7 +35,7 @@ class CredentialCaptureRouter:
         prefix: str = "/app",
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
-        callback: CredentialCaptureCallback | None = None,
+        callback: AppLoginCallback | None = None,
     ) -> None:
         self.prefix = prefix
         self.tags = tags or ["app"]
@@ -43,7 +43,7 @@ class CredentialCaptureRouter:
         self.router = APIRouter(
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
-        self._callback: CredentialCaptureCallback = callback or self._default_callback
+        self._callback: AppLoginCallback = callback or self._default_callback
         self._form_template_path: Path = (
             Path(__file__).resolve().parents[2]
             / "static"
