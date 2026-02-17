@@ -100,3 +100,23 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def tool_call_timeout_seconds(self) -> int:
         """Timeout in seconds for tool calls."""
         return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))
+
+    @property
+    def app_login_base_url(self) -> str:
+        value = os.environ.get("APP_LOGIN_BASE_URL")
+        return value if value else "https://api.dev.icanbwell.com"
+
+    @property
+    def app_login_client_key(self) -> Optional[str]:
+        value = os.environ.get("APP_LOGIN_CLIENT_KEY")
+        return value if value else None
+
+    @property
+    def app_login_origin(self) -> str:
+        value = os.environ.get("APP_LOGIN_ORIGIN")
+        return value if value else "https://app.dev.icanbwell.com"
+
+    @property
+    def app_login_referer(self) -> str:
+        value = os.environ.get("APP_LOGIN_REFERER")
+        return value if value else "https://app.dev.icanbwell.com/"
