@@ -17,7 +17,6 @@ from openai.types.chat import (
     ChatCompletionChunk,
     ChatCompletionMessageParam,
     ChatCompletionMessage,
-    ChatCompletionUserMessageParam,
 )
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -179,15 +178,15 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             base_url=pass_through_url,
             http_client=async_client,
         )
-        # messages: list[ChatCompletionMessageParam] = [
-        #     m.to_chat_completion_message() for m in chat_request_wrapper.messages
-        # ]
         messages: list[ChatCompletionMessageParam] = [
-            ChatCompletionUserMessageParam(
-                role="user",
-                content="show vitals for person id 31c718e9-a3d0-400f-8d95-5bcd9ece5c09",
-            )
+            m.to_chat_completion_message() for m in chat_request_wrapper.messages
         ]
+        # messages: list[ChatCompletionMessageParam] = [
+        #     ChatCompletionUserMessageParam(
+        #         role="user",
+        #         content="use person id: 0c0a2930-8358-40de-b5fc-2974308962f9. get my medications",
+        #     )
+        # ]
         upstream_streaming_enabled: bool = (
             model_config.streaming_enabled
             if model_config.streaming_enabled is not None

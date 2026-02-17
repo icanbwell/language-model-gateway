@@ -4,14 +4,14 @@
   "name": "Bailey",
   "description": "Calls Bailey",
   "type": "passthru",
-  "url": "https://api.dev.icanbwell.com/bailey/v1",
+  "url": "https://baileyai.dev.bwell.zone/bailey/v1",
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
   },
   "auth_config": {
     "name": "bailey",
-    "url": "https://api.dev.icanbwell.com/bailey/v1",
+    "url": "https://baileyai.dev.bwell.zone/bailey/v1",
     "auth": "jwt_token",
     "auth_providers": [
       "oktafhirdev"
