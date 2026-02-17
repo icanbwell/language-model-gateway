@@ -139,7 +139,7 @@ class AppLoginManager:
                 status_code=500, detail="Authentication configuration error"
             )
         token_dict: dict[str, Any] = {
-            "access_token_from_payload": access_token_from_payload,
+            "access_token": access_token_from_payload,
             "id_token": payload.get("idToken", {}).get("jwtToken"),
             "refresh_token": payload.get("refreshToken", {}).get("token"),
         }

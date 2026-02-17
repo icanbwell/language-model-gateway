@@ -505,7 +505,11 @@ class TokenExchangeManager:
         id_token_item = Token.create_from_token(token=id_token)
 
         refresh_token: str | None = token.get("refresh_token")
-        refresh_token_item = Token.create_from_token(token=refresh_token)
+        # refresh tokens can be non JWTs so we should still create a token item for them even if we can't decode them
+        try:
+            refresh_token_item = Token.create_from_token(token=refresh_token)
+        except Exception:
+            refresh_token_item = None
 
         if access_token is None:
             raise ValueError("access_token was not found in the token response")
