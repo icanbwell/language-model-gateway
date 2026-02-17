@@ -32,6 +32,9 @@ from language_model_gateway.gateway.routers.image_generation_router import (
 )
 from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
+from language_model_gateway.gateway.routers.credential_capture_router import (
+    CredentialCaptureRouter,
+)
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -101,6 +104,7 @@ def create_app() -> FastAPI:
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
     app1.include_router(AuthRouter(prefix="/auth").get_router())
+    app1.include_router(CredentialCaptureRouter().get_router())
     # Mount the static directory
     app1.mount(
         "/static",
