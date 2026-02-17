@@ -64,7 +64,7 @@ class ToolAuthManager:
         Args:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to display if authorization is needed.
-            tool_config (AgentConfig): The tool configuration.
+            tool_config (AuthenticationConfig): The tool configuration.
         Returns:
             str | None: The token for the specified tool, or None if not found.
         Raises:
