@@ -76,7 +76,7 @@ class TokenSubmissionManager:
                 "Token verification failed for auth_provider '%s'", auth_provider
             )
             raise HTTPException(
-                status_code=400, detail="Token verification failed"
+                status_code=400, detail=f"{type(exc)}: Token verification failed: {exc}"
             ) from exc
 
         if verified_token is None:
