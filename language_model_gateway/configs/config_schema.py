@@ -60,10 +60,10 @@ class AgentParameterConfig(BaseModel):
 
 
 class AuthenticationConfig(BaseModel):
-    """Tool configuration"""
+    """Authentication configuration"""
 
     name: str
-    """The name of the tool"""
+    """The name of the authentication configuration"""
 
     url: str | None = None
     """The MCP (Model Context Protocol) URL to access the tool"""
