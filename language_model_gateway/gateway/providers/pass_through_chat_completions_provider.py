@@ -178,25 +178,9 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             base_url=pass_through_url,
             http_client=async_client,
         )
-        system_messages: List[ChatCompletionMessageParam] = []
-        if getattr(model_config, "system_prompts", None):
-            for prompt in model_config.system_prompts:
-                system_messages.append(
-                    {
-                        "role": "system",
-                        "content": prompt,
-                    }
-                )
-        user_messages: List[ChatCompletionMessageParam] = [
+        messages: List[ChatCompletionMessageParam] = [
             m.to_chat_completion_message() for m in chat_request_wrapper.messages
         ]
-        messages: List[ChatCompletionMessageParam] = system_messages + user_messages
-        # messages: list[ChatCompletionMessageParam] = [
-        #     ChatCompletionUserMessageParam(
-        #         role="user",
-        #         content="use person id: 0c0a2930-8358-40de-b5fc-2974308962f9. get my medications",
-        #     )
-        # ]
         upstream_streaming_enabled: bool = (
             model_config.streaming_enabled
             if model_config.streaming_enabled is not None
