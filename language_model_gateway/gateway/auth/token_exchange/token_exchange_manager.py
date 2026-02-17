@@ -211,7 +211,7 @@ class TokenExchangeManager:
         if tool_config is None:
             raise Exception("tool_config must not be None")
         if not isinstance(tool_config, AuthenticationConfig):
-            raise Exception("tool_config must be an instance of AgentConfig")
+            raise Exception("tool_config must be an instance of AuthenticationConfig")
 
         if not tool_config.auth_providers:
             raise ValueError(
