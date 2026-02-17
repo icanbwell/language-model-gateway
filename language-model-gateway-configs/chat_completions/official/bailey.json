@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "bailey",
+  "name": "Bailey",
+  "description": "Calls Bailey",
+  "type": "passthru",
+  "url": "https://baileyai.dev.bwell.zone/bailey/v1",
+  "model": {
+    "model": "Bailey AI",
+    "provider": "passthru"
+  },
+  "auth_config": {
+    "name": "bailey",
+    "url": "https://baileyai.dev.bwell.zone/bailey/v1",
+    "auth": "jwt_token",
+    "auth_providers": [
+      "oktafhirdev"
+    ],
+    "headers": {
+      "X-Client-Id": "Aiden"
+    }
+  },
+  "system_prompts": [
+    {
+      "role": "system",
+      "content": "You are a tool that searches and retrieves from FHIR server.  You can also access the current date using the current_date tool."
+    }
+  ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "example_prompts": [
+    {
+      "role": "user",
+      "content": "Show my health summary"
+    }
+  ]
+}

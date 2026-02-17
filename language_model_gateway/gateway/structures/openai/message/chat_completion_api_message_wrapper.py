@@ -6,6 +6,7 @@ from openai.types.chat import (
     ChatCompletionMessageParam,
     ChatCompletionSystemMessageParam,
 )
+from openai.types.responses.response_input_param import ResponseInputItemParam
 
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
@@ -62,3 +63,14 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     ) -> BaseMessage:
         # call the utility function in langchain_community.adapters.openai to convert dict to langchain message
         return convert_dict_to_message(message)
+
+    @override
+    def to_chat_completion_message(self) -> ChatCompletionMessageParam:
+        """Convert the message wrapper back to a ChatCompletionMessageParam, which is the same format as the original message.  This is used for tools that need to send messages back to the model in the same format as the original messages."""
+        return self.message
+
+    @override
+    def to_responses_api_message(self) -> ResponseInputItemParam:
+        raise NotImplementedError(
+            "Conversion from ChatCompletionMessageParam to EasyInputMessageParam is not implemented yet."
+        )

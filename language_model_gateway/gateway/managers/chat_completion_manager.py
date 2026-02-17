@@ -5,6 +5,7 @@ import time
 from typing import Dict, List, cast, AsyncGenerator, Optional
 
 from fastapi import HTTPException
+from httpx import Headers
 from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
@@ -37,6 +38,9 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
+from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
+    PassThroughChatCompletionsProvider,
+)
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
 )
@@ -62,6 +66,7 @@ class ChatCompletionManager:
         *,
         open_ai_provider: OpenAiChatCompletionsProvider,
         langchain_provider: LangChainCompletionsProvider,
+        pass_through_provider: PassThroughChatCompletionsProvider,
         config_reader: ConfigReader,
     ) -> None:
         self.openai_provider: OpenAiChatCompletionsProvider = open_ai_provider
@@ -77,6 +82,18 @@ class ChatCompletionManager:
         if not isinstance(self.langchain_provider, LangChainCompletionsProvider):
             raise TypeError(
                 f"langchain_provider must be LangChainCompletionsProvider, got {type(self.langchain_provider)}"
+            )
+
+        self.pass_through_provider: PassThroughChatCompletionsProvider = (
+            pass_through_provider
+        )
+        if self.pass_through_provider is None:
+            raise ValueError("pass_through_provider must not be None")
+        if not isinstance(
+            self.pass_through_provider, PassThroughChatCompletionsProvider
+        ):
+            raise TypeError(
+                f"pass_through_provider must be PassThroughChatCompletionsProvider, got {type(self.pass_through_provider)}"
             )
         self.config_reader: ConfigReader = config_reader
         if self.config_reader is None:
@@ -124,6 +141,8 @@ class ChatCompletionManager:
 
             provider: BaseChatCompletionsProvider | None = None
             match model_config.type:
+                case "passthru":
+                    provider = self.pass_through_provider
                 case "openai":
                     provider = self.openai_provider
                 case "langchain":
@@ -142,7 +161,7 @@ class ChatCompletionManager:
             help_response: StreamingResponse | JSONResponse | None = (
                 self.handle_help_prompt(
                     chat_request_wrapper=chat_request_wrapper,
-                    model=model,
+                    model_name=model,
                     model_config=model_config,
                 )
             )
@@ -182,7 +201,7 @@ class ChatCompletionManager:
                 ):
                     url: str | None = (
                         McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
-                            headers=first_exception.headers
+                            headers=Headers(first_exception.headers)
                         )
                     )
                     content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
@@ -253,7 +272,7 @@ class ChatCompletionManager:
         self,
         *,
         chat_request_wrapper: ChatRequestWrapper,
-        model: str,
+        model_name: str,
         model_config: ChatModelConfig,
     ) -> StreamingResponse | JSONResponse | None:
         request_messages: List[ChatMessageWrapper] = [
@@ -285,7 +304,7 @@ class ChatCompletionManager:
             isinstance(last_message_content, str)
             and last_message_content.lower() in help_keywords
         ):
-            logger.info(f"Help requested for model {model}: {model_config}")
+            logger.info(f"Help requested for model {model_name}: {model_config}")
             response_messages: List[ChatCompletionMessage] = [
                 ChatCompletionMessage(
                     role="assistant",

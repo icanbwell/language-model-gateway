@@ -13,7 +13,7 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from oidcauthlib.auth.repository.base_repository import AsyncBaseRepository
 from oidcauthlib.auth.repository.repository_factory import RepositoryFactory
 
-from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.configs.config_schema import AuthenticationConfig
 from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )
@@ -189,7 +189,11 @@ class TokenExchangeManager:
         return found_cache_item
 
     async def get_token_for_tool_async(
-        self, *, auth_header: str | None, error_message: str, tool_config: AgentConfig
+        self,
+        *,
+        auth_header: str | None,
+        error_message: str,
+        tool_config: AuthenticationConfig,
     ) -> TokenCacheItem | None:
         """
         Get the token for the tool using the Authorization header.
@@ -206,8 +210,8 @@ class TokenExchangeManager:
         """
         if tool_config is None:
             raise Exception("tool_config must not be None")
-        if not isinstance(tool_config, AgentConfig):
-            raise Exception("tool_config must be an instance of AgentConfig")
+        if not isinstance(tool_config, AuthenticationConfig):
+            raise Exception("tool_config must be an instance of AuthenticationConfig")
 
         if not tool_config.auth_providers:
             raise ValueError(

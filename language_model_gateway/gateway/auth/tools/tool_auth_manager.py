@@ -5,7 +5,7 @@ from authlib.integrations.starlette_client import StarletteOAuth2App
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 
-from language_model_gateway.configs.config_schema import AgentConfig
+from language_model_gateway.configs.config_schema import AuthenticationConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
     AuthorizationTokenCacheItemExpiredException,
 )
@@ -54,7 +54,7 @@ class ToolAuthManager:
         *,
         auth_header: str | None,
         error_message: str,
-        tool_config: AgentConfig,
+        tool_config: AuthenticationConfig,
     ) -> TokenCacheItem | None:
         """
         Get the token for the specified tool.
@@ -64,7 +64,7 @@ class ToolAuthManager:
         Args:
             auth_header (str | None): The Authorization header containing the token.
             error_message (str): The error message to display if authorization is needed.
-            tool_config (AgentConfig): The tool configuration.
+            tool_config (AuthenticationConfig): The tool configuration.
         Returns:
             str | None: The token for the specified tool, or None if not found.
         Raises:

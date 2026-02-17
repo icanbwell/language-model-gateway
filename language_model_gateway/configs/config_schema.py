@@ -59,23 +59,17 @@ class AgentParameterConfig(BaseModel):
     """The value of the parameter"""
 
 
-class AgentConfig(BaseModel):
-    """Tool configuration"""
+class AuthenticationConfig(BaseModel):
+    """Authentication configuration"""
 
     name: str
-    """The name of the tool"""
-
-    parameters: List[AgentParameterConfig] | None = None
-    """The parameters for the tool"""
+    """The name of the authentication configuration"""
 
     url: str | None = None
-    """The MCP (Model Context Protocol) URL to access the tool"""
+    """The URL to access the authenticated resource"""
 
     headers: Dict[str, str] | None = None
     """The headers to pass to the MCP tool"""
-
-    tools: str | None = None
-    """The names of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used. Separate multiple tool names with commas."""
 
     auth: Literal["None", "jwt_token", "oauth", "headers"] | None = None
     """The authentication method to use when calling the tool"""
@@ -93,6 +87,16 @@ class AgentConfig(BaseModel):
     If auth is needed, we will use the first issuer.
     If none is provided then we use the default issuer from the OIDC provider.
     """
+
+
+class AgentConfig(AuthenticationConfig):
+    """Tool configuration"""
+
+    parameters: List[AgentParameterConfig] | None = None
+    """The parameters for the tool"""
+
+    tools: str | None = None
+    """The names of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used. Separate multiple tool names with commas."""
 
 
 class ModelConfig(BaseModel):
@@ -148,6 +152,15 @@ class ChatModelConfig(BaseModel):
 
     example_prompts: List[PromptConfig] | None = None
     """Example prompts for the model"""
+
+    auth_config: AuthenticationConfig | None = None
+    """The authentication configuration for the model"""
+
+    request_timeout_seconds: float | None = None
+    """Optional override for outbound request timeout when invoking this model.  Default is to use the global default timeout which is 60 seconds."""
+
+    streaming_enabled: bool | None = None
+    """Whether the upstream model supports streaming responses; defaults to True"""
 
     def get_agents(self) -> List[AgentConfig]:
         """Get the agents for the model"""

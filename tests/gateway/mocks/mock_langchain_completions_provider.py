@@ -3,13 +3,8 @@ from typing import Dict, Any, override
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
-from oidcauthlib.auth.auth_manager import AuthManager
-from oidcauthlib.auth.config.auth_config_reader import (
-    AuthConfigReader,
-)
 from oidcauthlib.auth.models.auth import AuthInformation
 
-from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
@@ -19,6 +14,9 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 )
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
+)
+from language_model_gateway.gateway.providers.pass_through_token_manager import (
+    PassThroughTokenManager,
 )
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
@@ -41,10 +39,8 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
-        auth_manager: AuthManager,
-        tool_auth_manager: ToolAuthManager,
+        pass_through_token_manager: PassThroughTokenManager,
         fn_get_response: MockChatResponseProtocol,
-        auth_config_reader: AuthConfigReader,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
     ) -> None:
@@ -54,10 +50,8 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             tool_provider=tool_provider,
             mcp_tool_provider=mcp_tool_provider,
             token_reader=token_reader,
-            auth_manager=auth_manager,
-            tool_auth_manager=tool_auth_manager,
+            pass_through_token_manager=pass_through_token_manager,
             environment_variables=environment_variables,
-            auth_config_reader=auth_config_reader,
             persistence_factory=persistence_factory,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response

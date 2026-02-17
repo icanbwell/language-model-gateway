@@ -25,7 +25,8 @@
       "default": "langchain",
       "enum": [
         "langchain",
-        "openai"
+        "openai",
+        "passthru"
       ]
     },
     "owner": {
@@ -58,7 +59,8 @@
           "enum": [
             "bedrock",
             "openai",
-            "google"
+            "google",
+            "passthru"
           ]
         },
         "model": {
@@ -242,6 +244,7 @@
               "None",
               "jwt_token",
               "oauth",
+              "headers",
               null
             ],
             "default": null
@@ -330,6 +333,7 @@
               "None",
               "jwt_token",
               "oauth",
+              "headers",
               null
             ],
             "default": null
@@ -357,6 +361,76 @@
           }
         }
       }
+    },
+    "auth_config": {
+      "type": ["object", "null"],
+      "description": "Authentication configuration for calls made through this model.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the authentication configuration."
+        },
+        "url": {
+          "type": ["string", "null"],
+          "description": "URL to access the authenticated resource.",
+          "default": null
+        },
+        "headers": {
+          "type": ["object", "null"],
+          "description": "Headers to pass when invoking the authenticated resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": null
+        },
+        "auth": {
+          "type": ["string", "null"],
+          "description": "Authentication method to use when calling the resource.",
+          "enum": [
+            "None",
+            "jwt_token",
+            "oauth",
+            "headers",
+            null
+          ],
+          "default": null
+        },
+        "auth_optional": {
+          "type": ["boolean", "null"],
+          "description": "Whether authentication is optional for this resource.",
+          "default": null
+        },
+        "auth_providers": {
+          "type": ["array", "null"],
+          "description": "Acceptable auth providers; the first provider will be used when auth is required.",
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        },
+        "issuers": {
+          "type": ["array", "null"],
+          "description": "Acceptable token issuers; defaults to the OIDC provider issuer when omitted.",
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        }
+      },
+      "default": null
+    },
+    "request_timeout_seconds": {
+      "type": ["number", "null"],
+      "description": "Override for outbound request timeout in seconds when invoking this model (default 60).",
+      "default": null
+    },
+    "streaming_enabled": {
+      "type": ["boolean", "null"],
+      "description": "Whether the upstream model supports streaming responses.",
+      "default": null
     }
   }
 }

@@ -31,6 +31,7 @@ log_sources = [
     "MCP",
     "AGENTS",
     "ERRORS",
+    "BAILEY",
 ]
 
 SRC_LOG_LEVELS = {}
