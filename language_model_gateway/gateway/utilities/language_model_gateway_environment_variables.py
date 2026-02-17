@@ -115,3 +115,8 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def app_login_uri(self) -> str:
         value = os.environ.get("APP_LOGIN_URI")
         return value if value else "/app/login"
+
+    @property
+    def app_token_save_uri(self) -> str:
+        value = os.environ.get("APP_TOKEN_SAVE_URI")
+        return value if value else "/app/token"

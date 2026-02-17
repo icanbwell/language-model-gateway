@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Dict, List
+from typing import Any, Dict, List, cast
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from oidcauthlib.auth.auth_manager import AuthManager
@@ -175,8 +175,39 @@ class PassThroughTokenManager:
                 **existing_query_params,
                 **sanitized_login_query_params,
             }
-            app_login_url_with_parameters = urlunparse(
-                parsed_login_uri._replace(query=urlencode(merged_query_params))
+            app_login_url_with_parameters = cast(  # type: ignore[redundant-cast]
+                str,
+                urlunparse(
+                    parsed_login_uri._replace(query=urlencode(merged_query_params))
+                ),
+            )
+
+        app_token_save_uri = self.environment_variables.app_token_save_uri
+        app_token_save_uri_with_parameters: str | None = None
+        if app_token_save_uri:
+            parsed_token_save_uri = urlparse(app_token_save_uri)
+            existing_query_params = dict(
+                parse_qsl(parsed_token_save_uri.query, keep_blank_values=True)
+            )
+            token_save_query_params: dict[str, str | None] = {
+                "auth_provider": tool_auth_provider,
+                "referring_email": auth_information.email,
+                "referring_subject": auth_information.subject,
+            }
+            sanitized_token_save_query_params: dict[str, str] = {
+                key: value
+                for key, value in token_save_query_params.items()
+                if value is not None
+            }
+            merged_query_params = {
+                **existing_query_params,
+                **sanitized_token_save_query_params,
+            }
+            app_token_save_uri_with_parameters = cast(  # type: ignore[redundant-cast]
+                str,
+                urlunparse(
+                    parsed_token_save_uri._replace(query=urlencode(merged_query_params))
+                ),
             )
 
         error_message: str = (
@@ -186,6 +217,10 @@ class PassThroughTokenManager:
         if app_login_url_with_parameters:
             error_message += (
                 f"\nClick here to [Login to App]({app_login_url_with_parameters})."
+            )
+        if app_token_save_uri_with_parameters:
+            error_message += (
+                f"\nClick here to [Paste Token]({app_token_save_uri_with_parameters})."
             )
         return await self.tool_auth_manager.get_token_for_tool_async(
             auth_header=auth_header,

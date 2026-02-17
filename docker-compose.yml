@@ -95,6 +95,7 @@ services:
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       APP_LOGIN_URI: "http://localhost:5050/app/login"
+      APP_TOKEN_SAVE_URI: "http://localhost:5050/app/token"
       # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=fhir-server}
