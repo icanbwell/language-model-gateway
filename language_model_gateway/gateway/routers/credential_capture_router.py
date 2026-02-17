@@ -27,7 +27,7 @@ class CredentialCaptureRouter:
     """Router that renders a credential capture form and handles submissions."""
 
     _form_route: str = "/login"
-    _form_template_filename: str = "credential_capture.html"
+    _form_template_filename: str = "app_login.html"
 
     def __init__(
         self,
