@@ -8,13 +8,9 @@ from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
 from oidcauthlib.container.inject import Inject
 
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.models.app_login_submission import (
     CredentialSubmission,
-)
-from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
-    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -104,13 +100,6 @@ class AppLoginRouter:
         app_login_manager: Annotated[
             AppLoginManager,
             Depends(Inject(AppLoginManager)),
-        ],
-        http_client_factory: Annotated[
-            HttpClientFactory, Depends(Inject(HttpClientFactory))
-        ],
-        environment_variables: Annotated[
-            LanguageModelGatewayEnvironmentVariables,
-            Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
         ],
         username: Annotated[str, Form(min_length=1, max_length=255)],
         password: Annotated[str, Form(min_length=1, max_length=255)],
