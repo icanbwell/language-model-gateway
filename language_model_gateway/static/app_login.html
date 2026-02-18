@@ -207,6 +207,18 @@
 
 <section class="card">
     <form method="post">
+        {% if clients %}
+        <div class="input-wrapper">
+            <label for="client_key">Client</label>
+            <select id="client_key" name="client_key" required>
+                {% for client_name, client_value in clients.items() %}
+                <option value="{{ client_value }}">{{ client_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+
+
         <div class="input-wrapper">
             <label for="username">Email</label>
             <input id="username" name="username" type="email" required/>
@@ -224,17 +236,6 @@
                 </button>
             </div>
         </div>
-
-        {% if clients %}
-        <div class="input-wrapper">
-            <label for="client_key">Client</label>
-            <select id="client_key" name="client_key" required>
-                {% for client_name, client_value in clients.items() %}
-                <option value="{{ client_value }}">{{ client_name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        {% endif %}
 
         <div class="remember-forgot">
             <label class="remember-me">
