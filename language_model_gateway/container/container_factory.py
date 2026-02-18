@@ -44,6 +44,9 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.managers.system_command_manager import (
+    SystemCommandManager,
+)
 from language_model_gateway.gateway.managers.token_submission_manager import (
     TokenSubmissionManager,
 )
@@ -345,6 +348,16 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             ConfigReader, lambda c: ConfigReader(cache=c.resolve(ConfigExpiringCache))
         )
+
+        container.singleton(
+            SystemCommandManager,
+            lambda c: SystemCommandManager(
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
+        )
         container.singleton(
             ChatCompletionManager,
             lambda c: ChatCompletionManager(
@@ -352,6 +365,7 @@ class LanguageModelGatewayContainerFactory:
                 langchain_provider=c.resolve(LangChainCompletionsProvider),
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
+                system_command_manager=c.resolve(SystemCommandManager),
             ),
         )
         container.singleton(

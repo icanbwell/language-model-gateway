@@ -1,9 +1,10 @@
 import abc
 from abc import abstractmethod
-from typing import Literal, Any, List, Optional
+from typing import Literal, Any, List, Optional, AsyncGenerator
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
+from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
@@ -75,3 +76,31 @@ class ChatRequestWrapper(abc.ABC):
 
     @abstractmethod
     def get_tools(self) -> list[AgentConfig]: ...
+
+    @abstractmethod
+    async def stream_response(
+        self,
+        *,
+        response_messages1: List[AnyMessage],
+    ) -> AsyncGenerator[str, None]: ...
+
+    def write_response(
+        self,
+        *,
+        request_id: str,
+        response_messages: List[AnyMessage],
+    ) -> StreamingResponse | JSONResponse:
+        should_stream_response: Optional[bool] = self.stream
+
+        if should_stream_response:
+            return StreamingResponse(
+                content=self.stream_response(response_messages1=response_messages),
+                media_type="text/event-stream",
+            )
+        else:
+            chat_response = self.create_non_streaming_response(
+                request_id=request_id,
+                responses=response_messages,
+                json_output_requested=False,
+            )
+            return JSONResponse(content=chat_response)

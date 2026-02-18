@@ -110,3 +110,8 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def app_token_save_uri(self) -> str:
         value = os.environ.get("APP_TOKEN_SAVE_URI")
         return value if value else "/app/token"
+
+    @property
+    def system_commands(self) -> list[str]:
+        system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
+        return system_commands.split(",") if system_commands else []
