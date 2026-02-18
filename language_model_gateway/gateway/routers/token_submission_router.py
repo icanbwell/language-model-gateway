@@ -3,8 +3,9 @@ from enum import Enum
 from pathlib import Path
 from typing import Annotated, Sequence
 
-from fastapi import APIRouter, Depends, Form, Query, params
+from fastapi import APIRouter, Depends, Form, Query, params, HTTPException
 from fastapi.responses import FileResponse, Response
+from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.container.inject import Inject
 
 from language_model_gateway.gateway.managers.token_submission_manager import (
@@ -75,10 +76,41 @@ class TokenSubmissionRouter:
             Depends(Inject(TokenSubmissionManager)),
         ],
         token: Annotated[str, Form(min_length=1, max_length=4096)],
-        auth_provider: Annotated[str, Query(min_length=1, max_length=255)],
-        referring_email: Annotated[str, Query(min_length=3, max_length=320)],
-        referring_subject: Annotated[str, Query(min_length=1, max_length=255)],
+        state: Annotated[str, Query(min_length=1, max_length=255)],
     ) -> Response:
+        if not state:
+            raise HTTPException(
+                status_code=400,
+                detail="state query parameter is required to submit login form",
+            )
+        state_dict: dict[str, str | None] | None = AuthHelper.decode_state(
+            encoded_content=state
+        )
+        if state_dict is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid state parameter: unable to decode",
+            )
+        auth_provider: str | None = state_dict.get("auth_provider")
+        if auth_provider is None:
+            raise HTTPException(
+                status_code=400,
+                detail="auth_provider query parameter is required",
+            )
+
+        referring_email: str | None = state_dict.get("referring_email")
+        if referring_email is None:
+            raise HTTPException(
+                status_code=400,
+                detail="referring_email is required in state",
+            )
+        referring_subject: str | None = state_dict.get("referring_subject")
+        if referring_subject is None:
+            raise HTTPException(
+                status_code=400,
+                detail="referring_subject is required in state",
+            )
+
         submission = TokenSubmission(token=token.strip())
 
         return await token_submission_manager.submit_token(
