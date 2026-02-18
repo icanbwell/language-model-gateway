@@ -49,7 +49,7 @@ class SystemCommandManager:
         request_id: str,
         chat_request_wrapper: ChatRequestWrapper,
         referring_subject: str,
-        auth_provider: str,
+        auth_provider: str | None,
     ) -> StreamingResponse | JSONResponse | None:
         last_message_content: str | None = chat_request_wrapper.messages[-1].content
 
@@ -60,9 +60,8 @@ class SystemCommandManager:
                     case "clear tokens":
                         # Clear any stored tokens for the user or session. This is a placeholder for the actual token clearing logic.
                         # delete any existing tokens with same referring_subject and auth_provider
-                        await self.token_exchange_manager.delete_token_async(
+                        await self.token_exchange_manager.delete_all_tokens_async(
                             referring_subject=referring_subject,
-                            auth_provider=auth_provider,
                         )
                     case _:
                         raise ValueError(
