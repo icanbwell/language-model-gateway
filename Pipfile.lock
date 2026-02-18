@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6ff69341cb48d8d32f187ab3f94b1026777bc62d9d59bb495fca14ff29aba9c1"
+            "sha256": "2cbe7ecc393b38211c53a2e260243b56d9b033ed1e84b50bc3de8ab588a9a832"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -184,11 +184,11 @@
         },
         "anthropic": {
             "hashes": [
-                "sha256:dad0e40ec371ee686e9ffb2e0cb461a0ed51447fa100927fb5d39b174c286d6f",
-                "sha256:ef042586673fdcab2a6ffd381aa5f9a1bcce38ffe73c07fe70bd56d12b8124ba"
+                "sha256:ac54407e9a1f9b35e6e6c86f75bf403f0e54d60944f99f15f685a38d6829f20b",
+                "sha256:bab2d4e45c2e81a0668fdc2da2f7fd665ed8a0295ba3c86450f9dcc3a7804524"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==0.80.0"
+            "version": "==0.81.0"
         },
         "anyio": {
             "hashes": [
@@ -2198,12 +2198,12 @@
         },
         "oidcauthlib": {
             "hashes": [
-                "sha256:93e614cdc577c024dfdfde20e81361b32ba851eaba21a72bcff89c2ae7c6cfd3",
-                "sha256:def8c76651576c29031b338f4cf008e812f088865e12e7ed844f12ed39054c7b"
+                "sha256:1c92906a90625082f009aa7902afd96e310793561e037622b2431ccd52362ce9",
+                "sha256:2ed32c04a5f3673deef03e0674bd402e2dbc96b82d0929cd132959632e41c9a2"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==2.0.14"
+            "version": "==2.0.16"
         },
         "openai": {
             "hashes": [
@@ -4601,12 +4601,12 @@
         },
         "autoflake": {
             "hashes": [
-                "sha256:3ae7495db9084b7b32818b4140e6dc4fc280b712fb414f5b8fe57b0a8e85a840",
-                "sha256:c98b75dc5b0a86459c4f01a1d32ac7eb4338ec4317a4469515ff1e687ecd909e"
+                "sha256:4270b06ad5eb754d6b1b3cea51f195dab85f35a55afdb05c5d7bc96679dbf866",
+                "sha256:73d3b22bad89034879f7a4871c279c8d189b3f2c0b9d9e274b8e5b468c17f9a0"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==2.3.1"
+            "markers": "python_version >= '3.10'",
+            "version": "==2.3.2"
         },
         "bandit": {
             "hashes": [
