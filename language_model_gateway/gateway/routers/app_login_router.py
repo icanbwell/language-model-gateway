@@ -6,6 +6,7 @@ from typing import Annotated, Sequence
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request, params
 from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
+from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.container.inject import Inject
 
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
@@ -74,7 +75,21 @@ class AppLoginRouter:
         ],
     ) -> Response:
         """Serve the username/password capture page from the static asset."""
-        auth_provider: str | None = request.query_params.get("auth_provider")
+        state: str | None = request.query_params.get("state")
+        if not state:
+            raise HTTPException(
+                status_code=400,
+                detail="state query parameter is required to render login form",
+            )
+        state_dict: dict[str, str | None] | None = AuthHelper.decode_state(
+            encoded_content=state
+        )
+        if state_dict is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid state parameter: unable to decode",
+            )
+        auth_provider: str | None = state_dict.get("auth_provider")
         if not auth_provider:
             raise HTTPException(
                 status_code=400,
@@ -91,10 +106,12 @@ class AppLoginRouter:
             context={
                 "request": request,
                 "clients": client_keys,
+                "state": state,
             },
             media_type="text/html",
         )
 
+    # noinspection PyMethodMayBeStatic
     async def submit_form(
         self,
         app_login_manager: Annotated[
@@ -103,14 +120,26 @@ class AppLoginRouter:
         ],
         username: Annotated[str, Form(min_length=1, max_length=255)],
         password: Annotated[str, Form(min_length=1, max_length=255)],
-        auth_provider: Annotated[str, Query(min_length=1, max_length=255)],
-        referring_email: Annotated[str, Query(min_length=3, max_length=320)],
-        referring_subject: Annotated[str, Query(min_length=1, max_length=255)],
+        state: Annotated[str, Query(min_length=1, max_length=255)],
         client_key: Annotated[str | None, Form(min_length=1, max_length=255)] = None,
     ) -> Response:
         """
         Handle form submission, invoking the callback if provided or the manager method otherwise.
         """
+        if not state:
+            raise HTTPException(
+                status_code=400,
+                detail="state query parameter is required to submit login form",
+            )
+        state_dict: dict[str, str | None] | None = AuthHelper.decode_state(
+            encoded_content=state
+        )
+        if state_dict is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid state parameter: unable to decode",
+            )
+        auth_provider: str | None = state_dict.get("auth_provider")
         if auth_provider is None:
             raise HTTPException(
                 status_code=400,
@@ -131,6 +160,20 @@ class AppLoginRouter:
                 status_code=400,
                 detail="client_key form field is required",
             )
+
+        referring_email: str | None = state_dict.get("referring_email")
+        if referring_email is None:
+            raise HTTPException(
+                status_code=400,
+                detail="referring_email is required in state",
+            )
+        referring_subject: str | None = state_dict.get("referring_subject")
+        if referring_subject is None:
+            raise HTTPException(
+                status_code=400,
+                detail="referring_subject is required in state",
+            )
+
         submission = CredentialSubmission(username=username.strip(), password=password)
 
         return await app_login_manager.login(

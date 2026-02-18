@@ -2,6 +2,7 @@ import logging
 from typing import Any, Dict, List, cast
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
+from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
@@ -166,10 +167,9 @@ class PassThroughTokenManager:
                 "referring_email": auth_information.email,
                 "referring_subject": auth_information.subject,
             }
-            sanitized_login_query_params: dict[str, str] = {
-                key: value
-                for key, value in login_query_params.items()
-                if value is not None
+            # create state
+            sanitized_login_query_params = {
+                "state": (AuthHelper.encode_state(content=login_query_params)),
             }
             merged_query_params = {
                 **existing_query_params,
@@ -194,10 +194,8 @@ class PassThroughTokenManager:
                 "referring_email": auth_information.email,
                 "referring_subject": auth_information.subject,
             }
-            sanitized_token_save_query_params: dict[str, str] = {
-                key: value
-                for key, value in token_save_query_params.items()
-                if value is not None
+            sanitized_token_save_query_params = {
+                "state": (AuthHelper.encode_state(content=token_save_query_params)),
             }
             merged_query_params = {
                 **existing_query_params,
