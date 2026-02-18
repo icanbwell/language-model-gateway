@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from typing import Literal, Union, override, Optional, List, Any, AsyncGenerator
+from typing import AsyncIterable, Literal, Union, override, Optional, List, Any
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
@@ -236,12 +236,12 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         return self.extract_mcp_agent_configs(tools_in_request)
 
     @override
-    async def stream_response(
+    def stream_response(
         self,
         *,
         response_messages1: List[AnyMessage],
-    ) -> AsyncGenerator[str, None]:
-        """Streams the response messages as Server-Sent Events (SSE) in the format expected by OpenAI's Chat Completions API."""
+    ) -> AsyncIterable[str]:
+        """Streaming responses are not yet supported for the Responses API wrapper."""
         raise NotImplementedError(
             "Streaming responses is not implemented for ResponsesApiRequestWrapper"
         )

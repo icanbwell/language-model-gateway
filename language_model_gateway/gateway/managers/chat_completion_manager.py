@@ -138,15 +138,17 @@ class ChatCompletionManager:
                     status_code=400, detail=f"Model {model} not found in the config"
                 )
 
-            system_response: (
-                StreamingResponse | JSONResponse | None
-            ) = await self.system_command_manager.run_system_commands(
-                auth_provider=None,  # TODO: pass auth provider if needed for system commands
-                chat_request_wrapper=chat_request_wrapper,
-                referring_subject=auth_information.subject,
-            )
-            if system_response is not None:
-                return system_response
+            if auth_information.subject is not None:
+                system_response: (
+                    StreamingResponse | JSONResponse | None
+                ) = await self.system_command_manager.run_system_commands(
+                    request_id=request_id,
+                    auth_provider=None,  # TODO: pass auth provider if needed for system commands
+                    chat_request_wrapper=chat_request_wrapper,
+                    referring_subject=auth_information.subject,
+                )
+                if system_response is not None:
+                    return system_response
 
             chat_request_wrapper = self.add_system_messages(
                 chat_request_wrapper=chat_request_wrapper,
@@ -287,7 +289,7 @@ class ChatCompletionManager:
     def handle_help_prompt(
         self,
         *,
-        request_id: str | None,
+        request_id: str,
         chat_request_wrapper: ChatRequestWrapper,
         model_name: str,
         model_config: ChatModelConfig,
@@ -322,7 +324,7 @@ class ChatCompletionManager:
             and last_message_content.lower() in help_keywords
         ):
             logger.info(f"Help requested for model {model_name}: {model_config}")
-            response_messages: List[AIMessage] = [
+            response_messages: List[AnyMessage] = [
                 AIMessage(
                     content=model_config.description or "No description available",
                 )

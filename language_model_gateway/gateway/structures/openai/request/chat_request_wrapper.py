@@ -1,6 +1,6 @@
 import abc
 from abc import abstractmethod
-from typing import Literal, Any, List, Optional, AsyncGenerator
+from typing import AsyncIterable, Literal, Any, List, Optional
 
 from langchain_core.messages import AnyMessage
 from langchain_core.messages.ai import UsageMetadata
@@ -78,11 +78,11 @@ class ChatRequestWrapper(abc.ABC):
     def get_tools(self) -> list[AgentConfig]: ...
 
     @abstractmethod
-    async def stream_response(
+    def stream_response(
         self,
         *,
         response_messages1: List[AnyMessage],
-    ) -> AsyncGenerator[str, None]: ...
+    ) -> AsyncIterable[str]: ...
 
     def write_response(
         self,
@@ -93,8 +93,11 @@ class ChatRequestWrapper(abc.ABC):
         should_stream_response: Optional[bool] = self.stream
 
         if should_stream_response:
+            stream_content: AsyncIterable[str] = self.stream_response(
+                response_messages1=response_messages
+            )
             return StreamingResponse(
-                content=self.stream_response(response_messages1=response_messages),
+                content=stream_content,
                 media_type="text/event-stream",
             )
         else:

@@ -1,6 +1,6 @@
 import json
 import time
-from typing import Literal, cast, override, Any, List, Dict, Optional, AsyncGenerator
+from typing import AsyncIterator, Literal, cast, override, Any, List, Dict, Optional
 
 from langchain_core.messages import (
     AIMessage,
@@ -269,35 +269,38 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         return []
 
     @override
-    async def stream_response(
+    def stream_response(
         self,
         *,
         response_messages1: List[AnyMessage],
-    ) -> AsyncGenerator[str, None]:
-        """Streams the response messages as Server-Sent Events (SSE) in the format expected by OpenAI's Chat Completions API."""
+    ) -> AsyncIterator[str]:
+        """Streams the response messages as Server-Sent Events (SSE) in the OpenAI format."""
 
-        for response_message in response_messages1:
-            message_content: str = cast(str, response_message.content)
-            if message_content:
-                chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                    id="1",
-                    created=int(time.time()),
-                    model=self.model,
-                    choices=[
-                        ChunkChoice(
-                            index=0,
-                            delta=ChoiceDelta(
-                                role="assistant",
-                                content=message_content + "\n",
-                            ),
-                        )
-                    ],
-                    usage=CompletionUsage(
-                        prompt_tokens=0,
-                        completion_tokens=0,
-                        total_tokens=0,
-                    ),
-                    object="chat.completion.chunk",
-                )
-                yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
-        yield "data: [DONE]\n\n"
+        async def response_stream() -> AsyncIterator[str]:
+            for response_message in response_messages1:
+                message_content: str = cast(str, response_message.content)
+                if message_content:
+                    chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                        id="1",
+                        created=int(time.time()),
+                        model=self.model,
+                        choices=[
+                            ChunkChoice(
+                                index=0,
+                                delta=ChoiceDelta(
+                                    role="assistant",
+                                    content=message_content + "\n",
+                                ),
+                            )
+                        ],
+                        usage=CompletionUsage(
+                            prompt_tokens=0,
+                            completion_tokens=0,
+                            total_tokens=0,
+                        ),
+                        object="chat.completion.chunk",
+                    )
+                    yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield "data: [DONE]\n\n"
+
+        return response_stream()
