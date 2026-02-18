@@ -99,7 +99,7 @@ langgraph-store-mongodb = ">=0.1.0"
 # langchain-google-genai is a Python library for integrating LangChain with Google Generative AI
 langchain-google-genai= ">=4.1.3"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=2.0.16"
+oidcauthlib = ">=2.0.17"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }

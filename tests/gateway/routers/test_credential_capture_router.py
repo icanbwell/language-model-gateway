@@ -1,6 +1,5 @@
 import pytest
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 import httpx
 import respx
 
@@ -29,15 +28,8 @@ async def test_render_form_returns_html() -> None:
 async def test_submit_form_invokes_callback() -> None:
     captured: list[CredentialSubmission] = []
 
-    async def callback(
-        submission: CredentialSubmission,
-        *_: object,
-    ) -> JSONResponse:
-        captured.append(submission)
-        return JSONResponse({"received": True})
-
     app = FastAPI()
-    app.include_router(AppLoginRouter(callback=callback).get_router())
+    app.include_router(AppLoginRouter().get_router())
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:

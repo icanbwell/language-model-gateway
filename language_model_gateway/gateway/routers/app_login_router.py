@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 from enum import Enum
-from typing import Annotated, Awaitable, Callable, Sequence
+from typing import Annotated, Sequence
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request, params
 from fastapi.responses import Response
@@ -21,16 +21,6 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["AUTH"])
 
-AppLoginCallback = Callable[
-    [
-        CredentialSubmission,
-        HttpClientFactory,
-        LanguageModelGatewayEnvironmentVariables,
-        str | None,
-    ],
-    Awaitable[Response],
-]
-
 
 class AppLoginRouter:
     """Router that renders a credential capture form and handles submissions."""
@@ -44,7 +34,6 @@ class AppLoginRouter:
         prefix: str = "/app",
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
-        callback: AppLoginCallback | None = None,
     ) -> None:
         self.prefix = prefix
         self.tags = tags or ["app"]
@@ -52,7 +41,6 @@ class AppLoginRouter:
         self.router = APIRouter(
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
-        self._callback: AppLoginCallback | None = callback
         self._form_template_path: Path = (
             Path(__file__).resolve().parents[2]
             / "static"
@@ -155,13 +143,6 @@ class AppLoginRouter:
                 detail="client_key form field is required",
             )
         submission = CredentialSubmission(username=username.strip(), password=password)
-        if self._callback is not None:
-            return await self._callback(
-                submission,
-                http_client_factory,
-                environment_variables,
-                client_key,
-            )
 
         return await app_login_manager.login(
             submission=submission,

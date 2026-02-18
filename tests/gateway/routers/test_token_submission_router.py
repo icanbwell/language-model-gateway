@@ -31,15 +31,8 @@ async def test_render_form_returns_html() -> None:
 async def test_submit_form_invokes_callback() -> None:
     captured: list[TokenSubmission] = []
 
-    async def callback(
-        submission: TokenSubmission,
-        *_: object,
-    ) -> JSONResponse:
-        captured.append(submission)
-        return JSONResponse({"received": True})
-
     app = FastAPI()
-    app.include_router(TokenSubmissionRouter(callback=callback).get_router())
+    app.include_router(TokenSubmissionRouter().get_router())
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:

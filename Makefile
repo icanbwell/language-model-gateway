@@ -1,7 +1,7 @@
 export LANG
 
 .PHONY: Pipfile.lock
-Pipfile.lock: create-docker-network # Locks Pipfile and updates the Pipfile.lock on the local file system
+Pipfile.lock: down create-docker-network # Locks Pipfile and updates the Pipfile.lock on the local file system
 	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
 	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
 

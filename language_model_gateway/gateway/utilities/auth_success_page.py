@@ -1,64 +1,26 @@
+from pathlib import Path
+from typing import Final
+
 from fastapi.responses import HTMLResponse
+from jinja2 import Environment, FileSystemLoader, Template, select_autoescape
+
+_TEMPLATE_NAME: Final[str] = "auth_success.html"
+_STATIC_DIR: Final[Path] = Path(__file__).resolve().parents[2] / "static"
+_TEMPLATE_PATH: Final[Path] = _STATIC_DIR / _TEMPLATE_NAME
+
+if not _TEMPLATE_PATH.exists():
+    raise FileNotFoundError(
+        f"Authentication success template not found at {_TEMPLATE_PATH}"
+    )
+
+_TEMPLATE_ENV: Final[Environment] = Environment(
+    loader=FileSystemLoader(str(_STATIC_DIR)),
+    autoescape=select_autoescape(enabled_extensions=("html", "xml")),
+)
+_AUTH_SUCCESS_TEMPLATE: Final[Template] = _TEMPLATE_ENV.get_template(_TEMPLATE_NAME)
 
 
 def build_auth_success_page(access_token: str | None) -> HTMLResponse:
     """Render a success page matching the credential capture flow."""
-    html_content = f"""
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Authentication Successful</title>
-        <style>
-            * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-            body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }}
-            .container {{ background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); padding: 48px; max-width: 500px; text-align: center; animation: fadeIn 0.5s ease-in; }}
-            @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(-20px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-            .checkmark {{ width: 80px; height: 80px; border-radius: 50%; display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 24px; position: relative; animation: scaleIn 0.5s ease-in-out; }}
-            @keyframes scaleIn {{ from {{ transform: scale(0); }} to {{ transform: scale(1); }} }}
-            .checkmark::after {{ content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: bold; }}
-            h1 {{ color: #2d3748; font-size: 32px; margin-bottom: 16px; font-weight: 700; }}
-            p {{ color: #4a5568; font-size: 18px; line-height: 1.6; margin-bottom: 12px; }}
-            .highlight {{ color: #667eea; font-weight: 600; }}
-            .footer {{ margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; color: #718096; font-size: 14px; }}
-            .token-container {{ margin-top: 24px; }}
-            .token-label {{ font-weight: 600; color: #2d3748; margin-bottom: 8px; }}
-            .token-value {{ display: none; word-break: break-all; background: #f7fafc; border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 15px; color: #4a5568; }}
-            .show-btn {{ background: #667eea; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-size: 15px; margin-top: 8px; }}
-            .show-btn:active {{ background: #764ba2; }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="checkmark"></div>
-            <h1>Authentication Successful!</h1>
-            <p>You have been successfully authenticated.</p>
-            <p>You can now go back to <span class="highlight">Aiden</span> and retry your question.</p>
-            <div class="token-container">
-                <div class="token-label">Access Token:</div>
-                <button class="show-btn" onclick="toggleToken()">Show Access Token</button>
-                <div id="access-token" class="token-value">{access_token or ""}</div>
-            </div>
-            <div class="footer">
-                You may close this window.
-            </div>
-        </div>
-        <script>
-            function toggleToken() {{
-                var tokenDiv = document.getElementById('access-token');
-                var btn = document.querySelector('.show-btn');
-                if (tokenDiv.style.display === 'none' || tokenDiv.style.display === '') {{
-                    tokenDiv.style.display = 'block';
-                    btn.textContent = 'Hide Access Token';
-                }} else {{
-                    tokenDiv.style.display = 'none';
-                    btn.textContent = 'Show Access Token';
-                }}
-            }}
-        </script>
-    </body>
-    </html>
-    """
-
-    return HTMLResponse(content=html_content)
+    rendered_content: str = _AUTH_SUCCESS_TEMPLATE.render(access_token=access_token)
+    return HTMLResponse(content=rendered_content, media_type="text/html")

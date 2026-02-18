@@ -39,6 +39,7 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
+    convert_message_content_to_string,
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 
@@ -278,7 +279,9 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
 
         async def response_stream() -> AsyncIterator[str]:
             for response_message in response_messages1:
-                message_content: str = cast(str, response_message.content)
+                message_content: str = convert_message_content_to_string(
+                    response_message.content
+                )
                 if message_content:
                     chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
                         id="1",

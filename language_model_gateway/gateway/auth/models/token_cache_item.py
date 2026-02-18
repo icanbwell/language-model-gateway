@@ -65,6 +65,11 @@ class TokenCacheItem(BaseDbModel):
         default=None, description="The refresh token used to obtain new access tokens."
     )
 
+    refresh_token_raw: Optional[str] = Field(
+        default=None,
+        description="The raw refresh token string, stored for use in token refresh operations. This is necessary because the refresh token may not be a JWT and may not have the same structure as access or ID tokens.",
+    )
+
     def is_valid_id_token(self) -> bool:
         """
         Check if the token is valid based on its expiration time.

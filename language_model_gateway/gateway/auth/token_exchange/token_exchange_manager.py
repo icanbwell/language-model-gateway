@@ -551,6 +551,7 @@ class TokenExchangeManager:
             created=datetime.now(UTC),
             referring_email=referring_email,
             referring_subject=referring_subject,
+            refresh_token_raw=refresh_token,
         )
         return token_cache_item
 

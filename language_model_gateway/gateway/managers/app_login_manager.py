@@ -190,7 +190,6 @@ class AppLoginManager:
         await self.token_exchange_manager.save_token_async(
             token_cache_item=token_cache_item, refreshed=False
         )
-        # return JSONResponse({"accessToken": access_token_from_payload})
         return await self.get_html_response(token_dict.get("access_token"))
 
     async def get_html_response(self, access_token: str | None) -> HTMLResponse:
