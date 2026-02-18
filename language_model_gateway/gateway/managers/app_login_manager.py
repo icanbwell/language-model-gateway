@@ -195,3 +195,34 @@ class AppLoginManager:
 
     async def get_html_response(self, access_token: str | None) -> HTMLResponse:
         return build_auth_success_page(access_token)
+
+    async def get_client_keys_for_auth_provider(
+        self, auth_provider: str
+    ) -> dict[str, str] | None:
+        auth_config: AuthConfig | None = (
+            self.auth_config_reader.get_config_for_auth_provider(
+                auth_provider=auth_provider
+            )
+        )
+        if auth_config is None:
+            logger.error("No auth config found for auth provider '%s'", auth_provider)
+            raise HTTPException(
+                status_code=500, detail="Authentication configuration error"
+            )
+
+        auth_config_extra_info: dict[str, Any] | None = auth_config.extra_info
+        client_keys: dict[str, str] | None = (
+            auth_config_extra_info.get("client_keys")
+            if auth_config_extra_info
+            else None
+        )
+        if not client_keys:
+            logger.error(
+                f"client_keys not set in auth config extra_info for auth provider '{auth_provider}'"
+            )
+            raise HTTPException(
+                status_code=500,
+                detail=f"client_keys not set in auth config extra_info for auth provider '{auth_provider}'",
+            )
+
+        return client_keys

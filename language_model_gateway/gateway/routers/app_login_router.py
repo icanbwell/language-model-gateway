@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 from enum import Enum
-from typing import Annotated, Awaitable, Callable, Mapping, Sequence
+from typing import Annotated, Awaitable, Callable, Sequence
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request, params
 from fastapi.responses import Response
@@ -20,7 +20,6 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["AUTH"])
-
 
 AppLoginCallback = Callable[
     [
@@ -46,7 +45,6 @@ class AppLoginRouter:
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
         callback: AppLoginCallback | None = None,
-        clients: Mapping[str, str] | None = None,
     ) -> None:
         self.prefix = prefix
         self.tags = tags or ["app"]
@@ -55,7 +53,6 @@ class AppLoginRouter:
             prefix=self.prefix, tags=self.tags, dependencies=self.dependencies
         )
         self._callback: AppLoginCallback | None = callback
-        self._clients: dict[str, str] = dict(clients or {})
         self._form_template_path: Path = (
             Path(__file__).resolve().parents[2]
             / "static"
@@ -84,13 +81,32 @@ class AppLoginRouter:
             include_in_schema=False,
         )
 
-    async def render_form(self, request: Request) -> Response:
+    async def render_form(
+        self,
+        request: Request,
+        app_login_manager: Annotated[
+            AppLoginManager,
+            Depends(Inject(AppLoginManager)),
+        ],
+    ) -> Response:
         """Serve the username/password capture page from the static asset."""
+        auth_provider: str | None = request.query_params.get("auth_provider")
+        if not auth_provider:
+            raise HTTPException(
+                status_code=400,
+                detail="auth_provider query parameter is required to render login form",
+            )
+        # get client keys from the specified auth provider if clients are configured
+        client_keys: (
+            dict[str, str] | None
+        ) = await app_login_manager.get_client_keys_for_auth_provider(
+            auth_provider=auth_provider
+        )
         return self._templates.TemplateResponse(
             name=self._form_template_filename,
             context={
                 "request": request,
-                "clients": self._clients,
+                "clients": client_keys,
             },
             media_type="text/html",
         )
@@ -115,53 +131,45 @@ class AppLoginRouter:
         referring_subject: Annotated[str, Query(min_length=1, max_length=255)],
         client_key: Annotated[str | None, Form(min_length=1, max_length=255)] = None,
     ) -> Response:
+        """
+        Handle form submission, invoking the callback if provided or the manager method otherwise.
+        """
+        if auth_provider is None:
+            raise HTTPException(
+                status_code=400,
+                detail="auth_provider query parameter is required",
+            )
+        if username is None:
+            raise HTTPException(
+                status_code=400,
+                detail="username form field is required",
+            )
+        if password is None:
+            raise HTTPException(
+                status_code=400,
+                detail="password form field is required",
+            )
+        if client_key is None:
+            raise HTTPException(
+                status_code=400,
+                detail="client_key form field is required",
+            )
         submission = CredentialSubmission(username=username.strip(), password=password)
-        resolved_client_key = self._resolve_auth_client_key(
-            provided_client_key=client_key,
-            environment_variables=environment_variables,
-        )
         if self._callback is not None:
             return await self._callback(
                 submission,
                 http_client_factory,
                 environment_variables,
-                resolved_client_key,
+                client_key,
             )
 
         return await app_login_manager.login(
             submission=submission,
             auth_provider=auth_provider,
-            auth_client_key=resolved_client_key,
+            auth_client_key=client_key,
             referring_email=referring_email,
             referring_subject=referring_subject,
         )
 
     def get_router(self) -> APIRouter:
         return self.router
-
-    def _resolve_auth_client_key(
-        self,
-        *,
-        provided_client_key: str | None,
-        environment_variables: LanguageModelGatewayEnvironmentVariables,
-    ) -> str:
-        if self._clients:
-            if not provided_client_key:
-                raise HTTPException(
-                    status_code=400,
-                    detail="client_key is required",
-                )
-            if provided_client_key not in self._clients.values():
-                raise HTTPException(
-                    status_code=400,
-                    detail="client_key is invalid",
-                )
-            return provided_client_key
-
-        if provided_client_key:
-            return provided_client_key
-
-        raise HTTPException(
-            status_code=500,
-            detail="auth_client_key not configured",
-        )
