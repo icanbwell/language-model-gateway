@@ -5,7 +5,7 @@
   "description": "Calls Bailey",
   "type": "passthru",
   "url": "https://api.dev.icanbwell.com/bailey/v1",
-  "streaming_enabled": false,
+  "streaming_enabled": true,
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
@@ -31,6 +31,12 @@
     {
       "role": "user",
       "content": "Show my health summary"
+    }
+  ],
+  "system_prompts": [
+    {
+      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.",
+      "role": "system"
     }
   ]
 }
