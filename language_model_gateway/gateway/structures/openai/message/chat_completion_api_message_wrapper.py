@@ -72,5 +72,10 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     @override
     def to_responses_api_message(self) -> ResponseInputItemParam:
         raise NotImplementedError(
-            "Conversion from ChatCompletionMessageParam to EasyInputMessageParam is not implemented yet."
+            "Conversion from ChatCompletionMessageParam to EasyInputMessageParam is not implemented."
         )
+
+    @override
+    @property
+    def is_user_message(self) -> bool:
+        return getattr(self.message, "role", None) == "user"

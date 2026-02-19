@@ -24,15 +24,11 @@ from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as Chunk
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
 from language_model_gateway.gateway.structures.openai.message.chat_completion_api_message_wrapper import (
     ChatCompletionApiMessageWrapper,
 )
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
-)
-from language_model_gateway.gateway.structures.openai.message.responses_api_message_wrapper import (
-    ResponsesApiMessageWrapper,
 )
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
@@ -82,11 +78,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
 
     @override
     def create_system_message(self, *, content: str) -> ChatMessageWrapper:
-        return (
-            ResponsesApiMessageWrapper.create_system_message(content=content)
-            if isinstance(self.request, ResponsesRequest)
-            else ChatCompletionApiMessageWrapper.create_system_message(content=content)
-        )
+        return ChatCompletionApiMessageWrapper.create_system_message(content=content)
 
     @property
     @override
@@ -307,3 +299,30 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             yield "data: [DONE]\n\n"
 
         return response_stream()
+
+    @override
+    @property
+    def instructions(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate instructions field, so we return None."""
+        return None
+
+    @override
+    @property
+    def previous_response_id(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate previous_response_id field, so we return None."""
+        return None
+
+    @override
+    @property
+    def store(self) -> Optional[bool]:
+        """ChatCompletion API does not have a separate store field, so we return None."""
+        return None
+
+    @override
+    @property
+    def user_input(self) -> Optional[str]:
+        """Extract the user input from the messages. We assume the user input is the content of the last message with role 'user'."""
+        for message in reversed(self._messages):
+            if message.is_user_message:
+                return message.content
+        return None

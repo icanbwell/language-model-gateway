@@ -61,3 +61,14 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
     @override
     def to_responses_api_message(self) -> ResponseInputItemParam:
         return self.input_
+
+    @override
+    @property
+    def is_user_message(self) -> bool:
+        # Use getattr with default to avoid mypy union-attr error
+        role = getattr(self.input_, "role", None)
+        if role is not None:
+            return True if role == "user" else False
+        elif isinstance(self.input_, dict):
+            return self.input_.get("role") == "user"
+        return False

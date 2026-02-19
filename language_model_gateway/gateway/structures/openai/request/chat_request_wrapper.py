@@ -107,3 +107,19 @@ class ChatRequestWrapper(abc.ABC):
                 json_output_requested=False,
             )
             return JSONResponse(content=chat_response)
+
+    @abstractmethod
+    @property
+    def instructions(self) -> Optional[str]: ...
+
+    @abstractmethod
+    @property
+    def previous_response_id(self) -> Optional[str]: ...
+
+    @abstractmethod
+    @property
+    def store(self) -> Optional[bool]: ...
+
+    @abstractmethod
+    @property
+    def user_input(self) -> Optional[str]: ...

@@ -39,3 +39,7 @@ class ChatMessageWrapper(abc.ABC):
 
     @abstractmethod
     def to_responses_api_message(self) -> ResponseInputItemParam: ...
+
+    @abstractmethod
+    @property
+    def is_user_message(self) -> bool: ...

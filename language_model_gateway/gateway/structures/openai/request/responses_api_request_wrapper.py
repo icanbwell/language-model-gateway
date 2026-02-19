@@ -245,3 +245,38 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         raise NotImplementedError(
             "Streaming responses is not implemented for ResponsesApiRequestWrapper"
         )
+
+    @override
+    @property
+    def instructions(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate instructions field, so we return None."""
+        return self.request.instructions
+
+    @override
+    @property
+    def previous_response_id(self) -> Optional[str]:
+        """Responses API does have a previous_response_id."""
+        return self.request.previous_response_id
+
+    @override
+    @property
+    def store(self) -> Optional[bool]:
+        """Responses API does have a store parameter."""
+        return self.request.store
+
+    @override
+    @property
+    def user_input(self) -> Optional[str]:
+        """Extract the user input from the request."""
+        if self.request.input is not None:
+            if isinstance(self.request.input, str):
+                return self.request.input
+            elif isinstance(self.request.input, list):
+                text_parts: list[str] = []
+                for part in self.request.input:
+                    if isinstance(part, dict):
+                        text_value = part.get("text")
+                        if isinstance(text_value, str):
+                            text_parts.append(text_value)
+                return " ".join(text_parts)
+        return ""
