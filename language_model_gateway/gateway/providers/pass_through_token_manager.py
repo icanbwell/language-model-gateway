@@ -213,9 +213,7 @@ class PassThroughTokenManager:
             + f"\nClick here to [Login to {auth_config.friendly_name}]({authorization_url})."
         )
         if app_login_url_with_parameters:
-            error_message += (
-                f"\nClick here to [Login to App]({app_login_url_with_parameters})."
-            )
+            error_message += f"\nClick here to [Login to b.well App]({app_login_url_with_parameters})."
         if app_token_save_uri_with_parameters:
             error_message += (
                 f"\nClick here to [Paste Token]({app_token_save_uri_with_parameters})."
