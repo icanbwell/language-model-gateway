@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "bailey",
-  "name": "Bailey",
+  "id": "bailey-prod",
+  "name": "Bailey Prod",
   "description": "Calls Bailey",
   "type": "passthru",
-  "url": "https://api.dev.icanbwell.com/bailey/v1",
+  "url": "https://api.prod.icanbwell.com/bailey/v1",
   "streaming_enabled": true,
   "model": {
     "model": "Bailey AI",
@@ -12,10 +12,10 @@
   },
   "auth_config": {
     "name": "bailey",
-    "url": "https://api.dev.icanbwell.com/bailey/v1",
+    "url": "https://api.prod.icanbwell.com/bailey/v1",
     "auth": "jwt_token",
     "auth_providers": [
-      "oktafhirdev"
+      "oktafhirprod"
     ],
     "headers": {
       "X-Client-Id": "Aiden"
@@ -35,7 +35,7 @@
   ],
   "system_prompts": [
     {
-      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.",
+      "content": "If a user does not provide a person ID, use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a as the default person ID.",
       "role": "system"
     }
   ]

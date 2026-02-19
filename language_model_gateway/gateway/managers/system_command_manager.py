@@ -69,15 +69,12 @@ class SystemCommandManager:
                         )
 
                 logger.info(f"System command received: {last_message_content}")
-                return JSONResponse(
-                    chat_request_wrapper.create_non_streaming_response(
-                        request_id=request_id,
-                        json_output_requested=False,
-                        responses=[
-                            AIMessage(
-                                content=f"System command '{last_message_content}' received and processed.",
-                            )
-                        ],
-                    )
+                return chat_request_wrapper.write_response(
+                    request_id=request_id,
+                    response_messages=[
+                        AIMessage(
+                            content=f"System command '{last_message_content}' received and processed.",
+                        )
+                    ],
                 )
         return None
