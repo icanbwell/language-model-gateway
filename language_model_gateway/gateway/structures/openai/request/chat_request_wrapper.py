@@ -130,3 +130,15 @@ class ChatRequestWrapper(abc.ABC):
     @abstractmethod
     @property
     def metadata(self) -> Optional[dict[str, Any]]: ...
+
+    @abstractmethod
+    @property
+    def max_tokens(self) -> Optional[int]: ...
+
+    @abstractmethod
+    @property
+    def max_output_tokens(self) -> Optional[int]: ...
+
+    @abstractmethod
+    @property
+    def temperature(self) -> Optional[float]: ...

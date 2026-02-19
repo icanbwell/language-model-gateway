@@ -308,3 +308,21 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def metadata(self) -> Optional[dict[str, Any]]:
         """Responses API does have a metadata field."""
         return self.request.metadata
+
+    @override
+    @property
+    def max_tokens(self) -> Optional[int]:
+        """Responses API does have a max_output_tokens parameter, but it's not the same as max_tokens in ChatCompletion API, so we return None here to avoid confusion."""
+        return None
+
+    @override
+    @property
+    def max_output_tokens(self) -> Optional[int]:
+        """Return the max_output_tokens parameter from the request, which is specific to the Responses API."""
+        return self.request.max_output_tokens
+
+    @override
+    @property
+    def temperature(self) -> Optional[float]:
+        """Return the temperature parameter from the request, which is used in both ChatCompletion and Responses API."""
+        return self.request.temperature
