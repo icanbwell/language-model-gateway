@@ -25,12 +25,12 @@
       "value": "Bearer OPENAI_API_KEY"
     }
   ],
-  "id": "bailey-prod-temp",
+  "id": "bailey-prod-okta",
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
   },
-  "name": "Bailey Prod Temp",
+  "name": "Bailey Prod Okta",
   "streaming_enabled": false,
   "system_prompts": [
     {
