@@ -48,7 +48,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,apigateway,oktafhirclientsandbox,oktafhirstaging,oktafhirprod}
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -72,6 +72,13 @@ services:
       AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
       AUTH_EXTRA_INFO_OKTAFHIRDEV: '{"api_gateway_base_url":"https://api.dev.icanbwell.com","client_keys":{"dev": "eyJyIjoiY2Zoa2h3ODZvNHdoNWFiOW9kaHgiLCJlbnYiOiJkZXYiLCJraWQiOiJid2VsbF9kZW1vLWRldiJ9"}}'
+      # API Gateway Dev
+      AUTH_ISSUER_APIGATEWAY: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_o71QMdxTG"  # Expected audience claim for the API Gateway provider.
+      AUTH_AUDIENCE_APIGATEWAY: "3i43562q02ghinf28av0nqv6di"  # OAuth client id for API Gateway tokens.
+      AUTH_CLIENT_ID_APIGATEWAY: "3i43562q02ghinf28av0nqv6di"  # OIDC discovery document for API Gateway tokens.
+      AUTH_WELL_KNOWN_URI_APIGATEWAY: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_o71QMdxTG/.well-known/openid-configuration"  # Friendly display name shown for the API Gateway provider.
+      AUTH_FRIENDLY_NAME_APIGATEWAY: "b.well API Gateway"  # Scope set requested from the API Gateway provider.
+      AUTH_SCOPE_APIGATEWAY: "openid email profile"
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
       AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
