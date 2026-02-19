@@ -357,7 +357,7 @@ class TokenExchangeManager:
                 raise
             except Exception as e:
                 logger.exception(
-                    f"Error verifying token for tool {tool_config.name}: {e}"
+                    f"{type(e).__name__} Error verifying token for tool {tool_config.name}: {e}"
                 )
                 raise AuthorizationNeededException(
                     message="Invalid or expired token provided in Authorization header."
