@@ -323,6 +323,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     def user_input(self) -> Optional[str]:
         """Extract the user input from the messages. We assume the user input is the content of the last message with role 'user'."""
         for message in reversed(self._messages):
-            if message.is_user_message:
+            if message.role == "user":
                 return message.content
         return None
+
+    @override
+    @property
+    def metadata(self) -> Optional[dict[str, Any]]:
+        """Responses API does have a metadata field."""
+        return self.request.metadata

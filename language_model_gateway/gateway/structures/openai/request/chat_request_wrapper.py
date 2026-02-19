@@ -123,3 +123,7 @@ class ChatRequestWrapper(abc.ABC):
     @abstractmethod
     @property
     def user_input(self) -> Optional[str]: ...
+
+    @abstractmethod
+    @property
+    def metadata(self) -> Optional[dict[str, Any]]: ...

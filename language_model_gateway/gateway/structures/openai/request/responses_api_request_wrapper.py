@@ -280,3 +280,9 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
                             text_parts.append(text_value)
                 return " ".join(text_parts)
         return ""
+
+    @override
+    @property
+    def metadata(self) -> Optional[dict[str, Any]]:
+        """Responses API does have a metadata field."""
+        return self.request.metadata
