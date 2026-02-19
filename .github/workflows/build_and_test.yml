@@ -8,6 +8,11 @@ on:
   pull_request:
     branches: [ main ]
 
+# Prevent duplicate runs on the same ref and cancel in-progress on PR updates to save CI minutes
+concurrency:
+  group: build-and-test-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
 jobs:
   build_and_test:
     # The type of runner that the job will run on
