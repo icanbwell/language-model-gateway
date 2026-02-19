@@ -1,33 +1,27 @@
-import json
 import logging
 import os
-import time
-from typing import Dict, List, cast, AsyncGenerator, Optional
+import uuid
+from typing import Dict, List
 
 from fastapi import HTTPException
 from httpx import Headers
+from langchain_core.messages import AnyMessage, AIMessage
 from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
-from openai.types import CompletionUsage
-from openai.types.chat import (
-    ChatCompletion,
-    ChatCompletionMessage,
-    ChatCompletionChunk,
-)
-from openai.types.chat.chat_completion import Choice
-from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
+from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
-
-from oidcauthlib.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
-    McpAuthorizationHelper,
+from language_model_gateway.gateway.managers.system_command_manager import (
+    SystemCommandManager,
 )
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
+)
+from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
+    McpAuthorizationHelper,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
@@ -68,6 +62,7 @@ class ChatCompletionManager:
         langchain_provider: LangChainCompletionsProvider,
         pass_through_provider: PassThroughChatCompletionsProvider,
         config_reader: ConfigReader,
+        system_command_manager: SystemCommandManager,
     ) -> None:
         self.openai_provider: OpenAiChatCompletionsProvider = open_ai_provider
         if self.openai_provider is None:
@@ -103,6 +98,14 @@ class ChatCompletionManager:
                 f"config_reader must be ConfigReader, got {type(self.config_reader)}"
             )
 
+        self.system_command_manager: SystemCommandManager = system_command_manager
+        if self.system_command_manager is None:
+            raise ValueError("system_command_manager must not be None")
+        if not isinstance(self.system_command_manager, SystemCommandManager):
+            raise TypeError(
+                f"system_command_manager must be SystemCommandManager, got {type(self.system_command_manager)}"
+            )
+
     # noinspection PyMethodMayBeStatic
     async def chat_completions(
         self,
@@ -112,6 +115,7 @@ class ChatCompletionManager:
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # Use the model to choose the provider
+        request_id: str = str(uuid.uuid4())
         try:
             model: str = chat_request_wrapper.model
             if model is None:
@@ -133,6 +137,18 @@ class ChatCompletionManager:
                 raise HTTPException(
                     status_code=400, detail=f"Model {model} not found in the config"
                 )
+
+            if auth_information.subject is not None:
+                system_response: (
+                    StreamingResponse | JSONResponse | None
+                ) = await self.system_command_manager.run_system_commands(
+                    request_id=request_id,
+                    auth_provider=None,  # TODO: pass auth provider if needed for system commands
+                    chat_request_wrapper=chat_request_wrapper,
+                    referring_subject=auth_information.subject,
+                )
+                if system_response is not None:
+                    return system_response
 
             chat_request_wrapper = self.add_system_messages(
                 chat_request_wrapper=chat_request_wrapper,
@@ -160,6 +176,7 @@ class ChatCompletionManager:
 
             help_response: StreamingResponse | JSONResponse | None = (
                 self.handle_help_prompt(
+                    request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
                     model_name=model,
                     model_config=model_config,
@@ -184,9 +201,10 @@ class ChatCompletionManager:
             return response
         except AuthorizationNeededException as e:
             return self.write_response(
+                request_id=request_id,
                 chat_request_wrapper=chat_request_wrapper,
                 response_messages=[
-                    ChatCompletionMessage(role="assistant", content=line.strip())
+                    AIMessage(content=line.strip())
                     for line in e.message.splitlines()
                     if line.strip()
                 ],
@@ -206,18 +224,16 @@ class ChatCompletionManager:
                     )
                     content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
                     return self.write_response(
+                        request_id=request_id,
                         chat_request_wrapper=chat_request_wrapper,
-                        response_messages=[
-                            ChatCompletionMessage(role="assistant", content=content)
-                        ],
+                        response_messages=[AIMessage(content=content)],
                     )
                 elif isinstance(first_exception, AuthorizationNeededException):
                     return self.write_response(
+                        request_id=request_id,
                         chat_request_wrapper=chat_request_wrapper,
                         response_messages=[
-                            ChatCompletionMessage(
-                                role="assistant", content=line.strip()
-                            )
+                            AIMessage(content=line.strip())
                             for line in first_exception.message.splitlines()
                             if line.strip()
                         ],
@@ -227,14 +243,16 @@ class ChatCompletionManager:
                     exc_info=True,
                 )
                 return await self.handle_exception(
-                    chat_request_wrapper=chat_request_wrapper, e=first_exception
+                    request_id=request_id,
+                    chat_request_wrapper=chat_request_wrapper,
+                    e=first_exception,
                 )
             return await self.handle_exception(
-                chat_request_wrapper=chat_request_wrapper, e=e
+                request_id=request_id, chat_request_wrapper=chat_request_wrapper, e=e
             )
         except Exception as e:
             return await self.handle_exception(
-                chat_request_wrapper=chat_request_wrapper, e=e
+                request_id=request_id, chat_request_wrapper=chat_request_wrapper, e=e
             )
 
     # noinspection PyMethodMayBeStatic
@@ -271,6 +289,7 @@ class ChatCompletionManager:
     def handle_help_prompt(
         self,
         *,
+        request_id: str,
         chat_request_wrapper: ChatRequestWrapper,
         model_name: str,
         model_config: ChatModelConfig,
@@ -293,7 +312,7 @@ class ChatCompletionManager:
                 status_code=400, detail="User messages not found in the request"
             )
 
-        last_message_content: str = cast(str, user_messages[-1].content)
+        last_message_content: str | None = user_messages[-1].content
         if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
             logger.info(
                 f"Last message content: {last_message_content}, type: {type(last_message_content)}"
@@ -305,48 +324,41 @@ class ChatCompletionManager:
             and last_message_content.lower() in help_keywords
         ):
             logger.info(f"Help requested for model {model_name}: {model_config}")
-            response_messages: List[ChatCompletionMessage] = [
-                ChatCompletionMessage(
-                    role="assistant",
+            response_messages: List[AnyMessage] = [
+                AIMessage(
                     content=model_config.description or "No description available",
                 )
             ]
             if model_config.owner is not None:
                 response_messages.append(
-                    ChatCompletionMessage(
-                        role="assistant", content=f"Model owner: {model_config.owner}"
-                    )
+                    AIMessage(content=f"Model owner: {model_config.owner}")
                 )
             if (
                 model_config.model is not None
                 and model_config.model.provider is not None
             ):
                 response_messages.append(
-                    ChatCompletionMessage(
-                        role="assistant",
+                    AIMessage(
                         content=f"Model Provider: {model_config.model.provider}",
                     )
                 )
             if model_config.model is not None and model_config.model.model is not None:
                 response_messages.append(
-                    ChatCompletionMessage(
-                        role="assistant", content=f"Model: {model_config.model.model}"
-                    )
+                    AIMessage(content=f"Model: {model_config.model.model}")
                 )
             if model_config.example_prompts is not None:
                 response_messages.append(
-                    ChatCompletionMessage(
-                        role="assistant", content="Here are some example prompts:"
-                    )
+                    AIMessage(content="Here are some example prompts:")
                 )
                 response_messages.extend(
                     [
-                        ChatCompletionMessage(role="assistant", content=prompt.content)
+                        AIMessage(content=prompt.content)
                         for prompt in model_config.example_prompts
                     ]
                 )
 
             return self.write_response(
+                request_id=request_id,
                 chat_request_wrapper=chat_request_wrapper,
                 response_messages=response_messages,
             )
@@ -357,70 +369,21 @@ class ChatCompletionManager:
     def write_response(
         self,
         *,
+        request_id: str,
         chat_request_wrapper: ChatRequestWrapper,
-        response_messages: List[ChatCompletionMessage],
+        response_messages: List[AnyMessage],
     ) -> StreamingResponse | JSONResponse:
-        chat_model: str = chat_request_wrapper.model
-        should_stream_response: Optional[bool] = chat_request_wrapper.stream
-
-        if should_stream_response:
-
-            async def stream_response(
-                response_messages1: List[ChatCompletionMessage],
-            ) -> AsyncGenerator[str, None]:
-                for response_message in response_messages1:
-                    if response_message.content:
-                        chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
-                            id="1",
-                            created=int(time.time()),
-                            model=chat_model,
-                            choices=[
-                                ChunkChoice(
-                                    index=0,
-                                    delta=ChoiceDelta(
-                                        role="assistant",
-                                        content=response_message.content + "\n",
-                                    ),
-                                )
-                            ],
-                            usage=CompletionUsage(
-                                prompt_tokens=0,
-                                completion_tokens=0,
-                                total_tokens=0,
-                            ),
-                            object="chat.completion.chunk",
-                        )
-                        yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
-                yield "data: [DONE]\n\n"
-
-            return StreamingResponse(
-                content=stream_response(response_messages1=response_messages),
-                media_type="text/event-stream",
-            )
-        else:
-            choices: List[Choice] = [
-                Choice(index=i, message=m, finish_reason="stop")
-                for i, m in enumerate(response_messages)
-            ]
-            chat_response: ChatCompletion = ChatCompletion(
-                id="1",
-                model=chat_model,
-                choices=choices,
-                usage=CompletionUsage(
-                    prompt_tokens=0,
-                    completion_tokens=0,
-                    total_tokens=0,
-                ),
-                created=int(time.time()),
-                object="chat.completion",
-            )
-            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                logger.info(f"Returning help response: {chat_response.model_dump()}")
-
-            return JSONResponse(content=chat_response.model_dump())
+        return chat_request_wrapper.write_response(
+            request_id=request_id,
+            response_messages=response_messages,
+        )
 
     async def handle_exception(
-        self, *, chat_request_wrapper: ChatRequestWrapper, e: Exception
+        self,
+        *,
+        request_id: str,
+        chat_request_wrapper: ChatRequestWrapper,
+        e: Exception,
     ) -> StreamingResponse | JSONResponse:
         logger.error(
             f"Error in chat completion: {e} {type(e)} {e.__dict__.keys()}",
@@ -428,8 +391,7 @@ class ChatCompletionManager:
         )
         content = ExceptionLogger.extract_error_details(e)
         return self.write_response(
+            request_id=request_id,
             chat_request_wrapper=chat_request_wrapper,
-            response_messages=[
-                ChatCompletionMessage(role="assistant", content=content)
-            ],
+            response_messages=[AIMessage(content=content)],
         )

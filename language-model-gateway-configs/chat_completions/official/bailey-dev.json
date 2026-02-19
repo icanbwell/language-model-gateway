@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
+  "id": "bailey-dev",
+  "name": "Bailey Dev",
+  "description": "Calls Bailey",
+  "type": "passthru",
+  "url": "https://api.dev.icanbwell.com/bailey/v1",
+  "streaming_enabled": true,
+  "model": {
+    "model": "Bailey AI",
+    "provider": "passthru"
+  },
+  "auth_config": {
+    "name": "bailey",
+    "url": "https://api.dev.icanbwell.com/bailey/v1",
+    "auth": "jwt_token",
+    "auth_providers": [
+      "oktafhirdev",
+      "apigatewaydev"
+    ],
+    "headers": {
+      "X-Client-Id": "Aiden"
+    }
+  },
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "example_prompts": [
+    {
+      "role": "user",
+      "content": "Show my health summary"
+    }
+  ],
+  "system_prompts": [
+    {
+      "content": "If a user does not provide a person ID, use 31c718e9-a3d0-400f-8d95-5bcd9ece5c09 as the default person ID.",
+      "role": "system"
+    }
+  ]
+}

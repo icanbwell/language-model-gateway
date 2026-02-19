@@ -100,3 +100,18 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def tool_call_timeout_seconds(self) -> int:
         """Timeout in seconds for tool calls."""
         return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))
+
+    @property
+    def app_login_uri(self) -> str:
+        value = os.environ.get("APP_LOGIN_URI")
+        return value if value else "/app/login"
+
+    @property
+    def app_token_save_uri(self) -> str:
+        value = os.environ.get("APP_TOKEN_SAVE_URI")
+        return value if value else "/app/token"
+
+    @property
+    def system_commands(self) -> list[str]:
+        system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
+        return system_commands.split(",") if system_commands else []

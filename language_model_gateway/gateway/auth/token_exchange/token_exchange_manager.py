@@ -357,7 +357,7 @@ class TokenExchangeManager:
                 raise
             except Exception as e:
                 logger.exception(
-                    f"Error verifying token for tool {tool_config.name}: {e}"
+                    f"{type(e).__name__} Error verifying token for tool {tool_config.name}: {e}"
                 )
                 raise AuthorizationNeededException(
                     message="Invalid or expired token provided in Authorization header."
@@ -505,7 +505,11 @@ class TokenExchangeManager:
         id_token_item = Token.create_from_token(token=id_token)
 
         refresh_token: str | None = token.get("refresh_token")
-        refresh_token_item = Token.create_from_token(token=refresh_token)
+        # refresh tokens can be non JWTs so we should still create a token item for them even if we can't decode them
+        try:
+            refresh_token_item = Token.create_from_token(token=refresh_token)
+        except Exception:
+            refresh_token_item = None
 
         if access_token is None:
             raise ValueError("access_token was not found in the token response")
@@ -547,6 +551,7 @@ class TokenExchangeManager:
             created=datetime.now(UTC),
             referring_email=referring_email,
             referring_subject=referring_subject,
+            refresh_token_raw=refresh_token,
         )
         return token_cache_item
 
@@ -560,6 +565,21 @@ class TokenExchangeManager:
             filter_dict={
                 "referring_subject": referring_subject,
                 "auth_provider": auth_provider.lower(),
+            },
+        )
+        for item in results:
+            await self.token_repository.delete_by_id(
+                collection_name=self.token_collection_name,
+                document_id=item.id,
+            )
+
+    async def delete_all_tokens_async(self, referring_subject: str) -> None:
+        # delete any matching tokens
+        results: list[TokenCacheItem] = await self.token_repository.find_many(
+            collection_name=self.token_collection_name,
+            model_class=TokenCacheItem,
+            filter_dict={
+                "referring_subject": referring_subject,
             },
         )
         for item in results:

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Token Capture</title>
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #e5e7eb;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        p.description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.75rem;
+            background: #1e40af;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background: #1d3a9c;
+        }
+
+        .helper-text {
+            margin-top: 0.75rem;
+            font-size: 0.8125rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+<div class="logo">bwell</div>
+<section class="card">
+    <h1>Paste Your Token</h1>
+    <p class="description">
+        Provide the access or ID token issued by your identity provider. The token will be stored securely
+        and used to authorize Aiden actions for this session.
+    </p>
+    <form method="post">
+        <label for="token">Token</label>
+        <textarea id="token" name="token" required placeholder="eyJhbGciOi..."></textarea>
+        <p class="helper-text">Never share tokens over chat or email. Submit them only on this page.</p>
+        <button type="submit">Save Token</button>
+    </form>
+</section>
+</body>
+</html>
+

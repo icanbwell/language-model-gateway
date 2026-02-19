@@ -1,31 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "bailey",
-  "name": "Bailey",
+  "id": "bailey-prod",
+  "name": "Bailey Prod",
   "description": "Calls Bailey",
   "type": "passthru",
-  "url": "https://baileyai.dev.bwell.zone/bailey/v1",
+  "url": "https://api.prod.icanbwell.com/bailey/v1",
+  "streaming_enabled": true,
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"
   },
   "auth_config": {
     "name": "bailey",
-    "url": "https://baileyai.dev.bwell.zone/bailey/v1",
+    "url": "https://api.prod.icanbwell.com/bailey/v1",
     "auth": "jwt_token",
     "auth_providers": [
-      "oktafhirdev"
+      "oktafhirprod"
     ],
     "headers": {
       "X-Client-Id": "Aiden"
     }
   },
-  "system_prompts": [
-    {
-      "role": "system",
-      "content": "You are a tool that searches and retrieves from FHIR server.  You can also access the current date using the current_date tool."
-    }
-  ],
   "headers": [
     {
       "key": "Authorization",
@@ -36,6 +31,12 @@
     {
       "role": "user",
       "content": "Show my health summary"
+    }
+  ],
+  "system_prompts": [
+    {
+      "content": "If a user does not provide a person ID, use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a as the default person ID.",
+      "role": "system"
     }
   ]
 }

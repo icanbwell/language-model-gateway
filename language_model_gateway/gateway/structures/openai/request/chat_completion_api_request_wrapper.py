@@ -1,6 +1,6 @@
 import json
 import time
-from typing import Literal, cast, override, Any, List, Dict, Optional
+from typing import AsyncIterator, Literal, cast, override, Any, List, Dict, Optional
 
 from langchain_core.messages import (
     AIMessage,
@@ -39,6 +39,7 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
+    convert_message_content_to_string,
 )
 from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
 
@@ -267,3 +268,42 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         """
         # ChatCompletions API does not support passing in tools.
         return []
+
+    @override
+    def stream_response(
+        self,
+        *,
+        response_messages1: List[AnyMessage],
+    ) -> AsyncIterator[str]:
+        """Streams the response messages as Server-Sent Events (SSE) in the OpenAI format."""
+
+        async def response_stream() -> AsyncIterator[str]:
+            for response_message in response_messages1:
+                message_content: str = convert_message_content_to_string(
+                    response_message.content
+                )
+                if message_content:
+                    chat_stream_response: ChatCompletionChunk = ChatCompletionChunk(
+                        id="1",
+                        created=int(time.time()),
+                        model=self.model,
+                        choices=[
+                            ChunkChoice(
+                                index=0,
+                                delta=ChoiceDelta(
+                                    role="assistant",
+                                    content=message_content + "\n",
+                                ),
+                            )
+                        ],
+                        usage=CompletionUsage(
+                            prompt_tokens=0,
+                            completion_tokens=0,
+                            total_tokens=0,
+                        ),
+                        object="chat.completion.chunk",
+                    )
+                    yield f"data: {json.dumps(chat_stream_response.model_dump())}\n\n"
+            yield "data: [DONE]\n\n"
+
+        return response_stream()

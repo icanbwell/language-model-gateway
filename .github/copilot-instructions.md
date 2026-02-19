@@ -45,6 +45,8 @@
 - Config or env access that bypasses `LanguageModelGatewayEnvironmentVariables`/`ConfigReader`, leading to inconsistent behavior across workers.
 - Tests that cannot run with `make tests` or that rely on local resources outside the Compose stack.
 - Dependency updates without synchronized `Pipfile`/`Pipfile.lock` changes.
+- Run `make run-pre-commit` after a change to ensure the code passes linter.
+- Don't put code in __init__.py files.
 
 ## Non-Blocking Suggestions (Nice to Have)
 - Refactor duplicated logic in routers/managers/providers into shared helpers.

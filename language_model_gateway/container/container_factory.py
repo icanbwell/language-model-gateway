@@ -36,6 +36,7 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
+from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
@@ -43,6 +44,12 @@ from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.managers.system_command_manager import (
+    SystemCommandManager,
+)
+from language_model_gateway.gateway.managers.token_submission_manager import (
+    TokenSubmissionManager,
+)
 from language_model_gateway.gateway.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
 )
@@ -284,6 +291,9 @@ class LanguageModelGatewayContainerFactory:
                 auth_manager=c.resolve(AuthManager),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 tool_auth_manager=c.resolve(ToolAuthManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 
@@ -338,6 +348,16 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             ConfigReader, lambda c: ConfigReader(cache=c.resolve(ConfigExpiringCache))
         )
+
+        container.singleton(
+            SystemCommandManager,
+            lambda c: SystemCommandManager(
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
+        )
         container.singleton(
             ChatCompletionManager,
             lambda c: ChatCompletionManager(
@@ -345,6 +365,26 @@ class LanguageModelGatewayContainerFactory:
                 langchain_provider=c.resolve(LangChainCompletionsProvider),
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
+                system_command_manager=c.resolve(SystemCommandManager),
+            ),
+        )
+        container.singleton(
+            AppLoginManager,
+            lambda c: AppLoginManager(
+                http_client_factory=c.resolve(HttpClientFactory),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                auth_config_reader=c.resolve(AuthConfigReader),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+            ),
+        )
+        container.singleton(
+            TokenSubmissionManager,
+            lambda c: TokenSubmissionManager(
+                token_reader=c.resolve(TokenReader),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
 
