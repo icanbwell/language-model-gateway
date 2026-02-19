@@ -46,6 +46,9 @@ class ChatRequestWrapper(abc.ABC):
     def response_json_schema(self) -> str | None: ...
 
     @abstractmethod
+    def create_first_sse_message(self, *, request_id: str) -> str: ...
+
+    @abstractmethod
     def create_sse_message(
         self,
         *,

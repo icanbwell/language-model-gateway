@@ -119,6 +119,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         return str(response_json_schema) if response_json_schema else None
 
     @override
+    def create_first_sse_message(self, *, request_id: str) -> str:
+        raise NotImplementedError(
+            "ChatCompletion API does not have a separate first SSE message.  The first message is created in the same format as subsequent messages with create_sse_message."
+        )
+
+    @override
     def create_sse_message(
         self,
         *,
