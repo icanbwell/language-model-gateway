@@ -15,7 +15,8 @@
     "url": "https://api.dev.icanbwell.com/bailey/v1",
     "auth": "jwt_token",
     "auth_providers": [
-      "oktafhirdev"
+      "oktafhirdev",
+      "apigatewaydev"
     ],
     "headers": {
       "X-Client-Id": "Aiden"

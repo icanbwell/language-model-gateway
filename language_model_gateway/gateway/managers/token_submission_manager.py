@@ -82,15 +82,6 @@ class TokenSubmissionManager:
         if verified_token is None:
             raise HTTPException(status_code=400, detail="Token verification failed")
 
-        token_issuer = getattr(verified_token, "issuer", None)
-        if token_issuer and auth_config.issuer and token_issuer != auth_config.issuer:
-            logger.error(
-                "Token issuer '%s' does not match expected '%s'",
-                token_issuer,
-                auth_config.issuer,
-            )
-            raise HTTPException(status_code=400, detail="Token issuer mismatch")
-
         try:
             token_cache_item = TokenCacheItem.create(
                 token=verified_token,
