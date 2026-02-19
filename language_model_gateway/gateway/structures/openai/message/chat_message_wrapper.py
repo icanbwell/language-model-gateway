@@ -1,5 +1,6 @@
 import abc
 from abc import abstractmethod
+from typing import Literal
 
 from langchain_core.messages import BaseMessage
 from openai.types.chat import ChatCompletionMessageParam
@@ -39,3 +40,7 @@ class ChatMessageWrapper(abc.ABC):
 
     @abstractmethod
     def to_responses_api_message(self) -> ResponseInputItemParam: ...
+
+    @property
+    @abstractmethod
+    def role(self) -> Literal["system", "user", "assistant"] | None: ...

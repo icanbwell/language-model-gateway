@@ -1,4 +1,4 @@
-from typing import Optional, cast, override
+from typing import Optional, cast, override, Literal
 
 from langchain_community.adapters.openai import convert_dict_to_message
 from langchain_core.messages import BaseMessage
@@ -32,13 +32,7 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     @override
     @property
     def system_message(self) -> bool:
-        # Use getattr with default to avoid mypy union-attr error
-        role = getattr(self.message, "role", None)
-        if role is not None:
-            return True if role == "system" else False
-        elif isinstance(self.message, dict):
-            return self.message.get("role") == "system"
-        return False
+        return self.role == "system"
 
     @override
     @property
@@ -72,5 +66,18 @@ class ChatCompletionApiMessageWrapper(ChatMessageWrapper):
     @override
     def to_responses_api_message(self) -> ResponseInputItemParam:
         raise NotImplementedError(
-            "Conversion from ChatCompletionMessageParam to EasyInputMessageParam is not implemented yet."
+            "Conversion from ChatCompletionMessageParam to EasyInputMessageParam is not implemented."
         )
+
+    @override
+    @property
+    def role(self) -> Literal["system", "user", "assistant"] | None:
+        role = getattr(self.message, "role", None)
+        if role is not None:
+            return cast(Literal["system", "user", "assistant"], role)
+        elif isinstance(self.message, dict):
+            return cast(
+                Literal["system", "user", "assistant"], self.message.get("role")
+            )
+        else:
+            return None

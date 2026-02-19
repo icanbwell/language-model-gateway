@@ -1,4 +1,4 @@
-from typing import Optional, cast, override
+from typing import Optional, cast, override, Literal
 
 from langchain_core.messages import BaseMessage
 from openai.types.chat import ChatCompletionMessageParam
@@ -61,3 +61,17 @@ class ResponsesApiMessageWrapper(ChatMessageWrapper):
     @override
     def to_responses_api_message(self) -> ResponseInputItemParam:
         return self.input_
+
+    @override
+    @property
+    def role(self) -> Literal["system", "user", "assistant"] | None:
+        # Use getattr with default to avoid mypy union-attr error
+        role = getattr(self.input_, "role", None)
+        if role is not None:
+            return cast(Optional[Literal["system", "user", "assistant"]], role)
+        elif isinstance(self.input_, dict):
+            return cast(
+                Optional[Literal["system", "user", "assistant"]],
+                self.input_.get("role"),
+            )
+        return None

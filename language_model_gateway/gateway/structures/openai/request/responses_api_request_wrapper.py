@@ -1,3 +1,4 @@
+import time
 from datetime import datetime, UTC
 from typing import AsyncIterable, Literal, Union, override, Optional, List, Any
 
@@ -13,6 +14,7 @@ from openai.types.responses import (
     ResponseOutputMessage,
     ResponseOutputText,
     ResponseOutputRefusal,
+    ResponseCreatedEvent,
 )
 
 from language_model_gateway.configs.config_schema import AgentConfig
@@ -93,6 +95,26 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     @property
     def response_json_schema(self) -> str | None:
         return None  # Not applicable for ResponsesRequest
+
+    @override
+    def create_first_sse_message(self, *, request_id: str) -> str:
+        # For the first SSE message, we can include any initial content if needed. Here we just return an empty message to indicate the start of the stream.
+        message: ResponseCreatedEvent = ResponseCreatedEvent(
+            response=Response(
+                id=request_id,
+                model=self.model,
+                status="in_progress",
+                created_at=time.time(),
+                object="response",
+                output=[],
+                parallel_tool_calls=False,
+                tools=[],
+                tool_choice="auto",
+            ),
+            type="response.created",
+            sequence_number=0,
+        )
+        return f"data: {message.model_dump_json()}\n\n"
 
     @override
     def create_sse_message(
@@ -245,3 +267,62 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         raise NotImplementedError(
             "Streaming responses is not implemented for ResponsesApiRequestWrapper"
         )
+
+    @override
+    @property
+    def instructions(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate instructions field, so we return None."""
+        return self.request.instructions
+
+    @override
+    @property
+    def previous_response_id(self) -> Optional[str]:
+        """Responses API does have a previous_response_id."""
+        return self.request.previous_response_id
+
+    @override
+    @property
+    def store(self) -> Optional[bool]:
+        """Responses API does have a store parameter."""
+        return self.request.store
+
+    @override
+    @property
+    def user_input(self) -> Optional[str]:
+        """Extract the user input from the request."""
+        if self.request.input is not None:
+            if isinstance(self.request.input, str):
+                return self.request.input
+            elif isinstance(self.request.input, list):
+                text_parts: list[str] = []
+                for part in self.request.input:
+                    if isinstance(part, dict):
+                        text_value = part.get("text")
+                        if isinstance(text_value, str):
+                            text_parts.append(text_value)
+                return " ".join(text_parts)
+        return ""
+
+    @override
+    @property
+    def metadata(self) -> Optional[dict[str, Any]]:
+        """Responses API does have a metadata field."""
+        return self.request.metadata
+
+    @override
+    @property
+    def max_tokens(self) -> Optional[int]:
+        """Responses API does have a max_output_tokens parameter, but it's not the same as max_tokens in ChatCompletion API, so we return None here to avoid confusion."""
+        return None
+
+    @override
+    @property
+    def max_output_tokens(self) -> Optional[int]:
+        """Return the max_output_tokens parameter from the request, which is specific to the Responses API."""
+        return self.request.max_output_tokens
+
+    @override
+    @property
+    def temperature(self) -> Optional[float]:
+        """Return the temperature parameter from the request, which is used in both ChatCompletion and Responses API."""
+        return self.request.temperature

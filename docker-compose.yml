@@ -48,7 +48,7 @@ services:
       # These define the connection to the identity provider for JWT validation
       # This lists the audiences that are allowed to access the API
       # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: "client1,client3,oktafhirdev,apigatewaydev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod"
+      AUTH_PROVIDERS: "client1,client3,oktafhirdev,apigatewaydev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod,apigatewayprod"
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -77,7 +77,7 @@ services:
       AUTH_AUDIENCE_APIGATEWAYDEV: "3i43562q02ghinf28av0nqv6di"  # OAuth client id for API Gateway tokens.
       AUTH_CLIENT_ID_APIGATEWAYDEV: "3i43562q02ghinf28av0nqv6di"  # OIDC discovery document for API Gateway tokens.
       AUTH_WELL_KNOWN_URI_APIGATEWAYDEV: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_o71QMdxTG/.well-known/openid-configuration"  # Friendly display name shown for the API Gateway provider.
-      AUTH_FRIENDLY_NAME_APIGATEWAYDEV: "b.well API Gateway"  # Scope set requested from the API Gateway provider.
+      AUTH_FRIENDLY_NAME_APIGATEWAYDEV: "b.well API Gateway Dev"  # Scope set requested from the API Gateway provider.
       AUTH_SCOPE_APIGATEWAYDEV: "openid email profile"
       # Okta FHIR Client Sandbox
       AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
@@ -100,6 +100,14 @@ services:
       AUTH_CLIENT_ID_OKTAFHIRPROD: "0oargxz9fkFFcSM38697"
       AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
+      AUTH_EXTRA_INFO_OKTAFHIRPROD: '{"api_gateway_base_url":"https://api.prod.icanbwell.com","client_keys":{"Trial": "eyJyIjoiMDMyZHF0ZWN1ODVkaWZxazU0dTQiLCJlbnYiOiJwcm9kIiwia2lkIjoiYndlbGxfdHJpYWwtcHJvZCJ9", "Demo": "eyJyIjoiNnl5bXVyNHR0eGUzdjA1cTk4IiwiZW52IjoicHJvZCIsImtpZCI6ImJ3ZWxsX2RlbW8tcHJvZCJ9"}}'
+      # API Gateway Dev
+      AUTH_ISSUER_APIGATEWAYPROD: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nj7c9EeTG"
+      AUTH_AUDIENCE_APIGATEWAYPROD: "5h2u1p2tvrq9q5sar7hvia08sr"  # OAuth client id for API Gateway tokens.
+      AUTH_CLIENT_ID_APIGATEWAYPROD: "5h2u1p2tvrq9q5sar7hvia08sr"  # OIDC discovery document for API Gateway tokens.
+      AUTH_WELL_KNOWN_URI_APIGATEWAYPROD: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nj7c9EeTG/.well-known/openid-configuration"
+      AUTH_FRIENDLY_NAME_APIGATEWAYPROD: "b.well API Gateway Prod"  # Scope set requested from the API Gateway provider.
+      AUTH_SCOPE_APIGATEWAYPROD: "openid email profile"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       APP_LOGIN_URI: "http://localhost:5050/app/login"

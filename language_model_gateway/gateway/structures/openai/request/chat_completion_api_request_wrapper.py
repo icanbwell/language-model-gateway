@@ -24,15 +24,11 @@ from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as Chunk
 
 from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
 from language_model_gateway.gateway.structures.openai.message.chat_completion_api_message_wrapper import (
     ChatCompletionApiMessageWrapper,
 )
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
-)
-from language_model_gateway.gateway.structures.openai.message.responses_api_message_wrapper import (
-    ResponsesApiMessageWrapper,
 )
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
@@ -82,11 +78,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
 
     @override
     def create_system_message(self, *, content: str) -> ChatMessageWrapper:
-        return (
-            ResponsesApiMessageWrapper.create_system_message(content=content)
-            if isinstance(self.request, ResponsesRequest)
-            else ChatCompletionApiMessageWrapper.create_system_message(content=content)
-        )
+        return ChatCompletionApiMessageWrapper.create_system_message(content=content)
 
     @property
     @override
@@ -125,6 +117,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             return None
         response_json_schema = json_response_format.get("json_schema")
         return str(response_json_schema) if response_json_schema else None
+
+    @override
+    def create_first_sse_message(self, *, request_id: str) -> str:
+        raise NotImplementedError(
+            "ChatCompletion API does not have a separate first SSE message.  The first message is created in the same format as subsequent messages with create_sse_message."
+        )
 
     @override
     def create_sse_message(
@@ -307,3 +305,54 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             yield "data: [DONE]\n\n"
 
         return response_stream()
+
+    @override
+    @property
+    def instructions(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate instructions field, so we return None."""
+        return None
+
+    @override
+    @property
+    def previous_response_id(self) -> Optional[str]:
+        """ChatCompletion API does not have a separate previous_response_id field, so we return None."""
+        return None
+
+    @override
+    @property
+    def store(self) -> Optional[bool]:
+        """ChatCompletion API does not have a separate store field, so we return None."""
+        return None
+
+    @override
+    @property
+    def user_input(self) -> Optional[str]:
+        """Extract the user input from the messages. We assume the user input is the content of the last message with role 'user'."""
+        for message in reversed(self._messages):
+            if message.role == "user":
+                return message.content
+        return None
+
+    @override
+    @property
+    def metadata(self) -> Optional[dict[str, Any]]:
+        """Responses API does have a metadata field."""
+        return self.request.metadata
+
+    @override
+    @property
+    def max_tokens(self) -> Optional[int]:
+        """Return the max_tokens parameter from the request, which is used in both ChatCompletion and Responses API."""
+        return self.request.max_tokens
+
+    @override
+    @property
+    def max_output_tokens(self) -> Optional[int]:
+        """Return the max_output_tokens parameter from the request, which is used in both ChatCompletion and Responses API."""
+        return self.request.max_completion_tokens
+
+    @override
+    @property
+    def temperature(self) -> Optional[float]:
+        """Return the temperature parameter from the request, which is used in both ChatCompletion and Responses API."""
+        return self.request.temperature

@@ -1,18 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "bailey-prod",
-  "name": "Bailey Prod",
-  "description": "Calls Bailey",
-  "type": "passthru",
-  "url": "https://api.prod.icanbwell.com/bailey/v1",
-  "streaming_enabled": false,
-  "model": {
-    "model": "Bailey AI",
-    "provider": "passthru"
-  },
   "auth_config": {
-    "name": "bailey",
-    "url": "https://api.prod.icanbwell.com/bailey/v1",
     "auth": "jwt_token",
     "auth_providers": [
       "oktafhirprod",
@@ -20,24 +8,36 @@
     ],
     "headers": {
       "X-Client-Id": "Aiden"
-    }
+    },
+    "name": "bailey",
+    "url": "https://baileyai.prod.bwell.zone/bailey/v1"
   },
+  "description": "Calls Bailey",
+  "example_prompts": [
+    {
+      "content": "Show my health summary",
+      "role": "user"
+    }
+  ],
   "headers": [
     {
       "key": "Authorization",
       "value": "Bearer OPENAI_API_KEY"
     }
   ],
-  "example_prompts": [
-    {
-      "role": "user",
-      "content": "Show my health summary"
-    }
-  ],
+  "id": "bailey-prod-okta",
+  "model": {
+    "model": "Bailey AI",
+    "provider": "passthru"
+  },
+  "name": "Bailey Prod Okta",
+  "streaming_enabled": false,
   "system_prompts": [
     {
       "content": "If a user does not provide a person ID, use 072b2b1c-942d-542c-8e51-f9dc0dadcc0a as the default person ID.",
       "role": "system"
     }
-  ]
+  ],
+  "type": "passthru",
+  "url": "https://baileyai.prod.bwell.zone/bailey/v1"
 }
