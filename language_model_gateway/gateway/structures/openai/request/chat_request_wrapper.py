@@ -111,6 +111,16 @@ class ChatRequestWrapper(abc.ABC):
             )
             return JSONResponse(content=chat_response)
 
+    def write_non_streaming_response(
+        self, *, request_id: str, response_messages: list[AnyMessage]
+    ) -> JSONResponse:
+        chat_response = self.create_non_streaming_response(
+            request_id=request_id,
+            responses=response_messages,
+            json_output_requested=False,
+        )
+        return JSONResponse(content=chat_response)
+
     @abstractmethod
     @property
     def instructions(self) -> Optional[str]: ...
