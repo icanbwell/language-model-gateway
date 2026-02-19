@@ -41,6 +41,6 @@ class ChatMessageWrapper(abc.ABC):
     @abstractmethod
     def to_responses_api_message(self) -> ResponseInputItemParam: ...
 
-    @abstractmethod
     @property
+    @abstractmethod
     def role(self) -> Literal["system", "user", "assistant"] | None: ...
