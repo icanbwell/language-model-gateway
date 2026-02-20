@@ -31,7 +31,7 @@ from language_model_gateway.gateway.structures.openai.request.chat_request_wrapp
 
 
 class ResponsesApiRequestWrapper(ChatRequestWrapper):
-    def __init__(self, chat_request: ResponsesRequest) -> None:
+    def __init__(self, *, chat_request: ResponsesRequest) -> None:
         """
         Wraps an OpenAI /responses API request and provides a unified interface so the code can use it
 
@@ -138,6 +138,20 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
             logprobs=[],
         )
         return f"data: {message.model_dump_json()}\n\n"
+
+    def create_debug_sse_message(
+        self,
+        *,
+        request_id: str,
+        content: str | None,
+        usage_metadata: UsageMetadata | None,
+    ) -> str:
+
+        return self.create_sse_message(
+            request_id=request_id,
+            content=f"\n\n> {content}" if content else None,
+            usage_metadata=usage_metadata,
+        )
 
     @override
     def create_final_sse_message(

@@ -41,7 +41,7 @@ from language_model_gateway.gateway.utilities.json_extractor import JsonExtracto
 
 
 class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
-    def __init__(self, chat_request: ChatRequest) -> None:
+    def __init__(self, *, chat_request: ChatRequest) -> None:
         """
         Wraps an OpenAI /chat/completions request to provide a consistent interface for different request types.
 
@@ -157,6 +157,20 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             object="chat.completion.chunk",
         )
         return f"data: {chat_model_stream_response.model_dump_json()}\n\n"
+
+    def create_debug_sse_message(
+        self,
+        *,
+        request_id: str,
+        content: str | None,
+        usage_metadata: UsageMetadata | None,
+    ) -> str:
+
+        return self.create_sse_message(
+            request_id=request_id,
+            content=f"\n\n> {content}" if content else None,
+            usage_metadata=usage_metadata,
+        )
 
     @override
     def create_non_streaming_response(

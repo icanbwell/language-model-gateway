@@ -25,7 +25,7 @@ from langchain_community.adapters.openai import (
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AnyMessage,
-    BaseMessage,
+    BaseMessage, UsageMetadata,
 )
 from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
@@ -34,6 +34,7 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
+from openai.types import CompletionUsage
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.language_model_gateway_exception import (
@@ -108,6 +109,8 @@ class LangGraphToOpenAIConverter:
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> AsyncGenerator[str, None]:
         """
         Asynchronously generate streaming responses from the agent.
@@ -134,6 +137,8 @@ class LangGraphToOpenAIConverter:
                 compiled_state_graph=compiled_state_graph,
                 messages=messages,
                 request_information=request_information,
+                config=config,
+                state=state,
             ):
                 if not event:
                     continue
@@ -146,27 +151,27 @@ class LangGraphToOpenAIConverter:
                 ):
                     yield chunk
         except TokenRetrievalError as e:
-            logger.exception(e, stack_info=True)
             message: str = f"Token retrieval error: {e}.  If you are running locally, your AWS session may have expired.  Please re-authenticate using `aws sso login --profile [role]`."
+            logger.exception(message)
             yield chat_request_wrapper.create_sse_message(
                 request_id=request_id,
                 usage_metadata=None,
                 content=message,
+                source="error",
             )
         except Exception as e:
             tb = traceback.format_exc()
-            logger.error(
-                f"Exception in _stream_resp_async_generator: {e}\n{tb}", exc_info=True
-            )
+            logger.exception(f"Exception in _stream_resp_async_generator: {e}\n{tb}")
             error_message = f"Error: {e}\nTraceback:\n{tb}"
             yield chat_request_wrapper.create_sse_message(
                 request_id=request_id,
                 usage_metadata=None,
                 content=f"\n{error_message}\n",
+                source="error",
             )
 
         yield chat_request_wrapper.create_final_sse_message(
-            request_id=request_id, usage_metadata=None
+            request_id=request_id, usage_metadata=None, source="final"
         )
 
     async def call_agent_with_input(
@@ -176,6 +181,8 @@ class LangGraphToOpenAIConverter:
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> StreamingResponse | JSONResponse:
         """
         Call the agent with the provided input and return the response.
@@ -185,6 +192,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
             request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will be created using the messages and request information.
 
         Returns:
             The response as a StreamingResponse or JSONResponse.
@@ -199,6 +208,8 @@ class LangGraphToOpenAIConverter:
                     compiled_state_graph=compiled_state_graph,
                     system_messages=system_messages,
                     request_information=request_information,
+                    config=config,
+                    state=state,
                 ),
                 media_type="text/event-stream",
             )
@@ -223,6 +234,8 @@ class LangGraphToOpenAIConverter:
                     chat_request_wrapper=chat_request_wrapper,
                     system_messages=system_messages,
                     request_information=request_information,
+                    config=config,
+                    state=state,
                 )
 
                 content_json: Dict[str, Any] = (
@@ -237,32 +250,36 @@ class LangGraphToOpenAIConverter:
 
                 return JSONResponse(content=content_json)
             except* TokenRetrievalError as e:
-                logger.exception(e, stack_info=True)
                 first_exception = e.exceptions[0]
+                error_message = (
+                    f"AWS Bedrock Token retrieval error: {type(first_exception)} {first_exception}."
+                    + "  If you are running locally, your AWS session may have expired."
+                    + "  Please re-authenticate using `aws sso login --profile [role]`."
+                )
+                logger.exception(error_message)
                 raise HTTPException(
                     status_code=401,
-                    detail=f"AWS Bedrock Token retrieval error: {type(first_exception)} {first_exception}."
-                    + "  If you are running locally, your AWS session may have expired."
-                    + "  Please re-authenticate using `aws sso login --profile [role]`.",
+                    detail=error_message,
                 )
             except* botocore.exceptions.NoCredentialsError as e:
-                logger.exception(e, stack_info=True)
                 first_exception1 = e.exceptions[0]
+                error_message = (
+                    f"AWS Bedrock Login error: {type(first_exception1)} {first_exception1}."
+                    + "  If you are running locally, your AWS session may have expired."
+                    + "  Please re-authenticate using `aws sso login --profile [role]`."
+                )
+                logger.exception(error_message)
                 raise HTTPException(
                     status_code=401,
-                    detail=f"AWS Bedrock Login error: {type(first_exception1)} {first_exception1}."
-                    + "  If you are running locally, your AWS session may have expired."
-                    + "  Please re-authenticate using `aws sso login --profile [role]`.",
+                    detail=error_message,
                 )
             except* Exception as e:
-                logger.exception(e, stack_info=True)
                 first_exception2 = e.exceptions[0] if len(e.exceptions) > 0 else e
                 # print type of first exception in ExceptionGroup
                 # if there is just one exception, we can log it directly
                 if len(e.exceptions) > 0:
-                    logger.error(
+                    logger.exception(
                         f"ExceptionGroup in call_agent_with_input: {type(first_exception2)} {first_exception2}",
-                        exc_info=True,
                     )
                 # Get the traceback for the first exception
                 stack = "".join(
@@ -272,9 +289,11 @@ class LangGraphToOpenAIConverter:
                         first_exception2.__traceback__,
                     )
                 )
+                error_message = f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}"
+                logger.exception(error_message)
                 raise HTTPException(
                     status_code=500,
-                    detail=f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}",
+                    detail=error_message,
                 )
 
     @staticmethod
@@ -368,6 +387,8 @@ class LangGraphToOpenAIConverter:
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: List[ChatMessageWrapper],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> AsyncGenerator[str, None]:
         """
         Get the streaming response asynchronously.
@@ -377,6 +398,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph: The compiled state graph.
             system_messages: The list of chat completion message parameters.
             request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will be created using the messages and request information.
 
         Returns:
             The streaming response as an async generator.
@@ -387,12 +410,14 @@ class LangGraphToOpenAIConverter:
         ]
         messages: List[ChatMessageWrapper] = [s for s in system_messages] + new_messages
 
-        logger.info(f"Streaming response {request_information.request_id} from agent")
+        logger.debug(f"Streaming response {request_information.request_id} from agent")
         generator: AsyncGenerator[str, None] = self._stream_resp_async_generator(
             chat_request_wrapper=chat_request_wrapper,
             compiled_state_graph=compiled_state_graph,
             messages=messages,
             request_information=request_information,
+            config=config,
+            state=state,
         )
         return generator
 
@@ -403,6 +428,8 @@ class LangGraphToOpenAIConverter:
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> List[AnyMessage]:
         """
         Run the graph with the provided messages asynchronously.
@@ -411,16 +438,18 @@ class LangGraphToOpenAIConverter:
             messages: The list of role and incoming message type tuples.
             compiled_state_graph: The compiled state graph.
             request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will be created using the messages and request information.
 
         Returns:
             The list of any messages.
         """
 
-        input_: MyMessagesState = self.create_state(
+        input_: MyMessagesState = state or self.create_state(
             messages=messages,
             request_information=request_information,
         )
-        config: RunnableConfig = {
+        config = config or {
             "configurable": {
                 "thread_id": request_information.conversation_thread_id,
                 "user_id": request_information.user_id,
@@ -432,7 +461,7 @@ class LangGraphToOpenAIConverter:
             )
         except AttributeError as e:
             # Fallback if errorfactory is not available
-            logger.error(f"AttributeError in throttling handling: {e}")
+            logger.exception(f"AttributeError in throttling handling: {e}")
             raise
         except Exception as e:
             # Try to catch ThrottlingException dynamically
@@ -440,7 +469,7 @@ class LangGraphToOpenAIConverter:
                 hasattr(e, "__class__")
                 and e.__class__.__name__ == "ThrottlingException"
             ):
-                logger.error(f"AWS ThrottlingException: {e}")
+                logger.exception(f"AWS ThrottlingException: {e}")
                 raise HTTPException(
                     status_code=429,
                     detail="AWS request throttled. Please try again later.",
@@ -456,6 +485,8 @@ class LangGraphToOpenAIConverter:
         messages: List[BaseMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream the graph with the provided messages asynchronously.
@@ -463,12 +494,15 @@ class LangGraphToOpenAIConverter:
         Args:
             messages: The list of role and incoming message type tuples.
             compiled_state_graph: The compiled state graph.
+            request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will
 
         Yields:
             The standard or custom stream event.
         """
 
-        config: RunnableConfig = {
+        config = config or {
             "configurable": {
                 "thread_id": request_information.conversation_thread_id,
                 "user_id": request_information.user_id,
@@ -477,7 +511,8 @@ class LangGraphToOpenAIConverter:
         try:
             event: StandardStreamEvent | CustomStreamEvent
             async for event in compiled_state_graph.astream_events(
-                input=self.create_state(
+                input=state
+                or self.create_state(
                     messages=messages,
                     request_information=request_information,
                 ),
@@ -490,8 +525,9 @@ class LangGraphToOpenAIConverter:
                 convert_message_to_dict(m) for m in messages
             ]
             logger.exception(
-                f"ToolException occurred: {e}. Messages: {messages_dict}",
-                stack_info=True,
+                "ToolException occurred: {}. Messages: {}",
+                e,
+                messages_dict,
             )
             raise LanguageModelGatewayException(
                 f"Tool Error streaming graph with messages: {e}"
@@ -499,11 +535,11 @@ class LangGraphToOpenAIConverter:
         except Exception as e:
             messages_dict = [convert_message_to_dict(m) for m in messages]
             logger.exception(
-                f"Exception occurred: {e}. Messages: {messages_dict}", stack_info=True
+                "Exception occurred while streaming graph with messages: {}. Messages: {}",
+                e,
+                messages_dict,
             )
-            raise LanguageModelGatewayException(
-                f"Error streaming graph with messages: {e}"
-            ) from e
+            raise LanguageModelGatewayException(f"Error streaming graph with messages: {e}") from e
 
     # noinspection SpellCheckingInspection
     async def ainvoke(
@@ -513,6 +549,8 @@ class LangGraphToOpenAIConverter:
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         system_messages: Iterable[ChatMessageWrapper],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> List[AnyMessage]:
         """
         Run the agent asynchronously.
@@ -522,6 +560,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph: The compiled state graph.
             system_messages: The iterable of chat completion message parameters.
             request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will be created using the messages and request information.
 
         Returns:
             The list of any messages.
@@ -538,6 +578,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
             request_information=request_information,
+            config=config,
+            state=state,
         )
 
     async def astream_events(
@@ -547,6 +589,8 @@ class LangGraphToOpenAIConverter:
         request_information: RequestInformation,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         messages: Iterable[ChatMessageWrapper],
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> AsyncGenerator[StandardStreamEvent | CustomStreamEvent, None]:
         """
         Stream events asynchronously.
@@ -556,6 +600,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph: The compiled state graph.
             messages: The iterable of chat completion message parameters.
             request_information: The request information.
+            config: Optional configuration for the runnable execution.
+            state: Optional state to run the graph with. If not provided, a new state will
 
         Yields:
             The standard or custom stream event.
@@ -565,6 +611,8 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph=compiled_state_graph,
             messages=self.create_messages_for_graph(messages=messages),
             request_information=request_information,
+            config=config,
+            state=state,
         ):
             yield event
 
@@ -591,6 +639,8 @@ class LangGraphToOpenAIConverter:
         chat_request_wrapper: ChatRequestWrapper,
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
+        config: RunnableConfig | None,
+        state: Optional[MyMessagesState],
     ) -> List[AnyMessage]:
         """
         Run the graph asynchronously.
@@ -599,6 +649,8 @@ class LangGraphToOpenAIConverter:
             chat_request_wrapper: The chat request.
             compiled_state_graph: The compiled state graph.
             request_information: The request information.
+            config: RunnableConfig | None
+            state: Optional state to run the graph with. If not provided, a new state will be created.
 
         Returns:
             The list of any messages.
@@ -611,11 +663,14 @@ class LangGraphToOpenAIConverter:
             compiled_state_graph=compiled_state_graph,
             messages=messages,
             request_information=request_information,
+            config=config,
+            state=state,
         )
         return output_messages
 
-    @staticmethod
+    # noinspection PyMethodMayBeStatic
     async def create_graph_for_llm_async(
+        self,
         *,
         llm: BaseChatModel,
         tools: Sequence[BaseTool],
@@ -624,6 +679,9 @@ class LangGraphToOpenAIConverter:
     ) -> CompiledStateGraph[MyMessagesState]:
         """
         Create a graph for the language model asynchronously.
+
+        Optionally includes a health safety evaluation node that can evaluate
+        and refine AI responses before they are returned to the user.
 
         Args:
             llm: The base chat model.

@@ -35,7 +35,6 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
-from language_model_gateway.gateway.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -207,10 +206,8 @@ class LangGraphStreamingManager:
         tool_start_times[tool_key] = time.time()
         if tool_name:
             logger.debug(f"on_tool_start: {tool_name} {tool_input_display}")
-            content_text: str = (
-                f"\n\n> Running Agent {tool_name}: {tool_input_display}\n"
-            )
-            yield chat_request_wrapper.create_sse_message(
+            content_text: str = f"Running Agent {tool_name}: {tool_input_display}\n"
+            yield chat_request_wrapper.create_debug_sse_message(
                 request_id=request_id,
                 content=content_text,
                 usage_metadata=None,
@@ -316,7 +313,6 @@ class LangGraphStreamingManager:
                                     "\n--- End Structured Content ---\n"
                                 )
                             try:
-                                file_url = UrlParser.get_url_for_file_name(filename)
                                 if file_url is not None:
                                     tool_message_content += f"\n(URL: {file_url})"
                                 else:
@@ -347,7 +343,7 @@ class LangGraphStreamingManager:
 """
                     )
                     if return_raw_tool_output
-                    else f"\n> {artifact}" + f" [tokens: {token_count}]"
+                    else f"{artifact}" + f" [tokens: {token_count}]"
                 )
                 yield chat_request_wrapper.create_sse_message(
                     request_id=request_id,

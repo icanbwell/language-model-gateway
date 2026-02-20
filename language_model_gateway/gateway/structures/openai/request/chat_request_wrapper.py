@@ -77,6 +77,15 @@ class ChatRequestWrapper(abc.ABC):
         usage_metadata: UsageMetadata | None,
     ) -> str: ...
 
+    @abstractmethod
+    def create_debug_sse_message(
+        self,
+        *,
+        request_id: str,
+        content: str | None,
+        usage_metadata: UsageMetadata | None,
+    ) -> str: ...
+
     """ Create the final message to be sent in the streaming response after the model has finished generating, which typically contains metadata about the response such as usage information.  This is used for tools that need to create the final message in a streaming response, such as a tool that creates a message with usage metadata that will be sent after all content messages have been sent."""
 
     @abstractmethod
