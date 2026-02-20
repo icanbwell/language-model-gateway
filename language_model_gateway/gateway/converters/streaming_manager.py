@@ -45,8 +45,7 @@ class LangGraphStreamingManager:
         self,
         *,
         token_reducer: TokenReducer,
-        file_manager_factory: FileManagerFactory,
-        environment_variables: LanguageModelGatewayEnvironmentVariables,
+        environment_variables: BaileyAIEnvironmentVariables,
     ) -> None:
         self.token_reducer: TokenReducer = token_reducer
         if self.token_reducer is None:
@@ -54,25 +53,15 @@ class LangGraphStreamingManager:
         if not isinstance(self.token_reducer, TokenReducer):
             raise TypeError("token_reducer must be an instance of TokenReducer")
 
-        self.file_manager_factory: FileManagerFactory = file_manager_factory
-        if self.file_manager_factory is None:
-            raise ValueError("file_manager_factory must not be None")
-        if not isinstance(self.file_manager_factory, FileManagerFactory):
-            raise TypeError(
-                "file_manager_factory must be an instance of FileManagerFactory"
-            )
-
-        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
-            environment_variables
-        )
+        self.environment_variables: BaileyAIEnvironmentVariables = environment_variables
         if self.environment_variables is None:
             raise ValueError("environment_variables must not be None")
         if not isinstance(
             self.environment_variables,
-            LanguageModelGatewayEnvironmentVariables,
+            BaileyAIEnvironmentVariables,
         ):
             raise TypeError(
-                "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
+                "environment_variables must be an instance of BaileyAIEnvironmentVariables"
             )
 
     async def handle_langchain_event(
@@ -137,7 +126,7 @@ class LangGraphStreamingManager:
                 case _:
                     logger.debug(f"Skipped event type: {event_type}")
         except Exception as e:
-            logger.error(f"Error handling langchain event: {e}")
+            logger.exception(f"Error handling langchain event: {e}")
 
     async def _handle_on_chat_model_stream(
         self,
@@ -161,6 +150,7 @@ class LangGraphStreamingManager:
                     request_id=request_id,
                     content=content_text,
                     usage_metadata=chunk.usage_metadata,
+                    source="on_chat_model_stream",
                 )
 
     async def _handle_on_chain_end(
@@ -177,6 +167,7 @@ class LangGraphStreamingManager:
             yield chat_request_wrapper.create_final_sse_message(
                 request_id=request_id,
                 usage_metadata=output["usage_metadata"],
+                source="on_chain_end",
             )
 
     async def _handle_on_tool_start(
@@ -206,12 +197,17 @@ class LangGraphStreamingManager:
         tool_start_times[tool_key] = time.time()
         if tool_name:
             logger.debug(f"on_tool_start: {tool_name} {tool_input_display}")
-            content_text: str = f"Running Agent {tool_name}: {tool_input_display}\n"
-            yield chat_request_wrapper.create_debug_sse_message(
+            content_text: str = (
+                f"\n\n> Running Agent {tool_name}: {tool_input_display}\n"
+            )
+            debug_message = chat_request_wrapper.create_debug_sse_message(
                 request_id=request_id,
                 content=content_text,
                 usage_metadata=None,
+                source="on_tool_start",
             )
+            if debug_message:
+                yield debug_message
 
     async def _handle_on_tool_end(
         self,
@@ -343,13 +339,16 @@ class LangGraphStreamingManager:
 """
                     )
                     if return_raw_tool_output
-                    else f"{artifact}" + f" [tokens: {token_count}]"
+                    else f"\n> {artifact}" + f" [tokens: {token_count}]"
                 )
-                yield chat_request_wrapper.create_sse_message(
+                debug_message = chat_request_wrapper.create_debug_sse_message(
                     request_id=request_id,
                     content=tool_progress_message,
                     usage_metadata=None,
+                    source="on_tool_end",
                 )
+                if debug_message:
+                    yield debug_message
                 if file_url:
                     # send a follow-up message with the file URL
                     content_text: str = f"\n\n[Click to download {tool_message.name} Output]({file_url})\n\n"
@@ -359,11 +358,14 @@ class LangGraphStreamingManager:
         else:
             logger.debug("on_tool_end: no tool message output")
             content_text = f"\n\n> Tool completed with no output.{runtime_str}\n"
-            yield chat_request_wrapper.create_sse_message(
+            debug_message = chat_request_wrapper.create_debug_sse_message(
                 request_id=request_id,
                 content=content_text,
                 usage_metadata=None,
+                source="on_tool_end",
             )
+            if debug_message:
+                yield debug_message
 
     @staticmethod
     def _format_text_resource_contents(text: str) -> str:
@@ -421,6 +423,7 @@ class LangGraphStreamingManager:
             request_id=request_id,
             content=content_text,
             usage_metadata=None,
+            source="on_tool_error",
         )
 
     @staticmethod

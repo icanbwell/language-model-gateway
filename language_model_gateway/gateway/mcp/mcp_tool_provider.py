@@ -40,6 +40,7 @@ from language_model_gateway.gateway.utilities.logger.logging_transport import (
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
+from language_model_gateway.gateway.utilities.url_validator import URLValidator
 
 # OpenTelemetry propagation for trace context
 
@@ -174,6 +175,16 @@ class MCPToolProvider:
             url: str | None = tool_config.url
             if url is None:
                 raise ValueError("Tool URL must be provided")
+
+            # check the url is valid:
+            url_valid, url_validation_result = URLValidator.validate(
+                url=url,
+                allowed_domains=self.environment_variables.mcp_tool_allowed_domains,
+            )
+            if not url_valid:
+                raise ValueError(
+                    f"Invalid URL for MCP tool: {url}. Validation result: {url_validation_result}"
+                )
 
             tool_call_timeout_seconds: int = (
                 self.environment_variables.tool_call_timeout_seconds

@@ -115,3 +115,15 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def system_commands(self) -> list[str]:
         system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
         return system_commands.split(",") if system_commands else []
+
+    @property
+    def mcp_tool_allowed_domains(self) -> set[str]:
+        # read the MCP_TOOL_ALLOWED_DOMAINS environment variable and split it by commas
+        domains = os.environ.get(
+            "MCP_TOOL_ALLOWED_DOMAINS",
+            "bwell.zone,bwell.com,icanbwell.com,mcp-fhir-agent,test-mcp-server",
+        )
+        if domains and domains.strip():
+            return set(domain.strip().lower() for domain in domains.split(","))
+        else:
+            return set()
