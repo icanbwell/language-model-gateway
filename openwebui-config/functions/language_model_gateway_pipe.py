@@ -1,9 +1,15 @@
-"""title: LangChain Pipe Function (Streaming Version)
+"""
+title: LangChain Pipe Function (Streaming Version - FIXED)
 author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
 author_url: https://github.com/imranq2
-version: 0.2.0
-This module defines a Pipe class that reads the oauth_id_token from the request cookies and uses it in Authorization header
-to make requests to the OpenAI API. It supports both streaming and non-streaming responses.
+version: 0.2.1
+
+This module defines a Pipe class that reads the oauth_id_token from the request cookies
+and uses it in Authorization header to make requests to the OpenAI API.
+It supports both streaming and non-streaming responses.
+
+KEY FIX: Instead of yielding raw SSE lines, we now parse the OpenAI streaming response
+and yield individual text chunks that OpenWebUI will format properly.
 """
 
 import datetime
@@ -84,6 +90,14 @@ class Pipe:
             default=30.0,
             description="Timeout in seconds for fetching the models list",
         )
+        stream: Optional[bool] = Field(
+            default=True,
+            description="Whether to use streaming responses for the chat/completions endpoint",
+        )
+        client_id_header_value: Optional[str] = Field(
+            default="Aiden",
+            description="Header name to pass client ID for debugging purposes",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
@@ -100,7 +114,6 @@ class Pipe:
         self.pipelines_last_updated: Optional[float] = (
             None  # Track last cache update time
         )
-        # self.default_model is not used; removed to avoid confusion
 
     @staticmethod
     def read_base_url() -> Optional[str]:
@@ -196,17 +209,15 @@ HTTPX Response Log:
 - Status Code: {response1.status_code}
 - URL: {response1.request.url}
 - Method: {response1.request.method}
-- Response Headers:
-{json.dumps(dict(response1.headers), indent=2)}
-- Response Body:
-{response_body}
+- Response Headers: {json.dumps(dict(response1.headers), indent=2)}
+- Response Body: {response_body}
 - Response Encoding: {response1.encoding}
 - Response Elapsed Time: {response1.elapsed}
 """.strip()
         return response_log
 
-    @staticmethod
     def _build_headers(
+        self,
         *,
         request: Request,
         user: Optional[Dict[str, Any]],
@@ -222,12 +233,17 @@ HTTPX Response Log:
         """
         headers = {
             "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
             "Authorization": f"Bearer {access_token}",
             "X-ID-Token": id_token or "",
             "X-Session-Id": session_id or "",
             "X-Chat-Id": chat_id or "",
             "X-Message-Id": message_id or "",
         }
+        if self.valves.client_id_header_value:
+            headers["X-Client-Id"] = self.valves.client_id_header_value
+
+        # pass through some headers from OpenWebUI request to OpenAI API for better context and debugging
         for key in [
             "User-Agent",
             "Referrer",
@@ -294,6 +310,59 @@ HTTPX Response Log:
             }
         return None
 
+    async def _stream_openai_response(
+        self,
+        response: httpx.Response,
+    ) -> AsyncGenerator[str, None]:
+        """
+        Parse OpenAI streaming response and yield text chunks.
+
+        This is the KEY FIX: Instead of yielding raw SSE lines,
+        we parse the chunks and yield just the text content.
+        OpenWebUI's framework will handle wrapping it in proper SSE format.
+        """
+        async for line in response.aiter_lines():
+            if not line:
+                continue
+
+            # Skip the SSE metadata
+            if line == "data: [DONE]":
+                continue
+
+            # Remove "data: " prefix if present
+            if line.startswith("data: "):
+                line = line[6:]
+
+            if not line:
+                continue
+
+            try:
+                # Parse the JSON chunk
+                chunk = json.loads(line)
+
+                # Extract text content from the OpenAI format
+                if "choices" in chunk and len(chunk["choices"]) > 0:
+                    delta = chunk["choices"][0].get("delta", {})
+
+                    # Get text content
+                    if "content" in delta and delta["content"]:
+                        yield delta["content"]
+
+                    # Handle finish_reason for proper stream termination
+                    if chunk["choices"][0].get("finish_reason") == "stop":
+                        # Optionally yield a final empty chunk to signal completion
+                        pass
+
+                    # Also handle tool_calls if present
+                    tool_calls = delta.get("tool_calls")
+                    if tool_calls:
+                        yield json.dumps({"tool_calls": tool_calls})
+
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse SSE line: {line}, error: {e}")
+                # Yield the line as-is if parsing fails
+                yield line
+
     async def pipe(
         self,
         body: Dict[str, Any],
@@ -312,22 +381,31 @@ HTTPX Response Log:
     ) -> AsyncGenerator[str, None]:
         """
         Main pipe method supporting both streaming and non-streaming responses.
+
+        IMPORTANT: For streaming, yield plain text chunks or structured data.
+        The OpenWebUI framework handles wrapping in proper SSE format.
         """
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
             return
+
         access_token: Optional[str] = __oauth_token__.get("access_token")
         id_token: Optional[str] = __oauth_token__.get("id_token")
+
         await self.emit_status(__event_emitter__, "info", "Working...", False)
+
         logger.debug(f"pipe:{__name__}")
         logger.debug(f"body: {body}")
         logger.debug(f"__request__: {__request__}")
         logger.debug(f"__user__: {__user__}")
         logger.debug(f"Request URL: {getattr(__request__, 'url', None)}")
+
         if __request__ is None:
             raise ValueError("Request object must be provided.")
+
         auth_header = __request__.headers.get("Authorization")
         logger.debug(f"Authorization header: {auth_header if auth_header else 'None'}")
+
         open_api_base_url: Optional[str] = (
             self.valves.OPENAI_API_BASE_URL or self.read_base_url()
         )
@@ -336,13 +414,21 @@ HTTPX Response Log:
                 "OpenAI API base URL must be set as an environment variable."
             )
         logger.debug(f"open_api_base_url: {open_api_base_url}")
+
         model_id = body.get("model", "")
         if "." in model_id:
             model_id = model_id.split(".", 1)[1]
+
         payload = {**body, "model": model_id}
         url = self.pathlib_url_join(base_url=open_api_base_url, path="chat/completions")
+
+        stream: Optional[bool] = self.valves.stream
+        if stream is not None:
+            payload["stream"] = stream
+
         response_text: str = ""
-        is_streaming: bool = body.get("stream", False)
+        is_streaming: bool = bool(payload.get("stream", False))
+
         headers = self._build_headers(
             request=__request__,
             user=__user__,
@@ -352,6 +438,7 @@ HTTPX Response Log:
             chat_id=__chat_id__,
             message_id=__message_id__,
         )
+
         for debug_line in self._yield_debug_info(
             user=__user__,
             request=__request__,
@@ -360,27 +447,49 @@ HTTPX Response Log:
             payload=payload,
         ):
             yield debug_line
+
         try:
             logger.debug(
                 f"Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
             )
             async with httpx.AsyncClient() as client:
-                response = await client.post(
-                    url=url,
-                    json=payload,
-                    headers=headers,
-                    timeout=self.valves.llm_call_timeout_seconds,
-                    follow_redirects=True,
-                )
-                response.raise_for_status()
-                content_type = response.headers.get("content-type", "")
-                if content_type.startswith("text/event-stream"):
-                    async for line in response.aiter_lines():
-                        if line:
-                            yield line + "\n"
+                if is_streaming:
+                    async with client.stream(
+                        "POST",
+                        url,
+                        json=payload,
+                        headers=headers,
+                        timeout=self.valves.llm_call_timeout_seconds,
+                        follow_redirects=True,
+                    ) as response:
+                        response.raise_for_status()
+                        content_type = response.headers.get("content-type", "")
+                        if content_type.startswith("text/event-stream"):
+                            # NEW: Parse OpenAI SSE format and yield text chunks
+                            async for chunk in self._stream_openai_response(response):
+                                yield chunk
+                        else:
+                            # Non-SSE response from streaming endpoint
+                            raw_body = await response.aread()
+                            response_text = raw_body.decode("utf-8", errors="replace")
+                            try:
+                                yield json.dumps(json.loads(response_text))
+                            except json.JSONDecodeError:
+                                yield response_text
                 else:
+                    # Non-streaming response
+                    response = await client.post(
+                        url=url,
+                        json=payload,
+                        headers=headers,
+                        timeout=self.valves.llm_call_timeout_seconds,
+                        follow_redirects=True,
+                    )
+                    response.raise_for_status()
                     yield json.dumps(response.json())
+
             await self.emit_status(__event_emitter__, "info", "Done", True)
+
         except httpx.HTTPStatusError as e:
             await self.emit_status(__event_emitter__, "HttpError", f"{e}", True)
             yield (
@@ -410,8 +519,10 @@ HTTPX Response Log:
         if not open_api_base_url:
             logger.debug("OpenAI API base URL is not set.")
             return []
+
         model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
         logger.debug(f"Calling models endpoint: {model_url}")
+
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.get(
@@ -419,6 +530,7 @@ HTTPX Response Log:
                 )
                 response.raise_for_status()
                 models = response.json().get("data", [])
+
             logger.debug(f"Received models from {model_url}: {models}")
             # Update cache timestamp
             self.pipelines_last_updated = time.time()
