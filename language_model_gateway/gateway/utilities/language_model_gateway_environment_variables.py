@@ -115,3 +115,14 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
     def system_commands(self) -> list[str]:
         system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
         return system_commands.split(",") if system_commands else []
+
+    @property
+    def pass_through_headers(self) -> set[str]:
+        raw_value = os.environ.get(
+            "PASS_THROUGH_HEADERS",
+            "connection,keep-alive,proxy-authenticate,proxy-authorization,te,trailers,transfer-encoding,upgrade,host,content-length,authorization",
+        )
+        if raw_value:
+            return set(item.strip() for item in raw_value.split(",") if item.strip())
+        else:
+            return set()

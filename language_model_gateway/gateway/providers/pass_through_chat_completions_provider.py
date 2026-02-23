@@ -31,6 +31,9 @@ from language_model_gateway.gateway.providers.pass_through_token_manager import 
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
+)
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
@@ -53,7 +56,12 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
     This provider can be used when you want to directly forward the chat completion requests to an external API
     """
 
-    def __init__(self, *, pass_through_token_manager: PassThroughTokenManager) -> None:
+    def __init__(
+        self,
+        *,
+        pass_through_token_manager: PassThroughTokenManager,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
+    ) -> None:
         self.pass_through_token_manager: PassThroughTokenManager = (
             pass_through_token_manager
         )
@@ -62,6 +70,16 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         if not isinstance(self.pass_through_token_manager, PassThroughTokenManager):
             raise TypeError(
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
+            )
+
+        self.environment_variables = environment_variables
+        if self.environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(
+            self.environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
+            raise TypeError(
+                "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
     @override
@@ -166,10 +184,17 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
             write=WRITE_TIMEOUT_SECONDS,
             pool=None,
         )
+        # Copy headers, excluding problematic ones
+        pass_through_headers = {
+            key: value
+            for key, value in headers.items()
+            if key.lower() not in self.environment_variables.pass_through_headers
+        }
         async_client = httpx.AsyncClient(
             auth=auth,
             timeout=timeout,
             transport=LoggingTransport(httpx.AsyncHTTPTransport()),
+            headers=pass_through_headers,
         )
 
         client = AsyncOpenAI(
