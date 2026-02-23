@@ -188,7 +188,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         pass_through_headers = {
             key: value
             for key, value in headers.items()
-            if key.lower() not in self.environment_variables.pass_through_headers
+            if key.lower() not in self.environment_variables.do_not_pass_through_headers
         }
         async_client = httpx.AsyncClient(
             auth=auth,
