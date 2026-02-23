@@ -315,6 +315,11 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         return StreamingResponse(
             content=stream_response(stream1=stream),
             media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
         )
 
     # noinspection PyMethodMayBeStatic
