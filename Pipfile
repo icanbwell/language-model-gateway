@@ -130,7 +130,9 @@ prometheus-fastapi-instrumentator = ">=7.1.0"
 # gunicorn is a Python WSGI HTTP server for UNIX
 "gunicorn[standard]" = ">=23.0.0"  # needed for production server
 # py-key-value-aio 0.4.0 has issues
-py-key-value-aio = "!=0.4.0"
+py-key-value-aio = ">=0.4.4"
+# PyYAML is a Python library for working with YAML files
+PyYAML = ">=6.0.3"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
@@ -187,6 +189,8 @@ asgi-lifespan = ">=2.1.0"
 watchfiles = ">=1.1.1"
 # inotify is a Python library for monitoring filesystem events (Linux only).  Used by gunicorn reloader
 inotify = ">=0.2.12"
+# types-PyYAML provides type hints for PyYAML
+types-PyYAML = ">=6.0.12"
 
 [requires]
 python_version = "3.12"

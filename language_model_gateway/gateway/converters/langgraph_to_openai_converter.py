@@ -19,6 +19,7 @@ from typing import (
 import botocore
 from botocore.exceptions import TokenRetrievalError
 from fastapi import HTTPException
+from langchain.agents import create_agent
 from langchain_community.adapters.openai import (
     convert_message_to_dict,
 )
@@ -32,7 +33,7 @@ from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEve
 from langchain_core.tools import BaseTool, ToolException
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
-from langgraph.prebuilt import ToolNode, create_react_agent
+from langgraph.prebuilt import ToolNode
 from langgraph.store.base import BaseStore
 from openai.types import CompletionUsage
 from starlette.responses import StreamingResponse, JSONResponse
@@ -47,6 +48,7 @@ from language_model_gateway.gateway.converters.streaming_manager import (
 from language_model_gateway.gateway.converters.streaming_tool_node import (
     StreamingToolNode,
 )
+from language_model_gateway.gateway.skills.skill_loader import SkillLoaderProtocol
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
 )
@@ -719,7 +721,7 @@ class LangGraphToOpenAIConverter:
             tool_node = StreamingToolNode(tools)
 
         # https://langchain-ai.github.io/langgraph/concepts/persistence/
-        compiled_state_graph: CompiledStateGraph[MyMessagesState] = create_react_agent(
+        compiled_state_graph: CompiledStateGraph[MyMessagesState] = create_agent(
             model=llm,
             tools=tool_node if tool_node is not None else [],
             state_schema=MyMessagesState,

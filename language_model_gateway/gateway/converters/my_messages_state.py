@@ -1,10 +1,10 @@
 from typing import Optional
 
+from langchain.agents import AgentState
 from langchain_core.messages.ai import UsageMetadata
-from langgraph.prebuilt.chat_agent_executor import AgentStatePydantic
 
 
-class MyMessagesState(AgentStatePydantic):
+class MyMessagesState(AgentState):
     """ "
     Custom state class that extends AgentStatePydantic to include additional metadata.
     """

@@ -2,7 +2,7 @@ import abc
 from abc import abstractmethod
 from typing import Literal
 
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import AnyMessage
 from openai.types.chat import ChatCompletionMessageParam
 from openai.types.responses.response_input_param import ResponseInputItemParam
 
@@ -29,7 +29,7 @@ class ChatMessageWrapper(abc.ABC):
     """ Convert the message wrapper to a LangChain BaseMessage.  This is used for tools that need to convert the message to a LangChain message to use with LangChain tools."""
 
     @abstractmethod
-    def to_langchain_message(self) -> BaseMessage: ...
+    def to_langchain_message(self) -> AnyMessage: ...
 
     """ Convert the message wrapper back to a ChatCompletionMessageParam or ResponseInputItemParam, depending on the implementation.  This is used for tools that need to send messages back to the model in the same format as the original messages."""
 
