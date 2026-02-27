@@ -25,7 +25,7 @@ from langchain_community.adapters.openai import (
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AnyMessage,
-    BaseMessage, UsageMetadata,
+    BaseMessage,
 )
 from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
@@ -34,7 +34,6 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
-from openai.types import CompletionUsage
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.language_model_gateway_exception import (
@@ -539,7 +538,9 @@ class LangGraphToOpenAIConverter:
                 e,
                 messages_dict,
             )
-            raise LanguageModelGatewayException(f"Error streaming graph with messages: {e}") from e
+            raise LanguageModelGatewayException(
+                f"Error streaming graph with messages: {e}"
+            ) from e
 
     # noinspection SpellCheckingInspection
     async def ainvoke(

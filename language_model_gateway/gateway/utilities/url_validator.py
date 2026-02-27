@@ -67,10 +67,10 @@ class URLValidator:
 
     @classmethod
     def validate(
-            cls,
-            url: str,
-            allowed_domains: Set[str],
-            allowed_internal_services: Optional[Set[str]] = None,
+        cls,
+        url: str,
+        allowed_domains: Set[str],
+        allowed_internal_services: Optional[Set[str]] = None,
     ) -> tuple[bool, Optional[str]]:
         """
         Validate URL against allowed domains with SSRF protection

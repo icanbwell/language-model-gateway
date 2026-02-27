@@ -4,7 +4,9 @@ import time
 import uuid
 from typing import override, Callable, Awaitable, cast, AsyncIterable, AsyncIterator
 
-from oidcauthlib.utilities.environment.oidc_environment_variables import OidcEnvironmentVariables
+from oidcauthlib.utilities.environment.oidc_environment_variables import (
+    OidcEnvironmentVariables,
+)
 from starlette.middleware.base import BaseHTTPMiddleware, DispatchFunction
 from starlette.requests import Request
 from starlette.responses import Response, StreamingResponse
@@ -15,7 +17,6 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["HTTP_TRACING"])
-
 
 
 class FastApiLoggingMiddleware(BaseHTTPMiddleware):

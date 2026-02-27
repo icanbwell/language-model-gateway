@@ -19,17 +19,11 @@ from langchain_core.messages import (
 )
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
 
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
-    FileManagerFactory,
-)
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     convert_message_content_to_string,
-)
-from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
-    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
