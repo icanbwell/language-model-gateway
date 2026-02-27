@@ -66,13 +66,13 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
                 f"input_ must be a str or list, got {type(input_).__name__}: {input_!r}"
             )
 
-    @property
     @override
+    @property
     def model(self) -> str:
         return self.request.model
 
-    @property
     @override
+    @property
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
 
@@ -151,6 +151,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         )
         return f"data: {message.model_dump_json()}\n\n"
 
+    @override
     def create_debug_sse_message(
         self,
         *,

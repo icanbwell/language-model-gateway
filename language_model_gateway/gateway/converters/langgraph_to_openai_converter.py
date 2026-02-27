@@ -25,7 +25,7 @@ from langchain_community.adapters.openai import (
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
     AnyMessage,
-    BaseMessage,
+    UsageMetadata,
 )
 from langchain_core.runnables import RunnableConfig
 from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEvent
@@ -34,6 +34,7 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.prebuilt import ToolNode, create_react_agent
 from langgraph.store.base import BaseStore
+from openai.types import CompletionUsage
 from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.gateway.converters.language_model_gateway_exception import (
@@ -74,31 +75,42 @@ class LangGraphToOpenAIConverter:
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         token_reducer: TokenReducer,
         streaming_manager: LangGraphStreamingManager,
+        skill_loader: SkillLoaderProtocol,
     ) -> None:
+        if environment_variables is None:
+            raise ValueError("environment_variables must not be None")
+        if not isinstance(
+            environment_variables, LanguageModelGatewayEnvironmentVariables
+        ):
+            raise TypeError(
+                f"environment_variables must be EnvironmentVariables, got {type(environment_variables)}"
+            )
         self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
             environment_variables
         )
-        if not isinstance(
-            self.environment_variables, LanguageModelGatewayEnvironmentVariables
-        ):
-            raise TypeError(
-                f"environment_variables must be EnvironmentVariables, got {type(self.environment_variables)}"
-            )
-        if self.environment_variables is None:
-            raise ValueError("environment_variables must not be None")
-        self.token_reducer = token_reducer
-        if self.token_reducer is None:
+
+        if token_reducer is None:
             raise ValueError("token_reducer must not be None")
-        if not isinstance(self.token_reducer, TokenReducer):
+        if not isinstance(token_reducer, TokenReducer):
             raise TypeError(
-                f"token_reducer must be TokenReducer, got {type(self.token_reducer)}"
+                f"token_reducer must be TokenReducer, got {type(token_reducer)}"
             )
+        self.token_reducer = token_reducer
+
         self.streaming_manager = streaming_manager
         if self.streaming_manager is None:
             raise ValueError("streaming_manager must not be None")
         if not isinstance(self.streaming_manager, LangGraphStreamingManager):
             raise TypeError(
                 f"streaming_manager must be LangGraphStreamingManager, got {type(self.streaming_manager)}"
+            )
+
+        self.skill_loader = skill_loader
+        if self.skill_loader is None:
+            raise ValueError("skill_loader must not be None")
+        if not isinstance(self.skill_loader, SkillLoaderProtocol):
+            raise TypeError(
+                f"skill_loader must be SkillLoaderProtocol, got {type(self.skill_loader)}"
             )
 
     async def _stream_resp_async_generator(
@@ -145,7 +157,7 @@ class LangGraphToOpenAIConverter:
                 async for chunk in self.streaming_manager.handle_langchain_event(
                     event=event,
                     chat_request_wrapper=chat_request_wrapper,
-                    request_id=request_id,
+                    request_information=request_information,
                     tool_start_times=tool_start_times,
                 ):
                     yield chunk
@@ -161,7 +173,13 @@ class LangGraphToOpenAIConverter:
         except Exception as e:
             tb = traceback.format_exc()
             logger.exception(f"Exception in _stream_resp_async_generator: {e}\n{tb}")
-            error_message = f"Error: {e}\nTraceback:\n{tb}"
+            # if the request is not enabled for debug logging, return a generic error message instead of the actual error
+            error_message: str
+            if request_information.enable_debug_logging:
+                error_message = f"Error: {e}\n{tb}"
+            else:
+                error_message = self.environment_variables.generic_error_message
+
             yield chat_request_wrapper.create_sse_message(
                 request_id=request_id,
                 usage_metadata=None,
@@ -288,11 +306,11 @@ class LangGraphToOpenAIConverter:
                         first_exception2.__traceback__,
                     )
                 )
-                error_message = f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}"
-                logger.exception(error_message)
+                log_message = f"Unexpected error: {type(first_exception2)} {first_exception2}\nStack trace:\n{stack}"
+                logger.exception(log_message)
                 raise HTTPException(
                     status_code=500,
-                    detail=error_message,
+                    detail=f"Unexpected error: {first_exception2}",
                 )
 
     @staticmethod
@@ -424,7 +442,7 @@ class LangGraphToOpenAIConverter:
     async def _run_graph_with_messages_async(
         self,
         *,
-        messages: List[BaseMessage],
+        messages: List[AnyMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
         config: RunnableConfig | None,
@@ -481,7 +499,7 @@ class LangGraphToOpenAIConverter:
     async def _stream_graph_with_messages_async(
         self,
         *,
-        messages: List[BaseMessage],
+        messages: List[AnyMessage],
         compiled_state_graph: CompiledStateGraph[MyMessagesState],
         request_information: RequestInformation,
         config: RunnableConfig | None,
@@ -620,7 +638,7 @@ class LangGraphToOpenAIConverter:
     # noinspection PyMethodMayBeStatic
     def create_messages_for_graph(
         self, *, messages: Iterable[ChatMessageWrapper]
-    ) -> List[BaseMessage]:
+    ) -> List[AnyMessage]:
         """
         Create messages for the graph.
 
@@ -631,7 +649,7 @@ class LangGraphToOpenAIConverter:
             The list of role and incoming message type tuples.
         """
 
-        messages_: List[BaseMessage] = [m.to_langchain_message() for m in messages]
+        messages_: List[AnyMessage] = [m.to_langchain_message() for m in messages]
         return messages_
 
     async def run_graph_async(
@@ -656,7 +674,7 @@ class LangGraphToOpenAIConverter:
         Returns:
             The list of any messages.
         """
-        messages: List[BaseMessage] = self.create_messages_for_graph(
+        messages: List[AnyMessage] = self.create_messages_for_graph(
             messages=chat_request_wrapper.messages
         )
 
@@ -677,6 +695,8 @@ class LangGraphToOpenAIConverter:
         tools: Sequence[BaseTool],
         store: BaseStore | None,
         checkpointer: BaseCheckpointSaver[str] | None,
+        enable_health_safety: bool | None = None,
+        system_prompts: List[str] | None = None,
     ) -> CompiledStateGraph[MyMessagesState]:
         """
         Create a graph for the language model asynchronously.
@@ -685,13 +705,13 @@ class LangGraphToOpenAIConverter:
         and refine AI responses before they are returned to the user.
 
         Args:
-            llm: The base chat model.
-            tools: The sequence of tools.
-            store: The base store for persistence.
-            checkpointer: The checkpoint saver for saving state.
-
-        Returns:
-            The compiled state graph.
+            llm: The language model to use
+            tools: List of tools available to the agent
+            store: Optional store for persistence
+            checkpointer: Optional checkpointer for state management
+            enable_health_safety: Whether to enable health safety evaluation.
+                                  If None, reads from HEALTH_SAFETY_ENABLE_EVALUATOR env var.
+            system_prompts: Optional list of system prompts to prepend to the agent
         """
         tool_node: Optional[ToolNode] = None
 
@@ -711,7 +731,7 @@ class LangGraphToOpenAIConverter:
     @staticmethod
     def create_state(
         *,
-        messages: List[BaseMessage],
+        messages: List[AnyMessage],
         request_information: RequestInformation,
     ) -> MyMessagesState:
         """
@@ -724,9 +744,10 @@ class LangGraphToOpenAIConverter:
                 headers=request_information.headers
             ),
             usage_metadata=None,
-            remaining_steps=0,
             user_id=request_information.user_id,
             conversation_thread_id=request_information.conversation_thread_id,
+            passed_evaluation=None,
+            evaluation_notes=None,
         )
         return input1
 
@@ -757,3 +778,17 @@ class LangGraphToOpenAIConverter:
                     return match.group(1)
 
         return None
+
+    # noinspection PyMethodMayBeStatic
+    def convert_usage_meta_data_to_openai(
+        self, *, usages: List[UsageMetadata]
+    ) -> CompletionUsage:
+        total_usage_metadata: CompletionUsage = CompletionUsage(
+            prompt_tokens=0, completion_tokens=0, total_tokens=0
+        )
+        usage_metadata: UsageMetadata
+        for usage_metadata in usages:
+            total_usage_metadata.prompt_tokens += usage_metadata["input_tokens"]
+            total_usage_metadata.completion_tokens += usage_metadata["output_tokens"]
+            total_usage_metadata.total_tokens += usage_metadata["total_tokens"]
+        return total_usage_metadata

@@ -65,13 +65,13 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     ) -> list[ChatMessageWrapper]:
         return [ChatCompletionApiMessageWrapper(message=msg) for msg in messages]
 
-    @property
     @override
+    @property
     def model(self) -> str:
         return cast(str, self.request.model)
 
-    @property
     @override
+    @property
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
 
@@ -171,6 +171,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         )
         return f"data: {chat_model_stream_response.model_dump_json()}\n\n"
 
+    @override
     def create_debug_sse_message(
         self,
         *,
