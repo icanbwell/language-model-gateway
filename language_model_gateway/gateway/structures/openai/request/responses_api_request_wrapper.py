@@ -1,3 +1,4 @@
+import logging
 import time
 from datetime import datetime, UTC
 from typing import AsyncIterable, Literal, Union, override, Optional, List, Any
@@ -17,7 +18,6 @@ from openai.types.responses import (
     ResponseCreatedEvent,
 )
 
-from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
 from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
@@ -28,10 +28,16 @@ from language_model_gateway.gateway.structures.openai.message.responses_api_mess
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ResponsesApiRequestWrapper(ChatRequestWrapper):
-    def __init__(self, *, chat_request: ResponsesRequest) -> None:
+    def __init__(
+        self, *, chat_request: ResponsesRequest, enable_debug_logging: bool
+    ) -> None:
         """
         Wraps an OpenAI /responses API request and provides a unified interface so the code can use it
 
@@ -41,6 +47,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         self._messages: list[ChatMessageWrapper] = self.convert_from_responses_input(
             input_=self.request.input
         )
+        self._enable_debug_logging: bool = enable_debug_logging
 
     @staticmethod
     def convert_from_responses_input(
@@ -64,7 +71,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def model(self) -> str:
         return self.request.model
 
-    @property  # type: ignore[explicit-override]
+    @property
     @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
@@ -97,7 +104,7 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         return None  # Not applicable for ResponsesRequest
 
     @override
-    def create_first_sse_message(self, *, request_id: str) -> str:
+    def create_first_sse_message(self, *, request_id: str, source: str) -> str:
         # For the first SSE message, we can include any initial content if needed. Here we just return an empty message to indicate the start of the stream.
         message: ResponseCreatedEvent = ResponseCreatedEvent(
             response=Response(
@@ -123,10 +130,15 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         request_id: str,
         content: str | None,
         usage_metadata: UsageMetadata | None,
+        source: str,
     ) -> str:
         # Format a single SSE message chunk for streaming
         if content is None:
             return ""
+
+        logger.debug(
+            f"Creating SSE message for request_id: {request_id} from source: {source}"
+        )
 
         message: ResponseTextDeltaEvent = ResponseTextDeltaEvent(
             item_id=request_id,
@@ -145,18 +157,27 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
         request_id: str,
         content: str | None,
         usage_metadata: UsageMetadata | None,
-    ) -> str:
+        source: str,
+    ) -> str | None:
 
-        return self.create_sse_message(
-            request_id=request_id,
-            content=f"\n\n> {content}" if content else None,
-            usage_metadata=usage_metadata,
+        return (
+            self.create_sse_message(
+                request_id=request_id,
+                content=content,
+                usage_metadata=usage_metadata,
+                source=source,
+            )
+            if self._enable_debug_logging
+            else None
         )
 
     @override
     def create_final_sse_message(
-        self, *, request_id: str, usage_metadata: UsageMetadata | None
+        self, *, request_id: str, usage_metadata: UsageMetadata | None, source: str
     ) -> str:
+        logger.debug(
+            f"Creating final SSE message for request_id: {request_id} from source: {source}"
+        )
         # Format the final SSE message chunk
         message: ResponseTextDoneEvent = ResponseTextDoneEvent(
             item_id=request_id,
@@ -232,45 +253,6 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def to_dict(self) -> dict[str, Any]:
         return self.request.model_dump(mode="json")
 
-    @staticmethod
-    def extract_mcp_agent_configs(
-        tools_in_request: list[dict[str, Any]],
-    ) -> list[AgentConfig]:
-        """
-        Extract AgentConfig objects for MCP tools from the tools_in_request list.
-        """
-        return [
-            AgentConfig(
-                url=tool["server_url"],
-                name=tool["server_label"],
-                tools=",".join(
-                    [
-                        t["name"] if isinstance(t, dict) and "name" in t else str(t)
-                        for t in tool["allowed_tools"]
-                    ]
-                )
-                if isinstance(tool["allowed_tools"], (list, tuple))
-                else "",
-                headers=tool.get("headers"),
-                auth="headers",
-            )
-            for tool in tools_in_request
-            if tool["type"] == "mcp"
-            and "server_url" in tool
-            and "server_label" in tool
-            and "allowed_tools" in tool
-        ]
-
-    @override
-    def get_tools(self) -> list[AgentConfig]:
-        """
-        Return a list of tools passed in the request.
-        """
-        tools_in_request: list[dict[str, Any]] | None = self.request.tools
-        if tools_in_request is None:
-            return []
-        return self.extract_mcp_agent_configs(tools_in_request)
-
     @override
     def stream_response(
         self,
@@ -340,3 +322,9 @@ class ResponsesApiRequestWrapper(ChatRequestWrapper):
     def temperature(self) -> Optional[float]:
         """Return the temperature parameter from the request, which is used in both ChatCompletion and Responses API."""
         return self.request.temperature
+
+    @override
+    @property
+    def enable_debug_logging(self) -> bool:
+        """Return whether debug logging is enabled for this request."""
+        return self._enable_debug_logging

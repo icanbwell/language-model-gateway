@@ -1,4 +1,5 @@
 import json
+import logging
 import time
 from typing import AsyncIterator, Literal, cast, override, Any, List, Dict, Optional
 
@@ -22,7 +23,6 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion import Choice
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 
-from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.schema.openai.completions import ChatRequest
 from language_model_gateway.gateway.structures.openai.message.chat_completion_api_message_wrapper import (
     ChatCompletionApiMessageWrapper,
@@ -37,11 +37,16 @@ from language_model_gateway.gateway.utilities.chat_message_helpers import (
     langchain_to_chat_message,
     convert_message_content_to_string,
 )
-from language_model_gateway.gateway.utilities.json_extractor import JsonExtractor
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
-    def __init__(self, *, chat_request: ChatRequest) -> None:
+    def __init__(
+        self, *, chat_request: ChatRequest, enable_debug_logging: bool
+    ) -> None:
         """
         Wraps an OpenAI /chat/completions request to provide a consistent interface for different request types.
 
@@ -51,6 +56,8 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         self._messages: list[ChatMessageWrapper] = self.convert_from_chat_messages(
             messages=self.request.messages
         )
+
+        self._enable_debug_logging: bool = enable_debug_logging
 
     @staticmethod
     def convert_from_chat_messages(
@@ -63,7 +70,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     def model(self) -> str:
         return cast(str, self.request.model)
 
-    @property  # type: ignore[explicit-override]
+    @property
     @override
     def messages(self) -> list[ChatMessageWrapper]:
         return self._messages
@@ -119,7 +126,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         return str(response_json_schema) if response_json_schema else None
 
     @override
-    def create_first_sse_message(self, *, request_id: str) -> str:
+    def create_first_sse_message(self, *, request_id: str, source: str) -> str:
         raise NotImplementedError(
             "ChatCompletion API does not have a separate first SSE message.  The first message is created in the same format as subsequent messages with create_sse_message."
         )
@@ -131,7 +138,12 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         request_id: str,
         content: str | None,
         usage_metadata: UsageMetadata | None,
+        source: str,
     ) -> str:
+
+        logger.debug(
+            f"Creating SSE message with content: {content} from source: {source}"
+        )
         completion_usage_metadata: CompletionUsage | None = (
             (self.convert_usage_meta_data_to_openai(usages=[usage_metadata]))
             if usage_metadata
@@ -148,6 +160,7 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
                     delta=ChoiceDelta(
                         role="assistant",
                         content=content,
+                        # content=f"[{source}]: {content}" if content else "",
                     ),
                 )
             ]
@@ -164,12 +177,17 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
         request_id: str,
         content: str | None,
         usage_metadata: UsageMetadata | None,
-    ) -> str:
-
-        return self.create_sse_message(
-            request_id=request_id,
-            content=f"\n\n> {content}" if content else None,
-            usage_metadata=usage_metadata,
+        source: str,
+    ) -> str | None:
+        return (
+            self.create_sse_message(
+                request_id=request_id,
+                content=content,
+                usage_metadata=usage_metadata,
+                source=source,
+            )
+            if self._enable_debug_logging
+            else None
         )
 
     @override
@@ -203,27 +221,6 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             for i, m in enumerate(output_messages)
         ]
 
-        choices_text = "\n".join([f"{c.message.content}" for c in choices])
-
-        if json_output_requested:
-            # extract the json content from response and just return that
-            json_content_raw: Dict[str, Any] | List[Dict[str, Any]] | str = (
-                (JsonExtractor.extract_structured_output(text=choices_text))
-                if choices_text
-                else choices_text
-            )
-            json_content: str = json.dumps(json_content_raw)
-            choices = [
-                Choice(
-                    index=i,
-                    message=ChatCompletionMessage(
-                        content=json_content, role="assistant"
-                    ),
-                    finish_reason="stop",
-                )
-                for i in range(1)
-            ]
-
         chat_response: ChatCompletion = ChatCompletion(
             id=request_id,
             model=self.model,
@@ -251,8 +248,9 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
 
     @override
     def create_final_sse_message(
-        self, *, request_id: str, usage_metadata: UsageMetadata | None
+        self, *, request_id: str, usage_metadata: UsageMetadata | None, source: str
     ) -> str:
+        logger.debug(f"Creating final SSE message from source: {source}")
         return "data: [DONE]\n\n"
 
     @override
@@ -272,14 +270,6 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
             if hasattr(self.request, "model_dump")
             else str(self.request),
         }
-
-    @override
-    def get_tools(self) -> list[AgentConfig]:
-        """
-        Returns an empty list as tools are not applicable for ChatCompletionApiRequestWrapper.
-        """
-        # ChatCompletions API does not support passing in tools.
-        return []
 
     @override
     def stream_response(
@@ -370,3 +360,9 @@ class ChatCompletionApiRequestWrapper(ChatRequestWrapper):
     def temperature(self) -> Optional[float]:
         """Return the temperature parameter from the request, which is used in both ChatCompletion and Responses API."""
         return self.request.temperature
+
+    @override
+    @property
+    def enable_debug_logging(self) -> bool:
+        """Return whether debug logging is enabled for this request."""
+        return self._enable_debug_logging

@@ -22,12 +22,22 @@ from langchain_core.runnables.schema import CustomStreamEvent, StandardStreamEve
 from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
+from language_model_gateway.gateway.structures.request_information import (
+    RequestInformation,
+)
 from language_model_gateway.gateway.utilities.chat_message_helpers import (
     convert_message_content_to_string,
+)
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
+)
+from langchain_core.messages import BaseMessage
+from langchain_core.runnables.schema import (
+    EventData,
 )
 
 logger = logging.getLogger(__file__)
@@ -35,11 +45,26 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangGraphStreamingManager:
+    """
+    Dispatches LangGraph streaming events into OpenAI-compatible SSE chunks.
+
+    This class listens for events emitted by LangGraph's `astream_events` and
+    translates them into SSE messages that OpenWebUI can display. Key events:
+
+    - ``on_chat_model_stream`` – Token-by-token LLM output (main response text).
+    - ``on_tool_start`` / ``on_tool_end`` – MCP tool invocation lifecycle.
+    - ``on_tool_error`` – Errors during tool execution.
+    - ``on_chain_end`` – Final usage metadata for the request.
+
+    Instantiated via DI container (`ContainerFactory`) and injected into
+    `LangGraphToOpenAIConverter`.
+    """
+
     def __init__(
         self,
         *,
         token_reducer: TokenReducer,
-        environment_variables: BaileyAIEnvironmentVariables,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
     ) -> None:
         self.token_reducer: TokenReducer = token_reducer
         if self.token_reducer is None:
@@ -47,15 +72,17 @@ class LangGraphStreamingManager:
         if not isinstance(self.token_reducer, TokenReducer):
             raise TypeError("token_reducer must be an instance of TokenReducer")
 
-        self.environment_variables: BaileyAIEnvironmentVariables = environment_variables
+        self.environment_variables: LanguageModelGatewayEnvironmentVariables = (
+            environment_variables
+        )
         if self.environment_variables is None:
             raise ValueError("environment_variables must not be None")
         if not isinstance(
             self.environment_variables,
-            BaileyAIEnvironmentVariables,
+            LanguageModelGatewayEnvironmentVariables,
         ):
             raise TypeError(
-                "environment_variables must be an instance of BaileyAIEnvironmentVariables"
+                "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
     async def handle_langchain_event(
@@ -63,19 +90,36 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
+        """Route a single LangGraph event to the appropriate handler and yield SSE chunks."""
         try:
             event_type: str = event["event"]
+            # logger.debug(f"Received event type: {event_type}: {event}")
             # Events defined here:
             # https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.astream_events
+            # https://reference.langchain.com/python/langchain-core/runnables/base/Runnable/astream_events
             match event_type:
                 case "on_chat_model_start":
-                    pass
+                    async for chunk in self._handle_on_chat_model_start(
+                        event=event,
+                        chat_request_wrapper=chat_request_wrapper,
+                        request_information=request_information,
+                    ):
+                        if chunk:
+                            yield chunk
                 case "on_chat_model_end":
                     pass
                 case "on_chain_start":
+                    # async for chunk in self._handle_on_chain_start(
+                    #     event=event,
+                    #     chat_request_wrapper=chat_request_wrapper,
+                    #     request_id=request_id,
+                    #     messages=messages,
+                    # ):
+                    #     if chunk:
+                    #         yield chunk
                     pass
                 case "on_chain_stream":
                     pass
@@ -83,40 +127,45 @@ class LangGraphStreamingManager:
                     async for chunk in self._handle_on_chat_model_stream(
                         event=event,
                         chat_request_wrapper=chat_request_wrapper,
-                        request_id=request_id,
+                        request_information=request_information,
                     ):
-                        yield chunk
+                        if chunk:
+                            yield chunk
                 case "on_chain_end":
                     async for chunk in self._handle_on_chain_end(
                         event=event,
                         chat_request_wrapper=chat_request_wrapper,
-                        request_id=request_id,
+                        request_information=request_information,
                     ):
-                        yield chunk
+                        if chunk:
+                            yield chunk
                 case "on_tool_start":
                     async for chunk in self._handle_on_tool_start(
                         event=event,
                         chat_request_wrapper=chat_request_wrapper,
-                        request_id=request_id,
+                        request_information=request_information,
                         tool_start_times=tool_start_times,
                     ):
-                        yield chunk
+                        if chunk:
+                            yield chunk
                 case "on_tool_end":
                     async for chunk in self._handle_on_tool_end(
                         event=event,
                         chat_request_wrapper=chat_request_wrapper,
-                        request_id=request_id,
+                        request_information=request_information,
                         tool_start_times=tool_start_times,
                     ):
-                        yield chunk
+                        if chunk:
+                            yield chunk
                 case "on_tool_error":
                     async for chunk in self._handle_on_tool_error(
                         event=event,
                         chat_request_wrapper=chat_request_wrapper,
-                        request_id=request_id,
+                        request_information=request_information,
                         tool_start_times=tool_start_times,
                     ):
-                        yield chunk
+                        if chunk:
+                            yield chunk
                 case _:
                     logger.debug(f"Skipped event type: {event_type}")
         except Exception as e:
@@ -127,8 +176,9 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
     ) -> AsyncGenerator[str, None]:
+        """Yield SSE chunk for each LLM token received (main response text)."""
         # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
         data = event["data"] if "data" in event else {}
         chunk: AIMessageChunk | None = data.get("chunk")
@@ -141,7 +191,7 @@ class LangGraphStreamingManager:
                 logger.debug(f"Returning content: {content_text}")
             if content_text:
                 yield chat_request_wrapper.create_sse_message(
-                    request_id=request_id,
+                    request_id=request_information.request_id,
                     content=content_text,
                     usage_metadata=chunk.usage_metadata,
                     source="on_chat_model_stream",
@@ -152,14 +202,15 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
     ) -> AsyncGenerator[str, None]:
+        """Emit final SSE message with usage metadata when the LangGraph chain completes."""
         # Fix mypy TypedDict .get() error by using square bracket access and key existence checks
         data = event["data"] if "data" in event else {}
         output: Dict[str, Any] | str | None = data.get("output")
         if output and isinstance(output, dict) and "usage_metadata" in output:
             yield chat_request_wrapper.create_final_sse_message(
-                request_id=request_id,
+                request_id=request_information.request_id,
                 usage_metadata=output["usage_metadata"],
                 source="on_chain_end",
             )
@@ -169,9 +220,10 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
+        """Record tool start time and emit debug SSE showing which MCP tool is running."""
         tool_name: Optional[str] = event["name"] if "name" in event else None
         logger.debug(f"on_tool_start: {tool_name}: {event}")
         data = event["data"] if "data" in event else {}
@@ -195,7 +247,7 @@ class LangGraphStreamingManager:
                 f"\n\n> Running Agent {tool_name}: {tool_input_display}\n"
             )
             debug_message = chat_request_wrapper.create_debug_sse_message(
-                request_id=request_id,
+                request_id=request_information.request_id,
                 content=content_text,
                 usage_metadata=None,
                 source="on_tool_start",
@@ -208,9 +260,10 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
+        """Emit debug SSE when MCP tool completes, including runtime and optional raw output."""
         logger.debug(f"on_tool_end: {event}")
         data = event["data"] if "data" in event else {}
         tool_message: Optional[ToolMessage] = data.get("output")
@@ -263,65 +316,8 @@ class LangGraphStreamingManager:
                 tool_message_content: str = self.convert_message_content_into_string(
                     tool_message=tool_message
                 )
-                if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
-                    logger.debug(
-                        f"Returning artifact: {artifact if artifact else tool_message_content}"
-                    )
 
-                tool_message_content_length: int = len(tool_message_content)
                 token_count: int = self.token_reducer.count_tokens(tool_message_content)
-                file_url: Optional[str] = None
-                if (
-                    tool_message_content_length
-                    > self.environment_variables.maximum_inline_tool_output_size
-                ):
-                    # Save to file and provide link
-                    output_folder = os.environ.get("IMAGE_GENERATION_PATH")
-                    if output_folder:
-                        file_manager = self.file_manager_factory.get_file_manager(
-                            folder=output_folder
-                        )
-                        filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
-                        file_path: Optional[str] = await file_manager.save_file_async(
-                            file_data=tool_message_content.encode("utf-8"),
-                            folder=output_folder,
-                            filename=filename,
-                            content_type="text/plain",
-                        )
-                        if file_path:
-                            tool_message_content = (
-                                ""  # clear the content since we're using a file
-                            )
-                            if structured_data_without_result:
-                                tool_message_content += (
-                                    "\n--- Structured Content (w/o result) ---\n"
-                                )
-                                tool_message_content += json.dumps(
-                                    structured_data_without_result, indent=2
-                                )
-                                tool_message_content += (
-                                    "\n--- End Structured Content ---\n"
-                                )
-                            try:
-                                if file_url is not None:
-                                    tool_message_content += f"\n(URL: {file_url})"
-                                else:
-                                    tool_message_content += (
-                                        "\nTool output file URL could not be generated."
-                                    )
-                            except KeyError:
-                                tool_message_content += "\nTool output file URL could not be generated due to missing IMAGE_GENERATION_URL environment variable."
-                        else:
-                            tool_message_content = (
-                                "Tool output too large to display inline, "
-                                "and failed to save to file."
-                            )
-                    else:
-                        tool_message_content = (
-                            f"Tool output too large to display inline,"
-                            f" {tool_message_content_length} > {self.environment_variables.maximum_inline_tool_output_size}"
-                            " and TOOL_OUTPUT_FILE_PATH is not set."
-                        )
 
                 tool_progress_message: str = (
                     (
@@ -336,24 +332,18 @@ class LangGraphStreamingManager:
                     else f"\n> {artifact}" + f" [tokens: {token_count}]"
                 )
                 debug_message = chat_request_wrapper.create_debug_sse_message(
-                    request_id=request_id,
+                    request_id=request_information.request_id,
                     content=tool_progress_message,
                     usage_metadata=None,
                     source="on_tool_end",
                 )
                 if debug_message:
                     yield debug_message
-                if file_url:
-                    # send a follow-up message with the file URL
-                    content_text: str = f"\n\n[Click to download {tool_message.name} Output]({file_url})\n\n"
-                    yield chat_request_wrapper.create_sse_message(
-                        request_id=request_id, content=content_text, usage_metadata=None
-                    )
         else:
             logger.debug("on_tool_end: no tool message output")
             content_text = f"\n\n> Tool completed with no output.{runtime_str}\n"
             debug_message = chat_request_wrapper.create_debug_sse_message(
-                request_id=request_id,
+                request_id=request_information.request_id,
                 content=content_text,
                 usage_metadata=None,
                 source="on_tool_end",
@@ -361,11 +351,59 @@ class LangGraphStreamingManager:
             if debug_message:
                 yield debug_message
 
+    # noinspection PyMethodMayBeStatic
+    async def _handle_on_chat_model_start(
+        self,
+        *,
+        event: StandardStreamEvent | CustomStreamEvent,
+        chat_request_wrapper: ChatRequestWrapper,
+        request_information: RequestInformation,
+    ) -> AsyncGenerator[str | None, None]:
+        """Emit debug SSE listing input messages when debug logging is enabled (skipped otherwise)."""
+        if not request_information.enable_debug_logging:
+            return
+
+        data: EventData = event["data"] if "data" in event else {}
+        # {
+        #     "event": "on_chat_model_start",
+        #     "name": str,                    # Name of the chat model (e.g., "ChatOpenAI", "gpt-4")
+        #     "run_id": str,                  # Unique UUID for this execution
+        #     "parent_ids": List[str],        # List of parent run IDs (v2 only)
+        #     "tags": List[str],              # Tags for filtering/organization
+        #     "metadata": Dict[str, Any],     # Additional metadata
+        #     "data": {
+        #         "input": {
+        #             "messages": List[List[BaseMessage]]  # The input messages
+        #         }
+        #     }
+        # }
+        input_messages_list: list[list[BaseMessage]] = cast(
+            list[list[BaseMessage]],
+            cast(dict[str, Any], data.get("input", {})).get("messages", []),
+        )
+        input_messages: list[BaseMessage] = (
+            input_messages_list[0] if input_messages_list else []
+        )
+        # append all the messages into content_text
+        content_text = "```\n"
+        content_text += "> Starting new chat_model with messages:\n"
+        for message_number, input_message in enumerate(input_messages):
+            content_text += (
+                f"--- Message {message_number + 1} by {input_message.type} ---\n"
+            )
+            content_text += f"{input_message.content}\n"
+        content_text += "```\n"
+
+        yield chat_request_wrapper.create_debug_sse_message(
+            request_id=request_information.request_id,
+            content=content_text,
+            usage_metadata=None,
+            source="on_chat_model_start",
+        )
+
     @staticmethod
     def _format_text_resource_contents(text: str) -> str:
-        """
-        Helper to format TextResourceContents, extracting JSON fields if possible.
-        """
+        """Extract JSON fields (result, error, meta, urls) from text for human-readable output."""
         result = ""
         json_object: Any = LangGraphStreamingManager.safe_json(text)
         if json_object is not None and isinstance(json_object, dict):
@@ -396,9 +434,10 @@ class LangGraphStreamingManager:
         *,
         event: StandardStreamEvent | CustomStreamEvent,
         chat_request_wrapper: ChatRequestWrapper,
-        request_id: str,
+        request_information: RequestInformation,
         tool_start_times: dict[str, float],
     ) -> AsyncGenerator[str, None]:
+        """Emit SSE when an MCP tool raises an error, including runtime if available."""
         # Extract error details
         tool_name: Optional[str] = event["name"] if "name" in event else None
         data = event["data"] if "data" in event else {}
@@ -414,7 +453,7 @@ class LangGraphStreamingManager:
         )
         content_text: str = f"\n\n> Tool {tool_name} encountered an error: {error_message} [runtime: {runtime_str}]\n"
         yield chat_request_wrapper.create_sse_message(
-            request_id=request_id,
+            request_id=request_information.request_id,
             content=content_text,
             usage_metadata=None,
             source="on_tool_error",
@@ -424,6 +463,7 @@ class LangGraphStreamingManager:
     def make_tool_key(
         tool_name1: Optional[str], tool_input1: Optional[Dict[str, Any]]
     ) -> str:
+        """Generate a unique key for a tool invocation to correlate start/end events."""
         # Use tool name and a hash of the input for uniqueness
         if tool_name1 is None:
             tool_name1 = "unknown"
@@ -436,6 +476,7 @@ class LangGraphStreamingManager:
 
     @staticmethod
     def safe_json(string: str) -> Any:
+        """Parse JSON string, returning None on failure instead of raising."""
         try:
             return json.loads(string)
         except json.JSONDecodeError:
@@ -443,6 +484,7 @@ class LangGraphStreamingManager:
 
     @staticmethod
     def convert_message_content_into_string(*, tool_message: ToolMessage) -> str:
+        """Convert a ToolMessage's content to a string, extracting JSON result if present."""
         if isinstance(tool_message.content, str):
             # the content is str then just return it
             # see if this is a json object embedded in text
@@ -474,6 +516,7 @@ class LangGraphStreamingManager:
     def get_structured_content_from_tool_message(
         *, tool_message: ToolMessage
     ) -> dict[str, Any] | None:
+        """Extract structured dict content from a ToolMessage if available."""
         content_dict: Dict[str, Any] | None = None
         if isinstance(tool_message.content, dict):
             content_dict = tool_message.content
