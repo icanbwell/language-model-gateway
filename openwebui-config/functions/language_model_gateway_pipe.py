@@ -1,15 +1,9 @@
-"""
-title: LangChain Pipe Function (Streaming Version - FIXED)
+"""title: LangChain Pipe Function (Streaming Version)
 author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
 author_url: https://github.com/imranq2
-version: 0.2.1
-
-This module defines a Pipe class that reads the oauth_id_token from the request cookies
-and uses it in Authorization header to make requests to the OpenAI API.
-It supports both streaming and non-streaming responses.
-
-KEY FIX: Instead of yielding raw SSE lines, we now parse the OpenAI streaming response
-and yield individual text chunks that OpenWebUI will format properly.
+version: 0.2.0
+This module defines a Pipe class that reads the oauth_id_token from the request cookies and uses it in Authorization header
+to make requests to the OpenAI API. It supports both streaming and non-streaming responses.
 """
 
 import datetime

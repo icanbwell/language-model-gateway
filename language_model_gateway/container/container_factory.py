@@ -443,6 +443,9 @@ class LanguageModelGatewayContainerFactory:
             PassThroughChatCompletionsProvider,
             lambda c: PassThroughChatCompletionsProvider(
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 

@@ -5,7 +5,6 @@
   "description": "Calls Bailey",
   "type": "passthru",
   "url": "https://api.dev.icanbwell.com/bailey/v1",
-  "streaming_enabled": true,
   "model": {
     "model": "Bailey AI",
     "provider": "passthru"

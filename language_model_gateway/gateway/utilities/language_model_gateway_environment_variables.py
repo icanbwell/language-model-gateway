@@ -127,3 +127,16 @@ class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables):
             return set(domain.strip().lower() for domain in domains.split(","))
         else:
             return set()
+
+    @property
+    def do_not_pass_through_headers(self) -> set[str]:
+        raw_value = os.environ.get(
+            "DO_NOT_PASS_THROUGH_HEADERS",
+            "connection,keep-alive,proxy-authenticate,proxy-authorization,te,trailers,transfer-encoding,upgrade,host,content-length,authorization",
+        )
+        if raw_value:
+            return set(
+                item.strip().lower() for item in raw_value.split(",") if item.strip()
+            )
+        else:
+            return set()
