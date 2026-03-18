@@ -151,7 +151,7 @@ class ChatCompletionsRouter:
             return await self._chat_completions(
                 request=request,
                 chat_request_wrapper=ChatCompletionApiRequestWrapper(
-                    chat_request_typed
+                    chat_request=chat_request_typed, enable_debug_logging=False
                 ),
                 chat_manager=chat_manager,
                 token_reader=token_reader,
@@ -203,7 +203,7 @@ class ChatCompletionsRouter:
         return await self._chat_completions(
             request=request,
             chat_request_wrapper=ResponsesApiRequestWrapper(
-                chat_request=chat_request_typed
+                chat_request=chat_request_typed, enable_debug_logging=False
             ),
             chat_manager=chat_manager,
             token_reader=token_reader,

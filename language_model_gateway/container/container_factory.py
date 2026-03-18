@@ -2,6 +2,7 @@ import logging
 import os
 from typing import cast
 
+from languagemodelcommon.container.container_factory import LanguageModelCommonContainerFactory
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
@@ -120,6 +121,11 @@ class LanguageModelGatewayContainerFactory:
             container=container
         )
 
+        # register services here
+        container = LanguageModelCommonContainerFactory.register_services_in_container(
+            container=container
+        )
+
         # Register our own FastAPIManager so we can save the token
         # Must be done AFTER the OidcContainerFactory to override the registration
         container.singleton(
@@ -134,8 +140,6 @@ class LanguageModelGatewayContainerFactory:
                 ),
             ),
         )
-
-        # register services here
 
         # we want only one instance of the cache so we use singleton
         container.singleton(

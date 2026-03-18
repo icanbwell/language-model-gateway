@@ -52,7 +52,8 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
         chat_request=ChatRequest(
             model=model,
             messages=chat_history + [user_message],
-        )
+        ),
+        enable_debug_logging=False,
     )
 
     provider: OpenAiChatCompletionsProvider
