@@ -4,7 +4,7 @@ from typing import Dict, Any, List, Optional
 import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
@@ -115,15 +115,23 @@ async def test_mcp_agent() -> None:
     )
     builder.add_edge("tools", "call_model")
     graph = builder.compile()
-    prompt = {"messages": "what's address for Dr. Alice Smith?"}
-    # noinspection PyTypeChecker
+    prompt: MyMessagesState = MyMessagesState(
+        messages=[HumanMessage(content="what's address for Dr. Alice Smith?")],
+        usage_metadata=None,
+        user_id=None,
+        auth_token=None,
+        remaining_steps=0,
+        conversation_thread_id=None,
+    )
     math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Math Response ===")
     print(math_response["messages"][-1].content)
     print("===== End of Math Response =====")
     assert "123 Main St, Springfield" in math_response["messages"][-1].content
-    # weather_response = await graph.ainvoke({"messages": "what is the weather in nyc?"})
+    # weather_response = await graph.ainvoke(
+    #     MyMessagesState(messages=[HumanMessage(content="what is the weather in nyc?")])
+    # )
     # print(weather_response)
 
 

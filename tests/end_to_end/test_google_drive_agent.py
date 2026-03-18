@@ -6,11 +6,12 @@ import mcp
 from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
+from languagemodelcommon.state.messages_state import MyMessagesState
 from mcp.types import (
     Prompt,
     Resource,
@@ -23,6 +24,7 @@ from mcp.types import (
 )
 
 from oidcauthlib.auth.models.token import Token
+
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -181,10 +183,20 @@ async def test_google_drive_via_llm() -> None:
     )
     builder.add_edge("tools", "call_model")
     graph = builder.compile()
-    prompt = {
-        "messages": "show me contents of this file: https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
-    }
-    # noinspection PyTypeChecker
+    prompt: MyMessagesState = MyMessagesState(
+        messages=[
+            HumanMessage(
+                content=(
+                    "show me contents of this file: "
+                    "https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
+                )
+            )
+        ],
+        usage_metadata=None,
+        user_id=None,
+        auth_token=None,
+        conversation_thread_id=None,
+    )
     math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Google Drive Response ===")
