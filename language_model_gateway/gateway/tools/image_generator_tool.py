@@ -10,10 +10,10 @@ from language_model_gateway.gateway.file_managers.file_manager import FileManage
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
-from language_model_gateway.gateway.image_generation.image_generator import (
+from languagemodelcommon.image_generation.image_generator import (
     ImageGenerator,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool

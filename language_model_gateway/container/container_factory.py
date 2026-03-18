@@ -4,7 +4,7 @@ from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtoc
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory

@@ -15,7 +15,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
 from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
@@ -23,7 +23,7 @@ from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_image_generator import MockImageGenerator
+from languagemodelcommon.tests.gateway.mocks.mock_image_generator import MockImageGenerator
 from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer

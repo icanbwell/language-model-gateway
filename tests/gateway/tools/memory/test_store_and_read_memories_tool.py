@@ -16,7 +16,7 @@ from oidcauthlib.auth.models.token import Token
 from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
