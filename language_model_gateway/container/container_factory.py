@@ -215,6 +215,15 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            ToolAuthManager,
+            lambda c: ToolAuthManager(
+                auth_manager=c.resolve(AuthManager),
+                token_exchange_manager=c.resolve(TokenExchangeManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
+            ),
+        )
+
+        container.singleton(
             PassThroughTokenManager,
             lambda c: PassThroughTokenManager(
                 auth_manager=c.resolve(AuthManager),
@@ -223,6 +232,38 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
+            ),
+        )
+
+        container.singleton(
+            TruncationMcpCallInterceptor,
+            lambda c: TruncationMcpCallInterceptor(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                token_reducer=c.resolve(TokenReducer),
+            ),
+        )
+
+        container.singleton(
+            TracingMcpCallInterceptor,
+            lambda c: TracingMcpCallInterceptor(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
+        )
+
+        container.singleton(
+            MCPToolProvider,
+            lambda c: MCPToolProvider(
+                tool_auth_manager=c.resolve(ToolAuthManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                token_reducer=c.resolve(TokenReducer),
+                tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
+                truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
             ),
         )
 
