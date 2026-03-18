@@ -15,7 +15,7 @@ from mcp.types import (
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
 
-from languagemodelcommon.configs.config_schema import AgentConfig
+from languagemodelcommon.configs.schemas.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )

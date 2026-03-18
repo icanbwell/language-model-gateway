@@ -16,7 +16,10 @@ from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig, AgentConfig
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    AgentConfig,
+)
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.token_reader import TokenReader
 

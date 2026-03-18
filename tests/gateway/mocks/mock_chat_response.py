@@ -1,6 +1,6 @@
 from typing import Protocol, Dict, Any
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )

@@ -12,7 +12,10 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion import Choice
 from starlette.responses import StreamingResponse, JSONResponse
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig, ModelConfig
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    ModelConfig,
+)
 from oidcauthlib.auth.models.auth import AuthInformation
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (

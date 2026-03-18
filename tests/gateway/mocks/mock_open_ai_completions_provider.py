@@ -3,7 +3,7 @@ from typing import Dict, Any, override
 from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,

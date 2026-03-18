@@ -3,7 +3,7 @@ from typing import Dict
 
 from starlette.responses import StreamingResponse, JSONResponse
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from oidcauthlib.auth.models.auth import AuthInformation
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,

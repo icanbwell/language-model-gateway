@@ -2,7 +2,7 @@ from typing import Protocol, runtime_checkable
 
 from langchain_core.language_models import BaseChatModel
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 
 
 @runtime_checkable

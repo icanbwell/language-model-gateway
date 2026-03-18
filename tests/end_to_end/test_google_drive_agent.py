@@ -42,7 +42,7 @@ import pytest
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 
-from languagemodelcommon.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,

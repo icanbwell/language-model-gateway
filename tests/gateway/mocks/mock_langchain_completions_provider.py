@@ -2,7 +2,7 @@ from typing import Dict, Any, override
 
 from starlette.responses import StreamingResponse, JSONResponse
 
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from oidcauthlib.auth.models.auth import AuthInformation
 
 from languagemodelcommon.converters.langgraph_to_openai_converter import (

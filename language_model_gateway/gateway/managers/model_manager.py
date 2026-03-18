@@ -5,7 +5,7 @@ from typing import Dict, List, Any
 from openai.types import Model
 
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)

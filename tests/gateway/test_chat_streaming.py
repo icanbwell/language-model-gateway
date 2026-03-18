@@ -8,7 +8,7 @@ from openai.types import CompletionUsage
 from openai.types.chat import ChatCompletionChunk
 from pytest_httpx import HTTPXMock, IteratorStream
 
-from languagemodelcommon.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     ModelParameterConfig,

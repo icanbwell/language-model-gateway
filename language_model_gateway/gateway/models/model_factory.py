@@ -13,7 +13,7 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from types_boto3_bedrock_runtime.client import BedrockRuntimeClient
 
-from languagemodelcommon.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ModelConfig,
     ModelParameterConfig,
     ChatModelConfig,

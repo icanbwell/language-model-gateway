@@ -13,7 +13,10 @@ from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_schema import ChatModelConfig, PromptConfig
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    PromptConfig,
+)
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )
