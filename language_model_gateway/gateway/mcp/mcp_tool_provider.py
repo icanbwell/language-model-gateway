@@ -15,7 +15,7 @@ from mcp.types import (
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
 
-from languagemodelcommon.configs.schemas.config_schema import AgentConfig
+from language_model_gateway.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
@@ -37,7 +37,7 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
-from languagemodelcommon.utilities.token_reducer.token_reducer import (
+from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 
