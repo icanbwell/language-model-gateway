@@ -230,7 +230,13 @@ class LangGraphStreamingManager:
         tool_start_times: dict[str, float],
         user_id: Optional[str] = None,
     ) -> AsyncGenerator[str, None]:
-        logger.debug(f"on_tool_end: {event}")
+        tool_name: Optional[str] = event["name"] if "name" in event else None
+        logger.debug(
+            "on_tool_end: name=%s request_id=%s has_data=%s",
+            tool_name,
+            request_id,
+            "data" in event,
+        )
         data = event["data"] if "data" in event else {}
         tool_message: Optional[ToolMessage] = data.get("output")
         tool_name2: Optional[str] = None
