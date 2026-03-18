@@ -24,11 +24,11 @@ from mcp.types import (
 
 from oidcauthlib.auth.models.token import Token
 
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from languagemodelcommon.state.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.converters.streaming_tool_node import (
+from languagemodelcommon.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client

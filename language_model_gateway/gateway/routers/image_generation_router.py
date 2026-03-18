@@ -12,7 +12,7 @@ from oidcauthlib.container.inject import Inject
 from language_model_gateway.gateway.managers.image_generation_manager import (
     ImageGenerationManager,
 )
-from language_model_gateway.gateway.schema.openai.image_generation import (
+from languagemodelcommon.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS

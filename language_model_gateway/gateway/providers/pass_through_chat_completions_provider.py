@@ -28,7 +28,7 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
     PassThroughTokenManager,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

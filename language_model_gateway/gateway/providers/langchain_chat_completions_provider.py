@@ -20,10 +20,10 @@ from language_model_gateway.configs.config_schema import ChatModelConfig, AgentC
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.token_reader import TokenReader
 
-from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
+from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from languagemodelcommon.state.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.persistence.persistence_factory import (
     PersistenceFactory,
@@ -31,11 +31,8 @@ from language_model_gateway.gateway.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
-)
-from language_model_gateway.gateway.structures.request_information import (
-    RequestInformation,
 )
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
@@ -47,6 +44,7 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 )
 from langgraph.store.base import BaseStore
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from languagemodelcommon.utilities.request_information import RequestInformation
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])

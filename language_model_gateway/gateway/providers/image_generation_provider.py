@@ -22,7 +22,7 @@ from language_model_gateway.gateway.image_generation.image_generator_factory imp
 from language_model_gateway.gateway.providers.base_image_generation_provider import (
     BaseImageGenerationProvider,
 )
-from language_model_gateway.gateway.schema.openai.image_generation import (
+from languagemodelcommon.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS

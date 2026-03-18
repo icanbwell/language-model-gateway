@@ -18,11 +18,11 @@ from language_model_gateway.gateway.http.http_client_factory import HttpClientFa
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+from languagemodelcommon.schema.openai.completions import ChatRequest
+from languagemodelcommon.structures.openai.request.chat_completion_api_request_wrapper import (
     ChatCompletionApiRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (

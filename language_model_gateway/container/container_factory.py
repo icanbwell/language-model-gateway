@@ -23,10 +23,10 @@ from language_model_gateway.gateway.auth.token_storage_auth_manager import (
 )
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
-from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
+from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
-from language_model_gateway.gateway.converters.streaming_manager import (
+from languagemodelcommon.converters.streaming_manager import (
     LangGraphStreamingManager,
 )
 from language_model_gateway.gateway.file_managers.file_manager_factory import (

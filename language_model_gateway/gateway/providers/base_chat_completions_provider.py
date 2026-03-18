@@ -5,7 +5,7 @@ from starlette.responses import StreamingResponse, JSONResponse
 
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from oidcauthlib.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 

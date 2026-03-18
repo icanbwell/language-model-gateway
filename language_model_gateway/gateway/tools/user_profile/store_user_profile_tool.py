@@ -10,7 +10,7 @@ from langmem import errors
 from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field, ConfigDict
 
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from languagemodelcommon.state.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.tools.user_profile.structures.user_profile import (
     UserProfile,
 )

@@ -3,7 +3,7 @@ from typing import Dict
 
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.gateway.schema.openai.image_generation import (
+from languagemodelcommon.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
 

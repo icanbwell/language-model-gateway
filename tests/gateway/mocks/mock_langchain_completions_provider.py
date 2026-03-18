@@ -5,7 +5,7 @@ from starlette.responses import StreamingResponse, JSONResponse
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from oidcauthlib.auth.models.auth import AuthInformation
 
-from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
+from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
@@ -18,7 +18,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
     PassThroughTokenManager,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider

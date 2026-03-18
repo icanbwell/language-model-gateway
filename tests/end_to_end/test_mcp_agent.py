@@ -22,8 +22,8 @@ from openai import AsyncOpenAI
 from openai.types.responses import Response
 from openai.types.responses.tool_param import Mcp
 
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
-from language_model_gateway.gateway.converters.streaming_tool_node import (
+from languagemodelcommon.state.my_messages_state import MyMessagesState
+from languagemodelcommon.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client

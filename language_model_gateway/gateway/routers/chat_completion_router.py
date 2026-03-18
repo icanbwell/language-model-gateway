@@ -21,15 +21,15 @@ from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
-from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+from languagemodelcommon.schema.openai.completions import ChatRequest
+from languagemodelcommon.schema.openai.responses import ResponsesRequest
+from languagemodelcommon.structures.openai.request.chat_completion_api_request_wrapper import (
     ChatCompletionApiRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.responses_api_request_wrapper import (
+from languagemodelcommon.structures.openai.request.responses_api_request_wrapper import (
     ResponsesApiRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

@@ -24,7 +24,7 @@
 # from language_model_gateway.gateway.providers.base_chat_completions_provider import (
 #     BaseChatCompletionsProvider,
 # )
-# from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+# from languagemodelcommon.schema.openai.completions import ChatRequest
 #
 # logger = logging.getLogger(__file__)
 #
