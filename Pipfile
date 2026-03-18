@@ -64,8 +64,6 @@ markdownify = ">=0.14.1"
 cachetools = ">=5.5.0"
 # aiofiles is a Python library for working with files asynchronously
 #aiofiles = ">=24.1.0"
-# pypdf is a Python library for working with PDFs
-pypdf = ">=6.6.0"
 # backoff is a Python library for retrying requests
 backoff = ">=2.2.1"
 # Databricks SDK is a Python library for interacting with Databricks
