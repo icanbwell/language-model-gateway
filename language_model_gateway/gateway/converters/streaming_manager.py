@@ -1,7 +1,9 @@
 import copy  # For deepcopy
+import hashlib
 import json
 import logging
 import os
+import secrets
 import time
 from typing import (
     Any,
@@ -83,6 +85,7 @@ class LangGraphStreamingManager:
         chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
+        user_id: Optional[str] = None,
     ) -> AsyncGenerator[str, None]:
         try:
             event_type: str = event["event"]
@@ -125,6 +128,7 @@ class LangGraphStreamingManager:
                         chat_request_wrapper=chat_request_wrapper,
                         request_id=request_id,
                         tool_start_times=tool_start_times,
+                        user_id=user_id,
                     ):
                         yield chunk
                 case "on_tool_error":
@@ -223,6 +227,7 @@ class LangGraphStreamingManager:
         chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
+        user_id: Optional[str] = None,
     ) -> AsyncGenerator[str, None]:
         logger.debug(f"on_tool_end: {event}")
         data = event["data"] if "data" in event else {}
@@ -294,7 +299,12 @@ class LangGraphStreamingManager:
                         file_manager = self.file_manager_factory.get_file_manager(
                             folder=output_folder
                         )
-                        filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
+                        # Use secure filename with user isolation and random token
+                        # to prevent enumeration attacks and cross-user data access
+                        filename = self.generate_secure_filename(
+                            tool_name=tool_name2,
+                            user_id=user_id,
+                        )
                         file_path: Optional[str] = await file_manager.save_file_async(
                             file_data=tool_message_content.encode("utf-8"),
                             folder=output_folder,
@@ -440,6 +450,42 @@ class LangGraphStreamingManager:
         except Exception:
             tool_input_str = str(tool_input1)
         return f"{tool_name1}:{hash(tool_input_str)}"
+
+    @staticmethod
+    def generate_secure_filename(
+        *,
+        tool_name: Optional[str],
+        user_id: Optional[str],
+    ) -> str:
+        """
+        Generate a secure, non-guessable filename for tool output files.
+
+        The filename includes:
+        - A hashed user identifier (for user isolation without exposing user_id)
+        - A cryptographically secure random token (to prevent enumeration)
+        - The tool name and timestamp (for debugging/identification)
+
+        Args:
+            tool_name: The name of the tool that generated the output
+            user_id: The user identifier (will be hashed, not stored directly)
+
+        Returns:
+            A secure filename string
+        """
+        # Generate a cryptographically secure random token
+        random_token = secrets.token_urlsafe(16)
+
+        # Hash the user_id if present (don't expose raw user_id in filename)
+        user_hash = ""
+        if user_id:
+            user_hash = hashlib.sha256(user_id.encode()).hexdigest()[:12] + "_"
+
+        # Sanitize tool name
+        safe_tool_name = (tool_name or "unknown").replace("/", "_").replace("\\", "_")
+
+        timestamp = int(time.time())
+
+        return f"{user_hash}{safe_tool_name}_{timestamp}_{random_token}.txt"
 
     @staticmethod
     def safe_json(string: str) -> Any:
