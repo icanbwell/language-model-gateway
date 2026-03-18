@@ -5,7 +5,7 @@ from authlib.integrations.starlette_client import StarletteOAuth2App
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 
-from language_model_gateway.configs.config_schema import AuthenticationConfig
+from languagemodelcommon.configs.config_schema import AuthenticationConfig
 from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_expired_exception import (
     AuthorizationTokenCacheItemExpiredException,
 )

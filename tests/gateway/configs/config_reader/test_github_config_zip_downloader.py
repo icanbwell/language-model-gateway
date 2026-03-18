@@ -1,6 +1,6 @@
 import os
 import pytest
-from language_model_gateway.configs.config_reader.github_config_zip_reader import (
+from languagemodelcommon.configs.config_reader.github_config_zip_reader import (
     GitHubConfigZipDownloader,
 )
 

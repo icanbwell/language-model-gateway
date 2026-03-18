@@ -16,8 +16,8 @@ from starlette.requests import Request
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
-from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
 )

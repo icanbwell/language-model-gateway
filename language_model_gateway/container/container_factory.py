@@ -14,7 +14,7 @@ from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
 
-from language_model_gateway.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )

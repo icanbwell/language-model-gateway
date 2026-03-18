@@ -8,7 +8,7 @@ from langchain_community.tools import (
 )
 from langchain_core.tools import BaseTool
 
-from language_model_gateway.configs.config_schema import AgentConfig
+from languagemodelcommon.configs.config_schema import AgentConfig
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )

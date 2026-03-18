@@ -13,7 +13,7 @@ from openai.types.responses import (
 )
 from openai.types.responses.tool_param import Mcp
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
 )

@@ -5,11 +5,14 @@ from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
 
-from languagemodelcommon.utilities.environment.language_model_common_environment_variables import \
-    LanguageModelCommonEnvironmentVariables
+from languagemodelcommon.utilities.environment.language_model_common_environment_variables import (
+    LanguageModelCommonEnvironmentVariables,
+)
 
 
-class LanguageModelGatewayEnvironmentVariables(OidcEnvironmentVariables, LanguageModelCommonEnvironmentVariables):
+class LanguageModelGatewayEnvironmentVariables(
+    OidcEnvironmentVariables, LanguageModelCommonEnvironmentVariables
+):
     @property
     def github_org(self) -> Optional[str]:
         return os.environ.get("GITHUB_ORGANIZATION_NAME")

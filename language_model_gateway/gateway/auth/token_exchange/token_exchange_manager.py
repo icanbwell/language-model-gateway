@@ -13,7 +13,7 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from oidcauthlib.auth.repository.base_repository import AsyncBaseRepository
 from oidcauthlib.auth.repository.repository_factory import RepositoryFactory
 
-from language_model_gateway.configs.config_schema import AuthenticationConfig
+from languagemodelcommon.configs.config_schema import AuthenticationConfig
 from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )

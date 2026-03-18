@@ -5,7 +5,7 @@ from openai import AsyncOpenAI, AsyncStream
 from openai.types.chat import ChatCompletionChunk, ChatCompletion
 from openai.types.chat.chat_completion import Choice
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,

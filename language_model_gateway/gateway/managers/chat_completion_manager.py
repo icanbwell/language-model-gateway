@@ -12,8 +12,8 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.config_schema import ChatModelConfig, PromptConfig
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )

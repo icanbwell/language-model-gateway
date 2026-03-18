@@ -4,7 +4,7 @@ import httpx
 from openai import AsyncOpenAI, AsyncStream
 from openai.types.chat import ChatCompletion, ChatCompletionChunk
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.config_schema import (
     ChatModelConfig,
     ModelConfig,
     PromptConfig,
