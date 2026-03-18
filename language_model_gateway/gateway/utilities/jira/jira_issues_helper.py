@@ -6,7 +6,7 @@ from typing import Dict, Optional, List, Any, Literal
 
 from httpx import URL
 
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.jira.JiraIssuesPerAssigneeInfo import (
     JiraIssuesPerAssigneeInfo,
 )

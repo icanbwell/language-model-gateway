@@ -40,7 +40,7 @@ from language_model_gateway.gateway.auth.token_storage_auth_manager import (
     TokenStorageAuthManager,
 )
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,

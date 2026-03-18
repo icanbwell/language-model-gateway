@@ -16,7 +16,7 @@ from pydantic_core import ValidationError
 from starlette.responses import StreamingResponse, JSONResponse
 
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )

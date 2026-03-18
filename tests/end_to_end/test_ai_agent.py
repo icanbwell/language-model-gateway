@@ -17,7 +17,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     ModelConfig,
 )
 from oidcauthlib.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
