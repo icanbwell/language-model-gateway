@@ -122,6 +122,8 @@ async def test_mcp_agent() -> None:
         user_id=None,
         auth_token=None,
         conversation_thread_id=None,
+        passed_evaluation=None,
+        evaluation_notes=None,
     )
     math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
     print(math_response)
