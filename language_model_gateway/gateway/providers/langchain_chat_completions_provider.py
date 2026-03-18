@@ -9,6 +9,8 @@ from typing import (
     ContextManager,
     override,
 )
+
+from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
 from starlette.responses import StreamingResponse, JSONResponse
 
 from langchain_core.language_models import BaseChatModel
@@ -65,6 +67,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         pass_through_token_manager: PassThroughTokenManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
+        skill_loader: SkillLoaderProtocol,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -128,6 +131,14 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if not isinstance(self.pass_through_token_manager, PassThroughTokenManager):
             raise TypeError(
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
+            )
+
+        self.skill_loader: SkillLoaderProtocol = skill_loader
+        if self.skill_loader is None:
+            raise ValueError("skill_loader must not be None")
+        if not isinstance(self.skill_loader, SkillLoaderProtocol):
+            raise TypeError(
+                f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
             )
 
     @override
@@ -207,6 +218,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 checkpointer=checkpointer
                 if self.environment_variables.enable_llm_checkpointer
                 else None,
+                skill_loader=self.skill_loader,
             )
             request_id: uuid.UUID = uuid.uuid4()
 
@@ -227,6 +239,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     else str(request_id),
                     headers=headers,
                 ),
+                config=None,
+                state=None,
             )
             # If result is a StreamingResponse, wrap the generator so context managers stay open
             if isinstance(result, StreamingResponse):

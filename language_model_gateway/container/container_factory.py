@@ -2,7 +2,13 @@ import logging
 import os
 from typing import cast
 
-from languagemodelcommon.container.container_factory import LanguageModelCommonContainerFactory
+from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from languagemodelcommon.configs.prompt_library.prompt_library_manager import (
+    PromptLibraryManager,
+)
+from languagemodelcommon.container.container_factory import (
+    LanguageModelCommonContainerFactory,
+)
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
@@ -200,6 +206,7 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 token_reducer=c.resolve(TokenReducer),
                 streaming_manager=c.resolve(LangGraphStreamingManager),
+                skill_loader=c.resolve(SkillLoaderProtocol),
             ),
         )
 
@@ -346,11 +353,16 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
+                skill_loader=c.resolve(SkillLoaderProtocol),
             ),
         )
 
         container.singleton(
-            ConfigReader, lambda c: ConfigReader(cache=c.resolve(ConfigExpiringCache))
+            ConfigReader,
+            lambda c: ConfigReader(
+                cache=c.resolve(ConfigExpiringCache),
+                prompt_library_manager=c.resolve(PromptLibraryManager),
+            ),
         )
 
         container.singleton(
