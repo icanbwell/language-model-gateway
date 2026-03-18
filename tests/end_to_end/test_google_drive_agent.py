@@ -11,7 +11,6 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
-from languagemodelcommon.state.messages_state import MyMessagesState
 from mcp.types import (
     Prompt,
     Resource,
@@ -25,6 +24,7 @@ from mcp.types import (
 
 from oidcauthlib.auth.models.token import Token
 
+from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
 from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
@@ -197,7 +197,7 @@ async def test_google_drive_via_llm() -> None:
         auth_token=None,
         conversation_thread_id=None,
     )
-    math_response = await graph.ainvoke(prompt)
+    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
     print(math_response)
     print("=== Google Drive Response ===")
     print(math_response["messages"][-1].content)
