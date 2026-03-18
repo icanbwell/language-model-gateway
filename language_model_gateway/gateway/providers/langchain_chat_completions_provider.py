@@ -23,7 +23,7 @@ from oidcauthlib.auth.token_reader import TokenReader
 from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
-from languagemodelcommon.state.my_messages_state import MyMessagesState
+from languagemodelcommon.state.messages_state import MyMessagesState
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from language_model_gateway.gateway.persistence.persistence_factory import (
     PersistenceFactory,

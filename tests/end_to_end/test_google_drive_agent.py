@@ -24,7 +24,7 @@ from mcp.types import (
 
 from oidcauthlib.auth.models.token import Token
 
-from languagemodelcommon.state.my_messages_state import MyMessagesState
+from languagemodelcommon.state.messages_state import MyMessagesState
 from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )

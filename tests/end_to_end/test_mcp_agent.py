@@ -22,12 +22,13 @@ from openai import AsyncOpenAI
 from openai.types.responses import Response
 from openai.types.responses.tool_param import Mcp
 
-from languagemodelcommon.state.my_messages_state import MyMessagesState
 from languagemodelcommon.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client
 from fastmcp.client.client import CallToolResult
+
+from languagemodelcommon.state.messages_state import MyMessagesState
 
 
 @pytest.mark.skipif(
@@ -120,7 +121,6 @@ async def test_mcp_agent() -> None:
         usage_metadata=None,
         user_id=None,
         auth_token=None,
-        remaining_steps=0,
         conversation_thread_id=None,
     )
     math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
