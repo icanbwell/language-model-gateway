@@ -1694,12 +1694,12 @@
         },
         "language-model-common": {
             "hashes": [
-                "sha256:1c66e6e44c1ac5e852c239e96ea6cbb9ff17db6f47422dc181c58716d8b0ad18",
-                "sha256:b7125c0e1306b207c05f150f5c8cad1915024c5aa80aad6134fec2789751c806"
+                "sha256:51607a113c17391c2449b34e7b3449ae0719be13d63747ba8417178b23c5b0cb",
+                "sha256:8c1fa7b7714663bce1b6d36f2d32f1ec17f9fe66d33de1a77db23801ea76616a"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.5"
+            "version": "==1.0.6"
         },
         "lark": {
             "hashes": [
