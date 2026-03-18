@@ -1,5 +1,4 @@
 import copy  # For deepcopy
-import hashlib
 import json
 import logging
 import os
@@ -468,13 +467,12 @@ class LangGraphStreamingManager:
         Generate a secure, non-guessable filename for tool output files.
 
         The filename includes:
-        - A hashed user identifier (for user isolation without exposing user_id)
         - A cryptographically secure random token (to prevent enumeration)
         - The tool name and timestamp (for debugging/identification)
 
         Args:
             tool_name: The name of the tool that generated the output
-            user_id: The user identifier (will be hashed, not stored directly)
+            user_id: The user identifier (currently not embedded in the filename)
 
         Returns:
             A secure filename string
@@ -482,10 +480,9 @@ class LangGraphStreamingManager:
         # Generate a cryptographically secure random token
         random_token = secrets.token_urlsafe(16)
 
-        # Hash the user_id if present (don't expose raw user_id in filename)
-        user_hash = ""
-        if user_id:
-            user_hash = hashlib.sha256(user_id.encode()).hexdigest()[:12] + "_"
+        # Note: We intentionally do not embed user_id (or a deterministic hash of it)
+        # in the filename to avoid cross-file linkability or offline guessing of
+        # user identifiers if filenames are exposed outside the service.
 
         # Sanitize tool name: restrict to a safe subset for filesystem and URLs
         base_tool_name = tool_name or "unknown"
@@ -501,7 +498,7 @@ class LangGraphStreamingManager:
 
         timestamp = int(time.time())
 
-        return f"{user_hash}{safe_tool_name}_{timestamp}_{random_token}.txt"
+        return f"{safe_tool_name}_{timestamp}_{random_token}.txt"
 
     @staticmethod
     def safe_json(string: str) -> Any:
