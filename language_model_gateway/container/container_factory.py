@@ -78,7 +78,7 @@ from language_model_gateway.gateway.providers.pass_through_token_manager import 
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.confluence.confluence_helper import (
@@ -97,7 +97,7 @@ from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
+from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )

@@ -11,7 +11,7 @@ from language_model_gateway.configs.config_schema import (
     AgentConfig,
 )
 from oidcauthlib.auth.models.token import Token
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory

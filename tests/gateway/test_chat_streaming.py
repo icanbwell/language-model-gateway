@@ -14,7 +14,7 @@ from language_model_gateway.configs.config_schema import (
     ModelParameterConfig,
     PromptConfig,
 )
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (

@@ -18,7 +18,7 @@ from language_model_gateway.configs.config_schema import (
     ModelConfig,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (

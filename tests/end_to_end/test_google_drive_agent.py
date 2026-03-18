@@ -25,7 +25,7 @@ from mcp.types import (
 from oidcauthlib.auth.models.token import Token
 
 from languagemodelcommon.state.my_messages_state import MyMessagesState
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from languagemodelcommon.converters.streaming_tool_node import (

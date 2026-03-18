@@ -5,7 +5,7 @@ from typing import List
 from botocore.exceptions import ClientError
 from language_model_gateway.configs.config_schema import ChatModelConfig
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from language_model_gateway.gateway.utilities.url_parser import UrlParser
+from languagemodelcommon.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["CONFIG"])

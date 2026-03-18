@@ -9,7 +9,7 @@ from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFacto
 from language_model_gateway.gateway.file_managers.file_manager import FileManager
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from language_model_gateway.gateway.utilities.s3_url import S3Url
-from language_model_gateway.gateway.utilities.url_parser import UrlParser
+from languagemodelcommon.utilities.url_parser import UrlParser
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["FILES"])

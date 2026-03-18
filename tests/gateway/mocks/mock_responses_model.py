@@ -20,7 +20,7 @@ from langchain_core.runnables import Runnable
 from langchain_core.tools import BaseTool
 
 from tests.gateway.mocks.mock_ai_message_protocol import MockAiMessageProtocol
-from language_model_gateway.gateway.utilities.openai.responses_api_converter import (
+from languagemodelcommon.utilities.openai.responses_api_converter import (
     convert_responses_api_to_messages,
 )
 
