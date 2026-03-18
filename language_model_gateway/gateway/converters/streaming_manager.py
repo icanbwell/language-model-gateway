@@ -3,6 +3,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import secrets
 import time
 from typing import (
@@ -480,8 +481,17 @@ class LangGraphStreamingManager:
         if user_id:
             user_hash = hashlib.sha256(user_id.encode()).hexdigest()[:12] + "_"
 
-        # Sanitize tool name
-        safe_tool_name = (tool_name or "unknown").replace("/", "_").replace("\\", "_")
+        # Sanitize tool name: restrict to a safe subset for filesystem and URLs
+        base_tool_name = tool_name or "unknown"
+        # Replace any character not in [A-Za-z0-9._-] with underscore
+        safe_tool_name = re.sub(r"[^A-Za-z0-9._-]", "_", base_tool_name)
+        # Collapse multiple underscores and strip leading/trailing underscores
+        safe_tool_name = re.sub(r"_+", "_", safe_tool_name).strip("_")
+        if not safe_tool_name:
+            safe_tool_name = "unknown"
+        # Limit length to avoid exceeding filesystem limits when combined with other parts
+        max_tool_name_length = 50
+        safe_tool_name = safe_tool_name[:max_tool_name_length]
 
         timestamp = int(time.time())
 
