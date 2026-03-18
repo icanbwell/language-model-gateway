@@ -55,7 +55,6 @@ class LanguageModelGatewayEnvironmentVariables(
         limit = os.environ.get("TOOL_OUTPUT_TOKEN_LIMIT")
         return int(limit) if limit and limit.isdigit() else None
 
-
     @property
     def tool_call_timeout_seconds(self) -> int:
         """Timeout in seconds for tool calls."""

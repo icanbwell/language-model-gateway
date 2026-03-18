@@ -1,20 +1,13 @@
 import logging
 
 from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
-from language_model_gateway.gateway.aws.aws_client_factory import AwsClientFactory
 from language_model_gateway.gateway.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
-from language_model_gateway.gateway.managers.image_generation_manager import (
-    ImageGenerationManager,
-)
 from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
-from language_model_gateway.gateway.providers.image_generation_provider import (
-    ImageGenerationProvider,
-)
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
@@ -322,7 +315,6 @@ class LanguageModelGatewayContainerFactory:
                 auth_config_reader=c.resolve(AuthConfigReader),
             ),
         )
-
 
         container.singleton(
             ModelManager, lambda c: ModelManager(config_reader=c.resolve(ConfigReader))
