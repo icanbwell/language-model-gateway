@@ -97,7 +97,7 @@ from language_model_gateway.gateway.utilities.jira.jira_issues_helper import (
     JiraIssueHelper,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from languagemodelcommon.utilities.auth.token_reducer import (
+from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
     TOKEN_REDUCER_STRATEGY,
 )

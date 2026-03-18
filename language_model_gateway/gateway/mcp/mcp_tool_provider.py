@@ -37,7 +37,7 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from language_model_gateway.gateway.utilities.logger.logging_transport import (
     LoggingTransport,
 )
-from languagemodelcommon.utilities.auth.token_reducer import (
+from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
 
