@@ -185,7 +185,7 @@ async def test_google_drive_via_llm() -> None:
         "messages": "show me contents of this file: https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
     }
     # noinspection PyTypeChecker
-    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
+    math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Google Drive Response ===")
     print(math_response["messages"][-1].content)

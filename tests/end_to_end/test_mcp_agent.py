@@ -117,7 +117,7 @@ async def test_mcp_agent() -> None:
     graph = builder.compile()
     prompt = {"messages": "what's address for Dr. Alice Smith?"}
     # noinspection PyTypeChecker
-    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
+    math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Math Response ===")
     print(math_response["messages"][-1].content)
