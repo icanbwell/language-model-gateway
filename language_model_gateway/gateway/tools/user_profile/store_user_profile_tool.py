@@ -89,11 +89,11 @@ class StoreUserProfileTool(ResilientBaseTool):
             UserProfileValidator.validate_state_user_id(state)
             UserProfileValidator.validate_action(action, self.actions_permitted)
             # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
-            if not state.user_id:
+            if not state["user_id"]:
                 raise ToolException(
                     "user_id is required in the state to store user profile"
                 )
-            user_profile.user_id = state.user_id
+            user_profile.user_id = state["user_id"]
             store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()

@@ -33,7 +33,7 @@ class GetUserProfileTool(ResilientBaseTool):
         logger.info(f"GetUserProfileTool called with state: {state}")
 
         try:
-            user_id = state.user_id
+            user_id = state["user_id"]
             if not user_id:
                 raise ValueError("user_id is required")
 
