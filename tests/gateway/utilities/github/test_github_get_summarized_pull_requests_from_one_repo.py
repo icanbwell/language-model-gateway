@@ -7,7 +7,7 @@ from shutil import rmtree
 from typing import Dict, List, Optional, Any
 
 import pytest
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
 from languagemodelcommon.http.http_client_factory import HttpClientFactory

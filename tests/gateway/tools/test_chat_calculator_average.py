@@ -13,7 +13,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
 from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)

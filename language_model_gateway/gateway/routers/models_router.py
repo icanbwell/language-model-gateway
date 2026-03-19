@@ -7,7 +7,7 @@ from fastapi import params
 
 from language_model_gateway.gateway.managers.model_manager import ModelManager
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])

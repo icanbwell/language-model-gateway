@@ -41,8 +41,8 @@ from language_model_gateway.gateway.routers.token_submission_router import (
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
-from oidcauthlib.container.container_registry import ContainerRegistry
-from oidcauthlib.container.inject import Inject
+from simple_container.container.container_registry import ContainerRegistry
+from simple_container.container.inject import Inject
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 

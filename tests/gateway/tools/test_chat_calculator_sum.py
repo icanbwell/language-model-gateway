@@ -1,7 +1,7 @@
 import logging
 
 import httpx
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion
 from typing import List, Dict, Any

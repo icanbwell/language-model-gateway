@@ -4,7 +4,7 @@ from typing import cast
 import httpx
 import pytest
 from oidcauthlib.auth.models.token import Token
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.responses import (
     EasyInputMessageParam,

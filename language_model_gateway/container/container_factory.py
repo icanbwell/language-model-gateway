@@ -28,7 +28,7 @@ from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager 
 from oidcauthlib.container.oidc_authlib_container_factory import (
     OidcAuthLibContainerFactory,
 )
-from oidcauthlib.container.simple_container import SimpleContainer
+from simple_container.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
@@ -102,14 +102,14 @@ class LanguageModelGatewayContainerFactory:
     def create_container(cls, *, source: str) -> SimpleContainer:
         logger.info("Initializing DI container")
 
-        container = SimpleContainer(source=source)
+        container: SimpleContainer = SimpleContainer(source=source)
 
-        container = OidcAuthLibContainerFactory().register_services_in_container(
+        OidcAuthLibContainerFactory().register_services_in_container(
             container=container
         )
 
         # register services here
-        container = LanguageModelCommonContainerFactory.register_services_in_container(
+        LanguageModelCommonContainerFactory.register_services_in_container(
             container=container
         )
 

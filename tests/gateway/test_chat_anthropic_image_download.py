@@ -17,7 +17,7 @@ from languagemodelcommon.mocks.mock_image_generator_factory import (
     MockImageGeneratorFactory,
 )
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 @pytest.mark.asyncio

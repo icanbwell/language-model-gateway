@@ -19,7 +19,7 @@ from languagemodelcommon.utilities.cache.config_expiring_cache import (
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 async def test_chat_completions_b_well(

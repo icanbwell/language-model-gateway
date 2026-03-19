@@ -13,7 +13,7 @@ from languagemodelcommon.file_managers.file_manager_factory import (
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from languagemodelcommon.utilities.url_parser import UrlParser
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])

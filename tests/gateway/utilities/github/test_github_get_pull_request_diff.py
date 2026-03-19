@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 import pytest
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from pytest_httpx import HTTPXMock
 
 from languagemodelcommon.http.http_client_factory import HttpClientFactory

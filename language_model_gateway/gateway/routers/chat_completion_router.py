@@ -35,7 +35,7 @@ from languagemodelcommon.structures.openai.request.responses_api_request_wrapper
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)

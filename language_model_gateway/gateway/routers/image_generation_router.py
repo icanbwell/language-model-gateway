@@ -8,7 +8,7 @@ from starlette.requests import Request
 from fastapi import params
 from starlette.responses import JSONResponse, StreamingResponse
 
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 from languagemodelcommon.image_generation.managers.image_generation_manager import (
     ImageGenerationManager,
 )

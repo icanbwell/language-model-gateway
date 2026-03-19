@@ -24,7 +24,7 @@ from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 @pytest.mark.skipif(
