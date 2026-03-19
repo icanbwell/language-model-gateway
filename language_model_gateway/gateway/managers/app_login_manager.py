@@ -11,7 +11,7 @@ from language_model_gateway.gateway.auth.models.token_cache_item import TokenCac
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.models.app_login_submission import (
     CredentialSubmission,
 )

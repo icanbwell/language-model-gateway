@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import List, Optional
 from urllib.parse import urlencode
 
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.confluence.confluence_document import (
     ConfluenceDocument,
 )

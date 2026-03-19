@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 import httpx
 from httpx import Response, URL
 
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.utilities.github.github_pull_request import (
     GithubPullRequest,
 )

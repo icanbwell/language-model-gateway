@@ -27,6 +27,7 @@ from typing import (
     Any,
     Dict,
     Generator,
+    cast,
 )
 from urllib.parse import urlparse, urlunparse
 
@@ -226,6 +227,7 @@ HTTPX Response Log:
         session_id: Optional[str],
         chat_id: Optional[str],
         message_id: Optional[str],
+        debug_mode: bool,
     ) -> Dict[str, str]:
         """
         Build headers for the OpenAI API request, including user and request context.
@@ -240,6 +242,8 @@ HTTPX Response Log:
             "X-Chat-Id": chat_id or "",
             "X-Message-Id": message_id or "",
         }
+        if debug_mode:
+            headers["Debug-Mode"] = "true"
         if self.valves.client_id_header_value:
             headers["X-Client-Id"] = self.valves.client_id_header_value
 
@@ -270,6 +274,38 @@ HTTPX Response Log:
             if key.lower().startswith("x-"):
                 headers[key] = value
         return headers
+
+    @staticmethod
+    def _extract_user_prompt(body: Dict[str, Any]) -> Optional[str]:
+        messages = body.get("messages")
+        if not isinstance(messages, list):
+            return None
+        for message in reversed(messages):
+            if not isinstance(message, dict):
+                continue
+            if message.get("role") != "user":
+                continue
+            content = message.get("content")
+            if isinstance(content, str):
+                return content
+            if isinstance(content, list):
+                for item in content:
+                    if not isinstance(item, dict):
+                        continue
+                    if item.get("type") == "text" and isinstance(item.get("text"), str):
+                        return cast(str, item["text"])
+            if isinstance(content, dict):
+                text = content.get("text")
+                if isinstance(text, str):
+                    return text
+        return None
+
+    @classmethod
+    def _is_debug_request(cls, body: Dict[str, Any]) -> bool:
+        prompt = cls._extract_user_prompt(body)
+        if not prompt:
+            return False
+        return prompt.lstrip().startswith("DEBUG:")
 
     def _yield_debug_info(
         self,
@@ -429,6 +465,7 @@ HTTPX Response Log:
         response_text: str = ""
         is_streaming: bool = bool(payload.get("stream", False))
 
+        debug_request = self._is_debug_request(body)
         headers = self._build_headers(
             request=__request__,
             user=__user__,
@@ -437,6 +474,7 @@ HTTPX Response Log:
             session_id=__session_id__,
             chat_id=__chat_id__,
             message_id=__message_id__,
+            debug_mode=debug_request,
         )
 
         for debug_line in self._yield_debug_info(

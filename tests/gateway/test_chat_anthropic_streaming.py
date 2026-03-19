@@ -9,7 +9,7 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 @pytest.mark.asyncio

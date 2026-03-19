@@ -10,21 +10,21 @@ from openai.types import CompletionUsage
 from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
 from pytest_httpx import HTTPXMock, IteratorStream
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     ModelParameterConfig,
     PromptConfig,
     AuthenticationConfig,
 )
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 @pytest.mark.skipif(

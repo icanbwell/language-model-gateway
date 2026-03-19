@@ -6,20 +6,20 @@ from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,
     PromptConfig,
     ModelParameterConfig,
 )
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 
 async def test_chat_completions_b_well(

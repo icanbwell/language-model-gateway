@@ -8,7 +8,7 @@ from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.models.auth import AuthInformation
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     AgentConfig,
     ChatModelConfig,
     AuthenticationConfig,

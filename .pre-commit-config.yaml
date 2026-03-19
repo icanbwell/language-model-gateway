@@ -135,5 +135,5 @@ repos:
         files: ^language-model-gateway-configs/.*\.json$
         args:
           - "--schemafile"
-          - "language_model_gateway/configs/config_schema.json"
+          - "language_model_gateway/config_schema.json"
           - "--verbose"

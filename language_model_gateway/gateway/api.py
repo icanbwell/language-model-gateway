@@ -16,8 +16,8 @@ from starlette.requests import Request
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
-from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
 )
@@ -41,8 +41,8 @@ from language_model_gateway.gateway.routers.token_submission_router import (
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
-from oidcauthlib.container.container_registry import ContainerRegistry
-from oidcauthlib.container.inject import Inject
+from simple_container.container.container_registry import ContainerRegistry
+from simple_container.container.inject import Inject
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 

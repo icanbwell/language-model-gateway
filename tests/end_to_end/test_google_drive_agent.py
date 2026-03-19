@@ -6,7 +6,7 @@ import mcp
 from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
 from langgraph.graph import StateGraph, MessagesState, START
@@ -23,10 +23,12 @@ from mcp.types import (
 )
 
 from oidcauthlib.auth.models.token import Token
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+
+from languagemodelcommon.state.messages_state import MyMessagesState
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
-from language_model_gateway.gateway.converters.streaming_tool_node import (
+from languagemodelcommon.converters.streaming_tool_node import (
     StreamingToolNode,
 )
 from fastmcp import Client
@@ -40,7 +42,7 @@ import pytest
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,
@@ -52,7 +54,7 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 from tests.auth.keycloak_helper import KeyCloakHelper
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 logger = logging.getLogger(__name__)
 
@@ -181,10 +183,22 @@ async def test_google_drive_via_llm() -> None:
     )
     builder.add_edge("tools", "call_model")
     graph = builder.compile()
-    prompt = {
-        "messages": "show me contents of this file: https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
-    }
-    # noinspection PyTypeChecker
+    prompt: MyMessagesState = MyMessagesState(
+        messages=[
+            HumanMessage(
+                content=(
+                    "show me contents of this file: "
+                    "https://docs.google.com/document/d/15uw9_mdTON6SQpQHCEgCffVtYBg9woVjvcMErXQSaa0/edit?usp=sharing"
+                )
+            )
+        ],
+        usage_metadata=None,
+        user_id=None,
+        auth_token=None,
+        conversation_thread_id=None,
+        evaluation_notes=None,
+        passed_evaluation=None,
+    )
     math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
     print(math_response)
     print("=== Google Drive Response ===")

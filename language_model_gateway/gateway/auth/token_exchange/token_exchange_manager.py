@@ -3,6 +3,7 @@ from datetime import datetime, UTC
 from typing import List, Any
 
 from bson import ObjectId
+from languagemodelcommon.configs.schemas.config_schema import AuthenticationConfig
 from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.exceptions.authorization_bearer_token_missing_exception import (
     AuthorizationBearerTokenMissingException,
@@ -13,7 +14,6 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from oidcauthlib.auth.repository.base_repository import AsyncBaseRepository
 from oidcauthlib.auth.repository.repository_factory import RepositoryFactory
 
-from language_model_gateway.configs.config_schema import AuthenticationConfig
 from oidcauthlib.auth.config.auth_config_reader import (
     AuthConfigReader,
 )

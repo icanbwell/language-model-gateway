@@ -144,7 +144,8 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
-
+      WRITE_TOOL_OUTPUT_TO_FILE: 1
+      SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/skills"
     env_file: .env
     command:
       - opentelemetry-instrument
@@ -174,6 +175,7 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+#    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s

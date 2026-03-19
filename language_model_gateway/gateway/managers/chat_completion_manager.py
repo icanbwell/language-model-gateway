@@ -12,8 +12,11 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_reader.config_reader import ConfigReader
-from language_model_gateway.configs.config_schema import ChatModelConfig, PromptConfig
+from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    PromptConfig,
+)
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )
@@ -35,10 +38,10 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
     PassThroughChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.message.chat_message_wrapper import (
+from languagemodelcommon.structures.openai.message.chat_message_wrapper import (
     ChatMessageWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.exception_logger import ExceptionLogger

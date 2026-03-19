@@ -10,7 +10,7 @@ from langmem import errors
 from langmem.utils import NamespaceTemplate
 from pydantic import BaseModel, Field, ConfigDict
 
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
+from languagemodelcommon.state.messages_state import MyMessagesState
 from language_model_gateway.gateway.tools.user_profile.structures.user_profile import (
     UserProfile,
 )
@@ -89,11 +89,11 @@ class StoreUserProfileTool(ResilientBaseTool):
             UserProfileValidator.validate_state_user_id(state)
             UserProfileValidator.validate_action(action, self.actions_permitted)
             # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
-            if not state.user_id:
+            if not state["user_id"]:
                 raise ToolException(
                     "user_id is required in the state to store user profile"
                 )
-            user_profile.user_id = state.user_id
+            user_profile.user_id = state["user_id"]
             store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()

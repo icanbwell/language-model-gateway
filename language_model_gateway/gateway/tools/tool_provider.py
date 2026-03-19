@@ -8,14 +8,14 @@ from langchain_community.tools import (
 )
 from langchain_core.tools import BaseTool
 
-from language_model_gateway.configs.config_schema import AgentConfig
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
+from languagemodelcommon.configs.schemas.config_schema import AgentConfig
+from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
-from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
+from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from language_model_gateway.gateway.tools.confluence_page_retriever import (
     ConfluencePageRetriever,
 )

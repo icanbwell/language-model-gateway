@@ -3,8 +3,7 @@
   "type": "object",
   "required": [
     "id",
-    "name",
-    "description"
+    "name"
   ],
   "properties": {
     "id": {
@@ -16,37 +15,47 @@
       "description": "Display name of task model - this is the name shown in the dropdown in the b.well AI tool"
     },
     "description": {
-      "type": "string",
-      "description": "This is the text shown when a user types “help” in that model's chat window."
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "This is the text shown when a user types “help” in that model's chat window.",
+      "default": null
     },
     "type": {
       "type": "string",
       "description": "Type of model.",
-      "default": "langchain",
-      "enum": [
-        "langchain",
-        "openai",
-        "passthru"
-      ]
+      "default": "langchain"
     },
     "owner": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "This is the name of the owner of this model.  It is shown when someone types help in that model.  This is to help people reach out to owners of a model if they have questions, have issues or just want to thank the owner for creating this model.",
       "default": null
     },
     "url": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "If we are not using the local language model gateway, this is the URL to the model.",
-      "format": "uri",
       "default": null
     },
     "disabled": {
-      "type": ["boolean", "null"],
+      "type": [
+        "boolean",
+        "null"
+      ],
       "description": "If true, this model will not be shown in the list of models in the b.well AI tool.",
       "default": null
     },
     "model": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "This is the model that is used for the task.  If you don't specify the model, our AI will chose the default model.  This is the recommended approach unless you want a specific model.",
       "required": [
         "provider",
@@ -55,13 +64,7 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "Provider of the model.",
-          "enum": [
-            "bedrock",
-            "openai",
-            "google",
-            "passthru"
-          ]
+          "description": "Provider of the model."
         },
         "model": {
           "type": "string",
@@ -71,7 +74,10 @@
       "default": null
     },
     "system_prompts": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These are the prompts that are sent to the model before any user messages. In system prompts, you can define the role of the LLM agent, provide it instructions, provide it example output and constrain its function.",
       "items": {
         "type": "object",
@@ -86,18 +92,35 @@
             ],
             "default": "system"
           },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Optional prompt library name to load content.",
+            "default": null
+          },
           "content": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Content of the prompt.",
             "default": null
           },
           "hub_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Langhub ID of the prompt.  If set, the prompt will be fetched from the langhub.",
             "default": null
           },
           "cache": {
-            "type": ["boolean", "null"],
+            "type": [
+              "boolean",
+              "null"
+            ],
             "description": "If true, the LLM will cache this prompt for future uses.",
             "default": null
           }
@@ -106,7 +129,10 @@
       "default": null
     },
     "example_prompts": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These example prompts are shown when the user types help in the chat window.",
       "items": {
         "type": "object",
@@ -121,18 +147,35 @@
             ],
             "default": "system"
           },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Optional prompt library name to load content.",
+            "default": null
+          },
           "content": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Content of the prompt.",
             "default": null
           },
           "hub_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Langhub ID of the prompt.  If set, the prompt will be fetched from the langhub.",
             "default": null
           },
           "cache": {
-            "type": ["boolean", "null"],
+            "type": [
+              "boolean",
+              "null"
+            ],
             "description": "If true, the LLM will cache this prompt for future uses.",
             "default": null
           }
@@ -141,7 +184,10 @@
       "default": null
     },
     "model_parameters": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These are the parameters to configure the base model. ",
       "items": {
         "type": "object",
@@ -155,7 +201,12 @@
             "description": "Parameter name."
           },
           "value": {
-            "type": ["number", "string", "integer", "boolean"],
+            "type": [
+              "number",
+              "string",
+              "integer",
+              "boolean"
+            ],
             "description": "Parameter value."
           }
         }
@@ -163,7 +214,10 @@
       "default": null
     },
     "headers": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These are the headers that are sent to the URL if set.",
       "items": {
         "type": "object",
@@ -185,7 +239,10 @@
       "default": null
     },
     "tools": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These are the tools that are available for the model.",
       "items": {
         "type": "object",
@@ -198,7 +255,10 @@
             "description": "Name of the tool."
           },
           "parameters": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The parameters for the tool",
             "items": {
               "type": "object",
@@ -220,12 +280,18 @@
             "default": null
           },
           "url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The MCP (Model Context Protocol) URL to access the tool",
             "default": null
           },
           "headers": {
-            "type": ["object", "null"],
+            "type": [
+              "object",
+              "null"
+            ],
             "description": "The headers to pass to the MCP tool",
             "additionalProperties": {
               "type": "string"
@@ -233,12 +299,18 @@
             "default": null
           },
           "tools": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The names of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used. Separate multiple tool names with commas.",
             "default": null
           },
           "auth": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The authentication method to use when calling the tool",
             "enum": [
               "None",
@@ -250,12 +322,18 @@
             "default": null
           },
           "auth_optional": {
-            "type": ["boolean", "null"],
+            "type": [
+              "boolean",
+              "null"
+            ],
             "description": "Whether authentication is optional when calling the tool.  Default is None.",
             "default": null
           },
           "auth_providers": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The auth providers for the authentication. If multiple are provided then the tool accepts ANY of those auth providers.  If auth is needed, we will use the first auth provider.",
             "items": {
               "type": "string"
@@ -263,7 +341,10 @@
             "default": null
           },
           "issuers": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The issuers for the authentication. If multiple are provided then the tool accepts ANY of those issuers. If auth is needed, we will use the first issuer. If none is provided then we use the default issuer from the OIDC provider.",
             "items": {
               "type": "string"
@@ -274,7 +355,10 @@
       }
     },
     "agents": {
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "description": "These are the agents that are available for the model.",
       "items": {
         "type": "object",
@@ -287,7 +371,10 @@
             "description": "Name of the agent."
           },
           "parameters": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The parameters for the agent",
             "items": {
               "type": "object",
@@ -309,12 +396,18 @@
             "default": null
           },
           "url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The MCP (Model Context Protocol) URL to access the agent",
             "default": null
           },
           "headers": {
-            "type": ["object", "null"],
+            "type": [
+              "object",
+              "null"
+            ],
             "description": "The headers to pass to the MCP agent",
             "additionalProperties": {
               "type": "string"
@@ -322,12 +415,18 @@
             "default": null
           },
           "tools": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The names of the tool to use in the MCP call.  If none is provided then all tools at the URL will be used. Separate multiple tool names with commas.",
             "default": null
           },
           "auth": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The authentication method to use when calling the agent",
             "enum": [
               "None",
@@ -339,12 +438,18 @@
             "default": null
           },
           "auth_optional": {
-            "type": ["boolean", "null"],
+            "type": [
+              "boolean",
+              "null"
+            ],
             "description": "Whether authentication is optional when calling the agent.  Default is None.",
             "default": null
           },
           "auth_providers": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The auth providers for the authentication. If multiple are provided then the agent accepts ANY of those auth providers.  If auth is needed, we will use the first auth provider.",
             "items": {
               "type": "string"
@@ -352,7 +457,10 @@
             "default": null
           },
           "issuers": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "description": "The issuers for the authentication. If multiple are provided then the agent accepts ANY of those issuers. If auth is needed, we will use the first issuer. If none is provided then we use the default issuer from the OIDC provider.",
             "items": {
               "type": "string"
@@ -362,8 +470,22 @@
         }
       }
     },
+    "skills": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The skills to enable for the model",
+      "items": {
+        "type": "string"
+      },
+      "default": null
+    },
     "auth_config": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Authentication configuration for calls made through this model.",
       "required": [
         "name"
@@ -374,12 +496,18 @@
           "description": "Name of the authentication configuration."
         },
         "url": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "URL to access the authenticated resource.",
           "default": null
         },
         "headers": {
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "description": "Headers to pass when invoking the authenticated resource.",
           "additionalProperties": {
             "type": "string"
@@ -387,7 +515,10 @@
           "default": null
         },
         "auth": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Authentication method to use when calling the resource.",
           "enum": [
             "None",
@@ -399,12 +530,18 @@
           "default": null
         },
         "auth_optional": {
-          "type": ["boolean", "null"],
+          "type": [
+            "boolean",
+            "null"
+          ],
           "description": "Whether authentication is optional for this resource.",
           "default": null
         },
         "auth_providers": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "description": "Acceptable auth providers; the first provider will be used when auth is required.",
           "items": {
             "type": "string"
@@ -412,7 +549,10 @@
           "default": null
         },
         "issuers": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "description": "Acceptable token issuers; defaults to the OIDC provider issuer when omitted.",
           "items": {
             "type": "string"
@@ -423,12 +563,18 @@
       "default": null
     },
     "request_timeout_seconds": {
-      "type": ["number", "null"],
+      "type": [
+        "number",
+        "null"
+      ],
       "description": "Override for outbound request timeout in seconds when invoking this model (default 60).",
       "default": null
     },
     "streaming_enabled": {
-      "type": ["boolean", "null"],
+      "type": [
+        "boolean",
+        "null"
+      ],
       "description": "Whether the upstream model supports streaming responses.",
       "default": null
     }

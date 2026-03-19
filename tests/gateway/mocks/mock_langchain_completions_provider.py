@@ -1,15 +1,16 @@
 from typing import Dict, Any, override
 
+from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from oidcauthlib.auth.models.auth import AuthInformation
 
-from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
+from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.persistence.persistence_factory import (
+from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
@@ -18,7 +19,7 @@ from language_model_gateway.gateway.providers.langchain_chat_completions_provide
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
     PassThroughTokenManager,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
@@ -43,6 +44,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         fn_get_response: MockChatResponseProtocol,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
+        skill_loader: SkillLoaderProtocol,
     ) -> None:
         super().__init__(
             model_factory=model_factory,
@@ -53,6 +55,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
             pass_through_token_manager=pass_through_token_manager,
             environment_variables=environment_variables,
             persistence_factory=persistence_factory,
+            skill_loader=skill_loader,
         )
         self.fn_get_response: MockChatResponseProtocol = fn_get_response
 

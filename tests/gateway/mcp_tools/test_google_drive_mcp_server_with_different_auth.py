@@ -2,16 +2,16 @@ import os
 
 import pytest
 import httpx
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion, ChatCompletionUserMessageParam
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
     AgentConfig,
 )
 from oidcauthlib.auth.models.token import Token
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.models.model_factory import ModelFactory

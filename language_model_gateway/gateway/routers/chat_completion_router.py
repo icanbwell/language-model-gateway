@@ -21,21 +21,21 @@ from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.schema.openai.responses import ResponsesRequest
-from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+from languagemodelcommon.schema.openai.completions import ChatRequest
+from languagemodelcommon.schema.openai.responses import ResponsesRequest
+from languagemodelcommon.structures.openai.request.chat_completion_api_request_wrapper import (
     ChatCompletionApiRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.responses_api_request_wrapper import (
+from languagemodelcommon.structures.openai.request.responses_api_request_wrapper import (
     ResponsesApiRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -151,7 +151,7 @@ class ChatCompletionsRouter:
             return await self._chat_completions(
                 request=request,
                 chat_request_wrapper=ChatCompletionApiRequestWrapper(
-                    chat_request_typed
+                    chat_request=chat_request_typed, enable_debug_logging=False
                 ),
                 chat_manager=chat_manager,
                 token_reader=token_reader,
@@ -203,7 +203,7 @@ class ChatCompletionsRouter:
         return await self._chat_completions(
             request=request,
             chat_request_wrapper=ResponsesApiRequestWrapper(
-                chat_request=chat_request_typed
+                chat_request=chat_request_typed, enable_debug_logging=False
             ),
             chat_manager=chat_manager,
             token_reader=token_reader,

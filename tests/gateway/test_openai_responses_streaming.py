@@ -1,6 +1,6 @@
 import httpx
 import pytest
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI, AsyncStream
 from openai.types.responses import (
     ResponseStreamEvent,

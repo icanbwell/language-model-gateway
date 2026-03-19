@@ -7,6 +7,7 @@ from langchain_mcp_adapters.interceptors import (
     MCPToolCallResult,
     ToolCallInterceptor,
 )
+from languagemodelcommon.utilities.token_reducer.token_reducer import TokenReducer
 from mcp.types import (
     ContentBlock,
     TextContent,
@@ -19,9 +20,7 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
     LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from language_model_gateway.gateway.utilities.token_reducer.token_reducer import (
-    TokenReducer,
-)
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["MCP"])

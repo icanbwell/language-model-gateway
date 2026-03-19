@@ -15,12 +15,12 @@ from openai.types.chat import (
 from pydantic_core import ValidationError
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
