@@ -2,6 +2,8 @@ import copy  # For deepcopy
 import json
 import logging
 import os
+import re
+import secrets
 import time
 from typing import (
     Any,
@@ -83,6 +85,7 @@ class LangGraphStreamingManager:
         chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
+        user_id: Optional[str] = None,
     ) -> AsyncGenerator[str, None]:
         try:
             event_type: str = event["event"]
@@ -125,6 +128,7 @@ class LangGraphStreamingManager:
                         chat_request_wrapper=chat_request_wrapper,
                         request_id=request_id,
                         tool_start_times=tool_start_times,
+                        user_id=user_id,
                     ):
                         yield chunk
                 case "on_tool_error":
@@ -223,8 +227,15 @@ class LangGraphStreamingManager:
         chat_request_wrapper: ChatRequestWrapper,
         request_id: str,
         tool_start_times: dict[str, float],
+        user_id: Optional[str] = None,
     ) -> AsyncGenerator[str, None]:
-        logger.debug(f"on_tool_end: {event}")
+        tool_name: Optional[str] = event["name"] if "name" in event else None
+        logger.debug(
+            "on_tool_end: name=%s request_id=%s has_data=%s",
+            tool_name,
+            request_id,
+            "data" in event,
+        )
         data = event["data"] if "data" in event else {}
         tool_message: Optional[ToolMessage] = data.get("output")
         tool_name2: Optional[str] = None
@@ -294,7 +305,12 @@ class LangGraphStreamingManager:
                         file_manager = self.file_manager_factory.get_file_manager(
                             folder=output_folder
                         )
-                        filename = f"tool_output_{tool_name2}_{int(time.time())}.txt"
+                        # Use secure filename with user isolation and random token
+                        # to prevent enumeration attacks and cross-user data access
+                        filename = self.generate_secure_filename(
+                            tool_name=tool_name2,
+                            user_id=user_id,
+                        )
                         file_path: Optional[str] = await file_manager.save_file_async(
                             file_data=tool_message_content.encode("utf-8"),
                             folder=output_folder,
@@ -440,6 +456,49 @@ class LangGraphStreamingManager:
         except Exception:
             tool_input_str = str(tool_input1)
         return f"{tool_name1}:{hash(tool_input_str)}"
+
+    @staticmethod
+    def generate_secure_filename(
+        *,
+        tool_name: Optional[str],
+        user_id: Optional[str],
+    ) -> str:
+        """
+        Generate a secure, non-guessable filename for tool output files.
+
+        The filename includes:
+        - A cryptographically secure random token (to prevent enumeration)
+        - The tool name and timestamp (for debugging/identification)
+
+        Args:
+            tool_name: The name of the tool that generated the output
+            user_id: The user identifier (currently not embedded in the filename)
+
+        Returns:
+            A secure filename string
+        """
+        # Generate a cryptographically secure random token
+        random_token = secrets.token_urlsafe(16)
+
+        # Note: We intentionally do not embed user_id (or a deterministic hash of it)
+        # in the filename to avoid cross-file linkability or offline guessing of
+        # user identifiers if filenames are exposed outside the service.
+
+        # Sanitize tool name: restrict to a safe subset for filesystem and URLs
+        base_tool_name = tool_name or "unknown"
+        # Replace any character not in [A-Za-z0-9._-] with underscore
+        safe_tool_name = re.sub(r"[^A-Za-z0-9._-]", "_", base_tool_name)
+        # Collapse multiple underscores and strip leading/trailing underscores
+        safe_tool_name = re.sub(r"_+", "_", safe_tool_name).strip("_")
+        if not safe_tool_name:
+            safe_tool_name = "unknown"
+        # Limit length to avoid exceeding filesystem limits when combined with other parts
+        max_tool_name_length = 50
+        safe_tool_name = safe_tool_name[:max_tool_name_length]
+
+        timestamp = int(time.time())
+
+        return f"{safe_tool_name}_{timestamp}_{random_token}.txt"
 
     @staticmethod
     def safe_json(string: str) -> Any:
