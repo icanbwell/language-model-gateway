@@ -144,6 +144,7 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
+      WRITE_TOOL_OUTPUT_TO_FILE: 1
 
     env_file: .env
     command:
