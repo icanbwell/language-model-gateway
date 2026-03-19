@@ -10,7 +10,6 @@ from typing import Type, Tuple, Literal, override
 from starlette.responses import Response, StreamingResponse
 
 
-
 class HealthSummaryGeneratorModel(BaseModel):
     """
     Model to generate the health summary report for each user showing the diagnosis, procedures and medications of the
