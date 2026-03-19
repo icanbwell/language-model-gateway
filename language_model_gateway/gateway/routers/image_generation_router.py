@@ -9,7 +9,7 @@ from fastapi import params
 from starlette.responses import JSONResponse, StreamingResponse
 
 from oidcauthlib.container.inject import Inject
-from language_model_gateway.gateway.managers.image_generation_manager import (
+from languagemodelcommon.image_generation.managers.image_generation_manager import (
     ImageGenerationManager,
 )
 from languagemodelcommon.schema.openai.image_generation import (

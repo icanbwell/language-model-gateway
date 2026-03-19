@@ -35,7 +35,7 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
     LanguageModelGatewayEnvironmentVariables,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from language_model_gateway.gateway.utilities.logger.logging_transport import (
+from languagemodelcommon.utilities.logger.logging_transport import (
     LoggingTransport,
 )
 from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice

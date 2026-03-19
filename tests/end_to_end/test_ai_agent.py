@@ -3,6 +3,7 @@ from typing import Any, Dict, List
 
 import httpx
 import pytest
+from languagemodelcommon.mocks.mock_http_client_factory import MockHttpClientFactory
 from openai.types.chat import (
     ChatCompletionMessageParam,
     ChatCompletionUserMessageParam,
@@ -31,7 +32,6 @@ from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from tests.gateway.mocks.mock_http_client_factory import MockHttpClientFactory
 from tests.gateway.mocks.mock_open_ai_completions_provider import (
     MockOpenAiChatCompletionsProvider,
 )
