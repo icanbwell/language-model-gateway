@@ -6,8 +6,8 @@ from uuid import uuid4
 from graphviz import Digraph
 from pydantic import BaseModel, Field
 
-from language_model_gateway.gateway.file_managers.file_manager import FileManager
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
+from languagemodelcommon.file_managers.file_manager import FileManager
+from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool

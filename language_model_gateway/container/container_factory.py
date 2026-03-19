@@ -1,13 +1,13 @@
 import logging
 
 from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
+from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
-from language_model_gateway.gateway.ocr.ocr_extractor_factory import OCRExtractorFactory
+from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,

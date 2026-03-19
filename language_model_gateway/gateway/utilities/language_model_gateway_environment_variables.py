@@ -11,7 +11,7 @@ from languagemodelcommon.utilities.environment.language_model_common_environment
 
 
 class LanguageModelGatewayEnvironmentVariables(
-    OidcEnvironmentVariables, LanguageModelCommonEnvironmentVariables
+    LanguageModelCommonEnvironmentVariables
 ):
     @property
     def github_org(self) -> Optional[str]:
