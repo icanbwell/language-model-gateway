@@ -1,6 +1,7 @@
 from typing import Optional, List
 
 import httpx
+from languagemodelcommon.mocks.mock_image_generator import MockImageGenerator
 from openai import AsyncOpenAI
 from openai.types.chat import (
     ChatCompletion,
@@ -23,10 +24,10 @@ from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
-from languagemodelcommon.tests.gateway.mocks.mock_image_generator import (
-    MockImageGenerator,
+
+from languagemodelcommon.mocks.mock_image_generator_factory import (
+    MockImageGeneratorFactory,
 )
-from languagemodelcommon.mocks.mock_image_generator_factory import MockImageGeneratorFactory
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
 

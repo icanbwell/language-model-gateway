@@ -26,7 +26,9 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_environment_variables import MockEnvironmentVariables
 from languagemodelcommon.mocks.mock_image_generator import MockImageGenerator
-from languagemodelcommon.mocks.mock_image_generator_factory import MockImageGeneratorFactory
+from languagemodelcommon.mocks.mock_image_generator_factory import (
+    MockImageGeneratorFactory,
+)
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from oidcauthlib.container.interfaces import IContainer
 

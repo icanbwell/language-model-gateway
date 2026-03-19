@@ -13,7 +13,9 @@ from language_model_gateway.gateway.utilities.environment_reader import (
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from languagemodelcommon.mocks.mock_image_generator import MockImageGenerator
-from languagemodelcommon.mocks.mock_image_generator_factory import MockImageGeneratorFactory
+from languagemodelcommon.mocks.mock_image_generator_factory import (
+    MockImageGeneratorFactory,
+)
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 

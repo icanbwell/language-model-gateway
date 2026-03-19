@@ -60,7 +60,7 @@ from language_model_gateway.gateway.mcp.interceptors.truncation import (
 )
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.persistence.persistence_factory import (
+from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
