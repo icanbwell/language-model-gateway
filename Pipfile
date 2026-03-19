@@ -191,6 +191,8 @@ asgi-lifespan = ">=2.1.0"
 watchfiles = ">=1.1.1"
 # inotify is a Python library for monitoring filesystem events (Linux only).  Used by gunicorn reloader
 inotify = ">=0.2.12"
+# types-psycopg2  is a Python library for typing psycopg2, which is a PostgreSQL adapter for Python.  Needed for testing the PostgreSQL checkpoint store in LangGraph.
+types-psycopg2 = ">=2.9.0"
 
 [requires]
 python_version = "3.12"
