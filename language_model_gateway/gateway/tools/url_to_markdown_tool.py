@@ -4,7 +4,9 @@ from typing import Type, Literal, Tuple, Optional, override
 
 import httpx
 from httpx import Headers
-from languagemodelcommon.markdown.html_to_markdown_converter import HtmlToMarkdownConverter
+from languagemodelcommon.markdown.html_to_markdown_converter import (
+    HtmlToMarkdownConverter,
+)
 from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
