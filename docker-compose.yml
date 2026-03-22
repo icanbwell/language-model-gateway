@@ -146,7 +146,7 @@ services:
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
       WRITE_TOOL_OUTPUT_TO_FILE: 1
       SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/skills"
-#      SKILLS_DIRECTORY: "github://icanbwell/language-model-gateway-configuration/bailey/skills?ref=add-skills"
+#      SKILLS_DIRECTORY: "github://icanbwell/language-model-gateway-configuration/configs/skills?ref=add-skills"
     env_file: .env
     command:
       - opentelemetry-instrument
