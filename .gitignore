@@ -151,3 +151,4 @@ dmypy.json
 !/outputs/**/readme.md
 
 /dependency_graph*.*
+/.skills-git-cache/

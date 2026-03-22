@@ -32,6 +32,7 @@ from simple_container.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
+from simple_container.environment.environment_variables import EnvironmentVariables
 
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
@@ -111,6 +112,12 @@ class LanguageModelGatewayContainerFactory:
         # register services here
         LanguageModelCommonContainerFactory.register_services_in_container(
             container=container
+        )
+
+        # override with our own EnvironmentVariables
+        container.singleton(
+            EnvironmentVariables,
+            lambda c: c.resolve(LanguageModelGatewayEnvironmentVariables),
         )
 
         # Register our own FastAPIManager so we can save the token
