@@ -5,22 +5,23 @@ description: Create or improve Agent Skills in this repository and return only t
 
 # Skill Creator
 
-Create and refine repository skills under `configs/skills/` using the Agent Skills specification.
+Create and refine repository skills under `language-model-gateway-configs/skills/` using the Agent Skills specification.
 
 ## Instructions
 
-1. Confirm the skill goal and where it should live in `configs/skills/<skill-name>/`.
+1. Confirm the skill goal and the target folder under `language-model-gateway-configs/skills/<skill-name>/`.
 2. Create or update `SKILL.md` with valid YAML frontmatter first.
 3. Ensure `name` exactly matches the folder name and follows naming constraints.
 4. Write a clear `description` that explains both what the skill does and when to use it.
-5. Draft concise, imperative body instructions focused on execution steps.
-6. Add at least one input/output example.
-7. Add edge cases and failure handling guidance.
-8. Keep the main file focused; if detail grows large, move detail to `references/`.
-9. Use relative file references from the skill root and keep references shallow.
-10. Run repository validation and fix any schema/frontmatter issues before finishing.
-11. Present the final answer as code-formatted skill content only so the user can copy/paste it directly.
-12. Do not add prose summaries, rationale, or extra commentary outside the final code block unless the user explicitly asks for explanation.
+5. Include optional frontmatter fields (`license`, `compatibility`, `metadata`, `allowed-tools`) only when they are relevant.
+6. Draft concise, imperative body instructions focused on execution steps.
+7. Add at least one input/output example.
+8. Add edge cases and failure handling guidance.
+9. Keep the main file focused; if detail grows large, move detail to `references/`.
+10. Use relative file references from the skill root and keep references one level deep.
+11. Validate the skill with `skills-ref validate` when available and fix any schema/frontmatter issues before finishing.
+12. Present the final answer as code-formatted skill content only so the user can copy/paste it directly.
+13. Do not add prose summaries, rationale, or extra commentary outside the final code block unless the user explicitly asks for explanation.
 
 ## Required Frontmatter Checklist
 
@@ -29,6 +30,13 @@ Create and refine repository skills under `configs/skills/` using the Agent Skil
 - `name` does not contain `--`
 - `name` equals parent folder name
 - `description` is 1-1024 chars and explains what + when
+
+## Optional Frontmatter Checklist
+
+- `license` is a short license name or bundled license file reference
+- `compatibility` is 1-500 chars and only used for specific environment requirements
+- `metadata` is a string-to-string map with stable, unique keys
+- `allowed-tools` is a space-delimited list of pre-approved tools
 
 ## Input/Output Examples
 
@@ -90,3 +98,4 @@ description: [Rewritten description with stronger trigger contexts and clear use
 - Content includes clear execution steps, input/output example(s), and edge-case handling.
 - No extra prose, rationale, or summary is included unless the user explicitly asks for it.
 - If repository edits are requested, run `make run-pre-commit` and resolve skill validation errors before finalizing.
+- If available, `skills-ref validate` passes for the updated skill.

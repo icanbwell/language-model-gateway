@@ -17,7 +17,7 @@
     },
     {
       "key": "max_tokens",
-      "value": 1000
+      "value": 10000
     }
   ],
   "headers": [
