@@ -5,23 +5,28 @@ description: Create or improve Agent Skills and return only the final skill cont
 
 # Skill Creator
 
-Create and refine repository skills under `language-model-gateway-configs/skills/` using the Agent Skills specification.
+Create and refine repository skills  using the Agent Skills specification.
 
 ## Instructions
 
-1. Confirm the skill goal and the target folder under `language-model-gateway-configs/skills/<skill-name>/`.
-2. Create or update `SKILL.md` with valid YAML frontmatter first.
-3. Ensure `name` exactly matches the folder name and follows naming constraints.
-4. Write a clear `description` that explains both what the skill does and when to use it.
-5. Include optional frontmatter fields (`license`, `compatibility`, `metadata`, `allowed-tools`) only when they are relevant.
-6. Draft concise, imperative body instructions focused on execution steps.
-7. Add at least one input/output example.
-8. Add edge cases and failure handling guidance.
-9. Keep the main file focused; if detail grows large, move detail to `references/`.
-10. Use relative file references from the skill root and keep references one level deep.
-11. Validate the skill with `skills-ref validate` when available and fix any schema/frontmatter issues before finishing.
-12. Present the final answer as code-formatted skill content only so the user can copy/paste it directly.
-13. Do not add prose summaries, rationale, or extra commentary outside the final code block unless the user explicitly asks for explanation.
+1. Create or update `SKILL.md` with valid YAML frontmatter first.
+2. Ensure `name` exactly matches the folder name and follows naming constraints.
+3. Write a clear `description` that explains both what the skill does and when to use it.
+4. Include optional frontmatter fields (`license`, `compatibility`, `metadata`, `allowed-tools`) only when they are relevant.
+5. Draft concise, imperative body instructions focused on execution steps.
+6. Add at least one input/output example.
+7. Add edge cases and failure handling guidance.
+8. Keep the main file focused; if detail grows large, move detail to `references/`.
+9. Use relative file references from the skill root and keep references one level deep.
+10. Validate the skill with `skills-ref validate` when available and fix any schema/frontmatter issues before finishing.
+11. Present the final answer as code-formatted skill content only so the user can copy/paste it directly.
+12. Do not add prose summaries, rationale, or extra commentary outside the final code block unless the user explicitly asks for explanation.
+
+## Best Practices for creating skills
+Follow this guide and the Agent Skills specification to create high-quality, reusable skills that work reliably in the intended contexts. For more detailed guidance and examples, see
+https://agentskills.io/skill-creation/best-practices
+
+For descriptions, follow this guide: https://agentskills.io/skill-creation/optimizing-descriptions
 
 ## Required Frontmatter Checklist
 
