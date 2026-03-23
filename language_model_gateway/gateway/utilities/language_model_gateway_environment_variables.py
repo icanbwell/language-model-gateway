@@ -82,3 +82,11 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
             )
         else:
             return set()
+
+    @property
+    def tool_friendly_name_config_path(self) -> str:
+        configured = os.environ.get("TOOL_FRIENDLY_NAME_CONFIG_PATH")
+        if configured and configured.strip():
+            return configured
+
+        return "/usr/src/language_model_gateway/gateway/tools/tool_friendly_names.json"

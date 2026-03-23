@@ -148,11 +148,14 @@ class ChatCompletionsRouter:
                 **chat_request
             )
 
+            chat_request_wrapper: ChatCompletionApiRequestWrapper = (
+                ChatCompletionApiRequestWrapper(
+                    chat_request=chat_request_typed, enable_debug_logging=False
+                )
+            )
             return await self._chat_completions(
                 request=request,
-                chat_request_wrapper=ChatCompletionApiRequestWrapper(
-                    chat_request=chat_request_typed, enable_debug_logging=False
-                ),
+                chat_request_wrapper=chat_request_wrapper,
                 chat_manager=chat_manager,
                 token_reader=token_reader,
                 auth_manager=auth_manager,

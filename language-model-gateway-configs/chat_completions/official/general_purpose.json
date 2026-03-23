@@ -17,7 +17,7 @@
     },
     {
       "key": "max_tokens",
-      "value": 1000
+      "value": 30000
     }
   ],
   "headers": [
@@ -83,5 +83,8 @@
       "role": "user",
       "content": "Write a unit test for this code: ```def test_addition(a,b): return a + b```"
     }
+  ],
+  "skills": [
+    "skill-creator"
   ]
 }
