@@ -91,7 +91,7 @@ description: [Rewritten description with stronger trigger contexts and clear use
 - If the user asks for copy/paste output, return only the final skill content in a fenced code block.
 
 ## MANDATORY for Final Response
-- Final response contains only the completed skill content in the Agent Skills format including frontmatter in a fenced `markdown` code block.
+- Final response contains only the completed skill content in the Agent Skills format including frontmatter in a markdown wrapper fenced with four backticks.
 - The code block is copy/paste-ready as `SKILL.md` (includes valid YAML frontmatter and body).
 - `name` is valid and matches the target skill folder name.
 - Content includes clear execution steps, input/output example(s), and edge-case handling.
