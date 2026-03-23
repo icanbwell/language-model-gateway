@@ -150,7 +150,7 @@ class ChatCompletionsRouter:
 
             chat_request_wrapper: ChatCompletionApiRequestWrapper = (
                 ChatCompletionApiRequestWrapper(
-                    chat_request=chat_request_typed, enable_debug_logging=True
+                    chat_request=chat_request_typed, enable_debug_logging=False
                 )
             )
             return await self._chat_completions(
