@@ -1,6 +1,8 @@
 import logging
 
-from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )

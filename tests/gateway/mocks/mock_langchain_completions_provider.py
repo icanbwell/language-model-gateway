@@ -1,6 +1,8 @@
 from typing import Dict, Any, override
 
-from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
 from languagemodelcommon.utilities.tool_friendly_name_mapper import (
     ToolFriendlyNameMapper,
 )

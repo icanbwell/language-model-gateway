@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e571ba37f295e4b9adf9b093943c0d11cbb504b5e8997d0653147a5d8965193d"
+            "sha256": "4cb3a0b253c206452522eaf8d99a96e81e0bcca406f9872a9bacd9fd8fadf56b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,14 @@
             ],
             "index": "pypi",
             "version": "==0.12.3"
+        },
+        "aiofiles": {
+            "hashes": [
+                "sha256:a8d728f0a29de45dc521f18f07297428d56992a742f0cd2701ba86e44d23d5b2",
+                "sha256:abe311e527c862958650f9438e859c1fa7568a141b22abcd015e120e86a85695"
+            ],
+            "markers": "python_version >= '3.9'",
+            "version": "==25.1.0"
         },
         "aiohappyeyeballs": {
             "hashes": [
@@ -805,12 +813,12 @@
         },
         "fastapi": {
             "hashes": [
-                "sha256:46e2fc5745924b7c840f71ddd277382af29ce1cdb7d5eab5bf697e3fb9999c9e",
-                "sha256:d04115b508d936d254cea545b7312ecaa58a7b3a0f84952535b4c9afae7668cd"
+                "sha256:0af0447d541867e8db2a6a25c23a8c4bd80e2394ac5529bd87501bbb9e240ca5",
+                "sha256:88a832095359755527b7f63bb4c6bc9edb8329a026189eed83d6c1afcf419d56"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==0.135.1"
+            "version": "==0.135.2"
         },
         "feedparser": {
             "hashes": [
@@ -1543,12 +1551,12 @@
         },
         "langchain-ai-skills-framework": {
             "hashes": [
-                "sha256:3daf1f56efa23bcb40340f3f6db8ac7e4f65875fcb198999ed6972572c2f780e",
-                "sha256:f79092adf91cc78fc2f413a2aceafda75c696630d87dfa360ad1b21a7e5a7820"
+                "sha256:365d2ca22343bfdab949f0a0df7b41922787448cb1c4d6b3c8f78ffc71e23165",
+                "sha256:f1ae91dd110732df80eaf0ca2de327365879d8cb620d80b62eba23907792abab"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.7"
+            "version": "==1.0.9"
         },
         "langchain-anthropic": {
             "hashes": [
@@ -1725,12 +1733,12 @@
         },
         "language-model-common": {
             "hashes": [
-                "sha256:924382d22b96862adcd5cdb917d616423516ed60237e3b53053b01645d2f3964",
-                "sha256:95965cef5e468f034fc7c41768f4fb887db6d84ac83a47d64e437c90ec11c7f3"
+                "sha256:05d3775154c5fae67023423706b5a3d49daadb318a2b5652d15b524e1c19ee9f",
+                "sha256:94dfd5de9d983fa337b368b3909b1d9134ba1ed1f84ce5d788d925aa7e6e02ad"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.16"
+            "version": "==1.0.17"
         },
         "lark": {
             "hashes": [
@@ -3157,12 +3165,12 @@
         },
         "pypdf": {
             "hashes": [
-                "sha256:ae052407d33d34de0c86c5c729be6d51010bf36e03035a8f23ab449bca52377d",
-                "sha256:f35a6a022348fae47e092a908339a8f3dc993510c026bb39a96718fc7185e89f"
+                "sha256:662cf29bcb419a36a1365232449624ab40b7c2d0cfc28e54f42eeecd1fd7e844",
+                "sha256:7f850faf2b0d4ab936582c05da32c52214c2b089d61a316627b5bfb5b0dab46c"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==6.9.1"
+            "version": "==6.9.2"
         },
         "python-crfsuite": {
             "hashes": [
@@ -5143,11 +5151,11 @@
         },
         "cyclopts": {
             "hashes": [
-                "sha256:0ae04a53274e200ef3477c8b54de63b019bc6cd0162d75c718bf40c9c3fb5268",
-                "sha256:50f333382a60df8d40ec14aa2e627316b361c4f478598ada1f4169d959bf9ea7"
+                "sha256:35f37257139380a386d9fe4475e1e7c87ca7795765ef4f31abba579fcfcb6ecd",
+                "sha256:ad4e4bb90576412d32276b14a76f55d43353753d16217f2c3cd5bdceba7f15a0"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==4.10.0"
+            "version": "==4.10.1"
         },
         "deepdiff": {
             "extras": [
