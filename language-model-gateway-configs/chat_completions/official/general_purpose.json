@@ -83,5 +83,8 @@
       "role": "user",
       "content": "Write a unit test for this code: ```def test_addition(a,b): return a + b```"
     }
+  ],
+  "skills": [
+    "skill-creator"
   ]
 }

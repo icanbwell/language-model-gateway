@@ -90,12 +90,10 @@ description: [Rewritten description with stronger trigger contexts and clear use
 - If validation fails, surface exact errors and patch only the failing fields/sections.
 - If the user asks for copy/paste output, return only the final skill content in a fenced code block.
 
-## Definition of Done
-
-- Final response contains only the completed skill content in a fenced `markdown` code block.
+## MANDATORY for Final Response
+- Final response contains only the completed skill content in the Agent Skills format including frontmatter in a fenced `markdown` code block.
 - The code block is copy/paste-ready as `SKILL.md` (includes valid YAML frontmatter and body).
 - `name` is valid and matches the target skill folder name.
 - Content includes clear execution steps, input/output example(s), and edge-case handling.
 - No extra prose, rationale, or summary is included unless the user explicitly asks for it.
-- If repository edits are requested, run `make run-pre-commit` and resolve skill validation errors before finalizing.
-- If available, `skills-ref validate` passes for the updated skill.
+
