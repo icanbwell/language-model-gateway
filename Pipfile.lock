@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4cb3a0b253c206452522eaf8d99a96e81e0bcca406f9872a9bacd9fd8fadf56b"
+            "sha256": "9b01edbc265369992777a737056f26cc320762f9a4043491789b65e188fe9005"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1551,12 +1551,12 @@
         },
         "langchain-ai-skills-framework": {
             "hashes": [
-                "sha256:365d2ca22343bfdab949f0a0df7b41922787448cb1c4d6b3c8f78ffc71e23165",
-                "sha256:f1ae91dd110732df80eaf0ca2de327365879d8cb620d80b62eba23907792abab"
+                "sha256:69f9e33109697a45114a02487990d316a0e3a5c9b302b75c07b4d179509ab624",
+                "sha256:e20abc80b3e493b4086dc251236b7fdd957e2c4c75df73ce3cd7bd308e8777f0"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.9"
+            "version": "==1.0.10"
         },
         "langchain-anthropic": {
             "hashes": [
@@ -1594,12 +1594,12 @@
         },
         "langchain-core": {
             "hashes": [
-                "sha256:b65ff678f3c3dc1f1b4d03a3af5ee3b8d51f9be5181d74eb53c6c11cd9dd5e68",
-                "sha256:c7ac8b976039b5832abb989fef058b88c270594ba331efc79e835df046e7dc44"
+                "sha256:1a121d13976dc0908d5a8222262810ea483a4cf2b05006bdba75df5b11b554b3",
+                "sha256:486cb405e2ecb0c407cb5fb5379ed0f919eb4b8a868b60cc8c3c15a3dfb560a7"
             ],
             "index": "pypi",
             "markers": "python_full_version >= '3.10.0' and python_full_version < '4.0.0'",
-            "version": "==1.2.20"
+            "version": "==1.2.21"
         },
         "langchain-experimental": {
             "hashes": [
@@ -1647,12 +1647,12 @@
         },
         "langchain-openai": {
             "hashes": [
-                "sha256:44b003a2960d1f6699f23721196b3b97d0c420d2e04444950869213214b7a06a",
-                "sha256:a03596221405d38d6852fb865467cb0d9ff9e79f335905eb6a576e8c4874ac71"
+                "sha256:ccf5ef02c896f6807b4d0e51aaf678a72ce81ae41201cae8d65e11eeff9ecb79",
+                "sha256:da71ca3f2d18c16f7a2443cc306aa195ad2a07054335ac9b0626dcae02b6a0c5"
             ],
             "index": "pypi",
             "markers": "python_full_version >= '3.10.0' and python_full_version < '4.0.0'",
-            "version": "==1.1.11"
+            "version": "==1.1.12"
         },
         "langchain-text-splitters": {
             "hashes": [
@@ -1750,11 +1750,11 @@
         },
         "logfire-api": {
             "hashes": [
-                "sha256:48a1361b818357f5a37c71f9683f97e626e5df6c17f35212bfc1f19dddc6771c",
-                "sha256:55430c554cf198dcbddee390eca259a10a26d5f7e3527d51f859ddc31a83c840"
+                "sha256:9138976dc30df4cf21617f1b188a84781683ef2ba88c46008774a7081f16f2c9",
+                "sha256:ab24c4283fbe90b0f275e59f69ce3b86712cbabec6aa7ae64f411e754c66e3fc"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==4.29.0"
+            "version": "==4.30.0"
         },
         "lxml": {
             "hashes": [
