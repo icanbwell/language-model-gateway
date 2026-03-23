@@ -11,6 +11,7 @@ from typing import (
 )
 
 from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from langchain_ai_skills_framework.tools.skills_tool import LoadSkillTool
 from starlette.responses import StreamingResponse, JSONResponse
 
 from langchain_core.language_models import BaseChatModel
@@ -183,6 +184,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             tools=[t for t in model_config.get_agents()],
             headers=headers,
         )
+
+        # add the skills tools
+        tools += [
+            LoadSkillTool(
+                skill_loader=self.skill_loader,
+            )
+        ]
 
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
