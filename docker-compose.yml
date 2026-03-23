@@ -11,6 +11,7 @@ services:
       MCP_LOG_LEVEL: DEBUG
       LLM_LOG_LEVEL: DEBUG
       HTTP_LOG_LEVEL: DEBUG
+      LOG_ALL_REQUESTS: 1
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       DEFAULT_PATIENT_ID: "eEooRVLYdWIW753OhZUd1dgxQRny4KCo6fiH-13lY0043"

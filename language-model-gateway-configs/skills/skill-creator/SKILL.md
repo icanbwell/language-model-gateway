@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: Create or improve Agent Skills in this repository and return only the final skill content as code-formatted output for copy/paste. Use when the user asks for a new skill, an updated SKILL.md, or a polished final skill file.
+description: Create or improve Agent Skills and return only the final skill content as code-formatted output for copy/paste. Use when the user asks for a new skill, an updated SKILL.md, or a polished final skill file.
 ---
 
 # Skill Creator
