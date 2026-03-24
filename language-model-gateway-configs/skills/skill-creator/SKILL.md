@@ -41,6 +41,7 @@ metadata:
 - Complete SKILL.md file with valid YAML frontmatter
 - Formatted as copy/paste-ready markdown code block (four backticks)
 - Validated against Agent Skills specification
+- Validation is mandatory before final output (see Section 9 for the exact command)
 - Includes execution steps, examples, and edge case handling
 - Optimized description for reliable triggering
 - Under 500 lines (move detail to references/ if needed)
@@ -68,7 +69,8 @@ metadata:
 5. ✓ Determine required inputs and expected outputs
 6. ✓ Identify if any specific tools must be used
 7. ✓ Plan to keep SKILL.md under 500 lines (use references/ for detail)
-8. ✓ Only then proceed with drafting the skill
+8. ✓ Plan to run mandatory validation as defined in Section 9 before final output
+9. ✓ Only then proceed with drafting the skill
 
 **Never create a skill without first gathering domain-specific context. Generic skills based solely on LLM training knowledge produce vague, low-value instructions.**
 
@@ -144,7 +146,7 @@ When the user has existing material, use it to ground the skill:
 - **Practical examples**: Based on real usage, not generic scenarios
 - **Under 500 lines**: Main file stays focused; detail moved to references/
 - **No extra commentary**: Only the skill content unless user requests explanation
-- **Validation confirmation**: Note any specification checks performed
+- **Validation confirmation**: Include whether `scripts/validate.py` passed, and if it failed, fix and re-run before final output
 
 ## Decision Flow
 
@@ -277,7 +279,7 @@ Progress:
 **Validation loops:**
 ```markdown
 1. Make your edits
-2. Run validation: `python scripts/validate.py output/`
+2. Run validation using the exact command in Section 9
 3. If validation fails:
    - Review the error message
    - Fix the issues
@@ -313,6 +315,13 @@ Progress:
 - When to ask for clarification
 
 ### 9. Validate Against Specification
+
+**MANDATORY before final output:**
+- Run `scripts/validate.py` on the generated skill content.
+- `scripts/validate.py` expects a JSON object on stdin with a `skill_content` field.
+- Pass `SKILL.md` to the validator by wrapping file contents as JSON, then piping to the script:
+  `python3 -c 'import json,sys; print(json.dumps({"skill_content": sys.stdin.read()}))' < SKILL.md | python3 scripts/validate.py`
+- If validation fails, correct the skill and re-run until it passes.
 
 **Frontmatter validation:**
 - Schema compliance
@@ -353,6 +362,9 @@ Progress:
 
 ### 11. Format Final Output
 
-**Wrap in four-backtick markdown code fence:**
+- Confirm validator status first (`scripts/validate.py` must pass before final delivery).
+
+**MANDATORY: Wrap in four-backtick markdown code fence:**
 ````markdown
 [Complete skill content here]
+````
