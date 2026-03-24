@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 from skills_ref.errors import ParseError
@@ -20,11 +21,10 @@ MAX_DESCRIPTION_LENGTH = 1024
 MAX_COMPATIBILITY_LENGTH = 500
 
 
-def validate_frontmatter_lengths(skill_file: Path) -> list[str]:
+def validate_frontmatter_lengths(content: str, source: str) -> list[str]:
     errors: list[str] = []
 
     try:
-        content = skill_file.read_text(encoding="utf-8")
         metadata, _ = parse_frontmatter(content)
     except ParseError as exc:
         # skills-ref already reports parser issues; keep this check additive.
@@ -35,7 +35,7 @@ def validate_frontmatter_lengths(skill_file: Path) -> list[str]:
         name_length = len(name.strip())
         if not 1 <= name_length <= MAX_NAME_LENGTH:
             errors.append(
-                f"{skill_file}: name length must be 1-{MAX_NAME_LENGTH} characters "
+                f"{source}: name length must be 1-{MAX_NAME_LENGTH} characters "
                 f"(found {name_length})"
             )
 
@@ -44,7 +44,7 @@ def validate_frontmatter_lengths(skill_file: Path) -> list[str]:
         description_length = len(description.strip())
         if not 1 <= description_length <= MAX_DESCRIPTION_LENGTH:
             errors.append(
-                f"{skill_file}: description length must be 1-{MAX_DESCRIPTION_LENGTH} characters "
+                f"{source}: description length must be 1-{MAX_DESCRIPTION_LENGTH} characters "
                 f"(found {description_length})"
             )
 
@@ -54,7 +54,7 @@ def validate_frontmatter_lengths(skill_file: Path) -> list[str]:
             compatibility_length = len(compatibility.strip())
             if not 1 <= compatibility_length <= MAX_COMPATIBILITY_LENGTH:
                 errors.append(
-                    f"{skill_file}: compatibility length must be 1-{MAX_COMPATIBILITY_LENGTH} "
+                    f"{source}: compatibility length must be 1-{MAX_COMPATIBILITY_LENGTH} "
                     f"characters when provided (found {compatibility_length})"
                 )
 
@@ -62,34 +62,22 @@ def validate_frontmatter_lengths(skill_file: Path) -> list[str]:
 
 
 def main() -> int:
-    repo_root = Path(__file__).resolve().parent.parent
-    skills_roots = [
-        repo_root / "configs" / "skills",
-        repo_root / "bailey" / "skills",
-    ]
-
-    existing_roots = [
-        skills_root for skills_root in skills_roots if skills_root.exists()
-    ]
-    if not existing_roots:
-        roots_text = ", ".join(str(skills_root) for skills_root in skills_roots)
-        print(f"Skills directories not found: {roots_text}")
+    if sys.stdin.isatty():
+        print("Expected SKILL.md content on stdin.")
         return 1
 
-    skill_files = sorted(
-        skill_file
-        for skills_root in existing_roots
-        for skill_file in skills_root.rglob("SKILL.md")
-    )
-    if not skill_files:
-        roots_text = ", ".join(str(skills_root) for skills_root in existing_roots)
-        print(f"No skill files found under: {roots_text}")
+    skill_content = sys.stdin.read()
+    if not skill_content.strip():
+        print("No content received on stdin.")
         return 1
 
     skills_ref_failures = 0
     extra_errors: list[str] = []
-    for skill_file in skill_files:
-        skill_dir = skill_file.parent
+    with tempfile.TemporaryDirectory() as temp_dir:
+        skill_dir = Path(temp_dir)
+        skill_file = skill_dir / "SKILL.md"
+        skill_file.write_text(skill_content, encoding="utf-8")
+
         command = [sys.executable, "-m", "skills_ref.cli", "validate", str(skill_dir)]
         result = subprocess.run(command, capture_output=True, text=True)
         if result.returncode != 0:
@@ -98,7 +86,7 @@ def main() -> int:
             if result.stderr.strip():
                 print(result.stderr.strip())
 
-        extra_errors.extend(validate_frontmatter_lengths(skill_file))
+    extra_errors.extend(validate_frontmatter_lengths(skill_content, "<stdin>"))
 
     if extra_errors:
         for error in extra_errors:
@@ -111,10 +99,7 @@ def main() -> int:
         )
         return 1
 
-    print(
-        f"Validated {len(skill_files)} skill(s) with skills-ref across "
-        f"{len(existing_roots)} root(s)."
-    )
+    print("Validated 1 skill from stdin with skills-ref.")
     return 0
 
 
