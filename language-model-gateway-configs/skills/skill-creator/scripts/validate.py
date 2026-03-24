@@ -7,58 +7,11 @@
 
 from __future__ import annotations
 
-import subprocess
 import sys
-import tempfile
-from pathlib import Path
 
 from skills_ref.errors import ParseError
 from skills_ref.parser import parse_frontmatter
-
-
-MAX_NAME_LENGTH = 64
-MAX_DESCRIPTION_LENGTH = 1024
-MAX_COMPATIBILITY_LENGTH = 500
-
-
-def validate_frontmatter_lengths(content: str, source: str) -> list[str]:
-    errors: list[str] = []
-
-    try:
-        metadata, _ = parse_frontmatter(content)
-    except ParseError as exc:
-        # skills-ref already reports parser issues; keep this check additive.
-        return [str(exc)]
-
-    name = metadata.get("name")
-    if isinstance(name, str):
-        name_length = len(name.strip())
-        if not 1 <= name_length <= MAX_NAME_LENGTH:
-            errors.append(
-                f"{source}: name length must be 1-{MAX_NAME_LENGTH} characters "
-                f"(found {name_length})"
-            )
-
-    description = metadata.get("description")
-    if isinstance(description, str):
-        description_length = len(description.strip())
-        if not 1 <= description_length <= MAX_DESCRIPTION_LENGTH:
-            errors.append(
-                f"{source}: description length must be 1-{MAX_DESCRIPTION_LENGTH} characters "
-                f"(found {description_length})"
-            )
-
-    if "compatibility" in metadata:
-        compatibility = metadata.get("compatibility")
-        if isinstance(compatibility, str):
-            compatibility_length = len(compatibility.strip())
-            if not 1 <= compatibility_length <= MAX_COMPATIBILITY_LENGTH:
-                errors.append(
-                    f"{source}: compatibility length must be 1-{MAX_COMPATIBILITY_LENGTH} "
-                    f"characters when provided (found {compatibility_length})"
-                )
-
-    return errors
+from skills_ref.validator import validate_metadata
 
 
 def main() -> int:
@@ -71,35 +24,21 @@ def main() -> int:
         print("No content received on stdin.")
         return 1
 
-    skills_ref_failures = 0
-    extra_errors: list[str] = []
-    with tempfile.TemporaryDirectory() as temp_dir:
-        skill_dir = Path(temp_dir)
-        skill_file = skill_dir / "SKILL.md"
-        skill_file.write_text(skill_content, encoding="utf-8")
-
-        command = [sys.executable, "-m", "skills_ref.cli", "validate", str(skill_dir)]
-        result = subprocess.run(command, capture_output=True, text=True)
-        if result.returncode != 0:
-            skills_ref_failures += 1
-            print(result.stdout.strip())
-            if result.stderr.strip():
-                print(result.stderr.strip())
-
-    extra_errors.extend(validate_frontmatter_lengths(skill_content, "<stdin>"))
-
-    if extra_errors:
-        for error in extra_errors:
-            print(error)
-
-    if skills_ref_failures or extra_errors:
-        print(
-            "skills validation failed "
-            f"({skills_ref_failures} skills-ref error(s), {len(extra_errors)} length error(s))."
-        )
+    try:
+        metadata, _ = parse_frontmatter(skill_content)
+    except ParseError as exc:
+        print(str(exc))
+        print("skills validation failed (1 skills-ref error(s)).")
         return 1
 
-    print("Validated 1 skill from stdin with skills-ref.")
+    validation_errors = validate_metadata(metadata)
+    if validation_errors:
+        for error in validation_errors:
+            print(error)
+        print(f"skills validation failed ({len(validation_errors)} skills-ref error(s)).")
+        return 1
+
+    print("Validated 1 skill from stdin with skills-ref validator.")
     return 0
 
 
