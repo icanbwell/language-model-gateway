@@ -1,6 +1,8 @@
 import logging
 
-from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -18,6 +20,9 @@ from languagemodelcommon.converters.langgraph_to_openai_converter import (
 from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
+from languagemodelcommon.utilities.tool_friendly_name_mapper import (
+    ToolFriendlyNameMapper,
+)
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
@@ -32,6 +37,7 @@ from simple_container.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )
+from simple_container.environment.environment_variables import EnvironmentVariables
 
 from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
@@ -111,6 +117,12 @@ class LanguageModelGatewayContainerFactory:
         # register services here
         LanguageModelCommonContainerFactory.register_services_in_container(
             container=container
+        )
+
+        # override with our own EnvironmentVariables
+        container.singleton(
+            EnvironmentVariables,
+            lambda c: c.resolve(LanguageModelGatewayEnvironmentVariables),
         )
 
         # Register our own FastAPIManager so we can save the token
@@ -261,6 +273,15 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            ToolFriendlyNameMapper,
+            lambda c: ToolFriendlyNameMapper.from_config_path(
+                config_path=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).tool_friendly_name_config_path
+            ),
+        )
+
+        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
@@ -274,6 +295,7 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
                 skill_loader=c.resolve(SkillLoaderProtocol),
+                tool_friendly_name_mapper=c.resolve(ToolFriendlyNameMapper),
             ),
         )
 

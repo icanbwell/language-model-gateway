@@ -10,7 +10,13 @@ from typing import (
     override,
 )
 
-from langchain_ai_skills_framework.loaders.skill_loader import SkillLoaderProtocol
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
+from langchain_ai_skills_framework.tools.skills_tool import LoadSkillTool
+from languagemodelcommon.utilities.tool_friendly_name_mapper import (
+    ToolFriendlyNameMapper,
+)
 from starlette.responses import StreamingResponse, JSONResponse
 
 from langchain_core.language_models import BaseChatModel
@@ -68,6 +74,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
         skill_loader: SkillLoaderProtocol,
+        tool_friendly_name_mapper: ToolFriendlyNameMapper,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -141,6 +148,16 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
             )
 
+        self.tool_friendly_name_mapper: ToolFriendlyNameMapper = (
+            tool_friendly_name_mapper
+        )
+        if self.tool_friendly_name_mapper is None:
+            raise ValueError("tool_friendly_name_mapper must not be None")
+        if not isinstance(self.tool_friendly_name_mapper, ToolFriendlyNameMapper):
+            raise TypeError(
+                f"Expected ToolFriendlyNameMapper, got {type(self.tool_friendly_name_mapper)}"
+            )
+
     @override
     async def chat_completions(
         self,
@@ -183,6 +200,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             tools=[t for t in model_config.get_agents()],
             headers=headers,
         )
+
+        # add the skills tools
+        tools += [
+            LoadSkillTool(
+                skill_loader=self.skill_loader,
+            )
+        ]
 
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
@@ -238,6 +262,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     if conversation_thread_id
                     else str(request_id),
                     headers=headers,
+                    tool_friendly_name_mapper=self.tool_friendly_name_mapper,
                 ),
                 config=None,
                 state=None,
