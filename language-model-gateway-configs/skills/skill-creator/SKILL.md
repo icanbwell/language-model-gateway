@@ -327,6 +327,9 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
    - `script_name`: `"validate.py"`
    - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
 
+   **Allowed script note:** `validate.py` is the only script you should call for this skill.
+   Never call `create_skill` or `create_skill.py` with `run_skill_script`.
+
 2. **Check validation result:**
    - If validation passes: Proceed to Section 10 (Format Final Output)
    - If validation fails: Review error messages, fix issues, and run validation again
@@ -336,6 +339,7 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
    - Do not ask the user to validate manually
    - Do not provide bash commands for the user to run
    - You must run the validation yourself using `run_skill_script`
+   - Do not attempt to call `create_skill`/`create_skill.py`; those scripts do not exist
 
 **Example tool call:**
 ```
