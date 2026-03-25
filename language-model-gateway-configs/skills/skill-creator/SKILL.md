@@ -317,11 +317,36 @@ Progress:
 ### 9. Validate Against Specification
 
 **MANDATORY before final output:**
-- Run `scripts/validate.py` on the generated skill content.
-- `scripts/validate.py` expects a JSON object on stdin with a `skill_content` field.
-- Pass `SKILL.md` to the validator by wrapping file contents as JSON, then piping to the script:
-  `python3 -c 'import json,sys; print(json.dumps({"skill_content": sys.stdin.read()}))' < SKILL.md | python3 scripts/validate.py`
-- If validation fails, correct the skill and re-run until it passes.
+
+You MUST validate the skill using `run_skill_script` before presenting it to the user. This is not optional.
+
+**Step-by-step validation process:**
+
+1. **Call `run_skill_script`** with:
+   - `skill_name`: `"skill-creator"`
+   - `script_name`: `"validate.py"`
+   - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
+
+2. **Check validation result:**
+   - If validation passes: Proceed to Section 10 (Format Final Output)
+   - If validation fails: Review error messages, fix issues, and run validation again
+
+3. **Never skip validation:**
+   - Do not present a skill to the user without successful validation
+   - Do not ask the user to validate manually
+   - Do not provide bash commands for the user to run
+   - You must run the validation yourself using `run_skill_script`
+
+**Example tool call:**
+```
+run_skill_script(
+  skill_name="skill-creator",
+  script_name="validate.py",
+  arguments={
+    "skill_content": "---\nname: example-skill\n...[full skill content]..."
+  }
+)
+```
 
 **Frontmatter validation:**
 - Schema compliance
