@@ -5,8 +5,6 @@
 # ]
 # ///
 
-from __future__ import annotations
-
 import json
 import sys
 from collections.abc import Sequence
