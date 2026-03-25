@@ -13,7 +13,6 @@ from typing import (
 from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
     SkillLoaderProtocol,
 )
-from langchain_ai_skills_framework.tools.load_skill_tool import LoadSkillTool
 from languagemodelcommon.utilities.tool_friendly_name_mapper import (
     ToolFriendlyNameMapper,
 )
@@ -202,11 +201,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
 
         # add the skills tools
-        tools += [
-            LoadSkillTool(
-                skill_loader=self.skill_loader,
-            )
-        ]
+        tools += self.skill_loader.get_tools()
 
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
