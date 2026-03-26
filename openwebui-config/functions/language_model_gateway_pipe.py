@@ -8,8 +8,8 @@ This module defines a Pipe class that reads the oauth_id_token from the request 
 and uses it in Authorization header to make requests to the OpenAI API.
 It supports both streaming and non-streaming responses.
 
-KEY UPDATE: Streaming yields upstream chunks as-is so OpenWebUI receives
-the original SSE payload without line-level parsing.
+KEY FIX: Instead of yielding raw SSE lines, we now parse the OpenAI streaming response
+and yield individual text chunks that OpenWebUI will format properly.
 """
 
 import datetime
@@ -228,7 +228,6 @@ HTTPX Response Log:
         chat_id: Optional[str],
         message_id: Optional[str],
         debug_mode: bool,
-        is_streaming: bool,
     ) -> Dict[str, str]:
         """
         Build headers for the OpenAI API request, including user and request context.
@@ -236,7 +235,7 @@ HTTPX Response Log:
         """
         headers = {
             "Content-Type": "application/json",
-            "Accept": "text/event-stream" if is_streaming else "application/json",
+            "Accept": "application/json, text/event-stream",
             "Authorization": f"Bearer {access_token}",
             "X-ID-Token": id_token or "",
             "X-Session-Id": session_id or "",
@@ -255,6 +254,7 @@ HTTPX Response Log:
             "Cookie",
             "traceparent",
             "origin",
+            "Accept-Encoding",
         ]:
             if key in request.headers:
                 headers[key] = request.headers[key]
@@ -349,28 +349,55 @@ HTTPX Response Log:
     async def _stream_openai_response(
         self,
         response: httpx.Response,
-        enable_chunk_timing_logs: bool = False,
     ) -> AsyncGenerator[str, None]:
         """
-        Yield upstream streaming chunks as-is.
+        Parse OpenAI streaming response and yield text chunks.
 
-        This keeps the original SSE payload intact so OpenWebUI receives
-        every frame exactly as provided by the upstream gateway.
+        This is the KEY FIX: Instead of yielding raw SSE lines,
+        we parse the chunks and yield just the text content.
+        OpenWebUI's framework will handle wrapping it in proper SSE format.
         """
-        stream_started_at = time.perf_counter()
-        chunk_index = 0
+        async for line in response.aiter_lines():
+            if not line:
+                continue
 
-        async for chunk in response.aiter_text():
-            chunk_index += 1
-            if enable_chunk_timing_logs:
-                elapsed_ms = int((time.perf_counter() - stream_started_at) * 1000)
-                logger.debug(
-                    "stream_chunk idx=%s elapsed_ms=%s chars=%s",
-                    chunk_index,
-                    elapsed_ms,
-                    len(chunk),
-                )
-            yield chunk
+            # Skip the SSE metadata
+            if line == "data: [DONE]":
+                continue
+
+            # Remove "data: " prefix if present
+            if line.startswith("data: "):
+                line = line[6:]
+
+            if not line:
+                continue
+
+            try:
+                # Parse the JSON chunk
+                chunk = json.loads(line)
+
+                # Extract text content from the OpenAI format
+                if "choices" in chunk and len(chunk["choices"]) > 0:
+                    delta = chunk["choices"][0].get("delta", {})
+
+                    # Get text content
+                    if "content" in delta and delta["content"]:
+                        yield delta["content"]
+
+                    # Handle finish_reason for proper stream termination
+                    if chunk["choices"][0].get("finish_reason") == "stop":
+                        # Optionally yield a final empty chunk to signal completion
+                        pass
+
+                    # Also handle tool_calls if present
+                    tool_calls = delta.get("tool_calls")
+                    if tool_calls:
+                        yield json.dumps({"tool_calls": tool_calls})
+
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse SSE line: {line}, error: {e}")
+                # Yield the line as-is if parsing fails
+                yield line
 
     async def pipe(
         self,
@@ -391,7 +418,8 @@ HTTPX Response Log:
         """
         Main pipe method supporting both streaming and non-streaming responses.
 
-        IMPORTANT: For streaming, yield upstream chunks as received.
+        IMPORTANT: For streaming, yield plain text chunks or structured data.
+        The OpenWebUI framework handles wrapping in proper SSE format.
         """
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
@@ -447,7 +475,6 @@ HTTPX Response Log:
             chat_id=__chat_id__,
             message_id=__message_id__,
             debug_mode=debug_request,
-            is_streaming=is_streaming,
         )
 
         for debug_line in self._yield_debug_info(
@@ -476,11 +503,8 @@ HTTPX Response Log:
                         response.raise_for_status()
                         content_type = response.headers.get("content-type", "")
                         if content_type.startswith("text/event-stream"):
-                            # Stream raw chunks exactly as received from upstream.
-                            async for chunk in self._stream_openai_response(
-                                response,
-                                enable_chunk_timing_logs=self.valves.debug_mode,
-                            ):
+                            # NEW: Parse OpenAI SSE format and yield text chunks
+                            async for chunk in self._stream_openai_response(response):
                                 yield chunk
                         else:
                             # Non-SSE response from streaming endpoint
