@@ -74,20 +74,20 @@ def main() -> int:
         try:
             metadata, _ = parse_frontmatter(skill_content)
         except ParseError as exc:
-            print(str(exc))
-            print("skills validation failed (1 skills-ref error(s)).")
+            sys.stderr.write(str(exc))
+            sys.stderr.write("skills validation failed (1 skills-ref error(s)).")
             return 1
 
         validation_errors = validate_metadata(metadata)
         if validation_errors:
             for error in validation_errors:
-                print(error)
-            print(
+                sys.stderr.write(error)
+            sys.stderr.write(
                 f"skills validation failed ({len(validation_errors)} skills-ref error(s))."
             )
             return 1
 
-        print("Validated 1 skill from stdin with skills-ref validator.")
+        sys.stdout.write(skill_content)
         return 0
     except Exception as exc:
         print(str(exc), file=sys.stderr)
