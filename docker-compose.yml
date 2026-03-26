@@ -152,6 +152,7 @@ services:
       AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100
+      ENABLE_STREAMING_BUFFERING: 0
     env_file: .env
     command:
       - opentelemetry-instrument
