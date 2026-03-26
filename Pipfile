@@ -132,7 +132,7 @@ prometheus-fastapi-instrumentator = ">=7.1.0"
 # py-key-value-aio is a Python library for working with key-value stores asynchronously
 py-key-value-aio = ">=0.4.4"
 # langchain-ai-skills-framework is a Python library for building AI skills in LangChain
-langchain-ai-skills-framework = ">=1.0.16"
+langchain-ai-skills-framework = ">=1.0.17"
 # languagemodelcommon is a Python library for common language model utilities
 language-model-common = ">=1.0.19"
 
