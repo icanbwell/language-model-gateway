@@ -11,6 +11,7 @@ services:
       MCP_LOG_LEVEL: DEBUG
       LLM_LOG_LEVEL: DEBUG
       HTTP_LOG_LEVEL: DEBUG
+      HTTP_TRACING_LOG_LEVEL: DEBUG
       SKILLS_LOG_LEVEL: DEBUG
       LOG_ALL_REQUESTS: 1
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
@@ -70,7 +71,7 @@ services:
       # Okta for corporate access
       AUTH_ISSUER_OKTAAIDEN: "https://icanbwell.okta.com"
       AUTH_AUDIENCE_OKTAAIDEN: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAAIDEN: "Okta FHIR Dev"
+      AUTH_FRIENDLY_NAME_OKTAAIDEN: "Okta b.well"
       AUTH_CLIENT_ID_OKTAAIDEN: "0oatz6lcbwmIkbXUD697"
       AUTH_WELL_KNOWN_URI_OKTAAIDEN: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAAIDEN: "openid email profile groups"
@@ -143,8 +144,6 @@ services:
       MY_USER_PASSWORD: password
       # truncates the tool output to the specified number of tokens
       TOOL_OUTPUT_TOKEN_LIMIT: 100000
-      # Control logging by code area
-      HTTP_TRACING_LOG_LEVEL: 'DEBUG'
       # configures retry behavior for AWS SDK calls
       AWS_BEDROCK_MAX_RETRIES: '1'
       AWS_BEDROCK_RETRY_MODE: 'standard'
