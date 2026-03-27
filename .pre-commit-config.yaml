@@ -1,4 +1,4 @@
-exclude: (^.idea/|^docsrc|^docs|^language-model-gateway-configs/skills/**/.*\.py$)
+exclude: (^.idea/|^docsrc|^docs)
 
 repos:
   # Pre-commit hooks for basic checks
@@ -61,6 +61,7 @@ repos:
         language: system
         types: [ python ]
         entry: mypy
+        exclude: ^language-model-gateway-configs/skills/
         require_serial: true
         args: [
           --explicit-package-bases,
