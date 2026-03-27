@@ -320,15 +320,23 @@ Progress:
 
 You MUST validate the skill using `run_skill_script` before presenting it to the user. This is not optional.
 
+**CRITICAL — The ONLY script that exists is `validate.py`.** Do NOT call any other script name. The following scripts DO NOT EXIST and must never be called:
+- `create_skill.py` — does not exist
+- `create_skill` — does not exist
+- `validate_skill.py` — does not exist
+- `validate_skill` — does not exist
+- `create.py` — does not exist
+- `check.py` — does not exist
+- Any script name other than `validate.py` — does not exist
+
+If you call a non-existent script, it will fail. The only valid call is `script_name="validate.py"`.
+
 **Step-by-step validation process:**
 
-1. **Call `run_skill_script`** with:
+1. **Call `run_skill_script`** with exactly these parameters:
    - `skill_name`: `"skill-creator"`
-   - `script_name`: `"validate.py"`
+   - `script_name`: `"validate.py"` (this is the ONLY valid script name)
    - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
-
-   **Allowed script note:** `validate.py` is the only script you should call for this skill.
-   Never call `create_skill` or `create_skill.py` with `run_skill_script`.
 
 2. **Check validation result:**
    - If validation passes: Proceed to Section 10 (Format Final Output)
@@ -339,7 +347,6 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
    - Do not ask the user to validate manually
    - Do not provide bash commands for the user to run
    - You must run the validation yourself using `run_skill_script`
-   - Do not attempt to call `create_skill`/`create_skill.py`; those scripts do not exist
 
 **Example tool call:**
 ```
