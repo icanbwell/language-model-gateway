@@ -90,3 +90,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
             return configured
 
         return "/usr/src/language_model_gateway/gateway/tools/tool_friendly_names.json"
+
+    @property
+    def enable_code_interpreter(self) -> bool:
+        return self.str2bool(os.environ.get("ENABLE_CODE_INTERPRETER", "true"))

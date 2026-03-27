@@ -41,6 +41,7 @@ metadata:
 - Complete SKILL.md file with valid YAML frontmatter
 - Formatted as copy/paste-ready markdown code block (four backticks)
 - Validated against Agent Skills specification
+- Validation is mandatory before final output (see Section 9 for the exact command)
 - Includes execution steps, examples, and edge case handling
 - Optimized description for reliable triggering
 - Under 500 lines (move detail to references/ if needed)
@@ -68,7 +69,8 @@ metadata:
 5. ✓ Determine required inputs and expected outputs
 6. ✓ Identify if any specific tools must be used
 7. ✓ Plan to keep SKILL.md under 500 lines (use references/ for detail)
-8. ✓ Only then proceed with drafting the skill
+8. ✓ Plan to run mandatory validation as defined in Section 9 before final output
+9. ✓ Only then proceed with drafting the skill
 
 **Never create a skill without first gathering domain-specific context. Generic skills based solely on LLM training knowledge produce vague, low-value instructions.**
 
@@ -144,7 +146,7 @@ When the user has existing material, use it to ground the skill:
 - **Practical examples**: Based on real usage, not generic scenarios
 - **Under 500 lines**: Main file stays focused; detail moved to references/
 - **No extra commentary**: Only the skill content unless user requests explanation
-- **Validation confirmation**: Note any specification checks performed
+- **Validation confirmation**: Include whether `scripts/validate.py` passed, and if it failed, fix and re-run before final output
 
 ## Decision Flow
 
@@ -277,7 +279,7 @@ Progress:
 **Validation loops:**
 ```markdown
 1. Make your edits
-2. Run validation: `python scripts/validate.py output/`
+2. Run validation using the exact command in Section 9
 3. If validation fails:
    - Review the error message
    - Fix the issues
@@ -313,6 +315,42 @@ Progress:
 - When to ask for clarification
 
 ### 9. Validate Against Specification
+
+**MANDATORY before final output:**
+
+You MUST validate the skill using `run_skill_script` before presenting it to the user. This is not optional.
+
+**Step-by-step validation process:**
+
+1. **Call `run_skill_script`** with:
+   - `skill_name`: `"skill-creator"`
+   - `script_name`: `"validate.py"`
+   - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
+
+   **Allowed script note:** `validate.py` is the only script you should call for this skill.
+   Never call `create_skill` or `create_skill.py` with `run_skill_script`.
+
+2. **Check validation result:**
+   - If validation passes: Proceed to Section 10 (Format Final Output)
+   - If validation fails: Review error messages, fix issues, and run validation again
+
+3. **Never skip validation:**
+   - Do not present a skill to the user without successful validation
+   - Do not ask the user to validate manually
+   - Do not provide bash commands for the user to run
+   - You must run the validation yourself using `run_skill_script`
+   - Do not attempt to call `create_skill`/`create_skill.py`; those scripts do not exist
+
+**Example tool call:**
+```
+run_skill_script(
+  skill_name="skill-creator",
+  script_name="validate.py",
+  arguments={
+    "skill_content": "---\nname: example-skill\n...[full skill content]..."
+  }
+)
+```
 
 **Frontmatter validation:**
 - Schema compliance
@@ -353,6 +391,9 @@ Progress:
 
 ### 11. Format Final Output
 
-**Wrap in four-backtick markdown code fence:**
+- Confirm validator status first (`scripts/validate.py` must pass before final delivery).
+
+**MANDATORY: Wrap in four-backtick markdown code fence:**
 ````markdown
 [Complete skill content here]
+````

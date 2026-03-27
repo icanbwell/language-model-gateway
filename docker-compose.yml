@@ -11,6 +11,7 @@ services:
       MCP_LOG_LEVEL: DEBUG
       LLM_LOG_LEVEL: DEBUG
       HTTP_LOG_LEVEL: DEBUG
+      SKILLS_LOG_LEVEL: DEBUG
       LOG_ALL_REQUESTS: 1
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
@@ -148,6 +149,10 @@ services:
       WRITE_TOOL_OUTPUT_TO_FILE: 1
       SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/skills"
 #      SKILLS_DIRECTORY: "github://icanbwell/language-model-gateway-configuration/configs/skills?ref=main"
+      AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
+      STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
+      LANGGRAPH_RECURSION_LIMIT: 100
+      ENABLE_STREAMING_BUFFERING: 0
     env_file: .env
     command:
       - opentelemetry-instrument
