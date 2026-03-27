@@ -43,13 +43,13 @@ metadata:
 
 ### Step 1: Identify the Measure
 
-Match the user's request to a HEDIS MY 2025 measure. Read `references/hedis-measures-index.md` if the measure name is ambiguous or abbreviated.
+Match the user's request to a HEDIS MY 2025 measure. Read `references/hedis-measures-index.md` or `references/measures/INDEX.md` if the measure name is ambiguous or abbreviated.
 
 If the measure cannot be identified, ask: "Which HEDIS measure would you like to implement? Please provide the abbreviation (e.g., CBP) or full name."
 
 ### Step 2: Read the Measure Specification
 
-Read the HEDIS specification for the requested measure from `references/HEDIS MY 2025 Volume 2 Technical Update 2025-03-31.docx`. Search for the measure name or abbreviation in the document. Extract:
+Read the HEDIS specification for the requested measure from its individual file in `references/measures/<abbreviation>.md` (e.g., `references/measures/cbp.md` for Controlling High Blood Pressure). See `references/measures/INDEX.md` for the full list of measure files. For general HEDIS guidelines and definitions, read `references/HEDIS-MY-2025-overview.md`. For appendices, read `references/HEDIS-MY-2025-appendices.md`. Extract:
 
 1. **Description** - What the measure calculates
 2. **Definitions** - Key terms and thresholds

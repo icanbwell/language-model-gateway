@@ -21,7 +21,7 @@ HELP_TEXT = (
     "Options:\n"
     "  -help, --help      Show this help message and exit\n\n"
     "Examples:\n"
-    "  echo '{\"skill_content\": \"---\\nname: demo\\n---\\n# Demo\"}' | validate.py\n\n"
+    '  echo \'{"skill_content": "---\\nname: demo\\n---\\n# Demo"}\' | validate.py\n\n'
     "Input JSON keys (stdin):\n"
     "  skill_content      string, required\n"
 )
