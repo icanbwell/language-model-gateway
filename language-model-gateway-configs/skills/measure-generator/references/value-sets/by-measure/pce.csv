@@ -1,0 +1,370 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J41.0,[J41.0] Simple chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J41.1,[J41.1] Mucopurulent chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J41.8,[J41.8] Mixed simple and mucopurulent chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J42,[J42] Unspecified chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J43.0,[J43.0] Unilateral pulmonary emphysema [MacLeod's syndrome],ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J43.1,[J43.1] Panlobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J43.2,[J43.2] Centrilobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J43.8,[J43.8] Other emphysema,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J43.9,"[J43.9] Emphysema, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J44.0,[J44.0] Chronic obstructive pulmonary disease with (acute) lower respiratory infection,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J44.1,[J44.1] Chronic obstructive pulmonary disease with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J44.81,[J44.81] Bronchiolitis obliterans and bronchiolitis obliterans syndrome,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J44.89,[J44.89] Other specified chronic obstructive pulmonary disease,ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,J44.9,"[J44.9] Chronic obstructive pulmonary disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,4981000,Panacinar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,13645005,Chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,16003001,Giant bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,16846004,Obstructive emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,23958009,Vanishing lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,31898008,Paraseptal emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,47895001,Congenital emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,49691004,Occupational bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,52571006,Chronic tracheobronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,54288002,Traumatic subcutaneous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,57686001,Emphysematous bleb of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,60805002,Hemolytic anemia with emphysema AND cutis laxa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,61937009,Simple chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,63480004,Chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,66987001,Congenital lobar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,68328006,Centriacinar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,70756004,Bronchial atresia with segmental pulmonary emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,74417001,Mucopurulent chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,84409004,Fetid chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,86680006,Ruptured emphysematous bleb of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,87433001,Pulmonary emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,89099002,Chronic allergic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,89549007,Catarrhal bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,135836000,End stage chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,185086009,Chronic obstructive bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195949008,Chronic asthmatic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195951007,Acute exacerbation of chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195953005,Mixed simple and mucopurulent chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195957006,Chronic bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195958001,Segmental bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195959009,Zonal bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,195963002,Acute vesicular emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,196001008,Chronic obstructive pulmonary disease with acute lower respiratory infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,196026004,Chronic emphysema caused by chemical fumes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,233674008,Pulmonary emphysema in alpha-1 primary immunodeficiency deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,233675009,Toxic emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,233677001,Scar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,266355005,Bullous emphysema with collapse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,266356006,Atrophic (senile) emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,285381006,Acute infective exacerbation of chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,313296004,Mild chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,313297008,Moderate chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,313299006,Severe chronic obstructive pulmonary disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,425748003,Acute exacerbation of chronic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,442025000,Acute exacerbation of chronic asthmatic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,708030004,Pulmonary emphysema co-occurrent with fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,735465007,Protracted bronchitis caused by bacterium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,785736001,Chronic bronchitis co-occurrent with wheeze (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,836477007,Chronic emphysema caused by vapor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,1010333003,Emphysema of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,1010334009,Emphysema of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,1751000119100,Acute exacerbation of chronic obstructive pulmonary disease with asthma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,106001000119101,Chronic obstructive pulmonary disease with acute bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,293241000119100,Acute exacerbation of chronic obstructive bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463,451981000124108,Eosinophilic bronchitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+ED,2.16.840.1.113883.3.464.1004.1086,99281,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99282,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99283,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99284,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99285,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,4525004,Emergency department patient visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+ED,2.16.840.1.113883.3.464.1004.1086,0450,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0451,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0452,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0456,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0459,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0981,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0100,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0101,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0110,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0111,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0112,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0113,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0114,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0116,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0117,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0118,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0119,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0120,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0121,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0122,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0123,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0124,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0126,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0127,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0128,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0129,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0130,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0131,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0132,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0133,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0134,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0136,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0137,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0138,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0139,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0140,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0141,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0142,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0143,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0144,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0146,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0147,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0148,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0149,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0150,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0151,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0152,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0153,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0154,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0156,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0157,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0158,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0159,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0160,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0164,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0167,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0169,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0170,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0171,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0172,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0173,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0174,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0179,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0190,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0191,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0192,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0193,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0194,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0199,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0200,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0201,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0202,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0203,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0204,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0206,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0207,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0208,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0209,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0210,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0211,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0212,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0213,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0214,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0219,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1000,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1001,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1002,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0022,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0024,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0118,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0128,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0138,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0148,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0158,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0190,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0191,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0192,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0193,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0194,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0199,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0524,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0525,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0550,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0551,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0552,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0559,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0660,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0661,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0662,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0663,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0669,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,1000,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,1001,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,1002,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0180,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0181,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0182,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0183,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0184,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0185,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0187,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0188,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0210,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0211,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0212,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0213,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0214,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0215,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0217,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0218,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0220,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0221,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0222,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0223,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0224,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0225,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0227,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0228,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0280,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0281,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0282,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0283,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0284,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0285,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0287,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0288,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0289,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0650,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0651,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0652,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0653,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0654,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0655,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0657,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0658,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0660,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0661,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0662,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0663,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0664,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0665,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0667,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0668,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0860,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0861,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0862,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0863,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0864,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0865,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0867,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,0868,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,018Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,021Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,022Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,028Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,065Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,066Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398,086Z,,UBTOB,2.16.840.1.113883.6.301.1

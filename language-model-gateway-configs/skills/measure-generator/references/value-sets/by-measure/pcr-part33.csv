@@ -1,0 +1,1422 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289747009,Finding of measures of gravid uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289748004,Gravid uterus normal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289749007,Gravid uterus problem (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289761004,Finding of cervical dilatation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289762006,Cervix dilated (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289763001,Rim of cervix palpable (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289764007,Cervix undilated (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289765008,Ripe cervix (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289766009,Finding of thickness of cervix (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289768005,Cervix thick (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289770001,Cervix thin (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289783000,Cervix central (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289827009,Finding of cervical cerclage suture (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,289828004,Cervical cerclage suture absent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,300571009,Finding of gestational sac (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,300572002,Gestational sac present (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,300573007,Gestational sac absent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,301801008,Finding of position of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302078000,Abnormal immature chorionic villi (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302080006,Finding of birth outcome (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302253005,Delivered by cesarean section - pregnancy at term (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302254004,Delivered by cesarean delivery following previous cesarean delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302644007,Abnormal immature chorion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302929008,Umbilical cord around neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,302945005,Absent blood vessel in umbilical cord (disorder) [302945005],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307517001,Pregnancy-related factor VIII deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307534009,Urinary tract infection in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307632004,Non-proteinuric hypertension of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307733001,Inevitable abortion complete (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307734007,Complete inevitable abortion complicated by genital tract and pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307735008,Complete inevitable abortion complicated by delayed or excessive hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307737000,Inevitable abortion incomplete (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307738005,Complete inevitable abortion without complication (disorder) [307738005],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307746006,Incomplete inevitable abortion complicated by embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307748007,Incomplete inevitable abortion without complication (disorder) [307748007],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307749004,Incomplete inevitable abortion complicated by genital tract and pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307750004,Complete inevitable abortion complicated by embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,307752007,Incomplete inevitable abortion complicated by delayed or excessive hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,308136002,Superficial thrombophlebitis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,308140006,Hemorrhoids in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,309469004,Spontaneous vertex delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,310248000,Antenatal care midwifery led (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,312684008,Anti-D not detected by screening (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,312685009,Anti-D detected by screening (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,312974005,Preterm premature rupture of membranes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,313017000,Anhydramnios (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,313130001,Uterine membrane finding (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,313178001,Gestation less than 24 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,313179009,"Gestation period, 24 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,313180007,Gestation greater than 24 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,314204000,Early stage of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,363681007,Pregnancy with abortive outcome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,364738009,Finding of outcome of delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,364826005,Finding related to ability to perform breast-feeding (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,364827001,Finding related to ability to position baby at breast for feeding (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,365662002,Finding of amniotic fluid appearance (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366309007,Finding of effacement of cervix (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366321006,Finding of gravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366323009,Finding of length of gestation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366325002,Finding of progress of labor - first stage (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366327005,Finding of progress of second stage of labor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366328000,Finding related to ability to push in labor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366329008,Finding of speed of delivery of placenta (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366332006,Finding of odor of placenta (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366333001,Finding of number of membranes (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366334007,Finding of condition of amniotic fluid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366335008,Finding of consistency of liquor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366339002,Finding of general shape of pelvis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366340000,Finding of shape of sacral curve (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366341001,Finding of position of ischial spines (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,366345005,Finding of antenatal data (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,367390009,Hypertension in the obstetric context (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,371106008,Idiopathic maternal thrombocytopenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,371380006,Amniotic fluid leaking (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,371614003,Hematoma of obstetric wound (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,372043009,Hydrops of allantois (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,372046001,"Glucose tolerance test during pregnancy, childbirth and puerperium outside reference range (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,372048000,Pregnancy with abnormal glucose tolerance test (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,373663005,Perinatal period (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,373680009,Avulsion of umbilical cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,373896005,Miscarriage complicated by genital-pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,387692004,Hypotonic uterine inertia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,387696001,Primary hypotonic uterine dysfunction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,387699008,Primary uterine inertia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,387700009,Prolonged latent phase of labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,388604008,Villitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,388605009,Disorder of chorion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,390959009,Live birth surviving more than one year (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,396343006,Funisitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,397774002,Pain during labor and delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,397949005,Poor fetal growth affecting management (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,397952002,Trauma to perineum during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,398019008,Perineal laceration during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,398254007,Pre-eclampsia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,398276003,Placental insufficiency affecting management of mother (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,399031001,Fourth degree perineal laceration (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,399363000,Late fetal death affecting management of mother (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,402836009,Spider telangiectasis in association with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,403528000,Pregnancy-related exacerbation of dermatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,405733001,Hypocalcemia of late pregnancy and/or lactation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408781009,Straw colored amniotic fluid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408782002,Purulent amniotic fluid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408783007,Antenatal Anti-D prophylaxis status (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408792005,Meconium stained liquor - grade I (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408793000,Meconium stained liquor - grade II (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408794006,Meconium stained liquor - grade III (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408796008,Stillbirth - unknown if fetal death intrapartum or prior to labor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408823004,Antenatal hepatitis B blood screening test status (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408825006,Antenatal hepatitis B blood screening test sent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408827003,Antenatal human immunodeficiency virus blood screening test status (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408828008,Antenatal human immunodeficiency virus blood screening test sent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408831009,Antenatal thalassemia blood screening test status (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408833007,Antenatal thalassemia blood screening test sent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408842000,Antenatal human immunodeficiency virus blood screening test requested (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,408843005,Antenatal thalassemia blood screening test requested (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,413338003,Incomplete miscarriage with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,413567003,Aplastic anemia associated with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,415105001,Placental abruption (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,415810004,Varix of umbilical vein (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,416402001,Gestational trophoblastic disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,416413003,Advanced maternal age gravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,416669000,Invasive hydatidiform mole (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417006004,Twin reversal arterial perfusion syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417044008,"Hydatidiform mole, benign (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417150000,Exaggerated placental site (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417364008,Placental site nodule (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417426005,Four vessels in umbilical cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,417570003,Gestational choriocarcinoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,423445003,Difficulty following prenatal diet (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,423834007,Difficulty with prenatal rest pattern (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,424009001,Fears delivery procedure (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,424037008,Difficulty following prenatal exercise routine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,425708006,Placental aromatase deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,426403007,Late entry into prenatal care (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,426997005,Traumatic injury during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,427013000,Alcohol consumption during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,427139004,Third trimester bleeding (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428017002,Condyloma acuminata of vulva in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428058009,Gestation less than 9 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428164004,Mitral valve disorder in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428165003,Hypothyroidism in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428230005,Trichomonal vaginitis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428252001,Vaginitis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428508008,Abortion due to Brucella abortus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428511009,Multiple pregnancy with one fetal loss (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428566005,Gestation less than 20 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428567001,Gestation 14 - 20 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428707000,Nutritional deficiency in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,428930004,Gestation 9- 13 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,429187001,Continuing pregnancy after intrauterine death of twin fetus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,429240000,Third trimester pregnancy less than 36 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,429715006,Gestation greater than 20 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,430881000,Second trimester bleeding (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,430933008,Gravid uterus size for dates discrepancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,439311009,Intends to continue pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,441697004,Thrombophilia associated with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,441924001,Gestational age unknown (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,442478007,Multiple pregnancy involving intrauterine pregnancy and tubal pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,443460007,Multigravida of advanced maternal age (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,444661007,High risk pregnancy due to history of preterm labor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,445086005,Chemical pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,445122007,Low lying placenta (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,445548006,Dead fetus in utero (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,448401007,Choriocarcinoma of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,449169008,Subchorionic intervillositis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,449807005,Type 3a third degree laceration of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,449808000,Type 3b third degree laceration of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,449809008,Type 3c third degree laceration of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,450852006,Yolk sac present (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459166009,Dichorionic diamniotic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459167000,Monochorionic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459168005,Monochorionic diamniotic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459169002,Monochorionic diamniotic twin pregnancy with similar amniotic fluid volumes (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459170001,Monochorionic diamniotic twin pregnancy with dissimilar amniotic fluid volumes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,459171002,Monochorionic monoamniotic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,472321009,Continuing pregnancy after intrauterine death of one twin with intrauterine retention of dead twin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,472699005,Uncontrolled gestational diabetes mellitus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,472836003,Yolk sac absent (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609133009,Short cervical length in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609204004,Subchorionic hematoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609447002,Induced termination of pregnancy complicated by damage to pelvic organs and/or tissues (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609449004,Induced termination of pregnancy complicated by embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609450004,Induced termination of pregnancy complicated by genital-pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609451000,Induced termination of pregnancy complicated by metabolic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609452007,Induced termination of pregnancy complicated by renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609453002,Induced termination of pregnancy complicated by shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609454008,Induced termination of pregnancy complicated by acute necrosis of liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609455009,Induced termination of pregnancy complicated by acute renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609456005,Induced termination of pregnancy complicated by afibrinogenemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609457001,Induced termination of pregnancy complicated by air embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609458006,Induced termination of pregnancy complicated by amniotic fluid embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609459003,Induced termination of pregnancy complicated by blood-clot embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609461007,Induced termination of pregnancy complicated by cerebral anoxia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609462000,Induced termination of pregnancy complicated by defibrination syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609463005,Induced termination of pregnancy complicated by electrolyte imbalance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609464004,Induced termination of pregnancy complicated by endometritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609465003,Induced termination of pregnancy complicated by fat embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609466002,Induced termination of pregnancy complicated by intravascular hemolysis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609467006,Induced termination of pregnancy complicated by laceration of bowel (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609468001,Induced termination of pregnancy complicated by laceration of broad ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609469009,Induced termination of pregnancy complicated by laceration of cervix (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609470005,Induced termination of pregnancy complicated by laceration of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609471009,Induced termination of pregnancy complicated by laceration of vagina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609472002,Induced termination of pregnancy complicated by acute renal failure with oliguria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609473007,Induced termination of pregnancy complicated by parametritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609474001,Induced termination of pregnancy complicated by pelvic peritonitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609475000,Induced termination of pregnancy complicated by perforation of bowel (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609476004,Induced termination of pregnancy complicated by perforation of cervix (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609477008,Induced termination of pregnancy complicated by perforation of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609478003,Induced termination of pregnancy complicated by perforation of vagina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609479006,Induced termination of pregnancy complicated by postoperative shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609480009,Induced termination of pregnancy complicated by pulmonary embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609482001,Induced termination of pregnancy complicated by renal tubular necrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609483006,Induced termination of pregnancy complicated by salpingitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609484000,Induced termination of pregnancy complicated by salpingo-oophoritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609486003,Induced termination of pregnancy complicated by septic embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609487007,Induced termination of pregnancy complicated by septic shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609489005,Induced termination of pregnancy complicated by soap embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609490001,Induced termination of pregnancy complicated by uremia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609491002,Induced termination of pregnancy complicated by urinary tract infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609492009,Induced termination of pregnancy without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609493004,Induced termination of pregnancy complicated by tetanus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609494005,Induced termination of pregnancy complicated by pelvic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609496007,Complication occurring during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609498008,Induced termination of pregnancy complicated by laceration of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609499000,Induced termination of pregnancy complicated by laceration of periurethral tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609500009,Induced termination of pregnancy complicated by perforation of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609501008,Induced termination of pregnancy complicated by perforation of broad ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609502001,Induced termination of pregnancy complicated by perforation of periurethral tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609503006,Induced termination of pregnancy complicated by urinary bladder damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609504000,Induced termination of pregnancy complicated by bowel damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609505004,Induced termination of pregnancy complicated by broad ligament damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609506003,Induced termination of pregnancy complicated by cardiac arrest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609507007,Induced termination of pregnancy complicated by cardiac failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609508002,Induced termination of pregnancy complicated by cervix damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609510000,Induced termination of pregnancy complicated by infectious disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609511001,Induced termination of pregnancy complicated by periurethral tissue damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609512008,Induced termination of pregnancy complicated by oliguria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609513003,Induced termination of pregnancy complicated by uterus damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609514009,Induced termination of pregnancy complicated by vaginal damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609515005,Epithelioid trophoblastic tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609516006,Gestational trophoblastic lesion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609519004,Gestational trophoblastic neoplasia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609522002,Disorder of extraembryonic membrane (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,609525000,Miscarriage of tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,698638005,Pregnancy induced hypertension with pulmonary edema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,698702007,Deep transverse arrest with persistent occipitoposterior position (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,698716002,Preterm spontaneous labor with preterm delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,698717006,Preterm spontaneous labor with term delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,699240001,Combined intrauterine and ovarian pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,699950009,Anti-D isoimmunization affecting pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,702452007,Quadruplet birth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,702453002,Quintuplet birth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,702454008,Sextuplet birth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,702711004,Mental disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,703309000,Familial gestational hyperthyroidism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,704175009,Acute chorioamnionitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,707207004,Incomplete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,707254000,Amniotic adhesion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,710944000,Inflammation of fetal umbilical artery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,712653003,Delivery by cesarean section for footling breech presentation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,712654009,Delivery by cesarean section for breech presentation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,712655005,Delivery by cesarean section for flexed breech presentation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713187004,Polyhydramnios due to maternal disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713191009,Polyhydramnios due to placental anomaly (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713192002,Oligohydramnios due to rupture of membranes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713202001,Antepartum stillbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713232009,Prolonged second stage of labor due to poor maternal effort (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713249002,Pyogenic granuloma of gingiva due to pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713575004,Dizygotic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,713576003,Monozygotic twin pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,715880002,Obstructed labor due to fetal abnormality (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,716379000,Acute fatty liver of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,719844007,Ulceration of umbilical cord and atresia of intestine syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,721153000,Congenital anomaly of mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,721166000,Human immunodeficiency virus complicating pregnancy childbirth and the puerperium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,721177006,Injury complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,721201001,Protozoal disease complicating pregnancy childbirth and the puerperium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,721567004,Primary malignant neoplasm of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,723541004,Disease of respiratory system complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,723665008,Vaginal bleeding complicating early pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724483001,Concern about body image related to pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724485008,Gestational proteinuria without hypertension (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724486009,Venous complication of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724488005,Preterm delivery following induction of labor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724489002,Preterm delivery following Cesarean section (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724490006,Intrapartum hemorrhage co-occurrent and due to obstructed labor with uterine rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724491005,Vesicovaginal fistula with involvement of urinary continence mechanism following normal delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724492003,Vesicovaginal fistula with involvement of urinary continence mechanism due to and following obstructed labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724493008,Vesicovaginal fistula with involvement of urinary continence mechanism following obstetric delivery procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724494002,Vesicovaginal fistula with involvement of urinary continence mechanism following termination of pregnancy procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,724497009,Disease of circulatory system complicating pregnancy childbirth and puerperium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,734857007,Injury of female genital organ due to obstetric procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,735488008,Pelvic infection due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,735489000,Genital tract infection due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,735490009,Genital tract infection due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,735491008,Pelvic infection due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,735492001,Obstructed labor due to shoulder dystocia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737320000,Delayed hemorrhage due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737321001,Excessive hemorrhage due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737322008,Delayed hemorrhage due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737323003,Excessive hemorrhage due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737324009,Embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737325005,Embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737327002,Renal failure following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737329004,Damage to pelvic organs and tissues following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737330009,Damage to pelvic organs and tissues following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737332001,Disorder of vein following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,737333006,Disorder of vein following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,739668007,Rupture of uterus due to obstetric procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,740597009,Umbilical cord complication during labor and delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,762612009,Quadruplets with all four stillborn (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,762613004,Quintuplets with all five stillborn (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,762614005,Sextuplets with all six stillborn (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,765182005,Pre-eclampsia in puerperium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,769087009,Vomiting during third trimester of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,785341006,Intrapartum hemorrhage due to leiomyoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,785867009,Excessive hemorrhage due to and following induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,785868004,Secondary hemorrhage due to and following induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,786067000,Intramural ectopic pregnancy of myometrium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,788120007,Antenatal depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,788290007,Hemangioma of skin in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,788960009,Infection of placenta caused by Mycobacterium tuberculosis complex (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,816148008,Disproportion between fetus and pelvis due to conjoined twins (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,816967008,Fetal distress due to augmentation of labor with oxytocin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,816969006,Inefficient uterine activity with oxytocin augmentation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,820947007,Third stage hemorrhage due to retention of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,833321003,Hydropic degeneration of chorionic villi (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,833332003,Incomplete amniotic membrane (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840365009,Placenta circummarginate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840625002,Gravid uterus at 12-16 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840626001,Gravid uterus at 16-20 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840627005,Gravid uterus at 20-24 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840628000,Gravid uterus at 24-28 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840629008,Gravid uterus at 28-32 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840630003,Gravid uterus at 32-34 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840631004,Gravid uterus at 34-36 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840632006,Gravid uterus at 36-38 weeks size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,840633001,Gravid uterus at term size (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860603002,Episiotomy wound (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860676006,Amniotic fluid embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860677002,Amniotic fluid embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860678007,Blood clot embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860679004,Blood clot embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860680001,Pulmonary embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860681002,Pulmonary embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860682009,Septic embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860683004,Septic embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860686007,Fat embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860687003,Fat embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860688008,Air embolism due to and following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,860689000,Air embolism due to and following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,863897005,Failed attempted termination of pregnancy complicated by acute necrosis of liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,866229004,Trauma to urethra and urinary bladder during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,879817000,Disproportion between fetus and pelvis due to fetal neoplasm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,879819002,Disproportion between fetus and pelvis due to fetal sacral teratoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,880126001,Disorder of amnion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,890096007,Pregnancy with implant contraceptive (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1010645004,Single umbilical cord artery type III (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1010646003,Single umbilical cord artery type IV (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1010652002,Single umbilical cord artery type II (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1010655000,Single umbilical cord artery type I (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1052284009,Restless leg syndrome in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1142030006,Nutritional anemia of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1142048002,Persistent gestational proteinuria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1142062009,Macrocytic anemia of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1142083003,Hemolytic anemia of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1142097006,Intermittent gestational proteinuria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1144435009,Varicose veins of perineum in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1144807000,Varicose veins of bilateral lower limbs in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148583001,Phlebitis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148584007,Venous thrombosis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148587000,Phlegmasia alba dolens in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148740009,Jorissenne sign (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148848009,Multiple pregnancy following assisted fertilization (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1148970006,Higher order multiple pregnancy due to and following medically assisted reproduction (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1149345007,Excessive weight gain measured during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1149472000,Thrombophlebitis of bilateral lower limbs in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1156027008,Thrombus of dural sinus in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1156031002,Venous varices in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1156100006,Pregnancy with normal glucose tolerance test (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1157306001,Embryo present in utero (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1162631002,Bilobate placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1173098001,Placenta previa lateralis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1179359005,Maternal epilepsy due to perinatal stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1179361001,Maternal perinatal sensorineural hearing loss (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1179363003,Maternal perinatal purpura (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1179366006,Maternal perinatal epistaxis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1179398000,Maternal perinatal infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1193533005,Injury of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1196980000,Injury of placenta due to cesarean section (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1197158009,Placental separation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1197159001,Placental separation with bleeding (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1197770002,Placental hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220564001,Incomplete induced termination of pregnancy complicated by shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220586000,Incomplete induced termination of pregnancy complicated by renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220625008,Incomplete induced termination of pregnancy complicated by metabolic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220626009,Incomplete induced termination of pregnancy complicated by genital-pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220630007,Incomplete induced termination of pregnancy complicated by embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220631006,Incomplete induced termination of pregnancy complicated by delayed or excessive hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220632004,Incomplete induced termination of pregnancy complicated by damage to pelvic organs or tissues (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220641009,Complete induced termination of pregnancy with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220645000,Shock due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220648003,Renal failure due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220651005,Metabolic disease due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220652003,Embolism due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220653008,Excessive hemorrhage due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220656000,Genital-pelvic infection due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220657009,Damage to pelvic organs and/or tissue due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1228877003,Amniotic fluid volume below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1230040001,Cornual placenta accreta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1230061008,Premature aging of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236949008,Finding of placental volume (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236950008,Placental volume within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236951007,Placental volume above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236952000,Placental volume below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237254001,Rupture of marginal sinus of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237361000,Pressure collapse of lung due to anesthesia during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237363002,Pressure collapse of lung due to anesthesia during labor and delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1251634006,Excessive retraction of upper uterine segment (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1252649001,Normal retraction of upper uterine segment (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1252747005,Polymorphic eruption of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1258895002,Entanglement and compression of umbilical cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1258896001,Amniotic fluid pulmonary embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1259016008,Rupture of uterus following obstructed labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263928008,Septic shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263929000,Septic shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263942000,Shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263943005,Shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263945003,Postoperative shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263946002,Postoperative shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263947006,Uremia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263948001,Uremia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263949009,Oliguria following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263950009,Oliguria following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263953006,Renal tubular necrosis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263954000,Renal tubular necrosis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263955004,Acute renal failure following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263956003,Acute renal failure following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263979002,Sepsis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264020006,Sepsis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264130004,Tetanus following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264131000,Tetanus following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264132007,Salpingitis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264133002,Salpingitis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264134008,Endometritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264135009,Endometritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264136005,Parametritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264137001,Parametritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264138006,Cerebral anoxia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264139003,Cerebral anoxia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264140001,Afibrinogenemia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264141002,Afibrinogenemia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264142009,Damage to large intestine following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264143004,Damage to large intestine following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264144005,Damage to vagina following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264145006,Damage to vagina following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264146007,Damage to uterus following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264147003,Damage to uterus following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264148008,Damage to cervix following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264149000,Damage to cervix following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264150000,Damage to urinary bladder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264151001,Damage to urinary bladder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264152008,Pelvic peritonitis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264153003,Pelvic peritonitis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264154009,Metabolic disorder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264155005,Metabolic disorder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264156006,Electrolyte imbalance following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264157002,Electrolyte imbalance following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264158007,Disorder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264159004,Disorder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264160009,Salpingo-oophoritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264161008,Salpingo-oophoritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264232003,Defibrination syndrome following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264233008,Defibrination syndrome following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264234002,Intravascular hemolysis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264235001,Intravascular hemolysis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264236000,Urinary tract infection following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264237009,Urinary tract infection following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264238004,Damage to broad ligament following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264239007,Damage to broad ligament following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264240009,Damage to periurethral tissue following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264241008,Damage to periurethral tissue following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264255000,Complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264269000,Chorioamnionitis caused by Bacteria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264270004,Chorioamnionitis caused by virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264271000,Chorioamnionitis caused by fungus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264304005,Acute necrosis of liver following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264435003,Acute necrosis of liver following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1268535008,Obstructed labor due to interlocked twins (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269074003,Maternal disorder during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269075002,Maternal disorder during labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269247005,Infection of female genital tract due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269249008,Infection of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269255003,Damage to organ of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269256002,Damage to tissue of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269273000,Malignancy diagnosed during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1287713006,Iron deficiency anemia during maternal intrapartum period (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290152008,Singleton pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290936006,Plain X-ray pelvimetry normal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290937002,Plain X-ray pelvimetry abnormal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1296685008,Nausea and vomiting in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1300203003,Pregnancy resulting from natural conception (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1303255001,Medium risk pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1303872001,Fetal twin anemia-polycythemia sequence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1335934009,Cesarean scar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1339000004,Group B streptococcus carrier in mother during childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1340042007,Chronic intervillositis of unknown etiology (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1340166003,Squatting during delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,171000119107,"Maternal obesity complicating pregnancy, childbirth and the puerperium, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,521000119104,"Acute cystitis in pregnancy, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,541000119105,"Hypertension complicating pregnancy, childbirth and the puerperium, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1031000119109,Insufficient prenatal care (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1621000119101,Chlamydia trachomatis infection in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,6251000119101,Induced termination of pregnancy in first trimester (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,6261000119104,Induced termination of pregnancy in second trimester (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,9111000119104,Musculoskeletal problem in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,9121000119106,Low back pain in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10211000132109,Perinatal depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10231000132102,In-vitro fertilization pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,12271000132101,Maternal infection caused by Streptococcus agalactiae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16101000119107,Incomplete induced termination of pregnancy with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16111000119105,Incomplete spontaneous abortion due to hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16271000119108,Pyelonephritis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,18491000119109,Psychological disorder during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,22281000119101,Post-term pregnancy of 40 to 42 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,23431000119106,Rupture of uterus during labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,31041000119106,Obstructed labor due to deep transverse arrest and persistent occipitoposterior position (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,31801000146106,Pre-existing maternal disease complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,32801000119106,Infectious disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,35381000119101,Quadruplet pregnancy with loss of one or more fetuses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,36801000119105,Continuing triplet pregnancy after spontaneous abortion of one or more fetuses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,38451000119105,Failed attempted vaginal birth after previous cesarean section (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39101000119109,Pregnancy with isoimmunization from irregular blood group incompatibility (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39121000119100,Pelvic mass in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39341000119109,Infection of surgical incision wound following cesarean section (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39791000119102,Disorder of breast during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,40691000119104,Infectious disease of mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,40801000119106,Gestational diabetes mellitus complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,71151000119105,Umbilical cord three times around neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72161000119100,Antiphospholipid syndrome in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72171000119106,Heart murmur during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72271000119100,Hyperthyroidism in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72291000119104,Cardiac arrhythmia during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72301000119103,Asthma in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72321000119107,Sickle cell trait in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72331000119105,Thalassemia in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,82771000119102,Hypertension complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,88201000119101,Failure of cervical dilation due to primary uterine inertia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94611000119105,Gallbladder calculus during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94631000119100,Depressive disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94641000119109,Anxiety in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94821000119104,First trimester Down screening blood test abnormal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,97101000119105,Viral disease of mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100801000119107,Maternal tobacco use in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100841000119109,Previous bariatric surgery complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100941000119100,Epilepsy in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,104011000119109,Genital herpes simplex in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,106281000119103,Pre-existing diabetes mellitus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,110081000119109,Bacterial vaginosis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,110091000119107,Candidiasis of vagina in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,114881000119108,Maternal gonorrhea during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,117591000119103,Urinary frequency during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,117611000119108,Urinary urgency during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,118781000119108,Pre-existing hypertensive chronic kidney disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,119901000119109,Hemorrhage co-occurrent and due to partial placenta previa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,120001000119107,Group B streptococcus carrier complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,134781000119106,High risk pregnancy due to recurrent miscarriage (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,137701000119106,Antepartum septicemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,151441000119105,Twin live born in hospital by vaginal delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,152231000119106,Pregnancy not yet confirmed (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,433601000124106,Gestation period greater than or equal to 37 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451891000124103,Tobacco use in mother complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451911000124101,Tobacco smoking in mother complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451921000124109,Tobacco smoking in mother complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,457811000124103,Normal pregnancy in primigravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,457821000124106,Normal pregnancy in multigravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567941000005109,Pregnancy with certain dates (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567961000005108,Antenatal ultrasound scan in first trimester wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567981000005100,Antenatal ultrasound scan in second trimester wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568011000005108,Antenatal risk assessment wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568141000005106,Pregnancy following cone biopsy of uterine cervix (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568171000005100,Drinker of alcohol before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568191000005104,Drug misuse before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598071000005103,Stopped smoking in first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598081000005100,Stopped smoking after first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598091000005102,Nicotine user before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598221000005106,Nicotine user during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598241000005101,Stopped using nicotine in first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598251000005104,Stopped using nicotine after first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,650991000124104,Victim of intimate partner abuse during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658001000005107,Position of placenta in anterior wall of fundal uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658011000005105,Position of placenta low in anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658021000005104,Position of placenta in posterior wall of fundal uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658031000005101,Position of placenta low in posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658041000005109,Position of placenta in left anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658051000005106,Position of placenta in right anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658061000005108,Position of placenta in left posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658071000005103,Position of placenta in right posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658081000005100,Position of placenta in left side of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658091000005102,Position of placenta in right side of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658101000005106,Position of placenta in fundus uteri (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,813541000000100,Pregnancy resulting from assisted conception (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,858901000000108,Pregnancy of unknown location (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1323351000000104,First trimester bleeding (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10629511000119102,Rhinitis of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741751000119100,Anemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741871000119101,Alcohol dependence in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741911000119103,Abnormality of cervix uteri affecting pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10742121000119104,Asthma in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10742471000119108,Previous bariatric surgery in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743001000119103,Anxiety disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743121000119108,Aortic valve disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743651000119105,Inflammation of cervix in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743741000119103,Cardiac arrhythmia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743831000119100,Neoplasm of uterus affecting pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743881000119104,Suspected fetal abnormality affecting management of mother (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10745231000119102,Cardiac arrest due to administration of anesthesia in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10745291000119103,Malignant neoplastic disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10746341000119109,Acquired immune deficiency syndrome complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749581000119100,Blood coagulation disorder complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749641000119106,Blood coagulation disorder complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749811000119108,Obstetric anesthesia with central nervous system complication in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749871000119100,Malignant neoplastic disease in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750051000119105,Chlamydia trachomatis infection in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750111000119108,Breast lump in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750161000119106,Cholestasis of pregnancy complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750551000119100,Obesity in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750801000119102,False labor before 37 completed weeks of gestation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750951000119106,Epilepsy in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750991000119101,Cyst of ovary in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751351000119104,Sepsis due to ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751471000119101,Nutritional deficiency in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751511000119105,Obstructed labor due to incomplete rotation of fetal head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751581000119104,Obstructed labor due to disproportion between fetus and pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751631000119101,Obstructed labor due to abnormality of maternal pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751701000119102,Spontaneous onset of labor between 37 and 39 weeks gestation with planned cesarean section (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751771000119107,Placental abruption due to afibrinogenemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752251000119103,Galactorrhea in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752641000119102,Eclampsia with pre-existing hypertension in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752771000119100,Renal failure after ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753101000119102,Heart disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753181000119105,Premature rupture of membranes in full term pregnancy with onset of labor within 24 hours of rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753231000119104,Premature rupture of membranes in full term pregnancy with onset of labor more than 24 hours after rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753281000119103,Premature rupture of membranes in full term pregnancy with onset of labor unknown (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753491000119101,Gestational diabetes mellitus in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754031000119105,Gonorrhea in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754331000119108,Air embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754701000119100,Genital herpes simplex in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754781000119108,Gallbladder calculus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754881000119104,Diabetes mellitus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754921000119106,Hyperthyroidism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10755671000119100,Human immunodeficiency virus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10755951000119102,Heart murmur in mother in childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756101000119107,Group B streptococcus infection in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756261000119102,Physical abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756301000119105,Physical abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757401000119104,Pre-existing hypertensive heart and chronic kidney disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757441000119102,Pre-existing hypertensive heart disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757481000119107,Pre-existing hypertensive heart and chronic kidney disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759031000119106,Pre-existing hypertensive heart disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759111000119102,Viral hepatitis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759151000119101,Viral hepatitis in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759231000119102,Salpingo-oophoritis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759311000119104,Pulmonary embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759351000119103,Sickle cell anemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759401000119105,Sickle cell trait in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759611000119105,Preterm premature rupture of membranes with onset of labor later than 24 hours after rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759661000119108,Preterm premature rupture of membranes with onset of labor unknown (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759711000119103,Preterm premature rupture of membranes with onset of labor within 24 hours of rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759761000119100,Rubella in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759841000119105,Sexually transmitted infectious disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759881000119100,Tuberculosis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759921000119107,Syphilis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759961000119102,Viral disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760001000119100,Thyroid disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760041000119103,Thyroiditis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760081000119108,Pyemic and septic embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760131000119108,Pyemic and septic embolism in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760221000119101,Uterine prolapse in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760261000119106,Uterine laceration during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760301000119103,Retraction of nipple during lactation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760341000119101,Retraction of nipple in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760381000119106,Thyroiditis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760421000119102,Psychotic disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760461000119107,Psychotic disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760541000119109,Traumatic injury to vulva during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760581000119104,Pain in round ligament in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760661000119109,"Triplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760701000119102,"Quadruplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760741000119100,"Quadruplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760781000119105,"Quintuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760821000119100,"Quintuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760861000119105,"Sextuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760901000119104,"Sextuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760941000119102,Psychological abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760981000119107,Psychological abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761021000119102,Sexual abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761061000119107,Sexual abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761101000119105,Vacuum assisted vaginal delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761141000119107,Preterm labor in second trimester with preterm delivery in second trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761191000119104,Preterm labor in third trimester with preterm delivery in third trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761241000119104,Preterm labor with preterm delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761341000119105,Preterm labor without delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761391000119102,Tobacco use in mother complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10805641000119102,Congenital cardiovascular anomaly in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10806241000119108,Thalassemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10807061000119103,Liver disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10808861000119105,Maternal distress during childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809061000119106,Malaria in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809101000119109,Hypothyroidism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809641000119100,Mitral valve disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811121000119102,Major depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811161000119107,Major depressive disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811201000119102,Mental disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10812041000119103,Urinary tract infection due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10812131000119108,Malnutrition in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835621000119104,Congenital anomaly of vagina in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835701000119102,Congenital anomaly of vulva in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835781000119105,Amniotic fluid embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835871000119104,Depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835971000119109,Anti-A sensitization in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10836071000119101,Dislocation of symphysis pubis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,11718971000119100,Diarrhea in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,12275071000119109,Conjoined twin pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,13016151000119101,Constipation during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,15643101000119103,Gastroesophageal reflux disease in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,15750121000119108,Pre-existing severe obesity in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16316841000119100,Purulent mastitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16320551000119109,Bleeding from female genital tract co-occurrent with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16468121000119106,Zika virus infection during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16623921000119105,Viral hepatitis C in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698501000119109,Cyst of right ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698541000119106,Cyst of left ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698581000119101,Cyst of bilateral ovaries during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16833081000119100,Dyspepsia during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836261000119107,Ectopic pregnancy of left ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836351000119100,Ectopic pregnancy of right ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836391000119105,Pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836431000119100,Ruptured tubal pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836571000119103,Ruptured tubal pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836811000119108,Miscarriage of left tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836851000119109,Miscarriage of right tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836891000119104,Pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16859701000119109,Chronic hepatitis B during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16862491000119106,Abscess of skin during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16896421000119107,Prediabetes in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,104758671000119101,Chronic deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,138841771000119103,Chronic candidiasis of vagina during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,159139031000119104,Candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,292834071000119104,Acute deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,501661611000119107,Latent genital herpes simplex during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,812500731000119109,Chronic candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,894362851000119109,Disease caused by severe acute respiratory syndrome coronavirus 2 during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.001,[Z44.001] Encounter for fitting and adjustment of unspecified right artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.002,[Z44.002] Encounter for fitting and adjustment of unspecified left artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.009,"[Z44.009] Encounter for fitting and adjustment of unspecified artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.011,[Z44.011] Encounter for fitting and adjustment of complete right artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.012,[Z44.012] Encounter for fitting and adjustment of complete left artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.019,"[Z44.019] Encounter for fitting and adjustment of complete artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.021,[Z44.021] Encounter for fitting and adjustment of partial artificial right arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.022,[Z44.022] Encounter for fitting and adjustment of partial artificial left arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.029,"[Z44.029] Encounter for fitting and adjustment of partial artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.101,[Z44.101] Encounter for fitting and adjustment of unspecified right artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.102,[Z44.102] Encounter for fitting and adjustment of unspecified left artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.109,"[Z44.109] Encounter for fitting and adjustment of unspecified artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.111,[Z44.111] Encounter for fitting and adjustment of complete right artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.112,[Z44.112] Encounter for fitting and adjustment of complete left artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.119,"[Z44.119] Encounter for fitting and adjustment of complete artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.121,[Z44.121] Encounter for fitting and adjustment of partial artificial right leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.122,[Z44.122] Encounter for fitting and adjustment of partial artificial left leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.129,"[Z44.129] Encounter for fitting and adjustment of partial artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.30,"[Z44.30] Encounter for fitting and adjustment of external breast prosthesis, unspecified breast",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.31,[Z44.31] Encounter for fitting and adjustment of external right breast prosthesis,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.32,[Z44.32] Encounter for fitting and adjustment of external left breast prosthesis,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.8,[Z44.8] Encounter for fitting and adjustment of other external prosthetic devices,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.9,[Z44.9] Encounter for fitting and adjustment of unspecified external prosthetic device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.1,[Z45.1] Encounter for adjustment and management of infusion pump,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.31,[Z45.31] Encounter for adjustment and management of implanted visual substitution device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.320,[Z45.320] Encounter for adjustment and management of bone conduction device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.321,[Z45.321] Encounter for adjustment and management of cochlear device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.328,[Z45.328] Encounter for adjustment and management of other implanted hearing device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.41,[Z45.41] Encounter for adjustment and management of cerebrospinal fluid drainage device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.42,[Z45.42] Encounter for adjustment and management of neurostimulator,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.49,[Z45.49] Encounter for adjustment and management of other implanted nervous system device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.811,[Z45.811] Encounter for adjustment or removal of right breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.812,[Z45.812] Encounter for adjustment or removal of left breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.819,[Z45.819] Encounter for adjustment or removal of unspecified breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.82,[Z46.82] Encounter for fitting and adjustment of non-vascular catheter,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.89,[Z46.89] Encounter for fitting and adjustment of other specified devices,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.9,[Z46.9] Encounter for fitting and adjustment of unspecified device,ICD10CM,2.16.840.1.113883.6.90
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0022,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0190,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0191,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0192,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0193,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0194,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0199,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0210,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0211,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0212,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0213,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0214,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0215,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0217,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0218,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021F,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021G,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021H,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021I,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021J,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021K,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021M,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021O,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Q,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021X,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Y,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Z,,UBTOB,2.16.840.1.113883.6.301.1
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00210,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00211,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00216,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00350,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00404,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00406,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00500,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00540,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00541,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00542,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00546,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00548,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00560,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00561,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00562,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00563,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00566,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00567,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00580,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00600,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00604,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00620,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00622,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00625,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00626,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00670,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00792,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00794,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00796,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00844,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00846,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00848,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00860,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00862,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00864,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00865,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00866,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00868,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00880,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00904,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00906,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00908,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00926,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00928,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00932,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00934,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00936,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,00944,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01130,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01140,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01150,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01173,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01210,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01212,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01214,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01215,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01230,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01232,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01234,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01270,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01272,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01274,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01360,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01392,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01400,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01402,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01404,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01480,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01482,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01484,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01486,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01500,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01638,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01654,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01656,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,01760,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11450,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11451,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11462,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11463,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11470,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11471,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11771,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11772,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11960,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11970,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,11971,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,13160,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14000,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14001,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14020,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14021,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14040,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14041,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14060,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14061,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14300,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14301,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,14350,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15050,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15100,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15110,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15115,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15120,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15130,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15135,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15150,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15155,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15170,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15175,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15200,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15220,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15240,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15260,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15300,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15320,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15330,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15335,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15350,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15360,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15365,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15400,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15420,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15430,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15570,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15572,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15574,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15576,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15600,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15610,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15620,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15630,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15650,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15731,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15732,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15734,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15736,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15738,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15740,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15750,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15756,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15757,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15758,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15760,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15770,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15780,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15781,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15782,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15783,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15788,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15789,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15792,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15793,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15810,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15811,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15819,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15820,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15821,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15822,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15823,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15830,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15831,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15832,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15833,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15834,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15835,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15836,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15837,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15838,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15839,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15840,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15841,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15842,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15845,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15920,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15922,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15931,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15933,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15934,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15935,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15936,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15937,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15940,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15941,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15944,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15945,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15946,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15950,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15951,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15952,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15953,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15956,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,15958,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,17106,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,17107,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,17108,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19020,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19110,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19112,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19120,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19125,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19140,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19160,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19162,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19180,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19182,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19200,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19220,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19240,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19260,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19271,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19272,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19300,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19301,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19302,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19303,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19304,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19305,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19306,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19307,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19316,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19318,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19324,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19325,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19328,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19330,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19340,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19342,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19350,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19355,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19357,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19361,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19364,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19366,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19367,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19368,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19369,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19370,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19371,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,19380,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20150,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20661,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20662,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20663,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20664,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20680,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20690,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20692,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20693,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20694,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20696,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20802,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20805,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20808,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20816,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20822,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20824,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20827,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20838,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20910,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20912,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20920,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20922,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20924,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20926,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20955,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20956,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20957,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20962,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20969,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20970,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20972,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,20973,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21010,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21011,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21012,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21013,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21014,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21015,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21016,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21025,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21026,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21029,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21030,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21031,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21032,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21034,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21040,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21044,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21045,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21046,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21047,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21048,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21049,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21050,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21060,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21070,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21073,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21077,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21079,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21080,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21081,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21082,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21083,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21084,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21086,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21087,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21088,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21100,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21110,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21120,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21121,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21122,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21123,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21125,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21127,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21137,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21138,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21139,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21141,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21142,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21143,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21145,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21146,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21147,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21150,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21151,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21154,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21155,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21159,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21160,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21172,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21175,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21179,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21180,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21181,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21182,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21183,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21184,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21188,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21193,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21194,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21195,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21196,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21198,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21199,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21206,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21208,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21209,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21210,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21215,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21230,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21235,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21240,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21242,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21243,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21244,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21245,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21246,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21247,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21248,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21249,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21255,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21256,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21260,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21261,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21263,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21267,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21268,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21270,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21275,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21280,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21282,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21295,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21296,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21325,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21330,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21335,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21336,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21337,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21338,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21339,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21340,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21343,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21344,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21345,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21346,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21347,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21348,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21360,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21365,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21366,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21385,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21386,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21387,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21390,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21395,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21400,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21401,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21406,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21407,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21408,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21421,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21422,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21423,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21431,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21432,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21433,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21435,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21436,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21440,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21445,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21450,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21451,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21452,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21453,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21454,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21461,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21462,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21465,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21470,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21485,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21490,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21493,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21494,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21495,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21497,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21501,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21502,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21510,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21552,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21554,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21555,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21556,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21557,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21558,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21600,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21610,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21615,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21616,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21620,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21627,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21630,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21632,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21685,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21700,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21705,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21720,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21725,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21740,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21742,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21743,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21750,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21800,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21805,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21810,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21820,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21825,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21925,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21930,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21931,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21932,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21933,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21935,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,21936,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22010,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22015,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22100,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22101,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22102,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22110,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22112,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22114,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22206,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22207,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22210,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22212,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22214,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22220,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22222,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22224,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22305,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22310,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22315,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22318,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22319,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22325,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22326,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22327,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22532,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22533,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22548,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22551,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22554,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22556,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22558,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22586,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22590,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22595,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22600,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22610,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22612,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22630,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22633,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22800,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22802,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22804,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22808,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22810,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22812,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22818,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22819,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22830,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22849,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22850,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22852,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22855,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22856,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22857,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22861,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22862,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22864,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22865,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22900,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22901,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22902,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22903,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22904,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,22905,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23000,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23020,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23035,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23040,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23044,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23066,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23071,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23073,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23075,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23076,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23077,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23078,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23100,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23101,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23105,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23106,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23107,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23120,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23125,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23130,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23140,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23145,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23146,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23150,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23155,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23156,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23170,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23172,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23174,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23180,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23182,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23184,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23190,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23195,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23200,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23210,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23220,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23221,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23222,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23331,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23332,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23333,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23334,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23335,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23395,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23397,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23400,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23405,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23406,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23410,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23412,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23415,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23420,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23430,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23440,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23450,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23455,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23460,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23462,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23465,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23466,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23470,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23472,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23473,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23474,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23480,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23485,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23490,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23491,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23500,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23505,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23515,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23520,,CPT,2.16.840.1.113883.6.12
+Surgery Procedure,2.16.840.1.113883.3.464.1004.2223,23525,,CPT,2.16.840.1.113883.6.12

@@ -1,0 +1,79 @@
+Value Set Name,Change,Description,Revised
+Adult Hepatitis B Immunization (3 dose),Added to,AIS-E,2025-03-31
+Adult Hepatitis B Vaccine Procedure (2 dose),Added to,AIS-E,2025-03-31
+Adult Hepatitis B Vaccine Procedure (3 dose),Added to,AIS-E,2025-03-31
+Autonomous Eye Exam Result or Finding,Added to,EED,2025-03-31
+Behavioral Healthcare Setting,Added to,FUM,
+Beta-Blocker Contraindications,Renamed to,Beta Blocker Contraindications,
+Chronic Heart Failure,Renamed to,Heart Failure and Cardiomyopathy,2025-03-31
+Diabetic Retinal Screening,Deleted from ,EED,
+Diabetic Retinopathy Severity Level,Added to ,EED,
+Diagnosis History That May Warrant Imaging,Added to,LBP,
+Fragility Fractures,Deleted from,LBP,
+Heart Failure Diagnosis,Deleted from,FMC,2025-03-31
+Hepatitis B,Added to,AIS-E,2025-03-31
+Hepatitis B Immunity Finding,Added to,AIS-E,2025-03-31
+Hepatitis B Immunization,Added to,AIS-E,2025-03-31
+Hepatitis B Prevaccination Tests,Added to,AIS-E,2025-03-31
+Hepatitis B Tests With Threshold of 10,Added to,AIS-E,2025-03-31
+Hepatitis B Vaccine Procedure,Added to,AIS-E,2025-03-31
+Herpes Zoster Live Vaccine Procedure,Deleted from,AIS-E,2025-03-31
+History of Kidney Transplant,Deleted from,LBP,
+History of Kidney Transplant,Renamed to,History of Nephrectomy or Kidney Transplant,2025-03-31
+History of Malignant Neoplasm,Deleted from,LBP,
+History of Organ Transplant Other Than Kidney,Deleted from,LBP,
+HIV,Deleted from,LBP,
+Inpatient Stay,Deleted from,FUM,
+Inpatient Stay Except Psychiatric Residential,Added to,FUH,
+Inpatient Stay Except Psychiatric Residential,Added to,FUM,
+Intentional Self-Harm,Renamed to,Intentional Self Harm,
+IV Drug Abuse,Deleted from,LBP,
+Kidney Transplant,Deleted from,LBP,
+LDL-C Lab Test,Renamed to,LDL C Lab Test,
+LDL-C Test Result or Finding,Renamed to,LDL C Test Result or Finding,
+Long Acting Injections 14 Days Supply,Added to,SAA,2025-03-31
+Long-Acting Injections,Renamed to,Long Acting Injections,
+Long-Acting Osteoporosis Medications,Deleted from,LBP,
+Long-Acting Osteoporosis Medications,Renamed to,Long Acting Osteoporosis Medications,
+Lumbar Surgery,Deleted from,LBP,
+Malignant Neoplasms,Deleted from,LBP,
+Mental Illness,Added to,FUH,
+Mental Illness,Added to ,FUM,
+Mental Illness and Intentional Self-Harm,Deleted from,FUH,
+Mental Illness and Intentional Self-Harm,Deleted from,FUM,
+Muscular Reactions to Statins,Added to,SPC,
+Muscular Reactions to Statins,Added to,SPD,
+Neurologic Impairment,Deleted from,LBP,
+Newborn Hepatitis B Vaccine Administered,Deleted from,CIS-E,
+Non-live Births,Renamed to,Non Live Births,
+Non-residential Substance Abuse Treatment Facility POS,Renamed to,Nonresidential Substance Abuse Treatment Facility POS,
+Online Assessments,Added to,W30,
+Online Assessments,Added to,WCV,
+Organ and Bone Marrow Transplants,Added to,CIS-E,
+Organ Transplant Other Than Kidney,Deleted from,LBP,
+Osteoporosis Medication Therapy,Deleted from,LBP,
+Other Malignant Neoplasm of Skin,Deleted from,LBP,
+Other Neoplasms,Deleted from,LBP,
+"Outpatient, ED and Telehealth",Added to,OMW,2025-03-31
+"Outpatient, ED, Telehealth, Physical Therapy, Osteopathic and Chiropractic Manipulative Treatment",Deleted from,LBP,
+Pain Assessment,Deleted from,COA,
+Peer Support Services,Added to,FUH,
+Peer Support Services,Added to ,FUM,
+Potentially Planned Post-Acute Care Hospitalization,Renamed to,Potentially Planned Post Acute Care Hospitalization,
+Pressure Ulcer,Renamed to,Severe Pressure Ulcers,2025-03-31
+Procedure History That May Warrant Imaging,Added to,LBP,
+Psychiatric Collaborative Care Management,Added to ,FUM,
+Recent Diagnoses That May Warrant Imaging,Added to,LBP,
+Recent Injuries That May Warrant Imaging,Added to,LBP,
+Residential Behavioral Health Treatment,Added to,FUH,
+Residential Behavioral Health Treatment,Added to ,FUM,
+Retinal Eye Exams,Added to,EED,
+Retinal Imaging,Added to,EED,
+Spinal Infection,Deleted from,LBP,
+Spondylopathy,Deleted from,LBP,
+Stage I-IV Kidney Disease,Renamed to,Stage I Through IV Kidney Disease,
+Telehealth POS,Added to,W30,
+Telehealth POS,Added to,WCV,
+Telephone Visits,Added to,W30,
+Telephone Visits,Added to,WCV,
+Trauma,Deleted from,LBP,

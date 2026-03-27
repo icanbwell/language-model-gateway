@@ -1,0 +1,177 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,401267002,Telephone triage encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,406547006,Urgent follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,870191006,Follow up for depression (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0510,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0513,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0516,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0517,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0519,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0520,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0521,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0522,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0523,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0526,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0527,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0528,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0529,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0982,,UBREV,2.16.840.1.113883.6.301.3
+Follow Up Visit,2.16.840.1.113883.3.464.1004.1385,0983,,UBREV,2.16.840.1.113883.6.301.3
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2137-8,Spaniard,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2138-6,Andalusian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2139-4,Asturian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2140-2,Castillian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2141-0,Catalonian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2142-8,Belearic Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2143-6,Gallego,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2144-4,Valencian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2145-1,Canarian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2146-9,Spanish Basque,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2148-5,Mexican,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2149-3,Mexican American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2150-1,Mexicano,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2151-9,Chicano,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2152-7,La Raza,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2153-5,Mexican American Indian [Ethnicity],CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2155-0,Central American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2156-8,Costa Rican,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2157-6,Guatemalan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2158-4,Honduran,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2159-2,Nicaraguan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2160-0,Panamanian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2161-8,Salvadoran,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2162-6,Central American Indian [Ethnicity],CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2163-4,Canal Zone,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2165-9,South American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2166-7,Argentinean,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2167-5,Bolivian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2168-3,Chilean,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2169-1,Colombian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2170-9,Ecuadorian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2171-7,Paraguayan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2172-5,Peruvian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2173-3,Uruguayan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2174-1,Venezuelan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2175-8,South American Indian [Ethnicity],CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2176-6,Criollo,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2178-2,Latin American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2180-8,Puerto Rican,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2182-4,Cuban,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368,2184-0,Dominican [Ethnicity],CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2078-4,Polynesian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2079-2,Native Hawaiian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2080-0,Samoan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2081-8,Tahitian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2082-6,Tongan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2083-4,Tokelauan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2085-9,Micronesian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2086-7,Guamanian or Chamorro,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2087-5,Guamanian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2088-3,Chamorro,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2089-1,Mariana Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2090-9,Marshallese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2091-7,Palauan,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2092-5,Carolinian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2093-3,Kosraean,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2094-1,Pohnpeian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2095-8,Saipanese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2096-6,Kiribati,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2097-4,Chuukese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2098-2,Yapese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2100-6,Melanesian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2101-4,Fijian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2102-2,Papua New Guinean,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2103-0,Solomon Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2104-8,New Hebrides,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369,2500-7,Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+Symptoms of Depression,2.16.840.1.113883.3.464.1004.2392,394924000,Symptoms of depression (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Symptoms of Depression,2.16.840.1.113883.3.464.1004.2392,788976000,Leaden paralysis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2108-9,European,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2109-7,Armenian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2110-5,English,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2111-3,French,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2112-1,German,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2113-9,Irish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2114-7,Italian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2115-4,Polish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2116-2,Scottish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2118-8,Middle Eastern or North African,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2119-6,Assyrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2120-4,Egyptian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2121-2,Iranian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2122-0,Iraqi,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2123-8,Lebanese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2124-6,Palestinian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2125-3,Syrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2126-1,Afghanistani,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2127-9,Israeli,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2129-5,Arab,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,Z71.82,[Z71.82] Exercise counseling,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,55758-7,Patient Health Questionnaire 2 item (PHQ-2) total score [Reported],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,71777-7,Total score [M3],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,71965-8,PROMIS-29 Depression score T-score,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89205-9,Center for Epidemiologic Studies Depression Scale-Revised total score [CESD-R],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89208-3,Beck Depression Inventory Fast Screen total score [BDI],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89209-1,Beck Depression Inventory II total score [BDI],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,90221-3,Total score [CUDOS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,90853-3,Final score [DUKE-AD],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99046-5,Total score [EPDS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

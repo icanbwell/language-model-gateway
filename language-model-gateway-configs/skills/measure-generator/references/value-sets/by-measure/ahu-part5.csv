@@ -1,0 +1,1347 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.442,[I82.442] Acute embolism and thrombosis of left tibial vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.443,"[I82.443] Acute embolism and thrombosis of tibial vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.449,[I82.449] Acute embolism and thrombosis of unspecified tibial vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.45,[I82.45] Acute embolism and thrombosis of peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.451,[I82.451] Acute embolism and thrombosis of right peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.452,[I82.452] Acute embolism and thrombosis of left peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.453,"[I82.453] Acute embolism and thrombosis of peroneal vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.459,[I82.459] Acute embolism and thrombosis of unspecified peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.46,[I82.46] Acute embolism and thrombosis of calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.461,[I82.461] Acute embolism and thrombosis of right calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.462,[I82.462] Acute embolism and thrombosis of left calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.463,"[I82.463] Acute embolism and thrombosis of calf muscular vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.469,[I82.469] Acute embolism and thrombosis of unspecified calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.491,[I82.491] Acute embolism and thrombosis of other specified deep vein of right lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.492,[I82.492] Acute embolism and thrombosis of other specified deep vein of left lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.493,"[I82.493] Acute embolism and thrombosis of other specified deep vein of lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.499,[I82.499] Acute embolism and thrombosis of other specified deep vein of unspecified lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Y1,[I82.4Y1] Acute embolism and thrombosis of unspecified deep veins of right proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Y2,[I82.4Y2] Acute embolism and thrombosis of unspecified deep veins of left proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Y3,"[I82.4Y3] Acute embolism and thrombosis of unspecified deep veins of proximal lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Y9,[I82.4Y9] Acute embolism and thrombosis of unspecified deep veins of unspecified proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Z1,[I82.4Z1] Acute embolism and thrombosis of unspecified deep veins of right distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Z2,[I82.4Z2] Acute embolism and thrombosis of unspecified deep veins of left distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Z3,"[I82.4Z3] Acute embolism and thrombosis of unspecified deep veins of distal lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.4Z9,[I82.4Z9] Acute embolism and thrombosis of unspecified deep veins of unspecified distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.501,[I82.501] Chronic embolism and thrombosis of unspecified deep veins of right lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.502,[I82.502] Chronic embolism and thrombosis of unspecified deep veins of left lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.503,"[I82.503] Chronic embolism and thrombosis of unspecified deep veins of lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.509,[I82.509] Chronic embolism and thrombosis of unspecified deep veins of unspecified lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.511,[I82.511] Chronic embolism and thrombosis of right femoral vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.512,[I82.512] Chronic embolism and thrombosis of left femoral vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.513,"[I82.513] Chronic embolism and thrombosis of femoral vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.519,[I82.519] Chronic embolism and thrombosis of unspecified femoral vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.521,[I82.521] Chronic embolism and thrombosis of right iliac vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.522,[I82.522] Chronic embolism and thrombosis of left iliac vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.523,"[I82.523] Chronic embolism and thrombosis of iliac vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.529,[I82.529] Chronic embolism and thrombosis of unspecified iliac vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.531,[I82.531] Chronic embolism and thrombosis of right popliteal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.532,[I82.532] Chronic embolism and thrombosis of left popliteal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.533,"[I82.533] Chronic embolism and thrombosis of popliteal vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.539,[I82.539] Chronic embolism and thrombosis of unspecified popliteal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.541,[I82.541] Chronic embolism and thrombosis of right tibial vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.542,[I82.542] Chronic embolism and thrombosis of left tibial vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.543,"[I82.543] Chronic embolism and thrombosis of tibial vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.549,[I82.549] Chronic embolism and thrombosis of unspecified tibial vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.55,[I82.55] Chronic embolism and thrombosis of peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.551,[I82.551] Chronic embolism and thrombosis of right peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.552,[I82.552] Chronic embolism and thrombosis of left peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.553,"[I82.553] Chronic embolism and thrombosis of peroneal vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.559,[I82.559] Chronic embolism and thrombosis of unspecified peroneal vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.56,[I82.56] Chronic embolism and thrombosis of calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.561,[I82.561] Chronic embolism and thrombosis of right calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.562,[I82.562] Chronic embolism and thrombosis of left calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.563,"[I82.563] Chronic embolism and thrombosis of calf muscular vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.569,[I82.569] Chronic embolism and thrombosis of unspecified calf muscular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.591,[I82.591] Chronic embolism and thrombosis of other specified deep vein of right lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.592,[I82.592] Chronic embolism and thrombosis of other specified deep vein of left lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.593,"[I82.593] Chronic embolism and thrombosis of other specified deep vein of lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.599,[I82.599] Chronic embolism and thrombosis of other specified deep vein of unspecified lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Y1,[I82.5Y1] Chronic embolism and thrombosis of unspecified deep veins of right proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Y2,[I82.5Y2] Chronic embolism and thrombosis of unspecified deep veins of left proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Y3,"[I82.5Y3] Chronic embolism and thrombosis of unspecified deep veins of proximal lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Y9,[I82.5Y9] Chronic embolism and thrombosis of unspecified deep veins of unspecified proximal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Z1,[I82.5Z1] Chronic embolism and thrombosis of unspecified deep veins of right distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Z2,[I82.5Z2] Chronic embolism and thrombosis of unspecified deep veins of left distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Z3,"[I82.5Z3] Chronic embolism and thrombosis of unspecified deep veins of distal lower extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.5Z9,[I82.5Z9] Chronic embolism and thrombosis of unspecified deep veins of unspecified distal lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.601,[I82.601] Acute embolism and thrombosis of unspecified veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.602,[I82.602] Acute embolism and thrombosis of unspecified veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.603,"[I82.603] Acute embolism and thrombosis of unspecified veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.609,[I82.609] Acute embolism and thrombosis of unspecified veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.611,[I82.611] Acute embolism and thrombosis of superficial veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.612,[I82.612] Acute embolism and thrombosis of superficial veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.613,"[I82.613] Acute embolism and thrombosis of superficial veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.619,[I82.619] Acute embolism and thrombosis of superficial veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.621,[I82.621] Acute embolism and thrombosis of deep veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.622,[I82.622] Acute embolism and thrombosis of deep veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.623,"[I82.623] Acute embolism and thrombosis of deep veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.629,[I82.629] Acute embolism and thrombosis of deep veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.701,[I82.701] Chronic embolism and thrombosis of unspecified veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.702,[I82.702] Chronic embolism and thrombosis of unspecified veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.703,"[I82.703] Chronic embolism and thrombosis of unspecified veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.709,[I82.709] Chronic embolism and thrombosis of unspecified veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.711,[I82.711] Chronic embolism and thrombosis of superficial veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.712,[I82.712] Chronic embolism and thrombosis of superficial veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.713,"[I82.713] Chronic embolism and thrombosis of superficial veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.719,[I82.719] Chronic embolism and thrombosis of superficial veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.721,[I82.721] Chronic embolism and thrombosis of deep veins of right upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.722,[I82.722] Chronic embolism and thrombosis of deep veins of left upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.723,"[I82.723] Chronic embolism and thrombosis of deep veins of upper extremity, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.729,[I82.729] Chronic embolism and thrombosis of deep veins of unspecified upper extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.811,[I82.811] Embolism and thrombosis of superficial veins of right lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.812,[I82.812] Embolism and thrombosis of superficial veins of left lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.813,"[I82.813] Embolism and thrombosis of superficial veins of lower extremities, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.819,[I82.819] Embolism and thrombosis of superficial veins of unspecified lower extremity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.890,[I82.890] Acute embolism and thrombosis of other specified veins,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.891,[I82.891] Chronic embolism and thrombosis of other specified veins,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.90,[I82.90] Acute embolism and thrombosis of unspecified vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.91,[I82.91] Chronic embolism and thrombosis of unspecified vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A11,[I82.A11] Acute embolism and thrombosis of right axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A12,[I82.A12] Acute embolism and thrombosis of left axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A13,"[I82.A13] Acute embolism and thrombosis of axillary vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A19,[I82.A19] Acute embolism and thrombosis of unspecified axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A21,[I82.A21] Chronic embolism and thrombosis of right axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A22,[I82.A22] Chronic embolism and thrombosis of left axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A23,"[I82.A23] Chronic embolism and thrombosis of axillary vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.A29,[I82.A29] Chronic embolism and thrombosis of unspecified axillary vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B11,[I82.B11] Acute embolism and thrombosis of right subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B12,[I82.B12] Acute embolism and thrombosis of left subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B13,"[I82.B13] Acute embolism and thrombosis of subclavian vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B19,[I82.B19] Acute embolism and thrombosis of unspecified subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B21,[I82.B21] Chronic embolism and thrombosis of right subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B22,[I82.B22] Chronic embolism and thrombosis of left subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B23,"[I82.B23] Chronic embolism and thrombosis of subclavian vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.B29,[I82.B29] Chronic embolism and thrombosis of unspecified subclavian vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C11,[I82.C11] Acute embolism and thrombosis of right internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C12,[I82.C12] Acute embolism and thrombosis of left internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C13,"[I82.C13] Acute embolism and thrombosis of internal jugular vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C19,[I82.C19] Acute embolism and thrombosis of unspecified internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C21,[I82.C21] Chronic embolism and thrombosis of right internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C22,[I82.C22] Chronic embolism and thrombosis of left internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C23,"[I82.C23] Chronic embolism and thrombosis of internal jugular vein, bilateral",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I82.C29,[I82.C29] Chronic embolism and thrombosis of unspecified internal jugular vein,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I85.01,[I85.01] Esophageal varices with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I85.11,[I85.11] Secondary esophageal varices with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I88.0,[I88.0] Nonspecific mesenteric lymphadenitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I88.1,"[I88.1] Chronic lymphadenitis, except mesenteric",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I88.8,[I88.8] Other nonspecific lymphadenitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I88.9,"[I88.9] Nonspecific lymphadenitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I95.2,[I95.2] Hypotension due to drugs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I95.3,[I95.3] Hypotension of hemodialysis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I95.81,[I95.81] Postprocedural hypotension,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.0,[I97.0] Postcardiotomy syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.110,[I97.110] Postprocedural cardiac insufficiency following cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.111,[I97.111] Postprocedural cardiac insufficiency following other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.120,[I97.120] Postprocedural cardiac arrest following cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.121,[I97.121] Postprocedural cardiac arrest following other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.130,[I97.130] Postprocedural heart failure following cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.131,[I97.131] Postprocedural heart failure following other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.190,[I97.190] Other postprocedural cardiac functional disturbances following cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.191,[I97.191] Other postprocedural cardiac functional disturbances following other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.2,[I97.2] Postmastectomy lymphedema syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.3,[I97.3] Postprocedural hypertension,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.410,[I97.410] Intraoperative hemorrhage and hematoma of a circulatory system organ or structure complicating a cardiac catheterization,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.411,[I97.411] Intraoperative hemorrhage and hematoma of a circulatory system organ or structure complicating a cardiac bypass,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.418,[I97.418] Intraoperative hemorrhage and hematoma of a circulatory system organ or structure complicating other circulatory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.42,[I97.42] Intraoperative hemorrhage and hematoma of a circulatory system organ or structure complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.51,[I97.51] Accidental puncture and laceration of a circulatory system organ or structure during a circulatory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.52,[I97.52] Accidental puncture and laceration of a circulatory system organ or structure during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.610,[I97.610] Postprocedural hemorrhage of a circulatory system organ or structure following a cardiac catheterization,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.611,[I97.611] Postprocedural hemorrhage of a circulatory system organ or structure following cardiac bypass,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.618,[I97.618] Postprocedural hemorrhage of a circulatory system organ or structure following other circulatory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.620,[I97.620] Postprocedural hemorrhage of a circulatory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.621,[I97.621] Postprocedural hematoma of a circulatory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.622,[I97.622] Postprocedural seroma of a circulatory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.630,[I97.630] Postprocedural hematoma of a circulatory system organ or structure following a cardiac catheterization,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.631,[I97.631] Postprocedural hematoma of a circulatory system organ or structure following cardiac bypass,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.638,[I97.638] Postprocedural hematoma of a circulatory system organ or structure following other circulatory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.640,[I97.640] Postprocedural seroma of a circulatory system organ or structure following a cardiac catheterization,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.641,[I97.641] Postprocedural seroma of a circulatory system organ or structure following cardiac bypass,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.648,[I97.648] Postprocedural seroma of a circulatory system organ or structure following other circulatory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.710,[I97.710] Intraoperative cardiac arrest during cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.711,[I97.711] Intraoperative cardiac arrest during other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.790,[I97.790] Other intraoperative cardiac functional disturbances during cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.791,[I97.791] Other intraoperative cardiac functional disturbances during other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.810,[I97.810] Intraoperative cerebrovascular infarction during cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.811,[I97.811] Intraoperative cerebrovascular infarction during other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.820,[I97.820] Postprocedural cerebrovascular infarction following cardiac surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.821,[I97.821] Postprocedural cerebrovascular infarction following other surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.88,"[I97.88] Other intraoperative complications of the circulatory system, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,I97.89,"[I97.89] Other postprocedural complications and disorders of the circulatory system, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J00,[J00] Acute nasopharyngitis [common cold],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.00,"[J01.00] Acute maxillary sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.01,[J01.01] Acute recurrent maxillary sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.10,"[J01.10] Acute frontal sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.11,[J01.11] Acute recurrent frontal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.20,"[J01.20] Acute ethmoidal sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.21,[J01.21] Acute recurrent ethmoidal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.30,"[J01.30] Acute sphenoidal sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.31,[J01.31] Acute recurrent sphenoidal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.40,"[J01.40] Acute pansinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.41,[J01.41] Acute recurrent pansinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.80,[J01.80] Other acute sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.81,[J01.81] Other acute recurrent sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.90,"[J01.90] Acute sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J01.91,"[J01.91] Acute recurrent sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J02.0,[J02.0] Streptococcal pharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J02.8,[J02.8] Acute pharyngitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J02.9,"[J02.9] Acute pharyngitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.00,"[J03.00] Acute streptococcal tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.01,[J03.01] Acute recurrent streptococcal tonsillitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.80,[J03.80] Acute tonsillitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.81,[J03.81] Acute recurrent tonsillitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.90,"[J03.90] Acute tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J03.91,"[J03.91] Acute recurrent tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.0,[J04.0] Acute laryngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.10,[J04.10] Acute tracheitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.11,[J04.11] Acute tracheitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.2,[J04.2] Acute laryngotracheitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.30,"[J04.30] Supraglottitis, unspecified, without obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J04.31,"[J04.31] Supraglottitis, unspecified, with obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J05.0,[J05.0] Acute obstructive laryngitis [croup],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J05.10,[J05.10] Acute epiglottitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J05.11,[J05.11] Acute epiglottitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J06.0,[J06.0] Acute laryngopharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J06.9,"[J06.9] Acute upper respiratory infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J09.X1,[J09.X1] Influenza due to identified novel influenza A virus with pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J09.X2,[J09.X2] Influenza due to identified novel influenza A virus with other respiratory manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J09.X3,[J09.X3] Influenza due to identified novel influenza A virus with gastrointestinal manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J09.X9,[J09.X9] Influenza due to identified novel influenza A virus with other manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.00,[J10.00] Influenza due to other identified influenza virus with unspecified type of pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.01,[J10.01] Influenza due to other identified influenza virus with the same other identified influenza virus pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.08,[J10.08] Influenza due to other identified influenza virus with other specified pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.1,[J10.1] Influenza due to other identified influenza virus with other respiratory manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.2,[J10.2] Influenza due to other identified influenza virus with gastrointestinal manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.82,[J10.82] Influenza due to other identified influenza virus with myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.83,[J10.83] Influenza due to other identified influenza virus with otitis media,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J10.89,[J10.89] Influenza due to other identified influenza virus with other manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.00,[J11.00] Influenza due to unidentified influenza virus with unspecified type of pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.08,[J11.08] Influenza due to unidentified influenza virus with specified pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.1,[J11.1] Influenza due to unidentified influenza virus with other respiratory manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.2,[J11.2] Influenza due to unidentified influenza virus with gastrointestinal manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.81,[J11.81] Influenza due to unidentified influenza virus with encephalopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.82,[J11.82] Influenza due to unidentified influenza virus with myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.83,[J11.83] Influenza due to unidentified influenza virus with otitis media,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J11.89,[J11.89] Influenza due to unidentified influenza virus with other manifestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.0,[J12.0] Adenoviral pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.1,[J12.1] Respiratory syncytial virus pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.2,[J12.2] Parainfluenza virus pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.3,[J12.3] Human metapneumovirus pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.81,[J12.81] Pneumonia due to SARS-associated coronavirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.89,[J12.89] Other viral pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J12.9,"[J12.9] Viral pneumonia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J13,[J13] Pneumonia due to Streptococcus pneumoniae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J14,[J14] Pneumonia due to Hemophilus influenzae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.0,[J15.0] Pneumonia due to Klebsiella pneumoniae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.1,[J15.1] Pneumonia due to Pseudomonas,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.20,"[J15.20] Pneumonia due to staphylococcus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.211,[J15.211] Pneumonia due to Methicillin susceptible Staphylococcus aureus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.212,[J15.212] Pneumonia due to Methicillin resistant Staphylococcus aureus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.29,[J15.29] Pneumonia due to other staphylococcus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.3,"[J15.3] Pneumonia due to streptococcus, group B",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.4,[J15.4] Pneumonia due to other streptococci,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.5,[J15.5] Pneumonia due to Escherichia coli,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.6,[J15.6] Pneumonia due to other Gram-negative bacteria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.7,[J15.7] Pneumonia due to Mycoplasma pneumoniae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.8,[J15.8] Pneumonia due to other specified bacteria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J15.9,[J15.9] Unspecified bacterial pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J16.0,[J16.0] Chlamydial pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J16.8,[J16.8] Pneumonia due to other specified infectious organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J17,[J17] Pneumonia in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J18.0,"[J18.0] Bronchopneumonia, unspecified organism",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J18.1,"[J18.1] Lobar pneumonia, unspecified organism",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J18.8,"[J18.8] Other pneumonia, unspecified organism",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J18.9,"[J18.9] Pneumonia, unspecified organism",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.0,[J20.0] Acute bronchitis due to Mycoplasma pneumoniae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.1,[J20.1] Acute bronchitis due to Hemophilus influenzae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.2,[J20.2] Acute bronchitis due to streptococcus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.3,[J20.3] Acute bronchitis due to coxsackievirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.4,[J20.4] Acute bronchitis due to parainfluenza virus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.5,[J20.5] Acute bronchitis due to respiratory syncytial virus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.6,[J20.6] Acute bronchitis due to rhinovirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.7,[J20.7] Acute bronchitis due to echovirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.8,[J20.8] Acute bronchitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J20.9,"[J20.9] Acute bronchitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J21.0,[J21.0] Acute bronchiolitis due to respiratory syncytial virus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J21.1,[J21.1] Acute bronchiolitis due to human metapneumovirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J21.8,[J21.8] Acute bronchiolitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J21.9,"[J21.9] Acute bronchiolitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J30.5,[J30.5] Allergic rhinitis due to food,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.0,[J32.0] Chronic maxillary sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.1,[J32.1] Chronic frontal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.2,[J32.2] Chronic ethmoidal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.3,[J32.3] Chronic sphenoidal sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.4,[J32.4] Chronic pansinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.8,[J32.8] Other chronic sinusitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J32.9,"[J32.9] Chronic sinusitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.01,[J35.01] Chronic tonsillitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.02,[J35.02] Chronic adenoiditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.03,[J35.03] Chronic tonsillitis and adenoiditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.1,[J35.1] Hypertrophy of tonsils,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.2,[J35.2] Hypertrophy of adenoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.3,[J35.3] Hypertrophy of tonsils with hypertrophy of adenoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.8,[J35.8] Other chronic diseases of tonsils and adenoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J35.9,"[J35.9] Chronic disease of tonsils and adenoids, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J36,[J36] Peritonsillar abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J40,"[J40] Bronchitis, not specified as acute or chronic",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J41.0,[J41.0] Simple chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J41.1,[J41.1] Mucopurulent chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J41.8,[J41.8] Mixed simple and mucopurulent chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J42,[J42] Unspecified chronic bronchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J43.0,[J43.0] Unilateral pulmonary emphysema [MacLeod's syndrome],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J43.1,[J43.1] Panlobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J43.2,[J43.2] Centrilobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J43.8,[J43.8] Other emphysema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J43.9,"[J43.9] Emphysema, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J44.0,[J44.0] Chronic obstructive pulmonary disease with (acute) lower respiratory infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J44.1,[J44.1] Chronic obstructive pulmonary disease with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J44.9,"[J44.9] Chronic obstructive pulmonary disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.20,"[J45.20] Mild intermittent asthma, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.21,[J45.21] Mild intermittent asthma with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.22,[J45.22] Mild intermittent asthma with status asthmaticus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.30,"[J45.30] Mild persistent asthma, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.31,[J45.31] Mild persistent asthma with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.32,[J45.32] Mild persistent asthma with status asthmaticus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.40,"[J45.40] Moderate persistent asthma, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.41,[J45.41] Moderate persistent asthma with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.42,[J45.42] Moderate persistent asthma with status asthmaticus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.50,"[J45.50] Severe persistent asthma, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.51,[J45.51] Severe persistent asthma with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.52,[J45.52] Severe persistent asthma with status asthmaticus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.901,[J45.901] Unspecified asthma with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.902,[J45.902] Unspecified asthma with status asthmaticus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.909,"[J45.909] Unspecified asthma, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.990,[J45.990] Exercise induced bronchospasm,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.991,[J45.991] Cough variant asthma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J45.998,[J45.998] Other asthma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J47.0,[J47.0] Bronchiectasis with acute lower respiratory infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J47.1,[J47.1] Bronchiectasis with (acute) exacerbation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J47.9,"[J47.9] Bronchiectasis, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J65,[J65] Pneumoconiosis associated with tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J69.0,[J69.0] Pneumonitis due to inhalation of food and vomit,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J80,[J80] Acute respiratory distress syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J81.0,[J81.0] Acute pulmonary edema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J82.81,[J82.81] Chronic eosinophilic pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J82.82,[J82.82] Acute eosinophilic pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J82.83,[J82.83] Eosinophilic asthma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J84.114,[J84.114] Acute interstitial pneumonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J85.1,[J85.1] Abscess of lung with pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J85.2,[J85.2] Abscess of lung without pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J85.3,[J85.3] Abscess of mediastinum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J86.0,[J86.0] Pyothorax with fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J86.9,[J86.9] Pyothorax without fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J90,"[J90] Pleural effusion, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J91.8,[J91.8] Pleural effusion in other conditions classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J92.0,[J92.0] Pleural plaque with presence of asbestos,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J92.9,[J92.9] Pleural plaque without asbestos,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.0,[J93.0] Spontaneous tension pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.11,[J93.11] Primary spontaneous pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.12,[J93.12] Secondary spontaneous pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.81,[J93.81] Chronic pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.82,[J93.82] Other air leak,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.83,[J93.83] Other pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J93.9,"[J93.9] Pneumothorax, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J94.0,[J94.0] Chylous effusion,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J94.1,[J94.1] Fibrothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J94.2,[J94.2] Hemothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J94.8,[J94.8] Other specified pleural conditions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J94.9,"[J94.9] Pleural condition, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.00,[J95.00] Unspecified tracheostomy complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.01,[J95.01] Hemorrhage from tracheostomy stoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.02,[J95.02] Infection of tracheostomy stoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.03,[J95.03] Malfunction of tracheostomy stoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.04,[J95.04] Tracheo-esophageal fistula following tracheostomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.09,[J95.09] Other tracheostomy complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.1,[J95.1] Acute pulmonary insufficiency following thoracic surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.2,[J95.2] Acute pulmonary insufficiency following nonthoracic surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.3,[J95.3] Chronic pulmonary insufficiency following surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.4,[J95.4] Chemical pneumonitis due to anesthesia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.5,[J95.5] Postprocedural subglottic stenosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.61,[J95.61] Intraoperative hemorrhage and hematoma of a respiratory system organ or structure complicating a respiratory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.62,[J95.62] Intraoperative hemorrhage and hematoma of a respiratory system organ or structure complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.71,[J95.71] Accidental puncture and laceration of a respiratory system organ or structure during a respiratory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.72,[J95.72] Accidental puncture and laceration of a respiratory system organ or structure during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.811,[J95.811] Postprocedural pneumothorax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.812,[J95.812] Postprocedural air leak,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.821,[J95.821] Acute postprocedural respiratory failure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.822,[J95.822] Acute and chronic postprocedural respiratory failure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.830,[J95.830] Postprocedural hemorrhage of a respiratory system organ or structure following a respiratory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.831,[J95.831] Postprocedural hemorrhage of a respiratory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.84,[J95.84] Transfusion-related acute lung injury (TRALI),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.850,[J95.850] Mechanical complication of respirator,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.851,[J95.851] Ventilator associated pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.859,[J95.859] Other complication of respirator [ventilator],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.860,[J95.860] Postprocedural hematoma of a respiratory system organ or structure following a respiratory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.861,[J95.861] Postprocedural hematoma of a respiratory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.862,[J95.862] Postprocedural seroma of a respiratory system organ or structure following a respiratory system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.863,[J95.863] Postprocedural seroma of a respiratory system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.88,"[J95.88] Other intraoperative complications of respiratory system, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J95.89,"[J95.89] Other postprocedural complications and disorders of respiratory system, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.00,"[J96.00] Acute respiratory failure, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.01,[J96.01] Acute respiratory failure with hypoxia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.02,[J96.02] Acute respiratory failure with hypercapnia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.10,"[J96.10] Chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.11,[J96.11] Chronic respiratory failure with hypoxia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.12,[J96.12] Chronic respiratory failure with hypercapnia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.20,"[J96.20] Acute and chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.21,[J96.21] Acute and chronic respiratory failure with hypoxia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.22,[J96.22] Acute and chronic respiratory failure with hypercapnia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.90,"[J96.90] Respiratory failure, unspecified, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.91,"[J96.91] Respiratory failure, unspecified with hypoxia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J96.92,"[J96.92] Respiratory failure, unspecified with hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J98.11,[J98.11] Atelectasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J98.19,[J98.19] Other pulmonary collapse,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J98.2,[J98.2] Interstitial emphysema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,J98.3,[J98.3] Compensatory emphysema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K09.8,"[K09.8] Other cysts of oral region, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K09.9,"[K09.9] Cyst of oral region, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.0,[K11.0] Atrophy of salivary gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.1,[K11.1] Hypertrophy of salivary gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.20,"[K11.20] Sialoadenitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.21,[K11.21] Acute sialoadenitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.22,[K11.22] Acute recurrent sialoadenitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.23,[K11.23] Chronic sialoadenitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.3,[K11.3] Abscess of salivary gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.4,[K11.4] Fistula of salivary gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.5,[K11.5] Sialolithiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.6,[K11.6] Mucocele of salivary gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.7,[K11.7] Disturbances of salivary secretion,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.8,[K11.8] Other diseases of salivary glands,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K11.9,"[K11.9] Disease of salivary gland, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.0,[K12.0] Recurrent oral aphthae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.1,[K12.1] Other forms of stomatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.2,[K12.2] Cellulitis and abscess of mouth,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.30,"[K12.30] Oral mucositis (ulcerative), unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.31,[K12.31] Oral mucositis (ulcerative) due to antineoplastic therapy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.32,[K12.32] Oral mucositis (ulcerative) due to other drugs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.33,[K12.33] Oral mucositis (ulcerative) due to radiation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K12.39,[K12.39] Other oral mucositis (ulcerative),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.0,[K13.0] Diseases of lips,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.1,[K13.1] Cheek and lip biting,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.21,"[K13.21] Leukoplakia of oral mucosa, including tongue",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.22,[K13.22] Minimal keratinized residual ridge mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.23,[K13.23] Excessive keratinized residual ridge mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.24,[K13.24] Leukokeratosis nicotina palati,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.29,"[K13.29] Other disturbances of oral epithelium, including tongue",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.3,[K13.3] Hairy leukoplakia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.4,[K13.4] Granuloma and granuloma-like lesions of oral mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.5,[K13.5] Oral submucous fibrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.6,[K13.6] Irritative hyperplasia of oral mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.70,[K13.70] Unspecified lesions of oral mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K13.79,[K13.79] Other lesions of oral mucosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.0,[K14.0] Glossitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.1,[K14.1] Geographic tongue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.2,[K14.2] Median rhomboid glossitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.3,[K14.3] Hypertrophy of tongue papillae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.4,[K14.4] Atrophy of tongue papillae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.5,[K14.5] Plicated tongue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.6,[K14.6] Glossodynia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.8,[K14.8] Other diseases of tongue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K14.9,"[K14.9] Disease of tongue, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K20.81,[K20.81] Other esophagitis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K20.91,"[K20.91] Esophagitis, unspecified with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K21.01,"[K21.01] Gastro-esophageal reflux disease with esophagitis, with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K22.11,[K22.11] Ulcer of esophagus with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K22.6,[K22.6] Gastro-esophageal laceration-hemorrhage syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.0,[K25.0] Acute gastric ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.1,[K25.1] Acute gastric ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.2,[K25.2] Acute gastric ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.3,[K25.3] Acute gastric ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.4,[K25.4] Chronic or unspecified gastric ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.5,[K25.5] Chronic or unspecified gastric ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.6,[K25.6] Chronic or unspecified gastric ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.7,[K25.7] Chronic gastric ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K25.9,"[K25.9] Gastric ulcer, unspecified as acute or chronic, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.0,[K26.0] Acute duodenal ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.1,[K26.1] Acute duodenal ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.2,[K26.2] Acute duodenal ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.3,[K26.3] Acute duodenal ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.4,[K26.4] Chronic or unspecified duodenal ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.5,[K26.5] Chronic or unspecified duodenal ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.6,[K26.6] Chronic or unspecified duodenal ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.7,[K26.7] Chronic duodenal ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K26.9,"[K26.9] Duodenal ulcer, unspecified as acute or chronic, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.0,"[K27.0] Acute peptic ulcer, site unspecified, with hemorrhage",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.1,"[K27.1] Acute peptic ulcer, site unspecified, with perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.2,"[K27.2] Acute peptic ulcer, site unspecified, with both hemorrhage and perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.3,"[K27.3] Acute peptic ulcer, site unspecified, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.4,"[K27.4] Chronic or unspecified peptic ulcer, site unspecified, with hemorrhage",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.5,"[K27.5] Chronic or unspecified peptic ulcer, site unspecified, with perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.6,"[K27.6] Chronic or unspecified peptic ulcer, site unspecified, with both hemorrhage and perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.7,"[K27.7] Chronic peptic ulcer, site unspecified, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K27.9,"[K27.9] Peptic ulcer, site unspecified, unspecified as acute or chronic, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.0,[K28.0] Acute gastrojejunal ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.1,[K28.1] Acute gastrojejunal ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.2,[K28.2] Acute gastrojejunal ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.3,[K28.3] Acute gastrojejunal ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.4,[K28.4] Chronic or unspecified gastrojejunal ulcer with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.5,[K28.5] Chronic or unspecified gastrojejunal ulcer with perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.6,[K28.6] Chronic or unspecified gastrojejunal ulcer with both hemorrhage and perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.7,[K28.7] Chronic gastrojejunal ulcer without hemorrhage or perforation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K28.9,"[K28.9] Gastrojejunal ulcer, unspecified as acute or chronic, without hemorrhage or perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.00,[K29.00] Acute gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.01,[K29.01] Acute gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.20,[K29.20] Alcoholic gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.21,[K29.21] Alcoholic gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.30,[K29.30] Chronic superficial gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.31,[K29.31] Chronic superficial gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.40,[K29.40] Chronic atrophic gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.41,[K29.41] Chronic atrophic gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.50,[K29.50] Unspecified chronic gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.51,[K29.51] Unspecified chronic gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.60,[K29.60] Other gastritis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.61,[K29.61] Other gastritis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.70,"[K29.70] Gastritis, unspecified, without bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.71,"[K29.71] Gastritis, unspecified, with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.80,[K29.80] Duodenitis without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.81,[K29.81] Duodenitis with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.90,"[K29.90] Gastroduodenitis, unspecified, without bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K29.91,"[K29.91] Gastroduodenitis, unspecified, with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K31.811,[K31.811] Angiodysplasia of stomach and duodenum with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.2,[K35.2] Acute appendicitis with generalized peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.20,"[K35.20] Acute appendicitis with generalized peritonitis, without abscess",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.21,"[K35.21] Acute appendicitis with generalized peritonitis, with abscess",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.3,[K35.3] Acute appendicitis with localized peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.30,"[K35.30] Acute appendicitis with localized peritonitis, without perforation or gangrene",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.31,"[K35.31] Acute appendicitis with localized peritonitis and gangrene, without perforation",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.32,"[K35.32] Acute appendicitis with perforation, localized peritonitis, and gangrene, without abscess",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.33,"[K35.33] Acute appendicitis with perforation, localized peritonitis, and gangrene, with abscess",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.80,[K35.80] Unspecified acute appendicitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.89,[K35.89] Other acute appendicitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.890,[K35.890] Other acute appendicitis without perforation or gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K35.891,"[K35.891] Other acute appendicitis without perforation, with gangrene",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K36,[K36] Other appendicitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K37,[K37] Unspecified appendicitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.0,[K38.0] Hyperplasia of appendix,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.1,[K38.1] Appendicular concretions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.2,[K38.2] Diverticulum of appendix,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.3,[K38.3] Fistula of appendix,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.8,[K38.8] Other specified diseases of appendix,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K38.9,"[K38.9] Disease of appendix, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K50.011,[K50.011] Crohn's disease of small intestine with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K50.111,[K50.111] Crohn's disease of large intestine with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K50.811,[K50.811] Crohn's disease of both small and large intestine with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K50.911,"[K50.911] Crohn's disease, unspecified, with rectal bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.011,[K51.011] Ulcerative (chronic) pancolitis with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.211,[K51.211] Ulcerative (chronic) proctitis with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.311,[K51.311] Ulcerative (chronic) rectosigmoiditis with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.411,[K51.411] Inflammatory polyps of colon with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.511,[K51.511] Left sided colitis with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.811,[K51.811] Other ulcerative colitis with rectal bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K51.911,"[K51.911] Ulcerative colitis, unspecified with rectal bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.21,[K52.21] Food protein-induced enterocolitis syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.22,[K52.22] Food protein-induced enteropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.29,[K52.29] Other allergic and dietetic gastroenteritis and colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.3,[K52.3] Indeterminate colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.81,[K52.81] Eosinophilic gastritis or gastroenteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.82,[K52.82] Eosinophilic colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.831,[K52.831] Collagenous colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.832,[K52.832] Lymphocytic colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.838,[K52.838] Other microscopic colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.839,"[K52.839] Microscopic colitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.89,[K52.89] Other specified noninfective gastroenteritis and colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K52.9,"[K52.9] Noninfective gastroenteritis and colitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.011,[K55.011] Focal (segmental) acute (reversible) ischemia of small intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.012,[K55.012] Diffuse acute (reversible) ischemia of small intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.019,"[K55.019] Acute (reversible) ischemia of small intestine, extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.021,[K55.021] Focal (segmental) acute infarction of small intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.022,[K55.022] Diffuse acute infarction of small intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.029,"[K55.029] Acute infarction of small intestine, extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.031,[K55.031] Focal (segmental) acute (reversible) ischemia of large intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.032,[K55.032] Diffuse acute (reversible) ischemia of large intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.039,"[K55.039] Acute (reversible) ischemia of large intestine, extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.041,[K55.041] Focal (segmental) acute infarction of large intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.042,[K55.042] Diffuse acute infarction of large intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.049,"[K55.049] Acute infarction of large intestine, extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.051,"[K55.051] Focal (segmental) acute (reversible) ischemia of intestine, part unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.052,"[K55.052] Diffuse acute (reversible) ischemia of intestine, part unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.059,"[K55.059] Acute (reversible) ischemia of intestine, part and extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.061,"[K55.061] Focal (segmental) acute infarction of intestine, part unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.062,"[K55.062] Diffuse acute infarction of intestine, part unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.069,"[K55.069] Acute infarction of intestine, part and extent unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.21,[K55.21] Angiodysplasia of colon with hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.30,"[K55.30] Necrotizing enterocolitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.31,[K55.31] Stage 1 necrotizing enterocolitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.32,[K55.32] Stage 2 necrotizing enterocolitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K55.33,[K55.33] Stage 3 necrotizing enterocolitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.0,[K56.0] Paralytic ileus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.1,[K56.1] Intussusception,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.2,[K56.2] Volvulus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.3,[K56.3] Gallstone ileus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.41,[K56.41] Fecal impaction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.49,[K56.49] Other impaction of intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.50,"[K56.50] Intestinal adhesions [bands], unspecified as to partial versus complete obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.51,"[K56.51] Intestinal adhesions [bands], with partial obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.52,[K56.52] Intestinal adhesions [bands] with complete obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.600,"[K56.600] Partial intestinal obstruction, unspecified as to cause",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.601,"[K56.601] Complete intestinal obstruction, unspecified as to cause",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.609,"[K56.609] Unspecified intestinal obstruction, unspecified as to partial versus complete obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.690,[K56.690] Other partial intestinal obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.691,[K56.691] Other complete intestinal obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.699,[K56.699] Other intestinal obstruction unspecified as to partial versus complete obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K56.7,"[K56.7] Ileus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.00,[K57.00] Diverticulitis of small intestine with perforation and abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.01,[K57.01] Diverticulitis of small intestine with perforation and abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.10,[K57.10] Diverticulosis of small intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.11,[K57.11] Diverticulosis of small intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.12,[K57.12] Diverticulitis of small intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.13,[K57.13] Diverticulitis of small intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.20,[K57.20] Diverticulitis of large intestine with perforation and abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.21,[K57.21] Diverticulitis of large intestine with perforation and abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.30,[K57.30] Diverticulosis of large intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.31,[K57.31] Diverticulosis of large intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.32,[K57.32] Diverticulitis of large intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.33,[K57.33] Diverticulitis of large intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.40,[K57.40] Diverticulitis of both small and large intestine with perforation and abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.41,[K57.41] Diverticulitis of both small and large intestine with perforation and abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.50,[K57.50] Diverticulosis of both small and large intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.51,[K57.51] Diverticulosis of both small and large intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.52,[K57.52] Diverticulitis of both small and large intestine without perforation or abscess without bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.53,[K57.53] Diverticulitis of both small and large intestine without perforation or abscess with bleeding,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.80,"[K57.80] Diverticulitis of intestine, part unspecified, with perforation and abscess without bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.81,"[K57.81] Diverticulitis of intestine, part unspecified, with perforation and abscess with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.90,"[K57.90] Diverticulosis of intestine, part unspecified, without perforation or abscess without bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.91,"[K57.91] Diverticulosis of intestine, part unspecified, without perforation or abscess with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.92,"[K57.92] Diverticulitis of intestine, part unspecified, without perforation or abscess without bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K57.93,"[K57.93] Diverticulitis of intestine, part unspecified, without perforation or abscess with bleeding",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K59.31,[K59.31] Toxic megacolon,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K62.5,[K62.5] Hemorrhage of anus and rectum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K63.0,[K63.0] Abscess of intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.0,[K64.0] First degree hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.1,[K64.1] Second degree hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.2,[K64.2] Third degree hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.3,[K64.3] Fourth degree hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.4,[K64.4] Residual hemorrhoidal skin tags,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.5,[K64.5] Perianal venous thrombosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.8,[K64.8] Other hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K64.9,[K64.9] Unspecified hemorrhoids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.0,[K65.0] Generalized (acute) peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.1,[K65.1] Peritoneal abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.2,[K65.2] Spontaneous bacterial peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.3,[K65.3] Choleperitonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.4,[K65.4] Sclerosing mesenteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.8,[K65.8] Other peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K65.9,"[K65.9] Peritonitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K67,[K67] Disorders of peritoneum in infectious diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K68.11,[K68.11] Postprocedural retroperitoneal abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K68.19,[K68.19] Other retroperitoneal abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.0,[K70.0] Alcoholic fatty liver,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.10,[K70.10] Alcoholic hepatitis without ascites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.11,[K70.11] Alcoholic hepatitis with ascites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.2,[K70.2] Alcoholic fibrosis and sclerosis of liver,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.30,[K70.30] Alcoholic cirrhosis of liver without ascites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.31,[K70.31] Alcoholic cirrhosis of liver with ascites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.40,[K70.40] Alcoholic hepatic failure without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K70.9,"[K70.9] Alcoholic liver disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.00,[K80.00] Calculus of gallbladder with acute cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.01,[K80.01] Calculus of gallbladder with acute cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.12,[K80.12] Calculus of gallbladder with acute and chronic cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.13,[K80.13] Calculus of gallbladder with acute and chronic cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.18,[K80.18] Calculus of gallbladder with other cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.19,[K80.19] Calculus of gallbladder with other cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.20,[K80.20] Calculus of gallbladder without cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.21,[K80.21] Calculus of gallbladder without cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.30,"[K80.30] Calculus of bile duct with cholangitis, unspecified, without obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.31,"[K80.31] Calculus of bile duct with cholangitis, unspecified, with obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.32,[K80.32] Calculus of bile duct with acute cholangitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.33,[K80.33] Calculus of bile duct with acute cholangitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.36,[K80.36] Calculus of bile duct with acute and chronic cholangitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.37,[K80.37] Calculus of bile duct with acute and chronic cholangitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.40,"[K80.40] Calculus of bile duct with cholecystitis, unspecified, without obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.41,"[K80.41] Calculus of bile duct with cholecystitis, unspecified, with obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.42,[K80.42] Calculus of bile duct with acute cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.43,[K80.43] Calculus of bile duct with acute cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.46,[K80.46] Calculus of bile duct with acute and chronic cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.47,[K80.47] Calculus of bile duct with acute and chronic cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.50,[K80.50] Calculus of bile duct without cholangitis or cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.51,[K80.51] Calculus of bile duct without cholangitis or cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.60,"[K80.60] Calculus of gallbladder and bile duct with cholecystitis, unspecified, without obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.61,"[K80.61] Calculus of gallbladder and bile duct with cholecystitis, unspecified, with obstruction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.62,[K80.62] Calculus of gallbladder and bile duct with acute cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.63,[K80.63] Calculus of gallbladder and bile duct with acute cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.66,[K80.66] Calculus of gallbladder and bile duct with acute and chronic cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.67,[K80.67] Calculus of gallbladder and bile duct with acute and chronic cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.70,[K80.70] Calculus of gallbladder and bile duct without cholecystitis without obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.71,[K80.71] Calculus of gallbladder and bile duct without cholecystitis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K80.81,[K80.81] Other cholelithiasis with obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K81.0,[K81.0] Acute cholecystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K81.2,[K81.2] Acute cholecystitis with chronic cholecystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K81.9,"[K81.9] Cholecystitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K82.0,[K82.0] Obstruction of gallbladder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K82.1,[K82.1] Hydrops of gallbladder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K82.2,[K82.2] Perforation of gallbladder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K82.A1,[K82.A1] Gangrene of gallbladder in cholecystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K82.A2,[K82.A2] Perforation of gallbladder in cholecystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K83.0,[K83.0] Cholangitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K83.09,[K83.09] Other cholangitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K83.1,[K83.1] Obstruction of bile duct,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K83.2,[K83.2] Perforation of bile duct,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.00,[K85.00] Idiopathic acute pancreatitis without necrosis or infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.01,[K85.01] Idiopathic acute pancreatitis with uninfected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.02,[K85.02] Idiopathic acute pancreatitis with infected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.10,[K85.10] Biliary acute pancreatitis without necrosis or infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.11,[K85.11] Biliary acute pancreatitis with uninfected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.12,[K85.12] Biliary acute pancreatitis with infected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.20,[K85.20] Alcohol induced acute pancreatitis without necrosis or infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.21,[K85.21] Alcohol induced acute pancreatitis with uninfected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.22,[K85.22] Alcohol induced acute pancreatitis with infected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.30,[K85.30] Drug induced acute pancreatitis without necrosis or infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.31,[K85.31] Drug induced acute pancreatitis with uninfected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.32,[K85.32] Drug induced acute pancreatitis with infected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.80,[K85.80] Other acute pancreatitis without necrosis or infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.81,[K85.81] Other acute pancreatitis with uninfected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.82,[K85.82] Other acute pancreatitis with infected necrosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.90,"[K85.90] Acute pancreatitis without necrosis or infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.91,"[K85.91] Acute pancreatitis with uninfected necrosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K85.92,"[K85.92] Acute pancreatitis with infected necrosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K86.81,[K86.81] Exocrine pancreatic insufficiency,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K86.89,[K86.89] Other specified diseases of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K90.41,[K90.41] Non-celiac gluten sensitivity,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K90.81,[K90.81] Whipple's disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.0,[K91.0] Vomiting following gastrointestinal surgery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.1,[K91.1] Postgastric surgery syndromes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.2,"[K91.2] Postsurgical malabsorption, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.30,"[K91.30] Postprocedural intestinal obstruction, unspecified as to partial versus complete",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.31,[K91.31] Postprocedural partial intestinal obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.32,[K91.32] Postprocedural complete intestinal obstruction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.61,[K91.61] Intraoperative hemorrhage and hematoma of a digestive system organ or structure complicating a digestive system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.62,[K91.62] Intraoperative hemorrhage and hematoma of a digestive system organ or structure complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.71,[K91.71] Accidental puncture and laceration of a digestive system organ or structure during a digestive system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.72,[K91.72] Accidental puncture and laceration of a digestive system organ or structure during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.81,[K91.81] Other intraoperative complications of digestive system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.82,[K91.82] Postprocedural hepatic failure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.83,[K91.83] Postprocedural hepatorenal syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.840,[K91.840] Postprocedural hemorrhage of a digestive system organ or structure following a digestive system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.841,[K91.841] Postprocedural hemorrhage of a digestive system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.850,[K91.850] Pouchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.858,[K91.858] Other complications of intestinal pouch,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.86,[K91.86] Retained cholelithiasis following cholecystectomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.870,[K91.870] Postprocedural hematoma of a digestive system organ or structure following a digestive system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.871,[K91.871] Postprocedural hematoma of a digestive system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.872,[K91.872] Postprocedural seroma of a digestive system organ or structure following a digestive system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.873,[K91.873] Postprocedural seroma of a digestive system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K91.89,[K91.89] Other postprocedural complications and disorders of digestive system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K92.0,[K92.0] Hematemesis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K92.1,[K92.1] Melena,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K92.2,"[K92.2] Gastrointestinal hemorrhage, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.00,"[K94.00] Colostomy complication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.01,[K94.01] Colostomy hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.02,[K94.02] Colostomy infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.03,[K94.03] Colostomy malfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.09,[K94.09] Other complications of colostomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.10,"[K94.10] Enterostomy complication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.11,[K94.11] Enterostomy hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.12,[K94.12] Enterostomy infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.13,[K94.13] Enterostomy malfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.19,[K94.19] Other complications of enterostomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.20,"[K94.20] Gastrostomy complication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.21,[K94.21] Gastrostomy hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.22,[K94.22] Gastrostomy infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.23,[K94.23] Gastrostomy malfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.29,[K94.29] Other complications of gastrostomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.30,"[K94.30] Esophagostomy complications, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.31,[K94.31] Esophagostomy hemorrhage,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.32,[K94.32] Esophagostomy infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.33,[K94.33] Esophagostomy malfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K94.39,[K94.39] Other complications of esophagostomy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K95.01,[K95.01] Infection due to gastric band procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K95.09,[K95.09] Other complications of gastric band procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K95.81,[K95.81] Infection due to other bariatric procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,K95.89,[K95.89] Other complications of other bariatric procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L00,[L00] Staphylococcal scalded skin syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.00,"[L01.00] Impetigo, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.01,[L01.01] Non-bullous impetigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.02,[L01.02] Bockhart's impetigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.03,[L01.03] Bullous impetigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.09,[L01.09] Other impetigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L01.1,[L01.1] Impetiginization of other dermatoses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.01,[L02.01] Cutaneous abscess of face,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.02,[L02.02] Furuncle of face,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.03,[L02.03] Carbuncle of face,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.11,[L02.11] Cutaneous abscess of neck,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.12,[L02.12] Furuncle of neck,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.13,[L02.13] Carbuncle of neck,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.211,[L02.211] Cutaneous abscess of abdominal wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.212,"[L02.212] Cutaneous abscess of back [any part, except buttock]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.213,[L02.213] Cutaneous abscess of chest wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.214,[L02.214] Cutaneous abscess of groin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.215,[L02.215] Cutaneous abscess of perineum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.216,[L02.216] Cutaneous abscess of umbilicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.219,"[L02.219] Cutaneous abscess of trunk, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.221,[L02.221] Furuncle of abdominal wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.222,"[L02.222] Furuncle of back [any part, except buttock]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.223,[L02.223] Furuncle of chest wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.224,[L02.224] Furuncle of groin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.225,[L02.225] Furuncle of perineum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.226,[L02.226] Furuncle of umbilicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.229,"[L02.229] Furuncle of trunk, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.231,[L02.231] Carbuncle of abdominal wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.232,"[L02.232] Carbuncle of back [any part, except buttock]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.233,[L02.233] Carbuncle of chest wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.234,[L02.234] Carbuncle of groin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.235,[L02.235] Carbuncle of perineum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.236,[L02.236] Carbuncle of umbilicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.239,"[L02.239] Carbuncle of trunk, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.31,[L02.31] Cutaneous abscess of buttock,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.32,[L02.32] Furuncle of buttock,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.33,[L02.33] Carbuncle of buttock,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.411,[L02.411] Cutaneous abscess of right axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.412,[L02.412] Cutaneous abscess of left axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.413,[L02.413] Cutaneous abscess of right upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.414,[L02.414] Cutaneous abscess of left upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.415,[L02.415] Cutaneous abscess of right lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.416,[L02.416] Cutaneous abscess of left lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.419,"[L02.419] Cutaneous abscess of limb, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.421,[L02.421] Furuncle of right axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.422,[L02.422] Furuncle of left axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.423,[L02.423] Furuncle of right upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.424,[L02.424] Furuncle of left upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.425,[L02.425] Furuncle of right lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.426,[L02.426] Furuncle of left lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.429,"[L02.429] Furuncle of limb, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.431,[L02.431] Carbuncle of right axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.432,[L02.432] Carbuncle of left axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.433,[L02.433] Carbuncle of right upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.434,[L02.434] Carbuncle of left upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.435,[L02.435] Carbuncle of right lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.436,[L02.436] Carbuncle of left lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.439,"[L02.439] Carbuncle of limb, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.511,[L02.511] Cutaneous abscess of right hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.512,[L02.512] Cutaneous abscess of left hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.519,[L02.519] Cutaneous abscess of unspecified hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.521,[L02.521] Furuncle right hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.522,[L02.522] Furuncle left hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.529,[L02.529] Furuncle unspecified hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.531,[L02.531] Carbuncle of right hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.532,[L02.532] Carbuncle of left hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.539,[L02.539] Carbuncle of unspecified hand,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.611,[L02.611] Cutaneous abscess of right foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.612,[L02.612] Cutaneous abscess of left foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.619,[L02.619] Cutaneous abscess of unspecified foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.621,[L02.621] Furuncle of right foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.622,[L02.622] Furuncle of left foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.629,[L02.629] Furuncle of unspecified foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.631,[L02.631] Carbuncle of right foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.632,[L02.632] Carbuncle of left foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.639,[L02.639] Carbuncle of unspecified foot,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.811,"[L02.811] Cutaneous abscess of head [any part, except face]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.818,[L02.818] Cutaneous abscess of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.821,"[L02.821] Furuncle of head [any part, except face]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.828,[L02.828] Furuncle of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.831,"[L02.831] Carbuncle of head [any part, except face]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.838,[L02.838] Carbuncle of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.91,"[L02.91] Cutaneous abscess, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.92,"[L02.92] Furuncle, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L02.93,"[L02.93] Carbuncle, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.011,[L03.011] Cellulitis of right finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.012,[L03.012] Cellulitis of left finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.019,[L03.019] Cellulitis of unspecified finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.021,[L03.021] Acute lymphangitis of right finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.022,[L03.022] Acute lymphangitis of left finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.029,[L03.029] Acute lymphangitis of unspecified finger,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.031,[L03.031] Cellulitis of right toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.032,[L03.032] Cellulitis of left toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.039,[L03.039] Cellulitis of unspecified toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.041,[L03.041] Acute lymphangitis of right toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.042,[L03.042] Acute lymphangitis of left toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.049,[L03.049] Acute lymphangitis of unspecified toe,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.111,[L03.111] Cellulitis of right axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.112,[L03.112] Cellulitis of left axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.113,[L03.113] Cellulitis of right upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.114,[L03.114] Cellulitis of left upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.115,[L03.115] Cellulitis of right lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.116,[L03.116] Cellulitis of left lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.119,[L03.119] Cellulitis of unspecified part of limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.121,[L03.121] Acute lymphangitis of right axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.122,[L03.122] Acute lymphangitis of left axilla,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.123,[L03.123] Acute lymphangitis of right upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.124,[L03.124] Acute lymphangitis of left upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.125,[L03.125] Acute lymphangitis of right lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.126,[L03.126] Acute lymphangitis of left lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.129,[L03.129] Acute lymphangitis of unspecified part of limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.211,[L03.211] Cellulitis of face,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.212,[L03.212] Acute lymphangitis of face,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.213,[L03.213] Periorbital cellulitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.221,[L03.221] Cellulitis of neck,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.222,[L03.222] Acute lymphangitis of neck,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.311,[L03.311] Cellulitis of abdominal wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.312,[L03.312] Cellulitis of back [any part except buttock],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.313,[L03.313] Cellulitis of chest wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.314,[L03.314] Cellulitis of groin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.315,[L03.315] Cellulitis of perineum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.316,[L03.316] Cellulitis of umbilicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.317,[L03.317] Cellulitis of buttock,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.319,"[L03.319] Cellulitis of trunk, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.321,[L03.321] Acute lymphangitis of abdominal wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.322,[L03.322] Acute lymphangitis of back [any part except buttock],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.323,[L03.323] Acute lymphangitis of chest wall,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.324,[L03.324] Acute lymphangitis of groin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.325,[L03.325] Acute lymphangitis of perineum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.326,[L03.326] Acute lymphangitis of umbilicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.327,[L03.327] Acute lymphangitis of buttock,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.329,"[L03.329] Acute lymphangitis of trunk, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.811,"[L03.811] Cellulitis of head [any part, except face]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.818,[L03.818] Cellulitis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.891,"[L03.891] Acute lymphangitis of head [any part, except face]",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.898,[L03.898] Acute lymphangitis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.90,"[L03.90] Cellulitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L03.91,"[L03.91] Acute lymphangitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.0,"[L04.0] Acute lymphadenitis of face, head and neck",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.1,[L04.1] Acute lymphadenitis of trunk,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.2,[L04.2] Acute lymphadenitis of upper limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.3,[L04.3] Acute lymphadenitis of lower limb,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.8,[L04.8] Acute lymphadenitis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L04.9,"[L04.9] Acute lymphadenitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L05.01,[L05.01] Pilonidal cyst with abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L05.02,[L05.02] Pilonidal sinus with abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L05.91,[L05.91] Pilonidal cyst without abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L05.92,[L05.92] Pilonidal sinus without abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.0,[L08.0] Pyoderma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.1,[L08.1] Erythrasma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.81,[L08.81] Pyoderma vegetans,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.82,[L08.82] Omphalitis not of newborn,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.89,[L08.89] Other specified local infections of the skin and subcutaneous tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L08.9,"[L08.9] Local infection of the skin and subcutaneous tissue, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.0,[L10.0] Pemphigus vulgaris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.1,[L10.1] Pemphigus vegetans,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.2,[L10.2] Pemphigus foliaceous,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.3,[L10.3] Brazilian pemphigus [fogo selvagem],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.4,[L10.4] Pemphigus erythematosus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.5,[L10.5] Drug-induced pemphigus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.81,[L10.81] Paraneoplastic pemphigus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.89,[L10.89] Other pemphigus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L10.9,"[L10.9] Pemphigus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L11.0,[L11.0] Acquired keratosis follicularis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L11.1,[L11.1] Transient acantholytic dermatosis [Grover],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L11.8,[L11.8] Other specified acantholytic disorders,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L11.9,"[L11.9] Acantholytic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.0,[L12.0] Bullous pemphigoid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.1,[L12.1] Cicatricial pemphigoid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.2,[L12.2] Chronic bullous disease of childhood,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.30,"[L12.30] Acquired epidermolysis bullosa, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.31,[L12.31] Epidermolysis bullosa due to drug,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.35,[L12.35] Other acquired epidermolysis bullosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.8,[L12.8] Other pemphigoid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L12.9,"[L12.9] Pemphigoid, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L13.0,[L13.0] Dermatitis herpetiformis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L13.1,[L13.1] Subcorneal pustular dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L13.8,[L13.8] Other specified bullous disorders,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L13.9,"[L13.9] Bullous disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L14,[L14] Bullous disorders in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.0,[L20.0] Besnier's prurigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.81,[L20.81] Atopic neurodermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.82,[L20.82] Flexural eczema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.83,[L20.83] Infantile (acute) (chronic) eczema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.84,[L20.84] Intrinsic (allergic) eczema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.89,[L20.89] Other atopic dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L20.9,"[L20.9] Atopic dermatitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L21.0,[L21.0] Seborrhea capitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L21.1,[L21.1] Seborrheic infantile dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L21.8,[L21.8] Other seborrheic dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L21.9,"[L21.9] Seborrheic dermatitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L22,[L22] Diaper dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.0,[L23.0] Allergic contact dermatitis due to metals,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.1,[L23.1] Allergic contact dermatitis due to adhesives,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.2,[L23.2] Allergic contact dermatitis due to cosmetics,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.3,[L23.3] Allergic contact dermatitis due to drugs in contact with skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.4,[L23.4] Allergic contact dermatitis due to dyes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.5,[L23.5] Allergic contact dermatitis due to other chemical products,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.6,[L23.6] Allergic contact dermatitis due to food in contact with the skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.7,"[L23.7] Allergic contact dermatitis due to plants, except food",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.81,[L23.81] Allergic contact dermatitis due to animal (cat) (dog) dander,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.89,[L23.89] Allergic contact dermatitis due to other agents,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L23.9,"[L23.9] Allergic contact dermatitis, unspecified cause",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.0,[L24.0] Irritant contact dermatitis due to detergents,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.1,[L24.1] Irritant contact dermatitis due to oils and greases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.2,[L24.2] Irritant contact dermatitis due to solvents,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.3,[L24.3] Irritant contact dermatitis due to cosmetics,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.4,[L24.4] Irritant contact dermatitis due to drugs in contact with skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.5,[L24.5] Irritant contact dermatitis due to other chemical products,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.6,[L24.6] Irritant contact dermatitis due to food in contact with skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.7,"[L24.7] Irritant contact dermatitis due to plants, except food",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.81,[L24.81] Irritant contact dermatitis due to metals,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.89,[L24.89] Irritant contact dermatitis due to other agents,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.9,"[L24.9] Irritant contact dermatitis, unspecified cause",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.A0,"[L24.A0] Irritant contact dermatitis due to friction or contact with body fluids, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.A1,[L24.A1] Irritant contact dermatitis due to saliva,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.A2,"[L24.A2] Irritant contact dermatitis due to fecal, urinary or dual incontinence",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.A9,[L24.A9] Irritant contact dermatitis due friction or contact with other specified body fluids,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.B0,[L24.B0] Irritant contact dermatitis related to unspecified stoma or fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.B1,[L24.B1] Irritant contact dermatitis related to digestive stoma or fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.B2,[L24.B2] Irritant contact dermatitis related to respiratory stoma or fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L24.B3,[L24.B3] Irritant contact dermatitis related to fecal or urinary stoma or fistula,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.0,[L25.0] Unspecified contact dermatitis due to cosmetics,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.1,[L25.1] Unspecified contact dermatitis due to drugs in contact with skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.2,[L25.2] Unspecified contact dermatitis due to dyes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.3,[L25.3] Unspecified contact dermatitis due to other chemical products,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.4,[L25.4] Unspecified contact dermatitis due to food in contact with skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.5,"[L25.5] Unspecified contact dermatitis due to plants, except food",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.8,[L25.8] Unspecified contact dermatitis due to other agents,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L25.9,"[L25.9] Unspecified contact dermatitis, unspecified cause",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L26,[L26] Exfoliative dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L27.0,[L27.0] Generalized skin eruption due to drugs and medicaments taken internally,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L27.1,[L27.1] Localized skin eruption due to drugs and medicaments taken internally,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L27.2,[L27.2] Dermatitis due to ingested food,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L27.8,[L27.8] Dermatitis due to other substances taken internally,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L27.9,[L27.9] Dermatitis due to unspecified substance taken internally,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L28.0,[L28.0] Lichen simplex chronicus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L28.1,[L28.1] Prurigo nodularis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L28.2,[L28.2] Other prurigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.0,[L29.0] Pruritus ani,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.1,[L29.1] Pruritus scroti,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.2,[L29.2] Pruritus vulvae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.3,"[L29.3] Anogenital pruritus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.8,[L29.8] Other pruritus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L29.9,"[L29.9] Pruritus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.0,[L30.0] Nummular dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.2,[L30.2] Cutaneous autosensitization,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.3,[L30.3] Infective dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.4,[L30.4] Erythema intertrigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.5,[L30.5] Pityriasis alba,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.8,[L30.8] Other specified dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L30.9,"[L30.9] Dermatitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.0,[L40.0] Psoriasis vulgaris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.1,[L40.1] Generalized pustular psoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.2,[L40.2] Acrodermatitis continua,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.3,[L40.3] Pustulosis palmaris et plantaris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.4,[L40.4] Guttate psoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.50,"[L40.50] Arthropathic psoriasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.51,[L40.51] Distal interphalangeal psoriatic arthropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.52,[L40.52] Psoriatic arthritis mutilans,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.53,[L40.53] Psoriatic spondylitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.54,[L40.54] Psoriatic juvenile arthropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.59,[L40.59] Other psoriatic arthropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.8,[L40.8] Other psoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L40.9,"[L40.9] Psoriasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.0,[L41.0] Pityriasis lichenoides et varioliformis acuta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.1,[L41.1] Pityriasis lichenoides chronica,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.3,[L41.3] Small plaque parapsoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.4,[L41.4] Large plaque parapsoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.5,[L41.5] Retiform parapsoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.8,[L41.8] Other parapsoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L41.9,"[L41.9] Parapsoriasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L42,[L42] Pityriasis rosea,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.0,[L43.0] Hypertrophic lichen planus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.1,[L43.1] Bullous lichen planus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.2,[L43.2] Lichenoid drug reaction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.3,[L43.3] Subacute (active) lichen planus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.8,[L43.8] Other lichen planus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L43.9,"[L43.9] Lichen planus, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.0,[L44.0] Pityriasis rubra pilaris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.1,[L44.1] Lichen nitidus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.2,[L44.2] Lichen striatus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.3,[L44.3] Lichen ruber moniliformis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.4,[L44.4] Infantile papular acrodermatitis [Gianotti-Crosti],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.8,[L44.8] Other specified papulosquamous disorders,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L44.9,"[L44.9] Papulosquamous disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L45,[L45] Papulosquamous disorders in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.0,[L49.0] Exfoliation due to erythematous condition involving less than 10 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.1,[L49.1] Exfoliation due to erythematous condition involving 10-19 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.2,[L49.2] Exfoliation due to erythematous condition involving 20-29 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.3,[L49.3] Exfoliation due to erythematous condition involving 30-39 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.4,[L49.4] Exfoliation due to erythematous condition involving 40-49 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.5,[L49.5] Exfoliation due to erythematous condition involving 50-59 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.6,[L49.6] Exfoliation due to erythematous condition involving 60-69 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.7,[L49.7] Exfoliation due to erythematous condition involving 70-79 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.8,[L49.8] Exfoliation due to erythematous condition involving 80-89 percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L49.9,[L49.9] Exfoliation due to erythematous condition involving 90 or more percent of body surface,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.0,[L50.0] Allergic urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.1,[L50.1] Idiopathic urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.2,[L50.2] Urticaria due to cold and heat,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.3,[L50.3] Dermatographic urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.4,[L50.4] Vibratory urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.5,[L50.5] Cholinergic urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.6,[L50.6] Contact urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.8,[L50.8] Other urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L50.9,"[L50.9] Urticaria, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.0,[L51.0] Nonbullous erythema multiforme,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.1,[L51.1] Stevens-Johnson syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.2,[L51.2] Toxic epidermal necrolysis [Lyell],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.3,[L51.3] Stevens-Johnson syndrome-toxic epidermal necrolysis overlap syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.8,[L51.8] Other erythema multiforme,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L51.9,"[L51.9] Erythema multiforme, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L52,[L52] Erythema nodosum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.0,[L53.0] Toxic erythema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.1,[L53.1] Erythema annulare centrifugum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.2,[L53.2] Erythema marginatum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.3,[L53.3] Other chronic figurate erythema,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.8,[L53.8] Other specified erythematous conditions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L53.9,"[L53.9] Erythematous condition, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L54,[L54] Erythema in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L55.0,[L55.0] Sunburn of first degree,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L55.1,[L55.1] Sunburn of second degree,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L55.2,[L55.2] Sunburn of third degree,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L55.9,"[L55.9] Sunburn, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.0,[L56.0] Drug phototoxic response,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.1,[L56.1] Drug photoallergic response,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.2,[L56.2] Photocontact dermatitis [berloque dermatitis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.3,[L56.3] Solar urticaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.4,[L56.4] Polymorphous light eruption,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.8,[L56.8] Other specified acute skin changes due to ultraviolet radiation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L56.9,"[L56.9] Acute skin change due to ultraviolet radiation, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L57.8,[L57.8] Other skin changes due to chronic exposure to nonionizing radiation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L57.9,"[L57.9] Skin changes due to chronic exposure to nonionizing radiation, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L58.0,[L58.0] Acute radiodermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L58.1,[L58.1] Chronic radiodermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L58.9,"[L58.9] Radiodermatitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L59.0,[L59.0] Erythema ab igne [dermatitis ab igne],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L59.8,[L59.8] Other specified disorders of the skin and subcutaneous tissue related to radiation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L59.9,"[L59.9] Disorder of the skin and subcutaneous tissue related to radiation, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L66.1,[L66.1] Lichen planopilaris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L71.0,[L71.0] Perioral dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L71.1,[L71.1] Rhinophyma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L71.8,[L71.8] Other rosacea,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L71.9,"[L71.9] Rosacea, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.01,[L76.01] Intraoperative hemorrhage and hematoma of skin and subcutaneous tissue complicating a dermatologic procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.02,[L76.02] Intraoperative hemorrhage and hematoma of skin and subcutaneous tissue complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.11,[L76.11] Accidental puncture and laceration of skin and subcutaneous tissue during a dermatologic procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.12,[L76.12] Accidental puncture and laceration of skin and subcutaneous tissue during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.21,[L76.21] Postprocedural hemorrhage of skin and subcutaneous tissue following a dermatologic procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.22,[L76.22] Postprocedural hemorrhage of skin and subcutaneous tissue following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.31,[L76.31] Postprocedural hematoma of skin and subcutaneous tissue following a dermatologic procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.32,[L76.32] Postprocedural hematoma of skin and subcutaneous tissue following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.33,[L76.33] Postprocedural seroma of skin and subcutaneous tissue following a dermatologic procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.34,[L76.34] Postprocedural seroma of skin and subcutaneous tissue following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.81,[L76.81] Other intraoperative complications of skin and subcutaneous tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L76.82,[L76.82] Other postprocedural complications of skin and subcutaneous tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L88,[L88] Pyoderma gangrenosum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L92.0,[L92.0] Granuloma annulare,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L93.0,[L93.0] Discoid lupus erythematosus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L93.1,[L93.1] Subacute cutaneous lupus erythematosus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L93.2,[L93.2] Other local lupus erythematosus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L94.5,[L94.5] Poikiloderma vasculare atrophicans,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L94.6,[L94.6] Ainhum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L95.0,[L95.0] Livedoid vasculitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L95.1,[L95.1] Erythema elevatum diutinum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L95.8,[L95.8] Other vasculitis limited to the skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L95.9,"[L95.9] Vasculitis limited to the skin, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L98.1,[L98.1] Factitial dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L98.2,[L98.2] Febrile neutrophilic dermatosis [Sweet],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,L98.3,[L98.3] Eosinophilic cellulitis [Wells],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.00,"[M10.00] Idiopathic gout, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.011,"[M10.011] Idiopathic gout, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.012,"[M10.012] Idiopathic gout, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.019,"[M10.019] Idiopathic gout, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.021,"[M10.021] Idiopathic gout, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.022,"[M10.022] Idiopathic gout, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.029,"[M10.029] Idiopathic gout, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.031,"[M10.031] Idiopathic gout, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.032,"[M10.032] Idiopathic gout, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.039,"[M10.039] Idiopathic gout, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.041,"[M10.041] Idiopathic gout, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.042,"[M10.042] Idiopathic gout, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.049,"[M10.049] Idiopathic gout, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.051,"[M10.051] Idiopathic gout, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.052,"[M10.052] Idiopathic gout, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.059,"[M10.059] Idiopathic gout, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.061,"[M10.061] Idiopathic gout, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.062,"[M10.062] Idiopathic gout, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.069,"[M10.069] Idiopathic gout, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.071,"[M10.071] Idiopathic gout, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.072,"[M10.072] Idiopathic gout, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.079,"[M10.079] Idiopathic gout, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.08,"[M10.08] Idiopathic gout, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.09,"[M10.09] Idiopathic gout, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.10,"[M10.10] Lead-induced gout, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.111,"[M10.111] Lead-induced gout, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.112,"[M10.112] Lead-induced gout, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.119,"[M10.119] Lead-induced gout, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.121,"[M10.121] Lead-induced gout, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.122,"[M10.122] Lead-induced gout, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.129,"[M10.129] Lead-induced gout, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.131,"[M10.131] Lead-induced gout, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.132,"[M10.132] Lead-induced gout, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.139,"[M10.139] Lead-induced gout, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.141,"[M10.141] Lead-induced gout, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.142,"[M10.142] Lead-induced gout, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.149,"[M10.149] Lead-induced gout, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.151,"[M10.151] Lead-induced gout, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.152,"[M10.152] Lead-induced gout, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.159,"[M10.159] Lead-induced gout, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.161,"[M10.161] Lead-induced gout, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.162,"[M10.162] Lead-induced gout, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.169,"[M10.169] Lead-induced gout, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.171,"[M10.171] Lead-induced gout, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.172,"[M10.172] Lead-induced gout, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.179,"[M10.179] Lead-induced gout, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.18,"[M10.18] Lead-induced gout, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.19,"[M10.19] Lead-induced gout, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.20,"[M10.20] Drug-induced gout, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.211,"[M10.211] Drug-induced gout, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.212,"[M10.212] Drug-induced gout, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.219,"[M10.219] Drug-induced gout, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.221,"[M10.221] Drug-induced gout, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.222,"[M10.222] Drug-induced gout, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.229,"[M10.229] Drug-induced gout, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.231,"[M10.231] Drug-induced gout, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.232,"[M10.232] Drug-induced gout, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.239,"[M10.239] Drug-induced gout, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.241,"[M10.241] Drug-induced gout, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.242,"[M10.242] Drug-induced gout, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.249,"[M10.249] Drug-induced gout, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.251,"[M10.251] Drug-induced gout, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.252,"[M10.252] Drug-induced gout, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.259,"[M10.259] Drug-induced gout, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.261,"[M10.261] Drug-induced gout, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.262,"[M10.262] Drug-induced gout, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.269,"[M10.269] Drug-induced gout, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.271,"[M10.271] Drug-induced gout, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.272,"[M10.272] Drug-induced gout, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.279,"[M10.279] Drug-induced gout, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.28,"[M10.28] Drug-induced gout, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.29,"[M10.29] Drug-induced gout, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.30,"[M10.30] Gout due to renal impairment, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.311,"[M10.311] Gout due to renal impairment, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.312,"[M10.312] Gout due to renal impairment, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.319,"[M10.319] Gout due to renal impairment, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.321,"[M10.321] Gout due to renal impairment, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.322,"[M10.322] Gout due to renal impairment, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.329,"[M10.329] Gout due to renal impairment, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.331,"[M10.331] Gout due to renal impairment, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.332,"[M10.332] Gout due to renal impairment, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.339,"[M10.339] Gout due to renal impairment, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.341,"[M10.341] Gout due to renal impairment, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.342,"[M10.342] Gout due to renal impairment, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.349,"[M10.349] Gout due to renal impairment, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.351,"[M10.351] Gout due to renal impairment, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.352,"[M10.352] Gout due to renal impairment, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.359,"[M10.359] Gout due to renal impairment, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.361,"[M10.361] Gout due to renal impairment, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.362,"[M10.362] Gout due to renal impairment, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.369,"[M10.369] Gout due to renal impairment, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.371,"[M10.371] Gout due to renal impairment, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.372,"[M10.372] Gout due to renal impairment, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.379,"[M10.379] Gout due to renal impairment, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.38,"[M10.38] Gout due to renal impairment, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.39,"[M10.39] Gout due to renal impairment, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.40,"[M10.40] Other secondary gout, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.411,"[M10.411] Other secondary gout, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.412,"[M10.412] Other secondary gout, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.419,"[M10.419] Other secondary gout, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.421,"[M10.421] Other secondary gout, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.422,"[M10.422] Other secondary gout, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.429,"[M10.429] Other secondary gout, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.431,"[M10.431] Other secondary gout, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.432,"[M10.432] Other secondary gout, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.439,"[M10.439] Other secondary gout, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.441,"[M10.441] Other secondary gout, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.442,"[M10.442] Other secondary gout, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.449,"[M10.449] Other secondary gout, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.451,"[M10.451] Other secondary gout, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.452,"[M10.452] Other secondary gout, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.459,"[M10.459] Other secondary gout, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.461,"[M10.461] Other secondary gout, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.462,"[M10.462] Other secondary gout, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.469,"[M10.469] Other secondary gout, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.471,"[M10.471] Other secondary gout, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.472,"[M10.472] Other secondary gout, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.479,"[M10.479] Other secondary gout, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.48,"[M10.48] Other secondary gout, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.49,"[M10.49] Other secondary gout, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M10.9,"[M10.9] Gout, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.00,"[M11.00] Hydroxyapatite deposition disease, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.011,"[M11.011] Hydroxyapatite deposition disease, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.012,"[M11.012] Hydroxyapatite deposition disease, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.019,"[M11.019] Hydroxyapatite deposition disease, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.021,"[M11.021] Hydroxyapatite deposition disease, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.022,"[M11.022] Hydroxyapatite deposition disease, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.029,"[M11.029] Hydroxyapatite deposition disease, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.031,"[M11.031] Hydroxyapatite deposition disease, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.032,"[M11.032] Hydroxyapatite deposition disease, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.039,"[M11.039] Hydroxyapatite deposition disease, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.041,"[M11.041] Hydroxyapatite deposition disease, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.042,"[M11.042] Hydroxyapatite deposition disease, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.049,"[M11.049] Hydroxyapatite deposition disease, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.051,"[M11.051] Hydroxyapatite deposition disease, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.052,"[M11.052] Hydroxyapatite deposition disease, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.059,"[M11.059] Hydroxyapatite deposition disease, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.061,"[M11.061] Hydroxyapatite deposition disease, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.062,"[M11.062] Hydroxyapatite deposition disease, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.069,"[M11.069] Hydroxyapatite deposition disease, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.071,"[M11.071] Hydroxyapatite deposition disease, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.072,"[M11.072] Hydroxyapatite deposition disease, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.079,"[M11.079] Hydroxyapatite deposition disease, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.08,"[M11.08] Hydroxyapatite deposition disease, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.09,"[M11.09] Hydroxyapatite deposition disease, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.10,"[M11.10] Familial chondrocalcinosis, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.111,"[M11.111] Familial chondrocalcinosis, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.112,"[M11.112] Familial chondrocalcinosis, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.119,"[M11.119] Familial chondrocalcinosis, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.121,"[M11.121] Familial chondrocalcinosis, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.122,"[M11.122] Familial chondrocalcinosis, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.129,"[M11.129] Familial chondrocalcinosis, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.131,"[M11.131] Familial chondrocalcinosis, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.132,"[M11.132] Familial chondrocalcinosis, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.139,"[M11.139] Familial chondrocalcinosis, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.141,"[M11.141] Familial chondrocalcinosis, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.142,"[M11.142] Familial chondrocalcinosis, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.149,"[M11.149] Familial chondrocalcinosis, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.151,"[M11.151] Familial chondrocalcinosis, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.152,"[M11.152] Familial chondrocalcinosis, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.159,"[M11.159] Familial chondrocalcinosis, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.161,"[M11.161] Familial chondrocalcinosis, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.162,"[M11.162] Familial chondrocalcinosis, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.169,"[M11.169] Familial chondrocalcinosis, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.171,"[M11.171] Familial chondrocalcinosis, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.172,"[M11.172] Familial chondrocalcinosis, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.179,"[M11.179] Familial chondrocalcinosis, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.18,"[M11.18] Familial chondrocalcinosis, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.19,"[M11.19] Familial chondrocalcinosis, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.20,"[M11.20] Other chondrocalcinosis, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.211,"[M11.211] Other chondrocalcinosis, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.212,"[M11.212] Other chondrocalcinosis, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.219,"[M11.219] Other chondrocalcinosis, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.221,"[M11.221] Other chondrocalcinosis, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.222,"[M11.222] Other chondrocalcinosis, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.229,"[M11.229] Other chondrocalcinosis, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.231,"[M11.231] Other chondrocalcinosis, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.232,"[M11.232] Other chondrocalcinosis, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.239,"[M11.239] Other chondrocalcinosis, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.241,"[M11.241] Other chondrocalcinosis, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.242,"[M11.242] Other chondrocalcinosis, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.249,"[M11.249] Other chondrocalcinosis, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.251,"[M11.251] Other chondrocalcinosis, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.252,"[M11.252] Other chondrocalcinosis, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.259,"[M11.259] Other chondrocalcinosis, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.261,"[M11.261] Other chondrocalcinosis, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.262,"[M11.262] Other chondrocalcinosis, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.269,"[M11.269] Other chondrocalcinosis, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.271,"[M11.271] Other chondrocalcinosis, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.272,"[M11.272] Other chondrocalcinosis, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.279,"[M11.279] Other chondrocalcinosis, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.28,"[M11.28] Other chondrocalcinosis, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.29,"[M11.29] Other chondrocalcinosis, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.80,"[M11.80] Other specified crystal arthropathies, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.811,"[M11.811] Other specified crystal arthropathies, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.812,"[M11.812] Other specified crystal arthropathies, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.819,"[M11.819] Other specified crystal arthropathies, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.821,"[M11.821] Other specified crystal arthropathies, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.822,"[M11.822] Other specified crystal arthropathies, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.829,"[M11.829] Other specified crystal arthropathies, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.831,"[M11.831] Other specified crystal arthropathies, right wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.832,"[M11.832] Other specified crystal arthropathies, left wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.839,"[M11.839] Other specified crystal arthropathies, unspecified wrist",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.841,"[M11.841] Other specified crystal arthropathies, right hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.842,"[M11.842] Other specified crystal arthropathies, left hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.849,"[M11.849] Other specified crystal arthropathies, unspecified hand",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.851,"[M11.851] Other specified crystal arthropathies, right hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.852,"[M11.852] Other specified crystal arthropathies, left hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.859,"[M11.859] Other specified crystal arthropathies, unspecified hip",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.861,"[M11.861] Other specified crystal arthropathies, right knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.862,"[M11.862] Other specified crystal arthropathies, left knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.869,"[M11.869] Other specified crystal arthropathies, unspecified knee",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.871,"[M11.871] Other specified crystal arthropathies, right ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.872,"[M11.872] Other specified crystal arthropathies, left ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.879,"[M11.879] Other specified crystal arthropathies, unspecified ankle and foot",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.88,"[M11.88] Other specified crystal arthropathies, vertebrae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.89,"[M11.89] Other specified crystal arthropathies, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M11.9,"[M11.9] Crystal arthropathy, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.50,"[M12.50] Traumatic arthropathy, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.511,"[M12.511] Traumatic arthropathy, right shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.512,"[M12.512] Traumatic arthropathy, left shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.519,"[M12.519] Traumatic arthropathy, unspecified shoulder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.521,"[M12.521] Traumatic arthropathy, right elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.522,"[M12.522] Traumatic arthropathy, left elbow",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,M12.529,"[M12.529] Traumatic arthropathy, unspecified elbow",ICD10CM,2.16.840.1.113883.6.90

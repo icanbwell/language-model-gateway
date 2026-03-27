@@ -1,0 +1,682 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Diastolic Less Than 90,2.16.840.1.113883.3.464.1004.2459,3078F,"Most recent diastolic blood pressure less than 80 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Diastolic Less Than 90,2.16.840.1.113883.3.464.1004.2459,3079F,"Most recent diastolic blood pressure 80-89 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99281,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99282,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99283,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99284,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,99285,,CPT,2.16.840.1.113883.6.12
+ED,2.16.840.1.113883.3.464.1004.1086,4525004,Emergency department patient visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+ED,2.16.840.1.113883.3.464.1004.1086,0450,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0451,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0452,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0456,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0459,,UBREV,2.16.840.1.113883.6.301.3
+ED,2.16.840.1.113883.3.464.1004.1086,0981,,UBREV,2.16.840.1.113883.6.301.3
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0100,"Cane, includes canes of all materials, adjustable or fixed, with tip (E0100)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0105,"Cane, quad or three prong, includes canes of all materials, adjustable or fixed, with tips (E0105)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0130,"Walker, rigid (pickup), adjustable or fixed height (E0130)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0135,"Walker, folding (pickup), adjustable or fixed height (E0135)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0140,"Walker, with trunk support, adjustable or fixed height, any type (E0140)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0141,"Walker, rigid, wheeled, adjustable or fixed height (E0141)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0143,"Walker, folding, wheeled, adjustable or fixed height (E0143)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0144,"Walker, enclosed, four sided framed, rigid or folding, wheeled with posterior seat (E0144)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0147,"Walker, heavy duty, multiple braking system, variable wheel resistance (E0147)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0148,"Walker, heavy duty, without wheels, rigid or folding, any type, each (E0148)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0149,"Walker, heavy duty, wheeled, rigid or folding, any type (E0149)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0163,"Commode chair, mobile or stationary, with fixed arms (E0163)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0165,"Commode chair, mobile or stationary, with detachable arms (E0165)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0167,"Pail or pan for use with commode chair, replacement only (E0167)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0168,"Commode chair, extra wide and/or heavy duty, stationary or mobile, with or without arms, any type, each (E0168)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0170,"Commode chair with integrated seat lift mechanism, electric, any type (E0170)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0171,"Commode chair with integrated seat lift mechanism, non-electric, any type (E0171)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0250,"Hospital bed, fixed height, with any type side rails, with mattress (E0250)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0251,"Hospital bed, fixed height, with any type side rails, without mattress (E0251)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0255,"Hospital bed, variable height, hi-lo, with any type side rails, with mattress (E0255)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0256,"Hospital bed, variable height, hi-lo, with any type side rails, without mattress (E0256)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0260,"Hospital bed, semi-electric (head and foot adjustment), with any type side rails, with mattress (E0260)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0261,"Hospital bed, semi-electric (head and foot adjustment), with any type side rails, without mattress (E0261)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0265,"Hospital bed, total electric (head, foot and height adjustments), with any type side rails, with mattress (E0265)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0266,"Hospital bed, total electric (head, foot and height adjustments), with any type side rails, without mattress (E0266)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0270,"Hospital bed, institutional type includes: oscillating, circulating and stryker frame, with mattress (E0270)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0290,"Hospital bed, fixed height, without side rails, with mattress (E0290)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0291,"Hospital bed, fixed height, without side rails, without mattress (E0291)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0292,"Hospital bed, variable height, hi-lo, without side rails, with mattress (E0292)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0293,"Hospital bed, variable height, hi-lo, without side rails, without mattress (E0293)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0294,"Hospital bed, semi-electric (head and foot adjustment), without side rails, with mattress (E0294)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0295,"Hospital bed, semi-electric (head and foot adjustment), without side rails, without mattress (E0295)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0296,"Hospital bed, total electric (head, foot and height adjustments), without side rails, with mattress (E0296)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0297,"Hospital bed, total electric (head, foot and height adjustments), without side rails, without mattress (E0297)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0301,"Hospital bed, heavy duty, extra wide, with weight capacity greater than 350 pounds, but less than or equal to 600 pounds, with any type side rails, without mattress (E0301)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0302,"Hospital bed, extra heavy duty, extra wide, with weight capacity greater than 600 pounds, with any type side rails, without mattress (E0302)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0303,"Hospital bed, heavy duty, extra wide, with weight capacity greater than 350 pounds, but less than or equal to 600 pounds, with any type side rails, with mattress (E0303)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0304,"Hospital bed, extra heavy duty, extra wide, with weight capacity greater than 600 pounds, with any type side rails, with mattress (E0304)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0424,"Stationary compressed gaseous oxygen system, rental; includes container, contents, regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0424)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0425,"Stationary compressed gas system, purchase; includes regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0425)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0430,"Portable gaseous oxygen system, purchase; includes regulator, flowmeter, humidifier, cannula or mask, and tubing (E0430)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0431,"Portable gaseous oxygen system, rental; includes portable container, regulator, flowmeter, humidifier, cannula or mask, and tubing (E0431)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0433,"Portable liquid oxygen system, rental; home liquefier used to fill portable liquid oxygen containers, includes portable containers, regulator, flowmeter, humidifier, cannula or mask and tubing, with or without supply reservoir and contents gauge (E0433)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0434,"Portable liquid oxygen system, rental; includes portable container, supply reservoir, humidifier, flowmeter, refill adaptor, contents gauge, cannula or mask, and tubing (E0434)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0435,"Portable liquid oxygen system, purchase; includes portable container, supply reservoir, flowmeter, humidifier, contents gauge, cannula or mask, tubing and refill adaptor (E0435)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0439,"Stationary liquid oxygen system, rental; includes container, contents, regulator, flowmeter, humidifier, nebulizer, cannula or mask, & tubing (E0439)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0440,"Stationary liquid oxygen system, purchase; includes use of reservoir, contents indicator, regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0440)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0441,"Stationary oxygen contents, gaseous, 1 month's supply = 1 unit (E0441)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0442,"Stationary oxygen contents, liquid, 1 month's supply = 1 unit (E0442)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0443,"Portable oxygen contents, gaseous, 1 month's supply = 1 unit (E0443)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0444,"Portable oxygen contents, liquid, 1 month's supply = 1 unit (E0444)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0462,Rocking bed with or without side rails (E0462),HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0465,"Home ventilator, any type, used with invasive interface, (e.g., tracheostomy tube) (E0465)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0466,"Home ventilator, any type, used with non-invasive interface, (e.g., mask, chest shell) (E0466)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0470,"Respiratory assist device, bi-level pressure capability, without backup rate feature, used with noninvasive interface, e.g., nasal or facial mask (intermittent assist device with continuous positive airway pressure device) (E0470)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0471,"Respiratory assist device, bi-level pressure capability, with back-up rate feature, used with noninvasive interface, e.g., nasal or facial mask (intermittent assist device with continuous positive airway pressure device) (E0471)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0472,"Respiratory assist device, bi-level pressure capability, with backup rate feature, used with invasive interface, e.g., tracheostomy tube (intermittent assist device with continuous positive airway pressure device) (E0472)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1130,"Standard wheelchair, fixed full length arms, fixed or swing away detachable footrests (E1130)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1140,"Wheelchair, detachable arms, desk or full length, swing away detachable footrests (E1140)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1150,"Wheelchair, detachable arms, desk or full length swing away detachable elevating legrests (E1150)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1160,"Wheelchair, fixed full length arms, swing away detachable elevating legrests (E1160)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1161,"Manual adult size wheelchair, includes tilt in space (E1161)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1170,"Amputee wheelchair, fixed full length arms, swing away detachable elevating legrests (E1170)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1171,"Amputee wheelchair, fixed full length arms, without footrests or legrest (E1171)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1172,"Amputee wheelchair, detachable arms (desk or full length) without footrests or legrest (E1172)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1180,"Amputee wheelchair, detachable arms (desk or full length) swing away detachable footrests (E1180)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1190,"Amputee wheelchair, detachable arms (desk or full length) swing away detachable elevating legrests (E1190)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1195,"Heavy duty wheelchair, fixed full length arms, swing away detachable elevating legrests (E1195)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1200,"Amputee wheelchair, fixed full length arms, swing away detachable footrest (E1200)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1220,"Wheelchair; specially sized or constructed, (indicate brand name, model number, if any) and justification (E1220)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1240,"Lightweight wheelchair, detachable arms, (desk or full length) swing away detachable, elevating legrest (E1240)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1250,"Lightweight wheelchair, fixed full length arms, swing away detachable footrest (E1250)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1260,"Lightweight wheelchair, detachable arms (desk or full length) swing away detachable footrest (E1260)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1270,"Lightweight wheelchair, fixed full length arms, swing away detachable elevating legrests (E1270)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1280,"Heavy duty wheelchair, detachable arms (desk or full length) elevating legrests (E1280)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1285,"Heavy duty wheelchair, fixed full length arms, swing away detachable footrest (E1285)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1290,"Heavy duty wheelchair, detachable arms (desk or full length) swing away detachable footrest (E1290)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1295,"Heavy duty wheelchair, fixed full length arms, elevating legrest (E1295)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1296,Special wheelchair seat height from floor (E1296),HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1297,"Special wheelchair seat depth, by upholstery (E1297)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1298,"Special wheelchair seat depth and/or width, by construction (E1298)",HCPCS,2.16.840.1.113883.6.285
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.000,"[L89.000] Pressure ulcer of unspecified elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.001,"[L89.001] Pressure ulcer of unspecified elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.002,"[L89.002] Pressure ulcer of unspecified elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.003,"[L89.003] Pressure ulcer of unspecified elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.004,"[L89.004] Pressure ulcer of unspecified elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.006,[L89.006] Pressure-induced deep tissue damage of unspecified elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.009,"[L89.009] Pressure ulcer of unspecified elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.010,"[L89.010] Pressure ulcer of right elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.011,"[L89.011] Pressure ulcer of right elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.012,"[L89.012] Pressure ulcer of right elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.013,"[L89.013] Pressure ulcer of right elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.014,"[L89.014] Pressure ulcer of right elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.016,[L89.016] Pressure-induced deep tissue damage of right elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.019,"[L89.019] Pressure ulcer of right elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.020,"[L89.020] Pressure ulcer of left elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.021,"[L89.021] Pressure ulcer of left elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.022,"[L89.022] Pressure ulcer of left elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.023,"[L89.023] Pressure ulcer of left elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.024,"[L89.024] Pressure ulcer of left elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.026,[L89.026] Pressure-induced deep tissue damage of left elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.029,"[L89.029] Pressure ulcer of left elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.100,"[L89.100] Pressure ulcer of unspecified part of back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.101,"[L89.101] Pressure ulcer of unspecified part of back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.102,"[L89.102] Pressure ulcer of unspecified part of back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.103,"[L89.103] Pressure ulcer of unspecified part of back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.104,"[L89.104] Pressure ulcer of unspecified part of back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.106,[L89.106] Pressure-induced deep tissue damage of unspecified part of back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.109,"[L89.109] Pressure ulcer of unspecified part of back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.110,"[L89.110] Pressure ulcer of right upper back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.111,"[L89.111] Pressure ulcer of right upper back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.112,"[L89.112] Pressure ulcer of right upper back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.113,"[L89.113] Pressure ulcer of right upper back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.114,"[L89.114] Pressure ulcer of right upper back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.116,[L89.116] Pressure-induced deep tissue damage of right upper back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.119,"[L89.119] Pressure ulcer of right upper back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.120,"[L89.120] Pressure ulcer of left upper back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.121,"[L89.121] Pressure ulcer of left upper back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.122,"[L89.122] Pressure ulcer of left upper back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.123,"[L89.123] Pressure ulcer of left upper back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.124,"[L89.124] Pressure ulcer of left upper back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.126,[L89.126] Pressure-induced deep tissue damage of left upper back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.129,"[L89.129] Pressure ulcer of left upper back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.130,"[L89.130] Pressure ulcer of right lower back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.131,"[L89.131] Pressure ulcer of right lower back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.132,"[L89.132] Pressure ulcer of right lower back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.133,"[L89.133] Pressure ulcer of right lower back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.134,"[L89.134] Pressure ulcer of right lower back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.136,[L89.136] Pressure-induced deep tissue damage of right lower back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.139,"[L89.139] Pressure ulcer of right lower back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.140,"[L89.140] Pressure ulcer of left lower back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.141,"[L89.141] Pressure ulcer of left lower back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.142,"[L89.142] Pressure ulcer of left lower back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.143,"[L89.143] Pressure ulcer of left lower back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.144,"[L89.144] Pressure ulcer of left lower back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.146,[L89.146] Pressure-induced deep tissue damage of left lower back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.149,"[L89.149] Pressure ulcer of left lower back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.150,"[L89.150] Pressure ulcer of sacral region, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.151,"[L89.151] Pressure ulcer of sacral region, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.152,"[L89.152] Pressure ulcer of sacral region, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.153,"[L89.153] Pressure ulcer of sacral region, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.154,"[L89.154] Pressure ulcer of sacral region, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.156,[L89.156] Pressure-induced deep tissue damage of sacral region,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.159,"[L89.159] Pressure ulcer of sacral region, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.200,"[L89.200] Pressure ulcer of unspecified hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.201,"[L89.201] Pressure ulcer of unspecified hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.202,"[L89.202] Pressure ulcer of unspecified hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.203,"[L89.203] Pressure ulcer of unspecified hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.204,"[L89.204] Pressure ulcer of unspecified hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.206,[L89.206] Pressure-induced deep tissue damage of unspecified hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.209,"[L89.209] Pressure ulcer of unspecified hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.210,"[L89.210] Pressure ulcer of right hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.211,"[L89.211] Pressure ulcer of right hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.212,"[L89.212] Pressure ulcer of right hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.213,"[L89.213] Pressure ulcer of right hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.214,"[L89.214] Pressure ulcer of right hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.216,[L89.216] Pressure-induced deep tissue damage of right hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.219,"[L89.219] Pressure ulcer of right hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.220,"[L89.220] Pressure ulcer of left hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.221,"[L89.221] Pressure ulcer of left hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.222,"[L89.222] Pressure ulcer of left hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.223,"[L89.223] Pressure ulcer of left hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.224,"[L89.224] Pressure ulcer of left hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.226,[L89.226] Pressure-induced deep tissue damage of left hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.229,"[L89.229] Pressure ulcer of left hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.300,"[L89.300] Pressure ulcer of unspecified buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.301,"[L89.301] Pressure ulcer of unspecified buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.302,"[L89.302] Pressure ulcer of unspecified buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.303,"[L89.303] Pressure ulcer of unspecified buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.304,"[L89.304] Pressure ulcer of unspecified buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.306,[L89.306] Pressure-induced deep tissue damage of unspecified buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.309,"[L89.309] Pressure ulcer of unspecified buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.310,"[L89.310] Pressure ulcer of right buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.311,"[L89.311] Pressure ulcer of right buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.312,"[L89.312] Pressure ulcer of right buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.313,"[L89.313] Pressure ulcer of right buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.314,"[L89.314] Pressure ulcer of right buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.316,[L89.316] Pressure-induced deep tissue damage of right buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.319,"[L89.319] Pressure ulcer of right buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.320,"[L89.320] Pressure ulcer of left buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.321,"[L89.321] Pressure ulcer of left buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.322,"[L89.322] Pressure ulcer of left buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.323,"[L89.323] Pressure ulcer of left buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.324,"[L89.324] Pressure ulcer of left buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.326,[L89.326] Pressure-induced deep tissue damage of left buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.329,"[L89.329] Pressure ulcer of left buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.40,"[L89.40] Pressure ulcer of contiguous site of back, buttock and hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.41,"[L89.41] Pressure ulcer of contiguous site of back, buttock and hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.42,"[L89.42] Pressure ulcer of contiguous site of back, buttock and hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.43,"[L89.43] Pressure ulcer of contiguous site of back, buttock and hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.44,"[L89.44] Pressure ulcer of contiguous site of back, buttock and hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.45,"[L89.45] Pressure ulcer of contiguous site of back, buttock and hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.46,"[L89.46] Pressure-induced deep tissue damage of contiguous site of back, buttock and hip",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.500,"[L89.500] Pressure ulcer of unspecified ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.501,"[L89.501] Pressure ulcer of unspecified ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.502,"[L89.502] Pressure ulcer of unspecified ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.503,"[L89.503] Pressure ulcer of unspecified ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.504,"[L89.504] Pressure ulcer of unspecified ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.506,[L89.506] Pressure-induced deep tissue damage of unspecified ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.509,"[L89.509] Pressure ulcer of unspecified ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.510,"[L89.510] Pressure ulcer of right ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.511,"[L89.511] Pressure ulcer of right ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.512,"[L89.512] Pressure ulcer of right ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.513,"[L89.513] Pressure ulcer of right ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.514,"[L89.514] Pressure ulcer of right ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.516,[L89.516] Pressure-induced deep tissue damage of right ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.519,"[L89.519] Pressure ulcer of right ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.520,"[L89.520] Pressure ulcer of left ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.521,"[L89.521] Pressure ulcer of left ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.522,"[L89.522] Pressure ulcer of left ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.523,"[L89.523] Pressure ulcer of left ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.524,"[L89.524] Pressure ulcer of left ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.526,[L89.526] Pressure-induced deep tissue damage of left ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.529,"[L89.529] Pressure ulcer of left ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.600,"[L89.600] Pressure ulcer of unspecified heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.601,"[L89.601] Pressure ulcer of unspecified heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.602,"[L89.602] Pressure ulcer of unspecified heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.603,"[L89.603] Pressure ulcer of unspecified heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.604,"[L89.604] Pressure ulcer of unspecified heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.606,[L89.606] Pressure-induced deep tissue damage of unspecified heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.609,"[L89.609] Pressure ulcer of unspecified heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.610,"[L89.610] Pressure ulcer of right heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.611,"[L89.611] Pressure ulcer of right heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.612,"[L89.612] Pressure ulcer of right heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.613,"[L89.613] Pressure ulcer of right heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.614,"[L89.614] Pressure ulcer of right heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.616,[L89.616] Pressure-induced deep tissue damage of right heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.619,"[L89.619] Pressure ulcer of right heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.620,"[L89.620] Pressure ulcer of left heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.621,"[L89.621] Pressure ulcer of left heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.622,"[L89.622] Pressure ulcer of left heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.623,"[L89.623] Pressure ulcer of left heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.624,"[L89.624] Pressure ulcer of left heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.626,[L89.626] Pressure-induced deep tissue damage of left heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.629,"[L89.629] Pressure ulcer of left heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.810,"[L89.810] Pressure ulcer of head, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.811,"[L89.811] Pressure ulcer of head, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.812,"[L89.812] Pressure ulcer of head, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.813,"[L89.813] Pressure ulcer of head, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.814,"[L89.814] Pressure ulcer of head, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.816,[L89.816] Pressure-induced deep tissue damage of head,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.819,"[L89.819] Pressure ulcer of head, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.890,"[L89.890] Pressure ulcer of other site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.891,"[L89.891] Pressure ulcer of other site, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.892,"[L89.892] Pressure ulcer of other site, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.893,"[L89.893] Pressure ulcer of other site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.894,"[L89.894] Pressure ulcer of other site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.896,[L89.896] Pressure-induced deep tissue damage of other site,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.899,"[L89.899] Pressure ulcer of other site, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.90,"[L89.90] Pressure ulcer of unspecified site, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.91,"[L89.91] Pressure ulcer of unspecified site, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.92,"[L89.92] Pressure ulcer of unspecified site, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.93,"[L89.93] Pressure ulcer of unspecified site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.94,"[L89.94] Pressure ulcer of unspecified site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.95,"[L89.95] Pressure ulcer of unspecified site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.96,[L89.96] Pressure-induced deep tissue damage of unspecified site,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.50,"[M62.50] Muscle wasting and atrophy, not elsewhere classified, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.81,[M62.81] Muscle weakness (generalized),ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.84,[M62.84] Sarcopenia,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,R29.6,[R29.6] Repeated falls,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXA,"[W01.0XXA] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXD,"[W01.0XXD] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXS,"[W01.0XXS] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XA,"[W01.10XA] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XD,"[W01.10XD] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XS,"[W01.10XS] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110A,"[W01.110A] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110D,"[W01.110D] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110S,"[W01.110S] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111A,"[W01.111A] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111D,"[W01.111D] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111S,"[W01.111S] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118A,"[W01.118A] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118D,"[W01.118D] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118S,"[W01.118S] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119A,"[W01.119A] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119D,"[W01.119D] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119S,"[W01.119S] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190A,"[W01.190A] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190D,"[W01.190D] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190S,"[W01.190S] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198A,"[W01.198A] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198D,"[W01.198D] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198S,"[W01.198S] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXA,"[W06.XXXA] Fall from bed, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXD,"[W06.XXXD] Fall from bed, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXS,"[W06.XXXS] Fall from bed, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXA,"[W07.XXXA] Fall from chair, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXD,"[W07.XXXD] Fall from chair, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXS,"[W07.XXXS] Fall from chair, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXA,"[W08.XXXA] Fall from other furniture, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXD,"[W08.XXXD] Fall from other furniture, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXS,"[W08.XXXS] Fall from other furniture, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXA,"[W10.0XXA] Fall (on)(from) escalator, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXD,"[W10.0XXD] Fall (on)(from) escalator, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXS,"[W10.0XXS] Fall (on)(from) escalator, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXA,"[W10.1XXA] Fall (on)(from) sidewalk curb, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXD,"[W10.1XXD] Fall (on)(from) sidewalk curb, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXS,"[W10.1XXS] Fall (on)(from) sidewalk curb, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXA,"[W10.2XXA] Fall (on)(from) incline, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXD,"[W10.2XXD] Fall (on)(from) incline, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXS,"[W10.2XXS] Fall (on)(from) incline, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXA,"[W10.8XXA] Fall (on) (from) other stairs and steps, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXD,"[W10.8XXD] Fall (on) (from) other stairs and steps, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXS,"[W10.8XXS] Fall (on) (from) other stairs and steps, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXA,"[W10.9XXA] Fall (on) (from) unspecified stairs and steps, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXD,"[W10.9XXD] Fall (on) (from) unspecified stairs and steps, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXS,"[W10.9XXS] Fall (on) (from) unspecified stairs and steps, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XA,"[W18.00XA] Striking against unspecified object with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XD,"[W18.00XD] Striking against unspecified object with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XS,"[W18.00XS] Striking against unspecified object with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XA,"[W18.02XA] Striking against glass with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XD,"[W18.02XD] Striking against glass with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XS,"[W18.02XS] Striking against glass with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XA,"[W18.09XA] Striking against other object with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XD,"[W18.09XD] Striking against other object with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XS,"[W18.09XS] Striking against other object with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XA,"[W18.11XA] Fall from or off toilet without subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XD,"[W18.11XD] Fall from or off toilet without subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XS,"[W18.11XS] Fall from or off toilet without subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XA,"[W18.12XA] Fall from or off toilet with subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XD,"[W18.12XD] Fall from or off toilet with subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XS,"[W18.12XS] Fall from or off toilet with subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXA,"[W18.2XXA] Fall in (into) shower or empty bathtub, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXD,"[W18.2XXD] Fall in (into) shower or empty bathtub, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXS,"[W18.2XXS] Fall in (into) shower or empty bathtub, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XA,"[W18.30XA] Fall on same level, unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XD,"[W18.30XD] Fall on same level, unspecified, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XS,"[W18.30XS] Fall on same level, unspecified, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XA,"[W18.31XA] Fall on same level due to stepping on an object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XD,"[W18.31XD] Fall on same level due to stepping on an object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XS,"[W18.31XS] Fall on same level due to stepping on an object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XA,"[W18.39XA] Other fall on same level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XD,"[W18.39XD] Other fall on same level, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XS,"[W18.39XS] Other fall on same level, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXA,"[W19.XXXA] Unspecified fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXD,"[W19.XXXD] Unspecified fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXS,"[W19.XXXS] Unspecified fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Y92.199,[Y92.199] Unspecified place in other specified residential institution as the place of occurrence of the external cause,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z59.3,[Z59.3] Problems related to living in residential institution,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z73.6,[Z73.6] Limitation of activities due to disability,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.01,[Z74.01] Bed confinement status,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.09,[Z74.09] Other reduced mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.1,[Z74.1] Need for assistance with personal care,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.2,[Z74.2] Need for assistance at home and no other household member able to render care,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.3,[Z74.3] Need for continuous supervision,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.8,[Z74.8] Other problems related to care provider dependency,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.9,"[Z74.9] Problem related to care provider dependency, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z91.81,[Z91.81] History of falling,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.11,[Z99.11] Dependence on respirator [ventilator] status,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.3,[Z99.3] Dependence on wheelchair,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.81,[Z99.81] Dependence on supplemental oxygen,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.89,[Z99.89] Dependence on other enabling machines and devices,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,17886000,Fall from wheelchair (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,20902002,Fall from bed (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,33036003,Fall on same level (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,40104005,Fall in home (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,44188002,Fall in shower (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,56307009,Fall from table (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,67223001,Fall on escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,74541001,Fall from bench (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,83468000,Fall from chair (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,90619006,Fall in bathtub (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,129588001,Adult failure to thrive syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214436006,Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214437002,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, driver of motor vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214438007,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, passenger of motor vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214439004,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, motor cyclist injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214441003,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, occupant of tram injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214442005,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, rider of animal or occupant of animal-drawn vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214443000,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, pedal cyclist injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214444006,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, pedestrian injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217082002,Accidental fall (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217083007,Fall on or from stairs or steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217084001,Fall on or from escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217086004,Fall from escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217088003,Fall on or from stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217090002,Fall from stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217092005,Fall on or from steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217093000,Fall on steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217094006,Fall from steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217142006,Fall from chair or bed (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217154006,"Fall on same level from slipping, tripping or stumbling (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217155007,Fall on same level from slipping (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217156008,Fall on same level from tripping (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217157004,Fall on same level from stumbling (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217158009,Fall on moving sidewalk (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217173005,Fall from bump against object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225558004,Pressure injury of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225562005,Pressure injury of sacral region of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225563000,Pressure injury of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242109009,Fall down stairs of motor bus while boarding or alighting (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242389003,Fall due to wet surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242390007,Fall due to polished surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242391006,Fall due to discarded object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242392004,Fall in bath or shower (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242395002,Fall due to trip on loose carpet (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242396001,Fall due to uneven surface indoors (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242413007,Fall from furniture (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242414001,Fall from stool (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242419006,Fall from toilet seat (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,269699007,Fall on same level from impact against object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,274918000,Fall on same level due to nature of surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,414190009,Fall on stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,427849003,Fall on hard surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,428484005,Organic failure to thrive (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,429621003,Fall on concrete (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,699214007,Pressure injury of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,699216009,Pressure injury of coccygeal region of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,715504003,Spastic paraparesis co-occurrent with deafness (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,763829004,Oculopharyngodistal myopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,823018004,Muscle paresis due to and following neuromuscular blockade (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,92341000119107,Weakness of extremities as sequela of stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,138371000119104,Paresis as late effect of poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,8960001000004106,Pressure injury of ischial tuberosity region of right buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637031000119106,Pressure injury of buttock stage I (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637071000119109,Pressure injury of buttock stage II (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637111000119102,Pressure injury of buttock stage III (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637151000119101,Pressure injury of buttock stage IV (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,99504,,CPT,2.16.840.1.113883.6.12
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,99509,,CPT,2.16.840.1.113883.6.12
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0162,Skilled services by a registered nurse (rn) for management and evaluation of the plan of care; each 15 minutes (the patient's underlying condition or complication requires an rn to ensure that essential non-skilled care achieves its purpose in the home health or hospice setting) (G0162),HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0299,"Direct skilled nursing services of a registered nurse (rn) in the home health or hospice setting, each 15 minutes (G0299)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0300,"Direct skilled nursing services of a licensed practical nurse (lpn) in the home health or hospice setting, each 15 minutes (G0300)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0493,"Skilled services of a registered nurse (rn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need for possible modification of treatment in the home health or hospice setting) (G0493)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0494,"Skilled services of a licensed practical nurse (lpn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need for possible modification of treatment in the home health or hospice setting) (G0494)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S0271,"Physician management of patient home care, hospice monthly case rate (per 30 days) (S0271)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S0311,"Comprehensive management and care coordination for advanced illness, per calendar month (S0311)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S9123,"Nursing care, in the home; by registered nurse, per hour (use for general nursing care only, not to be used when cpt codes 99500-99602 can be used) (S9123)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S9124,"Nursing care, in the home; by licensed practical nurse, per hour (S9124)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1000,"Private duty / independent nursing service(s) - licensed, up to 15 minutes (T1000)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1001,Nursing assessment / evaluation (T1001),HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1002,"Rn services, up to 15 minutes (T1002)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1003,"Lpn/lvn services, up to 15 minutes (T1003)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1004,"Services of a qualified nursing aide, up to 15 minutes (T1004)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1005,"Respite care services, up to 15 minutes (T1005)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1019,"Personal care services, per 15 minutes, not for an inpatient or resident of a hospital, nursing facility, icf/mr or imd, part of the individualized plan of treatment (code may not be used to identify services provided by home health aide or certified nurse assistant) (T1019)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1020,"Personal care services, per diem, not for an inpatient or resident of a hospital, nursing facility, icf/mr or imd, part of the individualized plan of treatment (code may not be used to identify services provided by home health aide or certified nurse assistant) (T1020)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1021,"Home health aide or certified nurse assistant, per visit (T1021)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1022,"Contracted home health agency services, all services provided under contract, per day (T1022)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1030,"Nursing care, in the home, by registered nurse, per diem (T1030)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1031,"Nursing care, in the home, by licensed practical nurse, per diem (T1031)",HCPCS,2.16.840.1.113883.6.285
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.2,"[R26.2] Difficulty in walking, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.89,[R26.89] Other abnormalities of gait and mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.9,[R26.9] Unspecified abnormalities of gait and mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R53.1,[R53.1] Weakness,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R53.81,[R53.81] Other malaise,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R54,[R54] Age-related physical debility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R62.7,[R62.7] Adult failure to thrive,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R63.4,[R63.4] Abnormal weight loss,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R63.6,[R63.6] Underweight,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R64,[R64] Cachexia,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,4468000,Oppenheim's gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,8510008,Reduced mobility (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,13791008,Asthenia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,18726006,Senile asthenia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,20940004,Spinal hemiparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22090007,Scissoring gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22325002,Abnormal gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22631008,Unsteady when walking (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,23042008,Spinal paraparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,26544005,Muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,41786007,Neurological muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,43005009,Shuffling gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,50314001,Partial bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,67141003,Antalgic gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,78119002,Complete bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,78691002,Staggering gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,89362005,Weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,102492002,Failure to maintain weight (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,102568007,Paresis of lower extremity (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105501005,Dependence on enabling machine or device (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105503008,Dependence on wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105504002,Dependence on walking stick (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,126013009,Subjective muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,127378008,Bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160681005,Mobile outside with aid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160683008,Needs walking aid in home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160684002,Confined to chair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160685001,Bed-ridden (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160692006,Mobility very poor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160693001,Mobility poor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160734000,Lives in nursing home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160737007,Lives in an old peoples home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161832001,Weight decreasing (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161873000,Heavy legs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161874006,Heavy feeling (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,162236007,Weakness present (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,162239000,Abdominal weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,165243005,Independent in wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,165244004,Minimal help in wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,224960004,Tired (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,238108007,Cachexia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248269005,Tired on least exertion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248278004,Attacks of weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248279007,Frailty (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249888000,Weakness of sternomastoid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249937002,Truncal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249938007,Weakness of back (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249939004,Proximal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249940002,Shoulder girdle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249941003,Pelvic girdle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249942005,Distal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249943000,Weakness of distal arms and legs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249946008,Pyramidal type muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250003005,Low level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250015009,Arthritic gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250034009,Middle level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250038007,Retropulsion when walking (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250043000,High level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250044006,Cautious gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250045007,Tottering gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250052009,Petren's gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250054005,Frontal gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,262285001,Weight decreased (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,267024001,Abnormal weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,267032009,Tired all the time (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,271795006,Malaise and fatigue (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,275313006,Dragging leg (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,284529003,Cardiac cachexia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,298283006,Hand muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,300948004,Quadriceps weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,309249007,Calf muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,309257005,Excessive weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,312444006,Spastic paraparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,367391008,Malaise (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,371028005,Spastic paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,373931001,Sensation of heaviness in limbs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,397776000,Festinating gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,404904002,Frail elderly (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,413121008,Dependent on helper pushing wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,422868009,Unexplained weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,426977000,Recent weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,428116008,Multifactorial gait problem (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,428264009,Painful gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,429091008,Dependence on biphasic positive airway pressure ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,429487005,Dependence on continuous positive airway pressure ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,431524008,Abnormal gait due to impairment of balance (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,432559006,Abnormal gait due to muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,444932008,Dependence on ventilator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,448765001,Unintentional weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713512009,Muscle weakness of upper limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713514005,Muscle weakness of limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713568000,Occasionally tired (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713655003,Dependence on non-invasive ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,788876001,Cachexia due to malignant neoplastic disease (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,788900007,Dependence on artificial heart (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,931000119107,Dependence on supplemental oxygen (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,60631000119109,Dependence on home ventilator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,60651000119103,Dependence on continuous supplemental oxygen (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,69161000119103,Functional gait abnormality (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,79021000119104,Dependence on aspirator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,79031000119101,Dependence on respirator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,85711000119103,Stumbling due to lack of coordination (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,89201000119106,Dependence on supplemental oxygen when ambulating (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,152921000119101,Dependence on respiratory device (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250991000119100,Stumbling gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,15634971000119107,Weakness of bilateral upper limbs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16018391000119104,Paresis of left lower limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16018431000119109,Paresis of right lower limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16419651000119103,Dependence on biphasic positive airway pressure ventilation due to central sleep apnea syndrome (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718890006,Assessment using Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718893008,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718895001,Assessment using Integrated Palliative care Outcome Scale Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718898004,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718899007,Assessment using Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718901003,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718903000,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718904006,Assessment using Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718957007,Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718967002,Integrated Palliative care Outcome Scale - Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718969004,Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718971004,Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718973001,Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718974007,Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718975008,Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718976009,Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761865002,Palliative care Outcome Scale symptom list for end-stage renal disease (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761866001,Palliative care Outcome Scale symptom list for end-stage renal disease score (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761867005,Assessment using Palliative care Outcome Scale symptom list for end-stage renal disease (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,457511000124100,Palliative performance scale (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,G9054,"Oncology; primary focus of visit; supervising, coordinating or managing care of patient with terminal cancer or for whom other medical illness prevents further cancer treatment; includes symptom management, end-of-life care planning, management of palliative therapies (for use in a medicare-approved demonstration project) (G9054)",HCPCS,2.16.840.1.113883.6.285
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305284002,Admission by palliative care physician (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305381007,Admission to palliative care department (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305686008,Seen by palliative care physician (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305824005,Seen by palliative care medicine service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,441874000,Seen by palliative care service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,713281006,Consultation for palliative care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,4901000124101,Palliative care education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,103735009,Palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,105402000,Visit of patient by chaplain during palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395669003,Specialist palliative care treatment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395670002,Specialist palliative care treatment - inpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395694002,Specialist palliative care treatment - daycare (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395695001,Specialist palliative care treatment - outpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,443761007,Anticipatory palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,1841000124106,Palliative care medication review (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,433181000124107,Documentation of palliative care medication action plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3074F,"Most recent systolic blood pressure less than 130 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3075F,"Most recent systolic blood pressure 130-139 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3078F,"Most recent diastolic blood pressure less than 80 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3079F,"Most recent diastolic blood pressure 80-89 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,3074F,"Most recent systolic blood pressure less than 130 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,3075F,"Most recent systolic blood pressure 130-139 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,75997-7,Systolic blood pressure by Continuous non-invasive monitoring,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,8459-0,Systolic blood pressure--sitting,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,8480-6,Systolic blood pressure,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,8508-4,Brachial artery Systolic blood pressure,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,8546-4,Brachial artery - left Systolic blood pressure,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,8547-2,Brachial artery - right Systolic blood pressure,LOINC,2.16.840.1.113883.6.1
+Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964,271649006,Systolic blood pressure (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Systolic Less Than 140,2.16.840.1.113883.3.464.1004.1243,3074F,"Most recent systolic blood pressure less than 130 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+Systolic Less Than 140,2.16.840.1.113883.3.464.1004.1243,3075F,"Most recent systolic blood pressure 130-139 mm Hg (DM) (HTN, CKD, CAD)",CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

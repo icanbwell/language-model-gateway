@@ -1,0 +1,206 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.294S,"[T41.294S] Poisoning by other general anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X1A,"[T41.3X1A] Poisoning by local anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X1D,"[T41.3X1D] Poisoning by local anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X1S,"[T41.3X1S] Poisoning by local anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X4A,"[T41.3X4A] Poisoning by local anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X4D,"[T41.3X4D] Poisoning by local anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.3X4S,"[T41.3X4S] Poisoning by local anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.41XA,"[T41.41XA] Poisoning by unspecified anesthetic, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.41XD,"[T41.41XD] Poisoning by unspecified anesthetic, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.41XS,"[T41.41XS] Poisoning by unspecified anesthetic, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.44XA,"[T41.44XA] Poisoning by unspecified anesthetic, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.44XD,"[T41.44XD] Poisoning by unspecified anesthetic, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.44XS,"[T41.44XS] Poisoning by unspecified anesthetic, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X1A,"[T41.5X1A] Poisoning by therapeutic gases, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X1D,"[T41.5X1D] Poisoning by therapeutic gases, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X1S,"[T41.5X1S] Poisoning by therapeutic gases, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X4A,"[T41.5X4A] Poisoning by therapeutic gases, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X4D,"[T41.5X4D] Poisoning by therapeutic gases, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T41.5X4S,"[T41.5X4S] Poisoning by therapeutic gases, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X1A,"[T42.3X1A] Poisoning by barbiturates, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X1D,"[T42.3X1D] Poisoning by barbiturates, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X1S,"[T42.3X1S] Poisoning by barbiturates, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X4A,"[T42.3X4A] Poisoning by barbiturates, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X4D,"[T42.3X4D] Poisoning by barbiturates, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.3X4S,"[T42.3X4S] Poisoning by barbiturates, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X1A,"[T42.4X1A] Poisoning by benzodiazepines, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X1D,"[T42.4X1D] Poisoning by benzodiazepines, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X1S,"[T42.4X1S] Poisoning by benzodiazepines, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X4A,"[T42.4X4A] Poisoning by benzodiazepines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X4D,"[T42.4X4D] Poisoning by benzodiazepines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T42.4X4S,"[T42.4X4S] Poisoning by benzodiazepines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.601A,"[T43.601A] Poisoning by unspecified psychostimulants, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.601D,"[T43.601D] Poisoning by unspecified psychostimulants, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.601S,"[T43.601S] Poisoning by unspecified psychostimulants, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.604A,"[T43.604A] Poisoning by unspecified psychostimulants, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.604D,"[T43.604D] Poisoning by unspecified psychostimulants, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.604S,"[T43.604S] Poisoning by unspecified psychostimulants, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.621A,"[T43.621A] Poisoning by amphetamines, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.621D,"[T43.621D] Poisoning by amphetamines, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.621S,"[T43.621S] Poisoning by amphetamines, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.624A,"[T43.624A] Poisoning by amphetamines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.624D,"[T43.624D] Poisoning by amphetamines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.624S,"[T43.624S] Poisoning by amphetamines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.631A,"[T43.631A] Poisoning by methylphenidate, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.631D,"[T43.631D] Poisoning by methylphenidate, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.631S,"[T43.631S] Poisoning by methylphenidate, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.634A,"[T43.634A] Poisoning by methylphenidate, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.634D,"[T43.634D] Poisoning by methylphenidate, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.634S,"[T43.634S] Poisoning by methylphenidate, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.641A,"[T43.641A] Poisoning by ecstasy, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.641D,"[T43.641D] Poisoning by ecstasy, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.641S,"[T43.641S] Poisoning by ecstasy, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.644A,"[T43.644A] Poisoning by ecstasy, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.644D,"[T43.644D] Poisoning by ecstasy, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.644S,"[T43.644S] Poisoning by ecstasy, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.651A,"[T43.651A] Poisoning by methamphetamines accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.651D,"[T43.651D] Poisoning by methamphetamines accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.651S,"[T43.651S] Poisoning by methamphetamines accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.654A,"[T43.654A] Poisoning by methamphetamines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.654D,"[T43.654D] Poisoning by methamphetamines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.654S,"[T43.654S] Poisoning by methamphetamines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.691A,"[T43.691A] Poisoning by other psychostimulants, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.691D,"[T43.691D] Poisoning by other psychostimulants, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.691S,"[T43.691S] Poisoning by other psychostimulants, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.694A,"[T43.694A] Poisoning by other psychostimulants, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.694D,"[T43.694D] Poisoning by other psychostimulants, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T43.694S,"[T43.694S] Poisoning by other psychostimulants, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X1A,"[T51.0X1A] Toxic effect of ethanol, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X1D,"[T51.0X1D] Toxic effect of ethanol, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X1S,"[T51.0X1S] Toxic effect of ethanol, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X4A,"[T51.0X4A] Toxic effect of ethanol, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X4D,"[T51.0X4D] Toxic effect of ethanol, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,T51.0X4S,"[T51.0X4S] Toxic effect of ethanol, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295141006,Accidental pentazocine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295145002,Accidental phenazocine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295150008,Accidental dextromoramide overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295154004,Accidental dextropropoxyphene overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295158001,Accidental dipipanone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295163002,Accidental methadone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295167001,Accidental buprenorphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295171003,Accidental overdose by codeine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295175007,Accidental heroin overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295178009,Accidental overdose by dihydrocodeine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295181004,Accidental nalbuphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295185008,Accidental morphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295190006,Accidental alfentanil overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295194002,Accidental fentanyl overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295198004,Accidental pethidine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295202002,Accidental phenoperidine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295206004,Accidental meptazinol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295210001,Accidental levorphanol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295504002,Accidental etomidate overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295508004,Accidental ketamine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295513000,Accidental propofol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295521006,Accidental methohexitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295526001,Accidental enflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295534007,Accidental halothane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295538005,Accidental isoflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295542008,Accidental trichloroethylene overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295546006,Accidental desflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295551000,Accidental bupivacaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295555009,Accidental cinchocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295559003,Accidental prilocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295563005,Accidental lignocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295572002,Accidental benzocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295576004,Accidental oxybuprocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295580009,Accidental procaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295584000,Accidental proxymetacaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295984006,Accidental methylphenobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295988009,Accidental phenobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,295992002,Accidental primidone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296011000,Accidental clonazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296038007,Accidental amylobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296042005,Accidental butabarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296046008,Accidental cyclobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296050001,Accidental quinalbarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296055006,Accidental flunitrazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296059000,Accidental flurazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296063007,Accidental loprazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296067008,Accidental lormetazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296071006,Accidental nitrazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296075002,Accidental triazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296080006,Accidental alprazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296084002,Accidental bromazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296088004,Accidental chlordiazepoxide overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296091004,Accidental clobazam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296099002,Accidental ketazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296103007,Accidental medazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296107008,Accidental oxazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296111002,Accidental prazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296115006,Accidental midazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296119000,Accidental diazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296122003,Accidental lorazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296126000,Accidental overdose by temazepam (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296128004,Accidental overdose of benzodiazepine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296302007,Accidental cannabis overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296310008,Accidental psilocybin overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296314004,Accidental mescaline overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296322006,Accidental overdose by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,296326009,Accidental overdose by crack cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,297199006,Accidental overdose of opiate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,838520000,Accidental overdose of methylenedioxymethamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90791,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90792,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90832,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90833,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90834,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90836,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90837,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90838,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90839,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90840,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90845,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90847,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90849,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90853,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90875,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90876,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99221,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99222,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99223,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99231,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99232,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99233,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99238,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99239,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99252,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99253,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99254,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99255,,CPT,2.16.840.1.113883.6.12
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2108-9,European,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2109-7,Armenian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2110-5,English,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2111-3,French,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2112-1,German,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2113-9,Irish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2114-7,Italian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2115-4,Polish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2116-2,Scottish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2118-8,Middle Eastern or North African,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2119-6,Assyrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2120-4,Egyptian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2121-2,Iranian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2122-0,Iraqi,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2123-8,Lebanese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2124-6,Palestinian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2125-3,Syrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2126-1,Afghanistani,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2127-9,Israeli,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2129-5,Arab,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50
+[Direct Reference],,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50
+[Direct Reference],,55,Residential Substance Abuse Treatment Facility,POS,2.16.840.1.113883.6.50
+[Direct Reference],,56,Psychiatric Residential Treatment Center,POS,2.16.840.1.113883.6.50
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

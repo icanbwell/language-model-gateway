@@ -1,0 +1,593 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796121000119104,Closed traumatic dislocation of metacarpophalangeal joint of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796161000119109,Closed traumatic dislocation of metacarpophalangeal joint of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796201000119104,Closed traumatic dislocation of metacarpophalangeal joint of left ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796481000119106,Closed traumatic dislocation of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796521000119106,Closed traumatic dislocation of joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796561000119101,Closed traumatic dislocation of joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796601000119101,Closed traumatic dislocation of joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796641000119104,Closed traumatic dislocation of joint of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11796981000119102,Contusion of bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11797341000119105,Injury of bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11798411000119101,Traumatic hematoma of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11798461000119103,Traumatic hematoma of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11800851000119104,Laceration of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11800891000119109,Laceration of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801171000119107,Contusion of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801251000119105,Contusion of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801411000119105,Traumatic injury of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801451000119106,Traumatic injury of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801571000119103,Laceration of right ureter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801611000119107,Laceration of left ureter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801651000119108,Injury of right ureter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801691000119103,Injury of left ureter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11801931000119107,Injury of bilateral fallopian tubes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803171000119108,Closed traumatic dislocation of metacarpophalangeal joint of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803211000119105,Closed traumatic dislocation of metacarpophalangeal joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803251000119106,Closed traumatic dislocation of metacarpophalangeal joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803291000119101,Closed traumatic dislocation of metacarpophalangeal joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803331000119107,Closed traumatic dislocation of metacarpophalangeal joint of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803531000119102,Open traumatic dislocation of proximal interphalangeal joint of finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803571000119104,Open traumatic dislocation of proximal interphalangeal joint of left index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803611000119108,Open traumatic dislocation of proximal interphalangeal joint of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803651000119109,Open traumatic dislocation of proximal interphalangeal joint of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803691000119104,Open traumatic dislocation of proximal interphalangeal joint of left ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803731000119106,Open traumatic dislocation of proximal interphalangeal joint of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803771000119109,Open traumatic dislocation of proximal interphalangeal joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803811000119109,Open traumatic dislocation of proximal interphalangeal joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803851000119105,Open traumatic dislocation of proximal interphalangeal joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803891000119100,Open traumatic dislocation of proximal interphalangeal joint of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803931000119108,Open traumatic dislocation of distal interphalangeal joint of finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11803971000119106,Open traumatic dislocation of distal interphalangeal joint of left index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804011000119101,Open traumatic dislocation of distal interphalangeal joint of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804051000119100,Open traumatic dislocation of distal interphalangeal joint of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804131000119107,Open traumatic dislocation of distal interphalangeal joint of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804171000119105,Open traumatic dislocation of distal interphalangeal joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804211000119107,Open traumatic dislocation of distal interphalangeal joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804251000119108,Open traumatic dislocation of distal interphalangeal joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804331000119109,Closed traumatic dislocation of distal interphalangeal joint of finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804371000119107,Closed traumatic dislocation of distal interphalangeal joint of left index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804411000119108,Closed traumatic dislocation of distal interphalangeal joint of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804451000119109,Closed traumatic dislocation of distal interphalangeal joint of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804491000119104,Closed traumatic dislocation of distal interphalangeal joint of left ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804531000119104,Closed traumatic dislocation of distal interphalangeal joint of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804571000119101,Closed traumatic dislocation of distal interphalangeal joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804611000119105,Closed traumatic dislocation of distal interphalangeal joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804651000119106,Closed traumatic dislocation of distal interphalangeal joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11804691000119101,Closed traumatic dislocation of distal interphalangeal joint of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805531000119103,Closed traumatic dislocation of proximal interphalangeal joint of finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805571000119100,Closed traumatic dislocation of proximal interphalangeal joint of left index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805611000119109,Closed traumatic dislocation of proximal interphalangeal joint of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805651000119105,Closed traumatic dislocation of proximal interphalangeal joint of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805691000119100,Closed traumatic dislocation of proximal interphalangeal joint of left ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805731000119107,Closed traumatic dislocation of proximal interphalangeal joint of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805771000119105,Closed traumatic dislocation of proximal interphalangeal joint of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805811000119105,Closed traumatic dislocation of proximal interphalangeal joint of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805851000119106,Closed traumatic dislocation of proximal interphalangeal joint of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11805891000119101,Closed traumatic dislocation of proximal interphalangeal joint of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11808291000119106,Laceration of ascending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11808331000119100,Laceration of transverse colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11808371000119102,Laceration of descending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11808411000119101,Laceration of sigmoid colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11808531000119105,Contusion of descending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11810901000119105,Laceration of body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11811501000119105,Contusion of head of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11811541000119107,Contusion of body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11811581000119102,Contusion of tail of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812181000119101,Primary blast injury of jejunum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812221000119109,Primary blast injury of ileum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812301000119107,Primary blast injury of ascending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812341000119109,Primary blast injury of transverse colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812381000119104,Primary blast injury of descending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11812421000119108,Primary blast injury of sigmoid colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11819651000119109,Closed traumatic anterior dislocation of right glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11819691000119104,Closed traumatic anterior dislocation of left glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820291000119102,Closed traumatic posterior dislocation of right glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820331000119108,Closed traumatic posterior dislocation of left glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820771000119105,Closed traumatic dislocation of right glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820811000119105,Closed traumatic dislocation of left glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820851000119106,Closed traumatic inferior dislocation of right glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11820891000119101,Closed traumatic inferior dislocation of left glenohumeral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821251000119100,Closed traumatic dislocation of carpometacarpal joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821291000119105,Closed traumatic dislocation of carpometacarpal joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821331000119104,Closed traumatic dislocation of carpometacarpal joint of left wrist (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821371000119101,Closed traumatic dislocation of carpometacarpal joint of right wrist (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821491000119109,Closed traumatic posterior dislocation of right sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821531000119109,Closed traumatic posterior dislocation of left sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821571000119107,Closed traumatic anterior dislocation of right sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821611000119103,Closed traumatic anterior dislocation of left sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821801000119100,Closed traumatic dislocation of right sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11821841000119103,Closed traumatic dislocation of left sternoclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11822201000119107,Closed dislocation of right acromioclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11822281000119104,Closed dislocation of left acromioclavicular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827271000119104,Open traumatic dislocation of interphalangeal joint of right great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827311000119104,Open traumatic dislocation of interphalangeal joint of left great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827351000119103,Open traumatic dislocation of interphalangeal joint of lesser toe of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827391000119108,Open traumatic dislocation of joint of right toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827431000119103,Open traumatic dislocation of joint of left toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827471000119100,Closed traumatic dislocation of joint of left toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827511000119109,Closed traumatic dislocation of interphalangeal joint of right great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827551000119105,Closed traumatic dislocation of interphalangeal joint of left great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827591000119100,Closed traumatic dislocation of interphalangeal joint of lesser toe of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827631000119100,Closed traumatic dislocation of interphalangeal joint of lesser toe of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827741000119104,Closed traumatic dislocation of right patellofemoral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11827781000119109,Closed traumatic dislocation of left patellofemoral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833431000119107,Sprain of medial ligament of right ankle joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833471000119105,Sprain of medial ligament of left ankle joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833511000119101,Sprain of calcaneofibular ligament of right ankle joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833551000119100,Sprain of calcaneofibular ligament of left ankle joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833591000119105,Sprain of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833631000119105,Sprain of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833671000119108,Sprain of tibiofibular ligament of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833711000119107,Sprain of tibiofibular ligament of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833751000119108,Sprain of talofibular ligament of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11833791000119103,Sprain of talofibular ligament of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834071000119104,Closed traumatic dislocation of metacarpophalangeal joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834111000119106,Closed traumatic dislocation of metacarpophalangeal joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834151000119107,Open traumatic dislocation of metacarpophalangeal joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834191000119102,Open traumatic dislocation of metacarpophalangeal joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834471000119108,Open traumatic dislocation of interphalangeal joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834511000119104,Open traumatic dislocation of interphalangeal joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834551000119103,Open traumatic dislocation of joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834591000119108,Open traumatic dislocation of joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834791000119101,Closed traumatic dislocation of joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11834831000119107,Closed traumatic dislocation of joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835111000119107,Closed traumatic dislocation of interphalangeal joint of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835151000119108,Closed traumatic dislocation of interphalangeal joint of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835671000119107,Open traumatic dislocation of metatarsophalangeal joint of right great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835711000119106,Open traumatic dislocation of metatarsophalangeal joint of left great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835831000119108,Open traumatic dislocation of interphalangeal joint of lesser toe of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835871000119106,Closed traumatic dislocation of metatarsophalangeal joint of right great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835911000119109,Closed traumatic dislocation of metatarsophalangeal joint of left great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835951000119105,Closed traumatic dislocation of metatarsophalangeal joint of lesser toe of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11835991000119100,Closed traumatic dislocation of metatarsophalangeal joint of lesser toe of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836031000119106,Open traumatic dislocation of tarsometatarsal joint of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836231000119102,Open traumatic dislocation of joint of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836271000119104,Open traumatic dislocation of joint of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836311000119104,Closed traumatic dislocation of joint of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836351000119103,Closed traumatic dislocation of joint of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836391000119108,Closed traumatic dislocation of intertarsal joint of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836471000119100,Closed traumatic dislocation of intertarsal joint of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836551000119105,Closed traumatic dislocation of tarsometatarsal joint of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836591000119100,Closed traumatic dislocation of tarsometatarsal joint of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11836631000119100,Open traumatic dislocation of tarsometatarsal joint of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842251000119108,Laceration of tendon of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842291000119103,Laceration of tendon of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842371000119107,Strain of tendon of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842451000119109,Strain of tendon of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842531000119104,Traumatic rupture of tendon of right ankle region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11842611000119105,Traumatic rupture of tendon of left ankle region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11845111000119106,Traumatic right carotid cavernous fistula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11845151000119107,Traumatic left carotid cavernous fistula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11853731000119103,Crush injury of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11853771000119100,Crush injury of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11853811000119100,Injury of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11853851000119104,Injury of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11861081000119105,Closed traumatic dislocation of joint of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11861121000119107,Closed traumatic dislocation of joint of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11861361000119104,Open traumatic dislocation of joint of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11864161000119100,Foreign body in skin of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11864241000119107,Foreign body in skin of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11874341000119106,Osteoporotic fracture of left rib (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,11874381000119101,Osteoporotic fracture of right rib (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12020001000004102,Fracture of right rib (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12030001000004100,Fracture of left rib (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12198801000119106,Dislocation of prosthetic joint of left elbow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12202711000119103,Fracture of bone adjacent to prosthesis of right wrist joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12204631000119107,Dislocation of prosthetic joint of right elbow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12206191000119105,Fracture of bone adjacent to right ankle joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12206231000119101,Fracture of bone adjacent to right elbow joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12209041000119109,Fracture of bone adjacent to right shoulder joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12217561000119107,Fracture of bone adjacent to left elbow joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12217601000119107,Fracture of bone adjacent to left ankle joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12217761000119100,Fracture of bone adjacent to left shoulder joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12217801000119108,Fracture of bone adjacent to prosthesis of left wrist joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,12960001000004104,Fracture of left radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,13270001000004101,Fracture of left ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,13960001000004106,Fracture of pubic tubercle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,14430001000004102,Fracture of distal end of right ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15708801000119102,Recurrent dislocation of joint of bilateral hips (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15709001000119101,Recurrent dislocation of joint of bilateral elbows (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15709081000119109,Recurrent dislocation of joint of bilateral hands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15717401000119103,Osteochondritis dissecans of bilateral ankle regions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15720681000119104,Pathological dislocation of left hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15720721000119105,Pathological dislocation of bilateral hips (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15720761000119100,Pathological dislocation of right hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15911931000119102,Open fracture of head of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15912091000119107,Open fracture of head of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15912331000119106,Closed fracture of head of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15912431000119100,Closed fracture of head of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15912531000119101,Closed fracture of trochanter of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15912631000119102,Closed fracture of trochanter of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918061000119103,Closed fracture of alveolar border of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918101000119100,Closed fracture of alveolar border of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918221000119100,Closed fracture of alveolar ridge of left maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918261000119105,Closed fracture of alveolar ridge of right maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918301000119102,Open fracture of alveolar ridge of left maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15918341000119100,Open fracture of alveolar ridge of right maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15970001000004108,Periprosthetic fracture of proximal femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15980231000119103,Recurrent dislocation of left temporomandibular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15980311000119100,Recurrent dislocation of bilateral temporomandibular joints (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,15980351000119104,Recurrent dislocation of right temporomandibular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16000001000004109,Fracture of thumb due to gunshot wound (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16250001000004107,Fracture of shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16280471000119103,Pathological fracture of left tibia due to osteoporosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16542861000119107,Closed fracture of metaphysis of distal end of left radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16542901000119101,Closed fracture of metaphysis of distal end of right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16543151000119106,Open fracture of metaphysis of distal right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16543671000119105,Open fracture of metaphysis of distal left radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561321000119107,Open fracture of left zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561361000119102,Open fracture of right zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561481000119103,Open traumatic dislocation of bilateral temporomandibular joints (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561521000119103,Closed fracture of left zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561561000119108,Closed fracture of right zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561601000119108,Closed dislocation of right temporomandibular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561641000119105,Closed dislocation of left temporomandibular joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16561681000119100,Closed dislocation of bilateral temporomandibular joints (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16582921000119102,Arthritis of left ankle due to trauma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16582961000119107,Arthritis of right ankle due to trauma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16583281000119101,Osteoarthritis of left ankle due to trauma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16583321000119106,Osteoarthritis of right ankle due to trauma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16664831000119108,Open fracture of left zygomatic arch (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665071000119101,Open fracture of right zygomatic arch (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665311000119106,Open fracture of left maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665351000119107,Open fracture of right maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665391000119102,Open fracture of medial wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665431000119107,Open fracture of medial wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665471000119105,Open fracture of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665511000119101,Open blow-out fracture of right orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665751000119108,Open blow-out fracture of left orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16665991000119101,Open fracture of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16666111000119103,Open fracture of condylar process of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16666351000119104,Open fracture of condylar process of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16666591000119101,Open fracture of body of right half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16666831000119102,Open fracture of body of left half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667071000119108,Open fracture of right angle of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667111000119101,Open fracture of left angle of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667311000119103,Open fracture of left half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667351000119102,Open fracture of right half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667391000119107,Closed fracture of left maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667431000119102,Closed fracture of right maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667471000119104,Closed fracture of right zygomatic arch (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667711000119102,Closed fracture of left zygomatic arch (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16667951000119103,Closed fracture of orbital portion of right zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668191000119106,Closed fracture of orbital portion of left zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668431000119103,Closed fracture of right zygomatic tripod (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668671000119102,Closed fracture of left zygomatic tripod (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668911000119100,Closed fracture of right naso orbital ethmoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668951000119104,Closed fracture of left naso orbital ethmoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16668991000119109,Closed fracture of medial wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669031000119102,Closed fracture of medial wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669071000119104,Closed fracture of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669111000119106,Closed fracture of left orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669351000119105,Closed fracture of right orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669591000119108,Closed fracture of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669631000119108,Closed fracture of condylar process of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669871000119105,Closed subcondylar fracture of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669911000119108,Closed subcondylar fracture of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16669951000119109,Closed fracture of condylar process of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670191000119104,Closed fracture of coronoid process of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670231000119108,Closed fracture of coronoid process of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670271000119106,Closed fracture of ramus of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670311000119106,Closed fracture of ramus of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670351000119107,Closed fracture of body of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670591000119105,Closed fracture of body of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16670831000119109,Closed fracture of angle of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16671071000119105,Closed fracture of angle of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16671311000119100,Closed fracture of right mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16671351000119104,Closed fracture of left mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16671391000119109,Closed blow-out fracture of right orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16671631000119101,Closed blow-out fracture of left orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16673871000119100,Closed fracture of right calcaneal apophysis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16673911000119102,Closed fracture of left calcaneal apophysis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16674131000119106,Pathological fracture of left half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16674411000119107,Pathological fracture of right half of mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16674691000119100,Open fracture of right orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16674931000119109,Open fracture of left orbital floor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16694261000119102,Closed fracture of right half of occipital bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16695501000119102,Closed fracture of left half of occipital bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16709301000119102,Closed fracture of left basilar portion of occipital bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16709541000119108,Closed fracture of right basilar portion of occipital bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16709811000119106,Spontaneous hemorrhage of subarachnoid space from anterior communicating artery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16769891000119103,Closed fracture of anterior column of left acetabulum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16866431000119108,Closed fracture of capitellum of right humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16867081000119101,Closed fracture of capitellum of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16898321000119103,Closed fracture of distal phalanx of ring finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16898361000119108,Closed mallet fracture of distal phalanx of middle finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,16898401000119104,Closed mallet fracture of distal phalanx of middle finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,18230001000004102,Closed fracture of left pilon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,18310001000004100,Fracture of distal end of right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,18890001000004102,Facial fracture due to fall (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,18960001000004105,Burst fracture of fourth thoracic vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,19350001000004107,Stress fracture of tibia and fibula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,21080001000004105,Subchondral insufficiency fracture of condyle of femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,21640001000004108,Subtrochanteric fracture of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,21920001000004109,Fracture of posterior vertebral body of thoracic vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,22120001000004107,Nonunion fracture of right ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,22470001000004107,Ruptured cyst of kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,22770001000004100,Comminuted fracture of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,23630001000004100,Supracondylar fracture of right humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,24990001000004105,Fracture of mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,25860001000004107,Fracture of head of right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,28260001000004105,Fracture of manubrium sterni (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,28490001000004108,Compression fracture of second lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,29110001000004106,Fracture of pedicle of fourth cervical vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,29120001000004103,Fracture of pedicle of fifth cervical vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,29580001000004102,Burst fracture of ninth thoracic vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,29750001000004107,Supracondylar fracture of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,31580001000004106,Bilateral sacral insufficiency fracture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,52503801000119101,Open fracture of superior wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,220767211000119104,Pathologic fracture of right foot due to osteopetrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,243863351000119103,Closed fracture of lateral wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,348126401000119103,Open fracture of superior wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,363589331000119100,Closed fracture of superior wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,455367991000119108,Open fracture of lateral wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,547853841000119107,Open fracture of lateral wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,640080131000119107,Closed fracture of lateral wall of left orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,712365461000119105,Pathological fracture of left foot due to osteopetrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596,812493641000119108,Closed fracture of superior wall of right orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.26,"[M47.26] Other spondylosis with radiculopathy, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.27,"[M47.27] Other spondylosis with radiculopathy, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.28,"[M47.28] Other spondylosis with radiculopathy, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.816,"[M47.816] Spondylosis without myelopathy or radiculopathy, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.817,"[M47.817] Spondylosis without myelopathy or radiculopathy, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.818,"[M47.818] Spondylosis without myelopathy or radiculopathy, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.896,"[M47.896] Other spondylosis, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.897,"[M47.897] Other spondylosis, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M47.898,"[M47.898] Other spondylosis, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M48.061,"[M48.061] Spinal stenosis, lumbar region without neurogenic claudication",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M48.07,"[M48.07] Spinal stenosis, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M48.08,"[M48.08] Spinal stenosis, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.16,"[M51.16] Intervertebral disc disorders with radiculopathy, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.17,"[M51.17] Intervertebral disc disorders with radiculopathy, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.26,"[M51.26] Other intervertebral disc displacement, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.27,"[M51.27] Other intervertebral disc displacement, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.36,"[M51.36] Other intervertebral disc degeneration, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.360,"[M51.360] Other intervertebral disc degeneration, lumbar region with discogenic back pain only",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.362,"[M51.362] Other intervertebral disc degeneration, lumbar region with discogenic back pain and lower extremity pain",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.369,"[M51.369] Other intervertebral disc degeneration, lumbar region without mention of lumbar back pain or lower extremity pain",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.37,"[M51.37] Other intervertebral disc degeneration, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.370,"[M51.370] Other intervertebral disc degeneration, lumbosacral region with discogenic back pain only",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.372,"[M51.372] Other intervertebral disc degeneration, lumbosacral region with discogenic back pain and lower extremity pain",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.379,"[M51.379] Other intervertebral disc degeneration, lumbosacral region without mention of lumbar back pain or lower extremity pain",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.86,"[M51.86] Other intervertebral disc disorders, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M51.87,"[M51.87] Other intervertebral disc disorders, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.2X6,"[M53.2X6] Spinal instabilities, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.2X7,"[M53.2X7] Spinal instabilities, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.2X8,"[M53.2X8] Spinal instabilities, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.3,"[M53.3] Sacrococcygeal disorders, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.86,"[M53.86] Other specified dorsopathies, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.87,"[M53.87] Other specified dorsopathies, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M53.88,"[M53.88] Other specified dorsopathies, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.16,"[M54.16] Radiculopathy, lumbar region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.17,"[M54.17] Radiculopathy, lumbosacral region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.18,"[M54.18] Radiculopathy, sacral and sacrococcygeal region",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.30,"[M54.30] Sciatica, unspecified side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.31,"[M54.31] Sciatica, right side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.32,"[M54.32] Sciatica, left side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.40,"[M54.40] Lumbago with sciatica, unspecified side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.41,"[M54.41] Lumbago with sciatica, right side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.42,"[M54.42] Lumbago with sciatica, left side",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.5,[M54.5] Low back pain,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.50,"[M54.50] Low back pain, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.51,[M54.51] Vertebrogenic low back pain,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.59,[M54.59] Other low back pain,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.89,[M54.89] Other dorsalgia,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M54.9,"[M54.9] Dorsalgia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.03,[M99.03] Segmental and somatic dysfunction of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.04,[M99.04] Segmental and somatic dysfunction of sacral region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.23,[M99.23] Subluxation stenosis of neural canal of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.33,[M99.33] Osseous stenosis of neural canal of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.43,[M99.43] Connective tissue stenosis of neural canal of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.53,[M99.53] Intervertebral disc stenosis of neural canal of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.63,[M99.63] Osseous and subluxation stenosis of intervertebral foramina of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.73,[M99.73] Connective tissue and disc stenosis of intervertebral foramina of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.83,[M99.83] Other biomechanical lesions of lumbar region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,M99.84,[M99.84] Other biomechanical lesions of sacral region,ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.100A,"[S33.100A] Subluxation of unspecified lumbar vertebra, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.100D,"[S33.100D] Subluxation of unspecified lumbar vertebra, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.100S,"[S33.100S] Subluxation of unspecified lumbar vertebra, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.110A,"[S33.110A] Subluxation of L1/L2 lumbar vertebra, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.110D,"[S33.110D] Subluxation of L1/L2 lumbar vertebra, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.110S,"[S33.110S] Subluxation of L1/L2 lumbar vertebra, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.120A,"[S33.120A] Subluxation of L2/L3 lumbar vertebra, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.120D,"[S33.120D] Subluxation of L2/L3 lumbar vertebra, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.120S,"[S33.120S] Subluxation of L2/L3 lumbar vertebra, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.130A,"[S33.130A] Subluxation of L3/L4 lumbar vertebra, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.130D,"[S33.130D] Subluxation of L3/L4 lumbar vertebra, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.130S,"[S33.130S] Subluxation of L3/L4 lumbar vertebra, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.140A,"[S33.140A] Subluxation of L4/L5 lumbar vertebra, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.140D,"[S33.140D] Subluxation of L4/L5 lumbar vertebra, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.140S,"[S33.140S] Subluxation of L4/L5 lumbar vertebra, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.5XXA,"[S33.5XXA] Sprain of ligaments of lumbar spine, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.6XXA,"[S33.6XXA] Sprain of sacroiliac joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.8XXA,"[S33.8XXA] Sprain of other parts of lumbar spine and pelvis, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S33.9XXA,"[S33.9XXA] Sprain of unspecified parts of lumbar spine and pelvis, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.002A,"[S39.002A] Unspecified injury of muscle, fascia and tendon of lower back, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.002D,"[S39.002D] Unspecified injury of muscle, fascia and tendon of lower back, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.002S,"[S39.002S] Unspecified injury of muscle, fascia and tendon of lower back, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.012A,"[S39.012A] Strain of muscle, fascia and tendon of lower back, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.012D,"[S39.012D] Strain of muscle, fascia and tendon of lower back, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.012S,"[S39.012S] Strain of muscle, fascia and tendon of lower back, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.092A,"[S39.092A] Other injury of muscle, fascia and tendon of lower back, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.092D,"[S39.092D] Other injury of muscle, fascia and tendon of lower back, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.092S,"[S39.092S] Other injury of muscle, fascia and tendon of lower back, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.82XA,"[S39.82XA] Other specified injuries of lower back, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.82XD,"[S39.82XD] Other specified injuries of lower back, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.82XS,"[S39.82XS] Other specified injuries of lower back, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.92XA,"[S39.92XA] Unspecified injury of lower back, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.92XD,"[S39.92XD] Unspecified injury of lower back, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,S39.92XS,"[S39.92XS] Unspecified injury of lower back, sequela",ICD10CM,2.16.840.1.113883.6.90
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,2415007,Lumbosacral radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,3200003,Sacrocoxalgia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,12519004,Sprain of sacroiliac ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,18347007,Spinal stenosis of lumbar region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,20021007,Displacement of lumbar intervertebral disc without myelopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,23056005,Sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,26538006,Degeneration of lumbar intervertebral disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,29885006,Sacroiliac instability (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,38253002,Instability of lumbosacral joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,39058009,Lumbosacral radiculoplexus neuropathy due to diabetes mellitus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46578006,Lumbosacral radiculitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46960006,Lumbago-sciatica due to displacement of lumbar intervertebral disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,48210000,Lumbosacral spondylosis without myelopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,60937000,Degeneration of lumbosacral intervertebral disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,61486003,Sacral back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,79244005,Lumbosacral prespondylolisthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,86345004,Bertolotti's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,86814006,Increased lumbosacral angle (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,90631008,Sprain of sacrococcygeal ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,91240008,Degeneration of thoracolumbar intervertebral disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,102831002,Renal angle pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,111653006,Sprain of sacroiliac region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,123798002,Lumbosacral spondylosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,128196005,Lumbar radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,128197001,Sacral radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,129179000,Piriformis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202487003,Sacroiliac joint pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202674000,Single-level lumbosacral spondylosis without myelopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202675004,Two-level lumbosacral spondylosis without myelopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202676003,Multiple-level lumbosacral spondylosis without myelopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202693003,Lumbosacral spondylosis with radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202694009,Single-level lumbosacral spondylosis with radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202695005,Two-level lumbosacral spondylosis with radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202696006,Multiple-level lumbosacral spondylosis with radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202708005,Prolapsed lumbar intervertebral disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202735001,Lumbar disc prolapse with radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202755000,Calcification of lumbar disc (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202787002,Idiopathic lumbar spinal stenosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202788007,Degenerative lumbar spinal stenosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202789004,Iatrogenic lumbar spinal stenosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202794004,Lumbago with sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202796002,Thoracic and lumbosacral neuritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,202824000,Lumbar spine instability (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209169008,Closed subluxation lumbar spine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209547009,Sprain pelvic ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209548004,Sprain of ligament of lumbosacral joint (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209549007,Sprain of anterior sacroiliac ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209550007,Sprain of posterior sacroiliac ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209552004,"Sprain, sacrotuberous ligament (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209553009,Sprain of iliolumbar ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209561004,Atlanto-occipital joint sprain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209565008,Lumbar sprain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209566009,Sacrum sprain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,209812006,"Sprain, symphysis pubis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,212457004,"Injury of muscle and tendon of abdomen, lower back and pelvis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,239880009,Lumbar spondylosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,240471009,Herpes zoster involving lumbar dermatome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,247368002,Posterior compartment low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,262726002,Transection of lumbar nerve root (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,262727006,Transection of sacral nerve root (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,262731000,Partial division of lumbar nerve root (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,262732007,Partial division of sacral nerve root (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,262995003,Back sprain excluding lumbosacral (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,263044008,Subluxation of joint of lumbar spine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,267067009,Lumbar ache - renal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,267982002,Pain in lumbar spine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,274162005,Thoracic back sprain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,278860009,Chronic low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,278862001,Acute low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,279039007,Low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,279040009,Mechanical low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,279042001,Lumbar segmental dysfunction (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,279063004,Lumbar facet joint pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,281598004,Sprain of spinal ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,298251000,Tenderness of sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,298604007,Decreased active range of lumbar spine flexion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,298605008,No active range of lumbar spine flexion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,298674008,Pain on movement of lumbar spine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,300956001,Low back strain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,300957005,Postural low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,301416003,Rebound tenderness of right lumbar (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,301417007,Rebound tenderness of left lumbar (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,307138004,Spondylolisthesis L5/S1 level (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,307176005,Acute sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,307177001,Chronic sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,309710005,Lumbosacral strain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,311804006,Prolapsed lumbar intervertebral disc with sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,370471003,Lumbosacral stenosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,416513001,Rotation dysfunction of the sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,416546007,Anterior translated sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,416929004,Posterior sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417056009,Bilateral sacral extension (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417068000,Sacral shear (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417098007,Sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417262009,Bilateral sacral flexion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417414000,Anterior sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417459008,Forward sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417614006,Sacral extension (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417646006,Somatic dysfunction of sacral spine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417685004,Posterior translated sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417725008,Sacral flexion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417731006,Backward sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,417744001,Sacral base declination (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,427923007,Stenosis of lateral recess of lumbar spine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,608832005,Lumbar discogenic pain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,703619001,Pelvic girdle pain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,713911007,Lumbosacral spondylosis co-occurrent with root compression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,718929000,Somatic dysfunction of lumbar region (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,718936004,Somatic dysfunction of sacral region (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,722410009,Somatic dysfunction of lumbosacral region (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,724899004,Laceration of muscle of lower back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,735609006,Degeneration of lumbar intervertebral disc without prolapse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,735610001,Prolapse of lumbar intervertebral disc co-occurrent and due to degeneration (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,735611002,Degeneration of lumbar intervertebral disc co-occurrent with osteophyte of lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,737254001,Injury of muscle of lower back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,782661001,Chronic sacroiliac joint pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,838412000,Pain in lumbar region on palpation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,860614004,Injury of lumbar nerve root (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,871492003,Sprain of sacrospinous ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1119215001,Pain in left lumbar region of back (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1119216000,Pain in right lumbar region of back (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1156105001,Pain in sacrum (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1156802000,Myofascial low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1258954001,Lumbar radicular pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,1332462002,Lesion of lumbar and sacral spinal nerve roots (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,471000119102,Somatic dysfunction of sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,9121000119106,Low back pain in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,13291000119100,Prolapse of lumbar intervertebral disc without radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,36241000119108,Sprain of ligament of cervical spine region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,43351000087103,Prolapse of intervertebral disc of first lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,43371000087109,Prolapse of intervertebral disc of second lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,43381000087106,Prolapse of intervertebral disc of third lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,43401000087106,Prolapse of intervertebral disc of fourth lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,43411000087108,Prolapse of intervertebral disc of L5 and S1 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46091000087101,Sprain of left sacroiliac ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46101000087106,Sprain of right sacroiliac ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46111000087108,Sprain of left sacrospinous ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,46121000087100,Sprain of right sacrospinous ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,77841000119108,Thoracolumbar radiculopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,113611000119100,Myofascial pain syndrome of lumbar spine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,129501000119107,Chronic sacral pain for greater than three months (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,291941000119106,Left-sided piriformis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,291951000119108,Right-sided piriformis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,311211000119105,Radiculopathy due to lumbar intervertebral disc disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,313501000119105,Low back pain co-occurrent with neuralgia of right sciatic nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,321081000119100,Instability of thoracic and lumbar spine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,321111000119105,Stenosis of spinal canal of thoracolumbar region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,322141000119100,Subluxation complex of lumbar vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,448701000124105,Herniation of nucleus pulposus of lumbar intervertebral disc co-occurrent with sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,771121000124100,Left on left forward sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,771131000124102,Left on right backward sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,771141000124107,Right on left backward sacral torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,771151000124109,Right on right forward torsion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,12242551000119102,Pain in left sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,12242591000119107,Pain in right sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15633361000119103,Bilateral sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15634631000119104,Bilateral sacroiliac joint pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15636531000119108,Somatic dysfunction of left sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15636571000119106,Somatic dysfunction of right sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15636611000119102,Somatic dysfunction of bilateral sacroiliac joints (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15749221000119107,Instability of right sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15749261000119102,Instability of left sacroiliac joint (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15749301000119105,Instability of bilateral sacroiliac joints (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15968741000119100,Low back pain co-occurrent and due to bilateral sciatica (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,15972821000119108,Radiculopathy of lumbosacral spine due to disc disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,16026751000119100,Radiculopathy of thoracolumbar spine due to disc disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,16206741000119104,Piriformis syndrome of bilateral lower limbs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,16839401000119104,Low back pain co-occurrent with neuralgia of left sciatic nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,16864831000119104,Lumbar radiculitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,29930001000004103,Intractable low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422,616839841000119101,Vertebrogenic low back pain (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

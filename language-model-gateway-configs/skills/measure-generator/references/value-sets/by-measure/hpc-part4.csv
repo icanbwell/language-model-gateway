@@ -1,0 +1,201 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.813,"[L89.813] Pressure ulcer of head, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.814,"[L89.814] Pressure ulcer of head, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.890,"[L89.890] Pressure ulcer of other site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.893,"[L89.893] Pressure ulcer of other site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.894,"[L89.894] Pressure ulcer of other site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.93,"[L89.93] Pressure ulcer of unspecified site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.94,"[L89.94] Pressure ulcer of unspecified site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372,L89.95,"[L89.95] Pressure ulcer of unspecified site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.00,"[D57.00] Hb-SS disease with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.01,[D57.01] Hb-SS disease with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.02,[D57.02] Hb-SS disease with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.03,[D57.03] Hb-SS disease with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.04,[D57.04] Hb-SS disease with dactylitis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.09,[D57.09] Hb-SS disease with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.1,[D57.1] Sickle-cell disease without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.20,[D57.20] Sickle-cell/Hb-C disease without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.211,[D57.211] Sickle-cell/Hb-C disease with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.212,[D57.212] Sickle-cell/Hb-C disease with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.213,[D57.213] Sickle-cell/Hb-C disease with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.214,[D57.214] Sickle-cell/Hb-C disease with dactylitis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.218,[D57.218] Sickle-cell/Hb-C disease with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.219,"[D57.219] Sickle-cell/Hb-C disease with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.40,[D57.40] Sickle-cell thalassemia without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.411,"[D57.411] Sickle-cell thalassemia, unspecified, with acute chest syndrome",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.412,"[D57.412] Sickle-cell thalassemia, unspecified, with splenic sequestration",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.413,"[D57.413] Sickle-cell thalassemia, unspecified, with cerebral vascular involvement",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.414,"[D57.414] Sickle-cell thalassemia, unspecified, with dactylitis",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.418,"[D57.418] Sickle-cell thalassemia, unspecified, with crisis with other specified complication",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.419,"[D57.419] Sickle-cell thalassemia, unspecified, with crisis",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.42,[D57.42] Sickle-cell thalassemia beta zero without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.431,[D57.431] Sickle-cell thalassemia beta zero with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.432,[D57.432] Sickle-cell thalassemia beta zero with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.433,[D57.433] Sickle-cell thalassemia beta zero with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.434,[D57.434] Sickle-cell thalassemia beta zero with dactylitis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.438,[D57.438] Sickle-cell thalassemia beta zero with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.439,"[D57.439] Sickle-cell thalassemia beta zero with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.44,[D57.44] Sickle-cell thalassemia beta plus without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.451,[D57.451] Sickle-cell thalassemia beta plus with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.452,[D57.452] Sickle-cell thalassemia beta plus with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.453,[D57.453] Sickle-cell thalassemia beta plus with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.454,[D57.454] Sickle-cell thalassemia beta plus with dactylitis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.458,[D57.458] Sickle-cell thalassemia beta plus with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.459,"[D57.459] Sickle-cell thalassemia beta plus with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.80,[D57.80] Other sickle-cell disorders without crisis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.811,[D57.811] Other sickle-cell disorders with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.812,[D57.812] Other sickle-cell disorders with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.813,[D57.813] Other sickle-cell disorders with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.814,[D57.814] Other sickle-cell disorders with dactylitis,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.818,[D57.818] Other sickle-cell disorders with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,D57.819,"[D57.819] Other sickle-cell disorders with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,11603001,Sickle cell retinopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,13886001,Sickle cell nephropathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,23269001,Double heterozygous sickling disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,25472008,Sickle cell-hemoglobin D disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,35434009,Sickle cell-hemoglobin C disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,36472007,Sickle cell-thalassemia disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,47024008,Sickle cell-hemoglobin E disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127040003,Sickle cell-hemoglobin SS disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127041004,Sickle cell-beta-thalassemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127042006,Sickle cell beta plus thalassemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127043001,Sickle cell-beta^0^-thalassemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127044007,Sickle cell-delta beta^0^-thalassemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127045008,Sickle cell anemia with coexistent alpha-thalassemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127047000,Sickle cell-hemoglobin Lepore disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,127048005,Sickle cell-Hemoglobin O Arab disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,154798006,Sickle cell anaemia (disorder) [154798006],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191194009,Sickle cell anaemia (disorder) [191194009],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191195005,Sickle cell anemia of unspecified type (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191196006,Sickle cell anemia with no crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191197002,Sickle cell anemia with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191199004,Sickle cell anemia NOS (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,191419008,[X]Other sickle cell disorders (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,193370005,Proliferative retinopathy due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,232033003,Sickle cell-hemoglobin C retinopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,234391009,Sickle cell anemia with high hemoglobin F (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,276267006,Sickle cell syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,371104006,Hand-foot syndrome in sickle cell anemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416180004,Hemoglobin SS disease without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416214006,Sickle cell-hemoglobin D disease without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416290001,Hemoglobin S sickling disorder without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416484003,Sickle cell-hemoglobin E disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416638004,Sickle cell-hemoglobin E disease without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,416826005,Sickle cell-thalassemia disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417048006,Sickle cell-thalassemia disease without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417279003,Hemoglobin S sickling disorder with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417357006,Sickling disorder due to hemoglobin S (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417425009,Hemoglobin SS disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417517009,Sickle cell-hemoglobin C disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417683006,Sickle cell-hemoglobin C disease without crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,417748003,Sickle cell-hemoglobin D disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,440206000,Hemoglobin SS disease with vasoocclusive crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,444108000,Acute sickle cell splenic sequestration crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,471863000,Disorder of myocardium due to sickle cell hemoglobinopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,709142003,Arthropathy due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,722085003,Renal papillary necrosis due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,722147003,Focal segmental glomerulosclerosis due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,763096004,Disorder of liver due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,769167005,Vaso-occlusive pain co-occurrent and due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,783254003,Hereditary persistence of fetal hemoglobin with sickle cell disease syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,1153412006,Acute chest syndrome due to sickle cell thalassemia with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,1153413001,Acute sequestration of spleen due to sickle cell thalassemia with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,1153414007,Acute chest syndrome due to sickle cell hemoglobin C disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,1153415008,Acute sequestration of spleen due to sickle cell hemoglobin C disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,1285514002,Nonproliferative retinopathy due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,128431000119106,Acute chest syndrome due to sickle cell-hemoglobin C disease with crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,367061000119107,Priapism due to sickle cell disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373,10759351000119103,Sickle cell anemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Stage I Through IV Kidney Disease,2.16.840.1.113883.3.464.1004.1374,I12.9,"[I12.9] Hypertensive chronic kidney disease with stage 1 through stage 4 chronic kidney disease, or unspecified chronic kidney disease",ICD10CM,2.16.840.1.113883.6.90
+Stage I Through IV Kidney Disease,2.16.840.1.113883.3.464.1004.1374,I13.10,"[I13.10] Hypertensive heart and chronic kidney disease without heart failure, with stage 1 through stage 4 chronic kidney disease, or unspecified chronic kidney disease",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.011A,"[S78.011A] Complete traumatic amputation at right hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.012A,"[S78.012A] Complete traumatic amputation at left hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.019A,"[S78.019A] Complete traumatic amputation at unspecified hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.021A,"[S78.021A] Partial traumatic amputation at right hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.022A,"[S78.022A] Partial traumatic amputation at left hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.029A,"[S78.029A] Partial traumatic amputation at unspecified hip joint, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.111A,"[S78.111A] Complete traumatic amputation at level between right hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.112A,"[S78.112A] Complete traumatic amputation at level between left hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.119A,"[S78.119A] Complete traumatic amputation at level between unspecified hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.121A,"[S78.121A] Partial traumatic amputation at level between right hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.122A,"[S78.122A] Partial traumatic amputation at level between left hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.129A,"[S78.129A] Partial traumatic amputation at level between unspecified hip and knee, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.911A,"[S78.911A] Complete traumatic amputation of right hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.912A,"[S78.912A] Complete traumatic amputation of left hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.919A,"[S78.919A] Complete traumatic amputation of unspecified hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.921A,"[S78.921A] Partial traumatic amputation of right hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.922A,"[S78.922A] Partial traumatic amputation of left hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S78.929A,"[S78.929A] Partial traumatic amputation of unspecified hip and thigh, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.011A,"[S88.011A] Complete traumatic amputation at knee level, right lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.012A,"[S88.012A] Complete traumatic amputation at knee level, left lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.019A,"[S88.019A] Complete traumatic amputation at knee level, unspecified lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.021A,"[S88.021A] Partial traumatic amputation at knee level, right lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.022A,"[S88.022A] Partial traumatic amputation at knee level, left lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.029A,"[S88.029A] Partial traumatic amputation at knee level, unspecified lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.111A,"[S88.111A] Complete traumatic amputation at level between knee and ankle, right lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.112A,"[S88.112A] Complete traumatic amputation at level between knee and ankle, left lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.119A,"[S88.119A] Complete traumatic amputation at level between knee and ankle, unspecified lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.121A,"[S88.121A] Partial traumatic amputation at level between knee and ankle, right lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.122A,"[S88.122A] Partial traumatic amputation at level between knee and ankle, left lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.129A,"[S88.129A] Partial traumatic amputation at level between knee and ankle, unspecified lower leg, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.911A,"[S88.911A] Complete traumatic amputation of right lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.912A,"[S88.912A] Complete traumatic amputation of left lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.919A,"[S88.919A] Complete traumatic amputation of unspecified lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.921A,"[S88.921A] Partial traumatic amputation of right lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.922A,"[S88.922A] Partial traumatic amputation of left lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S88.929A,"[S88.929A] Partial traumatic amputation of unspecified lower leg, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.011A,"[S98.011A] Complete traumatic amputation of right foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.012A,"[S98.012A] Complete traumatic amputation of left foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.019A,"[S98.019A] Complete traumatic amputation of unspecified foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.021A,"[S98.021A] Partial traumatic amputation of right foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.022A,"[S98.022A] Partial traumatic amputation of left foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.029A,"[S98.029A] Partial traumatic amputation of unspecified foot at ankle level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.111A,"[S98.111A] Complete traumatic amputation of right great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.112A,"[S98.112A] Complete traumatic amputation of left great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.119A,"[S98.119A] Complete traumatic amputation of unspecified great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.121A,"[S98.121A] Partial traumatic amputation of right great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.122A,"[S98.122A] Partial traumatic amputation of left great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.129A,"[S98.129A] Partial traumatic amputation of unspecified great toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.131A,"[S98.131A] Complete traumatic amputation of one right lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.132A,"[S98.132A] Complete traumatic amputation of one left lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.139A,"[S98.139A] Complete traumatic amputation of one unspecified lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.141A,"[S98.141A] Partial traumatic amputation of one right lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.142A,"[S98.142A] Partial traumatic amputation of one left lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.149A,"[S98.149A] Partial traumatic amputation of one unspecified lesser toe, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.211A,"[S98.211A] Complete traumatic amputation of two or more right lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.212A,"[S98.212A] Complete traumatic amputation of two or more left lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.219A,"[S98.219A] Complete traumatic amputation of two or more unspecified lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.221A,"[S98.221A] Partial traumatic amputation of two or more right lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.222A,"[S98.222A] Partial traumatic amputation of two or more left lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.229A,"[S98.229A] Partial traumatic amputation of two or more unspecified lesser toes, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.311A,"[S98.311A] Complete traumatic amputation of right midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.312A,"[S98.312A] Complete traumatic amputation of left midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.319A,"[S98.319A] Complete traumatic amputation of unspecified midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.321A,"[S98.321A] Partial traumatic amputation of right midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.322A,"[S98.322A] Partial traumatic amputation of left midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.329A,"[S98.329A] Partial traumatic amputation of unspecified midfoot, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.911A,"[S98.911A] Complete traumatic amputation of right foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.912A,"[S98.912A] Complete traumatic amputation of left foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.919A,"[S98.919A] Complete traumatic amputation of unspecified foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.921A,"[S98.921A] Partial traumatic amputation of right foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.922A,"[S98.922A] Partial traumatic amputation of left foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376,S98.929A,"[S98.929A] Partial traumatic amputation of unspecified foot, level unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E10.649,[E10.649] Type 1 diabetes mellitus with hypoglycemia without coma,ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E10.65,[E10.65] Type 1 diabetes mellitus with hyperglycemia,ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E11.649,[E11.649] Type 2 diabetes mellitus with hypoglycemia without coma,ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E11.65,[E11.65] Type 2 diabetes mellitus with hyperglycemia,ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E13.649,[E13.649] Other specified diabetes mellitus with hypoglycemia without coma,ICD10CM,2.16.840.1.113883.6.90
+Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377,E13.65,[E13.65] Other specified diabetes mellitus with hyperglycemia,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N10,[N10] Acute pyelonephritis,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N12,"[N12] Tubulo-interstitial nephritis, not specified as acute or chronic",ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N15.1,[N15.1] Renal and perinephric abscess,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N15.9,"[N15.9] Renal tubulo-interstitial disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N16,[N16] Renal tubulo-interstitial disorders in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N28.84,[N28.84] Pyelitis cystica,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N28.85,[N28.85] Pyeloureteritis cystica,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N28.86,[N28.86] Ureteritis cystica,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N30.00,[N30.00] Acute cystitis without hematuria,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N30.01,[N30.01] Acute cystitis with hematuria,ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N30.90,"[N30.90] Cystitis, unspecified without hematuria",ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N30.91,"[N30.91] Cystitis, unspecified with hematuria",ICD10CM,2.16.840.1.113883.6.90
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,N39.0,"[N39.0] Urinary tract infection, site not specified",ICD10CM,2.16.840.1.113883.6.90

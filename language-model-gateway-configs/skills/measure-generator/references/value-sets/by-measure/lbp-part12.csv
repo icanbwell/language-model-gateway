@@ -1,0 +1,1177 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950021000119100,Primary squamous cell carcinoma of skin of right breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950061000119105,Primary malignant neoplasm of skin of right breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950101000119108,Primary basal cell carcinoma of skin of right breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950141000119105,Primary basal cell carcinoma of skin of left breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950221000119108,Primary malignant neoplasm of skin of left breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950381000119103,Primary Merkel cell carcinoma of skin of right breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15950421000119107,Primary Merkel cell carcinoma of skin of left breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15952661000119101,Neoplasm of uncertain behavior of bilateral breasts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15952981000119103,Lobular carcinoma in situ of bilateral breasts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15953021000119108,Carcinoma in situ of bilateral breasts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955101000119101,Primary malignant neoplasm of right greater vestibular gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955141000119104,Primary malignant neoplasm of left greater vestibular gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955181000119109,Neoplasm of uncertain behavior of bilateral testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955301000119103,Primary seminoma of descended bilateral testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955341000119101,Primary seminoma of undescended bilateral testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955381000119106,Primary malignant neoplasm of bilateral undescended testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955421000119102,Primary nonseminomatous germ cell neoplasm of bilateral undescended testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955581000119104,Primary nonseminomatous germ cell neoplasm of bilateral descended testes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955901000119104,Primary small cell carcinoma of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15955941000119102,Primary small cell carcinoma of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956181000119102,Metastatic adenocarcinoma to bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956221000119105,Metastatic adenocarcinoma to right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956261000119100,Metastatic adenocarcinoma to left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956341000119105,Adenocarcinoma of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956381000119100,Adenocarcinoma of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956661000119102,Metastatic small cell carcinoma to right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956701000119109,Metastatic small cell carcinoma to left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15956741000119106,Metastatic small cell carcinoma to bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15957141000119109,Metastatic squamous cell carcinoma to bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15957181000119104,Metastatic squamous cell carcinoma to right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15957221000119107,Metastatic squamous cell carcinoma to left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15957261000119102,Kaposi sarcoma of bilateral lungs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15957421000119106,Primary squamous cell carcinoma of bilateral main bronchi (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958021000119103,Primary sarcoma of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958101000119106,Primary sarcoma of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958181000119103,Metastatic adenocarcinoma to bilateral kidneys (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958221000119106,Metastatic adenocarcinoma to left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958261000119101,Metastatic adenocarcinoma to right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958301000119109,Metastatic squamous cell carcinoma to right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958381000119101,Metastatic squamous cell carcinoma to left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958661000119103,Metastatic malignant melanoma to left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958701000119105,Metastatic malignant melanoma to bilateral kidneys (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15958741000119107,Metastatic malignant melanoma to right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959061000119101,Transitional cell carcinoma of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959101000119103,Transitional cell carcinoma of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959221000119103,Neoplasm of uncertain behavior of bilateral renal pelvises (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959261000119108,Neoplasm of uncertain behavior of bilateral kidneys (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959461000119109,Neoplasm of uncertain behavior of bilateral adrenal glands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15959581000119101,Neoplasm of uncertain behavior of bilateral ureters (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977391000119102,Primary malignant neoplasm of bilateral lacrimal glands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977471000119105,Primary malignant neoplasm of bilateral orbits (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977551000119100,Metastatic malignant neoplasm to bilateral eyes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977591000119105,Metastatic malignant neoplasm to right eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977631000119105,Metastatic malignant neoplasm to left eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977711000119107,Malignant melanoma of bilateral conjunctivas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977831000119109,Malignant melanoma of choroid of bilateral eyes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,15977871000119107,Malignant melanoma of bilateral retinas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16091131000119108,Primary angiosarcoma of skin of forehead (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16091171000119106,Angiosarcoma of skin of cheek (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16091251000119109,Primary angiosarcoma of skin of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16091371000119108,Primary angiosarcoma of skin of temporal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16091411000119109,Primary angiosarcoma of skin of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16094831000119100,History of malignant phyllodes neoplasm of breast (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16218761000119102,Primary squamous cell carcinoma of skin of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16228971000119104,Primary malignant neoplasm of soft tissue of left hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16229011000119100,Primary malignant neoplasm of soft tissue of right hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16260391000119109,Primary malignant neoplasm of soft tissues of left shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16260431000119104,Primary malignant neoplasm of soft tissues of right shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16260631000119101,Metastatic malignant neoplasm to lymph node from primary malignant neoplasm of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16314671000119104,Dupuytren's disease of palm of bilateral hands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16314711000119100,Dupuytren's disease of palm of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16314751000119104,Dupuytren's disease of palm of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16410531000119103,History of malignant neoplasm of nasal sinus (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16414611000119100,Primary malignant neoplasm of peripheral nerves of left upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527441000119105,Primary non-small cell carcinoma of lower lobe of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527481000119100,Primary non-small cell carcinoma of middle lobe of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527521000119100,Primary non-small cell carcinoma of upper lobe of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527561000119105,Primary non-small cell carcinoma of lower lobe of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527601000119105,Primary non-small cell carcinoma of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527641000119107,Primary non-small cell carcinoma of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16527721000119108,Primary non-small cell carcinoma of upper lobe of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16636051000119105,Primary malignant gastrointestinal stromal neoplasm of colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16636101000119105,Primary malignant gastrointestinal stromal neoplasm of rectum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16637101000119107,Primary sarcoma of small intestine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16699241000119100,Kaposi sarcoma of toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16705321000119109,Neoplasm of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16705361000119104,Neoplasm of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16774551000119100,Primary basal cell carcinoma of skin of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16774591000119105,Primary basal cell carcinoma of skin of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16774671000119108,Primary basal cell carcinoma of skin of labium majus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16775311000119107,Mycosis fungoides of facial lymph node (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16782241000119104,Primary squamous cell carcinoma of skin of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16782321000119104,Primary squamous cell carcinoma of skin of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16782401000119100,Primary basal cell carcinoma of skin of anus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16782891000119108,Primary Merkel cell carcinoma of skin of temple (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16782931000119100,Primary Merkel cell carcinoma of skin of cheek (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16783011000119102,Primary Merkel cell carcinoma of skin of forehead (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16823941000119108,Primary malignant gastrointestinal stromal neoplasm of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16824021000119104,Primary malignant neuroendocrine neoplasm of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16833831000119106,Congenital cutaneous mastocytosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16845301000119108,Primary glioblastoma multiforme of cerebellum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16845341000119105,Primary glioblastoma multiforme of brainstem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16845381000119100,Primary chondrosarcoma of sternum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16846301000119103,Primary Merkel cell carcinoma of skin of eyebrow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847701000119100,History of primary malignant neoplasm of left ovary (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847741000119103,History of primary malignant neoplasm of bilateral ovaries (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847781000119108,History of primary malignant neoplasm of right ovary (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847821000119103,History of primary malignant neoplasm of right kidney (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847861000119108,History of primary transitional cell carcinoma of bilateral kidneys (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847901000119102,History of primary transitional cell carcinoma of right kidney (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847941000119100,History of primary transitional cell carcinoma of left kidney (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16847981000119105,History of primary malignant neoplasm of left kidney (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848021000119108,History of primary malignant neoplasm of bilateral kidneys (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848061000119103,History of primary malignant neoplasm of left lung (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848101000119100,History of primary malignant neoplasm of right lung (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848141000119103,History of primary non-small cell carcinoma of right lung (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848181000119108,History of primary non-small cell carcinoma of left lung (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848221000119100,History of primary non-small cell carcinoma of bilateral lungs (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848261000119105,History of primary malignant neoplasm of bilateral lungs (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848301000119102,History of primary malignant neoplasm of right ureter (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848341000119100,History of primary malignant neoplasm of left ureter (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848381000119105,History of primary malignant neoplasm of bilateral ureters (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848421000119101,History of primary malignant neoplasm of left testis (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848461000119106,History of primary malignant neoplasm of right testis (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848501000119106,History of primary malignant neoplasm of bilateral testes (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848541000119108,History of primary malignant neoplasm of right main bronchus (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848581000119103,History of primary malignant neoplasm of main bronchus (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848621000119103,History of primary malignant neoplasm of left main bronchus (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848661000119108,History of primary malignant neoplasm of bilateral main bronchi (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848701000119101,History of primary malignant neoplasm of anterior wall of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848741000119104,History of primary malignant neoplasm of ureteric orifice (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848781000119109,History of primary malignant neoplasm of dome of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848821000119104,History of primary malignant neoplasm of urachus (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848861000119109,History of primary malignant neoplasm of posterior wall of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848901000119103,History of primary malignant neoplasm of lateral wall of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16848941000119101,History of primary malignant neoplasm of neck of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16849021000119100,History of primary malignant neoplasm of trigone of urinary bladder (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16894981000119106,History of primary malignant neoplasm of base of tongue (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16899901000119104,Primary squamous cell carcinoma of skin of chest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16899941000119102,Primary squamous cell carcinoma of skin of anus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16903491000119107,Atypical meningioma of spinal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16903531000119107,Atypical meningioma of cerebral meninges (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905141000119107,Primary malignant neoplasm of skin of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905341000119105,Primary malignant neoplasm of skin of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905381000119100,Primary basal cell carcinoma of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905421000119109,Primary basal cell carcinoma of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905461000119104,Primary basal cell carcinoma of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905501000119104,Primary basal cell carcinoma of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905541000119102,Primary malignant neoplasm of skin of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905581000119107,Primary malignant neoplasm of skin of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905941000119109,Primary Merkel cell carcinoma of skin of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16905981000119104,Primary Merkel cell carcinoma of skin of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906021000119109,Primary Merkel cell carcinoma of skin of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906061000119104,Primary Merkel cell carcinoma of skin of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906481000119103,Primary squamous cell carcinoma of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906521000119103,Primary squamous cell carcinoma of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906561000119108,Primary squamous cell carcinoma of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16906601000119108,Primary squamous cell carcinoma of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908241000119106,Squamous cell carcinoma in situ of skin of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908281000119101,Squamous cell carcinoma in situ of skin of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908321000119106,Squamous cell carcinoma in situ of skin of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908361000119101,Squamous cell carcinoma in situ of skin of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908401000119105,Sebaceous carcinoma of skin of right lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908441000119107,Sebaceous carcinoma of skin of left upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908481000119102,Sebaceous carcinoma of skin of right upper eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,16908521000119102,Sebaceous carcinoma of skin of left lower eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,19090001000004101,Metastatic neoplasm of left basal ganglion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,30570001000004109,History of malignant neoplasm of oropharynx (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,102919151000119100,History of myelodysplastic syndrome (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,137644811000119102,Well-differentiated neuroendocrine tumor grade 1 of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,145194251000119106,Primary basal cell carcinoma of skin of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,145298771000119104,Malignant carcinoid tumor of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,148822661000119106,Malignant neuroendocrine neoplasm of nasal cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,165264081000119102,Squamous cell carcinoma in situ of skin of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,226446911000119100,Well-differentiated neuroendocrine tumor grade 1 of bronchus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,265458371000119104,Primary malignant adamantinoma of long bone of right lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,284158251000119106,Neoplasm of uncertain behavior of smooth muscle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,341306651000119109,Primary carcinoma ex pleomorphic adenoma of right lacrimal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,362594291000119104,Squamous cell carcinoma in situ of skin of bilateral feet (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,400347211000119102,History of acute leukemia (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,409743031000119105,Well-differentiated neuroendocrine tumor grade 2 of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,428487561000119102,Primary basal cell carcinoma of skin of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,434784581000119109,History of acute monocytic leukemia (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,455733521000119103,Primary squamous cell carcinoma of skin of head and/or neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,477402151000119107,Primary carcinoma ex pleomorphic adenoma of left lacrimal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,505671831000119108,History of choriocarcinoma (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,557174041000119102,Well-differentiated neuroendocrine tumor grade 2 of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,598377701000119108,Clear cell adenocarcinoma of Mullerian origin of ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,619792361000119102,History of primary small cell carcinoma of lung (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,636201361000119105,Primary malignant neoplasm of sclera of left eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,676112841000119101,History of acute lymphoid leukemia (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,684579951000119109,Primary squamous cell carcinoma of skin of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,722119031000119100,Primary squamous cell carcinoma of skin of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,724003651000119103,Primary malignant glioma of thalamus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,763101411000119100,Primary renal cell carcinoma of left kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,767289441000119108,Primary malignant neoplasm of sclera of right eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,776005371000119104,Primary malignant adamantinoma of long bone of left lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,793197981000119106,Malignant carcinoid tumor of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,827644581000119108,Clear cell adenocarcinoma of Mullerian origin of renal pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,872012781000119103,Squamous cell carcinoma in situ of skin of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,894171571000119107,Primary renal cell carcinoma of right kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593,936472381000119102,Well-differentiated neuroendocrine tumor grade 1 of left lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0100,"Cane, includes canes of all materials, adjustable or fixed, with tip (E0100)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0105,"Cane, quad or three prong, includes canes of all materials, adjustable or fixed, with tips (E0105)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0130,"Walker, rigid (pickup), adjustable or fixed height (E0130)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0135,"Walker, folding (pickup), adjustable or fixed height (E0135)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0140,"Walker, with trunk support, adjustable or fixed height, any type (E0140)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0141,"Walker, rigid, wheeled, adjustable or fixed height (E0141)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0143,"Walker, folding, wheeled, adjustable or fixed height (E0143)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0144,"Walker, enclosed, four sided framed, rigid or folding, wheeled with posterior seat (E0144)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0147,"Walker, heavy duty, multiple braking system, variable wheel resistance (E0147)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0148,"Walker, heavy duty, without wheels, rigid or folding, any type, each (E0148)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0149,"Walker, heavy duty, wheeled, rigid or folding, any type (E0149)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0163,"Commode chair, mobile or stationary, with fixed arms (E0163)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0165,"Commode chair, mobile or stationary, with detachable arms (E0165)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0167,"Pail or pan for use with commode chair, replacement only (E0167)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0168,"Commode chair, extra wide and/or heavy duty, stationary or mobile, with or without arms, any type, each (E0168)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0170,"Commode chair with integrated seat lift mechanism, electric, any type (E0170)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0171,"Commode chair with integrated seat lift mechanism, non-electric, any type (E0171)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0250,"Hospital bed, fixed height, with any type side rails, with mattress (E0250)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0251,"Hospital bed, fixed height, with any type side rails, without mattress (E0251)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0255,"Hospital bed, variable height, hi-lo, with any type side rails, with mattress (E0255)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0256,"Hospital bed, variable height, hi-lo, with any type side rails, without mattress (E0256)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0260,"Hospital bed, semi-electric (head and foot adjustment), with any type side rails, with mattress (E0260)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0261,"Hospital bed, semi-electric (head and foot adjustment), with any type side rails, without mattress (E0261)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0265,"Hospital bed, total electric (head, foot and height adjustments), with any type side rails, with mattress (E0265)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0266,"Hospital bed, total electric (head, foot and height adjustments), with any type side rails, without mattress (E0266)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0270,"Hospital bed, institutional type includes: oscillating, circulating and stryker frame, with mattress (E0270)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0290,"Hospital bed, fixed height, without side rails, with mattress (E0290)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0291,"Hospital bed, fixed height, without side rails, without mattress (E0291)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0292,"Hospital bed, variable height, hi-lo, without side rails, with mattress (E0292)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0293,"Hospital bed, variable height, hi-lo, without side rails, without mattress (E0293)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0294,"Hospital bed, semi-electric (head and foot adjustment), without side rails, with mattress (E0294)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0295,"Hospital bed, semi-electric (head and foot adjustment), without side rails, without mattress (E0295)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0296,"Hospital bed, total electric (head, foot and height adjustments), without side rails, with mattress (E0296)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0297,"Hospital bed, total electric (head, foot and height adjustments), without side rails, without mattress (E0297)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0301,"Hospital bed, heavy duty, extra wide, with weight capacity greater than 350 pounds, but less than or equal to 600 pounds, with any type side rails, without mattress (E0301)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0302,"Hospital bed, extra heavy duty, extra wide, with weight capacity greater than 600 pounds, with any type side rails, without mattress (E0302)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0303,"Hospital bed, heavy duty, extra wide, with weight capacity greater than 350 pounds, but less than or equal to 600 pounds, with any type side rails, with mattress (E0303)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0304,"Hospital bed, extra heavy duty, extra wide, with weight capacity greater than 600 pounds, with any type side rails, with mattress (E0304)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0424,"Stationary compressed gaseous oxygen system, rental; includes container, contents, regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0424)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0425,"Stationary compressed gas system, purchase; includes regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0425)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0430,"Portable gaseous oxygen system, purchase; includes regulator, flowmeter, humidifier, cannula or mask, and tubing (E0430)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0431,"Portable gaseous oxygen system, rental; includes portable container, regulator, flowmeter, humidifier, cannula or mask, and tubing (E0431)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0433,"Portable liquid oxygen system, rental; home liquefier used to fill portable liquid oxygen containers, includes portable containers, regulator, flowmeter, humidifier, cannula or mask and tubing, with or without supply reservoir and contents gauge (E0433)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0434,"Portable liquid oxygen system, rental; includes portable container, supply reservoir, humidifier, flowmeter, refill adaptor, contents gauge, cannula or mask, and tubing (E0434)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0435,"Portable liquid oxygen system, purchase; includes portable container, supply reservoir, flowmeter, humidifier, contents gauge, cannula or mask, tubing and refill adaptor (E0435)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0439,"Stationary liquid oxygen system, rental; includes container, contents, regulator, flowmeter, humidifier, nebulizer, cannula or mask, & tubing (E0439)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0440,"Stationary liquid oxygen system, purchase; includes use of reservoir, contents indicator, regulator, flowmeter, humidifier, nebulizer, cannula or mask, and tubing (E0440)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0441,"Stationary oxygen contents, gaseous, 1 month's supply = 1 unit (E0441)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0442,"Stationary oxygen contents, liquid, 1 month's supply = 1 unit (E0442)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0443,"Portable oxygen contents, gaseous, 1 month's supply = 1 unit (E0443)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0444,"Portable oxygen contents, liquid, 1 month's supply = 1 unit (E0444)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0462,Rocking bed with or without side rails (E0462),HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0465,"Home ventilator, any type, used with invasive interface, (e.g., tracheostomy tube) (E0465)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0466,"Home ventilator, any type, used with non-invasive interface, (e.g., mask, chest shell) (E0466)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0470,"Respiratory assist device, bi-level pressure capability, without backup rate feature, used with noninvasive interface, e.g., nasal or facial mask (intermittent assist device with continuous positive airway pressure device) (E0470)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0471,"Respiratory assist device, bi-level pressure capability, with back-up rate feature, used with noninvasive interface, e.g., nasal or facial mask (intermittent assist device with continuous positive airway pressure device) (E0471)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E0472,"Respiratory assist device, bi-level pressure capability, with backup rate feature, used with invasive interface, e.g., tracheostomy tube (intermittent assist device with continuous positive airway pressure device) (E0472)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1130,"Standard wheelchair, fixed full length arms, fixed or swing away detachable footrests (E1130)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1140,"Wheelchair, detachable arms, desk or full length, swing away detachable footrests (E1140)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1150,"Wheelchair, detachable arms, desk or full length swing away detachable elevating legrests (E1150)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1160,"Wheelchair, fixed full length arms, swing away detachable elevating legrests (E1160)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1161,"Manual adult size wheelchair, includes tilt in space (E1161)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1170,"Amputee wheelchair, fixed full length arms, swing away detachable elevating legrests (E1170)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1171,"Amputee wheelchair, fixed full length arms, without footrests or legrest (E1171)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1172,"Amputee wheelchair, detachable arms (desk or full length) without footrests or legrest (E1172)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1180,"Amputee wheelchair, detachable arms (desk or full length) swing away detachable footrests (E1180)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1190,"Amputee wheelchair, detachable arms (desk or full length) swing away detachable elevating legrests (E1190)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1195,"Heavy duty wheelchair, fixed full length arms, swing away detachable elevating legrests (E1195)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1200,"Amputee wheelchair, fixed full length arms, swing away detachable footrest (E1200)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1220,"Wheelchair; specially sized or constructed, (indicate brand name, model number, if any) and justification (E1220)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1240,"Lightweight wheelchair, detachable arms, (desk or full length) swing away detachable, elevating legrest (E1240)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1250,"Lightweight wheelchair, fixed full length arms, swing away detachable footrest (E1250)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1260,"Lightweight wheelchair, detachable arms (desk or full length) swing away detachable footrest (E1260)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1270,"Lightweight wheelchair, fixed full length arms, swing away detachable elevating legrests (E1270)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1280,"Heavy duty wheelchair, detachable arms (desk or full length) elevating legrests (E1280)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1285,"Heavy duty wheelchair, fixed full length arms, swing away detachable footrest (E1285)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1290,"Heavy duty wheelchair, detachable arms (desk or full length) swing away detachable footrest (E1290)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1295,"Heavy duty wheelchair, fixed full length arms, elevating legrest (E1295)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1296,Special wheelchair seat height from floor (E1296),HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1297,"Special wheelchair seat depth, by upholstery (E1297)",HCPCS,2.16.840.1.113883.6.285
+Frailty Device,2.16.840.1.113883.3.464.1004.1530,E1298,"Special wheelchair seat depth and/or width, by construction (E1298)",HCPCS,2.16.840.1.113883.6.285
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.000,"[L89.000] Pressure ulcer of unspecified elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.001,"[L89.001] Pressure ulcer of unspecified elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.002,"[L89.002] Pressure ulcer of unspecified elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.003,"[L89.003] Pressure ulcer of unspecified elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.004,"[L89.004] Pressure ulcer of unspecified elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.006,[L89.006] Pressure-induced deep tissue damage of unspecified elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.009,"[L89.009] Pressure ulcer of unspecified elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.010,"[L89.010] Pressure ulcer of right elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.011,"[L89.011] Pressure ulcer of right elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.012,"[L89.012] Pressure ulcer of right elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.013,"[L89.013] Pressure ulcer of right elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.014,"[L89.014] Pressure ulcer of right elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.016,[L89.016] Pressure-induced deep tissue damage of right elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.019,"[L89.019] Pressure ulcer of right elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.020,"[L89.020] Pressure ulcer of left elbow, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.021,"[L89.021] Pressure ulcer of left elbow, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.022,"[L89.022] Pressure ulcer of left elbow, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.023,"[L89.023] Pressure ulcer of left elbow, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.024,"[L89.024] Pressure ulcer of left elbow, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.026,[L89.026] Pressure-induced deep tissue damage of left elbow,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.029,"[L89.029] Pressure ulcer of left elbow, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.100,"[L89.100] Pressure ulcer of unspecified part of back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.101,"[L89.101] Pressure ulcer of unspecified part of back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.102,"[L89.102] Pressure ulcer of unspecified part of back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.103,"[L89.103] Pressure ulcer of unspecified part of back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.104,"[L89.104] Pressure ulcer of unspecified part of back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.106,[L89.106] Pressure-induced deep tissue damage of unspecified part of back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.109,"[L89.109] Pressure ulcer of unspecified part of back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.110,"[L89.110] Pressure ulcer of right upper back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.111,"[L89.111] Pressure ulcer of right upper back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.112,"[L89.112] Pressure ulcer of right upper back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.113,"[L89.113] Pressure ulcer of right upper back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.114,"[L89.114] Pressure ulcer of right upper back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.116,[L89.116] Pressure-induced deep tissue damage of right upper back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.119,"[L89.119] Pressure ulcer of right upper back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.120,"[L89.120] Pressure ulcer of left upper back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.121,"[L89.121] Pressure ulcer of left upper back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.122,"[L89.122] Pressure ulcer of left upper back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.123,"[L89.123] Pressure ulcer of left upper back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.124,"[L89.124] Pressure ulcer of left upper back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.126,[L89.126] Pressure-induced deep tissue damage of left upper back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.129,"[L89.129] Pressure ulcer of left upper back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.130,"[L89.130] Pressure ulcer of right lower back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.131,"[L89.131] Pressure ulcer of right lower back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.132,"[L89.132] Pressure ulcer of right lower back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.133,"[L89.133] Pressure ulcer of right lower back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.134,"[L89.134] Pressure ulcer of right lower back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.136,[L89.136] Pressure-induced deep tissue damage of right lower back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.139,"[L89.139] Pressure ulcer of right lower back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.140,"[L89.140] Pressure ulcer of left lower back, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.141,"[L89.141] Pressure ulcer of left lower back, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.142,"[L89.142] Pressure ulcer of left lower back, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.143,"[L89.143] Pressure ulcer of left lower back, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.144,"[L89.144] Pressure ulcer of left lower back, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.146,[L89.146] Pressure-induced deep tissue damage of left lower back,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.149,"[L89.149] Pressure ulcer of left lower back, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.150,"[L89.150] Pressure ulcer of sacral region, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.151,"[L89.151] Pressure ulcer of sacral region, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.152,"[L89.152] Pressure ulcer of sacral region, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.153,"[L89.153] Pressure ulcer of sacral region, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.154,"[L89.154] Pressure ulcer of sacral region, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.156,[L89.156] Pressure-induced deep tissue damage of sacral region,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.159,"[L89.159] Pressure ulcer of sacral region, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.200,"[L89.200] Pressure ulcer of unspecified hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.201,"[L89.201] Pressure ulcer of unspecified hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.202,"[L89.202] Pressure ulcer of unspecified hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.203,"[L89.203] Pressure ulcer of unspecified hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.204,"[L89.204] Pressure ulcer of unspecified hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.206,[L89.206] Pressure-induced deep tissue damage of unspecified hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.209,"[L89.209] Pressure ulcer of unspecified hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.210,"[L89.210] Pressure ulcer of right hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.211,"[L89.211] Pressure ulcer of right hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.212,"[L89.212] Pressure ulcer of right hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.213,"[L89.213] Pressure ulcer of right hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.214,"[L89.214] Pressure ulcer of right hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.216,[L89.216] Pressure-induced deep tissue damage of right hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.219,"[L89.219] Pressure ulcer of right hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.220,"[L89.220] Pressure ulcer of left hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.221,"[L89.221] Pressure ulcer of left hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.222,"[L89.222] Pressure ulcer of left hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.223,"[L89.223] Pressure ulcer of left hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.224,"[L89.224] Pressure ulcer of left hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.226,[L89.226] Pressure-induced deep tissue damage of left hip,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.229,"[L89.229] Pressure ulcer of left hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.300,"[L89.300] Pressure ulcer of unspecified buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.301,"[L89.301] Pressure ulcer of unspecified buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.302,"[L89.302] Pressure ulcer of unspecified buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.303,"[L89.303] Pressure ulcer of unspecified buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.304,"[L89.304] Pressure ulcer of unspecified buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.306,[L89.306] Pressure-induced deep tissue damage of unspecified buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.309,"[L89.309] Pressure ulcer of unspecified buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.310,"[L89.310] Pressure ulcer of right buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.311,"[L89.311] Pressure ulcer of right buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.312,"[L89.312] Pressure ulcer of right buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.313,"[L89.313] Pressure ulcer of right buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.314,"[L89.314] Pressure ulcer of right buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.316,[L89.316] Pressure-induced deep tissue damage of right buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.319,"[L89.319] Pressure ulcer of right buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.320,"[L89.320] Pressure ulcer of left buttock, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.321,"[L89.321] Pressure ulcer of left buttock, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.322,"[L89.322] Pressure ulcer of left buttock, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.323,"[L89.323] Pressure ulcer of left buttock, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.324,"[L89.324] Pressure ulcer of left buttock, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.326,[L89.326] Pressure-induced deep tissue damage of left buttock,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.329,"[L89.329] Pressure ulcer of left buttock, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.40,"[L89.40] Pressure ulcer of contiguous site of back, buttock and hip, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.41,"[L89.41] Pressure ulcer of contiguous site of back, buttock and hip, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.42,"[L89.42] Pressure ulcer of contiguous site of back, buttock and hip, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.43,"[L89.43] Pressure ulcer of contiguous site of back, buttock and hip, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.44,"[L89.44] Pressure ulcer of contiguous site of back, buttock and hip, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.45,"[L89.45] Pressure ulcer of contiguous site of back, buttock and hip, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.46,"[L89.46] Pressure-induced deep tissue damage of contiguous site of back, buttock and hip",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.500,"[L89.500] Pressure ulcer of unspecified ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.501,"[L89.501] Pressure ulcer of unspecified ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.502,"[L89.502] Pressure ulcer of unspecified ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.503,"[L89.503] Pressure ulcer of unspecified ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.504,"[L89.504] Pressure ulcer of unspecified ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.506,[L89.506] Pressure-induced deep tissue damage of unspecified ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.509,"[L89.509] Pressure ulcer of unspecified ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.510,"[L89.510] Pressure ulcer of right ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.511,"[L89.511] Pressure ulcer of right ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.512,"[L89.512] Pressure ulcer of right ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.513,"[L89.513] Pressure ulcer of right ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.514,"[L89.514] Pressure ulcer of right ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.516,[L89.516] Pressure-induced deep tissue damage of right ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.519,"[L89.519] Pressure ulcer of right ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.520,"[L89.520] Pressure ulcer of left ankle, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.521,"[L89.521] Pressure ulcer of left ankle, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.522,"[L89.522] Pressure ulcer of left ankle, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.523,"[L89.523] Pressure ulcer of left ankle, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.524,"[L89.524] Pressure ulcer of left ankle, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.526,[L89.526] Pressure-induced deep tissue damage of left ankle,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.529,"[L89.529] Pressure ulcer of left ankle, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.600,"[L89.600] Pressure ulcer of unspecified heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.601,"[L89.601] Pressure ulcer of unspecified heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.602,"[L89.602] Pressure ulcer of unspecified heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.603,"[L89.603] Pressure ulcer of unspecified heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.604,"[L89.604] Pressure ulcer of unspecified heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.606,[L89.606] Pressure-induced deep tissue damage of unspecified heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.609,"[L89.609] Pressure ulcer of unspecified heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.610,"[L89.610] Pressure ulcer of right heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.611,"[L89.611] Pressure ulcer of right heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.612,"[L89.612] Pressure ulcer of right heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.613,"[L89.613] Pressure ulcer of right heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.614,"[L89.614] Pressure ulcer of right heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.616,[L89.616] Pressure-induced deep tissue damage of right heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.619,"[L89.619] Pressure ulcer of right heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.620,"[L89.620] Pressure ulcer of left heel, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.621,"[L89.621] Pressure ulcer of left heel, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.622,"[L89.622] Pressure ulcer of left heel, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.623,"[L89.623] Pressure ulcer of left heel, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.624,"[L89.624] Pressure ulcer of left heel, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.626,[L89.626] Pressure-induced deep tissue damage of left heel,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.629,"[L89.629] Pressure ulcer of left heel, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.810,"[L89.810] Pressure ulcer of head, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.811,"[L89.811] Pressure ulcer of head, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.812,"[L89.812] Pressure ulcer of head, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.813,"[L89.813] Pressure ulcer of head, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.814,"[L89.814] Pressure ulcer of head, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.816,[L89.816] Pressure-induced deep tissue damage of head,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.819,"[L89.819] Pressure ulcer of head, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.890,"[L89.890] Pressure ulcer of other site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.891,"[L89.891] Pressure ulcer of other site, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.892,"[L89.892] Pressure ulcer of other site, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.893,"[L89.893] Pressure ulcer of other site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.894,"[L89.894] Pressure ulcer of other site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.896,[L89.896] Pressure-induced deep tissue damage of other site,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.899,"[L89.899] Pressure ulcer of other site, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.90,"[L89.90] Pressure ulcer of unspecified site, unspecified stage",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.91,"[L89.91] Pressure ulcer of unspecified site, stage 1",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.92,"[L89.92] Pressure ulcer of unspecified site, stage 2",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.93,"[L89.93] Pressure ulcer of unspecified site, stage 3",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.94,"[L89.94] Pressure ulcer of unspecified site, stage 4",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.95,"[L89.95] Pressure ulcer of unspecified site, unstageable",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,L89.96,[L89.96] Pressure-induced deep tissue damage of unspecified site,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.50,"[M62.50] Muscle wasting and atrophy, not elsewhere classified, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.81,[M62.81] Muscle weakness (generalized),ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,M62.84,[M62.84] Sarcopenia,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,R29.6,[R29.6] Repeated falls,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXA,"[W01.0XXA] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXD,"[W01.0XXD] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.0XXS,"[W01.0XXS] Fall on same level from slipping, tripping and stumbling without subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XA,"[W01.10XA] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XD,"[W01.10XD] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.10XS,"[W01.10XS] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110A,"[W01.110A] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110D,"[W01.110D] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.110S,"[W01.110S] Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111A,"[W01.111A] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111D,"[W01.111D] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.111S,"[W01.111S] Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118A,"[W01.118A] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118D,"[W01.118D] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.118S,"[W01.118S] Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119A,"[W01.119A] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119D,"[W01.119D] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.119S,"[W01.119S] Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190A,"[W01.190A] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190D,"[W01.190D] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.190S,"[W01.190S] Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198A,"[W01.198A] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198D,"[W01.198D] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W01.198S,"[W01.198S] Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXA,"[W06.XXXA] Fall from bed, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXD,"[W06.XXXD] Fall from bed, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W06.XXXS,"[W06.XXXS] Fall from bed, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXA,"[W07.XXXA] Fall from chair, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXD,"[W07.XXXD] Fall from chair, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W07.XXXS,"[W07.XXXS] Fall from chair, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXA,"[W08.XXXA] Fall from other furniture, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXD,"[W08.XXXD] Fall from other furniture, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W08.XXXS,"[W08.XXXS] Fall from other furniture, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXA,"[W10.0XXA] Fall (on)(from) escalator, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXD,"[W10.0XXD] Fall (on)(from) escalator, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.0XXS,"[W10.0XXS] Fall (on)(from) escalator, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXA,"[W10.1XXA] Fall (on)(from) sidewalk curb, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXD,"[W10.1XXD] Fall (on)(from) sidewalk curb, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.1XXS,"[W10.1XXS] Fall (on)(from) sidewalk curb, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXA,"[W10.2XXA] Fall (on)(from) incline, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXD,"[W10.2XXD] Fall (on)(from) incline, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.2XXS,"[W10.2XXS] Fall (on)(from) incline, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXA,"[W10.8XXA] Fall (on) (from) other stairs and steps, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXD,"[W10.8XXD] Fall (on) (from) other stairs and steps, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.8XXS,"[W10.8XXS] Fall (on) (from) other stairs and steps, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXA,"[W10.9XXA] Fall (on) (from) unspecified stairs and steps, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXD,"[W10.9XXD] Fall (on) (from) unspecified stairs and steps, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W10.9XXS,"[W10.9XXS] Fall (on) (from) unspecified stairs and steps, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XA,"[W18.00XA] Striking against unspecified object with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XD,"[W18.00XD] Striking against unspecified object with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.00XS,"[W18.00XS] Striking against unspecified object with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XA,"[W18.02XA] Striking against glass with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XD,"[W18.02XD] Striking against glass with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.02XS,"[W18.02XS] Striking against glass with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XA,"[W18.09XA] Striking against other object with subsequent fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XD,"[W18.09XD] Striking against other object with subsequent fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.09XS,"[W18.09XS] Striking against other object with subsequent fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XA,"[W18.11XA] Fall from or off toilet without subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XD,"[W18.11XD] Fall from or off toilet without subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.11XS,"[W18.11XS] Fall from or off toilet without subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XA,"[W18.12XA] Fall from or off toilet with subsequent striking against object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XD,"[W18.12XD] Fall from or off toilet with subsequent striking against object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.12XS,"[W18.12XS] Fall from or off toilet with subsequent striking against object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXA,"[W18.2XXA] Fall in (into) shower or empty bathtub, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXD,"[W18.2XXD] Fall in (into) shower or empty bathtub, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.2XXS,"[W18.2XXS] Fall in (into) shower or empty bathtub, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XA,"[W18.30XA] Fall on same level, unspecified, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XD,"[W18.30XD] Fall on same level, unspecified, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.30XS,"[W18.30XS] Fall on same level, unspecified, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XA,"[W18.31XA] Fall on same level due to stepping on an object, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XD,"[W18.31XD] Fall on same level due to stepping on an object, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.31XS,"[W18.31XS] Fall on same level due to stepping on an object, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XA,"[W18.39XA] Other fall on same level, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XD,"[W18.39XD] Other fall on same level, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W18.39XS,"[W18.39XS] Other fall on same level, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXA,"[W19.XXXA] Unspecified fall, initial encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXD,"[W19.XXXD] Unspecified fall, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,W19.XXXS,"[W19.XXXS] Unspecified fall, sequela",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Y92.199,[Y92.199] Unspecified place in other specified residential institution as the place of occurrence of the external cause,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z59.3,[Z59.3] Problems related to living in residential institution,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z73.6,[Z73.6] Limitation of activities due to disability,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.01,[Z74.01] Bed confinement status,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.09,[Z74.09] Other reduced mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.1,[Z74.1] Need for assistance with personal care,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.2,[Z74.2] Need for assistance at home and no other household member able to render care,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.3,[Z74.3] Need for continuous supervision,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.8,[Z74.8] Other problems related to care provider dependency,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z74.9,"[Z74.9] Problem related to care provider dependency, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z91.81,[Z91.81] History of falling,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.11,[Z99.11] Dependence on respirator [ventilator] status,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.3,[Z99.3] Dependence on wheelchair,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.81,[Z99.81] Dependence on supplemental oxygen,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,Z99.89,[Z99.89] Dependence on other enabling machines and devices,ICD10CM,2.16.840.1.113883.6.90
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,17886000,Fall from wheelchair (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,20902002,Fall from bed (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,33036003,Fall on same level (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,40104005,Fall in home (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,44188002,Fall in shower (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,56307009,Fall from table (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,67223001,Fall on escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,74541001,Fall from bench (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,83468000,Fall from chair (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,90619006,Fall in bathtub (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,129588001,Adult failure to thrive syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214436006,Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214437002,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, driver of motor vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214438007,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, passenger of motor vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214439004,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, motor cyclist injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214441003,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, occupant of tram injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214442005,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, rider of animal or occupant of animal-drawn vehicle injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214443000,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, pedal cyclist injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,214444006,"Noncollision motor vehicle traffic accident involving fall down stairs of motor bus while boarding or alighting, pedestrian injured (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217082002,Accidental fall (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217083007,Fall on or from stairs or steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217084001,Fall on or from escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217086004,Fall from escalator (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217088003,Fall on or from stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217090002,Fall from stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217092005,Fall on or from steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217093000,Fall on steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217094006,Fall from steps (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217142006,Fall from chair or bed (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217154006,"Fall on same level from slipping, tripping or stumbling (event)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217155007,Fall on same level from slipping (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217156008,Fall on same level from tripping (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217157004,Fall on same level from stumbling (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217158009,Fall on moving sidewalk (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,217173005,Fall from bump against object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225558004,Pressure injury of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225562005,Pressure injury of sacral region of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,225563000,Pressure injury of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242109009,Fall down stairs of motor bus while boarding or alighting (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242389003,Fall due to wet surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242390007,Fall due to polished surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242391006,Fall due to discarded object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242392004,Fall in bath or shower (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242395002,Fall due to trip on loose carpet (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242396001,Fall due to uneven surface indoors (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242413007,Fall from furniture (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242414001,Fall from stool (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,242419006,Fall from toilet seat (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,269699007,Fall on same level from impact against object (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,274918000,Fall on same level due to nature of surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,414190009,Fall on stairs (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,427849003,Fall on hard surface (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,428484005,Organic failure to thrive (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,429621003,Fall on concrete (event),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,699214007,Pressure injury of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,699216009,Pressure injury of coccygeal region of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,715504003,Spastic paraparesis co-occurrent with deafness (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,763829004,Oculopharyngodistal myopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,823018004,Muscle paresis due to and following neuromuscular blockade (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,92341000119107,Weakness of extremities as sequela of stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,138371000119104,Paresis as late effect of poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,8960001000004106,Pressure injury of ischial tuberosity region of right buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637031000119106,Pressure injury of buttock stage I (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637071000119109,Pressure injury of buttock stage II (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637111000119102,Pressure injury of buttock stage III (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531,10637151000119101,Pressure injury of buttock stage IV (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,99504,,CPT,2.16.840.1.113883.6.12
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,99509,,CPT,2.16.840.1.113883.6.12
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0162,Skilled services by a registered nurse (rn) for management and evaluation of the plan of care; each 15 minutes (the patient's underlying condition or complication requires an rn to ensure that essential non-skilled care achieves its purpose in the home health or hospice setting) (G0162),HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0299,"Direct skilled nursing services of a registered nurse (rn) in the home health or hospice setting, each 15 minutes (G0299)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0300,"Direct skilled nursing services of a licensed practical nurse (lpn) in the home health or hospice setting, each 15 minutes (G0300)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0493,"Skilled services of a registered nurse (rn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need for possible modification of treatment in the home health or hospice setting) (G0493)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,G0494,"Skilled services of a licensed practical nurse (lpn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need for possible modification of treatment in the home health or hospice setting) (G0494)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S0271,"Physician management of patient home care, hospice monthly case rate (per 30 days) (S0271)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S0311,"Comprehensive management and care coordination for advanced illness, per calendar month (S0311)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S9123,"Nursing care, in the home; by registered nurse, per hour (use for general nursing care only, not to be used when cpt codes 99500-99602 can be used) (S9123)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,S9124,"Nursing care, in the home; by licensed practical nurse, per hour (S9124)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1000,"Private duty / independent nursing service(s) - licensed, up to 15 minutes (T1000)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1001,Nursing assessment / evaluation (T1001),HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1002,"Rn services, up to 15 minutes (T1002)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1003,"Lpn/lvn services, up to 15 minutes (T1003)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1004,"Services of a qualified nursing aide, up to 15 minutes (T1004)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1005,"Respite care services, up to 15 minutes (T1005)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1019,"Personal care services, per 15 minutes, not for an inpatient or resident of a hospital, nursing facility, icf/mr or imd, part of the individualized plan of treatment (code may not be used to identify services provided by home health aide or certified nurse assistant) (T1019)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1020,"Personal care services, per diem, not for an inpatient or resident of a hospital, nursing facility, icf/mr or imd, part of the individualized plan of treatment (code may not be used to identify services provided by home health aide or certified nurse assistant) (T1020)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1021,"Home health aide or certified nurse assistant, per visit (T1021)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1022,"Contracted home health agency services, all services provided under contract, per day (T1022)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1030,"Nursing care, in the home, by registered nurse, per diem (T1030)",HCPCS,2.16.840.1.113883.6.285
+Frailty Encounter,2.16.840.1.113883.3.464.1004.1532,T1031,"Nursing care, in the home, by licensed practical nurse, per diem (T1031)",HCPCS,2.16.840.1.113883.6.285
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.2,"[R26.2] Difficulty in walking, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.89,[R26.89] Other abnormalities of gait and mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R26.9,[R26.9] Unspecified abnormalities of gait and mobility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R53.1,[R53.1] Weakness,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R53.81,[R53.81] Other malaise,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R54,[R54] Age-related physical debility,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R62.7,[R62.7] Adult failure to thrive,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R63.4,[R63.4] Abnormal weight loss,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R63.6,[R63.6] Underweight,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,R64,[R64] Cachexia,ICD10CM,2.16.840.1.113883.6.90
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,4468000,Oppenheim's gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,8510008,Reduced mobility (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,13791008,Asthenia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,18726006,Senile asthenia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,20940004,Spinal hemiparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22090007,Scissoring gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22325002,Abnormal gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,22631008,Unsteady when walking (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,23042008,Spinal paraparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,26544005,Muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,41786007,Neurological muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,43005009,Shuffling gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,50314001,Partial bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,67141003,Antalgic gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,78119002,Complete bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,78691002,Staggering gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,89362005,Weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,102492002,Failure to maintain weight (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,102568007,Paresis of lower extremity (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105501005,Dependence on enabling machine or device (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105503008,Dependence on wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,105504002,Dependence on walking stick (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,126013009,Subjective muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,127378008,Bilateral paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160681005,Mobile outside with aid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160683008,Needs walking aid in home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160684002,Confined to chair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160685001,Bed-ridden (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160692006,Mobility very poor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160693001,Mobility poor (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160734000,Lives in nursing home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,160737007,Lives in an old peoples home (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161832001,Weight decreasing (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161873000,Heavy legs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,161874006,Heavy feeling (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,162236007,Weakness present (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,162239000,Abdominal weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,165243005,Independent in wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,165244004,Minimal help in wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,224960004,Tired (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,238108007,Cachexia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248269005,Tired on least exertion (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248278004,Attacks of weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,248279007,Frailty (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249888000,Weakness of sternomastoid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249937002,Truncal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249938007,Weakness of back (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249939004,Proximal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249940002,Shoulder girdle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249941003,Pelvic girdle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249942005,Distal muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249943000,Weakness of distal arms and legs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,249946008,Pyramidal type muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250003005,Low level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250015009,Arthritic gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250034009,Middle level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250038007,Retropulsion when walking (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250043000,High level sensorimotor gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250044006,Cautious gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250045007,Tottering gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250052009,Petren's gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250054005,Frontal gait disorder (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,262285001,Weight decreased (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,267024001,Abnormal weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,267032009,Tired all the time (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,271795006,Malaise and fatigue (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,275313006,Dragging leg (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,284529003,Cardiac cachexia (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,298283006,Hand muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,300948004,Quadriceps weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,309249007,Calf muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,309257005,Excessive weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,312444006,Spastic paraparesis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,367391008,Malaise (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,371028005,Spastic paresis (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,373931001,Sensation of heaviness in limbs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,397776000,Festinating gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,404904002,Frail elderly (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,413121008,Dependent on helper pushing wheelchair (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,422868009,Unexplained weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,426977000,Recent weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,428116008,Multifactorial gait problem (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,428264009,Painful gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,429091008,Dependence on biphasic positive airway pressure ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,429487005,Dependence on continuous positive airway pressure ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,431524008,Abnormal gait due to impairment of balance (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,432559006,Abnormal gait due to muscle weakness (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,444932008,Dependence on ventilator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,448765001,Unintentional weight loss (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713512009,Muscle weakness of upper limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713514005,Muscle weakness of limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713568000,Occasionally tired (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,713655003,Dependence on non-invasive ventilation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,788876001,Cachexia due to malignant neoplastic disease (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,788900007,Dependence on artificial heart (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,931000119107,Dependence on supplemental oxygen (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,60631000119109,Dependence on home ventilator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,60651000119103,Dependence on continuous supplemental oxygen (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,69161000119103,Functional gait abnormality (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,79021000119104,Dependence on aspirator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,79031000119101,Dependence on respirator (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,85711000119103,Stumbling due to lack of coordination (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,89201000119106,Dependence on supplemental oxygen when ambulating (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,152921000119101,Dependence on respiratory device (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,250991000119100,Stumbling gait (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,15634971000119107,Weakness of bilateral upper limbs (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16018391000119104,Paresis of left lower limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16018431000119109,Paresis of right lower limb (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Frailty Symptom,2.16.840.1.113883.3.464.1004.1533,16419651000119103,Dependence on biphasic positive airway pressure ventilation due to central sleep apnea syndrome (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72020,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72040,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72050,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72052,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72070,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72072,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72074,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72080,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72081,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72082,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72083,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72084,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72100,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72110,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72114,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72120,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72125,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72126,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72127,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72128,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72129,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72130,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72131,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72132,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72133,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72141,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72142,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72146,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72147,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72148,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72149,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72156,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72157,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72158,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72200,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72202,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,72220,,CPT,2.16.840.1.113883.6.12
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,2847006,Cervical myelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,22791004,Plain X-ray of lumbar and sacral spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,41333006,Magnetic resonance imaging of lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,60443006,Magnetic resonance imaging of cervical spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,90523008,Computed tomography of lumbar vertebral column with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,91333005,Magnetic resonance imaging of thoracic spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,241580002,Computed tomography of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,241592002,Computed tomography myelogram of lumbar region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,241646009,Magnetic resonance imaging of cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,241647000,Magnetic resonance imaging of thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,241648005,Magnetic resonance imaging of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,429860003,Injection of lumbar zygapophyseal joint using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,429868005,Injection of lumbar spinal nerve root using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,429871002,Lumbar epidural injection using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,430021001,Magnetic resonance imaging myelography of cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,430507007,Magnetic resonance imaging myelography of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431250008,Magnetic resonance imaging of lumbar spine and pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431496002,Vertebroplasty of lumbar spine using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431557005,Plain X-ray of cervical spine using mobile image intensifier (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431613003,Kyphoplasty of fracture of lumbar spine using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431871005,Plain X-ray of lumbar spine using mobile image intensifier (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,431892005,Plain X-ray of lumbar spine and pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,432078003,Plain X-ray of sacrum using mobile image intensifier (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,432244001,Magnetic resonance imaging myelography of thoracic spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,432770001,Plain X-ray of thoracic vertebral column using mobile image intensifier (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,433140006,Magnetic resonance imaging of lumbar and sacral spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,433141005,Magnetic resonance imaging of lumbar and sacral spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,440450002,Magnetic resonance imaging of brain and cervical spinal cord (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,443580006,Single photon emission computed tomography with computed tomography of bone of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,444634007,Plain X-ray of thoracic and lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,448641007,Magnetic resonance imaging of thoracic and lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,700319007,Magnetic resonance imaging of thoracic and lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,700320001,Magnetic resonance imaging of cervical and lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,700321002,Magnetic resonance imaging of cervical and lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702487007,Computed tomography of thoracic and lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702488002,Computed tomography of thoracic and lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702513003,"Computed tomography of abdomen, pelvis and lumbar spine (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702514009,"Computed tomography of abdomen, pelvis and lumbar spine with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702515005,Computed tomography of cervical and lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702516006,Computed tomography of cervical and lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702521009,Computed tomography of lumbar spine and pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702522002,Computed tomography of lumbar spine and pelvis with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702523007,Computed tomography of lumbar spine and sacroiliac joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702607002,Magnetic resonance imaging of cervical and thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,702608007,Magnetic resonance imaging of cervical and thoracic spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,709652000,Magnetic resonance imaging of lumbar spine and pelvis with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,709653005,Magnetic resonance imaging of lumbar spine and sacroiliac joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,709698004,Computed tomography of lumbar spine and sacroiliac joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,711104001,Plain X-ray of cervical and thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,711184004,Magnetic resonance imaging of head and cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,711186002,Magnetic resonance imaging of head and cervical spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,711224009,Computed tomography of lumbar and sacral spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,711271003,Lumbar puncture using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,712970008,Plain X-ray of cervical vertebral column region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,713016000,Computed tomography angiography of vascular structure of lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,715290001,Computed tomography of lumbar and sacral spine for radiotherapy planning (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,715458009,Plain X-ray of entire spine using mobile image intensifier (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,716830000,X-ray tomography of cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,717912001,X-ray tomography of spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,718542005,X-ray tomography of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,718545007,X-ray tomography of thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,723646000,Computed tomography of lumbar and sacral spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,726546000,Magnetic resonance imaging of lumbar spine and sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,772220000,Mobile intraoperative three-dimensional computed tomography of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,783627007,Plain X-ray of sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,840361000,Plain X-ray of lumbar vertebral column region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,868279006,Plain X-ray for measurement of Cobb angle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,1251643002,Computed tomography discography with injection of contrast into intervertebral disc of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,3721000087104,Plain X-ray of left sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,3731000087102,Plain X-ray of right sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,14871000087107,"Computed tomography angiography of abdomen, pelvis and lumbar spine with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,17141000087101,Plain X-ray of bilateral sacroiliac joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,394451000119106,Magnetic resonance imaging of lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,396171000119100,Magnetic resonance imaging of thoracic spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,411571000119106,Magnetic resonance imaging of thoracic spine and lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,411611000119102,"Magnetic resonance imaging of cervical, thoracic, and lumbar spine without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,413001000119107,Magnetic resonance imaging of cervical and lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,495741000119105,"Magnetic resonance imaging of cervical, thoracic, and lumbar spine with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,571891000119109,Magnetic resonance imaging of cervical spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,572091000119106,Computed tomography of lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,16328021000119109,Magnetic resonance imaging of brain and cervical spinal cord without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,16384831000119100,Magnetic resonance imaging of cervical and thoracic spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Imaging Study,2.16.840.1.113883.3.464.1004.1138,16554061000119109,Computed tomography myelogram of lumbosacral spine with lumbar injection of contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0100,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0101,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0110,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0111,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0112,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0113,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0114,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0116,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0117,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0118,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0119,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0120,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0121,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0122,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0123,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0124,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0126,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0127,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0128,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0129,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0130,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0131,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0132,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0133,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0134,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0136,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0137,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0138,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0139,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0140,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0141,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0142,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0143,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0144,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0146,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0147,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0148,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0149,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0150,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0151,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0152,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0153,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0154,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0156,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0157,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0158,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0159,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0160,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0164,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0167,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0169,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0170,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0171,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0172,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0173,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0174,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0179,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0190,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0191,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0192,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0193,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0194,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0199,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0200,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0201,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0202,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0203,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0204,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0206,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0207,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0208,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0209,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0210,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0211,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0212,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0213,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0214,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0219,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1000,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1001,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1002,,UBREV,2.16.840.1.113883.6.301.3
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718890006,Assessment using Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718893008,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718895001,Assessment using Integrated Palliative care Outcome Scale Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718898004,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718899007,Assessment using Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718901003,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718903000,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718904006,Assessment using Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718957007,Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718967002,Integrated Palliative care Outcome Scale - Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718969004,Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718971004,Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718973001,Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718974007,Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718975008,Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718976009,Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761865002,Palliative care Outcome Scale symptom list for end-stage renal disease (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761866001,Palliative care Outcome Scale symptom list for end-stage renal disease score (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761867005,Assessment using Palliative care Outcome Scale symptom list for end-stage renal disease (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,457511000124100,Palliative performance scale (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,G9054,"Oncology; primary focus of visit; supervising, coordinating or managing care of patient with terminal cancer or for whom other medical illness prevents further cancer treatment; includes symptom management, end-of-life care planning, management of palliative therapies (for use in a medicare-approved demonstration project) (G9054)",HCPCS,2.16.840.1.113883.6.285
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305284002,Admission by palliative care physician (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305381007,Admission to palliative care department (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305686008,Seen by palliative care physician (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305824005,Seen by palliative care medicine service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,441874000,Seen by palliative care service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,713281006,Consultation for palliative care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,4901000124101,Palliative care education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,103735009,Palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,105402000,Visit of patient by chaplain during palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395669003,Specialist palliative care treatment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395670002,Specialist palliative care treatment - inpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395694002,Specialist palliative care treatment - daycare (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395695001,Specialist palliative care treatment - outpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,443761007,Anticipatory palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,1841000124106,Palliative care medication review (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,433181000124107,Documentation of palliative care medication action plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22114,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22207,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22214,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22224,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22511,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22512,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22514,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22515,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22533,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22534,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22558,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22612,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22630,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22632,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22633,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22634,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22857,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22860,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22862,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22865,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22867,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22868,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22869,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,22870,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32850,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32851,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32852,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32853,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32854,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32855,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,32856,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33927,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33928,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33929,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33930,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33933,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33935,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33940,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33944,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,33945,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44132,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44133,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44135,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44136,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44137,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44715,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44720,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,44721,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47133,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47135,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47136,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47140,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47141,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47142,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47143,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47144,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47145,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47146,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,47147,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48160,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48550,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48551,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48552,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48554,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,48556,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,50360,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,50365,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,50380,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,62287,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,62380,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63005,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63012,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63017,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63030,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63035,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63042,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63044,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63047,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63048,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63052,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63053,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63056,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63057,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63087,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63088,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63090,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63091,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63102,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63103,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63170,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63200,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63252,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63267,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63272,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63277,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63282,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,63287,,CPT,2.16.840.1.113883.6.12
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,J0897,"Injection, denosumab, 1 mg (J0897)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,J1740,"Injection, ibandronate sodium, 1 mg (J1740)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,J3110,"Injection, teriparatide, 10 mcg (J3110)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,J3111,"Injection, romosozumab-aqqg, 1 mg (J3111)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,J3489,"Injection, zoledronic acid, 1 mg (J3489)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,Q5136,"Injection, denosumab-bbdz (jubbonti/wyost), biosimilar, 1 mg (Q5136)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2053,Transplantation of small intestine and liver allografts (S2053),HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2054,Transplantation of multivisceral organs (S2054),HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2055,"Harvesting of donor multivisceral organs, with preparation and maintenance of allografts; from cadaver donor (S2055)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2060,Lobar lung transplantation (S2060),HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2061,"Donor lobectomy (lung) for transplantation, living donor (S2061)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2065,Simultaneous pancreas kidney transplantation (S2065),HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2152,"Solid organ(s), complete or segmental, single organ or combination of organs; deceased or living donor(s), procurement, transplantation, and related complications; including: drugs; supplies; hospitalization with outpatient follow-up; medical/surgical, diagnostic, emergency, and rehabilitative services, and the number of days of pre- and post-transplant care in the global definition (S2152)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2348,"Decompression procedure, percutaneous, of nucleus pulposus of intervertebral disc, using radiofrequency energy, single or multiple levels, lumbar (S2348)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,S2350,"Diskectomy, anterior, with decompression of spinal cord and/or nerve root(s), including osteophytectomy; lumbar, single interspace (S2350)",HCPCS,2.16.840.1.113883.6.285
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y0Z3,"[005Y0Z3] Destruction of Lumbar Spinal Cord using Laser Interstitial Thermal Therapy, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y0ZZ,"[005Y0ZZ] Destruction of Lumbar Spinal Cord, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y3Z3,"[005Y3Z3] Destruction of Lumbar Spinal Cord using Laser Interstitial Thermal Therapy, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y3ZZ,"[005Y3ZZ] Destruction of Lumbar Spinal Cord, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y4Z3,"[005Y4Z3] Destruction of Lumbar Spinal Cord using Laser Interstitial Thermal Therapy, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,005Y4ZZ,"[005Y4ZZ] Destruction of Lumbar Spinal Cord, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,008Y0ZZ,"[008Y0ZZ] Division of Lumbar Spinal Cord, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,008Y3ZZ,"[008Y3ZZ] Division of Lumbar Spinal Cord, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,008Y4ZZ,"[008Y4ZZ] Division of Lumbar Spinal Cord, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y00Z,"[009Y00Z] Drainage of Lumbar Spinal Cord with Drainage Device, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y0ZX,"[009Y0ZX] Drainage of Lumbar Spinal Cord, Open Approach, Diagnostic",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y0ZZ,"[009Y0ZZ] Drainage of Lumbar Spinal Cord, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y30Z,"[009Y30Z] Drainage of Lumbar Spinal Cord with Drainage Device, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y3ZX,"[009Y3ZX] Drainage of Lumbar Spinal Cord, Percutaneous Approach, Diagnostic",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y3ZZ,"[009Y3ZZ] Drainage of Lumbar Spinal Cord, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y40Z,"[009Y40Z] Drainage of Lumbar Spinal Cord with Drainage Device, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594,009Y4ZX,"[009Y4ZX] Drainage of Lumbar Spinal Cord, Percutaneous Endoscopic Approach, Diagnostic",ICD10PCS,2.16.840.1.113883.6.4

@@ -1,0 +1,265 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,92002,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,92004,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,92012,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,92014,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98000,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98001,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98002,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98003,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98004,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98005,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98006,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98007,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98008,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98009,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98010,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98011,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98012,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98013,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98014,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98015,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98016,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98966,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98967,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98968,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98970,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98971,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98972,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98980,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,98981,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99202,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99203,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99204,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99205,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99211,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99212,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99213,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99214,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99215,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99242,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99243,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99244,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99245,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99304,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99305,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99306,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99307,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99308,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99309,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99310,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99315,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99316,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99341,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99342,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99344,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99345,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99347,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99348,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99349,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99350,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99381,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99382,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99383,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99384,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99385,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99386,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99387,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99391,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99392,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99393,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99394,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99395,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99396,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99397,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99401,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99402,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99403,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99404,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99411,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99412,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99421,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99422,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99423,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99429,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99441,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99442,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99443,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99457,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99458,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,99483,,CPT,2.16.840.1.113883.6.12
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G0071,"Payment for communication technology-based services for 5 minutes or more of a virtual (non-face-to-face) communication between an rural health clinic (rhc) or federally qualified health center (fqhc) practitioner and rhc or fqhc patient, or 5 minutes or more of remote evaluation of recorded video and/or images by an rhc or fqhc practitioner, occurring in lieu of an office visit; rhc or fqhc only (G0071)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G0402,"Initial preventive physical examination; face-to-face visit, services limited to new beneficiary during the first 12 months of medicare enrollment (G0402)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G0438,"Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit (G0438)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G0439,"Annual wellness visit, includes a personalized prevention plan of service (pps), subsequent visit (G0439)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G0463,Hospital outpatient clinic visit for assessment and management of a patient (G0463),HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G2010,"Remote evaluation of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment (G2010)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G2012,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of medical discussion (G2012)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G2250,"Remote assessment of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment (G2250)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G2251,"Brief communication technology-based service, e.g. virtual check-in, by a qualified health care professional who cannot report evaluation and management services, provided to an established patient, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of clinical discussion (G2251)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,G2252,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 11-20 minutes of medical discussion (G2252)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,S0620,Routine ophthalmological examination including refraction; new patient (S0620),HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,S0621,Routine ophthalmological examination including refraction; established patient (S0621),HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,T1015,"Clinic visit/encounter, all-inclusive (T1015)",HCPCS,2.16.840.1.113883.6.285
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,18170008,Subsequent nursing facility visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,19681004,Nursing evaluation of patient and report (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,162651007,Patient examined (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,162655003,Full examination performed (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170107008,Child examination - 10 days (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170114005,Child examination - 6 weeks (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170123008,Child 8-9 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170132005,Child 18 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170141000,Child 2.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170150003,Child 3.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170159002,Child 4.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170168000,Child 10 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170250008,Child 3 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170254004,Child 1 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170263002,Child 6 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170272005,Child 21 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170281004,Child 3 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170290006,Child 39 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170300004,Child 8 week examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,170309003,Child 7 month exam (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,185317003,Telephone encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,207195004,History and physical examination with evaluation and management of nursing facility patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,209099002,History and physical examination with management of domiciliary or rest home patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,210098006,Domiciliary or rest home patient evaluation and management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,243788004,Child examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,268563000,Child health medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,268565007,Adult health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,281029006,Well man health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,281031002,Well woman health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,314849005,Telephone contact by consultant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,386472008,Telephone consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,386473003,Telephone follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,401140000,Child 2 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,401267002,Telephone triage encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410620009,Well child visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410622001,Child examination - 2 weeks (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410623006,"Well child visit, 2 week (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410624000,"Well child visit, 2 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410625004,Child 4 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410626003,"Well child visit, 4 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410627007,"Well child visit, 6 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410628002,"Well child visit, 9 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410629005,"Well child visit, 12 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410630000,Child 15 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410631001,"Well child visit, 15 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410632008,"Well child visit, 18 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410633003,"Well child visit, 2 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410634009,"Well child visit, 3 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410635005,Child 4 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410636006,"Well child visit, 4 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410637002,"Well child visit, 5 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410638007,"Well child visit, 6 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410639004,"Well child visit, 7 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410640002,"Well child visit, 8 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410641003,"Well child visit, 9 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410642005,"Well child visit, 10 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410643000,"Well child visit, 11 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410644006,"Well child visit, 12 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410645007,"Well child visit, 13 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410646008,"Well child visit, 14 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410647004,"Well child visit, 15 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410648009,"Well child visit, 16 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410649001,"Well child visit, 17 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,410650001,"Well child visit, 18 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,442162000,Child 6 to 8 week examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,699134002,Caregiver annual health check (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,712791009,Elderly driver insurance medical examination done (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,713020001,Child into care medical examination done (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,783260003,Child 15 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,1269517007,Child 1 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,1269518002,Child 5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0510,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0511,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0513,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0514,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0515,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0516,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0517,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0519,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0520,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0521,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0522,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0523,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0524,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0525,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0526,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0527,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0528,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0529,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0982,,UBREV,2.16.840.1.113883.6.301.3
+Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022,0983,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.00,[Z00.00] Encounter for general adult medical examination without abnormal findings,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.01,[Z00.01] Encounter for general adult medical examination with abnormal findings,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.121,[Z00.121] Encounter for routine child health examination with abnormal findings,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.129,[Z00.129] Encounter for routine child health examination without abnormal findings,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.3,[Z00.3] Encounter for examination for adolescent development state,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.5,[Z00.5] Encounter for examination of potential donor of organ and tissue,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z00.8,[Z00.8] Encounter for other general examination,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.0,[Z02.0] Encounter for examination for admission to educational institution,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.1,[Z02.1] Encounter for pre-employment examination,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.2,[Z02.2] Encounter for examination for admission to residential institution,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.3,[Z02.3] Encounter for examination for recruitment to armed forces,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.4,[Z02.4] Encounter for examination for driving license,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.5,[Z02.5] Encounter for examination for participation in sport,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.6,[Z02.6] Encounter for examination for insurance purposes,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.71,[Z02.71] Encounter for disability determination,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.79,[Z02.79] Encounter for issue of other medical certificate,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.81,[Z02.81] Encounter for paternity testing,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.82,[Z02.82] Encounter for adoption services,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.83,[Z02.83] Encounter for blood-alcohol and blood-drug test,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.84,[Z02.84] Encounter for child welfare exam,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.89,[Z02.89] Encounter for other administrative examinations,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z02.9,"[Z02.9] Encounter for administrative examinations, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z76.1,[Z76.1] Encounter for health supervision and care of foundling,ICD10CM,2.16.840.1.113883.6.90
+Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475,Z76.2,[Z76.2] Encounter for health supervision and care of other healthy infant and child,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

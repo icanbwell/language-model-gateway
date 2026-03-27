@@ -1,0 +1,1211 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.10,"[F10.10] Alcohol abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.120,"[F10.120] Alcohol abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.121,[F10.121] Alcohol abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.129,"[F10.129] Alcohol abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.130,"[F10.130] Alcohol abuse with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.131,[F10.131] Alcohol abuse with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.132,[F10.132] Alcohol abuse with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.139,"[F10.139] Alcohol abuse with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.14,[F10.14] Alcohol abuse with alcohol-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.150,[F10.150] Alcohol abuse with alcohol-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.151,[F10.151] Alcohol abuse with alcohol-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.159,"[F10.159] Alcohol abuse with alcohol-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.180,[F10.180] Alcohol abuse with alcohol-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.181,[F10.181] Alcohol abuse with alcohol-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.182,[F10.182] Alcohol abuse with alcohol-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.188,[F10.188] Alcohol abuse with other alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.19,[F10.19] Alcohol abuse with unspecified alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.20,"[F10.20] Alcohol dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.220,"[F10.220] Alcohol dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.221,[F10.221] Alcohol dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.229,"[F10.229] Alcohol dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.230,"[F10.230] Alcohol dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.231,[F10.231] Alcohol dependence with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.232,[F10.232] Alcohol dependence with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.239,"[F10.239] Alcohol dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.24,[F10.24] Alcohol dependence with alcohol-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.250,[F10.250] Alcohol dependence with alcohol-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.251,[F10.251] Alcohol dependence with alcohol-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.259,"[F10.259] Alcohol dependence with alcohol-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.26,[F10.26] Alcohol dependence with alcohol-induced persisting amnestic disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.27,[F10.27] Alcohol dependence with alcohol-induced persisting dementia,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.280,[F10.280] Alcohol dependence with alcohol-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.281,[F10.281] Alcohol dependence with alcohol-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.282,[F10.282] Alcohol dependence with alcohol-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.288,[F10.288] Alcohol dependence with other alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F10.29,[F10.29] Alcohol dependence with unspecified alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.10,"[F11.10] Opioid abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.120,"[F11.120] Opioid abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.121,[F11.121] Opioid abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.122,[F11.122] Opioid abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.129,"[F11.129] Opioid abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.13,[F11.13] Opioid abuse with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.14,[F11.14] Opioid abuse with opioid-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.150,[F11.150] Opioid abuse with opioid-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.151,[F11.151] Opioid abuse with opioid-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.159,"[F11.159] Opioid abuse with opioid-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.181,[F11.181] Opioid abuse with opioid-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.182,[F11.182] Opioid abuse with opioid-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.188,[F11.188] Opioid abuse with other opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.19,[F11.19] Opioid abuse with unspecified opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.20,"[F11.20] Opioid dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.220,"[F11.220] Opioid dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.221,[F11.221] Opioid dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.222,[F11.222] Opioid dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.229,"[F11.229] Opioid dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.23,[F11.23] Opioid dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.24,[F11.24] Opioid dependence with opioid-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.250,[F11.250] Opioid dependence with opioid-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.251,[F11.251] Opioid dependence with opioid-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.259,"[F11.259] Opioid dependence with opioid-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.281,[F11.281] Opioid dependence with opioid-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.282,[F11.282] Opioid dependence with opioid-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.288,[F11.288] Opioid dependence with other opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F11.29,[F11.29] Opioid dependence with unspecified opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.10,"[F12.10] Cannabis abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.120,"[F12.120] Cannabis abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.121,[F12.121] Cannabis abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.122,[F12.122] Cannabis abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.129,"[F12.129] Cannabis abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.13,[F12.13] Cannabis abuse with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.150,[F12.150] Cannabis abuse with psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.151,[F12.151] Cannabis abuse with psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.159,"[F12.159] Cannabis abuse with psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.180,[F12.180] Cannabis abuse with cannabis-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.188,[F12.188] Cannabis abuse with other cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.19,[F12.19] Cannabis abuse with unspecified cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.20,"[F12.20] Cannabis dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.220,"[F12.220] Cannabis dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.221,[F12.221] Cannabis dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.222,[F12.222] Cannabis dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.229,"[F12.229] Cannabis dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.23,[F12.23] Cannabis dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.250,[F12.250] Cannabis dependence with psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.251,[F12.251] Cannabis dependence with psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.259,"[F12.259] Cannabis dependence with psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.280,[F12.280] Cannabis dependence with cannabis-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.288,[F12.288] Cannabis dependence with other cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F12.29,[F12.29] Cannabis dependence with unspecified cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.10,"[F13.10] Sedative, hypnotic or anxiolytic abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.120,"[F13.120] Sedative, hypnotic or anxiolytic abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.121,"[F13.121] Sedative, hypnotic or anxiolytic abuse with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.129,"[F13.129] Sedative, hypnotic or anxiolytic abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.130,"[F13.130] Sedative, hypnotic or anxiolytic abuse with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.131,"[F13.131] Sedative, hypnotic or anxiolytic abuse with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.132,"[F13.132] Sedative, hypnotic or anxiolytic abuse with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.139,"[F13.139] Sedative, hypnotic or anxiolytic abuse with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.14,"[F13.14] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.150,"[F13.150] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.151,"[F13.151] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.159,"[F13.159] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.180,"[F13.180] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.181,"[F13.181] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.182,"[F13.182] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.188,"[F13.188] Sedative, hypnotic or anxiolytic abuse with other sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.19,"[F13.19] Sedative, hypnotic or anxiolytic abuse with unspecified sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.20,"[F13.20] Sedative, hypnotic or anxiolytic dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.220,"[F13.220] Sedative, hypnotic or anxiolytic dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.221,"[F13.221] Sedative, hypnotic or anxiolytic dependence with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.229,"[F13.229] Sedative, hypnotic or anxiolytic dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.230,"[F13.230] Sedative, hypnotic or anxiolytic dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.231,"[F13.231] Sedative, hypnotic or anxiolytic dependence with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.232,"[F13.232] Sedative, hypnotic or anxiolytic dependence with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.239,"[F13.239] Sedative, hypnotic or anxiolytic dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.24,"[F13.24] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.250,"[F13.250] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.251,"[F13.251] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.259,"[F13.259] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.26,"[F13.26] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting amnestic disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.27,"[F13.27] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting dementia",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.280,"[F13.280] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.281,"[F13.281] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.282,"[F13.282] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.288,"[F13.288] Sedative, hypnotic or anxiolytic dependence with other sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F13.29,"[F13.29] Sedative, hypnotic or anxiolytic dependence with unspecified sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.10,"[F14.10] Cocaine abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.120,"[F14.120] Cocaine abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.121,[F14.121] Cocaine abuse with intoxication with delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.122,[F14.122] Cocaine abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.129,"[F14.129] Cocaine abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.13,"[F14.13] Cocaine abuse, unspecified with withdrawal",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.14,[F14.14] Cocaine abuse with cocaine-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.150,[F14.150] Cocaine abuse with cocaine-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.151,[F14.151] Cocaine abuse with cocaine-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.159,"[F14.159] Cocaine abuse with cocaine-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.180,[F14.180] Cocaine abuse with cocaine-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.181,[F14.181] Cocaine abuse with cocaine-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.182,[F14.182] Cocaine abuse with cocaine-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.188,[F14.188] Cocaine abuse with other cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.19,[F14.19] Cocaine abuse with unspecified cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.20,"[F14.20] Cocaine dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.220,"[F14.220] Cocaine dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.221,[F14.221] Cocaine dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.222,[F14.222] Cocaine dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.229,"[F14.229] Cocaine dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.23,[F14.23] Cocaine dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.24,[F14.24] Cocaine dependence with cocaine-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.250,[F14.250] Cocaine dependence with cocaine-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.251,[F14.251] Cocaine dependence with cocaine-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.259,"[F14.259] Cocaine dependence with cocaine-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.280,[F14.280] Cocaine dependence with cocaine-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.281,[F14.281] Cocaine dependence with cocaine-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.282,[F14.282] Cocaine dependence with cocaine-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.288,[F14.288] Cocaine dependence with other cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F14.29,[F14.29] Cocaine dependence with unspecified cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.10,"[F15.10] Other stimulant abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.120,"[F15.120] Other stimulant abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.121,[F15.121] Other stimulant abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.122,[F15.122] Other stimulant abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.129,"[F15.129] Other stimulant abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.13,[F15.13] Other stimulant abuse with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.14,[F15.14] Other stimulant abuse with stimulant-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.150,[F15.150] Other stimulant abuse with stimulant-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.151,[F15.151] Other stimulant abuse with stimulant-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.159,"[F15.159] Other stimulant abuse with stimulant-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.180,[F15.180] Other stimulant abuse with stimulant-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.181,[F15.181] Other stimulant abuse with stimulant-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.182,[F15.182] Other stimulant abuse with stimulant-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.188,[F15.188] Other stimulant abuse with other stimulant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.19,[F15.19] Other stimulant abuse with unspecified stimulant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.20,"[F15.20] Other stimulant dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.220,"[F15.220] Other stimulant dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.221,[F15.221] Other stimulant dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.222,[F15.222] Other stimulant dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.229,"[F15.229] Other stimulant dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.23,[F15.23] Other stimulant dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.24,[F15.24] Other stimulant dependence with stimulant-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.250,[F15.250] Other stimulant dependence with stimulant-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.251,[F15.251] Other stimulant dependence with stimulant-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.259,"[F15.259] Other stimulant dependence with stimulant-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.280,[F15.280] Other stimulant dependence with stimulant-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.281,[F15.281] Other stimulant dependence with stimulant-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.282,[F15.282] Other stimulant dependence with stimulant-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.288,[F15.288] Other stimulant dependence with other stimulant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F15.29,[F15.29] Other stimulant dependence with unspecified stimulant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.10,"[F16.10] Hallucinogen abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.120,"[F16.120] Hallucinogen abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.121,[F16.121] Hallucinogen abuse with intoxication with delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.122,[F16.122] Hallucinogen abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.129,"[F16.129] Hallucinogen abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.14,[F16.14] Hallucinogen abuse with hallucinogen-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.150,[F16.150] Hallucinogen abuse with hallucinogen-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.151,[F16.151] Hallucinogen abuse with hallucinogen-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.159,"[F16.159] Hallucinogen abuse with hallucinogen-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.180,[F16.180] Hallucinogen abuse with hallucinogen-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.183,[F16.183] Hallucinogen abuse with hallucinogen persisting perception disorder (flashbacks),ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.188,[F16.188] Hallucinogen abuse with other hallucinogen-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.19,[F16.19] Hallucinogen abuse with unspecified hallucinogen-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.20,"[F16.20] Hallucinogen dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.220,"[F16.220] Hallucinogen dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.221,[F16.221] Hallucinogen dependence with intoxication with delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.229,"[F16.229] Hallucinogen dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.24,[F16.24] Hallucinogen dependence with hallucinogen-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.250,[F16.250] Hallucinogen dependence with hallucinogen-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.251,[F16.251] Hallucinogen dependence with hallucinogen-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.259,"[F16.259] Hallucinogen dependence with hallucinogen-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.280,[F16.280] Hallucinogen dependence with hallucinogen-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.283,[F16.283] Hallucinogen dependence with hallucinogen persisting perception disorder (flashbacks),ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.288,[F16.288] Hallucinogen dependence with other hallucinogen-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F16.29,[F16.29] Hallucinogen dependence with unspecified hallucinogen-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.10,"[F18.10] Inhalant abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.120,"[F18.120] Inhalant abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.121,[F18.121] Inhalant abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.129,"[F18.129] Inhalant abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.14,[F18.14] Inhalant abuse with inhalant-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.150,[F18.150] Inhalant abuse with inhalant-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.151,[F18.151] Inhalant abuse with inhalant-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.159,"[F18.159] Inhalant abuse with inhalant-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.17,[F18.17] Inhalant abuse with inhalant-induced dementia,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.180,[F18.180] Inhalant abuse with inhalant-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.188,[F18.188] Inhalant abuse with other inhalant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.19,[F18.19] Inhalant abuse with unspecified inhalant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.20,"[F18.20] Inhalant dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.220,"[F18.220] Inhalant dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.221,[F18.221] Inhalant dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.229,"[F18.229] Inhalant dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.24,[F18.24] Inhalant dependence with inhalant-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.250,[F18.250] Inhalant dependence with inhalant-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.251,[F18.251] Inhalant dependence with inhalant-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.259,"[F18.259] Inhalant dependence with inhalant-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.27,[F18.27] Inhalant dependence with inhalant-induced dementia,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.280,[F18.280] Inhalant dependence with inhalant-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.288,[F18.288] Inhalant dependence with other inhalant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F18.29,[F18.29] Inhalant dependence with unspecified inhalant-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.10,"[F19.10] Other psychoactive substance abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.120,"[F19.120] Other psychoactive substance abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.121,[F19.121] Other psychoactive substance abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.122,[F19.122] Other psychoactive substance abuse with intoxication with perceptual disturbances,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.129,"[F19.129] Other psychoactive substance abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.130,"[F19.130] Other psychoactive substance abuse with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.131,[F19.131] Other psychoactive substance abuse with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.132,[F19.132] Other psychoactive substance abuse with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.139,"[F19.139] Other psychoactive substance abuse with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.14,[F19.14] Other psychoactive substance abuse with psychoactive substance-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.150,[F19.150] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.151,[F19.151] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.159,"[F19.159] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.16,[F19.16] Other psychoactive substance abuse with psychoactive substance-induced persisting amnestic disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.17,[F19.17] Other psychoactive substance abuse with psychoactive substance-induced persisting dementia,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.180,[F19.180] Other psychoactive substance abuse with psychoactive substance-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.181,[F19.181] Other psychoactive substance abuse with psychoactive substance-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.182,[F19.182] Other psychoactive substance abuse with psychoactive substance-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.188,[F19.188] Other psychoactive substance abuse with other psychoactive substance-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.19,[F19.19] Other psychoactive substance abuse with unspecified psychoactive substance-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.20,"[F19.20] Other psychoactive substance dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.220,"[F19.220] Other psychoactive substance dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.221,[F19.221] Other psychoactive substance dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.222,[F19.222] Other psychoactive substance dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.229,"[F19.229] Other psychoactive substance dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.230,"[F19.230] Other psychoactive substance dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.231,[F19.231] Other psychoactive substance dependence with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.232,[F19.232] Other psychoactive substance dependence with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.239,"[F19.239] Other psychoactive substance dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.24,[F19.24] Other psychoactive substance dependence with psychoactive substance-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.250,[F19.250] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.251,[F19.251] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.259,"[F19.259] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.26,[F19.26] Other psychoactive substance dependence with psychoactive substance-induced persisting amnestic disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.27,[F19.27] Other psychoactive substance dependence with psychoactive substance-induced persisting dementia,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.280,[F19.280] Other psychoactive substance dependence with psychoactive substance-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.281,[F19.281] Other psychoactive substance dependence with psychoactive substance-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.282,[F19.282] Other psychoactive substance dependence with psychoactive substance-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.288,[F19.288] Other psychoactive substance dependence with other psychoactive substance-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,F19.29,[F19.29] Other psychoactive substance dependence with unspecified psychoactive substance-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,281004,Dementia associated with alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1383008,Hallucinogen mood disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1686006,"Sedative, hypnotic AND/OR anxiolytic-induced anxiety disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1973000,"Sedative, hypnotic AND/OR anxiolytic-induced psychotic disorder with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,2403008,Psychoactive substance dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,5002000,Inhalant dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,5444000,"Sedative, hypnotic AND/OR anxiolytic intoxication delirium (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,5602001,Opioid abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,6348008,Cocaine-induced psychotic disorder with hallucinations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,7052005,Alcohol hallucinosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,7071007,Phencyclidine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,7200002,Alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,8635005,Alcohol withdrawal delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,8837000,Delirium caused by amphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,10327003,Cocaine-induced mood disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,11387009,Organic mental disorder caused by psychoactive substance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,14784000,Organic mental disorder caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,15167005,Alcohol abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,15277004,Hallucinogen-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,18653004,Alcohol intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,18689007,Inhalant intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,19445006,Opioid-induced psychotic disorder with hallucinations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,20385005,Psychotic disorder with delusions caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,20876004,Inhalant-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,21647008,Amphetamine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,22574000,Cocaine-induced sleep disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,25753007,Amphetamine-induced sleep disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,26714005,Cannabis-induced psychotic disorder with hallucinations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,27956007,Cocaine intoxication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,28864000,"Sedative, hypnotic AND/OR anxiolytic-induced mood disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,29733004,Mood disorder caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,30491001,Cocaine delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,31956009,Cocaine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,32009006,Hallucinogen hallucinosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,32358001,Amphetamine delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,32875003,Inhalant-induced persisting dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,34938008,Anxiety disorder caused by alcohol (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,37344009,Cannabis abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,38247002,Hallucinogen dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,39807006,Cannabis intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,39951001,Cannabis-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,40571009,Hallucinogen intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,43497001,Amfetamine-induced mood disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,46975003,Organic mental disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,47664006,"Sedative, hypnotic AND/OR anxiolytic-induced psychotic disorder with hallucinations (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,50320000,Hallucinogen intoxication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,50933003,Hallucinogen delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,51443000,Amphetamine-induced psychotic disorder with hallucinations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,51493001,Anxiety disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,52866005,Opioid intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,53050002,Organic mental disorder caused by hallucinogen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,57588009,"Sedative, hypnotic AND/OR anxiolytic-induced sleep disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,58727001,Phencyclidine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,59651006,"Sedative, hypnotic AND/OR anxiolytic-induced persisting dementia (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,61104008,Inhalant-induced organic mental disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,61144001,Alcohol-induced psychotic disorder with delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,63649001,Cannabis delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,63983005,Inhalant-induced psychotic disorder with hallucinations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,64386003,Sedative abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,66590003,Alcohol dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,70328006,Cocaine intoxication delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,70340006,Inhalant abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,70701004,Alcoholic amblyopia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,70932007,Sexual dysfunction caused by amfetamine (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,71328000,Sexual dysfunction caused by opioid (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,73097000,Alcohol amnestic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,74851005,Hallucinogen abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,74934004,Psychoactive substance withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,75122001,Inhalant-induced psychotic disorder with delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,75544000,Opioid dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,77355000,Organic mental disorder caused by cannabis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,78267003,Cocaine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,78358001,Amphetamine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,80868005,Cocaine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,82339009,Anxiety disorder caused by amfetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,83367009,Organic mental disorder caused by amphetamine and/or amfetamine derivative (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,85005007,Cannabis dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,85561006,Alcohol withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,86325007,Non megaloblastic anemia due to alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,87132004,Opioid withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,87810006,Megaloblastic anemia due to alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,88926005,Opioid-induced sleep disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,89451009,Inhalant-induced mood disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,91388009,Psychoactive substance abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,95661003,Ergotamine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191475009,Chronic alcoholic brain syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191476005,Alcohol withdrawal hallucinosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191478006,Alcoholic paranoia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191480000,Alcohol withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191811004,Continuous chronic alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191812006,Episodic chronic alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191819002,Continuous opioid dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191820008,Episodic opioid dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191831000,"Cocaine dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191832007,"Cocaine dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191837001,"Cannabis dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191838006,"Cannabis dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191849000,"Hallucinogen dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191850000,"Hallucinogen dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191853003,Glue sniffing dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191855005,"Glue sniffing dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191856006,"Glue sniffing dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191882002,"Nondependent alcohol abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191883007,"Nondependent alcohol abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191891003,Nondependent cannabis abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191893000,"Nondependent cannabis abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191894006,"Nondependent cannabis abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191899001,"Nondependent hallucinogen abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191900006,"Nondependent hallucinogen abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191909007,Nondependent opioid abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191912005,"Nondependent opioid abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191913000,"Nondependent opioid abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191916008,Nondependent cocaine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191918009,"Nondependent cocaine abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,191919001,"Nondependent cocaine abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,230443000,Narcotic withdrawal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231462006,Barbiturate abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231468005,Lysergic acid diethylamide dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231469002,Mescaline dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231470001,Anxiolytic dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231472009,Barbiturate dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231473004,Benzodiazepine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231474005,Diazepam dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231477003,Dependence on diamorphine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231478008,Methadone dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231479000,Morphine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,231480002,Opium dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,268645007,Nondependent alcohol abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,268646008,Nondependent hallucinogen abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,275471001,Psychostimulant dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,284591009,Persistent alcohol abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,308742005,Alcohol withdrawal-induced convulsion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,312098001,"Sedative, hypnotic AND/OR anxiolytic-related disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,312936002,Organic mental disorder caused by anxiolytic agent (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,361151007,Delirium due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,416714005,Episodic flashbacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,417143004,Short duration flashbacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,425339005,Barbiturate withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,425885002,Continuous phencyclidine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,426001001,Fentanyl dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,426095000,Continuous inhalant abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,426873000,Methamphetamine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,427229002,Episodic inhalant abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,427327003,Sedative dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,428370001,Psychostimulant withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,441527004,Stimulant abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,442406005,Stimulant dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,699449003,Methamphetamine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,703845008,Buprenorphine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,703846009,Buprenorphine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,703848005,Cannabis withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,703849002,Benzodiazepine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,703850002,Delirium due to benzodiazepine withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,713583005,Mild alcohol dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,713862009,Severe alcohol dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,714829008,Moderate alcohol dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,723926008,Perceptual disturbances and seizures co-occurrent and due to alcohol withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,723927004,Psychotic disorder caused by alcohol with schizophreniform symptoms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,723936000,Psychotic disorder caused by cannabis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,723937009,Sleep disorder caused by cannabis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724655005,Psychotic disorder caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724656006,Hypnotic dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724660009,Hypnotic withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724661008,Anxiolytic withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724662001,Sedative withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724663006,Hypnotic withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724664000,Anxiolytic withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724665004,Perceptual disturbances co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724666003,Perceptual disturbances co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724667007,Perceptual disturbances co-occurrent and due to anxiolytic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724668002,Seizure co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724669005,Seizure co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724670006,Seizure co-occurrent and due to anxiolytic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724671005,Perceptual disturbances and seizures co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724672003,Perceptual disturbances and seizures co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724675001,Psychotic disorder caused by anxiolytic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724689006,Psychotic disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724690002,Mood disorder with depressive symptoms caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724691003,Mood disorder with manic symptoms caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724692005,Mood disorder with mixed depressive and manic symptoms caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724693000,Obsessive compulsive disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724696008,Psychotic disorder caused by hallucinogen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724701001,Volatile inhalant withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724702008,Psychotic disorder caused by volatile inhalant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724706006,Psychotic disorder caused by methylenedioxymethamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724713006,Harmful use of ketamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724715004,Ketamine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724720004,Mood disorder caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724725009,Psychoactive substance withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724726005,Perceptual disturbances co-occurrent and due to psychoactive substance withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724727001,Seizure co-occurrent and due to psychoactive substance withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724728006,Perceptual disturbances and seizures co-occurrent and due to psychoactive substance withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,724732000,Sleep disorder caused by psychoactive substance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,735750005,Psychotic disorder with schizophreniform symptoms caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,737338002,Synthetic cannabinoid withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762320004,Mood disorder with manic symptoms caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762321000,Mood disorder with depressive symptoms caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762322007,Mood disorder with mixed depressive and manic symptoms caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762324008,Delirium caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762325009,Psychotic disorder caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762326005,Psychotic disorder with hallucinations caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762327001,Psychotic disorder with delusions caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762333005,Sexual dysfunction caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762334004,Sleep disorder caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762335003,Mood disorder with manic symptoms caused by hallucinogen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762336002,Mood disorder with depressive symptoms caused by hallucinogen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762337006,Mood disorder with mixed depressive and manic symptoms caused by hallucinogen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762338001,Mood disorder with manic symptoms caused by volatile inhalant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762339009,Mood disorder with depressive symptoms caused by volatile inhalant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762340006,Mood disorder with mixed depressive and manic symptoms caused by volatile inhalant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762344002,Mood disorder with manic symptoms caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762345001,Mood disorder with depressive symptoms caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762346000,Mood disorder with mixed depressive and manic symptoms caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762504005,Abuse of synthetic cathinone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762505006,Synthetic cathinone dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762517008,Sexual dysfunction caused by synthetic cathinone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,762672001,Synthetic cathinone withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,785277001,Harmful pattern of use of amfetamine and/or amfetamine derivative (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,817962007,Chlordiazepoxide dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,838527002,Amfetamine and/or amfetamine derivative dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230071005,"Amfetamine and/or amfetamine derivative abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230072003,"Amfetamine and/or amfetamine derivative abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230084001,"Nondependent psychostimulant abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230085000,"Nondependent amfetamine and/or amfetamine derivative abuse, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230086004,"Nondependent psychostimulant abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230087008,"Nondependent amfetamine and/or amfetamine derivative abuse, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230088003,Nondependent amfetamine and/or amfetamine derivative abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1230089006,Nondependent psychostimulant abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231160001,"Hypnotic dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231162009,"Hypnotic dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231319004,Methylenedioxymethamphetamine dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231327008,Amfetamine and/or amfetamine derivative dependence episodic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231328003,Amfetamine and/or amfetamine derivative dependence continuous (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231333004,Psychostimulant dependence episodic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1231336007,Psychostimulant dependence continuous (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1255013006,Combined opioid with non-opioid substance dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1255015004,"Combined opioid with non-opioid substance dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1255018002,"Combined opioid with non-opioid substance dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1304039005,Harmful pattern of use of diamorphine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1304040007,Harmful pattern of use of intravenous diamorphine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,1081000119105,"Opioid dependence, on agonist therapy (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,23601000119102,Sedative withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,34111000119108,Nondependent amphetamine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,86391000119101,"Inhalant dependence, continuous (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,86401000119104,"Inhalant dependence, episodic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,97571000119109,Thrombocytopenia co-occurrent and due to alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,125851000119106,Continuous sedative abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,135301000119103,Parasomnia caused by alcohol (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,135311000119100,Insomnia caused by alcohol (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,135321000119107,Hypersomnia caused by alcohol (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,144981000119109,Nondependent intraveous amphetamine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,145101000119102,Intravenous cocaine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,145121000119106,Intravenous nondependent opioid abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,145841000119107,Episodic phencyclidine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,154211000119108,Chronic pancreatitis due to chronic alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,288021000119107,Disorder due to alcohol abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,288031000119105,Alcohol induced disorder co-occurrent and due to alcohol dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,288461000119105,Psychosis caused by inhalant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,288851000119106,Opioid-induced mood disorder due to opioid abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,288861000119108,Opioid-induced mood disorder due to opioid dependence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,520841000124109,Diamorphine abuse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,10741871000119101,Alcohol dependence in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,10755041000119100,Alcohol dependence in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,12398281000119105,Methamphetamine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013,12398651000119100,Sleep disorder caused by methamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,G0533,"Medication assisted treatment, buprenorphine (injectable) administered on a weekly basis; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G0533)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,G2069,"Medication assisted treatment, buprenorphine (injectable) administered on a monthly basis; bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2069)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,G2073,"Medication assisted treatment, naltrexone; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2073)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,H0020,Alcohol and/or drug services; methadone administration and/or service (provision of the drug by a licensed program) (H0020),HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,H0033,"Oral medication administration, direct observation (H0033)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0571,"Buprenorphine, oral, 1 mg (J0571)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0572,"Buprenorphine/naloxone, oral, less than or equal to 3 mg buprenorphine (J0572)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0573,"Buprenorphine/naloxone, oral, greater than 3 mg, but less than or equal to 6 mg buprenorphine (J0573)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0574,"Buprenorphine/naloxone, oral, greater than 6 mg, but less than or equal to 10 mg buprenorphine (J0574)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0575,"Buprenorphine/naloxone, oral, greater than 10 mg buprenorphine (J0575)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0577,"Injection, buprenorphine extended-release (brixadi), less than or equal to 7 days of therapy (J0577)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J0578,"Injection, buprenorphine extended release (brixadi), greater than 7 days and up to 28 days of therapy (J0578)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,J2315,"Injection, naltrexone, depot form, 1 mg (J2315)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,Q9991,"Injection, buprenorphine extended-release (sublocade), less than or equal to 100 mg (Q9991)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,Q9992,"Injection, buprenorphine extended-release (sublocade), greater than 100 mg (Q9992)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,S0109,"Methadone, oral, 5 mg (S0109)",HCPCS,2.16.840.1.113883.6.285
+AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017,310653000,Drug addiction therapy using methadone (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98000,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98001,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98002,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98003,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98004,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98005,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98006,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98007,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98960,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98961,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,98962,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99078,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99202,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99203,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99204,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99205,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99211,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99212,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99213,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99214,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99215,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99242,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99243,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99244,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99245,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99341,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99342,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99344,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99345,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99347,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99348,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99349,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99350,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99381,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99382,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99383,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99384,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99385,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99386,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99387,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99391,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99392,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99393,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99394,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99395,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99396,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99397,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99401,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99402,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99403,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99404,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99411,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99412,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99483,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99492,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99493,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99494,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,99510,,CPT,2.16.840.1.113883.6.12
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0155,"Services of clinical social worker in home health or hospice settings, each 15 minutes (G0155)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0176,"Activity therapy, such as music, dance, art or play therapies not for recreation, related to the care and treatment of patient's disabling mental health problems, per session (45 minutes or more) (G0176)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0177,Training and educational services related to the care and treatment of patient's disabling mental health problems per session (45 minutes or more) (G0177),HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0409,"Social work and psychological services, directly relating to and/or furthering the patient's rehabilitation goals, each 15 minutes, face-to-face; individual (services provided by a corf-qualified social worker or psychologist in a corf) (G0409)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0463,Hospital outpatient clinic visit for assessment and management of a patient (G0463),HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0512,"Rural health clinic or federally qualified health center (rhc/fqhc) only, psychiatric collaborative care model (psychiatric cocm), 60 minutes or more of clinical staff time for psychiatric cocm services directed by an rhc or fqhc practitioner (physician, np, pa, or cnm) and including services furnished by a behavioral health care manager and consultation with a psychiatric consultant, per calendar month (G0512)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,G0560,"Safety planning interventions, each 20 minutes personally performed by the billing practitioner, including assisting the patient in the identification of the following personalized elements of a safety plan: recognizing warning signs of an impending suicidal or substance use-related crisis; employing internal coping strategies; utilizing social contacts and social settings as a means of distraction from suicidal thoughts or risky substance use; utilizing family members, significant others, caregivers, and/or friends to help resolve the crisis; contacting mental health or substance use disorder professionals or agencies; and making the environment safe (G0560)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0002,Behavioral health screening to determine eligibility for admission to treatment program (H0002),HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0004,"Behavioral health counseling and therapy, per 15 minutes (H0004)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0031,"Mental health assessment, by non-physician (H0031)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0034,"Medication training and support, per 15 minutes (H0034)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0036,"Community psychiatric supportive treatment, face-to-face, per 15 minutes (H0036)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0037,"Community psychiatric supportive treatment program, per diem (H0037)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0039,"Assertive community treatment, face-to-face, per 15 minutes (H0039)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H0040,"Assertive community treatment program, per diem (H0040)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2000,Comprehensive multidisciplinary evaluation (H2000),HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2010,"Comprehensive medication services, per 15 minutes (H2010)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2011,"Crisis intervention service, per 15 minutes (H2011)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2013,"Psychiatric health facility service, per diem (H2013)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2014,"Skills training and development, per 15 minutes (H2014)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2015,"Comprehensive community support services, per 15 minutes (H2015)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2016,"Comprehensive community support services, per diem (H2016)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2017,"Psychosocial rehabilitation services, per 15 minutes (H2017)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2018,"Psychosocial rehabilitation services, per diem (H2018)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2019,"Therapeutic behavioral services, per 15 minutes (H2019)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,H2020,"Therapeutic behavioral services, per diem (H2020)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,T1015,"Clinic visit/encounter, all-inclusive (T1015)",HCPCS,2.16.840.1.113883.6.285
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,50357006,Evaluation and management of patient at home (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,77406008,Confirmatory medical consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,84251009,Comprehensive consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,86013001,Periodic reevaluation and management of healthy individual (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,90526000,Initial evaluation and management of healthy individual (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,185463005,Visit out of hours (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,185464004,Out of hours visit - not night visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,185465003,Weekend visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,209099002,History and physical examination with management of domiciliary or rest home patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,281036007,Follow-up consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391223001,Mental health support groups staff facilitated - 1-2 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391224007,Mental health support groups staff facilitated - 1-3 contacts/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391225008,Mental health support groups staff facilitated - <1 contact/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391233009,Psychological therapies - 3-5 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391237005,Psychological therapies - 1-2 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391239008,Psychological therapies - 1-3 contacts/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391242002,Psychological therapies - <1 contact/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391257009,Mental health functional therapies - 1-2 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391260002,Mental health functional therapies - 1-3 contacts/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,391261003,Mental health functional therapies - <1 contacts/month (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,439740005,Postoperative follow-up visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,866149003,Annual visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,3391000175108,Office visit for pediatric care and assessment (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,444971000124105,Annual wellness visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,456201000124103,Medicare annual wellness visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0510,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0513,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0515,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0516,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0517,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0519,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0520,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0521,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0522,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0523,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0526,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0527,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0528,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0529,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0900,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0902,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0903,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0904,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0911,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0914,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0915,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0916,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0917,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0919,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0982,,UBREV,2.16.840.1.113883.6.301.3
+BH Outpatient,2.16.840.1.113883.3.464.1004.1481,0983,,UBREV,2.16.840.1.113883.6.301.3
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0008,Alcohol and/or drug services; sub-acute detoxification (hospital inpatient) (H0008),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0009,Alcohol and/or drug services; acute detoxification (hospital inpatient) (H0009),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0010,Alcohol and/or drug services; sub-acute detoxification (residential addiction program inpatient) (H0010),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0011,Alcohol and/or drug services; acute detoxification (residential addiction program inpatient) (H0011),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0012,Alcohol and/or drug services; sub-acute detoxification (residential addiction program outpatient) (H0012),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0013,Alcohol and/or drug services; acute detoxification (residential addiction program outpatient) (H0013),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,H0014,Alcohol and/or drug services; ambulatory detoxification (H0014),HCPCS,2.16.840.1.113883.6.285
+Detoxification,2.16.840.1.113883.3.464.1004.1076,HZ2ZZZZ,[HZ2ZZZZ] Detoxification Services for Substance Abuse Treatment,ICD10PCS,2.16.840.1.113883.6.4
+Detoxification,2.16.840.1.113883.3.464.1004.1076,20093000,Alcohol rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,23915005,Combined alcohol and drug rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,56876005,Drug rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,61480009,Drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,64297001,Detoxication psychiatric therapy for alcoholism (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,67516001,Detoxification therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,87106005,Combined alcohol and drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,182969009,Dependent drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,414054004,Drug dependence home detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,414056002,Drug dependence self detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,827094004,Alcohol detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Detoxification,2.16.840.1.113883.3.464.1004.1076,0116,,UBREV,2.16.840.1.113883.6.301.3
+Detoxification,2.16.840.1.113883.3.464.1004.1076,0126,,UBREV,2.16.840.1.113883.6.301.3
+Detoxification,2.16.840.1.113883.3.464.1004.1076,0136,,UBREV,2.16.840.1.113883.6.301.3
+Detoxification,2.16.840.1.113883.3.464.1004.1076,0146,,UBREV,2.16.840.1.113883.6.301.3
+Detoxification,2.16.840.1.113883.3.464.1004.1076,0156,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0100,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0101,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0110,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0111,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0112,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0113,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0114,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0116,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0117,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0118,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0119,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0120,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0121,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0122,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0123,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0124,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0126,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0127,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0128,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0129,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0130,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0131,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0132,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0133,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0134,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0136,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0137,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0138,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0139,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0140,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0141,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0142,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0143,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0144,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0146,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0147,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0148,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0149,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0150,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0151,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0152,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0153,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0154,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0156,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0157,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0158,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0159,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0160,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0164,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0167,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0169,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0170,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0171,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0172,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0173,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0174,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0179,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0190,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0191,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0192,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0193,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0194,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0199,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0200,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0201,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0202,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0203,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0204,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0206,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0207,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0208,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0209,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0210,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0211,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0212,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0213,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0214,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0219,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1000,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1001,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1002,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0022,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0024,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0118,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0128,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0138,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0148,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0158,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0190,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0191,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0192,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0193,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0194,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0199,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0524,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0525,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0550,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0551,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0552,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0559,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0660,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0661,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0662,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0663,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0669,,UBREV,2.16.840.1.113883.6.301.3
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0180,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0181,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0182,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0183,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0184,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0185,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0187,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0188,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0210,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0211,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0212,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0213,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0214,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0215,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0217,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0218,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0220,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0221,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0222,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0223,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0224,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0225,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0227,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0228,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0280,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0281,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0282,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0283,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0284,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0285,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0287,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0288,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0289,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0650,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0651,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0652,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0653,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0654,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0655,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0657,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0658,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0660,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0661,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0662,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0663,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0664,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0665,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0667,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,0668,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,018Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,021Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,022Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,028Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,065Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066F,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066G,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066H,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066I,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066J,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066K,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066M,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066O,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066X,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066Y,,UBTOB,2.16.840.1.113883.6.301.1
+Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809,066Z,,UBTOB,2.16.840.1.113883.6.301.1
+Nonresidential Substance Abuse Treatment Facility POS,2.16.840.1.113883.3.464.1004.1490,57,Non-residential Substance Abuse Treatment Facility,POS,2.16.840.1.113883.6.50
+Nonresidential Substance Abuse Treatment Facility POS,2.16.840.1.113883.3.464.1004.1490,58,Non-residential Opioid Treatment Facility,POS,2.16.840.1.113883.6.50
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98016,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98970,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98971,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98972,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98980,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,98981,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,99421,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,99422,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,99423,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,99457,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,99458,,CPT,2.16.840.1.113883.6.12
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G0071,"Payment for communication technology-based services for 5 minutes or more of a virtual (non-face-to-face) communication between an rural health clinic (rhc) or federally qualified health center (fqhc) practitioner and rhc or fqhc patient, or 5 minutes or more of remote evaluation of recorded video and/or images by an rhc or fqhc practitioner, occurring in lieu of an office visit; rhc or fqhc only (G0071)",HCPCS,2.16.840.1.113883.6.285
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G2010,"Remote evaluation of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment (G2010)",HCPCS,2.16.840.1.113883.6.285
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G2012,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of medical discussion (G2012)",HCPCS,2.16.840.1.113883.6.285
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G2250,"Remote assessment of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment (G2250)",HCPCS,2.16.840.1.113883.6.285
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G2251,"Brief communication technology-based service, e.g. virtual check-in, by a qualified health care professional who cannot report evaluation and management services, provided to an established patient, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of clinical discussion (G2251)",HCPCS,2.16.840.1.113883.6.285
+Online Assessments,2.16.840.1.113883.3.464.1004.1446,G2252,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 11-20 minutes of medical discussion (G2252)",HCPCS,2.16.840.1.113883.6.285
+OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220,G2069,"Medication assisted treatment, buprenorphine (injectable) administered on a monthly basis; bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2069)",HCPCS,2.16.840.1.113883.6.285
+OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220,G2086,"Office-based treatment for opioid use disorder, including development of the treatment plan, care coordination, individual therapy and group therapy and counseling; at least 70 minutes in the first calendar month (G2086)",HCPCS,2.16.840.1.113883.6.285
+OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220,G2087,"Office-based treatment for opioid use disorder, including care coordination, individual therapy and group therapy and counseling; at least 60 minutes in a subsequent calendar month (G2087)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G0533,"Medication assisted treatment, buprenorphine (injectable) administered on a weekly basis; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G0533)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G2067,"Medication assisted treatment, methadone; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing, if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2067)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G2068,"Medication assisted treatment, buprenorphine (oral); weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2068)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G2070,"Medication assisted treatment, buprenorphine (implant insertion); weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2070)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G2072,"Medication assisted treatment, buprenorphine (implant insertion and removal); weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2072)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221,G2073,"Medication assisted treatment, naltrexone; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2073)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2071,"Medication assisted treatment, buprenorphine (implant removal); weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2071)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2074,"Medication assisted treatment, weekly bundle not including the drug, including substance use counseling, individual and group therapy, and toxicology testing if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2074)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2075,"Medication assisted treatment, medication not otherwise specified; weekly bundle including dispensing and/or administration, substance use counseling, individual and group therapy, and toxicology testing, if performed (provision of the services by a medicare-enrolled opioid treatment program) (G2075)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2076,"Intake activities, including initial medical examination that is conducted by an appropriately licensed practitioner and preparation of a care plan, which may be informed by administration of a standardized, evidence-based social determinants of health risk assessment to identify unmet health-related social needs, and that includes the patient's goals and mutually agreed-upon actions for the patient to meet those goals, including harm reduction interventions; the patient's needs and goals in the areas of education, vocational training, and employment; and the medical and psychiatric, psychosocial, economic, legal, housing, and other recovery support services that a patient needs and wishes to pursue, conducted by an appropriately (G2076)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2077,"Periodic assessment; assessing periodically by an otp practitioner and includes a review of moud dosing, treatment response, other substance use disorder treatment needs, responses and patient-identified goals, and other relevant physical and psychiatric treatment needs and goals; assessment may be informed by administration of a standardized, evidence-based social determinants of health risk assessment to identify unmet health-related social needs, or the need and interest for harm reduction interventions and recovery support services (provision of the services by a medicare-enrolled opioid treatment program); list separately in addition to each primary code (G2077)",HCPCS,2.16.840.1.113883.6.285
+OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222,G2080,"Each additional 30 minutes of counseling in a week of medication assisted treatment, (provision of the services by a medicare-enrolled opioid treatment program); list separately in addition to code for primary procedure (G2080)",HCPCS,2.16.840.1.113883.6.285
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,03,School,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,05,Indian Health Service Free-standing Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,07,Tribal 638 Free-standing Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,09,Prison/Correctional Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,11,Office,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,12,Home,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,13,Assisted Living Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,14,Group Home,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,15,Mobile Unit,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,16,Temporary Lodging,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,17,Walk-in Retail Health Clinic,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,18,Place of Employment-Worksite,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,19,Off Campus-Outpatient Hospital,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,20,Urgent Care Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,22,On Campus-Outpatient Hospital,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,33,Custodial Care Facility,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,49,Independent Clinic,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,50,Federally Qualified Health Center,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,71,Public Health Clinic,POS,2.16.840.1.113883.6.50
+Outpatient POS,2.16.840.1.113883.3.464.1004.1443,72,Rural Health Clinic,POS,2.16.840.1.113883.6.50
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,G0410,"Group psychotherapy other than of a multiple-family group, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0410)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,G0411,"Interactive group psychotherapy, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0411)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,H0035,"Mental health partial hospitalization, treatment, less than 24 hours (H0035)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,H2001,"Rehabilitation program, per 1/2 day (H2001)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,H2012,"Behavioral health day treatment, per hour (H2012)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,S0201,"Partial hospitalization services, less than 24 hours, per diem (S0201)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,S9480,"Intensive outpatient psychiatric services, per diem (S9480)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,S9484,"Crisis intervention mental health services, per hour (S9484)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,S9485,"Crisis intervention mental health services, per diem (S9485)",HCPCS,2.16.840.1.113883.6.285
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,7133001,Psychiatric day care by day (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,305345009,Admission to psychiatric day hospital (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,305346005,Admission to psychogeriatric day hospital (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,305347001,Admission to elderly severely mentally ill day hospital (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391038005,Emergency mental health assessment - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391042008,Planned mental health assessment - Full day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391043003,Planned mental health assessment - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391046006,Crisis/short term interventions in mental health care - Full day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391047002,Crisis/short term interventions in mental health care - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391048007,Crisis/short term interventions in mental health care - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391054008,Emergency mental health assessment - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391055009,Mental health crisis resolution - Part day (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391056005,Mental health crisis resolution - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391133003,Mental health crisis resolution - Full day (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391150001,General psychiatric care of older adults - Full day : day care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391151002,General psychiatric care of older adults - Part day : day care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391152009,General psychiatric care of older adults - Daily intensive (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391153004,General psychiatric care of older adults - 3 to 5 contacts/week (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391170007,General psychiatric care of older adults - 1 to 2 contacts/week (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391185001,Early intervention in psychosis - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391186000,Early intervention in psychosis - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391187009,Early intervention in psychosis - 3-5 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391188004,Early intervention in psychosis - 1-2 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391191004,Homeless mental health care - Full day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391192006,Homeless mental health care - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391194007,Homeless mental health care - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391195008,Homeless mental health care - 3-5 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391207001,Mental health addiction programs - full day: day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391208006,Mental health addiction programs - part day: day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391209003,Mental health addiction programs - daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391210008,Mental health addiction programs - 3-5 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391211007,Mental health addiction programs - 1-2 contacts/week (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391228005,Psychological therapies - Full day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391229002,Psychological therapies - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391232004,Psychological therapies - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391252003,Mental health functional therapies - Full day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391254002,Mental health functional therapies - Part day : day care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391255001,Mental health functional therapies - Daily intensive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,391256000,Mental health functional therapies - 3-5 contacts/wk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,0905,,UBREV,2.16.840.1.113883.6.301.3
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,0907,,UBREV,2.16.840.1.113883.6.301.3
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,0912,,UBREV,2.16.840.1.113883.6.301.3
+Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492,0913,,UBREV,2.16.840.1.113883.6.301.3
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0017,"Behavioral health; residential (hospital residential treatment program), without room and board, per diem (H0017)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0018,"Behavioral health; short-term residential (non-hospital residential treatment program), without room and board, per diem (H0018)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0019,"Behavioral health; long-term residential (non-medical, non-acute care in a residential treatment program where stay is typically longer than 30 days), without room and board, per diem (H0019)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,T2048,"Behavioral health; long-term care residential (non-acute care in a residential treatment program where stay is typically longer than 30 days), with room and board, per diem (T2048)",HCPCS,2.16.840.1.113883.6.285
+Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484,Z71.41,[Z71.41] Alcohol abuse counseling and surveillance of alcoholic,ICD10CM,2.16.840.1.113883.6.90
+Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484,Z71.51,[Z71.51] Drug abuse counseling and surveillance of drug abuser,ICD10CM,2.16.840.1.113883.6.90
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,99408,,CPT,2.16.840.1.113883.6.12
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,99409,,CPT,2.16.840.1.113883.6.12
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,G0396,"Alcohol and/or substance (other than tobacco) misuse structured assessment (e.g., audit, dast), and brief intervention 15 to 30 minutes (G0396)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,G0397,"Alcohol and/or substance (other than tobacco) misuse structured assessment (e.g., audit, dast), and intervention, greater than 30 minutes (G0397)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,G0443,"Brief face-to-face behavioral counseling for alcohol misuse, 15 minutes (G0443)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0001,Alcohol and/or drug assessment (H0001),HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0005,Alcohol and/or drug services; group counseling by a clinician (H0005),HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0007,Alcohol and/or drug services; crisis intervention (outpatient) (H0007),HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0015,"Alcohol and/or drug services; intensive outpatient (treatment program that operates at least 3 hours/day and at least 3 days/week and is based on an individualized treatment plan), including assessment, counseling; crisis intervention, and activity therapies or education (H0015)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0016,Alcohol and/or drug services; medical/somatic (medical intervention in ambulatory setting) (H0016),HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0022,Alcohol and/or drug intervention service (planned facilitation) (H0022),HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0047,"Alcohol and/or other drug abuse services, not otherwise specified (H0047)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H0050,"Alcohol and/or drug services, brief intervention, per 15 minutes (H0050)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H2035,"Alcohol and/or other drug treatment program, per hour (H2035)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,H2036,"Alcohol and/or other drug treatment program, per diem (H2036)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,T1006,"Alcohol and/or substance abuse services, family/couple counseling (T1006)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,T1012,"Alcohol and/or substance abuse services, skills development (T1012)",HCPCS,2.16.840.1.113883.6.285
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,20093000,Alcohol rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,23915005,Combined alcohol and drug rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,56876005,Drug rehabilitation and detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,61480009,Drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,64297001,Detoxication psychiatric therapy for alcoholism (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,67516001,Detoxification therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,87106005,Combined alcohol and drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,182969009,Dependent drug detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,266707007,Drug addiction therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,310653000,Drug addiction therapy using methadone (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,370776007,Assessment of history of substance abuse (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,370854007,Screening for substance abuse (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,385989002,Substance use therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,386449006,Substance use treatment: alcohol withdrawal (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,386450006,Substance use treatment: drug withdrawal (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,386451005,Substance use treatment: overdose (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,414054004,Drug dependence home detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,414056002,Drug dependence self detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,414283008,Follow up substance misuse assessment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,414501008,Initial substance misuse assessment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,415662004,Substance misuse monitoring (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,445628007,Assessment using alcohol withdrawal scale (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,445662007,Assessment using Addiction Research Foundation Clinical Institute Withdrawal Assessment for Alcohol (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,450760003,Assessment using alcohol use disorders identification test (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,704182008,"Assessment using hypertension, abnormal renal/liver function, stroke, bleeding history or predisposition, labile international normalized ratio, elderly over 65, and drugs/alcohol concomitantly score (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,707166002,Alcohol reduction program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,711008001,Assessment of substance withdrawal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,713106006,Screening for drug abuse (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,713107002,Screening for alcohol abuse (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,713127001,Assessment of alcohol use (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,720174008,Drug harm reduction program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,720175009,Alcohol harm reduction program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,720176005,Alcohol relapse prevention program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,720177001,Drug relapse prevention program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,763104007,Assessment using Christo Inventory for Substance-misuse Services (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,763233002,Assessment using Severity of Alcohol Dependence Questionnaire (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,763302001,Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,772813001,Assessment using Non-Alcoholic Fatty Liver Disease fibrosis score (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,774090004,Assessment using Alcohol Use Disorders Identification Test for Primary Care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,774091000,Assessment using Alcohol Dependence Scale (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,792901003,Drug addiction therapy using buprenorphine (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,792902005,Drug addiction therapy using buprenorphine and naloxone (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,827094004,Alcohol detoxification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,865964007,Assessment using Psychiatric Research Interview for Substance and Mental Disorders (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,428211000124100,Assessment of substance use (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,0906,,UBREV,2.16.840.1.113883.6.301.3
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,0944,,UBREV,2.16.840.1.113883.6.301.3
+Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205,0945,,UBREV,2.16.840.1.113883.6.301.3
+Telehealth POS,2.16.840.1.113883.3.464.1004.1460,02,Telehealth Provided Other than in Patient’s Home,POS,2.16.840.1.113883.6.50
+Telehealth POS,2.16.840.1.113883.3.464.1004.1460,10,Telehealth Provided in Patient’s Home,POS,2.16.840.1.113883.6.50
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98008,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98009,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98010,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98011,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98012,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98013,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98014,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98015,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98966,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98967,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,98968,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,99441,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,99442,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,99443,,CPT,2.16.840.1.113883.6.12
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,185317003,Telephone encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,314849005,Telephone contact by consultant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,386472008,Telephone consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,386473003,Telephone follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Telephone Visits,2.16.840.1.113883.3.464.1004.1246,401267002,Telephone triage encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90791,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90792,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90832,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90833,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90834,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90836,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90837,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90838,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90839,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90840,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90845,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90847,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90849,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90853,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90875,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,90876,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99221,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99222,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99223,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99231,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99232,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99233,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99238,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99239,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99252,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99253,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99254,,CPT,2.16.840.1.113883.6.12
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,99255,,CPT,2.16.840.1.113883.6.12
+[Direct Reference],,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50
+[Direct Reference],,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

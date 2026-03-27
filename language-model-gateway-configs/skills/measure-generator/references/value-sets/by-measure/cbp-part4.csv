@@ -1,0 +1,96 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT00ZZ,"[0TT00ZZ] Resection of Right Kidney, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT04ZG,"[0TT04ZG] Resection of Right Kidney, Percutaneous Endoscopic Approach, Hand-Assisted",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT04ZZ,"[0TT04ZZ] Resection of Right Kidney, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT10ZZ,"[0TT10ZZ] Resection of Left Kidney, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT14ZG,"[0TT14ZG] Resection of Left Kidney, Percutaneous Endoscopic Approach, Hand-Assisted",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT14ZZ,"[0TT14ZZ] Resection of Left Kidney, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT20ZZ,"[0TT20ZZ] Resection of Bilateral Kidneys, Open Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT24ZG,"[0TT24ZG] Resection of Bilateral Kidneys, Percutaneous Endoscopic Approach, Hand-Assisted",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,0TT24ZZ,"[0TT24ZZ] Resection of Bilateral Kidneys, Percutaneous Endoscopic Approach",ICD10PCS,2.16.840.1.113883.6.4
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1866009,Total excision of bilateral kidneys (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,12976005,Donor nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,48643009,Excision of cyst of kidney (procedure) [48643009],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,48994000,Renal homotransplantation with unilateral recipient nephrectomy (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,58367002,Nephrectomy of remaining kidney (procedure) [58367002],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,85250002,Nephrectomy (procedure) [85250002],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,88930008,Total nephrectomy in recipient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,88994001,Unilateral excision of kidney (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,116033007,Radical nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,116166009,Radical nephrectomy AND ipsilateral adrenalectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,149579003,Nephrectomy (procedure) [149579003],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,149583003,Total nephrectomy (procedure) [149583003],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,149584009,Nephrectomy NOS (procedure) [149584009],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175905003,Total nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175906002,Radical nephrectomy (procedure) [175906002],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175909009,Simple nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175910004,Transplant nephrectomy (& for rejection) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175911000,Live donor nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175914008,Other specified total nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,175915009,Total nephrectomy NOS (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,265550007,Transplant nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,284348003,Excision of rejected transplanted kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,287729007,Nephrectomy NOS (procedure) [287729007],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,289754003,Nephrectomy of remaining or solitary kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,290691008,Nephrectomy of remaining kidney (procedure) [290691008],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,361249003,Nephrectomy with excision of perirenal tissue (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,439235001,Laparoscopic radical nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,439964001,Laparoscopic excision of kidney and total excision of ureter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,440446009,Laparoscopic excision of kidney and partial excision of ureter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,442919002,Adrenal sparing radical nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,443869003,Total excision of right kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,444083005,Total excision of left kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,446296004,Laparoscopic total excision of kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,446990000,Laparoscopic excision of ureter and kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,447527008,Laparoscopic total excision of kidney by retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,447531002,Laparoscopic excision of ureter and kidney by retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,698869007,Laparoscopic bilateral total nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,699719001,Laparoscopic nephrectomy of remaining kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,699720007,Laparoscopic nephrectomy of remaining kidney by retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,708908003,Laparoscopic live donor nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,712998006,Laparoscopic radical nephrectomy using robotic assistance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,714031000,Single port laparoscopic nephrectomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,722149000,Chronic kidney disease due to and following excision of neoplasm of kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,765472003,Excision of left kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,765473008,Excision of right kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1017216005,Laparoscopic total excision of right kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1017217001,Laparoscopic total excision of left kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1017218006,Laparoscopic total excision of left kidney via retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1017219003,Laparoscopic total excision of right kidney via retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,1289993008,Laparoscopic radical excision of kidney by retroperitoneal approach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390,6561000179108,Open nephrectomy from live donor (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2108-9,European,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2109-7,Armenian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2110-5,English,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2111-3,French,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2112-1,German,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2113-9,Irish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2114-7,Italian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2115-4,Polish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2116-2,Scottish,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2118-8,Middle Eastern or North African,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2119-6,Assyrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2120-4,Egyptian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2121-2,Iranian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2122-0,Iraqi,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2123-8,Lebanese,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2124-6,Palestinian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2125-3,Syrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2126-1,Afghanistani,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2127-9,Israeli,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2129-5,Arab,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238
+[Direct Reference],,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9
+[Direct Reference],,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

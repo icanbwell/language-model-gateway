@@ -1,0 +1,590 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,96156,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,96160,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,96161,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,97802,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,97803,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,97804,,CPT,2.16.840.1.113883.6.12
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,S5170,"Home delivered meals, including preparation; per meal (S5170)",HCPCS,2.16.840.1.113883.6.285
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,S9470,"Nutritional counseling, dietitian visit (S9470)",HCPCS,2.16.840.1.113883.6.285
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1759002,Assessment of nutritional status (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,61310001,Nutrition education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,103699006,Referral to dietitian (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,308440001,Referral to social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,385767005,Meals on wheels provision education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,710824005,Assessment of health and social care needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,710925007,Provision of food (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,711069006,Coordination of care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,713109004,Referral to community meals service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1002223009,Assessment of progress toward goals to achieve food security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1002224003,Assessment for food insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1002225002,Assessment of barriers in food insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1004109000,Assessment of goals to achieve food security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1004110005,Coordination of resources to address food insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1148446004,Education about legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1162436000,Referral to legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1230338004,Referral to charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1268662008,Coordination of resources to address social needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1268726004,Education about peer support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1268727008,Education about charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,1269404007,Adjustment of clinical plan to accommodate social risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441041000124100,Counseling about nutrition (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441201000124108,Counseling about nutrition using cognitive behavioral theoretical approach (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441231000124100,Counseling about nutrition using health belief model (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441241000124105,Counseling about nutrition using social learning theory approach (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441251000124107,Counseling about nutrition using transtheoretical model and stages of change approach (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441261000124109,Counseling about nutrition using motivational interviewing technique (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441271000124102,Counseling about nutrition using goal setting strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441281000124104,Counseling about nutrition using self-monitoring strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441291000124101,Counseling about nutrition using problem solving strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441301000124100,Counseling about nutrition using social support strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441311000124102,Counseling about nutrition using stress management strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441321000124105,Counseling about nutrition using stimulus control strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441331000124108,Counseling about nutrition using cognitive restructuring strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441341000124103,Counseling about nutrition using relapse prevention strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,441351000124101,Counseling about nutrition using rewards and contingency management strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,445291000124103,Nutrition-related skill education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,445301000124102,Content-related nutrition education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,445641000124105,Technical nutrition education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,461481000124109,Referral to peer support (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,462481000124102,Referral to Community Action Agency program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,462491000124104,Referral to benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464001000124109,Referral to case manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464011000124107,Referral to care manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464021000124104,Referral to care navigator (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464031000124101,Referral to food pantry program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464041000124106,Referral to Child and Adult Care Food Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464051000124108,Referral to Gus Schumacher Nutrition Incentive-funded Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464061000124105,Referral to food prescription program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464071000124103,Referral to garden program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464081000124100,Referral to home-delivered meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464091000124102,Referral to medically tailored meal program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464101000124108,Referral to Supplemental Nutrition Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464111000124106,"Referral to Special Supplemental Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464121000124103,Referral to Summer Food Service Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464131000124100,Referral to community health worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464141000124105,Referral to Meals on Wheels Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464151000124107,Referral to congregate meal program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464161000124109,Referral to community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464171000124102,Referral to Senior Farmers' Market Nutrition Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464181000124104,"Referral to Farmers' Market Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464191000124101,Referral to Food Distribution Program on Indian Reservations (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464201000124103,Education about Child and Adult Care Food Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464211000124100,Education about Community Meals Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464221000124108,Education about Gus Schumacher Nutrition Incentive-funded Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464231000124106,Education about food pantry program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464241000124101,Education about food prescription program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464251000124104,Education about garden program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464261000124102,Education about home-delivered meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464271000124109,Education about medically tailored meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464281000124107,"Education about Special Supplement Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464291000124105,Education about community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464301000124106,Education about benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464311000124109,Education about Community Action Agency Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464321000124101,Education about Food Distribution Program on Indian Reservations (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464331000124103,"Education about Farmers' Market Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464341000124108,Education about Senior Farmers' Market Nutrition Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464351000124105,Education about congregate meal program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464361000124107,Education about Supplemental Nutrition Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464371000124100,Education about Summer Food Service Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464381000124102,Provision of prescription for infant formula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464401000124102,Provision of fresh fruit and vegetable voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464411000124104,Provision of food voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464421000124107,Provision of home-delivered meals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464431000124105,Provision of medically tailored meals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464611000124102,Coordination of care team (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464621000124105,Evaluation of eligibility for home-delivered meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464631000124108,Evaluation of eligibility for Meals on Wheels Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464641000124103,Evaluation of eligibility for medically tailored meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464651000124101,Evaluation of eligibility for Senior Farmers' Market Nutrition Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464661000124104,"Evaluation of eligibility for Special Supplemental Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464671000124106,Counseling for readiness to implement food insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464681000124109,Counseling for food insecurity care plan participation barriers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464691000124107,Counseling for barriers to achieving food security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464701000124107,Counseling for readiness to achieve food security goals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,464721000124102,Provision of food prescription (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467591000124102,Evaluation of eligibility for food pantry program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467601000124105,Evaluation of eligibility for Food Distribution Program on Indian Reservations (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467611000124108,"Evaluation of eligibility for Farmers' Market Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467621000124100,Evaluation of eligibility for Supplemental Nutrition Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467631000124102,Evaluation of eligibility for Summer Food Service Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467641000124107,Evaluation of eligibility for Gus Schumacher Nutrition Incentive-funded Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467651000124109,Evaluation of eligibility for garden program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467661000124106,Evaluation of eligibility for Community Meal Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467671000124104,Evaluation of eligibility for Child and Adult Care Food Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467681000124101,Assistance with application for Summer Food Service Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467691000124103,"Assistance with application for Special Supplemental Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467711000124100,Assistance with application for Senior Farmers' Market Nutrition Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467721000124108,Assistance with application for medically tailored meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467731000124106,Assistance with application for home-delivered meals program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467741000124101,Assistance with application for Gus Schumacher Nutrition Incentive-funded Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467751000124104,Assistance with application for garden program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467761000124102,Assistance with application for food prescription program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467771000124109,Assistance with application for food pantry program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467781000124107,Assistance with application for Child and Adult Care Food Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467791000124105,Assistance with application for Food Distribution Program on Indian Reservations (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467801000124106,Assistance with application for Community Meal Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467811000124109,"Assistance with application for Farmers' Market Nutrition Program for Women, Infants and Children (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,467821000124101,Assistance with application for Supplemental Nutrition Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,468401000124109,Evaluation of eligibility for food prescription program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470231000124107,Counseling for social determinant of health risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470241000124102,Assistance with application for national school lunch program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470261000124103,Assistance with application for school breakfast program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470281000124108,Evaluation of eligibility for school breakfast program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470291000124106,Referral to national school lunch program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470301000124107,Referral to school breakfast program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470311000124105,Education about national school lunch program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470321000124102,Education about school breakfast program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470591000124109,Education about community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470601000124101,Education about community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,470611000124103,Education about area agency on aging program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,471111000124101,Referral to community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,471121000124109,Referral to community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,471131000124107,Referral to area agency on aging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,472151000124109,Referral to medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,472331000124100,Education about medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,551101000124107,Referral to lawyer (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,661101000124109,Education about State Funded Food Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,661181000124100,Education about peer support specialist service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,662151000124104,Assistance with application for State Funded Food Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,662651000124105,Evaluation of eligibility for State Funded Food Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,663081000124100,Referral to State Funded Food Assistance Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262,663211000124100,Referral to peer support specialist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,96156,,CPT,2.16.840.1.113883.6.12
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,96160,,CPT,2.16.840.1.113883.6.12
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,96161,,CPT,2.16.840.1.113883.6.12
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,308440001,Referral to social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,710824005,Assessment of health and social care needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,711069006,Coordination of care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148446004,Education about legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148447008,Assessment for housing insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148812007,Assessment of progress toward goals to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148814008,Assessment of goals to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148817001,Assessment of barriers in housing insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1148818006,Coordination of services to assist with maintaining housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1162436000,Referral to legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1162437009,Coordination of resources to address housing instability (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1230338004,Referral to charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1268662008,Coordination of resources to address social needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1268726004,Education about peer support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1268727008,Education about charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,1269404007,Adjustment of clinical plan to accommodate social risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,461481000124109,Referral to peer support (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,462481000124102,Referral to Community Action Agency program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,462491000124104,Referral to benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464001000124109,Referral to case manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464011000124107,Referral to care manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464021000124104,Referral to care navigator (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464131000124100,Referral to community health worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464161000124109,Referral to community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464291000124105,Education about community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464301000124106,Education about benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464311000124109,Education about Community Action Agency Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,464611000124102,Coordination of care team (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470231000124107,Counseling for social determinant of health risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470471000124109,Assistance with application for rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470481000124107,Assistance with application for subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470491000124105,Evaluation of eligibility for subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470501000124102,Education about subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470581000124106,Education about healthcare for the homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470591000124109,Education about community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470601000124101,Education about community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470611000124103,Education about area agency on aging program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470781000124104,Evaluation of eligibility for permanent supportive housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470791000124101,Assistance with application for permanent supportive housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470801000124100,Education about permanent supportive housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470811000124102,Evaluation of eligibility for transitional housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470821000124105,Education about transitional housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470831000124108,Assistance with application for transitional housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,470841000124103,Referral to healthcare for the homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471021000124108,Referral to street outreach program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471031000124106,Education about street outreach program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471041000124101,Referral to rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471071000124109,Referral to fair housing assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471081000124107,Referral to Day Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471091000124105,Referral to Emergency Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471101000124104,Referral to Coordinated Entry Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471111000124101,Referral to community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471121000124109,Referral to community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,471131000124107,Referral to area agency on aging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472031000124103,Evaluation of eligibility for Safe Haven Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472041000124108,Referral to subsidized housing service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472051000124105,Education about Safe Haven Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472081000124102,Education about rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472091000124104,Evaluation of eligibility for rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472101000124105,Evaluation of eligibility for Rapid Re-housing Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472111000124108,Education about Rapid Re-housing Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472121000124100,Assistance with application for Rapid Re-housing Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472131000124102,Provision of rental assistance voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472141000124107,Referral to medical respite for homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472151000124109,Referral to medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472161000124106,Referral to housing support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472191000124103,Counseling for readiness to achieve housing security goals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472221000124105,Counseling for readiness to implement housing insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472241000124103,Counseling for barriers to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472261000124104,Counseling for housing insecurity care plan participation barriers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472301000124108,Evaluation of eligibility for medical respite for homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472311000124106,Education about medical respite for homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472321000124103,Assistance with application for medical respite for homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472331000124100,Education about medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472341000124105,Evaluation of eligibility for Housing with Services Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472351000124107,Assistance with application for Housing with Services Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,472361000124109,Education about Housing with Services Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480791000124106,Evaluation of eligibility for Street Outreach Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480801000124107,Assistance with application for Safe Haven Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480811000124105,Evaluation of eligibility for Housing Only Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480821000124102,Education about Housing Only Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480831000124104,Assistance with application for Housing Only Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480871000124101,Evaluation of eligibility for healthcare for homeless program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480901000124101,Education about fair housing assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480921000124106,Assistance with application to Emergency Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480931000124109,Evaluation of eligibility for Emergency Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480941000124104,Education about Emergency Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480961000124100,Education about Day Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480971000124107,Education about Coordinated Entry Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,480981000124105,Assistance with application for Day Shelter Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,551101000124107,Referral to lawyer (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,661181000124100,Education about peer support specialist service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410,663211000124100,Referral to peer support specialist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,96156,,CPT,2.16.840.1.113883.6.12
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,96160,,CPT,2.16.840.1.113883.6.12
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,96161,,CPT,2.16.840.1.113883.6.12
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,308440001,Referral to social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,710824005,Assessment of health and social care needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,711069006,Coordination of care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148446004,Education about legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148447008,Assessment for housing insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148812007,Assessment of progress toward goals to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148814008,Assessment of goals to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148817001,Assessment of barriers in housing insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1148818006,Coordination of services to assist with maintaining housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1156869006,Education about tenant rights organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1162436000,Referral to legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1162437009,Coordination of resources to address housing instability (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1230338004,Referral to charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1268662008,Coordination of resources to address social needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1268726004,Education about peer support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1268727008,Education about charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,1269404007,Adjustment of clinical plan to accommodate social risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,461481000124109,Referral to peer support (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,462481000124102,Referral to Community Action Agency program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,462491000124104,Referral to benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464001000124109,Referral to case manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464011000124107,Referral to care manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464021000124104,Referral to care navigator (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464131000124100,Referral to community health worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464161000124109,Referral to community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464291000124105,Education about community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464301000124106,Education about benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464311000124109,Education about Community Action Agency Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,464611000124102,Coordination of care team (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470231000124107,Counseling for social determinant of health risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470471000124109,Assistance with application for rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470481000124107,Assistance with application for subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470491000124105,Evaluation of eligibility for subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470501000124102,Education about subsidized housing program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470591000124109,Education about community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470601000124101,Education about community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,470611000124103,Education about area agency on aging program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471041000124101,Referral to rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471051000124104,Referral to Homelessness Prevention Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471061000124102,Referral to mortgage assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471071000124109,Referral to fair housing assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471111000124101,Referral to community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471121000124109,Referral to community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,471131000124107,Referral to area agency on aging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472021000124101,Referral to tenants rights organization program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472041000124108,Referral to subsidized housing service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472081000124102,Education about rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472091000124104,Evaluation of eligibility for rental assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472131000124102,Provision of rental assistance voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472151000124109,Referral to medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472161000124106,Referral to housing support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472191000124103,Counseling for readiness to achieve housing security goals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472221000124105,Counseling for readiness to implement housing insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472241000124103,Counseling for barriers to achieve housing security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472261000124104,Counseling for housing insecurity care plan participation barriers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472271000124106,Provision of mortgage assistance voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472281000124109,Evaluation of eligibility for mortgage assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472291000124107,Education about mortgage assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472331000124100,Education about medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,472381000124104,Provision of emergency housing fund voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,480841000124109,Education about Homelessness Prevention Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,480851000124106,Evaluation of eligibility for Homelessness Prevention Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,480861000124108,Assistance with application to Homelessness Prevention Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,480901000124101,Education about fair housing assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,551091000124101,Referral to emergency housing fund program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,551101000124107,Referral to lawyer (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,581041000124102,Assistance with application for renewal of benefits enrollment (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,661181000124100,Education about peer support specialist service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412,663211000124100,Referral to peer support specialist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,96156,,CPT,2.16.840.1.113883.6.12
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,96160,,CPT,2.16.840.1.113883.6.12
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,96161,,CPT,2.16.840.1.113883.6.12
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,49919000,Home safety education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,308440001,Referral to social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,710824005,Assessment of health and social care needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,711069006,Coordination of care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1148446004,Education about legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1148813002,Assessment of barriers in inadequate housing care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1148815009,Assessment of goals to achieve adequate housing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1148823006,Assessment of progress toward goals to achieve adequate housing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1162436000,Referral to legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1230338004,Referral to charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1268662008,Coordination of resources to address social needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1268686005,Coordination of resources to address inadequate housing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1268726004,Education about peer support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1268727008,Education about charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,1269404007,Adjustment of clinical plan to accommodate social risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,461481000124109,Referral to peer support (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,462481000124102,Referral to Community Action Agency program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,462491000124104,Referral to benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464001000124109,Referral to case manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464011000124107,Referral to care manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464021000124104,Referral to care navigator (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464131000124100,Referral to community health worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464161000124109,Referral to community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464291000124105,Education about community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464301000124106,Education about benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464311000124109,Education about Community Action Agency Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,464611000124102,Coordination of care team (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470231000124107,Counseling for social determinant of health risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470431000124106,Referral to weatherization assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470441000124101,Evaluation of eligibility for weatherization assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470451000124104,Education about weatherization assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470461000124102,Assistance with application for weatherization assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470591000124109,Education about community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470601000124101,Education about community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,470611000124103,Education about area agency on aging program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,471111000124101,Referral to community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,471121000124109,Referral to community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,471131000124107,Referral to area agency on aging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472151000124109,Referral to medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472201000124100,Counseling for readiness to achieve adequate housing goals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472211000124102,Counseling for readiness to implement inadequate housing care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472231000124108,Counseling for barriers to achieve adequate housing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472251000124101,Counseling for inadequate housing care plan participation barriers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472331000124100,Education about medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,472371000124102,Provision of voucher for repair of place of residence (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,480881000124103,Referral to environmental hazard testing of residence program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,480891000124100,Evaluation of eligibility for environmental hazard testing of residence program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,480911000124103,Education about environmental hazard testing of residence program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,480951000124102,Assistance with application for environmental hazard testing of residence program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551041000124105,Referral to housing repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551051000124107,Referral for housing repair assessment program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551061000124109,Evaluation of eligibility for housing repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551071000124102,Education about housing repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551081000124104,Assistance with application for housing repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,551101000124107,Referral to lawyer (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,661181000124100,Education about peer support specialist service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411,663211000124100,Referral to peer support specialist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,96156,,CPT,2.16.840.1.113883.6.12
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,96160,,CPT,2.16.840.1.113883.6.12
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,96161,,CPT,2.16.840.1.113883.6.12
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,228615008,Provision of transport (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,308440001,Referral to social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,710824005,Assessment of health and social care needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,711069006,Coordination of care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,716730006,Provision of taxi (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,716732003,Provision of emergency ambulance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,716733008,Provision of ambulance with stretcher facility (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1148446004,Education about legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1162436000,Referral to legal aid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1230338004,Referral to charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1268662008,Coordination of resources to address social needs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1268726004,Education about peer support program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1268727008,Education about charitable organization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,1269404007,Adjustment of clinical plan to accommodate social risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,461481000124109,Referral to peer support (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,462481000124102,Referral to Community Action Agency program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,462491000124104,Referral to benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464001000124109,Referral to case manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464011000124107,Referral to care manager (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464021000124104,Referral to care navigator (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464131000124100,Referral to community health worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464161000124109,Referral to community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464291000124105,Education about community resource network program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464301000124106,Education about benefits enrollment assistance program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464311000124109,Education about Community Action Agency Program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,464611000124102,Coordination of care team (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,470231000124107,Counseling for social determinant of health risk (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,470591000124109,Education about community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,470601000124101,Education about community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,470611000124103,Education about area agency on aging program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,471111000124101,Referral to community development financial institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,471121000124109,Referral to community development corporation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,471131000124107,Referral to area agency on aging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,472151000124109,Referral to medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,472331000124100,Education about medical legal partnership program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551101000124107,Referral to lawyer (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551111000124105,Provision of taxi voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551121000124102,Referral to taxi voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551141000124109,Evaluation of eligibility for taxi voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551161000124108,Education about taxi voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551191000124100,Assistance with application for taxi voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551231000124105,Referral to vehicle donation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551251000124103,Evaluation of eligibility for vehicle donation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551261000124101,Education about vehicle donation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551271000124108,Assistance with application for vehicle donation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551281000124106,Referral to transportation network company program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551291000124109,Assistance with application for transportation network company program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551301000124105,Education about transportation network company program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551311000124108,Evaluation of eligibility for transportation network company program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551321000124100,Referral to volunteer driver program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551331000124102,Referral to rideshare program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551341000124107,Referral to public transportation voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551351000124109,Referral to paratransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551361000124106,Referral to microtransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551371000124104,Referral to non-emergency medical transportation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551381000124101,Referral to automobile share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551391000124103,Referral to vehicle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551401000124101,Referral to vehicle repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551411000124103,Assistance with application for vehicle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551421000124106,Assistance with application for bicycle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,551431000124109,Referral to bicycle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,610961000124100,Assistance with application for volunteer driver program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,610971000124107,Assistance with application for rideshare program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,610981000124105,Assistance with application for public transportation voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,610991000124108,Assistance with application for paratransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611001000124109,Assistance with application for microtransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611011000124107,Assistance with application for non-emergency medical transportation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611021000124104,Assistance with application for automobile share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611031000124101,Education about rideshare program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611041000124106,Education about volunteer driver program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611051000124108,Education about microtransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611061000124105,Education about public transportation voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611071000124103,Education about paratransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611081000124100,Education about non-emergency medical transportation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611091000124102,Education about bicycle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611101000124108,Education about vehicle repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611111000124106,Education about vehicle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611121000124103,Education about automobile share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611281000124107,Counseling for readiness to achieve transportation security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611291000124105,Counseling for barriers to achieve transportation security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611301000124106,Counseling for readiness for engagement in transportation insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611311000124109,Counseling for barriers to engagement in transportation insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611321000124101,Assessment of progress toward goals to achieve transportation security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611331000124103,Assessment of goals to achieve transportation security (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611341000124108,Assessment of barriers in transportation insecurity care plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611351000124105,Assessment for transportation insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611361000124107,Evaluation of eligibility for rideshare program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611371000124100,Evaluation of eligibility for volunteer driver program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611381000124102,Provision of public transportation voucher (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611391000124104,Evaluation of eligibility for public transportation voucher program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611401000124102,Evaluation of eligibility for paratransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611411000124104,Evaluation of eligibility for microtransit program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611421000124107,Evaluation of eligibility for automobile share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611431000124105,Evaluation of eligibility for vehicle repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611441000124100,Evaluation of eligibility for non-emergency medical transportation program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,611451000124103,Evaluation of eligibility for bicycle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,651011000124100,Assistance with application for vehicle repair program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,651031000124106,Coordination of resources to address transportation insecurity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,661181000124100,Education about peer support specialist service (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,662351000124101,Evaluation of eligibility for vehicle share program (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264,663211000124100,Referral to peer support specialist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,101351-5,"Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living during assessment period [CMS Assessment]",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,71802-3,Housing status,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,88122-7,Within the past 12 months we worried whether our food would run out before we got money to buy more [U.S. FSS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,88123-5,Within the past 12 months the food we bought just didn't last and we didn't have money to get more [U.S. FSS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,88124-3,Food insecurity risk [HVS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89569-8,Access to transportation/mobility status [CUBS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,92358-1,Current level of confidence I can use public transportation [PROMIS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93030-5,"Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93031-3,Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93033-9,Are you worried about losing your housing [PRAPARE],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93668-2,Did you or others you live with eat smaller meals or skip meals because you didn't have money for food in the past 2 months [WellRx],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93669-0,Are you homeless or worried that you might be in the future [WellRx],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,93671-6,Do you have trouble finding or paying for transportation [WellRx],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,95251-5,"In the last 12 months, did you ever eat less than you felt you should because there wasn't enough money for food [U.S. FSS]",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,95264-8,Food security status [U.S. FSS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,95399-2,Within the past 12 months the food we bought just didn't last and we didn't have money to get more Caregiver [U.S. FSS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,95400-8,Within the past 12 months we worried whether our food would run out before we got money to buy more Caregiver [U.S. FSS],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,96434-6,Always has enough food for family Caregiver,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,96441-1,At risk of becoming homeless Caregiver,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,96778-6,Problems with place where you live,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,98976-4,Behind on rent or mortgage in past 12 months,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,98977-2,Number of residential moves in past 12 months,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,98978-0,Homeless in past 12 months,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99134-9,You or your families' health is affected by environmental conditions at home,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99135-6,Environmental conditions in the home that affect you or your families' health,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99550-6,Worried about housing stability in next 2 months,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99553-0,Went without health care due to lack of transportation in last 12 months,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,99594-4,Delayed medical care due to distance or lack of transportation,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA19952-3,At risk,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA28397-0,Often true,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA28580-1,Mold,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA29232-8,"My transportation is available and reliable, but limited and/or inconvenient; drivers are licensed and minimally insured",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA29233-6,"My transportation is available, but unreliable, unpredictable, unaffordable; may have car but no insurance, license, etc.",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA29234-4,"I have no access to transportation, public or private; may have car that is inoperable",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30024-6,I am not at all confident,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30026-1,I am a little confident,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30027-9,I am somewhat confident,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30125-1,Food,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30133-5,"Yes, it has kept me from medical appointments or from getting my medications",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30134-3,"Yes, it has kept me from non-medical meetings, appointments, work, or from getting things that I need",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30190-5,"I do not have housing (staying with others, in a hotel, in a shelter, living outside on the street, on a beach, in a car, or in a park)",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30985-8,Low food security,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA30986-6,Very low food security,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31994-9,"I have a place to live today, but I am worried about losing it in the future",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31995-6,"I do not have a steady place to live (I am temporarily staying with others, in a hotel, in a shelter, living outside on the street, on a beach, in a car, abandoned building, bus or train station, or in a park)",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31996-4,"Pests such as bugs, ants, or mice",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31997-2,Lead paint or pipes,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31998-0,Lack of heat,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA31999-8,Oven or stove not working,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32000-4,Smoke detectors missing or not working,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32001-2,Water leaks,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32691-0,Bug infestation,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32693-6,Lead paint/pipes,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32694-4,Inadequate heat,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32695-1,Non-functioning oven/stove,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32696-9,No or non-working smoke detectors,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA32-8,No,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA33093-8,"Yes, it has kept me from medical appointments or getting medications",LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA33-6,Yes,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA6729-3,Sometimes true,LOINC,2.16.840.1.113883.6.1

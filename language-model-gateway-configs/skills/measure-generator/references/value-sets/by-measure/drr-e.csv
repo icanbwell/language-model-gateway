@@ -1,0 +1,560 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.10,"[F30.10] Manic episode without psychotic symptoms, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.11,"[F30.11] Manic episode without psychotic symptoms, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.12,"[F30.12] Manic episode without psychotic symptoms, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.13,"[F30.13] Manic episode, severe, without psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.2,"[F30.2] Manic episode, severe with psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.3,[F30.3] Manic episode in partial remission,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.4,[F30.4] Manic episode in full remission,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.8,[F30.8] Other manic episodes,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.9,"[F30.9] Manic episode, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.0,"[F31.0] Bipolar disorder, current episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.10,"[F31.10] Bipolar disorder, current episode manic without psychotic features, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.11,"[F31.11] Bipolar disorder, current episode manic without psychotic features, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.12,"[F31.12] Bipolar disorder, current episode manic without psychotic features, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.13,"[F31.13] Bipolar disorder, current episode manic without psychotic features, severe",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.2,"[F31.2] Bipolar disorder, current episode manic severe with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.30,"[F31.30] Bipolar disorder, current episode depressed, mild or moderate severity, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.31,"[F31.31] Bipolar disorder, current episode depressed, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.32,"[F31.32] Bipolar disorder, current episode depressed, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.4,"[F31.4] Bipolar disorder, current episode depressed, severe, without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.5,"[F31.5] Bipolar disorder, current episode depressed, severe, with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.60,"[F31.60] Bipolar disorder, current episode mixed, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.61,"[F31.61] Bipolar disorder, current episode mixed, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.62,"[F31.62] Bipolar disorder, current episode mixed, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.63,"[F31.63] Bipolar disorder, current episode mixed, severe, without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.64,"[F31.64] Bipolar disorder, current episode mixed, severe, with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.70,"[F31.70] Bipolar disorder, currently in remission, most recent episode unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.71,"[F31.71] Bipolar disorder, in partial remission, most recent episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.72,"[F31.72] Bipolar disorder, in full remission, most recent episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.73,"[F31.73] Bipolar disorder, in partial remission, most recent episode manic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.74,"[F31.74] Bipolar disorder, in full remission, most recent episode manic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.75,"[F31.75] Bipolar disorder, in partial remission, most recent episode depressed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.76,"[F31.76] Bipolar disorder, in full remission, most recent episode depressed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.77,"[F31.77] Bipolar disorder, in partial remission, most recent episode mixed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.78,"[F31.78] Bipolar disorder, in full remission, most recent episode mixed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,162004,Severe manic bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,1499003,"Bipolar I disorder, single manic episode with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,3530005,"Bipolar I disorder, single manic episode, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,4441000,Severe bipolar disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,5703000,Bipolar disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,9340000,"Bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,10875004,"Severe mixed bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,10981006,Severe mixed bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13313007,Mild bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13581000,"Severe bipolar I disorder, single manic episode with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13746004,Bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,14495005,"Severe bipolar I disorder, single manic episode without psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,16506000,Mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,17782008,"Bipolar I disorder, most recent episode manic with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,21900002,"Bipolar I disorder, most recent episode depressed with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,22121000,Depressed bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,26203008,"Severe depressed bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,26530004,"Severe bipolar disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,28663008,Severe manic bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,28884001,"Moderate bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,29929003,"Bipolar I disorder, most recent episode depressed with atypical features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,30935000,Manic bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,31446002,"Bipolar I disorder, most recent episode hypomanic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,33380008,"Severe manic bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,35481005,Mixed bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,36583000,Mixed bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,38368003,"Schizoaffective disorder, bipolar type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,40926005,Moderate mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41552001,"Mild bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41832009,"Severe bipolar I disorder, single manic episode with psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41836007,Bipolar disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,43769008,Mild mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,45479006,Manic bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,46229002,Severe mixed bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,49468007,Depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,49512000,Depressed bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,51637008,"Chronic bipolar I disorder, most recent episode depressed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,53049002,Severe bipolar disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,53607008,Depressed bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,54761006,"Severe depressed bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,55516002,"Bipolar I disorder, most recent episode manic with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,59617007,Severe depressed bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,61403008,Severe depressed bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,63249007,Manic bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,64731001,"Severe mixed bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,65042007,"Bipolar I disorder, most recent episode mixed with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,66631006,Moderate depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,68569003,Manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,70546001,"Severe bipolar disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,71984005,Mild manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,73471000,"Bipolar I disorder, most recent episode mixed with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,74686005,Mild depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,75360000,"Bipolar I disorder, single manic episode, in remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,75752004,"Bipolar I disorder, most recent episode depressed with melancholic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,78269000,"Bipolar I disorder, single manic episode, in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,78640000,"Severe manic bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,79584002,Moderate bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,82998009,Moderate manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,85248005,Bipolar disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,86058007,"Severe bipolar I disorder, single manic episode with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,87203005,"Bipolar I disorder, most recent episode depressed with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,87950005,"Bipolar I disorder, single manic episode with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,111485001,Mixed bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191618007,"Bipolar affective disorder, current episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191620005,"Bipolar affective disorder, currently manic, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191621009,"Bipolar affective disorder, currently manic, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191623007,"Bipolar affective disorder, currently manic, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191625000,"Bipolar affective disorder, currently manic, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191627008,"Bipolar affective disorder, current episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191629006,"Bipolar affective disorder, currently depressed, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191630001,"Bipolar affective disorder, currently depressed, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191634005,"Bipolar affective disorder, currently depressed, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191636007,Mixed bipolar affective disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191638008,"Mixed bipolar affective disorder, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191639000,"Mixed bipolar affective disorder, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191641004,"Mixed bipolar affective disorder, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191643001,"Mixed bipolar affective disorder, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,192362008,"Bipolar affective disorder, current episode mixed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,231444002,Organic bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371596008,Bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371599001,Severe bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371600003,Severe bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,723903001,Bipolar type I disorder currently in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,765176007,Psychosis and severe depression co-occurrent and due to bipolar affective disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767631007,"Bipolar disorder, most recent episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767632000,"Bipolar disorder, most recent episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767633005,"Bipolar affective disorder, most recent episode mixed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767635003,"Bipolar I disorder, most recent episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767636002,"Bipolar I disorder, most recent episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,261000119107,Severe depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,271000119101,Severe mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,23741000119105,Severe manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,133091000119105,Rapid cycling bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,16238741000119105,Bipolar disorder caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90791,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90792,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90832,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90834,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90837,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98000,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98001,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98002,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98003,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98004,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98005,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98006,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98007,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98008,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98009,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98010,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98011,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98012,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98013,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98014,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98015,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98016,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98960,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98961,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98962,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98966,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98967,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98968,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98970,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98971,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98972,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98980,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,98981,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99078,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99202,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99203,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99204,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99205,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99211,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99212,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99213,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99214,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99215,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99242,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99243,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99244,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99245,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99341,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99342,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99344,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99345,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99347,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99348,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99349,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99350,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99381,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99382,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99383,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99384,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99385,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99386,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99387,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99391,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99392,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99393,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99394,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99395,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99396,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99397,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99401,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99402,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99403,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99404,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99411,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99412,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99421,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99422,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99423,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99441,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99442,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99443,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99457,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99458,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99483,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99492,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99493,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99494,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,99510,,CPT,2.16.840.1.113883.6.12
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0071,"Payment for communication technology-based services for 5 minutes or more of a virtual (non-face-to-face) communication between an rural health clinic (rhc) or federally qualified health center (fqhc) practitioner and rhc or fqhc patient, or 5 minutes or more of remote evaluation of recorded video and/or images by an rhc or fqhc practitioner, occurring in lieu of an office visit; rhc or fqhc only (G0071)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0155,"Services of clinical social worker in home health or hospice settings, each 15 minutes (G0155)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0176,"Activity therapy, such as music, dance, art or play therapies not for recreation, related to the care and treatment of patient's disabling mental health problems, per session (45 minutes or more) (G0176)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0177,Training and educational services related to the care and treatment of patient's disabling mental health problems per session (45 minutes or more) (G0177),HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0409,"Social work and psychological services, directly relating to and/or furthering the patient's rehabilitation goals, each 15 minutes, face-to-face; individual (services provided by a corf-qualified social worker or psychologist in a corf) (G0409)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0410,"Group psychotherapy other than of a multiple-family group, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0410)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0411,"Interactive group psychotherapy, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0411)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0463,Hospital outpatient clinic visit for assessment and management of a patient (G0463),HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G0512,"Rural health clinic or federally qualified health center (rhc/fqhc) only, psychiatric collaborative care model (psychiatric cocm), 60 minutes or more of clinical staff time for psychiatric cocm services directed by an rhc or fqhc practitioner (physician, np, pa, or cnm) and including services furnished by a behavioral health care manager and consultation with a psychiatric consultant, per calendar month (G0512)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G2010,"Remote evaluation of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment (G2010)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G2012,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of medical discussion (G2012)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G2250,"Remote assessment of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment (G2250)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G2251,"Brief communication technology-based service, e.g. virtual check-in, by a qualified health care professional who cannot report evaluation and management services, provided to an established patient, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of clinical discussion (G2251)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,G2252,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 11-20 minutes of medical discussion (G2252)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0002,Behavioral health screening to determine eligibility for admission to treatment program (H0002),HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0004,"Behavioral health counseling and therapy, per 15 minutes (H0004)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0031,"Mental health assessment, by non-physician (H0031)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0034,"Medication training and support, per 15 minutes (H0034)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0035,"Mental health partial hospitalization, treatment, less than 24 hours (H0035)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0036,"Community psychiatric supportive treatment, face-to-face, per 15 minutes (H0036)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0037,"Community psychiatric supportive treatment program, per diem (H0037)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0039,"Assertive community treatment, face-to-face, per 15 minutes (H0039)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H0040,"Assertive community treatment program, per diem (H0040)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2000,Comprehensive multidisciplinary evaluation (H2000),HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2001,"Rehabilitation program, per 1/2 day (H2001)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2010,"Comprehensive medication services, per 15 minutes (H2010)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2011,"Crisis intervention service, per 15 minutes (H2011)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2012,"Behavioral health day treatment, per hour (H2012)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2013,"Psychiatric health facility service, per diem (H2013)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2014,"Skills training and development, per 15 minutes (H2014)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2015,"Comprehensive community support services, per 15 minutes (H2015)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2016,"Comprehensive community support services, per diem (H2016)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2017,"Psychosocial rehabilitation services, per 15 minutes (H2017)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2018,"Psychosocial rehabilitation services, per diem (H2018)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2019,"Therapeutic behavioral services, per 15 minutes (H2019)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,H2020,"Therapeutic behavioral services, per diem (H2020)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,S0201,"Partial hospitalization services, less than 24 hours, per diem (S0201)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,S9480,"Intensive outpatient psychiatric services, per diem (S9480)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,S9484,"Crisis intervention mental health services, per hour (S9484)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,S9485,"Crisis intervention mental health services, per diem (S9485)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,T1015,"Clinic visit/encounter, all-inclusive (T1015)",HCPCS,2.16.840.1.113883.6.285
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,19681004,Nursing evaluation of patient and report (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,90526000,Initial evaluation and management of healthy individual (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,185317003,Telephone encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,185349003,Encounter for check up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,185463005,Visit out of hours (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,185465003,Weekend visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,209099002,History and physical examination with management of domiciliary or rest home patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,270427003,Patient-initiated encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,270430005,Provider-initiated encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,308335008,Patient encounter procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,314849005,Telephone contact by consultant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,386472008,Telephone consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,386473003,Telephone follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,390906007,Follow-up encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,401267002,Telephone triage encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,406547006,Urgent follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,439708006,Home visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0510,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0513,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0516,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0517,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0519,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0520,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0521,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0522,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0523,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0526,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0527,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0528,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0529,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0900,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0901,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0902,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0903,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0904,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0905,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0907,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0911,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0912,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0913,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0914,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0915,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0916,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0917,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0919,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0982,,UBREV,2.16.840.1.113883.6.301.3
+Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347,0983,,UBREV,2.16.840.1.113883.6.301.3
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.0,"[F32.0] Major depressive disorder, single episode, mild",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.1,"[F32.1] Major depressive disorder, single episode, moderate",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.2,"[F32.2] Major depressive disorder, single episode, severe without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.3,"[F32.3] Major depressive disorder, single episode, severe with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.4,"[F32.4] Major depressive disorder, single episode, in partial remission",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.5,"[F32.5] Major depressive disorder, single episode, in full remission",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F32.9,"[F32.9] Major depressive disorder, single episode, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.0,"[F33.0] Major depressive disorder, recurrent, mild",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.1,"[F33.1] Major depressive disorder, recurrent, moderate",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.2,"[F33.2] Major depressive disorder, recurrent severe without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.3,"[F33.3] Major depressive disorder, recurrent, severe with psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.40,"[F33.40] Major depressive disorder, recurrent, in remission, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.41,"[F33.41] Major depressive disorder, recurrent, in partial remission",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.42,"[F33.42] Major depressive disorder, recurrent, in full remission",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F33.9,"[F33.9] Major depressive disorder, recurrent, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,F34.1,[F34.1] Dysthymic disorder,ICD10CM,2.16.840.1.113883.6.90
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,832007,Moderate major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,2506003,Early onset dysthymia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,2618002,Chronic recurrent major depressive disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,3109008,Secondary dysthymia early onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,14183003,"Chronic major depressive disorder, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,15193003,"Severe recurrent major depression with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,15639000,"Moderate major depression, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,18818009,Moderate recurrent major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,19527009,Single episode of major depression in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,19694002,Late onset dysthymia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,20250007,"Severe major depression, single episode, with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,25922000,"Major depressive disorder, single episode with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,28475009,Severe recurrent major depression with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,30605009,Major depression in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,33078009,"Severe recurrent major depression with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,33135002,Recurrent major depression in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,33736005,"Severe major depression with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,36170009,Secondary dysthymia late onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,36474008,Severe recurrent major depression without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,36923009,"Major depression, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,38451003,Primary dysthymia early onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,38694004,Recurrent major depressive disorder with atypical features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,39809009,Recurrent major depressive disorder with catatonic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,40379007,Mild recurrent major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,42810003,Major depression in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,42925002,"Major depressive disorder, single episode with atypical features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,46244001,Recurrent major depression in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,60099002,"Severe major depression with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,63412003,Major depression in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,63778009,"Major depressive disorder, single episode with melancholic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,66344007,Recurrent major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,67711008,Primary dysthymia late onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,69392006,"Major depressive disorder, single episode with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,70747007,"Major depression single episode, in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,71336009,Recurrent major depressive disorder with postpartum onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,73867007,Severe major depression with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,75084000,Severe major depression without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,76441001,"Severe major depression, single episode, without psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,77911002,"Severe major depression, single episode, with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,78667006,Dysthymia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,79298009,"Mild major depression, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,83176005,Primary dysthymia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,85080004,Secondary dysthymia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,87512008,Mild major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,191604000,"Single major depressive episode, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,191610000,"Recurrent major depressive episodes, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,191611001,"Recurrent major depressive episodes, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,191613003,"Recurrent major depressive episodes, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,231499006,Endogenous depression first episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,268621008,Recurrent major depressive episodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,274948002,Endogenous depression - recurrent (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,300706003,Endogenous depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,319768000,Recurrent major depressive disorder with melancholic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,320751009,"Major depression, melancholic type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,370143000,Major depressive disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351,430852001,"Severe major depression, single episode, with psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,F31.81,[F31.81] Bipolar II disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,F31.89,[F31.89] Other bipolar disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,F31.9,"[F31.9] Bipolar disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,1196001,"Chronic bipolar II disorder, most recent episode major depressive (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,12969000,"Severe bipolar II disorder, most recent episode major depressive, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,16295005,"Bipolar II disorder, most recent episode major depressive (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,19300006,"Severe bipolar II disorder, most recent episode major depressive with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,20960007,"Severe bipolar II disorder, most recent episode major depressive with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,22407005,"Bipolar II disorder, most recent episode major depressive with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,30520009,"Severe bipolar II disorder, most recent episode major depressive with psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,30687003,"Bipolar II disorder, most recent episode major depressive with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,34315001,"Bipolar II disorder, most recent episode major depressive with melancholic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,35722002,"Severe bipolar II disorder, most recent episode major depressive, in remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,35846004,"Moderate bipolar II disorder, most recent episode major depressive (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,43568002,"Bipolar II disorder, most recent episode major depressive with atypical features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,48937005,"Bipolar II disorder, most recent episode hypomanic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,67002003,"Severe bipolar II disorder, most recent episode major depressive, in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,71294008,"Mild bipolar II disorder, most recent episode major depressive (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,81319007,"Severe bipolar II disorder, most recent episode major depressive without psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,83225003,Bipolar II disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,371604007,Severe bipolar II disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,723905008,Bipolar type II disorder currently in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399,789061003,Rapid cycling bipolar II disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F34.0,[F34.0] Cyclothymic disorder,ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F60.3,[F60.3] Borderline personality disorder,ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F60.4,[F60.4] Histrionic personality disorder,ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F68.10,"[F68.10] Factitious disorder imposed on self, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F68.11,"[F68.11] Factitious disorder imposed on self, with predominantly psychological signs and symptoms",ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F68.12,"[F68.12] Factitious disorder imposed on self, with predominantly physical signs and symptoms",ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,F68.13,"[F68.13] Factitious disorder imposed on self, with combined psychological and physical signs and symptoms",ICD10CM,2.16.840.1.113883.6.90
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,20010003,Borderline personality disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,55341008,Histrionic personality disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,191765005,Emotionally unstable personality disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,191766006,Psychoinfantile personality (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,191773001,Immature personality disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Personality Disorder,2.16.840.1.113883.3.464.1004.1355,231527003,Explosive personality disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,F84.0,[F84.0] Autistic disorder,ICD10CM,2.16.840.1.113883.6.90
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,F84.3,[F84.3] Other childhood disintegrative disorder,ICD10CM,2.16.840.1.113883.6.90
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,F84.8,[F84.8] Other pervasive developmental disorders,ICD10CM,2.16.840.1.113883.6.90
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,F84.9,"[F84.9] Pervasive developmental disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,35919005,Pervasive developmental disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,43614003,Autistic disorder of childhood onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,71961003,Childhood disintegrative disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,191689008,Active infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,191690004,Residual infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,231536004,Atypical autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,373618009,Autistic spectrum disorder with isolated skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,408857007,Infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,442314000,Active but odd autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356,39951000119105,Pervasive developmental disorder of residual state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.0,[F20.0] Paranoid schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.1,[F20.1] Disorganized schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.2,[F20.2] Catatonic schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.3,[F20.3] Undifferentiated schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.5,[F20.5] Residual schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.81,[F20.81] Schizophreniform disorder,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.89,[F20.89] Other schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F20.9,"[F20.9] Schizophrenia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F21,[F21] Schizotypal disorder,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F23,[F23] Brief psychotic disorder,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F25.0,"[F25.0] Schizoaffective disorder, bipolar type",ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F25.1,"[F25.1] Schizoaffective disorder, depressive type",ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F25.8,[F25.8] Other schizoaffective disorders,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F25.9,"[F25.9] Schizoaffective disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F28,[F28] Other psychotic disorder not due to a substance or known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,F29,[F29] Unspecified psychosis not due to a substance or known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,4926007,Schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,5464005,Brief reactive psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,7025000,Subchronic undifferentiated schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,12939007,Chronic disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,14291003,Subchronic disorganized schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,16990005,Subchronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,26025008,Residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,27387000,Subchronic disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,29599000,Chronic undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,30336007,Chronic residual schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,31373002,Disorganized schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,31658008,Chronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,35218008,Chronic disorganized schizophrenia with acute exacerbation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,35252006,Disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,38368003,"Schizoaffective disorder, bipolar type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,39610001,Undifferentiated schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,42868002,Subchronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,51133006,Residual schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,58214004,Schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,63181006,Paranoid schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,64905009,Paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,68890003,Schizoaffective disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,68995007,Chronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,69322001,Psychotic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,70814008,Subchronic residual schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,71103003,Chronic residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,76566000,Subchronic residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,79204003,Chronic undifferentiated schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,79866005,Subchronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,83746006,Chronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,84760002,"Schizoaffective disorder, depressive type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,85861002,Subchronic undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,111482003,Subchronic schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,111483008,Catatonic schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,111484002,Undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191526005,Schizophrenic disorders (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191527001,Simple schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191531007,Acute exacerbation of chronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191542003,Catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191547009,Acute exacerbation of subchronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191548004,Acute exacerbation of chronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191554003,Acute exacerbation of subchronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191555002,Acute exacerbation of chronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191559008,Latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191561004,Subchronic latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191562006,Chronic latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191563001,Acute exacerbation of subchronic latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191564007,Acute exacerbation of chronic latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191567000,Schizoaffective schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191569002,Subchronic schizoaffective schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191570001,Chronic schizoaffective schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191571002,Acute exacerbation of subchronic schizoaffective schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191572009,Acute exacerbation of chronic schizoaffective schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191574005,Schizoaffective schizophrenia in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191577003,Cenesthopathic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,191680007,Psychogenic paranoid psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,231437006,Reactive psychoses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,231489001,Acute transient psychotic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,247804008,Schizophrenic prodrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,268617001,Acute schizophrenic episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,268624000,Acute paranoid reaction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,270901009,"Schizoaffective disorder, mixed type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,271428004,"Schizoaffective disorder, manic type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,274952002,Borderline schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,278853003,Acute schizophrenia-like psychotic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,416340002,Late onset schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,441704009,Affective psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352,441833000,Lethal catatonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

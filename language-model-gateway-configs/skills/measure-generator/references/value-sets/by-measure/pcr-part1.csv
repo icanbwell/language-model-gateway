@@ -1,0 +1,1422 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A00.0,"[A00.0] Cholera due to Vibrio cholerae 01, biovar cholerae",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A00.1,"[A00.1] Cholera due to Vibrio cholerae 01, biovar eltor",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A00.9,"[A00.9] Cholera, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.00,"[A01.00] Typhoid fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.01,[A01.01] Typhoid meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.02,[A01.02] Typhoid fever with heart involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.03,[A01.03] Typhoid pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.09,[A01.09] Typhoid fever with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.1,[A01.1] Paratyphoid fever A,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.2,[A01.2] Paratyphoid fever B,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.3,[A01.3] Paratyphoid fever C,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A01.4,"[A01.4] Paratyphoid fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.0,[A02.0] Salmonella enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.1,[A02.1] Salmonella sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.20,"[A02.20] Localized salmonella infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.21,[A02.21] Salmonella meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.22,[A02.22] Salmonella pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.25,[A02.25] Salmonella pyelonephritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.29,[A02.29] Salmonella with other localized infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.8,[A02.8] Other specified salmonella infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A02.9,"[A02.9] Salmonella infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.0,[A03.0] Shigellosis due to Shigella dysenteriae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.1,[A03.1] Shigellosis due to Shigella flexneri,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.2,[A03.2] Shigellosis due to Shigella boydii,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.3,[A03.3] Shigellosis due to Shigella sonnei,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.8,[A03.8] Other shigellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A03.9,"[A03.9] Shigellosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.0,[A04.0] Enteropathogenic Escherichia coli infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.1,[A04.1] Enterotoxigenic Escherichia coli infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.2,[A04.2] Enteroinvasive Escherichia coli infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.3,[A04.3] Enterohemorrhagic Escherichia coli infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.4,[A04.4] Other intestinal Escherichia coli infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.5,[A04.5] Campylobacter enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.6,[A04.6] Enteritis due to Yersinia enterocolitica,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.71,"[A04.71] Enterocolitis due to Clostridium difficile, recurrent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.72,"[A04.72] Enterocolitis due to Clostridium difficile, not specified as recurrent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.8,[A04.8] Other specified bacterial intestinal infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A04.9,"[A04.9] Bacterial intestinal infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.0,[A05.0] Foodborne staphylococcal intoxication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.1,[A05.1] Botulism food poisoning,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.2,[A05.2] Foodborne Clostridium perfringens [Clostridium welchii] intoxication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.3,[A05.3] Foodborne Vibrio parahaemolyticus intoxication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.4,[A05.4] Foodborne Bacillus cereus intoxication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.5,[A05.5] Foodborne Vibrio vulnificus intoxication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.8,[A05.8] Other specified bacterial foodborne intoxications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A05.9,"[A05.9] Bacterial foodborne intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.0,[A06.0] Acute amebic dysentery,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.1,[A06.1] Chronic intestinal amebiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.2,[A06.2] Amebic nondysenteric colitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.3,[A06.3] Ameboma of intestine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.4,[A06.4] Amebic liver abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.5,[A06.5] Amebic lung abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.6,[A06.6] Amebic brain abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.7,[A06.7] Cutaneous amebiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.81,[A06.81] Amebic cystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.82,[A06.82] Other amebic genitourinary infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.89,[A06.89] Other amebic infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A06.9,"[A06.9] Amebiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.0,[A07.0] Balantidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.1,[A07.1] Giardiasis [lambliasis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.2,[A07.2] Cryptosporidiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.3,[A07.3] Isosporiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.4,[A07.4] Cyclosporiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.8,[A07.8] Other specified protozoal intestinal diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A07.9,"[A07.9] Protozoal intestinal disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.0,[A08.0] Rotaviral enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.11,[A08.11] Acute gastroenteropathy due to Norwalk agent,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.19,[A08.19] Acute gastroenteropathy due to other small round viruses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.2,[A08.2] Adenoviral enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.31,[A08.31] Calicivirus enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.32,[A08.32] Astrovirus enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.39,[A08.39] Other viral enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.4,"[A08.4] Viral intestinal infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A08.8,[A08.8] Other specified intestinal infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A09,"[A09] Infectious gastroenteritis and colitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.0,[A15.0] Tuberculosis of lung,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.4,[A15.4] Tuberculosis of intrathoracic lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.5,"[A15.5] Tuberculosis of larynx, trachea and bronchus",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.6,[A15.6] Tuberculous pleurisy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.7,[A15.7] Primary respiratory tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.8,[A15.8] Other respiratory tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A15.9,[A15.9] Respiratory tuberculosis unspecified,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.0,[A17.0] Tuberculous meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.1,[A17.1] Meningeal tuberculoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.81,[A17.81] Tuberculoma of brain and spinal cord,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.82,[A17.82] Tuberculous meningoencephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.83,[A17.83] Tuberculous neuritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.89,[A17.89] Other tuberculosis of nervous system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A17.9,"[A17.9] Tuberculosis of nervous system, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.01,[A18.01] Tuberculosis of spine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.02,[A18.02] Tuberculous arthritis of other joints,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.03,[A18.03] Tuberculosis of other bones,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.09,[A18.09] Other musculoskeletal tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.10,"[A18.10] Tuberculosis of genitourinary system, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.11,[A18.11] Tuberculosis of kidney and ureter,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.12,[A18.12] Tuberculosis of bladder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.13,[A18.13] Tuberculosis of other urinary organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.14,[A18.14] Tuberculosis of prostate,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.15,[A18.15] Tuberculosis of other male genital organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.16,[A18.16] Tuberculosis of cervix,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.17,[A18.17] Tuberculous female pelvic inflammatory disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.18,[A18.18] Tuberculosis of other female genital organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.2,[A18.2] Tuberculous peripheral lymphadenopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.31,[A18.31] Tuberculous peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.32,[A18.32] Tuberculous enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.39,[A18.39] Retroperitoneal tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.4,[A18.4] Tuberculosis of skin and subcutaneous tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.50,"[A18.50] Tuberculosis of eye, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.51,[A18.51] Tuberculous episcleritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.52,[A18.52] Tuberculous keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.53,[A18.53] Tuberculous chorioretinitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.54,[A18.54] Tuberculous iridocyclitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.59,[A18.59] Other tuberculosis of eye,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.6,[A18.6] Tuberculosis of (inner) (middle) ear,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.7,[A18.7] Tuberculosis of adrenal glands,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.81,[A18.81] Tuberculosis of thyroid gland,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.82,[A18.82] Tuberculosis of other endocrine glands,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.83,"[A18.83] Tuberculosis of digestive tract organs, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.84,[A18.84] Tuberculosis of heart,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.85,[A18.85] Tuberculosis of spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A18.89,[A18.89] Tuberculosis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A19.0,[A19.0] Acute miliary tuberculosis of a single specified site,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A19.1,[A19.1] Acute miliary tuberculosis of multiple sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A19.2,"[A19.2] Acute miliary tuberculosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A19.8,[A19.8] Other miliary tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A19.9,"[A19.9] Miliary tuberculosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.0,[A20.0] Bubonic plague,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.1,[A20.1] Cellulocutaneous plague,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.2,[A20.2] Pneumonic plague,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.3,[A20.3] Plague meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.7,[A20.7] Septicemic plague,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.8,[A20.8] Other forms of plague,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A20.9,"[A20.9] Plague, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.0,[A21.0] Ulceroglandular tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.1,[A21.1] Oculoglandular tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.2,[A21.2] Pulmonary tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.3,[A21.3] Gastrointestinal tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.7,[A21.7] Generalized tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.8,[A21.8] Other forms of tularemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A21.9,"[A21.9] Tularemia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.0,[A22.0] Cutaneous anthrax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.1,[A22.1] Pulmonary anthrax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.2,[A22.2] Gastrointestinal anthrax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.7,[A22.7] Anthrax sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.8,[A22.8] Other forms of anthrax,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A22.9,"[A22.9] Anthrax, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.0,[A23.0] Brucellosis due to Brucella melitensis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.1,[A23.1] Brucellosis due to Brucella abortus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.2,[A23.2] Brucellosis due to Brucella suis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.3,[A23.3] Brucellosis due to Brucella canis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.8,[A23.8] Other brucellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A23.9,"[A23.9] Brucellosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A24.0,[A24.0] Glanders,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A24.1,[A24.1] Acute and fulminating melioidosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A24.2,[A24.2] Subacute and chronic melioidosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A24.3,[A24.3] Other melioidosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A24.9,"[A24.9] Melioidosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A25.0,[A25.0] Spirillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A25.1,[A25.1] Streptobacillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A25.9,"[A25.9] Rat-bite fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A26.0,[A26.0] Cutaneous erysipeloid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A26.7,[A26.7] Erysipelothrix sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A26.8,[A26.8] Other forms of erysipeloid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A26.9,"[A26.9] Erysipeloid, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A27.0,[A27.0] Leptospirosis icterohemorrhagica,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A27.81,[A27.81] Aseptic meningitis in leptospirosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A27.89,[A27.89] Other forms of leptospirosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A27.9,"[A27.9] Leptospirosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A28.0,[A28.0] Pasteurellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A28.1,[A28.1] Cat-scratch disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A28.2,[A28.2] Extraintestinal yersiniosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A28.8,"[A28.8] Other specified zoonotic bacterial diseases, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A28.9,"[A28.9] Zoonotic bacterial disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.0,[A30.0] Indeterminate leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.1,[A30.1] Tuberculoid leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.2,[A30.2] Borderline tuberculoid leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.3,[A30.3] Borderline leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.4,[A30.4] Borderline lepromatous leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.5,[A30.5] Lepromatous leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.8,[A30.8] Other forms of leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A30.9,"[A30.9] Leprosy, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A31.0,[A31.0] Pulmonary mycobacterial infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A31.1,[A31.1] Cutaneous mycobacterial infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A31.2,[A31.2] Disseminated mycobacterium avium-intracellulare complex (DMAC),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A31.8,[A31.8] Other mycobacterial infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A31.9,"[A31.9] Mycobacterial infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.0,[A32.0] Cutaneous listeriosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.11,[A32.11] Listerial meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.12,[A32.12] Listerial meningoencephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.7,[A32.7] Listerial sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.81,[A32.81] Oculoglandular listeriosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.82,[A32.82] Listerial endocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.89,[A32.89] Other forms of listeriosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A32.9,"[A32.9] Listeriosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A35,[A35] Other tetanus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.0,[A36.0] Pharyngeal diphtheria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.1,[A36.1] Nasopharyngeal diphtheria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.2,[A36.2] Laryngeal diphtheria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.3,[A36.3] Cutaneous diphtheria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.82,[A36.82] Diphtheritic radiculomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.83,[A36.83] Diphtheritic polyneuritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.84,[A36.84] Diphtheritic tubulo-interstitial nephropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.85,[A36.85] Diphtheritic cystitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.86,[A36.86] Diphtheritic conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.89,[A36.89] Other diphtheritic complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A36.9,"[A36.9] Diphtheria, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.00,[A37.00] Whooping cough due to Bordetella pertussis without pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.01,[A37.01] Whooping cough due to Bordetella pertussis with pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.10,[A37.10] Whooping cough due to Bordetella parapertussis without pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.11,[A37.11] Whooping cough due to Bordetella parapertussis with pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.80,[A37.80] Whooping cough due to other Bordetella species without pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.81,[A37.81] Whooping cough due to other Bordetella species with pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.90,"[A37.90] Whooping cough, unspecified species without pneumonia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A37.91,"[A37.91] Whooping cough, unspecified species with pneumonia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A38.0,[A38.0] Scarlet fever with otitis media,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A38.1,[A38.1] Scarlet fever with myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A38.8,[A38.8] Scarlet fever with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A38.9,"[A38.9] Scarlet fever, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.0,[A39.0] Meningococcal meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.1,[A39.1] Waterhouse-Friderichsen syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.2,[A39.2] Acute meningococcemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.3,[A39.3] Chronic meningococcemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.4,"[A39.4] Meningococcemia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.50,"[A39.50] Meningococcal carditis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.51,[A39.51] Meningococcal endocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.52,[A39.52] Meningococcal myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.53,[A39.53] Meningococcal pericarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.81,[A39.81] Meningococcal encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.82,[A39.82] Meningococcal retrobulbar neuritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.89,[A39.89] Other meningococcal infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A39.9,"[A39.9] Meningococcal infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A40.0,"[A40.0] Sepsis due to streptococcus, group A",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A40.1,"[A40.1] Sepsis due to streptococcus, group B",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A40.3,[A40.3] Sepsis due to Streptococcus pneumoniae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A40.8,[A40.8] Other streptococcal sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A40.9,"[A40.9] Streptococcal sepsis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.01,[A41.01] Sepsis due to Methicillin susceptible Staphylococcus aureus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.02,[A41.02] Sepsis due to Methicillin resistant Staphylococcus aureus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.1,[A41.1] Sepsis due to other specified staphylococcus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.2,[A41.2] Sepsis due to unspecified staphylococcus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.3,[A41.3] Sepsis due to Hemophilus influenzae,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.4,[A41.4] Sepsis due to anaerobes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.50,"[A41.50] Gram-negative sepsis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.51,[A41.51] Sepsis due to Escherichia coli [E. coli],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.52,[A41.52] Sepsis due to Pseudomonas,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.53,[A41.53] Sepsis due to Serratia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.59,[A41.59] Other Gram-negative sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.81,[A41.81] Sepsis due to Enterococcus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.89,[A41.89] Other specified sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A41.9,"[A41.9] Sepsis, unspecified organism",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.0,[A42.0] Pulmonary actinomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.1,[A42.1] Abdominal actinomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.2,[A42.2] Cervicofacial actinomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.7,[A42.7] Actinomycotic sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.81,[A42.81] Actinomycotic meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.82,[A42.82] Actinomycotic encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.89,[A42.89] Other forms of actinomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A42.9,"[A42.9] Actinomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A43.0,[A43.0] Pulmonary nocardiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A43.1,[A43.1] Cutaneous nocardiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A43.8,[A43.8] Other forms of nocardiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A43.9,"[A43.9] Nocardiosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A44.0,[A44.0] Systemic bartonellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A44.1,[A44.1] Cutaneous and mucocutaneous bartonellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A44.8,[A44.8] Other forms of bartonellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A44.9,"[A44.9] Bartonellosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A46,[A46] Erysipelas,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.0,[A48.0] Gas gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.1,[A48.1] Legionnaires' disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.2,[A48.2] Nonpneumonic Legionnaires' disease [Pontiac fever],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.3,[A48.3] Toxic shock syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.4,[A48.4] Brazilian purpuric fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.52,[A48.52] Wound botulism,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A48.8,[A48.8] Other specified bacterial diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.01,"[A49.01] Methicillin susceptible Staphylococcus aureus infection, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.02,"[A49.02] Methicillin resistant Staphylococcus aureus infection, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.1,"[A49.1] Streptococcal infection, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.2,"[A49.2] Hemophilus influenzae infection, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.3,"[A49.3] Mycoplasma infection, unspecified site",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.8,[A49.8] Other bacterial infections of unspecified site,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A49.9,"[A49.9] Bacterial infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.01,[A50.01] Early congenital syphilitic oculopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.02,[A50.02] Early congenital syphilitic osteochondropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.03,[A50.03] Early congenital syphilitic pharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.04,[A50.04] Early congenital syphilitic pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.05,[A50.05] Early congenital syphilitic rhinitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.06,[A50.06] Early cutaneous congenital syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.07,[A50.07] Early mucocutaneous congenital syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.08,[A50.08] Early visceral congenital syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.09,"[A50.09] Other early congenital syphilis, symptomatic",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.1,"[A50.1] Early congenital syphilis, latent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.2,"[A50.2] Early congenital syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.30,"[A50.30] Late congenital syphilitic oculopathy, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.31,[A50.31] Late congenital syphilitic interstitial keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.32,[A50.32] Late congenital syphilitic chorioretinitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.39,[A50.39] Other late congenital syphilitic oculopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.40,"[A50.40] Late congenital neurosyphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.41,[A50.41] Late congenital syphilitic meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.42,[A50.42] Late congenital syphilitic encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.43,[A50.43] Late congenital syphilitic polyneuropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.44,[A50.44] Late congenital syphilitic optic nerve atrophy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.45,[A50.45] Juvenile general paresis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.49,[A50.49] Other late congenital neurosyphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.51,[A50.51] Clutton's joints,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.52,[A50.52] Hutchinson's teeth,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.53,[A50.53] Hutchinson's triad,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.54,[A50.54] Late congenital cardiovascular syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.55,[A50.55] Late congenital syphilitic arthropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.56,[A50.56] Late congenital syphilitic osteochondropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.57,[A50.57] Syphilitic saddle nose,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.59,"[A50.59] Other late congenital syphilis, symptomatic",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.6,"[A50.6] Late congenital syphilis, latent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.7,"[A50.7] Late congenital syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A50.9,"[A50.9] Congenital syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.0,[A51.0] Primary genital syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.1,[A51.1] Primary anal syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.2,[A51.2] Primary syphilis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.31,[A51.31] Condyloma latum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.32,[A51.32] Syphilitic alopecia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.39,[A51.39] Other secondary syphilis of skin,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.41,[A51.41] Secondary syphilitic meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.42,[A51.42] Secondary syphilitic female pelvic disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.43,[A51.43] Secondary syphilitic oculopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.44,[A51.44] Secondary syphilitic nephritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.45,[A51.45] Secondary syphilitic hepatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.46,[A51.46] Secondary syphilitic osteopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.49,[A51.49] Other secondary syphilitic conditions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.5,"[A51.5] Early syphilis, latent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A51.9,"[A51.9] Early syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.00,"[A52.00] Cardiovascular syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.01,[A52.01] Syphilitic aneurysm of aorta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.02,[A52.02] Syphilitic aortitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.03,[A52.03] Syphilitic endocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.04,[A52.04] Syphilitic cerebral arteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.05,[A52.05] Other cerebrovascular syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.06,[A52.06] Other syphilitic heart involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.09,[A52.09] Other cardiovascular syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.10,"[A52.10] Symptomatic neurosyphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.11,[A52.11] Tabes dorsalis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.12,[A52.12] Other cerebrospinal syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.13,[A52.13] Late syphilitic meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.14,[A52.14] Late syphilitic encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.15,[A52.15] Late syphilitic neuropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.16,[A52.16] Charcôt's arthropathy (tabetic),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.17,[A52.17] General paresis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.19,[A52.19] Other symptomatic neurosyphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.2,[A52.2] Asymptomatic neurosyphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.3,"[A52.3] Neurosyphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.71,[A52.71] Late syphilitic oculopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.72,[A52.72] Syphilis of lung and bronchus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.73,[A52.73] Symptomatic late syphilis of other respiratory organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.74,[A52.74] Syphilis of liver and other viscera,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.75,[A52.75] Syphilis of kidney and ureter,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.76,[A52.76] Other genitourinary symptomatic late syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.77,[A52.77] Syphilis of bone and joint,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.78,[A52.78] Syphilis of other musculoskeletal tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.79,[A52.79] Other symptomatic late syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.8,"[A52.8] Late syphilis, latent",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A52.9,"[A52.9] Late syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A53.0,"[A53.0] Latent syphilis, unspecified as early or late",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A53.9,"[A53.9] Syphilis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.00,"[A54.00] Gonococcal infection of lower genitourinary tract, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.01,"[A54.01] Gonococcal cystitis and urethritis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.02,"[A54.02] Gonococcal vulvovaginitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.03,"[A54.03] Gonococcal cervicitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.09,[A54.09] Other gonococcal infection of lower genitourinary tract,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.1,[A54.1] Gonococcal infection of lower genitourinary tract with periurethral and accessory gland abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.21,[A54.21] Gonococcal infection of kidney and ureter,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.22,[A54.22] Gonococcal prostatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.23,[A54.23] Gonococcal infection of other male genital organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.24,[A54.24] Gonococcal female pelvic inflammatory disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.29,[A54.29] Other gonococcal genitourinary infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.30,"[A54.30] Gonococcal infection of eye, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.31,[A54.31] Gonococcal conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.32,[A54.32] Gonococcal iridocyclitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.33,[A54.33] Gonococcal keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.39,[A54.39] Other gonococcal eye infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.40,"[A54.40] Gonococcal infection of musculoskeletal system, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.41,[A54.41] Gonococcal spondylopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.42,[A54.42] Gonococcal arthritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.43,[A54.43] Gonococcal osteomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.49,[A54.49] Gonococcal infection of other musculoskeletal tissue,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.5,[A54.5] Gonococcal pharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.6,[A54.6] Gonococcal infection of anus and rectum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.81,[A54.81] Gonococcal meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.82,[A54.82] Gonococcal brain abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.83,[A54.83] Gonococcal heart infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.84,[A54.84] Gonococcal pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.85,[A54.85] Gonococcal peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.86,[A54.86] Gonococcal sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.89,[A54.89] Other gonococcal infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A54.9,"[A54.9] Gonococcal infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A55,[A55] Chlamydial lymphogranuloma (venereum),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.00,"[A56.00] Chlamydial infection of lower genitourinary tract, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.01,[A56.01] Chlamydial cystitis and urethritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.02,[A56.02] Chlamydial vulvovaginitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.09,[A56.09] Other chlamydial infection of lower genitourinary tract,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.11,[A56.11] Chlamydial female pelvic inflammatory disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.19,[A56.19] Other chlamydial genitourinary infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.2,"[A56.2] Chlamydial infection of genitourinary tract, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.3,[A56.3] Chlamydial infection of anus and rectum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.4,[A56.4] Chlamydial infection of pharynx,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A56.8,[A56.8] Sexually transmitted chlamydial infection of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A57,[A57] Chancroid,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A58,[A58] Granuloma inguinale,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.00,"[A59.00] Urogenital trichomoniasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.01,[A59.01] Trichomonal vulvovaginitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.02,[A59.02] Trichomonal prostatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.03,[A59.03] Trichomonal cystitis and urethritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.09,[A59.09] Other urogenital trichomoniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.8,[A59.8] Trichomoniasis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A59.9,"[A59.9] Trichomoniasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.00,"[A60.00] Herpesviral infection of urogenital system, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.01,[A60.01] Herpesviral infection of penis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.02,[A60.02] Herpesviral infection of other male genital organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.03,[A60.03] Herpesviral cervicitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.04,[A60.04] Herpesviral vulvovaginitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.09,[A60.09] Herpesviral infection of other urogenital tract,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.1,[A60.1] Herpesviral infection of perianal skin and rectum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A60.9,"[A60.9] Anogenital herpesviral infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A63.0,[A63.0] Anogenital (venereal) warts,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A63.8,[A63.8] Other specified predominantly sexually transmitted diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A64,[A64] Unspecified sexually transmitted disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A65,[A65] Nonvenereal syphilis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.0,[A66.0] Initial lesions of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.1,[A66.1] Multiple papillomata and wet crab yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.2,[A66.2] Other early skin lesions of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.3,[A66.3] Hyperkeratosis of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.4,[A66.4] Gummata and ulcers of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.5,[A66.5] Gangosa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.6,[A66.6] Bone and joint lesions of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.7,[A66.7] Other manifestations of yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.8,[A66.8] Latent yaws,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A66.9,"[A66.9] Yaws, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A67.0,[A67.0] Primary lesions of pinta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A67.1,[A67.1] Intermediate lesions of pinta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A67.2,[A67.2] Late lesions of pinta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A67.3,[A67.3] Mixed lesions of pinta,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A67.9,"[A67.9] Pinta, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A68.0,[A68.0] Louse-borne relapsing fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A68.1,[A68.1] Tick-borne relapsing fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A68.9,"[A68.9] Relapsing fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.0,[A69.0] Necrotizing ulcerative stomatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.1,[A69.1] Other Vincent's infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.20,"[A69.20] Lyme disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.21,[A69.21] Meningitis due to Lyme disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.22,[A69.22] Other neurologic disorders in Lyme disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.29,[A69.29] Other conditions associated with Lyme disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.8,[A69.8] Other specified spirochetal infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A69.9,"[A69.9] Spirochetal infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A70,[A70] Chlamydia psittaci infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A71.0,[A71.0] Initial stage of trachoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A71.1,[A71.1] Active stage of trachoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A71.9,"[A71.9] Trachoma, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A74.0,[A74.0] Chlamydial conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A74.81,[A74.81] Chlamydial peritonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A74.89,[A74.89] Other chlamydial diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A74.9,"[A74.9] Chlamydial infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A75.0,[A75.0] Epidemic louse-borne typhus fever due to Rickettsia prowazekii,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A75.1,[A75.1] Recrudescent typhus [Brill's disease],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A75.2,[A75.2] Typhus fever due to Rickettsia typhi,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A75.3,[A75.3] Typhus fever due to Rickettsia tsutsugamushi,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A75.9,"[A75.9] Typhus fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.0,[A77.0] Spotted fever due to Rickettsia rickettsii,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.1,[A77.1] Spotted fever due to Rickettsia conorii,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.2,[A77.2] Spotted fever due to Rickettsia siberica,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.3,[A77.3] Spotted fever due to Rickettsia australis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.40,"[A77.40] Ehrlichiosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.41,[A77.41] Ehrlichiosis chaffeensis [E. chaffeensis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.49,[A77.49] Other ehrlichiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.8,[A77.8] Other spotted fevers,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A77.9,"[A77.9] Spotted fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A78,[A78] Q fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.0,[A79.0] Trench fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.1,[A79.1] Rickettsialpox due to Rickettsia akari,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.81,[A79.81] Rickettsiosis due to Ehrlichia sennetsu,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.82,[A79.82] Anaplasmosis [A. phagocytophilum],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.89,[A79.89] Other specified rickettsioses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A79.9,"[A79.9] Rickettsiosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.0,"[A80.0] Acute paralytic poliomyelitis, vaccine-associated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.1,"[A80.1] Acute paralytic poliomyelitis, wild virus, imported",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.2,"[A80.2] Acute paralytic poliomyelitis, wild virus, indigenous",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.30,"[A80.30] Acute paralytic poliomyelitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.39,[A80.39] Other acute paralytic poliomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.4,[A80.4] Acute nonparalytic poliomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A80.9,"[A80.9] Acute poliomyelitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.00,"[A81.00] Creutzfeldt-Jakob disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.01,[A81.01] Variant Creutzfeldt-Jakob disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.09,[A81.09] Other Creutzfeldt-Jakob disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.1,[A81.1] Subacute sclerosing panencephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.2,[A81.2] Progressive multifocal leukoencephalopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.81,[A81.81] Kuru,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.82,[A81.82] Gerstmann-Sträussler-Scheinker syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.83,[A81.83] Fatal familial insomnia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.89,[A81.89] Other atypical virus infections of central nervous system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A81.9,"[A81.9] Atypical virus infection of central nervous system, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A82.0,[A82.0] Sylvatic rabies,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A82.1,[A82.1] Urban rabies,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A82.9,"[A82.9] Rabies, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.0,[A83.0] Japanese encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.1,[A83.1] Western equine encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.2,[A83.2] Eastern equine encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.3,[A83.3] St Louis encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.4,[A83.4] Australian encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.5,[A83.5] California encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.6,[A83.6] Rocio virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.8,[A83.8] Other mosquito-borne viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A83.9,"[A83.9] Mosquito-borne viral encephalitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.0,[A84.0] Far Eastern tick-borne encephalitis [Russian spring-summer encephalitis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.1,[A84.1] Central European tick-borne encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.8,[A84.8] Other tick-borne viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.81,[A84.81] Powassan virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.89,[A84.89] Other tick-borne viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A84.9,"[A84.9] Tick-borne viral encephalitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A85.0,[A85.0] Enteroviral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A85.1,[A85.1] Adenoviral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A85.2,"[A85.2] Arthropod-borne viral encephalitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A85.8,[A85.8] Other specified viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A86,[A86] Unspecified viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A87.0,[A87.0] Enteroviral meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A87.1,[A87.1] Adenoviral meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A87.2,[A87.2] Lymphocytic choriomeningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A87.8,[A87.8] Other viral meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A87.9,"[A87.9] Viral meningitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A88.0,[A88.0] Enteroviral exanthematous fever [Boston exanthem],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A88.1,[A88.1] Epidemic vertigo,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A88.8,[A88.8] Other specified viral infections of central nervous system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A89,[A89] Unspecified viral infection of central nervous system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A90,[A90] Dengue fever [classical dengue],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A91,[A91] Dengue hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.0,[A92.0] Chikungunya virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.1,[A92.1] O'nyong-nyong fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.2,[A92.2] Venezuelan equine fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.30,"[A92.30] West Nile virus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.31,[A92.31] West Nile virus infection with encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.32,[A92.32] West Nile virus infection with other neurologic manifestation,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.39,[A92.39] West Nile virus infection with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.4,[A92.4] Rift Valley fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.5,[A92.5] Zika virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.8,[A92.8] Other specified mosquito-borne viral fevers,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A92.9,"[A92.9] Mosquito-borne viral fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A93.0,[A93.0] Oropouche virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A93.1,[A93.1] Sandfly fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A93.2,[A93.2] Colorado tick fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A93.8,[A93.8] Other specified arthropod-borne viral fevers,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A94,[A94] Unspecified arthropod-borne viral fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A95.0,[A95.0] Sylvatic yellow fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A95.1,[A95.1] Urban yellow fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A95.9,"[A95.9] Yellow fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A96.0,[A96.0] Junin hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A96.1,[A96.1] Machupo hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A96.2,[A96.2] Lassa fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A96.8,[A96.8] Other arenaviral hemorrhagic fevers,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A96.9,"[A96.9] Arenaviral hemorrhagic fever, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.0,[A98.0] Crimean-Congo hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.1,[A98.1] Omsk hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.2,[A98.2] Kyasanur Forest disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.3,[A98.3] Marburg virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.4,[A98.4] Ebola virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.5,[A98.5] Hemorrhagic fever with renal syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A98.8,[A98.8] Other specified viral hemorrhagic fevers,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,A99,[A99] Unspecified viral hemorrhagic fever,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.0,[B00.0] Eczema herpeticum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.1,[B00.1] Herpesviral vesicular dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.2,[B00.2] Herpesviral gingivostomatitis and pharyngotonsillitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.3,[B00.3] Herpesviral meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.4,[B00.4] Herpesviral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.50,"[B00.50] Herpesviral ocular disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.51,[B00.51] Herpesviral iridocyclitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.52,[B00.52] Herpesviral keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.53,[B00.53] Herpesviral conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.59,[B00.59] Other herpesviral disease of eye,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.7,[B00.7] Disseminated herpesviral disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.81,[B00.81] Herpesviral hepatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.82,[B00.82] Herpes simplex myelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.89,[B00.89] Other herpesviral infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B00.9,"[B00.9] Herpesviral infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.0,[B01.0] Varicella meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.11,[B01.11] Varicella encephalitis and encephalomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.12,[B01.12] Varicella myelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.2,[B01.2] Varicella pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.81,[B01.81] Varicella keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.89,[B01.89] Other varicella complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B01.9,[B01.9] Varicella without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.0,[B02.0] Zoster encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.1,[B02.1] Zoster meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.21,[B02.21] Postherpetic geniculate ganglionitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.22,[B02.22] Postherpetic trigeminal neuralgia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.23,[B02.23] Postherpetic polyneuropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.24,[B02.24] Postherpetic myelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.29,[B02.29] Other postherpetic nervous system involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.30,"[B02.30] Zoster ocular disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.31,[B02.31] Zoster conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.32,[B02.32] Zoster iridocyclitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.33,[B02.33] Zoster keratitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.34,[B02.34] Zoster scleritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.39,[B02.39] Other herpes zoster eye disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.7,[B02.7] Disseminated zoster,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.8,[B02.8] Zoster with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B02.9,[B02.9] Zoster without complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B03,[B03] Smallpox,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B04,[B04] Monkeypox,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.0,[B05.0] Measles complicated by encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.1,[B05.1] Measles complicated by meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.2,[B05.2] Measles complicated by pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.3,[B05.3] Measles complicated by otitis media,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.4,[B05.4] Measles with intestinal complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.81,[B05.81] Measles keratitis and keratoconjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.89,[B05.89] Other measles complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B05.9,[B05.9] Measles without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.00,"[B06.00] Rubella with neurological complication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.01,[B06.01] Rubella encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.02,[B06.02] Rubella meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.09,[B06.09] Other neurological complications of rubella,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.81,[B06.81] Rubella pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.89,[B06.89] Other rubella complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B06.9,[B06.9] Rubella without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B07.0,[B07.0] Plantar wart,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B07.8,[B07.8] Other viral warts,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B07.9,"[B07.9] Viral wart, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.010,[B08.010] Cowpox,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.011,[B08.011] Vaccinia not from vaccine,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.02,[B08.02] Orf virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.03,[B08.03] Pseudocowpox [milker's node],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.04,"[B08.04] Paravaccinia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.09,[B08.09] Other orthopoxvirus infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.1,[B08.1] Molluscum contagiosum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.20,"[B08.20] Exanthema subitum [sixth disease], unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.21,[B08.21] Exanthema subitum [sixth disease] due to human herpesvirus 6,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.22,[B08.22] Exanthema subitum [sixth disease] due to human herpesvirus 7,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.3,[B08.3] Erythema infectiosum [fifth disease],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.4,[B08.4] Enteroviral vesicular stomatitis with exanthem,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.5,[B08.5] Enteroviral vesicular pharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.60,"[B08.60] Parapoxvirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.61,[B08.61] Bovine stomatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.62,[B08.62] Sealpox,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.69,[B08.69] Other parapoxvirus infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.70,"[B08.70] Yatapoxvirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.71,[B08.71] Tanapox virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.72,[B08.72] Yaba pox virus disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.79,[B08.79] Other yatapoxvirus infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B08.8,[B08.8] Other specified viral infections characterized by skin and mucous membrane lesions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B09,[B09] Unspecified viral infection characterized by skin and mucous membrane lesions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B10.01,[B10.01] Human herpesvirus 6 encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B10.09,[B10.09] Other human herpesvirus encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B10.81,[B10.81] Human herpesvirus 6 infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B10.82,[B10.82] Human herpesvirus 7 infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B10.89,[B10.89] Other human herpesvirus infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B20,[B20] Human immunodeficiency virus [HIV] disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B25.0,[B25.0] Cytomegaloviral pneumonitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B25.2,[B25.2] Cytomegaloviral pancreatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B25.8,[B25.8] Other cytomegaloviral diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B25.9,"[B25.9] Cytomegaloviral disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.0,[B26.0] Mumps orchitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.1,[B26.1] Mumps meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.2,[B26.2] Mumps encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.3,[B26.3] Mumps pancreatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.82,[B26.82] Mumps myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.84,[B26.84] Mumps polyneuropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.89,[B26.89] Other mumps complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B26.9,[B26.9] Mumps without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.00,[B27.00] Gammaherpesviral mononucleosis without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.02,[B27.02] Gammaherpesviral mononucleosis with meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.09,[B27.09] Gammaherpesviral mononucleosis with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.10,[B27.10] Cytomegaloviral mononucleosis without complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.12,[B27.12] Cytomegaloviral mononucleosis with meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.19,[B27.19] Cytomegaloviral mononucleosis with other complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.80,[B27.80] Other infectious mononucleosis without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.82,[B27.82] Other infectious mononucleosis with meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.89,[B27.89] Other infectious mononucleosis with other complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.90,"[B27.90] Infectious mononucleosis, unspecified without complication",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.92,"[B27.92] Infectious mononucleosis, unspecified with meningitis",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B27.99,"[B27.99] Infectious mononucleosis, unspecified with other complication",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.0,[B30.0] Keratoconjunctivitis due to adenovirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.1,[B30.1] Conjunctivitis due to adenovirus,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.2,[B30.2] Viral pharyngoconjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.3,[B30.3] Acute epidemic hemorrhagic conjunctivitis (enteroviral),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.8,[B30.8] Other viral conjunctivitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B30.9,"[B30.9] Viral conjunctivitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.0,[B33.0] Epidemic myalgia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.1,[B33.1] Ross River disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.20,"[B33.20] Viral carditis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.21,[B33.21] Viral endocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.22,[B33.22] Viral myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.23,[B33.23] Viral pericarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.3,"[B33.3] Retrovirus infections, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.4,[B33.4] Hantavirus (cardio)-pulmonary syndrome [HPS] [HCPS],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B33.8,[B33.8] Other specified viral diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.0,"[B34.0] Adenovirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.1,"[B34.1] Enterovirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.2,"[B34.2] Coronavirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.3,"[B34.3] Parvovirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.4,"[B34.4] Papovavirus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.8,[B34.8] Other viral infections of unspecified site,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B34.9,"[B34.9] Viral infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.0,[B35.0] Tinea barbae and tinea capitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.1,[B35.1] Tinea unguium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.2,[B35.2] Tinea manuum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.3,[B35.3] Tinea pedis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.4,[B35.4] Tinea corporis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.5,[B35.5] Tinea imbricata,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.6,[B35.6] Tinea cruris,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.8,[B35.8] Other dermatophytoses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B35.9,"[B35.9] Dermatophytosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.0,[B36.0] Pityriasis versicolor,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.1,[B36.1] Tinea nigra,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.2,[B36.2] White piedra,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.3,[B36.3] Black piedra,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.8,[B36.8] Other specified superficial mycoses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B36.9,"[B36.9] Superficial mycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.0,[B37.0] Candidal stomatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.1,[B37.1] Pulmonary candidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.2,[B37.2] Candidiasis of skin and nail,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.3,[B37.3] Candidiasis of vulva and vagina,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.41,[B37.41] Candidal cystitis and urethritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.42,[B37.42] Candidal balanitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.49,[B37.49] Other urogenital candidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.5,[B37.5] Candidal meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.6,[B37.6] Candidal endocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.7,[B37.7] Candidal sepsis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.81,[B37.81] Candidal esophagitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.82,[B37.82] Candidal enteritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.83,[B37.83] Candidal cheilitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.84,[B37.84] Candidal otitis externa,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.89,[B37.89] Other sites of candidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B37.9,"[B37.9] Candidiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.0,[B38.0] Acute pulmonary coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.1,[B38.1] Chronic pulmonary coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.2,"[B38.2] Pulmonary coccidioidomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.3,[B38.3] Cutaneous coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.4,[B38.4] Coccidioidomycosis meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.7,[B38.7] Disseminated coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.81,[B38.81] Prostatic coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.89,[B38.89] Other forms of coccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B38.9,"[B38.9] Coccidioidomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.0,[B39.0] Acute pulmonary histoplasmosis capsulati,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.1,[B39.1] Chronic pulmonary histoplasmosis capsulati,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.2,"[B39.2] Pulmonary histoplasmosis capsulati, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.3,[B39.3] Disseminated histoplasmosis capsulati,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.4,"[B39.4] Histoplasmosis capsulati, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.5,[B39.5] Histoplasmosis duboisii,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B39.9,"[B39.9] Histoplasmosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.0,[B40.0] Acute pulmonary blastomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.1,[B40.1] Chronic pulmonary blastomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.2,"[B40.2] Pulmonary blastomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.3,[B40.3] Cutaneous blastomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.7,[B40.7] Disseminated blastomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.81,[B40.81] Blastomycotic meningoencephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.89,[B40.89] Other forms of blastomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B40.9,"[B40.9] Blastomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B41.0,[B41.0] Pulmonary paracoccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B41.7,[B41.7] Disseminated paracoccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B41.8,[B41.8] Other forms of paracoccidioidomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B41.9,"[B41.9] Paracoccidioidomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.0,[B42.0] Pulmonary sporotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.1,[B42.1] Lymphocutaneous sporotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.7,[B42.7] Disseminated sporotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.81,[B42.81] Cerebral sporotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.82,[B42.82] Sporotrichosis arthritis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.89,[B42.89] Other forms of sporotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B42.9,"[B42.9] Sporotrichosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B43.0,[B43.0] Cutaneous chromomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B43.1,[B43.1] Pheomycotic brain abscess,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B43.2,[B43.2] Subcutaneous pheomycotic abscess and cyst,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B43.8,[B43.8] Other forms of chromomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B43.9,"[B43.9] Chromomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.0,[B44.0] Invasive pulmonary aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.1,[B44.1] Other pulmonary aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.2,[B44.2] Tonsillar aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.7,[B44.7] Disseminated aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.81,[B44.81] Allergic bronchopulmonary aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.89,[B44.89] Other forms of aspergillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B44.9,"[B44.9] Aspergillosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.0,[B45.0] Pulmonary cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.1,[B45.1] Cerebral cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.2,[B45.2] Cutaneous cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.3,[B45.3] Osseous cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.7,[B45.7] Disseminated cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.8,[B45.8] Other forms of cryptococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B45.9,"[B45.9] Cryptococcosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.0,[B46.0] Pulmonary mucormycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.1,[B46.1] Rhinocerebral mucormycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.2,[B46.2] Gastrointestinal mucormycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.3,[B46.3] Cutaneous mucormycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.4,[B46.4] Disseminated mucormycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.5,"[B46.5] Mucormycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.8,[B46.8] Other zygomycoses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B46.9,"[B46.9] Zygomycosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B47.0,[B47.0] Eumycetoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B47.1,[B47.1] Actinomycetoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B47.9,"[B47.9] Mycetoma, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.0,[B48.0] Lobomycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.1,[B48.1] Rhinosporidiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.2,[B48.2] Allescheriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.3,[B48.3] Geotrichosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.4,[B48.4] Penicillosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B48.8,[B48.8] Other specified mycoses,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B49,[B49] Unspecified mycosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B50.0,[B50.0] Plasmodium falciparum malaria with cerebral complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B50.8,[B50.8] Other severe and complicated Plasmodium falciparum malaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B50.9,"[B50.9] Plasmodium falciparum malaria, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B51.0,[B51.0] Plasmodium vivax malaria with rupture of spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B51.8,[B51.8] Plasmodium vivax malaria with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B51.9,[B51.9] Plasmodium vivax malaria without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B52.0,[B52.0] Plasmodium malariae malaria with nephropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B52.8,[B52.8] Plasmodium malariae malaria with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B52.9,[B52.9] Plasmodium malariae malaria without complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B53.0,[B53.0] Plasmodium ovale malaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B53.1,[B53.1] Malaria due to simian plasmodia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B53.8,"[B53.8] Other malaria, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B54,[B54] Unspecified malaria,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B55.0,[B55.0] Visceral leishmaniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B55.1,[B55.1] Cutaneous leishmaniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B55.2,[B55.2] Mucocutaneous leishmaniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B55.9,"[B55.9] Leishmaniasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B56.0,[B56.0] Gambiense trypanosomiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B56.1,[B56.1] Rhodesiense trypanosomiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B56.9,"[B56.9] African trypanosomiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.0,[B57.0] Acute Chagas' disease with heart involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.1,[B57.1] Acute Chagas' disease without heart involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.2,[B57.2] Chagas' disease (chronic) with heart involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.30,"[B57.30] Chagas' disease with digestive system involvement, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.39,[B57.39] Other digestive system involvement in Chagas' disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.40,"[B57.40] Chagas' disease with nervous system involvement, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.41,[B57.41] Meningitis in Chagas' disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.42,[B57.42] Meningoencephalitis in Chagas' disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.49,[B57.49] Other nervous system involvement in Chagas' disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B57.5,[B57.5] Chagas' disease (chronic) with other organ involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.00,"[B58.00] Toxoplasma oculopathy, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.01,[B58.01] Toxoplasma chorioretinitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.09,[B58.09] Other toxoplasma oculopathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.2,[B58.2] Toxoplasma meningoencephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.3,[B58.3] Pulmonary toxoplasmosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.81,[B58.81] Toxoplasma myocarditis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.82,[B58.82] Toxoplasma myositis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.83,[B58.83] Toxoplasma tubulo-interstitial nephropathy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.89,[B58.89] Toxoplasmosis with other organ involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B58.9,"[B58.9] Toxoplasmosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B59,[B59] Pneumocystosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.0,[B60.0] Babesiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.00,"[B60.00] Babesiosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.01,[B60.01] Babesiosis due to Babesia microti,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.02,[B60.02] Babesiosis due to Babesia duncani,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.03,[B60.03] Babesiosis due to Babesia divergens,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.09,[B60.09] Other babesiosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.10,"[B60.10] Acanthamebiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.11,[B60.11] Meningoencephalitis due to Acanthamoeba (culbertsoni),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.12,[B60.12] Conjunctivitis due to Acanthamoeba,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.13,[B60.13] Keratoconjunctivitis due to Acanthamoeba,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.19,[B60.19] Other acanthamebic disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.2,[B60.2] Naegleriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B60.8,[B60.8] Other specified protozoal diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B64,[B64] Unspecified protozoal disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.0,[B65.0] Schistosomiasis due to Schistosoma haematobium [urinary schistosomiasis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.1,[B65.1] Schistosomiasis due to Schistosoma mansoni [intestinal schistosomiasis],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.2,[B65.2] Schistosomiasis due to Schistosoma japonicum,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.3,[B65.3] Cercarial dermatitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.8,[B65.8] Other schistosomiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B65.9,"[B65.9] Schistosomiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.0,[B66.0] Opisthorchiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.1,[B66.1] Clonorchiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.2,[B66.2] Dicroceliasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.3,[B66.3] Fascioliasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.4,[B66.4] Paragonimiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.5,[B66.5] Fasciolopsiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.8,[B66.8] Other specified fluke infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B66.9,"[B66.9] Fluke infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.0,[B67.0] Echinococcus granulosus infection of liver,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.1,[B67.1] Echinococcus granulosus infection of lung,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.2,[B67.2] Echinococcus granulosus infection of bone,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.31,"[B67.31] Echinococcus granulosus infection, thyroid gland",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.32,"[B67.32] Echinococcus granulosus infection, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.39,"[B67.39] Echinococcus granulosus infection, other sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.4,"[B67.4] Echinococcus granulosus infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.5,[B67.5] Echinococcus multilocularis infection of liver,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.61,"[B67.61] Echinococcus multilocularis infection, multiple sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.69,"[B67.69] Echinococcus multilocularis infection, other sites",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.7,"[B67.7] Echinococcus multilocularis infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.8,"[B67.8] Echinococcosis, unspecified, of liver",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.90,"[B67.90] Echinococcosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B67.99,[B67.99] Other echinococcosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B68.0,[B68.0] Taenia solium taeniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B68.1,[B68.1] Taenia saginata taeniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B68.9,"[B68.9] Taeniasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B69.0,[B69.0] Cysticercosis of central nervous system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B69.1,[B69.1] Cysticercosis of eye,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B69.81,[B69.81] Myositis in cysticercosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B69.89,[B69.89] Cysticercosis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B69.9,"[B69.9] Cysticercosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B70.0,[B70.0] Diphyllobothriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B70.1,[B70.1] Sparganosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B71.0,[B71.0] Hymenolepiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B71.1,[B71.1] Dipylidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B71.8,[B71.8] Other specified cestode infections,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B71.9,"[B71.9] Cestode infection, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B72,[B72] Dracunculiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B73.00,"[B73.00] Onchocerciasis with eye involvement, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B73.01,[B73.01] Onchocerciasis with endophthalmitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B73.02,[B73.02] Onchocerciasis with glaucoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B73.09,[B73.09] Onchocerciasis with other eye involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B73.1,[B73.1] Onchocerciasis without eye disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.0,[B74.0] Filariasis due to Wuchereria bancrofti,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.1,[B74.1] Filariasis due to Brugia malayi,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.2,[B74.2] Filariasis due to Brugia timori,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.3,[B74.3] Loiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.4,[B74.4] Mansonelliasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.8,[B74.8] Other filariases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B74.9,"[B74.9] Filariasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B75,[B75] Trichinellosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B76.0,[B76.0] Ancylostomiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B76.1,[B76.1] Necatoriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B76.8,[B76.8] Other hookworm diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B76.9,"[B76.9] Hookworm disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B77.0,[B77.0] Ascariasis with intestinal complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B77.81,[B77.81] Ascariasis pneumonia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B77.89,[B77.89] Ascariasis with other complications,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B77.9,"[B77.9] Ascariasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B78.0,[B78.0] Intestinal strongyloidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B78.1,[B78.1] Cutaneous strongyloidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B78.7,[B78.7] Disseminated strongyloidiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B78.9,"[B78.9] Strongyloidiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B79,[B79] Trichuriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B80,[B80] Enterobiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.0,[B81.0] Anisakiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.1,[B81.1] Intestinal capillariasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.2,[B81.2] Trichostrongyliasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.3,[B81.3] Intestinal angiostrongyliasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.4,[B81.4] Mixed intestinal helminthiases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B81.8,[B81.8] Other specified intestinal helminthiases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B82.0,"[B82.0] Intestinal helminthiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B82.9,"[B82.9] Intestinal parasitism, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.0,[B83.0] Visceral larva migrans,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.1,[B83.1] Gnathostomiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.2,[B83.2] Angiostrongyliasis due to Parastrongylus cantonensis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.3,[B83.3] Syngamiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.4,[B83.4] Internal hirudiniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.8,[B83.8] Other specified helminthiases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B83.9,"[B83.9] Helminthiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B85.0,[B85.0] Pediculosis due to Pediculus humanus capitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B85.1,[B85.1] Pediculosis due to Pediculus humanus corporis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B85.2,"[B85.2] Pediculosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B85.3,[B85.3] Phthiriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B85.4,[B85.4] Mixed pediculosis and phthiriasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B86,[B86] Scabies,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.0,[B87.0] Cutaneous myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.1,[B87.1] Wound myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.2,[B87.2] Ocular myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.3,[B87.3] Nasopharyngeal myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.4,[B87.4] Aural myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.81,[B87.81] Genitourinary myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.82,[B87.82] Intestinal myiasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.89,[B87.89] Myiasis of other sites,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B87.9,"[B87.9] Myiasis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.0,[B88.0] Other acariasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.1,[B88.1] Tungiasis [sandflea infestation],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.2,[B88.2] Other arthropod infestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.3,[B88.3] External hirudiniasis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.8,[B88.8] Other specified infestations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B88.9,"[B88.9] Infestation, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B89,[B89] Unspecified parasitic disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B90.0,[B90.0] Sequelae of central nervous system tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B90.1,[B90.1] Sequelae of genitourinary tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B90.2,[B90.2] Sequelae of tuberculosis of bones and joints,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B90.8,[B90.8] Sequelae of tuberculosis of other organs,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B90.9,[B90.9] Sequelae of respiratory and unspecified tuberculosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B91,[B91] Sequelae of poliomyelitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B92,[B92] Sequelae of leprosy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B94.0,[B94.0] Sequelae of trachoma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B94.1,[B94.1] Sequelae of viral encephalitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B94.8,[B94.8] Sequelae of other specified infectious and parasitic diseases,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B94.9,[B94.9] Sequelae of unspecified infectious and parasitic disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.0,"[B95.0] Streptococcus, group A, as the cause of diseases classified elsewhere",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.1,"[B95.1] Streptococcus, group B, as the cause of diseases classified elsewhere",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.2,[B95.2] Enterococcus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.3,[B95.3] Streptococcus pneumoniae as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.4,[B95.4] Other streptococcus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.5,[B95.5] Unspecified streptococcus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.61,[B95.61] Methicillin susceptible Staphylococcus aureus infection as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.62,[B95.62] Methicillin resistant Staphylococcus aureus infection as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.7,[B95.7] Other staphylococcus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B95.8,[B95.8] Unspecified staphylococcus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.0,[B96.0] Mycoplasma pneumoniae [M. pneumoniae] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.1,[B96.1] Klebsiella pneumoniae [K. pneumoniae] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.20,[B96.20] Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.21,[B96.21] Shiga toxin-producing Escherichia coli [E. coli] [STEC] O157 as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.22,[B96.22] Other specified Shiga toxin-producing Escherichia coli [E. coli] [STEC] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.23,[B96.23] Unspecified Shiga toxin-producing Escherichia coli [E. coli] [STEC] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.29,[B96.29] Other Escherichia coli [E. coli] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.3,[B96.3] Hemophilus influenzae [H. influenzae] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.4,[B96.4] Proteus (mirabilis) (morganii) as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.5,[B96.5] Pseudomonas (aeruginosa) (mallei) (pseudomallei) as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.6,[B96.6] Bacteroides fragilis [B. fragilis] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.7,[B96.7] Clostridium perfringens [C. perfringens] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.81,[B96.81] Helicobacter pylori [H. pylori] as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.82,[B96.82] Vibrio vulnificus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B96.89,[B96.89] Other specified bacterial agents as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.0,[B97.0] Adenovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.10,[B97.10] Unspecified enterovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.11,[B97.11] Coxsackievirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.12,[B97.12] Echovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.19,[B97.19] Other enterovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.21,[B97.21] SARS-associated coronavirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.29,[B97.29] Other coronavirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.30,[B97.30] Unspecified retrovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.31,[B97.31] Lentivirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.32,[B97.32] Oncovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.33,"[B97.33] Human T-cell lymphotrophic virus, type I [HTLV-I] as the cause of diseases classified elsewhere",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.34,"[B97.34] Human T-cell lymphotrophic virus, type II [HTLV-II] as the cause of diseases classified elsewhere",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.35,"[B97.35] Human immunodeficiency virus, type 2 [HIV 2] as the cause of diseases classified elsewhere",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.39,[B97.39] Other retrovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.4,[B97.4] Respiratory syncytial virus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.5,[B97.5] Reovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.6,[B97.6] Parvovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.7,[B97.7] Papillomavirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.81,[B97.81] Human metapneumovirus as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B97.89,[B97.89] Other viral agents as the cause of diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B99.8,[B99.8] Other infectious disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,B99.9,[B99.9] Unspecified infectious disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.00,"[D57.00] Hb-SS disease with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.01,[D57.01] Hb-SS disease with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.02,[D57.02] Hb-SS disease with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.03,[D57.03] Hb-SS disease with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.09,[D57.09] Hb-SS disease with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.1,[D57.1] Sickle-cell disease without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.20,[D57.20] Sickle-cell/Hb-C disease without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.211,[D57.211] Sickle-cell/Hb-C disease with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.212,[D57.212] Sickle-cell/Hb-C disease with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.213,[D57.213] Sickle-cell/Hb-C disease with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.218,[D57.218] Sickle-cell/Hb-C disease with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.219,"[D57.219] Sickle-cell/Hb-C disease with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.3,[D57.3] Sickle-cell trait,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.40,[D57.40] Sickle-cell thalassemia without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.411,"[D57.411] Sickle-cell thalassemia, unspecified, with acute chest syndrome",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.412,"[D57.412] Sickle-cell thalassemia, unspecified, with splenic sequestration",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.413,"[D57.413] Sickle-cell thalassemia, unspecified, with cerebral vascular involvement",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.418,"[D57.418] Sickle-cell thalassemia, unspecified, with crisis with other specified complication",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.419,"[D57.419] Sickle-cell thalassemia, unspecified, with crisis",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.42,[D57.42] Sickle-cell thalassemia beta zero without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.431,[D57.431] Sickle-cell thalassemia beta zero with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.432,[D57.432] Sickle-cell thalassemia beta zero with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.433,[D57.433] Sickle-cell thalassemia beta zero with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.438,[D57.438] Sickle-cell thalassemia beta zero with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.439,"[D57.439] Sickle-cell thalassemia beta zero with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.44,[D57.44] Sickle-cell thalassemia beta plus without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.451,[D57.451] Sickle-cell thalassemia beta plus with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.452,[D57.452] Sickle-cell thalassemia beta plus with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.453,[D57.453] Sickle-cell thalassemia beta plus with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.458,[D57.458] Sickle-cell thalassemia beta plus with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.459,"[D57.459] Sickle-cell thalassemia beta plus with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.80,[D57.80] Other sickle-cell disorders without crisis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.811,[D57.811] Other sickle-cell disorders with acute chest syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.812,[D57.812] Other sickle-cell disorders with splenic sequestration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.813,[D57.813] Other sickle-cell disorders with cerebral vascular involvement,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.818,[D57.818] Other sickle-cell disorders with crisis with other specified complication,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D57.819,"[D57.819] Other sickle-cell disorders with crisis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D62,[D62] Acute posthemorrhagic anemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D64.81,[D64.81] Anemia due to antineoplastic chemotherapy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D69.51,[D69.51] Posttransfusion purpura,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.0,[D70.0] Congenital agranulocytosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.1,[D70.1] Agranulocytosis secondary to cancer chemotherapy,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.2,[D70.2] Other drug-induced agranulocytosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.3,[D70.3] Neutropenia due to infection,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.4,[D70.4] Cyclic neutropenia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.8,[D70.8] Other neutropenia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D70.9,"[D70.9] Neutropenia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D71,[D71] Functional disorders of polymorphonuclear neutrophils,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.0,[D72.0] Genetic anomalies of leukocytes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.1,[D72.1] Eosinophilia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.10,"[D72.10] Eosinophilia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.110,[D72.110] Idiopathic hypereosinophilic syndrome [IHES],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.111,[D72.111] Lymphocytic Variant Hypereosinophilic Syndrome [LHES],ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.118,[D72.118] Other hypereosinophilic syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.119,"[D72.119] Hypereosinophilic syndrome [HES], unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.12,[D72.12] Drug rash with eosinophilia and systemic symptoms syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.18,[D72.18] Eosinophilia in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.19,[D72.19] Other eosinophilia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.810,[D72.810] Lymphocytopenia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.818,[D72.818] Other decreased white blood cell count,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.819,"[D72.819] Decreased white blood cell count, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.820,[D72.820] Lymphocytosis (symptomatic),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.821,[D72.821] Monocytosis (symptomatic),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.822,[D72.822] Plasmacytosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.823,[D72.823] Leukemoid reaction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.824,[D72.824] Basophilia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.825,[D72.825] Bandemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.828,[D72.828] Other elevated white blood cell count,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.829,"[D72.829] Elevated white blood cell count, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.89,[D72.89] Other specified disorders of white blood cells,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D72.9,"[D72.9] Disorder of white blood cells, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D73.81,[D73.81] Neutropenic splenomegaly,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D76.1,[D76.1] Hemophagocytic lymphohistiocytosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D76.2,"[D76.2] Hemophagocytic syndrome, infection-associated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D76.3,[D76.3] Other histiocytosis syndromes,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.01,[D78.01] Intraoperative hemorrhage and hematoma of the spleen complicating a procedure on the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.02,[D78.02] Intraoperative hemorrhage and hematoma of the spleen complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.11,[D78.11] Accidental puncture and laceration of the spleen during a procedure on the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.12,[D78.12] Accidental puncture and laceration of the spleen during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.21,[D78.21] Postprocedural hemorrhage of the spleen following a procedure on the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.22,[D78.22] Postprocedural hemorrhage of the spleen following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.31,[D78.31] Postprocedural hematoma of the spleen following a procedure on the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.32,[D78.32] Postprocedural hematoma of the spleen following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.33,[D78.33] Postprocedural seroma of the spleen following a procedure on the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.34,[D78.34] Postprocedural seroma of the spleen following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.81,[D78.81] Other intraoperative complications of the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D78.89,[D78.89] Other postprocedural complications of the spleen,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D86.81,[D86.81] Sarcoid meningitis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D89.810,[D89.810] Acute graft-versus-host disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D89.811,[D89.811] Chronic graft-versus-host disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D89.812,[D89.812] Acute on chronic graft-versus-host disease,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,D89.813,"[D89.813] Graft-versus-host disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.00,[E08.00] Diabetes mellitus due to underlying condition with hyperosmolarity without nonketotic hyperglycemic-hyperosmolar coma (NKHHC),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.01,[E08.01] Diabetes mellitus due to underlying condition with hyperosmolarity with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.10,[E08.10] Diabetes mellitus due to underlying condition with ketoacidosis without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.11,[E08.11] Diabetes mellitus due to underlying condition with ketoacidosis with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.52,[E08.52] Diabetes mellitus due to underlying condition with diabetic peripheral angiopathy with gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E08.641,[E08.641] Diabetes mellitus due to underlying condition with hypoglycemia with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.00,[E09.00] Drug or chemical induced diabetes mellitus with hyperosmolarity without nonketotic hyperglycemic-hyperosmolar coma (NKHHC),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.01,[E09.01] Drug or chemical induced diabetes mellitus with hyperosmolarity with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.10,[E09.10] Drug or chemical induced diabetes mellitus with ketoacidosis without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.11,[E09.11] Drug or chemical induced diabetes mellitus with ketoacidosis with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.52,[E09.52] Drug or chemical induced diabetes mellitus with diabetic peripheral angiopathy with gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E09.641,[E09.641] Drug or chemical induced diabetes mellitus with hypoglycemia with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E10.10,[E10.10] Type 1 diabetes mellitus with ketoacidosis without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E10.11,[E10.11] Type 1 diabetes mellitus with ketoacidosis with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E10.52,[E10.52] Type 1 diabetes mellitus with diabetic peripheral angiopathy with gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E10.641,[E10.641] Type 1 diabetes mellitus with hypoglycemia with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.00,[E11.00] Type 2 diabetes mellitus with hyperosmolarity without nonketotic hyperglycemic-hyperosmolar coma (NKHHC),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.01,[E11.01] Type 2 diabetes mellitus with hyperosmolarity with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.10,[E11.10] Type 2 diabetes mellitus with ketoacidosis without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.11,[E11.11] Type 2 diabetes mellitus with ketoacidosis with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.52,[E11.52] Type 2 diabetes mellitus with diabetic peripheral angiopathy with gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E11.641,[E11.641] Type 2 diabetes mellitus with hypoglycemia with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.00,[E13.00] Other specified diabetes mellitus with hyperosmolarity without nonketotic hyperglycemic-hyperosmolar coma (NKHHC),ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.01,[E13.01] Other specified diabetes mellitus with hyperosmolarity with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.10,[E13.10] Other specified diabetes mellitus with ketoacidosis without coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.11,[E13.11] Other specified diabetes mellitus with ketoacidosis with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.52,[E13.52] Other specified diabetes mellitus with diabetic peripheral angiopathy with gangrene,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E13.641,[E13.641] Other specified diabetes mellitus with hypoglycemia with coma,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E36.01,[E36.01] Intraoperative hemorrhage and hematoma of an endocrine system organ or structure complicating an endocrine system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E36.02,[E36.02] Intraoperative hemorrhage and hematoma of an endocrine system organ or structure complicating other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E36.11,[E36.11] Accidental puncture and laceration of an endocrine system organ or structure during an endocrine system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E36.12,[E36.12] Accidental puncture and laceration of an endocrine system organ or structure during other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E36.8,[E36.8] Other intraoperative complications of endocrine system,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E71.43,[E71.43] Iatrogenic carnitine deficiency,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E86.0,[E86.0] Dehydration,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E86.1,[E86.1] Hypovolemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E86.9,"[E86.9] Volume depletion, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.0,[E87.0] Hyperosmolality and hypernatremia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.1,[E87.1] Hypo-osmolality and hyponatremia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.2,[E87.2] Acidosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.3,[E87.3] Alkalosis,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.4,[E87.4] Mixed disorder of acid-base balance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.5,[E87.5] Hyperkalemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.6,[E87.6] Hypokalemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.70,"[E87.70] Fluid overload, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.71,[E87.71] Transfusion associated circulatory overload,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.79,[E87.79] Other fluid overload,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E87.8,"[E87.8] Other disorders of electrolyte and fluid balance, not elsewhere classified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E88.3,[E88.3] Tumor lysis syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.0,[E89.0] Postprocedural hypothyroidism,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.1,[E89.1] Postprocedural hypoinsulinemia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.2,[E89.2] Postprocedural hypoparathyroidism,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.3,[E89.3] Postprocedural hypopituitarism,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.40,[E89.40] Asymptomatic postprocedural ovarian failure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.41,[E89.41] Symptomatic postprocedural ovarian failure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.5,[E89.5] Postprocedural testicular hypofunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.6,[E89.6] Postprocedural adrenocortical (-medullary) hypofunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.810,[E89.810] Postprocedural hemorrhage of an endocrine system organ or structure following an endocrine system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.811,[E89.811] Postprocedural hemorrhage of an endocrine system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.820,[E89.820] Postprocedural hematoma of an endocrine system organ or structure following an endocrine system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.821,[E89.821] Postprocedural hematoma of an endocrine system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.822,[E89.822] Postprocedural seroma of an endocrine system organ or structure following an endocrine system procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.823,[E89.823] Postprocedural seroma of an endocrine system organ or structure following other procedure,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,E89.89,[E89.89] Other postprocedural endocrine and metabolic complications and disorders,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F01.50,"[F01.50] Vascular dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F01.51,"[F01.51] Vascular dementia, unspecified severity, with behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F02.80,"[F02.80] Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F02.81,"[F02.81] Dementia in other diseases classified elsewhere, unspecified severity, with behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F03.90,"[F03.90] Unspecified dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F03.91,"[F03.91] Unspecified dementia, unspecified severity, with behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F04,[F04] Amnestic disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F05,[F05] Delirium due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F06.1,[F06.1] Catatonic disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F06.4,[F06.4] Anxiety disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F06.8,[F06.8] Other specified mental disorders due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F07.0,[F07.0] Personality change due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F07.81,[F07.81] Postconcussional syndrome,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F07.89,[F07.89] Other personality and behavioral disorders due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F07.9,[F07.9] Unspecified personality and behavioral disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F09,[F09] Unspecified mental disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.10,"[F10.10] Alcohol abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.11,"[F10.11] Alcohol abuse, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.120,"[F10.120] Alcohol abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.121,[F10.121] Alcohol abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.129,"[F10.129] Alcohol abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.130,"[F10.130] Alcohol abuse with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.131,[F10.131] Alcohol abuse with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.132,[F10.132] Alcohol abuse with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.139,"[F10.139] Alcohol abuse with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.14,[F10.14] Alcohol abuse with alcohol-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.150,[F10.150] Alcohol abuse with alcohol-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.151,[F10.151] Alcohol abuse with alcohol-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.159,"[F10.159] Alcohol abuse with alcohol-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.180,[F10.180] Alcohol abuse with alcohol-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.181,[F10.181] Alcohol abuse with alcohol-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.182,[F10.182] Alcohol abuse with alcohol-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.188,[F10.188] Alcohol abuse with other alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.19,[F10.19] Alcohol abuse with unspecified alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.20,"[F10.20] Alcohol dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.21,"[F10.21] Alcohol dependence, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.220,"[F10.220] Alcohol dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.221,[F10.221] Alcohol dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.229,"[F10.229] Alcohol dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.230,"[F10.230] Alcohol dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.231,[F10.231] Alcohol dependence with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.232,[F10.232] Alcohol dependence with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.239,"[F10.239] Alcohol dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.24,[F10.24] Alcohol dependence with alcohol-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.250,[F10.250] Alcohol dependence with alcohol-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.251,[F10.251] Alcohol dependence with alcohol-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.259,"[F10.259] Alcohol dependence with alcohol-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.26,[F10.26] Alcohol dependence with alcohol-induced persisting amnestic disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.27,[F10.27] Alcohol dependence with alcohol-induced persisting dementia,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.280,[F10.280] Alcohol dependence with alcohol-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.281,[F10.281] Alcohol dependence with alcohol-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.282,[F10.282] Alcohol dependence with alcohol-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.288,[F10.288] Alcohol dependence with other alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.29,[F10.29] Alcohol dependence with unspecified alcohol-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.920,"[F10.920] Alcohol use, unspecified with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.921,"[F10.921] Alcohol use, unspecified with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.929,"[F10.929] Alcohol use, unspecified with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.930,"[F10.930] Alcohol use, unspecified with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.931,"[F10.931] Alcohol use, unspecified with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.932,"[F10.932] Alcohol use, unspecified with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.939,"[F10.939] Alcohol use, unspecified with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.94,"[F10.94] Alcohol use, unspecified with alcohol-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.950,"[F10.950] Alcohol use, unspecified with alcohol-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.951,"[F10.951] Alcohol use, unspecified with alcohol-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.959,"[F10.959] Alcohol use, unspecified with alcohol-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.96,"[F10.96] Alcohol use, unspecified with alcohol-induced persisting amnestic disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.97,"[F10.97] Alcohol use, unspecified with alcohol-induced persisting dementia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.980,"[F10.980] Alcohol use, unspecified with alcohol-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.981,"[F10.981] Alcohol use, unspecified with alcohol-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.982,"[F10.982] Alcohol use, unspecified with alcohol-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.988,"[F10.988] Alcohol use, unspecified with other alcohol-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F10.99,"[F10.99] Alcohol use, unspecified with unspecified alcohol-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.10,"[F11.10] Opioid abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.11,"[F11.11] Opioid abuse, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.120,"[F11.120] Opioid abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.121,[F11.121] Opioid abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.122,[F11.122] Opioid abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.129,"[F11.129] Opioid abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.13,[F11.13] Opioid abuse with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.14,[F11.14] Opioid abuse with opioid-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.150,[F11.150] Opioid abuse with opioid-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.151,[F11.151] Opioid abuse with opioid-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.159,"[F11.159] Opioid abuse with opioid-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.181,[F11.181] Opioid abuse with opioid-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.182,[F11.182] Opioid abuse with opioid-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.188,[F11.188] Opioid abuse with other opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.19,[F11.19] Opioid abuse with unspecified opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.20,"[F11.20] Opioid dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.21,"[F11.21] Opioid dependence, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.220,"[F11.220] Opioid dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.221,[F11.221] Opioid dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.222,[F11.222] Opioid dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.229,"[F11.229] Opioid dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.23,[F11.23] Opioid dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.24,[F11.24] Opioid dependence with opioid-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.250,[F11.250] Opioid dependence with opioid-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.251,[F11.251] Opioid dependence with opioid-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.259,"[F11.259] Opioid dependence with opioid-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.281,[F11.281] Opioid dependence with opioid-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.282,[F11.282] Opioid dependence with opioid-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.288,[F11.288] Opioid dependence with other opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.29,[F11.29] Opioid dependence with unspecified opioid-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.90,"[F11.90] Opioid use, unspecified, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.920,"[F11.920] Opioid use, unspecified with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.921,"[F11.921] Opioid use, unspecified with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.922,"[F11.922] Opioid use, unspecified with intoxication with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.929,"[F11.929] Opioid use, unspecified with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.93,"[F11.93] Opioid use, unspecified with withdrawal",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.94,"[F11.94] Opioid use, unspecified with opioid-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.950,"[F11.950] Opioid use, unspecified with opioid-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.951,"[F11.951] Opioid use, unspecified with opioid-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.959,"[F11.959] Opioid use, unspecified with opioid-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.981,"[F11.981] Opioid use, unspecified with opioid-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.982,"[F11.982] Opioid use, unspecified with opioid-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.988,"[F11.988] Opioid use, unspecified with other opioid-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F11.99,"[F11.99] Opioid use, unspecified with unspecified opioid-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.10,"[F12.10] Cannabis abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.11,"[F12.11] Cannabis abuse, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.120,"[F12.120] Cannabis abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.121,[F12.121] Cannabis abuse with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.122,[F12.122] Cannabis abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.129,"[F12.129] Cannabis abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.13,[F12.13] Cannabis abuse with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.150,[F12.150] Cannabis abuse with psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.151,[F12.151] Cannabis abuse with psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.159,"[F12.159] Cannabis abuse with psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.180,[F12.180] Cannabis abuse with cannabis-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.188,[F12.188] Cannabis abuse with other cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.19,[F12.19] Cannabis abuse with unspecified cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.20,"[F12.20] Cannabis dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.21,"[F12.21] Cannabis dependence, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.220,"[F12.220] Cannabis dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.221,[F12.221] Cannabis dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.222,[F12.222] Cannabis dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.229,"[F12.229] Cannabis dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.23,[F12.23] Cannabis dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.250,[F12.250] Cannabis dependence with psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.251,[F12.251] Cannabis dependence with psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.259,"[F12.259] Cannabis dependence with psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.280,[F12.280] Cannabis dependence with cannabis-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.288,[F12.288] Cannabis dependence with other cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.29,[F12.29] Cannabis dependence with unspecified cannabis-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.90,"[F12.90] Cannabis use, unspecified, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.920,"[F12.920] Cannabis use, unspecified with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.921,"[F12.921] Cannabis use, unspecified with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.922,"[F12.922] Cannabis use, unspecified with intoxication with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.929,"[F12.929] Cannabis use, unspecified with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.93,"[F12.93] Cannabis use, unspecified with withdrawal",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.950,"[F12.950] Cannabis use, unspecified with psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.951,"[F12.951] Cannabis use, unspecified with psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.959,"[F12.959] Cannabis use, unspecified with psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.980,"[F12.980] Cannabis use, unspecified with anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.988,"[F12.988] Cannabis use, unspecified with other cannabis-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F12.99,"[F12.99] Cannabis use, unspecified with unspecified cannabis-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.10,"[F13.10] Sedative, hypnotic or anxiolytic abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.11,"[F13.11] Sedative, hypnotic or anxiolytic abuse, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.120,"[F13.120] Sedative, hypnotic or anxiolytic abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.121,"[F13.121] Sedative, hypnotic or anxiolytic abuse with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.129,"[F13.129] Sedative, hypnotic or anxiolytic abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.130,"[F13.130] Sedative, hypnotic or anxiolytic abuse with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.131,"[F13.131] Sedative, hypnotic or anxiolytic abuse with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.132,"[F13.132] Sedative, hypnotic or anxiolytic abuse with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.139,"[F13.139] Sedative, hypnotic or anxiolytic abuse with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.14,"[F13.14] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.150,"[F13.150] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.151,"[F13.151] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.159,"[F13.159] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.180,"[F13.180] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.181,"[F13.181] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.182,"[F13.182] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.188,"[F13.188] Sedative, hypnotic or anxiolytic abuse with other sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.19,"[F13.19] Sedative, hypnotic or anxiolytic abuse with unspecified sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.20,"[F13.20] Sedative, hypnotic or anxiolytic dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.21,"[F13.21] Sedative, hypnotic or anxiolytic dependence, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.220,"[F13.220] Sedative, hypnotic or anxiolytic dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.221,"[F13.221] Sedative, hypnotic or anxiolytic dependence with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.229,"[F13.229] Sedative, hypnotic or anxiolytic dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.230,"[F13.230] Sedative, hypnotic or anxiolytic dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.231,"[F13.231] Sedative, hypnotic or anxiolytic dependence with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.232,"[F13.232] Sedative, hypnotic or anxiolytic dependence with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.239,"[F13.239] Sedative, hypnotic or anxiolytic dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.24,"[F13.24] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.250,"[F13.250] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.251,"[F13.251] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.259,"[F13.259] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.26,"[F13.26] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting amnestic disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.27,"[F13.27] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting dementia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.280,"[F13.280] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.281,"[F13.281] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.282,"[F13.282] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.288,"[F13.288] Sedative, hypnotic or anxiolytic dependence with other sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.29,"[F13.29] Sedative, hypnotic or anxiolytic dependence with unspecified sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.90,"[F13.90] Sedative, hypnotic, or anxiolytic use, unspecified, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.920,"[F13.920] Sedative, hypnotic or anxiolytic use, unspecified with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.921,"[F13.921] Sedative, hypnotic or anxiolytic use, unspecified with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.929,"[F13.929] Sedative, hypnotic or anxiolytic use, unspecified with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.930,"[F13.930] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.931,"[F13.931] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.932,"[F13.932] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal with perceptual disturbances",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.939,"[F13.939] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.94,"[F13.94] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced mood disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.950,"[F13.950] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.951,"[F13.951] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.959,"[F13.959] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.96,"[F13.96] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced persisting amnestic disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.97,"[F13.97] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced persisting dementia",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.980,"[F13.980] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced anxiety disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.981,"[F13.981] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced sexual dysfunction",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.982,"[F13.982] Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced sleep disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.988,"[F13.988] Sedative, hypnotic or anxiolytic use, unspecified with other sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F13.99,"[F13.99] Sedative, hypnotic or anxiolytic use, unspecified with unspecified sedative, hypnotic or anxiolytic-induced disorder",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.10,"[F14.10] Cocaine abuse, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.11,"[F14.11] Cocaine abuse, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.120,"[F14.120] Cocaine abuse with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.121,[F14.121] Cocaine abuse with intoxication with delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.122,[F14.122] Cocaine abuse with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.129,"[F14.129] Cocaine abuse with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.13,"[F14.13] Cocaine abuse, unspecified with withdrawal",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.14,[F14.14] Cocaine abuse with cocaine-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.150,[F14.150] Cocaine abuse with cocaine-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.151,[F14.151] Cocaine abuse with cocaine-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.159,"[F14.159] Cocaine abuse with cocaine-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.180,[F14.180] Cocaine abuse with cocaine-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.181,[F14.181] Cocaine abuse with cocaine-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.182,[F14.182] Cocaine abuse with cocaine-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.188,[F14.188] Cocaine abuse with other cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.19,[F14.19] Cocaine abuse with unspecified cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.20,"[F14.20] Cocaine dependence, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.21,"[F14.21] Cocaine dependence, in remission",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.220,"[F14.220] Cocaine dependence with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.221,[F14.221] Cocaine dependence with intoxication delirium,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.222,[F14.222] Cocaine dependence with intoxication with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.229,"[F14.229] Cocaine dependence with intoxication, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.23,[F14.23] Cocaine dependence with withdrawal,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.24,[F14.24] Cocaine dependence with cocaine-induced mood disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.250,[F14.250] Cocaine dependence with cocaine-induced psychotic disorder with delusions,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.251,[F14.251] Cocaine dependence with cocaine-induced psychotic disorder with hallucinations,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.259,"[F14.259] Cocaine dependence with cocaine-induced psychotic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.280,[F14.280] Cocaine dependence with cocaine-induced anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.281,[F14.281] Cocaine dependence with cocaine-induced sexual dysfunction,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.282,[F14.282] Cocaine dependence with cocaine-induced sleep disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.288,[F14.288] Cocaine dependence with other cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.29,[F14.29] Cocaine dependence with unspecified cocaine-induced disorder,ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.90,"[F14.90] Cocaine use, unspecified, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.920,"[F14.920] Cocaine use, unspecified with intoxication, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.921,"[F14.921] Cocaine use, unspecified with intoxication delirium",ICD10CM,2.16.840.1.113883.6.90
+Acute Condition,2.16.840.1.113883.3.464.1004.1324,F14.922,"[F14.922] Cocaine use, unspecified with intoxication with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90

@@ -1,0 +1,300 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,19081,,CPT,2.16.840.1.113883.6.12
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,19083,,CPT,2.16.840.1.113883.6.12
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,19085,,CPT,2.16.840.1.113883.6.12
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,19100,,CPT,2.16.840.1.113883.6.12
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,19101,,CPT,2.16.840.1.113883.6.12
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,10940003,Excisional biopsy of breast with preoperative localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,28768007,Incisional biopsy of breast mass (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,42125001,Excisional biopsy of breast mass (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,44578009,Core needle biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,116219004,Excisional biopsy of breast mass with axillary contents (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,116220005,Excisional biopsy of breast mass without axillary contents (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,116334007,Percutaneous core needle biopsy of breast using stereotactic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,172086006,Breast cavity shavings (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237372000,Excisional biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237375003,Breast biopsy and related procedures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237376002,Percutaneous needle biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237377006,Percutaneous drill biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237378001,Incisional biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,237379009,Marker biopsy of breast lesion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,265253005,Percutaneous biopsy of breast lesion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,274331003,Surgical biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,287553003,Non-surgical breast biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,303689004,Tru-cut biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,307298009,Percutaneous fine needle aspiration of breast lesion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,387736007,Fine needle aspiration of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,432109009,Fine needle aspiration biopsy of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,432157003,Vacuum assisted biopsy of breast using ultrasound guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,432337008,Fine needle aspiration biopsy of breast using ultrasound guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,432550005,Core needle biopsy of breast using ultrasound guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,433008009,Core needle biopsy of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,433685008,Fine needle aspiration and core needle biopsy of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,433805008,Fine needle aspiration biopsy and core needle biopsy of breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,442963006,Percutaneous needle biopsy of breast using ultrasound guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,445171002,Core needle biopsy of breast using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,445437001,Core needle biopsy of breast using palpation guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,448336005,Radiofrequency biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,448689003,Radiofrequency biopsy of breast using ultrasound guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,709628007,Biopsy of breast using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,711508007,Percutaneous fine needle aspiration biopsy of breast using imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,723990008,Biopsy of breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,725936002,Radiofrequency biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,736615002,Open biopsy of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,770568001,Biopsy of right breast using digital tomosynthesis guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,770569009,Biopsy of left breast using digital tomosynthesis guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,770570005,Biopsy of bilateral breasts using digital tomosynthesis guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,771086002,Biopsy of breast using digital tomosynthesis guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,771625002,Vacuum assisted biopsy of lesion of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,785800009,Biopsy of bilateral breasts using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,786883001,Vacuum assisted biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,866232001,Core needle biopsy of multiple lesions of breast using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1179705005,Excisional biopsy of lesion of breast using magnetic seed marker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1179707002,Excisional biopsy of lesion of breast using radioactive seed marker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1179708007,Excisional biopsy of lesion of breast using radiofrequency identifier tag (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1220570007,Biopsy of left breast using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1220571006,Biopsy of right breast using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1220572004,Biopsy of breast using mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1264555004,Core needle biopsy of breast using imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1264556003,Vacuum assisted biopsy of breast using imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1268323005,Fine needle aspiration biopsy of breast using stereotactic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1268996004,Excisional biopsy of lesion of breast using infrared reflector localization marker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1332066007,Fine needle aspiration biopsy of right breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1332067003,Fine needle aspiration biopsy and core needle biopsy of right breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333891002,Fine needle aspiration biopsy of left breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333892009,Fine needle aspiration biopsy of bilateral breasts using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333893004,Prone fine needle aspiration biopsy of left breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333894005,Prone fine needle aspiration biopsy of right breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333895006,Prone fine needle aspiration biopsy of bilateral breasts using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333896007,Prone fine needle aspiration biopsy and core needle biopsy of left breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333897003,Prone fine needle aspiration biopsy and core needle biopsy of right breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333898008,Prone fine needle aspiration biopsy and core needle biopsy of bilateral breasts using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333899000,Upright fine needle aspiration biopsy and core needle biopsy of left breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333900005,Upright fine needle aspiration biopsy and core needle biopsy of right breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333901009,Upright fine needle aspiration biopsy and core needle biopsy of bilateral breasts using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333902002,Fine needle aspiration biopsy and core needle biopsy of left breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333903007,Fine needle aspiration biopsy and core needle biopsy of bilateral breasts using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333904001,Upright fine needle aspiration biopsy of left breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333905000,Upright fine needle aspiration biopsy of right breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1333906004,Upright fine needle aspiration biopsy of bilateral breasts using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1334078005,Vacuum assisted core needle biopsy of left breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1334079002,Vacuum assisted core needle biopsy of right breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,1334080004,Vacuum assisted core needle biopsy of bilateral breasts using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,2131000087106,Biopsy of left breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,2141000087100,Biopsy of right breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,2841000087108,Biopsy of bilateral breasts using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,4541000087104,Biopsy of left breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,4551000087101,Biopsy of right breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,5181000087103,Biopsy of bilateral breasts using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,12131000087109,Biopsy of breast and axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,305011000000108,Core needle biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,305051000000107,Fine needle aspiration biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,305071000000103,Fine needle aspiration biopsy and core needle biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,306371000000109,Prone fine needle aspiration biopsy and core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,306381000000106,Prone core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,306641000000107,Upright core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,306651000000105,Upright fine needle aspiration biopsy and core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,306671000000101,Upright fine needle aspiration biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,307971000000105,Prone vacuum assisted biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,307981000000107,Upright vacuum assisted biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,308041000000102,Prone fine needle aspiration biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Biopsy,2.16.840.1.113883.3.464.1004.2505,872731000000104,Vacuum assisted core needle biopsy of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,76641,,CPT,2.16.840.1.113883.6.12
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,76642,,CPT,2.16.840.1.113883.6.12
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,105420-4,US Breast - left screening,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,105421-2,US Breast - right screening,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,24599-3,US Breast limited,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,24601-7,US Breast,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,26215-4,US Breast - left,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,26216-2,US Breast - right,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,26288-1,US Breast - left limited,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,26290-7,US Breast - right limited,LOINC,2.16.840.1.113883.6.1
+Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533,42132-1,US Breast screening,LOINC,2.16.840.1.113883.6.1
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,RID36030,BI-RADS 4 [RID36030],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,RID36031,BI-RADS 4A [RID36031],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,RID36032,BI-RADS 4B [RID36032],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,RID36033,BI-RADS 4C [RID36033],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,RID36034,BI-RADS 5 [RID36034],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,397144001,"Mammography assessment (Category 4) - Suspicious abnormality, biopsy should be considered (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,397145000,Mammography assessment (Category 5) - Highly suggestive of malignancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,6121000179106,"Mammography assessment (Category 4A) - Suspicious abnormality, biopsy should be considered, low suspicion of malignancy (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,6131000179108,"Mammography assessment (Category 4B) - Suspicious abnormality, biopsy should be considered, moderate suspicion of malignancy (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504,6141000179100,"Mammography assessment (Category 4C) - Suspicious abnormality, biopsy should be considered, high suspicion of malignancy (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inconclusive BIRADS,2.16.840.1.113883.3.464.1004.2602,RID36036,BI-RADS 0 [RID36036],RadLex Radiology Lexicon,2.16.840.1.113883.6.256
+Inconclusive BIRADS,2.16.840.1.113883.3.464.1004.2602,397138000,Mammography assessment (Category 0) - Need additional imaging evaluation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,77061,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,77062,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,77063,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,77065,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,77066,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,77067,,CPT,2.16.840.1.113883.6.12
+Mammography,2.16.840.1.113883.3.464.1004.1168,103885-0,MG Breast - left Screening for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,103886-8,MG Breast - right Screening for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,103892-6,DBT Breast screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,103893-4,MG Breast Screening for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,103894-2,MG Breast Diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,24604-1,MG Breast Diagnostic Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,24605-8,MG Breast Diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,24606-6,MG Breast Screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,24610-8,MG Breast Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26175-0,MG Breast - bilateral Screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26176-8,MG Breast - left Screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26177-6,MG Breast - right Screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26287-3,MG Breast - bilateral Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26289-9,MG Breast - left Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26291-5,MG Breast - right Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26346-7,MG Breast - bilateral Diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26347-5,MG Breast - left Diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26348-3,MG Breast - right Diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26349-1,MG Breast - bilateral Diagnostic Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26350-9,MG Breast - left Diagnostic Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,26351-7,MG Breast - right Diagnostic Limited Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36319-2,MG Breast 4 Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36625-2,MG Breast Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36626-0,MG Breast - bilateral Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36627-8,MG Breast - left Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36642-7,MG Breast - left 2 Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,36962-9,MG Breast Axillary,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37005-6,MG Breast - left Magnification,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37006-4,MG Breast - bilateral MLO,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37016-3,MG Breast - bilateral Rolled Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37017-1,MG Breast - left Rolled Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37028-8,MG Breast Tangential,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37029-6,MG Breast - bilateral Tangential,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37030-4,MG Breast - left Tangential,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37037-9,MG Breast True lateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37038-7,MG Breast - bilateral True lateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37052-8,MG Breast - bilateral XCCL,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37053-6,MG Breast - left XCCL,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37539-4,MG Breast Grid Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37542-8,MG Breast Magnification Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37543-6,MG Breast - bilateral Magnification Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37551-9,MG Breast Spot Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37552-7,MG Breast - bilateral Spot Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37553-5,MG Breast - left Spot Views compression,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37554-3,MG Breast - bilateral Magnification and Spot,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37768-9,MG Breast - right 2 Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37769-7,MG Breast - right Magnification and Spot,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37770-5,MG Breast - right Tangential,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37771-3,MG Breast - right True lateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37772-1,MG Breast - right XCCL,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37773-9,MG Breast - right Magnification,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37774-7,MG Breast - right Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,37775-4,MG Breast - right Rolled Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38070-9,MG Breast Views for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38071-7,MG Breast - bilateral Views for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38072-5,MG Breast - left Views for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38090-7,MG Breast - bilateral Air gap Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38091-5,MG Breast - left Air gap Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38807-4,MG Breast - right Spot Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38820-7,MG Breast - right Views for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38854-6,MG Breast - left Magnification and Spot,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,38855-3,MG Breast - left True lateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,42415-0,MG Breast - bilateral Views Post Wire Placement,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,42416-8,MG Breast - left Views Post Wire Placement,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46335-6,MG Breast - bilateral Single view,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46336-4,MG Breast - left Single view,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46337-2,MG Breast - right Single view,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46338-0,MG Breast - unilateral Single view,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46339-8,MG Breast - unilateral Views,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46350-5,MG Breast - unilateral Diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46351-3,MG Breast - bilateral Displacement Views for Implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46356-2,MG Breast - unilateral Screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,46380-2,MG Breast - unilateral Views for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,48475-8,MG Breast - bilateral Diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,48492-3,MG Breast - bilateral Screening for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,69150-1,MG Breast - left Diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,69251-7,MG Breast Views Post Wire Placement,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,69259-0,MG Breast - right Diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72137-3,DBT Breast - right diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72138-1,DBT Breast - left diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72139-9,DBT Breast - bilateral diagnostic,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72140-7,DBT Breast - right screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72141-5,DBT Breast - left screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,72142-3,DBT Breast - bilateral screening,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,86462-9,DBT Breast - unilateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,86463-7,DBT Breast - bilateral,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91517-3,DBT Breast - right diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91518-1,DBT Breast - left diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91519-9,DBT Breast - bilateral diagnostic for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91520-7,DBT Breast - right screen for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91521-5,DBT Breast - left screen for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,91522-3,DBT Breast - bilateral screen for implant,LOINC,2.16.840.1.113883.6.1
+Mammography,2.16.840.1.113883.3.464.1004.1168,12389009,Xeromammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,24623002,Screening mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,43204002,Mammography of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,71651007,Mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,241055006,Mammogram - symptomatic (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,241057003,Cone compression mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,241058008,Magnification mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,258172002,Stereotactic mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,439324009,Mammography in compression view (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,450566007,Digital tomosynthesis of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,723778004,Digital tomosynthesis of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,723779007,Digital tomosynthesis of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,723780005,Digital tomosynthesis of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,726551006,Contrast enhanced spectral mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,833310007,Contrast enhanced dual energy spectral mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,866234000,Mammography of breast implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,866235004,Mammography of bilateral breast implants (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,866236003,Mammography of left breast implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,866237007,Mammography of right breast implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1333997002,Mammography extended view of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1333998007,Mammography extended view of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1333999004,Mammography extended view of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1334000002,Mammography lateral view of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1334001003,Mammography lateral view of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,1334002005,Mammography lateral view of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,308001000000100,Mammography lateral view (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,308031000000106,Mammography extended view (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,384151000119104,Screening mammography of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,392521000119107,Screening mammography of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,392531000119105,Screening mammography of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,566571000119105,Mammography of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Mammography,2.16.840.1.113883.3.464.1004.1168,572701000119102,Mammography of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96

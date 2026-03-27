@@ -1,0 +1,603 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,F10.230,"[F10.230] Alcohol dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,F10.231,[F10.231] Alcohol dependence with withdrawal delirium,ICD10CM,2.16.840.1.113883.6.90
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,F10.232,[F10.232] Alcohol dependence with withdrawal with perceptual disturbance,ICD10CM,2.16.840.1.113883.6.90
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,F10.239,"[F10.239] Alcohol dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,8635005,Alcohol withdrawal delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,85561006,Alcohol withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,191476005,Alcohol withdrawal hallucinosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,191480000,Alcohol withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,308742005,Alcohol withdrawal-induced convulsion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209,723926008,Perceptual disturbances and seizures co-occurrent and due to alcohol withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.230,"[F13.230] Sedative, hypnotic or anxiolytic dependence with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.231,"[F13.231] Sedative, hypnotic or anxiolytic dependence with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.232,"[F13.232] Sedative, hypnotic or anxiolytic dependence with withdrawal with perceptual disturbance",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.239,"[F13.239] Sedative, hypnotic or anxiolytic dependence with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.930,"[F13.930] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal, uncomplicated",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.931,"[F13.931] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal delirium",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.932,"[F13.932] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal with perceptual disturbances",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,F13.939,"[F13.939] Sedative, hypnotic or anxiolytic use, unspecified with withdrawal, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,361151007,Delirium due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,703849002,Benzodiazepine withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,703850002,Delirium due to benzodiazepine withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724660009,Hypnotic withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724661008,Anxiolytic withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724662001,Sedative withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724663006,Hypnotic withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724664000,Anxiolytic withdrawal syndrome without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724665004,Perceptual disturbances co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724666003,Perceptual disturbances co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724667007,Perceptual disturbances co-occurrent and due to anxiolytic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724668002,Seizure co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724669005,Seizure co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724670006,Seizure co-occurrent and due to anxiolytic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724671005,Perceptual disturbances and seizures co-occurrent and due to sedative withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,724672003,Perceptual disturbances and seizures co-occurrent and due to hypnotic withdrawal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210,23601000119102,Sedative withdrawal syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,F41.0,[F41.0] Panic disorder [episodic paroxysmal anxiety],ICD10CM,2.16.840.1.113883.6.90
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,F41.1,[F41.1] Generalized anxiety disorder,ICD10CM,2.16.840.1.113883.6.90
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,F41.3,[F41.3] Other mixed anxiety disorders,ICD10CM,2.16.840.1.113883.6.90
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,F41.8,[F41.8] Other specified anxiety disorders,ICD10CM,2.16.840.1.113883.6.90
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,F41.9,"[F41.9] Anxiety disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,109006,Anxiety disorder of childhood OR adolescence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,1380006,Agoraphobia without history of panic disorder with limited symptom attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,1686006,"Sedative, hypnotic AND/OR anxiolytic-induced anxiety disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,1816003,"Panic disorder with agoraphobia, severe agoraphobic avoidance AND mild panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,3158007,"Panic disorder with agoraphobia, agoraphobic avoidance in partial remission AND panic attacks in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,4932002,"Panic disorder with agoraphobia, moderate agoraphobic avoidance AND mild panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,5509004,Panic disorder with agoraphobia AND severe panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,8185002,Panic disorder with agoraphobia AND moderate panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,10586006,Occupation-related stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,11806006,Separation anxiety disorder of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,11941006,"Panic disorder with agoraphobia, agoraphobic avoidance in full remission AND panic attacks in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,13438001,Overanxious disorder of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,15277004,Hallucinogen-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,17496003,Organic anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,19766004,"Panic disorder with agoraphobia, mild agoraphobic avoidance AND severe panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,20876004,Inhalant-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,21897009,Generalized anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,22230001,"Panic disorder with agoraphobia, agoraphobic avoidance in partial remission AND panic attacks in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,24781009,"Panic disorder with agoraphobia, mild agoraphobic avoidance AND panic attacks in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,25501002,Social phobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,30059008,"Panic disorder with agoraphobia, severe agoraphobic avoidance AND moderate panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,31781004,"Panic disorder with agoraphobia, agoraphobic avoidance in partial remission AND mild panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,32388005,"Panic disorder with agoraphobia, agoraphobic avoidance in partial remission AND moderate panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,34116005,"Panic disorder with agoraphobia, agoraphobic avoidance in full remission AND severe panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,34938008,Anxiety disorder caused by alcohol (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,35607004,Panic disorder with agoraphobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,37868008,Anxiety disorder of adolescence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,37872007,Avoidant disorder of childhood OR adolescence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,38328002,"Panic disorder with agoraphobia, severe agoraphobic avoidance AND panic attacks in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,39951001,Cannabis-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,43150009,Panic disorder without agoraphobia with severe panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,47505003,Posttraumatic stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,49564006,"Panic disorder with agoraphobia, mild agoraphobic avoidance AND moderate panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,50026000,Organic anxiety disorder caused by psychoactive substance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,50983008,"Panic disorder with agoraphobia, mild agoraphobic avoidance AND panic attacks in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,51493001,Anxiety disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,52910006,Anxiety disorder due to a general medical condition (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,53467004,Anxiety disorder of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,53956006,Panic disorder without agoraphobia with panic attacks in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,54587008,Simple phobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,55967005,Anxiety disorder caused by phencyclidine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,56576003,Panic disorder without agoraphobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,58535001,Physical AND emotional exhaustion state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,59923000,Panic disorder with agoraphobia AND panic attacks in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,61157009,Combat fatigue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,61212007,"Panic disorder with agoraphobia, severe agoraphobic avoidance AND severe panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,61569007,Agoraphobia without history of panic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,62351001,Generalized social phobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,63701002,"Panic disorder with agoraphobia, mild agoraphobic avoidance AND mild panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,63909006,Panic disorder with agoraphobia AND panic attacks in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,64060000,"Panic disorder with agoraphobia, moderate agoraphobic avoidance AND panic attacks in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,64165008,Avoidant disorder of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,65064003,Panic disorder without agoraphobia with moderate panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,67195008,Acute stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,69479009,Anxiety hyperventilation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,70655008,Caffeine-induced anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,70691001,Agoraphobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,71959007,Elective mutism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,72861004,Panic disorder without agoraphobia with mild panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,74010007,"Panic disorder with agoraphobia, severe agoraphobic avoidance AND panic attacks in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,76812003,"Panic disorder with agoraphobia, moderate agoraphobic avoidance AND panic attacks in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,76868007,"Panic disorder with agoraphobia, agoraphobic avoidance in full remission AND mild panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,82339009,Anxiety disorder caused by amfetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,82415003,Agoraphobia without history of panic disorder without limited symptom attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,82494000,Panic disorder without agoraphobia with panic attacks in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,82738004,"Panic disorder with agoraphobia, moderate agoraphobic avoidance AND moderate panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,83253003,Shyness disorder of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,83631006,"Panic disorder with agoraphobia, moderate agoraphobic avoidance AND severe panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,85061001,"Separation anxiety disorder of childhood, early onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,87798009,"Panic disorder with agoraphobia, agoraphobic avoidance in full remission AND moderate panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,89948007,Panic disorder with agoraphobia AND mild panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,90790003,Avoidant disorder of adolescence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,111487009,Dream anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,111490003,"Panic disorder with agoraphobia, agoraphobic avoidance in partial remission AND severe panic attacks (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,111491004,"Panic disorder with agoraphobia, agoraphobic avoidance in full remission AND panic attacks in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,126943008,Separation anxiety (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191722009,Agoraphobia with panic attacks (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191724005,"Social phobia, fear of eating in public (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191725006,"Social phobia, fear of public speaking (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191726007,"Social phobia, fear of public washing (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191736004,Obsessive-compulsive disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191737008,Compulsive neurosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,191738003,Obsessional neurosis (disorder) [191738003],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192014006,Psychogenic rumination (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192037000,Acute panic state due to acute stress reaction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192038005,Acute fugue state due to acute stress reaction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192039002,Acute stupor state due to acute stress reaction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192041001,Acute situational disturbance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192042008,Acute post-trauma stress state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192044009,Stress reaction causing mixed disturbance of emotion and conduct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,192611004,Childhood phobic anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,197480006,Anxiety disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,231504006,Mixed anxiety and depressive disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,238965007,Venereophobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,238966008,Syphilophobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,268669006,Childhood and adolescent disturbance with elective mutism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,279611005,Shell shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,313182004,Chronic post-traumatic stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,317816007,Stockholm syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,318784009,"Posttraumatic stress disorder, delayed onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,371631005,Panic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,386810004,Phobic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,403593004,Phobic fear of skin cancer (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,426174008,Chronic stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,428687006,Nightmares associated with chronic post-traumatic stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,443919007,Complex posttraumatic stress disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,446175003,Acute posttraumatic stress disorder following military combat (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,446180007,Delayed posttraumatic stress disorder following military combat (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,699241002,Chronic post-traumatic stress disorder following military combat (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,723913009,Olfactory reference disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724654009,Anxiety disorder caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724693000,Obsessive compulsive disorder caused by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724708007,Anxiety disorder caused by methylenedioxymethamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724722007,Anxiety disorder caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724723002,Anxiety disorder caused by ketamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,724730008,Obsessive compulsive disorder caused by psychoactive substance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,737341006,Anxiety disorder caused by synthetic cannabinoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,762331007,Anxiety disorder caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,762332000,Obsessive compulsive disorder caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,762515000,Anxiety disorder caused by synthetic cathinone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,762516004,Obsessive compulsive disorder caused by synthetic cathinone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,22621000119103,Anxiety disorder caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,10743001000119103,Anxiety disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,12398201000119102,Anxiety disorder caused by methamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16264621000119109,Recurrent mild major depressive disorder co-occurrent with anxiety (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16264821000119108,Recurrent severe major depressive disorder co-occurrent with anxiety (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16264901000119109,Recurrent moderate major depressive disorder co-occurrent with anxiety (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16265061000119105,Recurrent major depressive disorder co-occurrent with anxiety in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16265301000119106,Recurrent major depressive disorder in partial remission co-occurrent with anxiety (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16265951000119109,Mild major depressive disorder co-occurrent with anxiety single episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16266831000119100,Moderate major depressive disorder co-occurrent with anxiety single episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211,16266991000119108,Severe major depressive disorder co-occurrent with anxiety single episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718890006,Assessment using Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718893008,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718895001,Assessment using Integrated Palliative care Outcome Scale Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718898004,Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718899007,Assessment using Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718901003,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718903000,Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718904006,Assessment using Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718957007,Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718967002,Integrated Palliative care Outcome Scale - Staff Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718969004,Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718971004,Integrated Palliative care Outcome Scale Staff Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718973001,Integrated Palliative care Outcome Scale Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718974007,Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718975008,Integrated Palliative care Outcome Scale Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,718976009,Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period) (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761865002,Palliative care Outcome Scale symptom list for end-stage renal disease (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761866001,Palliative care Outcome Scale symptom list for end-stage renal disease score (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,761867005,Assessment using Palliative care Outcome Scale symptom list for end-stage renal disease (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225,457511000124100,Palliative performance scale (assessment scale),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,G9054,"Oncology; primary focus of visit; supervising, coordinating or managing care of patient with terminal cancer or for whom other medical illness prevents further cancer treatment; includes symptom management, end-of-life care planning, management of palliative therapies (for use in a medicare-approved demonstration project) (G9054)",HCPCS,2.16.840.1.113883.6.285
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305284002,Admission by palliative care physician (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305381007,Admission to palliative care department (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305686008,Seen by palliative care physician (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,305824005,Seen by palliative care medicine service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,441874000,Seen by palliative care service (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,713281006,Consultation for palliative care (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450,4901000124101,Palliative care education (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,103735009,Palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,105402000,Visit of patient by chaplain during palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395669003,Specialist palliative care treatment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395670002,Specialist palliative care treatment - inpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395694002,Specialist palliative care treatment - daycare (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,395695001,Specialist palliative care treatment - outpatient (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,443761007,Anticipatory palliative care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,1841000124106,Palliative care medication review (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224,433181000124107,Documentation of palliative care medication action plan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+REM Sleep Behavior Disorder,2.16.840.1.113883.3.464.1004.2212,G47.52,[G47.52] REM sleep behavior disorder,ICD10CM,2.16.840.1.113883.6.90
+REM Sleep Behavior Disorder,2.16.840.1.113883.3.464.1004.2212,69020003,Abnormal rapid eye movement sleep (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+REM Sleep Behavior Disorder,2.16.840.1.113883.3.464.1004.2212,415238003,Rapid eye movement sleep behavior disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.001,"[G40.001] Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.009,"[G40.009] Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.011,"[G40.011] Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.019,"[G40.019] Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.101,"[G40.101] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.109,"[G40.109] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.111,"[G40.111] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.119,"[G40.119] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.201,"[G40.201] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.209,"[G40.209] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.211,"[G40.211] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.219,"[G40.219] Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.301,"[G40.301] Generalized idiopathic epilepsy and epileptic syndromes, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.309,"[G40.309] Generalized idiopathic epilepsy and epileptic syndromes, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.311,"[G40.311] Generalized idiopathic epilepsy and epileptic syndromes, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.319,"[G40.319] Generalized idiopathic epilepsy and epileptic syndromes, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.401,"[G40.401] Other generalized epilepsy and epileptic syndromes, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.409,"[G40.409] Other generalized epilepsy and epileptic syndromes, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.411,"[G40.411] Other generalized epilepsy and epileptic syndromes, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.419,"[G40.419] Other generalized epilepsy and epileptic syndromes, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.42,[G40.42] Cyclin-Dependent Kinase-Like 5 Deficiency Disorder,ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.501,"[G40.501] Epileptic seizures related to external causes, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.509,"[G40.509] Epileptic seizures related to external causes, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.801,"[G40.801] Other epilepsy, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.802,"[G40.802] Other epilepsy, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.803,"[G40.803] Other epilepsy, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.804,"[G40.804] Other epilepsy, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.811,"[G40.811] Lennox-Gastaut syndrome, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.812,"[G40.812] Lennox-Gastaut syndrome, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.813,"[G40.813] Lennox-Gastaut syndrome, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.814,"[G40.814] Lennox-Gastaut syndrome, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.821,"[G40.821] Epileptic spasms, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.822,"[G40.822] Epileptic spasms, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.823,"[G40.823] Epileptic spasms, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.824,"[G40.824] Epileptic spasms, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.833,"[G40.833] Dravet syndrome, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.834,"[G40.834] Dravet syndrome, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.841,"[G40.841] KCNQ2-related epilepsy, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.842,"[G40.842] KCNQ2-related epilepsy, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.843,"[G40.843] KCNQ2-related epilepsy, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.844,"[G40.844] KCNQ2-related epilepsy, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.89,[G40.89] Other seizures,ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.901,"[G40.901] Epilepsy, unspecified, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.909,"[G40.909] Epilepsy, unspecified, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.911,"[G40.911] Epilepsy, unspecified, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.919,"[G40.919] Epilepsy, unspecified, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.A01,"[G40.A01] Absence epileptic syndrome, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.A09,"[G40.A09] Absence epileptic syndrome, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.A11,"[G40.A11] Absence epileptic syndrome, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.A19,"[G40.A19] Absence epileptic syndrome, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.B01,"[G40.B01] Juvenile myoclonic epilepsy, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.B09,"[G40.B09] Juvenile myoclonic epilepsy, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.B11,"[G40.B11] Juvenile myoclonic epilepsy, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.B19,"[G40.B19] Juvenile myoclonic epilepsy, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.C01,"[G40.C01] Lafora progressive myoclonus epilepsy, not intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.C09,"[G40.C09] Lafora progressive myoclonus epilepsy, not intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.C11,"[G40.C11] Lafora progressive myoclonus epilepsy, intractable, with status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,G40.C19,"[G40.C19] Lafora progressive myoclonus epilepsy, intractable, without status epilepticus",ICD10CM,2.16.840.1.113883.6.90
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,2198002,Visceral epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,6204001,Juvenile myoclonic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,15523002,Benign focal epilepsy of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,19598007,Generalized epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,28055006,West syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,36803009,Idiopathic generalized epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,38281008,Benign neonatal convulsions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,39194005,Visual epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,44145005,Benign Rolandic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,44423001,Early myoclonic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,50866000,Childhood absence epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,68761002,Epileptic vertigo (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,75023009,Post-traumatic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,79745005,Reflex epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,80651009,Aicardi's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,84757009,Epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,95208000,Photogenic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,111498005,Extratemporal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,128613002,Seizure disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,191714002,Dissociative convulsions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,192845009,Myoclonic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,192990004,Myoclonic epilepsy in infancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,192999003,Partial epilepsy with impairment of consciousness (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193000002,Temporal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193002005,Psychosensory epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193003000,Mesiobasal limbic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193008009,Somatosensory epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193009001,Partial epilepsy with autonomic symptoms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193010006,Visual reflex epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,193021002,Cursive (running) epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230191005,Rasmussen syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230381009,Focal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230382002,Benign frontal epilepsy of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230383007,Benign psychomotor epilepsy of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230384001,Benign atypical partial epilepsy in childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230386004,Childhood epilepsy with occipital paroxysms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230387008,Benign occipital epilepsy of childhood - early onset variant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230388003,Benign occipital epilepsy of childhood - late onset variant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230389006,Primary inherited reading epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230390002,Localization-related symptomatic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230391003,Amygdalo-hippocampal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230392005,Rhinencephalic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230393000,Lateral temporal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230394006,Frontal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230395007,Supplementary motor epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230396008,Cingulate epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230397004,Anterior frontopolar epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230398009,Orbitofrontal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230399001,Dorsolateral epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230400008,Opercular epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230403005,Parietal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230404004,Occipital lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230406002,Localization-related symptomatic epilepsy with specific precipitant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230407006,Hemiplegia-hemiconvulsion-epilepsy syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230408001,Localization-related cryptogenic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230410004,Benign neonatal familial convulsions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230411000,Benign non-familial neonatal convulsions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230413002,Juvenile absence epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230414008,Epilepsy with generalized tonic-clonic seizures alone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230416005,Cryptogenic West syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230417001,Symptomatic West syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230418006,Lennox-Gastaut syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230419003,Cryptogenic Lennox-Gastaut syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230420009,Symptomatic Lennox-Gastaut syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230421008,Epilepsy with myoclonic-atonic seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230422001,Epilepsy with myoclonic absence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230423006,Unverricht-Lundborg syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230425004,Lafora disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230426003,Myoclonic epilepsy with ragged red fibers (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230429005,Early infantile epileptic encephalopathy with suppression bursts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230432008,Familial febrile convulsions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230437002,Severe myoclonic epilepsy in infancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230438007,Acquired epileptic aphasia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230439004,Epilepsy with continuous spike wave during slow-wave sleep (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230440002,Secondary reading epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230444006,Menstrual epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230445007,Nocturnal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230448009,Writing epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230450001,Eating epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230452009,Toothbrushing epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230453004,Decision-making epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,230454005,Aquagenic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,267581004,Progressive myoclonic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,267592003,Motor cortex epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,278510009,Localization-related idiopathic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,279953009,Familial neonatal seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,307356008,Motor epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,307357004,"Jacksonian, focal or motor epilepsy (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,361123003,Psychomotor epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,371022006,Seizures due to metabolic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,371107004,Seizures complicating intracranial hemorrhage in the newborn (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,413101007,Stress-induced epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,422527005,Refractory infantile spasms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,442511009,"Progressive encephalopathy with edema, hypsarrhythmia and optic atrophy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,698021005,Autosomal dominant nocturnal frontal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,698764006,Post infectious grand mal epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,698767004,Post-cerebrovascular accident epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,699688008,Genetic epilepsy with febrile seizures plus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,702326000,Progressive myoclonus epilepsy with ataxia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,702344008,Pitt-Hopkins syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,703524005,Spinal muscular atrophy with progressive myoclonic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,715425000,Benign focal seizure of adolescence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,715534008,Infantile convulsion and choreoathetosis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,715629001,Generalized epilepsy and paroxysmal dyskinesia syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,716278005,Epilepsy with eyelid myoclonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,716706009,Female restricted epilepsy with intellectual disability syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,717223008,X-linked epilepsy with learning disability and behavior disorder syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,717225001,Benign adult familial myoclonic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,717276003,Folinic acid responsive seizure syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,719810000,X-linked intellectual disability with seizure and psoriasis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,720010009,Microphthalmia with brain atrophy syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,720519003,"Atherosclerosis, deafness, diabetes, epilepsy, nephropathy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,721088003,"Developmental delay, epilepsy, neonatal diabetes syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,721207002,"Seizure, sensorineural deafness, ataxia, intellectual disability, electrolyte imbalance syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,722110003,"Osteogenesis imperfecta, retinopathy, seizures, intellectual disability syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,722386009,Celiac disease with epilepsy and cerebral calcification syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,722762005,Ganglioside GM3 synthase deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,723125008,Epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,723304001,"Microcephaly, seizure, intellectual disability, heart disease syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,723676007,"Severe intellectual disability, epilepsy, anal anomaly, distal phalangeal hypoplasia syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724274009,Infant epilepsy with migrant focal crisis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724549005,Epilepsy due to infectious disease of central nervous system (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724576005,Pyridoxal 5-phosphate dependent epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724786008,Epilepsy due to perinatal anoxic-ischemic brain injury (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724787004,Epilepsy due to cerebrovascular accident (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724789001,Epilepsy due to intracranial tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724988000,Epilepsy co-occurrent and due to degenerative brain disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724989008,Epilepsy co-occurrent and due to mesial temporal sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724990004,Epilepsy due to immune disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724991000,Epilepsy co-occurrent and due to demyelinating disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,724992007,Epilepsy co-occurrent and due to dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,725163002,"X-linked spasticity, intellectual disability, epilepsy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,725413002,Febrile infection related epilepsy syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,726702005,Epileptic encephalopathy with global cerebral demyelination (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,733031004,"Epilepsy, microcephaly, skeletal dysplasia syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,733032006,Epilepsy telangiectasia syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,733082001,Early-onset Lafora body disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,733195008,Epilepsy of infancy with migrating focal seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,733623005,"Autism spectrum disorder, epilepsy, arthrogryposis syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,734434007,Pyridoxine-dependent epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763349002,Progressive myoclonic epilepsy with dystonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763534009,Hot water reflex epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763622006,Thinking epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763632004,Startle epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763802009,Micturition induced epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763827002,Orgasm induced epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,763861000,"Pachygyria, intellectual disability, epilepsy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,764453009,Action myoclonus renal failure syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,764522009,Familial focal epilepsy with variable foci (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,765089003,"Focal epilepsy, intellectual disability, cerebro-cerebellar malformation syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,765093009,"Rolandic epilepsy, speech dyspraxia syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,765170001,Sodium voltage-gated channel alpha subunit 8-related epilepsy with encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,765216006,Audiogenic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,765756007,Benign infantile seizure with mild gastroenteritis syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,766044005,Acute encephalopathy with biphasic seizures and late reduced diffusion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,766815007,Perioral myoclonia with absences (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,766932005,Hypothalamic hamartoma with gelastic seizure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,767254005,Recurrent benign focal seizures of childhood (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,768473009,Purine rich element binding protein A syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,768555009,5q31.3 microdeletion syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,768666006,Syntaxin binding protein 1 encephalopathy with epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770405003,Benign familial mesial temporal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770431001,"Early-onset epileptic encephalopathy and intellectual disability due to glutamate receptor, ionotropic, N-methyl-D-aspartate, subunit 2A mutation (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770438007,Infantile spasm and broad thumb syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770622009,Benign infantile focal epilepsy with midline spikes and waves during sleep (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770623004,Benign occipital lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770624005,Benign partial epilepsy of infancy with complex partial seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770643005,Mesial temporal lobe epilepsy with hippocampal sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770678005,"Progressive encephalopathy with edema, hypsarrhythmia, and optic atrophy-like syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770755007,"Intellectual disability, seizures, hypotonia, ophthalmologic, skeletal anomalies syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770758009,New-onset refractory status epilepticus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,770898002,"Autosomal recessive cerebellar ataxia, epilepsy, intellectual disability syndrome due to WW domain containing oxidoreductase deficiency (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771141002,Benign partial epilepsy with secondarily generalized seizures in infancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771223000,Infantile epileptic dyskinetic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771303004,Severe neonatal onset encephalopathy with microcephaly (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771448004,Autism epilepsy syndrome due to branched chain ketoacid dehydrogenase kinase deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771469002,"Early-onset spastic ataxia, myoclonic epilepsy, neuropathy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,771516000,Solute carrier family 35 member A2 congenital disorder of glycosylation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773230003,Cyclin-dependent kinase-like 5 deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773421009,Infantile-onset mesial temporal lobe epilepsy with severe cognitive regression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773497001,"Partial corpus callosum agenesis, cerebellar vermis hypoplasia with posterior fossa cysts syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773498006,"Autosomal recessive cerebellar ataxia, epilepsy, intellectual disability syndrome due to TUD deficiency (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773548008,"Early-onset epileptic encephalopathy, cortical blindness, intellectual disability, facial dysmorphism syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,773643006,"Multiple congenital anomalies, hypotonia, seizures syndrome type 2 (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,778001003,Potassium voltage-gated channel subfamily Q member 2 related epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,778029000,FAST kinase domains 2-related infantile mitochondrial encephalomyopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,778047006,Myoclonic epilepsy in non-progressive encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,778063003,Cryptogenic late-onset epileptic spasms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,780827006,Synaptic Ras GTPase activating protein 1- related intellectual disability (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,782737003,"Diffuse cerebral and cerebellar atrophy, intractable seizures, progressive microcephaly syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,782772000,Congenital muscular dystrophy with intellectual disability and severe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,782825008,"Primary microcephaly, epilepsy, permanent neonatal diabetes syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,783055005,Progressive myoclonic epilepsy type 5 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,783062001,Progressive myoclonic epilepsy type 6 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,783064000,Progressive myoclonic epilepsy type 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,783139000,Progressive myoclonic epilepsy type 8 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,783739005,Familial temporal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,784342008,Familial infantile myoclonic epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,784345005,Malignant migrating partial seizures of infancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,784372002,Familial mesial temporal lobe epilepsy with febrile seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,784377008,Autosomal dominant epilepsy with auditory features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,785303004,"Multiple congenital anomalies, hypotonia, seizures syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,785726009,Hyperekplexia epilepsy syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,788417006,"Alopecia, epilepsy, intellectual disability syndrome Moynahan type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,789063000,"Primary hyperaldosteronism, seizures, neurological abnormalities syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,860804005,Epilepsy due to infectious encephalitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,860806007,Epilepsy due to infectious meningitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,860815000,Epilepsy due to neonatal central nervous system infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1163527006,Epilepsy due to parasitic disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1163529009,Epilepsy due to bacterial endocarditis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1167371007,"Polyhydramnios, megalencephaly, symptomatic epilepsy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1172593006,"Early-onset progressive diffuse brain atrophy, microcephaly, muscle weakness, optic atrophy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1172630000,"Global developmental delay, neuro-ophthalmological abnormalities, seizures, intellectual disability syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1172844009,Combined oxidative phosphorylation defect type 27 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1179282009,"Severe neurodevelopmental disorder with feeding difficulties, stereotypic hand movement, bilateral cataract (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1179359005,Maternal epilepsy due to perinatal stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1179360000,Fetal epilepsy due to perinatal stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1179547007,Neonatal epilepsy due to perinatal stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1187042007,"Early-onset seizures, distal limb anomalies, facial dysmorphism, global developmental delay syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1187210007,"Intellectual disability, epilepsy, extrapyramidal syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1187250005,"Seizures, scoliosis, macrocephaly syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1187278006,"Spastic paraplegia, severe developmental delay, epilepsy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1187304005,"Macrocephaly, intellectual disability, neurodevelopmental disorder, small thorax syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1197587003,"Lethal neonatal spasticity, epileptic encephalopathy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1208486005,Multiple mitochondrial dysfunctions syndrome type 2 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1208747005,Inosine triphosphate pyrophosphohydrolase-related lethal infantile neurological disorder with cataract and cardiac involvement (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1208939001,Progressive myoclonic epilepsy type 7 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1217381009,"Neurodevelopmental delay, seizures, ophthalmic anomalies, osteopenia, cerebellar atrophy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1222656005,Synaptic Ras GTPase activating protein 1-related developmental and epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1222659003,Ring finger protein 13-related severe early-onset epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1222662000,Neonatal epileptic encephalopathy due to deficiency of glutaminase (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1228857005,Progressive myoclonic epilepsy type 9 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1230376005,Contactin associated protein 2-related developmental and epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1231282002,Benign familial neonatal-infantile seizures (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1231737000,"Rolandic epilepsy, paroxysmal exercise-induced dystonia, writer's cramp syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1237417007,"Carbamoyl-phosphate synthetase 2, aspartate transcarbamylase, and dihydroorotase congenital disorder of glycosylation (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1237571004,Benign familial infantile epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1237619001,Fatty acyl-coenzyme A reductase 1 deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260117009,Combined focal and generalized epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260368003,Epilepsy due to Rasmussen syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260369006,Epilepsy due to perinatal intraventricular hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260370007,Epilepsy due to perinatal periventricular hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260371006,Epilepsy due to perinatal cerebral ischemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260374003,Epilepsy due to congenital infectious disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260375002,Epilepsy due to glucose transporter protein type 1 deficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260377005,Epilepsy due to congenital anomaly of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1260407007,Genetic generalized epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1269236003,"Primary hypomagnesemia, refractory seizures, intellectual disability syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1275631007,Developmental and epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1300128003,"Methenyltetrahydrofolate synthetase-related developmental delay, microcephaly, short stature, epilepsy syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,1303273003,"Interferon regulatory factor 2 binding protein like-related regressive neurodevelopmental disorder, dystonia, seizures syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,5321000124109,Temporal lobe epilepsy with mesial temporal sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,14401000119109,Partial frontal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,20121000119105,Partial occipital lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,21391000119102,Partial parietal lobe epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,82381000119103,Epileptic dementia with behavioral disturbance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,84211000119108,Intractable partial parietal lobe epilepsy with impairment of consciousness (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,100941000119100,Epilepsy in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,116401000119105,Recurrent complex partial epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,137991000119103,Seizure disorder as sequela of stroke (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,290741000119102,Intractable idiopathic partial epilepsy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,430061000124109,"Early myoclonic encephalopathy, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,430071000124102,"Early myoclonic encephalopathy, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,431111000124104,"Lennox-Gastaut syndrome, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,431121000124107,"Lennox-Gastaut syndrome, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,431141000124100,"Myoclonic absence epilepsy, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,431961000124104,"Benign occipital epilepsy of childhood - late onset, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,431971000124106,"Benign occipital epilepsy of childhood - late onset, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,432171000124102,"Severe myoclonic epilepsy in infancy, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,434541000124109,"Benign childhood epilepsy with centrotemporal spikes, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,434551000124106,"Benign childhood epilepsy with centrotemporal spikes, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,435321000124106,"Acquired epileptic aphasia, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,435331000124109,"Acquired epileptic aphasia, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,435341000124104,"Rasmussen syndrome, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,435361000124100,"Juvenile myoclonic epilepsy, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,438421000124109,"Myoclonic astatic epilepsy, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,442151000124108,"Autosomal dominant nocturnal frontal lobe epilepsy, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,442161000124105,"Autosomal dominant nocturnal frontal lobe epilepsy, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,444441000124109,"Generalized epilepsy with febrile seizures plus, refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,444451000124106,"Generalized epilepsy with febrile seizures plus, non-refractory (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,460731000124105,Recurrent seizure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,721251000124100,Early infantile developmental and epileptic encephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,10750951000119106,Epilepsy in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Seizure Disorders,2.16.840.1.113883.3.464.1004.1235,322112361000132104,Epilepsy due to scarring of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

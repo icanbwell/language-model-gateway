@@ -1,0 +1,1211 @@
+Measure ID,Measure Name,Value Set Name,Value Set OID
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Acute Bronchitis,2.16.840.1.113883.3.464.1004.1016
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Comorbid Conditions,2.16.840.1.113883.3.464.1004.1066
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,Pharyngitis,2.16.840.1.113883.3.464.1004.1210
+AAP,Adults' Access to Preventive/Ambulatory Health Services,Ambulatory Visits,2.16.840.1.113883.3.464.1004.1022
+AAP,Adults' Access to Preventive/Ambulatory Health Services,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AAP,Adults' Access to Preventive/Ambulatory Health Services,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AAP,Adults' Access to Preventive/Ambulatory Health Services,Reason for Ambulatory Visit,2.16.840.1.113883.3.464.1004.2475
+ACP,Advance Care Planning,Advance Care Planning,2.16.840.1.113883.3.464.1004.1020
+ACP,Advance Care Planning,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+ACP,Advance Care Planning,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+ACP,Advance Care Planning,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+ACP,Advance Care Planning,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+ACP,Advance Care Planning,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+ACP,Advance Care Planning,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+ACP,Advance Care Planning,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+ACP,Advance Care Planning,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+ACP,Advance Care Planning,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+ACP,Advance Care Planning,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+ACP,Advance Care Planning,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Health and Behavior Assessment or Intervention,2.16.840.1.113883.3.464.1004.1487
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,"Mental, Behavioral and Neurodevelopmental Disorders",2.16.840.1.113883.3.464.1004.1961
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Narcolepsy,2.16.840.1.113883.3.464.1004.1182
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+AHU,Acute Hospital Utilization,Acute Condition,2.16.840.1.113883.3.464.1004.1324
+AHU,Acute Hospital Utilization,Bone Marrow Transplant,2.16.840.1.113883.3.464.1004.1325
+AHU,Acute Hospital Utilization,Chemotherapy Encounter,2.16.840.1.113883.3.464.1004.1519
+AHU,Acute Hospital Utilization,Deliveries Infant Record,2.16.840.1.113883.3.464.1004.1073
+AHU,Acute Hospital Utilization,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AHU,Acute Hospital Utilization,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AHU,Acute Hospital Utilization,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+AHU,Acute Hospital Utilization,Introduction of Autologous Pancreatic Cells,2.16.840.1.113883.3.464.1004.1459
+AHU,Acute Hospital Utilization,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+AHU,Acute Hospital Utilization,Maternity,2.16.840.1.113883.3.464.1004.1169
+AHU,Acute Hospital Utilization,Maternity Diagnosis,2.16.840.1.113883.3.464.1004.1170
+AHU,Acute Hospital Utilization,Mental and Behavioral Disorders,2.16.840.1.113883.3.464.1004.1300
+AHU,Acute Hospital Utilization,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+AHU,Acute Hospital Utilization,Observation Stay,2.16.840.1.113883.3.464.1004.1461
+AHU,Acute Hospital Utilization,Organ Transplant Other Than Kidney,2.16.840.1.113883.3.464.1004.1195
+AHU,Acute Hospital Utilization,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+AHU,Acute Hospital Utilization,Potentially Planned Procedures,2.16.840.1.113883.3.464.1004.1327
+AHU,Acute Hospital Utilization,Rehabilitation,2.16.840.1.113883.3.464.1004.1328
+AIS-E,Adult Immunization Status,Adult Hepatitis B Immunization (3 dose),2.16.840.1.113883.3.464.1004.2544
+AIS-E,Adult Immunization Status,Adult Hepatitis B Vaccine Procedure (2 dose),2.16.840.1.113883.3.464.1004.2541
+AIS-E,Adult Immunization Status,Adult Hepatitis B Vaccine Procedure (3 dose),2.16.840.1.113883.3.464.1004.2542
+AIS-E,Adult Immunization Status,Adult Influenza Immunization,2.16.840.1.113883.3.464.1004.1913
+AIS-E,Adult Immunization Status,Adult Influenza Vaccine Procedure,2.16.840.1.113883.3.464.1004.1914
+AIS-E,Adult Immunization Status,Adult Pneumococcal Immunization,2.16.840.1.113883.3.464.1004.2405
+AIS-E,Adult Immunization Status,Adult Pneumococcal Vaccine Procedure,2.16.840.1.113883.3.464.1004.2406
+AIS-E,Adult Immunization Status,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+AIS-E,Adult Immunization Status,"Anaphylaxis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2240
+AIS-E,Adult Immunization Status,Anaphylaxis Due to Herpes Zoster Vaccine,2.16.840.1.113883.3.464.1004.2379
+AIS-E,Adult Immunization Status,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+AIS-E,Adult Immunization Status,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+AIS-E,Adult Immunization Status,"Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2241
+AIS-E,Adult Immunization Status,Hepatitis B,2.16.840.1.113883.3.464.1004.1266
+AIS-E,Adult Immunization Status,Hepatitis B Immunity Finding,2.16.840.1.113883.3.464.1004.2592
+AIS-E,Adult Immunization Status,Hepatitis B Immunization,2.16.840.1.113883.3.464.1004.1759
+AIS-E,Adult Immunization Status,Hepatitis B Prevaccination Tests,2.16.840.1.113883.3.464.1004.2543
+AIS-E,Adult Immunization Status,Hepatitis B Tests With Threshold of 10,2.16.840.1.113883.3.464.1004.2567
+AIS-E,Adult Immunization Status,Hepatitis B Vaccine Procedure,2.16.840.1.113883.3.464.1004.1760
+AIS-E,Adult Immunization Status,Herpes Zoster Recombinant Vaccine Procedure,2.16.840.1.113883.3.464.1004.1918
+AIS-E,Adult Immunization Status,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+AIS-E,Adult Immunization Status,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AIS-E,Adult Immunization Status,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AIS-E,Adult Immunization Status,Influenza Virus LAIV Immunization,2.16.840.1.113883.3.464.1004.1974
+AIS-E,Adult Immunization Status,Influenza Virus LAIV Vaccine Procedure,2.16.840.1.113883.3.464.1004.1973
+AIS-E,Adult Immunization Status,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+AIS-E,Adult Immunization Status,Td Immunization,2.16.840.1.113883.3.464.1004.1923
+AIS-E,Adult Immunization Status,Td Vaccine Procedure,2.16.840.1.113883.3.464.1004.1924
+AIS-E,Adult Immunization Status,Tdap Vaccine Procedure,2.16.840.1.113883.3.464.1004.1792
+AIS-E,Adult Immunization Status,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+AMR,Asthma Medication Ratio,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+AMR,Asthma Medication Ratio,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+AMR,Asthma Medication Ratio,Asthma,2.16.840.1.113883.3.464.1004.1025
+AMR,Asthma Medication Ratio,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+AMR,Asthma Medication Ratio,ED and Acute Inpatient,2.16.840.1.113883.3.464.1004.2465
+AMR,Asthma Medication Ratio,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+AMR,Asthma Medication Ratio,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AMR,Asthma Medication Ratio,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AMR,Asthma Medication Ratio,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+AMR,Asthma Medication Ratio,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+AMR,Asthma Medication Ratio,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+AMR,Asthma Medication Ratio,Outpatient and Telehealth,2.16.840.1.113883.3.464.1004.2466
+AMR,Asthma Medication Ratio,Respiratory Diseases With Different Treatment Approaches Than Asthma,2.16.840.1.113883.3.464.1004.2467
+AMR,Asthma Medication Ratio,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Psychosocial Care,2.16.840.1.113883.3.464.1004.1316
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Alcohol Counseling or Other Follow Up Care,2.16.840.1.113883.3.464.1004.1437
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Alcohol Use Disorder,2.16.840.1.113883.3.464.1004.1339
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Dementia,2.16.840.1.113883.3.464.1004.1074
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AXR,Antibiotic Utilization for Respiratory Conditions,AXR Competing Diagnosis,2.16.840.1.113883.3.464.1004.2245
+AXR,Antibiotic Utilization for Respiratory Conditions,Comorbid Conditions,2.16.840.1.113883.3.464.1004.1066
+AXR,Antibiotic Utilization for Respiratory Conditions,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+AXR,Antibiotic Utilization for Respiratory Conditions,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+AXR,Antibiotic Utilization for Respiratory Conditions,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+AXR,Antibiotic Utilization for Respiratory Conditions,"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443
+AXR,Antibiotic Utilization for Respiratory Conditions,Respiratory Conditions and Symptoms,2.16.840.1.113883.3.464.1004.2246
+BCS-E,Breast Cancer Screening,Absence of Left Breast,2.16.840.1.113883.3.464.1004.1329
+BCS-E,Breast Cancer Screening,Absence of Right Breast,2.16.840.1.113883.3.464.1004.1330
+BCS-E,Breast Cancer Screening,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+BCS-E,Breast Cancer Screening,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+BCS-E,Breast Cancer Screening,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+BCS-E,Breast Cancer Screening,Bilateral Mastectomy,2.16.840.1.113883.3.464.1004.1042
+BCS-E,Breast Cancer Screening,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+BCS-E,Breast Cancer Screening,Clinical Unilateral Mastectomy,2.16.840.1.113883.3.464.1004.1948
+BCS-E,Breast Cancer Screening,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+BCS-E,Breast Cancer Screening,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+BCS-E,Breast Cancer Screening,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+BCS-E,Breast Cancer Screening,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+BCS-E,Breast Cancer Screening,Gender Dysphoria,2.16.840.1.113883.3.464.1004.2454
+BCS-E,Breast Cancer Screening,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+BCS-E,Breast Cancer Screening,History of Bilateral Mastectomy,2.16.840.1.113883.3.464.1004.1331
+BCS-E,Breast Cancer Screening,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+BCS-E,Breast Cancer Screening,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+BCS-E,Breast Cancer Screening,Mammography,2.16.840.1.113883.3.464.1004.1168
+BCS-E,Breast Cancer Screening,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+BCS-E,Breast Cancer Screening,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+BCS-E,Breast Cancer Screening,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+BCS-E,Breast Cancer Screening,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+BCS-E,Breast Cancer Screening,Unilateral Mastectomy,2.16.840.1.113883.3.464.1004.1256
+BCS-E,Breast Cancer Screening,Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334
+BCS-E,Breast Cancer Screening,Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335
+BCS-E,Breast Cancer Screening,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+BPC-E,Blood Pressure Control for Patients With Hypertension,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+BPC-E,Blood Pressure Control for Patients With Hypertension,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+BPC-E,Blood Pressure Control for Patients With Hypertension,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+BPC-E,Blood Pressure Control for Patients With Hypertension,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+BPC-E,Blood Pressure Control for Patients With Hypertension,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+BPC-E,Blood Pressure Control for Patients With Hypertension,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+BPC-E,Blood Pressure Control for Patients With Hypertension,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+BPC-E,Blood Pressure Control for Patients With Hypertension,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+BPC-E,Blood Pressure Control for Patients With Hypertension,Diastolic Blood Pressure,2.16.840.1.113883.3.464.1004.1965
+BPC-E,Blood Pressure Control for Patients With Hypertension,Diastolic Less Than 90,2.16.840.1.113883.3.464.1004.2459
+BPC-E,Blood Pressure Control for Patients With Hypertension,ED,2.16.840.1.113883.3.464.1004.1086
+BPC-E,Blood Pressure Control for Patients With Hypertension,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+BPC-E,Blood Pressure Control for Patients With Hypertension,Essential Hypertension,2.16.840.1.113883.3.464.1004.1122
+BPC-E,Blood Pressure Control for Patients With Hypertension,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+BPC-E,Blood Pressure Control for Patients With Hypertension,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+BPC-E,Blood Pressure Control for Patients With Hypertension,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+BPC-E,Blood Pressure Control for Patients With Hypertension,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+BPC-E,Blood Pressure Control for Patients With Hypertension,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+BPC-E,Blood Pressure Control for Patients With Hypertension,History of Nephrectomy or Kidney Transplant,2.16.840.1.113883.3.464.1004.1908
+BPC-E,Blood Pressure Control for Patients With Hypertension,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+BPC-E,Blood Pressure Control for Patients With Hypertension,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+BPC-E,Blood Pressure Control for Patients With Hypertension,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+BPC-E,Blood Pressure Control for Patients With Hypertension,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+BPC-E,Blood Pressure Control for Patients With Hypertension,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+BPC-E,Blood Pressure Control for Patients With Hypertension,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+BPC-E,Blood Pressure Control for Patients With Hypertension,Outpatient and Telehealth Without UBREV,2.16.840.1.113883.3.464.1004.2470
+BPC-E,Blood Pressure Control for Patients With Hypertension,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+BPC-E,Blood Pressure Control for Patients With Hypertension,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+BPC-E,Blood Pressure Control for Patients With Hypertension,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+BPC-E,Blood Pressure Control for Patients With Hypertension,Partial Nephrectomy,2.16.840.1.113883.3.464.1004.2391
+BPC-E,Blood Pressure Control for Patients With Hypertension,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+BPC-E,Blood Pressure Control for Patients With Hypertension,Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458
+BPC-E,Blood Pressure Control for Patients With Hypertension,Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964
+BPC-E,Blood Pressure Control for Patients With Hypertension,Systolic Less Than 140,2.16.840.1.113883.3.464.1004.1243
+BPC-E,Blood Pressure Control for Patients With Hypertension,Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390
+BPC-E,Blood Pressure Control for Patients With Hypertension,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+BPD,Blood Pressure Control for Patients With Diabetes,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+BPD,Blood Pressure Control for Patients With Diabetes,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+BPD,Blood Pressure Control for Patients With Diabetes,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+BPD,Blood Pressure Control for Patients With Diabetes,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+BPD,Blood Pressure Control for Patients With Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+BPD,Blood Pressure Control for Patients With Diabetes,Diastolic Blood Pressure,2.16.840.1.113883.3.464.1004.1965
+BPD,Blood Pressure Control for Patients With Diabetes,Diastolic Less Than 90,2.16.840.1.113883.3.464.1004.2459
+BPD,Blood Pressure Control for Patients With Diabetes,ED,2.16.840.1.113883.3.464.1004.1086
+BPD,Blood Pressure Control for Patients With Diabetes,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+BPD,Blood Pressure Control for Patients With Diabetes,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+BPD,Blood Pressure Control for Patients With Diabetes,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+BPD,Blood Pressure Control for Patients With Diabetes,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+BPD,Blood Pressure Control for Patients With Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+BPD,Blood Pressure Control for Patients With Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+BPD,Blood Pressure Control for Patients With Diabetes,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+BPD,Blood Pressure Control for Patients With Diabetes,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+BPD,Blood Pressure Control for Patients With Diabetes,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+BPD,Blood Pressure Control for Patients With Diabetes,Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458
+BPD,Blood Pressure Control for Patients With Diabetes,Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964
+BPD,Blood Pressure Control for Patients With Diabetes,Systolic Less Than 140,2.16.840.1.113883.3.464.1004.1243
+CBP,Controlling High Blood Pressure,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+CBP,Controlling High Blood Pressure,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+CBP,Controlling High Blood Pressure,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+CBP,Controlling High Blood Pressure,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+CBP,Controlling High Blood Pressure,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+CBP,Controlling High Blood Pressure,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+CBP,Controlling High Blood Pressure,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+CBP,Controlling High Blood Pressure,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+CBP,Controlling High Blood Pressure,Diastolic Blood Pressure,2.16.840.1.113883.3.464.1004.1965
+CBP,Controlling High Blood Pressure,Diastolic Less Than 90,2.16.840.1.113883.3.464.1004.2459
+CBP,Controlling High Blood Pressure,ED,2.16.840.1.113883.3.464.1004.1086
+CBP,Controlling High Blood Pressure,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+CBP,Controlling High Blood Pressure,Essential Hypertension,2.16.840.1.113883.3.464.1004.1122
+CBP,Controlling High Blood Pressure,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+CBP,Controlling High Blood Pressure,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+CBP,Controlling High Blood Pressure,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+CBP,Controlling High Blood Pressure,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+CBP,Controlling High Blood Pressure,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+CBP,Controlling High Blood Pressure,History of Nephrectomy or Kidney Transplant,2.16.840.1.113883.3.464.1004.1908
+CBP,Controlling High Blood Pressure,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CBP,Controlling High Blood Pressure,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CBP,Controlling High Blood Pressure,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+CBP,Controlling High Blood Pressure,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+CBP,Controlling High Blood Pressure,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+CBP,Controlling High Blood Pressure,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+CBP,Controlling High Blood Pressure,Outpatient and Telehealth Without UBREV,2.16.840.1.113883.3.464.1004.2470
+CBP,Controlling High Blood Pressure,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+CBP,Controlling High Blood Pressure,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+CBP,Controlling High Blood Pressure,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+CBP,Controlling High Blood Pressure,Partial Nephrectomy,2.16.840.1.113883.3.464.1004.2391
+CBP,Controlling High Blood Pressure,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+CBP,Controlling High Blood Pressure,Systolic and Diastolic Result,2.16.840.1.113883.3.464.1004.2458
+CBP,Controlling High Blood Pressure,Systolic Blood Pressure,2.16.840.1.113883.3.464.1004.1964
+CBP,Controlling High Blood Pressure,Systolic Less Than 140,2.16.840.1.113883.3.464.1004.1243
+CBP,Controlling High Blood Pressure,Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390
+CBP,Controlling High Blood Pressure,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+CCS-E,Cervical Cancer Screening,Absence of Cervix Diagnosis,2.16.840.1.113883.3.464.1004.1522
+CCS-E,Cervical Cancer Screening,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+CCS-E,Cervical Cancer Screening,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+CCS-E,Cervical Cancer Screening,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+CCS-E,Cervical Cancer Screening,Cervical Cytology Lab Test,2.16.840.1.113883.3.464.1004.1525
+CCS-E,Cervical Cancer Screening,Cervical Cytology Result or Finding,2.16.840.1.113883.3.464.1004.1524
+CCS-E,Cervical Cancer Screening,High Risk HPV Lab Test,2.16.840.1.113883.3.464.1004.1527
+CCS-E,Cervical Cancer Screening,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+CCS-E,Cervical Cancer Screening,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CCS-E,Cervical Cancer Screening,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CCS-E,Cervical Cancer Screening,Hysterectomy With No Residual Cervix,2.16.840.1.113883.3.464.1004.1523
+CCS-E,Cervical Cancer Screening,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+CCS-E,Cervical Cancer Screening,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+CCS-E,Cervical Cancer Screening,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+CCS-E,Cervical Cancer Screening,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+CCS-E,Cervical Cancer Screening,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+CHL,Chlamydia Screening,Chlamydia Tests,2.16.840.1.113883.3.464.1004.1060
+CHL,Chlamydia Screening,Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481
+CHL,Chlamydia Screening,Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081
+CHL,Chlamydia Screening,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CHL,Chlamydia Screening,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CHL,Chlamydia Screening,Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221
+CHL,Chlamydia Screening,Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482
+CIS-E,Childhood Immunization Status,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+CIS-E,Childhood Immunization Status,"Anaphylaxis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2240
+CIS-E,Childhood Immunization Status,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+CIS-E,Childhood Immunization Status,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+CIS-E,Childhood Immunization Status,Contraindications to Childhood Vaccines,2.16.840.1.113883.3.464.1004.2464
+CIS-E,Childhood Immunization Status,DTaP Immunization,2.16.840.1.113883.3.464.1004.1744
+CIS-E,Childhood Immunization Status,DTaP Vaccine Procedure,2.16.840.1.113883.3.464.1004.1745
+CIS-E,Childhood Immunization Status,"Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2241
+CIS-E,Childhood Immunization Status,Haemophilus Influenzae Type B (HiB) Immunization,2.16.840.1.113883.3.464.1004.1753
+CIS-E,Childhood Immunization Status,Haemophilus Influenzae Type B (HiB) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1754
+CIS-E,Childhood Immunization Status,Hepatitis A,2.16.840.1.113883.3.464.1004.1117
+CIS-E,Childhood Immunization Status,Hepatitis A Immunization,2.16.840.1.113883.3.464.1004.1757
+CIS-E,Childhood Immunization Status,Hepatitis A Vaccine Procedure,2.16.840.1.113883.3.464.1004.1758
+CIS-E,Childhood Immunization Status,Hepatitis B,2.16.840.1.113883.3.464.1004.1266
+CIS-E,Childhood Immunization Status,Hepatitis B Immunization,2.16.840.1.113883.3.464.1004.1759
+CIS-E,Childhood Immunization Status,Hepatitis B Vaccine Procedure,2.16.840.1.113883.3.464.1004.1760
+CIS-E,Childhood Immunization Status,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+CIS-E,Childhood Immunization Status,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CIS-E,Childhood Immunization Status,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CIS-E,Childhood Immunization Status,Inactivated Polio Vaccine (IPV) Immunization,2.16.840.1.113883.3.464.1004.1765
+CIS-E,Childhood Immunization Status,Inactivated Polio Vaccine (IPV) Procedure,2.16.840.1.113883.3.464.1004.1766
+CIS-E,Childhood Immunization Status,Influenza Immunization,2.16.840.1.113883.3.464.1004.1767
+CIS-E,Childhood Immunization Status,Influenza Vaccine Procedure,2.16.840.1.113883.3.464.1004.1768
+CIS-E,Childhood Immunization Status,Influenza Virus LAIV Immunization,2.16.840.1.113883.3.464.1004.1974
+CIS-E,Childhood Immunization Status,Influenza Virus LAIV Vaccine Procedure,2.16.840.1.113883.3.464.1004.1973
+CIS-E,Childhood Immunization Status,Measles,2.16.840.1.113883.3.464.1004.1171
+CIS-E,Childhood Immunization Status,"Measles, Mumps and Rubella (MMR) Immunization",2.16.840.1.113883.3.464.1004.1773
+CIS-E,Childhood Immunization Status,"Measles, Mumps and Rubella (MMR) Vaccine Procedure",2.16.840.1.113883.3.464.1004.1774
+CIS-E,Childhood Immunization Status,Mumps,2.16.840.1.113883.3.464.1004.1181
+CIS-E,Childhood Immunization Status,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+CIS-E,Childhood Immunization Status,Organ and Bone Marrow Transplants,2.16.840.1.113883.3.464.1004.2591
+CIS-E,Childhood Immunization Status,Pneumococcal Conjugate Immunization,2.16.840.1.113883.3.464.1004.1781
+CIS-E,Childhood Immunization Status,Pneumococcal Conjugate Vaccine Procedure,2.16.840.1.113883.3.464.1004.1782
+CIS-E,Childhood Immunization Status,Rotavirus (3 Dose Schedule) Immunization,2.16.840.1.113883.3.464.1004.1786
+CIS-E,Childhood Immunization Status,Rotavirus Vaccine (2 Dose Schedule) Procedure,2.16.840.1.113883.3.464.1004.1787
+CIS-E,Childhood Immunization Status,Rotavirus Vaccine (3 Dose Schedule) Procedure,2.16.840.1.113883.3.464.1004.1788
+CIS-E,Childhood Immunization Status,Rubella,2.16.840.1.113883.3.464.1004.1232
+CIS-E,Childhood Immunization Status,Varicella Zoster,2.16.840.1.113883.3.464.1004.1258
+CIS-E,Childhood Immunization Status,Varicella Zoster (VZV) Immunization,2.16.840.1.113883.3.464.1004.1793
+CIS-E,Childhood Immunization Status,Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794
+CIS-E,Childhood Immunization Status,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+COA,Care for Older Adults,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+COA,Care for Older Adults,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+COA,Care for Older Adults,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+COA,Care for Older Adults,Functional Status Assessment,2.16.840.1.113883.3.464.1004.1104
+COA,Care for Older Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+COA,Care for Older Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+COA,Care for Older Adults,Medication List,2.16.840.1.113883.3.464.1004.1173
+COA,Care for Older Adults,Medication Review,2.16.840.1.113883.3.464.1004.1175
+COA,Care for Older Adults,Transitional Care Management Services,2.16.840.1.113883.3.464.1004.1462
+COL-E,Colorectal Cancer Screening,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+COL-E,Colorectal Cancer Screening,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+COL-E,Colorectal Cancer Screening,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+COL-E,Colorectal Cancer Screening,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+COL-E,Colorectal Cancer Screening,Colonoscopy,2.16.840.1.113883.3.464.1004.1064
+COL-E,Colorectal Cancer Screening,Colorectal Cancer,2.16.840.1.113883.3.464.1004.1065
+COL-E,Colorectal Cancer Screening,CT Colonography,2.16.840.1.113883.3.464.1004.1421
+COL-E,Colorectal Cancer Screening,Flexible Sigmoidoscopy,2.16.840.1.113883.3.464.1004.1102
+COL-E,Colorectal Cancer Screening,FOBT Lab Test,2.16.840.1.113883.3.464.1004.1959
+COL-E,Colorectal Cancer Screening,FOBT Test Result or Finding,2.16.840.1.113883.3.464.1004.1960
+COL-E,Colorectal Cancer Screening,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+COL-E,Colorectal Cancer Screening,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+COL-E,Colorectal Cancer Screening,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+COL-E,Colorectal Cancer Screening,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+COL-E,Colorectal Cancer Screening,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+COL-E,Colorectal Cancer Screening,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+COL-E,Colorectal Cancer Screening,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+COL-E,Colorectal Cancer Screening,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+COL-E,Colorectal Cancer Screening,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+COL-E,Colorectal Cancer Screening,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+COL-E,Colorectal Cancer Screening,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+COL-E,Colorectal Cancer Screening,sDNA FIT Lab Test,2.16.840.1.113883.3.464.1004.1749
+COL-E,Colorectal Cancer Screening,Total Colectomy,2.16.840.1.113883.3.464.1004.1250
+COL-E,Colorectal Cancer Screening,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+COU,Risk of Continued Opioid Use,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+COU,Risk of Continued Opioid Use,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+COU,Risk of Continued Opioid Use,Malignant Neoplasms,2.16.840.1.113883.3.464.1004.1167
+COU,Risk of Continued Opioid Use,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+COU,Risk of Continued Opioid Use,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+COU,Risk of Continued Opioid Use,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+COU,Risk of Continued Opioid Use,Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373
+CRE,Cardiac Rehabilitation,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+CRE,Cardiac Rehabilitation,CABG,2.16.840.1.113883.3.464.1004.1048
+CRE,Cardiac Rehabilitation,Cardiac Rehabilitation,2.16.840.1.113883.3.464.1004.2202
+CRE,Cardiac Rehabilitation,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+CRE,Cardiac Rehabilitation,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+CRE,Cardiac Rehabilitation,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+CRE,Cardiac Rehabilitation,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+CRE,Cardiac Rehabilitation,Heart Transplant,2.16.840.1.113883.3.464.1004.2203
+CRE,Cardiac Rehabilitation,Heart Valve Repair or Replacement,2.16.840.1.113883.3.464.1004.2201
+CRE,Cardiac Rehabilitation,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CRE,Cardiac Rehabilitation,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CRE,Cardiac Rehabilitation,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+CRE,Cardiac Rehabilitation,MI,2.16.840.1.113883.3.464.1004.1157
+CRE,Cardiac Rehabilitation,Other PCI,2.16.840.1.113883.3.464.1004.2213
+CRE,Cardiac Rehabilitation,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+CRE,Cardiac Rehabilitation,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+CRE,Cardiac Rehabilitation,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+CRE,Cardiac Rehabilitation,PCI,2.16.840.1.113883.3.464.1004.1204
+CRE,Cardiac Rehabilitation,Percutaneous CABG,2.16.840.1.113883.3.464.1004.2200
+CWP,Appropriate Testing for Pharyngitis,Comorbid Conditions,2.16.840.1.113883.3.464.1004.1066
+CWP,Appropriate Testing for Pharyngitis,Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067
+CWP,Appropriate Testing for Pharyngitis,Group A Strep Tests,2.16.840.1.113883.3.464.1004.1109
+CWP,Appropriate Testing for Pharyngitis,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+CWP,Appropriate Testing for Pharyngitis,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+CWP,Appropriate Testing for Pharyngitis,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+CWP,Appropriate Testing for Pharyngitis,"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443
+CWP,Appropriate Testing for Pharyngitis,Pharyngitis,2.16.840.1.113883.3.464.1004.1210
+DAE,Use of High-Risk Medications in Older Adults,Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209
+DAE,Use of High-Risk Medications in Older Adults,Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210
+DAE,Use of High-Risk Medications in Older Adults,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+DAE,Use of High-Risk Medications in Older Adults,Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211
+DAE,Use of High-Risk Medications in Older Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DAE,Use of High-Risk Medications in Older Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DAE,Use of High-Risk Medications in Older Adults,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+DAE,Use of High-Risk Medications in Older Adults,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+DAE,Use of High-Risk Medications in Older Adults,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+DAE,Use of High-Risk Medications in Older Adults,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+DAE,Use of High-Risk Medications in Older Adults,REM Sleep Behavior Disorder,2.16.840.1.113883.3.464.1004.2212
+DAE,Use of High-Risk Medications in Older Adults,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+DAE,Use of High-Risk Medications in Older Adults,Seizure Disorders,2.16.840.1.113883.3.464.1004.1235
+DBM-E,Documented Assessment After Mammogram,BIRADS Assessment,2.16.840.1.113883.3.464.1004.2503
+DBM-E,Documented Assessment After Mammogram,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DBM-E,Documented Assessment After Mammogram,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DBM-E,Documented Assessment After Mammogram,Mammography,2.16.840.1.113883.3.464.1004.1168
+DBO,Deprescribing of Benzodiazepines in Older Adults,Alcohol Withdrawal,2.16.840.1.113883.3.464.1004.2209
+DBO,Deprescribing of Benzodiazepines in Older Adults,Benzodiazepine Withdrawal,2.16.840.1.113883.3.464.1004.2210
+DBO,Deprescribing of Benzodiazepines in Older Adults,Generalized Anxiety Disorder,2.16.840.1.113883.3.464.1004.2211
+DBO,Deprescribing of Benzodiazepines in Older Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DBO,Deprescribing of Benzodiazepines in Older Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DBO,Deprescribing of Benzodiazepines in Older Adults,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+DBO,Deprescribing of Benzodiazepines in Older Adults,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+DBO,Deprescribing of Benzodiazepines in Older Adults,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+DBO,Deprescribing of Benzodiazepines in Older Adults,REM Sleep Behavior Disorder,2.16.840.1.113883.3.464.1004.2212
+DBO,Deprescribing of Benzodiazepines in Older Adults,Seizure Disorders,2.16.840.1.113883.3.464.1004.1235
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,CKD Stage 4,2.16.840.1.113883.3.464.1004.1052
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Dementia,2.16.840.1.113883.3.464.1004.1074
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Falls,2.16.840.1.113883.3.464.1004.1101
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Hip Fractures,2.16.840.1.113883.3.464.1004.1264
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,"Outpatient, ED, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2485
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Psychosis,2.16.840.1.113883.3.464.1004.1227
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Seizure Disorders,2.16.840.1.113883.3.464.1004.1235
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Total Nephrectomy,2.16.840.1.113883.3.464.1004.2390
+DMH,Diagnosed Mental Health Disorders,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DMH,Diagnosed Mental Health Disorders,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DMH,Diagnosed Mental Health Disorders,Mental Health Diagnosis,2.16.840.1.113883.3.464.1004.1178
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Personality Disorder,2.16.840.1.113883.3.464.1004.1355
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352
+DRR-E,Depression Remission or Response for Adolescents and Adults,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+DRR-E,Depression Remission or Response for Adolescents and Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DRR-E,Depression Remission or Response for Adolescents and Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DRR-E,Depression Remission or Response for Adolescents and Adults,Interactive Outpatient Encounter,2.16.840.1.113883.3.464.1004.1347
+DRR-E,Depression Remission or Response for Adolescents and Adults,Major Depression or Dysthymia,2.16.840.1.113883.3.464.1004.1351
+DRR-E,Depression Remission or Response for Adolescents and Adults,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+DRR-E,Depression Remission or Response for Adolescents and Adults,Personality Disorder,2.16.840.1.113883.3.464.1004.1355
+DRR-E,Depression Remission or Response for Adolescents and Adults,Pervasive Developmental Disorder,2.16.840.1.113883.3.464.1004.1356
+DRR-E,Depression Remission or Response for Adolescents and Adults,Psychotic Disorders,2.16.840.1.113883.3.464.1004.1352
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Behavioral Health Encounter,2.16.840.1.113883.3.464.1004.1383
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Depression,2.16.840.1.113883.3.464.1004.1390
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Depression Case Management Encounter,2.16.840.1.113883.3.464.1004.1389
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Depression or Other Behavioral Health Condition,2.16.840.1.113883.3.464.1004.1501
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Follow Up Visit,2.16.840.1.113883.3.464.1004.1385
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Symptoms of Depression,2.16.840.1.113883.3.464.1004.2392
+DSU,Diagnosed Substance Use Disorders,Alcohol Abuse and Dependence,2.16.840.1.113883.3.464.1004.1424
+DSU,Diagnosed Substance Use Disorders,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+DSU,Diagnosed Substance Use Disorders,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+DSU,Diagnosed Substance Use Disorders,Opioid Abuse and Dependence,2.16.840.1.113883.3.464.1004.1425
+DSU,Diagnosed Substance Use Disorders,Other Drug Abuse and Dependence,2.16.840.1.113883.3.464.1004.1426
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,ED,2.16.840.1.113883.3.464.1004.1086
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,Hypoglycemia,2.16.840.1.113883.3.464.1004.2247
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+EDU,Emergency Department Utilization,ED,2.16.840.1.113883.3.464.1004.1086
+EDU,Emergency Department Utilization,ED Procedure Code,2.16.840.1.113883.3.464.1004.1088
+EDU,Emergency Department Utilization,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+EDU,Emergency Department Utilization,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+EDU,Emergency Department Utilization,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+EDU,Emergency Department Utilization,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+EDU,Emergency Department Utilization,Mental and Behavioral Disorders,2.16.840.1.113883.3.464.1004.1300
+EDU,Emergency Department Utilization,Observation Stay,2.16.840.1.113883.3.464.1004.1461
+EDU,Emergency Department Utilization,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+EDU,Emergency Department Utilization,Psychiatry,2.16.840.1.113883.3.464.1004.1272
+EED,Eye Exam for Patients With Diabetes,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+EED,Eye Exam for Patients With Diabetes,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+EED,Eye Exam for Patients With Diabetes,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+EED,Eye Exam for Patients With Diabetes,Autonomous Eye Exam Result or Finding,2.16.840.1.113883.3.464.1004.2616
+EED,Eye Exam for Patients With Diabetes,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+EED,Eye Exam for Patients With Diabetes,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+EED,Eye Exam for Patients With Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+EED,Eye Exam for Patients With Diabetes,Diabetes Mellitus Without Complications,2.16.840.1.113883.3.464.1004.1407
+EED,Eye Exam for Patients With Diabetes,Diabetic Retinopathy Severity Level,2.16.840.1.113883.3.464.1004.2555
+EED,Eye Exam for Patients With Diabetes,Eye Exam With Evidence of Retinopathy,2.16.840.1.113883.3.464.1004.2229
+EED,Eye Exam for Patients With Diabetes,Eye Exam Without Evidence of Retinopathy,2.16.840.1.113883.3.464.1004.2230
+EED,Eye Exam for Patients With Diabetes,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+EED,Eye Exam for Patients With Diabetes,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+EED,Eye Exam for Patients With Diabetes,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+EED,Eye Exam for Patients With Diabetes,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+EED,Eye Exam for Patients With Diabetes,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+EED,Eye Exam for Patients With Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+EED,Eye Exam for Patients With Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+EED,Eye Exam for Patients With Diabetes,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+EED,Eye Exam for Patients With Diabetes,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+EED,Eye Exam for Patients With Diabetes,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+EED,Eye Exam for Patients With Diabetes,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+EED,Eye Exam for Patients With Diabetes,Retinal Eye Exams,2.16.840.1.113883.3.464.1004.2550
+EED,Eye Exam for Patients With Diabetes,Retinal Imaging,2.16.840.1.113883.3.464.1004.2584
+EED,Eye Exam for Patients With Diabetes,Unilateral Eye Enucleation,2.16.840.1.113883.3.464.1004.1454
+EED,Eye Exam for Patients With Diabetes,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Breast Biopsy,2.16.840.1.113883.3.464.1004.2505
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Breast Ultrasound,2.16.840.1.113883.3.464.1004.2533
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,High Risk BIRADS,2.16.840.1.113883.3.464.1004.2504
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Inconclusive BIRADS,2.16.840.1.113883.3.464.1004.2602
+FMA-E,Follow-Up After Abnormal Mammogram Assessment,Mammography,2.16.840.1.113883.3.464.1004.1168
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Asthma Diagnosis,2.16.840.1.113883.3.464.1004.1358
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Atrial Fibrillation,2.16.840.1.113883.3.464.1004.1430
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Case Management Encounter,2.16.840.1.113883.3.464.1004.1451
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Chronic Kidney Disease,2.16.840.1.113883.3.464.1004.1431
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Complex Care Management Services,2.16.840.1.113883.3.464.1004.1452
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,COPD Diagnosis,2.16.840.1.113883.3.464.1004.1360
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Dementia,2.16.840.1.113883.3.464.1004.1074
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Dysthymic Disorder,2.16.840.1.113883.3.464.1004.1433
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,ED,2.16.840.1.113883.3.464.1004.1086
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Frontotemporal Dementia,2.16.840.1.113883.3.464.1004.1263
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Heart Failure and Cardiomyopathy,2.16.840.1.113883.3.464.1004.1051
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Major Depression,2.16.840.1.113883.3.464.1004.1166
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,MI,2.16.840.1.113883.3.464.1004.1157
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Old Myocardial Infarction,2.16.840.1.113883.3.464.1004.2401
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Other Stroke Exclusions,2.16.840.1.113883.3.464.1004.1436
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Outpatient and Telehealth,2.16.840.1.113883.3.464.1004.2466
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,"Outpatient, ED, Telehealth and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2472
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Stroke,2.16.840.1.113883.3.464.1004.1434
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Transitional Care Management Services,2.16.840.1.113883.3.464.1004.1462
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+FUA,Follow-Up After Emergency Department Visit for Substance Use,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+FUA,Follow-Up After Emergency Department Visit for Substance Use,AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013
+FUA,Follow-Up After Emergency Department Visit for Substance Use,AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Behavioral Health Assessment,2.16.840.1.113883.3.464.1004.2253
+FUA,Follow-Up After Emergency Department Visit for Substance Use,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+FUA,Follow-Up After Emergency Department Visit for Substance Use,ED,2.16.840.1.113883.3.464.1004.1086
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Nonresidential Substance Abuse Treatment Facility POS,2.16.840.1.113883.3.464.1004.1490
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+FUA,Follow-Up After Emergency Department Visit for Substance Use,OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220
+FUA,Follow-Up After Emergency Department Visit for Substance Use,OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221
+FUA,Follow-Up After Emergency Department Visit for Substance Use,OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Peer Support Services,2.16.840.1.113883.3.464.1004.2254
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Residential Program Detoxification,2.16.840.1.113883.3.464.1004.2408
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Substance Induced Disorders,2.16.840.1.113883.3.464.1004.2244
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Substance Use Services,2.16.840.1.113883.3.464.1004.2252
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243
+FUA,Follow-Up After Emergency Department Visit for Substance Use,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+FUA,Follow-Up After Emergency Department Visit for Substance Use,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+FUH,Follow-Up After Hospitalization for Mental Illness,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+FUH,Follow-Up After Hospitalization for Mental Illness,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+FUH,Follow-Up After Hospitalization for Mental Illness,Behavioral Healthcare Setting,2.16.840.1.113883.3.464.1004.2214
+FUH,Follow-Up After Hospitalization for Mental Illness,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+FUH,Follow-Up After Hospitalization for Mental Illness,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+FUH,Follow-Up After Hospitalization for Mental Illness,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+FUH,Follow-Up After Hospitalization for Mental Illness,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+FUH,Follow-Up After Hospitalization for Mental Illness,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FUH,Follow-Up After Hospitalization for Mental Illness,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FUH,Follow-Up After Hospitalization for Mental Illness,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+FUH,Follow-Up After Hospitalization for Mental Illness,Inpatient Stay Except Psychiatric Residential,2.16.840.1.113883.3.464.1004.2590
+FUH,Follow-Up After Hospitalization for Mental Illness,Intentional Self Harm,2.16.840.1.113883.3.464.1004.1468
+FUH,Follow-Up After Hospitalization for Mental Illness,Mental Health Diagnosis,2.16.840.1.113883.3.464.1004.1178
+FUH,Follow-Up After Hospitalization for Mental Illness,Mental Illness,2.16.840.1.113883.3.464.1004.1179
+FUH,Follow-Up After Hospitalization for Mental Illness,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+FUH,Follow-Up After Hospitalization for Mental Illness,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+FUH,Follow-Up After Hospitalization for Mental Illness,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+FUH,Follow-Up After Hospitalization for Mental Illness,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+FUH,Follow-Up After Hospitalization for Mental Illness,Peer Support Services,2.16.840.1.113883.3.464.1004.2254
+FUH,Follow-Up After Hospitalization for Mental Illness,Psychiatric Collaborative Care Management,2.16.840.1.113883.3.464.1004.2261
+FUH,Follow-Up After Hospitalization for Mental Illness,Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966
+FUH,Follow-Up After Hospitalization for Mental Illness,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+FUH,Follow-Up After Hospitalization for Mental Illness,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+FUH,Follow-Up After Hospitalization for Mental Illness,Transitional Care Management Services,2.16.840.1.113883.3.464.1004.1462
+FUH,Follow-Up After Hospitalization for Mental Illness,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+FUH,Follow-Up After Hospitalization for Mental Illness,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,AOD Abuse and Dependence,2.16.840.1.113883.3.464.1004.1013
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,AOD Medication Treatment,2.16.840.1.113883.3.464.1004.2017
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Detoxification,2.16.840.1.113883.3.464.1004.1076
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Nonacute Inpatient Stay Other Than Behavioral Health Accommodations,2.16.840.1.113883.3.464.1004.1809
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Nonresidential Substance Abuse Treatment Facility POS,2.16.840.1.113883.3.464.1004.1490
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Behavioral Healthcare Setting,2.16.840.1.113883.3.464.1004.2214
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,ED,2.16.840.1.113883.3.464.1004.1086
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Inpatient Stay Except Psychiatric Residential,2.16.840.1.113883.3.464.1004.2590
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Intentional Self Harm,2.16.840.1.113883.3.464.1004.1468
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Mental Health Diagnosis,2.16.840.1.113883.3.464.1004.1178
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Mental Illness,2.16.840.1.113883.3.464.1004.1179
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Peer Support Services,2.16.840.1.113883.3.464.1004.2254
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Psychiatric Collaborative Care Management,2.16.840.1.113883.3.464.1004.2261
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+GSD,Glycemic Status Assessment for Patients With Diabetes,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+GSD,Glycemic Status Assessment for Patients With Diabetes,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+GSD,Glycemic Status Assessment for Patients With Diabetes,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+GSD,Glycemic Status Assessment for Patients With Diabetes,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+GSD,Glycemic Status Assessment for Patients With Diabetes,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+GSD,Glycemic Status Assessment for Patients With Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+GSD,Glycemic Status Assessment for Patients With Diabetes,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+GSD,Glycemic Status Assessment for Patients With Diabetes,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+GSD,Glycemic Status Assessment for Patients With Diabetes,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+GSD,Glycemic Status Assessment for Patients With Diabetes,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+GSD,Glycemic Status Assessment for Patients With Diabetes,HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755
+GSD,Glycemic Status Assessment for Patients With Diabetes,HbA1c Level Greater Than or Equal To 8.0,2.16.840.1.113883.3.464.1004.2461
+GSD,Glycemic Status Assessment for Patients With Diabetes,HbA1c Level Less Than 8.0,2.16.840.1.113883.3.464.1004.2460
+GSD,Glycemic Status Assessment for Patients With Diabetes,HbA1c Level Less Than or Equal To 9.0,2.16.840.1.113883.3.464.1004.2462
+GSD,Glycemic Status Assessment for Patients With Diabetes,HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756
+GSD,Glycemic Status Assessment for Patients With Diabetes,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+GSD,Glycemic Status Assessment for Patients With Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+GSD,Glycemic Status Assessment for Patients With Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+GSD,Glycemic Status Assessment for Patients With Diabetes,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+GSD,Glycemic Status Assessment for Patients With Diabetes,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+GSD,Glycemic Status Assessment for Patients With Diabetes,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+GSD,Glycemic Status Assessment for Patients With Diabetes,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+GSD,Glycemic Status Assessment for Patients With Diabetes,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+HDO,Use of Opioids at High Dosage,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+HDO,Use of Opioids at High Dosage,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+HDO,Use of Opioids at High Dosage,Malignant Neoplasms,2.16.840.1.113883.3.464.1004.1167
+HDO,Use of Opioids at High Dosage,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+HDO,Use of Opioids at High Dosage,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+HDO,Use of Opioids at High Dosage,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+HDO,Use of Opioids at High Dosage,Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373
+HFS,Hospitalizations Following Skilled Nursing Discharge,Acute Condition,2.16.840.1.113883.3.464.1004.1324
+HFS,Hospitalizations Following Skilled Nursing Discharge,Bone Marrow Transplant,2.16.840.1.113883.3.464.1004.1325
+HFS,Hospitalizations Following Skilled Nursing Discharge,Chemotherapy Encounter,2.16.840.1.113883.3.464.1004.1519
+HFS,Hospitalizations Following Skilled Nursing Discharge,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+HFS,Hospitalizations Following Skilled Nursing Discharge,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+HFS,Hospitalizations Following Skilled Nursing Discharge,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+HFS,Hospitalizations Following Skilled Nursing Discharge,Introduction of Autologous Pancreatic Cells,2.16.840.1.113883.3.464.1004.1459
+HFS,Hospitalizations Following Skilled Nursing Discharge,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+HFS,Hospitalizations Following Skilled Nursing Discharge,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+HFS,Hospitalizations Following Skilled Nursing Discharge,Observation Stay,2.16.840.1.113883.3.464.1004.1461
+HFS,Hospitalizations Following Skilled Nursing Discharge,Organ Transplant Other Than Kidney,2.16.840.1.113883.3.464.1004.1195
+HFS,Hospitalizations Following Skilled Nursing Discharge,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+HFS,Hospitalizations Following Skilled Nursing Discharge,Perinatal Conditions,2.16.840.1.113883.3.464.1004.1209
+HFS,Hospitalizations Following Skilled Nursing Discharge,Potentially Planned Post Acute Care Hospitalization,2.16.840.1.113883.3.464.1004.1496
+HFS,Hospitalizations Following Skilled Nursing Discharge,Potentially Planned Procedures,2.16.840.1.113883.3.464.1004.1327
+HFS,Hospitalizations Following Skilled Nursing Discharge,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+HFS,Hospitalizations Following Skilled Nursing Discharge,Rehabilitation,2.16.840.1.113883.3.464.1004.1328
+HFS,Hospitalizations Following Skilled Nursing Discharge,Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467
+HPC,Hospitalization for Potentially Preventable Complications,Asthma Diagnosis,2.16.840.1.113883.3.464.1004.1358
+HPC,Hospitalization for Potentially Preventable Complications,Bacterial Pneumonia,2.16.840.1.113883.3.464.1004.1359
+HPC,Hospitalization for Potentially Preventable Complications,Cardiac Procedure,2.16.840.1.113883.3.464.1004.1361
+HPC,Hospitalization for Potentially Preventable Complications,Cellulitis,2.16.840.1.113883.3.464.1004.1362
+HPC,Hospitalization for Potentially Preventable Complications,COPD Diagnosis,2.16.840.1.113883.3.464.1004.1360
+HPC,Hospitalization for Potentially Preventable Complications,Cystic Fibrosis and Respiratory System Anomalies,2.16.840.1.113883.3.464.1004.1363
+HPC,Hospitalization for Potentially Preventable Complications,Diabetes Diagnosis,2.16.840.1.113883.3.464.1004.1364
+HPC,Hospitalization for Potentially Preventable Complications,Diabetes Long Term Complications,2.16.840.1.113883.3.464.1004.1365
+HPC,Hospitalization for Potentially Preventable Complications,Diabetes Short Term Complications,2.16.840.1.113883.3.464.1004.1366
+HPC,Hospitalization for Potentially Preventable Complications,Dialysis,2.16.840.1.113883.3.464.1004.1367
+HPC,Hospitalization for Potentially Preventable Complications,Heart Failure Diagnosis,2.16.840.1.113883.3.464.1004.1368
+HPC,Hospitalization for Potentially Preventable Complications,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+HPC,Hospitalization for Potentially Preventable Complications,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+HPC,Hospitalization for Potentially Preventable Complications,Hypertension,2.16.840.1.113883.3.464.1004.1369
+HPC,Hospitalization for Potentially Preventable Complications,Immunocompromised State,2.16.840.1.113883.3.464.1004.1370
+HPC,Hospitalization for Potentially Preventable Complications,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+HPC,Hospitalization for Potentially Preventable Complications,Kidney and Urinary Tract Disorders,2.16.840.1.113883.3.464.1004.1371
+HPC,Hospitalization for Potentially Preventable Complications,Lower Extremity Amputation Procedures,2.16.840.1.113883.3.464.1004.1391
+HPC,Hospitalization for Potentially Preventable Complications,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+HPC,Hospitalization for Potentially Preventable Complications,Observation Stay,2.16.840.1.113883.3.464.1004.1461
+HPC,Hospitalization for Potentially Preventable Complications,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+HPC,Hospitalization for Potentially Preventable Complications,Severe Pressure Ulcers,2.16.840.1.113883.3.464.1004.1372
+HPC,Hospitalization for Potentially Preventable Complications,Sickle Cell Anemia and HB S Disease,2.16.840.1.113883.3.464.1004.1373
+HPC,Hospitalization for Potentially Preventable Complications,Stage I Through IV Kidney Disease,2.16.840.1.113883.3.464.1004.1374
+HPC,Hospitalization for Potentially Preventable Complications,Traumatic Amputation of Lower Extremity,2.16.840.1.113883.3.464.1004.1376
+HPC,Hospitalization for Potentially Preventable Complications,Uncontrolled Diabetes,2.16.840.1.113883.3.464.1004.1377
+HPC,Hospitalization for Potentially Preventable Complications,Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Alcohol Abuse and Dependence,2.16.840.1.113883.3.464.1004.1424
+IET,Initiation and Engagement of Substance Use Disorder Treatment,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+IET,Initiation and Engagement of Substance Use Disorder Treatment,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Buprenorphine Implant,2.16.840.1.113883.3.464.1004.1970
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Buprenorphine Injection,2.16.840.1.113883.3.464.1004.1969
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Buprenorphine Naloxone,2.16.840.1.113883.3.464.1004.1971
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Buprenorphine Oral,2.16.840.1.113883.3.464.1004.1968
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Buprenorphine Oral Weekly,2.16.840.1.113883.3.464.1004.2219
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Detoxification,2.16.840.1.113883.3.464.1004.1076
+IET,Initiation and Engagement of Substance Use Disorder Treatment,ED,2.16.840.1.113883.3.464.1004.1086
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Methadone Oral,2.16.840.1.113883.3.464.1004.1972
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Methadone Oral Weekly,2.16.840.1.113883.3.464.1004.2218
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Naltrexone Injection,2.16.840.1.113883.3.464.1004.1967
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Nonresidential Substance Abuse Treatment Facility POS,2.16.840.1.113883.3.464.1004.1490
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Opioid Abuse and Dependence,2.16.840.1.113883.3.464.1004.1425
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Other Drug Abuse and Dependence,2.16.840.1.113883.3.464.1004.1426
+IET,Initiation and Engagement of Substance Use Disorder Treatment,OUD Monthly Office Based Treatment,2.16.840.1.113883.3.464.1004.2220
+IET,Initiation and Engagement of Substance Use Disorder Treatment,OUD Weekly Drug Treatment Service,2.16.840.1.113883.3.464.1004.2221
+IET,Initiation and Engagement of Substance Use Disorder Treatment,OUD Weekly Non Drug Service,2.16.840.1.113883.3.464.1004.2222
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Substance Abuse Counseling and Surveillance,2.16.840.1.113883.3.464.1004.2484
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Substance Use Disorder Services,2.16.840.1.113883.3.464.1004.2205
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+IET,Initiation and Engagement of Substance Use Disorder Treatment,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+IET,Initiation and Engagement of Substance Use Disorder Treatment,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+IMA-E,Immunizations for Adolescents,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+IMA-E,Immunizations for Adolescents,"Anaphylaxis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2240
+IMA-E,Immunizations for Adolescents,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+IMA-E,Immunizations for Adolescents,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+IMA-E,Immunizations for Adolescents,"Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2241
+IMA-E,Immunizations for Adolescents,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+IMA-E,Immunizations for Adolescents,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+IMA-E,Immunizations for Adolescents,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+IMA-E,Immunizations for Adolescents,HPV Immunization,2.16.840.1.113883.3.464.1004.1763
+IMA-E,Immunizations for Adolescents,HPV Vaccine Procedure,2.16.840.1.113883.3.464.1004.1764
+IMA-E,Immunizations for Adolescents,Meningococcal Immunization,2.16.840.1.113883.3.464.1004.1777
+IMA-E,Immunizations for Adolescents,Meningococcal Vaccine Procedure,2.16.840.1.113883.3.464.1004.1778
+IMA-E,Immunizations for Adolescents,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+IMA-E,Immunizations for Adolescents,Tdap Vaccine Procedure,2.16.840.1.113883.3.464.1004.1792
+IMA-E,Immunizations for Adolescents,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+KED,Kidney Health Evaluation for Patients With Diabetes,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+KED,Kidney Health Evaluation for Patients With Diabetes,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+KED,Kidney Health Evaluation for Patients With Diabetes,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+KED,Kidney Health Evaluation for Patients With Diabetes,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+KED,Kidney Health Evaluation for Patients With Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+KED,Kidney Health Evaluation for Patients With Diabetes,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+KED,Kidney Health Evaluation for Patients With Diabetes,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+KED,Kidney Health Evaluation for Patients With Diabetes,Estimated Glomerular Filtration Rate Lab Test,2.16.840.1.113883.3.464.1004.2208
+KED,Kidney Health Evaluation for Patients With Diabetes,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+KED,Kidney Health Evaluation for Patients With Diabetes,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+KED,Kidney Health Evaluation for Patients With Diabetes,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+KED,Kidney Health Evaluation for Patients With Diabetes,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+KED,Kidney Health Evaluation for Patients With Diabetes,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+KED,Kidney Health Evaluation for Patients With Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+KED,Kidney Health Evaluation for Patients With Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+KED,Kidney Health Evaluation for Patients With Diabetes,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+KED,Kidney Health Evaluation for Patients With Diabetes,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+KED,Kidney Health Evaluation for Patients With Diabetes,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+KED,Kidney Health Evaluation for Patients With Diabetes,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+KED,Kidney Health Evaluation for Patients With Diabetes,Quantitative Urine Albumin Lab Test,2.16.840.1.113883.3.464.1004.2206
+KED,Kidney Health Evaluation for Patients With Diabetes,Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234
+KED,Kidney Health Evaluation for Patients With Diabetes,Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207
+KED,Kidney Health Evaluation for Patients With Diabetes,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+LBP,Use of Imaging for Low Back Pain,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+LBP,Use of Imaging for Low Back Pain,Diagnosis History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2593
+LBP,Use of Imaging for Low Back Pain,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+LBP,Use of Imaging for Low Back Pain,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+LBP,Use of Imaging for Low Back Pain,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+LBP,Use of Imaging for Low Back Pain,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+LBP,Use of Imaging for Low Back Pain,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+LBP,Use of Imaging for Low Back Pain,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+LBP,Use of Imaging for Low Back Pain,Imaging Study,2.16.840.1.113883.3.464.1004.1138
+LBP,Use of Imaging for Low Back Pain,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+LBP,Use of Imaging for Low Back Pain,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+LBP,Use of Imaging for Low Back Pain,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+LBP,Use of Imaging for Low Back Pain,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+LBP,Use of Imaging for Low Back Pain,Procedure History That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2594
+LBP,Use of Imaging for Low Back Pain,Recent Diagnoses That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2595
+LBP,Use of Imaging for Low Back Pain,Recent Injuries That May Warrant Imaging,2.16.840.1.113883.3.464.1004.2596
+LBP,Use of Imaging for Low Back Pain,Uncomplicated Low Back Pain,2.16.840.1.113883.3.464.1004.1422
+LSC,Lead Screening in Children,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+LSC,Lead Screening in Children,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+LSC,Lead Screening in Children,Lead Tests,2.16.840.1.113883.3.464.1004.1147
+OED,"Oral Evaluation, Dental Services",Dental Provider,2.16.840.1.113883.3.464.1004.2404
+OED,"Oral Evaluation, Dental Services",Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+OED,"Oral Evaluation, Dental Services",Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+OED,"Oral Evaluation, Dental Services",Oral Evaluation,2.16.840.1.113883.3.464.1004.2402
+OMW,Osteoporosis Management in Women Who Had a Fracture,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+OMW,Osteoporosis Management in Women Who Had a Fracture,Bone Mineral Density Tests,2.16.840.1.113883.3.464.1004.1047
+OMW,Osteoporosis Management in Women Who Had a Fracture,Fractures,2.16.840.1.113883.3.464.1004.1103
+OMW,Osteoporosis Management in Women Who Had a Fracture,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+OMW,Osteoporosis Management in Women Who Had a Fracture,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+OMW,Osteoporosis Management in Women Who Had a Fracture,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+OMW,Osteoporosis Management in Women Who Had a Fracture,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+OMW,Osteoporosis Management in Women Who Had a Fracture,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+OMW,Osteoporosis Management in Women Who Had a Fracture,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+OMW,Osteoporosis Management in Women Who Had a Fracture,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+OMW,Osteoporosis Management in Women Who Had a Fracture,Long Acting Osteoporosis Medications,2.16.840.1.113883.3.464.1004.1396
+OMW,Osteoporosis Management in Women Who Had a Fracture,Osteoporosis Medication Therapy,2.16.840.1.113883.3.464.1004.1197
+OMW,Osteoporosis Management in Women Who Had a Fracture,Outpatient and ED,2.16.840.1.113883.3.464.1004.2478
+OMW,Osteoporosis Management in Women Who Had a Fracture,"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443
+OMW,Osteoporosis Management in Women Who Had a Fracture,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+OMW,Osteoporosis Management in Women Who Had a Fracture,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+OMW,Osteoporosis Management in Women Who Had a Fracture,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+OSW,Osteoporosis Screening in Older Women,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+OSW,Osteoporosis Screening in Older Women,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+OSW,Osteoporosis Screening in Older Women,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+OSW,Osteoporosis Screening in Older Women,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+OSW,Osteoporosis Screening in Older Women,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+OSW,Osteoporosis Screening in Older Women,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+OSW,Osteoporosis Screening in Older Women,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+OSW,Osteoporosis Screening in Older Women,Long Acting Osteoporosis Medications,2.16.840.1.113883.3.464.1004.1396
+OSW,Osteoporosis Screening in Older Women,Osteoporosis Medication Therapy,2.16.840.1.113883.3.464.1004.1197
+OSW,Osteoporosis Screening in Older Women,Osteoporosis Screening Tests,2.16.840.1.113883.3.464.1004.2204
+OSW,Osteoporosis Screening in Older Women,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+OSW,Osteoporosis Screening in Older Women,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+OSW,Osteoporosis Screening in Older Women,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,AMI,2.16.840.1.113883.3.464.1004.1009
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Beta Blocker Contraindications,2.16.840.1.113883.3.464.1004.1041
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+PCE,Pharmacotherapy Management of COPD Exacerbation,Chronic Obstructive Pulmonary Diseases,2.16.840.1.113883.3.464.1004.2463
+PCE,Pharmacotherapy Management of COPD Exacerbation,ED,2.16.840.1.113883.3.464.1004.1086
+PCE,Pharmacotherapy Management of COPD Exacerbation,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PCE,Pharmacotherapy Management of COPD Exacerbation,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PCE,Pharmacotherapy Management of COPD Exacerbation,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+PCE,Pharmacotherapy Management of COPD Exacerbation,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+PCR,Plan All-Cause Readmissions,Acute Condition,2.16.840.1.113883.3.464.1004.1324
+PCR,Plan All-Cause Readmissions,Bone Marrow Transplant,2.16.840.1.113883.3.464.1004.1325
+PCR,Plan All-Cause Readmissions,Chemotherapy Encounter,2.16.840.1.113883.3.464.1004.1519
+PCR,Plan All-Cause Readmissions,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PCR,Plan All-Cause Readmissions,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PCR,Plan All-Cause Readmissions,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+PCR,Plan All-Cause Readmissions,Introduction of Autologous Pancreatic Cells,2.16.840.1.113883.3.464.1004.1459
+PCR,Plan All-Cause Readmissions,Kidney Transplant,2.16.840.1.113883.3.464.1004.1141
+PCR,Plan All-Cause Readmissions,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+PCR,Plan All-Cause Readmissions,Observation Stay,2.16.840.1.113883.3.464.1004.1461
+PCR,Plan All-Cause Readmissions,Organ Transplant Other Than Kidney,2.16.840.1.113883.3.464.1004.1195
+PCR,Plan All-Cause Readmissions,"Outpatient, ED, Telephone, Acute Inpatient and Nonacute Inpatient",2.16.840.1.113883.3.464.1004.2474
+PCR,Plan All-Cause Readmissions,Perinatal Conditions,2.16.840.1.113883.3.464.1004.1209
+PCR,Plan All-Cause Readmissions,Potentially Planned Procedures,2.16.840.1.113883.3.464.1004.1327
+PCR,Plan All-Cause Readmissions,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+PCR,Plan All-Cause Readmissions,Rehabilitation,2.16.840.1.113883.3.464.1004.1328
+PCR,Plan All-Cause Readmissions,Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467
+PCR,Plan All-Cause Readmissions,Surgery Procedure,2.16.840.1.113883.3.464.1004.2223
+PDS-E,Postpartum Depression Screening and Follow-Up,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+PDS-E,Postpartum Depression Screening and Follow-Up,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+PDS-E,Postpartum Depression Screening and Follow-Up,Behavioral Health Encounter,2.16.840.1.113883.3.464.1004.1383
+PDS-E,Postpartum Depression Screening and Follow-Up,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+PDS-E,Postpartum Depression Screening and Follow-Up,Deliveries,2.16.840.1.113883.3.464.1004.1072
+PDS-E,Postpartum Depression Screening and Follow-Up,Depression Case Management Encounter,2.16.840.1.113883.3.464.1004.1389
+PDS-E,Postpartum Depression Screening and Follow-Up,Depression or Other Behavioral Health Condition,2.16.840.1.113883.3.464.1004.1501
+PDS-E,Postpartum Depression Screening and Follow-Up,Follow Up Visit,2.16.840.1.113883.3.464.1004.1385
+PDS-E,Postpartum Depression Screening and Follow-Up,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+PDS-E,Postpartum Depression Screening and Follow-Up,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PDS-E,Postpartum Depression Screening and Follow-Up,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PDS-E,Postpartum Depression Screening and Follow-Up,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+PDS-E,Postpartum Depression Screening and Follow-Up,Symptoms of Depression,2.16.840.1.113883.3.464.1004.2392
+PDS-E,Postpartum Depression Screening and Follow-Up,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+PND-E,Prenatal Depression Screening and Follow-Up,37 Weeks Gestation,2.16.840.1.113883.3.464.1004.1509
+PND-E,Prenatal Depression Screening and Follow-Up,38 Weeks Gestation,2.16.840.1.113883.3.464.1004.1510
+PND-E,Prenatal Depression Screening and Follow-Up,39 Weeks Gestation,2.16.840.1.113883.3.464.1004.1511
+PND-E,Prenatal Depression Screening and Follow-Up,40 Weeks Gestation,2.16.840.1.113883.3.464.1004.1512
+PND-E,Prenatal Depression Screening and Follow-Up,41 Weeks Gestation,2.16.840.1.113883.3.464.1004.1513
+PND-E,Prenatal Depression Screening and Follow-Up,42 Weeks Gestation,2.16.840.1.113883.3.464.1004.1514
+PND-E,Prenatal Depression Screening and Follow-Up,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+PND-E,Prenatal Depression Screening and Follow-Up,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+PND-E,Prenatal Depression Screening and Follow-Up,Behavioral Health Encounter,2.16.840.1.113883.3.464.1004.1383
+PND-E,Prenatal Depression Screening and Follow-Up,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+PND-E,Prenatal Depression Screening and Follow-Up,Deliveries,2.16.840.1.113883.3.464.1004.1072
+PND-E,Prenatal Depression Screening and Follow-Up,Depression Case Management Encounter,2.16.840.1.113883.3.464.1004.1389
+PND-E,Prenatal Depression Screening and Follow-Up,Depression or Other Behavioral Health Condition,2.16.840.1.113883.3.464.1004.1501
+PND-E,Prenatal Depression Screening and Follow-Up,Follow Up Visit,2.16.840.1.113883.3.464.1004.1385
+PND-E,Prenatal Depression Screening and Follow-Up,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+PND-E,Prenatal Depression Screening and Follow-Up,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PND-E,Prenatal Depression Screening and Follow-Up,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PND-E,Prenatal Depression Screening and Follow-Up,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+PND-E,Prenatal Depression Screening and Follow-Up,Symptoms of Depression,2.16.840.1.113883.3.464.1004.2392
+PND-E,Prenatal Depression Screening and Follow-Up,Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479
+PND-E,Prenatal Depression Screening and Follow-Up,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+POD,Pharmacotherapy for Opioid Use Disorder,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+POD,Pharmacotherapy for Opioid Use Disorder,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+POD,Pharmacotherapy for Opioid Use Disorder,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+POD,Pharmacotherapy for Opioid Use Disorder,Buprenorphine Implant,2.16.840.1.113883.3.464.1004.1970
+POD,Pharmacotherapy for Opioid Use Disorder,Buprenorphine Injection,2.16.840.1.113883.3.464.1004.1969
+POD,Pharmacotherapy for Opioid Use Disorder,Buprenorphine Naloxone,2.16.840.1.113883.3.464.1004.1971
+POD,Pharmacotherapy for Opioid Use Disorder,Buprenorphine Oral,2.16.840.1.113883.3.464.1004.1968
+POD,Pharmacotherapy for Opioid Use Disorder,Buprenorphine Oral Weekly,2.16.840.1.113883.3.464.1004.2219
+POD,Pharmacotherapy for Opioid Use Disorder,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+POD,Pharmacotherapy for Opioid Use Disorder,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+POD,Pharmacotherapy for Opioid Use Disorder,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+POD,Pharmacotherapy for Opioid Use Disorder,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+POD,Pharmacotherapy for Opioid Use Disorder,Methadone Oral,2.16.840.1.113883.3.464.1004.1972
+POD,Pharmacotherapy for Opioid Use Disorder,Methadone Oral Weekly,2.16.840.1.113883.3.464.1004.2218
+POD,Pharmacotherapy for Opioid Use Disorder,Naltrexone Injection,2.16.840.1.113883.3.464.1004.1967
+POD,Pharmacotherapy for Opioid Use Disorder,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+POD,Pharmacotherapy for Opioid Use Disorder,Opioid Abuse and Dependence,2.16.840.1.113883.3.464.1004.1425
+POD,Pharmacotherapy for Opioid Use Disorder,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+PPC,Prenatal and Postpartum Care,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+PPC,Prenatal and Postpartum Care,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+PPC,Prenatal and Postpartum Care,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+PPC,Prenatal and Postpartum Care,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+PPC,Prenatal and Postpartum Care,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+PPC,Prenatal and Postpartum Care,Cervical Cytology Lab Test,2.16.840.1.113883.3.464.1004.1525
+PPC,Prenatal and Postpartum Care,Cervical Cytology Result or Finding,2.16.840.1.113883.3.464.1004.1524
+PPC,Prenatal and Postpartum Care,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+PPC,Prenatal and Postpartum Care,Deliveries,2.16.840.1.113883.3.464.1004.1072
+PPC,Prenatal and Postpartum Care,Encounter for Postpartum Care,2.16.840.1.113883.3.464.1004.2477
+PPC,Prenatal and Postpartum Care,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+PPC,Prenatal and Postpartum Care,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PPC,Prenatal and Postpartum Care,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PPC,Prenatal and Postpartum Care,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+PPC,Prenatal and Postpartum Care,Non Live Births,2.16.840.1.113883.3.464.1004.1187
+PPC,Prenatal and Postpartum Care,Postpartum Bundled Services,2.16.840.1.113883.3.464.1004.1217
+PPC,Prenatal and Postpartum Care,Postpartum Care,2.16.840.1.113883.3.464.1004.2476
+PPC,Prenatal and Postpartum Care,Pregnancy Diagnosis,2.16.840.1.113883.3.464.1004.1220
+PPC,Prenatal and Postpartum Care,Prenatal Bundled Services,2.16.840.1.113883.3.464.1004.1223
+PPC,Prenatal and Postpartum Care,Prenatal Visits,2.16.840.1.113883.3.464.1004.1225
+PPC,Prenatal and Postpartum Care,Stand Alone Prenatal Visits,2.16.840.1.113883.3.464.1004.1240
+PPC,Prenatal and Postpartum Care,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+PRS-E,Prenatal Immunization Status,37 Weeks Gestation,2.16.840.1.113883.3.464.1004.1509
+PRS-E,Prenatal Immunization Status,38 Weeks Gestation,2.16.840.1.113883.3.464.1004.1510
+PRS-E,Prenatal Immunization Status,39 Weeks Gestation,2.16.840.1.113883.3.464.1004.1511
+PRS-E,Prenatal Immunization Status,40 Weeks Gestation,2.16.840.1.113883.3.464.1004.1512
+PRS-E,Prenatal Immunization Status,41 Weeks Gestation,2.16.840.1.113883.3.464.1004.1513
+PRS-E,Prenatal Immunization Status,42 Weeks Gestation,2.16.840.1.113883.3.464.1004.1514
+PRS-E,Prenatal Immunization Status,Adult Influenza Immunization,2.16.840.1.113883.3.464.1004.1913
+PRS-E,Prenatal Immunization Status,Adult Influenza Vaccine Procedure,2.16.840.1.113883.3.464.1004.1914
+PRS-E,Prenatal Immunization Status,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+PRS-E,Prenatal Immunization Status,"Anaphylaxis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2240
+PRS-E,Prenatal Immunization Status,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+PRS-E,Prenatal Immunization Status,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+PRS-E,Prenatal Immunization Status,Deliveries,2.16.840.1.113883.3.464.1004.1072
+PRS-E,Prenatal Immunization Status,"Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",2.16.840.1.113883.3.464.1004.2241
+PRS-E,Prenatal Immunization Status,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+PRS-E,Prenatal Immunization Status,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PRS-E,Prenatal Immunization Status,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PRS-E,Prenatal Immunization Status,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+PRS-E,Prenatal Immunization Status,Tdap Vaccine Procedure,2.16.840.1.113883.3.464.1004.1792
+PRS-E,Prenatal Immunization Status,Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479
+PRS-E,Prenatal Immunization Status,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+PSA,Non-Recommended PSA-Based Screening in Older Men,Abnormal PSA Test Result or Finding,2.16.840.1.113883.3.464.1004.1962
+PSA,Non-Recommended PSA-Based Screening in Older Men,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+PSA,Non-Recommended PSA-Based Screening in Older Men,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+PSA,Non-Recommended PSA-Based Screening in Older Men,Prostate Cancer,2.16.840.1.113883.3.464.1004.1312
+PSA,Non-Recommended PSA-Based Screening in Older Men,Prostate Dysplasia,2.16.840.1.113883.3.464.1004.1313
+PSA,Non-Recommended PSA-Based Screening in Older Men,PSA Lab Test,2.16.840.1.113883.3.464.1004.1783
+PSA,Non-Recommended PSA-Based Screening in Older Men,PSA Lab Test Exclusion,2.16.840.1.113883.3.464.1004.1963
+PSA,Non-Recommended PSA-Based Screening in Older Men,PSA Test Result or Finding,2.16.840.1.113883.3.464.1004.1784
+RDM,Race/Ethnicity Diversity of Membership,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+RDM,Race/Ethnicity Diversity of Membership,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+RDM,Race/Ethnicity Diversity of Membership,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+RDM,Race/Ethnicity Diversity of Membership,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+RDM,Race/Ethnicity Diversity of Membership,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+RDM,Race/Ethnicity Diversity of Membership,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,BH Stand Alone Acute Inpatient,2.16.840.1.113883.3.464.1004.1034
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,BH Stand Alone Nonacute Inpatient,2.16.840.1.113883.3.464.1004.1035
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Dementia,2.16.840.1.113883.3.464.1004.1074
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,ED,2.16.840.1.113883.3.464.1004.1086
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Long Acting Injections 14 Days Supply,2.16.840.1.113883.3.464.1004.1151
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Long Acting Injections 28 Days Supply,2.16.840.1.113883.3.464.1004.1152
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Nonacute Inpatient POS,2.16.840.1.113883.3.464.1004.1031
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Acute Inpatient,2.16.840.1.113883.3.464.1004.1810
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,AMI,2.16.840.1.113883.3.464.1004.1009
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,BH Stand Alone Acute Inpatient,2.16.840.1.113883.3.464.1004.1034
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,BH Stand Alone Nonacute Inpatient,2.16.840.1.113883.3.464.1004.1035
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,CABG,2.16.840.1.113883.3.464.1004.1048
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,ED,2.16.840.1.113883.3.464.1004.1086
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,IVD,2.16.840.1.113883.3.464.1004.1137
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Nonacute Inpatient POS,2.16.840.1.113883.3.464.1004.1031
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Outpatient,2.16.840.1.113883.3.464.1004.1202
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,PCI,2.16.840.1.113883.3.464.1004.1204
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,BH Stand Alone Acute Inpatient,2.16.840.1.113883.3.464.1004.1034
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,BH Stand Alone Nonacute Inpatient,2.16.840.1.113883.3.464.1004.1035
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Diabetes,2.16.840.1.113883.3.464.1004.1077
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,ED,2.16.840.1.113883.3.464.1004.1086
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Nonacute Inpatient POS,2.16.840.1.113883.3.464.1004.1031
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+SNS-E,Social Need Screening and Intervention,Food Insecurity Procedures,2.16.840.1.113883.3.464.1004.2262
+SNS-E,Social Need Screening and Intervention,Homelessness Procedures,2.16.840.1.113883.3.464.1004.2410
+SNS-E,Social Need Screening and Intervention,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SNS-E,Social Need Screening and Intervention,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SNS-E,Social Need Screening and Intervention,Housing Instability Procedures,2.16.840.1.113883.3.464.1004.2412
+SNS-E,Social Need Screening and Intervention,Inadequate Housing Procedures,2.16.840.1.113883.3.464.1004.2411
+SNS-E,Social Need Screening and Intervention,Transportation Insecurity Procedures,2.16.840.1.113883.3.464.1004.2264
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+SPC,Statin Therapy for Patients with Cardiovascular Disease,CABG,2.16.840.1.113883.3.464.1004.1048
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Cirrhosis,2.16.840.1.113883.3.464.1004.1379
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+SPC,Statin Therapy for Patients with Cardiovascular Disease,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+SPC,Statin Therapy for Patients with Cardiovascular Disease,IVD,2.16.840.1.113883.3.464.1004.1137
+SPC,Statin Therapy for Patients with Cardiovascular Disease,IVF,2.16.840.1.113883.3.464.1004.1392
+SPC,Statin Therapy for Patients with Cardiovascular Disease,MI,2.16.840.1.113883.3.464.1004.1157
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Muscular Pain and Disease,2.16.840.1.113883.3.464.1004.1381
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Muscular Reactions to Statins,2.16.840.1.113883.3.464.1004.2556
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Old Myocardial Infarction,2.16.840.1.113883.3.464.1004.2401
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Other Revascularization,2.16.840.1.113883.3.464.1004.1388
+SPC,Statin Therapy for Patients with Cardiovascular Disease,"Outpatient, Telehealth and Acute Inpatient",2.16.840.1.113883.3.464.1004.2471
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+SPC,Statin Therapy for Patients with Cardiovascular Disease,PCI,2.16.840.1.113883.3.464.1004.1204
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+SPD,Statin Therapy for Patients with Diabetes,Advanced Illness,2.16.840.1.113883.3.464.1004.1465
+SPD,Statin Therapy for Patients with Diabetes,CABG,2.16.840.1.113883.3.464.1004.1048
+SPD,Statin Therapy for Patients with Diabetes,Cirrhosis,2.16.840.1.113883.3.464.1004.1379
+SPD,Statin Therapy for Patients with Diabetes,Diabetes,2.16.840.1.113883.3.464.1004.1077
+SPD,Statin Therapy for Patients with Diabetes,Dialysis Procedure,2.16.840.1.113883.3.464.1004.1952
+SPD,Statin Therapy for Patients with Diabetes,ESRD Diagnosis,2.16.840.1.113883.3.464.1004.1747
+SPD,Statin Therapy for Patients with Diabetes,Frailty Device,2.16.840.1.113883.3.464.1004.1530
+SPD,Statin Therapy for Patients with Diabetes,Frailty Diagnosis,2.16.840.1.113883.3.464.1004.1531
+SPD,Statin Therapy for Patients with Diabetes,Frailty Encounter,2.16.840.1.113883.3.464.1004.1532
+SPD,Statin Therapy for Patients with Diabetes,Frailty Symptom,2.16.840.1.113883.3.464.1004.1533
+SPD,Statin Therapy for Patients with Diabetes,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SPD,Statin Therapy for Patients with Diabetes,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SPD,Statin Therapy for Patients with Diabetes,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+SPD,Statin Therapy for Patients with Diabetes,IVD,2.16.840.1.113883.3.464.1004.1137
+SPD,Statin Therapy for Patients with Diabetes,IVF,2.16.840.1.113883.3.464.1004.1392
+SPD,Statin Therapy for Patients with Diabetes,MI,2.16.840.1.113883.3.464.1004.1157
+SPD,Statin Therapy for Patients with Diabetes,Muscular Pain and Disease,2.16.840.1.113883.3.464.1004.1381
+SPD,Statin Therapy for Patients with Diabetes,Muscular Reactions to Statins,2.16.840.1.113883.3.464.1004.2556
+SPD,Statin Therapy for Patients with Diabetes,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+SPD,Statin Therapy for Patients with Diabetes,Old Myocardial Infarction,2.16.840.1.113883.3.464.1004.2401
+SPD,Statin Therapy for Patients with Diabetes,Other Revascularization,2.16.840.1.113883.3.464.1004.1388
+SPD,Statin Therapy for Patients with Diabetes,"Outpatient, Telehealth and Acute Inpatient",2.16.840.1.113883.3.464.1004.2471
+SPD,Statin Therapy for Patients with Diabetes,Palliative Care Assessment,2.16.840.1.113883.3.464.1004.2225
+SPD,Statin Therapy for Patients with Diabetes,Palliative Care Encounter,2.16.840.1.113883.3.464.1004.1450
+SPD,Statin Therapy for Patients with Diabetes,Palliative Care Intervention,2.16.840.1.113883.3.464.1004.2224
+SPD,Statin Therapy for Patients with Diabetes,PCI,2.16.840.1.113883.3.464.1004.1204
+SPD,Statin Therapy for Patients with Diabetes,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Acute Inpatient POS,2.16.840.1.113883.3.464.1004.1027
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,BH Outpatient,2.16.840.1.113883.3.464.1004.1481
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,BH Stand Alone Acute Inpatient,2.16.840.1.113883.3.464.1004.1034
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,BH Stand Alone Nonacute Inpatient,2.16.840.1.113883.3.464.1004.1035
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Diabetes,2.16.840.1.113883.3.464.1004.1077
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,ED,2.16.840.1.113883.3.464.1004.1086
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Electroconvulsive Therapy,2.16.840.1.113883.3.464.1004.1294
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Long Acting Injections,2.16.840.1.113883.3.464.1004.1150
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Nonacute Inpatient POS,2.16.840.1.113883.3.464.1004.1031
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Other Bipolar Disorder,2.16.840.1.113883.3.464.1004.1399
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Outpatient POS,2.16.840.1.113883.3.464.1004.1443
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Partial Hospitalization or Intensive Outpatient,2.16.840.1.113883.3.464.1004.1492
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Schizophrenia,2.16.840.1.113883.3.464.1004.1234
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493
+TFC,Topical Fluoride for Children,Application of Fluoride Varnish,2.16.840.1.113883.3.464.1004.2403
+TFC,Topical Fluoride for Children,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+TFC,Topical Fluoride for Children,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+TRC,Transitions of Care,CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464
+TRC,Transitions of Care,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+TRC,Transitions of Care,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+TRC,Transitions of Care,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+TRC,Transitions of Care,Medication Reconciliation Encounter,2.16.840.1.113883.3.464.1004.1528
+TRC,Transitions of Care,Medication Reconciliation Intervention,2.16.840.1.113883.3.464.1004.1529
+TRC,Transitions of Care,Nonacute Inpatient Stay,2.16.840.1.113883.3.464.1004.1398
+TRC,Transitions of Care,Outpatient and Telehealth,2.16.840.1.113883.3.464.1004.2466
+TRC,Transitions of Care,Transitional Care Management Services,2.16.840.1.113883.3.464.1004.1462
+UOP,Use of Opioids From Multiple Providers,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+UOP,Use of Opioids From Multiple Providers,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+URI,Appropriate Treatment for Upper Respiratory Infection,Comorbid Conditions,2.16.840.1.113883.3.464.1004.1066
+URI,Appropriate Treatment for Upper Respiratory Infection,Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067
+URI,Appropriate Treatment for Upper Respiratory Infection,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+URI,Appropriate Treatment for Upper Respiratory Infection,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+URI,Appropriate Treatment for Upper Respiratory Infection,Inpatient Stay,2.16.840.1.113883.3.464.1004.1395
+URI,Appropriate Treatment for Upper Respiratory Infection,"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443
+URI,Appropriate Treatment for Upper Respiratory Infection,Pharyngitis,2.16.840.1.113883.3.464.1004.1210
+URI,Appropriate Treatment for Upper Respiratory Infection,URI,2.16.840.1.113883.3.464.1004.1255
+W30,Well-Child Visits in the First 30 Months of Life,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+W30,Well-Child Visits in the First 30 Months of Life,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+W30,Well-Child Visits in the First 30 Months of Life,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+W30,Well-Child Visits in the First 30 Months of Life,Encounter for Well Care,2.16.840.1.113883.3.464.1004.2480
+W30,Well-Child Visits in the First 30 Months of Life,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+W30,Well-Child Visits in the First 30 Months of Life,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+W30,Well-Child Visits in the First 30 Months of Life,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+W30,Well-Child Visits in the First 30 Months of Life,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+W30,Well-Child Visits in the First 30 Months of Life,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+W30,Well-Child Visits in the First 30 Months of Life,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+W30,Well-Child Visits in the First 30 Months of Life,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+W30,Well-Child Visits in the First 30 Months of Life,Well Care Visit,2.16.840.1.113883.3.464.1004.2479
+W30,Well-Child Visits in the First 30 Months of Life,White Detailed Race,2.16.840.1.113883.3.464.1004.2370
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,BMI Percentile,2.16.840.1.113883.3.464.1004.1038
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Encounter for Physical Activity Counseling,2.16.840.1.113883.3.464.1004.2483
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Nutrition Counseling,2.16.840.1.113883.3.464.1004.1190
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Outpatient,2.16.840.1.113883.3.464.1004.1202
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Physical Activity Counseling,2.16.840.1.113883.3.464.1004.1213
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Pregnancy,2.16.840.1.113883.3.464.1004.1219
+WCV,Child and Adolescent Well-Care Visits,American Indian or Alaska Native Detailed Race,2.16.840.1.113883.3.464.1004.2365
+WCV,Child and Adolescent Well-Care Visits,Asian Detailed Race,2.16.840.1.113883.3.464.1004.2366
+WCV,Child and Adolescent Well-Care Visits,Black or African American Detailed Race,2.16.840.1.113883.3.464.1004.2367
+WCV,Child and Adolescent Well-Care Visits,Encounter for Well Care,2.16.840.1.113883.3.464.1004.2480
+WCV,Child and Adolescent Well-Care Visits,Hispanic or Latino Detailed Ethnicity,2.16.840.1.113883.3.464.1004.2368
+WCV,Child and Adolescent Well-Care Visits,Hospice Encounter,2.16.840.1.113883.3.464.1004.1761
+WCV,Child and Adolescent Well-Care Visits,Hospice Intervention,2.16.840.1.113883.3.464.1004.1762
+WCV,Child and Adolescent Well-Care Visits,Native Hawaiian or Other Pacific Islander Detailed Race,2.16.840.1.113883.3.464.1004.2369
+WCV,Child and Adolescent Well-Care Visits,Online Assessments,2.16.840.1.113883.3.464.1004.1446
+WCV,Child and Adolescent Well-Care Visits,Telehealth POS,2.16.840.1.113883.3.464.1004.1460
+WCV,Child and Adolescent Well-Care Visits,Telephone Visits,2.16.840.1.113883.3.464.1004.1246
+WCV,Child and Adolescent Well-Care Visits,Well Care Visit,2.16.840.1.113883.3.464.1004.2479
+WCV,Child and Adolescent Well-Care Visits,White Detailed Race,2.16.840.1.113883.3.464.1004.2370

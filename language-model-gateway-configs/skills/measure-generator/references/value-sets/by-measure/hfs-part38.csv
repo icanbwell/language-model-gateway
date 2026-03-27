@@ -1,0 +1,90 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16320551000119109,Bleeding from female genital tract co-occurrent with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16468121000119106,Zika virus infection during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16623921000119105,Viral hepatitis C in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698501000119109,Cyst of right ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698541000119106,Cyst of left ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698581000119101,Cyst of bilateral ovaries during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16833081000119100,Dyspepsia during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836261000119107,Ectopic pregnancy of left ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836351000119100,Ectopic pregnancy of right ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836391000119105,Pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836431000119100,Ruptured tubal pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836571000119103,Ruptured tubal pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836811000119108,Miscarriage of left tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836851000119109,Miscarriage of right tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836891000119104,Pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16859701000119109,Chronic hepatitis B during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16862491000119106,Abscess of skin during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16896421000119107,Prediabetes in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,104758671000119101,Chronic deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,138841771000119103,Chronic candidiasis of vagina during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,159139031000119104,Candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,292834071000119104,Acute deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,501661611000119107,Latent genital herpes simplex during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,812500731000119109,Chronic candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,894362851000119109,Disease caused by severe acute respiratory syndrome coronavirus 2 during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.001,[Z44.001] Encounter for fitting and adjustment of unspecified right artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.002,[Z44.002] Encounter for fitting and adjustment of unspecified left artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.009,"[Z44.009] Encounter for fitting and adjustment of unspecified artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.011,[Z44.011] Encounter for fitting and adjustment of complete right artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.012,[Z44.012] Encounter for fitting and adjustment of complete left artificial arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.019,"[Z44.019] Encounter for fitting and adjustment of complete artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.021,[Z44.021] Encounter for fitting and adjustment of partial artificial right arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.022,[Z44.022] Encounter for fitting and adjustment of partial artificial left arm,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.029,"[Z44.029] Encounter for fitting and adjustment of partial artificial arm, unspecified arm",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.101,[Z44.101] Encounter for fitting and adjustment of unspecified right artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.102,[Z44.102] Encounter for fitting and adjustment of unspecified left artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.109,"[Z44.109] Encounter for fitting and adjustment of unspecified artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.111,[Z44.111] Encounter for fitting and adjustment of complete right artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.112,[Z44.112] Encounter for fitting and adjustment of complete left artificial leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.119,"[Z44.119] Encounter for fitting and adjustment of complete artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.121,[Z44.121] Encounter for fitting and adjustment of partial artificial right leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.122,[Z44.122] Encounter for fitting and adjustment of partial artificial left leg,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.129,"[Z44.129] Encounter for fitting and adjustment of partial artificial leg, unspecified leg",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.30,"[Z44.30] Encounter for fitting and adjustment of external breast prosthesis, unspecified breast",ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.31,[Z44.31] Encounter for fitting and adjustment of external right breast prosthesis,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.32,[Z44.32] Encounter for fitting and adjustment of external left breast prosthesis,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.8,[Z44.8] Encounter for fitting and adjustment of other external prosthetic devices,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z44.9,[Z44.9] Encounter for fitting and adjustment of unspecified external prosthetic device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.1,[Z45.1] Encounter for adjustment and management of infusion pump,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.31,[Z45.31] Encounter for adjustment and management of implanted visual substitution device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.320,[Z45.320] Encounter for adjustment and management of bone conduction device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.321,[Z45.321] Encounter for adjustment and management of cochlear device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.328,[Z45.328] Encounter for adjustment and management of other implanted hearing device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.41,[Z45.41] Encounter for adjustment and management of cerebrospinal fluid drainage device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.42,[Z45.42] Encounter for adjustment and management of neurostimulator,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.49,[Z45.49] Encounter for adjustment and management of other implanted nervous system device,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.811,[Z45.811] Encounter for adjustment or removal of right breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.812,[Z45.812] Encounter for adjustment or removal of left breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z45.819,[Z45.819] Encounter for adjustment or removal of unspecified breast implant,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.82,[Z46.82] Encounter for fitting and adjustment of non-vascular catheter,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.89,[Z46.89] Encounter for fitting and adjustment of other specified devices,ICD10CM,2.16.840.1.113883.6.90
+Rehabilitation,2.16.840.1.113883.3.464.1004.1328,Z46.9,[Z46.9] Encounter for fitting and adjustment of unspecified device,ICD10CM,2.16.840.1.113883.6.90
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0022,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0190,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0191,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0192,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0193,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0194,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0199,,UBREV,2.16.840.1.113883.6.301.3
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0210,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0211,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0212,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0213,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0214,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0215,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0217,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,0218,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021F,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021G,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021H,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021I,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021J,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021K,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021M,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021O,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Q,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021X,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Y,,UBTOB,2.16.840.1.113883.6.301.1
+Skilled Nursing Stay,2.16.840.1.113883.3.464.1004.1467,021Z,,UBTOB,2.16.840.1.113883.6.301.1

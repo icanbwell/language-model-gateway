@@ -1,0 +1,722 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,435201000124109,Recurrent acute suppurative otitis media of left ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,450761000124106,Irradiation cystitis without hematuria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,450991000124101,Spontaneous rupture of right tympanic membrane co-occurrent and due to acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,689981000119103,Ulcer of skin caused by Cytomegalovirus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1077931000119106,Osteolysis of right distal clavicle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1077941000119102,Osteolysis of left distal clavicle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1082561000119104,Recurrent acute suppurative otitis media with spontaneous rupture of ear drum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1082721000119101,Pneumonia caused by Ascaris (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1082731000119103,Enteritis caused by Astrovirus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1082841000119101,Acquired deformity of bilateral pierced ear lobes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1082931000119101,Acute inflammation of bilateral mastoids (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1083061000119100,Spontaneous rupture of tympanic membranes of bilateral ears co-occurrent and due to recurrent acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1083101000119102,Acute suppurative otitis media of bilateral ears (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1083111000119104,Spontaneous rupture of bilateral tympanic membranes co-occurrent and due to acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1083311000119101,Chronic inflammation of bilateral mastoid cavities (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1083321000119108,Chronic inflammation of bilateral mastoids (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1084011000119100,Inflammation of bilateral mastoids (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1084821000119103,Cystitis caused by Chlamydia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1086071000119103,Diphtheria tubulointerstitial nephropathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087001000119105,Infection of anus and rectum caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087021000119101,Periurethral abscess caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087041000119107,Infection of kidney and ureter caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087051000119109,Gonococcal osteomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087061000119106,Gonococcal pneumonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1087951000119105,Acquired deformity of left pierced ear lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088041000119106,Acute inflammation of left mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088181000119100,Spontaneous rupture of tympanic membrane of left ear co-occurrent and due to recurrent acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088221000119108,Acute suppurative otitis media of left ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088231000119106,Spontaneous rupture of left tympanic membrane co-occurrent and due to acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088441000119101,Chronic inflammation of left mastoid cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088451000119104,Chronic inflammation of left mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1088811000119102,Stenosis of left external auditory canal due to and following procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1089071000119109,Inflammation of left mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1089811000119106,Meningoencephalitis caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1090571000119108,Acquired deformity of right pierced ear lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1090661000119101,Acute inflammation of right mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1090791000119102,Spontaneous rupture of tympanic membrane of right ear co-occurrent and due to recurrent acute suppurative otitis media (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1090831000119108,Acute suppurative otitis media of right ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1091051000119100,Chronic inflammation of right mastoid cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1091061000119103,Chronic inflammation of right mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1091421000119101,Stenosis of right external auditory canal due to and following procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1091681000119104,Inflammation of right mastoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1092371000119103,Salmonella pyelonephritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1092831000119109,Toxoplasma tubulointerstitial nephropathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,1092951000119106,Pneumonia caused by Bordetella parapertussis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,2490001000004101,Herpes zoster of skin of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10624991000119103,Bronchopneumonia caused by Achromobacter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625031000119102,Bronchopneumonia caused by anaerobic bacteria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625071000119104,Bronchopneumonia caused by bacteria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625111000119106,Bronchopneumonia caused by Escherichia coli (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625151000119107,Bronchopneumonia caused by Group A Streptococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625191000119102,Bronchopneumonia caused by Group B Streptococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625231000119106,Bronchopneumonia caused by Haemophilus influenzae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625311000119109,Bronchopneumonia caused by Klebsiella pneumoniae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625351000119105,Bronchopneumonia caused by methicillin resistant Staphylococcus aureus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625391000119100,Bronchopneumonia caused by methicillin susceptible Staphylococcus aureus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625431000119105,Bronchopneumonia caused by Mycoplasma pneumoniae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625471000119108,Bronchopneumonia caused by Proteus mirabilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625511000119104,Bronchopneumonia caused by Pseudomonas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625591000119108,Bronchopneumonia caused by Staphylococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625631000119108,Bronchopneumonia caused by Staphylococcus aureus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625671000119106,Bronchopneumonia caused by Streptococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10625711000119105,Bronchopneumonia caused by Streptococcus pneumoniae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10628871000119101,Gastroenteritis caused by Influenza virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10628911000119103,Gastroenteritis caused by Influenza A virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10677511000119107,Infection of toenail (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10750051000119105,Chlamydia trachomatis infection in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10752111000119109,Postpartum acute cystitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10752171000119101,Postpartum candidiasis of vagina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10752211000119104,Postpartum bacterial vaginosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10754031000119105,Gonorrhea in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10759841000119105,Sexually transmitted infectious disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,10759921000119107,Syphilis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11673571000119101,Exostosis of skull (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11773411000119102,Infected abrasion of skin of right thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11773491000119106,Infected abrasion of skin of left thumb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11773571000119109,Infected wound of right elbow due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11773651000119104,Infected wound of left elbow due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11774411000119100,Blister of right thumb with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11774491000119109,Blister of left thumb with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11774571000119107,Foreign body in skin of right thumb with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11774651000119102,Foreign body in skin of left thumb with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11776091000119105,Foreign body in skin of right forearm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11776171000119105,Foreign body in skin of left forearm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779241000119101,Infected abrasion of skin of right forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779281000119106,Infected abrasion of skin of left forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779321000119101,Blister of right forearm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779361000119106,Blister of left forearm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779401000119102,Blister of right elbow region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779441000119100,Blister of left elbow region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779481000119105,Infected abrasion of skin of right elbow region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779521000119105,Infected abrasion of skin of left elbow region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779561000119100,Infected wound of right forearm due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779601000119100,Infected wound of left forearm due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11779641000119103,Infected abrasion of skin of lesser toe of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783401000119109,Infected wound of right hip due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783441000119106,Infected wound of left hip due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783481000119101,Blister of right wrist region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783521000119101,Blister of left wrist region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783561000119106,Blister of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783601000119106,Blister of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783641000119108,Infected abrasion of skin of lesser toe of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783881000119104,Nonvenomous insect bite of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783921000119106,Nonvenomous insect bite of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11783961000119101,Infected wound of right thigh due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784001000119100,Infected wound of left thigh due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784041000119103,Infected wound of right wrist due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784081000119108,Infected wound of left wrist due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784121000119105,Infected abrasion of skin of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784161000119100,Infected abrasion of skin of right index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784201000119105,Infected abrasion of skin of right little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784241000119107,Infected abrasion of skin of right middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784281000119102,Infected abrasion of skin of right ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784321000119107,Infected abrasion of skin of finger of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784361000119102,Infected abrasion of skin of left index finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784401000119106,Infected abrasion of skin of left little finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784441000119108,Infected abrasion of skin of left middle finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784481000119103,Infected abrasion of skin of left ring finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784521000119103,Infected abrasion of skin of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784561000119108,Infected abrasion of skin of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784601000119108,Infected abrasion of skin of right wrist region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11784641000119105,Infected abrasion of skin of left wrist region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786121000119100,Foreign body in skin of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786201000119100,Foreign body in skin of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786281000119108,Blister of little finger of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786321000119103,Blister of index finger of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786361000119108,Blister of middle finger of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786401000119104,Blister of ring finger of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786481000119107,Blister of index finger of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786521000119107,Blister of little finger of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786561000119102,Blister of middle finger of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11786601000119102,Blister of ring finger of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787241000119100,Foreign body in skin of finger of left hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787281000119105,Foreign body of skin of left index finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787361000119105,Foreign body in skin of left middle finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787401000119101,Foreign body in skin of left ring finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787641000119102,Foreign body in skin of finger of right hand with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787681000119107,Foreign body in skin of right index finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787761000119106,Foreign body in skin of right middle finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11787801000119103,Foreign body in skin of right ring finger with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793431000119101,Blister of right foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793461000119109,Blister of left foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793501000119109,Infected abrasion of skin of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793541000119106,Infected nonvenomous insect bite of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793581000119101,Infected nonvenomous insect bite of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11793981000119109,Foreign body in skin of right great toe with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11794061000119103,Foreign body in skin of left great toe with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11797461000119104,Blister of lower back with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11797501000119104,Blister of sacral region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11797701000119109,Infected abrasion of skin of sacral region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11808821000119105,Infected abrasion of skin of right hip region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11808861000119100,Infected abrasion of skin of left hip region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809221000119101,Infected wound of low back due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809421000119102,Infected abrasion of skin of right lower leg (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809461000119107,Infected abrasion of skin of left lower leg (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809501000119107,Infected abrasion of skin of right knee region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809541000119109,Infected abrasion of skin of left knee region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809581000119104,Infected abrasion of skin of right thigh (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809621000119104,Infected abrasion of skin of left thigh (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809661000119109,Infected wound of right knee due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11809701000119102,Infected wound of left knee due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11822921000119105,Infected abrasion of skin of right upper arm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11822961000119100,Infected abrasion of skin of left upper arm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823001000119108,Blister of right upper arm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823041000119105,Blister of left upper arm with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823081000119100,Blister of right shoulder region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823121000119103,Blister of left shoulder region with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823161000119108,Infected abrasion of skin of right shoulder region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823201000119103,Infected abrasion of skin of left shoulder region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823321000119101,Infected wound of right upper arm due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11823361000119106,Infected wound of left upper arm due to non venomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828621000119104,Blister of right hip with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828661000119109,Blister of left hip with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828781000119105,Blister of right thigh with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828821000119100,Blister of left thigh with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828861000119105,Blister of right knee with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11828901000119104,Blister of left knee with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11836921000119107,Blister of right lower leg with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11836961000119102,Blister of left lower leg with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11837001000119102,Infected wound of right lower leg due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11837041000119100,Infected wound of left lower leg due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11837481000119100,Foreign body in skin of right lower leg with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11837561000119105,Foreign body in skin of left lower leg with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11843111000119107,Infected abrasion of skin of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11843271000119105,Foreign body in skin of right ear with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11843351000119106,Foreign body in skin of left ear with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11843951000119105,Infected abrasion of skin of right ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11843991000119100,Infected abrasion of skin of left ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11844351000119109,Blister of right ear with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11844391000119104,Blister of left ear with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848021000119106,Infected abrasion of skin of cheek (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848301000119100,Infected wound of right eyelid due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848381000119108,Infected wound of left eyelid due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848501000119109,Infected abrasion of skin of right eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848581000119101,Infected abrasion of skin of left eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11848981000119109,Infected abrasion of skin of right breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11849021000119103,Infected abrasion of skin of left breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11850021000119106,Blister of right breast with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11850061000119101,Blister of left breast with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862081000119101,Traumatic blister of right ankle with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862121000119104,Traumatic blister of left ankle with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862161000119109,Infected abrasion of skin of right ankle region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862201000119104,Infected abrasion of skin of left ankle region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862241000119102,Infected abrasion of skin of right great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862281000119107,Infected abrasion of skin of left great toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862321000119102,Infected abrasion of skin of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862521000119106,Infected wound of right foot due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11862561000119101,Infected wound of left foot due to nonvenomous insect bite (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11863241000119105,Blister of great toe of right foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11863281000119100,Blister of great toe of left foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11863321000119105,Blister of lesser toe of right foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11863361000119100,Blister of lesser toe of left foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11864361000119102,Foreign body in skin of right foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,11864441000119108,Foreign body in skin of left foot with infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12208801000119106,Osteolysis of bone adjacent to right hip joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12208841000119108,Osteolysis of bone adjacent to right knee joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12217401000119105,Osteolysis of bone adjacent to left hip joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12217441000119107,Osteolysis of bone adjacent to left knee joint prosthesis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12241911000119102,Plantar wart of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12241951000119101,Plantar wart of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,12277551000119101,Bilateral plantar wart (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15640081000119104,Bilateral bone spur of calcaneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15677801000119103,Chorioretinitis of right eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15677841000119101,Chorioretinitis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15677881000119106,Chorioretinitis of left eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15679481000119104,Iritis of right eye caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15679561000119109,Iritis of left eye caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15679681000119101,Iritis of bilateral eyes caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15681321000119100,Dermatitis of left eyelid due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15681361000119105,Infection of skin of bilateral eyelids due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15681401000119101,Dermatitis of right eyelid due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15685441000119102,Retinitis of bilateral eyes caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693201000119102,Keratitis of bilateral eyes caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693241000119100,Keratitis of left eye caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693281000119105,Keratitis of right eye caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693321000119100,Keratitis of left eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693361000119105,Keratitis of bilateral eyes caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15693401000119101,Keratitis of right eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15698841000119105,Ulcer of right cornea caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15698881000119100,Ulcer of left cornea caused by Acanthamoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15709241000119108,Parasitic infestation of right eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15709281000119103,Parasitic infestation of bilateral eyelids (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15709321000119108,Parasitic infestation of left eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15715841000119107,Enostosis of left tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15715881000119102,Enostosis of right tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15716561000119104,Bone island of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15716601000119104,Bone island of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15717161000119109,Osteolysis of acromial end of bilateral clavicles (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15936661000119103,Erysipelas of bilateral lower limbs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15936701000119105,Erysipelas of right lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15936741000119107,Erysipelas of left lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15965421000119105,Vulvovaginitis caused by Amoeba (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15965501000119100,Abscess of right greater vestibular gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15965541000119103,Abscess of left greater vestibular gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15981911000119105,Chronic bilateral maxillary sinusitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15981951000119106,Chronic right maxillary sinusitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15981991000119101,Chronic left maxillary sinusitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15988791000119105,Neonatal conjunctivitis of right eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15988831000119104,Neonatal conjunctivitis of left eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15988871000119101,Neonatal conjunctivitis of bilateral eyes caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993071000119101,Interstitial keratitis of right eye due to congenital syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993231000119108,Interstitial keratitis of bilateral eyes due to congenital syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993311000119106,Iritis of right eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993351000119107,Iritis of left eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993391000119102,Retinitis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993431000119107,Interstitial keratitis of left eye due to congenital syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15993471000119105,Iritis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15998911000119104,Infection of right eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15998951000119103,Infection of bilateral eyes caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,15998991000119108,Infection of left eye caused by Neisseria gonorrhoeae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16003031000119105,Infection of nail of finger of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16003111000119101,Infection of fingernail of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16003951000119103,Disorder of right humerus following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16004031000119107,Disorder of left humerus following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015431000119100,Disorder of bone of right ankle joint region following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015471000119102,Osteopathy of right foot following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015511000119106,Disorder of bone of left ankle joint region following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015551000119107,Osteopathy of bilateral feet following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015591000119102,Disorder of bone of bilateral ankle joint regions following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16015631000119102,Osteopathy of left foot following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018031000119101,Disorder of bilateral tibias following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018071000119103,Disorder of left fibula following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018111000119105,Disorder of bilateral fibulas following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018151000119106,Disorder of right tibia following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018191000119101,Disorder of left tibia following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16018231000119105,Disorder of right fibula following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033471000119106,Hypertrophy of bilateral radii (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033551000119101,Hypertrophy of bone of bilateral tibias (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033591000119106,Hypertrophy of right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033711000119108,Hypertrophy of bone of right tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033831000119105,Hypertrophy of bone of right hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033871000119108,Hypertrophy of bone of right fibula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033911000119106,Hypertrophy of bone of bilateral feet (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033951000119107,Hypertrophy of bone of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16033991000119102,Hypertrophy of bone of bilateral clavicles (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034031000119103,Hypertrophy of bone of right ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034071000119100,Hypertrophy of bone of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034111000119107,Hypertrophy of left radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034151000119108,Hypertrophy of bone of left tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034191000119103,Hypertrophy of bone of bilateral humeri (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034231000119107,Hypertrophy of bone of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034271000119105,Hypertrophy of bone of bilateral ankle joint regions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034311000119105,Hypertrophy of bone of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034351000119106,Hypertrophy of bone of bilateral hands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034391000119101,Hypertrophy of bone of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034511000119100,Hypertrophy of bone of left fibula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034551000119104,Hypertrophy of bone of right humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034591000119109,Hypertrophy of bone of left scapula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034631000119109,Hypertrophy of bone of left hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034671000119107,Hypertrophy of bone of right scapula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16034711000119106,Hypertrophy of bone of left ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035191000119104,Osteolysis of bones of bilateral feet (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035351000119107,Osteolysis of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035391000119102,Osteolysis of right femur (disorder) [16035391000119102],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035511000119101,Osteolysis of bilateral tibias (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035551000119100,Osteolysis of left radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035591000119105,Osteolysis of left femur (disorder) [16035591000119105],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035631000119105,Osteolysis of left foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035671000119108,Osteolysis of left tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035711000119107,Osteolysis of right radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035751000119108,Osteolysis of bilateral femurs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035791000119103,Osteolysis of right humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035831000119109,Osteolysis of right ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035951000119106,Osteolysis of right tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16035991000119101,Osteolysis of bilateral hands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036031000119107,Osteolysis of bilateral radii (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036071000119105,Osteolysis of left ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036111000119103,Osteolysis of right foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036591000119101,Complete epiphyseal arrest of bilateral distal tibias (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036631000119101,Complete epiphyseal arrest of bilateral proximal tibias (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036711000119104,Epiphyseal arrest of left forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036751000119103,Epiphyseal arrest of right humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036791000119108,Epiphyseal arrest of left lower leg (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036831000119102,Epiphyseal arrest of right femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16036991000119105,Partial epiphyseal arrest of bilateral distal femurs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037071000119108,Partial epiphyseal arrest of bilateral distal tibias (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037111000119101,Partial epiphyseal arrest of bilateral distal radii (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037151000119100,Epiphyseal arrest of left humerus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037191000119105,Epiphyseal arrest of left femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037231000119101,Epiphyseal arrest of bilateral femurs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037271000119103,Epiphyseal arrest of right lower leg (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037311000119103,Epiphyseal arrest of right forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037351000119102,Epiphyseal arrest of bilateral lower legs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037391000119107,Epiphyseal arrest of bilateral humeri (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16037431000119102,Epiphyseal arrest of bilateral forearms (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16038471000119100,Disorder of left femur following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16038511000119109,Disorder of right femur following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16038551000119105,Disorder of bilateral femurs following poliomyelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16217981000119107,Infection of upper genitourinary tract caused by Neisseria gonorrheae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16291381000119103,Infection of subungual skin of toe of bilateral feet due to ingrown toenail (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16314371000119109,Steroid-modified tinea infection of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16314421000119103,Steroid-modified tinea infection of groin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16314471000119102,Steroid-modified tinea infection of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16838111000119103,Recurrent colitis caused by Clostridium difficile (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16838151000119102,Recurrent diarrhea caused by Clostridium difficile (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,16915901000119105,Osteolysis of thoracic vertebra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,32130001000004108,Spur of ankle bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,138841771000119103,Chronic candidiasis of vagina during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,159139031000119104,Candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,170059221000119102,Lipoid pneumonitis due to vaping (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,602893011000119101,Acute nasopharyngitis caused by respiratory syncytial virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,812500731000119109,Chronic candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,877043181000119101,Infection caused by Babesia duncani (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Competing Diagnosis,2.16.840.1.113883.3.464.1004.1067,903729901000119103,Acute upper respiratory infection caused by respiratory syncytial virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0100,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0101,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0110,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0111,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0112,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0113,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0114,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0116,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0117,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0118,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0119,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0120,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0121,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0122,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0123,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0124,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0126,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0127,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0128,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0129,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0130,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0131,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0132,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0133,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0134,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0136,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0137,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0138,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0139,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0140,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0141,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0142,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0143,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0144,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0146,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0147,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0148,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0149,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0150,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0151,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0152,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0153,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0154,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0156,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0157,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0158,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0159,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0160,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0164,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0167,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0169,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0170,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0171,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0172,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0173,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0174,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0179,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0190,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0191,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0192,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0193,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0194,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0199,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0200,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0201,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0202,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0203,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0204,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0206,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0207,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0208,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0209,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0210,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0211,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0212,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0213,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0214,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,0219,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1000,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1001,,UBREV,2.16.840.1.113883.6.301.3
+Inpatient Stay,2.16.840.1.113883.3.464.1004.1395,1002,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98000,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98001,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98002,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98003,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98004,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98005,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98006,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98007,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98008,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98009,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98010,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98011,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98012,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98013,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98014,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98015,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98016,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98966,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98967,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98968,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98970,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98971,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98972,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98980,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,98981,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99202,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99203,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99204,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99205,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99211,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99212,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99213,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99214,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99215,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99242,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99243,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99244,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99245,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99281,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99282,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99283,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99284,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99285,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99341,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99342,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99344,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99345,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99347,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99348,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99349,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99350,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99381,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99382,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99383,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99384,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99385,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99386,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99387,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99391,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99392,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99393,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99394,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99395,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99396,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99397,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99401,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99402,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99403,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99404,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99411,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99412,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99421,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99422,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99423,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99429,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99441,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99442,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99443,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99455,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99456,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99457,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99458,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,99483,,CPT,2.16.840.1.113883.6.12
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G0071,"Payment for communication technology-based services for 5 minutes or more of a virtual (non-face-to-face) communication between an rural health clinic (rhc) or federally qualified health center (fqhc) practitioner and rhc or fqhc patient, or 5 minutes or more of remote evaluation of recorded video and/or images by an rhc or fqhc practitioner, occurring in lieu of an office visit; rhc or fqhc only (G0071)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G0402,"Initial preventive physical examination; face-to-face visit, services limited to new beneficiary during the first 12 months of medicare enrollment (G0402)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G0438,"Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit (G0438)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G0439,"Annual wellness visit, includes a personalized prevention plan of service (pps), subsequent visit (G0439)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G0463,Hospital outpatient clinic visit for assessment and management of a patient (G0463),HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G2010,"Remote evaluation of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment (G2010)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G2012,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of medical discussion (G2012)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G2250,"Remote assessment of recorded video and/or images submitted by an established patient (e.g., store and forward), including interpretation with follow-up with the patient within 24 business hours, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment (G2250)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G2251,"Brief communication technology-based service, e.g. virtual check-in, by a qualified health care professional who cannot report evaluation and management services, provided to an established patient, not originating from a related service provided within the previous 7 days nor leading to a service or procedure within the next 24 hours or soonest available appointment; 5-10 minutes of clinical discussion (G2251)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,G2252,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a related e/m service provided within the previous 7 days nor leading to an e/m service or procedure within the next 24 hours or soonest available appointment; 11-20 minutes of medical discussion (G2252)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,T1015,"Clinic visit/encounter, all-inclusive (T1015)",HCPCS,2.16.840.1.113883.6.285
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,4525004,Emergency department patient visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,50357006,Evaluation and management of patient at home (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,77406008,Confirmatory medical consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,84251009,Comprehensive consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,86013001,Periodic reevaluation and management of healthy individual (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,90526000,Initial evaluation and management of healthy individual (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,185317003,Telephone encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,185463005,Visit out of hours (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,185464004,Out of hours visit - not night visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,185465003,Weekend visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,209099002,History and physical examination with management of domiciliary or rest home patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,281036007,Follow-up consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,314849005,Telephone contact by consultant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,386472008,Telephone consultation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,386473003,Telephone follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,401267002,Telephone triage encounter (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,439740005,Postoperative follow-up visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,866149003,Annual visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,3391000175108,Office visit for pediatric care and assessment (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,444971000124105,Annual wellness visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,456201000124103,Medicare annual wellness visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0450,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0451,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0452,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0456,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0459,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0510,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0511,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0513,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0514,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0515,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0516,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0517,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0519,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0520,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0521,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0522,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0523,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0526,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0527,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0528,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0529,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0981,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0982,,UBREV,2.16.840.1.113883.6.301.3
+"Outpatient, ED and Telehealth",2.16.840.1.113883.3.464.1004.2443,0983,,UBREV,2.16.840.1.113883.6.301.3
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J02.0,[J02.0] Streptococcal pharyngitis,ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J02.8,[J02.8] Acute pharyngitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J02.9,"[J02.9] Acute pharyngitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.00,"[J03.00] Acute streptococcal tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.01,[J03.01] Acute recurrent streptococcal tonsillitis,ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.80,[J03.80] Acute tonsillitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.81,[J03.81] Acute recurrent tonsillitis due to other specified organisms,ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.90,"[J03.90] Acute tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,J03.91,"[J03.91] Acute recurrent tonsillitis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,140004,Chronic pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,652005,Gangrenous tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,1532007,Viral pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,2365002,Chronic granular pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,10351008,Suppurative tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,11461005,Staphylococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,14465002,Ulcerative tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,17741008,Acute tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,27878001,Follicular tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,31309002,Respiratory syncytial virus pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,39271004,Ulcerative pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,40766000,Enteroviral lymphonodular pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,41582007,Streptococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,43878008,Streptococcal sore throat (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,51209006,Viral tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,55355000,Acute laryngopharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,58031004,Suppurative pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,59471009,Phlegmonous pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,63866002,Atrophic pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,72430001,Gangrenous pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,76651006,Pneumococcal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,78430008,Adenoviral pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,78911000,Parainfluenza virus pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,82228008,Staphylococcal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,87326000,Hypertrophic pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,90176007,Tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,90979004,Chronic tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,95885008,Mycoplasmal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,111816002,Pneumococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,126664009,Exudative pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,126665005,Oropharyngeal mucositis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,186357007,Streptococcal sore throat with scarlatina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,186659004,Herpangina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,186963008,Vincent's angina - pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195655000,Acute gangrenous pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195656004,Acute phlegmonous pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195657008,Acute ulcerative pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195658003,Acute bacterial pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195659006,Acute pneumococcal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195660001,Acute staphylococcal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195662009,Acute viral pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195663004,Allergic pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195666007,Acute erythematous tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195667003,Acute follicular tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195668008,Acute ulcerative tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195669000,Acute catarrhal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195670004,Acute gangrenous tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195671000,Acute bacterial tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195672007,Acute pneumococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195673002,Acute staphylococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195676005,Acute viral tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195677001,Recurrent acute tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195709006,Pharyngolaryngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195779005,Pharyngitis keratosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195780008,Pharyngitis sicca (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195782000,Chronic follicular pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195803003,Caseous tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195804009,Lingular tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,195924009,Influenza with pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232399005,Acute herpes simplex pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232400003,Acute herpes zoster pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232401004,Glandular fever pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232402006,Meningococcal pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232403001,Chlamydial pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232405008,Chronic ulcerative pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232406009,Chronic pharyngeal candidiasis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,232417005,Vincent's tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,240444009,Fusobacterial necrotizing tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,240547000,Lymphonodular coxsackie pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,302911003,Acute lingual tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,312422001,Infective pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,363746003,Acute pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,405737000,Pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,415724006,Tonsillitis caused by Gram negative bacteria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,703468005,Bacterial tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,721586007,Pharyngotonsillitis caused by Human herpes simplex virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,878818001,Pharyngotonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,1296672005,Acute infective pharyngitis caused by Streptococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,133171000119105,Chronic pharyngolaryngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,10629231000119109,Recurrent acute streptococcal tonsillitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pharyngitis,2.16.840.1.113883.3.464.1004.1210,10629271000119107,Acute tonsillitis caused by Streptococcus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

@@ -1,0 +1,1374 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760381000119106,Thyroiditis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760421000119102,Psychotic disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760461000119107,Psychotic disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760541000119109,Traumatic injury to vulva during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760581000119104,Pain in round ligament in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760661000119109,"Triplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760701000119102,"Quadruplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760741000119100,"Quadruplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760781000119105,"Quintuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760821000119100,"Quintuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760861000119105,"Sextuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760901000119104,"Sextuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760941000119102,Psychological abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10760981000119107,Psychological abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761021000119102,Sexual abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761061000119107,Sexual abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761101000119105,Vacuum assisted vaginal delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761141000119107,Preterm labor in second trimester with preterm delivery in second trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761191000119104,Preterm labor in third trimester with preterm delivery in third trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761241000119104,Preterm labor with preterm delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761341000119105,Preterm labor without delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10761391000119102,Tobacco use in mother complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10805641000119102,Congenital cardiovascular anomaly in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10806241000119108,Thalassemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10807061000119103,Liver disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10808861000119105,Maternal distress during childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10809061000119106,Malaria in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10809101000119109,Hypothyroidism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10809641000119100,Mitral valve disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10811121000119102,Major depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10811161000119107,Major depressive disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10811201000119102,Mental disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10812041000119103,Urinary tract infection due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10812131000119108,Malnutrition in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10835621000119104,Congenital anomaly of vagina in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10835701000119102,Congenital anomaly of vulva in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10835781000119105,Amniotic fluid embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10835871000119104,Depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10835971000119109,Anti-A sensitization in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,10836071000119101,Dislocation of symphysis pubis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,11056091000119105,Recurrent herpes simplex infection of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,11718971000119100,Diarrhea in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,12198241000119109,Malposition of intrauterine contraceptive device (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,12275071000119109,Conjoined twin pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,13016151000119101,Constipation during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15643101000119103,Gastroesophageal reflux disease in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15677801000119103,Chorioretinitis of right eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15677841000119101,Chorioretinitis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15677881000119106,Chorioretinitis of left eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15679481000119104,Iritis of right eye caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15679561000119109,Iritis of left eye caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15679681000119101,Iritis of bilateral eyes caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15685441000119102,Retinitis of bilateral eyes caused by Treponema pallidum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15750121000119108,Pre-existing severe obesity in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15928141000119107,Cognitive impairment co-occurrent and due to human immunodeficiency virus infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15993311000119106,Iritis of right eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15993351000119107,Iritis of left eye due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15993391000119102,Retinitis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,15993471000119105,Iritis of bilateral eyes due to secondary syphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16217981000119107,Infection of upper genitourinary tract caused by Neisseria gonorrheae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16316841000119100,Purulent mastitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16320551000119109,Bleeding from female genital tract co-occurrent with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16468121000119106,Zika virus infection during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16623921000119105,Viral hepatitis C in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16698501000119109,Cyst of right ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16698541000119106,Cyst of left ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16698581000119101,Cyst of bilateral ovaries during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16833081000119100,Dyspepsia during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836261000119107,Ectopic pregnancy of left ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836351000119100,Ectopic pregnancy of right ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836391000119105,Pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836431000119100,Ruptured tubal pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836571000119103,Ruptured tubal pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836811000119108,Miscarriage of left tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836851000119109,Miscarriage of right tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16836891000119104,Pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16859701000119109,Chronic hepatitis B during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16862491000119106,Abscess of skin during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,16896421000119107,Prediabetes in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,104758671000119101,Chronic deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,138841771000119103,Chronic candidiasis of vagina during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,159139031000119104,Candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,292834071000119104,Acute deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,501661611000119107,Latent genital herpes simplex during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,812500731000119109,Chronic candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnoses Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2481,894362851000119109,Disease caused by severe acute respiratory syndrome coronavirus 2 during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70010,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70015,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70030,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70100,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70110,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70120,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70130,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70134,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70140,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70150,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70160,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70170,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70190,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70200,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70210,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70220,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70240,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70250,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70260,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70300,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70310,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70320,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70328,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70330,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70332,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70336,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70350,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70355,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70360,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70370,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70371,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70380,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70390,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70450,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70460,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70470,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70480,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70481,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70482,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70486,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70487,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70488,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70490,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70491,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70492,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70496,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70498,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70540,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70542,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70543,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70544,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70545,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70546,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70547,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70548,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70549,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70551,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70552,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70553,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70554,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70555,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70557,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70558,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70559,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71045,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71046,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71047,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71048,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71100,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71101,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71110,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71111,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71120,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71130,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71250,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71260,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71270,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71271,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71275,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71550,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71551,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71552,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71555,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72020,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72040,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72050,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72052,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72070,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72072,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72074,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72080,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72081,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72082,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72083,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72084,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72100,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72110,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72114,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72120,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72125,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72126,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72127,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72128,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72129,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72130,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72131,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72132,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72133,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72141,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72142,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72146,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72147,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72148,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72149,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72156,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72157,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72158,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72159,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72170,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72190,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72191,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72192,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72193,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72194,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72195,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72196,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72197,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72198,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72200,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72202,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72220,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72240,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72255,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72265,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72270,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72285,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72295,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73000,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73010,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73020,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73030,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73040,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73050,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73060,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73070,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73080,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73085,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73090,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73092,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73100,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73110,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73115,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73120,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73130,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73140,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73200,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73201,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73202,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73206,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73218,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73219,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73220,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73221,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73222,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73223,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73225,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73501,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73502,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73503,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73521,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73522,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73523,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73525,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73551,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73552,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73560,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73562,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73564,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73565,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73580,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73590,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73592,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73600,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73610,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73615,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73620,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73630,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73650,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73660,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73700,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73701,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73702,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73706,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73718,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73719,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73720,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73721,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73722,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73723,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,73725,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74018,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74019,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74021,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74022,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74150,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74160,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74170,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74174,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74175,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74176,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74177,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74178,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74181,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74182,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74183,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74185,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74190,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74210,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74220,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74221,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74230,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74235,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74240,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74246,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74248,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74250,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74251,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74261,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74262,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74263,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74270,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74280,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74283,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74290,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74300,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74301,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74328,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74329,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74330,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74340,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74355,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74360,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74363,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74400,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74410,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74415,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74420,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74425,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74430,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74440,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74445,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74450,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74455,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74470,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74485,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74712,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74713,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74740,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74742,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74775,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75557,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75559,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75561,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75563,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75565,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75571,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75572,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75573,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75574,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75580,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75600,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75605,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75625,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75630,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75635,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75705,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75710,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75716,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75726,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75731,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75733,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75736,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75741,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75743,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75746,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75756,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75774,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75801,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75803,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75805,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75807,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75809,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75810,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75820,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75822,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75825,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75827,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75831,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75833,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75840,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75842,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75860,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75870,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75872,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75880,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75885,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75887,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75889,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75891,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75893,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75894,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75898,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75901,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75902,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75956,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75957,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75958,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75959,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75970,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75984,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75989,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76000,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76010,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76014,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76015,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76016,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76017,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76018,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76019,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76080,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76098,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76100,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76120,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76125,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76140,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76145,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76376,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76377,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76380,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76390,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76391,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76496,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76497,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76498,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76499,,CPT,2.16.840.1.113883.6.12
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306005,Echography of kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,334003,Panorex examination of mandible (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,435001,Pulmonary inhalation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,762008,Computed tomography of cervical spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,951000,Ultrasonic guidance for endomyocardial biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1292009,Magnetic resonance imaging of urinary bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1385001,"Echography, scan B-mode for fetal age determination (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1787006,Ultrasonic guidance for pericardiocentesis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,2508002,Retrograde urography with kidney-ureter-bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,2690005,Magnetic resonance imaging of pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,2847006,Cervical myelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,2933008,Pneumogynecography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,3620007,Red cell survival study with hepatic sequestration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,3787003,Needle biopsy using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,3858009,"Echography of thyroid, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,3991004,"Magnetic resonance imaging of pelvis, prostate and urinary bladder (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,3998005,Bone imaging of limited area (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4934001,Salpingography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6007000,Magnetic resonance imaging of chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6157006,Endoscopic retrograde cholangiopancreatography with biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6271008,"Echography, immersion B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6480006,Urinary bladder residual urine study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6521006,Polytomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6650009,Radionuclide lacrimal flow study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,7656009,Isotope study for renal plasma flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,7995007,Angiography of lower extremity arteries with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8073008,Ultrasonic guidance for aspiration of ova (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8151003,Echocardiography for detecting cardiac output (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8693001,Radionuclide identification of eye tumor (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8994009,Radioiron oral absorption study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9518008,Fistulography of abdominal wall with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9704004,Computed tomography limited studies (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9988008,Computed tomography oblique (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,10374007,"Echography, contact B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11269009,Isotope study for plasma volume (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11278003,Kidney imaging with vascular flow and function study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11390003,"Retroperitoneal echography, B-scan, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11760007,Fluoroscopy during operation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11892002,Computed tomography sagittal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11895000,Tracer study of eye (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11971003,Pulmonary ventilation-perfusion study by radioactive krypton (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12124007,Radioisotope scan of pancreas (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12341000,Isotope study for glomerular filtration rate (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12357000,"Radiologic examination of renal cyst, translumbar approach (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12389009,Xeromammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12749000,Radiologic guidance for percutaneous placement of enteroclysis tube (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13088001,Corpora cavernosography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13205008,Transvaginal echography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13256004,"Dynamic function study, blood clearance (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13378009,Thyroid uptake with discharge (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13450007,Mammary ductogram of multiple ducts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13518004,Computed tomography without intravenous contrast followed by intravenous contrast and more sections (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13845008,Gastrointestinal aspirate for localization of blood loss (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14211004,Computed tomography guidance for needle biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15282006,"Fetal echocardiography, real time with image documentation (2D) with M-mode recording (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15351005,Radiocalcium absorption study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15364006,"Scanning or imaging, perfusion study, particulate (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15749009,"Cerebral ventriculography, air contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16278002,Radiologic supervision and interpretation of procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16310003,Ultrasonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16747000,Percutaneous transhepatic cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16910009,Oral contrast cholecystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17026004,Radionuclide tissue clearance study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17375006,Ultrasonic guidance for renal pelvis aspiration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17624002,"Splenoportography, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17724006,Continuous wave Doppler analog wave form analysis of upper extremity arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17776005,Arthrography of elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17984001,Acute gastrointestinal blood loss imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18102001,Mammary ductogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18370004,Radiologic examination of upper gastrointestinal tract with kidney-ureter-bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18479002,Testicular imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18499008,"Radionuclide study, protein kinetics (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18640002,"Echography, M-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18848007,"Echography of chest, B-scan with image documentation (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19086005,Radioisotope study of respiratory system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19252005,Isotope study for gastrointestinal blood loss (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20384009,Radioisotope scan of pituitary (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20603005,Special echography procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20630000,Laparoscopic cholecystectomy with cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20740007,"Pelvic echography, B-scan, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20836009,Computed tomography of posterior fossa with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21623001,Fetal biophysical profile (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22034001,"Echography of prostate, transrectal approach (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22059005,Computed tomography bone density study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22089003,Pulmonary ventilation-perfusion study by radioactive oxygen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22400007,Computed tomography 3 dimensional reconstruction (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22760005,Xeroradiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22761009,Perineogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22791004,Plain X-ray of lumbar and sacral spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,23225008,Gastrointestinal protein loss study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,23572007,Transmission bone density study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,23738001,Ultrasonography of digestive system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,23818008,"Scanning or imaging, perfusion study, gaseous (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,23931002,Ultrasonography of head and neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24058001,Echocardiography for determining posterior left ventricular wall thickness (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24135002,Ultrasonography of total body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24623002,Screening mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24646000,Translumbar angiography of abdominal aorta with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24689001,"Computed tomography guidance for treatment planning, external beam radiation therapy (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24737001,Echography of scrotum and contents (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,24848001,Pelvic echography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,25411007,Hysterogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,25850001,Ultrasonography of thorax (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,26946001,Computed tomography of upper extremity with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,27498003,Radiography of bilateral bronchi with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,27851003,Myelography of entire spinal canal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28033003,Needle biopsy of chest with fluoroscopy guided localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28337005,Red cell survival study with splenic sequestration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28339008,Thoracic myelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28367004,Cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28514000,Tomography of bilateral kidneys (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28566009,"Echography, M-mode, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28686001,Nephrotomogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28687005,Transcatheter therapy by infusion with angiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28806001,"Angiocardiography by serialography, multi-plane (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,28894006,Fluoroscopic localization for transbronchial biopsy and brushing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29117008,"Angiocardiography, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29166005,Radiologic examination of upper gastrointestinal tract and small bowel with serial films (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29559003,"Radioiodohippurate sodium renogram, multiple probes (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29567006,Magnetic resonance imaging of brain and brain stem (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29845000,Xenon flow scan of cardiovascular system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,29967000,"Echography, scan B-mode for placement of radiation fields (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,30439001,Venography of inferior vena cava with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,30462004,"Echography of breast, B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,30726001,Ultrasonic guidance for thoracentesis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,30918004,Radionuclide venous thrombosis study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,30957007,Magnetic resonance imaging of orbit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31643000,Angiography of upper extremity arteries with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31683008,"Retroperitoneal echography, B-scan, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31800006,Selective angiocardiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31911002,Radiography of kidney-ureter-bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31962004,"Pulmonary perfusion imaging, particulate (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,31998007,"Echography, scan B-mode for fetal growth rate (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,32012009,Radioisotope scan of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,32265006,Intravenous pyelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,32345002,Gastrointestinal isotope fat absorption study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,32729002,Thyroid uptake with thyroid suppression (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,32962002,Computed tomography of abdomen with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,33527008,Aspiration of cyst using ultrasonic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,33677003,Isotope study of blood volume (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,34227000,Computed tomography of brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,35202002,Scanning or imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,35249003,Magnetic resonance imaging of face (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,35621002,Cardiac blood pool imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,35757004,Echocardiography for determining ventricular contraction (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,36624001,Gastrointestinal blood loss study by stool counting (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,36870006,"Echoencephalography, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,36960008,Intra-abdominal phlebography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37090007,Placentography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37348007,"Diagnostic radiography with contrast media by injection, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37385004,Diagnostic radiography of upper gastrointestinal tract with serial films (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37403009,Sphincterotomy of sphincter of Oddi by endoscopic retrograde cholangiopancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37707006,Radionuclide study of coronary blood flow (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,37859006,Pulmonary ventilation perfusion study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,38930009,Fluoroscopy of chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,39305005,Oral contrast cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,40008005,Plethysmometry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,40357002,Echocardiography for determining mitral and tricuspid valve motion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,40371005,Ultrasonography for midline shift of brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,40701008,Echocardiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,40892001,Special ultrasonic display or imaging technique (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41051004,"Echography, A-mode with amplitude quantitation (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41209002,Transcatheter therapy for embolization with angiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41333006,Magnetic resonance imaging of lumbar spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41380003,Radioisotope scan for myocardial infarction (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41440006,Radioisotope brain imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41466009,"Myocardial imaging for infarct with ejection fraction, first pass technique (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41496004,"Ophthalmic echography with amplitude quantitation, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41500002,Small bowel series (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41747008,Radioisotope scan of bone (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41823007,Thyroid imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,41842006,Radioisotope study of hematopoietic system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,42705007,Pneumography of retroperitoneum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,42957001,Imaging of cerebrospinal fluid flow for cerebrospinal fluid leakage detection and localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,42976004,Doppler flow mapping of thorax (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43129000,Radionuclide dynamic function study with multiple probes (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43145003,"Abdominal aortography, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43204002,Mammography of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43294005,"Echography, M-mode, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43370007,Impedance phlebography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43704001,"Echography of breast, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,43837006,Radioiodinated triolein study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,44052005,Ultrasonography of biliary tract (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,44260000,Stereotactic excisional biopsy of intracranial lesion using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,44491008,Fluoroscopy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,45036003,Ultrasonography of abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,45316007,Radionuclide localization of tumor (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,45588000,Liver function study with serial images (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,45689001,Femoral phlebography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46108001,Multi-plane radionuclide tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46258004,Determination of ventricular ejection fraction with probe technique (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46377000,Cardiac tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46424009,"Cerebral ventriculography, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46471003,Isotope study for urinary recovery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46798003,Special radionuclide imaging technique (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46822003,Arthrography of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46854007,Radionuclide localization of abscess of whole body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,46870009,P32 tracer study of eye (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,47079000,Ultrasonography of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,47324001,Thyroid uptake with thyroid stimulation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,47616002,"White blood cell localization, whole body (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,47621004,Diagnostic radiologic examination with fluoroscopy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,48564003,Fluoroscopic monitoring and radiography for cardiac pacemaker insertion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,48735005,"Thoracic aortography, positive contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,48986007,Cholecystocholangiogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,48995004,Postoperative fluoroscopy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,48996003,"Echography of abdomen, B-scan, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,49276007,Echocardiography for determining interventricular septal thickness (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,49752000,Intravenous pyelogram with kidney-ureter-bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50025001,Diagnostic radiography with oral contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50621006,Isotope study for renal clearance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50759007,Kidney imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50788008,Pulmonary ventilation-perfusion study by radioactive xenon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50867009,Mammary ductogram of single duct (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,50964001,Abdominal aortography with bilateral iliofemoral arteries with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,51006009,Echoencephalography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,51619007,Magnetic resonance imaging with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,51808006,Arthrography of ankle with positive contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,53161007,Radiologic guidance for ileal conduitogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,53457009,Echocardiography for determining prosthetic valve motion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,53585008,Radioisotope study of gastrointestinal system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,54042002,Contrast radiography of nasolacrimal ducts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,54321008,Cardiac flow imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,54689004,Real time scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,54780008,Liver imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,54810009,Voiding urethrocystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55447006,Percutaneous hysterogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55498000,Endotracheal bronchography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55501000,Computed tomography of kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55550006,Radioisotope study of central nervous system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55596003,Antegrade urography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,55965002,Plain X-ray of bone of cranium (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,56058002,Fluoroscopy to assist endoscopic maneuver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,56087001,Dacryocystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,56216006,"Radionuclide localization of tumor, whole body (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,56712007,Computed tomography multi-plane (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,57093001,"Echocardiography, real-time with image documentation with M-mode recording, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,57113004,Pulmonary ventilation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,57417005,Bowel imaging for Meckel's diverticulum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,57780004,"Radioiodohippurate sodium renogram, serial imaging (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,57902003,Magnetic resonance imaging of temporomandibular joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,58518000,"Bone imaging, vascular flow study (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,58713006,Magnetic resonance imaging of musculoskeletal structures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,58719005,Radioisotope scan of uterus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,58951003,"Pelvic echography, B-scan, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,59105009,Bowel imaging for ectopic gastric mucosa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,59413000,Radiologic guidance for dilation of urethra (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,59608007,Diagnostic radiologic examination with fluoroscopy of chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,59916001,"Cerebrospinal fluid flow imaging, shunt evaluation (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,60228007,Cholecystectomy with exploration of common duct with cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,60443006,Magnetic resonance imaging of cervical spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,60539009,"Echography of thyroid, B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,61361006,Red cell survival study for splenic and hepatic sequestration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,61518007,"Echography, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,61593002,Ultrasonic guidance procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,61832002,"Echocardiography for determining mitral, aortic and tricuspid valve motion (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,61982008,Echocardiography for determining pericardial effusion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,62559003,"Echocardiography, real time with image documentation with M-mode, follow-up (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,62581008,Magnetic resonance imaging of myocardium (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,62658002,Magnetic resonance imaging of chest and myocardium (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,62756008,Radiologic examination of pharynx and cervical esophagus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,63243008,Intraoperative cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,63670007,"Myocardial imaging for infarct, planar technique (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,64021002,Postoperative pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,64167000,Doppler flow mapping of aortic arch (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,64387007,Myelogram of posterior fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,64432007,Radioisotope myocardial imaging procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,64682006,"Pulmonary perfusion imaging, gaseous (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,65388005,Ultrasonic guidance for amniocentesis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,65749006,"Gastroesophageal reflux study, radiographic (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,65839000,Ophthalmic ultrasonic foreign body localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,65867009,Magnetic resonance imaging of mediastinum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,66088009,Pulmonary perfusion study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,66377006,"Radionuclide localization of tumor, limited area (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,66675005,"Magnetic resonance imaging of orbit, face and neck (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,66995002,Renal function study with serial imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,67255001,Magnetic resonance imaging without intravenous contrast followed by contrast and more sections (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,67357007,Esophageal motility study with acid perfusion studies (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,67361001,Pulmonary ventilation-perfusion study by radioactive nitrogen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,67595003,Radionuclide study of cardiac output (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,67715004,Oral contrast duodenography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,68280004,Replacement of percutaneous drainage catheter with contrast monitoring (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,68796002,Radioisotope study of musculoskeletal system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,68965004,Pelvimetry with placental localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,69477006,"Ophthalmic echography, contact B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,69657008,Computed tomography additional views (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,69720006,Radionuclide special dynamic function study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,69772001,"Echography, B-scan, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,70268007,Platelet survival study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71040008,Computed tomography follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71093009,Pancreatography during surgery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71163001,"Echography of abdomen, B-scan, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71503007,Magnetic resonance imaging of joint of upper extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71651007,Mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71867003,"Echography of breast, B-scan and real time with image documentation (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71954002,Gastric mucosa imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,71977002,Radionuclide uptake study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72221006,Magnetic resonance imaging of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,72716007,Computed tomography guided localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74017005,Intraoperative transhepatic cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74193008,Echocardiography for determining size of ventricular chambers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74219000,"Pulmonary perfusion imaging, gaseous, with ventilation, rebreathing and washout (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74546006,Fluoroscopy for foreign body localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74590001,Kidney imaging with dynamic function study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74710000,Computed tomography of pelvis with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74834003,"Angiocardiography by serialography, single plane (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,74874009,"Echography of chest, real time with image documentation (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75014006,Pelvimetry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75385009,Computed tomography of thorax with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75679007,Radiography of gastrointestinal tract (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75691003,Magnetic resonance imaging of prostate (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,75766009,"Pulmonary ventilation study, gaseous (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76285001,Upper gastrointestinal tract examination with air contrast with kidney-ureter-bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76718005,Aspiration of cyst using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76927004,Radioisotope study of genitourinary system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,76930006,"Ophthalmic echography, immersion B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,77477000,Computed tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,77658008,Ultrasonography of urinary system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,77973006,Doppler flow mapping of head and neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78002002,Contrast dacryocystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78013004,"Echography, B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78138006,Echography of spinal canal and contents (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78176000,"Echography, B-scan, complete (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78579002,Ultrasonography of retroperitoneum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78669009,"Fluoroscopy, serial films (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78711007,Doppler flow mapping of heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,78938007,Ultrasonography of multiple sites (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,79563007,Magnetic resonance imaging of joint of lower extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,79966006,Ultrasonography of uterus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,80308001,Pulmonary ventilation-perfusion study by radioactive carbon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,80823002,"Ophthalmic echography, B-scan, limited (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,80865008,Specimen mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,81391006,Liver and spleen imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,81523000,"Echography, scan C-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,81618005,Intravenous cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,81937003,Red cell survival study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82066000,"Bone density study, dual photon absorptiometry (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82327001,Cardiac fluoroscopy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82499005,Radiography of nasolacrimal duct (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82588005,Ureteral reflux study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82641000,Computed tomography coronal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82831001,"Cerebrospinal fluid flow imaging, ventriculography (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82918005,Positron emission tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,82921007,Radionuclide localization of abscess of limited area (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,83061004,Echocardiography for determining mitral valve motion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,83093007,Radioisotope joint imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,83262001,Cerebrospinal fluid flow imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,83735008,Insertion of biliary stent by endoscopic retrograde cholangiopancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,85339002,Hysterosalpingography with gas contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,85606007,Radionuclide cardiac ventriculography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,85815002,Hypotonic duodenography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,85895003,Contrast bronchogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86086004,"Cerebrospinal fluid flow imaging, tomographic (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86410006,Imaging of carotid arteries by duplex scan with spectrum analysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86434001,"Echography of chest, B-scan (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86543007,Esophageal motility study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86599005,"Echography, scan B-mode for placental localization (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86811003,"Pulmonary ventilation study, aerosol (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86924002,Gallium scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,86950003,Fetography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,87338009,Tracheography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,87674005,"Pulmonary ventilation study, total (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,87785000,Retrograde pyelography of bilateral renal pelvises (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,88365004,Lumbosacral myelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,88628008,Ultrasonography of lung (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,88663003,Thoracic aortography with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,88935003,Spleen imaging with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,89118008,Fluoroscopic localization for transbronchial biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,89846007,Orthopantogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,90084008,Magnetic resonance imaging without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,90523008,Computed tomography of lumbar vertebral column with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,90992001,Venous thrombosis study with radioactive fibrinogen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91008002,"Bone imaging, tomographic (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91160008,Transcricoid bronchography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91333005,Magnetic resonance imaging of thoracic spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91360003,Arthrography of knee with positive contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91453008,"Echography of chest, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,91649003,"Diagnostic radiography with gas-air, negative contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105368002,Intra-arterial digital subtraction angiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105369005,Intravenous digital subtraction angiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105371005,Single photon emission computed tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105375001,Hand-held-transducer ultrasonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105376000,Transesophageal echocardiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105377009,Ultrasonography of liver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105378004,Thallium scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,108279006,Radiographic procedure on genitourinary system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,108294005,Nuclear medicine diagnostic procedure on cardiovascular system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113090004,Computed tomography with intravenous contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113091000,Magnetic resonance imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113103008,Radiography of urinary system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113104002,Retrograde cystourethrogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113105001,Computed tomography of thoracic spine with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113109007,Magnetic resonance imaging of lower extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,113113000,"Ophthalmic echography, A-mode (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,116152004,Spiral computed tomography scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,116334007,Percutaneous core needle biopsy of breast using stereotactic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,164817009,Placental localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168537006,Plain X-ray (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168565008,Plain X-ray base of skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168594001,Plain X-ray of clavicle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168619004,Plain X-ray of head of humerus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168620005,Plain X-ray shaft of humerus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168637003,Plain X-ray of radius (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168663008,Plain X-ray of head of femur (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168664002,Plain X-ray of neck of femur (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168665001,Plain X-ray shaft of femur (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168669007,Plain X-ray of patella (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168702005,Plain X-ray of abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168745003,Plain X-ray of thoracic aorta (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168810003,Transglottic radiography of bilateral bronchi with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168811004,Transcricoid radiography of bilateral bronchi with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168812006,Selective bronchography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168821007,Barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168831000,Barium follow through (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168836005,Barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168843004,Colostomy enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168844005,Double contrast barium meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168845006,Duodenum double contrast examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168846007,Rectum double contrast examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168847003,Colon double contrast examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168854009,Cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168858007,Retrograde cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168859004,Percutaneous cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168860009,Negative/double contrast cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168861008,Intravenous cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168864000,Urethrogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168870006,Peroral cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168881009,Contrast amniography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168882002,Placental vasography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168884001,Hysterosalpingogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168890002,Female genital system contrast procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168896008,Contrast sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168900006,Omphalomesenteric duct contrast radiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168902003,Head fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168903008,Neck fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168904002,Chest wall fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168905001,Abdominal fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168906000,Retroperitoneal fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168908004,Arthrography of knee joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168982001,Venogram - pertrochanteric (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168997003,Fluoroscopy - brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168998008,Fluoroscopy - skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,168999000,Fluoroscopy of cervical vertebral column (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169000003,Fluoroscopy - skeleton/limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169002006,Fluoroscopy of diaphragm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169003001,Fluoroscopy - lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169004007,Fluoroscopy - chest wall (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169005008,Fluoroscopy of esophagus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169006009,Fluoroscopy - intestine -small (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169007000,Fluoroscopy - intestine -large (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169008005,Fluoroscopy - stomach (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169009002,Fluoroscopy - rectum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169010007,Fluoroscopy - gallbladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169011006,Fluoroscopy - urinary tract (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169012004,Fluoroscopy - female genital (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169014003,Fluoroscopy and radiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169015002,Fluoroscopy and radiography - brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169016001,Fluoroscopy and radiography - skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169017005,Fluoroscopy and radiography - cervical column (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169018000,Fluoroscopy and radiography - skeleton (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169021003,Fluoroscopy and radiography - lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169022005,Fluoroscopy and radiography - chest wall (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169023000,Fluoroscopy and radiography - digestive (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169025007,Fluoroscopy and radiography - urinary (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169026008,Fluoroscopy and radiography - female genital (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169031005,Tomography - head/neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169032003,Tomography - skeleton/limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169033008,Tomography - larynx/trachea (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169035001,Tomography - gallbladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169037009,Tomography - chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169066007,Computed tomography of skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169067003,Computed tomography of face (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169068008,Computed tomography of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169069000,Computed tomography of chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169070004,Computed tomography of abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169071000,Computed tomography of pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169072007,Computed tomography scan - whole body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169078006,Computed tomography cineangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169086006,Stereotactic/stereoscopic test - brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169087002,Stereotactic/stereoscopic test - skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169088007,Stereotactic/stereoscopic test - face (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169089004,Stereotactic/stereoscopic test - heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169090008,Stereotactic/stereoscopic test - mediastinum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169091007,Stereotactic/stereoscopic test - lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169092000,Stereotactic/stereoscopic test - abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169093005,Stereotactic/stereoscopic test - skeleton (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169115000,Photofluorography of lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169126006,Isotope fat absorption (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169127002,Potassium 40 whole body count (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169138002,Isotope distribution static scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169139005,Isotope static scan brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169140007,Isotope static scan skull (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169142004,Isotope static scan lung (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169143009,Isotope static scan kidneys (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169146001,Isotope static cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169150008,Isotope static scan of bone marrow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169151007,Isotope static scan joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169152000,Isotope static scan lymph node (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169153005,Isotope static placentography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169155003,Isotope stat scan parathyroid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169160004,Isotope dynamic scan of cerebrospinal fluid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169161000,Angiography of intracranial vascular structure using radioactive isotope (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169162007,Angiography of vascular structure of thyroid using radioactive isotope (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169167001,Radionuclide lymphogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169175007,Isotope - bone marrow function (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,169251004,Ultrasonography of urinary bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,171229005,Screening plain X-ray of chest (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,173771003,Radioisotope scan of intestine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174027003,Barium enema for radiological reduction of intussusception of ileum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174303008,Radiological reduction of intussusception of rectum using barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174304002,Hydrostatic reduction of intussusception of rectum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174377008,Fistulography of anal fistula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174608008,Operative cholangiography through cystic duct (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174609000,Direct puncture operative cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174651007,Endoscopic retrograde pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174653005,Endoscopic retrograde pancreatography and collection of pancreatic juice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174654004,Endoscopic retrograde pancreatography via accessory ampulla of Vater (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174681004,Percutaneous cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174682006,T tube cholangiogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174750001,Prograde operative pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,174770007,Percutaneous pancreatogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,175971006,Antegrade pyelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,175988004,Nephrostogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,176086008,Retrograde catheter ureteropyelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,176087004,Retrograde bulb ureteropyelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,180198004,Intravenous cholecystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,186473000,Angiocardiography with carbon dioxide negative contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,187231000,"Angiocardiography, negative contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,202440005,Water soluble contrast myelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,228084000,Whole body bone imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,228710009,Marker cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,229033006,Radioisotope scan of total body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235504000,Open pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235505004,Retrograde operative pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235506003,Ambigrade operative pancreatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235507007,Pancreatic operative cystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235508002,Pancreatic operative loopography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235576002,Pernasal tube cholangiogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,235583009,Endoscopic retrograde cholangiopancreatography sphincterotomy of sphincter of Oddi and calculus removal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,236196009,Cystoscopy and retrograde pyelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,236197000,Cystoscopy and bulb catheter ureteropyelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,240959006,Therapeutic barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241032008,Stereographic radiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241033003,Movement radiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241046008,Dental plain X-ray bitewing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241047004,Dental plain X-ray periapical (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241048009,Dental plain X-ray occlusal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241049001,Occlusal plain X-ray of maxillary region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241050001,Occlusal plain X-ray of mandibular region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241051002,Tangential plain X-ray of incisor tooth and canine tooth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241052009,Zonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241053004,Radiographic measurement of lung volume (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241056007,Localization mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241057003,Cone compression mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241058008,Magnification mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241069006,Plain X-ray of ulna (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241071006,Plain X-ray of scaphoid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241075002,Plain X-ray of femur (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241079008,Plain X-ray of metatarsal bone (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241080006,Plain X-ray of tarsus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241081005,Plain X-ray of hindfoot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241085001,Plain X-ray of subtalar joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241119000,Plain X-ray of extracted tooth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241123008,Fluoroscopy of soft tissue (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241124002,Video soft palate (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241125001,Placentography-contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241127009,Encephalography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241129007,Auditory meatogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241130002,Air meatogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241131003,Positive contrast meatogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241132005,Parotid sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241133000,Submandibular sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241134006,Choanogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241141000,Double contrast barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241142007,Single contrast barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241143002,Water soluble contrast swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241144008,Solid barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241145009,Air contrast swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241146005,Tracheoesophageal fistula X-ray study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241147001,Tube esophagram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241149003,Videofluoroscopy swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241150003,Videoswallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241151004,Cineswallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241152006,Digital fluoroscopy swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241153001,Barium meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241155008,Single contrast barium meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241156009,Water soluble contrast meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241157000,Upper gastrointestinal tract series (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241158005,Barium meal and follow through (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241160007,Small bowel meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241161006,Small bowel meal plus pneumocolon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241162004,Small bowel barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241163009,Ileostomy enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241164003,Double contrast barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241165002,Single contrast barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241166001,Distal loop enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241167005,Instant barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241168000,Water soluble contrast enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241169008,Proctogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241170009,Defecating proctogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241171008,Gastrointestinal tract loopogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241172001,Pouchogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241175004,Cholecystography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241176003,Catheter cholecystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241177007,Percutaneous cholecystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241178002,U tube cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241179005,Catheter cholangiogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241180008,Percutaneous hepatography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241181007,Percutaneous cyst puncture and cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241184004,Stress cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241185003,Retrograde ileoureterostogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241186002,Gynecogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241190000,Breast pneumocystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241193003,Scoliosis myelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241194009,Air myelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241195005,Epidurogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241205006,Interphalangeal joint arthrogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241209000,Sinogram with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241210005,Pneumocystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241213007,Cardiac shunt study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241221001,Intravenous digital subtraction angiography of cervicocerebral arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241275007,Vascular fistulography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241283001,Skull isotope studies (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241286009,Radionuclide brain study first pass (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241290006,Radionuclide study of neural receptors (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241291005,Radionuclide brain study with inhaled gases (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241292003,Radionuclide ophthalmology study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241293008,Radionuclide study of lung (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241294002,Lung perfusion study with Tc99m-albumin (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241295001,Lung perfusion study with Krypton 81m (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241297009,Xenon ventilation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241298004,Xenon-133 ventilation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241299007,Xenon-127 ventilation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241302007,Diethylenetriaminepentaacetate aerosol ventilation study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241303002,Radionuclide mucociliary clearance study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241304008,Radionuclide lung permeability study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241305009,Radionuclide venogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241306005,Radionuclide venous first pass study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241307001,Radionuclide thrombus localization study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241310008,Radionuclide thrombus-specific peptide study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241311007,Radionuclide venous blood pool study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241312000,Radionuclide angiography of artery using radioactive isotope (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241313005,Radionuclide soft tissue blood pool study - early and delayed (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241316002,Radionuclide gastric emptying study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241317006,Radionuclide dual phase gastric emptying study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241321004,Radionuclide esophageal study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241322006,Radionuclide study for esophageal transit time (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241323001,Study of esophageal transit using radiolabeled fluid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241324007,Study of esophageal transit using radiolabeled solid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241325008,Study of esophageal transit using both radiolabeled fluid and solid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241328005,Radionuclide gastroesophageal reflux study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241329002,Radionuclide study of esophageal reflux of gastric contents (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241330007,Radionuclide study of esophageal reflux of bile (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241331006,Radionuclide duodenogastric reflux study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241332004,Radionuclide stomach-lung reflux study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241333009,Measuring permeability of small intestine using radiolabeled serum proteins (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241334003,Measuring permeability of small intestine using radiolabeled macromolecules (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241335002,Radionuclide large intestine study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241336001,Radionuclide study for colonic transit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241337005,Radionuclide study for rectal transit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241341009,"Radionuclide study of liver, spleen and biliary tract (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241343007,Tc99m-IDA derivative study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241344001,Radiolabeled sulfobromophthalein study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241347008,Radionuclide first pass liver study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241348003,Radionuclide imaging of liver using technetium (99m-Tc) with hepatic perfusion index (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241349006,Radionuclide first pass spleen study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241351005,Radionuclide estimation of spleen size (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241354002,Renal isotope studies (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241355001,Placenta isotope study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241357009,Radionuclide static renal study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241362005,Radionuclide imaging of kidney using technetium (99m-Tc) tiatide (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241363000,Radionuclide micturating cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241364006,Radionuclide indirect micturating cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241366008,Radionuclide direct micturating cystogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241367004,Radionuclide hysterosalpingography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241368009,Radionuclide study of scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241369001,Radionuclide study of phallic blood flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241371001,Probe renogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241372008,Effective renal plasma flow determination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241373003,Technetium-99m-diethylenetriamine pentaacetic acid clearance - glomerular filtration rate (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241387003,Whole body radioiodine I123 study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241389000,Radionuclide parathyroid subtraction study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241390009,Thallium 201 parathyroid study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241391008,Tc99m-methoxyisobutyl isonitrile parathyroid study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241392001,Triple radionuclide parathyroid study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241393006,Radionuclide adrenal cortex study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241394000,Radionuclide adrenal study with Scintadren only (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241395004,Radionuclide adrenal study with kidney localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241401004,Radionuclide bone study first pass (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241403001,Delayed phase radionuclide bone study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241404007,Radionuclide two-phase bone study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241405008,Radionuclide three-phase bone study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241406009,Radionuclide study for quantitation of sacroiliac uptake (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241410007,Indium-111 granulocyte study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241411006,Tc99m mixed leukocyte study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241412004,Tc99m granulocyte (phagocytosis) study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241433008,Iron absorption measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241439007,Positron emission tomography heart study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241440009,Positron emission tomography myocardial glucose metabolism study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241441008,Positron emission tomography myocardial rest study using N13 ammonia (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241442001,Positron emission tomography myocardial stress study using N13 ammonia (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241443006,Positron emission tomography study for localization of tumor (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241444000,Positron emission tomography study for tumor uptake of glucose (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241445004,Positron emission tomography study for tumor uptake of methionine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241452002,Orbital B scan (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241489004,Hysterosalpingo contrast sonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241499009,Ultrasonography of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241500000,Ultrasonography of finger (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241504009,Ultrasonography of knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241505005,Ultrasonography of ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241512001,Ultrasonography of Achilles tendon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241518002,Computed tomography of posterior fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241519005,Computed tomography of pituitary fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241521000,Computed tomography of internal auditory meatus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241522007,Computed tomography of petrous bones (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241523002,Computed tomography stereotactic localization (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241524008,Computed tomography cisternography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241525009,Computed tomography air meatogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241526005,Computed tomography of paranasal sinuses (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241527001,Computed tomography of nasopharynx (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241529003,Computed tomography of salivary glands (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241530008,Computed tomography parotid gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241531007,Computed tomography submandibular gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241532000,Computed tomography sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241533005,Computed tomography parotid sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241534004,Computed tomography submandibular sialogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241535003,Computed tomography of soft tissues of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241536002,Computed tomography of larynx (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241537006,Computed tomography of thyroid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241538001,Computed tomography of parathyroid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241539009,Computed tomography of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241540006,Computed tomography of lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241541005,High resolution computed tomography of lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241542003,Computed tomography of lungs with diagnostic pneumothorax (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241543008,Computed tomography of mediastinum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241544002,Computed tomography of axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241545001,Computed tomography of brachial plexus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241546000,Computed tomography of thoracic inlet (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241547009,Computed tomography of heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241549007,Computed tomography of liver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241550007,Computed tomography of adrenals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241551006,Computed tomography of pancreas (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241552004,Computed tomography of spleen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241553009,Computed tomography of abdominal aorta (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241554003,Computed tomography arterioportography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241555002,Computed tomography of urinary bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241557005,Computed tomography prostate (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241558000,Computed tomography uterus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241559008,Computed tomography ovary (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241561004,Computed tomography bony pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241562006,Computed tomography of musculoskeletal system structures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241563001,Computed tomography of upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241565008,Computed tomography of upper arm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241566009,Computed tomography of elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241567000,Computed tomography of forearm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241568005,Computed tomography of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241569002,Computed tomography of hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241570001,Computed tomography of lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241571002,Computed tomography of hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241572009,Computed tomography of thigh (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241573004,Computed tomography of knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241574005,Computed tomography of lower leg (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241575006,Computed tomography of ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241576007,Computed tomography of foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241577003,Computed tomography of spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241578008,Computed tomography of cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241579000,Computed tomography of thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241580002,Computed tomography of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241581003,Computed tomography of sacral spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241582005,Computed tomography arthrogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241583000,Computed tomography arthrogram of shoulder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241584006,Computed tomography arthrogram of elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241585007,Computed tomography arthrogram of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241586008,Computed tomography arthrogram of hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241587004,Computed tomography arthrogram of knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241588009,Computed tomography arthrogram of ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241589001,Computed tomography myelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241590005,Computed tomography myelogram of cervical region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241591009,Computed tomography myelogram of thoracic region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241592002,Computed tomography myelogram of lumbar region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241597008,Digital slit-beam radiograph (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241599006,Digital slit-beam radiograph of leg length (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241600009,Computed tomography pelvimetry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241601008,Magnetic resonance imaging of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241602001,Magnetic resonance imaging of brain with T2 mapping (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241603006,Magnetic resonance imaging of brain with functional imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241604000,Magnetic resonance imaging of posterior fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241605004,Magnetic resonance imaging of pituitary fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241606003,Magnetic resonance imaging of internal auditory meatus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241607007,Magnetic resonance imaging of petrous bones (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241609005,Magnetic resonance imaging of paranasal sinuses (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241610000,Magnetic resonance imaging of nasopharynx (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241611001,Magnetic resonance imaging of salivary glands (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241612008,Magnetic resonance imaging of larynx (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241613003,Magnetic resonance imaging of thyroid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241614009,Magnetic resonance imaging of parathyroid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241615005,Magnetic resonance imaging of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241616006,Magnetic resonance imaging of lungs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241617002,Magnetic resonance imaging of axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241618007,Magnetic resonance imaging of brachial plexus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241619004,Magnetic resonance imaging of thoracic inlet (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241620005,Magnetic resonance imaging of heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241621009,Magnetic resonance imaging of abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241622002,Magnetic resonance imaging of liver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241623007,Magnetic resonance imaging of adrenals (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241624001,Magnetic resonance imaging of kidneys (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241625000,Magnetic resonance imaging of pancreas (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241626004,Magnetic resonance imaging of spleen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241627008,Magnetic resonance imaging of uterus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241628003,Magnetic resonance imaging of ovary (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241629006,Magnetic resonance imaging of rectum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241630001,Magnetic resonance imaging of scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241631002,Magnetic resonance imaging pelvimetry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241632009,Magnetic resonance imaging of upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241633004,Magnetic resonance imaging of shoulder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241634005,Magnetic resonance imaging of upper arm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241635006,Magnetic resonance imaging of elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241636007,Magnetic resonance imaging of forearm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241637003,Magnetic resonance imaging of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241638008,Magnetic resonance imaging of hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241639000,Magnetic resonance imaging of hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241640003,Magnetic resonance imaging of thigh (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241641004,Magnetic resonance imaging of knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241642006,Magnetic resonance imaging of lower leg (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241643001,Magnetic resonance imaging of ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241644007,Magnetic resonance imaging of foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241645008,Magnetic resonance imaging of spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241646009,Magnetic resonance imaging of cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241647000,Magnetic resonance imaging of thoracic spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241648005,Magnetic resonance imaging of lumbar spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241649002,Magnetic resonance imaging arthrography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241650002,Magnetic resonance imaging arthrography of shoulder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241651003,Magnetic resonance imaging arthrography of elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241652005,Magnetic resonance imaging arthrography of wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241653000,Magnetic resonance imaging arthrography of hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241654006,Magnetic resonance imaging arthrography of knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241655007,Magnetic resonance imaging arthrography of ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241656008,Cine magnetic resonance imaging of joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241657004,Cine magnetic resonance imaging of shoulder joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241658009,Cine magnetic resonance imaging of elbow joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241659001,Cine magnetic resonance imaging of wrist joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241660006,Cine magnetic resonance imaging of hip joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241661005,Cine magnetic resonance imaging of knee joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241662003,Cine magnetic resonance imaging of ankle joint movement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241663008,Magnetic resonance imaging of vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241665001,Magnetic resonance imaging of neck vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241666000,Magnetic resonance imaging of thoracic aorta (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241667009,Magnetic resonance imaging of abdominal vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241668004,Magnetic resonance imaging of abdominal aorta (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241669007,Magnetic resonance imaging of pelvic vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241670008,Magnetic resonance imaging of peripheral vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241671007,Magnetic resonance spectroscopy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241672000,Magnetic resonance spectroscopy of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241673005,Magnetic resonance phosphorus spectroscopy of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241675003,Magnetic resonance proton spectroscopy of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241676002,Magnetic resonance sodium spectroscopy of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241685002,X-ray photon absorptiometry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,241686001,Dual energy X-ray absorptiometry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,244981007,Isotope study for red blood cell sequestration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,245911009,Isotope study for red blood cell survival with sequestration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252420009,Intravascular echocardiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252421008,Intracavitary echocardiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252429005,Radionuclide study of heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252431001,Radionuclide cardiac shunt study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252432008,Radionuclide myocardial perfusion study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252433003,Cardiac thallium 201 study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252443000,Continuous wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252444006,Unidirectional continuous wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252445007,Bidirectional continuous wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252447004,Pulsed wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252448009,Unidirectional pulsed wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252449001,Bidirectional pulsed wave ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252450001,Gray scale ultrasonic Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252452009,Laser Doppler (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252466004,Radionuclide clearance test of tissue perfusion (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252467008,Radionuclide limb blood flow assessment (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252573007,Taub test (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252642000,Barium coated food gastric transit study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252643005,Bread barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252644004,Marshmallow barium swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252646002,Radionuclide liquid phase gastric emptying study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252647006,Radionuclide solid phase gastric emptying study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252674007,Radionuclide small intestine permeability study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252679002,Colloid study for bleeding (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252680004,Radionuclide study for localization of tumor or inflammatory disease (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252682007,Protein-losing enteropathy study using radiolabeled chromium chloride (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,252684008,Perfusion study - large intestine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,258172002,Stereotactic mammography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,258176004,Computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,258177008,Magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,268428008,Erect plain X-ray of abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,268434001,Contrast ventriculography of brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,268441007,Stereotactic/stereoscopic investigation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,271318007,Isotope static scan heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,271442007,Fetal anatomy study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,271455008,Dynamic non-imaging isotope study: brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,271457000,Dynamic non-imaging isotope study: heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,271459002,Dynamic non-imaging isotope study: urinary (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,276015003,Plain X-ray of forefoot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,276017006,Gastrografin swallow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,276018001,Gastrografin meal (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,276019009,Gastrografin enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,276021004,Ultrasonography of carotid artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277458000,Single energy X-ray photon absorptiometry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277583002,Percutaneous magnetic resonance guided aspiration (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277584008,Percutaneous computed tomography guided therapeutic drainage (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277585009,Percutaneous magnetic resonance guided therapeutic drainage (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277591006,Computed tomography guided biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277592004,Magnetic resonance imaging guided biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,277673007,Plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,278009009,Computed tomography guided removal of foreign body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,278010004,Magnetic resonance imaging guided removal of foreign body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,279771007,Cardiovascular flow study imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,282721001,Fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,287592005,Negative/double contrast pyelogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,287593000,Postoperative cholangiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,287601004,Pericardial contrast radiography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,287607000,Pneumohysterosalpingography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,302799008,Retrograde urethrogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303653007,Computed tomography of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303654001,Special computed tomography procedure of head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303658003,Computed tomography of extracranial soft tissues of the head (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303662009,Computed tomography of intrathoracic structures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303663004,Computed tomography of thoracic skeleton (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303664005,Special computed tomography procedure of thoracic region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303665006,Computed tomography of aortic arch and great vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303666007,Computed tomography of aortic aneurysm with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303668008,Computed tomography of intrathoracic respiratory structures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303669000,Computed tomography of intrathoracic cardiovascular structures (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303671000,Computed tomography of abdominal vascular structure with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303673002,Computed tomography of pelvic organs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303676005,Computed tomography of female pelvic organs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303677001,Computed tomography of male pelvic organs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303680000,Computed tomography of cardiovascular system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303681001,Computed tomography of limb regions (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303686006,Computed tomography shoulder region structure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303694004,Special computed tomography procedure of musculoskeletal system (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303695003,Computed tomography of back region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303697006,Computed tomography of lumbar region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303698001,Special computed tomography study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303757000,Upper gastrointestinal tract contrast procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,303786002,Imaging of neck with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96

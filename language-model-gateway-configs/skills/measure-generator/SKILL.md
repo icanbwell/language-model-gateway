@@ -58,14 +58,22 @@ Read the HEDIS specification for the requested measure from its individual file 
 5. **Administrative Specification** - Denominator and numerator logic
 6. **Value Sets Referenced** - All value set names mentioned
 
-### Step 3: Read the Code Pattern References
+### Step 3: Load the Value Sets for the Measure
+
+Read the measure's value set codes from `references/value-sets/by-measure/<abbreviation>.csv` (e.g., `references/value-sets/by-measure/cbp.csv`). This CSV contains all codes from the HEDIS Value Set Directory for the measure, with columns: `Value Set Name`, `Value Set OID`, `Code`, `Definition`, `Code System`, `Code System OID`.
+
+Use these actual codes in the generated Value Set Constants instead of representative samples. Group them by Value Set Name and Code System (ICD-10, CPT, LOINC, SNOMED, RxNorm, etc.) when building the code constants.
+
+For cross-referencing which value sets belong to a measure, see `references/value-sets/measures-to-value-sets.csv`. For the complete code-level value set data, see `references/value-sets/value-sets-to-codes.csv`.
+
+### Step 4: Read the Code Pattern References
 
 Read these references to understand the required code structure:
 - `references/measure-spec-pattern.md` - How HEDIS concepts map to code and FHIR resources
 - `references/fhir-measure-report-template.md` - The MeasureReport output structure and builder template
 - `scripts/example_cbp_measure.py` - A complete working example for the CBP measure
 
-### Step 4: Generate the Code
+### Step 5: Generate the Code
 
 Produce a single Python file following this structure:
 
@@ -85,12 +93,12 @@ Module docstring (measure name, description, input/output)
 **Code requirements**:
 - Pure Python, no external dependencies (only stdlib: `uuid`, `datetime`, `json`, `collections`)
 - All functions return a tuple of `(result_bool, evaluated_resource_references)` for traceability
-- Value sets use representative codes with a clear comment that production should load full sets from VSAC
+- Value sets use the complete codes from the HEDIS Value Set Directory (loaded from `references/value-sets/by-measure/<abbreviation>.csv`)
 - The main function name must follow the pattern `calculate_<abbreviation>_measure`
 - Include type hints throughout
 - Include an `if __name__ == "__main__"` block with a realistic example FHIR Bundle
 
-### Step 5: Validate the Code
+### Step 6: Validate the Code
 
 Run the validation script to verify the generated code:
 
@@ -100,7 +108,7 @@ echo '{"code": "<generated-code>", "measure_abbreviation": "<abbrev>"}' | python
 
 If validation fails, fix the issues and re-validate. Do not present code to the user until validation passes.
 
-### Step 6: Present the Code
+### Step 7: Present the Code
 
 Provide the complete Python file to the user. Explain:
 - What the measure calculates
@@ -111,7 +119,7 @@ Provide the complete Python file to the user. Explain:
 
 ## Gotchas
 
-- **Value sets are representative, not exhaustive.** The generated code includes sample codes from each value set for demonstration. Production implementations must load full value sets from the HEDIS Value Set Directory or VSAC. Always add a comment noting this.
+- **Value sets are from the HEDIS Value Set Directory.** The per-measure CSV files in `references/value-sets/by-measure/` contain the complete code lists. For very large value sets, the generated code may include all codes as constants; for production, consider loading them from a configuration file or database instead of inline constants.
 - **Age is calculated as of December 31.** HEDIS always uses end-of-year age, not age at encounter. Use `(as_of.month, as_of.day) < (birth.month, birth.day)` for the birthday check.
 - **"Different dates of service" means calendar dates, not encounters.** Two encounters on the same date count as one date of service.
 - **BP readings exclude acute inpatient and ED settings.** For CBP/BPD/BPC-E, filter out Observations where the encounter class is IMP or EMER.
@@ -156,6 +164,6 @@ Provide the complete Python file to the user. Explain:
 ## Policy
 
 - Always include the NCQA copyright notice in the module docstring.
-- Note that value sets are representative samples and must be replaced with full VSAC sets for production.
+- Value set codes are sourced from the HEDIS MY 2025 Value Set Directory.
 - Generated code is for internal quality improvement purposes only.
 - Do not hardcode patient data; the code must work with any FHIR Bundle.

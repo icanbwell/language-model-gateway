@@ -1,0 +1,638 @@
+Value Set Name,Value Set OID,Value Set Version,Code,Definition,Code System,Code System OID,Code System Version
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,726435001,Subcutaneous mastectomy of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,726437009,Modified radical mastectomy of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,741009001,Simple mastectomy of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,741018004,Subcutaneous mastectomy of left breast with prosthetic implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,836437004,Simple mastectomy of left breast using robotic assistance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Left,2.16.840.1.113883.3.464.1004.1334,2025-03-31,451211000124109,Prophylactic mastectomy of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,0HTT0ZZ,"[0HTT0ZZ] Resection of Right Breast, Open Approach",ICD10PCS,2.16.840.1.113883.6.4,2025.1.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,429400009,Excision of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,726430006,Radical mastectomy of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,726434002,Subcutaneous mastectomy of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,726436000,Modified radical mastectomy of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,741010006,Simple mastectomy of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,741019007,Subcutaneous mastectomy of right breast with prosthetic implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,836435007,Simple mastectomy of right breast using robotic assistance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unilateral Mastectomy Right,2.16.840.1.113883.3.464.1004.1335,2025-03-31,451201000124106,Prophylactic mastectomy of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X1A,"[T40.0X1A] Poisoning by opium, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X1D,"[T40.0X1D] Poisoning by opium, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X1S,"[T40.0X1S] Poisoning by opium, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X4A,"[T40.0X4A] Poisoning by opium, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X4D,"[T40.0X4D] Poisoning by opium, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.0X4S,"[T40.0X4S] Poisoning by opium, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X1A,"[T40.1X1A] Poisoning by heroin, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X1D,"[T40.1X1D] Poisoning by heroin, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X1S,"[T40.1X1S] Poisoning by heroin, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X4A,"[T40.1X4A] Poisoning by heroin, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X4D,"[T40.1X4D] Poisoning by heroin, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.1X4S,"[T40.1X4S] Poisoning by heroin, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X1A,"[T40.2X1A] Poisoning by other opioids, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X1D,"[T40.2X1D] Poisoning by other opioids, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X1S,"[T40.2X1S] Poisoning by other opioids, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X4A,"[T40.2X4A] Poisoning by other opioids, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X4D,"[T40.2X4D] Poisoning by other opioids, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.2X4S,"[T40.2X4S] Poisoning by other opioids, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X1A,"[T40.3X1A] Poisoning by methadone, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X1D,"[T40.3X1D] Poisoning by methadone, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X1S,"[T40.3X1S] Poisoning by methadone, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X4A,"[T40.3X4A] Poisoning by methadone, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X4D,"[T40.3X4D] Poisoning by methadone, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.3X4S,"[T40.3X4S] Poisoning by methadone, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.411A,"[T40.411A] Poisoning by fentanyl or fentanyl analogs, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.411D,"[T40.411D] Poisoning by fentanyl or fentanyl analogs, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.411S,"[T40.411S] Poisoning by fentanyl or fentanyl analogs, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.414A,"[T40.414A] Poisoning by fentanyl or fentanyl analogs, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.414D,"[T40.414D] Poisoning by fentanyl or fentanyl analogs, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.414S,"[T40.414S] Poisoning by fentanyl or fentanyl analogs, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.421A,"[T40.421A] Poisoning by tramadol, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.421D,"[T40.421D] Poisoning by tramadol, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.421S,"[T40.421S] Poisoning by tramadol, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.424A,"[T40.424A] Poisoning by tramadol, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.424D,"[T40.424D] Poisoning by tramadol, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.424S,"[T40.424S] Poisoning by tramadol, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.491A,"[T40.491A] Poisoning by other synthetic narcotics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.491D,"[T40.491D] Poisoning by other synthetic narcotics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.491S,"[T40.491S] Poisoning by other synthetic narcotics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.494A,"[T40.494A] Poisoning by other synthetic narcotics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.494D,"[T40.494D] Poisoning by other synthetic narcotics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.494S,"[T40.494S] Poisoning by other synthetic narcotics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X1A,"[T40.5X1A] Poisoning by cocaine, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X1D,"[T40.5X1D] Poisoning by cocaine, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X1S,"[T40.5X1S] Poisoning by cocaine, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X4A,"[T40.5X4A] Poisoning by cocaine, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X4D,"[T40.5X4D] Poisoning by cocaine, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.5X4S,"[T40.5X4S] Poisoning by cocaine, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.601A,"[T40.601A] Poisoning by unspecified narcotics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.601D,"[T40.601D] Poisoning by unspecified narcotics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.601S,"[T40.601S] Poisoning by unspecified narcotics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.604A,"[T40.604A] Poisoning by unspecified narcotics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.604D,"[T40.604D] Poisoning by unspecified narcotics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.604S,"[T40.604S] Poisoning by unspecified narcotics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.691A,"[T40.691A] Poisoning by other narcotics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.691D,"[T40.691D] Poisoning by other narcotics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.691S,"[T40.691S] Poisoning by other narcotics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.694A,"[T40.694A] Poisoning by other narcotics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.694D,"[T40.694D] Poisoning by other narcotics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.694S,"[T40.694S] Poisoning by other narcotics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.711A,"[T40.711A] Poisoning by cannabis, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.711D,"[T40.711D] Poisoning by cannabis, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.711S,"[T40.711S] Poisoning by cannabis, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.714A,"[T40.714A] Poisoning by cannabis, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.714D,"[T40.714D] Poisoning by cannabis, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.714S,"[T40.714S] Poisoning by cannabis, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.721A,"[T40.721A] Poisoning by synthetic cannabinoids, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.721D,"[T40.721D] Poisoning by synthetic cannabinoids, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.721S,"[T40.721S] Poisoning by synthetic cannabinoids, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.724A,"[T40.724A] Poisoning by synthetic cannabinoids, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.724D,"[T40.724D] Poisoning by synthetic cannabinoids, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.724S,"[T40.724S] Poisoning by synthetic cannabinoids, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X1A,"[T40.8X1A] Poisoning by lysergide [LSD], accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X1D,"[T40.8X1D] Poisoning by lysergide [LSD], accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X1S,"[T40.8X1S] Poisoning by lysergide [LSD], accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X4A,"[T40.8X4A] Poisoning by lysergide [LSD], undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X4D,"[T40.8X4D] Poisoning by lysergide [LSD], undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.8X4S,"[T40.8X4S] Poisoning by lysergide [LSD], undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.901A,"[T40.901A] Poisoning by unspecified psychodysleptics [hallucinogens], accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.901D,"[T40.901D] Poisoning by unspecified psychodysleptics [hallucinogens], accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.901S,"[T40.901S] Poisoning by unspecified psychodysleptics [hallucinogens], accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.904A,"[T40.904A] Poisoning by unspecified psychodysleptics [hallucinogens], undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.904D,"[T40.904D] Poisoning by unspecified psychodysleptics [hallucinogens], undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.904S,"[T40.904S] Poisoning by unspecified psychodysleptics [hallucinogens], undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.991A,"[T40.991A] Poisoning by other psychodysleptics [hallucinogens], accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.991D,"[T40.991D] Poisoning by other psychodysleptics [hallucinogens], accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.991S,"[T40.991S] Poisoning by other psychodysleptics [hallucinogens], accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.994A,"[T40.994A] Poisoning by other psychodysleptics [hallucinogens], undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.994D,"[T40.994D] Poisoning by other psychodysleptics [hallucinogens], undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T40.994S,"[T40.994S] Poisoning by other psychodysleptics [hallucinogens], undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X1A,"[T41.0X1A] Poisoning by inhaled anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X1D,"[T41.0X1D] Poisoning by inhaled anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X1S,"[T41.0X1S] Poisoning by inhaled anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X4A,"[T41.0X4A] Poisoning by inhaled anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X4D,"[T41.0X4D] Poisoning by inhaled anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.0X4S,"[T41.0X4S] Poisoning by inhaled anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X1A,"[T41.1X1A] Poisoning by intravenous anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X1D,"[T41.1X1D] Poisoning by intravenous anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X1S,"[T41.1X1S] Poisoning by intravenous anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X4A,"[T41.1X4A] Poisoning by intravenous anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X4D,"[T41.1X4D] Poisoning by intravenous anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.1X4S,"[T41.1X4S] Poisoning by intravenous anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.201A,"[T41.201A] Poisoning by unspecified general anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.201D,"[T41.201D] Poisoning by unspecified general anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.201S,"[T41.201S] Poisoning by unspecified general anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.204A,"[T41.204A] Poisoning by unspecified general anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.204D,"[T41.204D] Poisoning by unspecified general anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.204S,"[T41.204S] Poisoning by unspecified general anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.291A,"[T41.291A] Poisoning by other general anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.291D,"[T41.291D] Poisoning by other general anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.291S,"[T41.291S] Poisoning by other general anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.294A,"[T41.294A] Poisoning by other general anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.294D,"[T41.294D] Poisoning by other general anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.294S,"[T41.294S] Poisoning by other general anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X1A,"[T41.3X1A] Poisoning by local anesthetics, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X1D,"[T41.3X1D] Poisoning by local anesthetics, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X1S,"[T41.3X1S] Poisoning by local anesthetics, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X4A,"[T41.3X4A] Poisoning by local anesthetics, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X4D,"[T41.3X4D] Poisoning by local anesthetics, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.3X4S,"[T41.3X4S] Poisoning by local anesthetics, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.41XA,"[T41.41XA] Poisoning by unspecified anesthetic, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.41XD,"[T41.41XD] Poisoning by unspecified anesthetic, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.41XS,"[T41.41XS] Poisoning by unspecified anesthetic, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.44XA,"[T41.44XA] Poisoning by unspecified anesthetic, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.44XD,"[T41.44XD] Poisoning by unspecified anesthetic, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.44XS,"[T41.44XS] Poisoning by unspecified anesthetic, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X1A,"[T41.5X1A] Poisoning by therapeutic gases, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X1D,"[T41.5X1D] Poisoning by therapeutic gases, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X1S,"[T41.5X1S] Poisoning by therapeutic gases, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X4A,"[T41.5X4A] Poisoning by therapeutic gases, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X4D,"[T41.5X4D] Poisoning by therapeutic gases, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T41.5X4S,"[T41.5X4S] Poisoning by therapeutic gases, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X1A,"[T42.3X1A] Poisoning by barbiturates, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X1D,"[T42.3X1D] Poisoning by barbiturates, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X1S,"[T42.3X1S] Poisoning by barbiturates, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X4A,"[T42.3X4A] Poisoning by barbiturates, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X4D,"[T42.3X4D] Poisoning by barbiturates, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.3X4S,"[T42.3X4S] Poisoning by barbiturates, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X1A,"[T42.4X1A] Poisoning by benzodiazepines, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X1D,"[T42.4X1D] Poisoning by benzodiazepines, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X1S,"[T42.4X1S] Poisoning by benzodiazepines, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X4A,"[T42.4X4A] Poisoning by benzodiazepines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X4D,"[T42.4X4D] Poisoning by benzodiazepines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T42.4X4S,"[T42.4X4S] Poisoning by benzodiazepines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.601A,"[T43.601A] Poisoning by unspecified psychostimulants, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.601D,"[T43.601D] Poisoning by unspecified psychostimulants, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.601S,"[T43.601S] Poisoning by unspecified psychostimulants, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.604A,"[T43.604A] Poisoning by unspecified psychostimulants, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.604D,"[T43.604D] Poisoning by unspecified psychostimulants, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.604S,"[T43.604S] Poisoning by unspecified psychostimulants, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.621A,"[T43.621A] Poisoning by amphetamines, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.621D,"[T43.621D] Poisoning by amphetamines, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.621S,"[T43.621S] Poisoning by amphetamines, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.624A,"[T43.624A] Poisoning by amphetamines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.624D,"[T43.624D] Poisoning by amphetamines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.624S,"[T43.624S] Poisoning by amphetamines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.631A,"[T43.631A] Poisoning by methylphenidate, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.631D,"[T43.631D] Poisoning by methylphenidate, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.631S,"[T43.631S] Poisoning by methylphenidate, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.634A,"[T43.634A] Poisoning by methylphenidate, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.634D,"[T43.634D] Poisoning by methylphenidate, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.634S,"[T43.634S] Poisoning by methylphenidate, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.641A,"[T43.641A] Poisoning by ecstasy, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.641D,"[T43.641D] Poisoning by ecstasy, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.641S,"[T43.641S] Poisoning by ecstasy, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.644A,"[T43.644A] Poisoning by ecstasy, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.644D,"[T43.644D] Poisoning by ecstasy, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.644S,"[T43.644S] Poisoning by ecstasy, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.651A,"[T43.651A] Poisoning by methamphetamines accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.651D,"[T43.651D] Poisoning by methamphetamines accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.651S,"[T43.651S] Poisoning by methamphetamines accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.654A,"[T43.654A] Poisoning by methamphetamines, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.654D,"[T43.654D] Poisoning by methamphetamines, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.654S,"[T43.654S] Poisoning by methamphetamines, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.691A,"[T43.691A] Poisoning by other psychostimulants, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.691D,"[T43.691D] Poisoning by other psychostimulants, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.691S,"[T43.691S] Poisoning by other psychostimulants, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.694A,"[T43.694A] Poisoning by other psychostimulants, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.694D,"[T43.694D] Poisoning by other psychostimulants, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T43.694S,"[T43.694S] Poisoning by other psychostimulants, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X1A,"[T51.0X1A] Toxic effect of ethanol, accidental (unintentional), initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X1D,"[T51.0X1D] Toxic effect of ethanol, accidental (unintentional), subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X1S,"[T51.0X1S] Toxic effect of ethanol, accidental (unintentional), sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X4A,"[T51.0X4A] Toxic effect of ethanol, undetermined, initial encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X4D,"[T51.0X4D] Toxic effect of ethanol, undetermined, subsequent encounter",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,T51.0X4S,"[T51.0X4S] Toxic effect of ethanol, undetermined, sequela",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295141006,Accidental pentazocine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295145002,Accidental phenazocine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295150008,Accidental dextromoramide overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295154004,Accidental dextropropoxyphene overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295158001,Accidental dipipanone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295163002,Accidental methadone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295167001,Accidental buprenorphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295171003,Accidental overdose by codeine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295175007,Accidental heroin overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295178009,Accidental overdose by dihydrocodeine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295181004,Accidental nalbuphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295185008,Accidental morphine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295190006,Accidental alfentanil overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295194002,Accidental fentanyl overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295198004,Accidental pethidine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295202002,Accidental phenoperidine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295206004,Accidental meptazinol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295210001,Accidental levorphanol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295504002,Accidental etomidate overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295508004,Accidental ketamine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295513000,Accidental propofol overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295521006,Accidental methohexitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295526001,Accidental enflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295534007,Accidental halothane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295538005,Accidental isoflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295542008,Accidental trichloroethylene overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295546006,Accidental desflurane overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295551000,Accidental bupivacaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295555009,Accidental cinchocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295559003,Accidental prilocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295563005,Accidental lignocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295572002,Accidental benzocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295576004,Accidental oxybuprocaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295580009,Accidental procaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295584000,Accidental proxymetacaine overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295984006,Accidental methylphenobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295988009,Accidental phenobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,295992002,Accidental primidone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296011000,Accidental clonazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296038007,Accidental amylobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296042005,Accidental butabarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296046008,Accidental cyclobarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296050001,Accidental quinalbarbitone overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296055006,Accidental flunitrazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296059000,Accidental flurazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296063007,Accidental loprazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296067008,Accidental lormetazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296071006,Accidental nitrazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296075002,Accidental triazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296080006,Accidental alprazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296084002,Accidental bromazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296088004,Accidental chlordiazepoxide overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296091004,Accidental clobazam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296099002,Accidental ketazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296103007,Accidental medazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296107008,Accidental oxazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296111002,Accidental prazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296115006,Accidental midazolam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296119000,Accidental diazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296122003,Accidental lorazepam overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296126000,Accidental overdose by temazepam (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296128004,Accidental overdose of benzodiazepine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296302007,Accidental cannabis overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296310008,Accidental psilocybin overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296314004,Accidental mescaline overdose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296322006,Accidental overdose by cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,296326009,Accidental overdose by crack cocaine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,297199006,Accidental overdose of opiate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Unintentional Drug Overdose,2.16.840.1.113883.3.464.1004.2243,2025-03-31,838520000,Accidental overdose of methylenedioxymethamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,J00,[J00] Acute nasopharyngitis [common cold],ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,J06.0,[J06.0] Acute laryngopharyngitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,J06.9,"[J06.9] Acute upper respiratory infection, unspecified",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,43692000,Influenzal acute upper respiratory infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,54398005,Acute upper respiratory infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+URI,2.16.840.1.113883.3.464.1004.1255,2025-03-31,82272006,Common cold (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N10,[N10] Acute pyelonephritis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N12,"[N12] Tubulo-interstitial nephritis, not specified as acute or chronic",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N15.1,[N15.1] Renal and perinephric abscess,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N15.9,"[N15.9] Renal tubulo-interstitial disease, unspecified",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N16,[N16] Renal tubulo-interstitial disorders in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N28.84,[N28.84] Pyelitis cystica,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N28.85,[N28.85] Pyeloureteritis cystica,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N28.86,[N28.86] Ureteritis cystica,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N30.00,[N30.00] Acute cystitis without hematuria,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N30.01,[N30.01] Acute cystitis with hematuria,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N30.90,"[N30.90] Cystitis, unspecified without hematuria",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N30.91,"[N30.91] Cystitis, unspecified with hematuria",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urinary Tract Infection,2.16.840.1.113883.3.464.1004.1378,2025-03-31,N39.0,"[N39.0] Urinary tract infection, site not specified",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,13705-9,Albumin/Creatinine [Mass Ratio] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,14958-3,Microalbumin/Creatinine [Mass Ratio] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,14959-1,Microalbumin/Creatinine [Mass Ratio] in Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,30000-4,Microalbumin/Creatinine [Ratio] in Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,44292-1,Microalbumin/Creatinine [Mass Ratio] in 12 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,59159-4,Microalbumin/Creatinine [Ratio] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,76401-9,Albumin/Creatinine [Ratio] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,77253-3,Microalbumin/Creatinine [Ratio] in Urine by Detection limit <= 1.0 mg/L,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,77254-1,Microalbumin/Creatinine [Ratio] in 24 hour Urine by Detection limit <= 1.0 mg/L,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,89998-9,Microalbumin/Creatinine [Ratio] in Urine by Detection limit <= 3.0 mg/L,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Albumin Creatinine Ratio Lab Test,2.16.840.1.113883.3.464.1004.2234,2025-03-31,9318-7,Albumin/Creatinine [Mass Ratio] in Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,82570,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,20624-3,Creatinine [Mass/volume] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,2161-8,Creatinine [Mass/volume] in Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,35674-1,Creatinine [Mass/volume] in Urine collected for unspecified duration,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,39982-4,Creatinine [Mass/volume] in Urine --baseline,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,57344-4,Creatinine [Mass/volume] in 2 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,57346-9,Creatinine [Mass/volume] in 12 hour Urine,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,58951-5,Creatinine [Mass/volume] in Urine --2nd specimen,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,8879006,"Creatinine measurement, 24 hour urine (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,36793009,"Creatinine measurement, 12 hour urine (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,271260009,Urine creatinine measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Urine Creatinine Lab Test,2.16.840.1.113883.3.464.1004.2207,2025-03-31,444322008,Quantitative measurement of mass rate of excretion of creatinine in timed urine specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.0,[B01.0] Varicella meningitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.11,[B01.11] Varicella encephalitis and encephalomyelitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.12,[B01.12] Varicella myelitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.2,[B01.2] Varicella pneumonia,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.81,[B01.81] Varicella keratitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.89,[B01.89] Other varicella complications,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B01.9,[B01.9] Varicella without complication,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.0,[B02.0] Zoster encephalitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.1,[B02.1] Zoster meningitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.21,[B02.21] Postherpetic geniculate ganglionitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.22,[B02.22] Postherpetic trigeminal neuralgia,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.23,[B02.23] Postherpetic polyneuropathy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.24,[B02.24] Postherpetic myelitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.29,[B02.29] Other postherpetic nervous system involvement,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.30,"[B02.30] Zoster ocular disease, unspecified",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.31,[B02.31] Zoster conjunctivitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.32,[B02.32] Zoster iridocyclitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.33,[B02.33] Zoster keratitis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.34,[B02.34] Zoster scleritis,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.39,[B02.39] Other herpes zoster eye disease,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.7,[B02.7] Disseminated zoster,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.8,[B02.8] Zoster with other complications,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,B02.9,[B02.9] Zoster without complications,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,4740000,Herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,10698009,Herpes zoster iridocyclitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,21954000,Herpes zoster auricularis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,23737006,Chickenpox with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,24059009,Acute cerebellar ataxia caused by varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,31920006,Hemorrhagic pneumonia caused by varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,36292003,Otitis externa caused by Herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,38907003,Varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,42448002,Herpes zoster keratoconjunctivitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,49183009,Herpes zoster with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,55560002,Disseminated herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,87513003,Herpes zoster ophthalmicus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,111859007,Herpes zoster without complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,111861003,Herpes zoster with nervous system complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,161423008,History of chickenpox (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,186524006,Herpes zoster with ophthalmic complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,195911009,Chickenpox pneumonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,230176008,Herpes zoster encephalitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,230198004,Varicella transverse myelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,230262004,Amyotrophy caused by herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,230536009,Acute trigeminal herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,232400003,Acute herpes zoster pharyngitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,235059009,Herpes zoster infection of oral mucosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240468001,Neurological varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240470005,Herpes zoster involving thoracic dermatome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240471009,Herpes zoster involving lumbar dermatome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240472002,Maxillary herpes zoster infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240473007,Mandibular herpes zoster infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,240474001,Multidermatomal herpes zoster infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,309465005,Varicella-zoster virus infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,371113008,Varicella immune (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,397573005,Herpes zoster keratitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,400020001,Herpes zoster dermatitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,402897003,Herpes zoster involving cervical dermatome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,402898008,Herpes zoster involving sacral dermatome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,402899000,Anetoderma following varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,410500004,Herpes zoster involving tip of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,410509003,Herpes zoster conjunctivitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,421029004,Herpes zoster retinitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,422127002,Herpes zoster with acquired immunodeficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,422446008,Herpes zoster subepithelial infiltrates (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,422471006,Herpes zoster acute retinal necrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,422666006,Disorder of corneal epithelium caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,423333008,Exanthem due to varicella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,423628002,Acute herpes zoster neuropathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,424353002,Corneal haze caused by herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,424435009,Herpes zoster pseudodendrites (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,424801004,Herpes zoster corneal endotheliitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,424941009,Herpes zoster radiculitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,425356002,Herpes zoster retinal pigment epithelial detachment (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,426570007,Herpes zoster interstitial keratitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,428633000,Exanthem due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,713250002,Gingival disease caused by varicella-zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,713733003,Infection caused by herpes zoster virus co-occurrent with human immunodeficiency virus infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,713964006,Multidermatomal infection caused by Herpes zoster co-occurrent with human immunodeficiency virus infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,715223009,Fetal varicella syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,723109003,Herpes zoster of skin and/or mucous membranes without complications (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,838357005,Acute glossopharyngeal neuropathy caused by Herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,1163465001,Dacryoadenitis due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,1163483009,Infection of eyelid due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,1179456002,Esophagitis caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,12551000132107,Cranial neuropathy due to Herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,12561000132105,Bacterial infection co-occurrent and due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,12571000132104,Pneumonia caused by Herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,98541000119101,Herpes zoster myelitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,331071000119101,Herpes zoster iritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,681221000119108,History of herpes zoster (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,1087131000119102,Scleritis due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15678761000119105,Iridocyclitis of right eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15678801000119102,Iridocyclitis of left eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15678841000119100,Iridocyclitis of bilateral eyes caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15680201000119106,Keratoconjunctivitis of right eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15680241000119108,Keratoconjunctivitis of left eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15681321000119100,Dermatitis of left eyelid due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15681401000119101,Dermatitis of right eyelid due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15685081000119102,Disorder of corneal epithelium of right eye caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15685121000119100,Disorder of corneal epithelium of left eye caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15685161000119105,Disorder of corneal epithelium of bilateral eyes caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15936581000119108,Otitis externa of right external auditory canal caused by human herpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15936621000119108,Otitis externa of left external auditory canal caused by human herpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15989271000119107,Conjunctivitis of right eye caused by herpes zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15989311000119107,Conjunctivitis of bilateral eyes caused by herpes zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15989351000119108,Conjunctivitis of left eye caused by herpes zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15991711000119108,Iritis of right eye caused by herpes zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15991751000119109,Iritis of bilateral eyes caused by Human alphaherpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15991791000119104,Iritis of left eye caused by herpes zoster virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,15992351000119104,Keratitis of bilateral eyes caused by Human herpesvirus 3 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,16000751000119105,Scleritis of bilateral eyes due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,16000791000119100,Scleritis of left eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster,2.16.840.1.113883.3.464.1004.1258,2025-03-31,16000831000119106,Scleritis of right eye due to herpes zoster (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Immunization,2.16.840.1.113883.3.464.1004.1793,2025-03-31,21,varicella virus vaccine,CVX,2.16.840.1.113883.12.292,2024.09.03
+Varicella Zoster (VZV) Immunization,2.16.840.1.113883.3.464.1004.1793,2025-03-31,94,"measles, mumps, rubella, and varicella virus vaccine",CVX,2.16.840.1.113883.12.292,2024.09.03
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,90710,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,90716,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,425897001,Administration of first dose of vaccine product containing only Human alphaherpesvirus 3 antigen for chickenpox (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,428502009,Administration of second dose of vaccine product containing only Human alphaherpesvirus 3 antigen for chickenpox (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,432636005,Administration of vaccine product containing only Human alphaherpesvirus 3 and Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,433733003,Administration of second dose of vaccine product containing only Human alphaherpesvirus 3 and Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,737081007,Administration of vaccine product containing only Human alphaherpesvirus 3 antigen for chickenpox (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,871898007,Administration of vaccine product containing only live attenuated Human alphaherpesvirus 3 antigen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,871899004,Administration of vaccine product containing only live attenuated Human alphaherpesvirus 3 antigen via subcutaneous route (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,871909005,Administration of first dose of vaccine product containing only Human alphaherpesvirus 3 and Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Varicella Zoster (VZV) Vaccine Procedure,2.16.840.1.113883.3.464.1004.1794,2025-03-31,572511000119105,Administration of vaccine product containing only live attenuated Measles morbillivirus and Mumps orthorubulavirus and Rubella virus and Human alphaherpesvirus 3 antigens (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90791,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90792,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90832,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90833,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90834,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90836,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90837,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90838,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90839,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90840,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90845,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90847,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90849,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90853,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90875,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,90876,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99221,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99222,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99223,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99231,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99232,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99233,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99238,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99239,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99252,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99253,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99254,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Visit Setting Unspecified,2.16.840.1.113883.3.464.1004.1493,2025-03-31,99255,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.01,[Z3A.01] Less than 8 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.08,[Z3A.08] 8 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.09,[Z3A.09] 9 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.10,[Z3A.10] 10 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.11,[Z3A.11] 11 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.12,[Z3A.12] 12 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.13,[Z3A.13] 13 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.14,[Z3A.14] 14 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.15,[Z3A.15] 15 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.16,[Z3A.16] 16 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.17,[Z3A.17] 17 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.18,[Z3A.18] 18 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.19,[Z3A.19] 19 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.20,[Z3A.20] 20 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.21,[Z3A.21] 21 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.22,[Z3A.22] 22 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.23,[Z3A.23] 23 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.24,[Z3A.24] 24 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.25,[Z3A.25] 25 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.26,[Z3A.26] 26 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.27,[Z3A.27] 27 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.28,[Z3A.28] 28 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.29,[Z3A.29] 29 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.30,[Z3A.30] 30 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.31,[Z3A.31] 31 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.32,[Z3A.32] 32 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.33,[Z3A.33] 33 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.34,[Z3A.34] 34 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.35,[Z3A.35] 35 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,Z3A.36,[Z3A.36] 36 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,931004,"Gestation period, 9 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,6678005,"Gestation period, 15 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,15633004,"Gestation period, 16 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,23464008,"Gestation period, 20 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,25026004,"Gestation period, 18 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,26690008,"Gestation period, 8 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,37005007,"Gestation period, 5 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,38039008,"Gestation period, 10 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,41438001,"Gestation period, 21 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,44398003,"Gestation period, 4 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,46906003,"Gestation period, 27 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,48688005,"Gestation period, 26 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,50367001,"Gestation period, 11 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,54318006,"Gestation period, 19 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,57907009,"Gestation period, 36 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,62333002,"Gestation period, 13 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,63110000,"Gestation period, 7 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,65035007,"Gestation period, 22 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,65683006,"Gestation period, 17 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,72544005,"Gestation period, 25 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,72846000,"Gestation period, 14 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,74952004,"Gestation period, 3 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,79992004,"Gestation period, 12 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,82118009,"Gestation period, 2 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,86801005,"Gestation period, 6 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,86883006,"Gestation period, 23 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,87178007,"Gestation period, 1 week (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,313178001,Gestation less than 24 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,313179009,"Gestation period, 24 weeks (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,428058009,Gestation less than 9 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,428566005,Gestation less than 20 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,428567001,Gestation 14 - 20 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Weeks of Gestation Less Than 37,2.16.840.1.113883.3.464.1004.1479,2025-03-31,428930004,Gestation 9- 13 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99381,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99382,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99383,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99384,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99385,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99391,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99392,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99393,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99394,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99395,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,99461,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,G0438,"Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit (G0438)",HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,G0439,"Annual wellness visit, includes a personalized prevention plan of service (pps), subsequent visit (G0439)",HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,S0302,Completed early periodic screening diagnosis and treatment (epsdt) service (list in addition to code for appropriate evaluation and management service) (S0302),HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,S0610,"Annual gynecological examination, new patient (S0610)",HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,S0612,"Annual gynecological examination, established patient (S0612)",HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,S0613,Annual gynecological examination; clinical breast examination without pelvic evaluation (S0613),HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,103740001,Periodic physical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170099002,Child examination - birth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170107008,Child examination - 10 days (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170114005,Child examination - 6 weeks (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170123008,Child 8-9 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170132005,Child 18 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170141000,Child 2.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170150003,Child 3.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170159002,Child 4.5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170168000,Child 10 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170250008,Child 3 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170254004,Child 1 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170263002,Child 6 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170272005,Child 21 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170281004,Child 3 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170290006,Child 39 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170300004,Child 8 week examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,170309003,Child 7 month exam (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171387006,School admission medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171394009,Armed forces medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171395005,University admission medical (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171409007,Individual health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171410002,Individual general health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171416008,Student health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,171417004,Pre-school child health examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,243788004,Child examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,268563000,Child health medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,270356004,MOD F/MED/1 - Forces recruitment medical (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,401140000,Child 2 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410620009,Well child visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410621008,"Well child visit, newborn (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410622001,Child examination - 2 weeks (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410623006,"Well child visit, 2 week (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410624000,"Well child visit, 2 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410625004,Child 4 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410626003,"Well child visit, 4 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410627007,"Well child visit, 6 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410628002,"Well child visit, 9 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410629005,"Well child visit, 12 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410630000,Child 15 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410631001,"Well child visit, 15 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410632008,"Well child visit, 18 month (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410633003,"Well child visit, 2 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410634009,"Well child visit, 3 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410635005,Child 4 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410636006,"Well child visit, 4 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410637002,"Well child visit, 5 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410638007,"Well child visit, 6 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410639004,"Well child visit, 7 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410640002,"Well child visit, 8 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410641003,"Well child visit, 9 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410642005,"Well child visit, 10 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410643000,"Well child visit, 11 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410644006,"Well child visit, 12 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410645007,"Well child visit, 13 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410646008,"Well child visit, 14 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410647004,"Well child visit, 15 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410648009,"Well child visit, 16 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410649001,"Well child visit, 17 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,410650001,"Well child visit, 18 years (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,442162000,Child 6 to 8 week examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,783260003,Child 15 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,1269517007,Child 1 month examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,1269518002,Child 5 year examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,444971000124105,Annual wellness visit (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,446301000124108,"Well child visit, newborn less than 8 days old (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,446381000124104,"Well child visit, newborn 8 to 28 days old (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,669251000168104,Defense force post-deployment medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,669261000168102,Defense force preliminary post-deployment medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,669271000168108,Defense force pre-deployment medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+Well Care Visit,2.16.840.1.113883.3.464.1004.2479,2025-03-31,669281000168106,Defense force preliminary pre-deployment medical examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2108-9,European,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2109-7,Armenian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2110-5,English,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2111-3,French,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2112-1,German,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2113-9,Irish,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2114-7,Italian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2115-4,Polish,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2116-2,Scottish,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2118-8,Middle Eastern or North African,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2119-6,Assyrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2120-4,Egyptian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2121-2,Iranian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2122-0,Iraqi,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2123-8,Lebanese,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2124-6,Palestinian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2125-3,Syrian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2126-1,Afghanistani,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2127-9,Israeli,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+White Detailed Race,2.16.840.1.113883.3.464.1004.2370,2025-03-31,2129-5,Arab,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3

@@ -1,0 +1,1078 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4951000087105,Computed tomography of bilateral forearms (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4961000087108,Computed tomography of bilateral forearms with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4971000087104,Computed tomography of bilateral hands (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4981000087102,Computed tomography of bilateral hands with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,4991000087100,Computed tomography of left hand with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5001000087109,Computed tomography of right hand with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5011000087106,Fluoroscopic arthrography of bilateral ankles (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5021000087103,Fluoroscopic arthrography of bilateral elbows (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5031000087101,Fluoroscopic arthrography of bilateral hip joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5041000087107,Fluoroscopic arthrography of left hip joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5051000087105,Fluoroscopic arthrography of right hip joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5061000087108,Fluoroscopic arthrography of bilateral knees (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5071000087104,Fluoroscopic arthrography of bilateral lower limb joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5081000087102,Fluoroscopic arthrography of left lower limb joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5091000087100,Fluoroscopic arthrography of right lower limb joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5101000087105,Fluoroscopic arthrography of joint of bilateral shoulder regions (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5111000087107,Fluoroscopic arthrography of bilateral temporomandibular joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5121000087104,Fluoroscopic arthrography of bilateral wrists (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5161000087109,Lithotripsy of bilateral kidneys using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5171000087100,Fluoroscopic bilateral nephrostography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5181000087103,Biopsy of bilateral breasts using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5231000179108,Three dimensional obstetric ultrasonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5241000179100,Three dimensional obstetric ultrasonography in third trimester (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5461000087101,Mammary ductography of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5471000087105,Mammary ductography of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5481000087107,Needle localization of lesion of left breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5491000087109,Needle localization of lesion of right breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5541000087103,Computed tomography of bilateral ankles with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5561000087102,Mammary ductography of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5701000087106,Fluoroscopic antegrade pyelography of bilateral renal pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5971000087103,Mammography and aspiration of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,5981000087101,Mammography and aspiration of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6101000087104,Magnetic resonance imaging of tibia (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6111000087102,Magnetic resonance imaging of fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6131000087107,Plain X-ray of all fingers of left hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6141000087101,Plain X-ray of all fingers of right hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6151000087103,Plain X-ray of bone of left rib (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6161000087100,Plain X-ray of bone of right rib (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6201000087105,Plain X-ray of all toes of left foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6211000087107,Plain X-ray of all toes of right foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6231000087102,Doppler ultrasonography of artery of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6241000087108,Doppler ultrasonography of artery of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6251000087106,Doppler ultrasonography of artery of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6261000087109,Doppler ultrasonography of artery of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6281000087103,Doppler ultrasonography flow mapping of vein of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6291000087101,Doppler ultrasonography flow mapping of vein of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6301000087102,Doppler ultrasonography flow mapping of vein of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6311000087100,Doppler ultrasonography flow mapping of vein of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6411000087106,Fluoroscopic antegrade pyelography of left renal pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6421000087103,Fluoroscopic antegrade pyelography of right renal pelvis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6431000087101,Magnetic resonance imaging of left acromioclavicular joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6441000087107,Magnetic resonance imaging of right acromioclavicular joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6451000087105,Biopsy of left kidney using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6461000087108,Biopsy of right kidney using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6481000087102,Biopsy of left lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6491000087100,Biopsy of right lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6521000087102,Biopsy of left lung using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6531000087100,Biopsy of right lung using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6601000087107,Computed tomography of bilateral tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6611000087109,Computed tomography of bilateral tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6631000087104,Computed tomography of left tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6651000087108,Computed tomography of right tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6681000087100,Magnetic resonance imaging of bilateral tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6691000087103,Magnetic resonance imaging of bilateral tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6711000087101,Magnetic resonance imaging of left tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6721000087109,Magnetic resonance imaging of left tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6731000087106,Magnetic resonance imaging of right tibia and fibula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6741000087100,Magnetic resonance imaging of right tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6751000087102,Doppler ultrasonography of arteries of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6761000087104,Doppler ultrasonography of arteries of bilateral upper limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6771000087108,Doppler ultrasonography flow mapping of veins of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6781000087105,Doppler ultrasonography flow mapping of veins of bilateral upper limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6791000087107,Mammography and aspiration of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6801000087106,Magnetic resonance imaging of bilateral acromioclavicular joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6811000087108,Biopsy of left lower limb using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,6821000087100,Biopsy of right lower limb using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8891000087103,Doppler ultrasonography of left carotid artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,8901000087102,Doppler ultrasonography of right carotid artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9101000087107,Doppler ultrasonography of left iliac vessel (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9111000087109,Doppler ultrasonography of artery of right inguinal region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9121000087101,Doppler ultrasonography of artery of left inguinal region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9151000087108,Doppler ultrasonography of right iliac vessel (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9161000087106,Doppler ultrasonography of artery of bilateral inguinal regions (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9171000087102,Doppler ultrasonography of bilateral carotid arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9181000087100,Doppler ultrasonography of bilateral iliac vessels (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9191000087103,Plain X-ray of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9201000087101,Plain X-ray of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9241000087103,Plain X-ray of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9251000087100,Plain X-ray of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9491000087106,Ultrasonography of face and neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9521000087109,Computed tomography angiography of abdominal artery and pelvic artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9751000087109,Plain X-ray of bilateral upper limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,9771000087103,Plain X-ray of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,10321000087109,Ultrasonography of chest and abdomen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,10361000087104,Computed tomography of head and cervical spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,10401000087105,"Ultrasonography of chest, abdomen and pelvis (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11341000087106,Computed tomography of right acromioclavicular joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11361000087107,Magnetic resonance imaging of joint of right lower extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11381000087101,Magnetic resonance imaging of joint of left lower extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11401000087101,Ultrasonography of chest and right axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11411000087104,Magnetic resonance imaging of joint of left upper extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11421000087107,Magnetic resonance imaging of pelvis and left hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11441000087103,Computed tomography of left acromioclavicular joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11471000087106,Ultrasonography of chest and left axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11491000087105,Ultrasonography of left buttock (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11521000087108,Ultrasonography of right kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11541000087104,Magnetic resonance imaging of pelvis and right hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11581000087109,Ultrasonography of left kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11601000087103,Magnetic resonance imaging of joint of right upper extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11611000087101,Ultrasonography of right buttock (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11621000087109,Magnetic resonance imaging of joints of bilateral upper extremities (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11631000087106,Ultrasonography of bilateral buttocks (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11641000087100,Magnetic resonance imaging of joints of bilateral lower extremities (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11651000087102,Ultrasonography of bilateral adrenal glands (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11661000087104,Computed tomography of bilateral acromioclavicular joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11681000087105,Ultrasonography of right adrenal gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11691000087107,Ultrasonography of left adrenal gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11841000087101,Ultrasonography of breast and axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11931000087101,Biopsy of left adrenal gland using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,11981000087102,Computed tomography arthrography of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12011000087100,Biopsy of left axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12021000087108,Computed tomography arthrography of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12081000087109,Injection of right upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12111000087104,Fluoroscopic angiography of abdominal and pelvic vascular structure with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12131000087109,Biopsy of breast and axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12141000087103,Computed tomography angiography of neck and thorax with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12181000087108,Computed tomography arthrography of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12191000087105,Biopsy of right adrenal gland using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12311000087102,Magnetic resonance imaging of pelvis and bilateral hips (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12351000087103,Drainage of right breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12471000087101,Injection of left upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12511000087107,Computed tomography arthrography of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12601000087109,Drainage of left breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12641000087107,Ultrasonography of right breast and right axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12651000087105,Drainage of bilateral breasts using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12681000087102,Computed tomography arthrography of bilateral upper limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12691000087100,Injection of bilateral lower limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12701000087100,Computed tomography arthrography of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12711000087103,Ultrasonography of bilateral breasts and bilateral axillae (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12731000087108,Injection of left lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12741000087102,Injection of bilateral upper limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12771000087105,Ultrasonography of left breast and left axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12821000087102,Mammography of left breast specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12831000087100,Mammography of right breast specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12861000087107,Biopsy of left upper limb using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12871000087103,Biopsy of right upper limb using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12931000087106,Magnetic resonance imaging of left clavicle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,12941000087100,Magnetic resonance imaging of right clavicle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13041000087109,Doppler ultrasonography of aorta and femoral artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13061000087105,Doppler ultrasonography of aorta and artery of lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13081000087104,Biopsy of bilateral axillae using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13131000087104,Ultrasonography of pathological specimen of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13141000087105,Biopsy of left buttock using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13151000087108,Biopsy of right buttock using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13171000087102,Ultrasonography of chest and bilateral axillae (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13191000087103,Biopsy of face and neck using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13221000087107,Ultrasonography of inguinal region and scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13271000087106,Doppler ultrasonography of left iliac artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13281000087108,Doppler ultrasonography of right iliac artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13301000087109,Ultrasonography of bilateral kidneys (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13391000087100,Left nephrostomy using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13401000087102,Right nephrostomy using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13801000087100,Ultrasonography of chest and axilla (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13841000087102,Doppler ultrasonography of aorta and right iliac artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13851000087104,Doppler ultrasonography of aorta and left iliac artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13861000087101,Aspiration of cyst of right kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13871000087105,Aspiration of cyst of left kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,13911000087107,Drainage of lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14141000087107,Mammography of bilateral breast specimens (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14161000087108,Magnetic resonance imaging of bilateral clavicles (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14171000087104,"Ultrasonography of abdomen, pelvis and left lower limb (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14181000087102,"Ultrasonography of abdomen, pelvis and right lower limb (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14191000087100,Doppler ultrasonography of aorta and bilateral iliac arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14221000087109,Ultrasonography of left groin and left scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14231000087106,Ultrasonography of right groin and right scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14241000087100,Doppler ultrasonography of bilateral iliac arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14271000087108,Biopsy of left lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14281000087105,Biopsy of right lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14291000087107,Drainage of left lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14301000087106,Drainage of right lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14321000087100,Doppler ultrasonography of vascular structure of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14331000087103,Doppler ultrasonography of vascular structure of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14341000087109,Ultrasonography of pelvis and left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14351000087107,Ultrasonography of pelvis and right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14361000087105,Aspiration of cyst of bilateral kidneys using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14371000087101,Injection of left sacroiliac joint using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14381000087104,Injection of right sacroiliac joint using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14411000087102,Biopsy of left upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14421000087105,Biopsy of right upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14431000087107,Drainage of left upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14441000087101,Drainage of right upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14451000087103,Doppler ultrasonography of vascular structure of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14461000087100,Doppler ultrasonography of vascular structure of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14511000087103,Doppler ultrasonography of right femoral artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14521000087106,Doppler ultrasonography of left femoral artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14531000087108,Doppler ultrasonography of vein of right upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14541000087102,Doppler ultrasonography of vein of left upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14551000087104,Doppler ultrasonography of aorta and right femoral artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14561000087101,Doppler ultrasonography of aorta and left femoral artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14581000087107,Doppler ultrasonography of vascular structure of pelvis and vein of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14591000087109,Doppler ultrasonography of vascular structure of pelvis and vein of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14601000087101,"Ultrasonography of abdomen, pelvis and bilateral lower limbs (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14611000087104,Doppler ultrasonography of aorta and bilateral femoral arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14621000087107,Biopsy of right axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14641000087103,Doppler ultrasonography of bilateral femoral arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14651000087100,Ultrasonography of bilateral groins and bilateral scrotum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14671000087106,Biopsy of bilateral lower limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14691000087105,Doppler ultrasonography of vascular structure of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14701000087105,Ultrasonography of pelvis and bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14711000087107,Injection of bilateral sacroiliac joints using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14721000087104,Doppler ultrasonography of bilateral subclavian arteries (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14731000087102,Doppler ultrasonography of left subclavian artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14741000087108,Doppler ultrasonography of right subclavian artery (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14751000087106,Doppler ultrasonography of left subclavian vein (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14761000087109,Doppler ultrasonography of right subclavian vein (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14801000087102,Biopsy of bilateral upper limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14811000087100,Doppler ultrasonography of vascular structure of bilateral upper limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14831000087105,Doppler ultrasonography of bilateral subclavian veins (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,14871000087107,"Computed tomography angiography of abdomen, pelvis and lumbar spine with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15221000087108,Computed tomography of pelvis and right hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15231000087105,Computed tomography of pelvis and left hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15241000087104,Computed tomography of right rib (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15251000087101,Computed tomography of left rib (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15261000087103,Computed tomography of bilateral ribs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15271000087107,Biopsy of left scapula using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15281000087109,Biopsy of right scapula using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15301000087105,Computed tomography of right scaphoid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15311000087107,Computed tomography of left scaphoid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15321000087104,Computed tomography of pelvis and bilateral hips (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15331000087102,Computed tomography of bilateral ribs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15341000087108,Computed tomography of bilateral scaphoids (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15351000087106,Computed tomography of pelvis and bilateral hips with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15361000087109,Computed tomography of bilateral scaphoids with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15391000087101,"Computed tomography angiography of abdomen, pelvis and lower limb with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15901000087106,Fluoroscopic angiography of left subclavian artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15911000087108,Fluoroscopic angiography of right subclavian artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,15991000087102,Computed tomography angiography of right upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16001000087103,Computed tomography angiography of left upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16041000087100,Fluoroscopic angiography of left cervical vertebral artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16051000087102,Fluoroscopic angiography of right cervical vertebral artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16081000087105,Computed tomography angiography of bilateral upper limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16111000087100,Biopsy of left inguinal region using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16121000087108,Biopsy of right inguinal region using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16181000087109,Fluoroscopic angiography of bilateral subclavian arteries with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16731000087109,Magnetic resonance imaging of pelvis and lower extremity (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16831000087101,Magnetic resonance imaging of left thigh (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16841000087107,Magnetic resonance imaging of right thigh (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16931000087107,Biopsy of bilateral adrenal glands using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16951000087103,Biopsy of bilateral buttocks using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17001000087100,Puncture of cyst of left kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17011000087103,Puncture of cyst of right kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17071000087105,Angioplasty of left femoral artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17081000087107,Angioplasty of right femoral artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17131000087107,Biopsy of bilateral thorax using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17141000087101,Plain X-ray of bilateral sacroiliac joints (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17161000087100,Aspiration of left upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17171000087109,Aspiration of right upper limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17211000087107,Aspiration of left lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17221000087104,Aspiration of right lower limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17261000087109,Computed tomography of pelvis and lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17281000087103,Fluoroscopic venography of right upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17291000087101,Fluoroscopic venography of left upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17361000087103,Computed tomography of pelvis and left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17371000087107,Computed tomography of pelvis and right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17401000087109,Magnetic resonance imaging of left clavicle with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17411000087106,Magnetic resonance imaging of right clavicle with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17471000087104,Magnetic resonance angiography of left lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17481000087102,Magnetic resonance angiography of right lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17501000087108,Magnetic resonance imaging of bilateral thighs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17511000087105,Magnetic resonance imaging of left thigh with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17521000087102,Magnetic resonance imaging of right thigh with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17531000087100,Magnetic resonance angiography of left upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17541000087106,Magnetic resonance angiography of right upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17571000087103,Angioplasty of left iliac artery and insertion of stent using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17581000087101,Angioplasty of right iliac artery and insertion of stent using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17591000087104,Angioplasty of left renal artery and insertion of stent using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17601000087107,Angioplasty of right renal artery and insertion of stent using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17611000087109,Aspiration of bilateral upper limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17641000087105,Aspiration of bilateral lower limbs using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17691000087103,Fluoroscopic venography of bilateral upper limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17731000087106,Magnetic resonance angiography of bilateral lower limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17741000087100,Magnetic resonance angiography of bilateral upper limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17751000087102,Angioplasty of bilateral iliac arteries and insertion of bilateral iliac artery stents using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17901000087101,Computed tomography angiography of left lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17921000087107,Doppler ultrasonography of vein of right lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,17961000087102,Doppler ultrasonography of vascular structure of pelvis and veins of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18001000087104,Computed tomography of pelvis and lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18051000087103,Computed tomography of pelvis and bilateral lower limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18061000087100,Doppler ultrasonography of vein of left lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18291000087100,Computed tomography angiography of right lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18301000087101,Doppler ultrasonography of veins of bilateral lower limbs (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18361000087102,Biopsy of right rib using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18381000087108,Computed tomography angiography of bilateral lower limbs with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,18401000087108,Biopsy of left rib using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19521000087107,Magnetic resonance arthrography of right shoulder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19531000087109,Biopsy of bilateral kidneys using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19621000087108,Magnetic resonance arthrography of left hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19651000087101,Magnetic resonance arthrography of left ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19711000087108,Angioplasty of right tibial artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19741000087109,Magnetic resonance arthrography of right knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19761000087105,Biopsy of left salivary gland using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19771000087101,Magnetic resonance arthrography of right wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19791000087102,Magnetic resonance arthrography of right elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19831000087106,Magnetic resonance arthrography of right hip (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,19971000087103,Magnetic resonance arthrography of right ankle (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20021000087104,Computed tomography of right scapula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20051000087106,Magnetic resonance arthrography of left shoulder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20091000087101,Biopsy of right salivary gland using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20111000087108,Computed tomography of left scapula (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20141000087109,Angioplasty of left tibial artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20171000087101,Magnetic resonance arthrography of left wrist (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20221000087106,Magnetic resonance arthrography of left knee (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20271000087105,Magnetic resonance arthrography of left elbow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20311000087105,Ultrasonography of bilateral popliteal fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20321000087102,Angioplasty of bilateral tibial arteries using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20331000087100,Computed tomography of bilateral scapulae (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20341000087106,Magnetic resonance arthrography of bilateral hips (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20351000087109,Aspiration of right axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20361000087107,Aspiration of left axilla using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20371000087103,Magnetic resonance imaging of left calf (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20381000087101,Magnetic resonance imaging of right calf (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20411000087104,Computed tomography of left scapula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20421000087107,Computed tomography of right scapula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20431000087109,Magnetic resonance imaging of left humerus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20451000087100,Magnetic resonance imaging of right humerus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20481000087108,Magnetic resonance imaging of left humerus with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20491000087105,Magnetic resonance imaging of right humerus with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20501000087102,Computed tomography of bilateral scapulae with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20511000087100,Aspiration of bilateral axillae using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20521000087108,Magnetic resonance imaging of bilateral humeri (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20531000087105,Magnetic resonance imaging of bilateral calves (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20541000087104,Magnetic resonance imaging of bilateral humeri with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,20951000087105,Ultrasonography of pelvis and perineum (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21101000087100,Magnetic resonance venography of limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21151000087104,Ultrasonography of toe of right foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21171000087105,Ultrasonography of right biceps tendon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21181000087107,Ultrasonography of left biceps tendon (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21211000087108,Magnetic resonance imaging of calf of left lower leg with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21231000087103,Plain X-ray of right salivary gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21291000087102,Doppler ultrasonography of right saphenous vein (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21301000087103,Magnetic resonance imaging of pelvis and bilateral hips with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21321000087109,Doppler ultrasonography of left saphenous vein (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21401000087105,Ultrasonography of finger of right hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21441000087108,Ultrasonography of finger of left hand (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21461000087109,Plain X-ray of left salivary gland (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21471000087100,Magnetic resonance imaging of calf of right lower leg with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21491000087101,Ultrasonography of toe of left foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21521000087103,Doppler ultrasonography of bilateral saphenous veins (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21531000087101,Magnetic resonance imaging of bilateral calves with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21551000087105,Ultrasonography of bilateral biceps tendons (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,21731000087107,Biopsy of bilateral lungs using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22831000087106,"Computed tomography of abdomen, pelvis and bilateral lower limbs with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22851000087102,"Computed tomography of abdomen, pelvis and left lower limb with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22871000087108,"Computed tomography of abdomen, pelvis and lower limb (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22881000087105,"Computed tomography of abdomen, pelvis and lower limb with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,22891000087107,"Computed tomography of abdomen, pelvis and right lower limb with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,52211000087101,Magnetic resonance imaging of left calcaneus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,52221000087109,Magnetic resonance imaging of right calcaneus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,52231000087106,Magnetic resonance imaging of left sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,52241000087100,Magnetic resonance imaging of right sacroiliac joint (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105281000220105,Horizontal bitewing plain X-ray of teeth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105291000220108,Vertical bitewing plain X-ray of teeth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105301000220109,"Plain X-ray cephalometry, lateral (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,105311000220107,Occlusal plain X-ray of anterior maxillary region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,305011000000108,Core needle biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,305051000000107,Fine needle aspiration biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,305071000000103,Fine needle aspiration biopsy and core needle biopsy of breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306371000000109,Prone fine needle aspiration biopsy and core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306381000000106,Prone core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306391000000108,Prone wire localization of lesion of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306641000000107,Upright core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306651000000105,Upright fine needle aspiration biopsy and core needle biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306661000000108,Upright wire localization of lesion of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,306671000000101,Upright fine needle aspiration biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,307971000000105,Prone vacuum assisted biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,307981000000107,Upright vacuum assisted biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,308001000000100,Mammography lateral view (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,308031000000106,Mammography extended view (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,308041000000102,Prone fine needle aspiration biopsy of breast using stereotactic plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,317631000000102,Fluoroscopic direct puncture venography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,321511000000107,Computed tomography of midfoot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,382911000119105,Magnetic resonance imaging of neck without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383311000119100,Magnetic resonance imaging of orbits without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383321000119107,Magnetic resonance imaging of brain and brain stem without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383371000119108,Computed tomography of head without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383381000119106,Computed tomography of orbit without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383391000119109,Computed tomography of orbit and sella turcica without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383401000119106,Computed tomography of middle ear without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383441000119108,Computed tomography of orbit and sella turcica with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383471000119101,Computed tomography of paranasal sinus without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383501000119107,"Plain X-ray of chest, apical and lordotic views (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383761000119101,Computed tomography of shoulder without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383771000119107,Computed tomography of wrist without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383931000119106,Computed tomography of lower leg without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,383941000119102,Computed tomography of knee without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384041000119100,Fluoroscopy of esophagus with barium (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384051000119103,Fluoroscopy of esophagus with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384091000119108,Fluoroscopic barium enema via colostomy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384151000119104,Screening mammography of bilateral breasts (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384161000119102,Ultrasonography of soft tissue of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,384521000119100,Computed tomography of lower limb without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,385111000119104,Computed tomography of facial bones without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,385701000119103,Ultrasonography of right thorax (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,385711000119100,Ultrasonography of left thorax (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,385731000119105,Plain X-ray of tissue specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,387691000119107,Endoscopic retrograde cholangiopancreatography with insertion of catheter into biliary and pancreatic ducts using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,388131000119100,Computed tomography of mastoid without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,388321000119101,Magnetic resonance imaging of sacrum without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,388511000119103,Fluoroscopic angiography of thoracic aorta with serialography by femoral approach with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,391131000119106,Ultrasonography for qualitative amniotic fluid volume (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,391391000119107,Radionuclide scan of whole body using indium 111 for localization of abscess (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,392491000119105,Fluoroscopic venography of right limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,392521000119107,Screening mammography of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,392531000119105,Screening mammography of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,393031000119106,Magnetic resonance imaging cholangiography without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,393091000119105,Computed tomography of neck and chest without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,393161000119104,"Computed tomography of chest, abdomen and pelvis without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394211000119109,Ultrasonography for fetal biophysical profile with non-stress testing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394221000119102,Ultrasonography for fetal biophysical profile without non-stress testing (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394421000119103,"Plain X-ray of chest, anteroposterior view (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394451000119106,Magnetic resonance imaging of lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394491000119101,Computed tomography of upper limb without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394501000119108,Magnetic resonance arthrography of upper limb without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394511000119106,Magnetic resonance imaging of lower limb joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394531000119101,Magnetic resonance imaging of abdomen without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394591000119102,Shuntogram of indwelling nonvascular shunt using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394611000119107,Fluoroscopic angiography with contrast for transcatheter biopsy (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,394681000119101,Echoencephalography A and B-mode (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395041000119103,Plain X-ray of soft tissue of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395081000119108,Computed tomography of chest without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395231000119103,Endoscopic retrograde cholangiopancreatography with insertion of catheter into biliary duct using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395241000119107,Fluoroscopic angiography of abdominal aorta with serialography with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395561000119108,Computed tomography of soft tissues of neck without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395611000119106,Magnetic resonance imaging of brain and brain stem with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395761000119101,"Plain X-ray of pelvis, anteroposterior view (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,395771000119107,Computed tomography of pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,396101000119105,Computed tomography of abdomen without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,396111000119108,Computed tomography of soft tissues of neck with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,396161000119106,Magnetic resonance imaging of pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,396171000119100,Magnetic resonance imaging of thoracic spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,396321000119104,Single photon emission computed tomography of cerebrospinal fluid flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,405481000119105,Single photon emission computed tomography of liver with vascular flow (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,406451000119107,"Plain X-ray of pelvis, frog leg lateral view (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,406571000119104,Magnetic resonance imaging of paranasal sinuses without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,407651000119107,Magnetic resonance imaging of bilateral hip joints without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,407931000119106,Fluoroscopic retrograde cystourethrography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,407971000119109,Percutaneous needle biopsy of liver using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,407981000119107,Percutaneous biopsy of kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,408031000119108,Percutaneous needle biopsy of pancreas using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,408041000119104,Percutaneous needle biopsy of pleura using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,408071000119106,Percutaneous needle biopsy of kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,408451000119106,Percutaneous needle biopsy of kidney using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,408621000119100,Removal of tunneled central venous catheter with subcutaneous port using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409421000119109,Computed tomography of right ankle with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409491000119106,Computed tomography of left tibia and fibula without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409511000119101,Computed tomography of left tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409521000119108,Computed tomography of right tibia and fibula without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409541000119102,Computed tomography of right tibia and fibula with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409551000119100,Magnetic resonance angiography of carotid artery without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409571000119109,Magnetic resonance imaging of adrenal gland without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409701000119109,Computed tomography of left ankle with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409771000119104,Magnetic resonance imaging of sacrum and coccyx without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409781000119101,Magnetic resonance imaging of scrotum without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409791000119103,Magnetic resonance imaging of prostate without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409841000119100,Magnetic resonance imaging of kidney without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409871000119107,Magnetic resonance imaging of pancreas without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,409901000119107,Magnetic resonance imaging of liver without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410261000119108,Computed tomography of left femur without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410271000119102,Computed tomography of right femur without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410321000119109,Computed tomography of left knee with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410331000119107,Computed tomography of right knee with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410341000119103,Computed tomography of left foot with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410351000119101,Computed tomography of right foot with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410361000119104,Computed tomography of left femur with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,410371000119105,Computed tomography of right femur with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411011000119106,"Computed tomography of abdominal organs, kidney, ureter and bladder without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411151000119106,"Magnetic resonance imaging of orbit, face and neck with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411251000119104,Computed tomography angiography of chest with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411291000119109,Computed tomography of temporomandibular joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411301000119105,Magnetic resonance imaging of brain and internal auditory canal without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411311000119108,Computed tomography of sacrum and coccyx without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411571000119106,Magnetic resonance imaging of thoracic spine and lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411611000119102,"Magnetic resonance imaging of cervical, thoracic, and lumbar spine without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411661000119104,"Computed tomography of neck, chest, abdomen and pelvis without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411911000119107,Magnetic resonance imaging of brain and facial bones without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,411981000119101,Fluoroscopic venography of bilateral extremities with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,412361000119103,Cervical esophagram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,412461000119108,Magnetic resonance imaging of pituitary fossa without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,412541000119105,Computed tomography of internal auditory structure without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413001000119107,Magnetic resonance imaging of cervical and lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413371000119104,Single photon emission computed tomography using gallium for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413431000119108,Single photon emission computed tomography using octreotide for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413441000119104,Single photon emission computed tomography using technetium Tc^99m^ sestamibi for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413841000119101,Dual energy X-ray absorptiometry of hip and spine (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,413921000119104,Magnetic resonance imaging of scapula without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,414121000119100,Magnetic resonance imaging of abdomen and pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,414131000119102,Magnetic resonance angiography of abdomen and pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,414151000119108,"Magnetic resonance angiography of chest, abdomen and pelvis without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,414181000119101,Percutaneous needle biopsy of thyroid using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,414301000119107,Defecography with barium enema (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,421751000119100,Dual energy X-ray absorptiometry of axial and appendicular skeleton (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,422851000119101,Two dimensional echocardiography of fetus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,426101000119109,Computed tomography of adrenal gland without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,426701000119108,"Ultrasonography of abdomen, right upper quadrant and epigastrium (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427021000119103,Magnetic resonance imaging of bilateral breasts without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427031000119100,Magnetic resonance imaging of bilateral breasts with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427041000119109,Magnetic resonance imaging of left breast without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427061000119108,Magnetic resonance imaging of right breast without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427101000119106,Computed tomography of chest and abdomen without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427161000119107,Aspiration of cyst of left breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,427171000119101,Aspiration of cyst of right breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,437731000119100,Magnetic resonance angiography of head without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,437751000119106,Magnetic resonance imaging of hand joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,438281000119106,Magnetic resonance imaging of posterior fossa without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,455051000124103,Magnetic resonance imaging of cochlear implant (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,459801000124109,Three dimensional reconstruction of magnetic resonance imaging (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,480621000119104,Positron emission tomography with computed tomography of whole body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,486261000119109,"Plain X-ray of chest, posteroanterior (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,489801000119103,Magnetic resonance imaging of brain without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,489811000119100,Magnetic resonance angiography of head and brain without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,491131000119104,Plain X-ray of tissue specimen of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,491141000119108,Plain X-ray of tissue specimen of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,492661000119109,Computed tomography of sternoclavicular joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,492991000119105,Computed tomography of posterior fossa without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,495661000119101,Magnetic resonance imaging of bilateral hip joints with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,495741000119105,"Magnetic resonance imaging of cervical, thoracic, and lumbar spine with contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,502021000119101,Injection of hip joint using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,503891000119102,Needle biopsy of lymph node using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,504981000119108,Computed tomography of heart without contrast with calcium scoring (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,527231000119104,Computed tomography of temporal bone without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,566321000119100,Computed tomography of foot without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,566341000119106,Computed tomography of ankle without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,566571000119105,Mammography of right breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,571891000119109,Magnetic resonance imaging of cervical spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,571921000119104,Single photon emission computed tomography of liver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,572021000119109,Computed tomography of maxillofacial area without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,572061000119104,Computed tomography of cervical spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,572081000119108,Computed tomography of thoracic spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,572091000119106,Computed tomography of lumbar spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,572701000119102,Mammography of left breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,582101000119108,Computed tomography angiography of head with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,588111000119108,Computed tomography myelogram of thoracic spine with lumbar injection of contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,612171000124108,Ultrasensitive ultrasonography of microvasculature (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,752201000000100,Plain X-ray of sesamoid bone of foot (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811131000000103,Biopsy of soft tissue of thigh using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811141000000107,Computed tomography of cochlea (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811271000000108,Computed tomography sinogram of upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811281000000105,Computed tomography sinogram of lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811661000000104,Percutaneous nephrolithotomy for removal of calculus using plain X-ray mobile image intensifier guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811671000000106,Quantitative ultrasonography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811681000000108,Quantitative ultrasonography of upper limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,811691000000105,Quantitative ultrasonography of lower limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,819781000000104,Percutaneous transluminal radiofrequency sympathetic denervation of renal artery using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,819801000000103,Percutaneous microwave ablation of lesion of lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,819811000000101,Percutaneous microwave ablation of lesion of kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,829711000000103,Injection of marker into breast using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,829831000000100,Insertion of fiducial marker into lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,836381000000102,Insertion of marker into breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839861000000108,Computed tomography arthrography of ankle with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839871000000101,Computed tomography arthrography of elbow with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839891000000102,Computed tomography arthrography of hip with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839901000000101,Computed tomography arthrography of knee with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839931000000107,Computed tomography arthrography of midtarsal joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839941000000103,Computed tomography arthrography of subtalar joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,839971000000109,Computed tomography arthrography of wrist with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,840001000000105,Fluoroscopic arthrography of midtarsal joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,840011000000107,Fluoroscopic arthrography of subtalar joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,840031000000104,Fluoroscopic arthrography of temporomandibular joint with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,841191000000109,Percutaneous transluminal embolization of uterine artery using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,842971000000100,Marking of skin over small saphenous vein using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,843171000000109,Percutaneous transluminal balloon test occlusion of internal carotid artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,844541000000109,Injection of anesthetic agent into suprascapular nerve using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,845611000000108,Three dimensional rotational fluoroscopic angiography of upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,845651000000107,Three dimensional rotational fluoroscopic angiography of lower limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,847081000000101,Balloon dilation of bronchus using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,847101000000107,Cutting balloon dilation of bronchus using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,847581000000105,Intra-arterial injection of antineoplastic agent into ophthalmic artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,862691000000104,Marking of skin over carotid artery using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,869261000000104,Percutaneous mechanical thrombectomy of renal artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,869331000000103,Percutaneous radiofrequency ablation of renal artery using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,872501000000102,Application of external fixator on bone of upper limb using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,872511000000100,Application of external fixator on bone of lower limb using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,872631000000109,Insertion of marker into breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,872661000000104,Insertion of marker into breast using stereotactic mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,872731000000104,Vacuum assisted core needle biopsy of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,906081000000103,Percutaneous radiofrequency ablation of great saphenous vein using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,906091000000101,Percutaneous radiofrequency ablation of small saphenous vein using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,910551000000101,Diffusion weighted magnetic resonance imaging of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911581000000102,Fluoroscopic angiography of transplanted hepatic artery with contrast with insertion of stent (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911591000000100,Fluoroscopic venography of transplanted portal vein with contrast with insertion of stent (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911601000000106,Percutaneous thrombolysis of hepatic artery using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911611000000108,Percutaneous thrombolysis of transplanted hepatic artery using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911621000000102,Percutaneous thrombolysis of transplanted portal vein using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911651000000107,Percutaneous transluminal angioplasty of transplanted hepatic artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911661000000105,Percutaneous transluminal angioplasty of transplanted portal vein using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911821000000101,Diffusion weighted magnetic resonance imaging of internal auditory meatus (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,911831000000104,Wire guided localization of lesion of breast using magnetic resonance imaging guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,912281000000109,Lithotripsy of calculus of ureter using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,912321000000101,Optical coherence tomography of coronary artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,912901000000106,Barbotage of shoulder using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,913401000000107,Fluoroscopic percutaneous venography of orbital vein with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,913411000000109,Fluoroscopic direct puncture venography of orbital vein with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,914001000000103,Percutaneous injection of sclerosing agent into great saphenous vein using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,914071000000106,Percutaneous injection of sclerosing agent into small saphenous vein using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,927531000000100,Ultrasonography of transplanted kidney with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,931021000000101,Magnetic resonance imaging of heart for assessment of myocardial viability (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1076521000000109,Doppler ultrasonography of vascular structure of inguinal region (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1076561000000101,Doppler ultrasonography of popliteal blood vessel (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1076851000000101,Ultrasonography of kidney and bladder (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1104451000000105,Insertion of magnetic marker into left breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1104461000000108,Insertion of magnetic marker into right breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1104471000000101,Insertion of magnetic marker into bilateral breasts using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1106021000000101,Insertion of magnetic marker into breast using stereotactic mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1106641000000102,Insertion of magnetic marker into left breast using stereotactic mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1106651000000104,Insertion of magnetic marker into right breast using stereotactic mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1106661000000101,Insertion of magnetic marker into bilateral breasts using stereotactic mammography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1106671000000108,Insertion of magnetic marker into breast using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1111381000000105,Insertion of magnetic marker into bilateral breasts using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1111411000000107,Insertion of magnetic marker into left breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1111421000000101,Insertion of magnetic marker into right breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1111791000000108,Insertion of magnetic marker into breast using plain X-ray guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1113701000112104,Automated ultrasonography of entire breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1147081000000105,Balloon dilation of left bronchus using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1147141000000101,Balloon dilation of right bronchus using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1147151000000103,Balloon dilation of bilateral bronchi using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148361000000102,Computed tomography of left cochlea (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148371000000109,Computed tomography of right cochlea (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148381000000106,Computed tomography of bilateral cochleae (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148601000000109,Percutaneous microwave ablation of lesion of left kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148611000000106,Percutaneous microwave ablation of lesion of right kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1148721000000106,Percutaneous microwave ablation of lesion of bilateral kidneys using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1157121000000106,Percutaneous microwave ablation of lesion of left lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1167361000000109,Percutaneous microwave ablation of lesion of right lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1167381000000100,Percutaneous microwave ablation of lesion of bilateral lungs using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1167461000000101,Intra-arterial injection of antineoplastic agent into left ophthalmic artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1167471000000108,Intra-arterial injection of antineoplastic agent into right ophthalmic artery using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,1167481000000105,Intra-arterial injection of antineoplastic agent into bilateral ophthalmic arteries using fluoroscopic guidance with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,2370001000004103,Drainage of abscess using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16318521000119109,"Plain X-ray of nasal sinus, occipitomental view (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16319081000119105,Plain X-ray orthodontic cephalometry (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16319561000119105,Plain X-ray orthopantogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16321411000119100,Magnetic resonance imaging of nasopharynx without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16321631000119108,Computed tomography angiography of neck and chest and abdomen with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16321761000119108,Magnetic resonance angiography of neck without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16323611000119102,"Magnetic resonance imaging of orbit, face and neck without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16323751000119105,Computed tomography of sella turcica without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16324631000119105,Computed tomography of mandible without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16324841000119100,Magnetic resonance imaging of face without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16324921000119103,Magnetic resonance imaging of face and orbit with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16324971000119102,Magnetic resonance imaging of face and orbit without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16326461000119108,Computed tomography angiography of chest and abdomen with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16327691000119101,Magnetic resonance imaging of brain with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16328021000119109,Magnetic resonance imaging of brain and cervical spinal cord without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16329211000119102,Magnetic resonance imaging of ankle joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16331381000119101,Magnetic resonance imaging of knee joint without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16332841000119106,Computed tomography angiography of pulmonary artery with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16333021000119102,Magnetic resonance venography of intracranial veins without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16333621000119107,Magnetic resonance angiography of pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16333901000119107,Magnetic resonance venography of neck without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16334561000119101,Magnetic resonance imaging of chest without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16334661000119100,Magnetic resonance imaging of sternum without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16334791000119101,Computed tomography of sternum without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16334891000119106,Low dose computed tomography of chest without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16335031000119103,High resolution computed tomography of chest without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16335961000119107,Computed tomography of elbow without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16339401000119102,Magnetic resonance spectroscopy of brain without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16342171000119105,Magnetic resonance imaging of pelvic bone without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16342871000119103,Magnetic resonance imaging of clavicle without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16383121000119106,Magnetic resonance angiography of brain and neck without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16383281000119103,Magnetic resonance angiography of spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16384631000119104,Computed tomography three dimensional reconstruction of bilateral lower limbs without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16384831000119100,Magnetic resonance imaging of cervical and thoracic spine without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16410231000119101,Magnetic resonance imaging of cerebrospinal fluid flow without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16410391000119107,Fluoroscopic lumbosacral myelography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16430491000119106,Endoscopic retrograde cholangiopancreatography with insertion of catheter into pancreatic duct using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16430791000119103,Fluoroscopic venography of inferior vena cava with contrast with serialography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16431351000119104,Fluoroscopic venography of hepatic vein with hemodynamic evaluation with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16433081000119109,Percutaneous needle biopsy of muscle of neck using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16433141000119100,Needle biopsy of superficial lymph node using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16433271000119101,Puncture and aspiration of skin using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16435731000119106,Percutaneous needle biopsy of muscle using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16436111000119105,Ultrasonography of right popliteal fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16436161000119108,Ultrasonography of left popliteal fossa (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16436661000119104,Core needle biopsy of skin using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16437531000119105,Ultrasonography for qualitative deepest pocket amniotic fluid volume (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16439401000119105,Magnetic resonance imaging for cardiac velocity flow mapping (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16439481000119102,Magnetic resonance imaging for cardiac morphology and function without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16439801000119108,Computed tomography of heart with contrast for cardiac structure and morphology (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16440141000119108,Computed tomography of bilateral kidneys without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16440971000119103,Deep fine needle aspiration biopsy using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16441011000119103,Superficial fine needle aspiration using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16442821000119108,Fluoroscopy of colon with water soluble contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16443041000119100,Percutaneous needle biopsy of liver using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16443431000119101,Needle biopsy of salivary gland using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16444861000119109,Transcervical recanalization of fallopian tube with catheter using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16444991000119109,"Computed tomography of kidney, ureter and urinary bladder without contrast (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16446101000119108,Ultrasonography of abdomen for ascites (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16446481000119106,Percutaneous core needle biopsy of thyroid using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16446541000119100,Ultrasonography of soft tissue of head and neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16446591000119108,Ultrasonography of mass of soft tissue of neck (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16446991000119104,Ultrasonography of soft tissue mass of limb (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16451571000119101,Needle biopsy of right kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16451621000119103,Needle biopsy of left kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16452511000119101,Fluoroscopic angiography of artery of limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16456981000119100,Intraoperative fluoroscopic cholangiogram (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16457501000119102,Computed tomography of abdomen and pelvis without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16457791000119101,Percutaneous injection of pseudoaneurysm of left limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16457831000119107,Percutaneous injection of pseudoaneurysm of right limb using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16459631000119104,Fluoroscopic angiography of artery of left upper limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16460061000119103,Percutaneous needle biopsy of left kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16460111000119102,Percutaneous needle biopsy of right kidney using ultrasonographic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16460411000119108,Ultrasonography of surgical specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16462121000119108,Computed tomography angiography of thorax and abdomen and pelvis with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16464181000119103,Fluoroscopic angiography of arteries of bilateral extremities with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16464851000119104,Fluoroscopic angiography of arteriovenous shunt with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16520681000119101,Injection of thrombin into pseudoaneurysm of extremity using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16520741000119101,Needle biopsy of salivary gland using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16520881000119102,Fluoroscopic angiography of bilateral internal mammary arteries with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16520921000119109,Percutaneous needle biopsy of muscle using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16522691000119102,Computed tomography for bone length measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16522741000119100,Plain X-ray for bone length measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16523851000119103,Needle puncture and aspiration of abscess of rectum using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16523911000119105,Percutaneous needle puncture and aspiration of abscess of neck using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16523971000119102,Needle puncture and aspiration of abscess of abdomen using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534101000119106,Single photon emission computed tomography with computed tomography of liver using technetium Tc^99m^ sulfur colloid (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534151000119105,Single photon emission computed tomography with computed tomography of liver (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534201000119102,Radionuclide esophageal motility study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534261000119101,Radionuclide scan of sentinel lymph node of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534311000119107,Radionuclide scan of bone marrow of whole body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534461000119100,Radionuclide scan of lymphatics and lymph nodes of breast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16534511000119102,Single photon emission computed tomography of bones of whole body (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16545191000119100,Radionuclide myocardial perfusion stress study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16545381000119101,Single photon emission computed tomography of myocardial perfusion with computed tomography (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16545811000119100,Positron emission tomography myocardial metabolism study (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16546531000119101,Plain X-ray for bone age (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16547731000119108,Diagnostic lumbar puncture using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16547791000119107,Needle biopsy of mass of retroperitoneum using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16547871000119103,Needle aspiration of cyst of left kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16547921000119107,Needle aspiration of cyst of right kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16548031000119107,Radionuclide scan of whole body using technetium sestamibi for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16548181000119109,Radionuclide scan of whole body using gallium for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16548241000119107,Radionuclide scan of whole body using octreotide for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16548901000119104,Single photon emission computed tomography of kidney (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16548951000119100,Single photon emission computed tomography of brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549001000119105,Therapeutic injection of right hip using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549151000119108,Therapeutic injection of right knee using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549301000119107,Therapeutic injection of right wrist using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549351000119106,Therapeutic injection of left wrist using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549441000119102,Radionuclide scan of cerebrospinal fluid flow of brain using indium 111 (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549591000119109,Percutaneous biopsy of right lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549641000119100,Percutaneous biopsy of left lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549791000119102,Needle biopsy of left kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549841000119104,Needle biopsy of right kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16549891000119107,Percutaneous needle biopsy of adrenal gland using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550001000119100,Percutaneous drainage of lesion of pelvis using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550051000119101,Radiofrequency ablation of lesion of left kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550101000119101,Radiofrequency ablation of lesion of right kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550151000119102,Percutaneous cryoablation of neoplasm of right kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550201000119105,Percutaneous cryoablation of neoplasm of left kidney using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16550981000119107,Percutaneous needle biopsy of muscle using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16551041000119108,Needle puncture and aspiration of lesion of right lower leg using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16551091000119100,Percutaneous fine needle aspiration biopsy of joint of left hip using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16551141000119107,Percutaneous fine needle aspiration biopsy of joint of right hip using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16551191000119104,Percutaneous fine needle aspiration biopsy of chest using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16551241000119104,Needle puncture and aspiration of lesion of left lower leg using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16552301000119102,Single photon emission computed tomography of whole body for localization of neoplasm (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16553741000119105,Radionuclide scan of whole body for localization of inflammation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16553961000119107,Single photon emission computed tomography of whole body for localization of abscess (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554061000119109,Computed tomography myelogram of lumbosacral spine with lumbar injection of contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554361000119106,Positron emission tomography with computed tomography of brain (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554411000119104,Positron emission tomography with computed tomography of heart (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554511000119103,Single photon emission computed tomography using gallium radiolabeled white blood cells for localization of inflammation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554571000119106,Single photon emission computed tomography with computed tomography for localization of inflammation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16554721000119102,Single photon emission computed tomography for localization of inflammation (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16555401000119103,Therapeutic injection of left hip using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16555451000119104,Therapeutic injection of left knee using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16555501000119102,Injection of celiac plexus using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16555561000119101,Therapeutic injection of right shoulder using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16555611000119103,Therapeutic injection of left shoulder using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16557031000119108,Needle biopsy of thyroid using fluoroscopic guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558481000119100,Percutaneous cryoablation of lesion of liver using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558541000119106,Needle puncture and aspiration of bursa of left ankle using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558601000119105,Needle aspiration of bursa of right ankle using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558661000119106,Needle puncture and aspiration of bursa of left knee using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558721000119108,Needle aspiration of bursa of right hip using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558781000119107,Needle aspiration of bursa of left hip using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558841000119108,Needle aspiration of bursa of left shoulder using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558901000119101,Needle aspiration of bursa of right shoulder using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16558961000119100,Needle aspiration of bursa of right knee using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559021000119103,Fine needle aspiration biopsy of spleen using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559081000119104,Cryoablation of lesion of lung using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559141000119108,Percutaneous fine needle aspiration biopsy of pelvis using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559201000119102,Percutaneous needle biopsy of mass of abdomen using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559261000119101,Percutaneous fine needle aspiration biopsy of pseudocyst of pancreas using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559321000119100,Fine needle aspiration biopsy of abdomen using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559621000119108,Biopsy of neck using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559741000119107,Percutaneous needle biopsy of cyst of spinal cord using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16559801000119103,Aspiration of cyst of spinal synovium using computed tomography guidance (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,16561811000119107,Magnetic resonance imaging of internal auditory meatus without contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Diagnostic Radiology,2.16.840.1.113883.3.464.1004.1081,997199941000119102,Fluoroscopic venography of left limb with contrast (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,81025,,CPT,2.16.840.1.113883.6.12
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,84702,,CPT,2.16.840.1.113883.6.12
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,84703,,CPT,2.16.840.1.113883.6.12
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,19080-1,Choriogonadotropin [Units/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,19180-9,Choriogonadotropin.beta subunit free [Units/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,20415-6,Choriogonadotropin.beta subunit [Units/volume] in Serum or Plasma by Immunoassay (EIA) 3rd IS,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,20994-0,Choriogonadotropin [Interpretation] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2106-3,Choriogonadotropin (pregnancy test) [Presence] in Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2107-1,Choriogonadotropin [Moles/volume] in Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2110-5,Choriogonadotropin.beta subunit (pregnancy test) [Presence] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2111-3,Choriogonadotropin.beta subunit [Moles/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2112-1,Choriogonadotropin.beta subunit (pregnancy test) [Presence] in Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2113-9,Choriogonadotropin.beta subunit [Mass/time] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2114-7,Choriogonadotropin.beta subunit [Moles/volume] in Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2115-4,Choriogonadotropin.beta subunit free [Moles/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2118-8,Choriogonadotropin (pregnancy test) [Presence] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,2119-6,Choriogonadotropin [Moles/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,21198-7,Choriogonadotropin.beta subunit [Units/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,25372-4,Choriogonadotropin [Units/volume] in Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,25373-2,Choriogonadotropin.beta subunit free [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,34670-0,Choriogonadotropin [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,45194-8,Choriogonadotropin.intact+Beta subunit [Units/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,55869-2,Choriogonadotropin.beta subunit [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,55870-0,Choriogonadotropin [Units/volume] in Cord blood,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,56497-1,Choriogonadotropin.beta subunit [Units] in 24 hour Urine,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,80384-1,Choriogonadotropin (pregnancy test) [Presence] in Urine by Rapid immunoassay,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,80385-8,Choriogonadotropin (pregnancy test) [Presence] in Serum by Rapid immunoassay,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,83086-9,Choriogonadotropin [Units/volume] in Serum or Plasma by Immunoassay,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,93769-8,Choriogonadotropin.intact+Beta subunit [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Pregnancy Tests,2.16.840.1.113883.3.464.1004.1221,99104-2,Choriogonadotropin [Mass/volume] in Urine,LOINC,2.16.840.1.113883.6.1
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,11976,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,57022,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,57170,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58300,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58301,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58600,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58605,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58615,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58970,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58974,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,58976,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59000,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59001,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59012,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59015,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59020,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59025,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59030,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59050,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59051,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59070,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59072,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59074,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59076,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59100,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59120,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59121,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59130,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59136,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59140,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59150,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59151,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59160,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59200,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59300,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59320,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59325,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59350,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59400,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59409,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59410,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59412,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59414,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59425,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59426,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59430,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59510,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59514,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59515,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59525,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59610,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59612,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59614,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59618,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59620,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59622,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59812,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59820,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59821,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59830,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59840,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59841,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59850,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59851,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59852,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59855,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59856,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59857,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59866,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59870,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59871,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59897,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59898,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,59899,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76801,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76805,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76811,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76813,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76815,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76816,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76817,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76818,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76819,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76820,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76821,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76825,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76826,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76827,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76828,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76941,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76945,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,76946,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,80055,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,80081,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,82105,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,82106,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,82143,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,82731,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,83632,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,83661,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,83662,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,83663,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,83664,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,84163,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,84704,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,86592,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,86593,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,86631,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,86632,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87110,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87164,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87166,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87270,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87320,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87490,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87491,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87492,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87590,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87591,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87592,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87624,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87625,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87660,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87661,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87808,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87810,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,87850,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88141,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88142,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88143,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88147,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88148,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88150,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88152,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88153,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88164,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88165,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88166,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88167,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88174,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88175,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88235,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88267,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,88269,,CPT,2.16.840.1.113883.6.12
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0101,Cervical or vaginal cancer screening; pelvic and clinical breast examination (G0101),HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0123,"Screening cytopathology, cervical or vaginal (any reporting system), collected in preservative fluid, automated thin layer preparation, screening by cytotechnologist under physician supervision (G0123)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0124,"Screening cytopathology, cervical or vaginal (any reporting system), collected in preservative fluid, automated thin layer preparation, requiring interpretation by physician (G0124)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0141,"Screening cytopathology smears, cervical or vaginal, performed by automated system, with manual rescreening, requiring interpretation by physician (G0141)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0143,"Screening cytopathology, cervical or vaginal (any reporting system), collected in preservative fluid, automated thin layer preparation, with manual screening and rescreening by cytotechnologist under physician supervision (G0143)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0144,"Screening cytopathology, cervical or vaginal (any reporting system), collected in preservative fluid, automated thin layer preparation, with screening by automated system, under physician supervision (G0144)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0145,"Screening cytopathology, cervical or vaginal (any reporting system), collected in preservative fluid, automated thin layer preparation, with screening by automated system and manual rescreening under physician supervision (G0145)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0147,"Screening cytopathology smears, cervical or vaginal, performed by automated system under physician supervision (G0147)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,G0148,"Screening cytopathology smears, cervical or vaginal, performed by automated system with manual rescreening (G0148)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,H1000,"Prenatal care, at-risk assessment (H1000)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,H1001,"Prenatal care, at-risk enhanced service; antepartum management (H1001)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,H1003,"Prenatal care, at-risk enhanced service; education (H1003)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,H1004,"Prenatal care, at-risk enhanced service; follow-up home visit (H1004)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,H1005,"Prenatal care, at-risk enhanced service package (includes h1001-h1004) (H1005)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,P3000,"Screening papanicolaou smear, cervical or vaginal, up to three smears, by technician under physician supervision (P3000)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,P3001,"Screening papanicolaou smear, cervical or vaginal, up to three smears, requiring interpretation by physician (P3001)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,S0199,"Medically induced abortion by oral ingestion of medication including all associated services and supplies (e.g., patient counseling, office visits, confirmation of pregnancy by hcg, ultrasound to confirm duration of pregnancy, ultrasound to confirm completion of abortion) except drugs (S0199)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,S4981,Insertion of levonorgestrel-releasing intrauterine system (S4981),HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,S8055,"Ultrasound guidance for multifetal pregnancy reduction(s), technical component (only to be used when the physician doing the reduction procedure does not perform the ultrasound, guidance is included in the cpt code for multifetal pregnancy reduction - 59866) (S8055)",HCPCS,2.16.840.1.113883.6.285
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,104175002,Chlamydia culture (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,104281002,Measurement of Chlamydia antibody (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,104282009,Measurement of Chlamydia species immunoglobulin M antibody (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,104290009,Lymphogranuloma venereum antibody assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,117775008,"Measurement of Chlamydia trachomatis G, F, and K antibody (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,121956002,Chlamydia species antigen assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,121957006,Measurement of Chlamydia trachomatis antibody (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,121958001,Measurement of Chlamydia trachomatis B antibody (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,121959009,Measurement of Chlamydia trachomatis C antibody (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,122173003,Chlamydia trachomatis antigen assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,122254005,Chlamydia trachomatis culture (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,122321005,Chlamydia trachomatis deoxyribonucleic acid assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,122322003,Chlamydia trachomatis ribosomal ribonucleic acid assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,134256004,Chlamydia trachomatis immunoglobulin M level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,134289004,Chlamydia group antibody level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,171120003,Trachoma screening (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,185642003,Cap check - call deleted (finding) [185642003],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,285586000,Chlamydia swab (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,310861008,Chlamydia antigen test (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,310862001,Chlamydia antigen by enzyme-linked immunosorbent assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,315087006,Chlamydia trachomatis L2 antibody level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,315094009,Chlamydia antibody level (procedure) [315094009],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,315095005,Chlamydia group complement fixation test (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,315099004,Chlamydia trachomatis immunoglobulin G level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,390784004,Endocervical chlamydia swab (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,390785003,Urethral chlamydia swab (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,395195000,Chlamydia trachomatis immunoglobulin A level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,398452009,Chlamydia trachomatis nucleic acid assay (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,399193003,Polymerase chain reaction for Chlamydia trachomatis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,407707008,Chlamydia deoxyribonucleic acid detection (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,442487003,Screening for Chlamydia trachomatis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Procedures Indicating Sexual Activity,2.16.840.1.113883.3.464.1004.2482,707982002,Taking throat swab for chlamydia (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,female,female,administrative-gender,2.16.840.1.113883.4.642.4.2
+[Direct Reference],,76689-9,Sex assigned at birth,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA2-8,Male,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,LA3-6,Female,LOINC,2.16.840.1.113883.6.1
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50
+[Direct Reference],,female-typical,Apply female-typical setting or reference range,SexParameterForClinicalUse,2.16.840.1.113883.4.642.4.2038

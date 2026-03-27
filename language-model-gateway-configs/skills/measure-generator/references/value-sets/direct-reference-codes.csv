@@ -1,0 +1,537 @@
+Measure ID,Measure Name,Code,Definition,Code System,Code System OID,Code System Version
+AAB,Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+AAP,Adults' Access to Preventive/Ambulatory Health Services,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+ACP,Advance Care Planning,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+ACP,Advance Care Planning,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+ADD-E,Follow-Up Care for Children Prescribed ADHD Medication,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+AIS-E,Adult Immunization Status,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AIS-E,Adult Immunization Status,115,"tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine, adsorbed",CVX,2.16.840.1.113883.12.292,2024.09.03
+AIS-E,Adult Immunization Status,187,zoster vaccine recombinant,CVX,2.16.840.1.113883.12.292,2024.09.03
+AIS-E,Adult Immunization Status,189,"Hepatitis B vaccine (recombinant), CpG adjuvanted",CVX,2.16.840.1.113883.12.292,2024.09.03
+AIS-E,Adult Immunization Status,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AIS-E,Adult Immunization Status,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AIS-E,Adult Immunization Status,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AIS-E,Adult Immunization Status,3E0234Z,"[3E0234Z] Introduction of Serum, Toxoid and Vaccine into Muscle, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4,2025.1.24AA
+AIS-E,Adult Immunization Status,428321000124101,Anaphylaxis caused by vaccine product containing Hepatitis B virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+AIS-E,Adult Immunization Status,471141000124102,Anaphylaxis caused by vaccine product containing Streptococcus pneumoniae antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+AIS-E,Adult Immunization Status,471361000124100,Anaphylaxis caused by vaccine product containing Influenza virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+AMR,Asthma Medication Ratio,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+AMR,Asthma Medication Ratio,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AMR,Asthma Medication Ratio,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AMR,Asthma Medication Ratio,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+AMR,Asthma Medication Ratio,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+APM-E,Metabolic Monitoring for Children and Adolescents on Antipsychotics,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+APP,Use of First-Line Psychosocial Care for Children and Adolescents on Antipsychotics,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,Z71.41,[Z71.41] Alcohol abuse counseling and surveillance of alcoholic,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,75624-7,Total score [AUDIT],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,75626-2,Total score [AUDIT-C],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,75889-6,How often have you had four or more drinks in one day during the past year [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,88037-7,How often have you had five or more drinks in one day during the past year [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+ASF-E,Unhealthy Alcohol Use Screening and Follow-Up,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+AXR,Antibiotic Utilization for Respiratory Conditions,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+BCS-E,Breast Cancer Screening,female,female,administrative-gender,2.16.840.1.113883.4.642.4.2,N/A
+BCS-E,Breast Cancer Screening,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BCS-E,Breast Cancer Screening,50,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+BCS-E,Breast Cancer Screening,19318,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+BCS-E,Breast Cancer Screening,LT,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+BCS-E,Breast Cancer Screening,RT,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+BCS-E,Breast Cancer Screening,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BCS-E,Breast Cancer Screening,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BCS-E,Breast Cancer Screening,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BCS-E,Breast Cancer Screening,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+BCS-E,Breast Cancer Screening,76689-9,Sex assigned at birth,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+BCS-E,Breast Cancer Screening,LA3-6,Female,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+BCS-E,Breast Cancer Screening,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+BCS-E,Breast Cancer Screening,female-typical,Apply female-typical setting or reference range,SexParameterForClinicalUse,2.16.840.1.113883.4.642.4.2038,N/A
+BCS-E,Breast Cancer Screening,7771000,Left (qualifier value),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+BCS-E,Breast Cancer Screening,24028007,Right (qualifier value),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+BCS-E,Breast Cancer Screening,51440002,Right and left (qualifier value),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+BPC-E,Blood Pressure Control for Patients With Hypertension,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+BPC-E,Blood Pressure Control for Patients With Hypertension,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+BPC-E,Blood Pressure Control for Patients With Hypertension,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+BPC-E,Blood Pressure Control for Patients With Hypertension,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BPC-E,Blood Pressure Control for Patients With Hypertension,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BPC-E,Blood Pressure Control for Patients With Hypertension,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+BPC-E,Blood Pressure Control for Patients With Hypertension,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+BPC-E,Blood Pressure Control for Patients With Hypertension,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+BPC-E,Blood Pressure Control for Patients With Hypertension,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+BPD,Blood Pressure Control for Patients With Diabetes,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+BPD,Blood Pressure Control for Patients With Diabetes,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+BPD,Blood Pressure Control for Patients With Diabetes,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+BPD,Blood Pressure Control for Patients With Diabetes,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+BPD,Blood Pressure Control for Patients With Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CBP,Controlling High Blood Pressure,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CBP,Controlling High Blood Pressure,3077F,"Most recent systolic blood pressure greater than or equal to 140 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+CBP,Controlling High Blood Pressure,3080F,"Most recent diastolic blood pressure greater than or equal to 90 mm Hg (HTN, CKD, CAD) (DM)",CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+CBP,Controlling High Blood Pressure,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CBP,Controlling High Blood Pressure,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CBP,Controlling High Blood Pressure,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CBP,Controlling High Blood Pressure,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+CBP,Controlling High Blood Pressure,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+CBP,Controlling High Blood Pressure,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CCS-E,Cervical Cancer Screening,female,female,administrative-gender,2.16.840.1.113883.4.642.4.2,N/A
+CCS-E,Cervical Cancer Screening,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CCS-E,Cervical Cancer Screening,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CCS-E,Cervical Cancer Screening,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CCS-E,Cervical Cancer Screening,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CCS-E,Cervical Cancer Screening,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+CCS-E,Cervical Cancer Screening,76689-9,Sex assigned at birth,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CCS-E,Cervical Cancer Screening,LA2-8,Male,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CCS-E,Cervical Cancer Screening,LA3-6,Female,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CCS-E,Cervical Cancer Screening,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CCS-E,Cervical Cancer Screening,female-typical,Apply female-typical setting or reference range,SexParameterForClinicalUse,2.16.840.1.113883.4.642.4.2038,N/A
+CCS-E,Cervical Cancer Screening,718591004,High risk human papillomavirus detected by cytology (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CHL,Chlamydia Screening,female,female,administrative-gender,2.16.840.1.113883.4.642.4.2,N/A
+CHL,Chlamydia Screening,76689-9,Sex assigned at birth,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CHL,Chlamydia Screening,LA2-8,Male,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CHL,Chlamydia Screening,LA3-6,Female,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+CHL,Chlamydia Screening,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CHL,Chlamydia Screening,female-typical,Apply female-typical setting or reference range,SexParameterForClinicalUse,2.16.840.1.113883.4.642.4.2038,N/A
+CIS-E,Childhood Immunization Status,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+CIS-E,Childhood Immunization Status,119,"rotavirus, live, monovalent vaccine",CVX,2.16.840.1.113883.12.292,2024.09.03
+CIS-E,Childhood Immunization Status,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CIS-E,Childhood Immunization Status,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CIS-E,Childhood Immunization Status,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+CIS-E,Childhood Immunization Status,3E0234Z,"[3E0234Z] Introduction of Serum, Toxoid and Vaccine into Muscle, Percutaneous Approach",ICD10PCS,2.16.840.1.113883.6.4,2025.1.24AA
+CIS-E,Childhood Immunization Status,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CIS-E,Childhood Immunization Status,428321000124101,Anaphylaxis caused by vaccine product containing Hepatitis B virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,428331000124103,Anaphylaxis caused by rotavirus vaccine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,433621000124101,Anaphylaxis caused by vaccine product containing only Haemophilus influenzae type b antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471141000124102,Anaphylaxis caused by vaccine product containing Streptococcus pneumoniae antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471311000124103,Anaphylaxis caused by vaccine product containing Hepatitis A virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471321000124106,Anaphylaxis caused by vaccine product containing human poliovirus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471331000124109,Anaphylaxis caused by vaccine product containing Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471341000124104,Anaphylaxis caused by vaccine containing Human alphaherpesvirus 3 antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+CIS-E,Childhood Immunization Status,471361000124100,Anaphylaxis caused by vaccine product containing Influenza virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+COL-E,Colorectal Cancer Screening,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+COL-E,Colorectal Cancer Screening,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+COL-E,Colorectal Cancer Screening,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+COL-E,Colorectal Cancer Screening,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+COL-E,Colorectal Cancer Screening,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+COL-E,Colorectal Cancer Screening,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+COL-E,Colorectal Cancer Screening,708699002,Colorectal cancer detected by DNA-based stool screening (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+COL-E,Colorectal Cancer Screening,841000119107,History of flexible sigmoidoscopy (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+COL-E,Colorectal Cancer Screening,851000119109,History of colonoscopy (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+COL-E,Colorectal Cancer Screening,119771000119101,History of total colectomy (situation),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+COU,Risk of Continued Opioid Use,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+COU,Risk of Continued Opioid Use,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CRE,Cardiac Rehabilitation,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+CRE,Cardiac Rehabilitation,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+CWP,Appropriate Testing for Pharyngitis,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DAE,Use of High-Risk Medications in Older Adults,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+DAE,Use of High-Risk Medications in Older Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DBO,Deprescribing of Benzodiazepines in Older Adults,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+DBO,Deprescribing of Benzodiazepines in Older Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+DDE,Potentially Harmful Drug-Disease Interactions in Older Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DMH,Diagnosed Mental Health Disorders,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DMS-E,Utilization of the PHQ-9 to Monitor Depression Symptoms for Adolescents and Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DRR-E,Depression Remission or Response for Adolescents and Adults,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DRR-E,Depression Remission or Response for Adolescents and Adults,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DRR-E,Depression Remission or Response for Adolescents and Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,Z71.82,[Z71.82] Exercise counseling,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,48544-1,Geriatric depression scale (GDS) total,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,48545-8,Geriatric depression scale (GDS) short version total,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,55758-7,Patient Health Questionnaire 2 item (PHQ-2) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,71777-7,Total score [M3],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,71965-8,PROMIS-29 Depression score T-score,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,89205-9,Center for Epidemiologic Studies Depression Scale-Revised total score [CESD-R],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,89208-3,Beck Depression Inventory Fast Screen total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,89209-1,Beck Depression Inventory II total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,90221-3,Total score [CUDOS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,90853-3,Final score [DUKE-AD],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,99046-5,Total score [EPDS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+DSF-E,Depression Screening and Follow-Up for Adolescents and Adults,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+DSU,Diagnosed Substance Use Disorders,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+EDH,Emergency Department Visits for Hypoglycemia in Older Adults With Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+EDU,Emergency Department Utilization,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+EED,Eye Exam for Patients With Diabetes,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+EED,Eye Exam for Patients With Diabetes,50,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+EED,Eye Exam for Patients With Diabetes,92229,,CPT,2.16.840.1.113883.6.12,2025.3.24AB
+EED,Eye Exam for Patients With Diabetes,3072F,Low risk for retinopathy (no evidence of retinopathy in the prior year) (DM),CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+EED,Eye Exam for Patients With Diabetes,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+EED,Eye Exam for Patients With Diabetes,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+EED,Eye Exam for Patients With Diabetes,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+EED,Eye Exam for Patients With Diabetes,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+EED,Eye Exam for Patients With Diabetes,08T0XZZ,"[08T0XZZ] Resection of Right Eye, External Approach",ICD10PCS,2.16.840.1.113883.6.4,2025.1.24AA
+EED,Eye Exam for Patients With Diabetes,08T1XZZ,"[08T1XZZ] Resection of Left Eye, External Approach",ICD10PCS,2.16.840.1.113883.6.4,2025.1.24AA
+EED,Eye Exam for Patients With Diabetes,105914-6,Eye Diabetic retinopathy screening Autonomous artificial intelligence,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+EED,Eye Exam for Patients With Diabetes,71490-7,Left eye Diabetic retinopathy severity level by Ophthalmoscopy,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+EED,Eye Exam for Patients With Diabetes,71491-5,Right eye Diabetic retinopathy severity level by Ophthalmoscopy,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+EED,Eye Exam for Patients With Diabetes,LA18643-9,No apparent retinopathy,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+EED,Eye Exam for Patients With Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+EED,Eye Exam for Patients With Diabetes,15665641000119103,Anophthalmos of bilateral eyes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,J40,"[J40] Bronchitis, not specified as acute or chronic",ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,Z51.89,[Z51.89] Encounter for other specified aftercare,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,24,Ambulatory Surgical Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FMC,Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+FUA,Follow-Up After Emergency Department Visit for Substance Use,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUA,Follow-Up After Emergency Department Visit for Substance Use,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUA,Follow-Up After Emergency Department Visit for Substance Use,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUA,Follow-Up After Emergency Department Visit for Substance Use,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUA,Follow-Up After Emergency Department Visit for Substance Use,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+FUA,Follow-Up After Emergency Department Visit for Substance Use,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUA,Follow-Up After Emergency Department Visit for Substance Use,55,Residential Substance Abuse Treatment Facility,POS,2.16.840.1.113883.6.50,2024.05.02
+FUA,Follow-Up After Emergency Department Visit for Substance Use,56,Psychiatric Residential Treatment Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUA,Follow-Up After Emergency Department Visit for Substance Use,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+FUH,Follow-Up After Hospitalization for Mental Illness,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUH,Follow-Up After Hospitalization for Mental Illness,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUH,Follow-Up After Hospitalization for Mental Illness,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUH,Follow-Up After Hospitalization for Mental Illness,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUH,Follow-Up After Hospitalization for Mental Illness,24,Ambulatory Surgical Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUH,Follow-Up After Hospitalization for Mental Illness,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+FUH,Follow-Up After Hospitalization for Mental Illness,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUH,Follow-Up After Hospitalization for Mental Illness,56,Psychiatric Residential Treatment Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUI,Follow-Up After High-Intensity Care for Substance Use Disorder,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,24,Ambulatory Surgical Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+FUM,Follow-Up After Emergency Department Visit for Mental Illness,56,Psychiatric Residential Treatment Center,POS,2.16.840.1.113883.6.50,2024.05.02
+GSD,Glycemic Status Assessment for Patients With Diabetes,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+GSD,Glycemic Status Assessment for Patients With Diabetes,3046F,Most recent hemoglobin A1c level greater than 9.0% (DM),CPT-CAT-II,2.16.840.1.113883.6.12,2025.3.24AB
+GSD,Glycemic Status Assessment for Patients With Diabetes,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+GSD,Glycemic Status Assessment for Patients With Diabetes,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+GSD,Glycemic Status Assessment for Patients With Diabetes,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+GSD,Glycemic Status Assessment for Patients With Diabetes,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+GSD,Glycemic Status Assessment for Patients With Diabetes,97506-0,Glucose management indicator,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+GSD,Glycemic Status Assessment for Patients With Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+HDO,Use of Opioids at High Dosage,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+HDO,Use of Opioids at High Dosage,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+IET,Initiation and Engagement of Substance Use Disorder Treatment,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IET,Initiation and Engagement of Substance Use Disorder Treatment,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IET,Initiation and Engagement of Substance Use Disorder Treatment,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IET,Initiation and Engagement of Substance Use Disorder Treatment,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IET,Initiation and Engagement of Substance Use Disorder Treatment,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+IET,Initiation and Engagement of Substance Use Disorder Treatment,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+IET,Initiation and Engagement of Substance Use Disorder Treatment,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+IMA-E,Immunizations for Adolescents,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+IMA-E,Immunizations for Adolescents,115,"tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine, adsorbed",CVX,2.16.840.1.113883.12.292,2024.09.03
+IMA-E,Immunizations for Adolescents,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IMA-E,Immunizations for Adolescents,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IMA-E,Immunizations for Adolescents,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+IMA-E,Immunizations for Adolescents,428241000124101,Anaphylaxis caused by vaccine product containing Human papillomavirus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+IMA-E,Immunizations for Adolescents,428301000124106,Anaphylaxis caused by vaccine product containing only Neisseria meningitidis antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+KED,Kidney Health Evaluation for Patients With Diabetes,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+KED,Kidney Health Evaluation for Patients With Diabetes,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+KED,Kidney Health Evaluation for Patients With Diabetes,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+KED,Kidney Health Evaluation for Patients With Diabetes,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+KED,Kidney Health Evaluation for Patients With Diabetes,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+KED,Kidney Health Evaluation for Patients With Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+LBP,Use of Imaging for Low Back Pain,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+LBP,Use of Imaging for Low Back Pain,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+OMW,Osteoporosis Management in Women Who Had a Fracture,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+OMW,Osteoporosis Management in Women Who Had a Fracture,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+OSW,Osteoporosis Screening in Older Women,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+OSW,Osteoporosis Screening in Older Women,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PBH,Persistence of Beta-Blocker Treatment After a Heart Attack,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PDS-E,Postpartum Depression Screening and Follow-Up,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PDS-E,Postpartum Depression Screening and Follow-Up,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PDS-E,Postpartum Depression Screening and Follow-Up,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PDS-E,Postpartum Depression Screening and Follow-Up,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PDS-E,Postpartum Depression Screening and Follow-Up,Z71.82,[Z71.82] Exercise counseling,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,55758-7,Patient Health Questionnaire 2 item (PHQ-2) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,71777-7,Total score [M3],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,71965-8,PROMIS-29 Depression score T-score,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,89205-9,Center for Epidemiologic Studies Depression Scale-Revised total score [CESD-R],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,89208-3,Beck Depression Inventory Fast Screen total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,89209-1,Beck Depression Inventory II total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,90221-3,Total score [CUDOS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,90853-3,Final score [DUKE-AD],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,99046-5,Total score [EPDS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PDS-E,Postpartum Depression Screening and Follow-Up,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PND-E,Prenatal Depression Screening and Follow-Up,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PND-E,Prenatal Depression Screening and Follow-Up,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PND-E,Prenatal Depression Screening and Follow-Up,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PND-E,Prenatal Depression Screening and Follow-Up,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PND-E,Prenatal Depression Screening and Follow-Up,Z3A.49,[Z3A.49] Greater than 42 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,Z71.82,[Z71.82] Exercise counseling,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,44261-6,Patient Health Questionnaire 9 item (PHQ-9) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,55758-7,Patient Health Questionnaire 2 item (PHQ-2) total score [Reported],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,71777-7,Total score [M3],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,71965-8,PROMIS-29 Depression score T-score,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,89204-2,Patient Health Questionnaire-9: Modified for Teens total score [Reported.PHQ.Teen],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,89205-9,Center for Epidemiologic Studies Depression Scale-Revised total score [CESD-R],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,89208-3,Beck Depression Inventory Fast Screen total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,89209-1,Beck Depression Inventory II total score [BDI],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,90221-3,Total score [CUDOS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,90853-3,Final score [DUKE-AD],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,99046-5,Total score [EPDS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+PND-E,Prenatal Depression Screening and Follow-Up,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PND-E,Prenatal Depression Screening and Follow-Up,412726003,Length of gestation at birth (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+POD,Pharmacotherapy for Opioid Use Disorder,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+POD,Pharmacotherapy for Opioid Use Disorder,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+POD,Pharmacotherapy for Opioid Use Disorder,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+POD,Pharmacotherapy for Opioid Use Disorder,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+POD,Pharmacotherapy for Opioid Use Disorder,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PPC,Prenatal and Postpartum Care,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PPC,Prenatal and Postpartum Care,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PPC,Prenatal and Postpartum Care,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PPC,Prenatal and Postpartum Care,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PPC,Prenatal and Postpartum Care,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+PRS-E,Prenatal Immunization Status,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+PRS-E,Prenatal Immunization Status,115,"tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine, adsorbed",CVX,2.16.840.1.113883.12.292,2024.09.03
+PRS-E,Prenatal Immunization Status,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PRS-E,Prenatal Immunization Status,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PRS-E,Prenatal Immunization Status,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+PRS-E,Prenatal Immunization Status,Z3A.49,[Z3A.49] Greater than 42 weeks gestation of pregnancy,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+PRS-E,Prenatal Immunization Status,412726003,Length of gestation at birth (observable entity),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+PRS-E,Prenatal Immunization Status,471361000124100,Anaphylaxis caused by vaccine product containing Influenza virus antigen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96,2024.09.24AA
+PSA,Non-Recommended PSA-Based Screening in Older Men,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+RDM,Race/Ethnicity Diversity of Membership,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+RDM,Race/Ethnicity Diversity of Membership,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+RDM,Race/Ethnicity Diversity of Membership,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+RDM,Race/Ethnicity Diversity of Membership,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,J2798,"Injection, risperidone, (perseris), 0.5 mg (J2798)",HCPCS,2.16.840.1.113883.6.285,2025.1.24AB
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+SAA,Adherence to Antipsychotic Medications for Individuals With Schizophrenia,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+SMC,Cardiovascular Monitoring for People With Cardiovascular Disease and Schizophrenia,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+SMD,Diabetes Monitoring for People With Diabetes and Schizophrenia,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+SNS-E,Social Need Screening and Intervention,101351-5,"Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living during assessment period [CMS Assessment]",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,71802-3,Housing status,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,88122-7,Within the past 12 months we worried whether our food would run out before we got money to buy more [U.S. FSS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,88123-5,Within the past 12 months the food we bought just didn't last and we didn't have money to get more [U.S. FSS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,88124-3,Food insecurity risk [HVS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,89569-8,Access to transportation/mobility status [CUBS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,92358-1,Current level of confidence I can use public transportation [PROMIS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93030-5,"Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93031-3,Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93033-9,Are you worried about losing your housing [PRAPARE],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93668-2,Did you or others you live with eat smaller meals or skip meals because you didn't have money for food in the past 2 months [WellRx],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93669-0,Are you homeless or worried that you might be in the future [WellRx],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,93671-6,Do you have trouble finding or paying for transportation [WellRx],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,95251-5,"In the last 12 months, did you ever eat less than you felt you should because there wasn't enough money for food [U.S. FSS]",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,95264-8,Food security status [U.S. FSS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,95399-2,Within the past 12 months the food we bought just didn't last and we didn't have money to get more Caregiver [U.S. FSS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,95400-8,Within the past 12 months we worried whether our food would run out before we got money to buy more Caregiver [U.S. FSS],LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,96434-6,Always has enough food for family Caregiver,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,96441-1,At risk of becoming homeless Caregiver,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,96778-6,Problems with place where you live,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,98976-4,Behind on rent or mortgage in past 12 months,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,98977-2,Number of residential moves in past 12 months,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,98978-0,Homeless in past 12 months,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,99134-9,You or your families' health is affected by environmental conditions at home,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,99135-6,Environmental conditions in the home that affect you or your families' health,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,99550-6,Worried about housing stability in next 2 months,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,99553-0,Went without health care due to lack of transportation in last 12 months,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,99594-4,Delayed medical care due to distance or lack of transportation,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA19952-3,At risk,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA28397-0,Often true,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA28580-1,Mold,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA29232-8,"My transportation is available and reliable, but limited and/or inconvenient; drivers are licensed and minimally insured",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA29233-6,"My transportation is available, but unreliable, unpredictable, unaffordable; may have car but no insurance, license, etc.",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA29234-4,"I have no access to transportation, public or private; may have car that is inoperable",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30024-6,I am not at all confident,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30026-1,I am a little confident,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30027-9,I am somewhat confident,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30125-1,Food,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30133-5,"Yes, it has kept me from medical appointments or from getting my medications",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30134-3,"Yes, it has kept me from non-medical meetings, appointments, work, or from getting things that I need",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30190-5,"I do not have housing (staying with others, in a hotel, in a shelter, living outside on the street, on a beach, in a car, or in a park)",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30985-8,Low food security,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA30986-6,Very low food security,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31994-9,"I have a place to live today, but I am worried about losing it in the future",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31995-6,"I do not have a steady place to live (I am temporarily staying with others, in a hotel, in a shelter, living outside on the street, on a beach, in a car, abandoned building, bus or train station, or in a park)",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31996-4,"Pests such as bugs, ants, or mice",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31997-2,Lead paint or pipes,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31998-0,Lack of heat,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA31999-8,Oven or stove not working,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32000-4,Smoke detectors missing or not working,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32001-2,Water leaks,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32691-0,Bug infestation,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32693-6,Lead paint/pipes,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32694-4,Inadequate heat,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32695-1,Non-functioning oven/stove,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32696-9,No or non-working smoke detectors,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA32-8,No,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA33093-8,"Yes, it has kept me from medical appointments or getting medications",LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA33-6,Yes,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SNS-E,Social Need Screening and Intervention,LA6729-3,Sometimes true,LOINC,2.16.840.1.113883.6.1,2.78.24AA
+SPC,Statin Therapy for Patients with Cardiovascular Disease,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+SPC,Statin Therapy for Patients with Cardiovascular Disease,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+SPD,Statin Therapy for Patients with Diabetes,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+SPD,Statin Therapy for Patients with Diabetes,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,23,Emergency Room - Hospital,POS,2.16.840.1.113883.6.50,2024.05.02
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,52,Psychiatric Facility-Partial Hospitalization,POS,2.16.840.1.113883.6.50,2024.05.02
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,53,Community Mental Health Center,POS,2.16.840.1.113883.6.50,2024.05.02
+SSD,Diabetes Screening for People With Schizophrenia or Bipolar Disorder Who Are Using Antipsychotic Medications,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+URI,Appropriate Treatment for Upper Respiratory Infection,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+W30,Well-Child Visits in the First 30 Months of Life,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+W30,Well-Child Visits in the First 30 Months of Life,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+W30,Well-Child Visits in the First 30 Months of Life,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+W30,Well-Child Visits in the First 30 Months of Life,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+W30,Well-Child Visits in the First 30 Months of Life,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,Z71.3,[Z71.3] Dietary counseling and surveillance,ICD10CM,2.16.840.1.113883.6.90,2025.1.24AA
+WCC,Weight Assessment and Counseling for Nutrition and Physical Activity for Children/Adolescents,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02
+WCV,Child and Adolescent Well-Care Visits,1002-5,American Indian or Alaska Native,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2028-9,Asian,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2054-5,Black or African American,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2076-8,Native Hawaiian or Other Pacific Islander,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2106-3,White,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2135-2,Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,2186-5,Not Hispanic or Latino,CDC Race and Ethnicity,2.16.840.1.113883.6.238,1.3
+WCV,Child and Adolescent Well-Care Visits,ASKU,asked but unknown [ASKU] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+WCV,Child and Adolescent Well-Care Visits,OTH,other [OTH] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+WCV,Child and Adolescent Well-Care Visits,UNK,unknown [UNK] (NullFlavor),HL7 v3.0,2.16.840.1.113883.1.9,1451-20191215
+WCV,Child and Adolescent Well-Care Visits,81,Independent Laboratory,POS,2.16.840.1.113883.6.50,2024.05.02

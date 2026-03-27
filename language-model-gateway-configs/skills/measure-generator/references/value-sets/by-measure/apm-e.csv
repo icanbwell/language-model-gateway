@@ -1,0 +1,224 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,82465,,CPT,2.16.840.1.113883.6.12
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,83718,,CPT,2.16.840.1.113883.6.12
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,83722,,CPT,2.16.840.1.113883.6.12
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,84478,,CPT,2.16.840.1.113883.6.12
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,2085-9,Cholesterol in HDL [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,2093-3,Cholesterol [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,2571-8,Triglyceride [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,3043-7,Triglyceride [Mass/volume] in Blood,LOINC,2.16.840.1.113883.6.1
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,9830-1,Cholesterol.total/Cholesterol in HDL [Mass Ratio] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,14740000,Triglycerides measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,28036006,High density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,77068002,Cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104583003,High density lipoprotein/total cholesterol ratio measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104584009,Intermediate density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104586006,Cholesterol/triglyceride ratio measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104784006,"Lipids, triglycerides measurement (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104990004,Triglyceride and ester in high density lipoprotein measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,104991000,Triglyceride and ester in intermediate density lipoprotein measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,121868005,Total cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,166832000,Serum high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,166838001,Serum fasting high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,166839009,Serum random high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,166849007,Serum fasting triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,166850007,Serum random triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,167072001,Plasma random high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,167073006,Plasma fasting high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,167082000,Plasma triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,167083005,Plasma random triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,167084004,Plasma fasting triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,271245006,Measurement of serum triglyceride level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,275972003,Cholesterol screening (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,314035000,Plasma high density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,315017003,Fasting cholesterol level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,390956002,Plasma total cholesterol level (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,412808005,Serum total cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,412827004,Fluid sample triglyceride measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Lab Test,2.16.840.1.113883.3.464.1004.1742,443915001,Measurement of total cholesterol and triglycerides (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,166830008,Serum cholesterol above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,166848004,Serum triglycerides above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,259557002,High density lipoprotein triglyceride (substance),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,365793008,Finding of cholesterol level (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,365794002,Finding of serum cholesterol level (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,365795001,Finding of triglyceride level (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,365796000,Finding of serum triglyceride levels (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,439953004,Cholesterol/high density lipoprotein ratio above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,707122004,Triglyceride in high density lipoprotein subfraction 2 (substance),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,707123009,Triglyceride in high density lipoprotein subfraction 3 (substance),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,1162800007,Cholesterol esters within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,1172655006,Low density lipoprotein cholesterol below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,1172656007,Low density lipoprotein cholesterol within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Cholesterol Test Result or Finding,2.16.840.1.113883.3.464.1004.1743,67991000119104,Serum cholesterol outside reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464,1P,,CPT,2.16.840.1.113883.6.12
+CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464,2P,,CPT,2.16.840.1.113883.6.12
+CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464,3P,,CPT,2.16.840.1.113883.6.12
+CPT CAT II Modifier,2.16.840.1.113883.3.464.1004.1464,8P,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,80047,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,80048,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,80050,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,80053,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,80069,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,82947,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,82950,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,82951,,CPT,2.16.840.1.113883.6.12
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,10450-5,Glucose [Mass/volume] in Serum or Plasma --10 hours fasting,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1492-8,Glucose [Mass/volume] in Serum or Plasma --1.5 hours post 0.5 g/kg glucose IV,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1494-4,Glucose [Mass/volume] in Serum or Plasma --1.5 hours post 100 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1496-9,Glucose [Mass/volume] in Serum or Plasma --1.5 hours post 75 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1499-3,Glucose [Mass/volume] in Serum or Plasma --1 hour post 0.5 g/kg glucose IV,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1501-6,Glucose [Mass/volume] in Serum or Plasma --1 hour post 100 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1504-0,Glucose [Mass/volume] in Serum or Plasma --1 hour post 50 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1507-3,Glucose [Mass/volume] in Serum or Plasma --1 hour post 75 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1514-9,Glucose [Mass/volume] in Serum or Plasma --2 hours post 100 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1518-0,Glucose [Mass/volume] in Serum or Plasma --2 hours post 75 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1530-5,Glucose [Mass/volume] in Serum or Plasma --3 hours post 100 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1533-9,Glucose [Mass/volume] in Serum or Plasma --3 hours post 75 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1554-5,Glucose [Mass/volume] in Serum or Plasma --12 hours fasting,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1557-8,Fasting glucose [Mass/volume] in Venous blood,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,1558-6,Fasting glucose [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,17865-7,Glucose [Mass/volume] in Serum or Plasma --8 hours fasting,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,20436-2,Glucose [Mass/volume] in Serum or Plasma --2 hours post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,20437-0,Glucose [Mass/volume] in Serum or Plasma --3 hours post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,20438-8,Glucose [Mass/volume] in Serum or Plasma --1 hour post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,20440-4,Glucose [Mass/volume] in Serum or Plasma --1.5 hours post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,2345-7,Glucose [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,26554-6,Glucose [Mass/volume] in Serum or Plasma --2.5 hours post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,41024-1,Glucose [Mass/volume] in Serum or Plasma --2 hours post 50 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,49134-0,Glucose [Mass/volume] in Blood --2 hours post dose glucose,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,6749-6,Glucose [Mass/volume] in Serum or Plasma --2.5 hours post 75 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,9375-7,Glucose [Mass/volume] in Serum or Plasma --2.5 hours post 100 g glucose PO,LOINC,2.16.840.1.113883.6.1
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,22569008,"Glucose measurement, serum (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,33747003,"Glucose measurement, blood (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,52302001,"Glucose measurement, fasting (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,72191006,"Glucose measurement, plasma (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,73128004,"Glucose measurement, random (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,88856000,"Glucose measurement, 2 hour post prandial (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,104686004,"Glucose measurement, blood, test strip (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167086002,Serum random glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167087006,Serum fasting glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167088001,Serum 2-hr post-prandial glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167095005,Plasma random glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167096006,Plasma fasting glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,167097002,Plasma 2-hr post-prandial glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,250417005,"Glucose concentration, test strip measurement (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,271061004,Random blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,271062006,Fasting blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,271063001,Lunch time blood sugar measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,271064007,Supper time blood sugar measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,271065008,Bedtime blood sugar measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,275810004,BM stix glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,302788006,Post-prandial blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,302789003,Capillary blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,308113006,Self-monitoring of blood glucose (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313474007,60 minute blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313545000,120 minute blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313546004,90 minute blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313624000,150 minute blood glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313626003,60 minute plasma glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313627007,120 minute plasma glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313628002,150 minute plasma glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313630000,60 minute serum glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313631001,120 minute serum glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313697000,90 minute plasma glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313698005,90 minute serum glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,313810002,150 minute serum glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,412928005,Blood glucose series (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,440576000,240 minute plasma glucose measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,443780009,Quantitative measurement of mass concentration of glucose in serum or plasma specimen 120 minutes after 75 gram oral glucose challenge (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,444008003,Quantitative measurement of mass concentration of glucose in serum or plasma specimen 6 hours after glucose challenge (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Lab Test,2.16.840.1.113883.3.464.1004.1751,444127006,Quantitative measurement of mass concentration of glucose in postcalorie fasting serum or plasma specimen (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,166890005,Random blood glucose within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,166891009,Random blood sugar below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,166892002,Random blood sugar above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,166921001,Blood glucose within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,166922008,Blood glucose outside reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,442545002,Random blood glucose outside reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,444780001,Glucose in blood specimen above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,1179458001,Blood glucose below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Glucose Test Result or Finding,2.16.840.1.113883.3.464.1004.1752,1259140002,Blood glucose level unstable (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,83036,,CPT,2.16.840.1.113883.6.12
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,83037,,CPT,2.16.840.1.113883.6.12
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,17855-8,Hemoglobin A1c/Hemoglobin.total in Blood by calculation,LOINC,2.16.840.1.113883.6.1
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,17856-6,Hemoglobin A1c/Hemoglobin.total in Blood by HPLC,LOINC,2.16.840.1.113883.6.1
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,4548-4,Hemoglobin A1c/Hemoglobin.total in Blood,LOINC,2.16.840.1.113883.6.1
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,4549-2,Hemoglobin A1c/Hemoglobin.total in Blood by Electrophoresis,LOINC,2.16.840.1.113883.6.1
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,96595-4,Hemoglobin A1c/Hemoglobin.total in DBS,LOINC,2.16.840.1.113883.6.1
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,43396009,Hemoglobin A1c measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+HbA1c Lab Test,2.16.840.1.113883.3.464.1004.1755,313835008,Hemoglobin A1c measurement aligned to the Diabetes Control and Complications Trial (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,3044F,Most recent hemoglobin A1c (HbA1c) level less than 7.0% (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,3046F,Most recent hemoglobin A1c level greater than 9.0% (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,3051F,Most recent hemoglobin A1c (HbA1c) level greater than or equal to 7.0% and less than 8.0% (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,3052F,Most recent hemoglobin A1c (HbA1c) level greater than or equal to 8.0% and less than or equal to 9.0% (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,165679005,Hemoglobin A1c less than 7 percent indicating good diabetic control (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+HbA1c Test Result or Finding,2.16.840.1.113883.3.464.1004.1756,451061000124104,Hemoglobin A1c greater than nine percent indicating poor diabetic control (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,80061,,CPT,2.16.840.1.113883.6.12
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,83700,,CPT,2.16.840.1.113883.6.12
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,83701,,CPT,2.16.840.1.113883.6.12
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,83704,,CPT,2.16.840.1.113883.6.12
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,83721,,CPT,2.16.840.1.113883.6.12
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,12773-8,Cholesterol in LDL [Units/volume] in Serum or Plasma by Electrophoresis,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,13457-7,Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,18261-8,Cholesterol in LDL [Mass/volume] in Serum or Plasma ultracentrifugate,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,18262-6,Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,2089-1,Cholesterol in LDL [Mass/volume] in Serum or Plasma,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,49132-4,Cholesterol in LDL [Mass/volume] in Serum or Plasma by Electrophoresis,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,55440-2,Cholesterol.in LDL (real) [Mass/volume] in Serum or Plasma by VAP,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,96259-7,Cholesterol in LDL [Mass/volume] in Serum or Plasma by Calculated by Martin-Hopkins,LOINC,2.16.840.1.113883.6.1
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,113079009,Low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,166833005,Serum low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,166840006,Serum fasting low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,166841005,Serum random low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,167074000,Plasma random low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,167075004,Plasma fasting low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Lab Test,2.16.840.1.113883.3.464.1004.1769,314036004,Plasma low density lipoprotein cholesterol measurement (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770,3048F,Most recent LDL-C less than 100 mg/dL (CAD) (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770,3049F,Most recent LDL-C 100-129 mg/dL (CAD) (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+LDL C Test Result or Finding,2.16.840.1.113883.3.464.1004.1770,3050F,Most recent LDL-C greater than or equal to 130 mg/dL (CAD) (DM),CPT-CAT-II,2.16.840.1.113883.6.12
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

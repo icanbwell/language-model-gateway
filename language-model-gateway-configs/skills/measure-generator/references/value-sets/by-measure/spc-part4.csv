@@ -1,0 +1,364 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1197770002,Placental hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220564001,Incomplete induced termination of pregnancy complicated by shock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220586000,Incomplete induced termination of pregnancy complicated by renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220625008,Incomplete induced termination of pregnancy complicated by metabolic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220626009,Incomplete induced termination of pregnancy complicated by genital-pelvic infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220630007,Incomplete induced termination of pregnancy complicated by embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220631006,Incomplete induced termination of pregnancy complicated by delayed or excessive hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220632004,Incomplete induced termination of pregnancy complicated by damage to pelvic organs or tissues (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220641009,Complete induced termination of pregnancy with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220645000,Shock due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220648003,Renal failure due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220651005,Metabolic disease due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220652003,Embolism due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220653008,Excessive hemorrhage due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220656000,Genital-pelvic infection due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1220657009,Damage to pelvic organs and/or tissue due to and following complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1228877003,Amniotic fluid volume below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1230040001,Cornual placenta accreta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1230061008,Premature aging of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236949008,Finding of placental volume (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236950008,Placental volume within reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236951007,Placental volume above reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1236952000,Placental volume below reference range (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237254001,Rupture of marginal sinus of placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237361000,Pressure collapse of lung due to anesthesia during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1237363002,Pressure collapse of lung due to anesthesia during labor and delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1251634006,Excessive retraction of upper uterine segment (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1252649001,Normal retraction of upper uterine segment (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1252747005,Polymorphic eruption of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1258895002,Entanglement and compression of umbilical cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1258896001,Amniotic fluid pulmonary embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1259016008,Rupture of uterus following obstructed labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263928008,Septic shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263929000,Septic shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263942000,Shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263943005,Shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263945003,Postoperative shock following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263946002,Postoperative shock following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263947006,Uremia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263948001,Uremia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263949009,Oliguria following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263950009,Oliguria following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263953006,Renal tubular necrosis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263954000,Renal tubular necrosis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263955004,Acute renal failure following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263956003,Acute renal failure following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1263979002,Sepsis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264020006,Sepsis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264130004,Tetanus following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264131000,Tetanus following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264132007,Salpingitis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264133002,Salpingitis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264134008,Endometritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264135009,Endometritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264136005,Parametritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264137001,Parametritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264138006,Cerebral anoxia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264139003,Cerebral anoxia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264140001,Afibrinogenemia following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264141002,Afibrinogenemia following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264142009,Damage to large intestine following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264143004,Damage to large intestine following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264144005,Damage to vagina following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264145006,Damage to vagina following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264146007,Damage to uterus following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264147003,Damage to uterus following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264148008,Damage to cervix following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264149000,Damage to cervix following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264150000,Damage to urinary bladder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264151001,Damage to urinary bladder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264152008,Pelvic peritonitis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264153003,Pelvic peritonitis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264154009,Metabolic disorder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264155005,Metabolic disorder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264156006,Electrolyte imbalance following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264157002,Electrolyte imbalance following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264158007,Disorder following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264159004,Disorder following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264160009,Salpingo-oophoritis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264161008,Salpingo-oophoritis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264232003,Defibrination syndrome following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264233008,Defibrination syndrome following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264234002,Intravascular hemolysis following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264235001,Intravascular hemolysis following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264236000,Urinary tract infection following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264237009,Urinary tract infection following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264238004,Damage to broad ligament following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264239007,Damage to broad ligament following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264240009,Damage to periurethral tissue following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264241008,Damage to periurethral tissue following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264255000,Complete induced termination of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264269000,Chorioamnionitis caused by Bacteria (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264270004,Chorioamnionitis caused by virus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264271000,Chorioamnionitis caused by fungus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264304005,Acute necrosis of liver following molar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1264435003,Acute necrosis of liver following ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1268535008,Obstructed labor due to interlocked twins (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269074003,Maternal disorder during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269075002,Maternal disorder during labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269247005,Infection of female genital tract due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269249008,Infection of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269255003,Damage to organ of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269256002,Damage to tissue of pelvis due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1269273000,Malignancy diagnosed during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1287713006,Iron deficiency anemia during maternal intrapartum period (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290152008,Singleton pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290936006,Plain X-ray pelvimetry normal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1290937002,Plain X-ray pelvimetry abnormal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1296685008,Nausea and vomiting in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1300203003,Pregnancy resulting from natural conception (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1303255001,Medium risk pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1303872001,Fetal twin anemia-polycythemia sequence (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1335934009,Cesarean scar pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1339000004,Group B streptococcus carrier in mother during childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1340042007,Chronic intervillositis of unknown etiology (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1340166003,Squatting during delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,171000119107,"Maternal obesity complicating pregnancy, childbirth and the puerperium, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,521000119104,"Acute cystitis in pregnancy, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,541000119105,"Hypertension complicating pregnancy, childbirth and the puerperium, antepartum (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1031000119109,Insufficient prenatal care (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1621000119101,Chlamydia trachomatis infection in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,6251000119101,Induced termination of pregnancy in first trimester (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,6261000119104,Induced termination of pregnancy in second trimester (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,9111000119104,Musculoskeletal problem in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,9121000119106,Low back pain in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10211000132109,Perinatal depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10231000132102,In-vitro fertilization pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,12271000132101,Maternal infection caused by Streptococcus agalactiae (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16101000119107,Incomplete induced termination of pregnancy with complication (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16111000119105,Incomplete spontaneous abortion due to hemorrhage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16271000119108,Pyelonephritis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,18491000119109,Psychological disorder during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,22281000119101,Post-term pregnancy of 40 to 42 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,23431000119106,Rupture of uterus during labor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,31041000119106,Obstructed labor due to deep transverse arrest and persistent occipitoposterior position (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,31801000146106,Pre-existing maternal disease complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,32801000119106,Infectious disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,35381000119101,Quadruplet pregnancy with loss of one or more fetuses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,36801000119105,Continuing triplet pregnancy after spontaneous abortion of one or more fetuses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,38451000119105,Failed attempted vaginal birth after previous cesarean section (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39101000119109,Pregnancy with isoimmunization from irregular blood group incompatibility (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39121000119100,Pelvic mass in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39341000119109,Infection of surgical incision wound following cesarean section (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,39791000119102,Disorder of breast during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,40691000119104,Infectious disease of mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,40801000119106,Gestational diabetes mellitus complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,71151000119105,Umbilical cord three times around neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72161000119100,Antiphospholipid syndrome in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72171000119106,Heart murmur during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72271000119100,Hyperthyroidism in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72291000119104,Cardiac arrhythmia during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72301000119103,Asthma in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72321000119107,Sickle cell trait in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,72331000119105,Thalassemia in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,82771000119102,Hypertension complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,88201000119101,Failure of cervical dilation due to primary uterine inertia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94611000119105,Gallbladder calculus during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94631000119100,Depressive disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94641000119109,Anxiety in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,94821000119104,First trimester Down screening blood test abnormal (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,97101000119105,Viral disease of mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100801000119107,Maternal tobacco use in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100841000119109,Previous bariatric surgery complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,100941000119100,Epilepsy in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,104011000119109,Genital herpes simplex in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,106281000119103,Pre-existing diabetes mellitus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,110081000119109,Bacterial vaginosis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,110091000119107,Candidiasis of vagina in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,114881000119108,Maternal gonorrhea during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,117591000119103,Urinary frequency during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,117611000119108,Urinary urgency during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,118781000119108,Pre-existing hypertensive chronic kidney disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,119901000119109,Hemorrhage co-occurrent and due to partial placenta previa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,120001000119107,Group B streptococcus carrier complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,134781000119106,High risk pregnancy due to recurrent miscarriage (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,137701000119106,Antepartum septicemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,151441000119105,Twin live born in hospital by vaginal delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,152231000119106,Pregnancy not yet confirmed (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,433601000124106,Gestation period greater than or equal to 37 weeks (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451891000124103,Tobacco use in mother complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451911000124101,Tobacco smoking in mother complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,451921000124109,Tobacco smoking in mother complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,457811000124103,Normal pregnancy in primigravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,457821000124106,Normal pregnancy in multigravida (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567941000005109,Pregnancy with certain dates (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567961000005108,Antenatal ultrasound scan in first trimester wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,567981000005100,Antenatal ultrasound scan in second trimester wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568011000005108,Antenatal risk assessment wanted (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568141000005106,Pregnancy following cone biopsy of uterine cervix (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568171000005100,Drinker of alcohol before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,568191000005104,Drug misuse before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598071000005103,Stopped smoking in first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598081000005100,Stopped smoking after first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598091000005102,Nicotine user before confirmation of pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598221000005106,Nicotine user during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598241000005101,Stopped using nicotine in first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,598251000005104,Stopped using nicotine after first trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,650991000124104,Victim of intimate partner abuse during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658001000005107,Position of placenta in anterior wall of fundal uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658011000005105,Position of placenta low in anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658021000005104,Position of placenta in posterior wall of fundal uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658031000005101,Position of placenta low in posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658041000005109,Position of placenta in left anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658051000005106,Position of placenta in right anterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658061000005108,Position of placenta in left posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658071000005103,Position of placenta in right posterior wall of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658081000005100,Position of placenta in left side of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658091000005102,Position of placenta in right side of uterus (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,658101000005106,Position of placenta in fundus uteri (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,813541000000100,Pregnancy resulting from assisted conception (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,858901000000108,Pregnancy of unknown location (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,1323351000000104,First trimester bleeding (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10629511000119102,Rhinitis of pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741751000119100,Anemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741871000119101,Alcohol dependence in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10741911000119103,Abnormality of cervix uteri affecting pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10742121000119104,Asthma in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10742471000119108,Previous bariatric surgery in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743001000119103,Anxiety disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743121000119108,Aortic valve disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743651000119105,Inflammation of cervix in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743741000119103,Cardiac arrhythmia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743831000119100,Neoplasm of uterus affecting pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10743881000119104,Suspected fetal abnormality affecting management of mother (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10745231000119102,Cardiac arrest due to administration of anesthesia in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10745291000119103,Malignant neoplastic disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10746341000119109,Acquired immune deficiency syndrome complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749581000119100,Blood coagulation disorder complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749641000119106,Blood coagulation disorder complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749811000119108,Obstetric anesthesia with central nervous system complication in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10749871000119100,Malignant neoplastic disease in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750051000119105,Chlamydia trachomatis infection in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750111000119108,Breast lump in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750161000119106,Cholestasis of pregnancy complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750551000119100,Obesity in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750801000119102,False labor before 37 completed weeks of gestation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750951000119106,Epilepsy in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10750991000119101,Cyst of ovary in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751351000119104,Sepsis due to ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751471000119101,Nutritional deficiency in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751511000119105,Obstructed labor due to incomplete rotation of fetal head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751581000119104,Obstructed labor due to disproportion between fetus and pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751631000119101,Obstructed labor due to abnormality of maternal pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751701000119102,Spontaneous onset of labor between 37 and 39 weeks gestation with planned cesarean section (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10751771000119107,Placental abruption due to afibrinogenemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752251000119103,Galactorrhea in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752641000119102,Eclampsia with pre-existing hypertension in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10752771000119100,Renal failure after ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753101000119102,Heart disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753181000119105,Premature rupture of membranes in full term pregnancy with onset of labor within 24 hours of rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753231000119104,Premature rupture of membranes in full term pregnancy with onset of labor more than 24 hours after rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753281000119103,Premature rupture of membranes in full term pregnancy with onset of labor unknown (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10753491000119101,Gestational diabetes mellitus in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754031000119105,Gonorrhea in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754331000119108,Air embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754701000119100,Genital herpes simplex in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754781000119108,Gallbladder calculus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754881000119104,Diabetes mellitus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10754921000119106,Hyperthyroidism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10755671000119100,Human immunodeficiency virus in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10755951000119102,Heart murmur in mother in childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756101000119107,Group B streptococcus infection in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756261000119102,Physical abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10756301000119105,Physical abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757401000119104,Pre-existing hypertensive heart and chronic kidney disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757441000119102,Pre-existing hypertensive heart disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10757481000119107,Pre-existing hypertensive heart and chronic kidney disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759031000119106,Pre-existing hypertensive heart disease in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759111000119102,Viral hepatitis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759151000119101,Viral hepatitis in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759231000119102,Salpingo-oophoritis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759311000119104,Pulmonary embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759351000119103,Sickle cell anemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759401000119105,Sickle cell trait in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759611000119105,Preterm premature rupture of membranes with onset of labor later than 24 hours after rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759661000119108,Preterm premature rupture of membranes with onset of labor unknown (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759711000119103,Preterm premature rupture of membranes with onset of labor within 24 hours of rupture (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759761000119100,Rubella in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759841000119105,Sexually transmitted infectious disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759881000119100,Tuberculosis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759921000119107,Syphilis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10759961000119102,Viral disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760001000119100,Thyroid disease in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760041000119103,Thyroiditis in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760081000119108,Pyemic and septic embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760131000119108,Pyemic and septic embolism in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760221000119101,Uterine prolapse in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760261000119106,Uterine laceration during delivery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760301000119103,Retraction of nipple during lactation (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760341000119101,Retraction of nipple in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760381000119106,Thyroiditis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760421000119102,Psychotic disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760461000119107,Psychotic disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760541000119109,Traumatic injury to vulva during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760581000119104,Pain in round ligament in pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760661000119109,"Triplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760701000119102,"Quadruplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760741000119100,"Quadruplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760781000119105,"Quintuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760821000119100,"Quintuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760861000119105,"Sextuplets, all live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760901000119104,"Sextuplets, some live born (finding)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760941000119102,Psychological abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10760981000119107,Psychological abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761021000119102,Sexual abuse complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761061000119107,Sexual abuse complicating pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761101000119105,Vacuum assisted vaginal delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761141000119107,Preterm labor in second trimester with preterm delivery in second trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761191000119104,Preterm labor in third trimester with preterm delivery in third trimester (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761241000119104,Preterm labor with preterm delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761341000119105,Preterm labor without delivery (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10761391000119102,Tobacco use in mother complicating childbirth (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10805641000119102,Congenital cardiovascular anomaly in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10806241000119108,Thalassemia in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10807061000119103,Liver disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10808861000119105,Maternal distress during childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809061000119106,Malaria in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809101000119109,Hypothyroidism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10809641000119100,Mitral valve disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811121000119102,Major depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811161000119107,Major depressive disorder in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10811201000119102,Mental disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10812041000119103,Urinary tract infection due to incomplete miscarriage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10812131000119108,Malnutrition in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835621000119104,Congenital anomaly of vagina in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835701000119102,Congenital anomaly of vulva in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835781000119105,Amniotic fluid embolism in childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835871000119104,Depressive disorder in mother complicating childbirth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10835971000119109,Anti-A sensitization in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,10836071000119101,Dislocation of symphysis pubis in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,11718971000119100,Diarrhea in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,12275071000119109,Conjoined twin pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,13016151000119101,Constipation during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,15643101000119103,Gastroesophageal reflux disease in pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,15750121000119108,Pre-existing severe obesity in mother complicating pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16316841000119100,Purulent mastitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16320551000119109,Bleeding from female genital tract co-occurrent with pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16468121000119106,Zika virus infection during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16623921000119105,Viral hepatitis C in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698501000119109,Cyst of right ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698541000119106,Cyst of left ovary during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16698581000119101,Cyst of bilateral ovaries during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16833081000119100,Dyspepsia during pregnancy (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836261000119107,Ectopic pregnancy of left ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836351000119100,Ectopic pregnancy of right ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836391000119105,Pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836431000119100,Ruptured tubal pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836571000119103,Ruptured tubal pregnancy of left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836811000119108,Miscarriage of left tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836851000119109,Miscarriage of right tubal ectopic pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16836891000119104,Pregnancy of right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16859701000119109,Chronic hepatitis B during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16862491000119106,Abscess of skin during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,16896421000119107,Prediabetes in mother during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,104758671000119101,Chronic deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,138841771000119103,Chronic candidiasis of vagina during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,159139031000119104,Candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,292834071000119104,Acute deep vein thrombosis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,501661611000119107,Latent genital herpes simplex during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,812500731000119109,Chronic candidal vulvovaginitis during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Pregnancy,2.16.840.1.113883.3.464.1004.1219,894362851000119109,Disease caused by severe acute respiratory syndrome coronavirus 2 during pregnancy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,Z51.5,[Z51.5] Encounter for palliative care,ICD10CM,2.16.840.1.113883.6.90
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50

@@ -1,0 +1,1177 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,A81.00,"[A81.00] Creutzfeldt-Jakob disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,A81.01,[A81.01] Variant Creutzfeldt-Jakob disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,A81.09,[A81.09] Other Creutzfeldt-Jakob disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.0,[C25.0] Malignant neoplasm of head of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.1,[C25.1] Malignant neoplasm of body of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.2,[C25.2] Malignant neoplasm of tail of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.3,[C25.3] Malignant neoplasm of pancreatic duct,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.4,[C25.4] Malignant neoplasm of endocrine pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.7,[C25.7] Malignant neoplasm of other parts of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.8,[C25.8] Malignant neoplasm of overlapping sites of pancreas,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C25.9,"[C25.9] Malignant neoplasm of pancreas, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.0,"[C71.0] Malignant neoplasm of cerebrum, except lobes and ventricles",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.1,[C71.1] Malignant neoplasm of frontal lobe,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.2,[C71.2] Malignant neoplasm of temporal lobe,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.3,[C71.3] Malignant neoplasm of parietal lobe,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.4,[C71.4] Malignant neoplasm of occipital lobe,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.5,[C71.5] Malignant neoplasm of cerebral ventricle,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.6,[C71.6] Malignant neoplasm of cerebellum,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.7,[C71.7] Malignant neoplasm of brain stem,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.8,[C71.8] Malignant neoplasm of overlapping sites of brain,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C71.9,"[C71.9] Malignant neoplasm of brain, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.0,"[C77.0] Secondary and unspecified malignant neoplasm of lymph nodes of head, face and neck",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.1,[C77.1] Secondary and unspecified malignant neoplasm of intrathoracic lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.2,[C77.2] Secondary and unspecified malignant neoplasm of intra-abdominal lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.3,[C77.3] Secondary and unspecified malignant neoplasm of axilla and upper limb lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.4,[C77.4] Secondary and unspecified malignant neoplasm of inguinal and lower limb lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.5,[C77.5] Secondary and unspecified malignant neoplasm of intrapelvic lymph nodes,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.8,[C77.8] Secondary and unspecified malignant neoplasm of lymph nodes of multiple regions,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C77.9,"[C77.9] Secondary and unspecified malignant neoplasm of lymph node, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.00,[C78.00] Secondary malignant neoplasm of unspecified lung,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.01,[C78.01] Secondary malignant neoplasm of right lung,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.02,[C78.02] Secondary malignant neoplasm of left lung,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.1,[C78.1] Secondary malignant neoplasm of mediastinum,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.2,[C78.2] Secondary malignant neoplasm of pleura,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.30,[C78.30] Secondary malignant neoplasm of unspecified respiratory organ,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.39,[C78.39] Secondary malignant neoplasm of other respiratory organs,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.4,[C78.4] Secondary malignant neoplasm of small intestine,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.5,[C78.5] Secondary malignant neoplasm of large intestine and rectum,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.6,[C78.6] Secondary malignant neoplasm of retroperitoneum and peritoneum,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.7,[C78.7] Secondary malignant neoplasm of liver and intrahepatic bile duct,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.80,[C78.80] Secondary malignant neoplasm of unspecified digestive organ,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C78.89,[C78.89] Secondary malignant neoplasm of other digestive organs,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.00,[C79.00] Secondary malignant neoplasm of unspecified kidney and renal pelvis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.01,[C79.01] Secondary malignant neoplasm of right kidney and renal pelvis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.02,[C79.02] Secondary malignant neoplasm of left kidney and renal pelvis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.10,[C79.10] Secondary malignant neoplasm of unspecified urinary organs,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.11,[C79.11] Secondary malignant neoplasm of bladder,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.19,[C79.19] Secondary malignant neoplasm of other urinary organs,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.2,[C79.2] Secondary malignant neoplasm of skin,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.31,[C79.31] Secondary malignant neoplasm of brain,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.32,[C79.32] Secondary malignant neoplasm of cerebral meninges,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.40,[C79.40] Secondary malignant neoplasm of unspecified part of nervous system,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.49,[C79.49] Secondary malignant neoplasm of other parts of nervous system,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.51,[C79.51] Secondary malignant neoplasm of bone,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.52,[C79.52] Secondary malignant neoplasm of bone marrow,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.60,[C79.60] Secondary malignant neoplasm of unspecified ovary,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.61,[C79.61] Secondary malignant neoplasm of right ovary,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.62,[C79.62] Secondary malignant neoplasm of left ovary,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.63,[C79.63] Secondary malignant neoplasm of bilateral ovaries,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.70,[C79.70] Secondary malignant neoplasm of unspecified adrenal gland,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.71,[C79.71] Secondary malignant neoplasm of right adrenal gland,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.72,[C79.72] Secondary malignant neoplasm of left adrenal gland,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.81,[C79.81] Secondary malignant neoplasm of breast,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.82,[C79.82] Secondary malignant neoplasm of genital organs,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.89,[C79.89] Secondary malignant neoplasm of other specified sites,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C79.9,[C79.9] Secondary malignant neoplasm of unspecified site,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C91.00,[C91.00] Acute lymphoblastic leukemia not having achieved remission,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C91.02,"[C91.02] Acute lymphoblastic leukemia, in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C92.00,"[C92.00] Acute myeloblastic leukemia, not having achieved remission",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C92.02,"[C92.02] Acute myeloblastic leukemia, in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.00,"[C93.00] Acute monoblastic/monocytic leukemia, not having achieved remission",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.02,"[C93.02] Acute monoblastic/monocytic leukemia, in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.90,"[C93.90] Monocytic leukemia, unspecified, not having achieved remission",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.92,"[C93.92] Monocytic leukemia, unspecified in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.Z0,"[C93.Z0] Other monocytic leukemia, not having achieved remission",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C93.Z2,"[C93.Z2] Other monocytic leukemia, in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C94.30,[C94.30] Mast cell leukemia not having achieved remission,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,C94.32,"[C94.32] Mast cell leukemia, in relapse",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.50,"[F01.50] Vascular dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.511,"[F01.511] Vascular dementia, unspecified severity, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.518,"[F01.518] Vascular dementia, unspecified severity, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.52,"[F01.52] Vascular dementia, unspecified severity, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.53,"[F01.53] Vascular dementia, unspecified severity, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.54,"[F01.54] Vascular dementia, unspecified severity, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A0,"[F01.A0] Vascular dementia, mild, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A11,"[F01.A11] Vascular dementia, mild, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A18,"[F01.A18] Vascular dementia, mild, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A2,"[F01.A2] Vascular dementia, mild, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A3,"[F01.A3] Vascular dementia, mild, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.A4,"[F01.A4] Vascular dementia, mild, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B0,"[F01.B0] Vascular dementia, moderate, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B11,"[F01.B11] Vascular dementia, moderate, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B18,"[F01.B18] Vascular dementia, moderate, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B2,"[F01.B2] Vascular dementia, moderate, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B3,"[F01.B3] Vascular dementia, moderate, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.B4,"[F01.B4] Vascular dementia, moderate, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C0,"[F01.C0] Vascular dementia, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C11,"[F01.C11] Vascular dementia, severe, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C18,"[F01.C18] Vascular dementia, severe, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C2,"[F01.C2] Vascular dementia, severe, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C3,"[F01.C3] Vascular dementia, severe, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F01.C4,"[F01.C4] Vascular dementia, severe, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.80,"[F02.80] Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.811,"[F02.811] Dementia in other diseases classified elsewhere, unspecified severity, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.818,"[F02.818] Dementia in other diseases classified elsewhere, unspecified severity, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.82,"[F02.82] Dementia in other diseases classified elsewhere, unspecified severity, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.83,"[F02.83] Dementia in other diseases classified elsewhere, unspecified severity, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.84,"[F02.84] Dementia in other diseases classified elsewhere, unspecified severity, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A0,"[F02.A0] Dementia in other diseases classified elsewhere, mild, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A11,"[F02.A11] Dementia in other diseases classified elsewhere, mild, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A18,"[F02.A18] Dementia in other diseases classified elsewhere, mild, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A2,"[F02.A2] Dementia in other diseases classified elsewhere, mild, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A3,"[F02.A3] Dementia in other diseases classified elsewhere, mild, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.A4,"[F02.A4] Dementia in other diseases classified elsewhere, mild, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B0,"[F02.B0] Dementia in other diseases classified elsewhere, moderate, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B11,"[F02.B11] Dementia in other diseases classified elsewhere, moderate, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B18,"[F02.B18] Dementia in other diseases classified elsewhere, moderate, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B2,"[F02.B2] Dementia in other diseases classified elsewhere, moderate, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B3,"[F02.B3] Dementia in other diseases classified elsewhere, moderate, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.B4,"[F02.B4] Dementia in other diseases classified elsewhere, moderate, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C0,"[F02.C0] Dementia in other diseases classified elsewhere, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C11,"[F02.C11] Dementia in other diseases classified elsewhere, severe, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C18,"[F02.C18] Dementia in other diseases classified elsewhere, severe, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C2,"[F02.C2] Dementia in other diseases classified elsewhere, severe, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C3,"[F02.C3] Dementia in other diseases classified elsewhere, severe, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F02.C4,"[F02.C4] Dementia in other diseases classified elsewhere, severe, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.90,"[F03.90] Unspecified dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.911,"[F03.911] Unspecified dementia, unspecified severity, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.918,"[F03.918] Unspecified dementia, unspecified severity, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.92,"[F03.92] Unspecified dementia, unspecified severity, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.93,"[F03.93] Unspecified dementia, unspecified severity, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.94,"[F03.94] Unspecified dementia, unspecified severity, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A0,"[F03.A0] Unspecified dementia, mild, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A11,"[F03.A11] Unspecified dementia, mild, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A18,"[F03.A18] Unspecified dementia, mild, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A2,"[F03.A2] Unspecified dementia, mild, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A3,"[F03.A3] Unspecified dementia, mild, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.A4,"[F03.A4] Unspecified dementia, mild, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B0,"[F03.B0] Unspecified dementia, moderate, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B11,"[F03.B11] Unspecified dementia, moderate, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B18,"[F03.B18] Unspecified dementia, moderate, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B2,"[F03.B2] Unspecified dementia, moderate, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B3,"[F03.B3] Unspecified dementia, moderate, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.B4,"[F03.B4] Unspecified dementia, moderate, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C0,"[F03.C0] Unspecified dementia, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C11,"[F03.C11] Unspecified dementia, severe, with agitation",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C18,"[F03.C18] Unspecified dementia, severe, with other behavioral disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C2,"[F03.C2] Unspecified dementia, severe, with psychotic disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C3,"[F03.C3] Unspecified dementia, severe, with mood disturbance",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F03.C4,"[F03.C4] Unspecified dementia, severe, with anxiety",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F04,[F04] Amnestic disorder due to known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F10.27,[F10.27] Alcohol dependence with alcohol-induced persisting dementia,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F10.96,"[F10.96] Alcohol use, unspecified with alcohol-induced persisting amnestic disorder",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,F10.97,"[F10.97] Alcohol use, unspecified with alcohol-induced persisting dementia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G10,[G10] Huntington's disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G12.21,[G12.21] Amyotrophic lateral sclerosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G20.A1,"[G20.A1] Parkinson's disease without dyskinesia, without mention of fluctuations",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G20.A2,"[G20.A2] Parkinson's disease without dyskinesia, with fluctuations",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G20.B1,"[G20.B1] Parkinson's disease with dyskinesia, without mention of fluctuations",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G20.B2,"[G20.B2] Parkinson's disease with dyskinesia, with fluctuations",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G20.C,"[G20.C] Parkinsonism, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G30.0,[G30.0] Alzheimer's disease with early onset,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G30.1,[G30.1] Alzheimer's disease with late onset,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G30.8,[G30.8] Other Alzheimer's disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G30.9,"[G30.9] Alzheimer's disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G31.01,[G31.01] Pick's disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G31.09,[G31.09] Other frontotemporal neurocognitive disorder,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G31.83,[G31.83] Neurocognitive disorder with Lewy bodies,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,G35,[G35] Multiple sclerosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I09.81,[I09.81] Rheumatic heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I11.0,[I11.0] Hypertensive heart disease with heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I12.0,[I12.0] Hypertensive chronic kidney disease with stage 5 chronic kidney disease or end stage renal disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I13.0,"[I13.0] Hypertensive heart and chronic kidney disease with heart failure and stage 1 through stage 4 chronic kidney disease, or unspecified chronic kidney disease",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I13.11,"[I13.11] Hypertensive heart and chronic kidney disease without heart failure, with stage 5 chronic kidney disease, or end stage renal disease",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I13.2,"[I13.2] Hypertensive heart and chronic kidney disease with heart failure and with stage 5 chronic kidney disease, or end stage renal disease",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.1,"[I50.1] Left ventricular failure, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.20,[I50.20] Unspecified systolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.21,[I50.21] Acute systolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.22,[I50.22] Chronic systolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.23,[I50.23] Acute on chronic systolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.30,[I50.30] Unspecified diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.31,[I50.31] Acute diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.32,[I50.32] Chronic diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.33,[I50.33] Acute on chronic diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.40,[I50.40] Unspecified combined systolic (congestive) and diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.41,[I50.41] Acute combined systolic (congestive) and diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.42,[I50.42] Chronic combined systolic (congestive) and diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.43,[I50.43] Acute on chronic combined systolic (congestive) and diastolic (congestive) heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.810,"[I50.810] Right heart failure, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.811,[I50.811] Acute right heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.812,[I50.812] Chronic right heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.813,[I50.813] Acute on chronic right heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.814,[I50.814] Right heart failure due to left heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.82,[I50.82] Biventricular heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.83,[I50.83] High output heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.84,[I50.84] End stage heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.89,[I50.89] Other heart failure,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,I50.9,"[I50.9] Heart failure, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J43.0,[J43.0] Unilateral pulmonary emphysema [MacLeod's syndrome],ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J43.1,[J43.1] Panlobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J43.2,[J43.2] Centrilobular emphysema,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J43.8,[J43.8] Other emphysema,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J43.9,"[J43.9] Emphysema, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J68.4,"[J68.4] Chronic respiratory conditions due to chemicals, gases, fumes and vapors",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J84.10,"[J84.10] Pulmonary fibrosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J84.112,[J84.112] Idiopathic pulmonary fibrosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J84.170,[J84.170] Interstitial lung disease with progressive fibrotic phenotype in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J84.178,[J84.178] Other interstitial pulmonary diseases with fibrosis in diseases classified elsewhere,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.10,"[J96.10] Chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.11,[J96.11] Chronic respiratory failure with hypoxia,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.12,[J96.12] Chronic respiratory failure with hypercapnia,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.20,"[J96.20] Acute and chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.21,[J96.21] Acute and chronic respiratory failure with hypoxia,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.22,[J96.22] Acute and chronic respiratory failure with hypercapnia,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.90,"[J96.90] Respiratory failure, unspecified, unspecified whether with hypoxia or hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.91,"[J96.91] Respiratory failure, unspecified with hypoxia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J96.92,"[J96.92] Respiratory failure, unspecified with hypercapnia",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J98.2,[J98.2] Interstitial emphysema,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,J98.3,[J98.3] Compensatory emphysema,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.10,[K70.10] Alcoholic hepatitis without ascites,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.11,[K70.11] Alcoholic hepatitis with ascites,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.2,[K70.2] Alcoholic fibrosis and sclerosis of liver,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.30,[K70.30] Alcoholic cirrhosis of liver without ascites,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.31,[K70.31] Alcoholic cirrhosis of liver with ascites,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.40,[K70.40] Alcoholic hepatic failure without coma,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.41,[K70.41] Alcoholic hepatic failure with coma,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K70.9,"[K70.9] Alcoholic liver disease, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.00,"[K74.00] Hepatic fibrosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.01,"[K74.01] Hepatic fibrosis, early fibrosis",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.02,"[K74.02] Hepatic fibrosis, advanced fibrosis",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.1,[K74.1] Hepatic sclerosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.2,[K74.2] Hepatic fibrosis with hepatic sclerosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.4,[K74.4] Secondary biliary cirrhosis,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.5,"[K74.5] Biliary cirrhosis, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.60,[K74.60] Unspecified cirrhosis of liver,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,K74.69,[K74.69] Other cirrhosis of liver,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,N18.5,"[N18.5] Chronic kidney disease, stage 5",ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,N18.6,[N18.6] End stage renal disease,ICD10CM,2.16.840.1.113883.6.90
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,281004,Dementia associated with alcoholism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,364006,Acute left-sided heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,536002,Glissonian cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,792004,Jakob-Creutzfeldt disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,1761006,Biliary cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,2912004,Cystic-bullous disease of the lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,3514002,Peribronchial fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,4817008,"Primary degenerative dementia of the Alzheimer type, senile onset, with delirium (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,4981000,Panacinar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,5148006,Hypertensive heart disease with congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,5375005,Chronic left-sided congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,6475002,"Primary degenerative dementia of the Alzheimer type, presenile onset, uncomplicated (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,10091002,High output heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,10335000,Chronic right-sided heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,10349009,Multi-infarct dementia with delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,10532003,"Primary degenerative dementia of the Alzheimer type, presenile onset, with depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,10633002,Acute congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,12348006,Presenile dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,12368000,Secondary biliary cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,13274008,Atrophic fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,13839000,Bernheim's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,14070001,Multi-infarct dementia with depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,14700006,Bauxite fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,15662003,Senile dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,15999000,Mixed micro and macronodular cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,16003001,Giant bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,16070004,Syphilitic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,16253001,Dilated peripartum cardiomyopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,16846004,Obstructive emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,17385007,Graphite fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,19943007,Cirrhosis of liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,21861000,Micronodular cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,23958009,Vanishing lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,24700007,Multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,24841007,Cardiorespiratory failure during AND/OR resulting from a procedure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,25544003,Low output heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,25772007,Multi-infarct dementia with delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,26852004,"Primary degenerative dementia of the Alzheimer type, senile onset, with depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,26929004,Alzheimer's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,27156006,Posthepatitic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,30042003,Confluent fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,31712002,Primary biliary cholangitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,31898008,Paraseptal emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,33144001,Parasitic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,33325001,Compensatory emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,36599006,Chronic fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,37688005,Clonorchiasis with biliary cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,39871006,Chronic respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,40312006,Pericarditis co-occurrent and due to tumor metastatic to pericardium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,40640008,Massive fibrosis of lung co-occurrent and due to silicosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,41309000,Alcoholic liver damage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,42343007,Congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,43736008,Rheumatic left ventricular failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,43904005,Macronodular cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,44047000,Zieve's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,44313006,Right heart failure secondary to left heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,45256007,Cruveilhier-Baumgarten syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,46113002,Hypertensive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,46177005,End-stage renal disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,48447003,Chronic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,49049000,Parkinson's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,49584005,Acute cor pulmonale (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,50196008,Perialveolar fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,50325005,Alcoholic fatty liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,51615001,Fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,51928006,General paresis - neurosyphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,52448006,Dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,54502004,"Primary degenerative dementia of the Alzheimer type, presenile onset, with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,54867000,Rheumatoid arthritis with fibrosing alveolitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,55009008,"Primary degenerative dementia of the Alzheimer type, senile onset, with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,56267009,Multi-infarct dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,56675007,Acute heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,56841008,Massive fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,57686001,Emphysematous bleb of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,58756001,Huntington's chorea (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,59773008,Simple pulmonary alveolitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,62377009,Postpartum cardiomyopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,65096006,"Primary degenerative dementia of the Alzheimer type, presenile onset, with delirium (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,66108005,"Primary degenerative dementia of the Alzheimer type, senile onset, uncomplicated (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,66989003,Chronic right-sided congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,67905004,Acute-on-chronic respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,68328006,Centriacinar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,70936005,"Multi-infarct dementia, uncomplicated (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,71193007,Fibrosis of lung caused by radiation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,71892000,Cardiac asthma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,74669004,Cardiac cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,74960003,Acute left-sided congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,76301009,Florid cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,77690003,Interstitial emphysema of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,78862003,Ayerza's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,79955004,Chronic cor pulmonale (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,80479009,Acute right-sided congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,80614003,Prolonged pulmonary alveolitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,82523003,Congestive rheumatic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,82959004,Dementia paralytica juvenilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,83105008,Malignant hypertensive heart disease with congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,83291003,Cor pulmonale (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,84114007,Heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,85232009,Left heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,86044005,Amyotrophic lateral sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,86454000,Postnecrotic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,86680006,Ruptured emphysematous bleb of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,87317003,Respiratory arrest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,87433001,Pulmonary emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,88805009,Chronic congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,89580002,Cryptogenic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,90099008,Subcortical leukoencephalopathy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,90117007,Tuberculous fibrosis of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,90610005,Interstitial pulmonary fibrosis of prematurity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,90688005,Chronic renal failure syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,92506005,Biventricular congestive heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93144003,Leukemic reticuloendotheliosis of intra-abdominal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93145002,Leukemic reticuloendotheliosis of intrapelvic lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93146001,Leukemic reticuloendotheliosis of intrathoracic lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93150008,Leukemic reticuloendotheliosis of lymph nodes of multiple sites (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93715005,Primary malignant neoplasm of body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93726004,Primary malignant neoplasm of brain stem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93727008,Primary malignant neoplasm of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93746009,Primary malignant neoplasm of cerebellum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93748005,Primary malignant neoplasm of cerebral ventricle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93749002,Primary malignant neoplasm of cerebrum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93768004,Primary malignant neoplasm of craniopharyngeal duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93807001,Primary malignant neoplasm of frontal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93843007,Primary malignant neoplasm of islets of Langerhans (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93928006,Primary malignant neoplasm of occipital lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93939009,Primary malignant neoplasm of pancreatic duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,93946000,Primary malignant neoplasm of parietal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94082003,Primary malignant neoplasm of tail of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94086000,Primary malignant neoplasm of temporal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94152006,Metastatic malignant neoplasm to abdominal esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94153001,Metastatic malignant neoplasm to abducens nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94154007,Metastatic malignant neoplasm to accessory nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94155008,Metastatic malignant neoplasm to accessory sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94156009,Metastatic malignant neoplasm of vestibulocochlear nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94157000,Metastatic malignant neoplasm to acromion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94158005,Metastatic malignant neoplasm to adenoid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94159002,Metastatic malignant neoplasm to adnexa of skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94160007,Metastatic malignant neoplasm to adrenal cortex (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94161006,Metastatic malignant neoplasm to adrenal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94162004,Metastatic malignant neoplasm to adrenal medulla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94163009,Metastatic malignant neoplasm to alveolar ridge mucosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94164003,Metastatic malignant neoplasm to ampulla of Vater (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94165002,Metastatic malignant neoplasm to anal canal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94166001,Metastatic malignant neoplasm to anterior aspect of epiglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94167005,Metastatic malignant neoplasm to anterior mediastinum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94168000,Metastatic malignant neoplasm to anterior portion of floor of mouth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94169008,Metastatic malignant neoplasm to anterior two-thirds of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94170009,Metastatic malignant neoplasm to anterior wall of nasopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94171008,Metastatic malignant neoplasm to anterior wall of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94172001,Metastatic malignant neoplasm to anus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94173006,Metastatic malignant neoplasm to aortic body (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94175004,Metastatic malignant neoplasm to appendix (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94176003,Metastatic malignant neoplasm to areola of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94177007,Metastatic malignant neoplasm to areola of male breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94179005,Metastatic malignant neoplasm to ascending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94180008,Metastatic malignant neoplasm to axilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94181007,Metastatic malignant neoplasm to axillary lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94182000,Metastatic malignant neoplasm to axillary tail of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94183005,Metastatic malignant neoplasm to back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94184004,Metastatic malignant neoplasm to base of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94185003,Metastatic malignant neoplasm to biliary tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94186002,Metastatic malignant neoplasm to urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94187006,Metastatic malignant neoplasm to blood vessel of abdomen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94189009,Metastatic malignant neoplasm to blood vessel of axilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94190000,Metastatic malignant neoplasm to blood vessel of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94191001,Metastatic malignant neoplasm to blood vessel of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94192008,Metastatic malignant neoplasm to blood vessel of finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94193003,Metastatic malignant neoplasm to blood vessel of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94194009,Metastatic malignant neoplasm to blood vessel of forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94195005,Metastatic malignant neoplasm to blood vessel of hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94196006,Metastatic malignant neoplasm to blood vessel of head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94197002,Metastatic malignant neoplasm to blood vessel of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94198007,Metastatic malignant neoplasm to blood vessel of inguinal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94200001,Metastatic malignant neoplasm to blood vessel of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94201002,Metastatic malignant neoplasm to blood vessel of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94202009,Metastatic malignant neoplasm to blood vessel of pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94203004,Metastatic malignant neoplasm to blood vessel of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94204005,Metastatic malignant neoplasm to blood vessel of popliteal space (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94205006,Metastatic malignant neoplasm to blood vessel of shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94206007,Metastatic malignant neoplasm to blood vessel of thigh (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94207003,Metastatic malignant neoplasm to blood vessel of thorax (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94208008,Metastatic malignant neoplasm to blood vessel of toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94209000,Metastatic malignant neoplasm to blood vessel of trunk (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94210005,Metastatic malignant neoplasm to blood vessel of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94211009,Metastatic malignant neoplasm to blood vessel (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94212002,Metastatic malignant neoplasm to body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94213007,Metastatic malignant neoplasm to body of penis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94214001,Metastatic malignant neoplasm to body of stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94215000,Metastatic malignant neoplasm to body of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94217008,Metastatic malignant neoplasm to bone marrow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94218003,Metastatic malignant neoplasm to bone of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94219006,Metastatic malignant neoplasm to bone of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94220000,Metastatic malignant neoplasm to bone of skull (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94221001,Metastatic malignant neoplasm to bone of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94222008,Metastatic malignant neoplasm to bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94224009,Metastatic malignant neoplasm to brain stem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94225005,Metastatic malignant neoplasm to brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94226006,Metastatic malignant neoplasm to broad ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94227002,Metastatic malignant neoplasm to bronchopulmonary lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94228007,Metastatic malignant neoplasm to bronchus of left lower lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94229004,Metastatic malignant neoplasm to bronchus of left upper lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94230009,Metastatic malignant neoplasm to bronchus of right lower lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94231008,Metastatic malignant neoplasm to bronchus of middle lobe of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94232001,Metastatic malignant neoplasm to bronchus of right upper lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94233006,Metastatic malignant neoplasm to bronchus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94234000,Metastatic malignant neoplasm to buccal mucosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94235004,Metastatic malignant neoplasm to cecum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94236003,Metastatic malignant neoplasm to calcaneus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94237007,Metastatic malignant neoplasm to cardia of stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94238002,Metastatic malignant neoplasm to carina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94239005,Metastatic malignant neoplasm to carotid body (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94240007,Metastatic malignant neoplasm to carpal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94241006,Metastatic malignant neoplasm to cartilage of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94242004,Metastatic malignant neoplasm to cauda equina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94243009,Metastatic malignant neoplasm to central nervous system (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94244003,Metastatic malignant neoplasm to central portion of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94245002,Metastatic malignant neoplasm to cerebellum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94246001,Metastatic malignant neoplasm to cerebral meninges (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94247005,Metastatic malignant neoplasm to cerebral ventricle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94248000,Metastatic malignant neoplasm to cerebrum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94249008,Metastatic malignant neoplasm to cervical esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94250008,Metastatic malignant neoplasm to cervical vertebral column (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94252000,Metastatic malignant neoplasm to cheek (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94253005,Metastatic malignant neoplasm to chest wall (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94254004,Metastatic malignant neoplasm to choroid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94255003,Metastatic malignant neoplasm to ciliary body (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94256002,Metastatic malignant neoplasm to clavicle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94257006,Metastatic malignant neoplasm to clitoris (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94258001,Metastatic malignant neoplasm to coccygeal body (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94259009,Metastatic malignant neoplasm to coccyx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94260004,Metastatic malignant neoplasm to colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94261000,Metastatic malignant neoplasm to commissure of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94262007,Metastatic malignant neoplasm to common bile duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94263002,Metastatic malignant neoplasm to conjunctiva (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94264008,Metastatic malignant neoplasm to soft tissues (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94265009,Metastatic malignant neoplasm to cornea (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94266005,Metastatic malignant neoplasm to cranial nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94267001,Metastatic malignant neoplasm to craniopharyngeal duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94268006,Metastatic malignant neoplasm to cubital lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94269003,Metastatic malignant neoplasm to cuboid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94270002,Metastatic malignant neoplasm to cystic duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94271003,Metastatic malignant neoplasm to descending colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94272005,Metastatic malignant neoplasm to diaphragm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94273000,Metastatic malignant neoplasm to dorsal surface of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94274006,Metastatic malignant neoplasm to thoracic vertebral column (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94275007,Metastatic malignant neoplasm to duodenum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94276008,Metastatic malignant neoplasm to ectopic female breast tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94277004,Metastatic malignant neoplasm to ectopic male breast tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94278009,Metastatic malignant neoplasm to endocardium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94279001,Metastatic malignant neoplasm to endocervix (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94280003,Metastatic malignant neoplasm to endocrine gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94281004,Metastatic malignant neoplasm to endometrium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94282006,Metastatic malignant neoplasm to epicardium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94283001,Metastatic malignant neoplasm to epididymis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94284007,Metastatic malignant neoplasm to epiglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94285008,Metastatic malignant neoplasm to epitrochlear lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94286009,Metastatic malignant neoplasm to esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94287000,Metastatic malignant neoplasm to ethmoid bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94288005,Metastatic malignant neoplasm to ethmoidal sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94289002,Metastatic malignant neoplasm to eustachian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94290006,Metastatic malignant neoplasm to exocervix (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94291005,Metastatic malignant neoplasm to extrahepatic bile ducts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94292003,Metastatic malignant neoplasm to eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94293008,Metastatic malignant neoplasm to face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94294002,Metastatic malignant neoplasm to facial nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94295001,Metastatic malignant neoplasm to fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94296000,Metastatic malignant neoplasm to false vocal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94297009,Metastatic malignant neoplasm to female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94298004,Metastatic malignant neoplasm to female genital organ (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94299007,Metastatic malignant neoplasm to femoral lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94300004,Metastatic malignant neoplasm to femur (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94301000,Metastatic malignant neoplasm to fibula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94302007,Metastatic malignant neoplasm to first cuneiform bone of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94303002,Metastatic malignant neoplasm to flank (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94304008,Metastatic malignant neoplasm to floor of mouth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94305009,Metastatic malignant neoplasm to foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94306005,Metastatic malignant neoplasm to forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94307001,Metastatic malignant neoplasm to prepuce (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94308006,Metastatic malignant neoplasm to frontal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94309003,Metastatic malignant neoplasm to frontal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94310008,Metastatic malignant neoplasm to frontal sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94311007,Metastatic malignant neoplasm to fundus of stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94312000,Metastatic malignant neoplasm to gallbladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94313005,Metastatic malignant neoplasm to gastrointestinal tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94314004,Metastatic malignant neoplasm to gingival mucosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94315003,Metastatic malignant neoplasm to glans penis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94316002,Metastatic malignant neoplasm to glomus jugulare (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94317006,Metastatic malignant neoplasm to glossopharyngeal nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94318001,Metastatic malignant neoplasm to glottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94319009,Metastatic malignant neoplasm to great vessels (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94320003,Metastatic malignant neoplasm to greater curvature of stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94321004,Metastatic malignant neoplasm to gum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94322006,Metastatic malignant neoplasm to hamate bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94323001,Metastatic malignant neoplasm to hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94324007,Metastatic malignant neoplasm to hard palate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94325008,Metastatic malignant neoplasm to head of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94326009,Metastatic malignant neoplasm to head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94327000,Metastatic malignant neoplasm to heart (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94328005,Metastatic malignant neoplasm to hepatic flexure of colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94329002,Metastatic malignant neoplasm to hilus of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94330007,Metastatic malignant neoplasm to hypogastric lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94331006,Metastatic malignant neoplasm to hypoglossal nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94332004,Metastatic malignant neoplasm to hypopharyngeal aspect of aryepiglottic fold (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94333009,Metastatic malignant neoplasm to hypopharyngeal aspect of interarytenoid fold (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94334003,Metastatic malignant neoplasm to hypopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94335002,Metastatic malignant neoplasm to ileum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94336001,Metastatic malignant neoplasm to iliac lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94337005,Metastatic malignant neoplasm to ilium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94338000,Metastatic malignant neoplasm to infraclavicular lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94339008,Metastatic malignant neoplasm to inguinal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94340005,Metastatic malignant neoplasm to inguinal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94341009,Metastatic malignant neoplasm to inner aspect of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94342002,Metastatic malignant neoplasm to inner aspect of lower lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94343007,Metastatic malignant neoplasm to inner aspect of upper lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94344001,Metastatic malignant neoplasm to intercostal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94345000,Metastatic malignant neoplasm to intestinal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94346004,Metastatic malignant neoplasm to intestinal tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94347008,Metastatic malignant neoplasm to intra-abdominal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94348003,Metastatic malignant neoplasm to intra-abdominal organs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94349006,Metastatic malignant neoplasm to intrahepatic bile ducts (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94350006,Metastatic malignant neoplasm to intrapelvic lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94351005,Metastatic malignant neoplasm to intrathoracic lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94352003,Metastatic malignant neoplasm to intrathoracic organs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94353008,Metastatic malignant neoplasm to ischium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94354002,Metastatic malignant neoplasm to islets of Langerhans (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94355001,Metastatic malignant neoplasm to isthmus of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94356000,Metastatic malignant neoplasm to jaw (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94357009,Metastatic malignant neoplasm to jejunum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94358004,Metastatic malignant neoplasm to junctional region of epiglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94359007,Metastatic malignant neoplasm to junctional zone of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94360002,Metastatic malignant neoplasm to kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94361003,Metastatic malignant neoplasm to labia majora (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94362005,Metastatic malignant neoplasm to labia minora (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94364006,Metastatic malignant neoplasm to lacrimal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94365007,Metastatic malignant neoplasm to large intestine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94366008,Metastatic malignant neoplasm to laryngeal aspect of aryepiglottic fold (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94367004,Metastatic malignant neoplasm to laryngeal aspect of interarytenoid fold (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94368009,Metastatic malignant neoplasm to laryngeal commissure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94369001,Metastatic malignant neoplasm to laryngeal surface of epiglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94370000,Metastatic malignant neoplasm to larynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94371001,Metastatic malignant neoplasm to lateral portion of floor of mouth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94372008,Metastatic malignant neoplasm to lateral wall of nasopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94373003,Metastatic malignant neoplasm to lateral wall of oropharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94374009,Metastatic malignant neoplasm to lateral wall of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94375005,Metastatic malignant neoplasm to left lower lobe of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94376006,Metastatic malignant neoplasm to left upper lobe of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94378007,Metastatic malignant neoplasm to lesser curvature of stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94379004,Metastatic malignant neoplasm to lingual tonsil (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94380001,Metastatic malignant neoplasm to lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94381002,Metastatic malignant neoplasm to liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94382009,Metastatic malignant neoplasm to long bone of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94383004,Metastatic malignant neoplasm to long bone of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94384005,Metastatic malignant neoplasm to lower gum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94385006,Metastatic malignant neoplasm to lower inner quadrant of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94386007,Metastatic malignant neoplasm to lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94387003,Metastatic malignant neoplasm to lower outer quadrant of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94388008,Metastatic malignant neoplasm to lower third of esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94389000,Metastatic malignant neoplasm to lumbar vertebral column (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94390009,Metastatic malignant neoplasm to lunate bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94391008,Metastatic malignant neoplasm to lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94392001,Metastatic malignant neoplasm to lymph node (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94393006,Metastatic malignant neoplasm to lymph nodes of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94394000,Metastatic malignant neoplasm to lymph nodes of head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94395004,Metastatic malignant neoplasm to lymph nodes of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94396003,Metastatic malignant neoplasm to lymph nodes of multiple sites (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94397007,Metastatic malignant neoplasm to lymph nodes of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94398002,Metastatic malignant neoplasm to lymph nodes of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94399005,Metastatic malignant neoplasm to main bronchus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94400003,Metastatic malignant neoplasm to major salivary gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94401004,Metastatic malignant neoplasm to male breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94402006,Metastatic malignant neoplasm to male genital organ (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94403001,Metastatic malignant neoplasm to mandible (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94404007,Metastatic malignant neoplasm to mastoid air cells (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94405008,Metastatic malignant neoplasm to maxilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94406009,Metastatic malignant neoplasm to maxillary sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94407000,Metastatic malignant neoplasm to Meckel's diverticulum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94408005,Metastatic malignant neoplasm to mediastinal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94409002,Metastatic malignant neoplasm to mediastinum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94410007,Metastatic malignant neoplasm to mesenteric lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94411006,Metastatic malignant neoplasm to metacarpal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94412004,Metastatic malignant neoplasm to metatarsal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94413009,Metastatic malignant neoplasm to middle ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94414003,Metastatic malignant neoplasm to middle third of esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94415002,Metastatic malignant neoplasm to minor salivary gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94416001,Metastatic malignant neoplasm to mouth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94417005,Metastatic malignant neoplasm to multiple endocrine glands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94418000,Metastatic malignant neoplasm to muscle of abdomen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94419008,Metastatic malignant neoplasm to muscle of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94420002,Metastatic malignant neoplasm to muscle of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94421003,Metastatic malignant neoplasm to muscle of head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94422005,Metastatic malignant neoplasm to muscle of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94423000,Metastatic malignant neoplasm to muscle of inguinal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94424006,Metastatic malignant neoplasm to muscle of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94425007,Metastatic malignant neoplasm to muscle of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94426008,Metastatic malignant neoplasm to muscle of pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94427004,Metastatic malignant neoplasm to muscle of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94428009,Metastatic malignant neoplasm to muscle of shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94429001,Metastatic malignant neoplasm to muscle of thorax (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94430006,Metastatic malignant neoplasm to muscle of trunk (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94431005,Metastatic malignant neoplasm to muscle of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94432003,Metastatic malignant neoplasm to muscle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94433008,Metastatic malignant neoplasm to myocardium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94434002,Metastatic malignant neoplasm to myometrium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94435001,Metastatic malignant neoplasm to nasal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94436000,Metastatic malignant neoplasm to nasal cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94437009,Metastatic malignant neoplasm to nasal concha (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94439007,Metastatic malignant neoplasm to navicular bone of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94440009,Metastatic malignant neoplasm to scaphoid bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94441008,Metastatic malignant neoplasm to neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94442001,Metastatic malignant neoplasm to nervous system (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94443006,Metastatic malignant neoplasm to nipple of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94444000,Metastatic malignant neoplasm to nipple of male breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94445004,Metastatic malignant neoplasm to nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94446003,Metastatic malignant neoplasm to obturator lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94447007,Metastatic malignant neoplasm to occipital bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94448002,Metastatic malignant neoplasm to occipital lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94449005,Metastatic malignant neoplasm to occipital lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94450005,Metastatic malignant neoplasm to oculomotor nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94451009,Metastatic malignant neoplasm to olfactory nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94452002,Metastatic malignant neoplasm to optic nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94453007,Metastatic malignant neoplasm to orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94454001,Metastatic malignant neoplasm to oropharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94455000,Metastatic malignant neoplasm to ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94456004,Metastatic malignant neoplasm to palate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94457008,Metastatic malignant neoplasm to palatine bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94458003,Metastatic malignant neoplasm to tonsil (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94459006,Metastatic malignant neoplasm to pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94460001,Metastatic malignant neoplasm to pancreatic duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94461002,Metastatic malignant neoplasm to para-aortic body (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94462009,Metastatic malignant neoplasm to paraganglion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94463004,Metastatic malignant neoplasm to paramammary lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94464005,Metastatic malignant neoplasm to parametrial lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94465006,Metastatic malignant neoplasm to parametrium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94466007,Metastatic malignant neoplasm to pararectal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94467003,Metastatic malignant neoplasm to parathyroid gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94468008,Metastatic malignant neoplasm to paraurethral glands (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94469000,Metastatic malignant neoplasm to paravaginal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94470004,Metastatic malignant neoplasm to parietal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94471000,Metastatic malignant neoplasm to parietal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94472007,Metastatic malignant neoplasm to parietal peritoneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94473002,Metastatic malignant neoplasm to parietal pleura (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94474008,Metastatic malignant neoplasm to parotid gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94475009,Metastatic malignant neoplasm to parotid lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94476005,Metastatic malignant neoplasm to patella (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94477001,Metastatic malignant neoplasm to pectoral axillary lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94478006,Metastatic malignant neoplasm to pelvic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94479003,Metastatic malignant neoplasm to pelvic peritoneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94480000,Metastatic malignant neoplasm to pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94481001,Metastatic malignant neoplasm to penis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94482008,Metastatic malignant neoplasm to periadrenal tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94483003,Metastatic malignant neoplasm to perianal skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94484009,Metastatic malignant neoplasm to pericardium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94485005,Metastatic malignant neoplasm to perirenal tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94486006,Metastatic malignant neoplasm to phalanx of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94487002,Metastatic malignant neoplasm to phalanx of hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94488007,Metastatic malignant neoplasm to pharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94489004,Metastatic malignant neoplasm to pineal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94490008,Metastatic malignant neoplasm to pisiform bone of hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94491007,Metastatic malignant neoplasm to pituitary gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94492000,Metastatic malignant neoplasm to placenta (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94493005,Metastatic malignant neoplasm to pleura (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94494004,Metastatic malignant neoplasm to popliteal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94495003,Metastatic malignant neoplasm to postcricoid region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94496002,Metastatic malignant neoplasm to posterior hypopharyngeal wall (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94497006,Metastatic malignant neoplasm to posterior mediastinum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94498001,Metastatic malignant neoplasm to posterior wall of nasopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94499009,Metastatic malignant neoplasm to posterior wall of oropharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94500000,Metastatic malignant neoplasm to posterior wall of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94501001,Metastatic malignant neoplasm to preauricular lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94502008,Metastatic malignant neoplasm to presacral region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94503003,Metastatic malignant neoplasm to prostate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94504009,Metastatic malignant neoplasm to pubis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94505005,Metastatic malignant neoplasm to pyloric antrum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94506006,Metastatic malignant neoplasm to pylorus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94507002,Metastatic malignant neoplasm to pyriform sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94508007,Metastatic malignant neoplasm to radius (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94509004,Metastatic malignant neoplasm to rectosigmoid junction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94510009,Metastatic malignant neoplasm to rectouterine pouch (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94511008,Metastatic malignant neoplasm to rectovaginal septum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94512001,Metastatic malignant neoplasm to rectovesical septum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94513006,Metastatic malignant neoplasm to rectum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94514000,Metastatic malignant neoplasm to renal pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94515004,Metastatic malignant neoplasm to respiratory tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94516003,Metastatic malignant neoplasm to retina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94517007,Metastatic malignant neoplasm to retrocecal tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94518002,Metastatic malignant neoplasm to retromolar area (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94519005,Metastatic malignant neoplasm to retroperitoneal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94520004,Metastatic malignant neoplasm to retropharyngeal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94521000,Metastatic malignant neoplasm to rib (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94522007,Metastatic malignant neoplasm to right lower lobe of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94523002,Metastatic malignant neoplasm to middle lobe of right lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94524008,Metastatic malignant neoplasm to right upper lobe of lung (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94525009,Metastatic malignant neoplasm to round ligament of uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94526005,Metastatic malignant neoplasm to sacrococcygeal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94527001,Metastatic malignant neoplasm to sacrum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94528006,Metastatic malignant neoplasm to scalene lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94529003,Metastatic malignant neoplasm to scapula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94530008,Metastatic malignant neoplasm to sclera (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94531007,Metastatic malignant neoplasm to scrotum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94532000,Metastatic malignant neoplasm to sebaceous gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94533005,Metastatic malignant neoplasm to second cuneiform bone of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94534004,Metastatic malignant neoplasm to septum of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94535003,Metastatic malignant neoplasm to short bone of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94536002,Metastatic malignant neoplasm to short bone of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94537006,Metastatic malignant neoplasm to shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94538001,Metastatic malignant neoplasm to sigmoid colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94539009,Metastatic malignant neoplasm to skin of abdomen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94540006,Metastatic malignant neoplasm to skin of ankle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94542003,Metastatic malignant neoplasm to skin of axilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94543008,Metastatic malignant neoplasm to skin of back (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94544002,Metastatic malignant neoplasm to skin of breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94545001,Metastatic malignant neoplasm to skin of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94546000,Metastatic malignant neoplasm to skin of cheek (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94547009,Metastatic malignant neoplasm to skin of chest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94548004,Metastatic malignant neoplasm to skin of chin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94549007,Metastatic malignant neoplasm to skin of ear (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94550007,Metastatic malignant neoplasm to skin of elbow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94551006,Metastatic malignant neoplasm to skin of external auditory canal (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94552004,Metastatic malignant neoplasm to skin of eyebrow (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94553009,Metastatic malignant neoplasm to skin of eyelid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94554003,Metastatic malignant neoplasm to skin of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94555002,Metastatic malignant neoplasm to skin of finger (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94556001,Metastatic malignant neoplasm to skin of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94557005,Metastatic malignant neoplasm to skin of forearm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94558000,Metastatic malignant neoplasm to skin of forehead (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94559008,Metastatic malignant neoplasm to skin of groin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94560003,Metastatic malignant neoplasm to skin of hand (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94561004,Metastatic malignant neoplasm to skin of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94562006,Metastatic malignant neoplasm to skin of knee (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94564007,Metastatic malignant neoplasm to skin of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94565008,Metastatic malignant neoplasm to skin of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94566009,Metastatic malignant neoplasm to skin of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94567000,Metastatic malignant neoplasm to skin of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94568005,Metastatic malignant neoplasm to skin of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94569002,Metastatic malignant neoplasm to skin of popliteal area (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94570001,Metastatic malignant neoplasm to skin of scalp (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94571002,Metastatic malignant neoplasm to skin of shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94572009,Metastatic malignant neoplasm to skin of temporal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94573004,Metastatic malignant neoplasm to skin of thigh (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94574005,Metastatic malignant neoplasm to skin of toe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94575006,Metastatic malignant neoplasm to skin of trunk (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94577003,Metastatic malignant neoplasm to skin of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94578008,Metastatic malignant neoplasm to skin of wrist (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94579000,Metastatic malignant neoplasm to skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94580002,Metastatic malignant neoplasm to small intestine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94581003,Metastatic malignant neoplasm to soft palate (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94582005,Metastatic malignant neoplasm to soft tissues of abdomen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94583000,Metastatic malignant neoplasm to soft tissues of axilla (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94584006,Metastatic malignant neoplasm to soft tissues of buttock (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94585007,Metastatic malignant neoplasm to soft tissues of face (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94586008,Metastatic malignant neoplasm to soft tissues of head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94587004,Metastatic malignant neoplasm to soft tissues of hip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94588009,Metastatic malignant neoplasm to soft tissues of inguinal region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94589001,Metastatic malignant neoplasm to soft tissues of lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94590005,Metastatic malignant neoplasm to soft tissues of neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94591009,Metastatic malignant neoplasm to soft tissues of pelvis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94592002,Metastatic malignant neoplasm to soft tissues of perineum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94593007,Metastatic malignant neoplasm to soft tissues of shoulder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94594001,Metastatic malignant neoplasm to soft tissues of thorax (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94595000,Metastatic malignant neoplasm to soft tissues of trunk (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94596004,Metastatic malignant neoplasm to soft tissues of upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94597008,Metastatic malignant neoplasm to spermatic cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94598003,Metastatic malignant neoplasm to sphenoid bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94599006,Metastatic malignant neoplasm to sphenoidal sinus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94600009,Metastatic malignant neoplasm to spinal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94601008,Metastatic malignant neoplasm to spinal meninges (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94602001,Metastatic malignant neoplasm to vertebral column (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94603006,Metastatic malignant neoplasm to spleen (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94604000,Metastatic malignant neoplasm to splenic flexure of colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94605004,Metastatic malignant neoplasm to sternum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94606003,Metastatic malignant neoplasm to stomach (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94607007,Metastatic malignant neoplasm to subglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94608002,Metastatic malignant neoplasm to sublingual gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94609005,Metastatic malignant neoplasm to submandibular lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94610000,Metastatic malignant neoplasm to submaxillary gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94611001,Metastatic malignant neoplasm to submental lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94612008,Metastatic malignant neoplasm to superficial inguinal lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94613003,Metastatic malignant neoplasm to superior wall of nasopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94614009,Metastatic malignant neoplasm to supraclavicular lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94615005,Metastatic malignant neoplasm to supraclavicular region (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94616006,Metastatic malignant neoplasm to supraglottis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94617002,Metastatic malignant neoplasm to sweat gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94618007,Metastatic malignant neoplasm to tail of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94619004,Metastatic malignant neoplasm to talus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94620005,Metastatic malignant neoplasm to tarsal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94621009,Metastatic malignant neoplasm to temporal bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94622002,Metastatic malignant neoplasm to temporal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94623007,Metastatic malignant neoplasm to testis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94624001,Metastatic malignant neoplasm to the mesentery (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94625000,Metastatic malignant neoplasm to the mesocolon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94626004,Metastatic malignant neoplasm to omentum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94627008,Metastatic malignant neoplasm to peritoneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94628003,Metastatic malignant neoplasm to retroperitoneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94629006,Metastatic malignant neoplasm to thigh (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94630001,Metastatic malignant neoplasm to third cuneiform bone of foot (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94631002,Metastatic malignant neoplasm to thoracic esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94632009,Metastatic malignant neoplasm to thymus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94633004,Metastatic malignant neoplasm to thyroglossal duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94634005,Metastatic malignant neoplasm to thyroid gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94635006,Metastatic malignant neoplasm to tibia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94636007,Metastatic malignant neoplasm to tibial lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94637003,Metastatic malignant neoplasm to tip and lateral border of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94638008,Metastatic malignant neoplasm to tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94639000,Metastatic malignant neoplasm to tonsillar fossa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94640003,Metastatic malignant neoplasm to tonsillar pillar (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94641004,Metastatic malignant neoplasm to trachea (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94642006,Metastatic malignant neoplasm to tracheobronchial lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94643001,Metastatic malignant neoplasm to transverse colon (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94644007,Metastatic malignant neoplasm to trapezium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94645008,Metastatic malignant neoplasm to trapezoid bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94646009,Metastatic malignant neoplasm to trigeminal nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94647000,Metastatic malignant neoplasm to trigone of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94648005,Metastatic malignant neoplasm to trochlear nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94649002,Metastatic malignant neoplasm to trunk (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94650002,Metastatic malignant neoplasm to ulna (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94651003,Metastatic malignant neoplasm to undescended testis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94652005,Metastatic malignant neoplasm to upper gum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94653000,Metastatic malignant neoplasm to upper inner quadrant of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94654006,Metastatic malignant neoplasm to upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94655007,Metastatic malignant neoplasm to upper outer quadrant of female breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94656008,Metastatic malignant neoplasm to upper respiratory tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94657004,Metastatic malignant neoplasm to upper third of esophagus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94658009,Metastatic malignant neoplasm to urachus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94659001,Metastatic malignant neoplasm to ureter (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94660006,Metastatic malignant neoplasm to ureteric orifice of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94661005,Metastatic malignant neoplasm to urethra (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94662003,Metastatic malignant neoplasm to urinary bladder neck (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94663008,Metastatic malignant neoplasm to urinary system (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94664002,Metastatic malignant neoplasm to uterine adnexa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94665001,Metastatic malignant neoplasm to uterus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94666000,Metastatic malignant neoplasm to uveal tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94667009,Metastatic malignant neoplasm to uvula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94668004,Metastatic malignant neoplasm to vagina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94669007,Metastatic malignant neoplasm to vagus nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94670008,Metastatic malignant neoplasm to vallecula (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94671007,Metastatic malignant neoplasm to vas deferens (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94672000,Metastatic malignant neoplasm to ventral surface of tongue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94673005,Metastatic malignant neoplasm to vermilion border of lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94674004,Metastatic malignant neoplasm to vermilion border of lower lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94675003,Metastatic malignant neoplasm to vermilion border of upper lip (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94676002,Metastatic malignant neoplasm to vestibule of mouth (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94677006,Metastatic malignant neoplasm to vestibule of nose (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94678001,Metastatic malignant neoplasm to visceral pleura (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94679009,Metastatic malignant neoplasm to vocal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94680007,Metastatic malignant neoplasm to vomer (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94681006,Metastatic malignant neoplasm to vulva (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94682004,Metastatic malignant neoplasm to Waldeyer's ring (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,94683009,Metastatic malignant neoplasm to zygomatic bone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,109819003,Obstructive biliary cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,109848009,Overlapping malignant neoplasm of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,109912006,Overlapping malignant neoplasm of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,111283005,Chronic left-sided heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,123604002,Toxic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,123606000,Cholangiolitic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,123716002,Latent cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,123717006,Advanced cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,128462008,Metastatic malignant neoplasm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,128465005,Metastatic malignant neoplasm to articular cartilage (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187786003,Malignant neoplasm of sphincter of Oddi (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187791002,Malignant tumor of body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187792009,Malignant tumor of tail of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187793004,Malignant tumor of pancreatic duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187794005,Malignant tumor of Islets of Langerhans (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,187798008,Malignant neoplasm of ectopic pancreatic tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188280007,Malignant neoplasm of cerebrum (excluding lobes and ventricles) (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188281006,Malignant neoplasm of basal ganglia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188282004,Malignant neoplasm of cerebral cortex (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188283009,Malignant neoplasm of corpus striatum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188285002,Malignant neoplasm of globus pallidus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188286001,Malignant tumor of hypothalamus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188287005,Malignant neoplasm of thalamus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188289008,Malignant neoplasm of hippocampus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188290004,Malignant neoplasm of uncus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188292007,Malignant tumor of choroid plexus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188293002,Malignant neoplasm of floor of cerebral ventricle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188295009,Malignant neoplasm of cerebral peduncle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188296005,Malignant neoplasm of medulla oblongata (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188297001,Malignant neoplasm of midbrain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188298006,Malignant neoplasm of pons (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188301005,Malignant neoplasm of corpus callosum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188302003,Malignant neoplasm of tapetum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188308004,Malignant neoplasm of olfactory bulb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188339002,Malignant neoplasm of pituitary gland and craniopharyngeal duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188340000,Malignant tumor of craniopharyngeal duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188445006,Metastatic malignant neoplasm to retroperitoneum and peritoneum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188454009,Metastatic malignant neoplasm to skin of head (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188458007,Metastatic malignant neoplasm to skin of shoulder and arm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188462001,Metastatic malignant neoplasm to brain and spinal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188469005,Metastatic malignant neoplasm to cervix uteri (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188471005,Metastatic malignant neoplasm to epididymis and vas deferens (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188645002,"Leukemic reticuloendotheliosis of lymph nodes of head, face and neck (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188648000,Leukemic reticuloendotheliosis of lymph nodes of axilla and upper limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,188649008,Leukemic reticuloendotheliosis of lymph nodes of inguinal region and lower limb (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,189814006,Pancreatoblastoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191449005,Uncomplicated senile dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191451009,Uncomplicated presenile dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191452002,Presenile dementia with delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191454001,Presenile dementia with paranoia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191455000,Presenile dementia with depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191457008,Senile dementia with depressive or paranoid features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191458003,Senile dementia with paranoia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191459006,Senile dementia with depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191461002,Senile dementia with delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191463004,Uncomplicated arteriosclerotic dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191464005,Arteriosclerotic dementia with delirium (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191465006,Arteriosclerotic dementia with paranoia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191466007,Arteriosclerotic dementia with depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191471000,Korsakov's alcoholic psychosis with peripheral neuritis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,191519005,Dementia associated with another disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,192926004,Multiple sclerosis of the brainstem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,192927008,Multiple sclerosis of the spinal cord (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,192929006,Exacerbation of multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,194767001,Benign hypertensive heart disease with congestive cardiac failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,194779001,Hypertensive heart and renal disease with (congestive) heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,194781004,Hypertensive heart and renal disease with both (congestive) heart failure and renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195111005,Decompensated cardiac failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195112003,Compensated cardiac failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195114002,Acute left ventricular failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195957006,Chronic bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195958001,Segmental bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,195959009,Zonal bullous emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,196026004,Chronic emphysema caused by chemical fumes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,196028003,Chronic pulmonary fibrosis caused by chemical fumes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,196125002,Diffuse interstitial pulmonary fibrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197291001,Unilobular portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197293003,Diffuse nodular cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197294009,Fatty portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197299004,Pigmentary portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197301006,Toxic portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197303009,Bacterial portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,197305002,Syphilitic portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,206586007,Congenital cardiac failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230156002,Malignant meningitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230258005,Amyotrophic lateral sclerosis with dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230265002,Familial Alzheimer's disease of early onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230266001,Non-familial Alzheimer's disease of early onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230267005,Familial Alzheimer's disease of late onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230268000,Non-familial Alzheimer's disease of late onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230269008,Focal Alzheimer's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230271008,Pick's disease with Pick bodies (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230272001,Pick's disease with Pick cells and no Pick bodies (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230280008,Progressive aphasia in Alzheimer's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230282000,Post-traumatic dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230285003,Vascular dementia of acute onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230286002,Subcortical vascular dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230287006,Mixed cortical and subcortical vascular dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230288001,Semantic dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230289009,Patchy dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230299004,Juvenile onset Huntington's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230300007,Late onset Huntington's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230301006,Akinetic-rigid form of Huntington's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230372003,Acute relapsing multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,230499002,Sleep-related respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233674008,Pulmonary emphysema in alpha-1 primary immunodeficiency deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233675009,Toxic emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233677001,Scar emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233713004,Seasonal cryptogenic organizing pneumonia with biochemical cholestasis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233726000,Localized pulmonary fibrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233737004,Familial fibrous mediastinitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233758005,Mica pneumoconiosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233761006,Subacute silicosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233765002,Respiratory failure without hypercapnia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233924009,Heart failure as a complication of care (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,233940007,Pulmonary tumor embolism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235875008,Alcoholic hepatitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235880004,Alcoholic fibrosis and sclerosis of liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235881000,Alcoholic hepatic failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235895002,"Laennec's cirrhosis, non-alcoholic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235896001,Infectious cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235897005,Hypoxia-associated cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235899008,Hepatic sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235901004,Hepatic fibrosis with hepatic sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,235966007,Cystadenocarcinoma of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236433006,Acute-on-chronic renal failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236434000,End stage renal failure untreated by renal replacement therapy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236435004,End stage renal failure on dialysis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236436003,End stage renal failure with renal transplant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236512004,Leukemic infiltrate of kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,236513009,Lymphoma of kidney (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,241861008,Metastatic malignant neoplasm to nasopharynx (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,242862004,Metastatic malignant neoplasm to nasopharyngeal wall (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,253005002,Vasoactive intestinal peptide-secreting tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254609000,Carcinoma of ampulla of Vater (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254611009,Malignant tumor of endocrine pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254612002,Carcinoma of endocrine pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254938000,Astrocytoma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254940005,Oligodendroglioma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254955001,Pituitary carcinoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,254969001,Malignant tumor of olfactory tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255039001,Pancreatic polypeptidoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255088001,Malignant tumor of exocrine pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255112006,Malignant tumor of pituitary and hypothalamus (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255118005,Metastatic lymphangitic carcinoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255119002,Lymphangitis carcinomatosa (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255121007,Carcinomatosis of peritoneal cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255123005,Metastasis to nervous system and eye (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,255124004,Metastasis to peripheral nerve (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266355005,Bullous emphysema with collapse (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266356006,Atrophic (senile) emphysema (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266368002,Post-inflammatory pulmonary fibrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266468003,Cirrhosis - non-alcoholic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266469006,Multilobular portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266470007,Cardiac portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,266471006,Juvenile portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,268612007,Senile and presenile organic psychotic conditions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,269473008,Metastatic malignant neoplasm to respiratory and digestive systems (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,271440004,Cirrhosis secondary to cholestasis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,274088005,Metastatic malignant neoplasm to unknown site (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,275266006,Metastasis to digestive organs (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,276259003,Respiratory arrest preceding cardiac arrest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,276826005,Malignant glioma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,276828006,Glioblastoma multiforme of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,276836002,Primary cerebral lymphoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,277461004,Anaplastic astrocytoma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,277505007,Medulloblastoma of cerebellum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,278051002,Malignant lymphoma of thyroid gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,278433008,Malignant infiltration of soft tissue (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,278857002,Dementia of frontal lobe type (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,281560004,Neuroblastoma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,286902000,Secondary carcinoma of gastrointestinal tract (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,303194003,Metastasis to head and neck lymph node (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,303201005,Metastatic malignant neoplasm to multiple lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,304603007,Variant Creutzfeldt-Jakob disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,307226002,Metastatic adenocarcinoma of unknown origin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,307593001,Carcinomatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,307757001,Chronic alcoholic hepatitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,312991009,Senile dementia of the Lewy body type (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,314206003,Refractory heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,314408000,Leukemic infiltrate of choroid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,314418005,Leukemic infiltrate of retina (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,314964006,Local recurrence of malignant tumor of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,326072005,Carcinoma of head of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,359617009,Acute right-sided heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,359780007,Metastatic malignant neoplasm to lateral axillary lymph nodes (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,359782004,Metastatic malignant neoplasm to apex of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,359785002,Metastatic malignant neoplasm to dome of urinary bladder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,359987004,Krukenberg tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,361194002,Perinatal pulmonary fibroplasia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,361195001,Pulmonary fibroplasia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,361196000,Idiopathic hilar fibrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363368005,Carcinoma of body of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363369002,Carcinoma of tail of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363417006,Malignant tumor of ampulla of Vater (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363418001,Malignant tumor of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363419009,Malignant tumor of head of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363467004,Malignant neoplasm of frontal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363468009,Malignant neoplasm of temporal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363469001,Malignant neoplasm of parietal lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363470000,Malignant neoplasm of occipital lobe (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363471001,Malignant neoplasm of cerebral ventricles (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363473003,Malignant neoplasm of brainstem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363482009,Malignant tumor of pituitary gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,363483004,Malignant tumor of pineal gland (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,367363000,Right ventricular failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369488002,Metastatic malignant neoplasm to seminal vesicle (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369514009,Metastatic malignant neoplasm to left fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369521009,Metastatic malignant neoplasm to right fallopian tube (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369523007,Metastatic malignant neoplasm to left ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369530001,Metastatic malignant neoplasm to right ovary (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369535006,Metastatic neoplasm of left broad ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,369536007,Metastatic neoplasm of right broad ligament (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,371024007,Senile dementia with delusion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,371026009,Senile dementia with psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,371139006,Early cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,371967001,Primary malignant neoplasm of ampulla of Vater (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,372003004,Primary malignant neoplasm of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,372093008,Metastatic malignant neoplasm to axillary tail of breast (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,372119009,Primary malignant neoplasm of head of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,372142002,Carcinoma of pancreas (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,399969009,Metastatic malignant neoplasm to blood vessel of upper arm (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,400058002,Metastatic malignant neoplasm to blood vessel of lower leg (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,402537005,Metastatic basal cell carcinoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,402563000,Metastatic malignant melanoma with diffuse hypermelanosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,402879006,T-cell leukemic infiltration of skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,403906006,Metastatic squamous cell carcinoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404090003,Malignant infiltration of oral cavity by underlying tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404091004,Malignant infiltration of skin by underlying tumor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404092006,Metastatic carcinoma to skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404093001,Sarcomatous metastasis in skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404094007,Metastasis involving oral cavity (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404122003,Leukemic infiltration of skin (chronic T-cell lymphocytic leukemia) (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404123008,Leukemic infiltration of skin (T-cell prolymphocytic leukemia) (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404124002,Leukemic infiltration of skin (T-cell lymphoblastic leukemia) (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404139001,Leukemic infiltration of skin in hairy-cell leukemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404154007,Leukemic infiltration of skin in monocytic leukemia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404156009,Leukemic infiltration of skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,404157000,Specific skin infiltration in Hodgkin's disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,405570007,Pulmonary fibrosis due to and following radiotherapy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,405843009,Widespread metastatic malignant neoplastic disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,409622000,Respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,410430005,Cardiorespiratory arrest (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,410431009,Cardiorespiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,414676007,Metastatic neuroblastoma of orbit proper (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,416780008,"Primary degenerative dementia of the Alzheimer type, presenile onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,416975007,"Primary degenerative dementia of the Alzheimer type, senile onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,417996009,Systolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,418304008,Diastolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,418529003,Metastatic malignant neoplasm to lacrimal drainage structure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,419728003,Portal cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,420054005,Alcoholic cirrhosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,420614009,Organic dementia with acquired immunodeficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,421023003,Presenile dementia with acquired immunodeficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,421283008,Primary lymphoma of brain with acquired immunodeficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,421529006,Dementia with acquired immunodeficiency syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,423032007,Leukemic infiltration of orbit (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,423384009,Metastatic malignant neoplasm to lacrimal gland duct (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,423595004,Adenocarcinoma carcinomatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,424052001,Small cell carcinoma carcinomatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,424151006,Anaplastic glioma of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,424276002,Malignant glioma of brainstem (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,424404003,Decompensated chronic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,424954002,Undifferentiated large cell carcinomatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,425303004,Squamous cell carcinomatosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,425390006,Dementia associated with Parkinson's Disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,425413006,Drug-induced cirrhosis of liver (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,425500002,Secondary progressive multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,426263006,Congestive heart failure due to left ventricular systolic dysfunction (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,426373005,Relapsing remitting multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,426437004,Familial idiopathic pulmonary fibrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,426611007,Congestive heart failure due to valvular disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,426896000,Chronic hypercapnic respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,428061005,Malignant neoplasm of brain (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,428173007,Chronic hypoxemic respiratory failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,428700003,Primary progressive multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,429033009,Malignant neoplasm of cerebrum (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,429458009,Dementia due to Creutzfeldt Jakob disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,429998004,Vascular dementia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,433146000,Chronic kidney disease stage 5 (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,439567002,Malignant multiple sclerosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,441481004,Chronic systolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,441530006,Chronic diastolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,442344002,Dementia due to Huntington chorea (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443144000,Metastatic sarcoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443253003,Acute on chronic systolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443254009,Acute systolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443333004,Medulloblastoma (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443343001,Acute diastolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Advanced Illness,2.16.840.1.113883.3.464.1004.1465,443344007,Acute on chronic diastolic heart failure (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96

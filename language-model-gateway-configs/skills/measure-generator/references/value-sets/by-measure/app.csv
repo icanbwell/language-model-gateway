@@ -1,0 +1,714 @@
+Value Set Name,Value Set OID,Code,Definition,Code System,Code System OID
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.10,"[F30.10] Manic episode without psychotic symptoms, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.11,"[F30.11] Manic episode without psychotic symptoms, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.12,"[F30.12] Manic episode without psychotic symptoms, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.13,"[F30.13] Manic episode, severe, without psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.2,"[F30.2] Manic episode, severe with psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.3,[F30.3] Manic episode in partial remission,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.4,[F30.4] Manic episode in full remission,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.8,[F30.8] Other manic episodes,ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F30.9,"[F30.9] Manic episode, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.0,"[F31.0] Bipolar disorder, current episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.10,"[F31.10] Bipolar disorder, current episode manic without psychotic features, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.11,"[F31.11] Bipolar disorder, current episode manic without psychotic features, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.12,"[F31.12] Bipolar disorder, current episode manic without psychotic features, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.13,"[F31.13] Bipolar disorder, current episode manic without psychotic features, severe",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.2,"[F31.2] Bipolar disorder, current episode manic severe with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.30,"[F31.30] Bipolar disorder, current episode depressed, mild or moderate severity, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.31,"[F31.31] Bipolar disorder, current episode depressed, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.32,"[F31.32] Bipolar disorder, current episode depressed, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.4,"[F31.4] Bipolar disorder, current episode depressed, severe, without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.5,"[F31.5] Bipolar disorder, current episode depressed, severe, with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.60,"[F31.60] Bipolar disorder, current episode mixed, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.61,"[F31.61] Bipolar disorder, current episode mixed, mild",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.62,"[F31.62] Bipolar disorder, current episode mixed, moderate",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.63,"[F31.63] Bipolar disorder, current episode mixed, severe, without psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.64,"[F31.64] Bipolar disorder, current episode mixed, severe, with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.70,"[F31.70] Bipolar disorder, currently in remission, most recent episode unspecified",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.71,"[F31.71] Bipolar disorder, in partial remission, most recent episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.72,"[F31.72] Bipolar disorder, in full remission, most recent episode hypomanic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.73,"[F31.73] Bipolar disorder, in partial remission, most recent episode manic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.74,"[F31.74] Bipolar disorder, in full remission, most recent episode manic",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.75,"[F31.75] Bipolar disorder, in partial remission, most recent episode depressed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.76,"[F31.76] Bipolar disorder, in full remission, most recent episode depressed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.77,"[F31.77] Bipolar disorder, in partial remission, most recent episode mixed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,F31.78,"[F31.78] Bipolar disorder, in full remission, most recent episode mixed",ICD10CM,2.16.840.1.113883.6.90
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,162004,Severe manic bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,1499003,"Bipolar I disorder, single manic episode with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,3530005,"Bipolar I disorder, single manic episode, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,4441000,Severe bipolar disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,5703000,Bipolar disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,9340000,"Bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,10875004,"Severe mixed bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,10981006,Severe mixed bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13313007,Mild bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13581000,"Severe bipolar I disorder, single manic episode with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,13746004,Bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,14495005,"Severe bipolar I disorder, single manic episode without psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,16506000,Mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,17782008,"Bipolar I disorder, most recent episode manic with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,21900002,"Bipolar I disorder, most recent episode depressed with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,22121000,Depressed bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,26203008,"Severe depressed bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,26530004,"Severe bipolar disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,28663008,Severe manic bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,28884001,"Moderate bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,29929003,"Bipolar I disorder, most recent episode depressed with atypical features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,30935000,Manic bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,31446002,"Bipolar I disorder, most recent episode hypomanic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,33380008,"Severe manic bipolar I disorder with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,35481005,Mixed bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,36583000,Mixed bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,38368003,"Schizoaffective disorder, bipolar type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,40926005,Moderate mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41552001,"Mild bipolar I disorder, single manic episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41832009,"Severe bipolar I disorder, single manic episode with psychotic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,41836007,Bipolar disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,43769008,Mild mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,45479006,Manic bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,46229002,Severe mixed bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,49468007,Depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,49512000,Depressed bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,51637008,"Chronic bipolar I disorder, most recent episode depressed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,53049002,Severe bipolar disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,53607008,Depressed bipolar I disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,54761006,"Severe depressed bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,55516002,"Bipolar I disorder, most recent episode manic with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,59617007,Severe depressed bipolar I disorder with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,61403008,Severe depressed bipolar I disorder without psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,63249007,Manic bipolar I disorder in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,64731001,"Severe mixed bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,65042007,"Bipolar I disorder, most recent episode mixed with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,66631006,Moderate depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,68569003,Manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,70546001,"Severe bipolar disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,71984005,Mild manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,73471000,"Bipolar I disorder, most recent episode mixed with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,74686005,Mild depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,75360000,"Bipolar I disorder, single manic episode, in remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,75752004,"Bipolar I disorder, most recent episode depressed with melancholic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,78269000,"Bipolar I disorder, single manic episode, in partial remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,78640000,"Severe manic bipolar I disorder with psychotic features, mood-congruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,79584002,Moderate bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,82998009,Moderate manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,85248005,Bipolar disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,86058007,"Severe bipolar I disorder, single manic episode with psychotic features, mood-incongruent (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,87203005,"Bipolar I disorder, most recent episode depressed with postpartum onset (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,87950005,"Bipolar I disorder, single manic episode with catatonic features (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,111485001,Mixed bipolar I disorder in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191618007,"Bipolar affective disorder, current episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191620005,"Bipolar affective disorder, currently manic, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191621009,"Bipolar affective disorder, currently manic, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191623007,"Bipolar affective disorder, currently manic, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191625000,"Bipolar affective disorder, currently manic, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191627008,"Bipolar affective disorder, current episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191629006,"Bipolar affective disorder, currently depressed, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191630001,"Bipolar affective disorder, currently depressed, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191634005,"Bipolar affective disorder, currently depressed, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191636007,Mixed bipolar affective disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191638008,"Mixed bipolar affective disorder, mild (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191639000,"Mixed bipolar affective disorder, moderate (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191641004,"Mixed bipolar affective disorder, severe, with psychosis (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,191643001,"Mixed bipolar affective disorder, in full remission (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,192362008,"Bipolar affective disorder, current episode mixed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,231444002,Organic bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371596008,Bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371599001,Severe bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,371600003,Severe bipolar disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,723903001,Bipolar type I disorder currently in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,765176007,Psychosis and severe depression co-occurrent and due to bipolar affective disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767631007,"Bipolar disorder, most recent episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767632000,"Bipolar disorder, most recent episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767633005,"Bipolar affective disorder, most recent episode mixed (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767635003,"Bipolar I disorder, most recent episode manic (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,767636002,"Bipolar I disorder, most recent episode depression (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,261000119107,Severe depressed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,271000119101,Severe mixed bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,23741000119105,Severe manic bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,133091000119105,Rapid cycling bipolar I disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Bipolar Disorder,2.16.840.1.113883.3.464.1004.1044,16238741000119105,Bipolar disorder caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9473,"Services performed by chaplain in the hospice setting, each 15 minutes (G9473)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9474,"Services performed by dietary counselor in the hospice setting, each 15 minutes (G9474)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9475,"Services performed by other counselor in the hospice setting, each 15 minutes (G9475)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9476,"Services performed by volunteer in the hospice setting, each 15 minutes (G9476)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9477,"Services performed by care coordinator in the hospice setting, each 15 minutes (G9477)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9478,"Services performed by other qualified therapist in the hospice setting, each 15 minutes (G9478)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,G9479,"Services performed by qualified pharmacist in the hospice setting, each 15 minutes (G9479)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5003,Hospice care provided in nursing long term care facility (ltc) or non-skilled nursing facility (nf) (Q5003),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5004,Hospice care provided in skilled nursing facility (snf) (Q5004),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5005,Hospice care provided in inpatient hospital (Q5005),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5006,Hospice care provided in inpatient hospice facility (Q5006),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5007,Hospice care provided in long term care facility (Q5007),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5008,Hospice care provided in inpatient psychiatric facility (Q5008),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,Q5010,Hospice home care provided in a hospice facility (Q5010),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,S9126,"Hospice care, in the home, per diem (S9126)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2042,Hospice routine home care; per diem (T2042),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2043,Hospice continuous home care; per hour (T2043),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2044,Hospice inpatient respite care; per diem (T2044),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2045,Hospice general inpatient care; per diem (T2045),HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,T2046,"Hospice long term care, room and board only; per diem (T2046)",HCPCS,2.16.840.1.113883.6.285
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183919006,Urgent admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183920000,Routine admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,183921001,Admission to hospice for respite (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305336008,Admission to hospice (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,305911006,Seen in hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,385765002,Hospice care management (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0115,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0125,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0135,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0145,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0155,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0235,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0650,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0651,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0652,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0655,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0656,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0657,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0658,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Encounter,2.16.840.1.113883.3.464.1004.1761,0659,,UBREV,2.16.840.1.113883.6.301.3
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99377,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,99378,,CPT,2.16.840.1.113883.6.12
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,G0182,"Physician supervision of a patient under a medicare-approved hospice (patient not present) requiring complex and multidisciplinary care modalities involving regular physician development and/or revision of care plans, review of subsequent reports of patient status, review of laboratory and other studies, communication (including telephone calls) with other health care professionals involved in the patient's care, integration of new information into the medical treatment plan and/or adjustment of medical therapy, within a calendar month, 30 minutes or more (G0182)",HCPCS,2.16.840.1.113883.6.285
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170935008,Full care by hospice (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,170936009,Shared care - hospice and general practitioner (finding),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Hospice Intervention,2.16.840.1.113883.3.464.1004.1762,385763009,Hospice care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F22,[F22] Delusional disorders,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F23,[F23] Brief psychotic disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F24,[F24] Shared psychotic disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F28,[F28] Other psychotic disorder not due to a substance or known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F29,[F29] Unspecified psychosis not due to a substance or known physiological condition,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F32.3,"[F32.3] Major depressive disorder, single episode, severe with psychotic features",ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F33.3,"[F33.3] Major depressive disorder, recurrent, severe with psychotic symptoms",ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.0,[F84.0] Autistic disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.2,[F84.2] Rett's syndrome,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.3,[F84.3] Other childhood disintegrative disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.5,[F84.5] Asperger's syndrome,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.8,[F84.8] Other pervasive developmental disorders,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F84.9,"[F84.9] Pervasive developmental disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F95.0,[F95.0] Transient tic disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F95.1,[F95.1] Chronic motor or vocal tic disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F95.2,[F95.2] Tourette's disorder,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F95.8,[F95.8] Other tic disorders,ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,F95.9,"[F95.9] Tic disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,568005,Tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1973000,"Sedative, hypnotic AND/OR anxiolytic-induced psychotic disorder with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,5158005,Gilles de la Tourette's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,5464005,Brief reactive psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,5510009,Organic delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,7794004,Chronic motor tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,8511007,"Transient tic disorder, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,14144000,Erotomanic delusion disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,18573003,Obsessional erotomania (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,20385005,Psychotic disorder with delusions caused by opioid (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,23560001,Asperger's disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,23772009,Dysphonia of Gilles de la Tourette's syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,26472000,Paraphrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,30491001,Cocaine delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,32358001,Amphetamine delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,32552001,Organic delusional disorder caused by psychoactive substance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,33323008,Somatic delusion disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,35919005,Pervasive developmental disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,38295006,Involutional paraphrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,43614003,Autistic disorder of childhood onset (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,44433009,Recurrent transient tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,47447001,Grandiose delusion disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,48500005,Delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,50722006,Delusional disorder caused by phencyclidine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,50933003,Hallucinogen delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,54502004,"Primary degenerative dementia of the Alzheimer type, presenile onset, with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,55009008,"Primary degenerative dementia of the Alzheimer type, senile onset, with delusions (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,56573006,Transient tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,60123008,"Delusional disorder, mixed type (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,61144001,Alcohol-induced psychotic disorder with delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,61831009,Induced psychotic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,63649001,Cannabis delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,65179007,Koro (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,68618008,Rett syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,69322001,Psychotic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,71961003,Childhood disintegrative disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,73462009,Chronic vocal tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,73867007,Severe major depression with psychotic features (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,76236006,Atypical tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,77475008,Jealous delusion disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,89601008,Tic of organic origin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,89618007,Persecutory delusion disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,129604005,Delusion of heart disease syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,162313000,Morbid jealousy (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191478006,Alcoholic paranoia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191485005,Paranoid state caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191667009,Paranoid disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191668004,Simple paranoid state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191672000,Paranoia querulans (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191689008,Active infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191690004,Residual infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191692007,Active disintegrative psychoses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191693002,Residual disintegrative psychoses (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,191990001,Transient childhood tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230334008,Tic caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230335009,Facial tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230336005,Vocal tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230337001,Motor tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230338006,Gestural tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,230539002,Cluster tic syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,231487004,Persistent delusional disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,231536004,Atypical autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238972008,Cutaneous monosymptomatic delusional psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238973003,Delusions of parasitosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238974009,Delusions of infestation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238977002,Delusional hyperhidrosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238978007,Hyperschemazia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,238979004,Hyposchemazia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,268622001,Chronic paranoid psychosis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,278506006,Involutional paranoid state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,278508007,Delusional dysmorphophobia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,280949006,Erotomania (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,371024007,Senile dementia with delusion (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,373618009,Autistic spectrum disorder with isolated skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,402732001,Habit tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,402733006,Habit tic affecting skin (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,402734000,Nail dystrophy due to habit tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,402735004,Habit tic affecting hair (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,403169003,Callosity due to habit tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,403170002,Callosity due to biting and/or chewing (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,403595006,Pinocchio syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,408857007,Infantile autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,427975003,Delusional disorder caused by drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,432091002,Savant syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,442314000,Active but odd autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,698951002,Delusional disorder in remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,702356009,X-linked intellectual disability-psychosis-macroorchidism syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,702450004,FOXG1 syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,702732007,High-functioning autism (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,708037001,Residual Asperger's disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,712884004,Pathological demand avoidance (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,718393002,Atypical Rett syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,719600006,1p21.3 microdeletion syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,722972004,Secondary tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,722973009,Tic due to developmental disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723122006,Primary tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723332005,Isodicentric chromosome 15 syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723899008,Delusional disorder currently symptomatic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723900003,Delusional disorder currently in partial remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723901004,Delusional disorder currently in full remission (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,723913009,Olfactory reference disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724544000,Infection causing tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724545004,Tic due to and following infection (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724673008,Psychotic disorder caused by sedative (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724674002,Psychotic disorder caused by hypnotic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724675001,Psychotic disorder caused by anxiolytic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724706006,Psychotic disorder caused by methylenedioxymethamphetamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724718002,Psychotic disorder caused by dissociative drug (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,724719005,Psychotic disorder caused by ketamine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,733623005,"Autism spectrum disorder, epilepsy, arthrogryposis syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,737225007,Secondary psychotic syndrome with hallucinations and delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,762327001,Psychotic disorder with delusions caused by stimulant (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,762509000,Psychotic disorder with delusions caused by synthetic cathinone (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,766824003,"Activity dependent neuroprotector homeobox related multiple congenital anomalies, intellectual disability, autism spectrum disorder (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,770790004,Developmental delay with autism spectrum disorder and gait instability (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,771448004,Autism epilepsy syndrome due to branched chain ketoacid dehydrogenase kinase deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,771512003,Autism spectrum disorder due to AUTS2 activator of transcription and developmental regulator deficiency (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,783089006,"Macrocephaly, intellectual disability, autism syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,789053008,Transient motor tic (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870260008,Pervasive developmental disorder with marked impairment of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870261007,Pervasive developmental disorder with marked impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870262000,Pervasive developmental disorder with disorder of intellectual development without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870263005,Pervasive developmental disorder with impairment of functional language (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870264004,Pervasive developmental disorder with disorder of intellectual development and pervasive impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870265003,Pervasive developmental disorder with disorder of intellectual development with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870266002,Pervasive developmental disorder with disorder of intellectual development and marked impairment of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870267006,Pervasive developmental disorder with disorder of intellectual development and marked impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870268001,Pervasive developmental disorder with disorder of intellectual development and complete impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870269009,Pervasive developmental disorder with disorder of intellectual development and absence of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870270005,Pervasive developmental disorder with disorder of intellectual development and complete impairment of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870280009,Pervasive developmental disorder with severe impairment of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870282001,Pervasive developmental disorder with severe impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870303005,Pervasive developmental disorder with complete impairment of functional language with loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870304004,Pervasive developmental disorder with complete impairment of functional language without loss of previously acquired skills (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870305003,Pervasive developmental disorder with cognitive developmental delay and marked impairment of functional language (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870306002,Pervasive developmental disorder with complete impairment of functional language (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870307006,Pervasive developmental disorder with abscence of functional language (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,870308001,Pervasive developmental disorder with cognitive developmental delay and complete impairment of functional language (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1177001000,Tic disorder due to rheumatic chorea (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1177002007,Tic disorder due to prion disease (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1177006005,Tic disorder due to post-encephalitic syndrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1177058004,Tic disorder due to encephalitis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1177060002,Tic disorder due to neurosyphilis (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1220650006,Delusion of emitting foul body odor (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1254652005,"Intellectual disability, macrocephaly, hypotonia, behavioral abnormalities syndrome (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,1259070005,Adult-onset tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,251000119105,"Severe major depression, single episode (disorder)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,281000119103,Severe recurrent major depression (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,21831000119109,Psychotic disorder caused by phencyclidine (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,31081000119101,Presenile dementia with delusions (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,39951000119105,Pervasive developmental disorder of residual state (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Other Psychotic and Developmental Disorders,2.16.840.1.113883.3.464.1004.1315,434451000124105,Acute tic disorder (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90832,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90833,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90834,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90836,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90837,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90838,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90839,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90840,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90845,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90846,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90847,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90849,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90853,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90875,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90876,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90880,,CPT,2.16.840.1.113883.6.12
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,G0176,"Activity therapy, such as music, dance, art or play therapies not for recreation, related to the care and treatment of patient's disabling mental health problems, per session (45 minutes or more) (G0176)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,G0177,Training and educational services related to the care and treatment of patient's disabling mental health problems per session (45 minutes or more) (G0177),HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,G0409,"Social work and psychological services, directly relating to and/or furthering the patient's rehabilitation goals, each 15 minutes, face-to-face; individual (services provided by a corf-qualified social worker or psychologist in a corf) (G0409)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,G0410,"Group psychotherapy other than of a multiple-family group, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0410)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,G0411,"Interactive group psychotherapy, in a partial hospitalization or intensive outpatient setting, approximately 45 to 50 minutes (G0411)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0004,"Behavioral health counseling and therapy, per 15 minutes (H0004)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0035,"Mental health partial hospitalization, treatment, less than 24 hours (H0035)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0036,"Community psychiatric supportive treatment, face-to-face, per 15 minutes (H0036)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0037,"Community psychiatric supportive treatment program, per diem (H0037)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0038,"Self-help/peer services, per 15 minutes (H0038)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0039,"Assertive community treatment, face-to-face, per 15 minutes (H0039)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H0040,"Assertive community treatment program, per diem (H0040)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2000,Comprehensive multidisciplinary evaluation (H2000),HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2001,"Rehabilitation program, per 1/2 day (H2001)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2011,"Crisis intervention service, per 15 minutes (H2011)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2012,"Behavioral health day treatment, per hour (H2012)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2013,"Psychiatric health facility service, per diem (H2013)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2014,"Skills training and development, per 15 minutes (H2014)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2017,"Psychosocial rehabilitation services, per 15 minutes (H2017)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2018,"Psychosocial rehabilitation services, per diem (H2018)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2019,"Therapeutic behavioral services, per 15 minutes (H2019)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,H2020,"Therapeutic behavioral services, per diem (H2020)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,S0201,"Partial hospitalization services, less than 24 hours, per diem (S0201)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,S9480,"Intensive outpatient psychiatric services, per diem (S9480)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,S9484,"Crisis intervention mental health services, per hour (S9484)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,S9485,"Crisis intervention mental health services, per diem (S9485)",HCPCS,2.16.840.1.113883.6.285
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,166001,Behavioral therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1555005,Brief group psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,2619005,Psychiatric interpretation to family or parents of patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,3518004,Aversive psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,5694008,Crisis intervention with follow-up (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,6227009,Relationship psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,7133001,Psychiatric day care by day (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,8411005,Interactive individual medical psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,9591001,Gestalt therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,15142007,"Sexual psychotherapy, female therapist - female patient (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,15558000,Expressive psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,15711005,"Regular psychiatric visit, routine, established patient (procedure)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,17447008,Transactional analysis (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,17914007,Existential therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,18512000,Individual psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,19997007,Hypnotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,21055002,Crisis intervention with medication (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,22900004,Combined therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,24172008,Crisis intervention (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,24621000,Interpretation of results of psychiatric examinations and data (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,25621005,Daily full psychiatric care of inpatient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,26693005,"Sexual psychotherapy, group (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,26829003,Environmental intervention on a psychiatric patient's behalf with institutions (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,26890005,Psychiatric rehabilitation (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,27482005,Structural analysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,27591006,Group analytical psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,28868002,Interactive group medical psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,28988002,Psychoanalysis in depth (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,30808008,Encounter group therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,31408009,"Sexual psychotherapy, group, male and female (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,31594000,Group marathon therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,32051004,Institutional environmental intervention (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,33661004,"Sexual psychotherapy, group, all female (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,35358007,Token economy therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,36230009,"Psychologic desensitization, implosion (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,38592005,Dental behavior management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,38678006,Client-centered psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,39697002,Transcendental meditation therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,41035007,Conjoint psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,41653002,"Sexual psychotherapy, group, all male (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,41838008,Activity group therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,45565001,Logotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,46618005,Operant conditioning (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,47805006,Psychoanalysis of ego (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,50160009,Extended family therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,51484002,Family therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,51790004,Extinction therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,53508008,Psychodrama (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,53769000,Body contact-exploration therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,57070007,Confrontation therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,57847003,Crisis intervention by group therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,58771002,Game analysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,59364003,Script analysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,59585002,Psychiatric commitment to psychiatric institution (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,59694001,Occupational social therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,61436009,Psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,62474003,Group primal therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,63386006,Sexual psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,65201004,Supervision of psychiatric therapist or aide (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,66060003,"Sexual psychotherapy, male therapist - female patient (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,73139001,"Sexual psychotherapy, male therapist - male patient (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,75516001,Psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,76168009,Group psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,76740001,Psychiatric telephone consultation or therapy with patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,77170008,Psychiatric catharsis method (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,78493007,Psychoanalysis of transference (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,79441000,Group reassurance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,82309004,Interpersonal intervention (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,83474000,Psychiatric commitment procedure (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,84892007,Suppressive psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,85614001,Environmental intervention (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,85925008,Supportive verbal psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,88848003,Psychiatric follow-up (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,89909007,Employment environmental intervention (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,90102008,Social psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,91172002,Hypnodrama (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,91425008,Environmental intervention on a psychiatric patient's behalf with employers (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,91481002,Environmental intervention on a psychiatric patient's behalf with agencies (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,108313002,Family psychotherapy procedure (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,113141001,Legal testimony of psychiatric state of patient (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,113143003,"Psychologic desensitization, flooding (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,113144009,"Sexual psychotherapy, female therapist - male patient (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,171423009,Mental Health Act examination (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,171424003,Section examination - patient's GP (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,171425002,Section examination - approved doctor (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,171426001,Section examination - social worker (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183339004,Educational rehabilitation (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183381005,General psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183382003,Psychotherapy - behavioral (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183383008,Psychotherapy - cognitive (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183385001,Functional psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183387009,Aversion therapy - behavior correction (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183388004,Aversion therapy - alcoholism (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183389007,Aversion therapy - somatic ill (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183391004,Stimulative psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183393001,Provocative therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183395008,Competitive games therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183396009,Rehabilitation for disabling psychiatric problem (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183398005,Daily life psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183399002,Antiphobic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183401008,Anti-suicide psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183402001,Potential suicide care (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183403006,Samaritans advisory service (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183405004,Anti-criminal psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183406003,Care of potential criminal (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183408002,Hypnosis for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183411001,Therapeutic psychology (regime/therapy) [183411001],SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183413003,Conscious blood pressure control (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,183422002,Child guidance therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225160006,Reinforcement of behavior (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225224008,Exposure - behavior therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225225009,Accumulative reinforcement (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225226005,Negative reinforcement (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225227001,Positive reinforcement (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,225333008,Behavior management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228546003,Orientation training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228548002,Concept formation training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228549005,Reminiscence therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228550005,Attention training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228551009,Memory retraining (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228553007,Cognitive therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228554001,Personal construct therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228555000,Rational emotive therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228557008,Cognitive and behavioral therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,228575009,Reward technique (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229216005,Minor group games for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229217001,Minor team games for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229218006,Team games for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229219003,Relay games for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229220009,Pair activity games for therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229221008,Group trust experience games (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,229306004,Positive airway pressure therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,266744007,Psychotherapy/sociotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,299695005,Competitive games psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302230009,Generic cognitive behavioral therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302234000,Beck's cognitive therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302235004,Psychoanalytic and psychodynamic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302236003,Long-term exploratory psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302238002,Jungian-based therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302239005,Generic Jungian-based therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302240007,Analytical psychology (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302242004,Long-term psychodynamic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302243009,Humanistic and integrative therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302244003,Experiential constructivist therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302245002,"Family, systemic, couple and sex therapy (regime/therapy)",SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302247005,Narrative family psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302248000,Psychotherapeutic approaches using specific settings (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302255003,Debriefing therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302259009,Cognitive skills training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302260004,Concentration skills training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302262007,Memory skills training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,302683009,Narcoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,303262000,Narcosynthesis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304637004,Cognitive restructuring (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304638009,Empty chair technique (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304702006,Traumatic incident reduction (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304814008,Kleinian psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304815009,Bion-based group psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304816005,Generic psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304817001,Independent psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304818006,Classical psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304819003,Lacanian psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304820009,Developmental psychodynamic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304821008,Supportive expressive psychodynamic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304822001,Psychodynamic-interpersonal psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304824000,Group psychoanalysis (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304825004,Humanistic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304826003,Integrative psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304851002,Specific task orientated psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304888004,Understanding behavior (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304889007,Exposure technique (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304893001,Expressed emotion family therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,304894007,Abreaction under hypnosis (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311460008,Strategy training for cognitive skills (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311461007,Strategy training for perceptual skills (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311462000,Strategy training for executive skills (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311510000,Information processing training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311511001,Executive functions training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311522002,Process training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311523007,Strategy training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,311884008,External memory aids training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,312043006,Positive feedback approach (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,312044000,Negative feedback approach (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,313105004,Action therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,314034001,Psychodynamic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,361229007,Structural family psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,361230002,Structural psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385768000,Encouragement of compliance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385769008,Encouragement of dietary compliance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385770009,Encouragement of fluid volume compliance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385771008,Encouragement of compliance with medical regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385772001,Encouragement of compliance with medication regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385773006,Encouragement of compliance with safety precautions (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385774000,Encouragement of compliance with therapeutic regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385893007,Mental health treatment (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,385992003,Discipline promotion (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386255004,Delirium management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386256003,Delusion management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386257007,Dementia management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386316003,Hallucination management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386367000,Mutual goal setting (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386429002,Self-modification assistance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386522008,Overactivity/inattention behavior management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386523003,Self-harm behavior management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386524009,Sexual behavior management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,386525005,Social skills behavior modification (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,390773006,Cognitive analytic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,391892008,Goal directed therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,397074006,Psychologic desensitization therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,401157001,Brief solution focused psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,401162000,Problem solving therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,405780009,Dialectical behavior therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,405792009,Formal psychological therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,405793004,Eclectic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,406165004,Dementia management: bathing (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,406183007,Self-hypnosis facilitation (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,406184001,Trauma therapy: child (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,406185000,Trauma therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410112008,Compliance care management (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410115005,Management of dietary compliance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410118007,Management of fluid volume compliance (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410121009,Management of compliance with medical regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410124001,Management of compliance with medication regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410127008,Management of compliance with safety precautions (procedure),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,410130001,Management of compliance with therapeutic regimen (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,425680009,Cognitive behavioral therapy by multidisciplinary team (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,427954006,Child psychoanalytic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,429048003,Short-term psychodynamic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,429159005,Child psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,429329005,Computerized cognitive behavioral therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439330009,Covert sensitization (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439436002,Sexual surrogate therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439741009,Primal therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439795004,Reprimanding (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439805004,Transpersonal humanistic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439820005,Sensate focus technique (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,439916005,Paradoxical intention behavior therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,440274001,Couple psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,440582002,Psychosynthesis (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,440646003,Educational psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,443119008,Behavioral activation therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,443730003,Interpersonal psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,444175001,Guided self-help cognitive behavioral therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,449030000,Eye movement desensitization and reprocessing therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,700445002,Attachment-based therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,700446001,Parent-infant psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,702471009,Functional family therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,702780005,Multisystemic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,711078000,Debriefing of patient after restraint (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,711283001,Cognitive behavior therapy by unidisciplinary team (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,712558003,Anger management therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,718023002,Focal psychodynamic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,718026005,Cognitive behavioral therapy for psychosis (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,720444008,Sequencing skills training (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,723528003,Drama therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,723619005,Behavioral couple psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,734278000,Time out behavior strategy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,736861004,Systemic psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,866252000,Intensive parent-child interaction therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,868185009,Cognitive behavioral therapy for insomnia (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1163366004,Accelerated resolution therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1236920000,Euthymic therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1256107005,Ecotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1259023009,Mindfulness Based Stress Reduction program (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,1300121009,Acute phase rehabilitation (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,460891000124103,Rewards and contingency management therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,460901000124104,Acceptance and commitment therapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Psychosocial Care,2.16.840.1.113883.3.464.1004.1316,461561000124103,Meaning-centered psychotherapy (regime/therapy),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0017,"Behavioral health; residential (hospital residential treatment program), without room and board, per diem (H0017)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0018,"Behavioral health; short-term residential (non-hospital residential treatment program), without room and board, per diem (H0018)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,H0019,"Behavioral health; long-term residential (non-medical, non-acute care in a residential treatment program where stay is typically longer than 30 days), without room and board, per diem (H0019)",HCPCS,2.16.840.1.113883.6.285
+Residential Behavioral Health Treatment,2.16.840.1.113883.3.464.1004.1966,T2048,"Behavioral health; long-term care residential (non-acute care in a residential treatment program where stay is typically longer than 30 days), with room and board, per diem (T2048)",HCPCS,2.16.840.1.113883.6.285
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.0,[F20.0] Paranoid schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.1,[F20.1] Disorganized schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.2,[F20.2] Catatonic schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.3,[F20.3] Undifferentiated schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.5,[F20.5] Residual schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.81,[F20.81] Schizophreniform disorder,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.89,[F20.89] Other schizophrenia,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F20.9,"[F20.9] Schizophrenia, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F25.0,"[F25.0] Schizoaffective disorder, bipolar type",ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F25.1,"[F25.1] Schizoaffective disorder, depressive type",ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F25.8,[F25.8] Other schizoaffective disorders,ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,F25.9,"[F25.9] Schizoaffective disorder, unspecified",ICD10CM,2.16.840.1.113883.6.90
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,7025000,Subchronic undifferentiated schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,12939007,Chronic disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,14291003,Subchronic disorganized schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,16990005,Subchronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,26025008,Residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,26472000,Paraphrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,27387000,Subchronic disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,29599000,Chronic undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,30336007,Chronic residual schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,31658008,Chronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,35218008,Chronic disorganized schizophrenia with acute exacerbation (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,35252006,Disorganized schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,38295006,Involutional paraphrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,42868002,Subchronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,58214004,Schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,64905009,Paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,68995007,Chronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,70814008,Subchronic residual schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,71103003,Chronic residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,76566000,Subchronic residual schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,79204003,Chronic undifferentiated schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,79866005,Subchronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,83746006,Chronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,85861002,Subchronic undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,111482003,Subchronic schizophrenia with acute exacerbations (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,111484002,Undifferentiated schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191526005,Schizophrenic disorders (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191527001,Simple schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191531007,Acute exacerbation of chronic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191542003,Catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191547009,Acute exacerbation of subchronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191548004,Acute exacerbation of chronic catatonic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191554003,Acute exacerbation of subchronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191555002,Acute exacerbation of chronic paranoid schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191563001,Acute exacerbation of subchronic latent schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,191577003,Cenesthopathic schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,247804008,Schizophrenic prodrome (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,268617001,Acute schizophrenic episode (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,416340002,Late onset schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,441833000,Lethal catatonia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,1204417003,Early onset schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+Schizophrenia,2.16.840.1.113883.3.464.1004.1234,1335862003,Childhood-onset schizophrenia (disorder),SNOMED CT US Edition,2.16.840.1.113883.6.96
+[Direct Reference],,81,Independent Laboratory,POS,2.16.840.1.113883.6.50
