@@ -1,169 +1,221 @@
 ---
 name: measure-generator
-description: Generate Python code that calculates a HEDIS quality measure for a single patient given a FHIR R4 Bundle of their resources, outputting a FHIR MeasureReport. Use when the user asks to implement, generate, create, or build code for a HEDIS measure, a quality measure calculation, or a measure engine, even if they do not explicitly say "HEDIS" but reference a specific measure name or abbreviation (e.g., CBP, AMR, BCS-E).
-allowed-tools: Read Glob Grep WebSearch
+description: Calculate or improve HEDIS quality measures for a single patient given a FHIR R4 Bundle. Use when the user asks to run, calculate, implement, improve, debug, or extend a HEDIS measure, or references a specific measure name or abbreviation (e.g., CBP, AMR, BCS-E). Pre-built measure modules exist in measures/ for all 87 HEDIS MY 2025 measures.
+allowed-tools: Read Glob Grep WebSearch Bash Edit Write
 license: Internal use only
 metadata:
   owner: icanbwell
   last_reviewed: 2026-03-27
-  scope: HEDIS MY 2025 measure code generation from FHIR data
+  scope: HEDIS MY 2025 measure calculation and code generation from FHIR data
 ---
 
-# HEDIS Measure Code Generator
+# HEDIS Measure Calculator
 
 ## Skill Card
 
-**Goal**: Generate production-quality Python code that calculates a specific HEDIS MY 2025 measure for an individual patient, consuming a FHIR R4 Bundle and producing a FHIR R4 MeasureReport.
+**Goal**: Calculate HEDIS MY 2025 measures for individual patients using pre-built Python modules, or generate/improve measure calculation code.
 
 **Use when**:
-- User asks to implement a HEDIS measure calculation
-- User provides a measure name or abbreviation and wants runnable code
-- User asks to generate a measure engine for a FHIR-based quality calculation
+- User asks to calculate/run a HEDIS measure for a patient FHIR Bundle
+- User asks to implement, improve, debug, or extend a HEDIS measure calculation
 - User references a specific HEDIS measure (e.g., "CBP", "Controlling High Blood Pressure", "AMR")
-- User asks for code that evaluates patient data against a quality measure
+- User asks about measure logic, eligible population, exclusions, or numerator criteria
 
 **Do not use when**:
 - User asks general questions about HEDIS specifications (answer directly)
 - User wants to query a FHIR server (use fhir-query-builder skill instead)
 - User asks about measure reporting or submission processes (answer directly)
 
-**Required inputs**:
-- The HEDIS measure name or abbreviation (e.g., "CBP" or "Controlling High Blood Pressure")
-- Optionally: measurement year (default: 2025)
-- Optionally: specific value set codes to include
+## Architecture
 
-**Outputs**:
-- A complete, runnable Python file that:
-  - Accepts a FHIR R4 Bundle (dict) as input
-  - Returns a FHIR R4 MeasureReport (dict) as output
-  - Includes value set constants, helper functions, and a main entry point
-  - Passes validation via `scripts/validate_measure_code.py`
+All measure code lives in `measures/`:
+
+```
+measures/
+├── __init__.py
+├── hedis_common.py              # Shared utilities (DO NOT DUPLICATE)
+├── measure_cbp.py               # One file per measure
+├── measure_amr.py
+├── measure_cis_e.py             # ECDS measures use underscores (CIS-E -> cis_e)
+└── ...                          # 87 measure files total
+```
+
+### Shared Module: `measures/hedis_common.py`
+
+All reusable code lives here. Individual measure files MUST import from it. Key capabilities:
+
+| Category | Functions |
+|---|---|
+| **Value Set Loading** | `load_value_sets_from_csv(abbreviation)` → `{vs_name: {system_uri: {codes}}}` |
+| **Value Set Access** | `all_codes(vs, name)`, `codes_for_system(vs, name, uri)`, `codes_for_any_system(vs, name)` |
+| **Bundle Helpers** | `get_patient()`, `get_patient_id()`, `get_resources_by_type()`, `get_patient_birth_date()`, `get_patient_gender()` |
+| **Date Utilities** | `parse_date()`, `calculate_age()`, `is_date_in_range()`, `measurement_year_dates()`, `prior_year_dates()` |
+| **Code Matching** | `has_code_in_set()`, `resource_has_code()`, `resource_has_any_code()`, `codeable_concept_has_any_code()`, `has_code_prefix()`, `medication_has_code()` |
+| **Resource Dates** | `get_encounter_date()`, `get_condition_onset()`, `get_procedure_date()`, `get_observation_date()`, `get_medication_date()` |
+| **Finders** | `find_encounters_with_codes()`, `find_conditions_with_codes()`, `find_procedures_with_codes()`, `find_observations_with_codes()`, `find_medications_with_codes()` |
+| **Common Exclusions** | `check_common_exclusions()`, `check_hospice()`, `check_death()`, `check_palliative_care()`, `check_frailty_advanced_illness()` |
+| **BP Helpers** | `get_bp_readings()`, `get_most_recent_bp()` |
+| **Report Builders** | `build_measure_report()`, `build_multi_rate_measure_report()` |
+| **Runner** | `run_measure(bundle, abbr, name, year, eligible_fn, exclusion_fn, numerator_fn)` |
+| **Constants** | `ICD10CM`, `CPT`, `HCPCS`, `SNOMED`, `LOINC`, `RXNORM`, `NDC`, `CVX` (FHIR system URIs) |
+
+### Individual Measure Files
+
+Each `measure_<abbr>.py` follows this pattern:
+
+```python
+from .hedis_common import (load_value_sets_from_csv, run_measure, ...)
+
+VALUE_SETS = load_value_sets_from_csv("<ABBREVIATION>")
+
+def check_eligible_population(bundle, measurement_year) -> (bool, list[str]): ...
+def check_exclusions(bundle, measurement_year) -> (bool, list[str]): ...
+def check_numerator(bundle, measurement_year) -> (bool, list[str]): ...
+
+def calculate_<abbr>_measure(bundle, measurement_year=2025) -> dict:
+    return run_measure(bundle, "<ABBR>", "<Full Name>", measurement_year,
+                       check_eligible_population, check_exclusions, check_numerator)
+```
+
+Value sets are loaded at import time from `references/value-sets/by-measure/` CSV files via `load_value_sets_from_csv()`, which handles both single files and split part files automatically.
+
+### Value Set Data
+
+Value sets live in `references/value-sets/`:
+- `by-measure/<abbr>.csv` (or `<abbr>-part*.csv` for large sets) — per-measure codes
+- `measures-to-value-sets.csv` — maps measures to value set OIDs
+- `value-sets-to-codes-part*.csv` — complete code-level data (split for size)
+- `direct-reference-codes.csv` — direct reference codes by measure
+
+### Measure Specifications
+
+HEDIS specifications live in `references/measures/`:
+- `INDEX.md` — table of all 87 measures with abbreviations
+- `<abbr>.md` — individual measure specification
+- `../HEDIS-MY-2025-overview.md` — general guidelines and definitions
+- `../HEDIS-MY-2025-appendices.md` — appendices
 
 ## Mandatory Workflow
 
-### Step 1: Identify the Measure
+### When the user asks to CALCULATE a measure:
 
-Match the user's request to a HEDIS MY 2025 measure. Read `references/hedis-measures-index.md` or `references/measures/INDEX.md` if the measure name is ambiguous or abbreviated.
+1. Identify the measure abbreviation from the user's request. Check `references/measures/INDEX.md` if ambiguous.
+2. Read the corresponding `measures/measure_<abbr>.py` file.
+3. Show the user how to run it:
 
-If the measure cannot be identified, ask: "Which HEDIS measure would you like to implement? Please provide the abbreviation (e.g., CBP) or full name."
+```python
+import json
+from measures.measure_cbp import calculate_cbp_measure
 
-### Step 2: Read the Measure Specification
-
-Read the HEDIS specification for the requested measure from its individual file in `references/measures/<abbreviation>.md` (e.g., `references/measures/cbp.md` for Controlling High Blood Pressure). See `references/measures/INDEX.md` for the full list of measure files. For general HEDIS guidelines and definitions, read `references/HEDIS-MY-2025-overview.md`. For appendices, read `references/HEDIS-MY-2025-appendices.md`. Extract:
-
-1. **Description** - What the measure calculates
-2. **Definitions** - Key terms and thresholds
-3. **Eligible Population** - Ages, enrollment, benefits, event/diagnosis criteria
-4. **Required Exclusions** - All exclusion criteria
-5. **Administrative Specification** - Denominator and numerator logic
-6. **Value Sets Referenced** - All value set names mentioned
-
-### Step 3: Load the Value Sets for the Measure
-
-Read the measure's value set codes from `references/value-sets/by-measure/<abbreviation>.csv` (e.g., `references/value-sets/by-measure/cbp.csv`). This CSV contains all codes from the HEDIS Value Set Directory for the measure, with columns: `Value Set Name`, `Value Set OID`, `Code`, `Definition`, `Code System`, `Code System OID`.
-
-Use these actual codes in the generated Value Set Constants instead of representative samples. Group them by Value Set Name and Code System (ICD-10, CPT, LOINC, SNOMED, RxNorm, etc.) when building the code constants.
-
-For cross-referencing which value sets belong to a measure, see `references/value-sets/measures-to-value-sets.csv`. For the complete code-level value set data, see `references/value-sets/value-sets-to-codes.csv`.
-
-### Step 4: Read the Code Pattern References
-
-Read these references to understand the required code structure:
-- `references/measure-spec-pattern.md` - How HEDIS concepts map to code and FHIR resources
-- `references/fhir-measure-report-template.md` - The MeasureReport output structure and builder template
-- `scripts/example_cbp_measure.py` - A complete working example for the CBP measure
-
-### Step 5: Generate the Code
-
-Produce a single Python file following this structure:
-
-```
-Module docstring (measure name, description, input/output)
-│
-├── Value Set Constants (ICD-10, CPT, LOINC, SNOMED, RxNorm codes)
-├── Helper Functions (age calc, date parsing, resource extraction, code matching)
-├── check_eligible_population(bundle, measurement_year) -> (bool, list[str])
-├── check_exclusions(bundle, measurement_year) -> (bool, list[str])
-├── check_numerator(bundle, measurement_year) -> (bool, list[str])
-├── build_measure_report(...) -> dict
-├── calculate_<measure>_measure(bundle, measurement_year) -> dict  [main entry]
-└── if __name__ == "__main__": example usage with sample bundle
+result = calculate_cbp_measure(patient_bundle, measurement_year=2025)
+print(json.dumps(result, indent=2))
 ```
 
-**Code requirements**:
-- Pure Python, no external dependencies (only stdlib: `uuid`, `datetime`, `json`, `collections`)
-- All functions return a tuple of `(result_bool, evaluated_resource_references)` for traceability
-- Value sets use the complete codes from the HEDIS Value Set Directory (loaded from `references/value-sets/by-measure/<abbreviation>.csv`)
-- The main function name must follow the pattern `calculate_<abbreviation>_measure`
-- Include type hints throughout
-- Include an `if __name__ == "__main__"` block with a realistic example FHIR Bundle
+4. If the user provides a FHIR Bundle, run the calculation and show the MeasureReport result.
 
-### Step 6: Validate the Code
+### When the user asks to CREATE or IMPROVE a measure:
 
-Run the validation script to verify the generated code:
+#### Step 1: Identify the Measure
 
+Match the user's request to a HEDIS MY 2025 measure. Read `references/measures/INDEX.md` if the measure name is ambiguous.
+
+#### Step 2: Check for Existing Implementation
+
+Read `measures/measure_<abbr>.py` if it exists. If it does, understand the current logic before making changes.
+
+#### Step 3: Read the Measure Specification
+
+Read the HEDIS specification from `references/measures/<abbreviation>.md`. Extract:
+1. **Description** — What the measure calculates
+2. **Definitions** — Key terms and thresholds
+3. **Eligible Population** — Ages, enrollment, benefits, event/diagnosis criteria
+4. **Required Exclusions** — All exclusion criteria
+5. **Administrative Specification** — Denominator and numerator logic
+6. **Value Sets Referenced** — All value set names mentioned
+
+#### Step 4: Review the Value Sets
+
+Read the value set CSV header from `references/value-sets/by-measure/<abbreviation>.csv` (or the first part file) to understand available value set names. Value sets are loaded at runtime by `load_value_sets_from_csv()` — do NOT hardcode codes inline.
+
+#### Step 5: Write or Update the Code
+
+**If creating a new measure file**, follow the pattern in existing measure files:
+- Import everything needed from `hedis_common` — NEVER duplicate shared utilities
+- Load value sets: `VALUE_SETS = load_value_sets_from_csv("<ABBREVIATION>")`
+- Implement `check_eligible_population`, `check_exclusions`, `check_numerator`
+- Use `run_measure()` for single-rate measures, `build_multi_rate_measure_report()` for multi-rate
+- File name: `measure_<abbr>.py` (hyphens become underscores: CIS-E → `measure_cis_e.py`)
+
+**If improving an existing measure**, make targeted changes. Do not rewrite the entire file.
+
+#### Step 6: Validate
+
+Run a syntax check:
+```bash
+python3 -c "from measures.measure_<abbr> import calculate_<abbr>_measure; print('OK')"
 ```
-echo '{"code": "<generated-code>", "measure_abbreviation": "<abbrev>"}' | python3 scripts/validate_measure_code.py
-```
 
-If validation fails, fix the issues and re-validate. Do not present code to the user until validation passes.
+#### Step 7: Present
 
-### Step 7: Present the Code
-
-Provide the complete Python file to the user. Explain:
-- What the measure calculates
-- The eligible population criteria
-- The key exclusions
-- The numerator logic
-- How to run it with a FHIR Bundle
+Explain what the measure calculates, the key logic, and how to run it.
 
 ## Gotchas
 
-- **Value sets are from the HEDIS Value Set Directory.** The per-measure CSV files in `references/value-sets/by-measure/` contain the complete code lists. For very large value sets, the generated code may include all codes as constants; for production, consider loading them from a configuration file or database instead of inline constants.
-- **Age is calculated as of December 31.** HEDIS always uses end-of-year age, not age at encounter. Use `(as_of.month, as_of.day) < (birth.month, birth.day)` for the birthday check.
+- **Value sets are loaded from CSV at runtime.** The `load_value_sets_from_csv()` function in hedis_common handles single and split CSV files automatically. Never hardcode value set codes in measure files.
+- **Age is calculated as of December 31.** HEDIS uses end-of-year age. Use `calculate_age(birth_date, date(year, 12, 31))`.
 - **"Different dates of service" means calendar dates, not encounters.** Two encounters on the same date count as one date of service.
-- **BP readings exclude acute inpatient and ED settings.** For CBP/BPD/BPC-E, filter out Observations where the encounter class is IMP or EMER.
-- **Multiple BPs on same date: use lowest systolic and lowest diastolic.** These do not need to be from the same reading.
-- **Lab claims with POS code 81 are excluded** from many diagnosis-based criteria. Note this in exclusion logic.
-- **Frailty + Advanced Illness exclusion** has age-dependent logic: 66-80 requires both frailty AND advanced illness; 81+ requires only frailty. This applies across all product lines, not just Medicare.
-- **Medication measures** require matching on NDC or RxNorm codes from the Medication List Directory. Generic name matching is insufficient.
-- **ECDS measures** (those ending in -E) use electronic clinical data and may have different data source requirements than standard measures.
-- **The FHIR Bundle should contain all patient resources.** The code assumes a complete Bundle (Patient, Conditions, Encounters, Observations, Procedures, MedicationDispenses, Coverage).
+- **BP readings exclude acute inpatient and ED settings.** For CBP/BPD/BPC-E, use `get_bp_readings(bundle, start, end, exclude_inpatient_ed=True)`.
+- **Multiple BPs on same date: use lowest systolic and lowest diastolic.** Use `get_most_recent_bp()`.
+- **Frailty + Advanced Illness exclusion** has age-dependent logic: 66-80 requires both frailty AND advanced illness; 81+ requires only frailty. Use `check_frailty_advanced_illness()` from hedis_common.
+- **Common exclusions** (hospice, death, palliative care, frailty) are handled by `check_common_exclusions()`. Only add measure-specific exclusions in the measure file.
+- **ECDS measures** (ending in -E) use electronic clinical data. Their value set abbreviation uses a hyphen (e.g., "CIS-E") but the Python file uses underscores (e.g., `measure_cis_e.py`).
+- **Survey/descriptive measures** (HOS, FRM, MUI, PAO, CPA, CPC, CCC, ENP, LDM, RDM, DMH, DSU) have stub files that return empty MeasureReports — they cannot be calculated from individual FHIR data.
 
 ## Measures With Special Handling
 
 | Pattern | Measures | Notes |
 |---|---|---|
-| Multiple indicators | TRC, COA, WCC | Each indicator is a separate group in MeasureReport |
-| Medication ratio | AMR | Numerator is a ratio calculation, not a simple yes/no |
+| Multiple indicators | TRC, COA, WCC, DDE, CIS-E, IMA-E, AIS-E | Each indicator is a separate group in MeasureReport. Use `build_multi_rate_measure_report()`. |
+| Two rates (7d/30d) | FUH, FUM, FUI, FUA | Follow-up measures with 7-day and 30-day rates |
+| Two rates (init/cont) | IET, ADD-E | Initiation and continuation/engagement phases |
+| Two rates (prenatal/postpartum) | PPC | Timeliness of prenatal care + postpartum care |
+| Medication ratio | AMR | Numerator is a ratio calculation (controller/total >= 0.50) |
+| Medication adherence | SAA, PBH | PDC (proportion of days covered) calculation |
 | Multi-year lookback | SPC, SPD, OMW | Eligible population looks back 1-2 years before MY |
-| Inverse measure | PSA, URI, AAB, LBP | Lower rate = better. Numerator is the "bad" event |
-| Risk adjusted | PCR, HFS, AHU, EDU, HPC | Require comorbidity/risk adjustment tables |
-| 14-day separation | CIS-E, IMA-E, TFC, W30, AIS-E | Multiple events must be >=14 days apart |
+| Inverse measure | PSA, URI, AAB, LBP, HDO, UOP | Lower rate = better. Numerator is the "bad" event. |
+| Risk adjusted | PCR, HFS, AHU, EDU, HPC | Observed rates only at individual level (no risk adjustment) |
+| 14-day separation | CIS-E, IMA-E, TFC, W30, AIS-E | Multiple events must be ≥14 days apart |
+| Survey/descriptive | HOS, FRM, MUI, PAO, CPA, CPC, CCC, ENP, LDM, RDM, DMH, DSU | Stub files — not calculable from FHIR data |
 
 ## Example
 
-**User**: "Generate code for the Controlling High Blood Pressure (CBP) measure"
+**User**: "Calculate CBP for this patient bundle"
 
-**Output**: A Python file similar to `scripts/example_cbp_measure.py` that:
-1. Checks if the patient is 18-85 with 2+ HTN visits in the lookback period
-2. Applies exclusions (hospice, death, palliative care, pregnancy, ESRD, frailty)
-3. Finds the most recent BP reading in the measurement year
-4. Determines if BP < 140/90 mm Hg
-5. Returns a FHIR MeasureReport with population counts and measure score
+```python
+from measures.measure_cbp import calculate_cbp_measure
+
+result = calculate_cbp_measure(patient_bundle, measurement_year=2025)
+# Returns FHIR MeasureReport with:
+#   initial-population: 1 (age 18-85 with 2+ HTN visits)
+#   denominator-exclusion: 0 (no hospice/death/palliative/pregnancy/ESRD/frailty)
+#   denominator: 1
+#   numerator: 1 (most recent BP < 140/90)
+#   measureScore: 1.0
+```
 
 ## Edge Cases
 
-- **Patient not in eligible population**: Return MeasureReport with initial-population=0, all others=0, no measureScore.
-- **Patient excluded**: Return MeasureReport with initial-population=1, denominator-exclusion=1, denominator=0, numerator=0, no measureScore.
-- **Patient in denominator but not compliant**: Return MeasureReport with denominator=1, numerator=0, measureScore=0.0.
-- **No BP/lab readings found**: Patient is not compliant (numerator=0).
-- **Multiple rates/indicators**: Create separate group entries for each indicator.
+- **Patient not in eligible population**: MeasureReport with initial-population=0, all others=0, no measureScore.
+- **Patient excluded**: MeasureReport with initial-population=1, denominator-exclusion=1, denominator=0, numerator=0, no measureScore.
+- **Patient in denominator but not compliant**: MeasureReport with denominator=1, numerator=0, measureScore=0.0.
+- **No qualifying data found**: Patient is not compliant (numerator=0).
+- **Multiple rates/indicators**: Separate group entries for each indicator.
 - **Missing FHIR resources**: Gracefully handle missing resource types. Never raise on incomplete data.
 
 ## Policy
 
-- Always include the NCQA copyright notice in the module docstring.
+- Always include the NCQA copyright notice in module docstrings.
 - Value set codes are sourced from the HEDIS MY 2025 Value Set Directory.
 - Generated code is for internal quality improvement purposes only.
-- Do not hardcode patient data; the code must work with any FHIR Bundle.
+- Do not hardcode patient data; code must work with any FHIR Bundle.
+- All shared code goes in `hedis_common.py` — never duplicate utilities in measure files.
