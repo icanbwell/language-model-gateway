@@ -271,7 +271,7 @@ When a user tells you an action is blocked or explains a constraint, internalize
 Find and use the repo's canonical build, test, and lint commands. Check the Makefile, package.json scripts, build.gradle, or Pipfile. If the commands are unclear, say so and point to where you looked. Do not invent commands.
 
 ### Don't Introduce Dependencies Casually
-Check `approved-tech.yaml` before adding any new dependency. If the dependency is not listed, flag it for review. Do not assume a library is approved because it is popular.
+Check `policies/approved-tech.yaml` before adding any new dependency. If the dependency is not listed, flag it for review. Do not assume a library is approved because it is popular.
 
 ### Reference Governing Artifacts
 If your change touches a public API, event contract, or cross-service behavior, reference the governing document (Tech Design Doc, FDR, ADR, AsyncAPI spec) in the PR description or commit message. If no governing artifact exists and one should, say so.
