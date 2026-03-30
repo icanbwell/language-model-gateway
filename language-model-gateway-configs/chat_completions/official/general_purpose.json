@@ -72,13 +72,14 @@
     {
       "auth": "jwt_token",
       "auth_providers": [
-        "oktafhirdev"
+        "oktaaiden"
       ],
-      "name": "fhir_server",
-      "url": "https://mcpfhiragent.dev.icanbwell.com/",
+      "name": "google_drive",
+      "url": "http://mcp_server_gateway:5000/google_drive/",
       "headers": {
         "X-Client-Id": "Aiden"
-      }
+      },
+      "lazy_load": true
     }
   ],
   "example_prompts": [

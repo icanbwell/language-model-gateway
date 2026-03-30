@@ -9,11 +9,13 @@ from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from langchain_mcp_adapters.tools import convert_mcp_tool_to_langchain_tool
 from languagemodelcommon.configs.schemas.config_schema import AgentConfig
 from languagemodelcommon.utilities.logger.logging_transport import LoggingTransport
 from languagemodelcommon.utilities.token_reducer.token_reducer import TokenReducer
 from mcp.types import (
     LoggingMessageNotificationParams,
+    Tool as MCPTool,
 )
 from oidcauthlib.auth.models.token import Token
 
@@ -159,6 +161,73 @@ class MCPToolProvider:
             f"MCP Tool Progress - Server: {context.server_name}, Progress: {progress}, Total: {total}, Message: {message}"
         )
 
+    def get_lazy_tools(
+        self, *, tool_config: AgentConfig, headers: Dict[str, str]
+    ) -> List[BaseTool]:
+        """
+        Create tools from static definitions without contacting the MCP server.
+        When lazy_load is enabled, tool metadata comes from the config's
+        tool_definitions instead of being discovered from the server.  The
+        actual MCP connection is deferred to tool invocation time.
+        """
+        if not tool_config.tool_definitions:
+            logger.warning(
+                f"lazy_load is enabled for {tool_config.name} but no tool_definitions provided"
+            )
+            return []
+
+        url: str | None = tool_config.url
+        if url is None:
+            raise ValueError(
+                f"Tool URL must be provided for lazy-loaded tool: {tool_config.name}"
+            )
+
+        tool_call_timeout_seconds: int = (
+            self.environment_variables.tool_call_timeout_seconds
+        )
+        mcp_tool_config: StreamableHttpConnection = {
+            "url": url,
+            "transport": "streamable_http",
+            "httpx_client_factory": self.get_httpx_async_client,
+            "timeout": timedelta(seconds=tool_call_timeout_seconds),
+            "sse_read_timeout": timedelta(seconds=tool_call_timeout_seconds),
+        }
+        if tool_config.headers:
+            mcp_tool_config["headers"] = {
+                key: os.path.expandvars(value)
+                for key, value in tool_config.headers.items()
+            }
+
+        tools: List[BaseTool] = []
+        for tool_def in tool_config.tool_definitions:
+            mcp_tool = MCPTool(
+                name=tool_def.name,
+                description=tool_def.description,
+                inputSchema={"type": "object", "properties": {}},
+            )
+            langchain_tool = convert_mcp_tool_to_langchain_tool(
+                session=None,
+                tool=mcp_tool,
+                connection=mcp_tool_config,
+                callbacks=Callbacks(
+                    on_progress=self.on_mcp_tool_progress,
+                    on_logging_message=self.on_mcp_tool_logging,
+                ),
+                tool_interceptors=[
+                    self.auth_interceptor.get_tool_interceptor_auth(),
+                    self.tracing_interceptor.get_tool_interceptor_tracing(),
+                    self.truncation_interceptor.get_tool_interceptor_truncation(),
+                ],
+                server_name=tool_config.name,
+            )
+            tools.append(langchain_tool)
+
+        logger.info(
+            f"Created {len(tools)} lazy-loaded tools for {tool_config.name}: "
+            f"{[t.name for t in tools]}"
+        )
+        return tools
+
     async def get_tools_by_url_async(
         self, *, tool_config: AgentConfig, headers: Dict[str, str]
     ) -> List[BaseTool]:
@@ -171,6 +240,9 @@ class MCPToolProvider:
         Returns:
             A list of BaseTool instances retrieved from the MCP.
         """
+        if tool_config.lazy_load:
+            return self.get_lazy_tools(tool_config=tool_config, headers=headers)
+
         token: Token | None = None
 
         logger.info(
