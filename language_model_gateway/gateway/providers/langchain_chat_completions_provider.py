@@ -191,15 +191,23 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
-        await self.pass_through_token_manager.check_tokens_are_valid_for_tools(
+
+        # Configure the auth interceptor with per-request context so token
+        # validation is deferred to tool invocation time
+        mcp_tool_configs: list[AgentConfig] = (
+            [t for t in model_config.get_agents()]
+            if model_config.get_agents() is not None
+            else []
+        )
+        self.mcp_tool_provider.auth_interceptor.configure_for_request(
+            tool_configs=mcp_tool_configs,
             auth_information=auth_information,
             headers=headers,
-            model_config=model_config,
         )
 
         # add MCP tools
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
-            tools=[t for t in model_config.get_agents()],
+            tools=mcp_tool_configs,
             headers=headers,
         )
 

@@ -58,6 +58,9 @@ from language_model_gateway.gateway.managers.system_command_manager import (
 from language_model_gateway.gateway.managers.token_submission_manager import (
     TokenSubmissionManager,
 )
+from language_model_gateway.gateway.mcp.interceptors.auth import (
+    AuthMcpCallInterceptor,
+)
 from language_model_gateway.gateway.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
 )
@@ -260,6 +263,13 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            AuthMcpCallInterceptor,
+            lambda c: AuthMcpCallInterceptor(
+                pass_through_token_manager=c.resolve(PassThroughTokenManager),
+            ),
+        )
+
+        container.singleton(
             MCPToolProvider,
             lambda c: MCPToolProvider(
                 tool_auth_manager=c.resolve(ToolAuthManager),
@@ -269,6 +279,7 @@ class LanguageModelGatewayContainerFactory:
                 token_reducer=c.resolve(TokenReducer),
                 tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
+                auth_interceptor=c.resolve(AuthMcpCallInterceptor),
             ),
         )
 

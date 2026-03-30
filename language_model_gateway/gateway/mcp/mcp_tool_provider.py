@@ -16,15 +16,16 @@ from mcp.types import (
     LoggingMessageNotificationParams,
 )
 from oidcauthlib.auth.models.token import Token
-from oidcauthlib.auth.token_reader import TokenReader
 
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
-from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
+)
+from language_model_gateway.gateway.mcp.interceptors.auth import (
+    AuthMcpCallInterceptor,
 )
 from language_model_gateway.gateway.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
@@ -59,6 +60,7 @@ class MCPToolProvider:
         token_reducer: TokenReducer,
         truncation_interceptor: TruncationMcpCallInterceptor,
         tracing_interceptor: TracingMcpCallInterceptor,
+        auth_interceptor: AuthMcpCallInterceptor,
     ) -> None:
         """
         Initialize the MCPToolProvider with authentication and token management.
@@ -103,6 +105,14 @@ class MCPToolProvider:
         if not isinstance(self.tracing_interceptor, TracingMcpCallInterceptor):
             raise TypeError(
                 "tracing_interceptor must be an instance of TracingMcpCallInterceptor"
+            )
+
+        self.auth_interceptor = auth_interceptor
+        if self.auth_interceptor is None:
+            raise ValueError("AuthMcpCallInterceptor must be provided")
+        if not isinstance(self.auth_interceptor, AuthMcpCallInterceptor):
+            raise TypeError(
+                "auth_interceptor must be an instance of AuthMcpCallInterceptor"
             )
 
     async def load_async(self) -> None:
@@ -190,8 +200,11 @@ class MCPToolProvider:
                     for key, value in tool_config.headers.items()
                 }
 
-            # pass Authorization header if provided
-            if headers:
+            # For tools with auth_providers, authentication is deferred to
+            # invocation time via AuthMcpCallInterceptor.  For tools that have
+            # auth set but no specific auth_providers, pass through the caller's
+            # Authorization header so the MCP server can list its tools.
+            if headers and not tool_config.auth_providers and tool_config.auth:
                 auth_headers = [
                     headers.get(key)
                     for key in headers
@@ -199,57 +212,11 @@ class MCPToolProvider:
                 ]
                 auth_header: str | None = auth_headers[0] if auth_headers else None
                 if auth_header:
-                    if tool_config.auth_providers:
-                        # get the appropriate token_item for this tool
-                        token_item: (
-                            TokenCacheItem | None
-                        ) = await self.tool_auth_manager.get_token_for_tool_async(
-                            auth_header=auth_header,
-                            error_message=f"No auth found for  {tool_config.name}",
-                            tool_config=tool_config,
-                        )
-                        token = token_item.get_access_token() if token_item else None
-                        if token:
-                            # if we have a token_item, we need to add it to the Authorization header
-                            auth_header = f"Bearer {token.token}"
-                        else:
-                            auth_bearer_token: str | None = TokenReader.extract_token(
-                                authorization_header=auth_header
-                            )
-                            auth_token: Token | None = (
-                                Token.create_from_token(token=auth_bearer_token)
-                                if auth_bearer_token
-                                and auth_bearer_token != "fake-api-key"
-                                else None
-                            )
-
-                            if not auth_token and not tool_config.auth_optional:
-                                raise AuthorizationMcpToolTokenInvalidException(
-                                    message=f"No token found.  Authorization needed for MCP tools at {url}. "
-                                    + f" for auth providers {tool_config.auth_providers}"
-                                    + f", token_email: {auth_token.email if auth_token else 'None'}"
-                                    + f", token_audience: {auth_token.audience if auth_token else 'None'}"
-                                    + f", token_subject: {auth_token.subject if auth_token else 'None'}",
-                                    tool_url=url,
-                                    token=token,
-                                )
-
-                        # add the Authorization header to the mcp_tool_config headers
-                        existing_headers = mcp_tool_config.get("headers") or {}
-                        mcp_tool_config["headers"] = {
-                            **existing_headers,
-                            "Authorization": auth_header,
-                        }
-                    elif (
-                        tool_config.auth
-                    ):  # no specific auth providers are specified for the tool
-                        # just pass through the current Authorization header
-                        # add the Authorization header to the mcp_tool_config headers
-                        existing_headers = mcp_tool_config.get("headers") or {}
-                        mcp_tool_config["headers"] = {
-                            **existing_headers,
-                            "Authorization": auth_header,
-                        }
+                    existing_headers = mcp_tool_config.get("headers") or {}
+                    mcp_tool_config["headers"] = {
+                        **existing_headers,
+                        "Authorization": auth_header,
+                    }
 
             tool_names: List[str] | None = (
                 tool_config.tools.split(",") if tool_config.tools else None
@@ -264,6 +231,7 @@ class MCPToolProvider:
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
                 tool_interceptors=[  # First interceptor in list becomes outermost layer.
+                    self.auth_interceptor.get_tool_interceptor_auth(),
                     self.tracing_interceptor.get_tool_interceptor_tracing(),
                     self.truncation_interceptor.get_tool_interceptor_truncation(),
                 ],

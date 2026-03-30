@@ -68,6 +68,17 @@
     },
     {
       "name": "pdf_text_extractor"
+    },
+    {
+      "auth": "jwt_token",
+      "auth_providers": [
+        "oktaaiden"
+      ],
+      "name": "google_drive",
+      "url": "http://mcp_server_gateway:5000/google_drive/",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "example_prompts": [
