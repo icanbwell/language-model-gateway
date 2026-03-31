@@ -45,22 +45,7 @@
       "url": "http://mcp_server_gateway:5000/google_drive/",
       "headers": {
         "X-Client-Id": "Aiden"
-      },
-      "lazy_load": true,
-      "tool_definitions": [
-        {
-          "name": "search_drive_files",
-          "description": "Searches for files in Google Drive based on the provided name or full text.  Either name or full_text must be provided."
-        },
-        {
-          "name": "get_drive_file_contents_by_file_id",
-          "description": "Retrieves the contents of a file from Google Drive by file ID."
-        },
-        {
-          "name": "download_file_from_url",
-          "description": "Downloads a file from Google Drive using its URL. The URL must be a valid Google Drive file link.  Use with any url in the domain docs.google.com."
-        }
-      ]
+      }
     },
     {
       "name": "calculator_average"

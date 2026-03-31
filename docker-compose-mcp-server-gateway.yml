@@ -1,7 +1,8 @@
 services:
   mcp_server_gateway:
     depends_on:
-      - keycloak
+      keycloak-init:
+        condition: service_completed_successfully
     build:
       dockerfile: Dockerfile
       context: ../mcp-server-gateway
