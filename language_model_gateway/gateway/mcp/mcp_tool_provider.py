@@ -314,35 +314,35 @@ class MCPToolProvider:
                 tools = [t for t in tools if t.name in tool_names]
             return tools
         except* HTTPStatusError as e:
-            url = tool_config.url if tool_config.url else "unknown"
+            tool_url: str = tool_config.url if tool_config.url else "unknown"
             first_exception1 = e.exceptions[0]
             logger.error(
-                f"get_tools_by_url_async HTTP error while loading MCP tools from {url}: {type(first_exception1)} {first_exception1}"
+                f"get_tools_by_url_async HTTP error while loading MCP tools from {tool_url}: {type(first_exception1)} {first_exception1}"
             )
             raise AuthorizationMcpToolTokenInvalidException(
-                message=f"Authorization needed for MCP tools at {url}. "
+                message=f"Authorization needed for MCP tools at {tool_url}. "
                 + "Please provide a valid token_item in the Authorization header."
                 + f" token: {token.audience if token else 'None'}",
-                tool_url=url,
+                tool_url=tool_url,
                 token=token,
             ) from e
         except* McpToolUnauthorizedException as e:
-            url = tool_config.url if tool_config.url else "unknown"
+            tool_url = tool_config.url if tool_config.url else "unknown"
             first_exception2 = e.exceptions[0]
             logger.error(
-                f"get_tools_by_url_async MCP Tool UnAuthorized error while loading MCP tools from {url}: {type(first_exception2)} {first_exception2}"
+                f"get_tools_by_url_async MCP Tool UnAuthorized error while loading MCP tools from {tool_url}: {type(first_exception2)} {first_exception2}"
             )
             raise AuthorizationMcpToolTokenInvalidException(
-                message=f"Authorization needed for MCP tools at {url}. "
+                message=f"Authorization needed for MCP tools at {tool_url}. "
                 + "Please provide a valid token in the Authorization header."
                 + f" token audience: {token.audience if token else 'None'}",
-                tool_url=url,
+                tool_url=tool_url,
                 token=token,
             ) from e
         except* Exception as e:
-            url = tool_config.url if tool_config.url else "unknown"
+            tool_url = tool_config.url if tool_config.url else "unknown"
             logger.error(
-                f"get_tools_by_url_async Failed to load MCP tools from {url}: {type(e.exceptions[0])} {e}"
+                f"get_tools_by_url_async Failed to load MCP tools from {tool_url}: {type(e.exceptions[0])} {e}"
             )
             raise e
 
