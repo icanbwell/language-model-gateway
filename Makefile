@@ -29,6 +29,11 @@ build: create-docker-network ## Builds the docker for dev
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	-f docker-compose-mongo.yml \
+	-f docker-compose-fhir.yml \
+	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
 	 build --parallel;
 
 .PHONY: up
