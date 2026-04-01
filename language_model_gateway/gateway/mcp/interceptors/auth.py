@@ -27,14 +27,16 @@ logger.setLevel(SRC_LOG_LEVELS["MCP"])
 
 class AuthMcpCallInterceptor:
     """Resolves authentication tokens at MCP tool invocation time rather than
-    at tool registration time.  This avoids blocking chat requests that never
-    trigger a tool call and provides the user with actionable login URLs only
-    when a tool that requires authentication is actually invoked by the LLM."""
+    at tool registration time.  Created per-request with the request's auth
+    context so there is no shared mutable state between concurrent requests."""
 
     def __init__(
         self,
         *,
         pass_through_token_manager: PassThroughTokenManager,
+        tool_configs: list[AgentConfig],
+        auth_information: AuthInformation,
+        headers: Dict[str, str],
     ) -> None:
         self.pass_through_token_manager = pass_through_token_manager
         if self.pass_through_token_manager is None:
@@ -43,22 +45,9 @@ class AuthMcpCallInterceptor:
             raise TypeError(
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
             )
-
-        # Populated per-request by the completions provider before tools are invoked
-        self._tool_configs_by_server_name: Dict[str, AgentConfig] = {}
-        self._auth_information: AuthInformation | None = None
-        self._headers: Dict[str, str] = {}
-
-    def configure_for_request(
-        self,
-        *,
-        tool_configs: list[AgentConfig],
-        auth_information: AuthInformation,
-        headers: Dict[str, str],
-    ) -> None:
-        """Set per-request context so the interceptor can resolve tokens for
-        the correct tool config when a tool call arrives."""
-        self._tool_configs_by_server_name = {tc.name: tc for tc in tool_configs}
+        self._tool_configs_by_server_name: Dict[str, AgentConfig] = {
+            tc.name: tc for tc in tool_configs
+        }
         self._auth_information = auth_information
         self._headers = headers
 
@@ -76,11 +65,6 @@ class AuthMcpCallInterceptor:
                 return await handler(request)
 
             auth_header = self._extract_auth_header(self._headers)
-            if self._auth_information is None:
-                raise ValueError(
-                    "AuthInformation not set on AuthMcpCallInterceptor. "
-                    "Call configure_for_request before invoking tools."
-                )
 
             token_cache_item: (
                 TokenCacheItem | None

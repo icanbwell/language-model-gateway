@@ -47,6 +47,9 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
+from language_model_gateway.gateway.mcp.interceptors.auth import (
+    AuthMcpCallInterceptor,
+)
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
@@ -192,14 +195,15 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # Load MCP tools if they are enabled
         await self.mcp_tool_provider.load_async()
 
-        # Configure the auth interceptor with per-request context so token
-        # validation is deferred to tool invocation time
+        # Create a per-request auth interceptor so concurrent requests
+        # don't share mutable auth state
         mcp_tool_configs: list[AgentConfig] = (
             [t for t in model_config.get_agents()]
             if model_config.get_agents() is not None
             else []
         )
-        self.mcp_tool_provider.auth_interceptor.configure_for_request(
+        auth_interceptor = AuthMcpCallInterceptor(
+            pass_through_token_manager=self.pass_through_token_manager,
             tool_configs=mcp_tool_configs,
             auth_information=auth_information,
             headers=headers,
@@ -209,6 +213,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
             tools=mcp_tool_configs,
             headers=headers,
+            auth_interceptor=auth_interceptor,
         )
 
         # add the skills tools
@@ -222,7 +227,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if tool_configs_from_request:
             tools_from_request: Sequence[BaseTool] = (
                 await self.mcp_tool_provider.get_tools_async(
-                    tools=tool_configs_from_request, headers=headers
+                    tools=tool_configs_from_request,
+                    headers=headers,
+                    auth_interceptor=auth_interceptor,
                 )
                 if tool_configs_from_request is not None
                 else []

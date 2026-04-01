@@ -125,7 +125,7 @@ async def test_mcp_agent() -> None:
         passed_evaluation=None,
         evaluation_notes=None,
     )
-    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
+    math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Math Response ===")
     print(math_response["messages"][-1].content)

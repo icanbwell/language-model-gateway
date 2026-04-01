@@ -199,7 +199,7 @@ async def test_google_drive_via_llm() -> None:
         evaluation_notes=None,
         passed_evaluation=None,
     )
-    math_response = await graph.ainvoke(prompt)  # type: ignore[arg-type]
+    math_response = await graph.ainvoke(prompt)
     print(math_response)
     print("=== Google Drive Response ===")
     print(math_response["messages"][-1].content)

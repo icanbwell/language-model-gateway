@@ -35,6 +35,9 @@ from language_model_gateway.gateway.mcp.interceptors.tracing import (
 from language_model_gateway.gateway.mcp.interceptors.truncation import (
     TruncationMcpCallInterceptor,
 )
+from language_model_gateway.gateway.providers.pass_through_token_manager import (
+    PassThroughTokenManager,
+)
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
@@ -62,7 +65,7 @@ class MCPToolProvider:
         token_reducer: TokenReducer,
         truncation_interceptor: TruncationMcpCallInterceptor,
         tracing_interceptor: TracingMcpCallInterceptor,
-        auth_interceptor: AuthMcpCallInterceptor,
+        pass_through_token_manager: PassThroughTokenManager,
     ) -> None:
         """
         Initialize the MCPToolProvider with authentication and token management.
@@ -109,12 +112,12 @@ class MCPToolProvider:
                 "tracing_interceptor must be an instance of TracingMcpCallInterceptor"
             )
 
-        self.auth_interceptor = auth_interceptor
-        if self.auth_interceptor is None:
-            raise ValueError("AuthMcpCallInterceptor must be provided")
-        if not isinstance(self.auth_interceptor, AuthMcpCallInterceptor):
+        self.pass_through_token_manager = pass_through_token_manager
+        if self.pass_through_token_manager is None:
+            raise ValueError("PassThroughTokenManager must be provided")
+        if not isinstance(self.pass_through_token_manager, PassThroughTokenManager):
             raise TypeError(
-                "auth_interceptor must be an instance of AuthMcpCallInterceptor"
+                "pass_through_token_manager must be an instance of PassThroughTokenManager"
             )
 
     async def load_async(self) -> None:
@@ -162,7 +165,11 @@ class MCPToolProvider:
         )
 
     def get_lazy_tools(
-        self, *, tool_config: AgentConfig, headers: Dict[str, str]
+        self,
+        *,
+        tool_config: AgentConfig,
+        headers: Dict[str, str],
+        auth_interceptor: AuthMcpCallInterceptor,
     ) -> List[BaseTool]:
         """
         Create tools from static definitions without contacting the MCP server.
@@ -214,7 +221,7 @@ class MCPToolProvider:
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
                 tool_interceptors=[
-                    self.auth_interceptor.get_tool_interceptor_auth(),
+                    auth_interceptor.get_tool_interceptor_auth(),
                     self.tracing_interceptor.get_tool_interceptor_tracing(),
                     self.truncation_interceptor.get_tool_interceptor_truncation(),
                 ],
@@ -229,7 +236,11 @@ class MCPToolProvider:
         return tools
 
     async def get_tools_by_url_async(
-        self, *, tool_config: AgentConfig, headers: Dict[str, str]
+        self,
+        *,
+        tool_config: AgentConfig,
+        headers: Dict[str, str],
+        auth_interceptor: AuthMcpCallInterceptor,
     ) -> List[BaseTool]:
         """
         Get tools by their MCP URL asynchronously.
@@ -241,7 +252,11 @@ class MCPToolProvider:
             A list of BaseTool instances retrieved from the MCP.
         """
         if tool_config.lazy_load:
-            return self.get_lazy_tools(tool_config=tool_config, headers=headers)
+            return self.get_lazy_tools(
+                tool_config=tool_config,
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
 
         token: Token | None = None
 
@@ -303,7 +318,7 @@ class MCPToolProvider:
                     on_logging_message=self.on_mcp_tool_logging,
                 ),
                 tool_interceptors=[  # First interceptor in list becomes outermost layer.
-                    self.auth_interceptor.get_tool_interceptor_auth(),
+                    auth_interceptor.get_tool_interceptor_auth(),
                     self.tracing_interceptor.get_tool_interceptor_tracing(),
                     self.truncation_interceptor.get_tool_interceptor_truncation(),
                 ],
@@ -347,7 +362,11 @@ class MCPToolProvider:
             raise e
 
     async def get_tools_async(
-        self, *, tools: list[AgentConfig], headers: Dict[str, str]
+        self,
+        *,
+        tools: list[AgentConfig],
+        headers: Dict[str, str],
+        auth_interceptor: AuthMcpCallInterceptor,
     ) -> list[BaseTool]:
         # get list of tools from the tools from each agent and then concatenate them
         all_tools: List[BaseTool] = []
@@ -355,7 +374,9 @@ class MCPToolProvider:
             if tool.url is not None:
                 try:
                     tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
-                        tool_config=tool, headers=headers
+                        tool_config=tool,
+                        headers=headers,
+                        auth_interceptor=auth_interceptor,
                     )
                     all_tools.extend(tools_by_url)
                 except* Exception as e:
