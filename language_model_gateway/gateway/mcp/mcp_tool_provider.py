@@ -210,7 +210,11 @@ class MCPToolProvider:
             mcp_tool = MCPTool(
                 name=tool_def.name,
                 description=tool_def.description,
-                inputSchema={"type": "object", "properties": {}},
+                inputSchema={
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": True,
+                },
             )
             langchain_tool = convert_mcp_tool_to_langchain_tool(
                 session=None,
