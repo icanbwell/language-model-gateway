@@ -379,10 +379,16 @@ class MCPToolProvider:
                         auth_interceptor=auth_interceptor,
                     )
                     all_tools.extend(tools_by_url)
-                except* Exception as e:
-                    first_exception = e.exceptions[0]
+                except* AuthorizationMcpToolTokenInvalidException as auth_eg:
+                    auth_exception = auth_eg.exceptions[0]
                     logger.error(
-                        f"get_tools_async Failed to get tools for {tool.name} from {tool.url}: {type(first_exception)} {first_exception}"
+                        f"get_tools_async Authorization error for {tool.name} from {tool.url}: {type(auth_exception)} {auth_exception}"
                     )
-                    raise e
+                    raise auth_eg
+                except* Exception as conn_eg:
+                    conn_exception = conn_eg.exceptions[0]
+                    logger.warning(
+                        f"get_tools_async Failed to connect to MCP server for {tool.name} at {tool.url}, "
+                        f"skipping tool: {type(conn_exception).__name__}: {conn_exception}"
+                    )
         return all_tools
