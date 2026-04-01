@@ -8,7 +8,7 @@ from httpx import HTTPStatusError
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.sessions import StreamableHttpConnection
+from langchain_mcp_adapters.sessions import StreamableHttpConnection, create_session
 from langchain_mcp_adapters.tools import convert_mcp_tool_to_langchain_tool
 from languagemodelcommon.configs.schemas.config_schema import AgentConfig
 from languagemodelcommon.utilities.logger.logging_transport import LoggingTransport
@@ -239,6 +239,84 @@ class MCPToolProvider:
         )
         return tools
 
+    async def _discover_tools_via_public_url(
+        self,
+        *,
+        tool_config: AgentConfig,
+        invocation_config: StreamableHttpConnection,
+        tool_call_timeout_seconds: int,
+        auth_interceptor: AuthMcpCallInterceptor,
+    ) -> List[BaseTool]:
+        """
+        Discover tools via an unauthenticated public_url, then create
+        LangChain tools that invoke via the authenticated main url.
+        """
+        public_url: str = tool_config.public_url  # type: ignore[assignment]
+        logger.info(
+            f"Discovering tools for {tool_config.name} via public_url: {public_url}"
+        )
+
+        # Build an unauthenticated discovery connection
+        discovery_config: StreamableHttpConnection = {
+            "url": public_url,
+            "transport": "streamable_http",
+            "httpx_client_factory": self.get_httpx_async_client,
+            "timeout": timedelta(seconds=tool_call_timeout_seconds),
+            "sse_read_timeout": timedelta(seconds=tool_call_timeout_seconds),
+        }
+        if tool_config.headers:
+            discovery_config["headers"] = {
+                key: os.path.expandvars(value)
+                for key, value in tool_config.headers.items()
+            }
+
+        callbacks = Callbacks(
+            on_progress=self.on_mcp_tool_progress,
+            on_logging_message=self.on_mcp_tool_logging,
+        )
+        mcp_callbacks = callbacks.to_mcp_format(
+            context=CallbackContext(server_name=tool_config.name)
+        )
+
+        # Discover tool metadata from the public (unauthenticated) endpoint
+        async with create_session(
+            discovery_config, mcp_callbacks=mcp_callbacks
+        ) as session:
+            await session.initialize()
+            mcp_tools: List[MCPTool] = []
+            cursor: str | None = None
+            while True:
+                result = await session.list_tools(cursor=cursor)
+                if result.tools:
+                    mcp_tools.extend(result.tools)
+                if not result.nextCursor:
+                    break
+                cursor = result.nextCursor
+
+        # Create LangChain tools that use the main url for invocation
+        tool_interceptors = [
+            auth_interceptor.get_tool_interceptor_auth(),
+            self.tracing_interceptor.get_tool_interceptor_tracing(),
+            self.truncation_interceptor.get_tool_interceptor_truncation(),
+        ]
+        tools: List[BaseTool] = [
+            convert_mcp_tool_to_langchain_tool(
+                session=None,
+                tool=mcp_tool,
+                connection=invocation_config,
+                callbacks=callbacks,
+                tool_interceptors=tool_interceptors,
+                server_name=tool_config.name,
+            )
+            for mcp_tool in mcp_tools
+        ]
+
+        logger.info(
+            f"Discovered {len(tools)} tools for {tool_config.name} via public_url: "
+            f"{[t.name for t in tools]}"
+        )
+        return tools
+
     async def get_tools_by_url_async(
         self,
         *,
@@ -266,7 +344,8 @@ class MCPToolProvider:
 
         safe_header_keys = [k for k in headers.keys()] if headers else []
         logger.info(
-            f"get_tools_by_url_async called for tool: {tool_config.name}, url: {tool_config.url}, header_keys: {safe_header_keys}"
+            f"get_tools_by_url_async called for tool: {tool_config.name}, url: {tool_config.url}, "
+            f"public_url: {tool_config.public_url}, header_keys: {safe_header_keys}"
         )
 
         try:
@@ -278,7 +357,8 @@ class MCPToolProvider:
                 self.environment_variables.tool_call_timeout_seconds
             )
 
-            mcp_tool_config: StreamableHttpConnection = {
+            # Build the invocation connection config (uses the main url with auth)
+            invocation_config: StreamableHttpConnection = {
                 "url": url,
                 "transport": "streamable_http",
                 "httpx_client_factory": self.get_httpx_async_client,
@@ -286,66 +366,74 @@ class MCPToolProvider:
                 "sse_read_timeout": timedelta(seconds=tool_call_timeout_seconds),
             }
             if tool_config.headers:
-                # replace the strings with os.path.expandvars # to allow for environment variable expansion
-                mcp_tool_config["headers"] = {
+                invocation_config["headers"] = {
                     key: os.path.expandvars(value)
                     for key, value in tool_config.headers.items()
                 }
-
-            # Attach an Authorization header for tool discovery so that
-            # MCP servers requiring auth can respond to tools/list.
-            # - Tools with auth_providers: resolve via token exchange
-            #   (same logic used at invocation time).
-            # - Tools with auth but no specific auth_providers: pass
-            #   through the caller's raw Authorization header.
-            if headers and tool_config.auth:
-                if tool_config.auth_providers:
-                    resolved_header: (
-                        str | None
-                    ) = await auth_interceptor.resolve_auth_header_for_discovery(
-                        tool_config
-                    )
-                    if resolved_header:
-                        existing_headers = mcp_tool_config.get("headers") or {}
-                        mcp_tool_config["headers"] = {
-                            **existing_headers,
-                            "Authorization": resolved_header,
-                        }
-                else:
-                    auth_headers = [
-                        headers.get(key)
-                        for key in headers
-                        if key.lower() == "authorization"
-                    ]
-                    auth_header: str | None = auth_headers[0] if auth_headers else None
-                    if auth_header:
-                        existing_headers = mcp_tool_config.get("headers") or {}
-                        mcp_tool_config["headers"] = {
-                            **existing_headers,
-                            "Authorization": auth_header,
-                        }
 
             tool_names: List[str] | None = (
                 tool_config.tools.split(",") if tool_config.tools else None
             )
 
-            client: MultiServerMCPClient = MultiServerMCPClient(
-                connections={
-                    f"{tool_config.name}": mcp_tool_config,
-                },
-                callbacks=Callbacks(
-                    on_progress=self.on_mcp_tool_progress,
-                    on_logging_message=self.on_mcp_tool_logging,
-                ),
-                tool_interceptors=[  # First interceptor in list becomes outermost layer.
-                    auth_interceptor.get_tool_interceptor_auth(),
-                    self.tracing_interceptor.get_tool_interceptor_tracing(),
-                    self.truncation_interceptor.get_tool_interceptor_truncation(),
-                ],
-            )
-            tools: List[BaseTool] = await client.get_tools()
+            if tool_config.public_url:
+                # When public_url is set, use it for unauthenticated tool discovery
+                # and the main url for authenticated tool invocation.
+                tools = await self._discover_tools_via_public_url(
+                    tool_config=tool_config,
+                    invocation_config=invocation_config,
+                    tool_call_timeout_seconds=tool_call_timeout_seconds,
+                    auth_interceptor=auth_interceptor,
+                )
+            else:
+                # Standard path: single URL for both discovery and invocation.
+                # Attach auth headers for discovery if needed.
+                discovery_config = dict(invocation_config)
+                if headers and tool_config.auth:
+                    if tool_config.auth_providers:
+                        resolved_header: (
+                            str | None
+                        ) = await auth_interceptor.resolve_auth_header_for_discovery(
+                            tool_config
+                        )
+                        if resolved_header:
+                            existing_headers = discovery_config.get("headers") or {}
+                            discovery_config["headers"] = {
+                                **existing_headers,
+                                "Authorization": resolved_header,
+                            }
+                    else:
+                        auth_headers = [
+                            headers.get(key)
+                            for key in headers
+                            if key.lower() == "authorization"
+                        ]
+                        auth_header: str | None = (
+                            auth_headers[0] if auth_headers else None
+                        )
+                        if auth_header:
+                            existing_headers = discovery_config.get("headers") or {}
+                            discovery_config["headers"] = {
+                                **existing_headers,
+                                "Authorization": auth_header,
+                            }
+
+                client: MultiServerMCPClient = MultiServerMCPClient(
+                    connections={
+                        f"{tool_config.name}": discovery_config,
+                    },
+                    callbacks=Callbacks(
+                        on_progress=self.on_mcp_tool_progress,
+                        on_logging_message=self.on_mcp_tool_logging,
+                    ),
+                    tool_interceptors=[
+                        auth_interceptor.get_tool_interceptor_auth(),
+                        self.tracing_interceptor.get_tool_interceptor_tracing(),
+                        self.truncation_interceptor.get_tool_interceptor_truncation(),
+                    ],
+                )
+                tools = await client.get_tools()
+
             if tool_names and tools:
-                # filter tools by tool_name if provided
                 tools = [t for t in tools if t.name in tool_names]
             return tools
         except* HTTPStatusError as e:
