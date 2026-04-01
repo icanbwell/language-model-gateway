@@ -401,10 +401,10 @@ class MCPToolProvider:
                     all_tools.extend(tools_by_url)
                 except* AuthorizationMcpToolTokenInvalidException as auth_eg:
                     auth_exception = auth_eg.exceptions[0]
-                    logger.error(
-                        f"get_tools_async Authorization error for {tool.name} from {tool.url}: {type(auth_exception)} {auth_exception}"
+                    logger.warning(
+                        f"get_tools_async No valid auth token for {tool.name} from {tool.url}, "
+                        f"skipping tool discovery: {type(auth_exception).__name__}: {auth_exception}"
                     )
-                    raise auth_eg
                 except* Exception as conn_eg:
                     conn_exception = conn_eg.exceptions[0]
                     if tool.auth == "jwt_token" and not tool.auth_optional:
