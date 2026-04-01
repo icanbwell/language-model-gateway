@@ -107,12 +107,13 @@ class AuthMcpCallInterceptor:
                 tool_config=tool_config,
             )
 
+            modified_request = request
             if resolved_auth_header:
                 existing_headers: Dict[str, Any] = dict(request.headers or {})
                 existing_headers["Authorization"] = resolved_auth_header
-                request = request.override(headers=existing_headers)
+                modified_request = request.override(headers=existing_headers)
 
-            return await handler(request)
+            return await handler(modified_request)
 
         return tool_interceptor_auth
 
