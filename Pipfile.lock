@@ -1067,11 +1067,11 @@
         },
         "google-genai": {
             "hashes": [
-                "sha256:252e714d724aba74949647b9de511a6a6f7804b3b317ab39ddee9cc2f001cacc",
-                "sha256:5f1a6a478e0c5851506a3d337534bab27b3c33120e27bf9174507ea79dfb8673"
+                "sha256:36b67b0fc6f319e08d1f1efd808b790107b1809c8743a05d55dfcf9d9fad7719",
+                "sha256:b74c24549d8b4208f4c736fd11857374788e1ffffc725de45d706e35c97fceee"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==1.69.0"
+            "version": "==1.70.0"
         },
         "googleapis-common-protos": {
             "hashes": [
@@ -2837,11 +2837,11 @@
         },
         "pydantic-ai-slim": {
             "hashes": [
-                "sha256:55982aa8ac8085bd4413887b293e1b756e82cc62eee7d96f072d2d844ec5a319",
-                "sha256:f28158a94f8ea4b983e5fd9e6ef0a9a399be8f1321e090ad76c22be53f2e6563"
+                "sha256:5132e7fc135e062cde13ecd389940bccd84feadabd4ed810f61a099068d271a7",
+                "sha256:8ba5ad332be6c2f8c62e0778504086a2d9441cc28064bb335a3caf6d270b463f"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==1.74.0"
+            "version": "==1.75.0"
         },
         "pydantic-core": {
             "hashes": [
@@ -2972,11 +2972,11 @@
         },
         "pydantic-graph": {
             "hashes": [
-                "sha256:6d09e91ffa24fa5ab2cee46f8a59e3bc4c20255ba80712f9381da6117a55aee5",
-                "sha256:b696b3045e062b5d8cf1a8faf8d61760ae21aa6dc0db42729494803c6a2a207b"
+                "sha256:c46feb2a0d0e87a4487324ea91e5e547114996bd4026542eebddcaee3e4989bd",
+                "sha256:ea290452de13477699fe60745fe70f01ae3d16c5e50457e0b3d65a1ea1c9c703"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==1.74.0"
+            "version": "==1.75.0"
         },
         "pydantic-settings": {
             "hashes": [
