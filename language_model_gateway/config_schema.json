@@ -350,6 +350,39 @@
               "type": "string"
             },
             "default": null
+          },
+          "lazy_load": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether to lazy load the tool. If true, the tool will not be loaded until it is first used.",
+            "default": null
+          },
+          "tool_definitions": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Static tool definitions for lazy-loaded MCP tools.",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "description"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the tool."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the tool."
+                }
+              }
+            },
+            "default": null
           }
         }
       }
@@ -464,6 +497,39 @@
             "description": "The issuers for the authentication. If multiple are provided then the agent accepts ANY of those issuers. If auth is needed, we will use the first issuer. If none is provided then we use the default issuer from the OIDC provider.",
             "items": {
               "type": "string"
+            },
+            "default": null
+          },
+          "lazy_load": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether to lazy load the agent. If true, the agent will not be loaded until it is first used.",
+            "default": null
+          },
+          "tool_definitions": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Static tool definitions for lazy-loaded MCP tools.",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "description"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the tool."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the tool."
+                }
+              }
             },
             "default": null
           }
