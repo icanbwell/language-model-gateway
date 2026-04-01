@@ -260,8 +260,9 @@ class MCPToolProvider:
 
         token: Token | None = None
 
+        safe_header_keys = [k for k in headers.keys()] if headers else []
         logger.info(
-            f"get_tools_by_url_async called for tool: {tool_config.name}, url: {tool_config.url}, headers: {headers}"
+            f"get_tools_by_url_async called for tool: {tool_config.name}, url: {tool_config.url}, header_keys: {safe_header_keys}"
         )
 
         try:
@@ -387,6 +388,12 @@ class MCPToolProvider:
                     raise auth_eg
                 except* Exception as conn_eg:
                     conn_exception = conn_eg.exceptions[0]
+                    if tool.auth == "jwt_token" and not tool.auth_optional:
+                        logger.error(
+                            f"get_tools_async Failed to connect to auth-required MCP server for {tool.name} at {tool.url}, "
+                            f"raising error: {type(conn_exception).__name__}: {conn_exception}"
+                        )
+                        raise conn_eg
                     logger.warning(
                         f"get_tools_async Failed to connect to MCP server for {tool.name} at {tool.url}, "
                         f"skipping tool: {type(conn_exception).__name__}: {conn_exception}"

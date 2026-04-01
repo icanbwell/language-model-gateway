@@ -126,6 +126,6 @@ class AuthMcpCallInterceptor:
                 token=None,
             )
 
-        if auth_header:
+        if auth_token and auth_header:
             return auth_header
         return None
