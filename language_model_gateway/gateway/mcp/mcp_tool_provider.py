@@ -288,23 +288,38 @@ class MCPToolProvider:
                     for key, value in tool_config.headers.items()
                 }
 
-            # For tools with auth_providers, authentication is deferred to
-            # invocation time via AuthMcpCallInterceptor.  For tools that have
-            # auth set but no specific auth_providers, pass through the caller's
-            # Authorization header so the MCP server can list its tools.
-            if headers and not tool_config.auth_providers and tool_config.auth:
-                auth_headers = [
-                    headers.get(key)
-                    for key in headers
-                    if key.lower() == "authorization"
-                ]
-                auth_header: str | None = auth_headers[0] if auth_headers else None
-                if auth_header:
-                    existing_headers = mcp_tool_config.get("headers") or {}
-                    mcp_tool_config["headers"] = {
-                        **existing_headers,
-                        "Authorization": auth_header,
-                    }
+            # Attach an Authorization header for tool discovery so that
+            # MCP servers requiring auth can respond to tools/list.
+            # - Tools with auth_providers: resolve via token exchange
+            #   (same logic used at invocation time).
+            # - Tools with auth but no specific auth_providers: pass
+            #   through the caller's raw Authorization header.
+            if headers and tool_config.auth:
+                if tool_config.auth_providers:
+                    resolved_header: (
+                        str | None
+                    ) = await auth_interceptor.resolve_auth_header_for_discovery(
+                        tool_config
+                    )
+                    if resolved_header:
+                        existing_headers = mcp_tool_config.get("headers") or {}
+                        mcp_tool_config["headers"] = {
+                            **existing_headers,
+                            "Authorization": resolved_header,
+                        }
+                else:
+                    auth_headers = [
+                        headers.get(key)
+                        for key in headers
+                        if key.lower() == "authorization"
+                    ]
+                    auth_header: str | None = auth_headers[0] if auth_headers else None
+                    if auth_header:
+                        existing_headers = mcp_tool_config.get("headers") or {}
+                        mcp_tool_config["headers"] = {
+                            **existing_headers,
+                            "Authorization": auth_header,
+                        }
 
             tool_names: List[str] | None = (
                 tool_config.tools.split(",") if tool_config.tools else None

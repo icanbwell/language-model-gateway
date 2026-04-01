@@ -51,6 +51,33 @@ class AuthMcpCallInterceptor:
         self._auth_information = auth_information
         self._headers = headers
 
+    async def resolve_auth_header_for_discovery(
+        self, tool_config: AgentConfig
+    ) -> str | None:
+        """Resolve the Authorization header for tool discovery (listing tools).
+
+        Uses the same token resolution logic as the invocation-time
+        interceptor so that MCP servers requiring auth for ``tools/list``
+        receive a valid token during discovery."""
+        if tool_config.auth != "jwt_token" or not tool_config.auth_providers:
+            return None
+
+        auth_header = self._extract_auth_header(self._headers)
+
+        token_cache_item: (
+            TokenCacheItem | None
+        ) = await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
+            auth_header=auth_header,
+            auth_information=self._auth_information,
+            authentication_config=tool_config,
+        )
+
+        return self._resolve_auth_header(
+            token_cache_item=token_cache_item,
+            auth_header=auth_header,
+            tool_config=tool_config,
+        )
+
     def get_tool_interceptor_auth(self) -> ToolCallInterceptor:
         async def tool_interceptor_auth(
             request: MCPToolCallRequest,
