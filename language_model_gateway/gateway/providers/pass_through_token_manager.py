@@ -112,6 +112,10 @@ class PassThroughTokenManager:
             logger.debug("AuthInformation doesn't have redirect_uri.")
             return None
 
+        if not auth_information.subject:
+            logger.debug("AuthInformation doesn't have subject.")
+            return None
+
         tool_first_auth_provider: str | None = (
             tool_auth_providers[0] if tool_auth_providers is not None else None
         )

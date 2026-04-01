@@ -58,19 +58,28 @@ class AuthMcpCallInterceptor:
 
         Uses the same token resolution logic as the invocation-time
         interceptor so that MCP servers requiring auth for ``tools/list``
-        receive a valid token during discovery."""
+        receive a valid token during discovery.  Returns ``None`` when
+        auth context is incomplete (e.g. no subject) so that discovery
+        can proceed unauthenticated and the MCP server's rejection is
+        handled by the caller's error-handling path."""
         if tool_config.auth != "jwt_token" or not tool_config.auth_providers:
             return None
 
         auth_header = self._extract_auth_header(self._headers)
 
-        token_cache_item: (
-            TokenCacheItem | None
-        ) = await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
-            auth_header=auth_header,
-            auth_information=self._auth_information,
-            authentication_config=tool_config,
-        )
+        try:
+            token_cache_item: (
+                TokenCacheItem | None
+            ) = await self.pass_through_token_manager.check_tokens_are_valid_for_tool(
+                auth_header=auth_header,
+                auth_information=self._auth_information,
+                authentication_config=tool_config,
+            )
+        except (ValueError, AuthorizationMcpToolTokenInvalidException) as e:
+            logger.info(
+                f"Could not resolve auth for discovery of {tool_config.name}: {e}"
+            )
+            return None
 
         return self._resolve_auth_header(
             token_cache_item=token_cache_item,
