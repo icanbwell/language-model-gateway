@@ -387,7 +387,7 @@ class MCPToolProvider:
             else:
                 # Standard path: single URL for both discovery and invocation.
                 # Attach auth headers for discovery if needed.
-                discovery_config = dict(invocation_config)
+                discovery_config: StreamableHttpConnection = invocation_config
                 if headers and tool_config.auth:
                     if tool_config.auth_providers:
                         resolved_header: (
