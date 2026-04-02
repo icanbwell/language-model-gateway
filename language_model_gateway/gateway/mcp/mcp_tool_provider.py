@@ -480,6 +480,9 @@ class MCPToolProvider:
         all_tools: List[BaseTool] = []
         for tool in tools:
             if tool.url is not None:
+                logger.info(
+                    f"get_tools_async Fetching tools from url: {tool.url} for tool: {tool.name}"
+                )
                 try:
                     tools_by_url: List[BaseTool] = await self.get_tools_by_url_async(
                         tool_config=tool,
