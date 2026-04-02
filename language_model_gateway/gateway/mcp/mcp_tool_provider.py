@@ -434,13 +434,26 @@ class MCPToolProvider:
                         self.truncation_interceptor.get_tool_interceptor_truncation(),
                     ],
                 )
-                tools = await client.get_tools()
+                try:
+                    tools = await client.get_tools()
+                except BaseException as e:
+                    # MCP streamable HTTP sessions can fail with BaseExceptionGroup
+                    # containing GeneratorExit (from session cleanup) mixed with
+                    # regular Exceptions. except* Exception cannot catch these mixed
+                    # groups, so we catch BaseException here to prevent a single
+                    # failing MCP server from crashing the entire request.
+                    tool_url = tool_config.url or "unknown"
+                    logger.error(
+                        f"get_tools_by_url_async Failed to discover tools from "
+                        f"{tool_config.name} at {tool_url}: {type(e).__name__}: {e}"
+                    )
+                    return []
 
             if tool_names and tools:
                 tools = [t for t in tools if t.name in tool_names]
             return tools
         except* HTTPStatusError as e:
-            tool_url: str = tool_config.url if tool_config.url else "unknown"
+            tool_url = tool_config.url if tool_config.url else "unknown"
             first_exception1 = e.exceptions[0]
             logger.error(
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {tool_url}: {type(first_exception1)} {first_exception1}"
