@@ -37,16 +37,16 @@
       ]
     },
     {
-      "name": "calculator_average"
-    },
-    {
-      "name": "calculator_stddev"
-    },
-    {
-      "name": "calculator_length"
-    },
-    {
-      "name": "calculator_sum"
+      "auth": "jwt_token",
+      "auth_providers": [
+        "oktaaiden"
+      ],
+      "name": "google_drive",
+      "url": "http://mcp_server_gateway:5000/google_drive/",
+      "public_url": "http://mcp_server_gateway:5000/google_drive/tools",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     },
     {
       "name": "pubmed"
@@ -85,6 +85,6 @@
     }
   ],
   "skills": [
-    "skill-creator"
+    "*"
   ]
 }

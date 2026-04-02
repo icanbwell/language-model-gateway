@@ -220,6 +220,11 @@ class ChatCompletionManager:
                     isinstance(first_exception, McpToolUnauthorizedException)
                     and first_exception.headers
                 ):
+                    logger.info(
+                        "MCP tool at %s returned WWW-Authenticate header: %s",
+                        first_exception.url,
+                        first_exception.headers.get("WWW-Authenticate"),
+                    )
                     url: str | None = (
                         McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
                             headers=Headers(first_exception.headers)

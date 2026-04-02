@@ -24,11 +24,16 @@ create-docker-network: ## creates the docker network
 		language-model-gateway_web >/dev/null
 
 .PHONY:build
-build: create-docker-network ## Builds the docker for dev
+build: down create-docker-network ## Builds the docker for dev
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	-f docker-compose-mongo.yml \
+	-f docker-compose-fhir.yml \
+	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
 	 build --parallel;
 
 .PHONY: up

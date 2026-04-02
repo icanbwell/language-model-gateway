@@ -269,6 +269,7 @@ class LanguageModelGatewayContainerFactory:
                 token_reducer=c.resolve(TokenReducer),
                 tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
+                pass_through_token_manager=c.resolve(PassThroughTokenManager),
             ),
         )
 

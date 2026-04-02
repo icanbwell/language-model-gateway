@@ -37,12 +37,15 @@
       ]
     },
     {
-      "name": "google_drive",
-      "url": "http://mcp_server_gateway:5000/google_drive/",
       "auth": "jwt_token",
       "auth_providers": [
-        "okta"
-      ]
+        "oktaaiden"
+      ],
+      "name": "google_drive",
+      "url": "https://mcp-server-gateway.services.bwell.zone/google_drive/",
+      "headers": {
+        "X-Client-Id": "Aiden"
+      }
     }
   ],
   "example_prompts": [
