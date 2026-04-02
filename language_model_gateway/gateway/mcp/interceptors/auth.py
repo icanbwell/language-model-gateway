@@ -1,11 +1,13 @@
 import logging
 from typing import Callable, Awaitable, Dict, Any
 
+from httpx import HTTPStatusError
 from langchain_mcp_adapters.interceptors import (
     MCPToolCallRequest,
     MCPToolCallResult,
     ToolCallInterceptor,
 )
+from mcp.types import CallToolResult, TextContent
 
 from languagemodelcommon.configs.schemas.config_schema import AgentConfig
 from oidcauthlib.auth.models.auth import AuthInformation
@@ -98,7 +100,9 @@ class AuthMcpCallInterceptor:
                 or tool_config.auth != "jwt_token"
                 or not tool_config.auth_providers
             ):
-                return await handler(request)
+                return await self._call_handler_with_auth_error_handling(
+                    handler=handler, request=request
+                )
 
             auth_header = self._extract_auth_header(self._headers)
 
@@ -122,9 +126,59 @@ class AuthMcpCallInterceptor:
                 existing_headers["Authorization"] = resolved_auth_header
                 modified_request = request.override(headers=existing_headers)
 
-            return await handler(modified_request)
+            return await self._call_handler_with_auth_error_handling(
+                handler=handler, request=modified_request
+            )
 
         return tool_interceptor_auth
+
+    @staticmethod
+    async def _call_handler_with_auth_error_handling(
+        *,
+        handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
+        request: MCPToolCallRequest,
+    ) -> MCPToolCallResult:
+        try:
+            return await handler(request)
+        except BaseExceptionGroup as eg:
+            http_auth_error = AuthMcpCallInterceptor._extract_http_auth_error(eg)
+            if http_auth_error is not None:
+                url = str(http_auth_error.request.url)
+                status = http_auth_error.response.status_code
+                logger.warning(
+                    "MCP tool call to %s returned HTTP %s: %s",
+                    url,
+                    status,
+                    http_auth_error,
+                )
+                return CallToolResult(
+                    content=[
+                        TextContent(
+                            type="text",
+                            text=f"Authorization failed (HTTP {status}) for MCP tool at {url}."
+                            f" The user's credentials were rejected by the server."
+                            f" Please ask the user to check their authentication or log in again.",
+                        )
+                    ],
+                    isError=True,
+                )
+            raise
+
+    @staticmethod
+    def _extract_http_auth_error(
+        eg: BaseExceptionGroup,
+    ) -> HTTPStatusError | None:
+        for exc in eg.exceptions:
+            if isinstance(exc, BaseExceptionGroup):
+                result = AuthMcpCallInterceptor._extract_http_auth_error(exc)
+                if result is not None:
+                    return result
+            elif isinstance(exc, HTTPStatusError) and exc.response.status_code in (
+                401,
+                403,
+            ):
+                return exc
+        return None
 
     @staticmethod
     def _extract_auth_header(headers: Dict[str, str]) -> str | None:
