@@ -64,8 +64,11 @@ class AuthMcpCallInterceptor:
         auth context is incomplete (e.g. no subject) so that discovery
         can proceed unauthenticated and the MCP server's rejection is
         handled by the caller's error-handling path."""
-        if tool_config.auth != "jwt_token" or not tool_config.auth_providers:
+        if tool_config.auth != "jwt_token":
             return None
+
+        if not tool_config.auth_providers:
+            return self._extract_auth_header(self._headers)
 
         auth_header = self._extract_auth_header(self._headers)
 
@@ -95,11 +98,17 @@ class AuthMcpCallInterceptor:
             handler: Callable[[MCPToolCallRequest], Awaitable[MCPToolCallResult]],
         ) -> MCPToolCallResult:
             tool_config = self._tool_configs_by_server_name.get(request.server_name)
-            if (
-                tool_config is None
-                or tool_config.auth != "jwt_token"
-                or not tool_config.auth_providers
-            ):
+            if tool_config is None or tool_config.auth != "jwt_token":
+                return await self._call_handler_with_auth_error_handling(
+                    handler=handler, request=request
+                )
+
+            if not tool_config.auth_providers:
+                auth_header = self._extract_auth_header(self._headers)
+                if auth_header:
+                    existing_headers: Dict[str, Any] = dict(request.headers or {})
+                    existing_headers["Authorization"] = auth_header
+                    request = request.override(headers=existing_headers)
                 return await self._call_handler_with_auth_error_handling(
                     handler=handler, request=request
                 )
@@ -122,7 +131,7 @@ class AuthMcpCallInterceptor:
 
             modified_request = request
             if resolved_auth_header:
-                existing_headers: Dict[str, Any] = dict(request.headers or {})
+                existing_headers = dict(request.headers or {})
                 existing_headers["Authorization"] = resolved_auth_header
                 modified_request = request.override(headers=existing_headers)
 
