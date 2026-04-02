@@ -495,12 +495,6 @@ class MCPToolProvider:
                     )
                 except* Exception as conn_eg:
                     conn_exception = conn_eg.exceptions[0]
-                    if tool.auth == "jwt_token" and not tool.auth_optional:
-                        logger.error(
-                            f"get_tools_async Failed to connect to auth-required MCP server for {tool.name} at {tool.url}, "
-                            f"raising error: {type(conn_exception).__name__}: {conn_exception}"
-                        )
-                        raise conn_eg
                     logger.warning(
                         f"get_tools_async Failed to connect to MCP server for {tool.name} at {tool.url}, "
                         f"skipping tool: {type(conn_exception).__name__}: {conn_exception}"
