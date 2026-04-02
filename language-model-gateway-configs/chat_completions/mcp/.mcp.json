@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "google-drive": {
+      "type": "http",
+      "url": "http://mcp_server_gateway:5000/google_drive/"
+    },
+    "google-drive-external": {
+      "type": "http",
+      "url": "https://mcp-server-gateway.services.bwell.zone/google_drive/"
+    },
+    "google-search": {
+      "type": "http",
+      "url": "http://mcp_server_gateway:5000/google_search/"
+    },
+    "url-to-markdown": {
+      "type": "http",
+      "url": "http://mcp_server_gateway:5000/url_to_markdown/"
+    },
+    "provider-search": {
+      "type": "http",
+      "url": "http://mcp_server_gateway:5000/provider_search/"
+    }
+  }
+}

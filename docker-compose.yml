@@ -25,7 +25,7 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
-      MCP_JSON_PATH: "/usr/src/language_model_gateway/.mcp.json"
+      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/chat_completions/mcp/.mcp.json"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
@@ -182,6 +182,7 @@ services:
     - ./:/usr/src/language_model_gateway/:cached
 #    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
     - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
 #    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
     - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
