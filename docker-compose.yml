@@ -25,6 +25,7 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
+      MCP_JSON_PATH: "/usr/src/language_model_gateway/.mcp.json"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
@@ -179,10 +180,10 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
-    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
+#    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+#    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
+    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
@@ -191,8 +192,8 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
-#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
+    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
+    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s

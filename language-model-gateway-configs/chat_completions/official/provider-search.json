@@ -37,7 +37,8 @@
       ]
     },
     {
-      "name": "google_drive",
+      "name": "provider_search",
+      "mcp_server": "provider-search",
       "url": "http://mcp_server_gateway:5000/provider_search/",
       "auth": "jwt_token"
     }
