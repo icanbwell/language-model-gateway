@@ -154,18 +154,26 @@ class AuthMcpCallInterceptor:
             if http_auth_error is not None:
                 url = str(http_auth_error.request.url)
                 status = http_auth_error.response.status_code
+                www_authenticate = http_auth_error.response.headers.get(
+                    "WWW-Authenticate"
+                )
                 logger.warning(
-                    "MCP tool call to %s returned HTTP %s: %s",
+                    "MCP tool call to %s returned HTTP %s (WWW-Authenticate: %s): %s",
                     url,
                     status,
+                    www_authenticate,
                     http_auth_error,
                 )
+                auth_detail = ""
+                if www_authenticate:
+                    auth_detail = f" WWW-Authenticate: {www_authenticate}"
                 return CallToolResult(
                     content=[
                         TextContent(
                             type="text",
                             text=f"Authorization failed (HTTP {status}) for MCP tool at {url}."
                             f" The user's credentials were rejected by the server."
+                            f"{auth_detail}"
                             f" Please ask the user to check their authentication or log in again.",
                         )
                     ],
