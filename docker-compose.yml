@@ -180,6 +180,7 @@ services:
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
     - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
     - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
 #    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
