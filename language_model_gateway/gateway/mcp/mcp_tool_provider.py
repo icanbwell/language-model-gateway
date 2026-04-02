@@ -22,6 +22,9 @@ from oidcauthlib.auth.models.token import Token
 from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
+from oidcauthlib.auth.exceptions.authorization_needed_exception import (
+    AuthorizationNeededException,
+)
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
@@ -496,6 +499,13 @@ class MCPToolProvider:
                         f"get_tools_async No valid auth token for {tool.name} from {tool.url}, "
                         f"skipping tool discovery: {type(auth_exception).__name__}: {auth_exception}"
                     )
+                except* AuthorizationNeededException as auth_needed_eg:
+                    auth_needed_exception = auth_needed_eg.exceptions[0]
+                    logger.warning(
+                        f"get_tools_async Authorization needed for {tool.name} from {tool.url}, "
+                        f"prompting user to login: {type(auth_needed_exception).__name__}: {auth_needed_exception}"
+                    )
+                    raise
                 except* Exception as conn_eg:
                     conn_exception = conn_eg.exceptions[0]
                     logger.warning(
