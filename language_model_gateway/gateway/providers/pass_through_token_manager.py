@@ -154,8 +154,9 @@ class PassThroughTokenManager:
 
         auth_config = AuthConfig(
             auth_provider=auth_provider,
-            friendly_name=auth_provider,
-            audience=client_id,
+            friendly_name=oauth.display_name or auth_provider,
+            audience=oauth.audience or client_id,
+            issuer=oauth.issuer,
             client_id=client_id,
             client_secret=client_secret,
             well_known_uri=oauth.auth_server_metadata_url,
@@ -185,6 +186,40 @@ class PassThroughTokenManager:
 
         return auth_config
 
+    async def _resolve_oauth_providers(
+        self,
+        authentication_config: AuthenticationConfig,
+    ) -> None:
+        """Register inline ``oauth_providers`` and populate ``auth_providers``.
+
+        When a model's ``auth_config`` specifies ``oauth_providers`` instead of
+        named ``auth_providers``, this method dynamically registers each OAuth
+        config and fills in the ``auth_providers`` list so the rest of the auth
+        flow can proceed normally.
+        """
+        if not authentication_config.oauth_providers:
+            return
+        if authentication_config.auth_providers:
+            # Already resolved (or manually specified alongside oauth_providers)
+            return
+
+        provider_names: list[str] = []
+        for oauth in authentication_config.oauth_providers:
+            provider_key = (
+                f"oauth_{oauth.client_id}"
+                if oauth.client_id
+                else f"oauth_{hash(oauth.auth_server_metadata_url)}"
+            )
+            await self._ensure_oauth_provider_registered(
+                auth_provider=provider_key,
+                oauth=oauth,
+            )
+            provider_names.append(provider_key)
+
+        authentication_config.auth_providers = provider_names
+        if not authentication_config.auth:
+            authentication_config.auth = "jwt_token"
+
     async def check_tokens_are_valid_for_tool(
         self,
         *,
@@ -192,6 +227,9 @@ class PassThroughTokenManager:
         auth_information: AuthInformation,
         authentication_config: AuthenticationConfig,
     ) -> TokenCacheItem | None:
+        # Resolve inline oauth_providers into named auth_providers
+        await self._resolve_oauth_providers(authentication_config)
+
         tool_auth_providers: list[str] | None = authentication_config.auth_providers
         if (
             authentication_config.auth_providers is None
