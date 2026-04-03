@@ -5,7 +5,6 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
 from oidcauthlib.auth.config.auth_config import AuthConfig
-from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.dcr.dcr_registration import DcrRegistration
 
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
@@ -34,7 +33,7 @@ def _build_manager(
     environment_variables.app_login_uri = None
     environment_variables.app_token_save_uri = None
 
-    dcr_manager = MagicMock(spec=DcrManager)
+    dcr_manager = MagicMock()
     dcr_manager.resolve_dcr_credentials = AsyncMock(return_value=dcr_result)
 
     manager = object.__new__(PassThroughTokenManager)
@@ -57,12 +56,15 @@ class TestEnsureOAuthProviderRegistered:
             friendly_name="Existing",
             audience="aud",
             client_id="cid",
+            scope="openid",
             well_known_uri="https://idp.example.com/.well-known/openid-configuration",
         )
         manager = _build_manager(existing_config=existing)
-        oauth = McpOAuthConfig(
-            authorization_url="https://auth.example.com/authorize",
-            token_url="https://auth.example.com/token",
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+            }
         )
 
         result = await manager._ensure_oauth_provider_registered(
@@ -70,8 +72,8 @@ class TestEnsureOAuthProviderRegistered:
         )
 
         assert result is existing
-        manager.dcr_manager.resolve_dcr_credentials.assert_not_called()
-        manager.auth_manager.register_dynamic_provider.assert_not_called()
+        manager.dcr_manager.resolve_dcr_credentials.assert_not_called()  # type: ignore[attr-defined]
+        manager.auth_manager.register_dynamic_provider.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_pre_registered_client_uses_config_client_id(self) -> None:
@@ -95,7 +97,7 @@ class TestEnsureOAuthProviderRegistered:
         assert result.authorization_endpoint == "https://auth.example.com/authorize"
         assert result.token_endpoint == "https://auth.example.com/token"
         assert result.scope == "read write"
-        manager.auth_manager.register_dynamic_provider.assert_awaited_once()
+        manager.auth_manager.register_dynamic_provider.assert_awaited_once()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_dcr_uses_resolved_credentials(self) -> None:
@@ -124,15 +126,17 @@ class TestEnsureOAuthProviderRegistered:
         assert result.use_pkce is True
         assert result.pkce_method == "S256"
         assert result.registration_url == "https://auth.example.com/register"
-        manager.dcr_manager.resolve_dcr_credentials.assert_awaited_once()
-        manager.auth_manager.register_dynamic_provider.assert_awaited_once()
+        manager.dcr_manager.resolve_dcr_credentials.assert_awaited_once()  # type: ignore[attr-defined]
+        manager.auth_manager.register_dynamic_provider.assert_awaited_once()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_raises_when_no_client_id_resolved(self) -> None:
         manager = _build_manager(dcr_result=None)
-        oauth = McpOAuthConfig(
-            authorization_url="https://auth.example.com/authorize",
-            token_url="https://auth.example.com/token",
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+            }
         )
 
         with pytest.raises(ValueError, match="Could not resolve client_id"):
