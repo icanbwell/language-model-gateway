@@ -167,7 +167,9 @@ class TokenStorageAuthManager(FastAPIAuthManager):
                 well_known_uri=auth_config.well_known_uri,
                 scope=auth_config.scope,
                 issuer=auth_config.auth_provider,
-                authorization_endpoint=getattr(auth_config, "authorization_endpoint", None),
+                authorization_endpoint=getattr(
+                    auth_config, "authorization_endpoint", None
+                ),
                 token_endpoint=getattr(auth_config, "token_endpoint", None),
                 use_pkce=getattr(auth_config, "use_pkce", True),
                 pkce_method=getattr(auth_config, "pkce_method", "S256"),
