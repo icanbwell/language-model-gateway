@@ -65,6 +65,9 @@ from language_model_gateway.gateway.mcp.interceptors.tracing import (
 from language_model_gateway.gateway.mcp.interceptors.truncation import (
     TruncationMcpCallInterceptor,
 )
+from language_model_gateway.gateway.mcp.auth_server_metadata_discovery import (
+    McpAuthServerDiscovery,
+)
 from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
@@ -288,6 +291,7 @@ class LanguageModelGatewayContainerFactory:
                 tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
             ),
         )
 

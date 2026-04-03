@@ -29,6 +29,9 @@ from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuth
 from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
+from language_model_gateway.gateway.mcp.auth_server_metadata_discovery import (
+    McpAuthServerDiscoveryProtocol,
+)
 from language_model_gateway.gateway.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
@@ -69,6 +72,7 @@ class MCPToolProvider:
         truncation_interceptor: TruncationMcpCallInterceptor,
         tracing_interceptor: TracingMcpCallInterceptor,
         pass_through_token_manager: PassThroughTokenManager,
+        auth_server_metadata_discovery: McpAuthServerDiscoveryProtocol,
     ) -> None:
         """
         Initialize the MCPToolProvider with authentication and token management.
@@ -122,6 +126,8 @@ class MCPToolProvider:
             raise TypeError(
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
             )
+
+        self.auth_server_metadata_discovery = auth_server_metadata_discovery
 
     async def load_async(self) -> None:
         pass
@@ -443,6 +449,20 @@ class MCPToolProvider:
                     # groups, so we catch BaseException here to prevent a single
                     # failing MCP server from crashing the entire request.
                     tool_url = tool_config.url or "unknown"
+
+                    # Check if this is a 401 and attempt auth server discovery
+                    if (
+                        self._contains_http_401(e)
+                        and tool_config.oauth is None
+                        and not tool_config.oauth_providers
+                        and tool_url != "unknown"
+                    ):
+                        discovered = await self._attempt_auth_server_discovery(
+                            tool_config=tool_config,
+                        )
+                        if discovered:
+                            raise
+
                     logger.error(
                         f"get_tools_by_url_async Failed to discover tools from "
                         f"{tool_config.name} at {tool_url}: {type(e).__name__}: {e}"
@@ -455,6 +475,26 @@ class MCPToolProvider:
         except* HTTPStatusError as e:
             tool_url = tool_config.url if tool_config.url else "unknown"
             first_exception1 = e.exceptions[0]
+
+            # Attempt auth server discovery on 401 when no OAuth is configured
+            if (
+                isinstance(first_exception1, HTTPStatusError)
+                and first_exception1.response.status_code == 401
+                and tool_config.oauth is None
+                and not tool_config.oauth_providers
+                and tool_url != "unknown"
+            ):
+                discovered = await self._attempt_auth_server_discovery(
+                    tool_config=tool_config,
+                )
+                if discovered:
+                    raise AuthorizationMcpToolTokenInvalidException(
+                        message=f"Authorization needed for MCP tools at {tool_url}. "
+                        + "Auth server discovered automatically — please log in.",
+                        tool_url=tool_url,
+                        token=token,
+                    ) from e
+
             logger.error(
                 f"get_tools_by_url_async HTTP error while loading MCP tools from {tool_url}: {type(first_exception1)} {first_exception1}"
             )
@@ -484,6 +524,65 @@ class MCPToolProvider:
                 f"get_tools_by_url_async Failed to load MCP tools from {tool_url}: {type(e.exceptions[0])} {e}"
             )
             raise e
+
+    @staticmethod
+    def _contains_http_401(exc: BaseException) -> bool:
+        """Check if an exception tree contains an HTTPStatusError with status 401."""
+        if isinstance(exc, HTTPStatusError) and exc.response.status_code == 401:
+            return True
+        if isinstance(exc, BaseExceptionGroup):
+            return any(MCPToolProvider._contains_http_401(e) for e in exc.exceptions)
+        return False
+
+    async def _attempt_auth_server_discovery(
+        self,
+        *,
+        tool_config: AgentConfig,
+    ) -> bool:
+        """Attempt RFC 8414 / OIDC Discovery for an MCP server.
+
+        Returns True if discovery succeeded and the tool_config was updated
+        with the discovered OAuth configuration.
+        """
+        tool_url = tool_config.url
+        if not tool_url:
+            return False
+
+        logger.info(
+            "Attempting auth server discovery for %s at %s",
+            tool_config.name,
+            tool_url,
+        )
+        discovered = await self.auth_server_metadata_discovery.discover(
+            mcp_server_url=tool_url,
+        )
+        if discovered is None:
+            logger.info(
+                "Auth server discovery returned no results for %s", tool_config.name
+            )
+            return False
+
+        tool_config.oauth = discovered
+
+        provider_key = (
+            f"oauth_{discovered.client_id}"
+            if discovered.client_id
+            else f"oauth_discovered_{hash(tool_url)}"
+        )
+        tool_config.auth = "jwt_token"
+        tool_config.auth_providers = [provider_key]
+
+        await self.pass_through_token_manager._ensure_oauth_provider_registered(
+            auth_provider=provider_key,
+            oauth=discovered,
+        )
+
+        logger.info(
+            "Auth server discovery succeeded for %s — registered provider '%s'",
+            tool_config.name,
+            provider_key,
+        )
+        return True
 
     async def get_tools_async(
         self,
