@@ -20,10 +20,10 @@ from languagemodelcommon.configs.schemas.config_schema import (
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )
-from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
+from languagemodelcommon.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
-from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
+from languagemodelcommon.mcp.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (

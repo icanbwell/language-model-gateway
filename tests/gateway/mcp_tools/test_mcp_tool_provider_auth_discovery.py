@@ -11,10 +11,10 @@ from languagemodelcommon.configs.schemas.config_schema import (
     AgentConfig,
     McpOAuthConfig,
 )
-from language_model_gateway.gateway.mcp.interceptors.auth import (
+from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 
 
 def _make_oauth_config(**kwargs: Any) -> McpOAuthConfig:
@@ -57,7 +57,7 @@ def _make_401_exception_group() -> BaseExceptionGroup:
 
 @pytest.mark.asyncio
 @patch(
-    "language_model_gateway.gateway.mcp.mcp_tool_provider.MultiServerMCPClient",
+    "languagemodelcommon.mcp.mcp_tool_provider.MultiServerMCPClient",
 )
 async def test_401_no_oauth_triggers_discovery(
     mock_client_cls: MagicMock,
@@ -107,7 +107,7 @@ async def test_401_no_oauth_triggers_discovery(
 
 @pytest.mark.asyncio
 @patch(
-    "language_model_gateway.gateway.mcp.mcp_tool_provider.MultiServerMCPClient",
+    "languagemodelcommon.mcp.mcp_tool_provider.MultiServerMCPClient",
 )
 async def test_401_with_existing_oauth_skips_discovery(
     mock_client_cls: MagicMock,
@@ -147,7 +147,7 @@ async def test_401_with_existing_oauth_skips_discovery(
 
 @pytest.mark.asyncio
 @patch(
-    "language_model_gateway.gateway.mcp.mcp_tool_provider.MultiServerMCPClient",
+    "languagemodelcommon.mcp.mcp_tool_provider.MultiServerMCPClient",
 )
 async def test_401_discovery_returns_none_falls_through(
     mock_client_cls: MagicMock,

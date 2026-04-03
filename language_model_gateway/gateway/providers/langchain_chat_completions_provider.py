@@ -47,12 +47,12 @@ from language_model_gateway.gateway.providers.base_chat_completions_provider imp
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.mcp.interceptors.auth import (
+from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

@@ -21,13 +21,13 @@ from languagemodelcommon.persistence.persistence_factory import (
 from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
     LangChainCompletionsProvider,
 )
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

@@ -3,7 +3,7 @@ import logging
 from langchain_core.messages import AIMessage
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (

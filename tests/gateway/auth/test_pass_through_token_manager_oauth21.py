@@ -10,8 +10,8 @@ from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.dcr.dcr_registration import DcrRegistration
 
-from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

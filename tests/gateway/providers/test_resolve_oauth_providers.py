@@ -12,8 +12,8 @@ from languagemodelcommon.configs.schemas.config_schema import (
     McpOAuthConfig,
 )
 
-from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (

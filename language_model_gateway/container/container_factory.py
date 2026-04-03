@@ -40,13 +40,13 @@ from oidcauthlib.utilities.environment.oidc_environment_variables import (
 )
 from simple_container.environment.environment_variables import EnvironmentVariables
 
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from language_model_gateway.gateway.auth.token_storage_auth_manager import (
-    TokenStorageAuthManager,
+from language_model_gateway.gateway.auth.gateway_token_storage_auth_manager import (
+    GatewayTokenStorageAuthManager,
 )
-from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
+from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.managers.chat_completion_manager import (
@@ -59,16 +59,16 @@ from language_model_gateway.gateway.managers.system_command_manager import (
 from language_model_gateway.gateway.managers.token_submission_manager import (
     TokenSubmissionManager,
 )
-from language_model_gateway.gateway.mcp.interceptors.tracing import (
+from languagemodelcommon.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.interceptors.truncation import (
+from languagemodelcommon.mcp.interceptors.truncation import (
     TruncationMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.auth_server_metadata_discovery import (
+from languagemodelcommon.mcp.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from language_model_gateway.gateway.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
@@ -82,7 +82,7 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
     PassThroughChatCompletionsProvider,
 )
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
@@ -133,7 +133,7 @@ class LanguageModelGatewayContainerFactory:
         # Must be done AFTER the OidcContainerFactory to override the registration
         container.singleton(
             FastAPIAuthManager,
-            lambda c: TokenStorageAuthManager(
+            lambda c: GatewayTokenStorageAuthManager(
                 environment_variables=c.resolve(OidcEnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),

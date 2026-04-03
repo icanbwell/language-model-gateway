@@ -14,16 +14,16 @@ import pytest
 from langchain_core.tools import BaseTool
 
 from languagemodelcommon.configs.schemas.config_schema import AgentConfig
-from language_model_gateway.gateway.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
+from languagemodelcommon.auth.exceptions.authorization_mcp_tool_token_invalid_exception import (
     AuthorizationMcpToolTokenInvalidException,
 )
-from language_model_gateway.gateway.auth.exceptions.authorization_token_cache_item_not_found_exception import (
+from languagemodelcommon.auth.exceptions.authorization_token_cache_item_not_found_exception import (
     AuthorizationTokenCacheItemNotFoundException,
 )
-from language_model_gateway.gateway.mcp.interceptors.auth import (
+from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )

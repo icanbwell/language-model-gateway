@@ -7,8 +7,8 @@ from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from starlette.responses import HTMLResponse, Response
 
-from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+from languagemodelcommon.auth.models.token_cache_item import TokenCacheItem
+from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
