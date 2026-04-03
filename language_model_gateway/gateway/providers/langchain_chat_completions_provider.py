@@ -16,8 +16,8 @@ from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
 from langchain_ai_skills_framework.tools.run_python_script_tool import (
     RunPythonScriptTool,
 )
-from languagemodelcommon.utilities.tool_friendly_name_mapper import (
-    ToolFriendlyNameMapper,
+from languagemodelcommon.utilities.tool_display_name_mapper import (  # type: ignore[import-not-found]
+    ToolDisplayNameMapper,
 )
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -67,7 +67,7 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
-    def __init__(
+    def __init__(  # type: ignore[no-any-unimported]
         self,
         *,
         model_factory: ModelFactory,
@@ -79,7 +79,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
         skill_loader: SkillLoaderProtocol,
-        tool_friendly_name_mapper: ToolFriendlyNameMapper,
+        tool_friendly_name_mapper: ToolDisplayNameMapper,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -153,14 +153,14 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
             )
 
-        self.tool_friendly_name_mapper: ToolFriendlyNameMapper = (
+        self.tool_friendly_name_mapper: ToolDisplayNameMapper = (  # type: ignore[no-any-unimported]
             tool_friendly_name_mapper
         )
         if self.tool_friendly_name_mapper is None:
             raise ValueError("tool_friendly_name_mapper must not be None")
-        if not isinstance(self.tool_friendly_name_mapper, ToolFriendlyNameMapper):
+        if not isinstance(self.tool_friendly_name_mapper, ToolDisplayNameMapper):
             raise TypeError(
-                f"Expected ToolFriendlyNameMapper, got {type(self.tool_friendly_name_mapper)}"
+                f"Expected ToolDisplayNameMapper, got {type(self.tool_friendly_name_mapper)}"
             )
 
     @override
@@ -278,7 +278,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     if conversation_thread_id
                     else str(request_id),
                     headers=headers,
-                    tool_friendly_name_mapper=self.tool_friendly_name_mapper,
+                    tool_display_name_mapper=self.tool_friendly_name_mapper,  # type: ignore[call-arg]
                 ),
                 config=None,
                 state=None,

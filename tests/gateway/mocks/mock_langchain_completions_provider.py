@@ -3,8 +3,8 @@ from typing import Dict, Any, override
 from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
     SkillLoaderProtocol,
 )
-from languagemodelcommon.utilities.tool_friendly_name_mapper import (
-    ToolFriendlyNameMapper,
+from languagemodelcommon.utilities.tool_display_name_mapper import (  # type: ignore[import-not-found]
+    ToolDisplayNameMapper,
 )
 from starlette.responses import StreamingResponse, JSONResponse
 
@@ -37,7 +37,7 @@ from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol
 
 
 class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
-    def __init__(
+    def __init__(  # type: ignore[no-any-unimported]
         self,
         *,
         model_factory: ModelFactory,
@@ -50,7 +50,7 @@ class MockLangChainChatCompletionsProvider(LangChainCompletionsProvider):
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
         skill_loader: SkillLoaderProtocol,
-        tool_friendly_name_mapper: ToolFriendlyNameMapper,
+        tool_friendly_name_mapper: ToolDisplayNameMapper,
     ) -> None:
         super().__init__(
             model_factory=model_factory,
