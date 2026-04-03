@@ -158,6 +158,11 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         if auth_config.issuer is None:
             # Dynamic providers with explicit endpoints may not have an issuer.
             # Use auth_provider name as synthetic issuer for token storage.
+            logger.warning(
+                "AuthConfig for provider '%s' has no issuer. "
+                "Using auth_provider name as synthetic issuer for token storage.",
+                auth_config.auth_provider,
+            )
             auth_config = AuthConfig(
                 auth_provider=auth_config.auth_provider,
                 friendly_name=auth_config.friendly_name,

@@ -71,6 +71,8 @@ class PassThroughTokenManager:
         self.dcr_manager: DcrManager = dcr_manager
         if self.dcr_manager is None:
             raise ValueError("dcr_manager must not be None")
+        if not isinstance(self.dcr_manager, DcrManager):
+            raise TypeError("dcr_manager must be an instance of DcrManager")
 
     async def check_tokens_are_valid_for_tools(
         self,
