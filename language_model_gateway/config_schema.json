@@ -359,6 +359,70 @@
             },
             "default": null
           },
+          "oauth": {
+            "type": ["object", "null"],
+            "description": "OAuth configuration resolved from .mcp.json. Provides OIDC/OAuth2 settings for this tool's MCP server.",
+            "properties": {
+              "clientId": {
+                "type": ["string", "null"],
+                "description": "OAuth2 client ID. Optional — when absent, Dynamic Client Registration is used."
+              },
+              "authServerMetadataUrl": {
+                "type": ["string", "null"],
+                "description": "OIDC well-known / server metadata URL (discovery-based flow)."
+              },
+              "authorizationUrl": {
+                "type": ["string", "null"],
+                "description": "Authorization endpoint URL (explicit-endpoints flow)."
+              },
+              "tokenUrl": {
+                "type": ["string", "null"],
+                "description": "Token endpoint URL (explicit-endpoints flow)."
+              },
+              "clientSecret": {
+                "type": ["string", "null"],
+                "description": "Client secret for confidential clients."
+              },
+              "scopes": {
+                "type": ["array", "null"],
+                "items": { "type": "string" },
+                "description": "OAuth scopes to request."
+              },
+              "redirectUri": {
+                "type": ["string", "null"],
+                "description": "OAuth callback redirect URI override."
+              },
+              "registrationUrl": {
+                "type": ["string", "null"],
+                "description": "RFC 7591 Dynamic Client Registration endpoint."
+              },
+              "usePKCE": {
+                "type": "boolean",
+                "description": "Whether to use PKCE. Defaults to true.",
+                "default": true
+              },
+              "pkceMethod": {
+                "type": ["string", "null"],
+                "enum": ["S256", "plain", null],
+                "description": "PKCE challenge method.",
+                "default": "S256"
+              },
+              "clientMetadata": {
+                "type": ["object", "null"],
+                "description": "Client metadata for Dynamic Client Registration.",
+                "properties": {
+                  "client_name": { "type": ["string", "null"] },
+                  "client_uri": { "type": ["string", "null"] },
+                  "logo_uri": { "type": ["string", "null"] },
+                  "contacts": {
+                    "type": ["array", "null"],
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            },
+            "default": null
+          },
           "lazy_load": {
             "type": [
               "boolean",
@@ -513,6 +577,70 @@
             "description": "The issuers for the authentication. If multiple are provided then the agent accepts ANY of those issuers. If auth is needed, we will use the first issuer. If none is provided then we use the default issuer from the OIDC provider.",
             "items": {
               "type": "string"
+            },
+            "default": null
+          },
+          "oauth": {
+            "type": ["object", "null"],
+            "description": "OAuth configuration resolved from .mcp.json. Provides OIDC/OAuth2 settings for this tool's MCP server.",
+            "properties": {
+              "clientId": {
+                "type": ["string", "null"],
+                "description": "OAuth2 client ID. Optional — when absent, Dynamic Client Registration is used."
+              },
+              "authServerMetadataUrl": {
+                "type": ["string", "null"],
+                "description": "OIDC well-known / server metadata URL (discovery-based flow)."
+              },
+              "authorizationUrl": {
+                "type": ["string", "null"],
+                "description": "Authorization endpoint URL (explicit-endpoints flow)."
+              },
+              "tokenUrl": {
+                "type": ["string", "null"],
+                "description": "Token endpoint URL (explicit-endpoints flow)."
+              },
+              "clientSecret": {
+                "type": ["string", "null"],
+                "description": "Client secret for confidential clients."
+              },
+              "scopes": {
+                "type": ["array", "null"],
+                "items": { "type": "string" },
+                "description": "OAuth scopes to request."
+              },
+              "redirectUri": {
+                "type": ["string", "null"],
+                "description": "OAuth callback redirect URI override."
+              },
+              "registrationUrl": {
+                "type": ["string", "null"],
+                "description": "RFC 7591 Dynamic Client Registration endpoint."
+              },
+              "usePKCE": {
+                "type": "boolean",
+                "description": "Whether to use PKCE. Defaults to true.",
+                "default": true
+              },
+              "pkceMethod": {
+                "type": ["string", "null"],
+                "enum": ["S256", "plain", null],
+                "description": "PKCE challenge method.",
+                "default": "S256"
+              },
+              "clientMetadata": {
+                "type": ["object", "null"],
+                "description": "Client metadata for Dynamic Client Registration.",
+                "properties": {
+                  "client_name": { "type": ["string", "null"] },
+                  "client_uri": { "type": ["string", "null"] },
+                  "logo_uri": { "type": ["string", "null"] },
+                  "contacts": {
+                    "type": ["array", "null"],
+                    "items": { "type": "string" }
+                  }
+                }
+              }
             },
             "default": null
           },
