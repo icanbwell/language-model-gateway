@@ -163,20 +163,8 @@ class TokenStorageAuthManager(FastAPIAuthManager):
                 "Using auth_provider name as synthetic issuer for token storage.",
                 auth_config.auth_provider,
             )
-            auth_config = AuthConfig(
-                auth_provider=auth_config.auth_provider,
-                friendly_name=auth_config.friendly_name,
-                audience=auth_config.audience,
-                client_id=auth_config.client_id,
-                client_secret=auth_config.client_secret,
-                well_known_uri=auth_config.well_known_uri,
-                scope=auth_config.scope,
-                issuer=auth_config.auth_provider,
-                authorization_endpoint=auth_config.authorization_endpoint,
-                token_endpoint=auth_config.token_endpoint,
-                use_pkce=auth_config.use_pkce,
-                pkce_method=auth_config.pkce_method,
-                registration_url=auth_config.registration_url,
+            auth_config = auth_config.model_copy(
+                update={"issuer": auth_config.auth_provider}
             )
 
         token_cache_item: TokenCacheItem = (

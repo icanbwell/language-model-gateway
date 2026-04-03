@@ -234,14 +234,6 @@ class PassThroughTokenManager:
                 f"AuthConfig not found for auth provider {tool_first_auth_provider}"
                 f" used by tool {authentication_config.name}."
             )
-        if not auth_information.subject:
-            logger.error(
-                f"AuthInformation is missing subject for tool '{authentication_config.name}'."
-            )
-            raise ValueError(
-                "AuthInformation must have subject to authenticate for tools."
-                + (f"{auth_information}" if logger.isEnabledFor(logging.DEBUG) else "")
-            )
         if not tool_first_auth_provider:
             raise ValueError("Tool using authentication must have an auth provider.")
         tool_auth_provider: str = tool_first_auth_provider

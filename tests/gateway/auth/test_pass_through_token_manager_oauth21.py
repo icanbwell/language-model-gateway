@@ -4,11 +4,18 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
+from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config import AuthConfig
+from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.dcr.dcr_registration import DcrRegistration
 
+from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
 from language_model_gateway.gateway.providers.pass_through_token_manager import (
     PassThroughTokenManager,
+)
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 
 
@@ -17,33 +24,33 @@ def _build_manager(
     existing_config: AuthConfig | None = None,
     dcr_result: DcrRegistration | None = None,
 ) -> PassThroughTokenManager:
-    """Create a PassThroughTokenManager with mocked dependencies."""
-    auth_manager = MagicMock()
+    """Create a PassThroughTokenManager with spec-based mocks that pass isinstance checks."""
+    auth_manager = MagicMock(spec=AuthManager)
     auth_manager.register_dynamic_provider = AsyncMock()
 
-    auth_config_reader = MagicMock()
+    auth_config_reader = MagicMock(spec=AuthConfigReader)
     configs: list[AuthConfig] = []
     if existing_config:
         configs.append(existing_config)
     auth_config_reader.get_config_for_auth_provider.return_value = existing_config
     auth_config_reader.get_auth_configs_for_all_auth_providers.return_value = configs
 
-    tool_auth_manager = MagicMock()
-    environment_variables = MagicMock()
+    tool_auth_manager = MagicMock(spec=ToolAuthManager)
+
+    environment_variables = MagicMock(spec=LanguageModelGatewayEnvironmentVariables)
     environment_variables.app_login_uri = None
     environment_variables.app_token_save_uri = None
 
-    dcr_manager = MagicMock()
+    dcr_manager = MagicMock(spec=DcrManager)
     dcr_manager.resolve_dcr_credentials = AsyncMock(return_value=dcr_result)
 
-    manager = object.__new__(PassThroughTokenManager)
-    manager.auth_manager = auth_manager
-    manager.auth_config_reader = auth_config_reader
-    manager.tool_auth_manager = tool_auth_manager
-    manager.environment_variables = environment_variables
-    manager.dcr_manager = dcr_manager
-
-    return manager
+    return PassThroughTokenManager(
+        auth_manager=auth_manager,
+        auth_config_reader=auth_config_reader,
+        tool_auth_manager=tool_auth_manager,
+        environment_variables=environment_variables,
+        dcr_manager=dcr_manager,
+    )
 
 
 class TestEnsureOAuthProviderRegistered:
@@ -168,3 +175,46 @@ class TestEnsureOAuthProviderRegistered:
         configs = manager.auth_config_reader.get_auth_configs_for_all_auth_providers()
         prov_configs = [c for c in configs if c.auth_provider == "prov"]
         assert len(prov_configs) == 1
+
+    @pytest.mark.asyncio
+    async def test_dcr_overrides_config_client_id(self) -> None:
+        """When both config client_id and DCR result are present, DCR takes precedence."""
+        dcr_reg = MagicMock(spec=DcrRegistration)
+        dcr_reg.client_id = "dcr-overridden-id"
+        dcr_reg.client_secret = "dcr-secret"
+
+        manager = _build_manager(dcr_result=dcr_reg)
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "clientId": "config-client-id",
+                "registrationUrl": "https://auth.example.com/register",
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+            }
+        )
+
+        result = await manager._ensure_oauth_provider_registered(
+            auth_provider="override-test", oauth=oauth
+        )
+
+        assert result.client_id == "dcr-overridden-id"
+        assert result.client_secret == "dcr-secret"
+
+    @pytest.mark.asyncio
+    async def test_pkce_defaults(self) -> None:
+        """PKCE defaults to enabled with S256 when not explicitly set."""
+        manager = _build_manager()
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "clientId": "pkce-test",
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+            }
+        )
+
+        result = await manager._ensure_oauth_provider_registered(
+            auth_provider="pkce-default", oauth=oauth
+        )
+
+        assert result.use_pkce is True
+        assert result.pkce_method == "S256"
