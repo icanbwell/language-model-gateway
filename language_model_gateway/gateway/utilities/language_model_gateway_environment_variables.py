@@ -38,6 +38,10 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return os.environ.get("MONGO_DB_TOKEN_COLLECTION_NAME")
 
     @property
+    def mongo_db_dcr_collection_name(self) -> str:
+        return os.environ.get("MONGO_DB_DCR_COLLECTION_NAME", "dcr_registrations")
+
+    @property
     def mcp_tools_metadata_cache_timeout_seconds(self) -> int:
         return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS", 3600))
 

@@ -2,12 +2,11 @@ import logging
 from typing import Any, Dict, List, cast
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
-import httpx
-from languagemodelcommon.utilities.logger.logging_transport import LoggingTransport
 from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config import AuthConfig
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.models.auth import AuthInformation
 
 from languagemodelcommon.configs.schemas.config_schema import (
@@ -35,6 +34,7 @@ class PassThroughTokenManager:
         auth_config_reader: AuthConfigReader,
         tool_auth_manager: ToolAuthManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
+        dcr_manager: DcrManager,
     ) -> None:
         self.auth_manager: AuthManager = auth_manager
         if self.auth_manager is None:
@@ -68,7 +68,9 @@ class PassThroughTokenManager:
                 "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
-        self._registered_oauth_providers: set[str] = set()
+        self.dcr_manager: DcrManager = dcr_manager
+        if self.dcr_manager is None:
+            raise ValueError("dcr_manager must not be None")
 
     async def check_tokens_are_valid_for_tools(
         self,
@@ -105,12 +107,10 @@ class PassThroughTokenManager:
     ) -> AuthConfig:
         """Dynamically register an auth provider from .mcp.json oauth config.
 
-        Creates an ``AuthConfig`` from the OAuth settings and registers the
-        corresponding OAuth client in ``AuthManager`` so that authorization
-        URLs and token exchanges work for providers that are not statically
-        configured via environment variables.
+        Uses ``DcrManager`` for credential resolution (pre-registered or DCR)
+        and ``AuthManager.register_dynamic_provider()`` for OAuth client
+        registration with proper PKCE config.
         """
-        # Check if already registered in AuthConfigReader
         existing: AuthConfig | None = (
             self.auth_config_reader.get_config_for_auth_provider(
                 auth_provider=auth_provider
@@ -119,52 +119,66 @@ class PassThroughTokenManager:
         if existing is not None:
             return existing
 
-        scope = oauth.scope_string
+        # Resolve client_id — either from config or via DCR
+        client_id = oauth.client_id
+        client_secret = oauth.client_secret
+
+        dcr_result = await self.dcr_manager.resolve_dcr_credentials(
+            auth_provider=auth_provider,
+            registration_url=oauth.registration_url,
+            client_id=oauth.client_id,
+            client_name=(
+                oauth.client_metadata.client_name if oauth.client_metadata else None
+            ),
+            client_uri=(
+                oauth.client_metadata.client_uri if oauth.client_metadata else None
+            ),
+            logo_uri=(
+                oauth.client_metadata.logo_uri if oauth.client_metadata else None
+            ),
+            contacts=(
+                oauth.client_metadata.contacts if oauth.client_metadata else None
+            ),
+        )
+
+        if dcr_result is not None:
+            client_id = dcr_result.client_id
+            client_secret = dcr_result.client_secret
+
+        if not client_id:
+            raise ValueError(
+                f"Could not resolve client_id for auth_provider '{auth_provider}'"
+            )
 
         auth_config = AuthConfig(
             auth_provider=auth_provider,
             friendly_name=auth_provider,
-            audience=oauth.client_id,
-            client_id=oauth.client_id,
-            client_secret=oauth.client_secret,
+            audience=client_id,
+            client_id=client_id,
+            client_secret=client_secret,
             well_known_uri=oauth.auth_server_metadata_url,
-            scope=scope,
+            scope=oauth.scope_string,
+            authorization_endpoint=oauth.authorization_url,
+            token_endpoint=oauth.token_url,
+            use_pkce=oauth.use_pkce,
+            pkce_method=oauth.pkce_method,
+            registration_url=oauth.registration_url,
         )
 
-        # Register in AuthConfigReader so get_provider_for_client_id() works
+        # Register in AuthConfigReader for lookup
         configs = self.auth_config_reader.get_auth_configs_for_all_auth_providers()
         configs.append(auth_config)
 
-        # Register the OAuth client in AuthManager if not already done
-        if auth_provider not in self._registered_oauth_providers:
-            register_kwargs: dict[str, Any] = {
-                "name": auth_provider.lower(),
-                "client_id": oauth.client_id,
-                "client_secret": oauth.client_secret,
-                "client_kwargs": {
-                    "scope": scope,
-                    "code_challenge_method": "S256",
-                    "transport": LoggingTransport(httpx.AsyncHTTPTransport()),
-                },
-            }
-            # Use explicit endpoints when provided, otherwise use discovery
-            if oauth.authorization_url and oauth.token_url:
-                register_kwargs["authorize_url"] = oauth.authorization_url
-                register_kwargs["access_token_url"] = oauth.token_url
-            else:
-                register_kwargs["server_metadata_url"] = oauth.auth_server_metadata_url
+        # Register OAuth client via clean API
+        await self.auth_manager.register_dynamic_provider(auth_config=auth_config)
 
-            self.auth_manager._oauth.register(**register_kwargs)
-            self._registered_oauth_providers.add(auth_provider)
-            logger.info(
-                "Dynamically registered OAuth provider '%s' from .mcp.json "
-                "(client_id=%s, well_known=%s, authorize_url=%s, token_url=%s)",
-                auth_provider,
-                oauth.client_id,
-                oauth.auth_server_metadata_url,
-                oauth.authorization_url,
-                oauth.token_url,
-            )
+        logger.info(
+            "Registered OAuth provider '%s' (client_id=%s, pkce=%s/%s)",
+            auth_provider,
+            client_id,
+            oauth.use_pkce,
+            oauth.pkce_method,
+        )
 
         return auth_config
 
@@ -203,7 +217,11 @@ class PassThroughTokenManager:
             else None
         )
         # If not found in static config, try to register from .mcp.json oauth
-        if auth_config is None and tool_first_auth_provider and authentication_config.oauth:
+        if (
+            auth_config is None
+            and tool_first_auth_provider
+            and authentication_config.oauth
+        ):
             auth_config = await self._ensure_oauth_provider_registered(
                 auth_provider=tool_first_auth_provider,
                 oauth=authentication_config.oauth,

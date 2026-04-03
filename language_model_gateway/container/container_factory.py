@@ -25,6 +25,7 @@ from languagemodelcommon.utilities.tool_friendly_name_mapper import (
 )
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
 from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
@@ -229,6 +230,22 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            DcrManager,
+            lambda c: DcrManager(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                collection_name=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).mongo_db_dcr_collection_name,
+                redirect_uri=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).auth_redirect_uri
+                or "/auth/callback",
+            ),
+        )
+
+        container.singleton(
             PassThroughTokenManager,
             lambda c: PassThroughTokenManager(
                 auth_manager=c.resolve(AuthManager),
@@ -237,6 +254,7 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
+                dcr_manager=c.resolve(DcrManager),
             ),
         )
 

@@ -135,6 +135,7 @@ services:
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
 #      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
+      MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
       # for LLM memory
       ENABLE_LLM_STORE: 'true'
