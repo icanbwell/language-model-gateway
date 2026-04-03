@@ -11,10 +11,6 @@ from languagemodelcommon.image_generation.image_generator_factory import (
 )
 from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_reader.mcp_json_reader import (  # type: ignore[attr-defined]
-    build_auth_configs_from_mcp_json,
-    read_mcp_json,
-)
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
 )
@@ -159,20 +155,6 @@ class LanguageModelGatewayContainerFactory:
             LanguageModelGatewayEnvironmentVariables,
             lambda c: LanguageModelGatewayEnvironmentVariables(),
         )
-
-        # Bootstrap auth providers from .mcp.json into AuthConfigReader
-        mcp_json_config = read_mcp_json()
-        if mcp_json_config is not None:
-            auth_configs_from_mcp = build_auth_configs_from_mcp_json(mcp_json_config)
-            if auth_configs_from_mcp:
-                auth_config_reader = container.resolve(AuthConfigReader)
-                auth_config_reader.register_auth_configs(  # type: ignore[attr-defined]
-                    configs=auth_configs_from_mcp
-                )
-                logger.info(
-                    "Registered %d auth provider(s) from .mcp.json",
-                    len(auth_configs_from_mcp),
-                )
 
         container.singleton(
             GithubPullRequestHelper,

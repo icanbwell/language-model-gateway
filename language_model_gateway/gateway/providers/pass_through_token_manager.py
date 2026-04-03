@@ -154,9 +154,9 @@ class PassThroughTokenManager:
 
         auth_config = AuthConfig(
             auth_provider=auth_provider,
-            friendly_name=oauth.display_name or auth_provider,
-            audience=oauth.audience or client_id,
-            issuer=oauth.issuer,
+            friendly_name=oauth.display_name or auth_provider,  # type: ignore[attr-defined]
+            audience=oauth.audience or client_id,  # type: ignore[attr-defined]
+            issuer=oauth.issuer,  # type: ignore[attr-defined]
             client_id=client_id,
             client_secret=client_secret,
             well_known_uri=oauth.auth_server_metadata_url,
@@ -197,14 +197,14 @@ class PassThroughTokenManager:
         config and fills in the ``auth_providers`` list so the rest of the auth
         flow can proceed normally.
         """
-        if not authentication_config.oauth_providers:
+        if not authentication_config.oauth_providers:  # type: ignore[attr-defined]
             return
         if authentication_config.auth_providers:
             # Already resolved (or manually specified alongside oauth_providers)
             return
 
         provider_names: list[str] = []
-        for oauth in authentication_config.oauth_providers:
+        for oauth in authentication_config.oauth_providers:  # type: ignore[attr-defined]
             provider_key = (
                 f"oauth_{oauth.client_id}"
                 if oauth.client_id
