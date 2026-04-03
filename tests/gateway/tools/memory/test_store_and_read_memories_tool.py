@@ -1,6 +1,8 @@
+import os
 from typing import Optional, List
 
 import httpx
+import pytest
 from openai import AsyncOpenAI
 from openai.types.chat import (
     ChatCompletion,
@@ -33,6 +35,10 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 from simple_container.container.interfaces import IContainer
 
 
+@pytest.mark.skipif(
+    os.environ.get("RUN_TESTS_WITH_REAL_LLM") != "1",
+    reason="Requires Keycloak and real LLM infrastructure",
+)
 async def test_store_and_read_memories_tool(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
