@@ -165,9 +165,10 @@ class PassThroughTokenManager:
             registration_url=oauth.registration_url,
         )
 
-        # Register in AuthConfigReader for lookup
+        # Register in AuthConfigReader for lookup (check for duplicates)
         configs = self.auth_config_reader.get_auth_configs_for_all_auth_providers()
-        configs.append(auth_config)
+        if not any(c.auth_provider == auth_provider for c in configs):
+            configs.append(auth_config)
 
         # Register OAuth client via clean API
         await self.auth_manager.register_dynamic_provider(auth_config=auth_config)

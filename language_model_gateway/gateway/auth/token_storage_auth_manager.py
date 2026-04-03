@@ -167,13 +167,11 @@ class TokenStorageAuthManager(FastAPIAuthManager):
                 well_known_uri=auth_config.well_known_uri,
                 scope=auth_config.scope,
                 issuer=auth_config.auth_provider,
-                authorization_endpoint=getattr(
-                    auth_config, "authorization_endpoint", None
-                ),
-                token_endpoint=getattr(auth_config, "token_endpoint", None),
-                use_pkce=getattr(auth_config, "use_pkce", True),
-                pkce_method=getattr(auth_config, "pkce_method", "S256"),
-                registration_url=getattr(auth_config, "registration_url", None),
+                authorization_endpoint=auth_config.authorization_endpoint,
+                token_endpoint=auth_config.token_endpoint,
+                use_pkce=auth_config.use_pkce,
+                pkce_method=auth_config.pkce_method,
+                registration_url=auth_config.registration_url,
             )
 
         token_cache_item: TokenCacheItem = (
