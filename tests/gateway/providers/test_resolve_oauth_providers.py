@@ -78,7 +78,7 @@ async def test_resolve_oauth_providers_populates_auth_providers() -> None:
     auth_config = AuthenticationConfig(
         name="test-model",
         auth="jwt_token",
-        oauth_providers=[  # type: ignore[call-arg]
+        oauth_providers=[
             _make_oauth(
                 client_id="client-a",
                 metadata_url="https://idp.example.com/.well-known/openid-configuration",
@@ -107,7 +107,7 @@ async def test_resolve_oauth_providers_uses_audience_from_config() -> None:
     auth_config = AuthenticationConfig(
         name="test-model",
         auth="jwt_token",
-        oauth_providers=[  # type: ignore[call-arg]
+        oauth_providers=[
             _make_oauth(
                 client_id="okta-client",
                 metadata_url="https://idp.example.com/.well-known/openid-configuration",
@@ -133,7 +133,7 @@ async def test_resolve_oauth_providers_defaults_audience_to_client_id() -> None:
     auth_config = AuthenticationConfig(
         name="test-model",
         auth="jwt_token",
-        oauth_providers=[  # type: ignore[call-arg]
+        oauth_providers=[
             _make_oauth(
                 client_id="cognito-client",
                 metadata_url="https://cognito.example.com/.well-known/openid-configuration",
@@ -157,7 +157,7 @@ async def test_resolve_oauth_providers_skips_when_auth_providers_set() -> None:
         name="test-model",
         auth="jwt_token",
         auth_providers=["existing-provider"],
-        oauth_providers=[  # type: ignore[call-arg]
+        oauth_providers=[
             _make_oauth(
                 client_id="should-not-register",
                 metadata_url="https://idp.example.com/.well-known/openid-configuration",

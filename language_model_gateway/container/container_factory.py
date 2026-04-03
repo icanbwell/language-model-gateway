@@ -20,7 +20,7 @@ from languagemodelcommon.converters.langgraph_to_openai_converter import (
 from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
-from languagemodelcommon.utilities.tool_display_name_mapper import (  # type: ignore[import-not-found]
+from languagemodelcommon.utilities.tool_display_name_mapper import (
     ToolDisplayNameMapper,
 )
 from oidcauthlib.auth.auth_manager import AuthManager
