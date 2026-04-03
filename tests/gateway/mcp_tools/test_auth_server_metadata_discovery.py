@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
-from oidcauthlib.auth.well_known_configuration.auth_server_metadata import (  # type: ignore[import-not-found]
+from oidcauthlib.auth.well_known_configuration.auth_server_metadata import (
     AuthServerMetadata,
 )
 from language_model_gateway.gateway.mcp.auth_server_metadata_discovery import (

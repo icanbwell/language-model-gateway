@@ -2,10 +2,10 @@ import logging
 from typing import Protocol
 
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
-from oidcauthlib.auth.well_known_configuration.auth_server_metadata import (  # type: ignore[import-not-found]
+from oidcauthlib.auth.well_known_configuration.auth_server_metadata import (
     AuthServerMetadata,
 )
-from oidcauthlib.auth.well_known_configuration.auth_server_metadata_discovery import (  # type: ignore[import-not-found]
+from oidcauthlib.auth.well_known_configuration.auth_server_metadata_discovery import (
     AuthServerMetadataDiscovery as OidcAuthServerMetadataDiscovery,
     AuthServerMetadataDiscoveryProtocol as OidcDiscoveryProtocol,
 )
@@ -26,7 +26,7 @@ class McpAuthServerDiscovery:
     """Thin wrapper that delegates to oidc-auth-lib's AuthServerMetadataDiscovery
     and maps the result to McpOAuthConfig for use in the MCP gateway."""
 
-    def __init__(  # type: ignore[no-any-unimported]
+    def __init__(
         self,
         *,
         discovery: OidcDiscoveryProtocol | None = None,
@@ -34,7 +34,7 @@ class McpAuthServerDiscovery:
         self._discovery = discovery or OidcAuthServerMetadataDiscovery()
 
     @staticmethod
-    def _to_mcp_oauth_config(metadata: AuthServerMetadata) -> McpOAuthConfig:  # type: ignore[no-any-unimported]
+    def _to_mcp_oauth_config(metadata: AuthServerMetadata) -> McpOAuthConfig:
         return McpOAuthConfig.model_validate(
             {
                 "authorization_url": metadata.authorization_endpoint,
