@@ -16,7 +16,7 @@ from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
 from langchain_ai_skills_framework.tools.run_python_script_tool import (
     RunPythonScriptTool,
 )
-from languagemodelcommon.utilities.tool_display_name_mapper import (  # type: ignore[import-not-found]
+from languagemodelcommon.utilities.tool_display_name_mapper import (
     ToolDisplayNameMapper,
 )
 from starlette.responses import StreamingResponse, JSONResponse
@@ -67,7 +67,7 @@ logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
-    def __init__(  # type: ignore[no-any-unimported]
+    def __init__(
         self,
         *,
         model_factory: ModelFactory,
@@ -153,7 +153,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
             )
 
-        self.tool_friendly_name_mapper: ToolDisplayNameMapper = (  # type: ignore[no-any-unimported]
+        self.tool_friendly_name_mapper: ToolDisplayNameMapper = (
             tool_friendly_name_mapper
         )
         if self.tool_friendly_name_mapper is None:
@@ -278,7 +278,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     if conversation_thread_id
                     else str(request_id),
                     headers=headers,
-                    tool_display_name_mapper=self.tool_friendly_name_mapper,  # type: ignore[call-arg]
+                    tool_display_name_mapper=self.tool_friendly_name_mapper,
                 ),
                 config=None,
                 state=None,
