@@ -2,6 +2,8 @@ import logging
 from typing import Any, Dict, List, cast
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
+import httpx
+from languagemodelcommon.utilities.logger.logging_transport import LoggingTransport
 from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config import AuthConfig
@@ -12,6 +14,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     AgentConfig,
     ChatModelConfig,
     AuthenticationConfig,
+    McpOAuthConfig,
 )
 from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
@@ -65,6 +68,8 @@ class PassThroughTokenManager:
                 "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
+        self._registered_oauth_providers: set[str] = set()
+
     async def check_tokens_are_valid_for_tools(
         self,
         *,
@@ -91,6 +96,77 @@ class PassThroughTokenManager:
                 auth_information=auth_information,
                 authentication_config=tool_using_authentication,
             )
+
+    async def _ensure_oauth_provider_registered(
+        self,
+        *,
+        auth_provider: str,
+        oauth: McpOAuthConfig,
+    ) -> AuthConfig:
+        """Dynamically register an auth provider from .mcp.json oauth config.
+
+        Creates an ``AuthConfig`` from the OAuth settings and registers the
+        corresponding OAuth client in ``AuthManager`` so that authorization
+        URLs and token exchanges work for providers that are not statically
+        configured via environment variables.
+        """
+        # Check if already registered in AuthConfigReader
+        existing: AuthConfig | None = (
+            self.auth_config_reader.get_config_for_auth_provider(
+                auth_provider=auth_provider
+            )
+        )
+        if existing is not None:
+            return existing
+
+        scope = oauth.scope_string
+
+        auth_config = AuthConfig(
+            auth_provider=auth_provider,
+            friendly_name=auth_provider,
+            audience=oauth.client_id,
+            client_id=oauth.client_id,
+            client_secret=oauth.client_secret,
+            well_known_uri=oauth.auth_server_metadata_url,
+            scope=scope,
+        )
+
+        # Register in AuthConfigReader so get_provider_for_client_id() works
+        configs = self.auth_config_reader.get_auth_configs_for_all_auth_providers()
+        configs.append(auth_config)
+
+        # Register the OAuth client in AuthManager if not already done
+        if auth_provider not in self._registered_oauth_providers:
+            register_kwargs: dict[str, Any] = {
+                "name": auth_provider.lower(),
+                "client_id": oauth.client_id,
+                "client_secret": oauth.client_secret,
+                "client_kwargs": {
+                    "scope": scope,
+                    "code_challenge_method": "S256",
+                    "transport": LoggingTransport(httpx.AsyncHTTPTransport()),
+                },
+            }
+            # Use explicit endpoints when provided, otherwise use discovery
+            if oauth.authorization_url and oauth.token_url:
+                register_kwargs["authorize_url"] = oauth.authorization_url
+                register_kwargs["access_token_url"] = oauth.token_url
+            else:
+                register_kwargs["server_metadata_url"] = oauth.auth_server_metadata_url
+
+            self.auth_manager._oauth.register(**register_kwargs)
+            self._registered_oauth_providers.add(auth_provider)
+            logger.info(
+                "Dynamically registered OAuth provider '%s' from .mcp.json "
+                "(client_id=%s, well_known=%s, authorize_url=%s, token_url=%s)",
+                auth_provider,
+                oauth.client_id,
+                oauth.auth_server_metadata_url,
+                oauth.authorization_url,
+                oauth.token_url,
+            )
+
+        return auth_config
 
     async def check_tokens_are_valid_for_tool(
         self,
@@ -126,6 +202,12 @@ class PassThroughTokenManager:
             if tool_first_auth_provider is not None
             else None
         )
+        # If not found in static config, try to register from .mcp.json oauth
+        if auth_config is None and tool_first_auth_provider and authentication_config.oauth:
+            auth_config = await self._ensure_oauth_provider_registered(
+                auth_provider=tool_first_auth_provider,
+                oauth=authentication_config.oauth,
+            )
         if auth_config is None:
             raise ValueError(
                 f"AuthConfig not found for auth provider {tool_first_auth_provider}"
