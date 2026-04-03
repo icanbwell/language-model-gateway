@@ -1,6 +1,6 @@
 """Tests for OAuth 2.1 dynamic provider registration in PassThroughTokenManager."""
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
