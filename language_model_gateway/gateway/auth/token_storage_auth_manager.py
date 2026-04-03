@@ -156,7 +156,23 @@ class TokenStorageAuthManager(FastAPIAuthManager):
         )
 
         if auth_config.issuer is None:
-            raise ValueError("issuer must not be None")
+            # Dynamic providers with explicit endpoints may not have an issuer.
+            # Use auth_provider name as synthetic issuer for token storage.
+            auth_config = AuthConfig(
+                auth_provider=auth_config.auth_provider,
+                friendly_name=auth_config.friendly_name,
+                audience=auth_config.audience,
+                client_id=auth_config.client_id,
+                client_secret=auth_config.client_secret,
+                well_known_uri=auth_config.well_known_uri,
+                scope=auth_config.scope,
+                issuer=auth_config.auth_provider,
+                authorization_endpoint=getattr(auth_config, "authorization_endpoint", None),
+                token_endpoint=getattr(auth_config, "token_endpoint", None),
+                use_pkce=getattr(auth_config, "use_pkce", True),
+                pkce_method=getattr(auth_config, "pkce_method", "S256"),
+                registration_url=getattr(auth_config, "registration_url", None),
+            )
 
         token_cache_item: TokenCacheItem = (
             self.token_exchange_manager.create_token_cache_item(
