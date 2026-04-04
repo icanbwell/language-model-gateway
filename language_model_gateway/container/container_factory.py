@@ -318,7 +318,7 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
                 skill_loader=c.resolve(SkillLoaderProtocol),
-                tool_friendly_name_mapper=c.resolve(ToolDisplayNameMapper),
+                tool_display_name_mapper=c.resolve(ToolDisplayNameMapper),
             ),
         )
 

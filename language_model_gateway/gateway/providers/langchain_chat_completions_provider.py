@@ -79,7 +79,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
         skill_loader: SkillLoaderProtocol,
-        tool_friendly_name_mapper: ToolDisplayNameMapper,
+        tool_display_name_mapper: ToolDisplayNameMapper,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -153,14 +153,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
             )
 
-        self.tool_friendly_name_mapper: ToolDisplayNameMapper = (
-            tool_friendly_name_mapper
-        )
-        if self.tool_friendly_name_mapper is None:
-            raise ValueError("tool_friendly_name_mapper must not be None")
-        if not isinstance(self.tool_friendly_name_mapper, ToolDisplayNameMapper):
+        self.tool_display_name_mapper: ToolDisplayNameMapper = tool_display_name_mapper
+        if self.tool_display_name_mapper is None:
+            raise ValueError("tool_display_name_mapper must not be None")
+        if not isinstance(self.tool_display_name_mapper, ToolDisplayNameMapper):
             raise TypeError(
-                f"Expected ToolDisplayNameMapper, got {type(self.tool_friendly_name_mapper)}"
+                f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
     @override
@@ -278,7 +276,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     if conversation_thread_id
                     else str(request_id),
                     headers=headers,
-                    tool_display_name_mapper=self.tool_friendly_name_mapper,
+                    tool_display_name_mapper=self.tool_display_name_mapper,
                 ),
                 config=None,
                 state=None,
