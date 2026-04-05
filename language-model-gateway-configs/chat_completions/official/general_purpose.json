@@ -37,15 +37,8 @@
       ]
     },
     {
-      "auth": "jwt_token",
-      "auth_providers": [
-        "oktaaiden"
-      ],
       "name": "google_drive",
-      "mcp_server": "google-drive",
-      "headers": {
-        "X-Client-Id": "Aiden"
-      }
+      "mcp_server": "google-drive"
     },
     {
       "name": "pubmed"
