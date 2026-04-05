@@ -178,10 +178,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         call_tool into the tool list. Also injects a system message
         describing available tool categories.
         """
-        catalog = await self.mcp_tool_provider.discover_tool_catalog(
+        catalog = self.mcp_tool_provider.discover_tool_catalog(
             tools=mcp_tool_configs,
-            headers=headers,
-            auth_interceptor=auth_interceptor,
         )
 
         if catalog.tool_count > 0:
@@ -297,10 +295,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if tool_configs_from_request:
             if getattr(model_config, "use_tool_discovery", None):
                 # In discovery mode, add request tools to the catalog too
-                catalog = await self.mcp_tool_provider.discover_tool_catalog(
+                catalog = self.mcp_tool_provider.discover_tool_catalog(
                     tools=tool_configs_from_request,
-                    headers=headers,
-                    auth_interceptor=auth_interceptor,
                 )
                 logger.info(
                     "Added %d request tools to discovery catalog",
