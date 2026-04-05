@@ -5,7 +5,7 @@ import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage
-from languagemodelcommon.mcp.mcp_client import (  # type: ignore[import-not-found]
+from languagemodelcommon.mcp.mcp_client import (
     create_mcp_session,
     list_all_tools,
     mcp_tool_to_langchain_tool,

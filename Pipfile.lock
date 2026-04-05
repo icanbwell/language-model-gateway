@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "62743e63fb0d1cab190dc79fccc2c2dd8c571971e46b16ac99f32e4246548a6f"
+            "sha256": "f8ce14c024d0d09142b724d9137cca0092a2377b85c7a5bd85b2c97acaba1265"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1582,15 +1582,6 @@
             "markers": "python_full_version >= '3.10.0' and python_full_version < '4.0.0'",
             "version": "==4.2.1"
         },
-        "langchain-mcp-adapters": {
-            "hashes": [
-                "sha256:12d39e91ae4389c54b61b221094e53850b6e152934d8bc10c80665d600e76530",
-                "sha256:d08e64954e86281002653071b7430e0377c9a577cb4ac3143abfeb3e24ef8797"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.10'",
-            "version": "==0.2.2"
-        },
         "langchain-mongodb": {
             "hashes": [
                 "sha256:7e1f43684c907d1f1fee4dbc480dd4909b3ebf03b5d3dad105ed9f4a4280d49f",
@@ -1687,12 +1678,12 @@
         },
         "language-model-common": {
             "hashes": [
-                "sha256:b5f9febc90bbbaae3b5ccbd2b4c9973ce255c5c600952e27c54b829ed8de2d82",
-                "sha256:cc6b51508b3ad34ebc0d4902e6503fa55c3ef6fcfa18586a6c01cf0111f9fda6"
+                "sha256:56a64a97c935fc4016d9531f20013100ffebc21bb9c633ba9e3e8889af966f83",
+                "sha256:aa021dc00cd45bc99ea0b64375c3fd21dd77721d354ede927f39a1738255503d"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.35"
+            "version": "==1.0.36"
         },
         "lark": {
             "hashes": [

@@ -51,8 +51,8 @@ from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from languagemodelcommon.mcp.search_tools_tool import SearchToolsTool  # type: ignore[import-not-found]
-from languagemodelcommon.mcp.call_tool_tool import CallToolTool  # type: ignore[import-not-found]
+from languagemodelcommon.mcp.search_tools_tool import SearchToolsTool
+from languagemodelcommon.mcp.call_tool_tool import CallToolTool
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
@@ -178,7 +178,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         call_tool into the tool list. Also injects a system message
         describing available tool categories.
         """
-        catalog = await self.mcp_tool_provider.discover_tool_catalog(  # type: ignore[attr-defined]
+        catalog = await self.mcp_tool_provider.discover_tool_catalog(
             tools=mcp_tool_configs,
             headers=headers,
             auth_interceptor=auth_interceptor,
@@ -297,7 +297,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         if tool_configs_from_request:
             if getattr(model_config, "use_tool_discovery", None):
                 # In discovery mode, add request tools to the catalog too
-                catalog = await self.mcp_tool_provider.discover_tool_catalog(  # type: ignore[attr-defined]
+                catalog = await self.mcp_tool_provider.discover_tool_catalog(
                     tools=tool_configs_from_request,
                     headers=headers,
                     auth_interceptor=auth_interceptor,
