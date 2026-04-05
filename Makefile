@@ -83,7 +83,10 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	-f docker-compose-otel.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
-	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe && make configure-openai-connection && \
+	make insert-admin-user && \
+	make insert-admin-user-2 && \
+	make import-open-webui-pipe && \
+	make configure-openai-connection
 	@echo "======== Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
@@ -311,7 +314,9 @@ configure-openai-connection: ## Configurates OpenWebUI to use direct connection
                cd /app && \
                python3 configure_openai_connection.py \
                --url 'http://language-model-gateway-open-webui-1:8080' \
-               --api-key 'sk-my-api-key'"
+               --api-key 'sk-my-api-key' \
+               --connection-url='http://language-model-gateway:5000/api/v1' \
+               "
 
 .PHONY: fix-script-permissions
 fix-script-permissions:
