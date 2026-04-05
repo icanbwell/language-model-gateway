@@ -280,7 +280,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
         if tool_configs_from_request:
-            if getattr(model_config, "use_tool_discovery", None):
+            if model_config.use_tool_discovery:
                 # In discovery mode, add request tools to the catalog too
                 catalog = self.mcp_tool_provider.discover_tool_catalog(
                     tools=tool_configs_from_request,
