@@ -271,7 +271,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
 
         # add MCP tools — either via meta-discovery or direct loading
-        if getattr(model_config, "use_tool_discovery", None):
+        if model_config.use_tool_discovery:
             tools = await self._add_discovery_tools(
                 tools=list(tools),
                 mcp_tool_configs=mcp_tool_configs,
