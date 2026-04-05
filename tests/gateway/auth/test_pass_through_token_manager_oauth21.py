@@ -1,5 +1,6 @@
 """Tests for OAuth 2.1 dynamic provider registration in PassThroughTokenManager."""
 
+import asyncio
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
@@ -218,3 +219,69 @@ class TestEnsureOAuthProviderRegistered:
 
         assert result.use_pkce is True
         assert result.pkce_method == "S256"
+
+    @pytest.mark.asyncio
+    async def test_concurrent_dcr_only_registers_once(self) -> None:
+        """Concurrent requests for the same provider only trigger DCR once.
+
+        Simulates multiple users hitting the same MCP server at once.
+        The per-provider lock should serialize the calls so only the
+        first actually performs DCR; subsequent waiters find the
+        already-registered config.
+        """
+        dcr_reg = MagicMock(spec=DcrRegistration)
+        dcr_reg.client_id = "dcr-single-id"
+        dcr_reg.client_secret = "dcr-secret"
+
+        manager = _build_manager(dcr_result=dcr_reg)
+
+        # Track how many times DCR is actually called
+        call_count = 0
+        original_resolve = manager.dcr_manager.resolve_dcr_credentials
+
+        async def counting_resolve(**kwargs):  # type: ignore[no-untyped-def]
+            nonlocal call_count
+            call_count += 1
+            result = await original_resolve(**kwargs)
+            # After the first call completes, simulate the config being
+            # registered in-memory so subsequent lock waiters find it.
+            registered = AuthConfig(
+                auth_provider=kwargs["auth_provider"],
+                friendly_name=kwargs["auth_provider"],
+                audience="dcr-single-id",
+                client_id="dcr-single-id",
+                client_secret="dcr-secret",
+                scope="openid",
+                authorization_endpoint="https://auth.example.com/authorize",
+                token_endpoint="https://auth.example.com/token",
+            )
+            manager.auth_config_reader.get_config_for_auth_provider.return_value = (  # type: ignore[attr-defined]
+                registered
+            )
+            return result
+
+        manager.dcr_manager.resolve_dcr_credentials = AsyncMock(  # type: ignore[method-assign]
+            side_effect=counting_resolve,
+        )
+
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "registrationUrl": "https://auth.example.com/register",
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+            }
+        )
+
+        # Fire 5 concurrent registrations for the same provider
+        tasks = [
+            manager._ensure_oauth_provider_registered(
+                auth_provider="concurrent-test", oauth=oauth
+            )
+            for _ in range(5)
+        ]
+        results = await asyncio.gather(*tasks)
+
+        # All should resolve to a valid config
+        assert all(r.client_id == "dcr-single-id" for r in results)
+        # DCR should have been called exactly once
+        assert call_count == 1
