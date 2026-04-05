@@ -193,9 +193,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 headers=headers,
                 auth_interceptor=auth_interceptor,
             )
-            tools.append(
-                SearchToolsTool(catalog=catalog, resolver=resolver)
-            )
+            tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
             tools.append(
                 CallToolTool(
                     catalog=catalog,
