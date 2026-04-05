@@ -169,6 +169,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         *,
         tools: list[BaseTool],
         mcp_tool_configs: list[AgentConfig],
+        headers: Dict[str, str],
         auth_interceptor: AuthMcpCallInterceptor,
     ) -> tuple[list[BaseTool], ToolCatalog | None]:
         """Replace direct MCP tool loading with meta-discovery tools.
@@ -188,7 +189,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         categories = catalog.get_categories()
         if categories:
-            tools.append(SearchToolsTool(catalog=catalog))
+            resolver = self.mcp_tool_provider.create_tool_resolver(
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
+            tools.append(
+                SearchToolsTool(catalog=catalog, resolver=resolver)
+            )
             tools.append(
                 CallToolTool(
                     catalog=catalog,
@@ -254,6 +261,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             tools, tool_catalog = self._add_discovery_tools(
                 tools=list(tools),
                 mcp_tool_configs=mcp_tool_configs,
+                headers=headers,
                 auth_interceptor=auth_interceptor,
             )
         else:
