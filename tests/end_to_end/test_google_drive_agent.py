@@ -7,8 +7,7 @@ from fastmcp.client import StreamableHttpTransport
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage
-from languagemodelcommon.mcp.mcp_client import (
-    MCPConnectionConfig,
+from languagemodelcommon.mcp.mcp_client import (  # type: ignore[import-not-found]
     create_mcp_session,
     list_all_tools,
     mcp_tool_to_langchain_tool,
@@ -154,7 +153,7 @@ async def test_google_drive_via_llm() -> None:
         # Setting temperature to 0 for deterministic results
         **model_parameters_dict,
     )
-    mcp_tool_config: MCPConnectionConfig = {
+    mcp_tool_config: Any = {
         "url": url,
         "transport": "streamable_http",
         "headers": {
@@ -163,7 +162,7 @@ async def test_google_drive_via_llm() -> None:
         },
     }
 
-    tools = []
+    tools: list[Any] = []
     async with create_mcp_session(mcp_tool_config) as session:
         await session.initialize()
         mcp_tools = await list_all_tools(session)

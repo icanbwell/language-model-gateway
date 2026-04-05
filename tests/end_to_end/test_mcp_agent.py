@@ -5,8 +5,7 @@ import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage
-from languagemodelcommon.mcp.mcp_client import (
-    MCPConnectionConfig,
+from languagemodelcommon.mcp.mcp_client import (  # type: ignore[import-not-found]
     create_mcp_session,
     list_all_tools,
     mcp_tool_to_langchain_tool,
@@ -85,7 +84,7 @@ async def test_mcp_agent() -> None:
         **model_parameters_dict,
     )
 
-    server_configs: Dict[str, MCPConnectionConfig] = {
+    server_configs: Dict[str, Any] = {
         "math": {
             "url": "http://mcp_server_gateway:5000/math_server",
             "transport": "streamable_http",
@@ -95,13 +94,15 @@ async def test_mcp_agent() -> None:
             "transport": "streamable_http",
         },
     }
-    tools = []
+    tools: list[Any] = []
     for server_name, config in server_configs.items():
         async with create_mcp_session(config) as session:
             await session.initialize()
             mcp_tools = await list_all_tools(session)
             tools.extend(
-                mcp_tool_to_langchain_tool(t, connection=config, server_name=server_name)
+                mcp_tool_to_langchain_tool(
+                    t, connection=config, server_name=server_name
+                )
                 for t in mcp_tools
             )
 
