@@ -74,8 +74,7 @@ databricks-sdk = ">=0.42.0"
 pandas = ">=2.2.3"
 # for testing the MCP client
 mcp = ">=1.11.0"
-# langchain_mcp_adapters is a Python library for working with MCP adapters in LangChain
-langchain_mcp_adapters = ">=0.2.1"
+# langchain_mcp_adapters replaced by custom MCP client in languagemodelcommon.mcp.mcp_client
 # authlib is a Python library for OAuth and OpenID Connect
 authlib = ">=1.6.5"
 # joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)

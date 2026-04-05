@@ -51,6 +51,8 @@ from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.search_tools_tool import SearchToolsTool
+from languagemodelcommon.mcp.call_tool_tool import CallToolTool
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
@@ -161,6 +163,71 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
+    async def _add_discovery_tools(
+        self,
+        *,
+        tools: list[BaseTool],
+        mcp_tool_configs: list[AgentConfig],
+        headers: Dict[str, str],
+        auth_interceptor: AuthMcpCallInterceptor,
+        chat_request_wrapper: ChatRequestWrapper,
+    ) -> list[BaseTool]:
+        """Replace direct MCP tool loading with meta-discovery tools.
+
+        Builds a ToolCatalog from MCP servers and injects search_tools +
+        call_tool into the tool list. Also injects a system message
+        describing available tool categories.
+        """
+        catalog = await self.mcp_tool_provider.discover_tool_catalog(
+            tools=mcp_tool_configs,
+            headers=headers,
+            auth_interceptor=auth_interceptor,
+        )
+
+        if catalog.tool_count > 0:
+            # Inject system message describing available tool categories
+            categories = catalog.get_categories()
+            category_lines = "\n".join(
+                f"- {c['name']}: {c['description']} ({c['tool_count']} tools)"
+                for c in categories
+            )
+            discovery_prompt = (
+                "You have access to a tool discovery system. "
+                "The following categories of tools are available:\n\n"
+                f"{category_lines}\n\n"
+                "To use these tools:\n"
+                "1. Call search_tools(query=\"your search query\") to find relevant tools. "
+                "You can optionally filter by category.\n"
+                "2. Review the returned tool names, descriptions, and parameter schemas.\n"
+                "3. Call call_tool(name=\"tool_name\", arguments={{...}}) to invoke a specific tool.\n\n"
+                "Always search for tools before trying to call them."
+            )
+            system_msg = chat_request_wrapper.create_system_message(
+                content=discovery_prompt
+            )
+            chat_request_wrapper.messages = [system_msg] + [
+                m for m in chat_request_wrapper.messages
+            ]
+
+            tools.append(
+                SearchToolsTool(catalog=catalog)
+            )
+            tools.append(
+                CallToolTool(
+                    catalog=catalog,
+                    mcp_tool_provider=self.mcp_tool_provider,
+                    auth_interceptor=auth_interceptor,
+                )
+            )
+            logger.info(
+                f"Tool discovery enabled: {catalog.tool_count} tools in catalog, "
+                f"{len(categories)} categories"
+            )
+        else:
+            logger.warning("Tool discovery enabled but no tools found in catalog")
+
+        return tools
+
     @override
     async def chat_completions(
         self,
@@ -207,12 +274,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
-        # add MCP tools
-        tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
-            tools=mcp_tool_configs,
-            headers=headers,
-            auth_interceptor=auth_interceptor,
-        )
+        # add MCP tools — either via meta-discovery or direct loading
+        if model_config.use_tool_discovery:
+            tools = await self._add_discovery_tools(
+                tools=list(tools),
+                mcp_tool_configs=mcp_tool_configs,
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+                chat_request_wrapper=chat_request_wrapper,
+            )
+        else:
+            tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
+                tools=mcp_tool_configs,
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
 
         # add the skills tools
         tools += self.skill_loader.get_tools()
@@ -223,16 +299,29 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
         if tool_configs_from_request:
-            tools_from_request: Sequence[BaseTool] = (
-                await self.mcp_tool_provider.get_tools_async(
+            if model_config.use_tool_discovery:
+                # In discovery mode, add request tools to the catalog too
+                catalog = await self.mcp_tool_provider.discover_tool_catalog(
                     tools=tool_configs_from_request,
                     headers=headers,
                     auth_interceptor=auth_interceptor,
                 )
-                if tool_configs_from_request is not None
-                else []
-            )
-            tools = [t for t in tools] + [t for t in tools_from_request]
+                # The existing search_tools/call_tool already cover these
+                # since they share the same catalog instance
+                logger.info(
+                    f"Added {catalog.tool_count} request tools to discovery catalog"
+                )
+            else:
+                tools_from_request: Sequence[BaseTool] = (
+                    await self.mcp_tool_provider.get_tools_async(
+                        tools=tool_configs_from_request,
+                        headers=headers,
+                        auth_interceptor=auth_interceptor,
+                    )
+                    if tool_configs_from_request is not None
+                    else []
+                )
+                tools = [t for t in tools] + [t for t in tools_from_request]
 
         # Use context managers only for the duration of streaming
         # we can't use async with because we need to return the StreamingResponse

@@ -254,6 +254,11 @@
             "type": "string",
             "description": "Name of the tool."
           },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Human-readable description of the category of tools from this MCP server. Used in system prompts for tool discovery.",
+            "default": null
+          },
           "parameters": {
             "type": [
               "array",
@@ -474,6 +479,11 @@
           "name": {
             "type": "string",
             "description": "Name of the agent."
+          },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Human-readable description of the category of tools from this MCP server. Used in system prompts for tool discovery.",
+            "default": null
           },
           "parameters": {
             "type": [
@@ -786,6 +796,14 @@
         "null"
       ],
       "description": "Whether the upstream model supports streaming responses.",
+      "default": null
+    },
+    "use_tool_discovery": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When true, uses meta-tool discovery (search_tools + call_tool) instead of loading all MCP tools directly into the LLM context.",
       "default": null
     }
   }
