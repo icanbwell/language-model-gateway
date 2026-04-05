@@ -53,6 +53,7 @@ from languagemodelcommon.mcp.interceptors.auth import (
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.mcp.call_tool_tool import CallToolTool
+from languagemodelcommon.mcp.tool_catalog import ToolCatalog
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
@@ -163,50 +164,30 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
-    async def _add_discovery_tools(
+    def _add_discovery_tools(
         self,
         *,
         tools: list[BaseTool],
         mcp_tool_configs: list[AgentConfig],
-        headers: Dict[str, str],
         auth_interceptor: AuthMcpCallInterceptor,
-        chat_request_wrapper: ChatRequestWrapper,
-    ) -> list[BaseTool]:
+    ) -> tuple[list[BaseTool], ToolCatalog | None]:
         """Replace direct MCP tool loading with meta-discovery tools.
 
-        Builds a ToolCatalog from MCP servers and injects search_tools +
-        call_tool into the tool list. Also injects a system message
-        describing available tool categories.
+        Builds a ToolCatalog from MCP servers and adds search_tools +
+        call_tool to the tool list. The ToolDiscoveryMiddleware is
+        responsible for injecting category descriptions into the system
+        prompt at model-call time.
+
+        Returns:
+            A tuple of (tools, catalog). The catalog is ``None`` when no
+            categories were registered.
         """
         catalog = self.mcp_tool_provider.discover_tool_catalog(
             tools=mcp_tool_configs,
         )
 
-        if catalog.tool_count > 0:
-            # Inject system message describing available tool categories
-            categories = catalog.get_categories()
-            category_lines = "\n".join(
-                f"- {c['name']}: {c['description']} ({c['tool_count']} tools)"
-                for c in categories
-            )
-            discovery_prompt = (
-                "You have access to a tool discovery system. "
-                "The following categories of tools are available:\n\n"
-                f"{category_lines}\n\n"
-                "To use these tools:\n"
-                '1. Call search_tools(query="your search query") to find relevant tools. '
-                "You can optionally filter by category.\n"
-                "2. Review the returned tool names, descriptions, and parameter schemas.\n"
-                '3. Call call_tool(name="tool_name", arguments={{...}}) to invoke a specific tool.\n\n'
-                "Always search for tools before trying to call them."
-            )
-            system_msg = chat_request_wrapper.create_system_message(
-                content=discovery_prompt
-            )
-            chat_request_wrapper.messages = [system_msg] + list(
-                chat_request_wrapper.messages
-            )
-
+        categories = catalog.get_categories()
+        if categories:
             tools.append(SearchToolsTool(catalog=catalog))
             tools.append(
                 CallToolTool(
@@ -216,14 +197,13 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 )
             )
             logger.info(
-                "Tool discovery enabled: %d tools in catalog, %d categories",
-                catalog.tool_count,
+                "Tool discovery enabled: %d categories registered",
                 len(categories),
             )
-        else:
-            logger.warning("Tool discovery enabled but no tools found in catalog")
+            return tools, catalog
 
-        return tools
+        logger.warning("Tool discovery enabled but no tools found in catalog")
+        return tools, None
 
     @override
     async def chat_completions(
@@ -269,13 +249,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
 
         # add MCP tools — either via meta-discovery or direct loading
+        tool_catalog: ToolCatalog | None = None
         if model_config.use_tool_discovery:
-            tools = await self._add_discovery_tools(
+            tools, tool_catalog = self._add_discovery_tools(
                 tools=list(tools),
                 mcp_tool_configs=mcp_tool_configs,
-                headers=headers,
                 auth_interceptor=auth_interceptor,
-                chat_request_wrapper=chat_request_wrapper,
             )
         else:
             tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
@@ -335,6 +314,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 if self.environment_variables.enable_llm_checkpointer
                 else None,
                 skill_loader=self.skill_loader,
+                tool_catalog=tool_catalog,
             )
             request_id: uuid.UUID = uuid.uuid4()
 
