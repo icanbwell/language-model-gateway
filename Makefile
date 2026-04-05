@@ -85,8 +85,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
 	make insert-admin-user \
 	&& make insert-admin-user-2 \
-	&& make import-open-webui-pipe \
-	&& make configure-openai-connection
+	&& make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login

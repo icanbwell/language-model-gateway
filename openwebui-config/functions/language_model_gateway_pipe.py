@@ -326,78 +326,68 @@ HTTPX Response Log:
             if info and isinstance(info, dict) and info.get("location"):
                 yield f"Location: {type(info['location']).__name__} {info['location']}\n"
 
-    @staticmethod
-    def _make_error_chunk(
-        *, error: Exception, is_streaming: bool
-    ) -> Optional[Dict[str, Any]]:
-        if is_streaming:
-            return {
-                "id": "chatcmpl-error",
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": "error",
-                "choices": [
-                    {
-                        "index": 0,
-                        "delta": {"content": f"Error [{type(error)}]: {error}"},
-                        "finish_reason": "stop",
-                    }
-                ],
-            }
-        return None
-
     async def _stream_openai_response(
         self,
         response: httpx.Response,
     ) -> AsyncGenerator[str, None]:
         """
-        Parse OpenAI streaming response and yield text chunks.
+        Parse OpenAI Chat Completions streaming response and yield text chunks.
 
-        This is the KEY FIX: Instead of yielding raw SSE lines,
-        we parse the chunks and yield just the text content.
-        OpenWebUI's framework will handle wrapping it in proper SSE format.
+        Uses a byte-buffer approach for robust SSE parsing: reads raw chunks
+        and manually splits on newlines. This correctly handles partial frames
+        that may be split across network chunks, unlike aiter_lines() which
+        can mishandle SSE's double-newline delimiters.
+
+        Yields plain text content only — OpenWebUI handles SSE wrapping.
         """
-        async for line in response.aiter_lines():
-            if not line:
-                continue
+        buf = bytearray()
+        async for chunk in response.aiter_bytes():
+            buf.extend(chunk)
+            start_idx = 0
+            # Process all complete lines in the buffer
+            while True:
+                newline_idx = buf.find(b"\n", start_idx)
+                if newline_idx == -1:
+                    break
 
-            # Skip the SSE metadata
-            if line == "data: [DONE]":
-                continue
+                line = buf[start_idx:newline_idx].strip()
+                start_idx = newline_idx + 1
 
-            # Remove "data: " prefix if present
-            if line.startswith("data: "):
-                line = line[6:]
+                # Skip empty lines and SSE comments (lines starting with ':')
+                if not line or line.startswith(b":"):
+                    continue
 
-            if not line:
-                continue
+                # Only process lines with the "data:" prefix
+                if not line.startswith(b"data:"):
+                    continue
 
-            try:
-                # Parse the JSON chunk
-                chunk = json.loads(line)
+                data_part = line[5:].strip()
 
-                # Extract text content from the OpenAI format
-                if "choices" in chunk and len(chunk["choices"]) > 0:
-                    delta = chunk["choices"][0].get("delta", {})
+                # End of SSE stream
+                if data_part == b"[DONE]":
+                    return
 
-                    # Get text content
-                    if "content" in delta and delta["content"]:
-                        yield delta["content"]
+                try:
+                    chunk_json = json.loads(data_part.decode("utf-8"))
+                except json.JSONDecodeError as e:
+                    logger.warning(
+                        f"Failed to parse SSE data: {data_part!r}, error: {e}"
+                    )
+                    continue
 
-                    # Handle finish_reason for proper stream termination
-                    if chunk["choices"][0].get("finish_reason") == "stop":
-                        # Optionally yield a final empty chunk to signal completion
-                        pass
+                # Extract text content from Chat Completions chunk format
+                choices = chunk_json.get("choices")
+                if not choices:
+                    continue
 
-                    # Also handle tool_calls if present
-                    tool_calls = delta.get("tool_calls")
-                    if tool_calls:
-                        yield json.dumps({"tool_calls": tool_calls})
+                delta = choices[0].get("delta", {})
+                content = delta.get("content")
+                if content:
+                    yield content
 
-            except json.JSONDecodeError as e:
-                logger.warning(f"Failed to parse SSE line: {line}, error: {e}")
-                # Yield the line as-is if parsing fails
-                yield line
+            # Remove processed bytes from buffer
+            if start_idx > 0:
+                del buf[:start_idx]
 
     async def pipe(
         self,
@@ -500,18 +490,36 @@ HTTPX Response Log:
                         timeout=self.valves.llm_call_timeout_seconds,
                         follow_redirects=True,
                     ) as response:
-                        response.raise_for_status()
+                        # Read the error body before raise_for_status() so
+                        # the error message includes the server's response
+                        if response.status_code >= 400:
+                            error_body = await response.aread()
+                            response_text = error_body.decode("utf-8", errors="replace")
+                            response.raise_for_status()
+
                         content_type = response.headers.get("content-type", "")
-                        if content_type.startswith("text/event-stream"):
-                            # NEW: Parse OpenAI SSE format and yield text chunks
-                            async for chunk in self._stream_openai_response(response):
-                                yield chunk
+                        if "text/event-stream" in content_type:
+                            async for text_chunk in self._stream_openai_response(
+                                response
+                            ):
+                                yield text_chunk
                         else:
                             # Non-SSE response from streaming endpoint
                             raw_body = await response.aread()
                             response_text = raw_body.decode("utf-8", errors="replace")
                             try:
-                                yield json.dumps(json.loads(response_text))
+                                data = json.loads(response_text)
+                                # Extract content from a non-streamed completion
+                                choices = data.get("choices", [])
+                                if choices:
+                                    message = choices[0].get("message", {})
+                                    content = message.get("content", "")
+                                    if content:
+                                        yield content
+                                    else:
+                                        yield json.dumps(data)
+                                else:
+                                    yield json.dumps(data)
                             except json.JSONDecodeError:
                                 yield response_text
                 else:
@@ -538,16 +546,12 @@ HTTPX Response Log:
         except Exception as e:
             await self.emit_status(__event_emitter__, "error", f"{e}", True)
             httpx_version = getattr(httpx, "__version__", "unknown")
-            error_chunk = self._make_error_chunk(error=e, is_streaming=is_streaming)
-            if error_chunk:
-                yield f"data: {json.dumps(error_chunk)}\n\n"
-            else:
-                yield (
-                    f"LanguageModelGateway::pipe Error:"
-                    f" {type(e)} {e} httpx_version={httpx_version} url={url}"
-                    f" original_url={getattr(__request__, 'url', None)}"
-                    f" response_text={response_text} payload={payload}\n"
-                )
+            yield (
+                f"LanguageModelGateway::pipe Error:"
+                f" {type(e).__name__}: {e} httpx_version={httpx_version} url={url}"
+                f" original_url={getattr(__request__, 'url', None)}"
+                f" response_text={response_text} payload={payload}\n"
+            )
 
     async def get_models(self) -> List[Dict[str, str]]:
         """Fetches the list of available models from the OpenAI API."""
