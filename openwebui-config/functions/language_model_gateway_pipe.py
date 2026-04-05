@@ -12,12 +12,15 @@ KEY FIX: Instead of yielding raw SSE lines, we now parse the OpenAI streaming re
 and yield individual text chunks that OpenWebUI will format properly.
 """
 
+import asyncio
 import datetime
 import json
 import logging
 import os
+import random
 import time
 from pathlib import PurePosixPath
+from time import perf_counter
 from typing import (
     AsyncGenerator,
     List,
@@ -50,9 +53,6 @@ class Pipe:
     """
 
     class Valves(BaseModel):
-        emit_interval: float = Field(
-            default=2.0, description="Interval in seconds between status emissions"
-        )
         enable_status_indicator: bool = Field(
             default=True, description="Enable or disable status indicator emissions"
         )
@@ -110,7 +110,6 @@ class Pipe:
             if self.valves.model_name_prefix
             else ""
         )
-        self.last_emit_time: float = 0
         self.pipelines: Optional[List[Dict[str, Any]]] = None
         self.pipelines_last_updated: Optional[float] = (
             None  # Track last cache update time
@@ -135,35 +134,89 @@ class Pipe:
         logger.debug(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
 
-    async def emit_status(
-        self,
-        __event_emitter__: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
-        level: str,
-        message: str,
-        done: bool,
-        message_type: str = "status",
+    @staticmethod
+    async def _emit_status(
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        description: str,
+        done: bool = False,
     ) -> None:
-        """Emit status updates at controlled intervals."""
-        current_time = time.time()
-        if (
-            __event_emitter__
-            and self.valves.enable_status_indicator
-            and (
-                current_time - self.last_emit_time >= self.valves.emit_interval or done
-            )
-        ):
-            await __event_emitter__(
+        """Emit a native OpenWebUI status bar update."""
+        if event_emitter:
+            await event_emitter(
                 {
-                    "type": message_type,
-                    "data": {
-                        "status": "complete" if done else "in_progress",
-                        "level": level,
-                        "description": message,
-                        "done": done,
-                    },
+                    "type": "status",
+                    "data": {"description": description, "done": done},
                 }
             )
-            self.last_emit_time = current_time
+
+    @staticmethod
+    async def _emit_completion(
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        *,
+        content: str = "",
+        usage: Optional[Dict[str, Any]] = None,
+        done: bool = True,
+    ) -> None:
+        """Emit a chat:completion event with optional usage statistics."""
+        if event_emitter:
+            data: Dict[str, Any] = {"done": done, "content": content}
+            if usage is not None:
+                data["usage"] = usage
+            await event_emitter({"type": "chat:completion", "data": data})
+
+    @staticmethod
+    async def _emit_error(
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        message: str,
+        done: bool = True,
+    ) -> None:
+        """Emit a native OpenWebUI error via the chat:completion event."""
+        if event_emitter:
+            await event_emitter(
+                {
+                    "type": "chat:completion",
+                    "data": {"error": {"message": message}, "done": done},
+                }
+            )
+
+    @staticmethod
+    def _create_thinking_tasks(
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+    ) -> List[asyncio.Task[None]]:
+        """Schedule progressive thinking status messages.
+
+        Returns a list of asyncio tasks that emit status updates at
+        staggered intervals, giving the user visual feedback while
+        waiting for the first response token.
+        """
+        if not event_emitter:
+            return []
+
+        async def _later(delay: float, msg: str) -> None:
+            await asyncio.sleep(delay)
+            await event_emitter({"type": "status", "data": {"description": msg}})
+
+        tasks: List[asyncio.Task[None]] = []
+        for delay, msg in [
+            (0, "Thinking\u2026"),
+            (1.5, "Reading the question\u2026"),
+            (4.0, "Gathering thoughts\u2026"),
+            (6.0, "Exploring possible responses\u2026"),
+            (8.0, "Building a response\u2026"),
+        ]:
+            tasks.append(
+                asyncio.create_task(
+                    _later(delay + random.uniform(0, 0.5), msg)
+                )
+            )
+        return tasks
+
+    @staticmethod
+    def _cancel_thinking(tasks: List[asyncio.Task[None]]) -> None:
+        """Cancel all pending thinking status tasks."""
+        for t in tasks:
+            t.cancel()
+        tasks.clear()
 
     @classmethod
     def pathlib_url_join(cls, base_url: str, path: str) -> str:
@@ -329,6 +382,8 @@ HTTPX Response Log:
     async def _stream_openai_response(
         self,
         response: httpx.Response,
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
     ) -> AsyncGenerator[str, None]:
         """
         Parse OpenAI Chat Completions streaming response and yield text chunks.
@@ -338,8 +393,15 @@ HTTPX Response Log:
         that may be split across network chunks, unlike aiter_lines() which
         can mishandle SSE's double-newline delimiters.
 
+        Emits native status updates:
+        - Cancels thinking tasks and emits "Responding…" on first content token
+        - Forwards usage statistics from the final chunk via chat:completion
+
         Yields plain text content only — OpenWebUI handles SSE wrapping.
         """
+        first_token_received = False
+        usage: Optional[Dict[str, Any]] = None
+
         buf = bytearray()
         async for chunk in response.aiter_bytes():
             buf.extend(chunk)
@@ -365,6 +427,11 @@ HTTPX Response Log:
 
                 # End of SSE stream
                 if data_part == b"[DONE]":
+                    # Forward usage stats to OpenWebUI
+                    if usage:
+                        await self._emit_completion(
+                            event_emitter, usage=usage, done=False
+                        )
                     return
 
                 try:
@@ -375,6 +442,11 @@ HTTPX Response Log:
                     )
                     continue
 
+                # Capture usage from the final chunk (OpenAI includes it
+                # in the last chunk before [DONE] when stream_options.include_usage is set)
+                if "usage" in chunk_json and chunk_json["usage"]:
+                    usage = chunk_json["usage"]
+
                 # Extract text content from Chat Completions chunk format
                 choices = chunk_json.get("choices")
                 if not choices:
@@ -383,6 +455,14 @@ HTTPX Response Log:
                 delta = choices[0].get("delta", {})
                 content = delta.get("content")
                 if content:
+                    # On first content token, cancel thinking and show "Responding"
+                    if not first_token_received:
+                        first_token_received = True
+                        if thinking_tasks:
+                            self._cancel_thinking(thinking_tasks)
+                        await self._emit_status(
+                            event_emitter, "Responding\u2026"
+                        )
                     yield content
 
             # Remove processed bytes from buffer
@@ -412,13 +492,14 @@ HTTPX Response Log:
         The OpenWebUI framework handles wrapping in proper SSE format.
         """
         if not __oauth_token__ or "access_token" not in __oauth_token__:
-            yield "Oops, looks like your Auth token has expired. Please logout and login to Aiden to get a new Auth token."
+            await self._emit_error(
+                __event_emitter__,
+                "Your Auth token has expired. Please logout and login to Aiden to get a new Auth token.",
+            )
             return
 
         access_token: Optional[str] = __oauth_token__.get("access_token")
         id_token: Optional[str] = __oauth_token__.get("id_token")
-
-        await self.emit_status(__event_emitter__, "info", "Working...", False)
 
         logger.debug(f"pipe:{__name__}")
         logger.debug(f"body: {body}")
@@ -476,9 +557,19 @@ HTTPX Response Log:
         ):
             yield debug_line
 
+        # Schedule progressive thinking status indicators while waiting
+        # for the first response token (streaming only)
+        thinking_tasks: List[asyncio.Task[None]] = []
+        if self.valves.enable_status_indicator and is_streaming:
+            thinking_tasks = self._create_thinking_tasks(__event_emitter__)
+
+        start_time = perf_counter()
+        error_occurred = False
+
         try:
             logger.debug(
-                f"Calling chat completion url: {url} with payload: {payload} and headers: {__request__.headers}"
+                f"Calling chat completion url: {url} with payload: {payload}"
+                f" and headers: {__request__.headers}"
             )
             async with httpx.AsyncClient() as client:
                 if is_streaming:
@@ -494,22 +585,31 @@ HTTPX Response Log:
                         # the error message includes the server's response
                         if response.status_code >= 400:
                             error_body = await response.aread()
-                            response_text = error_body.decode("utf-8", errors="replace")
+                            response_text = error_body.decode(
+                                "utf-8", errors="replace"
+                            )
                             response.raise_for_status()
 
                         content_type = response.headers.get("content-type", "")
                         if "text/event-stream" in content_type:
                             async for text_chunk in self._stream_openai_response(
-                                response
+                                response,
+                                event_emitter=__event_emitter__,
+                                thinking_tasks=thinking_tasks,
                             ):
                                 yield text_chunk
                         else:
-                            # Non-SSE response from streaming endpoint
+                            # Non-SSE response — cancel thinking immediately
+                            self._cancel_thinking(thinking_tasks)
+                            await self._emit_status(
+                                __event_emitter__, "Responding\u2026"
+                            )
                             raw_body = await response.aread()
-                            response_text = raw_body.decode("utf-8", errors="replace")
+                            response_text = raw_body.decode(
+                                "utf-8", errors="replace"
+                            )
                             try:
                                 data = json.loads(response_text)
-                                # Extract content from a non-streamed completion
                                 choices = data.get("choices", [])
                                 if choices:
                                     message = choices[0].get("message", {})
@@ -534,24 +634,40 @@ HTTPX Response Log:
                     response.raise_for_status()
                     yield json.dumps(response.json())
 
-            await self.emit_status(__event_emitter__, "info", "Done", True)
-
         except httpx.HTTPStatusError as e:
-            await self.emit_status(__event_emitter__, "HttpError", f"{e}", True)
-            yield (
-                f"LanguageModelGateway::pipe HTTP Status Error: {type(e)} {e}\n"
-                + f"{self.log_httpx_request(e.request)}\n"
-                + f"{self.log_response_as_string(e.response)}"
+            error_occurred = True
+            error_detail = (
+                f"HTTP {e.response.status_code}: {e}\n"
+                f"{self.log_httpx_request(e.request)}\n"
+                f"{self.log_response_as_string(e.response)}"
             )
+            logger.error(f"LanguageModelGateway::pipe {error_detail}")
+            await self._emit_error(__event_emitter__, error_detail)
         except Exception as e:
-            await self.emit_status(__event_emitter__, "error", f"{e}", True)
+            error_occurred = True
             httpx_version = getattr(httpx, "__version__", "unknown")
-            yield (
-                f"LanguageModelGateway::pipe Error:"
-                f" {type(e).__name__}: {e} httpx_version={httpx_version} url={url}"
+            error_detail = (
+                f"{type(e).__name__}: {e}"
+                f" | httpx={httpx_version} url={url}"
                 f" original_url={getattr(__request__, 'url', None)}"
-                f" response_text={response_text} payload={payload}\n"
             )
+            logger.error(f"LanguageModelGateway::pipe Error: {error_detail}")
+            await self._emit_error(__event_emitter__, error_detail)
+        finally:
+            self._cancel_thinking(thinking_tasks)
+            elapsed = perf_counter() - start_time
+            if not error_occurred:
+                await self._emit_status(
+                    __event_emitter__,
+                    f"Completed in {elapsed:.1f}s",
+                    done=True,
+                )
+            else:
+                await self._emit_status(
+                    __event_emitter__,
+                    f"Failed after {elapsed:.1f}s",
+                    done=True,
+                )
 
     async def get_models(self) -> List[Dict[str, str]]:
         """Fetches the list of available models from the OpenAI API."""
