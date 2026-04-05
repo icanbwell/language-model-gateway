@@ -43,8 +43,6 @@
       ],
       "name": "google_drive",
       "mcp_server": "google-drive",
-      "url": "http://mcp_server_gateway:5000/google_drive/",
-      "public_url": "http://mcp_server_gateway:5000/google_drive/tools",
       "headers": {
         "X-Client-Id": "Aiden"
       }
