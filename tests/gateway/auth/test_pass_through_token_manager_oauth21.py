@@ -135,7 +135,63 @@ class TestEnsureOAuthProviderRegistered:
         assert result.pkce_method == "S256"
         assert result.registration_url == "https://auth.example.com/register"
         manager.dcr_manager.resolve_dcr_credentials.assert_awaited_once()  # type: ignore[attr-defined]
+        # When no clientMetadata is provided, client_name should default
+        # to the auth_provider key so the auth server shows a meaningful name.
+        call_kwargs = manager.dcr_manager.resolve_dcr_credentials.call_args.kwargs  # type: ignore[attr-defined]
+        assert call_kwargs["client_name"] == "dcr-server"
         manager.auth_manager.register_dynamic_provider.assert_awaited_once()  # type: ignore[attr-defined]
+
+    @pytest.mark.asyncio
+    async def test_dcr_sends_explicit_client_metadata(self) -> None:
+        """When clientMetadata.client_name is set it takes precedence over defaults."""
+        dcr_reg = MagicMock(spec=DcrRegistration)
+        dcr_reg.client_id = "dcr-meta-id"
+        dcr_reg.client_secret = "dcr-meta-secret"
+
+        manager = _build_manager(dcr_result=dcr_reg)
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "registrationUrl": "https://auth.example.com/register",
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+                "clientMetadata": {
+                    "clientName": "b.well Health Gateway",
+                    "clientUri": "https://www.icanbwell.com",
+                },
+            }
+        )
+
+        await manager._ensure_oauth_provider_registered(
+            auth_provider="meta-test", oauth=oauth
+        )
+
+        call_kwargs = manager.dcr_manager.resolve_dcr_credentials.call_args.kwargs  # type: ignore[attr-defined]
+        assert call_kwargs["client_name"] == "b.well Health Gateway"
+        assert call_kwargs["client_uri"] == "https://www.icanbwell.com"
+
+    @pytest.mark.asyncio
+    async def test_dcr_client_name_falls_back_to_display_name(self) -> None:
+        """When no clientMetadata but displayName is set, client_name uses displayName."""
+        dcr_reg = MagicMock(spec=DcrRegistration)
+        dcr_reg.client_id = "dcr-display-id"
+        dcr_reg.client_secret = "dcr-display-secret"
+
+        manager = _build_manager(dcr_result=dcr_reg)
+        oauth = McpOAuthConfig.model_validate(
+            {
+                "registrationUrl": "https://auth.example.com/register",
+                "authorizationUrl": "https://auth.example.com/authorize",
+                "tokenUrl": "https://auth.example.com/token",
+                "displayName": "My FHIR Server",
+            }
+        )
+
+        await manager._ensure_oauth_provider_registered(
+            auth_provider="display-test", oauth=oauth
+        )
+
+        call_kwargs = manager.dcr_manager.resolve_dcr_credentials.call_args.kwargs  # type: ignore[attr-defined]
+        assert call_kwargs["client_name"] == "My FHIR Server"
 
     @pytest.mark.asyncio
     async def test_raises_when_no_client_id_resolved(self) -> None:
