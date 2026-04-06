@@ -5,7 +5,7 @@ import pytest
 from openai import AsyncOpenAI
 from openai.types.responses import EasyInputMessageParam, Response, ResponseInputParam
 
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )

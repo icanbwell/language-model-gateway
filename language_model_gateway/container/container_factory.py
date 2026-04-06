@@ -69,7 +69,7 @@ from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )

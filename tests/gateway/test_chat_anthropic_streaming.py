@@ -3,7 +3,7 @@ import pytest
 from openai import AsyncOpenAI, AsyncStream
 from openai.types.chat import ChatCompletionChunk, ChatCompletionUserMessageParam
 
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )

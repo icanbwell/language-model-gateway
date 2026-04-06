@@ -37,7 +37,7 @@ from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
 from languagemodelcommon.state.messages_state import MyMessagesState
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
