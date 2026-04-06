@@ -51,8 +51,8 @@ from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from languagemodelcommon.mcp.search_tools_tool import SearchToolsTool
-from languagemodelcommon.mcp.call_tool_tool import CallToolTool
+from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
+from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (

@@ -65,7 +65,7 @@ from languagemodelcommon.mcp.interceptors.tracing import (
 from languagemodelcommon.mcp.interceptors.truncation import (
     TruncationMcpCallInterceptor,
 )
-from languagemodelcommon.mcp.auth_server_metadata_discovery import (
+from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider

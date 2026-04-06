@@ -424,6 +424,11 @@
                     "items": { "type": "string" }
                   }
                 }
+              },
+              "appLoginAllowed": {
+                "type": "boolean",
+                "description": "When true, the 'Login to b.well App' option is shown alongside the OAuth login link.",
+                "default": false
               }
             },
             "default": null
@@ -650,6 +655,11 @@
                     "items": { "type": "string" }
                   }
                 }
+              },
+              "appLoginAllowed": {
+                "type": "boolean",
+                "description": "When true, the 'Login to b.well App' option is shown alongside the OAuth login link.",
+                "default": false
               }
             },
             "default": null

@@ -2,22 +2,27 @@
   "mcpServers": {
     "google-drive": {
       "type": "http",
+      "displayName": "Google Drive",
       "url": "http://mcp_server_gateway:5000/google_drive/"
     },
     "google-drive-external": {
       "type": "http",
+      "displayName": "Google Drive",
       "url": "https://mcp-server-gateway.services.bwell.zone/google_drive/"
     },
     "google-search": {
       "type": "http",
+      "displayName": "Google Search",
       "url": "http://mcp_server_gateway:5000/google_search/"
     },
     "url-to-markdown": {
       "type": "http",
+      "displayName": "URL to Markdown",
       "url": "http://mcp_server_gateway:5000/url_to_markdown/"
     },
     "provider-search": {
       "type": "http",
+      "displayName": "Provider Search",
       "url": "http://mcp_server_gateway:5000/provider_search/"
     }
   }

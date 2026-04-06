@@ -23,7 +23,7 @@ from language_model_gateway.gateway.managers.system_command_manager import (
 from languagemodelcommon.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
-from languagemodelcommon.mcp.mcp_authorization_helper import (
+from languagemodelcommon.mcp.auth.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
