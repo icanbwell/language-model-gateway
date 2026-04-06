@@ -1,5 +1,5 @@
 """
-title: LangChain Pipe Function (Streaming Version - FIXED)
+title: LangChain Pipe Function (Streaming Version)
 author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
 author_url: https://github.com/imranq2
 version: 0.3.0
@@ -45,10 +45,8 @@ from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
 
-# Cache TTL in seconds (60 minutes)
 CACHE_TTL_SECONDS = 60 * 60
-
-LLM_CALL_TIMEOUT = 60 * 5  # 5 minutes
+LLM_CALL_TIMEOUT = 60 * 5
 
 
 class Pipe:
@@ -127,12 +125,10 @@ class Pipe:
         )
         self.pipelines: Optional[List[Dict[str, Any]]] = None
         self.pipelines_last_updated: Optional[float] = None
-        # Stateful Responses API: track last response_id per chat
         self._response_id_by_chat: Dict[str, str] = {}
 
     @staticmethod
     def read_base_url() -> Optional[str]:
-        """Reads the OpenAI API base URL from environment variables."""
         return os.getenv("LANGUAGE_MODEL_GATEWAY_API_BASE_URL") or os.getenv(
             "OPENAI_API_BASE_URL"
         )
@@ -141,7 +137,6 @@ class Pipe:
         logger.debug(f"on_startup:{__name__}")
         self.pipelines = await self.get_models()
 
-    # noinspection PyMethodMayBeStatic
     async def on_shutdown(self) -> None:
         logger.debug(f"on_shutdown:{__name__}")
 
@@ -149,52 +144,47 @@ class Pipe:
         logger.debug(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
 
-    # ── Native OpenWebUI event emitters ──────────────────────────────────
+    # ── Event emitters ───────────────────────────────────────────────────
 
     @staticmethod
     async def _emit_status(
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
         description: str,
         done: bool = False,
     ) -> None:
-        """Emit a native OpenWebUI status bar update."""
-        if event_emitter:
-            await event_emitter(
-                {
-                    "type": "status",
-                    "data": {"description": description, "done": done},
-                }
+        if emitter:
+            await emitter(
+                {"type": "status", "data": {"description": description, "done": done}}
             )
 
     @staticmethod
     async def _emit_completion(
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
         *,
         content: str = "",
         usage: Optional[Dict[str, Any]] = None,
         done: bool = True,
     ) -> None:
-        """Emit a chat:completion event with optional usage statistics."""
-        if event_emitter:
+        if emitter:
             data: Dict[str, Any] = {"done": done, "content": content}
             if usage is not None:
                 data["usage"] = usage
-            await event_emitter({"type": "chat:completion", "data": data})
+            await emitter({"type": "chat:completion", "data": data})
 
     @staticmethod
     async def _emit_error(
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
         message: str,
-        done: bool = True,
     ) -> None:
-        """Emit a native OpenWebUI error via the chat:completion event."""
-        if event_emitter:
-            await event_emitter(
+        if emitter:
+            await emitter(
                 {
                     "type": "chat:completion",
-                    "data": {"error": {"message": message}, "done": done},
+                    "data": {"error": {"message": message}, "done": True},
                 }
             )
+
+    # ── Loading indicator ────────────────────────────────────────────────
 
     _LOADING_PHRASES: List[str] = [
         "\u2705 Accomplishing",
@@ -389,12 +379,11 @@ class Pipe:
     @classmethod
     def _create_thinking_tasks(
         cls,
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
-        start_time: Optional[float] = None,
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        start_time: float,
         usage_collector: Optional[Dict[str, Any]] = None,
     ) -> List[asyncio.Task[None]]:
-        """Schedule cycling loading-phrase status messages until cancelled."""
-        if not event_emitter:
+        if not emitter:
             return []
 
         async def _cycle_phrases() -> None:
@@ -404,18 +393,10 @@ class Pipe:
             tick = 0
             while True:
                 phrase = phrases[phrase_idx % len(phrases)]
-                if start_time is not None:
-                    elapsed = perf_counter() - start_time
-                    suffix = (
-                        f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
-                    )
-                else:
-                    suffix = ""
-                await event_emitter(
-                    {
-                        "type": "status",
-                        "data": {"description": f"{phrase}\u2026{suffix}"},
-                    }
+                elapsed = perf_counter() - start_time
+                suffix = f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
+                await emitter(
+                    {"type": "status", "data": {"description": f"{phrase}\u2026{suffix}"}}
                 )
                 tick += 1
                 if tick % 5 == 0:
@@ -432,16 +413,10 @@ class Pipe:
         elapsed: float,
         usage: Optional[Dict[str, Any]] = None,
     ) -> str:
-        """Format elapsed time and token count like: ``(1m 2s, 16k tokens)``.
-
-        Handles both Chat Completions (``total_tokens``) and Responses API
-        (``input_tokens`` + ``output_tokens``) usage schemas.
-        """
         mins, secs = divmod(int(elapsed), 60)
         parts: List[str] = [f"{mins}m {secs}s" if mins > 0 else f"{secs}s"]
         if usage:
             total_tokens = usage.get("total_tokens")
-            # Responses API doesn't have total_tokens — sum the components
             if not total_tokens:
                 input_t = usage.get("input_tokens") or usage.get("prompt_tokens") or 0
                 output_t = (
@@ -457,19 +432,39 @@ class Pipe:
 
     @staticmethod
     def _cancel_thinking(tasks: List[asyncio.Task[None]]) -> None:
-        """Cancel all pending thinking status tasks."""
         for t in tasks:
             t.cancel()
         tasks.clear()
+
+    async def _finish_stream(
+        self,
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        thinking_tasks: List[asyncio.Task[None]],
+        start_time: float,
+        usage: Dict[str, Any],
+    ) -> None:
+        """Cancel the loading indicator and emit Completed status + completion event.
+
+        Called from inside the streaming methods so the events fire during the
+        same __anext__() call that processes the final SSE chunk — before the
+        outer generator needs another pull from OpenWebUI.
+        """
+        self._cancel_thinking(thinking_tasks)
+        elapsed = perf_counter() - start_time
+        stats = self._format_elapsed_and_tokens(elapsed, usage)
+        logger.info(f"Stream finished. usage={usage}, elapsed={elapsed:.1f}s")
+        await self._emit_status(emitter, f"Completed {stats}", done=True)
+        await self._emit_completion(
+            emitter, content="", usage=usage if usage else None, done=True
+        )
 
     # ── URL / logging helpers ────────────────────────────────────────────
 
     @classmethod
     def pathlib_url_join(cls, base_url: str, path: str) -> str:
-        """Join URLs using pathlib for path manipulation."""
         parsed_base = urlparse(base_url)
         full_path = str(PurePosixPath(parsed_base.path) / path.lstrip("/"))
-        reconstructed_url = urlunparse(
+        return urlunparse(
             (
                 parsed_base.scheme,
                 parsed_base.netloc,
@@ -479,23 +474,19 @@ class Pipe:
                 parsed_base.fragment,
             )
         )
-        return reconstructed_url
 
     @staticmethod
     def log_httpx_request(request: httpx.Request) -> str:
-        """Convert an HTTPX request to a detailed string representation."""
-        request_log = f"""
-HTTPX Request:
-- Method: {request.method}
-- URL: {request.url}
-- Headers: {dict(request.headers)}
-- Body: {request.content.decode("utf-8", errors="replace") if request.content else "No body"}
-""".strip()
-        return request_log
+        return (
+            f"HTTPX Request:\n"
+            f"- Method: {request.method}\n"
+            f"- URL: {request.url}\n"
+            f"- Headers: {dict(request.headers)}\n"
+            f"- Body: {request.content.decode('utf-8', errors='replace') if request.content else 'No body'}"
+        )
 
     @staticmethod
     def log_response_as_string(response1: httpx.Response) -> str:
-        """Convert an HTTPX response to a detailed, formatted string."""
         try:
             try:
                 response_body = json.dumps(response1.json(), indent=2)
@@ -503,18 +494,17 @@ HTTPX Request:
                 response_body = response1.text[:1000]
         except Exception:
             response_body = "(Unable to decode response body)"
-        response_log = f"""
-HTTPX Response Log:
-- Timestamp: {datetime.datetime.now().isoformat()}
-- Status Code: {response1.status_code}
-- URL: {response1.request.url}
-- Method: {response1.request.method}
-- Response Headers: {json.dumps(dict(response1.headers), indent=2)}
-- Response Body: {response_body}
-- Response Encoding: {response1.encoding}
-- Response Elapsed Time: {response1.elapsed}
-""".strip()
-        return response_log
+        return (
+            f"HTTPX Response Log:\n"
+            f"- Timestamp: {datetime.datetime.now().isoformat()}\n"
+            f"- Status Code: {response1.status_code}\n"
+            f"- URL: {response1.request.url}\n"
+            f"- Method: {response1.request.method}\n"
+            f"- Response Headers: {json.dumps(dict(response1.headers), indent=2)}\n"
+            f"- Response Body: {response_body}\n"
+            f"- Response Encoding: {response1.encoding}\n"
+            f"- Response Elapsed Time: {response1.elapsed}"
+        )
 
     # ── Header / request helpers ─────────────────────────────────────────
 
@@ -530,7 +520,6 @@ HTTPX Response Log:
         message_id: Optional[str],
         debug_mode: bool,
     ) -> Dict[str, str]:
-        """Build headers for the API request, including user and request context."""
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json, text/event-stream",
@@ -600,9 +589,7 @@ HTTPX Response Log:
     @classmethod
     def _is_debug_request(cls, body: Dict[str, Any]) -> bool:
         prompt = cls._extract_user_prompt(body)
-        if not prompt:
-            return False
-        return prompt.lstrip().startswith("DEBUG:")
+        return bool(prompt and prompt.lstrip().startswith("DEBUG:"))
 
     def _yield_debug_info(
         self,
@@ -632,18 +619,8 @@ HTTPX Response Log:
         store: bool = False,
         previous_response_id: Optional[str] = None,
     ) -> Dict[str, Any]:
-        """Transform a Chat Completions request body into Responses API format.
-
-        Mapping:
-        - ``messages`` → ``input`` (with content block type changes)
-        - System messages → ``instructions``
-        - ``max_tokens`` → ``max_output_tokens``
-        - ``reasoning_effort`` → ``reasoning.effort``
-        - Unsupported fields are dropped
-        """
         messages: List[Dict[str, Any]] = body.get("messages", [])
 
-        # Extract system/instructions
         instructions: Optional[str] = None
         for msg in messages:
             if msg.get("role") == "system":
@@ -652,7 +629,6 @@ HTTPX Response Log:
                     instructions = content
                 break
 
-        # Build input array
         input_items: List[Dict[str, Any]] = []
         for msg in messages:
             role = msg.get("role")
@@ -701,7 +677,6 @@ HTTPX Response Log:
             elif role == "developer":
                 input_items.append({"role": "developer", "content": raw_content})
 
-        # Build the Responses API payload
         responses_payload: Dict[str, Any] = {
             "model": body.get("model", ""),
             "input": input_items,
@@ -714,8 +689,6 @@ HTTPX Response Log:
 
         if previous_response_id:
             responses_payload["previous_response_id"] = previous_response_id
-            # When chaining via previous_response_id, only send the new user
-            # message(s) — the server already has the conversation history.
             last_user_items: list[Dict[str, Any]] = []
             for item in reversed(input_items):
                 if item.get("role") == "user":
@@ -724,7 +697,6 @@ HTTPX Response Log:
             if last_user_items:
                 responses_payload["input"] = last_user_items
 
-        # Map supported optional parameters
         if "temperature" in body:
             responses_payload["temperature"] = body["temperature"]
         if "top_p" in body:
@@ -734,7 +706,6 @@ HTTPX Response Log:
         if "max_output_tokens" in body:
             responses_payload["max_output_tokens"] = body["max_output_tokens"]
 
-        # reasoning_effort → reasoning.effort
         effort = body.get("reasoning_effort")
         if effort:
             responses_payload["reasoning"] = {"effort": effort}
@@ -747,10 +718,6 @@ HTTPX Response Log:
         self,
         response: httpx.Response,
     ) -> AsyncGenerator[Dict[str, Any], None]:
-        """Low-level SSE byte-buffer parser. Yields parsed JSON from ``data:`` lines.
-
-        Shared by both Chat Completions and Responses API streaming paths.
-        """
         buf = bytearray()
         async for chunk in response.aiter_bytes():
             buf.extend(chunk)
@@ -786,27 +753,24 @@ HTTPX Response Log:
     async def _stream_chat_completions(
         self,
         response: httpx.Response,
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
-        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
-        usage_collector: Optional[Dict[str, Any]] = None,
+        *,
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        thinking_tasks: List[asyncio.Task[None]],
+        usage_collector: Dict[str, Any],
+        start_time: float,
     ) -> AsyncGenerator[str, None]:
-        """Parse Chat Completions streaming response (``choices[0].delta.content``).
+        """Parse Chat Completions streaming response.
 
-        If ``usage_collector`` is provided (a mutable dict), captured usage
-        statistics are merged into it so the caller can emit a final
-        ``chat:completion`` event with accumulated totals.
+        Emits "Completed" status from *inside* this generator so the event
+        fires during the same ``__anext__()`` call that processes the final
+        SSE chunks — before OpenWebUI needs to pull again.
         """
         first_token_received = False
 
         async for chunk_json in self._iter_sse_events(response):
-            # Capture usage from the final chunk (present when
-            # stream_options.include_usage is set on the request)
             if "usage" in chunk_json and chunk_json["usage"]:
-                logger.info(
-                    f"Chat Completions usage chunk received: {chunk_json['usage']}"
-                )
-                if usage_collector is not None:
-                    self._merge_usage(usage_collector, chunk_json["usage"])
+                logger.info(f"Chat Completions usage received: {chunk_json['usage']}")
+                self._merge_usage(usage_collector, chunk_json["usage"])
 
             choices = chunk_json.get("choices")
             if not choices:
@@ -817,108 +781,93 @@ HTTPX Response Log:
             if content:
                 if not first_token_received:
                     first_token_received = True
-                    if thinking_tasks:
-                        self._cancel_thinking(thinking_tasks)
-                    await self._emit_status(
-                        event_emitter, "Responding\u2026", done=True
-                    )
+                    self._cancel_thinking(thinking_tasks)
+                    await self._emit_status(emitter, "Responding\u2026", done=True)
                 yield content
+
+        # Stream exhausted — emit completed immediately (same __anext__ call)
+        await self._finish_stream(
+            emitter, thinking_tasks, start_time, usage_collector
+        )
 
     async def _stream_responses_api(
         self,
         response: httpx.Response,
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
-        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
+        *,
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        thinking_tasks: List[asyncio.Task[None]],
         chat_id: Optional[str] = None,
-        usage_collector: Optional[Dict[str, Any]] = None,
+        usage_collector: Dict[str, Any],
+        start_time: float,
     ) -> AsyncGenerator[str, None]:
         """Parse Responses API streaming events.
 
-        Handles typed SSE events:
-        - ``response.output_text.delta`` → yields text content
-        - ``response.output_item.added`` → emits status for in-progress items
-        - ``response.completed`` → captures response_id and usage
-
-        If ``usage_collector`` is provided, usage from ``response.completed``
-        is merged into it for the caller to emit a final completion event.
+        Emits "Completed" status from *inside* this generator so the event
+        fires during the same ``__anext__()`` call that processes
+        ``response.completed`` — before OpenWebUI needs to pull again.
         """
         first_token_received = False
 
         async for event in self._iter_sse_events(response):
             etype = event.get("type", "")
 
-            # ── Text delta ──
             if etype == "response.output_text.delta":
                 delta = event.get("delta", "")
                 if delta:
                     if not first_token_received:
                         first_token_received = True
-                        if thinking_tasks:
-                            self._cancel_thinking(thinking_tasks)
-                        await self._emit_status(
-                            event_emitter, "Responding\u2026", done=True
-                        )
+                        self._cancel_thinking(thinking_tasks)
+                        await self._emit_status(emitter, "Responding\u2026", done=True)
                     yield delta
                 continue
 
-            # ── Reasoning summary ──
             if etype == "response.reasoning_summary_text.done":
                 text = (event.get("text") or "").strip()
                 if text:
-                    # Show briefly then dismiss so it doesn't linger
                     await self._emit_status(
-                        event_emitter, f"Reasoning: {text[:200]}", done=True
+                        emitter, f"Reasoning: {text[:200]}", done=True
                     )
                 continue
 
-            # ── Status for in-progress items ──
             if etype == "response.output_item.added":
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "message" and item.get("status") == "in_progress":
-                    # If we already started receiving text, don't re-open indicator
                     if not first_token_received:
-                        await self._emit_status(event_emitter, "Responding\u2026")
+                        await self._emit_status(emitter, "Responding\u2026")
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
-                    await self._emit_status(event_emitter, f"Running {name}\u2026")
+                    await self._emit_status(emitter, f"Running {name}\u2026")
                 continue
 
-            # ── Tool/search completion ──
             if etype == "response.output_item.done":
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "web_search_call":
-                    await self._emit_status(event_emitter, "Search complete", done=True)
+                    await self._emit_status(emitter, "Search complete", done=True)
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
-                    await self._emit_status(
-                        event_emitter, f"{name} complete", done=True
-                    )
+                    await self._emit_status(emitter, f"{name} complete", done=True)
                 continue
 
-            # ── Final response ──
             if etype == "response.completed":
                 final = event.get("response", {})
                 rid = final.get("id")
                 usage = final.get("usage")
                 logger.info(f"Responses API completed - usage: {usage}")
-                # Store response_id for stateful chaining
                 if chat_id and rid:
                     self._response_id_by_chat[chat_id] = rid
-                # Merge usage into the collector for the caller
-                if usage and usage_collector is not None:
+                if usage:
                     self._merge_usage(usage_collector, usage)
                 break
 
+        # Stream exhausted — emit completed immediately (same __anext__ call)
+        await self._finish_stream(
+            emitter, thinking_tasks, start_time, usage_collector
+        )
+
     @staticmethod
     def _merge_usage(total: Dict[str, Any], new: Dict[str, Any]) -> None:
-        """Recursively merge usage statistics into ``total`` in place.
-
-        Numeric values are summed, dicts are recursed, other values overwrite.
-        Mirrors the reference ``merge_usage_stats`` helper from the
-        openai_responses_manifold.
-        """
         for k, v in new.items():
             if isinstance(v, dict):
                 if k not in total or not isinstance(total[k], dict):
@@ -947,7 +896,6 @@ HTTPX Response Log:
         __metadata__: Optional[Dict[str, Any]] = None,
         __files__: Optional[List[str]] = None,
     ) -> AsyncGenerator[str, None]:
-        """Main pipe method supporting Chat Completions and Responses API modes."""
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             await self._emit_error(
                 __event_emitter__,
@@ -981,7 +929,6 @@ HTTPX Response Log:
         api_mode = self.valves.api_mode
         is_responses = api_mode in ("responses_stateless", "responses_stateful")
 
-        # Build payload based on API mode
         if is_responses:
             is_stateful = api_mode == "responses_stateful"
             previous_response_id = (
@@ -1005,14 +952,11 @@ HTTPX Response Log:
         if stream is not None:
             payload["stream"] = stream
 
-        # Ask the API to include usage stats in the final streamed chunk
         if payload.get("stream"):
             payload.setdefault("stream_options", {})["include_usage"] = True
 
-        response_text: str = ""
         is_streaming: bool = bool(payload.get("stream", False))
 
-        debug_request = self._is_debug_request(body)
         headers = self._build_headers(
             request=__request__,
             user=__user__,
@@ -1021,7 +965,7 @@ HTTPX Response Log:
             session_id=__session_id__,
             chat_id=__chat_id__,
             message_id=__message_id__,
-            debug_mode=debug_request,
+            debug_mode=self._is_debug_request(body),
         )
 
         for debug_line in self._yield_debug_info(
@@ -1035,11 +979,15 @@ HTTPX Response Log:
 
         start_time = perf_counter()
         error_occurred = False
-        # Mutable accumulator — streaming methods merge usage into this dict
         total_usage: Dict[str, Any] = {}
 
+        # Skip the loading indicator for background tasks (title generation, etc.)
+        is_background_task = bool(
+            __metadata__ and __metadata__.get("task")
+        )
+
         thinking_tasks: List[asyncio.Task[None]] = []
-        if self.valves.enable_status_indicator and is_streaming:
+        if self.valves.enable_status_indicator and is_streaming and not is_background_task:
             thinking_tasks = self._create_thinking_tasks(
                 __event_emitter__,
                 start_time=start_time,
@@ -1061,8 +1009,7 @@ HTTPX Response Log:
                         follow_redirects=True,
                     ) as response:
                         if response.status_code >= 400:
-                            error_body = await response.aread()
-                            response_text = error_body.decode("utf-8", errors="replace")
+                            await response.aread()
                             response.raise_for_status()
 
                         content_type = response.headers.get("content-type", "")
@@ -1070,42 +1017,24 @@ HTTPX Response Log:
                             if is_responses:
                                 async for text_chunk in self._stream_responses_api(
                                     response,
-                                    event_emitter=__event_emitter__,
+                                    emitter=__event_emitter__,
                                     thinking_tasks=thinking_tasks,
                                     chat_id=__chat_id__,
                                     usage_collector=total_usage,
+                                    start_time=start_time,
                                 ):
                                     yield text_chunk
                             else:
                                 async for text_chunk in self._stream_chat_completions(
                                     response,
-                                    event_emitter=__event_emitter__,
+                                    emitter=__event_emitter__,
                                     thinking_tasks=thinking_tasks,
                                     usage_collector=total_usage,
+                                    start_time=start_time,
                                 ):
                                     yield text_chunk
-                            # Emit completed immediately after streaming ends
-                            # (don't wait for generator cleanup in finally)
-                            self._cancel_thinking(thinking_tasks)
-                            elapsed = perf_counter() - start_time
-                            logger.info(
-                                f"Streaming ended. total_usage={total_usage}, elapsed={elapsed:.1f}s"
-                            )
-                            stats = self._format_elapsed_and_tokens(
-                                elapsed, total_usage
-                            )
-                            await self._emit_status(
-                                __event_emitter__,
-                                f"Completed {stats}",
-                                done=True,
-                            )
-                            await self._emit_completion(
-                                __event_emitter__,
-                                content="",
-                                usage=total_usage if total_usage else None,
-                                done=True,
-                            )
                         else:
+                            # Non-SSE response from a streaming request
                             self._cancel_thinking(thinking_tasks)
                             await self._emit_status(
                                 __event_emitter__, "Responding\u2026", done=True
@@ -1114,7 +1043,6 @@ HTTPX Response Log:
                             response_text = raw_body.decode("utf-8", errors="replace")
                             try:
                                 data = json.loads(response_text)
-                                # Extract usage from non-streamed response
                                 resp_usage = data.get("usage")
                                 if resp_usage:
                                     self._merge_usage(total_usage, resp_usage)
@@ -1129,36 +1057,18 @@ HTTPX Response Log:
                                     if choices:
                                         message = choices[0].get("message", {})
                                         content = message.get("content", "")
-                                        if content:
-                                            yield content
-                                        else:
-                                            yield json.dumps(data)
+                                        yield content if content else json.dumps(data)
                                     else:
                                         yield json.dumps(data)
                             except json.JSONDecodeError:
                                 yield response_text
-                            # Emit completed for non-SSE fallback
-                            self._cancel_thinking(thinking_tasks)
-                            elapsed = perf_counter() - start_time
-                            logger.info(
-                                f"Non-SSE response ended. total_usage={total_usage}"
-                            )
-                            stats = self._format_elapsed_and_tokens(
-                                elapsed, total_usage
-                            )
-                            await self._emit_status(
+                            await self._finish_stream(
                                 __event_emitter__,
-                                f"Completed {stats}",
-                                done=True,
-                            )
-                            await self._emit_completion(
-                                __event_emitter__,
-                                content="",
-                                usage=total_usage if total_usage else None,
-                                done=True,
+                                thinking_tasks,
+                                start_time,
+                                total_usage,
                             )
                 else:
-                    # Non-streaming response
                     self._cancel_thinking(thinking_tasks)
                     response = await client.post(
                         url=url,
@@ -1169,7 +1079,6 @@ HTTPX Response Log:
                     )
                     response.raise_for_status()
                     data = response.json()
-                    # Extract usage from non-streamed response
                     resp_usage = data.get("usage")
                     if resp_usage:
                         self._merge_usage(total_usage, resp_usage)
@@ -1181,22 +1090,11 @@ HTTPX Response Log:
                         yield text if text else json.dumps(data)
                     else:
                         yield json.dumps(data)
-                    # Emit completed for non-streaming
-                    elapsed = perf_counter() - start_time
-                    logger.info(
-                        f"Non-streaming response ended. total_usage={total_usage}"
-                    )
-                    stats = self._format_elapsed_and_tokens(elapsed, total_usage)
-                    await self._emit_status(
+                    await self._finish_stream(
                         __event_emitter__,
-                        f"Completed {stats}",
-                        done=True,
-                    )
-                    await self._emit_completion(
-                        __event_emitter__,
-                        content="",
-                        usage=total_usage if total_usage else None,
-                        done=True,
+                        thinking_tasks,
+                        start_time,
+                        total_usage,
                     )
 
         except httpx.HTTPStatusError as e:
@@ -1224,28 +1122,19 @@ HTTPX Response Log:
                 elapsed = perf_counter() - start_time
                 stats = self._format_elapsed_and_tokens(elapsed, total_usage)
                 await self._emit_status(
+                    __event_emitter__, f"Failed {stats}", done=True
+                )
+                await self._emit_completion(
                     __event_emitter__,
-                    f"Failed {stats}",
+                    content="",
+                    usage=total_usage if total_usage else None,
                     done=True,
                 )
-            # Always emit final completion with accumulated usage.
-            # content="" is required — OpenWebUI stalls without it.
-            await self._emit_completion(
-                __event_emitter__,
-                content="",
-                usage=total_usage if total_usage else None,
-                done=True,
-            )
 
     # ── Responses API helpers ────────────────────────────────────────────
 
     @staticmethod
     def _extract_responses_text(data: Dict[str, Any]) -> str:
-        """Extract assistant text from a non-streamed Responses API result.
-
-        The Responses API ``output`` is a list of items.  We concatenate all
-        ``output_text`` blocks from ``message`` items.
-        """
         parts: List[str] = []
         for item in data.get("output", []):
             if item.get("type") != "message":
@@ -1258,7 +1147,6 @@ HTTPX Response Log:
     # ── Models list ──────────────────────────────────────────────────────
 
     async def get_models(self) -> List[Dict[str, str]]:
-        """Fetches the list of available models from the OpenAI API."""
         open_api_base_url: Optional[str] = (
             self.valves.OPENAI_API_BASE_URL or self.read_base_url()
         )
