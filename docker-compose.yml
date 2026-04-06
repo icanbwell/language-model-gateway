@@ -120,6 +120,7 @@ services:
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100
       ENABLE_STREAMING_BUFFERING: 0
+      AIDEN_OAUTH_CLIENT_NAME: "b.well Aiden Local"
     env_file: .env
     command:
       - opentelemetry-instrument
