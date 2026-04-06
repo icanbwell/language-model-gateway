@@ -641,20 +641,25 @@ HTTPX Response Log:
                 item_type = item.get("type", "")
                 if item_type == "message" and item.get("status") == "in_progress":
                     await self._emit_status(event_emitter, "Responding\u2026")
+                elif item_type == "function_call":
+                    name = item.get("name", "tool")
+                    await self._emit_status(
+                        event_emitter, f"Running {name}\u2026"
+                    )
                 continue
 
-            # ── Tool/search status ──
+            # ── Tool/search completion ──
             if etype == "response.output_item.done":
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "web_search_call":
                     await self._emit_status(
-                        event_emitter, "Searching the web\u2026"
+                        event_emitter, "Search complete"
                     )
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
                     await self._emit_status(
-                        event_emitter, f"Running {name}\u2026"
+                        event_emitter, f"{name} complete"
                     )
                 continue
 
