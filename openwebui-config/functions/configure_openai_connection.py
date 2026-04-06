@@ -112,7 +112,8 @@ def configure_connection(
     logger.info(
         "Configuring connection to %s with auth_type=%s", connection_url, auth_type
     )
-    logger.debug("Payload: %s", json.dumps(payload, indent=2))
+    redacted_payload = {**payload, "OPENAI_API_KEYS": ["***"]}
+    logger.debug("Payload: %s", json.dumps(redacted_payload, indent=2))
 
     result = update_openai_config(base_url, headers, payload)
 
