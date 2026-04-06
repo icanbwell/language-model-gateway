@@ -1,15 +1,27 @@
 {
   "$schema": "https://raw.githubusercontent.com/imranq2/language_model_gateway/main/language_model_gateway/configs/config_schema.json",
-  "id": "general_purpose",
-  "name": "General Purpose",
   "description": "This is a general purpose model that can be used for a variety of tasks.  However, it may not work as well as the Task Specific models.  Use the Task Specific models if there is one that aligns with your task.",
-  "owner": "Imran Qureshi",
-  "system_prompts": [
+  "example_prompts": [
     {
-      "role": "system",
-      "content": "You are a tool that answers questions and generates text.  Let’s think step by step and take your time to get the right answer."
+      "content": "Search for the latest research on the use of AI in healthcare.",
+      "role": "user"
+    },
+    {
+      "content": "What is the largest customer of Epic?",
+      "role": "user"
+    },
+    {
+      "content": "Write a unit test for this code: ```def test_addition(a,b): return a + b```",
+      "role": "user"
     }
   ],
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer OPENAI_API_KEY"
+    }
+  ],
+  "id": "general_purpose",
   "model_parameters": [
     {
       "key": "temperature",
@@ -17,13 +29,18 @@
     },
     {
       "key": "max_tokens",
-      "value": 30000
+      "value": 50000
     }
   ],
-  "headers": [
+  "name": "General Purpose",
+  "owner": "Imran Qureshi",
+  "skills": [
+    "*"
+  ],
+  "system_prompts": [
     {
-      "key": "Authorization",
-      "value": "Bearer OPENAI_API_KEY"
+      "name": "general_purpose",
+      "role": "system"
     }
   ],
   "tools": [
@@ -37,46 +54,46 @@
       ]
     },
     {
-      "name": "google_drive",
-      "mcp_server": "google-drive"
+      "description": "Google Drive file management - search, read, and download files from Google Drive",
+      "mcp_server": "google-drive",
+      "name": "google_drive"
     },
     {
+      "description": "Web search via Google - find information on the internet",
+      "mcp_server": "google-search",
+      "name": "google_search"
+    },
+    {
+      "description": "Extract and convert web page content to markdown format",
+      "mcp_server": "url-to-markdown",
+      "name": "url_to_markdown"
+    },
+    {
+      "description": "Search and retrieve biomedical literature from PubMed",
       "name": "pubmed"
     },
     {
-      "name": "web_search"
-    },
-    {
+      "description": "Search and retrieve scientific papers from arXiv",
       "name": "arxiv_search"
     },
     {
+      "description": "Generate images based on text prompts using an image generation model",
       "name": "image_generator"
     },
     {
-      "name": "get_web_page"
-    },
-    {
-      "name": "scraping_bee_web_scraper"
-    },
-    {
+      "description": "Extract text content from PDF documents for analysis and processing",
       "name": "pdf_text_extractor"
-    }
-  ],
-  "example_prompts": [
-    {
-      "role": "user",
-      "content": "Search for the latest research on the use of AI in healthcare."
     },
     {
-      "role": "user",
-      "content": "What is the largest customer of Epic?"
+      "description": "Atlassian Jira and Confluence - search issues, read documentation, manage tickets",
+      "mcp_server": "atlassian",
+      "name": "atlassian"
     },
     {
-      "role": "user",
-      "content": "Write a unit test for this code: ```def test_addition(a,b): return a + b```"
+      "description": "GitHub repository access - search code, read files, manage pull requests and issues",
+      "mcp_server": "github",
+      "name": "github"
     }
   ],
-  "skills": [
-    "*"
-  ]
+  "use_tool_discovery": true
 }
