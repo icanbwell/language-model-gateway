@@ -560,14 +560,22 @@ HTTPX Response Log:
         response: httpx.Response,
         event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
         thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
+        usage_collector: Optional[Dict[str, Any]] = None,
     ) -> AsyncGenerator[str, None]:
-        """Parse Chat Completions streaming response (``choices[0].delta.content``)."""
+        """Parse Chat Completions streaming response (``choices[0].delta.content``).
+
+        If ``usage_collector`` is provided (a mutable dict), captured usage
+        statistics are merged into it so the caller can emit a final
+        ``chat:completion`` event with accumulated totals.
+        """
         first_token_received = False
-        usage: Optional[Dict[str, Any]] = None
 
         async for chunk_json in self._iter_sse_events(response):
+            # Capture usage from the final chunk (present when
+            # stream_options.include_usage is set on the request)
             if "usage" in chunk_json and chunk_json["usage"]:
-                usage = chunk_json["usage"]
+                if usage_collector is not None:
+                    self._merge_usage(usage_collector, chunk_json["usage"])
 
             choices = chunk_json.get("choices")
             if not choices:
@@ -583,15 +591,13 @@ HTTPX Response Log:
                     await self._emit_status(event_emitter, "Responding\u2026")
                 yield content
 
-        if usage:
-            await self._emit_completion(event_emitter, usage=usage, done=False)
-
     async def _stream_responses_api(
         self,
         response: httpx.Response,
         event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
         thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
         chat_id: Optional[str] = None,
+        usage_collector: Optional[Dict[str, Any]] = None,
     ) -> AsyncGenerator[str, None]:
         """Parse Responses API streaming events.
 
@@ -599,10 +605,11 @@ HTTPX Response Log:
         - ``response.output_text.delta`` → yields text content
         - ``response.output_item.added`` → emits status for in-progress items
         - ``response.completed`` → captures response_id and usage
+
+        If ``usage_collector`` is provided, usage from ``response.completed``
+        is merged into it for the caller to emit a final completion event.
         """
         first_token_received = False
-        usage: Optional[Dict[str, Any]] = None
-        response_id: Optional[str] = None
 
         async for event in self._iter_sse_events(response):
             etype = event.get("type", "")
@@ -623,7 +630,9 @@ HTTPX Response Log:
             if etype == "response.reasoning_summary_text.done":
                 text = (event.get("text") or "").strip()
                 if text:
-                    await self._emit_status(event_emitter, f"Reasoning: {text[:200]}")
+                    await self._emit_status(
+                        event_emitter, f"Reasoning: {text[:200]}"
+                    )
                 continue
 
             # ── Status for in-progress items ──
@@ -639,7 +648,9 @@ HTTPX Response Log:
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "web_search_call":
-                    await self._emit_status(event_emitter, "Searching the web\u2026")
+                    await self._emit_status(
+                        event_emitter, "Searching the web\u2026"
+                    )
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
                     await self._emit_status(
@@ -650,15 +661,33 @@ HTTPX Response Log:
             # ── Final response ──
             if etype == "response.completed":
                 final = event.get("response", {})
-                response_id = final.get("id")
+                rid = final.get("id")
                 usage = final.get("usage")
                 # Store response_id for stateful chaining
-                if chat_id and response_id:
-                    self._response_id_by_chat[chat_id] = response_id
+                if chat_id and rid:
+                    self._response_id_by_chat[chat_id] = rid
+                # Merge usage into the collector for the caller
+                if usage and usage_collector is not None:
+                    self._merge_usage(usage_collector, usage)
                 break
 
-        if usage:
-            await self._emit_completion(event_emitter, usage=usage, done=False)
+    @staticmethod
+    def _merge_usage(total: Dict[str, Any], new: Dict[str, Any]) -> None:
+        """Recursively merge usage statistics into ``total`` in place.
+
+        Numeric values are summed, dicts are recursed, other values overwrite.
+        Mirrors the reference ``merge_usage_stats`` helper from the
+        openai_responses_manifold.
+        """
+        for k, v in new.items():
+            if isinstance(v, dict):
+                if k not in total or not isinstance(total[k], dict):
+                    total[k] = {}
+                Pipe._merge_usage(total[k], v)
+            elif isinstance(v, (int, float)):
+                total[k] = total.get(k, 0) + v
+            elif v is not None:
+                total[k] = v
 
     # ── Main pipe method ─────────────────────────────────────────────────
 
@@ -770,10 +799,13 @@ HTTPX Response Log:
 
         start_time = perf_counter()
         error_occurred = False
+        # Mutable accumulator — streaming methods merge usage into this dict
+        total_usage: Dict[str, Any] = {}
 
         try:
             logger.debug(
-                f"Calling {api_mode} url: {url} with payload: {json.dumps(payload)}"
+                f"Calling {api_mode} url: {url}"
+                f" with payload: {json.dumps(payload)}"
             )
             async with httpx.AsyncClient() as client:
                 if is_streaming:
@@ -800,6 +832,7 @@ HTTPX Response Log:
                                     event_emitter=__event_emitter__,
                                     thinking_tasks=thinking_tasks,
                                     chat_id=__chat_id__,
+                                    usage_collector=total_usage,
                                 ):
                                     yield text_chunk
                             else:
@@ -807,6 +840,7 @@ HTTPX Response Log:
                                     response,
                                     event_emitter=__event_emitter__,
                                     thinking_tasks=thinking_tasks,
+                                    usage_collector=total_usage,
                                 ):
                                     yield text_chunk
                         else:
@@ -820,9 +854,12 @@ HTTPX Response Log:
                             )
                             try:
                                 data = json.loads(response_text)
+                                # Extract usage from non-streamed response
+                                resp_usage = data.get("usage")
+                                if resp_usage:
+                                    self._merge_usage(total_usage, resp_usage)
                                 if is_responses:
                                     text = self._extract_responses_text(data)
-                                    # Store response_id for stateful chaining
                                     rid = data.get("id")
                                     if __chat_id__ and rid:
                                         self._response_id_by_chat[
@@ -853,6 +890,10 @@ HTTPX Response Log:
                     )
                     response.raise_for_status()
                     data = response.json()
+                    # Extract usage from non-streamed response
+                    resp_usage = data.get("usage")
+                    if resp_usage:
+                        self._merge_usage(total_usage, resp_usage)
                     if is_responses:
                         text = self._extract_responses_text(data)
                         rid = data.get("id")
@@ -896,6 +937,14 @@ HTTPX Response Log:
                     f"Failed after {elapsed:.1f}s",
                     done=True,
                 )
+            # Always emit final completion with accumulated usage.
+            # content="" is required — OpenWebUI stalls without it.
+            await self._emit_completion(
+                __event_emitter__,
+                content="",
+                usage=total_usage if total_usage else None,
+                done=True,
+            )
 
     # ── Responses API helpers ────────────────────────────────────────────
 
