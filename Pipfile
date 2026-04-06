@@ -133,7 +133,7 @@ py-key-value-aio = ">=0.4.4"
 # langchain-ai-skills-framework is a Python library for building AI skills in LangChain
 langchain-ai-skills-framework = ">=1.0.32"
 # languagemodelcommon is a Python library for common language model utilities
-language-model-common = ">=1.0.36"
+language-model-common = ">=2.0.0"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks

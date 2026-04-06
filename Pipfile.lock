@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f8ce14c024d0d09142b724d9137cca0092a2377b85c7a5bd85b2c97acaba1265"
+            "sha256": "2b30e7f076df647f1a0e77a762da9c3b0ada0282f7e65ef048062cc160772348"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1678,12 +1678,12 @@
         },
         "language-model-common": {
             "hashes": [
-                "sha256:56a64a97c935fc4016d9531f20013100ffebc21bb9c633ba9e3e8889af966f83",
-                "sha256:aa021dc00cd45bc99ea0b64375c3fd21dd77721d354ede927f39a1738255503d"
+                "sha256:c4fbb97ad83f07d7c09ea74851ecb0ea15f3c60f46dbb7b939975e9f6d3c30a3",
+                "sha256:fe6c0963d129e704012ce9c3971390c59e668b360f18c6cc4c9874302e0a66f8"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.0.36"
+            "version": "==2.0.0"
         },
         "lark": {
             "hashes": [
@@ -3161,11 +3161,11 @@
         },
         "python-multipart": {
             "hashes": [
-                "sha256:2b2cd894c83d21bf49d702499531c7bafd057d730c201782048f7945d82de155",
-                "sha256:7340bef99a7e0032613f56dc36027b959fd3b30a787ed62d310e951f7c3a3a58"
+                "sha256:9574c97e1c026e00bc30340ef7c7d76739512ab4dfd428fec8c330fa6a5cc3c8",
+                "sha256:9b110a98db707df01a53c194f0af075e736a770dc5058089650d70b4a182f950"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==0.0.22"
+            "version": "==0.0.24"
         },
         "python-snappy": {
             "hashes": [
@@ -6063,11 +6063,11 @@
         },
         "python-multipart": {
             "hashes": [
-                "sha256:2b2cd894c83d21bf49d702499531c7bafd057d730c201782048f7945d82de155",
-                "sha256:7340bef99a7e0032613f56dc36027b959fd3b30a787ed62d310e951f7c3a3a58"
+                "sha256:9574c97e1c026e00bc30340ef7c7d76739512ab4dfd428fec8c330fa6a5cc3c8",
+                "sha256:9b110a98db707df01a53c194f0af075e736a770dc5058089650d70b4a182f950"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==0.0.22"
+            "version": "==0.0.24"
         },
         "pytokens": {
             "hashes": [

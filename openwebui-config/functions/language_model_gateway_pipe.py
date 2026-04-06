@@ -217,9 +217,7 @@ class Pipe:
             (8.0, "Writing a response\u2026"),
         ]:
             tasks.append(
-                asyncio.create_task(
-                    _later(delay + random.uniform(0, 0.5), msg)
-                )
+                asyncio.create_task(_later(delay + random.uniform(0, 0.5), msg))
             )
         return tasks
 
@@ -357,9 +355,7 @@ HTTPX Response Log:
                 for item in content:
                     if not isinstance(item, dict):
                         continue
-                    if item.get("type") == "text" and isinstance(
-                        item.get("text"), str
-                    ):
+                    if item.get("type") == "text" and isinstance(item.get("text"), str):
                         return cast(str, item["text"])
             if isinstance(content, dict):
                 text = content.get("text")
@@ -464,9 +460,7 @@ HTTPX Response Log:
                     input_items.append(
                         {
                             "role": "assistant",
-                            "content": [
-                                {"type": "output_text", "text": raw_content}
-                            ],
+                            "content": [{"type": "output_text", "text": raw_content}],
                         }
                     )
 
@@ -630,9 +624,7 @@ HTTPX Response Log:
             if etype == "response.reasoning_summary_text.done":
                 text = (event.get("text") or "").strip()
                 if text:
-                    await self._emit_status(
-                        event_emitter, f"Reasoning: {text[:200]}"
-                    )
+                    await self._emit_status(event_emitter, f"Reasoning: {text[:200]}")
                 continue
 
             # ── Status for in-progress items ──
@@ -643,9 +635,7 @@ HTTPX Response Log:
                     await self._emit_status(event_emitter, "Responding\u2026")
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
-                    await self._emit_status(
-                        event_emitter, f"Running {name}\u2026"
-                    )
+                    await self._emit_status(event_emitter, f"Running {name}\u2026")
                 continue
 
             # ── Tool/search completion ──
@@ -653,14 +643,10 @@ HTTPX Response Log:
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "web_search_call":
-                    await self._emit_status(
-                        event_emitter, "Search complete"
-                    )
+                    await self._emit_status(event_emitter, "Search complete")
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
-                    await self._emit_status(
-                        event_emitter, f"{name} complete"
-                    )
+                    await self._emit_status(event_emitter, f"{name} complete")
                 continue
 
             # ── Final response ──
@@ -701,9 +687,7 @@ HTTPX Response Log:
         body: Dict[str, Any],
         __request__: Optional[Request] = None,
         __user__: Optional[Dict[str, Any]] = None,
-        __event_emitter__: Optional[
-            Callable[[Dict[str, Any]], Awaitable[None]]
-        ] = None,
+        __event_emitter__: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
         __event_call__: Optional[
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
@@ -761,9 +745,7 @@ HTTPX Response Log:
                 store=is_stateful,
                 previous_response_id=previous_response_id,
             )
-            url = self.pathlib_url_join(
-                base_url=open_api_base_url, path="responses"
-            )
+            url = self.pathlib_url_join(base_url=open_api_base_url, path="responses")
         else:
             payload = {**body, "model": model_id}
             url = self.pathlib_url_join(
@@ -809,8 +791,7 @@ HTTPX Response Log:
 
         try:
             logger.debug(
-                f"Calling {api_mode} url: {url}"
-                f" with payload: {json.dumps(payload)}"
+                f"Calling {api_mode} url: {url} with payload: {json.dumps(payload)}"
             )
             async with httpx.AsyncClient() as client:
                 if is_streaming:
@@ -824,9 +805,7 @@ HTTPX Response Log:
                     ) as response:
                         if response.status_code >= 400:
                             error_body = await response.aread()
-                            response_text = error_body.decode(
-                                "utf-8", errors="replace"
-                            )
+                            response_text = error_body.decode("utf-8", errors="replace")
                             response.raise_for_status()
 
                         content_type = response.headers.get("content-type", "")
@@ -854,9 +833,7 @@ HTTPX Response Log:
                                 __event_emitter__, "Responding\u2026"
                             )
                             raw_body = await response.aread()
-                            response_text = raw_body.decode(
-                                "utf-8", errors="replace"
-                            )
+                            response_text = raw_body.decode("utf-8", errors="replace")
                             try:
                                 data = json.loads(response_text)
                                 # Extract usage from non-streamed response
@@ -867,9 +844,7 @@ HTTPX Response Log:
                                     text = self._extract_responses_text(data)
                                     rid = data.get("id")
                                     if __chat_id__ and rid:
-                                        self._response_id_by_chat[
-                                            __chat_id__
-                                        ] = rid
+                                        self._response_id_by_chat[__chat_id__] = rid
                                     yield text if text else json.dumps(data)
                                 else:
                                     choices = data.get("choices", [])
@@ -1003,9 +978,7 @@ HTTPX Response Log:
             )
             return []
         except Exception as e:
-            logger.exception(
-                f"Unexpected error fetching models from {model_url}: {e}"
-            )
+            logger.exception(f"Unexpected error fetching models from {model_url}: {e}")
             return []
 
     async def pipes(self) -> List[Dict[str, str]]:
@@ -1013,8 +986,7 @@ HTTPX Response Log:
         cache_expired = (
             self.pipelines is None
             or self.pipelines_last_updated is None
-            or (now - self.pipelines_last_updated)
-            > self.valves.model_cache_ttl_seconds
+            or (now - self.pipelines_last_updated) > self.valves.model_cache_ttl_seconds
         )
         if cache_expired:
             logger.debug("Model cache expired or not set. Fetching models.")
@@ -1032,8 +1004,6 @@ HTTPX Response Log:
         if default_model_id:
             if any(m["id"] == default_model_id for m in self.pipelines or []):
                 models = [m for m in models if m["id"] != default_model_id]
-                models.insert(
-                    0, {"id": default_model_id, "name": default_model_id}
-                )
+                models.insert(0, {"id": default_model_id, "name": default_model_id})
 
         return models
