@@ -406,11 +406,16 @@ class Pipe:
                 phrase = phrases[phrase_idx % len(phrases)]
                 if start_time is not None:
                     elapsed = perf_counter() - start_time
-                    suffix = f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
+                    suffix = (
+                        f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
+                    )
                 else:
                     suffix = ""
                 await event_emitter(
-                    {"type": "status", "data": {"description": f"{phrase}\u2026{suffix}"}}
+                    {
+                        "type": "status",
+                        "data": {"description": f"{phrase}\u2026{suffix}"},
+                    }
                 )
                 tick += 1
                 if tick % 5 == 0:
@@ -424,7 +429,8 @@ class Pipe:
 
     @staticmethod
     def _format_elapsed_and_tokens(
-        elapsed: float, usage: Optional[Dict[str, Any]] = None,
+        elapsed: float,
+        usage: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Format elapsed time and token count like: ``(1m 2s, 16k tokens)``.
 
@@ -438,7 +444,9 @@ class Pipe:
             # Responses API doesn't have total_tokens — sum the components
             if not total_tokens:
                 input_t = usage.get("input_tokens") or usage.get("prompt_tokens") or 0
-                output_t = usage.get("output_tokens") or usage.get("completion_tokens") or 0
+                output_t = (
+                    usage.get("output_tokens") or usage.get("completion_tokens") or 0
+                )
                 total_tokens = input_t + output_t if (input_t or output_t) else 0
             if total_tokens:
                 if total_tokens >= 1000:
@@ -794,6 +802,9 @@ HTTPX Response Log:
             # Capture usage from the final chunk (present when
             # stream_options.include_usage is set on the request)
             if "usage" in chunk_json and chunk_json["usage"]:
+                logger.info(
+                    f"Chat Completions usage chunk received: {chunk_json['usage']}"
+                )
                 if usage_collector is not None:
                     self._merge_usage(usage_collector, chunk_json["usage"])
 
@@ -808,7 +819,9 @@ HTTPX Response Log:
                     first_token_received = True
                     if thinking_tasks:
                         self._cancel_thinking(thinking_tasks)
-                    await self._emit_status(event_emitter, "Responding\u2026", done=True)
+                    await self._emit_status(
+                        event_emitter, "Responding\u2026", done=True
+                    )
                 yield content
 
     async def _stream_responses_api(
@@ -842,7 +855,9 @@ HTTPX Response Log:
                         first_token_received = True
                         if thinking_tasks:
                             self._cancel_thinking(thinking_tasks)
-                        await self._emit_status(event_emitter, "Responding\u2026", done=True)
+                        await self._emit_status(
+                            event_emitter, "Responding\u2026", done=True
+                        )
                     yield delta
                 continue
 
@@ -850,7 +865,10 @@ HTTPX Response Log:
             if etype == "response.reasoning_summary_text.done":
                 text = (event.get("text") or "").strip()
                 if text:
-                    await self._emit_status(event_emitter, f"Reasoning: {text[:200]}")
+                    # Show briefly then dismiss so it doesn't linger
+                    await self._emit_status(
+                        event_emitter, f"Reasoning: {text[:200]}", done=True
+                    )
                 continue
 
             # ── Status for in-progress items ──
@@ -858,7 +876,9 @@ HTTPX Response Log:
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "message" and item.get("status") == "in_progress":
-                    await self._emit_status(event_emitter, "Responding\u2026")
+                    # If we already started receiving text, don't re-open indicator
+                    if not first_token_received:
+                        await self._emit_status(event_emitter, "Responding\u2026")
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
                     await self._emit_status(event_emitter, f"Running {name}\u2026")
@@ -869,10 +889,12 @@ HTTPX Response Log:
                 item = event.get("item", {})
                 item_type = item.get("type", "")
                 if item_type == "web_search_call":
-                    await self._emit_status(event_emitter, "Search complete")
+                    await self._emit_status(event_emitter, "Search complete", done=True)
                 elif item_type == "function_call":
                     name = item.get("name", "tool")
-                    await self._emit_status(event_emitter, f"{name} complete")
+                    await self._emit_status(
+                        event_emitter, f"{name} complete", done=True
+                    )
                 continue
 
             # ── Final response ──
@@ -880,6 +902,7 @@ HTTPX Response Log:
                 final = event.get("response", {})
                 rid = final.get("id")
                 usage = final.get("usage")
+                logger.info(f"Responses API completed - usage: {usage}")
                 # Store response_id for stateful chaining
                 if chat_id and rid:
                     self._response_id_by_chat[chat_id] = rid
@@ -982,6 +1005,10 @@ HTTPX Response Log:
         if stream is not None:
             payload["stream"] = stream
 
+        # Ask the API to include usage stats in the final streamed chunk
+        if payload.get("stream"):
+            payload.setdefault("stream_options", {})["include_usage"] = True
+
         response_text: str = ""
         is_streaming: bool = bool(payload.get("stream", False))
 
@@ -1061,9 +1088,22 @@ HTTPX Response Log:
                             # (don't wait for generator cleanup in finally)
                             self._cancel_thinking(thinking_tasks)
                             elapsed = perf_counter() - start_time
-                            stats = self._format_elapsed_and_tokens(elapsed, total_usage)
+                            logger.info(
+                                f"Streaming ended. total_usage={total_usage}, elapsed={elapsed:.1f}s"
+                            )
+                            stats = self._format_elapsed_and_tokens(
+                                elapsed, total_usage
+                            )
                             await self._emit_status(
-                                __event_emitter__, f"Completed {stats}", done=True,
+                                __event_emitter__,
+                                f"Completed {stats}",
+                                done=True,
+                            )
+                            await self._emit_completion(
+                                __event_emitter__,
+                                content="",
+                                usage=total_usage if total_usage else None,
+                                done=True,
                             )
                         else:
                             self._cancel_thinking(thinking_tasks)
@@ -1100,9 +1140,22 @@ HTTPX Response Log:
                             # Emit completed for non-SSE fallback
                             self._cancel_thinking(thinking_tasks)
                             elapsed = perf_counter() - start_time
-                            stats = self._format_elapsed_and_tokens(elapsed, total_usage)
+                            logger.info(
+                                f"Non-SSE response ended. total_usage={total_usage}"
+                            )
+                            stats = self._format_elapsed_and_tokens(
+                                elapsed, total_usage
+                            )
                             await self._emit_status(
-                                __event_emitter__, f"Completed {stats}", done=True,
+                                __event_emitter__,
+                                f"Completed {stats}",
+                                done=True,
+                            )
+                            await self._emit_completion(
+                                __event_emitter__,
+                                content="",
+                                usage=total_usage if total_usage else None,
+                                done=True,
                             )
                 else:
                     # Non-streaming response
@@ -1130,9 +1183,20 @@ HTTPX Response Log:
                         yield json.dumps(data)
                     # Emit completed for non-streaming
                     elapsed = perf_counter() - start_time
+                    logger.info(
+                        f"Non-streaming response ended. total_usage={total_usage}"
+                    )
                     stats = self._format_elapsed_and_tokens(elapsed, total_usage)
                     await self._emit_status(
-                        __event_emitter__, f"Completed {stats}", done=True,
+                        __event_emitter__,
+                        f"Completed {stats}",
+                        done=True,
+                    )
+                    await self._emit_completion(
+                        __event_emitter__,
+                        content="",
+                        usage=total_usage if total_usage else None,
+                        done=True,
                     )
 
         except httpx.HTTPStatusError as e:
