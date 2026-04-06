@@ -121,6 +121,8 @@ services:
       LANGGRAPH_RECURSION_LIMIT: 100
       ENABLE_STREAMING_BUFFERING: 0
       AIDEN_OAUTH_CLIENT_NAME: "b.well Aiden Local"
+      # Allow http:// URLs for local OIDC providers (e.g. keycloak in Docker)
+      AUTH_ALLOW_HTTP_URLS: "true"
     env_file: .env
     command:
       - opentelemetry-instrument
@@ -154,9 +156,9 @@ services:
       # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
+    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
     - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
-#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
+    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
