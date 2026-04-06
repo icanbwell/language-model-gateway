@@ -390,6 +390,8 @@ class Pipe:
     def _create_thinking_tasks(
         cls,
         event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        start_time: Optional[float] = None,
+        usage_collector: Optional[Dict[str, Any]] = None,
     ) -> List[asyncio.Task[None]]:
         """Schedule cycling loading-phrase status messages until cancelled."""
         if not event_emitter:
@@ -398,19 +400,52 @@ class Pipe:
         async def _cycle_phrases() -> None:
             phrases = cls._LOADING_PHRASES[:]
             random.shuffle(phrases)
-            idx = 0
+            phrase_idx = 0
+            tick = 0
             while True:
-                phrase = phrases[idx % len(phrases)]
+                phrase = phrases[phrase_idx % len(phrases)]
+                if start_time is not None:
+                    elapsed = perf_counter() - start_time
+                    suffix = f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
+                else:
+                    suffix = ""
                 await event_emitter(
-                    {"type": "status", "data": {"description": f"{phrase}\u2026"}}
+                    {"type": "status", "data": {"description": f"{phrase}\u2026{suffix}"}}
                 )
-                idx += 1
-                if idx >= len(phrases):
-                    random.shuffle(phrases)
-                    idx = 0
-                await asyncio.sleep(5.0)
+                tick += 1
+                if tick % 5 == 0:
+                    phrase_idx += 1
+                    if phrase_idx >= len(phrases):
+                        random.shuffle(phrases)
+                        phrase_idx = 0
+                await asyncio.sleep(1.0)
 
         return [asyncio.create_task(_cycle_phrases())]
+
+    @staticmethod
+    def _format_elapsed_and_tokens(
+        elapsed: float, usage: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Format elapsed time and token count like: ``(1m 2s, 16k tokens)``.
+
+        Handles both Chat Completions (``total_tokens``) and Responses API
+        (``input_tokens`` + ``output_tokens``) usage schemas.
+        """
+        mins, secs = divmod(int(elapsed), 60)
+        parts: List[str] = [f"{mins}m {secs}s" if mins > 0 else f"{secs}s"]
+        if usage:
+            total_tokens = usage.get("total_tokens")
+            # Responses API doesn't have total_tokens — sum the components
+            if not total_tokens:
+                input_t = usage.get("input_tokens") or usage.get("prompt_tokens") or 0
+                output_t = usage.get("output_tokens") or usage.get("completion_tokens") or 0
+                total_tokens = input_t + output_t if (input_t or output_t) else 0
+            if total_tokens:
+                if total_tokens >= 1000:
+                    parts.append(f"{total_tokens / 1000:.1f}k tokens")
+                else:
+                    parts.append(f"{total_tokens} tokens")
+        return f"({', '.join(parts)})"
 
     @staticmethod
     def _cancel_thinking(tasks: List[asyncio.Task[None]]) -> None:
@@ -773,7 +808,7 @@ HTTPX Response Log:
                     first_token_received = True
                     if thinking_tasks:
                         self._cancel_thinking(thinking_tasks)
-                    await self._emit_status(event_emitter, "Responding\u2026")
+                    await self._emit_status(event_emitter, "Responding\u2026", done=True)
                 yield content
 
     async def _stream_responses_api(
@@ -807,7 +842,7 @@ HTTPX Response Log:
                         first_token_received = True
                         if thinking_tasks:
                             self._cancel_thinking(thinking_tasks)
-                        await self._emit_status(event_emitter, "Responding\u2026")
+                        await self._emit_status(event_emitter, "Responding\u2026", done=True)
                     yield delta
                 continue
 
@@ -971,14 +1006,18 @@ HTTPX Response Log:
         ):
             yield debug_line
 
-        thinking_tasks: List[asyncio.Task[None]] = []
-        if self.valves.enable_status_indicator and is_streaming:
-            thinking_tasks = self._create_thinking_tasks(__event_emitter__)
-
         start_time = perf_counter()
         error_occurred = False
         # Mutable accumulator — streaming methods merge usage into this dict
         total_usage: Dict[str, Any] = {}
+
+        thinking_tasks: List[asyncio.Task[None]] = []
+        if self.valves.enable_status_indicator and is_streaming:
+            thinking_tasks = self._create_thinking_tasks(
+                __event_emitter__,
+                start_time=start_time,
+                usage_collector=total_usage,
+            )
 
         try:
             logger.debug(
@@ -1018,10 +1057,18 @@ HTTPX Response Log:
                                     usage_collector=total_usage,
                                 ):
                                     yield text_chunk
+                            # Emit completed immediately after streaming ends
+                            # (don't wait for generator cleanup in finally)
+                            self._cancel_thinking(thinking_tasks)
+                            elapsed = perf_counter() - start_time
+                            stats = self._format_elapsed_and_tokens(elapsed, total_usage)
+                            await self._emit_status(
+                                __event_emitter__, f"Completed {stats}", done=True,
+                            )
                         else:
                             self._cancel_thinking(thinking_tasks)
                             await self._emit_status(
-                                __event_emitter__, "Responding\u2026"
+                                __event_emitter__, "Responding\u2026", done=True
                             )
                             raw_body = await response.aread()
                             response_text = raw_body.decode("utf-8", errors="replace")
@@ -1050,8 +1097,16 @@ HTTPX Response Log:
                                         yield json.dumps(data)
                             except json.JSONDecodeError:
                                 yield response_text
+                            # Emit completed for non-SSE fallback
+                            self._cancel_thinking(thinking_tasks)
+                            elapsed = perf_counter() - start_time
+                            stats = self._format_elapsed_and_tokens(elapsed, total_usage)
+                            await self._emit_status(
+                                __event_emitter__, f"Completed {stats}", done=True,
+                            )
                 else:
                     # Non-streaming response
+                    self._cancel_thinking(thinking_tasks)
                     response = await client.post(
                         url=url,
                         json=payload,
@@ -1073,6 +1128,12 @@ HTTPX Response Log:
                         yield text if text else json.dumps(data)
                     else:
                         yield json.dumps(data)
+                    # Emit completed for non-streaming
+                    elapsed = perf_counter() - start_time
+                    stats = self._format_elapsed_and_tokens(elapsed, total_usage)
+                    await self._emit_status(
+                        __event_emitter__, f"Completed {stats}", done=True,
+                    )
 
         except httpx.HTTPStatusError as e:
             error_occurred = True
@@ -1095,17 +1156,12 @@ HTTPX Response Log:
             await self._emit_error(__event_emitter__, error_detail)
         finally:
             self._cancel_thinking(thinking_tasks)
-            elapsed = perf_counter() - start_time
-            if not error_occurred:
+            if error_occurred:
+                elapsed = perf_counter() - start_time
+                stats = self._format_elapsed_and_tokens(elapsed, total_usage)
                 await self._emit_status(
                     __event_emitter__,
-                    f"Completed in {elapsed:.1f}s",
-                    done=True,
-                )
-            else:
-                await self._emit_status(
-                    __event_emitter__,
-                    f"Failed after {elapsed:.1f}s",
+                    f"Failed {stats}",
                     done=True,
                 )
             # Always emit final completion with accumulated usage.
