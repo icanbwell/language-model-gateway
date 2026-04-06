@@ -45,6 +45,9 @@ class ModelFactory:
                 provider=default_model_provider, model=default_model_name
             )
 
+        if model_config is None:
+            raise ValueError("model_config must not be None")
+
         model_vendor: str = model_config.provider
         model_name: str = model_config.model
 
@@ -77,11 +80,34 @@ class ModelFactory:
                 AwsClientFactory().create_bedrock_client()
             )
 
+            # Extract thinking config if present — it must be passed via
+            # additional_model_request_fields, not as a top-level kwarg.
+            additional_fields: Dict[str, Any] = {}
+            thinking_budget: int | None = None
+            raw_budget = model_parameters_dict.pop("thinking_budget_tokens", None)
+            if raw_budget is not None:
+                thinking_budget = int(raw_budget)
+            if thinking_budget and thinking_budget > 0:
+                additional_fields["thinking"] = {
+                    "type": "enabled",
+                    "budget_tokens": thinking_budget,
+                }
+                logger.info(
+                    "Extended thinking enabled for %s with budget_tokens=%d",
+                    model_name,
+                    thinking_budget,
+                )
+
             llm = ChatBedrockConverse(
                 client=bedrock_client,
                 provider="anthropic",
                 credentials_profile_name=aws_credentials_profile,
                 region_name=aws_region_name,
+                **(
+                    {"additional_model_request_fields": additional_fields}
+                    if additional_fields
+                    else {}
+                ),
                 **model_parameters_dict,
             )
         elif model_config.provider == "openai":

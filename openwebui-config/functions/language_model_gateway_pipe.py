@@ -482,7 +482,7 @@ HTTPX Response Log:
             responses_payload["previous_response_id"] = previous_response_id
             # When chaining via previous_response_id, only send the new user
             # message(s) — the server already has the conversation history.
-            last_user_items = []
+            last_user_items: list[Dict[str, Any]] = []
             for item in reversed(input_items):
                 if item.get("role") == "user":
                     last_user_items.insert(0, item)
