@@ -51,7 +51,10 @@ class SystemCommandManager:
         referring_subject: str,
         auth_provider: str | None,
     ) -> StreamingResponse | JSONResponse | None:
-        last_message_content: str | None = chat_request_wrapper.messages[-1].content
+        raw_content = chat_request_wrapper.messages[-1].content
+        last_message_content: str | None = (
+            raw_content if isinstance(raw_content, str) else None
+        )
 
         if last_message_content is not None:
             system_commands: list[str] = self.environment_variables.system_commands
