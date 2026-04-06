@@ -258,6 +258,7 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 dcr_manager=c.resolve(DcrManager),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
             ),
         )
 

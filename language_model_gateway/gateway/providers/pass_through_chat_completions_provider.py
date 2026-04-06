@@ -160,7 +160,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                 )
 
         bearer_token: str | None = (
-            token.access_token.token if token and token.access_token else None
+            token.get_access_token_string() if token else None
         )
         auth: httpx.Auth | None = (
             BearerAuth(token=bearer_token) if bearer_token is not None else None
