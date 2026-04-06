@@ -214,7 +214,7 @@ class Pipe:
             (1.5, "Reading the question\u2026"),
             (4.0, "Gathering thoughts\u2026"),
             (6.0, "Exploring possible responses\u2026"),
-            (8.0, "Building a response\u2026"),
+            (8.0, "Writing a response\u2026"),
         ]:
             tasks.append(
                 asyncio.create_task(

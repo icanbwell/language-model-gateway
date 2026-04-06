@@ -1,13 +1,12 @@
-from typing import Optional, override
+from typing import Any, AsyncGenerator, Dict, Optional, override
 import json
 import logging
 import os
 from os import environ
 from random import randint
-from typing import Any, Dict, AsyncGenerator
 
 from httpx import Response
-from httpx_sse import aconnect_sse, ServerSentEvent
+from httpx_sse import aconnect_sse
 from oidcauthlib.auth.models.auth import AuthInformation
 from openai.types.chat import (
     ChatCompletion,
@@ -68,11 +67,11 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
 
         if chat_request_wrapper.stream:
             return StreamingResponse(
-                await self.get_streaming_response_async(
+                self._stream_resp_async_generator(
                     agent_url=agent_url,
                     request_id=request_id,
-                    headers=headers,
                     chat_request_wrapper=chat_request_wrapper,
+                    headers=headers,
                 ),
                 media_type="text/event-stream",
             )
@@ -115,23 +114,6 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                 logger.info(f"Non-streaming response {request_id}: {response}")
             return JSONResponse(content=response.model_dump())
 
-    async def get_streaming_response_async(
-        self,
-        *,
-        agent_url: str,
-        request_id: str,
-        headers: Dict[str, str],
-        chat_request_wrapper: ChatRequestWrapper,
-    ) -> AsyncGenerator[str, None]:
-        logger.info(f"Streaming response {request_id} from agent")
-        generator: AsyncGenerator[str, None] = self._stream_resp_async_generator(
-            agent_url=agent_url,
-            request_id=request_id,
-            chat_request_wrapper=chat_request_wrapper,
-            headers=headers,
-        )
-        return generator
-
     async def _stream_resp_async_generator(
         self,
         *,
@@ -153,26 +135,18 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                     timeout=60 * 60,
                     headers=headers,
                 ) as event_source:
-                    i = 0
-                    sse: ServerSentEvent
                     async for sse in event_source.aiter_sse():
-                        event: str = sse.event
                         data: str = sse.data
-                        i += 1
-
                         if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
                             if logger.isEnabledFor(logging.DEBUG):
                                 logger.debug(
-                                    f"----- Received data from stream {i} {event} {type(data)} ------"
-                                )
-                                logger.debug(data)
-                                logger.debug(
-                                    f"----- End data from stream {i} {event} {type(data)} ------"
+                                    f"----- Received SSE {sse.event}: {data} ------"
                                 )
                         yield f"data: {data}\n\n"
         except Exception as e:
             logger.error(
                 f"Exception in _stream_resp_async_generator: {e}", exc_info=True
             )
-            # Optionally yield an error message to the client
             yield f'data: {{"error": "{str(e)}"}}\n\n'
+        finally:
+            yield "data: [DONE]\n\n"
