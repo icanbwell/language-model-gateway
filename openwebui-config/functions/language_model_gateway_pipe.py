@@ -983,8 +983,12 @@ class Pipe:
         error_occurred = False
         total_usage: Dict[str, Any] = {}
 
-        # Skip the loading indicator for background tasks (title generation, etc.)
-        is_background_task = bool(__metadata__ and __metadata__.get("task"))
+        # Suppress all status emissions for lightweight background tasks
+        # (title/tags/emoji generation) that run silently in the UI.
+        _SILENT_TASK_TYPES = {"title_generation", "tags_generation", "emoji_generation"}
+        task_type = (__metadata__ or {}).get("task")
+        is_background_task = task_type in _SILENT_TASK_TYPES
+        status_emitter = None if is_background_task else __event_emitter__
 
         thinking_tasks: List[asyncio.Task[None]] = []
         if (
@@ -1021,7 +1025,7 @@ class Pipe:
                             if is_responses:
                                 async for text_chunk in self._stream_responses_api(
                                     response,
-                                    emitter=__event_emitter__,
+                                    emitter=status_emitter,
                                     thinking_tasks=thinking_tasks,
                                     chat_id=__chat_id__,
                                     usage_collector=total_usage,
@@ -1031,7 +1035,7 @@ class Pipe:
                             else:
                                 async for text_chunk in self._stream_chat_completions(
                                     response,
-                                    emitter=__event_emitter__,
+                                    emitter=status_emitter,
                                     thinking_tasks=thinking_tasks,
                                     usage_collector=total_usage,
                                     start_time=start_time,
@@ -1041,7 +1045,7 @@ class Pipe:
                             # Non-SSE response from a streaming request
                             self._cancel_thinking(thinking_tasks)
                             await self._emit_status(
-                                __event_emitter__, "Responding\u2026", done=True
+                                status_emitter, "Responding\u2026", done=True
                             )
                             raw_body = await response.aread()
                             response_text = raw_body.decode("utf-8", errors="replace")
@@ -1067,7 +1071,7 @@ class Pipe:
                             except json.JSONDecodeError:
                                 yield response_text
                             await self._finish_stream(
-                                __event_emitter__,
+                                status_emitter,
                                 thinking_tasks,
                                 start_time,
                                 total_usage,
@@ -1095,7 +1099,7 @@ class Pipe:
                     else:
                         yield json.dumps(data)
                     await self._finish_stream(
-                        __event_emitter__,
+                        status_emitter,
                         thinking_tasks,
                         start_time,
                         total_usage,
@@ -1125,9 +1129,9 @@ class Pipe:
             if error_occurred:
                 elapsed = perf_counter() - start_time
                 stats = self._format_elapsed_and_tokens(elapsed, total_usage)
-                await self._emit_status(__event_emitter__, f"Failed {stats}", done=True)
+                await self._emit_status(status_emitter, f"Failed {stats}", done=True)
                 await self._emit_completion(
-                    __event_emitter__,
+                    status_emitter,
                     content="",
                     usage=total_usage if total_usage else None,
                     done=True,
