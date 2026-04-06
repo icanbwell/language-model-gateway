@@ -2,14 +2,18 @@
 title: LangChain Pipe Function (Streaming Version - FIXED)
 author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
 author_url: https://github.com/imranq2
-version: 0.2.1
+version: 0.3.0
 
 This module defines a Pipe class that reads the oauth_id_token from the request cookies
 and uses it in Authorization header to make requests to the OpenAI API.
 It supports both streaming and non-streaming responses.
 
-KEY FIX: Instead of yielding raw SSE lines, we now parse the OpenAI streaming response
-and yield individual text chunks that OpenWebUI will format properly.
+Supports three API modes via the ``api_mode`` valve:
+- ``chat_completions``: Standard OpenAI Chat Completions API (``/chat/completions``)
+- ``responses_stateless``: OpenAI Responses API without server-side state (``/responses``)
+- ``responses_stateful``: OpenAI Responses API with server-side state; uses
+  ``previous_response_id`` to chain conversation turns so only the latest user
+  message is sent each turn (``/responses`` with ``store: true``)
 """
 
 import asyncio
@@ -24,6 +28,7 @@ from time import perf_counter
 from typing import (
     AsyncGenerator,
     List,
+    Literal,
     Optional,
     Callable,
     Awaitable,
@@ -49,7 +54,7 @@ LLM_CALL_TIMEOUT = 60 * 5  # 5 minutes
 class Pipe:
     """
     Pipe class for interacting with the OpenAI API using OAuth ID token from request cookies.
-    Supports both streaming and non-streaming responses.
+    Supports Chat Completions API and Responses API (stateless and stateful).
     """
 
     class Valves(BaseModel):
@@ -78,14 +83,13 @@ class Pipe:
         default_model: Optional[str] = Field(
             default="General Purpose", description="Default model to use"
         )
-        # New valves for previously hardcoded constants
         model_cache_ttl_seconds: int = Field(
             default=CACHE_TTL_SECONDS,
             description="Cache TTL in seconds for the models list",
         )
         llm_call_timeout_seconds: float = Field(
             default=LLM_CALL_TIMEOUT,
-            description="Timeout in seconds for LLM chat/completions API calls",
+            description="Timeout in seconds for LLM API calls",
         )
         models_list_timeout_seconds: float = Field(
             default=30.0,
@@ -93,11 +97,22 @@ class Pipe:
         )
         stream: Optional[bool] = Field(
             default=True,
-            description="Whether to use streaming responses for the chat/completions endpoint",
+            description="Whether to use streaming responses",
         )
         client_id_header_value: Optional[str] = Field(
             default="Aiden",
             description="Header name to pass client ID for debugging purposes",
+        )
+        api_mode: Literal[
+            "chat_completions", "responses_stateless", "responses_stateful"
+        ] = Field(
+            default="chat_completions",
+            description=(
+                "API mode: 'chat_completions' uses /chat/completions, "
+                "'responses_stateless' uses /responses without server-side state, "
+                "'responses_stateful' uses /responses with store=true and "
+                "previous_response_id to chain conversation turns."
+            ),
         )
 
     def __init__(self) -> None:
@@ -111,9 +126,9 @@ class Pipe:
             else ""
         )
         self.pipelines: Optional[List[Dict[str, Any]]] = None
-        self.pipelines_last_updated: Optional[float] = (
-            None  # Track last cache update time
-        )
+        self.pipelines_last_updated: Optional[float] = None
+        # Stateful Responses API: track last response_id per chat
+        self._response_id_by_chat: Dict[str, str] = {}
 
     @staticmethod
     def read_base_url() -> Optional[str]:
@@ -133,6 +148,8 @@ class Pipe:
     async def on_valves_updated(self) -> None:
         logger.debug(f"on_valves_updated:{__name__}")
         self.pipelines = await self.get_models()
+
+    # ── Native OpenWebUI event emitters ──────────────────────────────────
 
     @staticmethod
     async def _emit_status(
@@ -183,12 +200,7 @@ class Pipe:
     def _create_thinking_tasks(
         event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
     ) -> List[asyncio.Task[None]]:
-        """Schedule progressive thinking status messages.
-
-        Returns a list of asyncio tasks that emit status updates at
-        staggered intervals, giving the user visual feedback while
-        waiting for the first response token.
-        """
+        """Schedule progressive thinking status messages."""
         if not event_emitter:
             return []
 
@@ -217,6 +229,8 @@ class Pipe:
         for t in tasks:
             t.cancel()
         tasks.clear()
+
+    # ── URL / logging helpers ────────────────────────────────────────────
 
     @classmethod
     def pathlib_url_join(cls, base_url: str, path: str) -> str:
@@ -270,6 +284,8 @@ HTTPX Response Log:
 """.strip()
         return response_log
 
+    # ── Header / request helpers ─────────────────────────────────────────
+
     def _build_headers(
         self,
         *,
@@ -282,10 +298,7 @@ HTTPX Response Log:
         message_id: Optional[str],
         debug_mode: bool,
     ) -> Dict[str, str]:
-        """
-        Build headers for the OpenAI API request, including user and request context.
-
-        """
+        """Build headers for the API request, including user and request context."""
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json, text/event-stream",
@@ -300,7 +313,6 @@ HTTPX Response Log:
         if self.valves.client_id_header_value:
             headers["X-Client-Id"] = self.valves.client_id_header_value
 
-        # pass through some headers from OpenWebUI request to OpenAI API for better context and debugging
         for key in [
             "User-Agent",
             "Referrer",
@@ -345,7 +357,9 @@ HTTPX Response Log:
                 for item in content:
                     if not isinstance(item, dict):
                         continue
-                    if item.get("type") == "text" and isinstance(item.get("text"), str):
+                    if item.get("type") == "text" and isinstance(
+                        item.get("text"), str
+                    ):
                         return cast(str, item["text"])
             if isinstance(content, dict):
                 text = content.get("text")
@@ -379,34 +393,140 @@ HTTPX Response Log:
             if info and isinstance(info, dict) and info.get("location"):
                 yield f"Location: {type(info['location']).__name__} {info['location']}\n"
 
-    async def _stream_openai_response(
+    # ── Completions → Responses API body transformation ──────────────────
+
+    @staticmethod
+    def _transform_to_responses_body(
+        body: Dict[str, Any],
+        *,
+        store: bool = False,
+        previous_response_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Transform a Chat Completions request body into Responses API format.
+
+        Mapping:
+        - ``messages`` → ``input`` (with content block type changes)
+        - System messages → ``instructions``
+        - ``max_tokens`` → ``max_output_tokens``
+        - ``reasoning_effort`` → ``reasoning.effort``
+        - Unsupported fields are dropped
+        """
+        messages: List[Dict[str, Any]] = body.get("messages", [])
+
+        # Extract system/instructions
+        instructions: Optional[str] = None
+        for msg in messages:
+            if msg.get("role") == "system":
+                content = msg.get("content", "")
+                if isinstance(content, str):
+                    instructions = content
+                break
+
+        # Build input array
+        input_items: List[Dict[str, Any]] = []
+        for msg in messages:
+            role = msg.get("role")
+            raw_content = msg.get("content", "")
+
+            if role == "system":
+                continue
+
+            if role == "user":
+                content_blocks = raw_content
+                if isinstance(content_blocks, str):
+                    content_blocks = [{"type": "input_text", "text": content_blocks}]
+                elif isinstance(content_blocks, list):
+                    transformed: List[Dict[str, Any]] = []
+                    for block in content_blocks:
+                        if not isinstance(block, dict):
+                            continue
+                        block_type = block.get("type", "")
+                        if block_type == "text":
+                            transformed.append(
+                                {"type": "input_text", "text": block.get("text", "")}
+                            )
+                        elif block_type == "image_url":
+                            transformed.append(
+                                {
+                                    "type": "input_image",
+                                    "image_url": block.get("image_url", {}).get(
+                                        "url", ""
+                                    ),
+                                }
+                            )
+                        else:
+                            transformed.append(block)
+                    content_blocks = transformed
+                input_items.append({"role": "user", "content": content_blocks})
+
+            elif role == "assistant":
+                if isinstance(raw_content, str) and raw_content:
+                    input_items.append(
+                        {
+                            "role": "assistant",
+                            "content": [
+                                {"type": "output_text", "text": raw_content}
+                            ],
+                        }
+                    )
+
+            elif role == "developer":
+                input_items.append({"role": "developer", "content": raw_content})
+
+        # Build the Responses API payload
+        responses_payload: Dict[str, Any] = {
+            "model": body.get("model", ""),
+            "input": input_items,
+            "stream": body.get("stream", False),
+            "store": store,
+        }
+
+        if instructions:
+            responses_payload["instructions"] = instructions
+
+        if previous_response_id:
+            responses_payload["previous_response_id"] = previous_response_id
+            # When chaining via previous_response_id, only send the new user
+            # message(s) — the server already has the conversation history.
+            last_user_items = []
+            for item in reversed(input_items):
+                if item.get("role") == "user":
+                    last_user_items.insert(0, item)
+                    break
+            if last_user_items:
+                responses_payload["input"] = last_user_items
+
+        # Map supported optional parameters
+        if "temperature" in body:
+            responses_payload["temperature"] = body["temperature"]
+        if "top_p" in body:
+            responses_payload["top_p"] = body["top_p"]
+        if "max_tokens" in body:
+            responses_payload["max_output_tokens"] = body["max_tokens"]
+        if "max_output_tokens" in body:
+            responses_payload["max_output_tokens"] = body["max_output_tokens"]
+
+        # reasoning_effort → reasoning.effort
+        effort = body.get("reasoning_effort")
+        if effort:
+            responses_payload["reasoning"] = {"effort": effort}
+
+        return responses_payload
+
+    # ── SSE parsers ──────────────────────────────────────────────────────
+
+    async def _iter_sse_events(
         self,
         response: httpx.Response,
-        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
-        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
-    ) -> AsyncGenerator[str, None]:
+    ) -> AsyncGenerator[Dict[str, Any], None]:
+        """Low-level SSE byte-buffer parser. Yields parsed JSON from ``data:`` lines.
+
+        Shared by both Chat Completions and Responses API streaming paths.
         """
-        Parse OpenAI Chat Completions streaming response and yield text chunks.
-
-        Uses a byte-buffer approach for robust SSE parsing: reads raw chunks
-        and manually splits on newlines. This correctly handles partial frames
-        that may be split across network chunks, unlike aiter_lines() which
-        can mishandle SSE's double-newline delimiters.
-
-        Emits native status updates:
-        - Cancels thinking tasks and emits "Responding…" on first content token
-        - Forwards usage statistics from the final chunk via chat:completion
-
-        Yields plain text content only — OpenWebUI handles SSE wrapping.
-        """
-        first_token_received = False
-        usage: Optional[Dict[str, Any]] = None
-
         buf = bytearray()
         async for chunk in response.aiter_bytes():
             buf.extend(chunk)
             start_idx = 0
-            # Process all complete lines in the buffer
             while True:
                 newline_idx = buf.find(b"\n", start_idx)
                 if newline_idx == -1:
@@ -415,66 +535,141 @@ HTTPX Response Log:
                 line = buf[start_idx:newline_idx].strip()
                 start_idx = newline_idx + 1
 
-                # Skip empty lines and SSE comments (lines starting with ':')
                 if not line or line.startswith(b":"):
                     continue
-
-                # Only process lines with the "data:" prefix
                 if not line.startswith(b"data:"):
                     continue
 
                 data_part = line[5:].strip()
 
-                # End of SSE stream
                 if data_part == b"[DONE]":
-                    # Forward usage stats to OpenWebUI
-                    if usage:
-                        await self._emit_completion(
-                            event_emitter, usage=usage, done=False
-                        )
                     return
 
                 try:
-                    chunk_json = json.loads(data_part.decode("utf-8"))
+                    yield json.loads(data_part.decode("utf-8"))
                 except json.JSONDecodeError as e:
                     logger.warning(
                         f"Failed to parse SSE data: {data_part!r}, error: {e}"
                     )
-                    continue
 
-                # Capture usage from the final chunk (OpenAI includes it
-                # in the last chunk before [DONE] when stream_options.include_usage is set)
-                if "usage" in chunk_json and chunk_json["usage"]:
-                    usage = chunk_json["usage"]
+            if start_idx > 0:
+                del buf[:start_idx]
 
-                # Extract text content from Chat Completions chunk format
-                choices = chunk_json.get("choices")
-                if not choices:
-                    continue
+    async def _stream_chat_completions(
+        self,
+        response: httpx.Response,
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
+    ) -> AsyncGenerator[str, None]:
+        """Parse Chat Completions streaming response (``choices[0].delta.content``)."""
+        first_token_received = False
+        usage: Optional[Dict[str, Any]] = None
 
-                delta = choices[0].get("delta", {})
-                content = delta.get("content")
-                if content:
-                    # On first content token, cancel thinking and show "Responding"
+        async for chunk_json in self._iter_sse_events(response):
+            if "usage" in chunk_json and chunk_json["usage"]:
+                usage = chunk_json["usage"]
+
+            choices = chunk_json.get("choices")
+            if not choices:
+                continue
+
+            delta = choices[0].get("delta", {})
+            content = delta.get("content")
+            if content:
+                if not first_token_received:
+                    first_token_received = True
+                    if thinking_tasks:
+                        self._cancel_thinking(thinking_tasks)
+                    await self._emit_status(event_emitter, "Responding\u2026")
+                yield content
+
+        if usage:
+            await self._emit_completion(event_emitter, usage=usage, done=False)
+
+    async def _stream_responses_api(
+        self,
+        response: httpx.Response,
+        event_emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        thinking_tasks: Optional[List[asyncio.Task[None]]] = None,
+        chat_id: Optional[str] = None,
+    ) -> AsyncGenerator[str, None]:
+        """Parse Responses API streaming events.
+
+        Handles typed SSE events:
+        - ``response.output_text.delta`` → yields text content
+        - ``response.output_item.added`` → emits status for in-progress items
+        - ``response.completed`` → captures response_id and usage
+        """
+        first_token_received = False
+        usage: Optional[Dict[str, Any]] = None
+        response_id: Optional[str] = None
+
+        async for event in self._iter_sse_events(response):
+            etype = event.get("type", "")
+
+            # ── Text delta ──
+            if etype == "response.output_text.delta":
+                delta = event.get("delta", "")
+                if delta:
                     if not first_token_received:
                         first_token_received = True
                         if thinking_tasks:
                             self._cancel_thinking(thinking_tasks)
-                        await self._emit_status(
-                            event_emitter, "Responding\u2026"
-                        )
-                    yield content
+                        await self._emit_status(event_emitter, "Responding\u2026")
+                    yield delta
+                continue
 
-            # Remove processed bytes from buffer
-            if start_idx > 0:
-                del buf[:start_idx]
+            # ── Reasoning summary ──
+            if etype == "response.reasoning_summary_text.done":
+                text = (event.get("text") or "").strip()
+                if text:
+                    await self._emit_status(event_emitter, f"Reasoning: {text[:200]}")
+                continue
+
+            # ── Status for in-progress items ──
+            if etype == "response.output_item.added":
+                item = event.get("item", {})
+                item_type = item.get("type", "")
+                if item_type == "message" and item.get("status") == "in_progress":
+                    await self._emit_status(event_emitter, "Responding\u2026")
+                continue
+
+            # ── Tool/search status ──
+            if etype == "response.output_item.done":
+                item = event.get("item", {})
+                item_type = item.get("type", "")
+                if item_type == "web_search_call":
+                    await self._emit_status(event_emitter, "Searching the web\u2026")
+                elif item_type == "function_call":
+                    name = item.get("name", "tool")
+                    await self._emit_status(
+                        event_emitter, f"Running {name}\u2026"
+                    )
+                continue
+
+            # ── Final response ──
+            if etype == "response.completed":
+                final = event.get("response", {})
+                response_id = final.get("id")
+                usage = final.get("usage")
+                # Store response_id for stateful chaining
+                if chat_id and response_id:
+                    self._response_id_by_chat[chat_id] = response_id
+                break
+
+        if usage:
+            await self._emit_completion(event_emitter, usage=usage, done=False)
+
+    # ── Main pipe method ─────────────────────────────────────────────────
 
     async def pipe(
         self,
         body: Dict[str, Any],
         __request__: Optional[Request] = None,
         __user__: Optional[Dict[str, Any]] = None,
-        __event_emitter__: Optional[Callable[[Dict[str, Any]], Awaitable[None]]] = None,
+        __event_emitter__: Optional[
+            Callable[[Dict[str, Any]], Awaitable[None]]
+        ] = None,
         __event_call__: Optional[
             Callable[[Dict[str, Any]], Awaitable[Dict[str, Any]]]
         ] = None,
@@ -485,16 +680,12 @@ HTTPX Response Log:
         __metadata__: Optional[Dict[str, Any]] = None,
         __files__: Optional[List[str]] = None,
     ) -> AsyncGenerator[str, None]:
-        """
-        Main pipe method supporting both streaming and non-streaming responses.
-
-        IMPORTANT: For streaming, yield plain text chunks or structured data.
-        The OpenWebUI framework handles wrapping in proper SSE format.
-        """
+        """Main pipe method supporting Chat Completions and Responses API modes."""
         if not __oauth_token__ or "access_token" not in __oauth_token__:
             await self._emit_error(
                 __event_emitter__,
-                "Your Auth token has expired. Please logout and login to Aiden to get a new Auth token.",
+                "Your Auth token has expired. Please logout and login to Aiden"
+                " to get a new Auth token.",
             )
             return
 
@@ -503,15 +694,10 @@ HTTPX Response Log:
 
         logger.debug(f"pipe:{__name__}")
         logger.debug(f"body: {body}")
-        logger.debug(f"__request__: {__request__}")
         logger.debug(f"__user__: {__user__}")
-        logger.debug(f"Request URL: {getattr(__request__, 'url', None)}")
 
         if __request__ is None:
             raise ValueError("Request object must be provided.")
-
-        auth_header = __request__.headers.get("Authorization")
-        logger.debug(f"Authorization header: {auth_header if auth_header else 'None'}")
 
         open_api_base_url: Optional[str] = (
             self.valves.OPENAI_API_BASE_URL or self.read_base_url()
@@ -520,14 +706,35 @@ HTTPX Response Log:
             raise RuntimeError(
                 "OpenAI API base URL must be set as an environment variable."
             )
-        logger.debug(f"open_api_base_url: {open_api_base_url}")
 
         model_id = body.get("model", "")
         if "." in model_id:
             model_id = model_id.split(".", 1)[1]
 
-        payload = {**body, "model": model_id}
-        url = self.pathlib_url_join(base_url=open_api_base_url, path="chat/completions")
+        api_mode = self.valves.api_mode
+        is_responses = api_mode in ("responses_stateless", "responses_stateful")
+
+        # Build payload based on API mode
+        if is_responses:
+            is_stateful = api_mode == "responses_stateful"
+            previous_response_id = (
+                self._response_id_by_chat.get(__chat_id__ or "")
+                if is_stateful
+                else None
+            )
+            payload = self._transform_to_responses_body(
+                {**body, "model": model_id},
+                store=is_stateful,
+                previous_response_id=previous_response_id,
+            )
+            url = self.pathlib_url_join(
+                base_url=open_api_base_url, path="responses"
+            )
+        else:
+            payload = {**body, "model": model_id}
+            url = self.pathlib_url_join(
+                base_url=open_api_base_url, path="chat/completions"
+            )
 
         stream: Optional[bool] = self.valves.stream
         if stream is not None:
@@ -557,8 +764,6 @@ HTTPX Response Log:
         ):
             yield debug_line
 
-        # Schedule progressive thinking status indicators while waiting
-        # for the first response token (streaming only)
         thinking_tasks: List[asyncio.Task[None]] = []
         if self.valves.enable_status_indicator and is_streaming:
             thinking_tasks = self._create_thinking_tasks(__event_emitter__)
@@ -568,8 +773,7 @@ HTTPX Response Log:
 
         try:
             logger.debug(
-                f"Calling chat completion url: {url} with payload: {payload}"
-                f" and headers: {__request__.headers}"
+                f"Calling {api_mode} url: {url} with payload: {json.dumps(payload)}"
             )
             async with httpx.AsyncClient() as client:
                 if is_streaming:
@@ -581,8 +785,6 @@ HTTPX Response Log:
                         timeout=self.valves.llm_call_timeout_seconds,
                         follow_redirects=True,
                     ) as response:
-                        # Read the error body before raise_for_status() so
-                        # the error message includes the server's response
                         if response.status_code >= 400:
                             error_body = await response.aread()
                             response_text = error_body.decode(
@@ -592,14 +794,22 @@ HTTPX Response Log:
 
                         content_type = response.headers.get("content-type", "")
                         if "text/event-stream" in content_type:
-                            async for text_chunk in self._stream_openai_response(
-                                response,
-                                event_emitter=__event_emitter__,
-                                thinking_tasks=thinking_tasks,
-                            ):
-                                yield text_chunk
+                            if is_responses:
+                                async for text_chunk in self._stream_responses_api(
+                                    response,
+                                    event_emitter=__event_emitter__,
+                                    thinking_tasks=thinking_tasks,
+                                    chat_id=__chat_id__,
+                                ):
+                                    yield text_chunk
+                            else:
+                                async for text_chunk in self._stream_chat_completions(
+                                    response,
+                                    event_emitter=__event_emitter__,
+                                    thinking_tasks=thinking_tasks,
+                                ):
+                                    yield text_chunk
                         else:
-                            # Non-SSE response — cancel thinking immediately
                             self._cancel_thinking(thinking_tasks)
                             await self._emit_status(
                                 __event_emitter__, "Responding\u2026"
@@ -610,16 +820,26 @@ HTTPX Response Log:
                             )
                             try:
                                 data = json.loads(response_text)
-                                choices = data.get("choices", [])
-                                if choices:
-                                    message = choices[0].get("message", {})
-                                    content = message.get("content", "")
-                                    if content:
-                                        yield content
+                                if is_responses:
+                                    text = self._extract_responses_text(data)
+                                    # Store response_id for stateful chaining
+                                    rid = data.get("id")
+                                    if __chat_id__ and rid:
+                                        self._response_id_by_chat[
+                                            __chat_id__
+                                        ] = rid
+                                    yield text if text else json.dumps(data)
+                                else:
+                                    choices = data.get("choices", [])
+                                    if choices:
+                                        message = choices[0].get("message", {})
+                                        content = message.get("content", "")
+                                        if content:
+                                            yield content
+                                        else:
+                                            yield json.dumps(data)
                                     else:
                                         yield json.dumps(data)
-                                else:
-                                    yield json.dumps(data)
                             except json.JSONDecodeError:
                                 yield response_text
                 else:
@@ -632,7 +852,15 @@ HTTPX Response Log:
                         follow_redirects=True,
                     )
                     response.raise_for_status()
-                    yield json.dumps(response.json())
+                    data = response.json()
+                    if is_responses:
+                        text = self._extract_responses_text(data)
+                        rid = data.get("id")
+                        if __chat_id__ and rid:
+                            self._response_id_by_chat[__chat_id__] = rid
+                        yield text if text else json.dumps(data)
+                    else:
+                        yield json.dumps(data)
 
         except httpx.HTTPStatusError as e:
             error_occurred = True
@@ -669,6 +897,26 @@ HTTPX Response Log:
                     done=True,
                 )
 
+    # ── Responses API helpers ────────────────────────────────────────────
+
+    @staticmethod
+    def _extract_responses_text(data: Dict[str, Any]) -> str:
+        """Extract assistant text from a non-streamed Responses API result.
+
+        The Responses API ``output`` is a list of items.  We concatenate all
+        ``output_text`` blocks from ``message`` items.
+        """
+        parts: List[str] = []
+        for item in data.get("output", []):
+            if item.get("type") != "message":
+                continue
+            for block in item.get("content", []):
+                if block.get("type") == "output_text":
+                    parts.append(block.get("text", ""))
+        return "".join(parts)
+
+    # ── Models list ──────────────────────────────────────────────────────
+
     async def get_models(self) -> List[Dict[str, str]]:
         """Fetches the list of available models from the OpenAI API."""
         open_api_base_url: Optional[str] = (
@@ -690,7 +938,6 @@ HTTPX Response Log:
                 models = response.json().get("data", [])
 
             logger.debug(f"Received models from {model_url}: {models}")
-            # Update cache timestamp
             self.pipelines_last_updated = time.time()
             return [{"id": model["id"], "name": model["id"]} for model in models]
         except httpx.TimeoutException as e:
@@ -702,7 +949,9 @@ HTTPX Response Log:
             )
             return []
         except Exception as e:
-            logger.exception(f"Unexpected error fetching models from {model_url}: {e}")
+            logger.exception(
+                f"Unexpected error fetching models from {model_url}: {e}"
+            )
             return []
 
     async def pipes(self) -> List[Dict[str, str]]:
@@ -710,7 +959,8 @@ HTTPX Response Log:
         cache_expired = (
             self.pipelines is None
             or self.pipelines_last_updated is None
-            or (now - self.pipelines_last_updated) > self.valves.model_cache_ttl_seconds
+            or (now - self.pipelines_last_updated)
+            > self.valves.model_cache_ttl_seconds
         )
         if cache_expired:
             logger.debug("Model cache expired or not set. Fetching models.")
@@ -724,14 +974,12 @@ HTTPX Response Log:
                 if model["id"] in self.valves.restrict_to_model_ids
             ]
 
-        # Always put default_model at the top
         default_model_id = self.valves.default_model
         if default_model_id:
-            # Only insert default_model if it exists in the models list
             if any(m["id"] == default_model_id for m in self.pipelines or []):
-                # Remove any existing entry for default_model
                 models = [m for m in models if m["id"] != default_model_id]
-                # Insert default_model at the top
-                models.insert(0, {"id": default_model_id, "name": default_model_id})
+                models.insert(
+                    0, {"id": default_model_id, "name": default_model_id}
+                )
 
         return models
