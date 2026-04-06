@@ -396,7 +396,10 @@ class Pipe:
                 elapsed = perf_counter() - start_time
                 suffix = f" {cls._format_elapsed_and_tokens(elapsed, usage_collector)}"
                 await emitter(
-                    {"type": "status", "data": {"description": f"{phrase}\u2026{suffix}"}}
+                    {
+                        "type": "status",
+                        "data": {"description": f"{phrase}\u2026{suffix}"},
+                    }
                 )
                 tick += 1
                 if tick % 5 == 0:
@@ -786,9 +789,7 @@ class Pipe:
                 yield content
 
         # Stream exhausted — emit completed immediately (same __anext__ call)
-        await self._finish_stream(
-            emitter, thinking_tasks, start_time, usage_collector
-        )
+        await self._finish_stream(emitter, thinking_tasks, start_time, usage_collector)
 
     async def _stream_responses_api(
         self,
@@ -862,9 +863,7 @@ class Pipe:
                 break
 
         # Stream exhausted — emit completed immediately (same __anext__ call)
-        await self._finish_stream(
-            emitter, thinking_tasks, start_time, usage_collector
-        )
+        await self._finish_stream(emitter, thinking_tasks, start_time, usage_collector)
 
     @staticmethod
     def _merge_usage(total: Dict[str, Any], new: Dict[str, Any]) -> None:
@@ -907,6 +906,9 @@ class Pipe:
         access_token: Optional[str] = __oauth_token__.get("access_token")
         id_token: Optional[str] = __oauth_token__.get("id_token")
 
+        logger.info(
+            f"pipe: __metadata__={json.dumps(__metadata__) if __metadata__ else None}"
+        )
         logger.debug(f"pipe:{__name__}")
         logger.debug(f"body: {body}")
         logger.debug(f"__user__: {__user__}")
@@ -982,12 +984,14 @@ class Pipe:
         total_usage: Dict[str, Any] = {}
 
         # Skip the loading indicator for background tasks (title generation, etc.)
-        is_background_task = bool(
-            __metadata__ and __metadata__.get("task")
-        )
+        is_background_task = bool(__metadata__ and __metadata__.get("task"))
 
         thinking_tasks: List[asyncio.Task[None]] = []
-        if self.valves.enable_status_indicator and is_streaming and not is_background_task:
+        if (
+            self.valves.enable_status_indicator
+            and is_streaming
+            and not is_background_task
+        ):
             thinking_tasks = self._create_thinking_tasks(
                 __event_emitter__,
                 start_time=start_time,
@@ -1121,9 +1125,7 @@ class Pipe:
             if error_occurred:
                 elapsed = perf_counter() - start_time
                 stats = self._format_elapsed_and_tokens(elapsed, total_usage)
-                await self._emit_status(
-                    __event_emitter__, f"Failed {stats}", done=True
-                )
+                await self._emit_status(__event_emitter__, f"Failed {stats}", done=True)
                 await self._emit_completion(
                     __event_emitter__,
                     content="",
