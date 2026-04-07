@@ -161,7 +161,7 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
+#    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
 #    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
