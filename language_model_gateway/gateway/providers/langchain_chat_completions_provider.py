@@ -51,8 +51,11 @@ from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.resource_catalog import ResourceCatalog
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
+from languagemodelcommon.tools.mcp.search_resources_tool import SearchResourcesTool
+from languagemodelcommon.tools.mcp.read_resource_tool import ReadResourceTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
@@ -171,19 +174,22 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         mcp_tool_configs: list[AgentConfig],
         headers: Dict[str, str],
         auth_interceptor: AuthMcpCallInterceptor,
-    ) -> tuple[list[BaseTool], ToolCatalog | None]:
+    ) -> tuple[list[BaseTool], ToolCatalog | None, ResourceCatalog | None]:
         """Replace direct MCP tool loading with meta-discovery tools.
 
-        Builds a ToolCatalog from MCP servers and adds search_tools +
-        call_tool to the tool list. The ToolDiscoveryMiddleware is
-        responsible for injecting category descriptions into the system
-        prompt at model-call time.
+        Builds a ToolCatalog and ResourceCatalog from MCP servers and adds
+        search_tools + call_tool + search_resources + read_resource to the
+        tool list. The ToolDiscoveryMiddleware is responsible for injecting
+        category descriptions into the system prompt at model-call time.
 
         Returns:
-            A tuple of (tools, catalog). The catalog is ``None`` when no
-            categories were registered.
+            A tuple of (tools, tool_catalog, resource_catalog). The catalogs
+            are ``None`` when no categories were registered.
         """
         catalog = self.mcp_tool_provider.discover_tool_catalog(
+            tools=mcp_tool_configs,
+        )
+        resource_catalog = self.mcp_tool_provider.discover_resource_catalog(
             tools=mcp_tool_configs,
         )
 
@@ -205,10 +211,35 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "Tool discovery enabled: %d categories registered",
                 len(categories),
             )
-            return tools, catalog
 
-        logger.warning("Tool discovery enabled but no tools found in catalog")
-        return tools, None
+        # Add resource discovery tools
+        resource_resolver = self.mcp_tool_provider.create_resource_resolver(
+            headers=headers,
+            auth_interceptor=auth_interceptor,
+        )
+        tools.append(
+            SearchResourcesTool(
+                catalog=resource_catalog,
+                resolver=resource_resolver,
+            )
+        )
+        tools.append(
+            ReadResourceTool(
+                catalog=resource_catalog,
+                mcp_tool_provider=self.mcp_tool_provider,
+                auth_interceptor=auth_interceptor,
+            )
+        )
+        logger.info(
+            "Resource discovery enabled: %d servers registered",
+            len(resource_catalog.get_categories()),
+        )
+
+        if not categories:
+            logger.warning("Tool discovery enabled but no tools found in catalog")
+            return tools, None, resource_catalog
+
+        return tools, catalog, resource_catalog
 
     @override
     async def chat_completions(
@@ -255,8 +286,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
         # add MCP tools — either via meta-discovery or direct loading
         tool_catalog: ToolCatalog | None = None
+        resource_catalog: ResourceCatalog | None = None
         if model_config.use_tool_discovery:
-            tools, tool_catalog = self._add_discovery_tools(
+            tools, tool_catalog, resource_catalog = self._add_discovery_tools(
                 tools=list(tools),
                 mcp_tool_configs=mcp_tool_configs,
                 headers=headers,
@@ -321,6 +353,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 else None,
                 skill_loader=self.skill_loader,
                 tool_catalog=tool_catalog,
+                resource_catalog=resource_catalog,
             )
             request_id: uuid.UUID = uuid.uuid4()
 
