@@ -35,6 +35,7 @@ services:
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
       SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
       NUM_WORKERS: 1
@@ -141,9 +142,9 @@ services:
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
-    - ./language-model-gateway-configs/chat_completions:/usr/src/github_config_cache/chat_completions
-    - ./language-model-gateway-configs/mcp:/usr/src/github_config_cache/mcp
-    - ./language-model-gateway-configs/skills:/usr/src/github_config_cache/skills
+    - ./language-model-gateway-configs/chat_completions:/usr/src/github_config_cache/configs/chat_completions
+    - ./language-model-gateway-configs/mcp:/usr/src/github_config_cache/configs/mcp
+    - ./language-model-gateway-configs/skills:/usr/src/github_config_cache/configs/skills
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/github_config_cache/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/github_config_cache/mcp

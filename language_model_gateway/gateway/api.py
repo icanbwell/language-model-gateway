@@ -89,8 +89,8 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
 
-    except Exception as e:
-        logger.exception(e, stack_info=True)
+    except Exception:
+        logger.exception("Application initialization failed for worker %s", worker_id)
         raise
 
     finally:
@@ -98,9 +98,8 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
             logger.info(f"Starting application shutdown for worker {worker_id}...")
             await repo_manager.stop()
             logger.info("Application shutdown completed")
-        except Exception as e:
-            logger.exception(e, stack_info=True)
-            raise
+        except Exception:
+            logger.exception("Application shutdown failed for worker %s", worker_id)
 
 
 def create_app() -> FastAPI:
