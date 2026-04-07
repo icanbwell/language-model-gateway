@@ -23,17 +23,21 @@ services:
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
-      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
-      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
-      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/mcp/.mcp.json"
+#      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
+#      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
+#      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/mcp"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
-      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/chat_completions/prompts"
+#      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/chat_completions/prompts"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
-#      MODELS_OFFICIAL_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/official"
-#      MODELS_TESTING_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/testing"
+      # Paths to get from github
+      MODELS_OFFICIAL_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/official?ref=main"
+      MODELS_TESTING_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/testing?ref=main"
+      MCP_JSON_PATH: "github://icanbwell/language-model-gateway-configuration/configs/mcp?ref=main"
+      PROMPT_LIBRARY_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/prompts?ref=main"
+      
       MODELS_PATH_BACKUP: "/usr/src/language-model-gateway-configs/chat_completions"
       CONFIG_CACHE_TIMEOUT_SECONDS: 120
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
@@ -143,11 +147,11 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
-    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+#    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-    - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway-configs/mcp
+#    - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway-configs/mcp
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
-    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
+#    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
 #    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
@@ -157,7 +161,7 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
+    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
 #    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
