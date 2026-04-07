@@ -176,6 +176,7 @@ RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
 
 # Create the folder where we will store generated images
 RUN mkdir -p ${PROJECT_DIR}/image_generation
+RUN mkdir -p ${PROJECT_DIR}/github_config_cache
 
 # Install the dependencies using pipenv in the development environment
 RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"

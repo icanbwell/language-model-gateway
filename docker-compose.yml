@@ -34,12 +34,13 @@ services:
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
       # Download the entire config repo as a zipball at startup and refresh every CONFIG_CACHE_TIMEOUT_SECONDS
       GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
-      GITHUB_CACHE_FOLDER: "/usr/src/language-model-gateway-configs"
+      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
-      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/official"
-      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/testing"
-      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/configs/mcp"
-      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/prompts"
+      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
+      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
+      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
+      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
+      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
       CONFIG_CACHE_TIMEOUT_SECONDS: 3600
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -119,7 +120,6 @@ services:
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
       WRITE_TOOL_OUTPUT_TO_FILE: 1
-      SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/configs/skills"
       AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100
