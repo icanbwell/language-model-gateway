@@ -78,7 +78,7 @@ ContainerRegistry.set_default(
 
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
-    worker_id = id(app)
+    worker_id = id(app1)
     repo_manager = GithubConfigRepoManager()
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
