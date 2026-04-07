@@ -37,8 +37,6 @@ services:
       MODELS_TESTING_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/testing?ref=main"
       MCP_JSON_PATH: "github://icanbwell/language-model-gateway-configuration/configs/mcp?ref=main"
       PROMPT_LIBRARY_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/prompts?ref=main"
-      
-      MODELS_PATH_BACKUP: "/usr/src/language-model-gateway-configs/chat_completions"
       CONFIG_CACHE_TIMEOUT_SECONDS: 120
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
