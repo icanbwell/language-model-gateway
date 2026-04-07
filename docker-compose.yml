@@ -34,7 +34,7 @@ services:
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
       SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
-      CONFIG_CACHE_TIMEOUT_SECONDS: 3600
+      CONFIG_CACHE_TIMEOUT_SECONDS: 10
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
       NUM_WORKERS: 1
@@ -140,12 +140,14 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
+    # uncomment the below to get configs from local folders instead of github
     - ./language-model-gateway-configs/chat_completions:/usr/src/github_config_cache/chat_completions
-#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
     - ./language-model-gateway-configs/mcp:/usr/src/github_config_cache/mcp
-#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
     - ./language-model-gateway-configs/skills:/usr/src/github_config_cache/skills
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
+    # uncomment the below and comment the above to get configs from a mounted folder instead of github (for testing)
+#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/github_config_cache/chat_completions
+#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/github_config_cache/mcp
+#    - ../language-model-gateway-configuration/configs/skills:/usr/src/github_config_cache/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
