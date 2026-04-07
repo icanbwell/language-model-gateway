@@ -1,19 +1,21 @@
 import httpx
 import pytest
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types import ImagesResponse, Image
 
-from language_model_gateway.gateway.image_generation.image_generator_factory import (
+from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
-from tests.gateway.mocks.mock_image_generator import MockImageGenerator
-from tests.gateway.mocks.mock_image_generator_factory import MockImageGeneratorFactory
+from languagemodelcommon.mocks.mock_image_generator import MockImageGenerator
+from languagemodelcommon.mocks.mock_image_generator_factory import (
+    MockImageGeneratorFactory,
+)
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
 
 

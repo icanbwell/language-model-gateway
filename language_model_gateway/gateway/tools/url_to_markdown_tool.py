@@ -4,12 +4,13 @@ from typing import Type, Literal, Tuple, Optional, override
 
 import httpx
 from httpx import Headers
+from languagemodelcommon.markdown.html_to_markdown_converter import (
+    HtmlToMarkdownConverter,
+)
 from pydantic import BaseModel, Field
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
-from language_model_gateway.gateway.utilities.html_to_markdown_converter import (
-    HtmlToMarkdownConverter,
-)
+
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)

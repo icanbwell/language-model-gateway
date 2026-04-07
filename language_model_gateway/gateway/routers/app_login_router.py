@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request, par
 from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
 from oidcauthlib.auth.auth_helper import AuthHelper
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.models.app_login_submission import (

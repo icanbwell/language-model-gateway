@@ -3,12 +3,12 @@ from typing import Dict, Any, override
 from oidcauthlib.auth.models.auth import AuthInformation
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from tests.gateway.mocks.mock_chat_response import MockChatResponseProtocol

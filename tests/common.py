@@ -1,7 +1,7 @@
 import uuid
 from typing import override
 
-from oidcauthlib.container.simple_container import SimpleContainer
+from simple_container.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
 )

@@ -3,8 +3,8 @@ from typing import AsyncGenerator
 import httpx
 import pytest
 from asgi_lifespan import LifespanManager
-from oidcauthlib.container.container_registry import ContainerRegistry
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.container_registry import ContainerRegistry
+from simple_container.container.interfaces import IContainer
 
 from language_model_gateway.gateway.api import app
 from tests.common import create_test_container

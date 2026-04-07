@@ -2,8 +2,8 @@ from typing import override
 
 from langchain_core.language_models import BaseChatModel
 
-from language_model_gateway.configs.config_schema import ChatModelConfig
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
+from languagemodelcommon.models.model_factory import ModelFactory
 from tests.gateway.mocks.mock_get_model_protocol import MockGetModelProtocol
 
 

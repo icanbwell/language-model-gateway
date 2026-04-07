@@ -1,4 +1,4 @@
-exclude: (^.idea/|^docsrc|^docs)
+exclude: (^.idea/|^docsrc|^docs|^language-model-gateway-configs/skills/skill-creator/.*\.py$)
 
 repos:
   # Pre-commit hooks for basic checks
@@ -132,8 +132,8 @@ repos:
         name: "taskfile · Validate Task configuration"
       - id: check-jsonschema
         name: "Validate language-model-gateway-configs against schema"
-        files: ^language-model-gateway-configs/.*\.json$
+        files: ^language-model-gateway-configs/chat_completions/(official|testing)/.*\.json$
         args:
           - "--schemafile"
-          - "language_model_gateway/configs/config_schema.json"
+          - "language_model_gateway/config_schema.json"
           - "--verbose"

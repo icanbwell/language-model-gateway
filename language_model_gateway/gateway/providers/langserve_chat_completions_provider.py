@@ -20,11 +20,11 @@
 # from openai.types.chat.chat_completion_chunk import ChoiceDelta, Choice as ChunkChoice
 # from starlette.responses import StreamingResponse, JSONResponse
 #
-# from language_model_gateway.configs.config_schema import ChatModelConfig
+# from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 # from language_model_gateway.gateway.providers.base_chat_completions_provider import (
 #     BaseChatCompletionsProvider,
 # )
-# from language_model_gateway.gateway.schema.openai.completions import ChatRequest
+# from languagemodelcommon.schema.openai.completions import ChatRequest
 #
 # logger = logging.getLogger(__file__)
 #

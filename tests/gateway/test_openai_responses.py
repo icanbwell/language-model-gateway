@@ -5,13 +5,13 @@ import pytest
 from openai import AsyncOpenAI
 from openai.types.responses import EasyInputMessageParam, Response, ResponseInputParam
 
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
 from tests.gateway.mocks.mock_chat_model import MockChatModel
 from tests.gateway.mocks.mock_model_factory import MockModelFactory
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 
 from tests.gateway.mocks.mock_responses_model import MockResponsesModel
 

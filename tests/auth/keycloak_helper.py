@@ -1,7 +1,7 @@
 import logging
 import os
 
-from language_model_gateway.gateway.auth.authenticator.oauth_authenticator import (
+from languagemodelcommon.auth.authenticator.oauth_authenticator import (
     OAuthAuthenticator,
 )
 from oidcauthlib.auth.models.token import Token

@@ -9,6 +9,16 @@ from typing import (
     ContextManager,
     override,
 )
+
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
+from langchain_ai_skills_framework.tools.run_python_script_tool import (
+    RunPythonScriptTool,
+)
+from languagemodelcommon.utilities.tool_display_name_mapper import (
+    ToolDisplayNameMapper,
+)
 from starlette.responses import StreamingResponse, JSONResponse
 
 from langchain_core.language_models import BaseChatModel
@@ -16,30 +26,36 @@ from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
 
-from language_model_gateway.configs.config_schema import ChatModelConfig, AgentConfig
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    AgentConfig,
+)
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.token_reader import TokenReader
 
-from language_model_gateway.gateway.converters.langgraph_to_openai_converter import (
+from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
-from language_model_gateway.gateway.converters.my_messages_state import MyMessagesState
-from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.persistence.persistence_factory import (
+from languagemodelcommon.state.messages_state import MyMessagesState
+from languagemodelcommon.models.model_factory import ModelFactory
+from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.structures.request_information import (
-    RequestInformation,
+from languagemodelcommon.mcp.interceptors.auth import (
+    AuthMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
+from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
+from languagemodelcommon.mcp.tool_catalog import ToolCatalog
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
@@ -47,6 +63,7 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 )
 from langgraph.store.base import BaseStore
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from languagemodelcommon.utilities.request_information import RequestInformation
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
@@ -64,6 +81,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         pass_through_token_manager: PassThroughTokenManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
+        skill_loader: SkillLoaderProtocol,
+        tool_display_name_mapper: ToolDisplayNameMapper,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -129,6 +148,68 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
             )
 
+        self.skill_loader: SkillLoaderProtocol = skill_loader
+        if self.skill_loader is None:
+            raise ValueError("skill_loader must not be None")
+        if not isinstance(self.skill_loader, SkillLoaderProtocol):
+            raise TypeError(
+                f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
+            )
+
+        self.tool_display_name_mapper: ToolDisplayNameMapper = tool_display_name_mapper
+        if self.tool_display_name_mapper is None:
+            raise ValueError("tool_display_name_mapper must not be None")
+        if not isinstance(self.tool_display_name_mapper, ToolDisplayNameMapper):
+            raise TypeError(
+                f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
+            )
+
+    def _add_discovery_tools(
+        self,
+        *,
+        tools: list[BaseTool],
+        mcp_tool_configs: list[AgentConfig],
+        headers: Dict[str, str],
+        auth_interceptor: AuthMcpCallInterceptor,
+    ) -> tuple[list[BaseTool], ToolCatalog | None]:
+        """Replace direct MCP tool loading with meta-discovery tools.
+
+        Builds a ToolCatalog from MCP servers and adds search_tools +
+        call_tool to the tool list. The ToolDiscoveryMiddleware is
+        responsible for injecting category descriptions into the system
+        prompt at model-call time.
+
+        Returns:
+            A tuple of (tools, catalog). The catalog is ``None`` when no
+            categories were registered.
+        """
+        catalog = self.mcp_tool_provider.discover_tool_catalog(
+            tools=mcp_tool_configs,
+        )
+
+        categories = catalog.get_categories()
+        if categories:
+            resolver = self.mcp_tool_provider.create_tool_resolver(
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
+            tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
+            tools.append(
+                CallToolTool(
+                    catalog=catalog,
+                    mcp_tool_provider=self.mcp_tool_provider,
+                    auth_interceptor=auth_interceptor,
+                )
+            )
+            logger.info(
+                "Tool discovery enabled: %d categories registered",
+                len(categories),
+            )
+            return tools, catalog
+
+        logger.warning("Tool discovery enabled but no tools found in catalog")
+        return tools, None
+
     @override
     async def chat_completions(
         self,
@@ -158,31 +239,63 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             else []
         )
 
-        # Load MCP tools if they are enabled
-        await self.mcp_tool_provider.load_async()
-        await self.pass_through_token_manager.check_tokens_are_valid_for_tools(
+        # Create a per-request auth interceptor so concurrent requests
+        # don't share mutable auth state
+        mcp_tool_configs: list[AgentConfig] = (
+            [t for t in model_config.get_agents()]
+            if model_config.get_agents() is not None
+            else []
+        )
+        auth_interceptor = AuthMcpCallInterceptor(
+            pass_through_token_manager=self.pass_through_token_manager,
+            tool_configs=mcp_tool_configs,
             auth_information=auth_information,
             headers=headers,
-            model_config=model_config,
         )
 
-        # add MCP tools
-        tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
-            tools=[t for t in model_config.get_agents()],
-            headers=headers,
-        )
+        # add MCP tools — either via meta-discovery or direct loading
+        tool_catalog: ToolCatalog | None = None
+        if model_config.use_tool_discovery:
+            tools, tool_catalog = self._add_discovery_tools(
+                tools=list(tools),
+                mcp_tool_configs=mcp_tool_configs,
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
+        else:
+            tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
+                tools=mcp_tool_configs,
+                headers=headers,
+                auth_interceptor=auth_interceptor,
+            )
+
+        # add the skills tools
+        tools += self.skill_loader.get_tools()
+
+        if self.environment_variables.enable_code_interpreter:
+            tools += [RunPythonScriptTool()]
 
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
         if tool_configs_from_request:
-            tools_from_request: Sequence[BaseTool] = (
-                await self.mcp_tool_provider.get_tools_async(
-                    tools=tool_configs_from_request, headers=headers
+            if model_config.use_tool_discovery:
+                # In discovery mode, add request tools to the catalog too
+                catalog = self.mcp_tool_provider.discover_tool_catalog(
+                    tools=tool_configs_from_request,
                 )
-                if tool_configs_from_request is not None
-                else []
-            )
-            tools = [t for t in tools] + [t for t in tools_from_request]
+                logger.info(
+                    "Added %d request tools to discovery catalog",
+                    catalog.tool_count,
+                )
+            else:
+                tools_from_request: Sequence[
+                    BaseTool
+                ] = await self.mcp_tool_provider.get_tools_async(
+                    tools=tool_configs_from_request,
+                    headers=headers,
+                    auth_interceptor=auth_interceptor,
+                )
+                tools = list(tools) + list(tools_from_request)
 
         # Use context managers only for the duration of streaming
         # we can't use async with because we need to return the StreamingResponse
@@ -206,6 +319,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 checkpointer=checkpointer
                 if self.environment_variables.enable_llm_checkpointer
                 else None,
+                skill_loader=self.skill_loader,
+                tool_catalog=tool_catalog,
             )
             request_id: uuid.UUID = uuid.uuid4()
 
@@ -225,7 +340,10 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     if conversation_thread_id
                     else str(request_id),
                     headers=headers,
+                    tool_display_name_mapper=self.tool_display_name_mapper,
                 ),
+                config=None,
+                state=None,
             )
             # If result is a StreamingResponse, wrap the generator so context managers stay open
             if isinstance(result, StreamingResponse):

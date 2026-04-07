@@ -1,6 +1,6 @@
 import httpx
 import pytest
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI, AsyncStream
 from openai.types.responses import (
     ResponseStreamEvent,
@@ -10,7 +10,7 @@ from openai.types.responses import (
     ResponseInputContentParam,
 )
 
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )

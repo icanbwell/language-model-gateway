@@ -3,10 +3,10 @@ import logging
 from langchain_core.messages import AIMessage
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
@@ -51,7 +51,10 @@ class SystemCommandManager:
         referring_subject: str,
         auth_provider: str | None,
     ) -> StreamingResponse | JSONResponse | None:
-        last_message_content: str | None = chat_request_wrapper.messages[-1].content
+        raw_content = chat_request_wrapper.messages[-1].content
+        last_message_content: str | None = (
+            raw_content if isinstance(raw_content, str) else None
+        )
 
         if last_message_content is not None:
             system_commands: list[str] = self.environment_variables.system_commands

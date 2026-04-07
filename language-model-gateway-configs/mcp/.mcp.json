@@ -1,0 +1,129 @@
+{
+  "$schema": "./mcp_config_schema.json",
+  "mcpServers": {
+    "atlassian": {
+      "displayName": "Atlassian Confluence & Jira",
+      "oauth": {
+        "clientId": "${ATLASSIAN_OAUTH_CLIENT_ID:-}",
+        "clientMetadata": {
+          "clientName": "${AIDEN_OAUTH_CLIENT_NAME}",
+          "clientUri": "https://www.icanbwell.com"
+        },
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+    "fhir-server-client-sandbox": {
+      "displayName": "b.well FHIR Client Sandbox",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oari2d229YaZYiZD697",
+        "displayName": "Okta FHIR Client Sandbox",
+        "scopes": [
+          "openid",
+          "profile",
+          "email",
+          "groups"
+        ]
+      },
+      "type": "http",
+      "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
+    },
+    "fhir-server-dev": {
+      "displayName": "b.well FHIR Dev",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oarf29h6x2DaWCkT697",
+        "displayName": "Okta FHIR Dev",
+        "scopes": [
+          "openid",
+          "profile",
+          "email",
+          "groups"
+        ]
+      },
+      "type": "http",
+      "url": "https://mcpfhiragent.dev.icanbwell.com/"
+    },
+    "fhir-server-prod": {
+      "displayName": "b.well FHIR Production",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oargxz9fkFFcSM38697",
+        "displayName": "Okta FHIR Production",
+        "scopes": [
+          "openid",
+          "profile",
+          "email",
+          "groups"
+        ]
+      },
+      "type": "http",
+      "url": "https://mcpfhiragent.prod.icanbwell.com/"
+    },
+    "fhir-server-staging": {
+      "displayName": "b.well FHIR Staging",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oarhz13sa21nfecS697",
+        "displayName": "Okta FHIR Staging",
+        "scopes": [
+          "openid",
+          "profile",
+          "email",
+          "groups"
+        ]
+      },
+      "type": "http",
+      "url": "https://mcpfhiragent.staging.icanbwell.com/"
+    },
+    "github": {
+      "displayName": "GitHub",
+      "oauth": {
+        "authorizationUrl": "https://github.com/login/oauth/authorize",
+        "clientId": "Iv23liP9XLkcIxslopoA",
+        "clientSecret": "${GITHUB_CLIENT_SECRET:-}",
+        "displayName": "Okta b.well",
+        "tokenUrl": "https://github.com/login/oauth/access_token"
+      },
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "google-drive": {
+      "displayName": "Google Drive",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/google_drive/"
+    },
+    "google-search": {
+      "displayName": "Google Search",
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/google_search/"
+    },
+    "groundcover": {
+      "displayName": "Groundcover",
+      "headers": {
+        "Authorization": "Bearer ${GROUNDCOVER_API_KEY:-}",
+        "X-Backend-Id": "groundcover",
+        "X-Tenant-UUID": "6310efb6-d0c9-4751-8cec-70bc0f0a599f"
+      },
+      "type": "http",
+      "url": "https://mcp.groundcover.com/api/mcp"
+    },
+    "provider-search": {
+      "displayName": "Provider Search",
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/provider_search/"
+    },
+    "url-to-markdown": {
+      "displayName": "URL to Markdown",
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/url_to_markdown/"
+    }
+  }
+}

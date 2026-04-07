@@ -24,11 +24,16 @@ create-docker-network: ## creates the docker network
 		language-model-gateway_web >/dev/null
 
 .PHONY:build
-build: create-docker-network ## Builds the docker for dev
+build: down create-docker-network ## Builds the docker for dev
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose.yml \
 	-f docker-compose-openwebui.yml \
+	-f docker-compose-mcp-server-gateway.yml \
+	-f docker-compose-mongo.yml \
+	-f docker-compose-fhir.yml \
+	-f docker-compose-embedding.yml \
+	-f docker-compose-mcp-fhir-agent.yml \
 	 build --parallel;
 
 .PHONY: up
@@ -78,7 +83,9 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	-f docker-compose-otel.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-open-webui-1 || exit 1 && \
-	make insert-admin-user && make insert-admin-user-2 && make import-open-webui-pipe
+	make insert-admin-user \
+	&& make insert-admin-user-2 \
+	&& make import-open-webui-pipe
 	@echo "======== Services are up and running ========"
 	@echo OpenWebUI: https://open-webui.localhost
 	@echo Click 'Continue with Keycloak' to login
@@ -292,6 +299,23 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
                --api-key 'sk-my-api-key' \
                --json 'language_model_gateway_pipe.json' \
                --file 'language_model_gateway_pipe.py'"
+
+.PHONY: configure-openai-connection
+configure-openai-connection: ## Configurates OpenWebUI to use direct connection
+	docker exec -i language-model-gateway-open-webui-db-1 psql -U myapp_user -d myapp_db -p 5431 -c \
+	"DELETE FROM public.function WHERE id='language_model_gateway';"
+	docker run --rm -it --name openid-function-creator \
+        --network language-model-gateway_web \
+        --mount type=bind,source="${PWD}"/openwebui-config/functions,target=/app \
+        python:3.12-alpine \
+        sh -c "pip install --root-user-action=ignore --upgrade pip && \
+               pip install --root-user-action=ignore authlib requests && \
+               cd /app && \
+               python3 configure_openai_connection.py \
+               --url 'http://language-model-gateway-open-webui-1:8080' \
+               --api-key 'sk-my-api-key' \
+               --connection-url='http://language-model-gateway:5000/api/v1' \
+               "
 
 .PHONY: fix-script-permissions
 fix-script-permissions:

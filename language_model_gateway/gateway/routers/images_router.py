@@ -7,13 +7,13 @@ from fastapi import params
 from starlette.requests import Request
 from starlette.responses import Response, StreamingResponse
 
-from language_model_gateway.gateway.file_managers.file_manager import FileManager
-from language_model_gateway.gateway.file_managers.file_manager_factory import (
+from languagemodelcommon.file_managers.file_manager import FileManager
+from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
-from language_model_gateway.gateway.utilities.url_parser import UrlParser
-from oidcauthlib.container.inject import Inject
+from languagemodelcommon.utilities.url_parser import UrlParser
+from simple_container.container.inject import Inject
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["IMAGE_GENERATION"])

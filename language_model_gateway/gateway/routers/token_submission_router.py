@@ -6,7 +6,7 @@ from typing import Annotated, Sequence
 from fastapi import APIRouter, Depends, Form, Query, params, HTTPException
 from fastapi.responses import FileResponse, Response
 from oidcauthlib.auth.auth_helper import AuthHelper
-from oidcauthlib.container.inject import Inject
+from simple_container.container.inject import Inject
 
 from language_model_gateway.gateway.managers.token_submission_manager import (
     TokenSubmissionManager,

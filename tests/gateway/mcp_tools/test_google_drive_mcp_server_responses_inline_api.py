@@ -4,7 +4,7 @@ from typing import cast
 import httpx
 import pytest
 from oidcauthlib.auth.models.token import Token
-from oidcauthlib.container.interfaces import IContainer
+from simple_container.container.interfaces import IContainer
 from openai import AsyncOpenAI
 from openai.types.responses import (
     EasyInputMessageParam,
@@ -13,12 +13,12 @@ from openai.types.responses import (
 )
 from openai.types.responses.tool_param import Mcp
 
-from language_model_gateway.configs.config_schema import (
+from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
 )
-from language_model_gateway.gateway.models.model_factory import ModelFactory
-from language_model_gateway.gateway.utilities.cache.config_expiring_cache import (
+from languagemodelcommon.models.model_factory import ModelFactory
+from languagemodelcommon.utilities.cache.config_expiring_cache import (
     ConfigExpiringCache,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (

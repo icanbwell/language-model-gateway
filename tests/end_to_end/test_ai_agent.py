@@ -3,6 +3,7 @@ from typing import Any, Dict, List
 
 import httpx
 import pytest
+from languagemodelcommon.mocks.mock_http_client_factory import MockHttpClientFactory
 from openai.types.chat import (
     ChatCompletionMessageParam,
     ChatCompletionUserMessageParam,
@@ -12,23 +13,25 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion import Choice
 from starlette.responses import StreamingResponse, JSONResponse
 
-from language_model_gateway.configs.config_schema import ChatModelConfig, ModelConfig
+from languagemodelcommon.configs.schemas.config_schema import (
+    ChatModelConfig,
+    ModelConfig,
+)
 from oidcauthlib.auth.models.auth import AuthInformation
-from language_model_gateway.gateway.http.http_client_factory import HttpClientFactory
+from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.providers.openai_chat_completions_provider import (
     OpenAiChatCompletionsProvider,
 )
-from language_model_gateway.gateway.schema.openai.completions import ChatRequest
-from language_model_gateway.gateway.structures.openai.request.chat_completion_api_request_wrapper import (
+from languagemodelcommon.schema.openai.completions import ChatRequest
+from languagemodelcommon.structures.openai.request.chat_completion_api_request_wrapper import (
     ChatCompletionApiRequestWrapper,
 )
-from language_model_gateway.gateway.structures.openai.request.chat_request_wrapper import (
+from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
-from tests.gateway.mocks.mock_http_client_factory import MockHttpClientFactory
 from tests.gateway.mocks.mock_open_ai_completions_provider import (
     MockOpenAiChatCompletionsProvider,
 )
@@ -49,7 +52,8 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
         chat_request=ChatRequest(
             model=model,
             messages=chat_history + [user_message],
-        )
+        ),
+        enable_debug_logging=False,
     )
 
     provider: OpenAiChatCompletionsProvider

@@ -8,11 +8,11 @@ from starlette.requests import Request
 from fastapi import params
 from starlette.responses import JSONResponse, StreamingResponse
 
-from oidcauthlib.container.inject import Inject
-from language_model_gateway.gateway.managers.image_generation_manager import (
+from simple_container.container.inject import Inject
+from languagemodelcommon.image_generation.managers.image_generation_manager import (
     ImageGenerationManager,
 )
-from language_model_gateway.gateway.schema.openai.image_generation import (
+from languagemodelcommon.schema.openai.image_generation import (
     ImageGenerationRequest,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
