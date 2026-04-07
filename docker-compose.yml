@@ -25,6 +25,10 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
+      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/mcp/.mcp.json"
+      MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
+#      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
+      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/chat_completions/prompts"
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
@@ -37,8 +41,8 @@ services:
       NUM_WORKERS: 1
       AWS_REGION: 'us-east-1'
       HELP_KEYWORDS: "help;/help;aid"
-      LOG_INPUT_AND_OUTPUT: 1
-      RETURN_RAW_TOOL_OUTPUT: 1
+      LOG_INPUT_AND_OUTPUT: 0
+      RETURN_RAW_TOOL_OUTPUT: 0
       DEFAULT_MODEL_PROVIDER: "bedrock"
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
@@ -49,10 +53,10 @@ services:
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
-      # These define the connection to the identity provider for JWT validation
-      # This lists the audiences that are allowed to access the API
-      # Below we specify the client id, client secret and well-known URI for each client
-      AUTH_PROVIDERS: "client1,client3,oktafhirdev,apigatewaydev,oktafhirclientsandbox,oktafhirstaging,oktafhirprod,apigatewayprod,oktaaiden"
+      # Inbound auth providers for JWT validation of gateway callers.
+      # Outbound providers (for MCP servers and models) are defined inline
+      # in .mcp.json mcpServers[x].oauth and model config oauth_providers.
+      AUTH_PROVIDERS: "client1,client3,oktaaiden"
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -75,50 +79,6 @@ services:
       AUTH_CLIENT_ID_OKTAAIDEN: "0oa11g45c90Fqbgzz698"
       AUTH_WELL_KNOWN_URI_OKTAAIDEN: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_SCOPE_OKTAAIDEN: "openid email profile groups"
-      # Okta FHIR Dev
-      AUTH_ISSUER_OKTAFHIRDEV: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRDEV: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRDEV: "Okta FHIR Dev"
-      AUTH_CLIENT_ID_OKTAFHIRDEV: "0oarf29h6x2DaWCkT697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRDEV: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRDEV: "openid email profile groups"
-      AUTH_EXTRA_INFO_OKTAFHIRDEV: '{"api_gateway_base_url":"https://api.dev.icanbwell.com","client_keys":{"dev": "eyJyIjoiY2Zoa2h3ODZvNHdoNWFiOW9kaHgiLCJlbnYiOiJkZXYiLCJraWQiOiJid2VsbF9kZW1vLWRldiJ9"}}'
-      # API Gateway Dev
-      AUTH_ISSUER_APIGATEWAYDEV: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_o71QMdxTG"  # Expected audience claim for the API Gateway provider.
-      AUTH_AUDIENCE_APIGATEWAYDEV: "3i43562q02ghinf28av0nqv6di"  # OAuth client id for API Gateway tokens.
-      AUTH_CLIENT_ID_APIGATEWAYDEV: "3i43562q02ghinf28av0nqv6di"  # OIDC discovery document for API Gateway tokens.
-      AUTH_WELL_KNOWN_URI_APIGATEWAYDEV: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_o71QMdxTG/.well-known/openid-configuration"  # Friendly display name shown for the API Gateway provider.
-      AUTH_FRIENDLY_NAME_APIGATEWAYDEV: "b.well API Gateway Dev"  # Scope set requested from the API Gateway provider.
-      AUTH_SCOPE_APIGATEWAYDEV: "openid email profile"
-      # Okta FHIR Client Sandbox
-      AUTH_ISSUER_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRCLIENTSANDBOX: "Okta FHIR Client Sandbox"
-      AUTH_CLIENT_ID_OKTAFHIRCLIENTSANDBOX: "0oari2d229YaZYiZD697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRCLIENTSANDBOX: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRCLIENTSANDBOX: "openid email profile groups"
-      # Okta FHIR Client Staging
-      AUTH_ISSUER_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRSTAGING: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRSTAGING: "Okta FHIR Staging"
-      AUTH_CLIENT_ID_OKTAFHIRSTAGING: "0oarhz13sa21nfecS697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRSTAGING: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRSTAGING: "openid email profile groups"
-      # Okta FHIR Production
-      AUTH_ISSUER_OKTAFHIRPROD: "https://icanbwell.okta.com"
-      AUTH_AUDIENCE_OKTAFHIRPROD: "https://icanbwell.okta.com"
-      AUTH_FRIENDLY_NAME_OKTAFHIRPROD: "Okta FHIR Production"
-      AUTH_CLIENT_ID_OKTAFHIRPROD: "0oargxz9fkFFcSM38697"
-      AUTH_WELL_KNOWN_URI_OKTAFHIRPROD: "https://icanbwell.okta.com/.well-known/openid-configuration"
-      AUTH_SCOPE_OKTAFHIRPROD: "openid email profile groups"
-      AUTH_EXTRA_INFO_OKTAFHIRPROD: '{"api_gateway_base_url":"https://api.prod.icanbwell.com","client_keys":{"Trial": "eyJyIjoiMDMyZHF0ZWN1ODVkaWZxazU0dTQiLCJlbnYiOiJwcm9kIiwia2lkIjoiYndlbGxfdHJpYWwtcHJvZCJ9", "Demo": "eyJyIjoiNnl5bXVyNHR0eGUzdjA1cTk4IiwiZW52IjoicHJvZCIsImtpZCI6ImJ3ZWxsX2RlbW8tcHJvZCJ9"}}'
-      # API Gateway Dev
-      AUTH_ISSUER_APIGATEWAYPROD: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nj7c9EeTG"
-      AUTH_AUDIENCE_APIGATEWAYPROD: "5h2u1p2tvrq9q5sar7hvia08sr"  # OAuth client id for API Gateway tokens.
-      AUTH_CLIENT_ID_APIGATEWAYPROD: "5h2u1p2tvrq9q5sar7hvia08sr"  # OIDC discovery document for API Gateway tokens.
-      AUTH_WELL_KNOWN_URI_APIGATEWAYPROD: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nj7c9EeTG/.well-known/openid-configuration"
-      AUTH_FRIENDLY_NAME_APIGATEWAYPROD: "b.well API Gateway Prod"  # Scope set requested from the API Gateway provider.
-      AUTH_SCOPE_APIGATEWAYPROD: "openid email profile"
       # This is the URL that the user will be redirected to after authentication
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       APP_LOGIN_URI: "http://localhost:5050/app/login"
@@ -131,6 +91,7 @@ services:
       MONGO_DB_AUTH_CACHE_COLLECTION_NAME: oauth_cache
 #      MONGO_DB_AUTH_CACHE_DISABLE_DELETE: 'true'
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
+      MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
       # for LLM memory
       ENABLE_LLM_STORE: 'true'
@@ -159,6 +120,9 @@ services:
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100
       ENABLE_STREAMING_BUFFERING: 0
+      AIDEN_OAUTH_CLIENT_NAME: "b.well Aiden Local"
+      # Allow http:// URLs for local OIDC providers (e.g. keycloak in Docker)
+      AUTH_ALLOW_HTTP_URLS: "true"
     env_file: .env
     command:
       - opentelemetry-instrument
@@ -181,6 +145,8 @@ services:
     - ./:/usr/src/language_model_gateway/:cached
     - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway-configs/mcp
+#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
     - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
 #    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs

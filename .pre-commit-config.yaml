@@ -132,7 +132,7 @@ repos:
         name: "taskfile · Validate Task configuration"
       - id: check-jsonschema
         name: "Validate language-model-gateway-configs against schema"
-        files: ^language-model-gateway-configs/.*\.json$
+        files: ^language-model-gateway-configs/chat_completions/(official|testing)/.*\.json$
         args:
           - "--schemafile"
           - "language_model_gateway/config_schema.json"

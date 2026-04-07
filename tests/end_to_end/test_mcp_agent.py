@@ -5,7 +5,11 @@ import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage
-from langchain_mcp_adapters.client import MultiServerMCPClient
+from languagemodelcommon.mcp.mcp_client import (
+    create_mcp_session,
+    list_all_tools,
+    mcp_tool_to_langchain_tool,
+)
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
 from mcp.types import (
@@ -71,8 +75,8 @@ async def test_mcp_agent() -> None:
 
     model: BaseChatModel = ChatBedrockConverse(
         client=None,
-        # model="us.anthropic.claude-sonnet-4-20250514-v1:0",
-        model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+        # model_id="us.anthropic.claude-sonnet-4-20250514-v1:0",
+        model_id="us.anthropic.claude-3-5-haiku-20241022-v1:0",
         provider="anthropic",
         credentials_profile_name=os.environ.get("AWS_CREDENTIALS_PROFILE"),
         region_name=os.environ.get("AWS_REGION", "us-east-1"),
@@ -80,27 +84,27 @@ async def test_mcp_agent() -> None:
         **model_parameters_dict,
     )
 
-    client = MultiServerMCPClient(
-        {
-            # "math": {
-            #     "command": "python",
-            #     # Make sure to update to the full absolute path to your math_server.py file
-            #     "args": ["./examples/math_server.py"],
-            #     "transport": "stdio",
-            # },
-            "math": {
-                # make sure you start your weather server on port 8000
-                "url": "http://mcp_server_gateway:5000/math_server",
-                "transport": "streamable_http",
-            },
-            "providersearch": {
-                # make sure you start your weather server on port 8000
-                "url": "http://mcp_server_gateway:5000/provider_search",
-                "transport": "streamable_http",
-            },
-        }
-    )
-    tools = await client.get_tools()
+    server_configs: Dict[str, Any] = {
+        "math": {
+            "url": "http://mcp_server_gateway:5000/math_server",
+            "transport": "streamable_http",
+        },
+        "providersearch": {
+            "url": "http://mcp_server_gateway:5000/provider_search",
+            "transport": "streamable_http",
+        },
+    }
+    tools: list[Any] = []
+    for server_name, config in server_configs.items():
+        async with create_mcp_session(config) as session:
+            await session.initialize()
+            mcp_tools = await list_all_tools(session)
+            tools.extend(
+                mcp_tool_to_langchain_tool(
+                    t, connection=config, server_name=server_name
+                )
+                for t in mcp_tools
+            )
 
     def call_model(state: MessagesState) -> Dict[str, BaseMessage]:
         response = model.bind_tools(tools).invoke(state["messages"])

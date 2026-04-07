@@ -20,10 +20,10 @@ from languagemodelcommon.configs.schemas.config_schema import (
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )
-from language_model_gateway.gateway.mcp.exceptions.mcp_tool_unauthorized_exception import (
+from languagemodelcommon.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
-from language_model_gateway.gateway.mcp.mcp_authorization_helper import (
+from languagemodelcommon.mcp.auth.mcp_authorization_helper import (
     McpAuthorizationHelper,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
@@ -44,7 +44,7 @@ from languagemodelcommon.structures.openai.message.chat_message_wrapper import (
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from language_model_gateway.gateway.utilities.exception_logger import ExceptionLogger
+from languagemodelcommon.utilities.logger.exception_logger import ExceptionLogger
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -213,50 +213,46 @@ class ChatCompletionManager:
                 ],
             )
         except ExceptionGroup as e:
-            # if there is just one exception, we can log it directly
-            if len(e.exceptions) == 1:
-                first_exception = e.exceptions[0]
-                if (
-                    isinstance(first_exception, McpToolUnauthorizedException)
-                    and first_exception.headers
-                ):
-                    logger.info(
-                        "MCP tool at %s returned WWW-Authenticate header: %s",
-                        first_exception.url,
-                        first_exception.headers.get("WWW-Authenticate"),
-                    )
-                    url: str | None = (
-                        McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
-                            headers=Headers(first_exception.headers)
-                        )
-                    )
-                    content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
-                    return self.write_response(
-                        request_id=request_id,
-                        chat_request_wrapper=chat_request_wrapper,
-                        response_messages=[AIMessage(content=content)],
-                    )
-                elif isinstance(first_exception, AuthorizationNeededException):
-                    return self.write_response(
-                        request_id=request_id,
-                        chat_request_wrapper=chat_request_wrapper,
-                        response_messages=[
-                            AIMessage(content=line.strip())
-                            for line in first_exception.message.splitlines()
-                            if line.strip()
-                        ],
-                    )
-                logger.error(
-                    f"ExceptionGroup in chat completion: {first_exception}",
-                    exc_info=True,
+            first_exception = ExceptionLogger.get_first_exception(e)
+            if (
+                isinstance(first_exception, McpToolUnauthorizedException)
+                and first_exception.headers
+            ):
+                logger.info(
+                    "MCP tool at %s returned WWW-Authenticate header: %s",
+                    first_exception.url,
+                    first_exception.headers.get("WWW-Authenticate"),
                 )
-                return await self.handle_exception(
+                url: str | None = (
+                    McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
+                        headers=Headers(first_exception.headers)
+                    )
+                )
+                content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
+                return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
-                    e=first_exception,
+                    response_messages=[AIMessage(content=content)],
                 )
+            elif isinstance(first_exception, AuthorizationNeededException):
+                return self.write_response(
+                    request_id=request_id,
+                    chat_request_wrapper=chat_request_wrapper,
+                    response_messages=[
+                        AIMessage(content=line.strip())
+                        for line in first_exception.message.splitlines()
+                        if line.strip()
+                    ],
+                )
+            logger.error(
+                "ExceptionGroup in chat completion: %s",
+                ExceptionLogger.format_exception_message(e),
+                exc_info=True,
+            )
             return await self.handle_exception(
-                request_id=request_id, chat_request_wrapper=chat_request_wrapper, e=e
+                request_id=request_id,
+                chat_request_wrapper=chat_request_wrapper,
+                e=first_exception if isinstance(first_exception, Exception) else e,
             )
         except Exception as e:
             return await self.handle_exception(

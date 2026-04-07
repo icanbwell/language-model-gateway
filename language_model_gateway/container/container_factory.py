@@ -20,11 +20,12 @@ from languagemodelcommon.converters.langgraph_to_openai_converter import (
 from languagemodelcommon.utilities.token_reducer.token_reducer import (
     TokenReducer,
 )
-from languagemodelcommon.utilities.tool_friendly_name_mapper import (
-    ToolFriendlyNameMapper,
+from languagemodelcommon.utilities.tool_display_name_mapper import (
+    ToolDisplayNameMapper,
 )
 from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
+from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from oidcauthlib.auth.token_reader import TokenReader
 from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
@@ -39,13 +40,13 @@ from oidcauthlib.utilities.environment.oidc_environment_variables import (
 )
 from simple_container.environment.environment_variables import EnvironmentVariables
 
-from language_model_gateway.gateway.auth.token_exchange.token_exchange_manager import (
+from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from language_model_gateway.gateway.auth.token_storage_auth_manager import (
-    TokenStorageAuthManager,
+from language_model_gateway.gateway.auth.gateway_token_storage_auth_manager import (
+    GatewayTokenStorageAuthManager,
 )
-from language_model_gateway.gateway.auth.tools.tool_auth_manager import ToolAuthManager
+from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
 from language_model_gateway.gateway.managers.chat_completion_manager import (
@@ -58,14 +59,17 @@ from language_model_gateway.gateway.managers.system_command_manager import (
 from language_model_gateway.gateway.managers.token_submission_manager import (
     TokenSubmissionManager,
 )
-from language_model_gateway.gateway.mcp.interceptors.tracing import (
+from languagemodelcommon.mcp.interceptors.tracing import (
     TracingMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.interceptors.truncation import (
+from languagemodelcommon.mcp.interceptors.truncation import (
     TruncationMcpCallInterceptor,
 )
-from language_model_gateway.gateway.mcp.mcp_tool_provider import MCPToolProvider
-from language_model_gateway.gateway.models.model_factory import ModelFactory
+from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
+    McpAuthServerDiscovery,
+)
+from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
@@ -78,7 +82,7 @@ from language_model_gateway.gateway.providers.openai_chat_completions_provider i
 from language_model_gateway.gateway.providers.pass_through_chat_completions_provider import (
     PassThroughChatCompletionsProvider,
 )
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
@@ -129,7 +133,7 @@ class LanguageModelGatewayContainerFactory:
         # Must be done AFTER the OidcContainerFactory to override the registration
         container.singleton(
             FastAPIAuthManager,
-            lambda c: TokenStorageAuthManager(
+            lambda c: GatewayTokenStorageAuthManager(
                 environment_variables=c.resolve(OidcEnvironmentVariables),
                 auth_config_reader=c.resolve(AuthConfigReader),
                 token_reader=c.resolve(TokenReader),
@@ -229,6 +233,22 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            DcrManager,
+            lambda c: DcrManager(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+                collection_name=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).mongo_db_dcr_collection_name,
+                redirect_uri=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).auth_redirect_uri
+                or "/auth/callback",
+            ),
+        )
+
+        container.singleton(
             PassThroughTokenManager,
             lambda c: PassThroughTokenManager(
                 auth_manager=c.resolve(AuthManager),
@@ -237,6 +257,8 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
+                dcr_manager=c.resolve(DcrManager),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
             ),
         )
 
@@ -270,12 +292,13 @@ class LanguageModelGatewayContainerFactory:
                 tracing_interceptor=c.resolve(TracingMcpCallInterceptor),
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
             ),
         )
 
         container.singleton(
-            ToolFriendlyNameMapper,
-            lambda c: ToolFriendlyNameMapper.from_config_path(
+            ToolDisplayNameMapper,
+            lambda c: ToolDisplayNameMapper.from_config_path(
                 config_path=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ).tool_friendly_name_config_path
@@ -296,7 +319,7 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
                 skill_loader=c.resolve(SkillLoaderProtocol),
-                tool_friendly_name_mapper=c.resolve(ToolFriendlyNameMapper),
+                tool_display_name_mapper=c.resolve(ToolDisplayNameMapper),
             ),
         )
 

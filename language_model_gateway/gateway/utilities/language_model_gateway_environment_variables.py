@@ -34,38 +34,6 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return auth_algorithms.split(",") if auth_algorithms else None
 
     @property
-    def mongo_db_token_collection_name(self) -> Optional[str]:
-        return os.environ.get("MONGO_DB_TOKEN_COLLECTION_NAME")
-
-    @property
-    def mcp_tools_metadata_cache_timeout_seconds(self) -> int:
-        return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS", 3600))
-
-    @property
-    def mcp_tools_metadata_cache_ttl_seconds(self) -> int:
-        return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TTL_SECONDS", 3600))
-
-    @property
-    def tool_output_token_limit(self) -> Optional[int]:
-        limit = os.environ.get("TOOL_OUTPUT_TOKEN_LIMIT")
-        return int(limit) if limit and limit.isdigit() else None
-
-    @property
-    def tool_call_timeout_seconds(self) -> int:
-        """Timeout in seconds for tool calls."""
-        return int(os.environ.get("TOOL_CALL_TIMEOUT_SECONDS", "600"))
-
-    @property
-    def app_login_uri(self) -> str:
-        value = os.environ.get("APP_LOGIN_URI")
-        return value if value else "/app/login"
-
-    @property
-    def app_token_save_uri(self) -> str:
-        value = os.environ.get("APP_TOKEN_SAVE_URI")
-        return value if value else "/app/token"
-
-    @property
     def system_commands(self) -> list[str]:
         system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
         return system_commands.split(",") if system_commands else []

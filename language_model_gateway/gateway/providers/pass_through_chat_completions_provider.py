@@ -21,11 +21,11 @@ from openai.types.chat import (
 from starlette.responses import StreamingResponse, JSONResponse
 
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
-from language_model_gateway.gateway.auth.models.token_cache_item import TokenCacheItem
+from languagemodelcommon.auth.models.token_cache_item import TokenCacheItem
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
 )
-from language_model_gateway.gateway.providers.pass_through_token_manager import (
+from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
@@ -159,9 +159,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     },
                 )
 
-        bearer_token: str | None = (
-            token.access_token.token if token and token.access_token else None
-        )
+        bearer_token: str | None = token.get_access_token_string() if token else None
         auth: httpx.Auth | None = (
             BearerAuth(token=bearer_token) if bearer_token is not None else None
         )

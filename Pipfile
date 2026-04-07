@@ -74,8 +74,7 @@ databricks-sdk = ">=0.42.0"
 pandas = ">=2.2.3"
 # for testing the MCP client
 mcp = ">=1.11.0"
-# langchain_mcp_adapters is a Python library for working with MCP adapters in LangChain
-langchain_mcp_adapters = ">=0.2.1"
+# langchain_mcp_adapters replaced by custom MCP client in languagemodelcommon.mcp.mcp_client
 # authlib is a Python library for OAuth and OpenID Connect
 authlib = ">=1.6.5"
 # joserfc is a Python library for working with JOSE (JSON Object Signing and Encryption)
@@ -99,7 +98,7 @@ langgraph-store-mongodb = ">=0.1.0"
 # langchain-google-genai is a Python library for integrating LangChain with Google Generative AI
 langchain-google-genai= ">=4.1.3"
 # oidcauthlib is a Python library for OpenID Connect authentication
-oidcauthlib = ">=3.0.1"
+oidcauthlib = ">=3.0.6"
 # Core OTel bundle
 # OpenTelemetry - Core SDK and auto-instrumentation (includes OTLP exporters for traces, metrics, and logs)
 opentelemetry-distro = { version = ">=0.60b0", extras = ["otlp"] }
@@ -132,9 +131,9 @@ prometheus-fastapi-instrumentator = ">=7.1.0"
 # py-key-value-aio is a Python library for working with key-value stores asynchronously
 py-key-value-aio = ">=0.4.4"
 # langchain-ai-skills-framework is a Python library for building AI skills in LangChain
-langchain-ai-skills-framework = ">=1.0.30"
+langchain-ai-skills-framework = ">=1.0.34"
 # languagemodelcommon is a Python library for common language model utilities
-language-model-common = ">=1.0.28"
+language-model-common = ">=2.0.3"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks
