@@ -32,12 +32,15 @@ services:
 #      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
 #      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "configs/chat_completions/testing"
-      # Paths to get from github
-      MODELS_OFFICIAL_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/official?ref=main"
-      MODELS_TESTING_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/testing?ref=main"
-      MCP_JSON_PATH: "github://icanbwell/language-model-gateway-configuration/configs/mcp?ref=main"
-      PROMPT_LIBRARY_PATH: "github://icanbwell/language-model-gateway-configuration/configs/chat_completions/prompts?ref=main"
-      CONFIG_CACHE_TIMEOUT_SECONDS: 120
+      # Download the entire config repo as a zipball at startup and refresh every CONFIG_CACHE_TIMEOUT_SECONDS
+      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
+      GITHUB_CACHE_FOLDER: "/usr/src/language-model-gateway-configs"
+      # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
+      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/official"
+      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/testing"
+      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/configs/mcp"
+      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/configs/chat_completions/prompts"
+      CONFIG_CACHE_TIMEOUT_SECONDS: 3600
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
       NUM_WORKERS: 1
@@ -116,8 +119,7 @@ services:
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
       WRITE_TOOL_OUTPUT_TO_FILE: 1
-      SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/skills"
-#      SKILLS_DIRECTORY: "github://icanbwell/language-model-gateway-configuration/configs/skills?ref=main"
+      SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/configs/skills"
       AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100

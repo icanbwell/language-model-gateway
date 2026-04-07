@@ -17,6 +17,9 @@ from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
+    GithubConfigRepoManager,
+)
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
@@ -75,13 +78,13 @@ ContainerRegistry.set_default(
 
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
-    # Startup: This runs when the first request comes in
     worker_id = id(app)
+    repo_manager = GithubConfigRepoManager()
     try:
-        # Configure logging
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
-        # perform any startup tasks here
+        # Download GitHub config repo if configured (before first request)
+        await repo_manager.start()
 
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
@@ -93,8 +96,7 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     finally:
         try:
             logger.info(f"Starting application shutdown for worker {worker_id}...")
-            # await container.cleanup()
-            # Clean up on shutdown
+            await repo_manager.stop()
             logger.info("Application shutdown completed")
         except Exception as e:
             logger.exception(e, stack_info=True)
