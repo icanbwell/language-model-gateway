@@ -23,16 +23,9 @@ services:
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
-#      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
-#      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
-#      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/mcp"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
-#      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/chat_completions/prompts"
-#      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
-#      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
-#      MODELS_TESTING_PATH: "configs/chat_completions/testing"
-      # Download the entire config repo as a zipball at startup and refresh every CONFIG_CACHE_TIMEOUT_SECONDS
+      # Uncomment this to read from github
       GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
@@ -147,11 +140,11 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
-#    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
+    - ./language-model-gateway-configs/chat_completions:/usr/src/github_config_cache/chat_completions
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-#    - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway-configs/mcp
+    - ./language-model-gateway-configs/mcp:/usr/src/github_config_cache/mcp
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
-#    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
+    - ./language-model-gateway-configs/skills:/usr/src/github_config_cache/skills
 #    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
