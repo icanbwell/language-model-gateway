@@ -146,9 +146,9 @@ services:
     - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway/github_config_cache/configs/mcp
     - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway/github_config_cache/configs/skills
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
-#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/github_config_cache/chat_completions
-#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/github_config_cache/mcp
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/github_config_cache/skills
+#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway/github_config_cache/configs/chat_completions
+#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway/github_config_cache/configs/mcp
+#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway/github_config_cache/configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
