@@ -141,6 +141,8 @@ class LanguageModelGatewayContainerFactory:
                 well_known_configuration_manager=c.resolve(
                     WellKnownConfigurationManager
                 ),
+                dcr_manager=c.resolve(DcrManager),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
             ),
         )
 
