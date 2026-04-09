@@ -46,6 +46,7 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
 from language_model_gateway.gateway.auth.gateway_token_storage_auth_manager import (
     GatewayTokenStorageAuthManager,
 )
+from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
 from language_model_gateway.gateway.managers.app_login_manager import AppLoginManager
@@ -141,8 +142,7 @@ class LanguageModelGatewayContainerFactory:
                 well_known_configuration_manager=c.resolve(
                     WellKnownConfigurationManager
                 ),
-                dcr_manager=c.resolve(DcrManager),
-                auth_server_metadata_discovery=McpAuthServerDiscovery(),
+                oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
             ),
         )
 
@@ -251,6 +251,15 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            OAuthProviderRegistrar,
+            lambda c: OAuthProviderRegistrar(
+                dcr_manager=c.resolve(DcrManager),
+                auth_config_reader=c.resolve(AuthConfigReader),
+                auth_server_metadata_discovery=McpAuthServerDiscovery(),
+            ),
+        )
+
+        container.singleton(
             PassThroughTokenManager,
             lambda c: PassThroughTokenManager(
                 auth_manager=c.resolve(AuthManager),
@@ -259,8 +268,7 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
-                dcr_manager=c.resolve(DcrManager),
-                auth_server_metadata_discovery=McpAuthServerDiscovery(),
+                oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
             ),
         )
 

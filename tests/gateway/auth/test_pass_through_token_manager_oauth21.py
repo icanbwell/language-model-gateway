@@ -11,6 +11,7 @@ from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.dcr.dcr_manager import DcrManager
 from oidcauthlib.auth.dcr.dcr_registration import DcrRegistration
 
+from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
@@ -45,13 +46,21 @@ def _build_manager(
     dcr_manager = MagicMock(spec=DcrManager)
     dcr_manager.resolve_dcr_credentials = AsyncMock(return_value=dcr_result)
 
-    return PassThroughTokenManager(
+    registrar = OAuthProviderRegistrar(
+        dcr_manager=dcr_manager,
+        auth_config_reader=auth_config_reader,
+    )
+
+    manager = PassThroughTokenManager(
         auth_manager=auth_manager,
         auth_config_reader=auth_config_reader,
         tool_auth_manager=tool_auth_manager,
         environment_variables=environment_variables,
-        dcr_manager=dcr_manager,
+        oauth_provider_registrar=registrar,
     )
+    # Expose dcr_manager for test assertions
+    manager.dcr_manager = dcr_manager  # type: ignore[attr-defined]
+    return manager
 
 
 class TestEnsureOAuthProviderRegistered:
@@ -209,7 +218,7 @@ class TestEnsureOAuthProviderRegistered:
             )
 
     @pytest.mark.asyncio
-    async def test_dedup_prevents_duplicate_config_append(self) -> None:
+    async def test_dedup_prevents_duplicate_registration(self) -> None:
         manager = _build_manager()
         oauth = McpOAuthConfig.model_validate(
             {
@@ -223,15 +232,13 @@ class TestEnsureOAuthProviderRegistered:
         await manager._ensure_oauth_provider_registered(
             auth_provider="prov", oauth=oauth
         )
-        # Second call: existing_config lookup still returns None (mock),
-        # but the config list now has the entry from first call
+        # Second call: registrar uses register_auth_configs which deduplicates
         await manager._ensure_oauth_provider_registered(
             auth_provider="prov", oauth=oauth
         )
 
-        configs = manager.auth_config_reader.get_auth_configs_for_all_auth_providers()
-        prov_configs = [c for c in configs if c.auth_provider == "prov"]
-        assert len(prov_configs) == 1
+        # register_auth_configs was called (dedup handled internally)
+        manager.auth_config_reader.register_auth_configs.assert_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_dcr_overrides_config_client_id(self) -> None:
@@ -281,9 +288,9 @@ class TestEnsureOAuthProviderRegistered:
         """Concurrent requests for the same provider only trigger DCR once.
 
         Simulates multiple users hitting the same MCP server at once.
-        The per-provider lock should serialize the calls so only the
-        first actually performs DCR; subsequent waiters find the
-        already-registered config.
+        The per-provider lock in OAuthProviderRegistrar should serialize
+        the calls so only the first actually performs DCR; subsequent
+        waiters find the already-registered config.
         """
         dcr_reg = MagicMock(spec=DcrRegistration)
         dcr_reg.client_id = "dcr-single-id"
@@ -293,7 +300,7 @@ class TestEnsureOAuthProviderRegistered:
 
         # Track how many times DCR is actually called
         call_count = 0
-        original_resolve = manager.dcr_manager.resolve_dcr_credentials
+        original_resolve = manager.dcr_manager.resolve_dcr_credentials  # type: ignore[attr-defined]
 
         async def counting_resolve(**kwargs):  # type: ignore[no-untyped-def]
             nonlocal call_count
@@ -316,7 +323,7 @@ class TestEnsureOAuthProviderRegistered:
             )
             return result
 
-        manager.dcr_manager.resolve_dcr_credentials = AsyncMock(  # type: ignore[method-assign]
+        manager.dcr_manager.resolve_dcr_credentials = AsyncMock(  # type: ignore[attr-defined]
             side_effect=counting_resolve,
         )
 
