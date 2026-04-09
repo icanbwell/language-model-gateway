@@ -23,19 +23,19 @@ services:
 #      IMAGE_GENERATION_PATH: "s3://bwell-dev-data-science-ue1/openwebui/image_generation/"
 #      IMAGE_GENERATION_PATH: "s3://bwell-services-data-science-ue1/openwebui/image_generation/"
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
-      MODELS_OFFICIAL_PATH: "/usr/src/language-model-gateway-configs/chat_completions/official"
-      MODELS_TESTING_PATH: "/usr/src/language-model-gateway-configs/chat_completions/testing"
-      MCP_JSON_PATH: "/usr/src/language-model-gateway-configs/mcp/.mcp.json"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
-      PROMPT_LIBRARY_PATH: "/usr/src/language-model-gateway-configs/chat_completions/prompts"
-#      MODELS_ZIP_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/zipball/main/"
-#      MODELS_OFFICIAL_PATH: "configs/chat_completions/official"
-#      MODELS_TESTING_PATH: "configs/chat_completions/testing"
-#      MODELS_OFFICIAL_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/official"
-#      MODELS_TESTING_PATH: "https://github.com/icanbwell/language-model-gateway-configuration/tree/main/configs/chat_completions/testing"
-      MODELS_PATH_BACKUP: "/usr/src/language-model-gateway-configs/chat_completions"
-      CONFIG_CACHE_TIMEOUT_SECONDS: 120
+      # Uncomment this to read from github
+#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
+      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
+      # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
+      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
+      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
+      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
+      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
+      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
+      CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
       NUM_WORKERS: 1
@@ -114,8 +114,6 @@ services:
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
       WRITE_TOOL_OUTPUT_TO_FILE: 1
-      SKILLS_DIRECTORY: "/usr/src/language-model-gateway-configs/skills"
-#      SKILLS_DIRECTORY: "github://icanbwell/language-model-gateway-configuration/configs/skills?ref=main"
       AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1
       LANGGRAPH_RECURSION_LIMIT: 100
@@ -143,12 +141,14 @@ services:
       - '5050:5000'
     volumes:
     - ./:/usr/src/language_model_gateway/:cached
-    - ./language-model-gateway-configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language-model-gateway-configs/chat_completions
-    - ./language-model-gateway-configs/mcp:/usr/src/language-model-gateway-configs/mcp
-#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language-model-gateway-configs/mcp
-    - ./language-model-gateway-configs/skills:/usr/src/language-model-gateway-configs/skills
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language-model-gateway-configs/skills
+    # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
+    - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
+    - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
+    - ./language-model-gateway-configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+    # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
+#    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
+#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
+#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip

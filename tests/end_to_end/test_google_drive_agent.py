@@ -68,7 +68,7 @@ logger = logging.getLogger(__name__)
 )
 async def test_google_drive_mcp_agent_directly() -> None:
     # HTTP server
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None
@@ -137,7 +137,7 @@ async def test_google_drive_via_llm() -> None:
     verify_aws_boto3_authentication()
     # model: BaseChatModel = init_chat_model("openai:gpt-4.1")
     model_parameters_dict: Dict[str, Any] = {}
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None
@@ -253,7 +253,7 @@ async def test_chat_completions_with_google_drive(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None

@@ -152,3 +152,5 @@ dmypy.json
 
 /dependency_graph*.*
 /.skills-git-cache/
+
+/github_config_cache/*

@@ -30,7 +30,7 @@ from tests.gateway.mocks.mock_model_factory import MockModelFactory
 async def test_chat_completions_with_mcp_google_drive_with_different_auth(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None

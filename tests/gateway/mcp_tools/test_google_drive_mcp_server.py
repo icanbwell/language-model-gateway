@@ -31,7 +31,7 @@ from simple_container.container.interfaces import IContainer
 async def test_chat_completions_with_mcp_google_drive(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None

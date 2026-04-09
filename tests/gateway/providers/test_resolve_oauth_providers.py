@@ -12,6 +12,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     McpOAuthConfig,
 )
 
+from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
@@ -44,12 +45,17 @@ def _make_manager(
     tool_auth_manager = MagicMock(spec=ToolAuthManager)
     env = MagicMock(spec=LanguageModelGatewayEnvironmentVariables)
 
+    registrar = OAuthProviderRegistrar(
+        dcr_manager=dcr_manager,
+        auth_config_reader=auth_config_reader,
+    )
+
     return PassThroughTokenManager(
         auth_manager=auth_manager,
         auth_config_reader=auth_config_reader,
         tool_auth_manager=tool_auth_manager,
         environment_variables=env,
-        dcr_manager=dcr_manager,
+        oauth_provider_registrar=registrar,
     )
 
 
