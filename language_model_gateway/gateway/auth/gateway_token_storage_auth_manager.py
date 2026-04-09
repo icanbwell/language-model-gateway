@@ -110,8 +110,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
                 )
             except ValueError:
                 logger.error(
-                    "Could not resolve client_id for '%s' from .mcp.json "
-                    "server '%s'",
+                    "Could not resolve client_id for '%s' from .mcp.json server '%s'",
                     auth_provider,
                     server_key,
                     exc_info=True,
