@@ -12,7 +12,7 @@
 - Entry surface: `language_model_gateway/gateway/api.py` configures FastAPI, routers under `gateway/routers/`, middleware (`FastApiLoggingMiddleware`, `RequestScopeMiddleware`), static assets, and health endpoints.
 - Business layers: managers in `gateway/managers/`, providers in `gateway/providers/`, converters/streaming helpers, MCP tooling (`gateway/mcp/**`), and tool implementations in `gateway/tools/`.
 - DI/IoC: `LanguageModelGatewayContainerFactory.create_container()` registers services (Auth, TokenExchange, Tool/MCP providers, LangChain providers, persistence, caching) via `oidcauthlib.container.SimpleContainer`; `ContainerRegistry` + `Inject(...)` supply dependencies to routers, managers, and background jobs.
-- AuthN/AuthZ: `oidcauthlib` (AuthRouter, AuthManager, TokenReader), PKCE helper `gateway/oidc_pkce_auth.py`, `TokenStorageAuthManager`, `TokenExchangeManager`, `ToolAuthManager`, and `TokenReducer` cooperate to handle on-behalf-of flows, OpenWebUI headers, and tool-scoped tokens.
+- AuthN/AuthZ: `oidcauthlib` (AuthRouter, AuthManager, TokenReader), `TokenStorageAuthManager`, `TokenExchangeManager`, `ToolAuthManager`, and `TokenReducer` cooperate to handle on-behalf-of flows, OpenWebUI headers, and tool-scoped tokens.
 - Config & env: use `language_model_gateway/configs/config_reader` + `ConfigExpiringCache` and `LanguageModelGatewayEnvironmentVariables` instead of ad-hoc `os.environ` access.
 - Tests live in `tests/` (unit/functional) with dockerized execution; fixture data sits in repo (see `openwebui-config`, `language-model-gateway-configs`, etc.).
 - Docker Compose files control the gateway, databases, Keycloak, MCP servers, observability (`docker-compose-otel.yml`), and OpenWebUI variants.
@@ -57,7 +57,7 @@
 
 ## Security and Privacy Guidelines
 - Always validate and refresh tokens through `TokenReader`/`AuthManager`; never trust headers blindly. Use RequestScopeMiddleware for per-request context.
-- For PKCE/browser flows, use `OIDCAuthPKCE` and `AuthRouter`. For service-to-service flows, rely on `TokenExchangeManager` and `ToolAuthManager` with least-privilege scopes.
+- For PKCE/browser flows, use `AuthRouter` (from oidcauthlib). For service-to-service flows, rely on `TokenExchangeManager` and `ToolAuthManager` with least-privilege scopes.
 - When bridging to AWS (Bedrock, S3), honor `AWS_CREDENTIALS_PROFILE`, use `AwsClientFactory`, and never hardcode credentials.
 - Sanitize data returned from Jira, Confluence, Databricks, GitHub, or MCP servers before logging or exposing to clients. Strip PHI/PII and redact secrets.
 - Use HTTPS endpoints for remote services and verify certificates (see `make create-certs` for local TLS). Do not downgrade to HTTP except for the documented local dev hosts.

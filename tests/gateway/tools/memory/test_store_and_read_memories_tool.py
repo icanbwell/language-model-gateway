@@ -43,7 +43,7 @@ async def test_store_and_read_memories_tool(
     async_client: httpx.AsyncClient, test_container: IContainer
 ) -> None:
     print("")
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None

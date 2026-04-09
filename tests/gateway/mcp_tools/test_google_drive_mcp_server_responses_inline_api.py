@@ -41,7 +41,7 @@ async def test_responses_inline_api_with_mcp_google_drive(
     This test uses a mock model to simulate LLM responses.
     Uses the inline tools parameter of the responses API.
     """
-    access_token: Token | None = KeyCloakHelper.get_keycloak_access_token(
+    access_token: Token | None = await KeyCloakHelper.get_keycloak_access_token_async(
         username="tester", password="password"
     )
     assert access_token is not None
