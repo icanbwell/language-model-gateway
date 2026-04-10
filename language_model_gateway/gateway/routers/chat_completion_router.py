@@ -21,6 +21,7 @@ from oidcauthlib.auth.token_reader import TokenReader
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
+from languagemodelcommon.utilities.logger.exception_logger import ExceptionLogger
 from languagemodelcommon.schema.openai.completions import ChatRequest
 from languagemodelcommon.schema.openai.responses import ResponsesRequest
 from languagemodelcommon.structures.openai.request.chat_completion_api_request_wrapper import (
@@ -243,49 +244,72 @@ class ChatCompletionsRouter:
                 auth_information=auth_information,
             )
         except* TokenRetrievalError as e:
-            logger.exception(e, stack_info=True)
-            # return JSONResponse(content=f"Error retrieving AWS token: {e}", status_code=500)
+            first = ExceptionLogger.get_first_exception(e)
+            logger.exception(
+                "TokenRetrievalError: %s",
+                ExceptionLogger.format_exception_message(e),
+                stack_info=True,
+            )
             raise HTTPException(
                 status_code=500,
-                detail=f"Error retrieving AWS token: {e}.  If running on developer machines, run `aws sso login --profile [profile_name]` to get the token.",
+                detail=f"Error retrieving AWS token: {first}.  If running on developer machines, run `aws sso login --profile [profile_name]` to get the token.",
             )
         except* AuthorizationNeededException as e:
-            logger.exception(e, stack_info=True)
+            logger.exception(
+                "AuthorizationNeededException: %s",
+                ExceptionLogger.format_exception_message(e),
+                stack_info=True,
+            )
             raise HTTPException(
                 status_code=401,
                 detail="Your login has expired. Please log in again.",
             )
         except* ConnectionError as e:
+            first = ExceptionLogger.get_first_exception(e)
             call_stack = traceback.format_exc()
             error_detail: ErrorDetail = {
-                "message": "Service connection error",
+                "message": f"Service connection error: {first}",
                 "timestamp": datetime.now().isoformat(),
                 "trace_id": "",
                 "call_stack": call_stack,
             }
-            logger.exception(e, stack_info=True)
+            logger.exception(
+                "ConnectionError: %s",
+                ExceptionLogger.format_exception_message(e),
+                stack_info=True,
+            )
             raise HTTPException(status_code=503, detail=error_detail)
 
         except* ValueError as e:
+            first = ExceptionLogger.get_first_exception(e)
             call_stack = traceback.format_exc()
             error_detail = {
-                "message": str(e),
+                "message": str(first),
                 "timestamp": datetime.now().isoformat(),
                 "trace_id": "",
                 "call_stack": call_stack,
             }
-            logger.exception(e, stack_info=True)
+            logger.exception(
+                "ValueError: %s",
+                ExceptionLogger.format_exception_message(e),
+                stack_info=True,
+            )
             raise HTTPException(status_code=400, detail=error_detail)
 
         except* Exception as e:
+            first = ExceptionLogger.get_first_exception(e)
             call_stack = traceback.format_exc()
             error_detail = {
-                "message": "Internal server error",
+                "message": f"Internal server error: {first}",
                 "timestamp": datetime.now().isoformat(),
                 "trace_id": "",
                 "call_stack": call_stack,
             }
-            logger.exception(e, stack_info=True)
+            logger.exception(
+                "Unhandled exception: %s",
+                ExceptionLogger.format_exception_message(e),
+                stack_info=True,
+            )
             raise HTTPException(status_code=500, detail=error_detail)
 
     # noinspection PyMethodMayBeStatic
