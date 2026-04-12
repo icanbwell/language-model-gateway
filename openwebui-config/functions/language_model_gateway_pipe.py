@@ -803,7 +803,7 @@ class Pipe:
                     data_part = stripped[5:].strip()
                     if data_part == b"[DONE]":
                         return
-                    data_lines.append(data_part)
+                    data_lines.append(bytes(data_part))
                     continue
 
             if start_idx > 0:
