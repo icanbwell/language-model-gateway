@@ -1,9 +1,8 @@
 import logging
 from os import environ
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from langchain_community.tools import (
-    DuckDuckGoSearchRun,
     ArxivQueryRun,
 )
 from langchain_core.tools import BaseTool
@@ -43,7 +42,6 @@ from language_model_gateway.gateway.tools.github_pull_request_diff_tool import (
 from language_model_gateway.gateway.tools.github_pull_request_retriever_tool import (
     GitHubPullRequestRetriever,
 )
-from language_model_gateway.gateway.tools.google_search_tool import GoogleSearchTool
 from language_model_gateway.gateway.tools.graph_viz_diagram_generator_tool import (
     GraphVizDiagramGeneratorTool,
 )
@@ -76,14 +74,12 @@ from language_model_gateway.gateway.tools.network_topology_diagram_tool import (
 )
 from language_model_gateway.gateway.tools.pdf_extraction_tool import PDFExtractionTool
 from language_model_gateway.gateway.tools.provider_search_tool import ProviderSearchTool
-from language_model_gateway.gateway.tools.python_repl_tool import PythonReplTool
 from language_model_gateway.gateway.tools.scraping_bee_web_scraper_tool import (
     ScrapingBeeWebScraperTool,
 )
 from language_model_gateway.gateway.tools.sequence_diagram_generator_tool import (
     SequenceDiagramGeneratorTool,
 )
-from language_model_gateway.gateway.tools.url_to_markdown_tool import URLToMarkdownTool
 from language_model_gateway.gateway.tools.calculator_average_tool import (
     CalculatorAverageTool,
 )
@@ -128,32 +124,16 @@ class ToolProvider:
         confluence_helper: ConfluenceHelper,
         databricks_helper: DatabricksHelper,
     ) -> None:
-        web_search_tool: Optional[BaseTool] = None
-        default_web_search_tool: str = environ.get(
-            "DEFAULT_WEB_SEARCH_TOOL", "duckduckgo"
-        )
-        match default_web_search_tool:
-            case "duckduckgo_search":
-                web_search_tool = DuckDuckGoSearchRun()
-            case "google_search":
-                web_search_tool = GoogleSearchTool()
-            case _:
-                raise ValueError(
-                    f"Unknown default web search tool: {default_web_search_tool}"
-                )
-
         self.tools: Dict[str, BaseTool] = {
             "current_date": CurrentTimeTool(),
             "calculator_average": CalculatorAverageTool(),
             "calculator_stddev": CalculatorStddevTool(),
             "calculator_sum": CalculatorSumTool(),
             "calculator_length": CalculatorLengthTool(),
-            "web_search": web_search_tool,
             "pubmed": PubmedQueryRun(),
-            "google_search": GoogleSearchTool(),
-            "duckduckgo_search": DuckDuckGoSearchRun(),
-            "python_repl": PythonReplTool(),
-            "get_web_page": URLToMarkdownTool(),
+            # "google_search": GoogleSearchTool(),
+            # "duckduckgo_search": DuckDuckGoSearchRun(),
+            # "python_repl": PythonReplTool(),
             "arxiv_search": ArxivQueryRun(),
             "health_summary_generator": HealthSummaryGeneratorTool(
                 file_manager_factory=file_manager_factory,

@@ -2,7 +2,7 @@
 title: LangChain Pipe Function (Streaming Version)
 author: Imran Qureshi @ b.well Connected Health (mailto:imran.qureshi@bwell.com)
 author_url: https://github.com/imranq2
-version: 0.3.0
+version: 0.4.0
 
 This module defines a Pipe class that reads the oauth_id_token from the request cookies
 and uses it in Authorization header to make requests to the OpenAI API.
@@ -14,6 +14,11 @@ Supports three API modes via the ``api_mode`` valve:
 - ``responses_stateful``: OpenAI Responses API with server-side state; uses
   ``previous_response_id`` to chain conversation turns so only the latest user
   message is sent each turn (``/responses`` with ``store: true``)
+
+MCP App Support:
+- The backend can emit ``event: mcp_app`` SSE events containing HTML payloads.
+- These are rendered inline as sandboxed iframes via Open WebUI's embed system.
+- Backend format: ``event: mcp_app\\ndata: {"html": "<html>...</html>"}\\n\\n``
 """
 
 import asyncio
@@ -35,7 +40,7 @@ from typing import (
     Any,
     Dict,
     Generator,
-    cast,
+    Tuple,
 )
 from urllib.parse import urlparse, urlunparse
 
@@ -47,6 +52,200 @@ logger = logging.getLogger(__name__)
 
 CACHE_TTL_SECONDS = 60 * 60
 LLM_CALL_TIMEOUT = 60 * 5
+
+# Suppressed task types that should not emit status indicators
+_SILENT_TASK_TYPES = frozenset(
+    {"title_generation", "tags_generation", "emoji_generation"}
+)
+
+_LOADING_PHRASES: List[str] = [
+    "\u2705 Accomplishing",
+    "\u26a1 Actioning",
+    "\u2728 Actualizing",
+    "\U0001f3d7\ufe0f Architecting",
+    "\U0001f35e Baking",
+    "\U0001f526 Beaming",
+    "\U0001f3b6 Beboppin'",
+    "\U0001f616 Befuddling",
+    "\U0001f32c\ufe0f Billowing",
+    "\U0001f373 Blanching",
+    "\U0001f4e2 Bloviating",
+    "\U0001f57a Boogieing",
+    "\U0001f939 Boondoggling",
+    "\U0001f47e Booping",
+    "\U0001f97e Bootstrapping",
+    "\u2615 Brewing",
+    "\U0001f95f Bunning",
+    "\U0001f407 Burrowing",
+    "\U0001f9ee Calculating",
+    "\U0001f498 Canoodling",
+    "\U0001f36e Caramelizing",
+    "\U0001f4a7 Cascading",
+    "\U0001f680 Catapulting",
+    "\U0001f9e0 Cerebrating",
+    "\U0001f4e1 Channeling",
+    "\U0001f483 Choreographing",
+    "\U0001f300 Churning",
+    "\U0001f916 Clauding",
+    "\U0001f54a\ufe0f Coalescing",
+    "\U0001f914 Cogitating",
+    "\U0001f527 Combobulating",
+    "\U0001f3b5 Composing",
+    "\U0001f4bb Computing",
+    "\U0001f9ea Concocting",
+    "\U0001f4ad Considering",
+    "\U0001f4ad Contemplating",
+    "\U0001f373 Cooking",
+    "\U0001f3a8 Crafting",
+    "\u2728 Creating",
+    "\U0001f4aa Crunching",
+    "\U0001f48e Crystallizing",
+    "\U0001f331 Cultivating",
+    "\U0001f50d Deciphering",
+    "\u2696\ufe0f Deliberating",
+    "\U0001f3af Determining",
+    "\u23f3 Dilly-dallying",
+    "\U0001f635 Discombobulating",
+    "\U0001f4aa Doing",
+    "\u270f\ufe0f Doodling",
+    "\U0001f327\ufe0f Drizzling",
+    "\U0001f30a Ebbing",
+    "\u2705 Effecting",
+    "\U0001f4a1 Elucidating",
+    "\U0001f380 Embellishing",
+    "\U0001fa84 Enchanting",
+    "\U0001f52e Envisioning",
+    "\U0001f32b\ufe0f Evaporating",
+    "\U0001f37a Fermenting",
+    "\U0001f3bb Fiddle-faddling",
+    "\U0001f9d0 Finagling",
+    "\U0001f525 Flambing",
+    "\U0001f47b Flibbertigibbeting",
+    "\U0001f30a Flowing",
+    "\U0001f633 Flummoxing",
+    "\U0001f98b Fluttering",
+    "\U0001f525 Forging",
+    "\U0001f9f1 Forming",
+    "\U0001f938 Frolicking",
+    "\U0001f9c1 Frosting",
+    "\U0001f6b6 Gallivanting",
+    "\U0001f40e Galloping",
+    "\U0001f33f Garnishing",
+    "\u2699\ufe0f Generating",
+    "\U0001f44b Gesticulating",
+    "\U0001f33e Germinating",
+    "\U0001f4be Gitifying",
+    "\U0001f3b6 Grooving",
+    "\U0001f4a8 Gusting",
+    "\U0001f3b6 Harmonizing",
+    "#\ufe0f\u20e3 Hashing",
+    "\U0001f423 Hatching",
+    "\U0001f42e Herding",
+    "\U0001f4ef Honking",
+    "\U0001f389 Hullaballooing",
+    "\U0001f680 Hyperspacing",
+    "\U0001f4a1 Ideating",
+    "\U0001f4ad Imagining",
+    "\U0001f3b7 Improvising",
+    "\U0001f95a Incubating",
+    "\U0001f9e0 Inferring",
+    "\U0001f375 Infusing",
+    "\u26a1 Ionizing",
+    "\U0001f57a Jitterbugging",
+    "\U0001f52a Julienning",
+    "\U0001f35e Kneading",
+    "\U0001f35e Leavening",
+    "\U0001fa84 Levitating",
+    "\U0001f634 Lollygagging",
+    "\u2728 Manifesting",
+    "\U0001f356 Marinating",
+    "\U0001f6b6 Meandering",
+    "\U0001f98b Metamorphosing",
+    "\U0001f32b\ufe0f Misting",
+    "\U0001f576\ufe0f Moonwalking",
+    "\U0001f6b6 Moseying",
+    "\U0001f914 Mulling",
+    "\U0001f4aa Mustering",
+    "\U0001f3b6 Musing",
+    "\U0001f32b\ufe0f Nebulizing",
+    "\U0001f426 Nesting",
+    "\U0001f4f0 Newspapering",
+    "\U0001f35c Noodling",
+    "\u269b\ufe0f Nucleating",
+    "\U0001f6f0\ufe0f Orbiting",
+    "\U0001f3bc Orchestrating",
+    "\U0001f4a7 Osmosing",
+    "\U0001f6b6 Perambulating",
+    "\u2615 Percolating",
+    "\U0001f4d6 Perusing",
+    "\U0001f914 Philosophising",
+    "\U0001f33b Photosynthesizing",
+    "\U0001f41d Pollinating",
+    "\U0001f914 Pondering",
+    "\U0001f9d0 Pontificating",
+    "\U0001f43e Pouncing",
+    "\U0001f327\ufe0f Precipitating",
+    "\U0001f3a9 Prestidigitating",
+    "\u2699\ufe0f Processing",
+    "\U0001f4cb Proofing",
+    "\U0001f331 Propagating",
+    "\U0001f527 Puttering",
+    "\U0001f9e9 Puzzling",
+    "\u269b\ufe0f Quantumizing",
+    "\u2728 Razzle-dazzling",
+    "\U0001f3b7 Razzmatazzing",
+    "\U0001f527 Recombobulating",
+    "\U0001f578\ufe0f Reticulating",
+    "\U0001f413 Roosting",
+    "\U0001f404 Ruminating",
+    "\U0001f373 Sauting",
+    "\U0001f401 Scampering",
+    "\U0001f6b6 Schlepping",
+    "\U0001f401 Scurrying",
+    "\U0001f9c2 Seasoning",
+    "\U0001f608 Shenaniganing",
+    "\U0001f483 Shimmying",
+    "\U0001f372 Simmering",
+    "\U0001f3c3 Skedaddling",
+    "\u270f\ufe0f Sketching",
+    "\U0001f40d Slithering",
+    "\U0001f917 Smooshing",
+    "\U0001f9e6 Sock-hopping",
+    "\u26f0\ufe0f Spelunking",
+    "\U0001f300 Spinning",
+    "\U0001f33f Sprouting",
+    "\U0001f372 Stewing",
+    "\U0001f4a8 Sublimating",
+    "\U0001f300 Swirling",
+    "\U0001f985 Swooping",
+    "\U0001f9ec Symbioting",
+    "\U0001f52c Synthesizing",
+    "\U0001f321\ufe0f Tempering",
+    "\U0001f4ad Thinking",
+    "\u26a1 Thundering",
+    "\U0001f527 Tinkering",
+    "\U0001f921 Tomfoolering",
+    "\U0001f643 Topsy-turvying",
+    "\u2728 Transfiguring",
+    "\U0001f9ea Transmuting",
+    "\U0001f500 Twisting",
+    "\U0001f30a Undulating",
+    "\U0001f33a Unfurling",
+    "\U0001f9f6 Unravelling",
+    "\U0001f60e Vibing",
+    "\U0001f986 Waddling",
+    "\U0001f6b6 Wandering",
+    "\U0001f300 Warping",
+    "\U0001f937 Whatchamacalliting",
+    "\U0001f300 Whirlpooling",
+    "\u2699\ufe0f Whirring",
+    "\U0001f9d1\u200d\U0001f373 Whisking",
+    "\U0001f974 Wibbling",
+    "\U0001f4bc Working",
+    "\U0001f920 Wrangling",
+    "\U0001f34b Zesting",
+    "\u21af Zigzagging",
+]
 
 
 class Pipe:
@@ -112,11 +311,15 @@ class Pipe:
                 "previous_response_id to chain conversation turns."
             ),
         )
+        mcp_app_event_name: str = Field(
+            default="mcp_app",
+            description="SSE event name that signals an MCP app embed from the backend.",
+        )
 
     def __init__(self) -> None:
         self.type: str = "pipe"
         self.id: str = "language_model_gateway"
-        openai_api_base_url_ = self.read_base_url()
+        openai_api_base_url_ = self._read_base_url()
         self.valves = self.Valves(OPENAI_API_BASE_URL=openai_api_base_url_)
         self.name: str = (
             self.valves.model_name_prefix.strip()
@@ -128,7 +331,7 @@ class Pipe:
         self._response_id_by_chat: Dict[str, str] = {}
 
     @staticmethod
-    def read_base_url() -> Optional[str]:
+    def _read_base_url() -> Optional[str]:
         return os.getenv("LANGUAGE_MODEL_GATEWAY_API_BASE_URL") or os.getenv(
             "OPENAI_API_BASE_URL"
         )
@@ -184,197 +387,16 @@ class Pipe:
                 }
             )
 
-    # ── Loading indicator ────────────────────────────────────────────────
+    @staticmethod
+    async def _emit_embeds(
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+        embeds: List[str],
+    ) -> None:
+        """Emit MCP app HTML embeds to be rendered inline as sandboxed iframes."""
+        if emitter and embeds:
+            await emitter({"type": "embeds", "data": {"embeds": embeds}})
 
-    _LOADING_PHRASES: List[str] = [
-        "\u2705 Accomplishing",
-        "\u26a1 Actioning",
-        "\u2728 Actualizing",
-        "\U0001f3d7\ufe0f Architecting",
-        "\U0001f35e Baking",
-        "\U0001f526 Beaming",
-        "\U0001f3b6 Beboppin'",
-        "\U0001f616 Befuddling",
-        "\U0001f32c\ufe0f Billowing",
-        "\U0001f373 Blanching",
-        "\U0001f4e2 Bloviating",
-        "\U0001f57a Boogieing",
-        "\U0001f939 Boondoggling",
-        "\U0001f47e Booping",
-        "\U0001f97e Bootstrapping",
-        "\u2615 Brewing",
-        "\U0001f95f Bunning",
-        "\U0001f407 Burrowing",
-        "\U0001f9ee Calculating",
-        "\U0001f498 Canoodling",
-        "\U0001f36e Caramelizing",
-        "\U0001f4a7 Cascading",
-        "\U0001f680 Catapulting",
-        "\U0001f9e0 Cerebrating",
-        "\U0001f4e1 Channeling",
-        "\U0001f4e1 Channelling",
-        "\U0001f483 Choreographing",
-        "\U0001f300 Churning",
-        "\U0001f916 Clauding",
-        "\U0001f54a\ufe0f Coalescing",
-        "\U0001f914 Cogitating",
-        "\U0001f527 Combobulating",
-        "\U0001f3b5 Composing",
-        "\U0001f4bb Computing",
-        "\U0001f9ea Concocting",
-        "\U0001f4ad Considering",
-        "\U0001f4ad Contemplating",
-        "\U0001f373 Cooking",
-        "\U0001f3a8 Crafting",
-        "\u2728 Creating",
-        "\U0001f4aa Crunching",
-        "\U0001f48e Crystallizing",
-        "\U0001f331 Cultivating",
-        "\U0001f50d Deciphering",
-        "\u2696\ufe0f Deliberating",
-        "\U0001f3af Determining",
-        "\u23f3 Dilly-dallying",
-        "\U0001f635 Discombobulating",
-        "\U0001f4aa Doing",
-        "\u270f\ufe0f Doodling",
-        "\U0001f327\ufe0f Drizzling",
-        "\U0001f30a Ebbing",
-        "\u2705 Effecting",
-        "\U0001f4a1 Elucidating",
-        "\U0001f380 Embellishing",
-        "\U0001fa84 Enchanting",
-        "\U0001f52e Envisioning",
-        "\U0001f32b\ufe0f Evaporating",
-        "\U0001f37a Fermenting",
-        "\U0001f3bb Fiddle-faddling",
-        "\U0001f9d0 Finagling",
-        "\U0001f525 Flambing",
-        "\U0001f47b Flibbertigibbeting",
-        "\U0001f30a Flowing",
-        "\U0001f633 Flummoxing",
-        "\U0001f98b Fluttering",
-        "\U0001f525 Forging",
-        "\U0001f9f1 Forming",
-        "\U0001f938 Frolicking",
-        "\U0001f9c1 Frosting",
-        "\U0001f6b6 Gallivanting",
-        "\U0001f40e Galloping",
-        "\U0001f33f Garnishing",
-        "\u2699\ufe0f Generating",
-        "\U0001f44b Gesticulating",
-        "\U0001f33e Germinating",
-        "\U0001f4be Gitifying",
-        "\U0001f3b6 Grooving",
-        "\U0001f4a8 Gusting",
-        "\U0001f3b6 Harmonizing",
-        "#\ufe0f\u20e3 Hashing",
-        "\U0001f423 Hatching",
-        "\U0001f42e Herding",
-        "\U0001f4ef Honking",
-        "\U0001f389 Hullaballooing",
-        "\U0001f680 Hyperspacing",
-        "\U0001f4a1 Ideating",
-        "\U0001f4ad Imagining",
-        "\U0001f3b7 Improvising",
-        "\U0001f95a Incubating",
-        "\U0001f9e0 Inferring",
-        "\U0001f375 Infusing",
-        "\u26a1 Ionizing",
-        "\U0001f57a Jitterbugging",
-        "\U0001f52a Julienning",
-        "\U0001f35e Kneading",
-        "\U0001f35e Leavening",
-        "\U0001fa84 Levitating",
-        "\U0001f634 Lollygagging",
-        "\u2728 Manifesting",
-        "\U0001f356 Marinating",
-        "\U0001f6b6 Meandering",
-        "\U0001f98b Metamorphosing",
-        "\U0001f32b\ufe0f Misting",
-        "\U0001f576\ufe0f Moonwalking",
-        "\U0001f6b6 Moseying",
-        "\U0001f914 Mulling",
-        "\U0001f4aa Mustering",
-        "\U0001f3b6 Musing",
-        "\U0001f32b\ufe0f Nebulizing",
-        "\U0001f426 Nesting",
-        "\U0001f4f0 Newspapering",
-        "\U0001f35c Noodling",
-        "\u269b\ufe0f Nucleating",
-        "\U0001f6f0\ufe0f Orbiting",
-        "\U0001f3bc Orchestrating",
-        "\U0001f4a7 Osmosing",
-        "\U0001f6b6 Perambulating",
-        "\u2615 Percolating",
-        "\U0001f4d6 Perusing",
-        "\U0001f914 Philosophising",
-        "\U0001f33b Photosynthesizing",
-        "\U0001f41d Pollinating",
-        "\U0001f914 Pondering",
-        "\U0001f9d0 Pontificating",
-        "\U0001f43e Pouncing",
-        "\U0001f327\ufe0f Precipitating",
-        "\U0001f3a9 Prestidigitating",
-        "\u2699\ufe0f Processing",
-        "\U0001f4cb Proofing",
-        "\U0001f331 Propagating",
-        "\U0001f527 Puttering",
-        "\U0001f9e9 Puzzling",
-        "\u269b\ufe0f Quantumizing",
-        "\u2728 Razzle-dazzling",
-        "\U0001f3b7 Razzmatazzing",
-        "\U0001f527 Recombobulating",
-        "\U0001f578\ufe0f Reticulating",
-        "\U0001f413 Roosting",
-        "\U0001f404 Ruminating",
-        "\U0001f373 Sauting",
-        "\U0001f401 Scampering",
-        "\U0001f6b6 Schlepping",
-        "\U0001f401 Scurrying",
-        "\U0001f9c2 Seasoning",
-        "\U0001f608 Shenaniganing",
-        "\U0001f483 Shimmying",
-        "\U0001f372 Simmering",
-        "\U0001f3c3 Skedaddling",
-        "\u270f\ufe0f Sketching",
-        "\U0001f40d Slithering",
-        "\U0001f917 Smooshing",
-        "\U0001f9e6 Sock-hopping",
-        "\u26f0\ufe0f Spelunking",
-        "\U0001f300 Spinning",
-        "\U0001f33f Sprouting",
-        "\U0001f372 Stewing",
-        "\U0001f4a8 Sublimating",
-        "\U0001f300 Swirling",
-        "\U0001f985 Swooping",
-        "\U0001f9ec Symbioting",
-        "\U0001f52c Synthesizing",
-        "\U0001f321\ufe0f Tempering",
-        "\U0001f4ad Thinking",
-        "\u26a1 Thundering",
-        "\U0001f527 Tinkering",
-        "\U0001f921 Tomfoolering",
-        "\U0001f643 Topsy-turvying",
-        "\u2728 Transfiguring",
-        "\U0001f9ea Transmuting",
-        "\U0001f500 Twisting",
-        "\U0001f30a Undulating",
-        "\U0001f33a Unfurling",
-        "\U0001f9f6 Unravelling",
-        "\U0001f60e Vibing",
-        "\U0001f986 Waddling",
-        "\U0001f6b6 Wandering",
-        "\U0001f300 Warping",
-        "\U0001f937 Whatchamacalliting",
-        "\U0001f300 Whirlpooling",
-        "\u2699\ufe0f Whirring",
-        "\U0001f9d1\u200d\U0001f373 Whisking",
-        "\U0001f974 Wibbling",
-        "\U0001f4bc Working",
-        "\U0001f920 Wrangling",
-        "\U0001f34b Zesting",
-        "\u21af Zigzagging",
-    ]
+    # ── Loading indicator ────────────────────────────────────────────────
 
     @classmethod
     def _create_thinking_tasks(
@@ -387,7 +409,7 @@ class Pipe:
             return []
 
         async def _cycle_phrases() -> None:
-            phrases = cls._LOADING_PHRASES[:]
+            phrases = _LOADING_PHRASES[:]
             random.shuffle(phrases)
             phrase_idx = 0
             tick = 0
@@ -446,12 +468,6 @@ class Pipe:
         start_time: float,
         usage: Dict[str, Any],
     ) -> None:
-        """Cancel the loading indicator and emit Completed status + completion event.
-
-        Called from inside the streaming methods so the events fire during the
-        same __anext__() call that processes the final SSE chunk — before the
-        outer generator needs another pull from OpenWebUI.
-        """
         self._cancel_thinking(thinking_tasks)
         elapsed = perf_counter() - start_time
         stats = self._format_elapsed_and_tokens(elapsed, usage)
@@ -463,8 +479,8 @@ class Pipe:
 
     # ── URL / logging helpers ────────────────────────────────────────────
 
-    @classmethod
-    def pathlib_url_join(cls, base_url: str, path: str) -> str:
+    @staticmethod
+    def _url_join(base_url: str, path: str) -> str:
         parsed_base = urlparse(base_url)
         full_path = str(PurePosixPath(parsed_base.path) / path.lstrip("/"))
         return urlunparse(
@@ -479,7 +495,7 @@ class Pipe:
         )
 
     @staticmethod
-    def log_httpx_request(request: httpx.Request) -> str:
+    def _log_request(request: httpx.Request) -> str:
         return (
             f"HTTPX Request:\n"
             f"- Method: {request.method}\n"
@@ -489,24 +505,24 @@ class Pipe:
         )
 
     @staticmethod
-    def log_response_as_string(response1: httpx.Response) -> str:
+    def _log_response(response: httpx.Response) -> str:
         try:
             try:
-                response_body = json.dumps(response1.json(), indent=2)
+                response_body = json.dumps(response.json(), indent=2)
             except (ValueError, json.JSONDecodeError):
-                response_body = response1.text[:1000]
+                response_body = response.text[:1000]
         except Exception:
             response_body = "(Unable to decode response body)"
         return (
             f"HTTPX Response Log:\n"
             f"- Timestamp: {datetime.datetime.now().isoformat()}\n"
-            f"- Status Code: {response1.status_code}\n"
-            f"- URL: {response1.request.url}\n"
-            f"- Method: {response1.request.method}\n"
-            f"- Response Headers: {json.dumps(dict(response1.headers), indent=2)}\n"
+            f"- Status Code: {response.status_code}\n"
+            f"- URL: {response.request.url}\n"
+            f"- Method: {response.request.method}\n"
+            f"- Response Headers: {json.dumps(dict(response.headers), indent=2)}\n"
             f"- Response Body: {response_body}\n"
-            f"- Response Encoding: {response1.encoding}\n"
-            f"- Response Elapsed Time: {response1.elapsed}"
+            f"- Response Encoding: {response.encoding}\n"
+            f"- Response Elapsed Time: {response.elapsed}"
         )
 
     # ── Header / request helpers ─────────────────────────────────────────
@@ -523,7 +539,7 @@ class Pipe:
         message_id: Optional[str],
         debug_mode: bool,
     ) -> Dict[str, str]:
-        headers = {
+        headers: Dict[str, str] = {
             "Content-Type": "application/json",
             "Accept": "application/json, text/event-stream",
             "Authorization": f"Bearer {access_token}",
@@ -537,31 +553,34 @@ class Pipe:
         if self.valves.client_id_header_value:
             headers["X-Client-Id"] = self.valves.client_id_header_value
 
-        for key in [
+        for key in (
             "User-Agent",
             "Referrer",
             "Cookie",
             "traceparent",
             "origin",
             "Accept-Encoding",
-        ]:
+        ):
             if key in request.headers:
                 headers[key] = request.headers[key]
+
         if user:
-            for user_key, header_key in [
+            for user_key, header_key in (
                 ("name", "X-OpenWebUI-User-Name"),
                 ("id", "X-OpenWebUI-User-Id"),
                 ("email", "X-OpenWebUI-User-Email"),
                 ("role", "X-OpenWebUI-User-Role"),
-            ]:
+            ):
                 if user.get(user_key):
                     headers[header_key] = user[user_key]
             info = user.get("info")
-            if info and isinstance(info, dict) and info.get("location"):
+            if isinstance(info, dict) and info.get("location"):
                 headers["X-OpenWebUI-User-Location"] = info["location"]
+
         for key, value in request.headers.items():
             if key.lower().startswith("x-"):
                 headers[key] = value
+
         return headers
 
     @staticmethod
@@ -579,10 +598,10 @@ class Pipe:
                 return content
             if isinstance(content, list):
                 for item in content:
-                    if not isinstance(item, dict):
-                        continue
-                    if item.get("type") == "text" and isinstance(item.get("text"), str):
-                        return cast(str, item["text"])
+                    if isinstance(item, dict) and item.get("type") == "text":
+                        text = item.get("text")
+                        if isinstance(text, str):
+                            return text
             if isinstance(content, dict):
                 text = content.get("text")
                 if isinstance(text, str):
@@ -603,15 +622,16 @@ class Pipe:
         headers: Dict[str, str],
         payload: Dict[str, Any],
     ) -> Generator[str, None, None]:
-        if self.valves.debug_mode:
-            yield f"User:\n{json.dumps(user, indent=2) if user else None}\n"
-            yield f"Original Headers:\n{dict(request.headers)}\n"
-            yield url + "\n"
-            yield f"New Headers: {dict(headers)}\n"
-            yield json.dumps(payload) + "\n"
-            info = user.get("info") if user else None
-            if info and isinstance(info, dict) and info.get("location"):
-                yield f"Location: {type(info['location']).__name__} {info['location']}\n"
+        if not self.valves.debug_mode:
+            return
+        yield f"User:\n{json.dumps(user, indent=2) if user else None}\n"
+        yield f"Original Headers:\n{dict(request.headers)}\n"
+        yield url + "\n"
+        yield f"New Headers: {dict(headers)}\n"
+        yield json.dumps(payload) + "\n"
+        info = user.get("info") if user else None
+        if isinstance(info, dict) and info.get("location"):
+            yield f"Location: {type(info['location']).__name__} {info['location']}\n"
 
     # ── Completions → Responses API body transformation ──────────────────
 
@@ -641,12 +661,11 @@ class Pipe:
                 continue
 
             if role == "user":
-                content_blocks = raw_content
-                if isinstance(content_blocks, str):
-                    content_blocks = [{"type": "input_text", "text": content_blocks}]
-                elif isinstance(content_blocks, list):
+                if isinstance(raw_content, str):
+                    content_blocks: Any = [{"type": "input_text", "text": raw_content}]
+                elif isinstance(raw_content, list):
                     transformed: List[Dict[str, Any]] = []
-                    for block in content_blocks:
+                    for block in raw_content:
                         if not isinstance(block, dict):
                             continue
                         block_type = block.get("type", "")
@@ -666,6 +685,8 @@ class Pipe:
                         else:
                             transformed.append(block)
                     content_blocks = transformed
+                else:
+                    content_blocks = raw_content
                 input_items.append({"role": "user", "content": content_blocks})
 
             elif role == "assistant":
@@ -692,7 +713,8 @@ class Pipe:
 
         if previous_response_id:
             responses_payload["previous_response_id"] = previous_response_id
-            last_user_items: list[Dict[str, Any]] = []
+            # Only send the last user message when chaining
+            last_user_items: List[Dict[str, Any]] = []
             for item in reversed(input_items):
                 if item.get("role") == "user":
                     last_user_items.insert(0, item)
@@ -715,43 +737,126 @@ class Pipe:
 
         return responses_payload
 
-    # ── SSE parsers ──────────────────────────────────────────────────────
+    # ── SSE parser ───────────────────────────────────────────────────────
 
     async def _iter_sse_events(
         self,
         response: httpx.Response,
-    ) -> AsyncGenerator[Dict[str, Any], None]:
+    ) -> AsyncGenerator[Tuple[str, Dict[str, Any]], None]:
+        """Parse an SSE stream, yielding (event_type, parsed_data) tuples.
+
+        Properly handles named ``event:`` fields per the SSE spec.
+        When no ``event:`` field is present, yields with event_type="".
+        Supports multi-line ``data:`` fields (concatenated with newlines).
+        Terminates on ``data: [DONE]``.
+        """
         buf = bytearray()
+        current_event = ""
+        data_lines: List[bytes] = []
+
         async for chunk in response.aiter_bytes():
             buf.extend(chunk)
             start_idx = 0
+
             while True:
                 newline_idx = buf.find(b"\n", start_idx)
                 if newline_idx == -1:
                     break
 
-                line = buf[start_idx:newline_idx].strip()
+                line = buf[start_idx:newline_idx]
                 start_idx = newline_idx + 1
 
-                if not line or line.startswith(b":"):
+                stripped = line.strip()
+
+                # Blank line = event boundary → dispatch accumulated data
+                if not stripped:
+                    if data_lines:
+                        combined = b"\n".join(data_lines)
+                        data_lines.clear()
+
+                        if combined.strip() == b"[DONE]":
+                            return
+
+                        try:
+                            parsed = json.loads(combined.decode("utf-8"))
+                            yield current_event, parsed
+                        except json.JSONDecodeError as e:
+                            logger.warning(
+                                f"Failed to parse SSE data: {combined!r}, error: {e}"
+                            )
+                    current_event = ""
                     continue
-                if not line.startswith(b"data:"):
+
+                # Comment lines
+                if stripped.startswith(b":"):
                     continue
 
-                data_part = line[5:].strip()
-
-                if data_part == b"[DONE]":
-                    return
-
-                try:
-                    yield json.loads(data_part.decode("utf-8"))
-                except json.JSONDecodeError as e:
-                    logger.warning(
-                        f"Failed to parse SSE data: {data_part!r}, error: {e}"
+                # Named event field
+                if stripped.startswith(b"event:"):
+                    current_event = (
+                        stripped[6:].strip().decode("utf-8", errors="replace")
                     )
+                    continue
+
+                # Data field (accumulate for multi-line data per SSE spec)
+                if stripped.startswith(b"data:"):
+                    data_part = stripped[5:].strip()
+                    if data_part == b"[DONE]":
+                        return
+                    data_lines.append(data_part)
+                    continue
 
             if start_idx > 0:
                 del buf[:start_idx]
+
+        # Flush any remaining buffered data at stream end
+        if data_lines:
+            combined = b"\n".join(data_lines)
+            if combined.strip() != b"[DONE]":
+                try:
+                    parsed = json.loads(combined.decode("utf-8"))
+                    yield current_event, parsed
+                except json.JSONDecodeError:
+                    pass
+
+    # ── MCP App embed handling ───────────────────────────────────────────
+
+    async def _handle_mcp_app_event(
+        self,
+        data: Dict[str, Any],
+        emitter: Optional[Callable[[Dict[str, Any]], Awaitable[None]]],
+    ) -> None:
+        """Process an MCP app SSE event and emit it as an embed.
+
+        Expected backend payload formats:
+
+        Single app:
+            event: mcp_app
+            data: {"html": "<html>...</html>", "title": "Optional Title"}
+
+        Multiple apps:
+            event: mcp_app
+            data: {"apps": [{"html": "...", "title": "..."}, ...]}
+        """
+        embeds: List[str] = []
+
+        html = data.get("html")
+        if isinstance(html, str) and html.strip():
+            embeds.append(html)
+
+        apps = data.get("apps")
+        if isinstance(apps, list):
+            for app in apps:
+                if isinstance(app, dict):
+                    app_html = app.get("html")
+                    if isinstance(app_html, str) and app_html.strip():
+                        embeds.append(app_html)
+
+        if embeds:
+            logger.info(f"Emitting {len(embeds)} MCP app embed(s)")
+            await self._emit_embeds(emitter, embeds)
+
+    # ── Stream processors ────────────────────────────────────────────────
 
     async def _stream_chat_completions(
         self,
@@ -762,15 +867,16 @@ class Pipe:
         usage_collector: Dict[str, Any],
         start_time: float,
     ) -> AsyncGenerator[str, None]:
-        """Parse Chat Completions streaming response.
-
-        Emits "Completed" status from *inside* this generator so the event
-        fires during the same ``__anext__()`` call that processes the final
-        SSE chunks — before OpenWebUI needs to pull again.
-        """
         first_token_received = False
+        mcp_event_name = self.valves.mcp_app_event_name
 
-        async for chunk_json in self._iter_sse_events(response):
+        async for event_type, chunk_json in self._iter_sse_events(response):
+            # ── MCP App embed ────────────────────────────────────
+            if event_type == mcp_event_name:
+                await self._handle_mcp_app_event(chunk_json, emitter)
+                continue
+
+            # ── Usage data ───────────────────────────────────────
             if "usage" in chunk_json and chunk_json["usage"]:
                 logger.info(f"Chat Completions usage received: {chunk_json['usage']}")
                 self._merge_usage(usage_collector, chunk_json["usage"])
@@ -788,7 +894,6 @@ class Pipe:
                     await self._emit_status(emitter, "Responding\u2026", done=True)
                 yield content
 
-        # Stream exhausted — emit completed immediately (same __anext__ call)
         await self._finish_stream(emitter, thinking_tasks, start_time, usage_collector)
 
     async def _stream_responses_api(
@@ -801,15 +906,15 @@ class Pipe:
         usage_collector: Dict[str, Any],
         start_time: float,
     ) -> AsyncGenerator[str, None]:
-        """Parse Responses API streaming events.
-
-        Emits "Completed" status from *inside* this generator so the event
-        fires during the same ``__anext__()`` call that processes
-        ``response.completed`` — before OpenWebUI needs to pull again.
-        """
         first_token_received = False
+        mcp_event_name = self.valves.mcp_app_event_name
 
-        async for event in self._iter_sse_events(response):
+        async for event_type, event in self._iter_sse_events(response):
+            # ── MCP App embed ────────────────────────────────────
+            if event_type == mcp_event_name:
+                await self._handle_mcp_app_event(event, emitter)
+                continue
+
             etype = event.get("type", "")
 
             if etype == "response.output_text.delta":
@@ -862,7 +967,6 @@ class Pipe:
                     self._merge_usage(usage_collector, usage)
                 break
 
-        # Stream exhausted — emit completed immediately (same __anext__ call)
         await self._finish_stream(emitter, thinking_tasks, start_time, usage_collector)
 
     @staticmethod
@@ -917,7 +1021,7 @@ class Pipe:
             raise ValueError("Request object must be provided.")
 
         open_api_base_url: Optional[str] = (
-            self.valves.OPENAI_API_BASE_URL or self.read_base_url()
+            self.valves.OPENAI_API_BASE_URL or self._read_base_url()
         )
         if not open_api_base_url:
             raise RuntimeError(
@@ -943,12 +1047,10 @@ class Pipe:
                 store=is_stateful,
                 previous_response_id=previous_response_id,
             )
-            url = self.pathlib_url_join(base_url=open_api_base_url, path="responses")
+            url = self._url_join(base_url=open_api_base_url, path="responses")
         else:
             payload = {**body, "model": model_id}
-            url = self.pathlib_url_join(
-                base_url=open_api_base_url, path="chat/completions"
-            )
+            url = self._url_join(base_url=open_api_base_url, path="chat/completions")
 
         stream: Optional[bool] = self.valves.stream
         if stream is not None:
@@ -983,9 +1085,6 @@ class Pipe:
         error_occurred = False
         total_usage: Dict[str, Any] = {}
 
-        # Suppress all status emissions for lightweight background tasks
-        # (title/tags/emoji generation) that run silently in the UI.
-        _SILENT_TASK_TYPES = {"title_generation", "tags_generation", "emoji_generation"}
         task_type = (__metadata__ or {}).get("task")
         is_background_task = task_type in _SILENT_TASK_TYPES
         status_emitter = None if is_background_task else __event_emitter__
@@ -1109,8 +1208,8 @@ class Pipe:
             error_occurred = True
             error_detail = (
                 f"HTTP {e.response.status_code}: {e}\n"
-                f"{self.log_httpx_request(e.request)}\n"
-                f"{self.log_response_as_string(e.response)}"
+                f"{self._log_request(e.request)}\n"
+                f"{self._log_response(e.response)}"
             )
             logger.error(f"LanguageModelGateway::pipe {error_detail}")
             await self._emit_error(__event_emitter__, error_detail)
@@ -1154,13 +1253,13 @@ class Pipe:
 
     async def get_models(self) -> List[Dict[str, str]]:
         open_api_base_url: Optional[str] = (
-            self.valves.OPENAI_API_BASE_URL or self.read_base_url()
+            self.valves.OPENAI_API_BASE_URL or self._read_base_url()
         )
         if not open_api_base_url:
             logger.debug("OpenAI API base URL is not set.")
             return []
 
-        model_url = self.pathlib_url_join(base_url=open_api_base_url, path="models")
+        model_url = self._url_join(base_url=open_api_base_url, path="models")
         logger.debug(f"Calling models endpoint: {model_url}")
 
         try:
@@ -1206,8 +1305,8 @@ class Pipe:
             ]
 
         default_model_id = self.valves.default_model
-        if default_model_id:
-            if any(m["id"] == default_model_id for m in self.pipelines or []):
+        if default_model_id and self.pipelines:
+            if any(m["id"] == default_model_id for m in self.pipelines):
                 models = [m for m in models if m["id"] != default_model_id]
                 models.insert(0, {"id": default_model_id, "name": default_model_id})
 
