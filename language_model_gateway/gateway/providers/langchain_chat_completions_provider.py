@@ -50,6 +50,7 @@ from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
 from languagemodelcommon.mcp.interceptors.auth import (
     AuthMcpCallInterceptor,
 )
+from languagemodelcommon.mcp.mcp_client.session_pool import McpSessionPool
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
@@ -171,6 +172,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         mcp_tool_configs: list[AgentConfig],
         headers: Dict[str, str],
         auth_interceptor: AuthMcpCallInterceptor,
+        session_pool: McpSessionPool | None = None,
     ) -> tuple[list[BaseTool], ToolCatalog | None]:
         """Replace direct MCP tool loading with meta-discovery tools.
 
@@ -199,6 +201,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     catalog=catalog,
                     mcp_tool_provider=self.mcp_tool_provider,
                     auth_interceptor=auth_interceptor,
+                    session_pool=session_pool,
                 )
             )
             logger.info(
@@ -253,6 +256,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             headers=headers,
         )
 
+        # Create a per-request session pool so MCP connections are reused
+        # across tool calls within this request
+        session_pool = McpSessionPool()
+        await session_pool.__aenter__()
+
         # add MCP tools — either via meta-discovery or direct loading
         tool_catalog: ToolCatalog | None = None
         if model_config.use_tool_discovery:
@@ -261,12 +269,14 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 mcp_tool_configs=mcp_tool_configs,
                 headers=headers,
                 auth_interceptor=auth_interceptor,
+                session_pool=session_pool,
             )
         else:
             tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
                 tools=mcp_tool_configs,
                 headers=headers,
                 auth_interceptor=auth_interceptor,
+                session_pool=session_pool,
             )
 
         # add the skills tools
@@ -294,6 +304,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                     tools=tool_configs_from_request,
                     headers=headers,
                     auth_interceptor=auth_interceptor,
+                    session_pool=session_pool,
                 )
                 tools = list(tools) + list(tools_from_request)
 
@@ -356,16 +367,19 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                         async for chunk in original_generator:
                             yield chunk
                     finally:
+                        await session_pool.__aexit__(None, None, None)
                         checkpointer_cm.__exit__(None, None, None)
                         store_cm.__exit__(None, None, None)
 
                 result.body_iterator = streaming_wrapper()
                 return result
             else:
+                await session_pool.__aexit__(None, None, None)
                 checkpointer_cm.__exit__(None, None, None)
                 store_cm.__exit__(None, None, None)
                 return result
         except Exception as e:
+            await session_pool.__aexit__(None, None, None)
             checkpointer_cm.__exit__(type(e), e, e.__traceback__)
             store_cm.__exit__(type(e), e, e.__traceback__)
             raise
