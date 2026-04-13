@@ -201,25 +201,29 @@ RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-pack
 USER appuser
 
 # The number of workers can be controlled using the NUM_WORKERS environment variable
-# Otherwise the number of workers for uvicorn (using the multiprocessing worker) is chosen based on these guidelines:
+# Otherwise the number of workers for gunicorn is chosen based on these guidelines:
 # (https://sentry.io/answers/number-of-uvicorn-workers-needed-in-production/)
 # basically (cores * threads + 1)
+#
+# Timeout defaults are set high to accommodate long-running MCP tool calls (e.g. Sigma exports).
+# GUNICORN_TIMEOUT: worker timeout — kills workers that don't heartbeat within this window (default: 660s)
+# GUNICORN_KEEP_ALIVE: keep-alive for client connections (default: 45s)
+# GUNICORN_GRACEFUL_TIMEOUT: time to finish requests during shutdown (default: 660s)
 CMD ["sh", "-c", "\
-    # Get CPU info \
     CORE_COUNT=$(nproc) && \
     THREAD_COUNT=$(nproc --all) && \
-    \
-    # Calculate workers using formula: (cores * threads + 1) \
     WORKER_COUNT=$((CORE_COUNT * THREAD_COUNT + 1)) && \
     FINAL_WORKERS=${NUM_WORKERS:-$WORKER_COUNT} && \
-    \
-    # Log the configuration \
-    echo \"Starting with $FINAL_WORKERS workers (cores: $CORE_COUNT, threads: $THREAD_COUNT)\" && \
-    \
-    # Start the application \
-    uvicorn language_model_gateway.gateway.api:app \
-        --host 0.0.0.0 \
-        --port 5000 \
+    FINAL_TIMEOUT=${GUNICORN_TIMEOUT:-660} && \
+    FINAL_KEEP_ALIVE=${GUNICORN_KEEP_ALIVE:-45} && \
+    FINAL_GRACEFUL_TIMEOUT=${GUNICORN_GRACEFUL_TIMEOUT:-660} && \
+    echo \"Starting with $FINAL_WORKERS workers (cores: $CORE_COUNT, threads: $THREAD_COUNT), timeout: $FINAL_TIMEOUT, keep-alive: $FINAL_KEEP_ALIVE, graceful-timeout: $FINAL_GRACEFUL_TIMEOUT\" && \
+    gunicorn language_model_gateway.gateway.api:app \
         --workers $FINAL_WORKERS \
+        --worker-class uvicorn.workers.UvicornWorker \
+        --bind 0.0.0.0:5000 \
+        --timeout $FINAL_TIMEOUT \
+        --keep-alive $FINAL_KEEP_ALIVE \
+        --graceful-timeout $FINAL_GRACEFUL_TIMEOUT \
         --log-level $(echo ${LOG_LEVEL:-info} | tr '[:upper:]' '[:lower:]') \
     "]
