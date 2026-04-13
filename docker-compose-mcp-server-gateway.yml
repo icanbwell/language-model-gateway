@@ -11,7 +11,7 @@ services:
 #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.20
     environment:
       DEBUG_METRICS: 0
-      LOG_LEVEL: DEBUG
+      LOG_LEVEL: INFO
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration,https://icanbwell.okta.com/.well-known/openid-configuration"
       # oidcauthlib per-provider config for pass-through token validation

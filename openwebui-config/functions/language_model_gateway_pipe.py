@@ -51,7 +51,7 @@ from starlette.requests import Request
 logger = logging.getLogger(__name__)
 
 CACHE_TTL_SECONDS = 60 * 60
-LLM_CALL_TIMEOUT = 60 * 5
+LLM_CALL_TIMEOUT = 60 * 10
 
 # Suppressed task types that should not emit status indicators
 _SILENT_TASK_TYPES = frozenset(
