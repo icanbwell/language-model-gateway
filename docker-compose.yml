@@ -132,9 +132,9 @@ services:
       - uvicorn.workers.UvicornWorker
       - --bind
       - 0.0.0.0:5000
-      - --timeout=60
+      - --timeout=660
       - --keep-alive=45
-      - --graceful-timeout=30
+      - --graceful-timeout=660
       - --log-level
       - info
     ports:
