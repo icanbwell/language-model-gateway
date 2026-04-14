@@ -89,6 +89,14 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
+        # Ensure the skills directory exists before skill initialization
+        # validates it.  The directory lives inside the GitHub config cache
+        # which may not contain a configs/skills/ folder yet, or may be
+        # mid-swap by another Gunicorn worker.
+        skills_dir = environ.get("SKILLS_DIRECTORY")
+        if skills_dir:
+            makedirs(skills_dir, exist_ok=True)
+
         # Sync shared skills from GitHub/filesystem into MongoDB
         container = ContainerRegistry.get_current()
         await initialize_skills(
