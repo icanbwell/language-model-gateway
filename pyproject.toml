@@ -1,0 +1,136 @@
+[project]
+name = "language-model-gateway"
+version = "0.0.1"
+description = "Language Model Gateway service"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32.3",
+    "ariadne>=0.23.0",
+    "fastapi>=0.115.8",
+    "boto3>=1.40.21",
+    "botocore>=1.40.21",
+    "uvicorn>=0.34.0",
+    "python-crfsuite>=0.9.11",
+    "httpx>=0.28.1",
+    "httpx-sse>=0.4.0",
+    "langchain>=1.0.0",
+    "pydantic>=2.0,<3.0.0",
+    "langchain-core>=1.2.5",
+    "langchain-aws>=1.2.0",
+    "openai>=2.5.0",
+    "langchain-openai>=1.1.6",
+    "langchain-community>=0.4",
+    "grpcio>=1.74.0",
+    "langchain-google-community>=3.0.0",
+    "langgraph>=1.0.0",
+    "furl>=2.1.3",
+    "tiktoken>=0.12.0",
+    "xmltodict>=0.14.2",
+    "pypdf>=5.1.0",
+    "langchain-experimental>=0.3.3",
+    "arxiv>=2.1.3",
+    "beautifulsoup4>=4.12.3",
+    "graphviz>=0.20.3",
+    "markdownify>=0.14.1",
+    "cachetools>=5.5.0",
+    "backoff>=2.2.1",
+    "databricks-sdk>=0.42.0",
+    "pandas>=2.2.3",
+    "mcp>=1.11.0",
+    "authlib>=1.6.5",
+    "joserfc>=1.4.3",
+    "aiocache>=0.12.3",
+    "pymongo[snappy]>=4.15.0",
+    "redis>=6.4.0",
+    "ddgs>=8.1.1",
+    "langmem>=0.0.30",
+    "langgraph-checkpoint>=3.0.0",
+    "langgraph-checkpoint-mongodb>=0.2.1",
+    "langgraph-store-mongodb>=0.1.0",
+    "langchain-google-genai>=4.1.3",
+    "oidcauthlib>=3.0.6",
+    "opentelemetry-distro[otlp]>=0.60b0",
+    "opentelemetry-api>=1.39.1",
+    "opentelemetry-sdk>=1.39.1",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.39.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.39.1",
+    "opentelemetry-instrumentation-fastapi>=0.60b0",
+    "opentelemetry-instrumentation-requests>=0.60b0",
+    "opentelemetry-instrumentation-logging>=0.60b0",
+    "opentelemetry-instrumentation-httpx>=0.60b0",
+    "opentelemetry-instrumentation-aiohttp-client>=0.60b0",
+    "opentelemetry-instrumentation-asyncio>=0.60b0",
+    "opentelemetry-instrumentation-pymongo>=0.60b0",
+    "opentelemetry-instrumentation-wsgi>=0.60b0",
+    "opentelemetry-instrumentation-langchain>=0.50.1",
+    "opentelemetry-instrumentation-redis>=0.60b0",
+    "opentelemetry-instrumentation-bedrock>=0.50.1",
+    "opentelemetry-instrumentation-openai-v2>=2.3b0",
+    "opentelemetry-instrumentation-mcp>=0.50.1",
+    "prometheus-fastapi-instrumentator>=7.1.0",
+    "gunicorn>=23.0.0",
+    "py-key-value-aio>=0.4.4",
+    "langchain-ai-skills-framework>=1.0.42",
+    "language-model-common>=2.0.17",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=3.8.0",
+    "autoflake>=2.3.1",
+    "mypy>=1.19.0",
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.25.3",
+    "pytest-split>=0.10.0",
+    "black>=25.1.0",
+    "deepdiff>=8.1.1",
+    "types-requests>=2.32.4",
+    "pytest-httpx>=0.35.0",
+    "types-beautifulsoup4>=4.12.0",
+    "types-cachetools>=5.5.0",
+    "moto[s3]>=5.1.11",
+    "bandit>=1.8.3",
+    "ruff>=0.11.5",
+    "pytest-cov>=6.1.1",
+    "fastmcp>=2.13.0",
+    "respx>=0.22.0",
+    "types-botocore>=1.0.2",
+    "types-boto3>=1.40.0",
+    "types-boto3-bedrock>=1.40.0",
+    "types-boto3-s3>=1.40.0",
+    "types-boto3-textract>=1.40.0",
+    "types-boto3-bedrock-runtime>=1.40.0",
+    "python-keycloak>=5.7.0",
+    "types-authlib>=1.6.5",
+    "pandas-stubs>=2.3.2",
+    "asgi-lifespan>=2.1.0",
+    "watchfiles>=1.1.1",
+    "inotify>=0.2.12",
+    "types-psycopg2>=2.9.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "--capture=fd"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["graphviz.*", "markdownify.*", "databricks.sdk.*", "pandas.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["langmem.*", "authlib.integrations.starlette_client.*"]
+follow_untyped_imports = true
+
+[[tool.uv.index]]
+name = "alpine-wheels"
+url = "https://imranq2.github.io/alpine-wheels/docs/"
+
+[tool.uv]
+index-strategy = "unsafe-best-match"

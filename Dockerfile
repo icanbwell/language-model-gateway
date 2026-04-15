@@ -1,52 +1,52 @@
+# syntax=docker/dockerfile:1
 # Stage 1: Base image to install common dependencies and lock Python dependencies
-# This stage is responsible for setting up the environment and installing Python packages using Pipenv.
+# This stage is responsible for setting up the environment and installing Python packages using uv.
 FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS python_packages
 
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 ENV PIP_ROOT_USER_ACTION=ignore
 
-# Define an argument to control whether to run pipenv lock (used for updating Pipfile.lock)
-ARG RUN_PIPENV_LOCK=false
+# Define an argument to control whether to run uv lock (used for updating uv.lock)
+ARG RUN_UV_LOCK=false
 # Declare build-time arguments
 ARG GITHUB_TOKEN
 
 # Install common tools and dependencies (git is required for some Python packages)
 RUN apk add --no-cache git
 
-# Install pipenv, a tool for managing Python project dependencies
-RUN pip install pipenv
+# Install uv from the official image (fast, single binary)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+
+# Use a venv outside the project dir so docker-compose volume mounts don't hide it
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
 
 # Set the working directory inside the container
 WORKDIR /usr/src/language_model_gateway
 
-# Copy Pipfile and Pipfile.lock to the working directory
-# Pipfile defines the Python packages required for the project
-# Pipfile.lock ensures consistency by locking the exact versions of packages
-COPY Pipfile* /usr/src/language_model_gateway/
+# Copy pyproject.toml and uv.lock to the working directory
+COPY pyproject.toml uv.lock* /usr/src/language_model_gateway/
 
-# Show the current pip configuration (for debugging purposes)
-RUN pip config list
+# Conditionally run uv lock to update the uv.lock based on the argument provided
+# If RUN_UV_LOCK is true, it regenerates the uv.lock file with the latest versions of dependencies
+RUN if [ "$RUN_UV_LOCK" = "true" ]; then echo "Locking dependencies" && rm -f uv.lock && uv lock --verbose; fi
 
-# Conditionally run pipenv lock to update the Pipfile.lock based on the argument provided
-# If RUN_PIPENV_LOCK is true, it regenerates the Pipfile.lock file with the latest versions of dependencies
-RUN if [ "$RUN_PIPENV_LOCK" = "true" ]; then echo "Locking Pipfile" && rm -f Pipfile.lock && pipenv lock --dev --clear --verbose --extra-pip-args="--prefer-binary"; fi
+# Install all dependencies using the locked versions in uv.lock
+RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache \
+    uv sync --frozen --all-extras --no-install-project --verbose
 
-# Install all dependencies using the locked versions in Pipfile.lock
-# --dev installs development dependencies, --system installs them globally in the container's Python environment
-RUN pipenv sync --dev --system --verbose --extra-pip-args="--prefer-binary"
+# Copy lock file for retrieval
+RUN cp -f uv.lock /tmp/uv.lock
 
 # Create necessary directories and list their contents (for debugging and verification)
-RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
-RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
+RUN ls -halt /opt/venv/lib/python3.12/site-packages
+RUN ls -halt /opt/venv/bin
 
 # Check and print system and Python platform information (for debugging)
 RUN python -c "import platform; print(platform.platform()); print(platform.architecture())"
 RUN python -c "import sys; print(sys.platform, sys.version, sys.maxsize > 2**32)"
-
-# Debug pip installation and list installed packages with verbosity
-RUN pip debug --verbose
-RUN pip list -v
 
 
 # Stage 2: Development image with hot reload
@@ -56,17 +56,19 @@ FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS development
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 
-# Define an argument to control whether to run pipenv lock (not used in this stage)
+# Declare build-time arguments
 ARG GITHUB_TOKEN
 
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
 
-# Install pipenv to manage and run the application
-RUN pip install --no-cache-dir pipenv
+# Install uv for runtime use
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 ENV PROMETHEUS_MULTIPROC_DIR=/tmp/prometheus
 ENV PIP_ROOT_USER_ACTION=ignore
 
@@ -76,31 +78,22 @@ RUN mkdir -p ${PROMETHEUS_MULTIPROC_DIR}
 # Set the working directory for the project
 WORKDIR ${PROJECT_DIR}
 
-# Copy the Pipfile and Pipfile.lock files into the development image
-COPY Pipfile* ${PROJECT_DIR}
+# Copy the venv with all installed packages from the build stage
+COPY --from=python_packages /opt/venv /opt/venv
 
-# Copy installed Python packages from the first stage
-COPY --from=python_packages /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=python_packages /usr/local/bin /usr/local/bin
+# Copy pyproject.toml and uv.lock into the development image
+COPY pyproject.toml uv.lock* ${PROJECT_DIR}/
 
 # Copy the application code into the development image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
-COPY ./setup.cfg ${PROJECT_DIR}/
 
-# Copy the Pipfile.lock from the first stage
-COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock ${PROJECT_DIR}/Pipfile.lock
-COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock /tmp/Pipfile.lock
-
-# Create directories and list their contents (for debugging and verification)
-RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
-RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
+# Copy the uv.lock from the first stage
+COPY --from=python_packages /usr/src/language_model_gateway/uv.lock ${PROJECT_DIR}/uv.lock
+COPY --from=python_packages /tmp/uv.lock /tmp/uv.lock
 
 # Create the folder where we will store generated images
 RUN mkdir -p ${PROJECT_DIR}/image_generation
 RUN mkdir -p ${PROJECT_DIR}/github_config_cache
-
-# Install the dependencies using pipenv in the development environment
-RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
 
 # Expose port 5000 for the application
 EXPOSE 5000
@@ -115,7 +108,7 @@ RUN dot -V
 RUN addgroup -S appgroup && adduser -S -h /etc/appuser appuser -G appgroup
 
 # Ensure that the appuser owns the application files and directories
-RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-packages /usr/local/bin ${PROMETHEUS_MULTIPROC_DIR}
+RUN chown -R appuser:appgroup ${PROJECT_DIR} /opt/venv ${PROMETHEUS_MULTIPROC_DIR}
 
 # Switch to the restricted user to enhance security
 USER appuser
@@ -136,17 +129,19 @@ FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS production
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 
-# Define an argument to control whether to run pipenv lock (not used in this stage)
+# Declare build-time arguments
 ARG GITHUB_TOKEN
 
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
 
-# Install pipenv to manage and run the application
-RUN pip install --no-cache-dir pipenv
+# Install uv for runtime use
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 ENV PROMETHEUS_MULTIPROC_DIR=/tmp/prometheus
 ENV PIP_ROOT_USER_ACTION=ignore
 
@@ -156,31 +151,22 @@ RUN mkdir -p ${PROMETHEUS_MULTIPROC_DIR}
 # Set the working directory for the project
 WORKDIR ${PROJECT_DIR}
 
-# Copy the Pipfile and Pipfile.lock files into the development image
-COPY Pipfile* ${PROJECT_DIR}
+# Copy the venv with all installed packages from the build stage
+COPY --from=python_packages /opt/venv /opt/venv
 
-# Copy installed Python packages from the first stage
-COPY --from=python_packages /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=python_packages /usr/local/bin /usr/local/bin
+# Copy pyproject.toml and uv.lock into the production image
+COPY pyproject.toml uv.lock* ${PROJECT_DIR}/
 
-# Copy the application code into the development image
+# Copy the application code into the production image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
-COPY ./setup.cfg ${PROJECT_DIR}/
 
-# Copy the Pipfile.lock from the first stage
-COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock ${PROJECT_DIR}/Pipfile.lock
-COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock /tmp/Pipfile.lock
-
-# Create directories and list their contents (for debugging and verification)
-RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
-RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
+# Copy the uv.lock from the first stage
+COPY --from=python_packages /usr/src/language_model_gateway/uv.lock ${PROJECT_DIR}/uv.lock
+COPY --from=python_packages /tmp/uv.lock /tmp/uv.lock
 
 # Create the folder where we will store generated images
 RUN mkdir -p ${PROJECT_DIR}/image_generation
 RUN mkdir -p ${PROJECT_DIR}/github_config_cache
-
-# Install the dependencies using pipenv in the development environment
-RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
 
 # Expose port 5000 for the application
 EXPOSE 5000
@@ -195,7 +181,7 @@ RUN dot -V
 RUN addgroup -S appgroup && adduser -S -h /etc/appuser appuser -G appgroup
 
 # Ensure that the appuser owns the application files and directories
-RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-packages /usr/local/bin ${PROMETHEUS_MULTIPROC_DIR}
+RUN chown -R appuser:appgroup ${PROJECT_DIR} /opt/venv ${PROMETHEUS_MULTIPROC_DIR}
 
 # Switch to the restricted user to enhance security
 USER appuser

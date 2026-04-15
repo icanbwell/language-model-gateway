@@ -1,9 +1,9 @@
 export LANG
 
-.PHONY: Pipfile.lock
-Pipfile.lock: down create-docker-network # Locks Pipfile and updates the Pipfile.lock on the local file system
-	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
-	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
+.PHONY: uv.lock
+uv.lock: down create-docker-network ## Locks dependencies and updates uv.lock on the local file system
+	docker compose --progress=plain build --no-cache --build-arg RUN_UV_LOCK=true language-model-gateway && \
+	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/uv.lock /usr/src/language_model_gateway/uv.lock"
 
 .PHONY:devsetup
 devsetup: ## one time setup for devs
@@ -154,7 +154,7 @@ down: ## stops docker containers
 	down --remove-orphans
 
 .PHONY:update
-update: Pipfile.lock setup-pre-commit  ## Updates all the packages using Pipfile
+update: uv.lock setup-pre-commit  ## Updates all the packages using pyproject.toml
 	make build && \
 	make run-pre-commit && \
 	echo "In PyCharm, do File -> Invalidate Caches/Restart to refresh" && \
