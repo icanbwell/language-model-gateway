@@ -2,6 +2,7 @@
   "$schema": "./mcp_config_schema.json",
   "mcpServers": {
     "atlassian": {
+      "description": "Search and manage Confluence pages and Jira issues for project documentation and task tracking",
       "displayName": "Atlassian Confluence & Jira",
       "oauth": {
         "clientId": "${ATLASSIAN_OAUTH_CLIENT_ID:-}",
@@ -15,6 +16,7 @@
       "url": "https://mcp.atlassian.com/v1/mcp"
     },
     "fhir-server-client-sandbox": {
+      "description": "Query and manage FHIR healthcare resources in the client sandbox environment",
       "displayName": "b.well FHIR Client Sandbox",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -31,6 +33,7 @@
       "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
     },
     "fhir-server-dev": {
+      "description": "Query and manage FHIR healthcare resources in the development environment",
       "displayName": "b.well FHIR Dev",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -47,6 +50,7 @@
       "url": "https://mcpfhiragent.dev.icanbwell.com/"
     },
     "fhir-server-prod": {
+      "description": "Query and manage FHIR healthcare resources in the production environment",
       "displayName": "b.well FHIR Production",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -63,6 +67,7 @@
       "url": "https://mcpfhiragent.prod.icanbwell.com/"
     },
     "fhir-server-staging": {
+      "description": "Query and manage FHIR healthcare resources in the staging environment",
       "displayName": "b.well FHIR Staging",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -79,6 +84,7 @@
       "url": "https://mcpfhiragent.staging.icanbwell.com/"
     },
     "github": {
+      "description": "Access GitHub repositories, pull requests, issues, and code for software development workflows",
       "displayName": "GitHub",
       "oauth": {
         "authorizationUrl": "https://github.com/login/oauth/authorize",
@@ -91,6 +97,7 @@
       "url": "https://api.githubcopilot.com/mcp/"
     },
     "google-drive": {
+      "description": "Google Drive file management - search, read, and download files from Google Drive",
       "displayName": "Google Drive",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -101,11 +108,13 @@
       "url": "${MCP_SERVER_GATEWAY_URL}/google_drive/"
     },
     "google-search": {
+      "description": "Web search via Google - find information, news, and resources on the internet",
       "displayName": "Google Search",
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/google_search/"
     },
     "groundcover": {
+      "description": "Kubernetes observability - query logs, metrics, traces, and monitor cluster health",
       "displayName": "Groundcover",
       "headers": {
         "Authorization": "Bearer ${GROUNDCOVER_API_KEY:-}",
@@ -116,11 +125,24 @@
       "url": "https://mcp.groundcover.com/api/mcp"
     },
     "provider-search": {
+      "description": "Search for healthcare providers by name, specialty, location, and insurance network",
       "displayName": "Provider Search",
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/provider_search/"
     },
+    "sigma-reporting": {
+      "description": "Search, download, and extract data from Sigma Computing workbooks and reports (sigmacomputing.com). Use this for any sigmacomputing.com URL instead of url-to-markdown.",
+      "displayName": "Sigma Reporting",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/sigma/"
+    },
     "url-to-markdown": {
+      "description": "Fetch, scrape, and extract content from web pages and URLs, converting to clean markdown",
       "displayName": "URL to Markdown",
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/url_to_markdown/"

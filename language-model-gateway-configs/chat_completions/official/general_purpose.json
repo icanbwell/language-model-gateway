@@ -54,19 +54,8 @@
       ]
     },
     {
-      "description": "Google Drive file management - search, read, and download files from Google Drive",
-      "mcp_server": "google-drive",
-      "name": "google_drive"
-    },
-    {
-      "description": "Web search via Google - find information on the internet",
-      "mcp_server": "google-search",
-      "name": "google_search"
-    },
-    {
-      "description": "Extract and convert web page content to markdown format",
-      "mcp_server": "url-to-markdown",
-      "name": "url_to_markdown"
+      "mcp_server": "*",
+      "name": "all_mcp_servers"
     },
     {
       "description": "Search and retrieve biomedical literature from PubMed",
@@ -83,16 +72,6 @@
     {
       "description": "Extract text content from PDF documents for analysis and processing",
       "name": "pdf_text_extractor"
-    },
-    {
-      "description": "Atlassian Jira and Confluence - search issues, read documentation, manage tickets",
-      "mcp_server": "atlassian",
-      "name": "atlassian"
-    },
-    {
-      "description": "GitHub repository access - search code, read files, manage pull requests and issues",
-      "mcp_server": "github",
-      "name": "github"
     }
   ],
   "use_tool_discovery": true

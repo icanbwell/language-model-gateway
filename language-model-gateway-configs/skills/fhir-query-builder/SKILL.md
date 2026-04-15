@@ -1,7 +1,9 @@
 ---
 name: fhir-query-builder
 description: Build FHIR server query URLs with proper parameters and environment endpoints. Use when users need to construct queries for the icanbwell FHIR server across different environments (dev, staging, client-sandbox, production).
-allowed-tools: google_search url_to_markdown
+allowed-tools:
+  - google_search
+  - url_to_markdown
 ---
 
 # FHIR Query Builder

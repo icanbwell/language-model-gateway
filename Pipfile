@@ -131,9 +131,9 @@ prometheus-fastapi-instrumentator = ">=7.1.0"
 # py-key-value-aio is a Python library for working with key-value stores asynchronously
 py-key-value-aio = ">=0.4.4"
 # langchain-ai-skills-framework is a Python library for building AI skills in LangChain
-langchain-ai-skills-framework = ">=1.0.34"
+langchain-ai-skills-framework = ">=1.0.42"
 # languagemodelcommon is a Python library for common language model utilities
-language-model-common = ">=2.0.8"
+language-model-common = ">=2.0.17"
 
 [dev-packages]
 # pre-commit is a Python library for running pre-commit checks

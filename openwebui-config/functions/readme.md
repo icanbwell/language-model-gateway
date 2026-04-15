@@ -23,6 +23,31 @@ https://docs.openwebui.com/features/plugin/functions/pipe/
 - Now go back to the main UI
 - There should be new models in the model dropdown
 
+## MCP Apps Support
+
+The pipe supports rendering MCP Apps — interactive HTML UIs returned by MCP tools that declare a `ui://` resource. When the LLM backend calls such a tool, the HTML is streamed back as a custom `event: mcp_app` SSE event.
+
+**How it works:**
+
+1. The LLM backend (language-model-gateway API) detects the `ui://` resource on the tool, fetches the HTML, and emits it as a named SSE event: `event: mcp_app\ndata: {"html": "...", "title": "..."}\n\n`
+2. The pipe's SSE parser recognizes named events and routes `mcp_app` events to the embed handler
+3. The handler emits the HTML to OpenWebUI via `__event_emitter__({"type": "embeds", "data": {"embeds": [html]}})`
+4. OpenWebUI renders the HTML in a sandboxed iframe with auto-height sizing
+
+**Configuration:**
+
+The pipe valve `mcp_app_event_name` (default: `mcp_app`) controls which SSE event name triggers embed emission. No other configuration is needed.
+
+**Requirements:**
+
+- The MCP server must declare `meta.ui.resourceUri` on tools and implement `resources/read` for the URI
+- The `language-model-common` library must be v2+ (includes MCP Apps support)
+- OpenWebUI must support the `embeds` event type (standard in recent versions)
+
+For full architecture details, see [language-model-common/docs/mcp-apps.md](../../language-model-common/docs/mcp-apps.md) (relative path from this repo — refer to the language-model-common project).
+
+---
+
 # Docker Login to pull private images from AWS ECR
 `data-engineer_dev` or `admin_dev`
 ```shell

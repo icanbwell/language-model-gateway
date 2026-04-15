@@ -201,25 +201,22 @@ RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-pack
 USER appuser
 
 # The number of workers can be controlled using the NUM_WORKERS environment variable
-# Otherwise the number of workers for uvicorn (using the multiprocessing worker) is chosen based on these guidelines:
+# Otherwise the number of workers for gunicorn is chosen based on these guidelines:
 # (https://sentry.io/answers/number-of-uvicorn-workers-needed-in-production/)
 # basically (cores * threads + 1)
+#
+# GUNICORN_TIMEOUT: worker timeout — kills workers that don't heartbeat within this window (default: 600s / 10 min)
 CMD ["sh", "-c", "\
-    # Get CPU info \
     CORE_COUNT=$(nproc) && \
     THREAD_COUNT=$(nproc --all) && \
-    \
-    # Calculate workers using formula: (cores * threads + 1) \
     WORKER_COUNT=$((CORE_COUNT * THREAD_COUNT + 1)) && \
     FINAL_WORKERS=${NUM_WORKERS:-$WORKER_COUNT} && \
-    \
-    # Log the configuration \
-    echo \"Starting with $FINAL_WORKERS workers (cores: $CORE_COUNT, threads: $THREAD_COUNT)\" && \
-    \
-    # Start the application \
-    uvicorn language_model_gateway.gateway.api:app \
-        --host 0.0.0.0 \
-        --port 5000 \
+    FINAL_TIMEOUT=${GUNICORN_TIMEOUT:-600} && \
+    echo \"Starting with $FINAL_WORKERS workers (cores: $CORE_COUNT, threads: $THREAD_COUNT), timeout: $FINAL_TIMEOUT\" && \
+    gunicorn language_model_gateway.gateway.api:app \
         --workers $FINAL_WORKERS \
+        --worker-class uvicorn.workers.UvicornWorker \
+        --bind 0.0.0.0:5000 \
+        --timeout $FINAL_TIMEOUT \
         --log-level $(echo ${LOG_LEVEL:-info} | tr '[:upper:]' '[:lower:]') \
     "]

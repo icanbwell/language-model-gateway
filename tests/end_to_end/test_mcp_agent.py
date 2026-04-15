@@ -5,11 +5,11 @@ import pytest
 from langchain_aws import ChatBedrockConverse
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage
-from languagemodelcommon.mcp.mcp_client import (
-    create_mcp_session,
-    list_all_tools,
+from languagemodelcommon.mcp.mcp_client.langchain_adapter import (
     mcp_tool_to_langchain_tool,
 )
+from languagemodelcommon.mcp.mcp_client.session import create_mcp_session
+from languagemodelcommon.mcp.mcp_client.tool_list_cache import list_all_tools
 from langgraph.graph import StateGraph, MessagesState, START
 from langgraph.prebuilt import tools_condition
 from mcp.types import (
