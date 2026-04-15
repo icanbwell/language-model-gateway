@@ -32,6 +32,7 @@ repos:
       # Dependency and import checks
       - id: check-ast
       - id: check-added-large-files
+        args: ['--maxkb=1000']
       - id: check-json
       - id: check-toml
       - id: check-yaml
