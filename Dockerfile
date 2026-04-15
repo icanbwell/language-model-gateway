@@ -35,7 +35,7 @@ RUN if [ "$RUN_UV_LOCK" = "true" ]; then echo "Locking dependencies" && rm -f uv
 
 # Install all dependencies using the locked versions in uv.lock
 RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache \
-    uv sync --frozen --all-extras --no-install-project --verbose
+    uv sync --frozen --all-extras --group dev --no-install-project --verbose
 
 # Copy lock file for retrieval
 RUN cp -f uv.lock /tmp/uv.lock
