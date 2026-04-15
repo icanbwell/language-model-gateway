@@ -40,15 +40,6 @@ RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache \
 # Copy lock file for retrieval
 RUN cp -f uv.lock /tmp/uv.lock
 
-# Create necessary directories and list their contents (for debugging and verification)
-RUN ls -halt /opt/venv/lib/python3.12/site-packages
-RUN ls -halt /opt/venv/bin
-
-# Check and print system and Python platform information (for debugging)
-RUN python -c "import platform; print(platform.platform()); print(platform.architecture())"
-RUN python -c "import sys; print(sys.platform, sys.version, sys.maxsize > 2**32)"
-
-
 # Stage 2: Development image with hot reload
 # This stage is optimized for local development with hot reload capability
 FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS development
