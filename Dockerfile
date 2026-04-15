@@ -16,7 +16,7 @@ ARG GITHUB_TOKEN
 RUN apk add --no-cache git
 
 # Install uv from the official image (fast, single binary)
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:0.11.6 /uv /uvx /usr/local/bin/
 
 # Use a venv outside the project dir so docker-compose volume mounts don't hide it
 ENV UV_PROJECT_ENVIRONMENT=/opt/venv
@@ -53,8 +53,8 @@ ARG GITHUB_TOKEN
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
 
-# Install uv for runtime use
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+# Install uv from the official image (fast, single binary)
+COPY --from=ghcr.io/astral-sh/uv:0.11.6 /uv /uvx /usr/local/bin/
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway
@@ -126,8 +126,8 @@ ARG GITHUB_TOKEN
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
 
-# Install uv for runtime use
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+# Install uv from the official image (fast, single binary)
+COPY --from=ghcr.io/astral-sh/uv:0.11.6 /uv /uvx /usr/local/bin/
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway

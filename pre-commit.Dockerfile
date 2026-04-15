@@ -8,7 +8,8 @@ ARG GITHUB_TOKEN
 
 # Install git, build-essential, and uv
 RUN apk add --no-cache git build-base
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+# Install uv from the official image (fast, single binary)
+COPY --from=ghcr.io/astral-sh/uv:0.11.6 /uv /uvx /usr/local/bin/
 
 ENV UV_PROJECT_ENVIRONMENT=/opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
