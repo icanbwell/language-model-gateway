@@ -41,6 +41,10 @@
     {
       "name": "general_purpose",
       "role": "system"
+    },
+    {
+      "name": "skills",
+      "role": "system"
     }
   ],
   "tools": [
