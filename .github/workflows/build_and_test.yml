@@ -175,7 +175,7 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          docker compose down -v --remove-orphans
+          docker compose down --volumes
 
       - name: 'Cleanup build folder'
         if: always()
