@@ -13,10 +13,6 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return os.environ.get("GITHUB_ORGANIZATION_NAME")
 
     @property
-    def github_token(self) -> Optional[str]:
-        return os.environ.get("GITHUB_TOKEN")
-
-    @property
     def jira_base_url(self) -> Optional[str]:
         return os.environ.get("JIRA_BASE_URL")
 
@@ -60,5 +56,64 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return "/usr/src/language_model_gateway/gateway/tools/tool_friendly_names.json"
 
     @property
+    def allowed_origins(self) -> list[str]:
+        raw = os.environ.get("ALLOWED_ORIGINS", "")
+        origins = [o.strip() for o in raw.split(",") if o.strip()]
+        return origins if origins else ["*"]
+
+    @property
     def enable_code_interpreter(self) -> bool:
         return self.str2bool(os.environ.get("ENABLE_CODE_INTERPRETER", "true"))
+
+    @property
+    def help_keywords(self) -> list[str]:
+        raw = os.environ.get("HELP_KEYWORDS", "help")
+        return raw.split(";") if raw else ["help"]
+
+    @property
+    def scraping_bee_api_key(self) -> Optional[str]:
+        return os.environ.get("SCRAPING_BEE_API_KEY")
+
+    @property
+    def google_api_key(self) -> Optional[str]:
+        return os.environ.get("GOOGLE_API_KEY")
+
+    @property
+    def google_cse_id(self) -> Optional[str]:
+        return os.environ.get("GOOGLE_CSE_ID")
+
+    @property
+    def provider_search_api_url(self) -> Optional[str]:
+        return os.environ.get("PROVIDER_SEARCH_API_URL")
+
+    @property
+    def github_maximum_repos(self) -> int:
+        return int(os.environ.get("GITHUB_MAXIMUM_REPOS", "100"))
+
+    @property
+    def github_maximum_pull_requests_per_repo(self) -> int:
+        return int(os.environ.get("GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO", "100"))
+
+    @property
+    def jira_maximum_projects(self) -> int:
+        return int(os.environ.get("JIRA_MAXIMUM_PROJECTS", "100"))
+
+    @property
+    def jira_maximum_issues_per_project(self) -> int:
+        return int(os.environ.get("JIRA_MAXIMUM_ISSUES_PER_PROJECT", "100"))
+
+    @property
+    def openai_agent_url(self) -> Optional[str]:
+        return os.environ.get("OPENAI_AGENT_URL")
+
+    @property
+    def databricks_host(self) -> Optional[str]:
+        return os.environ.get("DATABRICKS_HOST")
+
+    @property
+    def databricks_token(self) -> Optional[str]:
+        return os.environ.get("DATABRICKS_TOKEN")
+
+    @property
+    def databricks_sql_warehouse_id(self) -> Optional[str]:
+        return os.environ.get("DATABRICKS_SQL_WAREHOUSE_ID")

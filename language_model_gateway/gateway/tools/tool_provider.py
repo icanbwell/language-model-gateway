@@ -1,5 +1,4 @@
 import logging
-from os import environ
 from typing import Dict, List
 
 from langchain_community.tools import (
@@ -142,42 +141,54 @@ class ToolProvider:
                 image_generator_factory=image_generator_factory,
                 file_manager_factory=file_manager_factory,
                 model_provider="aws",
+                environment_variables=environment_variables,
             ),
             "image_generator_openai": ImageGeneratorTool(
                 image_generator_factory=image_generator_factory,
                 file_manager_factory=file_manager_factory,
                 model_provider="openai",
+                environment_variables=environment_variables,
             ),
             "graph_viz_diagram_generator": GraphVizDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
+                file_manager_factory=file_manager_factory,
+                environment_variables=environment_variables,
             ),
             "sequence_diagram_generator": SequenceDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
+                file_manager_factory=file_manager_factory,
+                environment_variables=environment_variables,
             ),
             "flow_chart_generator": FlowChartGeneratorTool(
-                file_manager_factory=file_manager_factory
+                file_manager_factory=file_manager_factory,
+                environment_variables=environment_variables,
             ),
             "er_diagram_generator": ERDiagramGeneratorTool(
-                file_manager_factory=file_manager_factory
+                file_manager_factory=file_manager_factory,
+                environment_variables=environment_variables,
             ),
             "network_topology_generator": NetworkTopologyGeneratorTool(
-                file_manager_factory=file_manager_factory
+                file_manager_factory=file_manager_factory,
+                environment_variables=environment_variables,
             ),
             "scraping_bee_web_scraper": ScrapingBeeWebScraperTool(
-                api_key=environ.get("SCRAPING_BEE_API_KEY")
+                api_key=environment_variables.scraping_bee_api_key,
+                environment_variables=environment_variables,
             ),
-            "provider_search": ProviderSearchTool(),
+            "provider_search": ProviderSearchTool(
+                environment_variables=environment_variables,
+            ),
             "pdf_text_extractor": PDFExtractionTool(
                 ocr_extractor_factory=ocr_extractor_factory
             ),
             "github_pull_request_analyzer": GitHubPullRequestAnalyzerTool(
-                github_pull_request_helper=github_pull_request_helper
+                github_pull_request_helper=github_pull_request_helper,
+                environment_variables=environment_variables,
             ),
             "github_pull_request_diff": GitHubPullRequestDiffTool(
                 github_pull_request_helper=github_pull_request_helper
             ),
             "jira_issues_analyzer": JiraIssuesAnalyzerTool(
-                jira_issues_helper=jira_issues_helper
+                jira_issues_helper=jira_issues_helper,
+                environment_variables=environment_variables,
             ),
             "databricks_query_validator": DatabricksSQLTool(
                 databricks_helper=databricks_helper

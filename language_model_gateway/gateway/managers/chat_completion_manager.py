@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import logging
-import os
 import uuid
-from typing import Dict, List
+from typing import TYPE_CHECKING, Dict, List
 
 from fastapi import HTTPException
 from httpx import Headers
@@ -47,6 +48,11 @@ from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
 from languagemodelcommon.utilities.logger.exception_logger import ExceptionLogger
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
+
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
@@ -66,6 +72,7 @@ class ChatCompletionManager:
         pass_through_provider: PassThroughChatCompletionsProvider,
         config_reader: ConfigReader,
         system_command_manager: SystemCommandManager,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
     ) -> None:
         self.openai_provider: OpenAiChatCompletionsProvider = open_ai_provider
         if self.openai_provider is None:
@@ -108,6 +115,10 @@ class ChatCompletionManager:
             raise TypeError(
                 f"system_command_manager must be SystemCommandManager, got {type(self.system_command_manager)}"
             )
+
+        self._environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+            environment_variables
+        )
 
     # noinspection PyMethodMayBeStatic
     async def chat_completions(
@@ -188,7 +199,10 @@ class ChatCompletionManager:
             if help_response is not None:
                 return help_response
 
-            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+            if (
+                self._environment_variables
+                and self._environment_variables.log_input_and_output
+            ):
                 logger.info(
                     f"Running chat completion for {chat_request_wrapper} with headers {headers}"
                 )
@@ -317,12 +331,19 @@ class ChatCompletionManager:
             )
 
         last_message_content: str | None = user_messages[-1].content
-        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+        if (
+            self._environment_variables
+            and self._environment_variables.log_input_and_output
+        ):
             logger.info(
                 f"Last message content: {last_message_content}, type: {type(last_message_content)}"
             )
 
-        help_keywords: List[str] = os.environ.get("HELP_KEYWORDS", "help").split(";")
+        help_keywords: List[str] = (
+            self._environment_variables.help_keywords
+            if self._environment_variables
+            else ["help"]
+        )
         if (
             isinstance(last_message_content, str)
             and last_message_content.lower() in help_keywords

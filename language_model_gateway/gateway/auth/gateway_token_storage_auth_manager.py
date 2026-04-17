@@ -19,7 +19,7 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
 )
 from languagemodelcommon.auth.token_storage_auth_manager import TokenStorageAuthManager
 from languagemodelcommon.configs.config_reader.mcp_json_reader import (
-    read_mcp_json,
+    McpJsonReader,
     _compute_oauth_provider_key,
 )
 from languagemodelcommon.configs.schemas.mcp_json_schema import McpJsonConfig
@@ -50,6 +50,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         token_exchange_manager: TokenExchangeManager,
         well_known_configuration_manager: WellKnownConfigurationManager,
         oauth_provider_registrar: OAuthProviderRegistrar,
+        mcp_json_reader: McpJsonReader,
     ) -> None:
         super().__init__(
             environment_variables=environment_variables,
@@ -59,6 +60,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             well_known_configuration_manager=well_known_configuration_manager,
         )
         self._oauth_provider_registrar = oauth_provider_registrar
+        self._mcp_json_reader = mcp_json_reader
 
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
@@ -80,7 +82,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         ``OAuthProviderRegistrar.register_provider()`` for discovery,
         DCR, AuthConfig construction, and registration.
         """
-        mcp_config: McpJsonConfig | None = read_mcp_json()
+        mcp_config: McpJsonConfig | None = self._mcp_json_reader.read_mcp_json()
         if mcp_config is None:
             logger.warning(
                 "Cannot auto-register auth provider '%s': .mcp.json not found",

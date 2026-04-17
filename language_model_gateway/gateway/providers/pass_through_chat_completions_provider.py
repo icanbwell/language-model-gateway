@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import time
 from typing import Dict, Optional, AsyncGenerator, override, List
 
@@ -381,7 +380,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                 created=int(time.time()),
                 object="chat.completion",
             )
-            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+            if self.environment_variables.log_input_and_output:
                 logger.info(f"Returning help response: {chat_response.model_dump()}")
 
             return JSONResponse(content=chat_response.model_dump())

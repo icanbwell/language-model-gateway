@@ -1,13 +1,19 @@
+from __future__ import annotations
+
 import logging
-import os
 import time
 from logging import Logger
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.service.sql import StatementState, StatementResponse
 import pandas as pd
 from pandas.core.frame import DataFrame
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 
 
 class DatabricksHelper:
@@ -16,6 +22,7 @@ class DatabricksHelper:
         *,
         catalog: str = "bronze",
         schema: str = "fhir_rpt",
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
     ) -> None:
         # Initialize logger as time, error level, and message
         self.logger: Logger = logging.getLogger(__name__)
@@ -25,6 +32,9 @@ class DatabricksHelper:
         )
         self.catalog = catalog
         self.schema = schema
+        self._environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+            environment_variables
+        )
 
     def parse_databricks_statement_response(
         self, statement_response: StatementResponse
@@ -81,29 +91,37 @@ class DatabricksHelper:
         return markdown_table
 
     def execute_query(self, query: str, max_wait_time: int = 300) -> str:
-        required_vars = [
-            "DATABRICKS_HOST",
-            "DATABRICKS_TOKEN",
-            "DATABRICKS_SQL_WAREHOUSE_ID",
-        ]
-        for var in required_vars:
-            if not os.environ.get(var):
-                raise ValueError(f"{var} environment variable not set")
+        databricks_host: Optional[str] = (
+            self._environment_variables.databricks_host
+            if self._environment_variables
+            else None
+        )
+        databricks_token: Optional[str] = (
+            self._environment_variables.databricks_token
+            if self._environment_variables
+            else None
+        )
+        warehouse_id: Optional[str] = (
+            self._environment_variables.databricks_sql_warehouse_id
+            if self._environment_variables
+            else None
+        )
+
+        if not databricks_host:
+            raise ValueError("DATABRICKS_HOST environment variable not set")
+        if not databricks_token:
+            raise ValueError("DATABRICKS_TOKEN environment variable not set")
+        if not warehouse_id:
+            raise ValueError("DATABRICKS_SQL_WAREHOUSE_ID environment variable not set")
 
         try:
             ws_client = WorkspaceClient(
-                host=os.environ.get("DATABRICKS_HOST"),
-                token=os.environ.get("DATABRICKS_TOKEN"),
+                host=databricks_host,
+                token=databricks_token,
             )
             # Execute initial statement
-            # Handle warehouse_id as an environment variable
             self.logger.debug(f"Executing Databricks query: {query}")
-            warehouse_id = os.environ.get("DATABRICKS_SQL_WAREHOUSE_ID")
             self.logger.debug(f"Warehouse ID: {warehouse_id}")
-            if not warehouse_id:
-                raise ValueError(
-                    "DATABRICKS_SQL_WAREHOUSE_ID environment variable not set"
-                )
             results = ws_client.statement_execution.execute_statement(
                 query, warehouse_id=warehouse_id
             )

@@ -1,16 +1,22 @@
+from __future__ import annotations
+
 import logging
-import os
-from typing import Type, Literal, Tuple, Optional, override
+from typing import TYPE_CHECKING, Any, Type, Literal, Tuple, Optional, override
 from uuid import uuid4
 
 from graphviz import Digraph
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from languagemodelcommon.file_managers.file_manager import FileManager
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from languagemodelcommon.utilities.url_parser import UrlParser
 
@@ -50,6 +56,17 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
     args_schema: Type[BaseModel] = GraphVizDiagramGeneratorToolInput
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
 
     @override
     def _run(self, dot_input: str) -> Tuple[str, str]:
@@ -88,7 +105,11 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
                     dot.node(node)
 
             # Render the diagram
-            image_generation_path_ = os.environ["IMAGE_GENERATION_PATH"]
+            image_generation_path_: Optional[str] = (
+                self._environment_variables.image_generation_path
+                if self._environment_variables
+                else None
+            )
             if not image_generation_path_:
                 raise ValueError(
                     "IMAGE_GENERATION_PATH environment variable is not set"

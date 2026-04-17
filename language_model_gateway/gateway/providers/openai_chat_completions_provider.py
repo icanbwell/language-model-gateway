@@ -1,8 +1,8 @@
-from typing import Any, AsyncGenerator, Dict, Optional, override
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, AsyncGenerator, Dict, Optional, override
 import json
 import logging
-import os
-from os import environ
 from random import randint
 
 from httpx import Response
@@ -24,12 +24,22 @@ from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
+
 logger = logging.getLogger(__file__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
 
 class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
-    def __init__(self, *, http_client_factory: HttpClientFactory) -> None:
+    def __init__(
+        self,
+        *,
+        http_client_factory: HttpClientFactory,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+    ) -> None:
         self.http_client_factory: HttpClientFactory = http_client_factory
         if self.http_client_factory is None:
             raise ValueError("http_client_factory must not be None")
@@ -37,6 +47,9 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
             raise TypeError(
                 "http_client_factory must be an instance of HttpClientFactory"
             )
+        self._environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+            environment_variables
+        )
 
     @override
     async def chat_completions(
@@ -61,7 +74,12 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
             raise ValueError("chat_request must not be None")
 
         request_id: str = str(randint(1, 1000))
-        agent_url: Optional[str] = model_config.url or environ["OPENAI_AGENT_URL"]
+        openai_agent_url: Optional[str] = (
+            self._environment_variables.openai_agent_url
+            if self._environment_variables
+            else None
+        )
+        agent_url: Optional[str] = model_config.url or openai_agent_url
         if not agent_url:
             raise ValueError("agent_url must not be None")
 
@@ -110,7 +128,10 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                     content=f"Error validating response: {e}. url: {agent_url}\n{response_text}",
                     status_code=500,
                 )
-            if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+            if (
+                self._environment_variables
+                and self._environment_variables.log_input_and_output
+            ):
                 logger.info(f"Non-streaming response {request_id}: {response}")
             return JSONResponse(content=response.model_dump())
 
@@ -137,7 +158,10 @@ class OpenAiChatCompletionsProvider(BaseChatCompletionsProvider):
                 ) as event_source:
                     async for sse in event_source.aiter_sse():
                         data: str = sse.data
-                        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                        if (
+                            self._environment_variables
+                            and self._environment_variables.log_input_and_output
+                        ):
                             if logger.isEnabledFor(logging.DEBUG):
                                 logger.debug(
                                     f"----- Received SSE {sse.event}: {data} ------"

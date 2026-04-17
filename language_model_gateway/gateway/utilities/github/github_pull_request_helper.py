@@ -1,16 +1,22 @@
+from __future__ import annotations
+
 import asyncio
 import logging
-import os
 import re
 from datetime import datetime
 from logging import Logger
-from typing import Dict, Optional, List, Union, Any, Literal
+from typing import TYPE_CHECKING, Dict, Optional, List, Union, Any, Literal
 from urllib.parse import urlparse
 
 import httpx
 from httpx import Response, URL
 
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.github.github_pull_request import (
     GithubPullRequest,
 )
@@ -29,6 +35,7 @@ class GithubPullRequestHelper:
         http_client_factory: HttpClientFactory,
         org_name: Optional[str],
         access_token: Optional[str],
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
     ):
         """
         Initialize GitHub PR Counter with async rate limit handling.
@@ -42,6 +49,10 @@ class GithubPullRequestHelper:
         self.logger: Logger = logging.getLogger(__name__)
         self.org_name: Optional[str] = org_name
         self.github_access_token: Optional[str] = access_token
+
+        self._environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+            environment_variables
+        )
 
         self.base_url = "https://api.github.com"
         self.headers = {
@@ -110,7 +121,10 @@ class GithubPullRequestHelper:
         if not self.github_access_token:
             raise ValueError("GitHub access token is required")
 
-        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+        if (
+            self._environment_variables
+            and self._environment_variables.log_input_and_output
+        ):
             self.logger.info(
                 f"Retrieving closed PRs for {self.org_name} organization"
                 f" with max_repos={max_repos}, max_pull_requests={max_pull_requests},"
@@ -127,7 +141,10 @@ class GithubPullRequestHelper:
             try:
                 if repo_name:
                     repos_url = f"{self.base_url}/repos/{self.org_name}/{repo_name}"
-                    if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                    if (
+                        self._environment_variables
+                        and self._environment_variables.log_input_and_output
+                    ):
                         self.logger.info(f"Fetching repository: {repos_url}")
                     repo_response = await client.get(
                         repos_url,
@@ -157,7 +174,10 @@ class GithubPullRequestHelper:
                             "per_page": max_repos or 50,
                             "page": page_number,
                         }
-                        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                        if (
+                            self._environment_variables
+                            and self._environment_variables.log_input_and_output
+                        ):
                             self.logger.info(
                                 f"Fetching repositories: {repos_url}: {params}"
                             )
@@ -202,7 +222,10 @@ class GithubPullRequestHelper:
                             "per_page": max_pull_requests or 50,
                             "page": page_number,
                         }
-                        if os.environ.get("LOG_INPUT_AND_OUTPUT", "0") == "1":
+                        if (
+                            self._environment_variables
+                            and self._environment_variables.log_input_and_output
+                        ):
                             self.logger.info(f"Fetching PRs: {prs_url}: {params}")
 
                         prs_response = await client.get(

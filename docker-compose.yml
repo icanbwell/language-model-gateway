@@ -127,7 +127,7 @@ services:
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
-      - --workers=1
+      - --workers=3
       - --worker-class
       - uvicorn.workers.UvicornWorker
       - --bind

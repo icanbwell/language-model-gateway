@@ -1,6 +1,6 @@
 """Tests for GatewayTokenStorageAuthManager DCR auto-registration on callback."""
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from oidcauthlib.auth.config.auth_config import AuthConfig
@@ -17,6 +17,7 @@ from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegis
 from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
+from languagemodelcommon.configs.config_reader.mcp_json_reader import McpJsonReader
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
 from languagemodelcommon.configs.schemas.mcp_json_schema import (
     McpJsonConfig,
@@ -31,6 +32,7 @@ def _build_manager(
     *,
     register_result: AuthConfig | None = None,
     register_side_effect: Exception | None = None,
+    mcp_json_return: McpJsonConfig | None = None,
 ) -> GatewayTokenStorageAuthManager:
     """Build a GatewayTokenStorageAuthManager with mocked dependencies."""
     env = MagicMock(spec=AbstractEnvironmentVariables)
@@ -59,6 +61,9 @@ def _build_manager(
             )
         )
 
+    mcp_json_reader = MagicMock(spec=McpJsonReader)
+    mcp_json_reader.read_mcp_json.return_value = mcp_json_return
+
     manager = GatewayTokenStorageAuthManager(
         environment_variables=env,
         auth_config_reader=auth_config_reader,
@@ -66,6 +71,7 @@ def _build_manager(
         token_exchange_manager=token_exchange_manager,
         well_known_configuration_manager=well_known_mgr,
         oauth_provider_registrar=registrar,
+        mcp_json_reader=mcp_json_reader,
     )
     return manager
 
@@ -84,7 +90,6 @@ class TestTryRegisterFromMcpJsonDcr:
             client_secret="dcr-atlassian-secret",
             scope="openid",
         )
-        manager = _build_manager(register_result=result_config)
 
         mcp_config = McpJsonConfig(
             mcpServers={
@@ -104,11 +109,11 @@ class TestTryRegisterFromMcpJsonDcr:
             }
         )
 
-        with patch(
-            "language_model_gateway.gateway.auth.gateway_token_storage_auth_manager.read_mcp_json",
-            return_value=mcp_config,
-        ):
-            await manager._try_register_from_mcp_json("atlassian")
+        manager = _build_manager(
+            register_result=result_config,
+            mcp_json_return=mcp_config,
+        )
+        await manager._try_register_from_mcp_json("atlassian")
 
         # Should have delegated to the registrar with correct args
         registrar = manager._oauth_provider_registrar
@@ -121,8 +126,6 @@ class TestTryRegisterFromMcpJsonDcr:
     @pytest.mark.asyncio
     async def test_pre_configured_provider_delegates_to_registrar(self) -> None:
         """Providers with a static client_id should also delegate to registrar."""
-        manager = _build_manager()
-
         mcp_config = McpJsonConfig(
             mcpServers={
                 "github": McpServerEntry(
@@ -141,11 +144,8 @@ class TestTryRegisterFromMcpJsonDcr:
             }
         )
 
-        with patch(
-            "language_model_gateway.gateway.auth.gateway_token_storage_auth_manager.read_mcp_json",
-            return_value=mcp_config,
-        ):
-            await manager._try_register_from_mcp_json("mcp_oauth_Iv23liP9XLkcIxslopoA")
+        manager = _build_manager(mcp_json_return=mcp_config)
+        await manager._try_register_from_mcp_json("mcp_oauth_Iv23liP9XLkcIxslopoA")
 
         registrar = manager._oauth_provider_registrar
         registrar.register_provider.assert_awaited_once()  # type: ignore[attr-defined]
@@ -153,10 +153,6 @@ class TestTryRegisterFromMcpJsonDcr:
     @pytest.mark.asyncio
     async def test_dcr_failure_does_not_crash(self) -> None:
         """When registrar raises ValueError, the method logs and returns."""
-        manager = _build_manager(
-            register_side_effect=ValueError("Could not resolve client_id"),
-        )
-
         mcp_config = McpJsonConfig(
             mcpServers={
                 "atlassian": McpServerEntry(
@@ -167,23 +163,18 @@ class TestTryRegisterFromMcpJsonDcr:
             }
         )
 
-        with patch(
-            "language_model_gateway.gateway.auth.gateway_token_storage_auth_manager.read_mcp_json",
-            return_value=mcp_config,
-        ):
-            # Should not raise — just returns after logging
-            await manager._try_register_from_mcp_json("atlassian")
+        manager = _build_manager(
+            register_side_effect=ValueError("Could not resolve client_id"),
+            mcp_json_return=mcp_config,
+        )
+        # Should not raise — just returns after logging
+        await manager._try_register_from_mcp_json("atlassian")
 
     @pytest.mark.asyncio
     async def test_no_mcp_json_returns_without_error(self) -> None:
         """When .mcp.json is not found, should return silently."""
-        manager = _build_manager()
-
-        with patch(
-            "language_model_gateway.gateway.auth.gateway_token_storage_auth_manager.read_mcp_json",
-            return_value=None,
-        ):
-            await manager._try_register_from_mcp_json("atlassian")
+        manager = _build_manager(mcp_json_return=None)
+        await manager._try_register_from_mcp_json("atlassian")
 
         registrar = manager._oauth_provider_registrar
         registrar.register_provider.assert_not_called()  # type: ignore[attr-defined]
@@ -191,8 +182,6 @@ class TestTryRegisterFromMcpJsonDcr:
     @pytest.mark.asyncio
     async def test_unmatched_provider_returns_without_error(self) -> None:
         """When auth_provider doesn't match any .mcp.json entry, should return silently."""
-        manager = _build_manager()
-
         mcp_config = McpJsonConfig(
             mcpServers={
                 "github": McpServerEntry(
@@ -205,11 +194,8 @@ class TestTryRegisterFromMcpJsonDcr:
             }
         )
 
-        with patch(
-            "language_model_gateway.gateway.auth.gateway_token_storage_auth_manager.read_mcp_json",
-            return_value=mcp_config,
-        ):
-            await manager._try_register_from_mcp_json("nonexistent")
+        manager = _build_manager(mcp_json_return=mcp_config)
+        await manager._try_register_from_mcp_json("nonexistent")
 
         registrar = manager._oauth_provider_registrar
         registrar.register_provider.assert_not_called()  # type: ignore[attr-defined]

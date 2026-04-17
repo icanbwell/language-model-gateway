@@ -11,6 +11,10 @@ from languagemodelcommon.image_generation.image_generator_factory import (
 )
 from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
+from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
+    GithubConfigRepoManager,
+)
+from languagemodelcommon.configs.config_reader.mcp_json_reader import McpJsonReader
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
 )
@@ -143,6 +147,7 @@ class LanguageModelGatewayContainerFactory:
                     WellKnownConfigurationManager
                 ),
                 oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
+                mcp_json_reader=c.resolve(McpJsonReader),
             ),
         )
 
@@ -151,14 +156,32 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             OpenAiChatCompletionsProvider,
             lambda c: OpenAiChatCompletionsProvider(
-                http_client_factory=c.resolve(HttpClientFactory)
+                http_client_factory=c.resolve(HttpClientFactory),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
-        container.singleton(ModelFactory, lambda c: ModelFactory())
+        container.singleton(
+            ModelFactory,
+            lambda c: ModelFactory(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
+        )
 
         container.singleton(
             LanguageModelGatewayEnvironmentVariables,
             lambda c: LanguageModelGatewayEnvironmentVariables(),
+        )
+        container.singleton(
+            GithubConfigRepoManager,
+            lambda c: GithubConfigRepoManager(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
         )
 
         container.singleton(
@@ -169,6 +192,9 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ).github_token,
                 http_client_factory=c.resolve(HttpClientFactory),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
 
@@ -206,7 +232,11 @@ class LanguageModelGatewayContainerFactory:
 
         container.singleton(
             DatabricksHelper,
-            lambda c: DatabricksHelper(),
+            lambda c: DatabricksHelper(
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
+            ),
         )
 
         container.singleton(
@@ -350,6 +380,9 @@ class LanguageModelGatewayContainerFactory:
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
                 system_command_manager=c.resolve(SystemCommandManager),
+                environment_variables=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ),
             ),
         )
         container.singleton(

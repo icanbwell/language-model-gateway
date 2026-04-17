@@ -1,12 +1,29 @@
-import os
+from __future__ import annotations
+
 import logging
 
-from typing import Optional, Dict, Any, List, cast, Type, Literal, Tuple, override
+from typing import (
+    TYPE_CHECKING,
+    Optional,
+    Dict,
+    Any,
+    List,
+    cast,
+    Type,
+    Literal,
+    Tuple,
+    override,
+)
 
 import httpx
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
@@ -35,7 +52,23 @@ class ProviderSearchTool(ResilientBaseTool):
     description: str = "Search for healthcare providers (e.g., doctors, clinics and hospitals) based on various criteria like name, specialty, location, insurance etc."
     args_schema: Type[BaseModel] = ProviderSearchToolInput
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
-    api_url: Optional[str] = os.environ.get("PROVIDER_SEARCH_API_URL")
+    _api_url: Optional[str] = PrivateAttr(default=None)
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
+        self._api_url = (
+            environment_variables.provider_search_api_url
+            if environment_variables
+            else None
+        )
 
     # noinspection PyMethodMayBeStatic
     def _build_query(self) -> str:
@@ -198,7 +231,7 @@ class ProviderSearchTool(ResilientBaseTool):
     ) -> Tuple[Dict[str, Any], str]:
         """Asynchronous execution"""
 
-        if not self.api_url:
+        if not self._api_url:
             raise ValueError("API URL is required")
 
         variables = self._prepare_variables(
@@ -220,7 +253,9 @@ class ProviderSearchTool(ResilientBaseTool):
         async_client: httpx.AsyncClient = httpx.AsyncClient(headers=headers)
 
         try:
-            response = await async_client.post(self.api_url, json=payload, timeout=30.0)
+            response = await async_client.post(
+                self._api_url, json=payload, timeout=30.0
+            )
             artifact: str = f"ProviderSearchAgent: Searched for {search} {variables} "
             if use_verbose_logging:
                 artifact += f"\nRequest: {payload}"

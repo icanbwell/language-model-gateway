@@ -1,13 +1,30 @@
+from __future__ import annotations
+
 import logging
-import os
 from datetime import datetime
-from typing import Type, Optional, List, Tuple, Literal, Dict, Annotated, override
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Type,
+    Optional,
+    List,
+    Tuple,
+    Literal,
+    Dict,
+    Annotated,
+    override,
+)
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.prebuilt import InjectedState
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.csv_to_markdown_converter import (
     CsvToMarkdownConverter,
 )
@@ -170,6 +187,17 @@ class GitHubPullRequestAnalyzerTool(ResilientBaseTool):
     args_schema: Type[BaseModel] = GitHubPullRequestAnalyzerAgentInput
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     github_pull_request_helper: GithubPullRequestHelper
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
 
     @override
     def _run(
@@ -250,9 +278,17 @@ class GitHubPullRequestAnalyzerTool(ResilientBaseTool):
         try:
             # Initialize GitHub Pull Request Helper
             # Retrieve closed pull requests
-            max_repos: int = int(os.environ.get("GITHUB_MAXIMUM_REPOS", 100))
+            max_repos: int = (
+                self._environment_variables.github_maximum_repos
+                if self._environment_variables
+                else 100
+            )
             max_pull_requests: Optional[int] = (
-                int(os.environ.get("GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO", 100))
+                (
+                    self._environment_variables.github_maximum_pull_requests_per_repo
+                    if self._environment_variables
+                    else 100
+                )
                 if not counts_only
                 else None
             )
