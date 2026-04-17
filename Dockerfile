@@ -1,15 +1,15 @@
 # Stage 1: Base image to install common dependencies and lock Python dependencies
 # This stage is responsible for setting up the environment and installing Python packages using Pipenv.
-FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS python_packages
+FROM 856965016623.dkr.ecr.us-east-1.amazonaws.com/root-mirror/python:3.12-alpine3.20 AS python_packages
 
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 ENV PIP_ROOT_USER_ACTION=ignore
+# Force pipenv to install into system Python, not a virtualenv
+ENV PIPENV_IGNORE_VIRTUALENVS=1
 
 # Define an argument to control whether to run pipenv lock (used for updating Pipfile.lock)
 ARG RUN_PIPENV_LOCK=false
-# Declare build-time arguments
-ARG GITHUB_TOKEN
 
 # Install common tools and dependencies (git is required for some Python packages)
 RUN apk add --no-cache git
@@ -28,13 +28,20 @@ COPY Pipfile* /usr/src/language_model_gateway/
 # Show the current pip configuration (for debugging purposes)
 RUN pip config list
 
-# Conditionally run pipenv lock to update the Pipfile.lock based on the argument provided
-# If RUN_PIPENV_LOCK is true, it regenerates the Pipfile.lock file with the latest versions of dependencies
-RUN if [ "$RUN_PIPENV_LOCK" = "true" ]; then echo "Locking Pipfile" && rm -f Pipfile.lock && pipenv lock --dev --clear --verbose --extra-pip-args="--prefer-binary"; fi
-
-# Install all dependencies using the locked versions in Pipfile.lock
-# --dev installs development dependencies, --system installs them globally in the container's Python environment
-RUN pipenv sync --dev --system --verbose --extra-pip-args="--prefer-binary"
+# Setup JFrog auth, optionally lock Pipfile, install dependencies, and remove credentials
+RUN --mount=type=secret,id=jfrog_user --mount=type=secret,id=jfrog_token \
+    set -eu; \
+    JFROG_USER=$(cat /run/secrets/jfrog_user); \
+    JFROG_TOKEN=$(cat /run/secrets/jfrog_token); \
+    trap 'rm -f ~/.netrc' EXIT; \
+    echo "machine artifacts.bwell.com login $JFROG_USER password $JFROG_TOKEN" > ~/.netrc; \
+    chmod 600 ~/.netrc; \
+    if [ "$RUN_PIPENV_LOCK" = "true" ]; then \
+        echo "Locking Pipfile"; \
+        rm -f Pipfile.lock; \
+        pipenv lock --dev --clear --verbose --extra-pip-args="--prefer-binary"; \
+    fi; \
+    pipenv sync --dev --system --verbose --extra-pip-args="--prefer-binary"
 
 # Create necessary directories and list their contents (for debugging and verification)
 RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
@@ -51,19 +58,13 @@ RUN pip list -v
 
 # Stage 2: Development image with hot reload
 # This stage is optimized for local development with hot reload capability
-FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS development
+FROM 856965016623.dkr.ecr.us-east-1.amazonaws.com/root-mirror/python:3.12-alpine3.20 AS development
 
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 
-# Define an argument to control whether to run pipenv lock (not used in this stage)
-ARG GITHUB_TOKEN
-
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
-
-# Install pipenv to manage and run the application
-RUN pip install --no-cache-dir pipenv
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway
@@ -79,9 +80,11 @@ WORKDIR ${PROJECT_DIR}
 # Copy the Pipfile and Pipfile.lock files into the development image
 COPY Pipfile* ${PROJECT_DIR}
 
-# Copy installed Python packages from the first stage
-COPY --from=python_packages /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+# Copy installed Python packages and scripts from the previous stage
+# On Alpine, pipenv --system installs to /usr/lib and /usr/bin (sys.prefix=/usr)
+COPY --from=python_packages /usr/lib/python3.12/site-packages /usr/lib/python3.12/site-packages
 COPY --from=python_packages /usr/local/bin /usr/local/bin
+COPY --from=python_packages /usr/bin /usr/bin
 
 # Copy the application code into the development image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
@@ -91,15 +94,8 @@ COPY ./setup.cfg ${PROJECT_DIR}/
 COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock ${PROJECT_DIR}/Pipfile.lock
 COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock /tmp/Pipfile.lock
 
-# Create directories and list their contents (for debugging and verification)
-RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
-RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
-
 # Create the folder where we will store generated images
 RUN mkdir -p ${PROJECT_DIR}/image_generation
-
-# Install the dependencies using pipenv in the development environment
-RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
 
 # Expose port 5000 for the application
 EXPOSE 5000
@@ -114,7 +110,7 @@ RUN dot -V
 RUN addgroup -S appgroup && adduser -S -h /etc/appuser appuser -G appgroup
 
 # Ensure that the appuser owns the application files and directories
-RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-packages /usr/local/bin ${PROMETHEUS_MULTIPROC_DIR}
+RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/lib/python3.12/site-packages /usr/local/bin /usr/bin ${PROMETHEUS_MULTIPROC_DIR}
 
 # Switch to the restricted user to enhance security
 USER appuser
@@ -130,19 +126,13 @@ CMD ["sh", "-c", "\
 
 # Stage 3: Production deployment image
 # This stage is optimized for deployment with multiple workers
-FROM public.ecr.aws/docker/library/python:3.12-alpine3.20 AS production
+FROM 856965016623.dkr.ecr.us-east-1.amazonaws.com/root-mirror/python:3.12-alpine3.20 AS production
 
 # Set terminal width (COLUMNS) and height (LINES)
 ENV COLUMNS=300
 
-# Define an argument to control whether to run pipenv lock (not used in this stage)
-ARG GITHUB_TOKEN
-
 # Install runtime dependencies required by the application
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
-
-# Install pipenv to manage and run the application
-RUN pip install --no-cache-dir pipenv
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway
@@ -155,14 +145,16 @@ RUN mkdir -p ${PROMETHEUS_MULTIPROC_DIR}
 # Set the working directory for the project
 WORKDIR ${PROJECT_DIR}
 
-# Copy the Pipfile and Pipfile.lock files into the development image
+# Copy the Pipfile and Pipfile.lock files into the production image
 COPY Pipfile* ${PROJECT_DIR}
 
-# Copy installed Python packages from the first stage
-COPY --from=python_packages /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+# Copy installed Python packages and scripts from the previous stage
+# On Alpine, pipenv --system installs to /usr/lib and /usr/bin (sys.prefix=/usr)
+COPY --from=python_packages /usr/lib/python3.12/site-packages /usr/lib/python3.12/site-packages
 COPY --from=python_packages /usr/local/bin /usr/local/bin
+COPY --from=python_packages /usr/bin /usr/bin
 
-# Copy the application code into the development image
+# Copy the application code into the production image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
 COPY ./setup.cfg ${PROJECT_DIR}/
 
@@ -170,15 +162,8 @@ COPY ./setup.cfg ${PROJECT_DIR}/
 COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock ${PROJECT_DIR}/Pipfile.lock
 COPY --from=python_packages ${PROJECT_DIR}/Pipfile.lock /tmp/Pipfile.lock
 
-# Create directories and list their contents (for debugging and verification)
-RUN mkdir -p /usr/local/lib/python3.12/site-packages && ls -halt /usr/local/lib/python3.12/site-packages
-RUN mkdir -p /usr/local/bin && ls -halt /usr/local/bin
-
 # Create the folder where we will store generated images
 RUN mkdir -p ${PROJECT_DIR}/image_generation
-
-# Install the dependencies using pipenv in the development environment
-RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
 
 # Expose port 5000 for the application
 EXPOSE 5000
@@ -193,7 +178,7 @@ RUN dot -V
 RUN addgroup -S appgroup && adduser -S -h /etc/appuser appuser -G appgroup
 
 # Ensure that the appuser owns the application files and directories
-RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/local/lib/python3.12/site-packages /usr/local/bin ${PROMETHEUS_MULTIPROC_DIR}
+RUN chown -R appuser:appgroup ${PROJECT_DIR} /usr/lib/python3.12/site-packages /usr/local/bin /usr/bin ${PROMETHEUS_MULTIPROC_DIR}
 
 # Switch to the restricted user to enhance security
 USER appuser

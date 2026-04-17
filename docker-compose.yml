@@ -4,6 +4,9 @@ services:
       dockerfile: Dockerfile
       context: .
       target: development
+      secrets:
+        - jfrog_user
+        - jfrog_token
     container_name: language-model-gateway
     environment:
       DEBUG_METRICS: 0
@@ -160,6 +163,12 @@ services:
       retries: 3
     networks:
       - web
+
+secrets:
+  jfrog_user:
+    environment: JFROG_READ_USER
+  jfrog_token:
+    environment: JFROG_READ_TOKEN
 
 networks:
   web:

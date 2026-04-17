@@ -2,8 +2,21 @@ export LANG
 
 .PHONY: Pipfile.lock
 Pipfile.lock: # Locks Pipfile and updates the Pipfile.lock on the local file system
-	docker compose --progress=plain build --no-cache --build-arg RUN_PIPENV_LOCK=true language-model-gateway && \
-	docker compose --progress=plain run language-model-gateway sh -c "cp -f /tmp/Pipfile.lock /usr/src/language_model_gateway/Pipfile.lock"
+	/bin/sh -c '\
+		if [ -z "$$JFROG_READ_USER" ] || [ -z "$$JFROG_READ_TOKEN" ]; then \
+			echo "ERROR: JFROG_READ_USER and JFROG_READ_TOKEN must be set."; \
+			exit 1; \
+		fi; \
+		export DOCKER_BUILDKIT=1; \
+		docker build --no-cache --build-arg RUN_PIPENV_LOCK=true \
+			--secret id=jfrog_user,env=JFROG_READ_USER \
+			--secret id=jfrog_token,env=JFROG_READ_TOKEN \
+			--target development \
+			-t language-model-gateway:local . && \
+		CONTAINER_ID=$$(docker create language-model-gateway:local); \
+		docker cp $$CONTAINER_ID:/tmp/Pipfile.lock Pipfile.lock && \
+		docker rm $$CONTAINER_ID \
+	'
 
 .PHONY:devsetup
 devsetup: ## one time setup for devs
@@ -19,11 +32,17 @@ create-docker-network: ## creates the docker network
 
 .PHONY:build
 build: create-docker-network ## Builds the docker for dev
-	docker compose \
-	-f docker-compose-keycloak.yml \
-	-f docker-compose.yml \
-	-f docker-compose-openwebui.yml \
-	 build --parallel;
+	/bin/sh -c '\
+		if [ -z "$$JFROG_READ_USER" ] || [ -z "$$JFROG_READ_TOKEN" ]; then \
+			echo "ERROR: JFROG_READ_USER and JFROG_READ_TOKEN must be set."; \
+			exit 1; \
+		fi; \
+		docker compose \
+		-f docker-compose-keycloak.yml \
+		-f docker-compose.yml \
+		-f docker-compose-openwebui.yml \
+		 build --parallel; \
+	'
 
 .PHONY: up
 up: create-docker-network fix-script-permissions ## starts docker containers
@@ -265,7 +284,7 @@ import-open-webui-pipe: ## Imports the OpenWebUI function pipe into OpenWebUI
 	docker run --rm -it --name openid-function-creator \
         --network language-model-gateway_web \
         --mount type=bind,source="${PWD}"/openwebui-config/functions,target=/app \
-        python:3.12-alpine \
+        856965016623.dkr.ecr.us-east-1.amazonaws.com/root-mirror/python:3.12-alpine \
         sh -c "pip install --root-user-action=ignore --upgrade pip && \
                pip install --root-user-action=ignore authlib requests && \
                cd /app && \

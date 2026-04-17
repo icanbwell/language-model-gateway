@@ -1,7 +1,7 @@
 [[source]]
-url = "https://pypi.org/simple"
+name = "virtual-pypi"
+url = "https://artifacts.bwell.com/artifactory/api/pypi/virtual-pypi/simple"
 verify_ssl = true
-name = "pypi"
 
 [packages]
 # requests is needed for making HTTP requests
