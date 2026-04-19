@@ -26,9 +26,16 @@ services:
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
       # Uncomment this to read from github
-#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
-      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
+#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/v3"
+      # Local paths when using downloading from Github
+#      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
+#      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
+#      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
+#      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
+#      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/skills"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
+      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
