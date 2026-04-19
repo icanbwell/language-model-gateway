@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 import base64
 import logging
-import os
-from typing import Literal, Tuple, Type, Optional, override
+from typing import TYPE_CHECKING, Any, Literal, Tuple, Type, Optional, override
 from uuid import uuid4
 
-from pydantic import Field, BaseModel
+from pydantic import Field, BaseModel, PrivateAttr
 
 from languagemodelcommon.file_managers.file_manager import FileManager
 from languagemodelcommon.file_managers.file_manager_factory import (
@@ -17,6 +18,11 @@ from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from languagemodelcommon.utilities.url_parser import UrlParser
 
@@ -50,6 +56,17 @@ class ImageGeneratorTool(ResilientBaseTool):
     )
     style: Literal["natural", "cinematic", "digital-art", "pop-art"] = "natural"
     return_embedded_image: bool = False
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
 
     @override
     def _run(self, prompt: str) -> Tuple[str, str]:
@@ -77,7 +94,11 @@ class ImageGeneratorTool(ResilientBaseTool):
                 prompt=prompt, style=self.style, image_size=self.image_size
             )
             # base64_image: str = base64.b64encode(image_data).decode("utf-8")
-            image_generation_path_ = os.environ.get("IMAGE_GENERATION_PATH")
+            image_generation_path_: Optional[str] = (
+                self._environment_variables.image_generation_path
+                if self._environment_variables
+                else None
+            )
             if not image_generation_path_:
                 raise ValueError(
                     "IMAGE_GENERATION_PATH environment variable is not set"

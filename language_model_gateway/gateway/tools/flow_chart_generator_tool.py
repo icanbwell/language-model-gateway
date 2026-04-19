@@ -1,17 +1,35 @@
+from __future__ import annotations
+
 import logging
-import os
 import tempfile
-from typing import Type, Literal, Tuple, Optional, List, Dict, Union, Set, override
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Type,
+    Literal,
+    Tuple,
+    Optional,
+    List,
+    Dict,
+    Union,
+    Set,
+    override,
+)
 from uuid import uuid4
 
 from graphviz import Digraph
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from languagemodelcommon.file_managers.file_manager import FileManager
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 from languagemodelcommon.utilities.url_parser import UrlParser
 
@@ -72,6 +90,17 @@ class FlowChartGeneratorTool(ResilientBaseTool):
     args_schema: Type[BaseModel] = FlowChartInput
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
     file_manager_factory: FileManagerFactory
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
 
     @override
     def _run(
@@ -166,8 +195,11 @@ class FlowChartGeneratorTool(ResilientBaseTool):
             image_file_name: str = f"{uuid4()}.png"
 
             # Use file manager to save the file (if needed)
-            image_generation_path_ = os.environ.get(
-                "IMAGE_GENERATION_PATH", tempfile.gettempdir()
+            image_generation_path_ = (
+                self._environment_variables.image_generation_path
+                if self._environment_variables
+                and self._environment_variables.image_generation_path
+                else tempfile.gettempdir()
             )
             file_manager: FileManager = self.file_manager_factory.get_file_manager(
                 folder=image_generation_path_

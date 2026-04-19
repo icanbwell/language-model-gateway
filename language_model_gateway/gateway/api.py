@@ -2,7 +2,7 @@ import logging
 import os
 import uuid
 from contextlib import asynccontextmanager
-from os import makedirs, environ
+from os import makedirs
 from pathlib import Path
 from typing import AsyncGenerator, Annotated, List
 
@@ -50,6 +50,10 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from simple_container.container.container_registry import ContainerRegistry
 from simple_container.container.inject import Inject
 
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
+)
+
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
 logger = logging.getLogger(__name__)
@@ -82,7 +86,9 @@ ContainerRegistry.set_default(
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     worker_id = id(app1)
-    repo_manager = GithubConfigRepoManager()
+    container = ContainerRegistry.get_current()
+    env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
+    repo_manager = container.resolve(GithubConfigRepoManager)
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
@@ -91,14 +97,12 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
 
         # Ensure the skills directory exists before skill initialization
         # validates it.  The directory lives inside the GitHub config cache
-        # which may not contain a configs/skills/ folder yet, or may be
-        # mid-swap by another Gunicorn worker.
-        skills_dir = environ.get("SKILLS_DIRECTORY")
+        # which may not contain a configs/skills/ folder yet.
+        skills_dir = env_vars.skills_directory
         if skills_dir:
             makedirs(skills_dir, exist_ok=True)
 
         # Sync shared skills from GitHub/filesystem into MongoDB
-        container = ContainerRegistry.get_current()
         await initialize_skills(
             user_store=container.resolve(UserSkillStore),
             skill_sync=container.resolve(SkillSync),
@@ -122,6 +126,10 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
 
 def create_app() -> FastAPI:
     app1: FastAPI = FastAPI(title="OpenAI-compatible API", lifespan=lifespan)
+
+    container = ContainerRegistry.get_current()
+    env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
+
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
@@ -137,9 +145,8 @@ def create_app() -> FastAPI:
         name="static",
     )
 
-    image_generation_path: str = environ["IMAGE_GENERATION_PATH"]
-
-    if image_generation_path is None:
+    image_generation_path: str | None = env_vars.image_generation_path
+    if not image_generation_path:
         raise ValueError("IMAGE_GENERATION_PATH environment variable must be set")
 
     makedirs(image_generation_path, exist_ok=True)
@@ -149,9 +156,7 @@ def create_app() -> FastAPI:
 
     # Set up CORS middleware; adjust parameters as needed
     # noinspection PyTypeChecker
-    allowed_origins = environ.get("ALLOWED_ORIGINS", "").split(",")
-    if not allowed_origins or allowed_origins == [""]:
-        allowed_origins = ["*"]  # Allow all origins if not specified
+    allowed_origins = env_vars.allowed_origins
     app1.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,

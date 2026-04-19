@@ -1,11 +1,17 @@
-import logging
-import os
-from datetime import datetime
-from typing import Type, Optional, List, Tuple, Literal, override
+from __future__ import annotations
 
-from pydantic import BaseModel, Field
+import logging
+from datetime import datetime
+from typing import TYPE_CHECKING, Any, Type, Optional, List, Tuple, Literal, override
+
+from pydantic import BaseModel, Field, PrivateAttr
 
 from language_model_gateway.gateway.tools.resilient_base_tool import ResilientBaseTool
+
+if TYPE_CHECKING:
+    from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+        LanguageModelGatewayEnvironmentVariables,
+    )
 from language_model_gateway.gateway.utilities.csv_to_markdown_converter import (
     CsvToMarkdownConverter,
 )
@@ -114,6 +120,17 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
     response_format: Literal["content", "content_and_artifact"] = "content_and_artifact"
 
     jira_issues_helper: JiraIssueHelper
+    _environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
+        PrivateAttr(default=None)
+    )
+
+    def __init__(
+        self,
+        environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
+        **data: Any,
+    ) -> None:
+        super().__init__(**data)
+        self._environment_variables = environment_variables
 
     @override
     def _run(
@@ -192,9 +209,15 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
         log_prefix += ", ".join(log_prefix_items)
 
         try:
-            max_projects: int = int(os.environ.get("JIRA_MAXIMUM_PROJECTS", 100))
-            max_issues: int = int(
-                os.environ.get("JIRA_MAXIMUM_ISSUES_PER_PROJECT", 100)
+            max_projects: int = (
+                self._environment_variables.jira_maximum_projects
+                if self._environment_variables
+                else 100
+            )
+            max_issues: int = (
+                self._environment_variables.jira_maximum_issues_per_project
+                if self._environment_variables
+                else 100
             )
             if limit:
                 max_issues = limit

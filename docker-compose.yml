@@ -26,9 +26,16 @@ services:
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
       # Uncomment this to read from github
-#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
-      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
+#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/v3"
+      # Local paths when using downloading from Github
+#      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
+#      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
+#      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
+#      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
+#      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/skills"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
+      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
@@ -127,7 +134,7 @@ services:
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
-      - --workers=1
+      - --workers=3
       - --worker-class
       - uvicorn.workers.UvicornWorker
       - --bind
@@ -156,9 +163,9 @@ services:
       # uncomment this for testing AWS models and the .env above (need the AWS_CREDENTIALS_PROFILE env var)
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
-#    - ../oidc-auth-lib/oidcauthlib:/usr/local/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/usr/local/lib/python3.12/site-packages/languagemodelcommon:ro
-#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/usr/local/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
+#    - ../oidc-auth-lib/oidcauthlib:/opt/venv/lib/python3.12/site-packages/oidcauthlib:ro
+#    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
+#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
