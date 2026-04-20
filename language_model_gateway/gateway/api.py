@@ -23,6 +23,9 @@ from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
     GithubConfigRepoManager,
 )
+from languagemodelcommon.utilities.cache.snapshot_cache_store import (
+    SnapshotCacheStore,
+)
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
@@ -89,8 +92,12 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
     repo_manager = container.resolve(GithubConfigRepoManager)
+    snapshot_cache = container.resolve(SnapshotCacheStore)
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
+
+        # Open the snapshot cache store (MongoDB connection if enabled)
+        await snapshot_cache.__aenter__()
 
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
@@ -118,6 +125,7 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     finally:
         try:
             logger.info(f"Starting application shutdown for worker {worker_id}...")
+            await snapshot_cache.__aexit__(None, None, None)
             await repo_manager.stop()
             logger.info("Application shutdown completed")
         except Exception:
