@@ -443,11 +443,11 @@ wheels = [
 
 [[package]]
 name = "cachetools"
-version = "7.0.5"
+version = "7.0.6"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/af/dd/57fe3fdb6e65b25a5987fd2cdc7e22db0aef508b91634d2e57d22928d41b/cachetools-7.0.5.tar.gz", hash = "sha256:0cd042c24377200c1dcd225f8b7b12b0ca53cc2c961b43757e774ebe190fd990", size = 37367, upload-time = "2026-03-09T20:51:29.451Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/76/7b/1755ed2c6bfabd1d98b37ae73152f8dcf94aa40fee119d163c19ed484704/cachetools-7.0.6.tar.gz", hash = "sha256:e5d524d36d65703a87243a26ff08ad84f73352adbeafb1cde81e207b456aaf24", size = 37526, upload-time = "2026-04-20T19:02:23.289Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/06/f3/39cf3367b8107baa44f861dc802cbf16263c945b62d8265d36034fc07bea/cachetools-7.0.5-py3-none-any.whl", hash = "sha256:46bc8ebefbe485407621d0a4264b23c080cedd913921bad7ac3ed2f26c183114", size = 13918, upload-time = "2026-03-09T20:51:27.33Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/c4/cf76242a5da1410917107ff14551764aa405a5fd10cd10cf9a5ca8fa77f4/cachetools-7.0.6-py3-none-any.whl", hash = "sha256:4e94956cfdd3086f12042cdd29318f5ced3893014f7d0d059bf3ead3f85b7f8b", size = 13976, upload-time = "2026-04-20T19:02:21.187Z" },
 ]
 
 [[package]]
@@ -2090,16 +2090,16 @@ wheels = [
 
 [[package]]
 name = "langchain-openai"
-version = "1.1.14"
+version = "1.1.15"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-core" },
     { name = "openai" },
     { name = "tiktoken" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8e/f5/b1a56f703fb90952b07ff9fb5507123a39df1267d62a7f2bb821c5dbb628/langchain_openai-1.1.14.tar.gz", hash = "sha256:71b4262932fabe506ce79c175dbc956cc48f24d81e20b27662df493147750643", size = 1115195, upload-time = "2026-04-16T14:55:24.696Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/86/1e/ed50e1c44f36be6ba97b56b09f1a6be5906098b4ba1e6f8a0f661a54a5f5/langchain_openai-1.1.15.tar.gz", hash = "sha256:16ddb7481853991fd00691dfd01bcc5cdf60cb36aa6962b38c8a4939f0538ba0", size = 1115780, upload-time = "2026-04-20T19:57:09.281Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/fa/8c33befbc0cf81b21371cc1dab4e7bf94a80b8116194f263a5021ec02529/langchain_openai-1.1.14-py3-none-any.whl", hash = "sha256:cb525d2011f9813fc15a7dcfd4bca5b87badcbcb2c113a7fbe45d1b8a1bbb69c", size = 88705, upload-time = "2026-04-16T14:55:23.159Z" },
+    { url = "https://files.pythonhosted.org/packages/2d/29/a357935f8d75ce4fc7c32bbc887c026295e98a9e4ded6daf434d150c5d44/langchain_openai-1.1.15-py3-none-any.whl", hash = "sha256:069022b6cba2108fac2450d3bf6c888e20a2af92bf89b493638456ef4db0d900", size = 88797, upload-time = "2026-04-20T19:57:07.683Z" },
 ]
 
 [[package]]
@@ -3056,7 +3056,7 @@ wheels = [
 
 [[package]]
 name = "oidcauthlib"
-version = "3.0.10"
+version = "3.0.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "authlib" },
@@ -3071,9 +3071,9 @@ dependencies = [
     { name = "simple-container" },
     { name = "starlette" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4f/7d/dfeb75fca254f134bbda26410acadcf5cdfb4b8a9c87fff437967c8d4775/oidcauthlib-3.0.10.tar.gz", hash = "sha256:c508cc29564c299afc0c56e83c6c7db752e80c2ad7be72b1cc7be713e4d8065c", size = 65648, upload-time = "2026-04-20T17:53:46.155Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/16/69160ecf08f4df3d503e381d3504eb748d56c9fa3f1ba583d6013c45e19a/oidcauthlib-3.0.11.tar.gz", hash = "sha256:a14136a797ca9ee94386fa5720fc4a7d16dbcfd45c5c2c8b522c6bb19750e6d2", size = 65670, upload-time = "2026-04-20T18:59:26.128Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ed/25/c0a5b04f560c390ad3354658ef3a54a538e7ad73889b3eb2d184eea18829/oidcauthlib-3.0.10-py3-none-any.whl", hash = "sha256:5c98f6556d23f4eec0fbcb1c4d5b22c096978a7f7f98b87bcd1b4371465b2d29", size = 89091, upload-time = "2026-04-20T17:53:45.129Z" },
+    { url = "https://files.pythonhosted.org/packages/12/e7/cef4939bccb1893263b081b2744ece7e057f618c13326edebc7f64596b50/oidcauthlib-3.0.11-py3-none-any.whl", hash = "sha256:64e07d9a2e10d91f85b2afe8a33348059f04f2e64d0e358aed9fb78645518708", size = 89090, upload-time = "2026-04-20T18:59:24.904Z" },
 ]
 
 [[package]]
@@ -5168,15 +5168,15 @@ wheels = [
 
 [[package]]
 name = "types-boto3"
-version = "1.42.91"
+version = "1.42.92"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "botocore-stubs" },
     { name = "types-s3transfer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0a/e3/c6172816bc83a27c58e2f2d9a0854470f22d06856655e3091bcf8be1bd2c/types_boto3-1.42.91.tar.gz", hash = "sha256:f85600f36d876184137df2289189a59792de35a7a5f2e50d3c2224cc150cbea8", size = 102982, upload-time = "2026-04-17T19:33:10.65Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/b4/2453ebebd548cbc195ff2cc94b76d38273021eb21a7f807594fb99ac8402/types_boto3-1.42.92.tar.gz", hash = "sha256:39b0ed28e697ab923e322e6e48d65488ece9809a27c3fc0045ab3ffaf3e67c99", size = 102981, upload-time = "2026-04-20T19:55:17.434Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/ca/77d844597a5e7476e5fed577a256b2b7f3b9968b52d81f388f3b0b6882a2/types_boto3-1.42.91-py3-none-any.whl", hash = "sha256:4abd8188ba75e53699addc4e547734b3e90b1582941b4e2bd97efd5441cf68f7", size = 70560, upload-time = "2026-04-17T19:33:07.618Z" },
+    { url = "https://files.pythonhosted.org/packages/58/4b/42cc8a01edf7d904de15a4fb3ed56ff5cb40f58eda2b10615b54caaee9bc/types_boto3-1.42.92-py3-none-any.whl", hash = "sha256:47da37efce9bd946acac711e18c7828f9b900d09ba0b284fd124b1f6f230a1d6", size = 70561, upload-time = "2026-04-20T19:55:13.243Z" },
 ]
 
 [[package]]
