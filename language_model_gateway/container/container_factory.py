@@ -74,6 +74,10 @@ from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.plugin_mcp_provider import PluginMcpConfigProvider
+from language_model_gateway.container.skill_loader_mcp_adapter import (
+    SkillLoaderMcpAdapter,
+)
 from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
@@ -346,6 +350,13 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            PluginMcpConfigProvider,
+            lambda c: SkillLoaderMcpAdapter(
+                skill_loader=c.resolve(SkillLoaderProtocol),
+            ),
+        )
+
+        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
@@ -360,6 +371,7 @@ class LanguageModelGatewayContainerFactory:
                 persistence_factory=c.resolve(PersistenceFactory),
                 skill_loader=c.resolve(SkillLoaderProtocol),
                 tool_display_name_mapper=c.resolve(ToolDisplayNameMapper),
+                plugin_mcp_provider=c.resolve(PluginMcpConfigProvider),
             ),
         )
 

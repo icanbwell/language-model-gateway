@@ -40,10 +40,10 @@ services:
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
-#      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
+      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace"
 #      PLUGINS_MARKETPLACE: "github://icanbwell/ai-plugin-marketplace/plugins?ref=main"
-#      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
+      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
 #      PLUGINS_MARKETPLACE_EXCLUDE: ""
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
       # path to provider search
@@ -170,7 +170,7 @@ services:
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/opt/venv/lib/python3.12/site-packages/oidcauthlib:ro
 #    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
-#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
+    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
