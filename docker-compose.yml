@@ -41,6 +41,8 @@ services:
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
       SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
+#      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace"
+#      PLUGINS_MARKETPLACE: "github://JosiahSiegel/claude-plugin-marketplace/plugins?ref=main"
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
@@ -156,6 +158,7 @@ services:
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
 #    - ../language-model-gateway-configuration/configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+#    - ../ai-plugin-marketplace:/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace:ro
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
