@@ -1907,7 +1907,7 @@ wheels = [
 
 [[package]]
 name = "langchain-ai-skills-framework"
-version = "1.0.53"
+version = "1.0.54"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -1917,6 +1917,7 @@ dependencies = [
     { name = "langchain" },
     { name = "langchain-core" },
     { name = "motor" },
+    { name = "py-key-value-aio" },
     { name = "pydantic" },
     { name = "pydantic-ai-skills", extra = ["git"] },
     { name = "pyyaml" },
@@ -1927,9 +1928,9 @@ dependencies = [
     { name = "skills-ref" },
     { name = "uv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d7/aa/e0940fe7f2b276f7177befd0565897a2cfce5912e1ad47b094312f2c0e03/langchain_ai_skills_framework-1.0.53.tar.gz", hash = "sha256:8ade2aa1b79dd6f113e0c1618e03ccf64e40b3b696e7bc102155f87538d211c7", size = 50943, upload-time = "2026-04-20T16:20:41.467Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/39/a1/5735e94946c29d1f1d8e9baf29b2709e161b7a46922b1451c96f342b9007/langchain_ai_skills_framework-1.0.54.tar.gz", hash = "sha256:7d323351f3fa5665f1b8209cf3af8bc0a4a2022fa4987930e16c9853567c2f3c", size = 57924, upload-time = "2026-04-20T23:16:10.772Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/66/2c27d20ed34d0287d159fb96622458b58c239de3f6e9751f0a6a2d8fcf26/langchain_ai_skills_framework-1.0.53-py3-none-any.whl", hash = "sha256:d03a3583b506c06a5357e31e8343f459f538160c100906fdcc00cc56bc0555ae", size = 81899, upload-time = "2026-04-20T16:20:40.223Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/f3/1eae1a8e2f60dabe69c35980beb130808022e14e45134746abc53f17c0ee/langchain_ai_skills_framework-1.0.54-py3-none-any.whl", hash = "sha256:e73281abd7bf3fea90ca95d6e9832f2e5de8c7a0609e63cfd0a0afcd4d178c8d", size = 92051, upload-time = "2026-04-20T23:16:09.477Z" },
 ]
 
 [[package]]
@@ -2239,7 +2240,7 @@ wheels = [
 
 [[package]]
 name = "language-model-common"
-version = "2.0.24"
+version = "2.0.25"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "authlib" },
@@ -2266,15 +2267,16 @@ dependencies = [
     { name = "motor" },
     { name = "oidcauthlib" },
     { name = "openai" },
+    { name = "py-key-value-aio" },
     { name = "pydantic" },
     { name = "pymongo", extra = ["snappy"] },
     { name = "pypdf" },
     { name = "simple-container" },
     { name = "tiktoken" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2f/ec/057222587d5d1455bebdcb24e80478bb35ea4d9af268e955bc2a2bc663c3/language_model_common-2.0.24.tar.gz", hash = "sha256:1a271a478e18e89785c9f11ad0452fd7fd50ff4fa32c0c3ea40cce311500843c", size = 146835, upload-time = "2026-04-19T18:16:41.359Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/dc/16879114669f58b2c1d9753352a190932e0e3afb4014afb92d4bd4136f22/language_model_common-2.0.25.tar.gz", hash = "sha256:0891c0185f2aebd1d601111eef38814fb20722c2eaf3ce4554a8dc23c638ff21", size = 148712, upload-time = "2026-04-20T23:24:39.683Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fe/c1/300e1a2b91dfa44841041fc7e8960737434340b7ea0509ddb4e305ba8d79/language_model_common-2.0.24-py3-none-any.whl", hash = "sha256:8d39dcaf3fe23574b1cded4b5da72e95607ce8c7e82fcb2b8aaabed30060d450", size = 202330, upload-time = "2026-04-19T18:16:39.384Z" },
+    { url = "https://files.pythonhosted.org/packages/25/fc/558e9dcd1b9c5e4c693a9c984c4ab6a21b6a40c759b1eef30d3796a6226f/language_model_common-2.0.25-py3-none-any.whl", hash = "sha256:d8b53a58e71f4bda737a90c574632e86b22e6c6a482d57dbd5d1b90d12a6bf2e", size = 204935, upload-time = "2026-04-20T23:24:37.795Z" },
 ]
 
 [[package]]
@@ -2409,7 +2411,7 @@ requires-dist = [
     { name = "httpx-sse", specifier = ">=0.4.0" },
     { name = "joserfc", specifier = ">=1.4.3" },
     { name = "langchain", specifier = ">=1.0.0" },
-    { name = "langchain-ai-skills-framework", specifier = ">=1.0.53" },
+    { name = "langchain-ai-skills-framework", specifier = ">=1.0.54" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
     { name = "langchain-community", specifier = ">=0.4" },
     { name = "langchain-core", specifier = ">=1.2.5" },
@@ -2422,7 +2424,7 @@ requires-dist = [
     { name = "langgraph-checkpoint-mongodb", specifier = ">=0.2.1" },
     { name = "langgraph-store-mongodb", specifier = ">=0.1.0" },
     { name = "langmem", specifier = ">=0.0.30" },
-    { name = "language-model-common", specifier = ">=2.0.23" },
+    { name = "language-model-common", specifier = ">=2.0.25" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "mcp", specifier = ">=1.11.0" },
     { name = "oidcauthlib", specifier = ">=3.0.10" },
