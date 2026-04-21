@@ -2094,16 +2094,16 @@ wheels = [
 
 [[package]]
 name = "langchain-openai"
-version = "1.1.15"
+version = "1.1.16"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-core" },
     { name = "openai" },
     { name = "tiktoken" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/86/1e/ed50e1c44f36be6ba97b56b09f1a6be5906098b4ba1e6f8a0f661a54a5f5/langchain_openai-1.1.15.tar.gz", hash = "sha256:16ddb7481853991fd00691dfd01bcc5cdf60cb36aa6962b38c8a4939f0538ba0", size = 1115780, upload-time = "2026-04-20T19:57:09.281Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/37/f7/567473c9e35e32144c21467209425d99cdf865275d9556eb08b1c92db99a/langchain_openai-1.1.16.tar.gz", hash = "sha256:306f1c7f66f47bd39655e645fd1f9445d65473465a59347fa7d716596e28dfe0", size = 1116903, upload-time = "2026-04-21T19:26:21.572Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2d/29/a357935f8d75ce4fc7c32bbc887c026295e98a9e4ded6daf434d150c5d44/langchain_openai-1.1.15-py3-none-any.whl", hash = "sha256:069022b6cba2108fac2450d3bf6c888e20a2af92bf89b493638456ef4db0d900", size = 88797, upload-time = "2026-04-20T19:57:07.683Z" },
+    { url = "https://files.pythonhosted.org/packages/d2/95/ea040d87ecb8df9e2fef2a1c331252b116a324ab7a3bdae09928e81244e7/langchain_openai-1.1.16-py3-none-any.whl", hash = "sha256:648becb4fb86d24d56b9292e01878a05cca932bb475909bb8fb85b8c82dd1a02", size = 89202, upload-time = "2026-04-21T19:26:20.498Z" },
 ]
 
 [[package]]
@@ -2243,7 +2243,7 @@ wheels = [
 
 [[package]]
 name = "language-model-common"
-version = "2.0.28"
+version = "2.0.29"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "authlib" },
@@ -2277,9 +2277,9 @@ dependencies = [
     { name = "simple-container" },
     { name = "tiktoken" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d0/62/2d4a04d74f78b4f43a830fcdf06253725c45c57e5b68b23cad296abc25f5/language_model_common-2.0.28.tar.gz", hash = "sha256:ceeafaa859013d1ffc7830f731c7b73f71f3af7157409602a4e3c08af388693c", size = 150609, upload-time = "2026-04-21T19:14:04.596Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0c/90/794e843cd9a398eed55bb56bba4abbfd276a17cb5ac5d7585deb04553a6a/language_model_common-2.0.29.tar.gz", hash = "sha256:acf4d8fe717c3ebaced276a8d16bedf3091f281c4635fc593f73eb4ae953f014", size = 150869, upload-time = "2026-04-21T20:17:26.49Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/13/62/8e9208572094295e2db0c84dc5307a590f052f7f0a2449bfd42698de47c9/language_model_common-2.0.28-py3-none-any.whl", hash = "sha256:6a3c0abed7986f03c2c5465a4a12be9bf9fc853dc24061911384f79ce5ac21f8", size = 207118, upload-time = "2026-04-21T19:14:02.961Z" },
+    { url = "https://files.pythonhosted.org/packages/55/0e/58536ff982b12a923a71c4404a3d35d9a04e398500cb0b7aa915ac85cda7/language_model_common-2.0.29-py3-none-any.whl", hash = "sha256:5da1aea8b06e78a0e30fcdb8e5a651c9e57ee07d37db0a8fbb14ee40de649f17", size = 207379, upload-time = "2026-04-21T20:17:24.813Z" },
 ]
 
 [[package]]
@@ -2427,7 +2427,7 @@ requires-dist = [
     { name = "langgraph-checkpoint-mongodb", specifier = ">=0.2.1" },
     { name = "langgraph-store-mongodb", specifier = ">=0.1.0" },
     { name = "langmem", specifier = ">=0.0.30" },
-    { name = "language-model-common", specifier = ">=2.0.28" },
+    { name = "language-model-common", specifier = ">=2.0.29" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "mcp", specifier = ">=1.11.0" },
     { name = "oidcauthlib", specifier = ">=3.0.10" },

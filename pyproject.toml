@@ -71,7 +71,7 @@ dependencies = [
     "gunicorn>=23.0.0",
     "py-key-value-aio>=0.4.4",
     "langchain-ai-skills-framework>=1.0.56",
-    "language-model-common>=2.0.28",
+    "language-model-common>=2.0.29",
 ]
 
 [dependency-groups]
