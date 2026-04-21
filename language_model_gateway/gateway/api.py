@@ -24,7 +24,6 @@ from languagemodelcommon.configs.config_reader.github_config_repo_manager import
     GithubConfigRepoManager,
 )
 from key_value.aio.stores.base import BaseStore
-from key_value.aio.stores.mongodb import MongoDBStore
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
@@ -91,11 +90,12 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
     repo_manager = container.resolve(GithubConfigRepoManager)
-    snapshot_cache: MongoDBStore = container.resolve(BaseStore)
+    snapshot_cache = container.resolve(BaseStore)
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
-        # Open the snapshot cache store (MongoDB connection if enabled)
+        # Open the snapshot cache store (connects to MongoDB if configured,
+        # falls back to in-memory silently on connection failure)
         await snapshot_cache.__aenter__()
 
         # Download GitHub config repo if configured (before first request)
