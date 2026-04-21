@@ -45,7 +45,6 @@ services:
 #      PLUGINS_MARKETPLACE: "github://icanbwell/ai-plugin-marketplace/plugins?ref=main"
       PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
 #      PLUGINS_MARKETPLACE_EXCLUDE: ""
-      CONFIG_CACHE_TIMEOUT_SECONDS: 10
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -63,7 +62,6 @@ services:
 #      JIRA_USERNAME: "imran.qureshi@bwell.com"
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
-      MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # Inbound auth providers for JWT validation of gateway callers.
       # Outbound providers (for MCP servers and models) are defined inline
       # in .mcp.json mcpServers[x].oauth and model config oauth_providers.
@@ -104,9 +102,54 @@ services:
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
-      # Snapshot cache backend: 'mongo', 'file', or 'memory' (default)
+      # ── Caching ─────────────────────────────────────────────────────
+      #
+      # CONFIG_CACHE_TIMEOUT_SECONDS: TTL (seconds) for the in-memory
+      #   config cache and the snapshot cache write.
+      #
+      # MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: TTL (seconds) for
+      #   cached MCP tool metadata (default: 3600).
+      #
+      # Snapshot cache — stores only the parsed ChatModelConfig list
+      # (model definitions from MODELS_OFFICIAL_PATH). Does NOT cache
+      # MCP server configs, prompts, plugins, or skills. Lets restarts
+      # and new Gunicorn workers load model configs from the cache
+      # instead of re-reading every file from disk or GitHub.
+      #
+      # SNAPSHOT_CACHE_TYPE: Backend type.
+      #   'mongo'  — persists to MongoDB. Uses MONGO_LLM_STORAGE_* vars
+      #              (falls back to MONGO_URL / MONGO_DB_USERNAME /
+      #              MONGO_DB_PASSWORD when the LLM-specific vars are unset).
+      #   'file'   — persists to a local JSON file at
+      #              /tmp/snapshot_cache/<collection>.json.
+      #              Survives restarts if the path is on a mounted volume.
+      #   'memory' — in-process only. Lost on restart. No MongoDB needed.
+      #
+      # SNAPSHOT_CACHE_COLLECTION_NAME: Mongo collection or file namespace
+      #   (default: 'snapshot_cache').
+      #
+      # Per-resource collection overrides (optional):
+      #   SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION — separate collection for
+      #     ChatModelConfig snapshots (ConfigReader).
+      #   SNAPSHOT_CACHE_SKILLS_COLLECTION — separate collection for
+      #     SkillkitDirectoryLoader snapshots.
+      #   SNAPSHOT_CACHE_PLUGINS_COLLECTION — separate collection for
+      #     MarketplaceDirectoryLoader snapshots.
+      #   When unset, each loader uses the store's default collection.
+      #
+      # Mongo connection (shared with LLM storage):
+      #   MONGO_LLM_STORAGE_URI          — falls back to MONGO_URL
+      #   MONGO_LLM_STORAGE_DB_NAME      — default: 'llm_storage'
+      #   MONGO_LLM_STORAGE_DB_USERNAME  — falls back to MONGO_DB_USERNAME
+      #   MONGO_LLM_STORAGE_DB_PASSWORD  — falls back to MONGO_DB_PASSWORD
+      # ────────────────────────────────────────────────────────────────
+      CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
+#      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
+#      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
+#      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
       # for LLM memory
       ENABLE_LLM_STORE: 'true'
       ENABLE_LLM_CHECKPOINTER: 'true'
