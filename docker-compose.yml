@@ -136,12 +136,6 @@ services:
       #   SNAPSHOT_CACHE_PLUGINS_COLLECTION — separate collection for
       #     MarketplaceDirectoryLoader snapshots.
       #   When unset, each loader uses the store's default collection.
-      #
-      # Mongo connection (shared with LLM storage):
-      #   MONGO_LLM_STORAGE_URI          — falls back to MONGO_URL
-      #   MONGO_LLM_STORAGE_DB_NAME      — default: 'llm_storage'
-      #   MONGO_LLM_STORAGE_DB_USERNAME  — falls back to MONGO_DB_USERNAME
-      #   MONGO_LLM_STORAGE_DB_PASSWORD  — falls back to MONGO_DB_PASSWORD
       # ────────────────────────────────────────────────────────────────
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
@@ -150,13 +144,16 @@ services:
 #      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
 #      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
 #      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
-      # for LLM memory
+      # ── LLM storage & snapshot cache MongoDB ──────────────────────
+      # All use MONGO_LLM_STORAGE_* vars, which fall back to
+      # MONGO_URL / MONGO_DB_USERNAME / MONGO_DB_PASSWORD when unset.
+      MONGO_LLM_STORAGE_DB_NAME: language_model_gateway
+      LLM_STORAGE_TYPE: "mongo"
       ENABLE_LLM_STORE: 'true'
       ENABLE_LLM_CHECKPOINTER: 'true'
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"
-      LLM_STORAGE_TYPE: "mongo"
       # This is the user and password that can be used for testing
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
