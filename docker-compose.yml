@@ -141,6 +141,7 @@ services:
       CONFIG_REFRESH_INTERVAL_MINUTES: 60
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
+      SNAPSHOT_CACHE_TTL_SECONDS: 3600
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
 #      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
 #      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
@@ -213,8 +214,8 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/opt/venv/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
-#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
+    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
+    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s

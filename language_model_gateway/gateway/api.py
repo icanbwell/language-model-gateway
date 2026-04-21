@@ -93,11 +93,14 @@ async def _load_all_configs(
     config_reader: ConfigReader,
     skill_loader: SkillLoaderProtocol,
 ) -> None:
-    """Eagerly load model configs (incl. MCP JSON), skills, and plugins."""
+    """Eagerly load model configs (incl. MCP JSON), skills, and plugins.
+
+    Uses the async path for skills/plugins so that the snapshot cache
+    is populated (the sync ``refresh()`` only updates in-memory state).
+    """
     configs = await config_reader.read_model_configs_async()
     logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
 
-    skill_loader.refresh()
     instructions = await skill_loader.get_instructions()
     logger.info(
         "Loaded skills and plugins (%d chars of instructions)",
@@ -117,6 +120,8 @@ async def _config_refresh_loop(
         await asyncio.sleep(interval_seconds)
         try:
             await config_reader.clear_cache()
+            # Rebuild skills/plugins from disk and persist to MongoDB.
+            await skill_loader.refresh_async()
             await _load_all_configs(
                 config_reader=config_reader,
                 skill_loader=skill_loader,
