@@ -105,7 +105,7 @@ services:
       MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
       # Snapshot cache backend: 'mongo', 'file', or 'memory' (default)
-      SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-memory}
+      SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
       # for LLM memory
       ENABLE_LLM_STORE: 'true'
