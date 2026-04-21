@@ -104,8 +104,8 @@ services:
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
-      # for snapshot cache (MongoDB-backed cross-pod cache for parsed configs/skills)
-      ENABLE_SNAPSHOT_CACHE: 'true'
+      # Snapshot cache backend: 'mongo', 'file', or 'memory' (default)
+      SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-memory}
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
       # for LLM memory
       ENABLE_LLM_STORE: 'true'
@@ -172,7 +172,7 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/opt/venv/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
+    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
     - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1

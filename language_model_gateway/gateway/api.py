@@ -94,8 +94,7 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
-        # Open the snapshot cache store (connects to MongoDB if configured,
-        # falls back to in-memory silently on connection failure)
+        # Open the snapshot cache store (MongoDB if configured, memory otherwise)
         await snapshot_cache.__aenter__()
 
         # Download GitHub config repo if configured (before first request)
