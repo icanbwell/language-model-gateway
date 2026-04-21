@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import uuid
@@ -9,6 +10,9 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
@@ -84,6 +88,46 @@ ContainerRegistry.set_default(
 )
 
 
+async def _load_all_configs(
+    *,
+    config_reader: ConfigReader,
+    skill_loader: SkillLoaderProtocol,
+) -> None:
+    """Eagerly load model configs (incl. MCP JSON), skills, and plugins."""
+    configs = await config_reader.read_model_configs_async()
+    logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
+
+    skill_loader.refresh()
+    instructions = await skill_loader.get_instructions()
+    logger.info(
+        "Loaded skills and plugins (%d chars of instructions)",
+        len(instructions),
+    )
+
+
+async def _config_refresh_loop(
+    *,
+    config_reader: ConfigReader,
+    skill_loader: SkillLoaderProtocol,
+    interval_minutes: int,
+) -> None:
+    """Periodically reload all configs in the background."""
+    interval_seconds = interval_minutes * 60
+    while True:
+        await asyncio.sleep(interval_seconds)
+        try:
+            await config_reader.clear_cache()
+            await _load_all_configs(
+                config_reader=config_reader,
+                skill_loader=skill_loader,
+            )
+            logger.info("Background config refresh completed")
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            logger.warning("Background config refresh failed", exc_info=True)
+
+
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     worker_id = id(app1)
@@ -91,6 +135,9 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
     repo_manager = container.resolve(GithubConfigRepoManager)
     snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
+    config_reader = container.resolve(ConfigReader)
+    skill_loader: SkillLoaderProtocol = container.resolve(SkillLoaderProtocol)
+    refresh_task: asyncio.Task[None] | None = None
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
 
@@ -113,6 +160,23 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
             skill_sync=container.resolve(SkillSync),
         )
 
+        # Eagerly load all configs at startup
+        await _load_all_configs(
+            config_reader=config_reader,
+            skill_loader=skill_loader,
+        )
+
+        # Start background refresh loop
+        interval = env_vars.config_refresh_interval_minutes
+        refresh_task = asyncio.create_task(
+            _config_refresh_loop(
+                config_reader=config_reader,
+                skill_loader=skill_loader,
+                interval_minutes=interval,
+            )
+        )
+        logger.info("Background config refresh scheduled every %d minutes", interval)
+
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
 
@@ -123,6 +187,12 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     finally:
         try:
             logger.info(f"Starting application shutdown for worker {worker_id}...")
+            if refresh_task is not None and not refresh_task.done():
+                refresh_task.cancel()
+                try:
+                    await refresh_task
+                except asyncio.CancelledError:
+                    pass
             await snapshot_cache.__aexit__(None, None, None)
             await repo_manager.stop()
             logger.info("Application shutdown completed")

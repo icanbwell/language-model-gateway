@@ -117,3 +117,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
     @property
     def databricks_sql_warehouse_id(self) -> Optional[str]:
         return os.environ.get("DATABRICKS_SQL_WAREHOUSE_ID")
+
+    @property
+    def config_refresh_interval_minutes(self) -> int:
+        return int(os.environ.get("CONFIG_REFRESH_INTERVAL_MINUTES", "60"))

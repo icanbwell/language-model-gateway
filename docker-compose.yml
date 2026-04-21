@@ -138,6 +138,7 @@ services:
       #   When unset, each loader uses the store's default collection.
       # ────────────────────────────────────────────────────────────────
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      CONFIG_REFRESH_INTERVAL_MINUTES: 60
       MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
