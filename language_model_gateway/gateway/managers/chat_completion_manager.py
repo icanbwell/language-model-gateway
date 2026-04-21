@@ -237,12 +237,17 @@ class ChatCompletionManager:
                     first_exception.url,
                     first_exception.headers.get("WWW-Authenticate"),
                 )
-                url: str | None = (
+                resource_metadata_url: str | None = (
                     McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
                         headers=Headers(first_exception.headers)
                     )
                 )
-                content: str = f"Please login at {url} to access the MCP tool from {first_exception.url}."
+                content: str = (
+                    McpAuthorizationHelper.build_www_authenticate_login_message(
+                        resource_metadata_url=resource_metadata_url,
+                        tool_url=first_exception.url,
+                    )
+                )
                 return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
