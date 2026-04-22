@@ -101,11 +101,7 @@ async def _load_all_configs(
     configs = await config_reader.read_model_configs_async()
     logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
 
-    instructions = await skill_loader.get_instructions()
-    logger.info(
-        "Loaded skills and marketplace (%d chars of instructions)",
-        len(instructions),
-    )
+    await skill_loader.get_instructions()
 
 
 async def _config_refresh_loop(
