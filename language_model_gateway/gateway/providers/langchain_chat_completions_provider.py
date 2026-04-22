@@ -253,7 +253,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             if model_config.get_agents() is not None
             else []
         )
-        # Append plugin MCP servers discovered from marketplace plugins
+        # Append plugin MCP servers discovered from marketplace marketplace
         if self.plugin_mcp_provider:
             mcp_tool_configs = mcp_tool_configs + list(
                 self.plugin_mcp_provider.get_mcp_server_configs()

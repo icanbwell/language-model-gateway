@@ -1,4 +1,4 @@
-exclude: (^.idea/|^docsrc|^docs|^language-model-gateway-configs/plugins/.*\.py$)
+exclude: (^.idea/|^docsrc|^docs|^language-model-gateway-configs/marketplace/.*\.py$)
 
 repos:
   # Pre-commit hooks for basic checks

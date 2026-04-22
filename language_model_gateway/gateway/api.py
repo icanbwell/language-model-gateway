@@ -93,9 +93,9 @@ async def _load_all_configs(
     config_reader: ConfigReader,
     skill_loader: SkillLoaderProtocol,
 ) -> None:
-    """Eagerly load model configs (incl. MCP JSON), skills, and plugins.
+    """Eagerly load model configs (incl. MCP JSON), skills, and marketplace.
 
-    Uses the async path for skills/plugins so that the snapshot cache
+    Uses the async path for skills/marketplace so that the snapshot cache
     is populated (the sync ``refresh()`` only updates in-memory state).
     """
     configs = await config_reader.read_model_configs_async()
@@ -103,7 +103,7 @@ async def _load_all_configs(
 
     instructions = await skill_loader.get_instructions()
     logger.info(
-        "Loaded skills and plugins (%d chars of instructions)",
+        "Loaded skills and marketplace (%d chars of instructions)",
         len(instructions),
     )
 
@@ -120,7 +120,7 @@ async def _config_refresh_loop(
         await asyncio.sleep(interval_seconds)
         try:
             await config_reader.clear_cache()
-            # Rebuild skills/plugins from disk and persist to MongoDB.
+            # Rebuild skills/marketplace from disk and persist to MongoDB.
             await skill_loader.refresh_async()
             await _load_all_configs(
                 config_reader=config_reader,
@@ -152,7 +152,7 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Sync shared skills from plugins marketplace into MongoDB
+        # Sync shared skills from marketplace marketplace into MongoDB
         await initialize_skills(
             user_store=container.resolve(PluginSkillStore),
             skill_sync=container.resolve(SkillSync),

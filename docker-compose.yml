@@ -33,16 +33,15 @@ services:
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
 #      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
 #      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
-#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/plugins"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/marketplace"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/plugins"
-      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace"
-#      PLUGINS_MARKETPLACE: "github://icanbwell/ai-plugin-marketplace/plugins?ref=main"
+      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
+#      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=main"
       PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
 #      PLUGINS_MARKETPLACE_EXCLUDE: ""
       # path to provider search
@@ -112,7 +111,7 @@ services:
       #
       # Snapshot cache — stores only the parsed ChatModelConfig list
       # (model definitions from MODELS_OFFICIAL_PATH). Does NOT cache
-      # MCP server configs, prompts, plugins, or skills. Lets restarts
+      # MCP server configs, prompts, marketplace, or skills. Lets restarts
       # and new Gunicorn workers load model configs from the cache
       # instead of re-reading every file from disk or GitHub.
       #
@@ -146,9 +145,9 @@ services:
 #      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
 #      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
       # PLUGINS_COLLECTION: MongoDB collection for individual plugin
-      #   definition documents (default: 'plugins'). Each marketplace
+      #   definition documents (default: 'marketplace'). Each marketplace
       #   plugin is written as a separate document keyed by plugin name.
-      PLUGINS_COLLECTION: plugins
+      PLUGINS_COLLECTION: marketplace
       # ── Plugin skill collections ─────────────────────────────────
       # MongoDB collections for plugin-scoped skills, resources, and
       # scripts. Indexed by (user_id, plugin_name, skill_name).
@@ -209,11 +208,11 @@ services:
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
     - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-    - ./language-model-gateway-configs/plugins:/usr/src/language_model_gateway/github_config_cache/configs/plugins
+    - ./language-model-gateway-configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-#    - ../language-model-gateway-configuration/configs/plugins:/usr/src/language_model_gateway/github_config_cache/configs/plugins
+#    - ../language-model-gateway-configuration/configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
 #    - ../ai-plugin-marketplace:/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace:ro
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
