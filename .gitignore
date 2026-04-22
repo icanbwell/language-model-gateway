@@ -155,3 +155,4 @@ dmypy.json
 
 /github_config_cache/*
 
+/.marketplace-git-cache/*
