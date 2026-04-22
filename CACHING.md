@@ -17,8 +17,12 @@ re-reading every config file from disk or GitHub.
 | **L2 -- Snapshot cache** | Cross-worker (shared) | `SNAPSHOT_CACHE_TTL_SECONDS` | 3600 s | MongoDB, file, or in-memory store |
 | **L3 -- Disk / GitHub / S3** | Source of truth | -- | -- | Filesystem or remote |
 
-Skills and plugins follow the same L1/L2/L3 pattern with their own
+Plugin marketplace skills follow the same L1/L2/L3 pattern with their own
 in-memory snapshots and the same shared L2 store.
+
+User-persisted skills (stored in MongoDB via `MongoPluginSkillLoader`) do
+**not** use in-memory caching — MongoDB is already the source of truth, so
+reads go directly to the database.
 
 MCP tool schemas have a separate in-memory cache with its own TTL.
 
@@ -75,7 +79,7 @@ can load configs from the cache instead of re-reading from disk or GitHub.
   | `memory` | `MemoryStoreWithContextManager` | In-process only, lost on restart |
 
 - **Singleton:** Registered as `BaseStore` in the DI container and shared
-  by `ConfigReader`, `SkillkitDirectoryLoader`, and `MarketplaceDirectoryLoader`.
+  by `ConfigReader` and `MarketplaceDirectoryLoader`.
 - **TTL:** `SNAPSHOT_CACHE_TTL_SECONDS` (default `3600`). This is
   independent of `CONFIG_CACHE_TIMEOUT_SECONDS`.
 - **Collection:** `SNAPSHOT_CACHE_COLLECTION_NAME` (default `snapshot_cache`).
@@ -107,10 +111,11 @@ prevent thundering-herd on cache miss:
 
 ---
 
-## 2. Skills and Plugins Caching
+## 2. Plugin Marketplace Caching
 
-Skills (from `SkillkitDirectoryLoader`) and plugins (from
-`MarketplaceDirectoryLoader`) follow the same three-tier pattern.
+`MarketplaceDirectoryLoader` loads skills from the plugin marketplace
+(filesystem or GitHub) and caches them using the same three-tier pattern
+as model configs.
 
 ### Data flow (async path)
 
@@ -137,7 +142,7 @@ Return snapshot
 
 ### SnapshotCacheMixin
 
-Both loaders inherit from `SnapshotCacheMixin`
+`MarketplaceDirectoryLoader` inherits from `SnapshotCacheMixin`
 (`langchain_ai_skills_framework/loaders/snapshot_cache_mixin.py`)
 which provides:
 
@@ -152,7 +157,6 @@ which provides:
 
 | Loader | Cache key | Collection env var |
 |--------|-----------|--------------------|
-| `SkillkitDirectoryLoader` | `skillkit_snapshot` | `SNAPSHOT_CACHE_SKILLS_COLLECTION` |
 | `MarketplaceDirectoryLoader` | `marketplace_snapshot` | `SNAPSHOT_CACHE_PLUGINS_COLLECTION` |
 | `ConfigReader` | `model_configs` | `SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION` |
 
@@ -163,7 +167,7 @@ which provides:
 | `refresh()` | Yes | No | Sync callers |
 | `refresh_async()` | Yes | Yes | Background refresh loop |
 
-The sync `_get_snapshot()` path never checks MongoDB -- it only checks
+The sync `_get_snapshot()` path never checks MongoDB — it only checks
 in-memory and falls back to disk. The async `_get_snapshot_async()` checks
 in-memory, then MongoDB, then disk.
 
@@ -172,11 +176,38 @@ in-memory, then MongoDB, then disk.
 | Component | Read errors | Write errors |
 |-----------|------------|--------------|
 | `ConfigReader` | Propagate (fail-fast) | Propagate (fail-fast) |
-| Skills/Plugins loaders | Return `None` (best-effort) | Swallow (best-effort) |
+| `MarketplaceDirectoryLoader` | Return `None` (best-effort) | Swallow (best-effort) |
 
 The rationale: model configs are critical for the gateway to function, so a
-misconfigured snapshot cache should surface immediately. Skills and plugins
-are additive features where a cache failure should not block the request.
+misconfigured snapshot cache should surface immediately. Plugin marketplace
+skills are additive features where a cache failure should not block the
+request.
+
+---
+
+## 2a. User-Persisted Skills (No Caching)
+
+User-persisted skills are stored in MongoDB via `MongoPluginSkillLoader`
+and use three dedicated collections:
+
+| Collection env var | Default | Contents |
+|--------------------|---------|----------|
+| `PLUGIN_SKILLS_COLLECTION` | `plugin_skills` | Skill definitions |
+| `PLUGIN_REFERENCES_COLLECTION` | `plugin_references` | Skill resource files |
+| `PLUGIN_SCRIPTS_COLLECTION` | `plugin_scripts` | Skill scripts |
+
+These collections are the source of truth for user-saved skills.
+**No in-memory caching** is applied — every read goes directly to MongoDB.
+This avoids staleness issues when multiple workers serve the same user, and
+MongoDB read latency is low enough that caching provides no meaningful
+benefit.
+
+The `CompositeSkillLoader` merges results from both sources with this
+precedence (highest wins):
+
+1. User's own MongoDB skills
+2. Shared MongoDB skills (skills marked as shared by other users)
+3. Plugin marketplace skills (from `MarketplaceDirectoryLoader`)
 
 ---
 
@@ -222,12 +253,11 @@ the configuration repo and extracts it to `GITHUB_CACHE_FOLDER`.
 ```
 1. Open snapshot cache store          (MongoDB ping if type=mongo)
 2. Download GitHub config repo        (if GITHUB_CONFIG_REPO_URL set)
-3. Ensure skills directory exists
-4. Initialize skills                  (MongoDB indexes + sync shared skills)
-5. Eagerly load all configs           (_load_all_configs)
+3. Initialize skills                  (MongoDB indexes + sync marketplace skills)
+4. Eagerly load all configs           (_load_all_configs)
    a. read_model_configs_async()      -> populates L1 + L2
    b. skill_loader.get_instructions() -> populates L1 + L2 (async path)
-6. Start background refresh task
+5. Start background refresh task
 ```
 
 ### Background refresh (`_config_refresh_loop`)
@@ -239,8 +269,9 @@ Runs every `CONFIG_REFRESH_INTERVAL_MINUTES` (default `60`).
    -> clears L1 (ConfigExpiringCache)
    -> deletes L2 snapshot entry for model_configs
 2. skill_loader.refresh_async()
-   -> rebuilds skills + plugins from disk
-   -> writes new snapshots to L2 (MongoDB)
+   -> rebuilds marketplace plugins from disk/GitHub
+   -> writes new snapshot to L2 (MongoDB)
+   (user-persisted skills are not cached, so no refresh needed)
 3. _load_all_configs()
    -> read_model_configs_async()   -- rebuilds from disk, writes L1 + L2
    -> get_instructions()           -- returns fresh in-memory snapshot
@@ -282,8 +313,7 @@ separate from the config caching infrastructure.
 | `SNAPSHOT_CACHE_TTL_SECONDS` | Entry TTL in the persistent store | `3600` |
 | `SNAPSHOT_CACHE_COLLECTION_NAME` | Default MongoDB collection | `snapshot_cache` |
 | `SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION` | Override collection for model configs | _(uses default)_ |
-| `SNAPSHOT_CACHE_SKILLS_COLLECTION` | Override collection for skills | _(uses default)_ |
-| `SNAPSHOT_CACHE_PLUGINS_COLLECTION` | Override collection for plugins | _(uses default)_ |
+| `SNAPSHOT_CACHE_PLUGINS_COLLECTION` | Override collection for marketplace plugins | _(uses default)_ |
 
 ### Snapshot cache MongoDB connection
 
@@ -304,11 +334,19 @@ These fall back to the general `MONGO_URL` / `MONGO_DB_USERNAME` /
 | `MCP_TOOLS_METADATA_CACHE_TTL_SECONDS` | Tool list cache TTL | `3600` |
 | `MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS` | _(backward compat alias)_ | `3600` |
 
-### Skills / plugins caching
+### Marketplace plugin caching
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `SKILLS_CACHE_TIMEOUT_SECONDS` | In-memory snapshot TTL | `3600` |
+| `SKILLS_CACHE_TIMEOUT_SECONDS` | In-memory snapshot TTL for marketplace plugins | `3600` |
+
+### User-persisted skill collections
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `PLUGIN_SKILLS_COLLECTION` | MongoDB collection for user skill definitions | `plugin_skills` |
+| `PLUGIN_REFERENCES_COLLECTION` | MongoDB collection for skill resource files | `plugin_references` |
+| `PLUGIN_SCRIPTS_COLLECTION` | MongoDB collection for skill scripts | `plugin_scripts` |
 
 ### GitHub config repo
 
@@ -354,7 +392,6 @@ These fall back to the general `MONGO_URL` / `MONGO_DB_USERNAME` /
                   │                                    │
                   │  Keys:                             │
                   │    model_configs                   │
-                  │    skillkit_snapshot               │
                   │    marketplace_snapshot            │
                   └──────────────┬─────────────────────┘
                                  │
@@ -364,8 +401,21 @@ These fall back to the general `MONGO_URL` / `MONGO_DB_USERNAME` /
                   │                                    │
                   │  Filesystem  /  GitHub  /  S3      │
                   └──────────────────────────────────┘
+
+                  ┌──────────────────────────────────┐
+                  │  User-Persisted Skills (MongoDB)  │
+                  │  (No caching — direct reads)       │
+                  │                                    │
+                  │  Collections:                      │
+                  │    plugin_skills                   │
+                  │    plugin_references               │
+                  │    plugin_scripts                  │
+                  └──────────────────────────────────┘
 ```
 
 Each worker has its own L1 caches. The L2 snapshot cache is shared
 (via MongoDB) so that when Worker 2 starts, it can load model configs
-and skills from L2 without hitting L3.
+and marketplace plugin skills from L2 without hitting L3.
+
+User-persisted skills bypass the L1/L2 caching tiers entirely. They are
+stored directly in MongoDB collections and read on demand.

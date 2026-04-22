@@ -33,14 +33,14 @@ services:
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
 #      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
 #      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
-#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/skills"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/plugins"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
+#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/plugins"
       PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace"
 #      PLUGINS_MARKETPLACE: "github://icanbwell/ai-plugin-marketplace/plugins?ref=main"
       PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
@@ -209,11 +209,11 @@ services:
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
     - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-    - ./language-model-gateway-configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+    - ./language-model-gateway-configs/plugins:/usr/src/language_model_gateway/github_config_cache/configs/plugins
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+#    - ../language-model-gateway-configuration/configs/plugins:/usr/src/language_model_gateway/github_config_cache/configs/plugins
 #    - ../ai-plugin-marketplace:/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace:ro
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
