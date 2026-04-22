@@ -43,7 +43,7 @@ services:
       PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
 #      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=main"
       PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
-#      PLUGINS_MARKETPLACE_EXCLUDE: ""
+      PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
