@@ -40,8 +40,8 @@ services:
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
-#      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=main"
+#      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
+      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=main"
       PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
       PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
       # path to provider search
