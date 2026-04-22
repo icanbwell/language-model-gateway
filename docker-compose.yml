@@ -146,6 +146,10 @@ services:
 #      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
 #      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
 #      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
+      # PLUGINS_COLLECTION: MongoDB collection for individual plugin
+      #   definition documents (default: 'plugins'). Each marketplace
+      #   plugin is written as a separate document keyed by plugin name.
+      PLUGINS_COLLECTION: plugins
       # ── LLM storage & snapshot cache MongoDB ──────────────────────
       # All use MONGO_LLM_STORAGE_* vars, which fall back to
       # MONGO_URL / MONGO_DB_USERNAME / MONGO_DB_PASSWORD when unset.
