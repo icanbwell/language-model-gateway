@@ -146,9 +146,9 @@ services:
 #      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
 #      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
       # PLUGINS_COLLECTION: MongoDB collection for individual plugin
-      #   definition documents (default: 'marketplace'). Each marketplace
+      #   definition documents (default: 'plugins'). Each marketplace
       #   plugin is written as a separate document keyed by plugin name.
-      PLUGINS_COLLECTION: marketplace
+      PLUGINS_COLLECTION: plugins
       # ── Plugin skill collections ─────────────────────────────────
       # MongoDB collections for plugin-scoped skills, resources, and
       # scripts. Indexed by (user_id, plugin_name, skill_name).
