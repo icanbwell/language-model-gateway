@@ -21,7 +21,7 @@ from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
-from langchain_ai_skills_framework.loaders.user_skill_store import UserSkillStore
+from langchain_ai_skills_framework.loaders.plugin_skill_store import PluginSkillStore
 from langchain_ai_skills_framework.startup import initialize_skills
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
@@ -152,16 +152,9 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Ensure the skills directory exists before skill initialization
-        # validates it.  The directory lives inside the GitHub config cache
-        # which may not contain a configs/skills/ folder yet.
-        skills_dir = env_vars.skills_directory
-        if skills_dir:
-            makedirs(skills_dir, exist_ok=True)
-
-        # Sync shared skills from GitHub/filesystem into MongoDB
+        # Sync shared skills from plugins marketplace into MongoDB
         await initialize_skills(
-            user_store=container.resolve(UserSkillStore),
+            user_store=container.resolve(PluginSkillStore),
             skill_sync=container.resolve(SkillSync),
         )
 

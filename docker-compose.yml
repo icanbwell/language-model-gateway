@@ -131,8 +131,7 @@ services:
       # Per-resource collection overrides (optional):
       #   SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION — separate collection for
       #     ChatModelConfig snapshots (ConfigReader).
-      #   SNAPSHOT_CACHE_SKILLS_COLLECTION — separate collection for
-      #     SkillkitDirectoryLoader snapshots.
+      #   SNAPSHOT_CACHE_SKILLS_COLLECTION — (legacy, no longer used).
       #   SNAPSHOT_CACHE_PLUGINS_COLLECTION — separate collection for
       #     MarketplaceDirectoryLoader snapshots.
       #   When unset, each loader uses the store's default collection.
@@ -150,6 +149,12 @@ services:
       #   definition documents (default: 'plugins'). Each marketplace
       #   plugin is written as a separate document keyed by plugin name.
       PLUGINS_COLLECTION: plugins
+      # ── Plugin skill collections ─────────────────────────────────
+      # MongoDB collections for plugin-scoped skills, resources, and
+      # scripts. Indexed by (user_id, plugin_name, skill_name).
+      PLUGIN_SKILLS_COLLECTION: plugin_skills
+      PLUGIN_REFERENCES_COLLECTION: plugin_references
+      PLUGIN_SCRIPTS_COLLECTION: plugin_scripts
       # ── LLM storage & snapshot cache MongoDB ──────────────────────
       # All use MONGO_LLM_STORAGE_* vars, which fall back to
       # MONGO_URL / MONGO_DB_USERNAME / MONGO_DB_PASSWORD when unset.
