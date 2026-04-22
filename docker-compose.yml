@@ -30,7 +30,7 @@ services:
       # Uncomment this to read marketplace plugins from github (also set PLUGINS_MARKETPLACE_CACHE_FOLDER below for the git cache)
       PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=add-bwell-skill"
       # Local paths when using downloading from Github
-#      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
+      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
       PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache/{pid}"
 #      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
@@ -38,7 +38,7 @@ services:
 #      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
 #      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/marketplace"
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
-      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
+#      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
@@ -194,7 +194,7 @@ services:
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
-      - --workers=1
+      - --workers=10
       - --worker-class
       - uvicorn.workers.UvicornWorker
       - --bind
