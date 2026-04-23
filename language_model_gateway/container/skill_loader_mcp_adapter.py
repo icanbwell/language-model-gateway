@@ -59,4 +59,5 @@ class SkillLoaderMcpAdapter:
             display_name=entry.display_name,
             headers=entry.headers or None,
             auth=entry.auth,
+            oauth=entry.oauth,
         )
