@@ -1910,7 +1910,7 @@ wheels = [
 
 [[package]]
 name = "langchain-ai-skills-framework"
-version = "1.0.59"
+version = "1.0.60"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -1931,9 +1931,9 @@ dependencies = [
     { name = "skills-ref" },
     { name = "uv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/41/12/80e46ed2e9ebb3ce189d8226dee6f7bf890f1d35ed6d91d308fa363023dc/langchain_ai_skills_framework-1.0.59.tar.gz", hash = "sha256:468a9a23e1881623d3f05178668e7f7d4be53adeecef6bd598e84bc182971e99", size = 56354, upload-time = "2026-04-23T00:36:28.724Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b2/7a/6527c63adbdd1d4f96ac6d32c51f58f795b940a33ffecd3f57ce9c43fd21/langchain_ai_skills_framework-1.0.60.tar.gz", hash = "sha256:064c574d9bf3763f437bf3db13e028933477c267a2ed4142a1c4314a45a75128", size = 56760, upload-time = "2026-04-23T00:50:16.629Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d3/7d/9d7d17dd05e1c1785ee53507bcb11975eb52601ea10fb3e1ff08badb6dfb/langchain_ai_skills_framework-1.0.59-py3-none-any.whl", hash = "sha256:d741411a6d1f9ae02986d973d9c3be6844f56e7f7aaf201472cec887f93ee968", size = 89697, upload-time = "2026-04-23T00:36:27.072Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/bb/6c7d179b4f44df8ea2c88b89f2b16819e5b7128ddf5cd975739c51b0b9ff/langchain_ai_skills_framework-1.0.60-py3-none-any.whl", hash = "sha256:9e02fbb5ed7eae2acc2ca9a5e171b34affbf36471f561aca28cfd0960ffd8e1d", size = 90172, upload-time = "2026-04-23T00:50:15.151Z" },
 ]
 
 [[package]]
@@ -2094,16 +2094,16 @@ wheels = [
 
 [[package]]
 name = "langchain-openai"
-version = "1.1.16"
+version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-core" },
     { name = "openai" },
     { name = "tiktoken" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/37/f7/567473c9e35e32144c21467209425d99cdf865275d9556eb08b1c92db99a/langchain_openai-1.1.16.tar.gz", hash = "sha256:306f1c7f66f47bd39655e645fd1f9445d65473465a59347fa7d716596e28dfe0", size = 1116903, upload-time = "2026-04-21T19:26:21.572Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/69/0ea9dabd903f750315ab31b8b85dad64f2927e56ddc26252dfe4e4ac2c40/langchain_openai-1.2.0.tar.gz", hash = "sha256:e88edf16002b9ed8e206161181c8a6fb2b3662da23195e0a844d040c3f93ab10", size = 1136352, upload-time = "2026-04-23T00:43:35.31Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/95/ea040d87ecb8df9e2fef2a1c331252b116a324ab7a3bdae09928e81244e7/langchain_openai-1.1.16-py3-none-any.whl", hash = "sha256:648becb4fb86d24d56b9292e01878a05cca932bb475909bb8fb85b8c82dd1a02", size = 89202, upload-time = "2026-04-21T19:26:20.498Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/7b/e8c3beeab0ca042529533072ebee69c66327c1805b3133531b58c422baab/langchain_openai-1.2.0-py3-none-any.whl", hash = "sha256:b3ed14dc48e40890605136f26c6b07e8f293987d95e734ab67cbfa572c523456", size = 98592, upload-time = "2026-04-23T00:43:34.135Z" },
 ]
 
 [[package]]
@@ -2414,7 +2414,7 @@ requires-dist = [
     { name = "httpx-sse", specifier = ">=0.4.0" },
     { name = "joserfc", specifier = ">=1.4.3" },
     { name = "langchain", specifier = ">=1.0.0" },
-    { name = "langchain-ai-skills-framework", specifier = ">=1.0.59" },
+    { name = "langchain-ai-skills-framework", specifier = ">=1.0.60" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
     { name = "langchain-community", specifier = ">=0.4" },
     { name = "langchain-core", specifier = ">=1.2.5" },
