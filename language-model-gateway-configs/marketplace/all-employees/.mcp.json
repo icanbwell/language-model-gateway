@@ -1,0 +1,16 @@
+{
+  "$schema": "./mcp_config_schema.json",
+  "mcpServers": {
+    "google-drive": {
+      "description": "Skills management - list, load, save, delete, and publish skills and their resources and scripts",
+      "displayName": "Skills Server",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills_server/"
+    }
+  }
+}

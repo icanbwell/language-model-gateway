@@ -13,7 +13,7 @@ from typing import (
 from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
     SkillLoaderProtocol,
 )
-from langchain_ai_skills_framework.tools.run_python_script_tool import (
+from langchain_ai_skills_framework.langchain.tools.run_python_script_tool import (
     RunPythonScriptTool,
 )
 from languagemodelcommon.utilities.tool_display_name_mapper import (
