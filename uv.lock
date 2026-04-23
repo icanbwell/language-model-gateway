@@ -850,7 +850,7 @@ wheels = [
 
 [[package]]
 name = "cyclopts"
-version = "4.10.2"
+version = "4.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -858,9 +858,9 @@ dependencies = [
     { name = "rich" },
     { name = "rich-rst" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/66/2c/fced34890f6e5a93a4b7afb2c71e8eee2a0719fb26193a0abf159ecb714d/cyclopts-4.10.2.tar.gz", hash = "sha256:d7b950457ef2563596d56331f80cbbbf86a2772535fb8b315c4f03bc7e6127f1", size = 166664, upload-time = "2026-04-08T23:57:45.805Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/fa/eff8f1abae783bade9b5e9bafafd0040d4dbf51988f9384bfdc0326ba1fc/cyclopts-4.11.0.tar.gz", hash = "sha256:1ffcb9990dbd56b90da19980d31596de9e99019980a215a5d76cf88fe452e94d", size = 170690, upload-time = "2026-04-23T00:23:36.858Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b4/bd/05055d8360cef0757d79367157f3b15c0a0715e81e08f86a04018ec045f0/cyclopts-4.10.2-py3-none-any.whl", hash = "sha256:a1f2d6f8f7afac9456b48f75a40b36658778ddc9c6d406b520d017ae32c990fe", size = 204314, upload-time = "2026-04-08T23:57:46.969Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/37/197db187c260d24d4be1f09d427f59f3fb9a89bcf1354e23865c7bff7607/cyclopts-4.11.0-py3-none-any.whl", hash = "sha256:34318e3823b44b5baa754a5e37ec70a5c17dc81c65e4295ed70e17bc1aeae50d", size = 208494, upload-time = "2026-04-23T00:23:34.948Z" },
 ]
 
 [[package]]
@@ -1910,7 +1910,7 @@ wheels = [
 
 [[package]]
 name = "langchain-ai-skills-framework"
-version = "1.0.58"
+version = "1.0.59"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -1931,9 +1931,9 @@ dependencies = [
     { name = "skills-ref" },
     { name = "uv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/03/78/996a90bfa5619c34ad5abe36318a21c8a17963d0802c8e7358c89112cb78/langchain_ai_skills_framework-1.0.58.tar.gz", hash = "sha256:593ef12a4358cafee851ee1969e0ed45828b6a370e4156d29a8cc6edc6ae380e", size = 56331, upload-time = "2026-04-22T21:52:17.038Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/41/12/80e46ed2e9ebb3ce189d8226dee6f7bf890f1d35ed6d91d308fa363023dc/langchain_ai_skills_framework-1.0.59.tar.gz", hash = "sha256:468a9a23e1881623d3f05178668e7f7d4be53adeecef6bd598e84bc182971e99", size = 56354, upload-time = "2026-04-23T00:36:28.724Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/01/6b/9cb8ccc54195a5c8c267a781883dd576b2fe4618a250582b6b25304a7ea2/langchain_ai_skills_framework-1.0.58-py3-none-any.whl", hash = "sha256:cdc1ecf0f4ae13d1c50fd29fae8cc1147ab36274e1dbe122f2439c07af7d0168", size = 89666, upload-time = "2026-04-22T21:52:15.581Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/7d/9d7d17dd05e1c1785ee53507bcb11975eb52601ea10fb3e1ff08badb6dfb/langchain_ai_skills_framework-1.0.59-py3-none-any.whl", hash = "sha256:d741411a6d1f9ae02986d973d9c3be6844f56e7f7aaf201472cec887f93ee968", size = 89697, upload-time = "2026-04-23T00:36:27.072Z" },
 ]
 
 [[package]]
@@ -2414,7 +2414,7 @@ requires-dist = [
     { name = "httpx-sse", specifier = ">=0.4.0" },
     { name = "joserfc", specifier = ">=1.4.3" },
     { name = "langchain", specifier = ">=1.0.0" },
-    { name = "langchain-ai-skills-framework", specifier = ">=1.0.58" },
+    { name = "langchain-ai-skills-framework", specifier = ">=1.0.59" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
     { name = "langchain-community", specifier = ">=0.4" },
     { name = "langchain-core", specifier = ">=1.2.5" },
