@@ -154,3 +154,7 @@ dmypy.json
 /.skills-git-cache/
 
 /github_config_cache/*
+
+/.marketplace-git-cache/*
+/github_config_cache.old/*
+/github_config_cache.ts

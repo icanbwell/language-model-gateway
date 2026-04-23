@@ -25,23 +25,28 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
-      # Uncomment this to read from github
-#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/v3"
-      # Local paths when using downloading from Github
+      # ====  Uncomment this to read from github ====
+#      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
+#      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=add-bwell-skill"
 #      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
+#      PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache/{pid}"
 #      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
 #      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
 #      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
-#      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/skills"
+      # ====  End Uncomment this to read from github  =======
+      # ====  Uncomment this to read from local folders ====
       # Local paths within the cache folder (populated by GITHUB_CONFIG_REPO_URL download)
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-      SKILLS_DIRECTORY: "/usr/src/language_model_gateway/github_config_cache/configs/skills"
-      CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
+      PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache"
+      # ====  End Uncomment this to read from local folders  =======
+#      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
+      PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -59,7 +64,6 @@ services:
 #      JIRA_USERNAME: "imran.qureshi@bwell.com"
       JIRA_MAXIMUM_PROJECTS: "100"
       JIRA_MAXIMUM_ISSUES_PER_PROJECT: "100"
-      MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
       # Inbound auth providers for JWT validation of gateway callers.
       # Outbound providers (for MCP servers and models) are defined inline
       # in .mcp.json mcpServers[x].oauth and model config oauth_providers.
@@ -100,13 +104,69 @@ services:
       MONGO_DB_TOKEN_COLLECTION_NAME: tokens
       MONGO_DB_DCR_COLLECTION_NAME: dcr_registrations
       OAUTH_CACHE: mongo
-      # for LLM memory
+      # ── Caching ─────────────────────────────────────────────────────
+      #
+      # CONFIG_CACHE_TIMEOUT_SECONDS: TTL (seconds) for the in-memory
+      #   config cache and the snapshot cache write.
+      #
+      # MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: TTL (seconds) for
+      #   cached MCP tool metadata (default: 3600).
+      #
+      # Snapshot cache — stores only the parsed ChatModelConfig list
+      # (model definitions from MODELS_OFFICIAL_PATH). Does NOT cache
+      # MCP server configs, prompts, marketplace, or skills. Lets restarts
+      # and new Gunicorn workers load model configs from the cache
+      # instead of re-reading every file from disk or GitHub.
+      #
+      # SNAPSHOT_CACHE_TYPE: Backend type.
+      #   'mongo'  — persists to MongoDB. Uses MONGO_LLM_STORAGE_* vars
+      #              (falls back to MONGO_URL / MONGO_DB_USERNAME /
+      #              MONGO_DB_PASSWORD when the LLM-specific vars are unset).
+      #   'file'   — persists to a local JSON file at
+      #              /tmp/snapshot_cache/<collection>.json.
+      #              Survives restarts if the path is on a mounted volume.
+      #   'memory' — in-process only. Lost on restart. No MongoDB needed.
+      #
+      # SNAPSHOT_CACHE_COLLECTION_NAME: Mongo collection or file namespace
+      #   (default: 'snapshot_cache').
+      #
+      # Per-resource collection overrides (optional):
+      #   SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION — separate collection for
+      #     ChatModelConfig snapshots (ConfigReader).
+      #   SNAPSHOT_CACHE_SKILLS_COLLECTION — (legacy, no longer used).
+      #   SNAPSHOT_CACHE_PLUGINS_COLLECTION — separate collection for
+      #     MarketplaceDirectoryLoader snapshots.
+      #   When unset, each loader uses the store's default collection.
+      # ────────────────────────────────────────────────────────────────
+      CONFIG_CACHE_TIMEOUT_SECONDS: 10
+      CONFIG_REFRESH_INTERVAL_MINUTES: 60
+      MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS: 30
+      SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
+      SNAPSHOT_CACHE_TTL_SECONDS: 3600
+      SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
+#      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
+#      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
+#      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
+      # PLUGINS_COLLECTION: MongoDB collection for individual plugin
+      #   definition documents (default: 'plugins'). Each marketplace
+      #   plugin is written as a separate document keyed by plugin name.
+      PLUGINS_COLLECTION: plugins
+      # ── Plugin skill collections ─────────────────────────────────
+      # MongoDB collections for plugin-scoped skills, resources, and
+      # scripts. Indexed by (user_id, plugin_name, skill_name).
+      PLUGIN_SKILLS_COLLECTION: plugin_skills
+      PLUGIN_REFERENCES_COLLECTION: plugin_references
+      PLUGIN_SCRIPTS_COLLECTION: plugin_scripts
+      # ── LLM storage & snapshot cache MongoDB ──────────────────────
+      # All use MONGO_LLM_STORAGE_* vars, which fall back to
+      # MONGO_URL / MONGO_DB_USERNAME / MONGO_DB_PASSWORD when unset.
+      MONGO_LLM_STORAGE_DB_NAME: language_model_gateway
+      LLM_STORAGE_TYPE: "mongo"
       ENABLE_LLM_STORE: 'true'
       ENABLE_LLM_CHECKPOINTER: 'true'
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"
-      LLM_STORAGE_TYPE: "mongo"
       # This is the user and password that can be used for testing
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
@@ -134,7 +194,7 @@ services:
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
-      - --workers=3
+      - --workers=10
       - --worker-class
       - uvicorn.workers.UvicornWorker
       - --bind
@@ -151,11 +211,12 @@ services:
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
     - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-    - ./language-model-gateway-configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+    - ./language-model-gateway-configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-#    - ../language-model-gateway-configuration/configs/skills:/usr/src/language_model_gateway/github_config_cache/configs/skills
+#    - ../language-model-gateway-configuration/configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
+#    - ../ai-plugin-marketplace:/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace:ro
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip

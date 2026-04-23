@@ -1,353 +1,449 @@
-# Caching in Language Model Gateway
+# Caching Architecture
 
-This document provides a comprehensive overview of where and how caching is implemented in the Language Model Gateway project.
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Model Configuration Caching](#model-configuration-caching)
-3. [Token/Authentication Caching](#tokenauthentication-caching)
-4. [MCP Tools Metadata Caching](#mcp-tools-metadata-caching)
-5. [Simple Function Caching](#simple-function-caching)
-6. [Cache-Related Environment Variables](#cache-related-environment-variables)
-7. [Implementation Details](#implementation-details)
+This document describes how caching works across the Language Model Gateway
+and its dependencies (`language-model-common`, `langchain-ai-skills-framework`).
 
 ---
 
 ## Overview
 
-The Language Model Gateway uses several caching mechanisms to improve performance and reduce redundant operations:
+The gateway uses a multi-tier caching architecture to avoid redundant
+disk/network I/O and to let new Gunicorn workers start quickly without
+re-reading every config file from disk or GitHub.
 
-1. **Model Configuration Caching** - Caches model configurations to avoid repeatedly reading from disk/S3/GitHub
-2. **Token/Authentication Caching** - Stores OAuth tokens in MongoDB to enable token reuse and exchange
-3. **MCP Tools Metadata Caching** - Caches MCP (Model Context Protocol) tool metadata
-4. **Simple Function Caching** - A decorator-based caching utility for async functions
+| Layer | Scope | TTL env var | Default | Backed by |
+|-------|-------|-------------|---------|-----------|
+| **L1 -- In-memory config cache** | Per-worker process | `CONFIG_CACHE_TIMEOUT_SECONDS` | 3600 s | `ConfigExpiringCache` |
+| **L2 -- Snapshot cache** | Cross-worker (shared) | `SNAPSHOT_CACHE_TTL_SECONDS` | 3600 s | MongoDB, file, or in-memory store |
+| **L3 -- Disk / GitHub / S3** | Source of truth | -- | -- | Filesystem or remote |
 
----
+Plugin marketplace skills follow the same L1/L2/L3 pattern with their own
+in-memory snapshots and the same shared L2 store.
 
-## Model Configuration Caching
+User-persisted skills (stored in MongoDB via `MongoPluginSkillLoader`) do
+**not** use in-memory caching — MongoDB is already the source of truth, so
+reads go directly to the database.
 
-### Location
-- **Implementation**: `language_model_gateway/gateway/utilities/cache/config_expiring_cache.py`
-- **Usage**: `language_model_gateway/configs/config_reader/config_reader.py`
-- **Base Class**: `language_model_gateway/gateway/utilities/cache/expiring_cache.py`
-
-### Description
-The `ConfigExpiringCache` is a time-based expiring cache that stores model configurations (`List[ChatModelConfig]`). It prevents the system from repeatedly reading model configuration files from various sources (local filesystem, S3, GitHub).
-
-### Key Features
-- **TTL-based expiration**: Configurations expire after a configurable time period
-- **Thread-safe**: Uses `asyncio.Lock` for safe concurrent access
-- **Double-check locking**: Prevents multiple simultaneous loads of the same configuration
-- **Singleton pattern**: Only one instance exists across the application
-
-### Configuration
-```python
-# Environment variable (defaults to 3600 seconds / 1 hour)
-CONFIG_CACHE_TIMEOUT_SECONDS=3600
-```
-
-### How It Works
-1. When model configurations are requested, the cache is checked first
-2. If cached and valid (not expired), cached data is returned immediately
-3. If cache is invalid/empty, configurations are loaded from source
-4. The loaded configurations are stored in cache with a timestamp
-5. Cache automatically invalidates after TTL expires
-
-### Registration
-The cache is registered as a singleton in the dependency injection container:
-```python
-# In container_factory.py
-container.singleton(
-    ConfigExpiringCache,
-    lambda c: ConfigExpiringCache(
-        ttl_seconds=(
-            int(os.environ["CONFIG_CACHE_TIMEOUT_SECONDS"])
-            if os.environ.get("CONFIG_CACHE_TIMEOUT_SECONDS")
-            else 60 * 60  # Default: 1 hour
-        )
-    )
-)
-```
-
-### Methods
-- `is_valid()` - Check if cache is still valid based on TTL
-- `get()` - Retrieve cached value if valid
-- `set(value)` - Store new value and update timestamp
-- `clear()` - Clear the cache
-- `create(init_value)` - Initialize cache with optional value
+MCP tool schemas have a separate in-memory cache with its own TTL.
 
 ---
 
-## Token/Authentication Caching
+## 1. Model Configuration Caching
 
-### Location
-- **Model**: `language_model_gateway/gateway/auth/models/token_cache_item.py`
-- **Manager**: `language_model_gateway/gateway/auth/token_exchange/token_exchange_manager.py`
-- **Storage**: MongoDB collection (configurable via environment variable)
+### Data flow
 
-### Description
-The `TokenCacheItem` model represents cached OAuth tokens stored in MongoDB. This enables token reuse across requests and token exchange operations.
-
-### Key Features
-- **Persistent storage**: Tokens are stored in MongoDB for durability
-- **Multiple token types**: Supports access tokens, ID tokens, and refresh tokens
-- **Token validation**: Built-in methods to check token validity
-- **Subject tracking**: Links tokens to referring subjects for token exchange
-- **Provider tracking**: Associates tokens with specific auth providers
-
-### Token Cache Item Structure
-```python
-class TokenCacheItem(BaseDbModel):
-    created: datetime              # Creation timestamp
-    updated: Optional[datetime]    # Last update timestamp
-    refreshed: Optional[datetime]  # Last refresh timestamp
-    auth_provider: str            # Authentication provider (e.g., "google", "github")
-    client_id: Optional[str]      # OAuth client ID
-    issuer: str | None            # Token issuer
-    audience: str                 # Intended audience
-    email: Optional[str]          # User email
-    subject: str                  # User subject/ID
-    referring_email: Optional[str] # Original token's email
-    referring_subject: str        # Original token's subject
-    referrer: Optional[str]       # Associated URL
-    access_token: Optional[Token] # Access token
-    id_token: Optional[Token]     # ID token
-    refresh_token: Optional[Token] # Refresh token
+```
+Request
+  |
+  v
+ConfigExpiringCache (L1, per-worker, short TTL)
+  |  hit -> return
+  |  miss
+  v
+Snapshot cache (L2, MongoDB/file, long TTL)
+  |  hit -> populate L1, return
+  |  miss
+  v
+Read from disk / GitHub / S3 (L3)
+  |
+  +-> write to L1 (ConfigExpiringCache.set)
+  +-> write to L2 (_write_to_snapshot_cache)
+  |
+  v
+Return models
 ```
 
-### Configuration
-```bash
-# MongoDB connection for token storage
-MONGO_URL=mongodb://localhost:27017
-MONGO_DB_NAME=language_model_gateway
-MONGO_DB_TOKEN_COLLECTION_NAME=tokens
+### ConfigExpiringCache (L1)
 
-# Cache type (mongodb, memory, etc.)
-OAUTH_CACHE=mongodb
-```
+An in-memory TTL cache holding `List[ChatModelConfig]`.
 
-### How It Works
-1. When a user authenticates, tokens are stored in MongoDB
-2. Tokens are indexed by `auth_provider` and `referring_subject`
-3. When making API calls that require authentication:
-   - The system checks MongoDB for existing valid tokens
-   - If found and valid, the cached token is reused
-   - If expired but refresh token exists, token is refreshed
-   - If no valid token exists, re-authentication is required
-4. Tokens are validated based on expiration times
+- **Class:** `ConfigExpiringCache` in `languagemodelcommon/utilities/cache/config_expiring_cache.py`
+- **TTL:** `CONFIG_CACHE_TIMEOUT_SECONDS` (default `3600`)
+- **Scope:** One instance per Gunicorn worker (singleton in DI container)
+- **Thread safety:** `asyncio.Lock`
+- **Stale fallback:** `get_stale()` returns the last value even after TTL
+  expiry. Used when a disk read returns nothing (e.g. directory is mid-swap).
 
-### Token Exchange Flow
-The `TokenExchangeManager` handles:
-- Storing new tokens after authentication
-- Retrieving tokens for specific auth providers and subjects
-- Checking token validity
-- Managing token refresh operations
+### Snapshot cache (L2)
+
+Persists parsed `ChatModelConfig` objects so that new workers and restarts
+can load configs from the cache instead of re-reading from disk or GitHub.
+
+- **Factory:** `create_cache_store()` in `languagemodelcommon/utilities/cache/snapshot_cache_store.py`
+- **Store types:**
+
+  | `SNAPSHOT_CACHE_TYPE` | Class returned | Notes |
+  |-----------------------|----------------|-------|
+  | `mongo` | `ValidatingMongoDBStore` | Pings MongoDB on open (fail-fast) |
+  | `file` | `FileStore` | JSON file at `/tmp/snapshot_cache/<collection>.json` |
+  | `memory` | `MemoryStoreWithContextManager` | In-process only, lost on restart |
+
+- **Singleton:** Registered as `BaseStore` in the DI container and shared
+  by `ConfigReader` and `MarketplaceDirectoryLoader`.
+- **TTL:** `SNAPSHOT_CACHE_TTL_SECONDS` (default `3600`). This is
+  independent of `CONFIG_CACHE_TIMEOUT_SECONDS`.
+- **Collection:** `SNAPSHOT_CACHE_COLLECTION_NAME` (default `snapshot_cache`).
+  Each data type can use its own collection via override env vars
+  (see [Environment variables](#environment-variables)).
+- **Fail-fast on `mongo`:** `ValidatingMongoDBStore` runs `db.command("ping")`
+  during `__aenter__`. If MongoDB is unreachable the application fails to start
+  instead of silently falling back.
+
+### ConfigReader
+
+- **File:** `languagemodelcommon/configs/config_reader/config_reader.py`
+- **Cache key:** `model_configs`
+- **Read behavior:** Errors from the snapshot store propagate (fail-fast).
+- **Write behavior:** Errors propagate (fail-fast).
+- **`clear_cache()`:** Clears both the in-memory `ConfigExpiringCache` and
+  deletes the snapshot cache entry from the store.
+
+### Double-check locking
+
+`ConfigReader._read_base_models_async()` uses double-check locking to
+prevent thundering-herd on cache miss:
+
+1. Check L1 outside lock (fast path).
+2. Acquire `asyncio.Lock`.
+3. Check L1 again inside lock (another coroutine may have populated it).
+4. Check L2 (snapshot cache).
+5. Read from disk and write to both L1 and L2.
 
 ---
 
-## MCP Tools Metadata Caching
+## 2. Plugin Marketplace Caching
 
-### Location
-- **Usage**: `language_model_gateway/gateway/mcp/mcp_tool_provider.py`
-- **Environment Variables**: `language_model_gateway/gateway/utilities/language_model_gateway_environment_variables.py`
+`MarketplaceDirectoryLoader` loads skills from the plugin marketplace
+(filesystem or GitHub) and caches them using the same three-tier pattern
+as model configs.
 
-### Description
-MCP (Model Context Protocol) tools metadata is cached to avoid repeatedly fetching tool definitions from MCP servers.
+### Data flow (async path)
 
-### Configuration
-```bash
-# Cache timeout in seconds (default: 3600 = 1 hour)
-MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS=3600
-
-# Cache TTL in seconds (default: 3600 = 1 hour)
-MCP_TOOLS_METADATA_CACHE_TTL_SECONDS=3600
+```
+get_instructions() / list_skill_summaries()
+  |
+  v
+In-memory _snapshot (L1, per-worker, TTL-based)
+  |  valid -> return
+  |  expired / empty
+  v
+MongoDB snapshot cache (L2, shared, TTL-based)
+  |  hit -> populate L1, return
+  |  miss
+  v
+Build snapshot from disk / GitHub (L3)
+  |
+  +-> write to L2 (best-effort)
+  +-> set _snapshot + _snapshot_loaded_at (L1)
+  |
+  v
+Return snapshot
 ```
 
-### Environment Variables
-```python
-@property
-def mcp_tools_metadata_cache_timeout_seconds(self) -> int:
-    return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS", 3600))
+### SnapshotCacheMixin
 
-@property
-def mcp_tools_metadata_cache_ttl_seconds(self) -> int:
-    return int(os.environ.get("MCP_TOOLS_METADATA_CACHE_TTL_SECONDS", 3600))
-```
+`MarketplaceDirectoryLoader` inherits from `SnapshotCacheMixin`
+(`langchain_ai_skills_framework/loaders/snapshot_cache_mixin.py`)
+which provides:
 
-### How It Works
-1. MCP tool metadata (available tools, their schemas, etc.) is fetched from MCP servers
-2. This metadata is cached for the configured duration
-3. Subsequent requests for tool metadata use the cached version
-4. Cache expires after the TTL period, triggering a fresh fetch
+| Method | Behavior |
+|--------|----------|
+| `_read_from_snapshot_cache()` | Best-effort read; returns `None` on any error |
+| `_write_to_snapshot_cache()` | Best-effort write; failure logged at DEBUG |
+| `_is_snapshot_valid_unlocked()` | Checks `_snapshot_loaded_at` against `_reload_ttl_seconds` |
+| `_resolve_reload_ttl_seconds()` | Parses `SKILLS_CACHE_TIMEOUT_SECONDS`, defaults to 3600 |
+
+### Cache keys
+
+| Loader | Cache key | Collection env var |
+|--------|-----------|--------------------|
+| `MarketplaceDirectoryLoader` | `marketplace_snapshot` | `SNAPSHOT_CACHE_PLUGINS_COLLECTION` |
+| `ConfigReader` | `model_configs` | `SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION` |
+
+### refresh() vs refresh_async()
+
+| Method | In-memory update | MongoDB write | Use case |
+|--------|-----------------|---------------|----------|
+| `refresh()` | Yes | No | Sync callers |
+| `refresh_async()` | Yes | Yes | Background refresh loop |
+
+The sync `_get_snapshot()` path never checks MongoDB — it only checks
+in-memory and falls back to disk. The async `_get_snapshot_async()` checks
+in-memory, then MongoDB, then disk.
+
+### Error handling difference
+
+| Component | Read errors | Write errors |
+|-----------|------------|--------------|
+| `ConfigReader` | Propagate (fail-fast) | Propagate (fail-fast) |
+| `MarketplaceDirectoryLoader` | Return `None` (best-effort) | Swallow (best-effort) |
+
+The rationale: model configs are critical for the gateway to function, so a
+misconfigured snapshot cache should surface immediately. Plugin marketplace
+skills are additive features where a cache failure should not block the
+request.
 
 ---
 
-## Simple Function Caching
+## 2a. User-Persisted Skills (No Caching)
 
-### Location
-- **Implementation**: `language_model_gateway/gateway/utilities/cached.py`
+User-persisted skills are stored in MongoDB via `MongoPluginSkillLoader`
+and use three dedicated collections:
 
-### Description
-A simple decorator that caches the result of an async function. The cached value is stored in memory and persists for the lifetime of the application.
+| Collection env var | Default | Contents |
+|--------------------|---------|----------|
+| `PLUGIN_SKILLS_COLLECTION` | `plugin_skills` | Skill definitions |
+| `PLUGIN_REFERENCES_COLLECTION` | `plugin_references` | Skill resource files |
+| `PLUGIN_SCRIPTS_COLLECTION` | `plugin_scripts` | Skill scripts |
 
-### Implementation
-```python
-def cached(f: Callable[P, Awaitable[R]]) -> Callable[P, Awaitable[R]]:
-    """Decorator to cache the result of an async function"""
-    cache: R | None = None
+These collections are the source of truth for user-saved skills.
+**No in-memory caching** is applied — every read goes directly to MongoDB.
+This avoids staleness issues when multiple workers serve the same user, and
+MongoDB read latency is low enough that caching provides no meaningful
+benefit.
 
-    @wraps(f)
-    async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
-        nonlocal cache
-        
-        if cache is not None:
-            return cache
-        
-        cache = await f(*args, **kwargs)
-        return cache
-    
-    return wrapper
-```
+The `CompositeSkillLoader` merges results from both sources with this
+precedence (highest wins):
 
-### Usage
-```python
-from language_model_gateway.gateway.utilities.cached import cached
-
-@cached
-async def expensive_operation() -> Result:
-    # This will only execute once
-    # Subsequent calls return the cached result
-    return await perform_expensive_operation()
-```
-
-### Characteristics
-- **One-time execution**: Function is only executed once, then cached forever
-- **No expiration**: Cache persists for application lifetime
-- **No cache key**: Cannot cache different results for different arguments
-- **Memory-based**: Stored in process memory
-- **Simple use case**: Best for initialization or setup operations that never change
+1. User's own MongoDB skills
+2. Shared MongoDB skills (skills marked as shared by other users)
+3. Plugin marketplace skills (from `MarketplaceDirectoryLoader`)
 
 ---
 
-## Cache-Related Environment Variables
+## 3. MCP Tool List Caching
 
-### Configuration Cache
-```bash
-# Model configuration cache TTL (default: 3600 seconds)
-CONFIG_CACHE_TIMEOUT_SECONDS=3600
-```
+MCP tool schemas (the result of `list_tools` calls to MCP servers) are
+cached to avoid redundant round-trips.
 
-### Token/Auth Cache
-```bash
-# MongoDB settings for token storage
-MONGO_URL=mongodb://localhost:27017
-MONGO_DB_NAME=language_model_gateway
-MONGO_DB_TOKEN_COLLECTION_NAME=tokens
-
-# Cache type selection
-OAUTH_CACHE=mongodb
-```
-
-### MCP Tools Cache
-```bash
-# MCP tools metadata cache settings (default: 3600 seconds each)
-MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS=3600
-MCP_TOOLS_METADATA_CACHE_TTL_SECONDS=3600
-```
+- **Class:** `ToolListCache` in `languagemodelcommon/mcp/mcp_client/tool_list_cache.py`
+- **Scope:** In-memory dict, keyed by `url|auth_header`
+- **TTL:** `MCP_TOOLS_METADATA_CACHE_TTL_SECONDS` (default `3600`).
+  Falls back to `MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS` for backward
+  compatibility.
+- **Invalidation:** On HTTP 401 errors the entry for that server is
+  invalidated so the next call re-fetches tools (potentially with a
+  refreshed token).
+- **`clear()`:** Wipes the entire cache. Not called during the periodic
+  refresh loop -- tool schemas are assumed stable and expire naturally.
 
 ---
 
-## Implementation Details
+## 4. GitHub Config Repo Caching
 
-### Expiring Cache Pattern
+When `GITHUB_CONFIG_REPO_URL` is set, the gateway downloads a zipball of
+the configuration repo and extracts it to `GITHUB_CACHE_FOLDER`.
 
-All TTL-based caches follow a common pattern defined by the `ExpiringCache` abstract base class:
-
-```python
-class ExpiringCache[T](ABC):
-    @abstractmethod
-    def is_valid(self) -> bool:
-        """Check if cache is valid (not expired)"""
-        pass
-    
-    @abstractmethod
-    async def get(self) -> Optional[T]:
-        """Get cached value if valid"""
-        pass
-    
-    @abstractmethod
-    async def set(self, value: T) -> None:
-        """Set new cached value"""
-        pass
-    
-    @abstractmethod
-    async def clear(self) -> None:
-        """Clear the cache"""
-        pass
-    
-    @abstractmethod
-    async def create(self, *, init_value: Optional[T] = None) -> Optional[T]:
-        """Initialize cache"""
-        pass
-```
-
-### Thread Safety
-
-The `ConfigExpiringCache` uses `asyncio.Lock` to ensure thread-safe operations:
-
-```python
-_lock: asyncio.Lock = asyncio.Lock()
-
-async def set(self, value: List[ChatModelConfig]) -> None:
-    async with self._lock:
-        self._cache = value
-        self._cache_timestamp = time.time()
-```
-
-### Double-Check Locking
-
-The `ConfigReader` uses double-check locking to prevent multiple simultaneous loads:
-
-```python
-# First check (without lock)
-cached_configs = await self._cache.get()
-if cached_configs is not None:
-    return cached_configs
-
-# Acquire lock
-async with self._lock:
-    # Second check (with lock)
-    cached_configs = await self._cache.get()
-    if cached_configs is not None:
-        return cached_configs
-    
-    # Load configurations
-    models = await self.read_models_from_path_async(config_path)
-    await self._cache.set(models)
-    return models
-```
-
-This pattern ensures:
-1. Fast path for cached data (no lock contention)
-2. Only one thread loads data if cache is empty
-3. Other threads wait and reuse the loaded data
+- **Class:** `GithubConfigRepoManager` in
+  `languagemodelcommon/configs/config_reader/github_config_repo_manager.py`
+- **Atomic swap:** Extraction goes to a staging directory; the live
+  directory is swapped atomically so readers never see a partial tree.
+- **Freshness check:** A timestamp marker file records when the last
+  download happened. If the age is less than `CONFIG_CACHE_TIMEOUT_SECONDS`
+  the download is skipped.
+- **Background refresh:** A loop re-downloads and re-extracts every
+  `CONFIG_CACHE_TIMEOUT_SECONDS`.
 
 ---
 
-## Summary
+## 5. Startup and Refresh Lifecycle
 
-The Language Model Gateway implements caching at multiple levels:
+### Startup (`lifespan` in `language_model_gateway/gateway/api.py`)
 
-1. **Model Configurations**: Time-based expiring cache (1 hour default) to avoid repeated file reads
-2. **OAuth Tokens**: Persistent MongoDB storage for token reuse and exchange
-3. **MCP Tool Metadata**: Time-based cache (1 hour default) to reduce MCP server requests
-4. **Function Results**: Simple decorator-based caching for one-time operations
+```
+1. Open snapshot cache store          (MongoDB ping if type=mongo)
+2. Download GitHub config repo        (if GITHUB_CONFIG_REPO_URL set)
+3. Initialize skills                  (MongoDB indexes + conditional sync)
+   a. Ensure MongoDB indexes          (idempotent)
+   b. Check plugins collection        (has_plugins?)
+      - Empty   -> sync marketplace skills from GitHub to MongoDB
+      - Not empty -> skip sync (already seeded)
+4. Eagerly load all configs           (_load_all_configs)
+   a. read_model_configs_async()      -> populates L1 + L2
+   b. skill_loader.get_instructions() -> populates L1 + L2 (async path)
+5. Start background refresh task
+```
 
-These caching mechanisms significantly improve performance by:
-- Reducing disk/network I/O operations
-- Enabling token reuse across requests
-- Minimizing redundant API calls to external services
-- Speeding up application startup and request handling
+The conditional sync in step 3 avoids redundant GitHub downloads and
+MongoDB writes on every restart. The `plugins` collection acts as a
+sentinel: if it has documents, all plugin collections (`plugin_skills`,
+`plugin_references`, `plugin_scripts`) were populated during a prior sync.
 
-All caches are configurable via environment variables, allowing operators to tune cache behavior based on their specific requirements.
+### Background refresh (`_config_refresh_loop`)
+
+Runs every `CONFIG_REFRESH_INTERVAL_MINUTES` (default `60`).
+
+```
+1. config_reader.clear_cache()
+   -> clears L1 (ConfigExpiringCache)
+   -> deletes L2 snapshot entry for model_configs
+2. skill_loader.refresh_async()
+   -> rebuilds marketplace plugins from disk/GitHub
+   -> writes new snapshot to L2 (MongoDB)
+   (user-persisted skills are not cached, so no refresh needed)
+3. _load_all_configs()
+   -> read_model_configs_async()   -- rebuilds from disk, writes L1 + L2
+   -> get_instructions()           -- returns fresh in-memory snapshot
+```
+
+### Manual refresh (`GET /refresh`)
+
+Clears the in-memory and snapshot caches for model configs, then
+re-reads from disk. Does not refresh skills or plugins.
+
+### Manual plugin reload (`reload_plugins` system command)
+
+Forces a full re-download of plugins from GitHub and re-syncs all plugin
+collections in MongoDB. This bypasses the startup check that skips sync
+when the `plugins` collection is not empty.
+
+```
+1. skill_loader.refresh_async()
+   -> forces GitHub download (bypasses cache TTL)
+   -> rebuilds skill snapshot from downloaded files
+   -> writes snapshot to L2 (MongoDB snapshot cache)
+2. skill_sync.sync()
+   -> reads all skills from the refreshed marketplace loader
+   -> upserts skills, resources, scripts, and plugin definitions to MongoDB
+```
+
+Triggered by sending the message `reload_plugins` as a system command
+via the chat API. Included in the default `SYSTEM_COMMANDS` list.
+
+---
+
+## 6. Token / Authentication Caching
+
+OAuth tokens are stored in MongoDB for reuse across requests. This is
+separate from the config caching infrastructure.
+
+- **Collection:** `MONGO_DB_TOKEN_COLLECTION_NAME` (default `tokens`)
+- **Cache type:** `OAUTH_CACHE` (typically `mongo`)
+- **Flow:** Authenticate -> store token -> reuse on subsequent requests
+  -> refresh when expired
+
+---
+
+## 7. Environment Variables
+
+### Model config caching
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `CONFIG_CACHE_TIMEOUT_SECONDS` | L1 in-memory TTL + GitHub refresh interval | `3600` |
+| `CONFIG_REFRESH_INTERVAL_MINUTES` | Background refresh loop interval | `60` |
+
+### Snapshot cache (L2)
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `SNAPSHOT_CACHE_TYPE` | Backend: `mongo`, `file`, `memory` | `memory` |
+| `SNAPSHOT_CACHE_TTL_SECONDS` | Entry TTL in the persistent store | `3600` |
+| `SNAPSHOT_CACHE_COLLECTION_NAME` | Default MongoDB collection | `snapshot_cache` |
+| `SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION` | Override collection for model configs | _(uses default)_ |
+| `SNAPSHOT_CACHE_PLUGINS_COLLECTION` | Override collection for marketplace plugins | _(uses default)_ |
+
+### Snapshot cache MongoDB connection
+
+These fall back to the general `MONGO_URL` / `MONGO_DB_USERNAME` /
+`MONGO_DB_PASSWORD` when the LLM-specific variants are not set.
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `MONGO_LLM_STORAGE_URI` | MongoDB connection URL | `MONGO_URL` |
+| `MONGO_LLM_STORAGE_DB_NAME` | Database name | `llm_storage` |
+| `MONGO_LLM_STORAGE_DB_USERNAME` | Username | `MONGO_DB_USERNAME` |
+| `MONGO_LLM_STORAGE_DB_PASSWORD` | Password | `MONGO_DB_PASSWORD` |
+
+### MCP tool caching
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `MCP_TOOLS_METADATA_CACHE_TTL_SECONDS` | Tool list cache TTL | `3600` |
+| `MCP_TOOLS_METADATA_CACHE_TIMEOUT_SECONDS` | _(backward compat alias)_ | `3600` |
+
+### Marketplace plugin caching
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `SKILLS_CACHE_TIMEOUT_SECONDS` | In-memory snapshot TTL for marketplace plugins | `3600` |
+
+### User-persisted skill collections
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `PLUGIN_SKILLS_COLLECTION` | MongoDB collection for user skill definitions | `plugin_skills` |
+| `PLUGIN_REFERENCES_COLLECTION` | MongoDB collection for skill resource files | `plugin_references` |
+| `PLUGIN_SCRIPTS_COLLECTION` | MongoDB collection for skill scripts | `plugin_scripts` |
+
+### GitHub config repo
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `GITHUB_CONFIG_REPO_URL` | Zipball URL (disables download if unset) | _(none)_ |
+| `GITHUB_CACHE_FOLDER` | Local extraction directory | `/tmp/github_config_cache` |
+| `GITHUB_TOKEN` | PAT for authenticated access | _(none)_ |
+| `GITHUB_TIMEOUT` | HTTP request timeout in seconds | `300` |
+
+### Token / auth
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `OAUTH_CACHE` | Cache backend (`mongo`, `memory`) | -- |
+| `MONGO_DB_TOKEN_COLLECTION_NAME` | MongoDB collection for tokens | `tokens` |
+
+---
+
+## 8. Architecture Diagram
+
+```
+                         Gunicorn (N workers)
+                  ┌──────────────────────────────────┐
+                  │  Worker 1          Worker 2  ...  │
+                  │  ┌──────────┐     ┌──────────┐   │
+                  │  │L1 Config │     │L1 Config │   │
+                  │  │  Cache   │     │  Cache   │   │
+                  │  ├──────────┤     ├──────────┤   │
+                  │  │L1 Skills │     │L1 Skills │   │
+                  │  │ Snapshot │     │ Snapshot │   │
+                  │  ├──────────┤     ├──────────┤   │
+                  │  │L1 MCP    │     │L1 MCP    │   │
+                  │  │ToolCache │     │ToolCache │   │
+                  │  └────┬─────┘     └────┬─────┘   │
+                  │       │                │          │
+                  └───────┼────────────────┼──────────┘
+                          │                │
+                          v                v
+                  ┌──────────────────────────────────┐
+                  │       L2 Snapshot Cache           │
+                  │  (MongoDB / File / Memory store)  │
+                  │                                    │
+                  │  Keys:                             │
+                  │    model_configs                   │
+                  │    marketplace_snapshot            │
+                  └──────────────┬─────────────────────┘
+                                 │
+                                 v
+                  ┌──────────────────────────────────┐
+                  │         L3 Source of Truth        │
+                  │                                    │
+                  │  Filesystem  /  GitHub  /  S3      │
+                  └──────────────────────────────────┘
+
+                  ┌──────────────────────────────────┐
+                  │  User-Persisted Skills (MongoDB)  │
+                  │  (No caching — direct reads)       │
+                  │                                    │
+                  │  Collections:                      │
+                  │    plugin_skills                   │
+                  │    plugin_references               │
+                  │    plugin_scripts                  │
+                  └──────────────────────────────────┘
+```
+
+Each worker has its own L1 caches. The L2 snapshot cache is shared
+(via MongoDB) so that when Worker 2 starts, it can load model configs
+and marketplace plugin skills from L2 without hitting L3.
+
+User-persisted skills bypass the L1/L2 caching tiers entirely. They are
+stored directly in MongoDB collections and read on demand.

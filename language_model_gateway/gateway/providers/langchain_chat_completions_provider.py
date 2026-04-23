@@ -52,6 +52,7 @@ from languagemodelcommon.mcp.interceptors.auth import (
 )
 from languagemodelcommon.mcp.mcp_client.session_pool import McpSessionPool
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
+from languagemodelcommon.mcp.plugin_mcp_provider import PluginMcpConfigProvider
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
@@ -84,6 +85,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         persistence_factory: PersistenceFactory,
         skill_loader: SkillLoaderProtocol,
         tool_display_name_mapper: ToolDisplayNameMapper,
+        plugin_mcp_provider: PluginMcpConfigProvider | None = None,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -164,6 +166,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             raise TypeError(
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
+
+        self.plugin_mcp_provider: PluginMcpConfigProvider | None = plugin_mcp_provider
 
     def _add_discovery_tools(
         self,
@@ -249,6 +253,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             if model_config.get_agents() is not None
             else []
         )
+        # Append plugin MCP servers discovered from marketplace marketplace
+        if self.plugin_mcp_provider:
+            mcp_tool_configs = mcp_tool_configs + list(
+                self.plugin_mcp_provider.get_mcp_server_configs()
+            )
         auth_interceptor = AuthMcpCallInterceptor(
             pass_through_token_manager=self.pass_through_token_manager,
             tool_configs=mcp_tool_configs,

@@ -3,6 +3,11 @@ import logging
 from langchain_core.messages import AIMessage
 from starlette.responses import StreamingResponse, JSONResponse
 
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
+from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
+from langchain_ai_skills_framework.startup import reload_plugins
 from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -24,6 +29,8 @@ class SystemCommandManager:
         *,
         token_exchange_manager: TokenExchangeManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
+        skill_loader: SkillLoaderProtocol,
+        skill_sync: SkillSync,
     ) -> None:
         self.token_exchange_manager = token_exchange_manager
         if self.token_exchange_manager is None:
@@ -43,6 +50,9 @@ class SystemCommandManager:
                 "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
 
+        self._skill_loader = skill_loader
+        self._skill_sync = skill_sync
+
     async def run_system_commands(
         self,
         *,
@@ -59,13 +69,21 @@ class SystemCommandManager:
         if last_message_content is not None:
             system_commands: list[str] = self.environment_variables.system_commands
             if last_message_content.lower() in system_commands:
+                response_text: str = (
+                    f"System command '{last_message_content}' received and processed."
+                )
                 match last_message_content.lower():
                     case "clear tokens":
-                        # Clear any stored tokens for the user or session. This is a placeholder for the actual token clearing logic.
                         # delete any existing tokens with same referring_subject and auth_provider
                         await self.token_exchange_manager.delete_all_tokens_async(
                             referring_subject=referring_subject,
                         )
+                    case "reload_plugins":
+                        summary = await reload_plugins(
+                            skill_loader=self._skill_loader,
+                            skill_sync=self._skill_sync,
+                        )
+                        response_text = f"Plugins reloaded from GitHub and synced to MongoDB. {summary}"
                     case _:
                         raise ValueError(
                             f"Unrecognized system command: {last_message_content}"
@@ -74,10 +92,6 @@ class SystemCommandManager:
                 logger.info(f"System command received: {last_message_content}")
                 return chat_request_wrapper.write_response(
                     request_id=request_id,
-                    response_messages=[
-                        AIMessage(
-                            content=f"System command '{last_message_content}' received and processed.",
-                        )
-                    ],
+                    response_messages=[AIMessage(content=response_text)],
                 )
         return None

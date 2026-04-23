@@ -31,7 +31,9 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
 
     @property
     def system_commands(self) -> list[str]:
-        system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
+        system_commands: str | None = os.environ.get(
+            "SYSTEM_COMMANDS", "clear tokens,reload_plugins"
+        )
         return system_commands.split(",") if system_commands else []
 
     @property
@@ -117,3 +119,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
     @property
     def databricks_sql_warehouse_id(self) -> Optional[str]:
         return os.environ.get("DATABRICKS_SQL_WAREHOUSE_ID")
+
+    @property
+    def config_refresh_interval_minutes(self) -> int:
+        return int(os.environ.get("CONFIG_REFRESH_INTERVAL_MINUTES", "60"))

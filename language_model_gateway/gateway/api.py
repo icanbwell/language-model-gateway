@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import uuid
@@ -9,6 +10,9 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
+from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
+    SkillLoaderProtocol,
+)
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
@@ -17,12 +21,13 @@ from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
-from langchain_ai_skills_framework.loaders.user_skill_store import UserSkillStore
+from langchain_ai_skills_framework.loaders.plugin_skill_store import PluginSkillStore
 from langchain_ai_skills_framework.startup import initialize_skills
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
     GithubConfigRepoManager,
 )
+from key_value.aio.stores.base import BaseContextManagerStore, BaseStore
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
@@ -83,30 +88,88 @@ ContainerRegistry.set_default(
 )
 
 
+async def _load_all_configs(
+    *,
+    config_reader: ConfigReader,
+    skill_loader: SkillLoaderProtocol,
+) -> None:
+    """Eagerly load model configs (incl. MCP JSON), skills, and marketplace.
+
+    Uses the async path for skills/marketplace so that the snapshot cache
+    is populated (the sync ``refresh()`` only updates in-memory state).
+    """
+    configs = await config_reader.read_model_configs_async()
+    logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
+
+    await skill_loader.get_instructions()
+
+
+async def _config_refresh_loop(
+    *,
+    config_reader: ConfigReader,
+    skill_loader: SkillLoaderProtocol,
+    interval_minutes: int,
+) -> None:
+    """Periodically reload all configs in the background."""
+    interval_seconds = interval_minutes * 60
+    while True:
+        await asyncio.sleep(interval_seconds)
+        try:
+            await config_reader.clear_cache()
+            # Rebuild skills/marketplace from disk and persist to MongoDB.
+            await skill_loader.refresh_async()
+            await _load_all_configs(
+                config_reader=config_reader,
+                skill_loader=skill_loader,
+            )
+            logger.info("Background config refresh completed")
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            logger.warning("Background config refresh failed", exc_info=True)
+
+
 @asynccontextmanager
 async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     worker_id = id(app1)
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
     repo_manager = container.resolve(GithubConfigRepoManager)
+    snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
+    config_reader = container.resolve(ConfigReader)
+    skill_loader: SkillLoaderProtocol = container.resolve(SkillLoaderProtocol)
+    refresh_task: asyncio.Task[None] | None = None
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
+
+        # Open the snapshot cache store (MongoDB if configured, memory otherwise)
+        await snapshot_cache.__aenter__()
 
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Ensure the skills directory exists before skill initialization
-        # validates it.  The directory lives inside the GitHub config cache
-        # which may not contain a configs/skills/ folder yet.
-        skills_dir = env_vars.skills_directory
-        if skills_dir:
-            makedirs(skills_dir, exist_ok=True)
-
-        # Sync shared skills from GitHub/filesystem into MongoDB
+        # Sync shared skills from marketplace marketplace into MongoDB
         await initialize_skills(
-            user_store=container.resolve(UserSkillStore),
+            user_store=container.resolve(PluginSkillStore),
             skill_sync=container.resolve(SkillSync),
         )
+
+        # Eagerly load all configs at startup
+        await _load_all_configs(
+            config_reader=config_reader,
+            skill_loader=skill_loader,
+        )
+
+        # Start background refresh loop
+        interval = env_vars.config_refresh_interval_minutes
+        refresh_task = asyncio.create_task(
+            _config_refresh_loop(
+                config_reader=config_reader,
+                skill_loader=skill_loader,
+                interval_minutes=interval,
+            )
+        )
+        logger.info("Background config refresh scheduled every %d minutes", interval)
 
         logger.info(f"Application initialization completed for worker {worker_id}")
         yield
@@ -118,6 +181,14 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     finally:
         try:
             logger.info(f"Starting application shutdown for worker {worker_id}...")
+            if refresh_task is not None and not refresh_task.done():
+                refresh_task.cancel()
+                try:
+                    await refresh_task
+                except asyncio.CancelledError:
+                    # Expected: background refresh task was cancelled during shutdown
+                    logger.debug("Background refresh task cancelled during shutdown")
+            await snapshot_cache.__aexit__(None, None, None)
             await repo_manager.stop()
             logger.info("Application shutdown completed")
         except Exception:
