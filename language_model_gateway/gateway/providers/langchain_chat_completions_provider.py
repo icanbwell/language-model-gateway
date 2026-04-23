@@ -289,7 +289,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             )
 
         # add the skills tools
-        tools += self.skill_loader.get_tools()
+        # tools += self.skill_loader.get_tools()
 
         if self.environment_variables.enable_code_interpreter:
             tools += [RunPythonScriptTool()]
