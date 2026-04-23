@@ -186,7 +186,8 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
                 try:
                     await refresh_task
                 except asyncio.CancelledError:
-                    pass
+                    # Expected: background refresh task was cancelled during shutdown
+                    logger.debug("Background refresh task cancelled during shutdown")
             await snapshot_cache.__aexit__(None, None, None)
             await repo_manager.stop()
             logger.info("Application shutdown completed")
