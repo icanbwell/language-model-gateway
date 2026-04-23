@@ -253,12 +253,21 @@ the configuration repo and extracts it to `GITHUB_CACHE_FOLDER`.
 ```
 1. Open snapshot cache store          (MongoDB ping if type=mongo)
 2. Download GitHub config repo        (if GITHUB_CONFIG_REPO_URL set)
-3. Initialize skills                  (MongoDB indexes + sync marketplace skills)
+3. Initialize skills                  (MongoDB indexes + conditional sync)
+   a. Ensure MongoDB indexes          (idempotent)
+   b. Check plugins collection        (has_plugins?)
+      - Empty   -> sync marketplace skills from GitHub to MongoDB
+      - Not empty -> skip sync (already seeded)
 4. Eagerly load all configs           (_load_all_configs)
    a. read_model_configs_async()      -> populates L1 + L2
    b. skill_loader.get_instructions() -> populates L1 + L2 (async path)
 5. Start background refresh task
 ```
+
+The conditional sync in step 3 avoids redundant GitHub downloads and
+MongoDB writes on every restart. The `plugins` collection acts as a
+sentinel: if it has documents, all plugin collections (`plugin_skills`,
+`plugin_references`, `plugin_scripts`) were populated during a prior sync.
 
 ### Background refresh (`_config_refresh_loop`)
 
@@ -281,6 +290,25 @@ Runs every `CONFIG_REFRESH_INTERVAL_MINUTES` (default `60`).
 
 Clears the in-memory and snapshot caches for model configs, then
 re-reads from disk. Does not refresh skills or plugins.
+
+### Manual plugin reload (`reload_plugins` system command)
+
+Forces a full re-download of plugins from GitHub and re-syncs all plugin
+collections in MongoDB. This bypasses the startup check that skips sync
+when the `plugins` collection is not empty.
+
+```
+1. skill_loader.refresh_async()
+   -> forces GitHub download (bypasses cache TTL)
+   -> rebuilds skill snapshot from downloaded files
+   -> writes snapshot to L2 (MongoDB snapshot cache)
+2. skill_sync.sync()
+   -> reads all skills from the refreshed marketplace loader
+   -> upserts skills, resources, scripts, and plugin definitions to MongoDB
+```
+
+Triggered by sending the message `reload_plugins` as a system command
+via the chat API. Included in the default `SYSTEM_COMMANDS` list.
 
 ---
 

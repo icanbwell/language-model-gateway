@@ -3,6 +3,7 @@ import logging
 from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
     SkillLoaderProtocol,
 )
+from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -382,6 +383,8 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
+                skill_loader=c.resolve(SkillLoaderProtocol),
+                skill_sync=c.resolve(SkillSync),
             ),
         )
         container.singleton(
