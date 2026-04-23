@@ -27,6 +27,7 @@ services:
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
       # ====  Uncomment this to read from github ====
       GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
+      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=add-bwell-skill"
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
       PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache/{pid}"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
