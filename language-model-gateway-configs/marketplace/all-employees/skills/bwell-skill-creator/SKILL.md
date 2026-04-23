@@ -1,5 +1,5 @@
 ---
-name: skill-creator
+name: bwell-skill-creator
 description: Creates or refines Agent Skills following the Agent Skills specification. Use this skill when the user requests a new skill, asks to improve an existing SKILL.md, needs a skill validated against specification requirements, wants to optimize a skill description for better triggering, or requests a polished final skill file ready for deployment. Use even if the user doesn't explicitly mention "Agent Skills" or "SKILL.md" but is asking about creating reusable instructions, procedures, or capabilities for an agent.
 license: Internal use only
 metadata:
@@ -332,7 +332,7 @@ You MUST validate the skill using `run_skill_script` (from the `skills-server` M
 
 1. **Call `run_skill_script`** with:
    - `plugin_name`: `"all-employees"`
-   - `skill_name`: `"skill-creator"`
+   - `skill_name`: `"bwell-skill-creator"`
    - `script_name`: `"validate.py"`
    - `arguments`: `{"skill_content": "<complete SKILL.md text>"}`
 
@@ -354,7 +354,7 @@ You MUST validate the skill using `run_skill_script` (from the `skills-server` M
 ```
 run_skill_script(
   plugin_name="all-employees",
-  skill_name="skill-creator",
+  skill_name="bwell-skill-creator",
   script_name="validate.py",
   arguments={
     "skill_content": "---\nname: example-skill\n...[full skill content]..."

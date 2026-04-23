@@ -1,0 +1,31 @@
+{
+  "name": "bwell-ai-plugin-marketplace",
+  "owner": {
+    "name": "icanbwell"
+  },
+  "metadata": {
+    "description": "A curated collection of Claude Code plugins for b.well Connected Health — company knowledge, developer tools, and productivity skills.",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "all-employees",
+      "source": "./plugins/all-employees",
+      "description": "Company-wide knowledge base and skills available to all employees",
+      "version": "1.0.0",
+      "category": "knowledge",
+      "tags": ["company", "knowledge-base", "bwell", "healthcare", "fhir"],
+      "keywords": ["b.well", "icanbwell", "helix", "FHIR", "bailey", "healthcare", "connected health"]
+    },
+    {
+      "name": "software-developers",
+      "source": "./plugins/software-developers",
+      "description": "Developer tools and migration skills for software engineering workflows",
+      "version": "1.0.0",
+      "category": "developer-tools",
+      "tags": ["migration", "pipenv", "uv", "python", "docker", "jfrog"],
+      "keywords": ["pipenv", "uv", "pyproject.toml", "migration", "Python", "dependency management", "JFrog"]
+    }
+  ]
+}
