@@ -47,6 +47,11 @@ services:
       # ====  End Uncomment this to read from local folders  =======
 #      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
       PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
+      # ── Skill publishing to marketplace ───────────────────────────
+      # Publishing is auto-enabled when PLUGINS_MARKETPLACE is a
+      # github:// URI and a GitHub token is available.
+#      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
+#      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
