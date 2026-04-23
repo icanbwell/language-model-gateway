@@ -1,7 +1,7 @@
 {
   "$schema": "./mcp_config_schema.json",
   "mcpServers": {
-    "google-drive": {
+    "skills-server": {
       "description": "Skills management - list, load, save, delete, and publish skills and their resources and scripts",
       "displayName": "Skills Server",
       "oauth": {
