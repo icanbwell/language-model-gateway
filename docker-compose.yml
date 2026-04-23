@@ -48,8 +48,8 @@ services:
 #      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
       PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
       # ── Skill publishing to marketplace ───────────────────────────
-      # Publishing is auto-enabled when PLUGINS_MARKETPLACE is a
-      # github:// URI and a GitHub token is available.
+      # Set to "true" to enable publishing skills to the marketplace repo.
+#      PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "false"
 #      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
 #      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # path to provider search
