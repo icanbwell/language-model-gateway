@@ -39,6 +39,7 @@ metadata:
 
 **Outputs**:
 - Complete SKILL.md file with valid YAML frontmatter
+- Saved via `save_skill` (and optionally `save_skill_resource` / `save_skill_script` for supporting files)
 - Formatted as copy/paste-ready markdown code block (four backticks)
 - Validated against Agent Skills specification
 - Validation is mandatory before final output (see Section 9 for the exact command)
@@ -47,10 +48,17 @@ metadata:
 - Under 500 lines (move detail to references/ if needed)
 - No extra prose unless explicitly requested
 
-**Tool usage**:
-- Use web search or documentation retrieval to reference Agent Skills specification when needed
-- Validate against specification requirements before finalizing
-- No external tools required for basic skill creation
+**Tool usage** (via the `skills-server` MCP server):
+- `list_skills` — list available skills (optionally filtered by `plugin_name`)
+- `load_skill` — load full skill content by `plugin_name` and `skill_name`
+- `save_skill` — create or update a skill with `plugin_name`, `skill_name`, and `content`
+- `save_skill_resource` — save a resource file with `plugin_name`, `skill_name`, `resource_name`, and `content`
+- `save_skill_script` — save a script file with `plugin_name`, `skill_name`, `script_name`, and `content`
+- `run_skill_script` — execute a skill script with `plugin_name`, `skill_name`, `script_name`, and optional `arguments`
+- `read_skill_resource` — read a resource file by `plugin_name`, `skill_name`, and `resource_name`
+- `delete_skill` — remove a skill by `plugin_name` and `skill_name`
+- `publish_skill` — publish/unpublish a skill with `plugin_name`, `skill_name`, and `shared` (bool)
+- `run_python_script` — execute inline Python with `script`, `script_name`, and optional `arguments`
 
 **Safety and privacy**:
 - Replace any sensitive data in examples with synthetic content
@@ -295,8 +303,8 @@ Progress:
 
 **Bundle reusable scripts:**
 - If agent reinvents same logic across runs, write a tested script
-- Place in `scripts/` directory
-- Reference from SKILL.md
+- Save with `save_skill_script` (providing `plugin_name`, `skill_name`, `script_name`, and `content`)
+- Reference from SKILL.md so the agent knows to call `run_skill_script`
 
 ### 7. Add Examples
 
@@ -318,14 +326,15 @@ Progress:
 
 **MANDATORY before final output:**
 
-You MUST validate the skill using `run_skill_script` before presenting it to the user. This is not optional.
+You MUST validate the skill using `run_skill_script` (from the `skills-server` MCP server) before presenting it to the user. This is not optional.
 
 **Step-by-step validation process:**
 
 1. **Call `run_skill_script`** with:
+   - `plugin_name`: `"all-employees"`
    - `skill_name`: `"skill-creator"`
    - `script_name`: `"validate.py"`
-   - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
+   - `arguments`: `{"skill_content": "<complete SKILL.md text>"}`
 
    **Allowed script note:** `validate.py` is the only script you should call for this skill.
    Never call `create_skill` or `create_skill.py` with `run_skill_script`.
@@ -344,6 +353,7 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
 **Example tool call:**
 ```
 run_skill_script(
+  plugin_name="all-employees",
   skill_name="skill-creator",
   script_name="validate.py",
   arguments={
@@ -375,11 +385,11 @@ run_skill_script(
    - Technical background → `references/technical-details.md`
    - Error codes and messages → `references/error-handling.md`
 
-2. **Add load triggers in main SKILL.md:**
+2. **Save reference files** using `save_skill_resource` for each file, then **add load triggers in main SKILL.md:**
    ```markdown
-   For detailed API specifications, read `references/api-reference.md`
+   For detailed API specifications, use `read_skill_resource` with resource_name="api-reference.md"
    
-   If you encounter an API error, read `references/error-handling.md`
+   If you encounter an API error, use `read_skill_resource` with resource_name="error-handling.md"
    ```
 
 3. **Keep in main SKILL.md:**
@@ -389,11 +399,14 @@ run_skill_script(
    - At least one example
    - Edge case overview
 
-### 11. Format Final Output
+### 11. Save and Format Final Output
 
 - Confirm validator status first (`scripts/validate.py` must pass before final delivery).
+- **Save the skill** using `save_skill` with the `plugin_name`, `skill_name`, and full `content`.
+- If there are reference files, save each with `save_skill_resource`.
+- If there are scripts, save each with `save_skill_script`.
 
-**MANDATORY: Wrap in four-backtick markdown code fence:**
+**MANDATORY: Also wrap in four-backtick markdown code fence for the user to review:**
 ````markdown
 [Complete skill content here]
 ````
