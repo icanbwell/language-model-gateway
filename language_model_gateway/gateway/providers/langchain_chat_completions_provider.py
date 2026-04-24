@@ -317,6 +317,9 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 )
                 tools = list(tools) + list(tools_from_request)
 
+        # Register MCP display names (title metadata) discovered from tools
+        self.tool_display_name_mapper.register_from_tools(tools)
+
         # Use context managers only for the duration of streaming
         # we can't use async with because we need to return the StreamingResponse
         store_cm: ContextManager[BaseStore] = self.persistence_factory.create_store(
