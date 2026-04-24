@@ -30,7 +30,6 @@ services:
 #      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
 #      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
-#      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
 #      PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/prompts"
       # ====  End Uncomment this to read from github  =======
       # ====  Uncomment this to read from local folders ====
@@ -38,8 +37,8 @@ services:
       GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache"
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
-      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
+      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
       # ====  End Uncomment this to read from local folders  =======
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
@@ -188,10 +187,10 @@ services:
     - ./:/usr/src/language_model_gateway/:cached
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
-    - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
+    - ./language-model-gateway-configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
-#    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
+#    - ../language-model-gateway-configuration/configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
