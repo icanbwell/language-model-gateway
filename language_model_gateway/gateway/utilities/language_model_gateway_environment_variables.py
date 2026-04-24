@@ -62,10 +62,6 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return origins if origins else ["*"]
 
     @property
-    def enable_code_interpreter(self) -> bool:
-        return self.str2bool(os.environ.get("ENABLE_CODE_INTERPRETER", "true"))
-
-    @property
     def help_keywords(self) -> list[str]:
         raw = os.environ.get("HELP_KEYWORDS", "help")
         return raw.split(";") if raw else ["help"]

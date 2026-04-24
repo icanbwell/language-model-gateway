@@ -27,9 +27,7 @@ services:
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
       # ====  Uncomment this to read from github ====
 #      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
-#      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace?ref=add-bwell-skill"
 #      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
-#      PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache/{pid}"
 #      MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/official"
 #      MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/chat_completions/testing"
 #      MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/{pid}/configs/mcp"
@@ -42,16 +40,7 @@ services:
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       MCP_JSON_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/mcp"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
-      PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/language_model_gateway/.marketplace-git-cache"
       # ====  End Uncomment this to read from local folders  =======
-#      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
-      PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
-      # ── Skill publishing to marketplace ───────────────────────────
-      # Set to "true" to enable publishing skills to the marketplace repo.
-#      PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "false"
-#      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
-#      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
       # Number of worker process to run
@@ -118,8 +107,7 @@ services:
       #   cached MCP tool metadata (default: 3600).
       #
       # Snapshot cache — stores only the parsed ChatModelConfig list
-      # (model definitions from MODELS_OFFICIAL_PATH). Does NOT cache
-      # MCP server configs, prompts, marketplace, or skills. Lets restarts
+      # (model definitions from MODELS_OFFICIAL_PATH). Lets restarts
       # and new Gunicorn workers load model configs from the cache
       # instead of re-reading every file from disk or GitHub.
       #
@@ -138,9 +126,6 @@ services:
       # Per-resource collection overrides (optional):
       #   SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION — separate collection for
       #     ChatModelConfig snapshots (ConfigReader).
-      #   SNAPSHOT_CACHE_SKILLS_COLLECTION — (legacy, no longer used).
-      #   SNAPSHOT_CACHE_PLUGINS_COLLECTION — separate collection for
-      #     MarketplaceDirectoryLoader snapshots.
       #   When unset, each loader uses the store's default collection.
       # ────────────────────────────────────────────────────────────────
       CONFIG_CACHE_TIMEOUT_SECONDS: 10
@@ -150,18 +135,6 @@ services:
       SNAPSHOT_CACHE_TTL_SECONDS: 3600
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
 #      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
-#      SNAPSHOT_CACHE_SKILLS_COLLECTION: skills_snapshot
-#      SNAPSHOT_CACHE_PLUGINS_COLLECTION: plugins_snapshot
-      # PLUGINS_COLLECTION: MongoDB collection for individual plugin
-      #   definition documents (default: 'plugins'). Each marketplace
-      #   plugin is written as a separate document keyed by plugin name.
-      PLUGINS_COLLECTION: plugins
-      # ── Plugin skill collections ─────────────────────────────────
-      # MongoDB collections for plugin-scoped skills, resources, and
-      # scripts. Indexed by (user_id, plugin_name, skill_name).
-      PLUGIN_SKILLS_COLLECTION: plugin_skills
-      PLUGIN_REFERENCES_COLLECTION: plugin_references
-      PLUGIN_SCRIPTS_COLLECTION: plugin_scripts
       # ── LLM storage & snapshot cache MongoDB ──────────────────────
       # All use MONGO_LLM_STORAGE_* vars, which fall back to
       # MONGO_URL / MONGO_DB_USERNAME / MONGO_DB_PASSWORD when unset.
@@ -216,12 +189,9 @@ services:
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
     - ./language-model-gateway-configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-    - ./language-model-gateway-configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
 #    - ../language-model-gateway-configuration/configs/mcp:/usr/src/language_model_gateway/github_config_cache/configs/mcp
-#    - ../language-model-gateway-configuration/configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
-#    - ../ai-plugin-marketplace:/usr/src/language_model_gateway/github_config_cache/ai-plugin-marketplace:ro
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
