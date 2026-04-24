@@ -3,11 +3,6 @@ import logging
 from langchain_core.messages import AIMessage
 from starlette.responses import StreamingResponse, JSONResponse
 
-from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
-    SkillLoaderProtocol,
-)
-from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
-from langchain_ai_skills_framework.startup import reload_plugins
 from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
@@ -29,8 +24,6 @@ class SystemCommandManager:
         *,
         token_exchange_manager: TokenExchangeManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
-        skill_loader: SkillLoaderProtocol,
-        skill_sync: SkillSync,
     ) -> None:
         self.token_exchange_manager = token_exchange_manager
         if self.token_exchange_manager is None:
@@ -49,9 +42,6 @@ class SystemCommandManager:
             raise TypeError(
                 "environment_variables must be an instance of LanguageModelGatewayEnvironmentVariables"
             )
-
-        self._skill_loader = skill_loader
-        self._skill_sync = skill_sync
 
     async def run_system_commands(
         self,
@@ -78,12 +68,6 @@ class SystemCommandManager:
                         await self.token_exchange_manager.delete_all_tokens_async(
                             referring_subject=referring_subject,
                         )
-                    case "reload_plugins":
-                        summary = await reload_plugins(
-                            skill_loader=self._skill_loader,
-                            skill_sync=self._skill_sync,
-                        )
-                        response_text = f"Plugins reloaded from GitHub and synced to MongoDB. {summary}"
                     case _:
                         raise ValueError(
                             f"Unrecognized system command: {last_message_content}"

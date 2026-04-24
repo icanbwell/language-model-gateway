@@ -1867,13 +1867,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/f4/b1/3f86315e562dd59e339d95fb9caaac903517252737b6dbbc2ae3ce939ec3/langchain_ai_skills_framework-1.0.65-py3-none-any.whl", hash = "sha256:a7d01529de14ab046f58c3293e0bdf0db5091e70af0ac02d38ddde36eac819c4", size = 99879, upload-time = "2026-04-23T21:06:44.427Z" },
 ]
 
-[package.optional-dependencies]
-langchain = [
-    { name = "langchain" },
-    { name = "langchain-core" },
-    { name = "langgraph" },
-]
-
 [[package]]
 name = "langchain-anthropic"
 version = "1.4.1"
@@ -2245,7 +2238,6 @@ dependencies = [
     { name = "httpx-sse" },
     { name = "joserfc" },
     { name = "langchain" },
-    { name = "langchain-ai-skills-framework", extra = ["langchain"] },
     { name = "langchain-aws" },
     { name = "langchain-community" },
     { name = "langchain-core" },
@@ -2352,7 +2344,6 @@ requires-dist = [
     { name = "httpx-sse", specifier = ">=0.4.0" },
     { name = "joserfc", specifier = ">=1.4.3" },
     { name = "langchain", specifier = ">=1.0.0" },
-    { name = "langchain-ai-skills-framework", extras = ["langchain"], specifier = ">=1.0.65" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
     { name = "langchain-community", specifier = ">=0.4" },
     { name = "langchain-core", specifier = ">=1.2.5" },

@@ -1,9 +1,5 @@
 import logging
 
-from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
-    SkillLoaderProtocol,
-)
-from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -75,10 +71,6 @@ from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from languagemodelcommon.mcp.plugin_mcp_provider import PluginMcpConfigProvider
-from language_model_gateway.container.skill_loader_mcp_adapter import (
-    SkillLoaderMcpAdapter,
-)
 from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
@@ -351,13 +343,6 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
-            PluginMcpConfigProvider,
-            lambda c: SkillLoaderMcpAdapter(
-                skill_loader=c.resolve(SkillLoaderProtocol),
-            ),
-        )
-
-        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
@@ -370,9 +355,7 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
-                skill_loader=c.resolve(SkillLoaderProtocol),
                 tool_display_name_mapper=c.resolve(ToolDisplayNameMapper),
-                plugin_mcp_provider=c.resolve(PluginMcpConfigProvider),
             ),
         )
 
@@ -383,8 +366,6 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
-                skill_loader=c.resolve(SkillLoaderProtocol),
-                skill_sync=c.resolve(SkillSync),
             ),
         )
         container.singleton(

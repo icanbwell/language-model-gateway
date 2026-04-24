@@ -10,12 +10,6 @@ from typing import (
     override,
 )
 
-from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
-    SkillLoaderProtocol,
-)
-from langchain_ai_skills_framework.langchain.tools.run_python_script_tool import (
-    RunPythonScriptTool,
-)
 from languagemodelcommon.utilities.tool_display_name_mapper import (
     ToolDisplayNameMapper,
 )
@@ -52,7 +46,6 @@ from languagemodelcommon.mcp.interceptors.auth import (
 )
 from languagemodelcommon.mcp.mcp_client.session_pool import McpSessionPool
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from languagemodelcommon.mcp.plugin_mcp_provider import PluginMcpConfigProvider
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
@@ -83,9 +76,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         pass_through_token_manager: PassThroughTokenManager,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
         persistence_factory: PersistenceFactory,
-        skill_loader: SkillLoaderProtocol,
         tool_display_name_mapper: ToolDisplayNameMapper,
-        plugin_mcp_provider: PluginMcpConfigProvider | None = None,
     ) -> None:
         self.model_factory: ModelFactory = model_factory
         if self.model_factory is None:
@@ -151,14 +142,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
             )
 
-        self.skill_loader: SkillLoaderProtocol = skill_loader
-        if self.skill_loader is None:
-            raise ValueError("skill_loader must not be None")
-        if not isinstance(self.skill_loader, SkillLoaderProtocol):
-            raise TypeError(
-                f"skill_loader must be an instance of SkillLoaderProtocol: {type(self.skill_loader)}"
-            )
-
         self.tool_display_name_mapper: ToolDisplayNameMapper = tool_display_name_mapper
         if self.tool_display_name_mapper is None:
             raise ValueError("tool_display_name_mapper must not be None")
@@ -166,8 +149,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             raise TypeError(
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
-
-        self.plugin_mcp_provider: PluginMcpConfigProvider | None = plugin_mcp_provider
 
     def _add_discovery_tools(
         self,
@@ -253,11 +234,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             if model_config.get_agents() is not None
             else []
         )
-        # Append plugin MCP servers discovered from marketplace marketplace
-        if self.plugin_mcp_provider:
-            mcp_tool_configs = mcp_tool_configs + list(
-                self.plugin_mcp_provider.get_mcp_server_configs()
-            )
         auth_interceptor = AuthMcpCallInterceptor(
             pass_through_token_manager=self.pass_through_token_manager,
             tool_configs=mcp_tool_configs,
@@ -287,12 +263,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 auth_interceptor=auth_interceptor,
                 session_pool=session_pool,
             )
-
-        # add the skills tools
-        # tools += self.skill_loader.get_tools()
-
-        if self.environment_variables.enable_code_interpreter:
-            tools += [RunPythonScriptTool()]
 
         # finally read any tools from the Responses API request
         tool_configs_from_request: list[AgentConfig] = chat_request_wrapper.get_tools()
@@ -342,7 +312,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 checkpointer=checkpointer
                 if self.environment_variables.enable_llm_checkpointer
                 else None,
-                skill_loader=self.skill_loader,
                 tool_catalog=tool_catalog,
             )
             request_id: uuid.UUID = uuid.uuid4()

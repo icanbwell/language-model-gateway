@@ -31,9 +31,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
 
     @property
     def system_commands(self) -> list[str]:
-        system_commands: str | None = os.environ.get(
-            "SYSTEM_COMMANDS", "clear tokens,reload_plugins"
-        )
+        system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
         return system_commands.split(",") if system_commands else []
 
     @property
