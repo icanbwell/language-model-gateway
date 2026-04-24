@@ -10,7 +10,7 @@
         "displayName": "Okta b.well"
       },
       "type": "http",
-      "url": "${MCP_SERVER_GATEWAY_URL}/skills_server/"
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills/"
     }
   }
 }

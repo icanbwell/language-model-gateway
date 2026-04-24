@@ -8,10 +8,12 @@ services:
       context: ../mcp-server-gateway
     volumes:
     - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
+    - ./language-model-gateway-configs/marketplace:/usr/src/mcp_server_gateway/marketplace
 #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.20
     environment:
       DEBUG_METRICS: 0
       LOG_LEVEL: INFO
+      SKILLS_LOG_LEVEL: DEBUG
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration,https://icanbwell.okta.com/.well-known/openid-configuration"
       # oidcauthlib per-provider config for pass-through token validation
@@ -19,6 +21,20 @@ services:
       AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
       AUTH_AUDIENCE_OKTA: "https://icanbwell.okta.com"
       PSS_BASE_URL: "https://provider-search.dev.bwell.zone/sdk/graphql"
+      # ── Skills / Marketplace ──────────────────────────────────────
+      # Points to the local marketplace directory (mounted via volume below).
+      # Without this, the skills server registers zero tools.
+      PLUGINS_MARKETPLACE: "/usr/src/mcp_server_gateway/marketplace"
+      PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/mcp_server_gateway/.marketplace-git-cache"
+      # ── MongoDB for user skill storage ────────────────────────────
+      MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=mcp-server-gateway}
+      MONGO_DB_NAME: language_model_gateway
+      MONGO_DB_USERNAME: ${LANGUAGE_MODEL_GATEWAY_MONGO_USERNAME:-root}
+      MONGO_DB_PASSWORD: ${LANGUAGE_MODEL_GATEWAY_MONGO_PASSWORD:-test123}  # pragma: allowlist secret
+      # ── Plugin skill collections ──────────────────────────────────
+      PLUGIN_SKILLS_COLLECTION: plugin_skills
+      PLUGIN_REFERENCES_COLLECTION: plugin_references
+      PLUGIN_SCRIPTS_COLLECTION: plugin_scripts
     env_file: .env
     command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
