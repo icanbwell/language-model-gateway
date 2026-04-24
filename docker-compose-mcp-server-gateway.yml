@@ -31,10 +31,18 @@ services:
       MONGO_DB_NAME: language_model_gateway
       MONGO_DB_USERNAME: ${LANGUAGE_MODEL_GATEWAY_MONGO_USERNAME:-root}
       MONGO_DB_PASSWORD: ${LANGUAGE_MODEL_GATEWAY_MONGO_PASSWORD:-test123}  # pragma: allowlist secret
+#      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
+      PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
+      # ── Skill publishing to marketplace ───────────────────────────
+      # Set to "true" to enable publishing skills to the marketplace repo.
+#      PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "false"
+#      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
+#      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # ── Plugin skill collections ──────────────────────────────────
       PLUGIN_SKILLS_COLLECTION: plugin_skills
       PLUGIN_REFERENCES_COLLECTION: plugin_references
       PLUGIN_SCRIPTS_COLLECTION: plugin_scripts
+
     env_file: .env
     command: ["uvicorn", "mcp_server_gateway.api:app", "--host", "0.0.0.0", "--port", "5000", "--reload", "--log-level", "debug"]
     ports:
