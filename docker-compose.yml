@@ -199,7 +199,7 @@ services:
       - gunicorn
       - --reload
       - language_model_gateway.gateway.api:app
-      - --workers=10
+      - --workers=1
       - --worker-class
       - uvicorn.workers.UvicornWorker
       - --bind
