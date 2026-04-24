@@ -18,6 +18,7 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
 from languagemodelcommon.auth.token_storage_auth_manager import TokenStorageAuthManager
+from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.configs.config_reader.mcp_json_reader import (
     McpJsonReader,
     _compute_oauth_provider_key,
@@ -51,6 +52,8 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         well_known_configuration_manager: WellKnownConfigurationManager,
         oauth_provider_registrar: OAuthProviderRegistrar,
         mcp_json_reader: McpJsonReader,
+        mcp_json_path: str | None = None,
+        mcp_json_fetcher: McpJsonFetcher | None = None,
     ) -> None:
         super().__init__(
             environment_variables=environment_variables,
@@ -61,6 +64,8 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         )
         self._oauth_provider_registrar = oauth_provider_registrar
         self._mcp_json_reader = mcp_json_reader
+        self._mcp_json_path = mcp_json_path
+        self._mcp_json_fetcher = mcp_json_fetcher
 
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
@@ -75,17 +80,19 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         return await super().read_callback_response(request=request)
 
     async def _try_register_from_mcp_json(self, auth_provider: str) -> None:
-        """Attempt to reconstruct and register an AuthConfig from .mcp.json.
+        """Attempt to reconstruct and register an AuthConfig from MCP config.
 
-        Looks up the OAuth config from ``.mcp.json`` by matching the
+        Tries the ``McpJsonFetcher`` first (plugin-scoped MCP configs
+        from the skills server), then falls back to a local ``.mcp.json``
+        file.  Looks up the OAuth config by matching the
         ``auth_provider`` key, then delegates to
         ``OAuthProviderRegistrar.register_provider()`` for discovery,
         DCR, AuthConfig construction, and registration.
         """
-        mcp_config: McpJsonConfig | None = self._mcp_json_reader.read_mcp_json()
+        mcp_config = await self._load_mcp_config()
         if mcp_config is None:
             logger.warning(
-                "Cannot auto-register auth provider '%s': .mcp.json not found",
+                "Cannot auto-register auth provider '%s': no MCP config available",
                 auth_provider,
             )
             return
@@ -105,14 +112,13 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
                     auth_manager=self,
                 )
                 logger.info(
-                    "Auto-registered MCP OAuth provider '%s' from "
-                    ".mcp.json server '%s'",
+                    "Auto-registered MCP OAuth provider '%s' from MCP server '%s'",
                     auth_provider,
                     server_key,
                 )
             except ValueError:
                 logger.error(
-                    "Could not resolve client_id for '%s' from .mcp.json server '%s'",
+                    "Could not resolve client_id for '%s' from MCP server '%s'",
                     auth_provider,
                     server_key,
                     exc_info=True,
@@ -120,10 +126,24 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             return
 
         logger.warning(
-            "Auth provider '%s' not found in .mcp.json — "
+            "Auth provider '%s' not found in MCP config — "
             "cannot auto-register for callback",
             auth_provider,
         )
+
+    async def _load_mcp_config(self) -> McpJsonConfig | None:
+        """Load MCP config from fetcher (all plugins merged) or local file."""
+        if self._mcp_json_fetcher:
+            plugin_configs = await self._mcp_json_fetcher.fetch_async()
+            if plugin_configs:
+                # Merge all plugins for auth provider lookup
+                merged: dict[str, Any] = {}
+                for pc in plugin_configs.values():
+                    merged.update(pc.mcpServers)
+                if merged:
+                    return McpJsonConfig(mcpServers=merged)
+
+        return self._mcp_json_reader.read_mcp_json(mcp_json_path=self._mcp_json_path)
 
     @override
     async def get_html_response(self, access_token: str | None) -> Response:

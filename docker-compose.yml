@@ -12,7 +12,6 @@ services:
       LLM_LOG_LEVEL: DEBUG
       HTTP_LOG_LEVEL: DEBUG
       HTTP_TRACING_LOG_LEVEL: DEBUG
-      SKILLS_LOG_LEVEL: DEBUG
       LOG_ALL_REQUESTS: 1
       AGENT_URL: 'http://host.docker.internal:5055/api/v1'
       OPENAI_AGENT_URL: 'http://host.docker.internal:5055/api/v1'
@@ -25,6 +24,7 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
+      PLUGINS_MCP_SERVER: "http://mcp_server_gateway:5000/skills/"
       # ====  Uncomment this to read from github ====
 #      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
 #      GITHUB_CACHE_FOLDER: "/usr/src/language_model_gateway/github_config_cache/{pid}"
@@ -38,7 +38,6 @@ services:
       MODELS_OFFICIAL_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/official"
       MODELS_TESTING_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/testing"
       PROMPT_LIBRARY_PATH: "/usr/src/language_model_gateway/github_config_cache/configs/chat_completions/prompts"
-      PLUGINS_MARKETPLACE: "/usr/src/language_model_gateway/github_config_cache/configs/marketplace"
       # ====  End Uncomment this to read from local folders  =======
       # path to provider search
       PROVIDER_SEARCH_API_URL: "https://provider-search.prod.icanbwell.com/graphql"
@@ -187,10 +186,8 @@ services:
     - ./:/usr/src/language_model_gateway/:cached
     # uncomment the below to get configs from local folders instead of github (also unset GITHUB_CONFIG_REPO_URL)
     - ./language-model-gateway-configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
-    - ./language-model-gateway-configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     # uncomment the below and comment the above to get configs from a mounted folder instead of github (also unset GITHUB_CONFIG_REPO_URL)
 #    - ../language-model-gateway-configuration/configs/chat_completions:/usr/src/language_model_gateway/github_config_cache/configs/chat_completions
-#    - ../language-model-gateway-configuration/configs/marketplace:/usr/src/language_model_gateway/github_config_cache/configs/marketplace
     - ./outputs/tools:/usr/src/tool_outputs
     # mount cache
 #    - ./caches/pip:/etc/appuser/.cache/pip
