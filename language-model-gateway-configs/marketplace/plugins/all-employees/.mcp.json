@@ -140,16 +140,22 @@
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/sigma/"
     },
-    "skills": {
+    "skills-library": {
       "description": "Domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks",
-      "displayName": "Skills",
+      "displayName": "Skills Library",
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills-library/"
+    },
+    "skills-publisher": {
+      "description": "Publishes skills for sharing with others",
+      "displayName": "Skills Publisher",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
         "clientId": "0oa11g45c90Fqbgzz698",
         "displayName": "Okta b.well"
       },
       "type": "http",
-      "url": "${MCP_SERVER_GATEWAY_URL}/skills/"
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills-publisher/"
     },
     "url-to-markdown": {
       "description": "Fetch, scrape, and extract content from web pages and URLs, converting to clean markdown",
