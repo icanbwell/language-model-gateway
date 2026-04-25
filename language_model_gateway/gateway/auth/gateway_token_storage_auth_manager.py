@@ -20,7 +20,6 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
 from languagemodelcommon.auth.token_storage_auth_manager import TokenStorageAuthManager
 from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.configs.config_reader.mcp_json_reader import (
-    McpJsonReader,
     _compute_oauth_provider_key,
 )
 from languagemodelcommon.configs.schemas.mcp_json_schema import McpJsonConfig
@@ -37,7 +36,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
     """Gateway-specific TokenStorageAuthManager that renders the HTML success page.
 
     Overrides ``read_callback_response`` to auto-register MCP OAuth
-    providers from ``.mcp.json`` when the auth config is not found
+    providers from plugin MCP configs when the auth config is not found
     in memory (e.g. after a server restart between the OAuth redirect
     and callback).
     """
@@ -51,9 +50,8 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         token_exchange_manager: TokenExchangeManager,
         well_known_configuration_manager: WellKnownConfigurationManager,
         oauth_provider_registrar: OAuthProviderRegistrar,
-        mcp_json_reader: McpJsonReader,
-        mcp_json_path: str | None = None,
         mcp_json_fetcher: McpJsonFetcher | None = None,
+        plugin_names: list[str] | None = None,
     ) -> None:
         super().__init__(
             environment_variables=environment_variables,
@@ -63,9 +61,8 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             well_known_configuration_manager=well_known_configuration_manager,
         )
         self._oauth_provider_registrar = oauth_provider_registrar
-        self._mcp_json_reader = mcp_json_reader
-        self._mcp_json_path = mcp_json_path
         self._mcp_json_fetcher = mcp_json_fetcher
+        self._plugin_names = plugin_names or []
 
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
@@ -82,9 +79,8 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
     async def _try_register_from_mcp_json(self, auth_provider: str) -> None:
         """Attempt to reconstruct and register an AuthConfig from MCP config.
 
-        Tries the ``McpJsonFetcher`` first (plugin-scoped MCP configs
-        from the skills server), then falls back to a local ``.mcp.json``
-        file.  Looks up the OAuth config by matching the
+        Fetches plugin MCP configs from the skills server via
+        ``McpJsonFetcher``, looks up the OAuth config by matching the
         ``auth_provider`` key, then delegates to
         ``OAuthProviderRegistrar.register_provider()`` for discovery,
         DCR, AuthConfig construction, and registration.
@@ -132,18 +128,26 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         )
 
     async def _load_mcp_config(self) -> McpJsonConfig | None:
-        """Load MCP config from fetcher (all plugins merged) or local file."""
-        if self._mcp_json_fetcher:
-            plugin_configs = await self._mcp_json_fetcher.fetch_async()
-            if plugin_configs:
-                # Merge all plugins for auth provider lookup
-                merged: dict[str, Any] = {}
-                for pc in plugin_configs.values():
-                    merged.update(pc.mcpServers)
-                if merged:
-                    return McpJsonConfig(mcpServers=merged)
+        """Load MCP config by merging all plugin configs from the fetcher.
 
-        return self._mcp_json_reader.read_mcp_json(mcp_json_path=self._mcp_json_path)
+        The auth manager needs to search across all plugin MCP configs
+        to find the OAuth provider that matches the callback state.
+        Since we don't know which plugin the auth provider belongs to,
+        we fetch configs for all known plugins and merge them.
+        """
+        if not self._mcp_json_fetcher or not self._plugin_names:
+            return None
+
+        plugin_configs = await self._mcp_json_fetcher.fetch_plugins_async(
+            self._plugin_names
+        )
+        if not plugin_configs:
+            return None
+
+        merged: dict[str, Any] = {}
+        for pc in plugin_configs.values():
+            merged.update(pc.mcpServers)
+        return McpJsonConfig(mcpServers=merged) if merged else None
 
     @override
     async def get_html_response(self, access_token: str | None) -> Response:

@@ -117,3 +117,9 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
     @property
     def config_refresh_interval_minutes(self) -> int:
         return int(os.environ.get("CONFIG_REFRESH_INTERVAL_MINUTES", "60"))
+
+    @property
+    def auth_plugin_names(self) -> list[str]:
+        """Comma-separated plugin names to query for OAuth provider recovery."""
+        raw = os.environ.get("AUTH_PLUGIN_NAMES", "")
+        return [n.strip() for n in raw.split(",") if n.strip()]

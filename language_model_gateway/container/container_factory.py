@@ -11,11 +11,7 @@ from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
     GithubConfigRepoManager,
 )
-from languagemodelcommon.configs.config_reader.file_config_reader import (
-    FileConfigReader,
-)
 from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
-from languagemodelcommon.configs.config_reader.mcp_json_reader import McpJsonReader
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
 )
@@ -148,13 +144,10 @@ class LanguageModelGatewayContainerFactory:
                     WellKnownConfigurationManager
                 ),
                 oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
-                mcp_json_reader=c.resolve(McpJsonReader),
-                mcp_json_path=FileConfigReader.discover_mcp_json_path(
-                    c.resolve(
-                        LanguageModelGatewayEnvironmentVariables
-                    ).models_official_path
-                ),
                 mcp_json_fetcher=c.resolve(McpJsonFetcher),
+                plugin_names=c.resolve(
+                    LanguageModelGatewayEnvironmentVariables
+                ).auth_plugin_names,
             ),
         )
 

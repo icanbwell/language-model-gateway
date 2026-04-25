@@ -17,7 +17,7 @@ from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegis
 from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
     TokenExchangeManager,
 )
-from languagemodelcommon.configs.config_reader.mcp_json_reader import McpJsonReader
+from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
 from languagemodelcommon.configs.schemas.mcp_json_schema import (
     McpJsonConfig,
@@ -33,6 +33,7 @@ def _build_manager(
     register_result: AuthConfig | None = None,
     register_side_effect: Exception | None = None,
     mcp_json_return: McpJsonConfig | None = None,
+    plugin_names: list[str] | None = None,
 ) -> GatewayTokenStorageAuthManager:
     """Build a GatewayTokenStorageAuthManager with mocked dependencies."""
     env = MagicMock(spec=AbstractEnvironmentVariables)
@@ -61,8 +62,13 @@ def _build_manager(
             )
         )
 
-    mcp_json_reader = MagicMock(spec=McpJsonReader)
-    mcp_json_reader.read_mcp_json.return_value = mcp_json_return
+    fetcher = MagicMock(spec=McpJsonFetcher)
+    if mcp_json_return:
+        fetcher.fetch_plugins_async = AsyncMock(
+            return_value={"test-plugin": mcp_json_return}
+        )
+    else:
+        fetcher.fetch_plugins_async = AsyncMock(return_value={})
 
     manager = GatewayTokenStorageAuthManager(
         environment_variables=env,
@@ -71,7 +77,8 @@ def _build_manager(
         token_exchange_manager=token_exchange_manager,
         well_known_configuration_manager=well_known_mgr,
         oauth_provider_registrar=registrar,
-        mcp_json_reader=mcp_json_reader,
+        mcp_json_fetcher=fetcher,
+        plugin_names=plugin_names or ["test-plugin"],
     )
     return manager
 
@@ -171,8 +178,8 @@ class TestTryRegisterFromMcpJsonDcr:
         await manager._try_register_from_mcp_json("atlassian")
 
     @pytest.mark.asyncio
-    async def test_no_mcp_json_returns_without_error(self) -> None:
-        """When .mcp.json is not found, should return silently."""
+    async def test_no_mcp_config_returns_without_error(self) -> None:
+        """When no plugin MCP config is available, should return silently."""
         manager = _build_manager(mcp_json_return=None)
         await manager._try_register_from_mcp_json("atlassian")
 
