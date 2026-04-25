@@ -142,12 +142,7 @@
     },
     "skills": {
       "description": "Domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks",
-      "displayName": "Skills",
-      "oauth": {
-        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
-        "clientId": "0oa11g45c90Fqbgzz698",
-        "displayName": "Okta b.well"
-      },
+      "displayName": "Skills Library",
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/skills/"
     },
