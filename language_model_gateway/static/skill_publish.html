@@ -343,15 +343,16 @@ Instructions for the skill..."></textarea>
         return false;
     }
 
-    // On page load: check for token from callback or sessionStorage
     (function init() {
-        // Check if we got a token via the callback redirect (hash fragment)
         const params = new URLSearchParams(window.location.search);
         const callbackToken = params.get('token');
         if (callbackToken) {
             setToken(callbackToken);
-            // Clean URL
             window.history.replaceState({}, '', window.location.pathname);
+        }
+        if (!getToken()) {
+            redirectToAuth();
+            return;
         }
         updateAuthBar();
     })();

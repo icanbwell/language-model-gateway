@@ -95,6 +95,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
+	@echo Publish Skill to Marketplace: http://localhost:5050/skills/publish
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
 
@@ -129,6 +130,7 @@ up-all: up-open-webui-auth up-mcp-fhir-agent up-mcp-server-gateway up-mcp-inspec
 	@echo Keycloak: http://keycloak:8080 admin/password
 	@echo OIDC debugger: http://localhost:8085
 	@echo Language Model Gateway Auth Test: http://localhost:5050/auth/login
+	@echo Publish Skill to Marketplace: http://localhost:5050/skills/publish
 	@echo OpenWebUI API docs: https://open-webui.localhost//docs
 	@echo Jaeger UI: http://localhost:16686
 

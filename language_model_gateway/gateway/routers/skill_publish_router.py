@@ -7,7 +7,7 @@ from typing import Annotated, Any, Sequence
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, params
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
-from oidcauthlib.auth.auth_manager import AuthManager
+from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
 from simple_container.container.inject import Inject
 from starlette.responses import Response
 
@@ -78,7 +78,9 @@ class SkillPublishRouter:
     async def auth_login(
         self,
         request: Request,
-        auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
+        auth_manager: Annotated[
+            FastAPIAuthManager, Depends(Inject(FastAPIAuthManager))
+        ],
         oauth_provider_registrar: Annotated[
             OAuthProviderRegistrar, Depends(Inject(OAuthProviderRegistrar))
         ],
@@ -241,7 +243,7 @@ class SkillPublishRouter:
     async def _ensure_provider_registered(
         self,
         *,
-        auth_manager: AuthManager,
+        auth_manager: FastAPIAuthManager,
         oauth_provider_registrar: OAuthProviderRegistrar,
     ) -> None:
         """Ensure the skills-publisher OAuth provider is registered."""
