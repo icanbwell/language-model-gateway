@@ -1,7 +1,10 @@
 import logging
+from pathlib import Path
 from typing import override, Any, Dict
 
 from fastapi import Request
+from fastapi.responses import HTMLResponse
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.token_reader import TokenReader
@@ -27,6 +30,12 @@ from language_model_gateway.gateway.utilities.auth_success_page import (
     build_auth_success_page,
 )
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
+_STATIC_DIR = Path(__file__).resolve().parents[2] / "static"
+_CALLBACK_TEMPLATE_ENV = Environment(
+    loader=FileSystemLoader(str(_STATIC_DIR)),
+    autoescape=select_autoescape(enabled_extensions=("html", "xml")),
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["AUTH"])
@@ -67,6 +76,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
         state: str | None = request.query_params.get("state")
+        self._pending_return_url = None
         if state:
             state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
             auth_provider: str | None = state_decoded.get("auth_provider")
@@ -74,6 +84,9 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
                 auth_provider=auth_provider
             ):
                 await self._try_register_from_mcp_json(auth_provider)
+            url_from_state: str | None = state_decoded.get("url")
+            if url_from_state and url_from_state.startswith("/skills/"):
+                self._pending_return_url = url_from_state
         return await super().read_callback_response(request=request)
 
     async def _try_register_from_mcp_json(self, auth_provider: str) -> None:
@@ -151,4 +164,13 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
 
     @override
     async def get_html_response(self, access_token: str | None) -> Response:
+        return_url = getattr(self, "_pending_return_url", None)
+        if return_url and access_token:
+            template = _CALLBACK_TEMPLATE_ENV.get_template("skill_auth_callback.html")
+            html = template.render(
+                access_token=access_token,
+                return_url=return_url,
+            )
+            self._pending_return_url = None
+            return HTMLResponse(content=html)
         return build_auth_success_page(access_token)

@@ -40,6 +40,9 @@ from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.routers.app_login_router import (
     AppLoginRouter,
 )
+from language_model_gateway.gateway.routers.skill_publish_router import (
+    SkillPublishRouter,
+)
 from language_model_gateway.gateway.routers.token_submission_router import (
     TokenSubmissionRouter,
 )
@@ -177,6 +180,7 @@ def create_app() -> FastAPI:
     app1.include_router(AuthRouter(prefix="/auth").get_router())
     app1.include_router(AppLoginRouter(prefix="/app").get_router())
     app1.include_router(TokenSubmissionRouter(prefix="/app").get_router())
+    app1.include_router(SkillPublishRouter(prefix="/skills").get_router())
     # Mount the static directory
     app1.mount(
         "/static",

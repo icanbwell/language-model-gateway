@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Publish Skill</title>
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            max-width: 700px;
+            width: 100%;
+            border: 1px solid #e5e7eb;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            margin-bottom: 1rem;
+            transition: border-color 0.15s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        textarea {
+            min-height: 300px;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .status.success {
+            display: block;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+        }
+
+        .status.error {
+            display: block;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .status.info {
+            display: block;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .auth-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .auth-bar .user {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .auth-bar .logout {
+            color: #6b7280;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .field-row > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="logo">b.well</div>
+<div class="card">
+    <h1>Publish Skill to Marketplace</h1>
+    <p class="subtitle">Paste your SKILL.md content below to save and publish it to the shared skills marketplace.</p>
+
+    <div id="auth-bar" class="auth-bar" style="display:none;">
+        <span class="user" id="auth-user"></span>
+        <span class="logout" onclick="logout()">Sign out</span>
+    </div>
+
+    <form id="skill-form" onsubmit="return handleSubmit(event)">
+        <div class="field-row">
+            <div>
+                <label for="plugin_name">Plugin Name</label>
+                <input type="text" id="plugin_name" name="plugin_name" value="all-employees" required placeholder="e.g., all-employees"/>
+            </div>
+            <div>
+                <label for="skill_name">Skill Name</label>
+                <input type="text" id="skill_name" name="skill_name" required placeholder="e.g., my-custom-skill"/>
+            </div>
+        </div>
+
+        <label for="content">Skill Content (SKILL.md)</label>
+        <textarea id="content" name="content" required placeholder="---
+name: my-custom-skill
+description: Describe what the skill does and when to use it.
+---
+
+# My Custom Skill
+
+Instructions for the skill..."></textarea>
+
+        <div class="actions">
+            <button type="submit" class="btn" id="submit-btn">Save &amp; Publish</button>
+        </div>
+    </form>
+
+    <div id="status" class="status"></div>
+</div>
+
+<script>
+    const AUTH_STORAGE_KEY = 'skills_publisher_token';
+    const AUTH_PROVIDER = 'skills-publisher';
+
+    function getToken() {
+        return sessionStorage.getItem(AUTH_STORAGE_KEY);
+    }
+
+    function setToken(token) {
+        sessionStorage.setItem(AUTH_STORAGE_KEY, token);
+    }
+
+    function clearToken() {
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    }
+
+    function logout() {
+        clearToken();
+        updateAuthBar();
+        showStatus('Signed out. You will need to authenticate again to publish.', 'info');
+    }
+
+    function updateAuthBar() {
+        const bar = document.getElementById('auth-bar');
+        const token = getToken();
+        if (token) {
+            bar.style.display = 'flex';
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                document.getElementById('auth-user').textContent =
+                    'Authenticated as: ' + (payload.sub || payload.email || 'user');
+            } catch {
+                document.getElementById('auth-user').textContent = 'Authenticated';
+            }
+        } else {
+            bar.style.display = 'none';
+        }
+    }
+
+    function showStatus(message, type) {
+        const el = document.getElementById('status');
+        el.textContent = message;
+        el.className = 'status ' + type;
+    }
+
+    function hideStatus() {
+        document.getElementById('status').className = 'status';
+    }
+
+    function redirectToAuth() {
+        const returnUrl = window.location.href;
+        window.location.href = '/skills/auth/login?return_url=' + encodeURIComponent(returnUrl);
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        hideStatus();
+
+        const token = getToken();
+        if (!token) {
+            redirectToAuth();
+            return false;
+        }
+
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Publishing...';
+
+        const pluginName = document.getElementById('plugin_name').value.trim();
+        const skillName = document.getElementById('skill_name').value.trim();
+        const content = document.getElementById('content').value;
+
+        try {
+            const response = await fetch('/skills/publish', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                },
+                body: JSON.stringify({
+                    plugin_name: pluginName,
+                    skill_name: skillName,
+                    content: content,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.status === 401) {
+                clearToken();
+                updateAuthBar();
+                redirectToAuth();
+                return false;
+            }
+
+            if (!response.ok) {
+                showStatus(data.detail || data.error || 'Publish failed.', 'error');
+            } else {
+                showStatus(data.message || 'Skill published successfully!', 'success');
+            }
+        } catch (err) {
+            showStatus('Network error: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Save & Publish';
+        }
+
+        return false;
+    }
+
+    // On page load: check for token from callback or sessionStorage
+    (function init() {
+        // Check if we got a token via the callback redirect (hash fragment)
+        const params = new URLSearchParams(window.location.search);
+        const callbackToken = params.get('token');
+        if (callbackToken) {
+            setToken(callbackToken);
+            // Clean URL
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+        updateAuthBar();
+    })();
+</script>
+</body>
+</html>
