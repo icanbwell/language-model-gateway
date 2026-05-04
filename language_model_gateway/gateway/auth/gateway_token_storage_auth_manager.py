@@ -85,7 +85,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             ):
                 await self._try_register_from_mcp_json(auth_provider)
             url_from_state: str | None = state_decoded.get("url")
-            if url_from_state and url_from_state.startswith("/skills/"):
+            if url_from_state and self._is_safe_redirect(url_from_state, request):
                 self._pending_return_url = url_from_state
         return await super().read_callback_response(request=request)
 
@@ -162,11 +162,26 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             merged.update(pc.mcpServers)
         return McpJsonConfig(mcpServers=merged) if merged else None
 
+    @staticmethod
+    def _is_safe_redirect(url: str, request: Request) -> bool:
+        """Only allow relative paths or URLs pointing back to this server."""
+        if url.startswith("/"):
+            return True
+        from urllib.parse import urlparse
+
+        parsed = urlparse(url)
+        if not parsed.scheme and not parsed.netloc:
+            return True
+        request_host = request.headers.get("host", "")
+        return parsed.netloc == request_host
+
     @override
     async def get_html_response(self, access_token: str | None) -> Response:
         return_url = getattr(self, "_pending_return_url", None)
         if return_url and access_token:
-            template = _CALLBACK_TEMPLATE_ENV.get_template("skill_auth_callback.html")
+            template = _CALLBACK_TEMPLATE_ENV.get_template(
+                "auth_redirect_callback.html"
+            )
             html = template.render(
                 access_token=access_token,
                 return_url=return_url,

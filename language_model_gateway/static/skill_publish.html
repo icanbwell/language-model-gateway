@@ -279,7 +279,7 @@ Instructions for the skill..."></textarea>
     }
 
     function redirectToAuth() {
-        const returnUrl = window.location.href;
+        const returnUrl = window.location.pathname;
         window.location.href = '/skills/auth/login?return_url=' + encodeURIComponent(returnUrl);
     }
 
