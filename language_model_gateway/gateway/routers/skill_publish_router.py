@@ -119,6 +119,8 @@ class SkillPublishRouter:
         plugin_name = body.get("plugin_name")
         skill_name = body.get("skill_name")
         content = body.get("content")
+        branch_name = body.get("branch_name")
+        update_if_exists = body.get("update_if_exists", True)
 
         if not plugin_name or not skill_name or not content:
             raise HTTPException(
@@ -133,16 +135,18 @@ class SkillPublishRouter:
         }
 
         async with httpx.AsyncClient(timeout=30.0) as client:
+            save_arguments: dict[str, Any] = {
+                "plugin_name": plugin_name,
+                "skill_name": skill_name,
+                "content": content,
+                "update_if_exists": update_if_exists,
+            }
             save_result = await self._call_mcp_tool(
                 client=client,
                 url=mcp_url,
                 headers=headers,
                 tool_name="save_skill",
-                arguments={
-                    "plugin_name": plugin_name,
-                    "skill_name": skill_name,
-                    "content": content,
-                },
+                arguments=save_arguments,
             )
 
             if save_result.get("error"):
@@ -151,16 +155,20 @@ class SkillPublishRouter:
                     content={"error": f"save_skill failed: {save_result['error']}"},
                 )
 
+            publish_arguments: dict[str, Any] = {
+                "plugin_name": plugin_name,
+                "skill_name": skill_name,
+                "published": True,
+            }
+            if branch_name:
+                publish_arguments["branch_name"] = branch_name
+
             publish_result = await self._call_mcp_tool(
                 client=client,
                 url=mcp_url,
                 headers=headers,
                 tool_name="publish_skill",
-                arguments={
-                    "plugin_name": plugin_name,
-                    "skill_name": skill_name,
-                    "published": True,
-                },
+                arguments=publish_arguments,
             )
 
             if publish_result.get("error"):

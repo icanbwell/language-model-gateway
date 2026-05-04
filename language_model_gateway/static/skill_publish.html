@@ -198,6 +198,19 @@
             </div>
         </div>
 
+        <div class="field-row">
+            <div>
+                <label for="branch_name">Branch Name (optional)</label>
+                <input type="text" id="branch_name" name="branch_name" placeholder="e.g., skill-publish/my-skill"/>
+            </div>
+            <div style="display:flex; align-items:flex-end; padding-bottom:1rem;">
+                <label style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0; cursor:pointer;">
+                    <input type="checkbox" id="update_if_exists" name="update_if_exists" checked/>
+                    Update if exists
+                </label>
+            </div>
+        </div>
+
         <label for="content">Skill Content (SKILL.md)</label>
         <textarea id="content" name="content" required placeholder="---
 name: my-custom-skill
@@ -287,6 +300,8 @@ Instructions for the skill..."></textarea>
         const pluginName = document.getElementById('plugin_name').value.trim();
         const skillName = document.getElementById('skill_name').value.trim();
         const content = document.getElementById('content').value;
+        const branchName = document.getElementById('branch_name').value.trim() || null;
+        const updateIfExists = document.getElementById('update_if_exists').checked;
 
         try {
             const response = await fetch('/skills/publish', {
@@ -299,6 +314,8 @@ Instructions for the skill..."></textarea>
                     plugin_name: pluginName,
                     skill_name: skillName,
                     content: content,
+                    branch_name: branchName,
+                    update_if_exists: updateIfExists,
                 }),
             });
 

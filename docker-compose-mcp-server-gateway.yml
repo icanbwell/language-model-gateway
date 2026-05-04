@@ -38,7 +38,7 @@ services:
       # ── Skill publishing to marketplace ───────────────────────────
       # Set to "true" to enable publishing skills to the marketplace repo.
       PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "true"
-      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "imran-test"
+      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
       PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # ── Plugin skill collections ──────────────────────────────────
       PLUGIN_SKILLS_COLLECTION: plugin_skills
