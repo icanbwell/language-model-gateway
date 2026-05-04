@@ -24,7 +24,9 @@ services:
       # ── Skills / Marketplace ──────────────────────────────────────
       # Points to the local marketplace directory (mounted via volume below).
       # Without this, the skills server registers zero tools.
-      PLUGINS_MARKETPLACE: "/usr/src/mcp_server_gateway/marketplace"
+#      PLUGINS_MARKETPLACE: "/usr/src/mcp_server_gateway/marketplace"
+      # Uncomment this to read/write to github
+      PLUGINS_MARKETPLACE: "github://icanbwell/bwell-ai-plugin-marketplace/plugins"
       PLUGINS_MARKETPLACE_CACHE_FOLDER: "/usr/src/mcp_server_gateway/.marketplace-git-cache"
       # ── MongoDB for user skill storage ────────────────────────────
       MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=mcp-server-gateway}
