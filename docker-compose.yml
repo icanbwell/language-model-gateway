@@ -24,7 +24,7 @@ services:
       IMAGE_GENERATION_URL: "http://localhost:5050/image_generation"
       MCP_SERVER_GATEWAY_URL: "http://mcp_server_gateway:5000"
 #      MCP_SERVER_GATEWAY_URL: "https://mcp-server-gateway.services.bwell.zone"
-      PLUGINS_MCP_SERVER: "http://mcp_server_gateway:5000/skills/"
+      PLUGINS_MCP_SERVER: "http://mcp_server_gateway:5000/skills-library/"
       AUTH_PLUGIN_NAMES: "all-employees"
       # ====  Uncomment this to read from github ====
 #      GITHUB_CONFIG_REPO_URL: "https://api.github.com/repos/icanbwell/language-model-gateway-configuration/zipball/main"
@@ -197,7 +197,7 @@ services:
     - ~/.aws/:/etc/appuser/.aws/
     # uncomment the below to get the code from local folders instead of pypi
 #    - ../oidc-auth-lib/oidcauthlib:/opt/venv/lib/python3.12/site-packages/oidcauthlib:ro
-#    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
+    - ../language-model-common/languagemodelcommon:/opt/venv/lib/python3.12/site-packages/languagemodelcommon:ro
     healthcheck:
       test: curl --fail -s http://localhost:5000/health || exit 1
       interval: 10s
