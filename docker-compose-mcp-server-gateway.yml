@@ -9,6 +9,7 @@ services:
     volumes:
     - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
     - ./language-model-gateway-configs/marketplace:/usr/src/mcp_server_gateway/marketplace
+#    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
 #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.20
     environment:
       DEBUG_METRICS: 0
@@ -34,9 +35,9 @@ services:
       PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
       # ── Skill publishing to marketplace ───────────────────────────
       # Set to "true" to enable publishing skills to the marketplace repo.
-#      PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "false"
-#      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "main"
-#      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
+      PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "true"
+      PLUGINS_MARKETPLACE_PUBLISH_BRANCH: "imran-test"
+      PLUGINS_MARKETPLACE_PUBLISH_USE_BRANCH: "true"
       # ── Plugin skill collections ──────────────────────────────────
       PLUGIN_SKILLS_COLLECTION: plugin_skills
       PLUGIN_REFERENCES_COLLECTION: plugin_references
