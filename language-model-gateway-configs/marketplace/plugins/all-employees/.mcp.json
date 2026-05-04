@@ -141,13 +141,13 @@
       "url": "${MCP_SERVER_GATEWAY_URL}/sigma/"
     },
     "skills-library": {
-      "description": "Domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks",
+      "description": "Browse and load domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks. Use this to discover available skills (list_skills), load a skill's instructions (load_skill), read skill reference files (read_skill_resource), and run skill scripts (run_skill_script). This is the read-only skills catalog.",
       "displayName": "Skills Library",
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/skills-library/"
     },
     "skills-publisher": {
-      "description": "Publishes skills for sharing with others",
+      "description": "Save and publish skills to the shared skills marketplace so they are available to all users. Use this when you need to create a new skill, update an existing skill, or publish a skill that was authored locally. Requires OAuth authentication to authorize write operations to the skills repository.",
       "displayName": "Skills Publisher",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
