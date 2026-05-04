@@ -2,7 +2,7 @@ import logging
 import os
 from enum import Enum
 from pathlib import Path
-from typing import Annotated, Any, Sequence
+from typing import Annotated, Sequence
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, params
@@ -108,8 +108,8 @@ class SkillPublishRouter:
 
         return RedirectResponse(url, status_code=302)
 
-    async def publish_skill(self, request: Request) -> JSONResponse:
-        """Proxy save_skill and publish_skill MCP tool calls."""
+    async def publish_skill(self, request: Request) -> Response:
+        """Proxy the publish request to the mcp-server-gateway REST API."""
         auth_header = request.headers.get("Authorization")
         if not auth_header or not auth_header.startswith("Bearer "):
             raise HTTPException(
@@ -118,127 +118,25 @@ class SkillPublishRouter:
             )
 
         body = await request.json()
-        plugin_name = body.get("plugin_name")
-        skill_name = body.get("skill_name")
-        content = body.get("content")
-        branch_name = body.get("branch_name")
-        update_if_exists = body.get("update_if_exists", True)
-
-        if not plugin_name or not skill_name or not content:
-            raise HTTPException(
-                status_code=400,
-                detail="plugin_name, skill_name, and content are required",
-            )
-
-        mcp_url = f"{self._mcp_server_gateway_url}/skills-publisher/mcp"
+        rest_url = f"{self._mcp_server_gateway_url}/api/skills/publish"
         headers = {
             "Authorization": auth_header,
             "Content-Type": "application/json",
         }
 
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            save_arguments: dict[str, Any] = {
-                "plugin_name": plugin_name,
-                "skill_name": skill_name,
-                "content": content,
-                "update_if_exists": update_if_exists,
-            }
-            save_result = await self._call_mcp_tool(
-                client=client,
-                url=mcp_url,
-                headers=headers,
-                tool_name="save_skill",
-                arguments=save_arguments,
-            )
-
-            if save_result.get("error"):
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            try:
+                response = await client.post(rest_url, json=body, headers=headers)
+            except httpx.HTTPError as exc:
                 return JSONResponse(
-                    status_code=500,
-                    content={"error": f"save_skill failed: {save_result['error']}"},
-                )
-
-            publish_arguments: dict[str, Any] = {
-                "plugin_name": plugin_name,
-                "skill_name": skill_name,
-                "published": True,
-            }
-            if branch_name:
-                publish_arguments["branch_name"] = branch_name
-
-            publish_result = await self._call_mcp_tool(
-                client=client,
-                url=mcp_url,
-                headers=headers,
-                tool_name="publish_skill",
-                arguments=publish_arguments,
-            )
-
-            if publish_result.get("error"):
-                return JSONResponse(
-                    status_code=500,
-                    content={
-                        "error": f"publish_skill failed: {publish_result['error']}",
-                        "save_result": save_result.get("message"),
-                    },
+                    status_code=502,
+                    content={"error": f"Network error: {exc}"},
                 )
 
         return JSONResponse(
-            content={
-                "message": f"Skill '{skill_name}' saved and published successfully.",
-                "save_result": save_result.get("message"),
-                "publish_result": publish_result.get("message"),
-            }
+            status_code=response.status_code,
+            content=response.json(),
         )
-
-    @staticmethod
-    async def _call_mcp_tool(
-        *,
-        client: httpx.AsyncClient,
-        url: str,
-        headers: dict[str, str],
-        tool_name: str,
-        arguments: dict[str, Any],
-    ) -> dict[str, Any]:
-        """Call an MCP tool via JSON-RPC over HTTP."""
-        payload = {
-            "jsonrpc": "2.0",
-            "id": 1,
-            "method": "tools/call",
-            "params": {
-                "name": tool_name,
-                "arguments": arguments,
-            },
-        }
-
-        try:
-            response = await client.post(url, json=payload, headers=headers)
-
-            if response.status_code == 401:
-                raise HTTPException(
-                    status_code=401,
-                    detail="Authentication expired. Please sign in again.",
-                )
-
-            if response.status_code != 200:
-                return {"error": f"HTTP {response.status_code}: {response.text}"}
-
-            data = response.json()
-
-            if "error" in data:
-                return {"error": data["error"].get("message", str(data["error"]))}
-
-            result = data.get("result", {})
-            content_list = result.get("content", [])
-            if content_list:
-                text_parts = [
-                    c.get("text", "") for c in content_list if c.get("type") == "text"
-                ]
-                return {"message": "\n".join(text_parts)}
-
-            return {"message": str(result)}
-
-        except httpx.HTTPError as exc:
-            return {"error": f"Network error: {exc}"}
 
     async def _ensure_provider_registered(
         self,
