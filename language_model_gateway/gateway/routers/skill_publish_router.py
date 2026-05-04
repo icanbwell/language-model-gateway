@@ -12,7 +12,7 @@ from simple_container.container.inject import Inject
 from starlette.responses import Response
 
 from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
-from languagemodelcommon.configs.schemas.mcp_json_schema import McpOAuthConfig
+from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 logger = logging.getLogger(__name__)
