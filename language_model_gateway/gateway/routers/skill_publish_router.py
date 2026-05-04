@@ -133,9 +133,14 @@ class SkillPublishRouter:
                     content={"error": f"Network error: {exc}"},
                 )
 
+        try:
+            content = response.json()
+        except Exception:
+            content = {"error": response.text or f"HTTP {response.status_code}"}
+
         return JSONResponse(
             status_code=response.status_code,
-            content=response.json(),
+            content=content,
         )
 
     async def _ensure_provider_registered(
