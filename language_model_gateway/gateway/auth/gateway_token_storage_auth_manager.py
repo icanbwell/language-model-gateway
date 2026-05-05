@@ -5,7 +5,7 @@ from typing import override, Any, Dict
 
 from fastapi import Request
 from fastapi.responses import HTMLResponse
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader
 from oidcauthlib.auth.auth_helper import AuthHelper
 from oidcauthlib.auth.config.auth_config_reader import AuthConfigReader
 from oidcauthlib.auth.token_reader import TokenReader
