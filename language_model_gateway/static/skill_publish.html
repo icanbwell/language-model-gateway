@@ -54,7 +54,7 @@
             font-weight: 500;
         }
 
-        input[type="text"], textarea {
+        input[type="text"], textarea, select {
             width: 100%;
             padding: 0.625rem 0.75rem;
             border: 1px solid #d1d5db;
@@ -65,7 +65,7 @@
             transition: border-color 0.15s;
         }
 
-        input[type="text"]:focus, textarea:focus {
+        input[type="text"]:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #1e3a8a;
             box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
@@ -189,19 +189,10 @@
     <form id="skill-form" onsubmit="return handleSubmit(event)">
         <div class="field-row">
             <div>
-                <label for="plugin_name">Plugin Name</label>
-                <input type="text" id="plugin_name" name="plugin_name" value="all-employees" required placeholder="e.g., all-employees"/>
-            </div>
-            <div>
-                <label for="skill_name">Skill Name</label>
-                <input type="text" id="skill_name" name="skill_name" required placeholder="e.g., my-custom-skill"/>
-            </div>
-        </div>
-
-        <div class="field-row">
-            <div>
-                <label for="branch_name">Branch Name (optional)</label>
-                <input type="text" id="branch_name" name="branch_name" placeholder="e.g., skill-publish/my-skill"/>
+                <label for="plugin_name">Audience</label>
+                <select id="plugin_name" name="plugin_name" required>
+                    <option value="all_employees">All Employees</option>
+                </select>
             </div>
             <div style="display:flex; align-items:flex-end; padding-bottom:1rem;">
                 <label style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0; cursor:pointer;">
@@ -297,10 +288,8 @@ Instructions for the skill..."></textarea>
         btn.disabled = true;
         btn.textContent = 'Publishing...';
 
-        const pluginName = document.getElementById('plugin_name').value.trim();
-        const skillName = document.getElementById('skill_name').value.trim();
+        const pluginName = document.getElementById('plugin_name').value;
         const content = document.getElementById('content').value;
-        const branchName = document.getElementById('branch_name').value.trim() || null;
         const updateIfExists = document.getElementById('update_if_exists').checked;
 
         try {
@@ -312,9 +301,7 @@ Instructions for the skill..."></textarea>
                 },
                 body: JSON.stringify({
                     plugin_name: pluginName,
-                    skill_name: skillName,
                     content: content,
-                    branch_name: branchName,
                     update_if_exists: updateIfExists,
                 }),
             });
