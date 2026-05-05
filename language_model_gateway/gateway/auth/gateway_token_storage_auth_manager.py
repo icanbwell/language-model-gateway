@@ -1,3 +1,4 @@
+import contextvars
 import logging
 from pathlib import Path
 from typing import override, Any, Dict
@@ -40,6 +41,10 @@ _CALLBACK_TEMPLATE_ENV = Environment(
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["AUTH"])
 
+_pending_return_url_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
+    "_pending_return_url", default=None
+)
+
 
 class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
     """Gateway-specific TokenStorageAuthManager that renders the HTML success page.
@@ -76,7 +81,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
         state: str | None = request.query_params.get("state")
-        self._pending_return_url = None
+        _pending_return_url_var.set(None)
         if state:
             state_decoded: Dict[str, Any] = AuthHelper.decode_state(state)
             auth_provider: str | None = state_decoded.get("auth_provider")
@@ -86,7 +91,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
                 await self._try_register_from_mcp_json(auth_provider)
             url_from_state: str | None = state_decoded.get("url")
             if url_from_state and self._is_safe_redirect(url_from_state, request):
-                self._pending_return_url = url_from_state
+                _pending_return_url_var.set(url_from_state)
         return await super().read_callback_response(request=request)
 
     async def _try_register_from_mcp_json(self, auth_provider: str) -> None:
@@ -177,7 +182,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
 
     @override
     async def get_html_response(self, access_token: str | None) -> Response:
-        return_url = getattr(self, "_pending_return_url", None)
+        return_url = _pending_return_url_var.get()
         if return_url and access_token:
             template = _CALLBACK_TEMPLATE_ENV.get_template(
                 "auth_redirect_callback.html"
@@ -186,6 +191,6 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
                 access_token=access_token,
                 return_url=return_url,
             )
-            self._pending_return_url = None
+            _pending_return_url_var.set(None)
             return HTMLResponse(content=html)
         return build_auth_success_page(access_token)
