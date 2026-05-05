@@ -10,7 +10,7 @@ metadata:
   scope: Agent skill creation, refinement, and optimization
 ---
 
-# Skill Creator
+# b.well Skill Library
 
 ## Skill Card
 
@@ -323,7 +323,7 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
 **Step-by-step validation process:**
 
 1. **Call `run_skill_script`** with:
-   - `skill_name`: `"skill-creator"`
+   - `skill_name`: `"bwell-skill-library"`
    - `script_name`: `"validate.py"`
    - `arguments`: A JSON object with field `"skill_content"` containing the complete SKILL.md text
 
@@ -344,7 +344,7 @@ You MUST validate the skill using `run_skill_script` before presenting it to the
 **Example tool call:**
 ```
 run_skill_script(
-  skill_name="skill-creator",
+  skill_name="bwell-skill-library",
   script_name="validate.py",
   arguments={
     "skill_content": "---\nname: example-skill\n...[full skill content]..."
