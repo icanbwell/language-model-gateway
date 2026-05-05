@@ -35,7 +35,7 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 _STATIC_DIR = Path(__file__).resolve().parents[2] / "static"
 _CALLBACK_TEMPLATE_ENV = Environment(
     loader=FileSystemLoader(str(_STATIC_DIR)),
-    autoescape=select_autoescape(enabled_extensions=("html", "xml")),
+    autoescape=True,
 )
 
 logger = logging.getLogger(__name__)
