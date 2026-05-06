@@ -1,4 +1,8 @@
 services:
+  language-model-gateway:
+    environment:
+      PLUGINS_MCP_SERVER: "http://mcp_server_gateway:5000/skills-library/"
+
   mcp_server_gateway:
     depends_on:
       keycloak-init:
