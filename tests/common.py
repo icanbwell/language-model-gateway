@@ -1,10 +1,6 @@
 import uuid
 from typing import override
 
-from langchain_ai_skills_framework.loaders.null_plugin_skill_store import (
-    NullPluginSkillStore,
-)
-from langchain_ai_skills_framework.loaders.plugin_skill_store import PluginSkillStore
 from simple_container.container.simple_container import SimpleContainer
 from oidcauthlib.utilities.environment.oidc_environment_variables import (
     OidcEnvironmentVariables,
@@ -43,10 +39,5 @@ def create_test_container() -> SimpleContainer:
     container.singleton(
         LanguageModelGatewayEnvironmentVariables,
         lambda c: test_language_model_gateway_environment_variables,
-    )
-    # Use NullPluginSkillStore to avoid requiring MongoDB during tests
-    container.singleton(
-        PluginSkillStore,
-        lambda c: NullPluginSkillStore(),
     )
     return container

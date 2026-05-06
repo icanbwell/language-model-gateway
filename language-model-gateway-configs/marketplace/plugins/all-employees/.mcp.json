@@ -1,5 +1,4 @@
 {
-  "$schema": "./mcp_config_schema.json",
   "mcpServers": {
     "atlassian": {
       "description": "Search and manage Confluence pages and Jira issues for project documentation and task tracking",
@@ -140,6 +139,34 @@
       },
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/sigma/"
+    },
+    "script-runner": {
+      "description": "Execute Python scripts in a sandboxed environment. Use this when you need to run data analysis, transformations, or other Python code on behalf of the user.",
+      "displayName": "Script Runner",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/script-runner/"
+    },
+    "skills-library": {
+      "description": "Browse and load domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks. Use this to discover available skills (list_skills), load a skill's instructions (load_skill), read skill reference files (read_skill_resource), and run skill scripts (run_skill_script). This is the read-only skills catalog.",
+      "displayName": "Skills Library",
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills-library/"
+    },
+    "skills-publisher": {
+      "description": "Save and publish skills to the shared skills marketplace so they are available to all users. Use this when you need to create a new skill, update an existing skill, or publish a skill that was authored locally. Requires OAuth authentication to authorize write operations to the skills repository.",
+      "displayName": "Skills Publisher",
+      "oauth": {
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
+      },
+      "type": "http",
+      "url": "${MCP_SERVER_GATEWAY_URL}/skills-publisher/"
     },
     "url-to-markdown": {
       "description": "Fetch, scrape, and extract content from web pages and URLs, converting to clean markdown",

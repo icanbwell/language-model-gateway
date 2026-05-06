@@ -70,8 +70,8 @@ dependencies = [
     "prometheus-fastapi-instrumentator>=7.1.0",
     "gunicorn>=23.0.0",
     "py-key-value-aio>=0.4.4",
-    "langchain-ai-skills-framework>=1.0.60",
-    "language-model-common>=2.0.30",
+    "language-model-common>=2.0.35",
+    "jinja2>=3.1.6"
 ]
 
 [dependency-groups]

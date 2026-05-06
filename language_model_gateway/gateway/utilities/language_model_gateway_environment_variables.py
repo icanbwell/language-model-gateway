@@ -31,9 +31,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
 
     @property
     def system_commands(self) -> list[str]:
-        system_commands: str | None = os.environ.get(
-            "SYSTEM_COMMANDS", "clear tokens,reload_plugins"
-        )
+        system_commands: str | None = os.environ.get("SYSTEM_COMMANDS", "clear tokens")
         return system_commands.split(",") if system_commands else []
 
     @property
@@ -62,10 +60,6 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         raw = os.environ.get("ALLOWED_ORIGINS", "")
         origins = [o.strip() for o in raw.split(",") if o.strip()]
         return origins if origins else ["*"]
-
-    @property
-    def enable_code_interpreter(self) -> bool:
-        return self.str2bool(os.environ.get("ENABLE_CODE_INTERPRETER", "true"))
 
     @property
     def help_keywords(self) -> list[str]:
