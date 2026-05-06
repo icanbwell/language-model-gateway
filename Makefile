@@ -76,6 +76,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	docker compose \
 	-f docker-compose-keycloak.yml \
 	-f docker-compose-mongo.yml \
+	-f docker-compose.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
@@ -124,6 +125,7 @@ up-mcp-fhir-agent:
 up-mcp-server-gateway:
 	docker compose \
 	-f docker-compose-keycloak.yml \
+	-f docker-compose.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1
