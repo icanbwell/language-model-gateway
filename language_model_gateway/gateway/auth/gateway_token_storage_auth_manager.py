@@ -65,7 +65,6 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         well_known_configuration_manager: WellKnownConfigurationManager,
         oauth_provider_registrar: OAuthProviderRegistrar,
         mcp_json_fetcher: McpJsonFetcher | None = None,
-        plugin_names: list[str] | None = None,
     ) -> None:
         super().__init__(
             environment_variables=environment_variables,
@@ -76,7 +75,6 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         )
         self._oauth_provider_registrar = oauth_provider_registrar
         self._mcp_json_fetcher = mcp_json_fetcher
-        self._plugin_names = plugin_names or []
 
     @override
     async def read_callback_response(self, *, request: Request) -> Response:
@@ -146,26 +144,11 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         )
 
     async def _load_mcp_config(self) -> McpJsonConfig | None:
-        """Load MCP config by merging all plugin configs from the fetcher.
-
-        The auth manager needs to search across all plugin MCP configs
-        to find the OAuth provider that matches the callback state.
-        Since we don't know which plugin the auth provider belongs to,
-        we fetch configs for all known plugins and merge them.
-        """
-        if not self._mcp_json_fetcher or not self._plugin_names:
+        """Load MCP config from all plugins via the skills server."""
+        if not self._mcp_json_fetcher:
             return None
 
-        plugin_configs = await self._mcp_json_fetcher.fetch_plugins_async(
-            self._plugin_names
-        )
-        if not plugin_configs:
-            return None
-
-        merged: dict[str, Any] = {}
-        for pc in plugin_configs.values():
-            merged.update(pc.mcpServers)
-        return McpJsonConfig(mcpServers=merged) if merged else None
+        return await self._mcp_json_fetcher.fetch_all_async()
 
     @staticmethod
     def _is_safe_redirect(url: str, request: Request) -> bool:

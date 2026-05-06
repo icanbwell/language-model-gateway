@@ -145,9 +145,6 @@ class LanguageModelGatewayContainerFactory:
                 ),
                 oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
                 mcp_json_fetcher=c.resolve(McpJsonFetcher),
-                plugin_names=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ).auth_plugin_names,
             ),
         )
 

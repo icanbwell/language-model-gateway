@@ -33,7 +33,6 @@ def _build_manager(
     register_result: AuthConfig | None = None,
     register_side_effect: Exception | None = None,
     mcp_json_return: McpJsonConfig | None = None,
-    plugin_names: list[str] | None = None,
 ) -> GatewayTokenStorageAuthManager:
     """Build a GatewayTokenStorageAuthManager with mocked dependencies."""
     env = MagicMock(spec=AbstractEnvironmentVariables)
@@ -63,12 +62,7 @@ def _build_manager(
         )
 
     fetcher = MagicMock(spec=McpJsonFetcher)
-    if mcp_json_return:
-        fetcher.fetch_plugins_async = AsyncMock(
-            return_value={"test-plugin": mcp_json_return}
-        )
-    else:
-        fetcher.fetch_plugins_async = AsyncMock(return_value={})
+    fetcher.fetch_all_async = AsyncMock(return_value=mcp_json_return)
 
     manager = GatewayTokenStorageAuthManager(
         environment_variables=env,
@@ -78,7 +72,6 @@ def _build_manager(
         well_known_configuration_manager=well_known_mgr,
         oauth_provider_registrar=registrar,
         mcp_json_fetcher=fetcher,
-        plugin_names=plugin_names or ["test-plugin"],
     )
     return manager
 
