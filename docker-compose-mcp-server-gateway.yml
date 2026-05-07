@@ -39,6 +39,7 @@ services:
       MONGO_DB_PASSWORD: ${LANGUAGE_MODEL_GATEWAY_MONGO_PASSWORD:-test123}  # pragma: allowlist secret
 #      PLUGINS_MARKETPLACE_INCLUDE: "all-employees"
       PLUGINS_MARKETPLACE_EXCLUDE: "software-developers"
+      PLUGINS_DEFAULT_PUBLISH_PLUGIN_NAME: "all-employees"
       # ── Skill publishing to marketplace ───────────────────────────
       # Set to "true" to enable publishing skills to the marketplace repo.
       PLUGINS_MARKETPLACE_PUBLISH_ENABLED: "true"
