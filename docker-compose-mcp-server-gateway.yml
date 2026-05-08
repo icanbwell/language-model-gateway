@@ -18,6 +18,7 @@ services:
     environment:
       DEBUG_METRICS: 0
       LOG_LEVEL: INFO
+      SERVER_BASE_URL: "http://mcp_server_gateway:5000"
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration,https://icanbwell.okta.com/.well-known/openid-configuration"
       # oidcauthlib per-provider config for pass-through token validation
