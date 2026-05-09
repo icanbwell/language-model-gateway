@@ -10,6 +10,9 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
 )
 from oidcauthlib.auth.models.auth import AuthInformation
+from language_model_gateway.gateway.auth.mcp_auth_response_builder import (
+    McpAuthResponseBuilder,
+)
 from openai import AsyncOpenAI, AsyncStream, OpenAIError
 from openai.types import CompletionUsage
 from openai.types.chat import (
@@ -59,6 +62,7 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         self,
         *,
         pass_through_token_manager: PassThroughTokenManager,
+        mcp_auth_response_builder: McpAuthResponseBuilder,
         environment_variables: LanguageModelGatewayEnvironmentVariables,
     ) -> None:
         self.pass_through_token_manager: PassThroughTokenManager = (
@@ -69,6 +73,16 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
         if not isinstance(self.pass_through_token_manager, PassThroughTokenManager):
             raise TypeError(
                 "pass_through_token_manager must be an instance of PassThroughTokenManager"
+            )
+
+        self.mcp_auth_response_builder: McpAuthResponseBuilder = (
+            mcp_auth_response_builder
+        )
+        if self.mcp_auth_response_builder is None:
+            raise ValueError("mcp_auth_response_builder must not be None")
+        if not isinstance(self.mcp_auth_response_builder, McpAuthResponseBuilder):
+            raise TypeError(
+                "mcp_auth_response_builder must be an instance of McpAuthResponseBuilder"
             )
 
         self.environment_variables = environment_variables
@@ -131,12 +145,15 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     authentication_config=model_config.auth_config,
                 )
             except AuthorizationNeededException as e:
+                auth_messages = (
+                    self.mcp_auth_response_builder.from_authorization_needed(e)
+                )
                 return self.write_response(
                     chat_request_wrapper=chat_request_wrapper,
                     response_messages=[
-                        ChatCompletionMessage(role="assistant", content=line.strip())
-                        for line in e.message.splitlines()
-                        if line.strip()
+                        ChatCompletionMessage(role="assistant", content=str(m.content))
+                        for m in auth_messages
+                        if m.content
                     ],
                 )
             except Exception as e:

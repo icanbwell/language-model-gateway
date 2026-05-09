@@ -47,6 +47,9 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
 from language_model_gateway.gateway.auth.gateway_token_storage_auth_manager import (
     GatewayTokenStorageAuthManager,
 )
+from language_model_gateway.gateway.auth.mcp_auth_response_builder import (
+    McpAuthResponseBuilder,
+)
 from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
@@ -147,6 +150,8 @@ class LanguageModelGatewayContainerFactory:
                 mcp_json_fetcher=c.resolve(McpJsonFetcher),
             ),
         )
+
+        container.singleton(McpAuthResponseBuilder, lambda c: McpAuthResponseBuilder())
 
         container.singleton(HttpClientFactory, lambda c: HttpClientFactory())
 
@@ -376,6 +381,7 @@ class LanguageModelGatewayContainerFactory:
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
                 system_command_manager=c.resolve(SystemCommandManager),
+                mcp_auth_response_builder=c.resolve(McpAuthResponseBuilder),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
@@ -419,6 +425,7 @@ class LanguageModelGatewayContainerFactory:
             PassThroughChatCompletionsProvider,
             lambda c: PassThroughChatCompletionsProvider(
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
+                mcp_auth_response_builder=c.resolve(McpAuthResponseBuilder),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
