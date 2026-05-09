@@ -230,9 +230,10 @@ class ChatCompletionManager:
             return self.write_response(
                 request_id=request_id,
                 chat_request_wrapper=chat_request_wrapper,
-                response_messages=self.mcp_auth_response_builder.from_authorization_needed(
-                    e
-                ),
+                response_messages=[
+                    AIMessage(content=c)
+                    for c in self.mcp_auth_response_builder.from_authorization_needed(e)
+                ],
             )
         except ExceptionGroup as e:
             first_exception = ExceptionLogger.get_first_exception(e)
@@ -248,17 +249,23 @@ class ChatCompletionManager:
                 return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
-                    response_messages=self.mcp_auth_response_builder.from_mcp_tool_unauthorized(
-                        first_exception
-                    ),
+                    response_messages=[
+                        AIMessage(content=c)
+                        for c in self.mcp_auth_response_builder.from_mcp_tool_unauthorized(
+                            first_exception
+                        )
+                    ],
                 )
             elif isinstance(first_exception, AuthorizationNeededException):
                 return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
-                    response_messages=self.mcp_auth_response_builder.from_authorization_needed(
-                        first_exception
-                    ),
+                    response_messages=[
+                        AIMessage(content=c)
+                        for c in self.mcp_auth_response_builder.from_authorization_needed(
+                            first_exception
+                        )
+                    ],
                 )
             logger.error(
                 "ExceptionGroup in chat completion: %s",

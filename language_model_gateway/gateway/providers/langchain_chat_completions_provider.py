@@ -175,7 +175,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         )
 
         categories = catalog.get_categories()
-        if catalog is not None:
+        if categories:
             resolver = self.mcp_tool_provider.create_tool_resolver(
                 headers=headers,
                 auth_interceptor=auth_interceptor,

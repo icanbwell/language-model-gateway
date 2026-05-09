@@ -2,8 +2,7 @@ import os
 
 from fastapi import Request
 from oidcauthlib.auth.fastapi_auth_manager import FastAPIAuthManager
-from starlette.responses import Response
-from starlette.responses import RedirectResponse
+from starlette.responses import RedirectResponse, Response
 
 from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.configs.schemas.config_schema import McpOAuthConfig

@@ -2,6 +2,7 @@ import contextvars
 import logging
 from pathlib import Path
 from typing import override, Any, Dict
+from urllib.parse import urlparse
 
 from fastapi import Request
 from fastapi.responses import HTMLResponse
@@ -155,8 +156,6 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         """Only allow relative paths or URLs pointing back to this server."""
         if url.startswith("/"):
             return True
-        from urllib.parse import urlparse
-
         parsed = urlparse(url)
         if not parsed.scheme and not parsed.netloc:
             return True

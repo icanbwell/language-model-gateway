@@ -280,7 +280,7 @@ class ChatCompletionsRouter:
             if isinstance(first, AuthorizationNeededException):
                 messages = mcp_auth_response_builder.from_authorization_needed(first)
                 if messages:
-                    detail = "\n".join(str(m.content) for m in messages if m.content)
+                    detail = "\n".join(messages)
             raise HTTPException(status_code=401, detail=detail)
         except* ConnectionError as e:
             first = ExceptionLogger.get_first_exception(e)

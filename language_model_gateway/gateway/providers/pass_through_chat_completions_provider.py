@@ -145,15 +145,13 @@ class PassThroughChatCompletionsProvider(BaseChatCompletionsProvider):
                     authentication_config=model_config.auth_config,
                 )
             except AuthorizationNeededException as e:
-                auth_messages = (
-                    self.mcp_auth_response_builder.from_authorization_needed(e)
-                )
                 return self.write_response(
                     chat_request_wrapper=chat_request_wrapper,
                     response_messages=[
-                        ChatCompletionMessage(role="assistant", content=str(m.content))
-                        for m in auth_messages
-                        if m.content
+                        ChatCompletionMessage(role="assistant", content=c)
+                        for c in self.mcp_auth_response_builder.from_authorization_needed(
+                            e
+                        )
                     ],
                 )
             except Exception as e:

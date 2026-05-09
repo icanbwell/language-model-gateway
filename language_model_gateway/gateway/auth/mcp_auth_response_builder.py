@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-from typing import List
-
 from httpx import Headers
-from langchain_core.messages import AnyMessage, AIMessage
 
 from languagemodelcommon.mcp.auth.mcp_authorization_helper import (
     McpAuthorizationHelper,
@@ -17,26 +14,22 @@ from oidcauthlib.auth.exceptions.authorization_needed_exception import (
 
 
 class McpAuthResponseBuilder:
-    """Converts MCP auth exceptions into user-facing AI response messages.
+    """Converts MCP auth exceptions into user-facing response content strings.
 
-    Centralizes the exception-to-chat-message translation that was previously
+    Centralizes the exception-to-message translation that was previously
     duplicated across ChatCompletionManager and PassThroughChatCompletionsProvider.
     """
 
     def from_authorization_needed(
         self,
         exception: AuthorizationNeededException,
-    ) -> List[AnyMessage]:
-        return [
-            AIMessage(content=line.strip())
-            for line in exception.message.splitlines()
-            if line.strip()
-        ]
+    ) -> list[str]:
+        return [line.strip() for line in exception.message.splitlines() if line.strip()]
 
     def from_mcp_tool_unauthorized(
         self,
         exception: McpToolUnauthorizedException,
-    ) -> List[AnyMessage]:
+    ) -> list[str]:
         resource_metadata_url: str | None = (
             McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
                 headers=Headers(exception.headers)
@@ -48,4 +41,4 @@ class McpAuthResponseBuilder:
             resource_metadata_url=resource_metadata_url,
             tool_url=exception.url,
         )
-        return [AIMessage(content=content)]
+        return [content]
