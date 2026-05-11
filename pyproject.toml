@@ -63,6 +63,7 @@ dependencies = [
     "opentelemetry-instrumentation-pymongo>=0.60b0",
     "opentelemetry-instrumentation-wsgi>=0.60b0",
     "opentelemetry-instrumentation-langchain>=0.50.1",
+    "wrapt>=1.14,<2.0",
     "opentelemetry-instrumentation-redis>=0.60b0",
     "opentelemetry-instrumentation-bedrock>=0.50.1",
     "opentelemetry-instrumentation-openai-v2>=2.3b0",
