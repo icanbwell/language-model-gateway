@@ -10,9 +10,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     PromptConfig,
     ModelParameterConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -37,10 +35,8 @@ async def test_chat_prompt_helper(
             ),
         )
 
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="prompt_helper",
@@ -68,7 +64,7 @@ async def test_chat_prompt_helper(
                 #     )
                 # ]
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server
@@ -114,10 +110,8 @@ async def test_chat_prompt_helper_streaming(
             ),
         )
 
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="prompt_helper",
@@ -145,7 +139,7 @@ async def test_chat_prompt_helper_streaming(
                 #     )
                 # ]
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server

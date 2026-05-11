@@ -9,9 +9,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -37,10 +35,8 @@ async def test_chat_open_ai(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="chat_gpt",
@@ -55,11 +51,8 @@ async def test_chat_open_ai(
                     AgentConfig(name="image_generator_openai"),
                 ],
             )
-        ]
+        ],
     )
-    # Test health endpoint
-    # response = await async_client.get("/health")
-    # assert response.status_code == 200
 
     # init client and connect to localhost server
     client = AsyncOpenAI(
@@ -105,10 +98,8 @@ async def test_chat_completions_with_chat_history(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="chat_gpt",
@@ -123,7 +114,7 @@ async def test_chat_completions_with_chat_history(
                     AgentConfig(name="image_generator_openai"),
                 ],
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server

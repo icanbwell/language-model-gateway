@@ -10,9 +10,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     AgentConfig,
     PromptConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -40,10 +38,8 @@ async def test_chat_anthropic_with_pdf_scraping(
         print(f"Using Model Factory After: {type(model_factory)}")
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="parse_web_page",
@@ -57,7 +53,7 @@ async def test_chat_anthropic_with_pdf_scraping(
                 system_prompts=[
                     PromptConfig(
                         role="system",
-                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
+                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don’t get the answer then use the scraping_bee_web_scraper tool.",
                     )
                 ],
                 tools=[
@@ -66,7 +62,7 @@ async def test_chat_anthropic_with_pdf_scraping(
                     AgentConfig(name="pdf_text_extractor"),
                 ],
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server
@@ -111,10 +107,8 @@ async def test_chat_anthropic_with_pdf_ocr_scraping(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="parse_web_page",
@@ -128,7 +122,7 @@ async def test_chat_anthropic_with_pdf_ocr_scraping(
                 system_prompts=[
                     PromptConfig(
                         role="system",
-                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don't get the answer then use the scraping_bee_web_scraper tool.",
+                        content="You are an assistant that parses web pages.  Let’s think step by step and take your time to get the right answer.  Try the get_web_page tool first and if you don’t get the answer then use the scraping_bee_web_scraper tool.",
                     )
                 ],
                 tools=[
@@ -137,7 +131,7 @@ async def test_chat_anthropic_with_pdf_ocr_scraping(
                     AgentConfig(name="pdf_text_extractor"),
                 ],
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server

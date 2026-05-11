@@ -10,9 +10,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.models.model_factory import ModelFactory
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
@@ -40,10 +38,8 @@ async def test_chat_completions_with_web_search(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="google_search",
@@ -59,7 +55,7 @@ async def test_chat_completions_with_web_search(
                     AgentConfig(name="get_web_page"),
                 ],
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server
