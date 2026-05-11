@@ -22,16 +22,9 @@ services:
       # These define the connection to the identity provider for JWT validation
       AUTH_WELL_KNOWN_URI: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration,https://icanbwell.okta.com/.well-known/openid-configuration"
       # oidcauthlib per-provider config for pass-through token validation
-      AUTH_PROVIDERS: "CLIENT1"
-      AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
-      AUTH_AUDIENCE_CLIENT1: "client1"
-      AUTH_FRIENDLY_NAME_CLIENT1: "Keycloak BWell Realm"
-      AUTH_CLIENT_ID_CLIENT1: "bwell-client-id"
-      AUTH_CLIENT_SECRET_CLIENT1: "bwell-secret"
-      AUTH_WELL_KNOWN_URI_CLIENT1: "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration"
-      AUTH_SCOPE_CLIENT1: "openid email profile"
-      AUTH_ALLOW_HTTP_URLS: "true"
-
+      AUTH_PROVIDERS: "OKTA"
+      AUTH_WELL_KNOWN_URI_OKTA: "https://icanbwell.okta.com/.well-known/openid-configuration"
+      AUTH_AUDIENCE_OKTA: "https://icanbwell.okta.com"
       PSS_BASE_URL: "https://provider-search.dev.bwell.zone/sdk/graphql"
       # ── Skills / Marketplace ──────────────────────────────────────
       # Points to the local marketplace directory (mounted via volume below).

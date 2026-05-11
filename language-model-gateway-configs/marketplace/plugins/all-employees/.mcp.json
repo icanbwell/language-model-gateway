@@ -155,9 +155,9 @@
       "description": "Browse and load domain-specific skills with specialized instructions, resources, and scripts for healthcare, development, and operational tasks. Use this to discover available skills (list_skills), load a skill's instructions (load_skill), read skill reference files (read_skill_resource), and run skill scripts (run_skill_script). This is the read-only skills catalog.",
       "displayName": "Skills Library",
       "oauth": {
-        "authServerMetadataUrl": "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
-        "clientId": "bwell-client-id",
-        "displayName": "Keycloak"
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oa11g45c90Fqbgzz698",
+        "displayName": "Okta b.well"
       },
       "type": "http",
       "url": "${MCP_SERVER_GATEWAY_URL}/skills-library/"
