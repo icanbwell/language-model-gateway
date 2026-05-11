@@ -55,9 +55,11 @@ class TestFromMcpToolUnauthorized:
             message="Unauthorized",
             url="https://mcp.example.com/tool",
             status_code=401,
-            headers=Headers({
-                "WWW-Authenticate": 'Bearer resource_metadata="https://mcp.example.com/.well-known/oauth-protected-resource"'
-            }),
+            headers=Headers(
+                {
+                    "WWW-Authenticate": 'Bearer resource_metadata="https://mcp.example.com/.well-known/oauth-protected-resource"'
+                }
+            ),
         )
         with patch(
             "language_model_gateway.gateway.auth.mcp_auth_response_builder.McpAuthorizationHelper"
