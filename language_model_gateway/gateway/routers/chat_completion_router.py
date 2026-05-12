@@ -18,6 +18,9 @@ from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.models.token import Token
 from oidcauthlib.auth.token_reader import TokenReader
+from language_model_gateway.gateway.auth.mcp_auth_response_builder import (
+    McpAuthResponseBuilder,
+)
 from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
@@ -113,6 +116,9 @@ class ChatCompletionsRouter:
         ],
         token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
         auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
+        mcp_auth_response_builder: Annotated[
+            McpAuthResponseBuilder, Depends(Inject(McpAuthResponseBuilder))
+        ],
         environment_variables: Annotated[
             LanguageModelGatewayEnvironmentVariables,
             Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
@@ -160,6 +166,7 @@ class ChatCompletionsRouter:
                 chat_manager=chat_manager,
                 token_reader=token_reader,
                 auth_manager=auth_manager,
+                mcp_auth_response_builder=mcp_auth_response_builder,
                 environment_variables=environment_variables,
             )
 
@@ -173,6 +180,9 @@ class ChatCompletionsRouter:
         ],
         token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
         auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
+        mcp_auth_response_builder: Annotated[
+            McpAuthResponseBuilder, Depends(Inject(McpAuthResponseBuilder))
+        ],
         environment_variables: Annotated[
             LanguageModelGatewayEnvironmentVariables,
             Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
@@ -187,6 +197,7 @@ class ChatCompletionsRouter:
             chat_manager: Injected chat manager instance
             token_reader: Injected token reader instance
             auth_manager: Injected auth manager instance
+            mcp_auth_response_builder: Injected MCP auth response builder instance
             environment_variables: Injected environment variables instance
 
         Returns:
@@ -212,6 +223,7 @@ class ChatCompletionsRouter:
             chat_manager=chat_manager,
             token_reader=token_reader,
             auth_manager=auth_manager,
+            mcp_auth_response_builder=mcp_auth_response_builder,
             environment_variables=environment_variables,
         )
 
@@ -224,6 +236,9 @@ class ChatCompletionsRouter:
         ],
         token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
         auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
+        mcp_auth_response_builder: Annotated[
+            McpAuthResponseBuilder, Depends(Inject(McpAuthResponseBuilder))
+        ],
         environment_variables: Annotated[
             LanguageModelGatewayEnvironmentVariables,
             Depends(Inject(LanguageModelGatewayEnvironmentVariables)),
@@ -255,15 +270,18 @@ class ChatCompletionsRouter:
                 detail=f"Error retrieving AWS token: {first}.  If running on developer machines, run `aws sso login --profile [profile_name]` to get the token.",
             )
         except* AuthorizationNeededException as e:
+            first = ExceptionLogger.get_first_exception(e)
             logger.exception(
                 "AuthorizationNeededException: %s",
                 ExceptionLogger.format_exception_message(e),
                 stack_info=True,
             )
-            raise HTTPException(
-                status_code=401,
-                detail="Your login has expired. Please log in again.",
-            )
+            detail = "Your login has expired. Please log in again."
+            if isinstance(first, AuthorizationNeededException):
+                messages = mcp_auth_response_builder.from_authorization_needed(first)
+                if messages:
+                    detail = "\n".join(messages)
+            raise HTTPException(status_code=401, detail=detail)
         except* ConnectionError as e:
             first = ExceptionLogger.get_first_exception(e)
             call_stack = traceback.format_exc()

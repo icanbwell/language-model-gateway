@@ -1,9 +1,5 @@
 import logging
 
-from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
-    SkillLoaderProtocol,
-)
-from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
 from languagemodelcommon.file_managers.file_manager_factory import (
     FileManagerFactory,
 )
@@ -15,7 +11,7 @@ from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
     GithubConfigRepoManager,
 )
-from languagemodelcommon.configs.config_reader.mcp_json_reader import McpJsonReader
+from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
 )
@@ -51,6 +47,9 @@ from languagemodelcommon.auth.token_exchange.token_exchange_manager import (
 from language_model_gateway.gateway.auth.gateway_token_storage_auth_manager import (
     GatewayTokenStorageAuthManager,
 )
+from language_model_gateway.gateway.auth.mcp_auth_response_builder import (
+    McpAuthResponseBuilder,
+)
 from languagemodelcommon.auth.oauth_provider_registrar import OAuthProviderRegistrar
 from languagemodelcommon.auth.tools.tool_auth_manager import ToolAuthManager
 from languagemodelcommon.http.http_client_factory import HttpClientFactory
@@ -75,10 +74,6 @@ from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
-from languagemodelcommon.mcp.plugin_mcp_provider import PluginMcpConfigProvider
-from language_model_gateway.container.skill_loader_mcp_adapter import (
-    SkillLoaderMcpAdapter,
-)
 from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
@@ -152,9 +147,11 @@ class LanguageModelGatewayContainerFactory:
                     WellKnownConfigurationManager
                 ),
                 oauth_provider_registrar=c.resolve(OAuthProviderRegistrar),
-                mcp_json_reader=c.resolve(McpJsonReader),
+                mcp_json_fetcher=c.resolve(McpJsonFetcher),
             ),
         )
+
+        container.singleton(McpAuthResponseBuilder, lambda c: McpAuthResponseBuilder())
 
         container.singleton(HttpClientFactory, lambda c: HttpClientFactory())
 
@@ -351,13 +348,6 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
-            PluginMcpConfigProvider,
-            lambda c: SkillLoaderMcpAdapter(
-                skill_loader=c.resolve(SkillLoaderProtocol),
-            ),
-        )
-
-        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
                 model_factory=c.resolve(ModelFactory),
@@ -370,9 +360,7 @@ class LanguageModelGatewayContainerFactory:
                     LanguageModelGatewayEnvironmentVariables
                 ),
                 persistence_factory=c.resolve(PersistenceFactory),
-                skill_loader=c.resolve(SkillLoaderProtocol),
                 tool_display_name_mapper=c.resolve(ToolDisplayNameMapper),
-                plugin_mcp_provider=c.resolve(PluginMcpConfigProvider),
             ),
         )
 
@@ -383,8 +371,6 @@ class LanguageModelGatewayContainerFactory:
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
-                skill_loader=c.resolve(SkillLoaderProtocol),
-                skill_sync=c.resolve(SkillSync),
             ),
         )
         container.singleton(
@@ -395,6 +381,7 @@ class LanguageModelGatewayContainerFactory:
                 pass_through_provider=c.resolve(PassThroughChatCompletionsProvider),
                 config_reader=c.resolve(ConfigReader),
                 system_command_manager=c.resolve(SystemCommandManager),
+                mcp_auth_response_builder=c.resolve(McpAuthResponseBuilder),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),
@@ -438,6 +425,7 @@ class LanguageModelGatewayContainerFactory:
             PassThroughChatCompletionsProvider,
             lambda c: PassThroughChatCompletionsProvider(
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
+                mcp_auth_response_builder=c.resolve(McpAuthResponseBuilder),
                 environment_variables=c.resolve(
                     LanguageModelGatewayEnvironmentVariables
                 ),

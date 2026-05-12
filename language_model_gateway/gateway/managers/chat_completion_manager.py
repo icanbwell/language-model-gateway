@@ -5,7 +5,6 @@ import uuid
 from typing import TYPE_CHECKING, Dict, List
 
 from fastapi import HTTPException
-from httpx import Headers
 from langchain_core.messages import AnyMessage, AIMessage
 from oidcauthlib.auth.exceptions.authorization_needed_exception import (
     AuthorizationNeededException,
@@ -24,8 +23,8 @@ from language_model_gateway.gateway.managers.system_command_manager import (
 from languagemodelcommon.mcp.exceptions.mcp_tool_unauthorized_exception import (
     McpToolUnauthorizedException,
 )
-from languagemodelcommon.mcp.auth.mcp_authorization_helper import (
-    McpAuthorizationHelper,
+from language_model_gateway.gateway.auth.mcp_auth_response_builder import (
+    McpAuthResponseBuilder,
 )
 from language_model_gateway.gateway.providers.base_chat_completions_provider import (
     BaseChatCompletionsProvider,
@@ -72,6 +71,7 @@ class ChatCompletionManager:
         pass_through_provider: PassThroughChatCompletionsProvider,
         config_reader: ConfigReader,
         system_command_manager: SystemCommandManager,
+        mcp_auth_response_builder: McpAuthResponseBuilder,
         environment_variables: LanguageModelGatewayEnvironmentVariables | None = None,
     ) -> None:
         self.openai_provider: OpenAiChatCompletionsProvider = open_ai_provider
@@ -114,6 +114,16 @@ class ChatCompletionManager:
         if not isinstance(self.system_command_manager, SystemCommandManager):
             raise TypeError(
                 f"system_command_manager must be SystemCommandManager, got {type(self.system_command_manager)}"
+            )
+
+        self.mcp_auth_response_builder: McpAuthResponseBuilder = (
+            mcp_auth_response_builder
+        )
+        if self.mcp_auth_response_builder is None:
+            raise ValueError("mcp_auth_response_builder must not be None")
+        if not isinstance(self.mcp_auth_response_builder, McpAuthResponseBuilder):
+            raise TypeError(
+                f"mcp_auth_response_builder must be McpAuthResponseBuilder, got {type(self.mcp_auth_response_builder)}"
             )
 
         self._environment_variables: LanguageModelGatewayEnvironmentVariables | None = (
@@ -221,9 +231,8 @@ class ChatCompletionManager:
                 request_id=request_id,
                 chat_request_wrapper=chat_request_wrapper,
                 response_messages=[
-                    AIMessage(content=line.strip())
-                    for line in e.message.splitlines()
-                    if line.strip()
+                    AIMessage(content=c)
+                    for c in self.mcp_auth_response_builder.from_authorization_needed(e)
                 ],
             )
         except ExceptionGroup as e:
@@ -237,30 +246,25 @@ class ChatCompletionManager:
                     first_exception.url,
                     first_exception.headers.get("WWW-Authenticate"),
                 )
-                resource_metadata_url: str | None = (
-                    McpAuthorizationHelper.extract_resource_metadata_from_www_auth(
-                        headers=Headers(first_exception.headers)
-                    )
-                )
-                content: str = (
-                    McpAuthorizationHelper.build_www_authenticate_login_message(
-                        resource_metadata_url=resource_metadata_url,
-                        tool_url=first_exception.url,
-                    )
-                )
                 return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
-                    response_messages=[AIMessage(content=content)],
+                    response_messages=[
+                        AIMessage(content=c)
+                        for c in self.mcp_auth_response_builder.from_mcp_tool_unauthorized(
+                            first_exception
+                        )
+                    ],
                 )
             elif isinstance(first_exception, AuthorizationNeededException):
                 return self.write_response(
                     request_id=request_id,
                     chat_request_wrapper=chat_request_wrapper,
                     response_messages=[
-                        AIMessage(content=line.strip())
-                        for line in first_exception.message.splitlines()
-                        if line.strip()
+                        AIMessage(content=c)
+                        for c in self.mcp_auth_response_builder.from_authorization_needed(
+                            first_exception
+                        )
                     ],
                 )
             logger.error(

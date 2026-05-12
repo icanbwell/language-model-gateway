@@ -10,9 +10,6 @@ from typing import AsyncGenerator, Annotated, List
 from fastapi import FastAPI, HTTPException
 from fastapi.params import Depends
 from fastapi.responses import JSONResponse
-from langchain_ai_skills_framework.loaders.skill_loader_protocol import (
-    SkillLoaderProtocol,
-)
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from starlette.middleware.cors import CORSMiddleware
@@ -20,9 +17,6 @@ from starlette.requests import Request
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
-from langchain_ai_skills_framework.loaders.skill_sync import SkillSync
-from langchain_ai_skills_framework.loaders.plugin_skill_store import PluginSkillStore
-from langchain_ai_skills_framework.startup import initialize_skills
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
     GithubConfigRepoManager,
@@ -45,6 +39,9 @@ from language_model_gateway.gateway.routers.images_router import ImagesRouter
 from language_model_gateway.gateway.routers.models_router import ModelsRouter
 from language_model_gateway.gateway.routers.app_login_router import (
     AppLoginRouter,
+)
+from language_model_gateway.gateway.routers.skill_publish_router import (
+    SkillPublishRouter,
 )
 from language_model_gateway.gateway.routers.token_submission_router import (
     TokenSubmissionRouter,
@@ -91,23 +88,15 @@ ContainerRegistry.set_default(
 async def _load_all_configs(
     *,
     config_reader: ConfigReader,
-    skill_loader: SkillLoaderProtocol,
 ) -> None:
-    """Eagerly load model configs (incl. MCP JSON), skills, and marketplace.
-
-    Uses the async path for skills/marketplace so that the snapshot cache
-    is populated (the sync ``refresh()`` only updates in-memory state).
-    """
+    """Eagerly load model configs (incl. MCP JSON resolution)."""
     configs = await config_reader.read_model_configs_async()
     logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
-
-    await skill_loader.get_instructions()
 
 
 async def _config_refresh_loop(
     *,
     config_reader: ConfigReader,
-    skill_loader: SkillLoaderProtocol,
     interval_minutes: int,
 ) -> None:
     """Periodically reload all configs in the background."""
@@ -116,12 +105,7 @@ async def _config_refresh_loop(
         await asyncio.sleep(interval_seconds)
         try:
             await config_reader.clear_cache()
-            # Rebuild skills/marketplace from disk and persist to MongoDB.
-            await skill_loader.refresh_async()
-            await _load_all_configs(
-                config_reader=config_reader,
-                skill_loader=skill_loader,
-            )
+            await _load_all_configs(config_reader=config_reader)
             logger.info("Background config refresh completed")
         except asyncio.CancelledError:
             raise
@@ -137,7 +121,6 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     repo_manager = container.resolve(GithubConfigRepoManager)
     snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
     config_reader = container.resolve(ConfigReader)
-    skill_loader: SkillLoaderProtocol = container.resolve(SkillLoaderProtocol)
     refresh_task: asyncio.Task[None] | None = None
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
@@ -148,24 +131,14 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Sync shared skills from marketplace marketplace into MongoDB
-        await initialize_skills(
-            user_store=container.resolve(PluginSkillStore),
-            skill_sync=container.resolve(SkillSync),
-        )
-
         # Eagerly load all configs at startup
-        await _load_all_configs(
-            config_reader=config_reader,
-            skill_loader=skill_loader,
-        )
+        await _load_all_configs(config_reader=config_reader)
 
         # Start background refresh loop
         interval = env_vars.config_refresh_interval_minutes
         refresh_task = asyncio.create_task(
             _config_refresh_loop(
                 config_reader=config_reader,
-                skill_loader=skill_loader,
                 interval_minutes=interval,
             )
         )
@@ -207,6 +180,7 @@ def create_app() -> FastAPI:
     app1.include_router(AuthRouter(prefix="/auth").get_router())
     app1.include_router(AppLoginRouter(prefix="/app").get_router())
     app1.include_router(TokenSubmissionRouter(prefix="/app").get_router())
+    app1.include_router(SkillPublishRouter(prefix="/skills").get_router())
     # Mount the static directory
     app1.mount(
         "/static",

@@ -21,7 +21,7 @@ async def test_container() -> AsyncGenerator[IContainer, None]:
 async def async_client(
     test_container: IContainer,
 ) -> AsyncGenerator[httpx.AsyncClient, None]:
-    async with LifespanManager(app=app) as manager:
+    async with LifespanManager(app=app, startup_timeout=30) as manager:
         async with httpx.AsyncClient(
             transport=httpx.ASGITransport(app=manager.app), base_url="http://test"
         ) as client:
