@@ -53,7 +53,7 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         if configured and configured.strip():
             return configured
 
-        return "/usr/src/language_model_gateway/gateway/tools/tool_friendly_names.json"
+        return "/usr/src/language_model_gateway/language_model_gateway/gateway/tools/tool_friendly_names.json"
 
     @property
     def allowed_origins(self) -> list[str]:

@@ -174,29 +174,21 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             tools=mcp_tool_configs,
         )
 
-        categories = catalog.get_categories()
-        if categories:
-            resolver = self.mcp_tool_provider.create_tool_resolver(
-                headers=headers,
+        resolver = self.mcp_tool_provider.create_tool_resolver(
+            headers=headers,
+            auth_interceptor=auth_interceptor,
+        )
+        tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
+        tools.append(
+            CallToolTool(
+                catalog=catalog,
+                mcp_tool_provider=self.mcp_tool_provider,
                 auth_interceptor=auth_interceptor,
+                session_pool=session_pool,
             )
-            tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
-            tools.append(
-                CallToolTool(
-                    catalog=catalog,
-                    mcp_tool_provider=self.mcp_tool_provider,
-                    auth_interceptor=auth_interceptor,
-                    session_pool=session_pool,
-                )
-            )
-            logger.info(
-                "Tool discovery enabled: %d categories registered",
-                len(categories),
-            )
-            return tools, catalog
+        )
 
-        logger.warning("Tool discovery enabled but no tools found in catalog")
-        return tools, None
+        return tools, catalog
 
     @override
     async def chat_completions(
