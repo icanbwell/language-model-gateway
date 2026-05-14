@@ -226,8 +226,8 @@ async def health() -> str:
 
 
 @app.get("/favicon.png", include_in_schema=False)
+@app.get("/favicon.ico", include_in_schema=False)
 async def favicon() -> FileResponse:
-    # Get absolute path
     file_path = Path("language_model_gateway/static/bwell-web.png")
     if not file_path.exists():
         raise HTTPException(status_code=404, detail=f"File not found: {file_path}")
