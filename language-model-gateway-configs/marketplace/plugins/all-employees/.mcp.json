@@ -15,7 +15,7 @@
       "url": "https://mcp.atlassian.com/v1/mcp"
     },
     "fhir-server-client-sandbox": {
-      "description": "Query and manage FHIR healthcare resources in the client sandbox environment",
+      "description": "Access patient health data in the client sandbox environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Client Sandbox",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -32,7 +32,7 @@
       "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
     },
     "fhir-server-dev": {
-      "description": "Query and manage FHIR healthcare resources in the development environment",
+      "description": "Access patient health data in the development environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Dev",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -49,7 +49,7 @@
       "url": "https://mcpfhiragent.dev.icanbwell.com/"
     },
     "fhir-server-prod": {
-      "description": "Query and manage FHIR healthcare resources in the production environment",
+      "description": "Access patient health data in the production environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Production",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -66,7 +66,7 @@
       "url": "https://mcpfhiragent.prod.icanbwell.com/"
     },
     "fhir-server-staging": {
-      "description": "Query and manage FHIR healthcare resources in the staging environment",
+      "description": "Access patient health data in the staging environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Staging",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
