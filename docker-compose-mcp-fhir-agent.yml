@@ -270,7 +270,7 @@ services:
       OTEL_SPAN_FILTER_DEBUG: 'false'
       ENABLE_DYNAMIC_CLIENT_REGISTRATION: 1
       LOG_ALL_REQUESTS: 1
-    env_file: docker.env
+    env_file: .env
     ports:
       - '5061:5000'
     volumes:
