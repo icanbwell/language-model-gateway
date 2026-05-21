@@ -178,7 +178,7 @@ services:
       # GraphQL endpoint URL for ATC BFF (default: staging).
       ATC_BFF_GRAPHQL: "https://api-gateway.staging.icanbwell.com/atc-bff/v2/graphql"
       # Provider Search Service GraphQL endpoint for directory lookups.
-      PSS_BASE_URL: "https://provider-search.client-sandbox.bwell.zone/graphql"
+      PSS_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/provider-search/graphql"
       # Federated API gateway endpoint used for supporting data fetches.
       API_GATEWAY_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql"
       # Username for scripted auth tests and demo logins.
@@ -294,10 +294,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir.dev.icanbwell.com/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.dev.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.dev.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.dev.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.dev.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -318,15 +319,16 @@ services:
     networks:
       - web
 
-  # This is another instance of the mcp-fhir-agent but points to dev FHIR server
+  # This is another instance of the mcp-fhir-agent but points to client-sandbox FHIR server
   mcp-fhir-agent-client-sandbox:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-internal.client-sandbox.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.client-sandbox.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.client-sandbox.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.client-sandbox.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -352,10 +354,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-internal.staging.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.staging.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.staging.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.staging.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.staging.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -381,10 +384,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-mcp.prod.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.prod.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.prod.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.prod.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.prod.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
 
     env_file: .env
