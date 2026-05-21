@@ -425,10 +425,22 @@
                   }
                 }
               },
-              "appLoginAllowed": {
-                "type": "boolean",
-                "description": "When true, the 'Login to b.well App' option is shown alongside the OAuth login link.",
-                "default": false
+              "appLogin": {
+                "type": "object",
+                "description": "Credential-based app login config. When present, enables the 'Login to b.well App' option.",
+                "properties": {
+                  "apiGatewayBaseUrl": {
+                    "type": "string",
+                    "description": "Base URL for the platform identity API (e.g., https://api.dev.icanbwell.com)."
+                  },
+                  "clientKeys": {
+                    "type": "object",
+                    "description": "Map of display name to client key shown in the login form dropdown.",
+                    "additionalProperties": { "type": "string" }
+                  }
+                },
+                "required": ["apiGatewayBaseUrl"],
+                "default": null
               }
             },
             "default": null
@@ -656,10 +668,22 @@
                   }
                 }
               },
-              "appLoginAllowed": {
-                "type": "boolean",
-                "description": "When true, the 'Login to b.well App' option is shown alongside the OAuth login link.",
-                "default": false
+              "appLogin": {
+                "type": "object",
+                "description": "Credential-based app login config. When present, enables the 'Login to b.well App' option.",
+                "properties": {
+                  "apiGatewayBaseUrl": {
+                    "type": "string",
+                    "description": "Base URL for the platform identity API (e.g., https://api.dev.icanbwell.com)."
+                  },
+                  "clientKeys": {
+                    "type": "object",
+                    "description": "Map of display name to client key shown in the login form dropdown.",
+                    "additionalProperties": { "type": "string" }
+                  }
+                },
+                "required": ["apiGatewayBaseUrl"],
+                "default": null
               }
             },
             "default": null
