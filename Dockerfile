@@ -13,7 +13,7 @@ ARG RUN_UV_LOCK=false
 ARG GITHUB_TOKEN
 
 # Install common tools and dependencies (git is required for some Python packages)
-RUN apk add --no-cache git
+RUN apk add --no-cache git build-base
 
 # Install uv from the official image (fast, single binary)
 COPY --from=ghcr.io/astral-sh/uv:0.11.6@sha256:b1e699368d24c57cda93c338a57a8c5a119009ba809305cc8e86986d4a006754 /uv /uvx /usr/local/bin/

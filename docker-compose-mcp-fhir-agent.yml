@@ -10,17 +10,18 @@ services:
     build:
       context: ../mcp-fhir-agent
       dockerfile: Dockerfile
+      target: production
       secrets:
-        - GITHUB_TOKEN
-      args:
-        GITHUB_TOKEN: ${GITHUB_TOKEN}
+        - jfrog_token
     image: mcp-fhir-agent:local
     environment: &agent_env
+      # Allow http:// well-known URLs for local Keycloak (oidcauthlib ≥3.0.6 enforces https by default).
+      AUTH_ALLOW_HTTP_URLS: "true"
       # Enables optional OTEL/Prometheus diagnostic metrics.
       DEBUG_METRICS: 0
       # Controls the root logging level for the app loggers.
       LOG_LEVEL: INFO
-      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      # Default Patient UUID used when a request omits patient_id.
       DEFAULT_PATIENT_ID: "d58b4c4d-e820-5935-adfc-4cb372a91c22"
       # Default Person UUID aligned with the patient for demo flows.
       DEFAULT_PERSON_ID: "072b2b1c-942d-542c-8e51-f9dc0dadcc0a"
@@ -47,7 +48,16 @@ services:
       # Max response tokens allowed when FastMCP formats LLM output.
       MAXIMUM_RESPONSE_TOKENS: ${MAXIMUM_RESPONSE_TOKENS:-8000}
       # Ordered list of OIDC providers the auth layer initializes.
-      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirprod}
+      AUTH_PROVIDERS: ${AUTH_PROVIDERS:-client1,client3,oktafhirdev,oktafhirclientsandbox,oktafhirprod,cognitostaging,cognitostaging2}
+      # Cognito issuers for the staging token exchange (tokens returned by ClientKeyAuthorizationMiddleware).
+      AUTH_ISSUER_COGNITOSTAGING: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_zzOfrTtVr"
+      AUTH_AUDIENCE_COGNITOSTAGING: "5bmd3qdmcgn9f5nbvbhdqh14pb"
+      AUTH_CLIENT_ID_COGNITOSTAGING: "5bmd3qdmcgn9f5nbvbhdqh14pb"
+      AUTH_WELL_KNOWN_URI_COGNITOSTAGING: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_zzOfrTtVr/.well-known/openid-configuration"
+      AUTH_ISSUER_COGNITOSTAGING2: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1SWX8btQj"
+      AUTH_AUDIENCE_COGNITOSTAGING2: "2if61aah5gdu648sjpm942g9kk"
+      AUTH_CLIENT_ID_COGNITOSTAGING2: "2if61aah5gdu648sjpm942g9kk"
+      AUTH_WELL_KNOWN_URI_COGNITOSTAGING2: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1SWX8btQj/.well-known/openid-configuration"
       # This specifies the provider used for dynamic client registration
       DYNAMIC_CLIENT_REGISTRATION_AUTH_PROVIDER: client1
       # Issuer URL for the first local Keycloak test client.
@@ -134,7 +144,7 @@ services:
       # Base URL used when constructing absolute links in auth flows.
       SERVER_BASE_URL: "https://mcpfhiragent.localhost/"
       # GraphQL endpoint for exchanging service-account tokens.
-      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.client-sandbox.icanbwell.com/v1/graphql'
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.staging.icanbwell.com/v1/graphql'
       # Mongo collection storing dynamically registered OAuth clients.
       DYNAMIC_CLIENT_REGISTRATION_COLLECTION: "oauth-clients"
       # Mongo collection backing the MCP response cache middleware.
@@ -165,8 +175,10 @@ services:
       CIRCUIT_BREAKER_FAIL_MAX: ${CIRCUIT_BREAKER_FAIL_MAX:-5}
       # Duration (seconds) a breaker stays open before retrying.
       CIRCUIT_BREAKER_TIMEOUT_SECONDS: ${CIRCUIT_BREAKER_TIMEOUT_SECONDS:-60}
+      # GraphQL endpoint URL for ATC BFF (default: staging).
+      ATC_BFF_GRAPHQL: "https://api-gateway.staging.icanbwell.com/atc-bff/v2/graphql"
       # Provider Search Service GraphQL endpoint for directory lookups.
-      PSS_BASE_URL: "https://provider-search.client-sandbox.bwell.zone/graphql"
+      PSS_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/provider-search/graphql"
       # Federated API gateway endpoint used for supporting data fetches.
       API_GATEWAY_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql"
       # Username for scripted auth tests and demo logins.
@@ -185,10 +197,6 @@ services:
       AWS_BEDROCK_MAX_RETRIES: '5'
       # Retry strategy used by AWS SDK (adaptive handles throttling better).
       AWS_BEDROCK_RETRY_MODE: 'adaptive'
-      # Path to the official FastMCP tool config set mounted via volume.
-      MODELS_OFFICIAL_PATH: "/usr/src/mcp-fhir-agent-configs/local/chat_completions/official"
-      # Path containing experimental/testing FastMCP configs.
-      MODELS_TESTING_PATH: "/usr/src/mcp-fhir-agent-configs/local/chat_completions/testing"
       # When 1, returns raw tool output without LLM summarization.
       RETURN_RAW_TOOL_OUTPUT: ${RETURN_RAW_TOOL_OUTPUT:-1}
       # Azure OpenAI resource URL used when the Azure client is selected.
@@ -244,7 +252,9 @@ services:
       # Strategy for trimming context when over token budget.
       TRUNCATION_STRATEGY: ${TRUNCATION_STRATEGY:-end}
       # Comma-delimited Composition types to skip when summarizing.
-      SKIP_COMPOSITIONS: "Lab,Vitals,Procedure,Immunization,Condition,CarePlan,DiagnosticReport,Encounter"
+      # Lab and Vitals use dedicated retriever paths; all other types flow through
+      # the Composition query with V2/V3 source priority.
+      SKIP_COMPOSITIONS: ""
       # Log level dedicated to the fastmcp library internals.
       FASTMCP_LOG_LEVEL : ${FASTMCP_LOG_LEVEL:-INFO}
       # OTEL Configurations
@@ -284,10 +294,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir.dev.icanbwell.com/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.dev.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.dev.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.dev.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.dev.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -308,15 +319,16 @@ services:
     networks:
       - web
 
-  # This is another instance of the mcp-fhir-agent but points to dev FHIR server
+  # This is another instance of the mcp-fhir-agent but points to client-sandbox FHIR server
   mcp-fhir-agent-client-sandbox:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-internal.client-sandbox.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.client-sandbox.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.client-sandbox.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.client-sandbox.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -342,10 +354,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-internal.staging.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.staging.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.staging.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.staging.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.staging.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
     env_file: .env
     ports:
@@ -371,10 +384,11 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      # You can override any environment variables here
       FHIR_SERVER_GET_URL: 'https://fhir-mcp.prod.bwell.zone/4_0_0/'
-      # Enable elicitation - if the Agent is unsure about what the user wants, it will ask follow-up questions
-      # disable until language model gateway supports elicitation
+      TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.prod.icanbwell.com/v1/graphql'
+      ATC_BFF_GRAPHQL: 'https://api-gateway.prod.icanbwell.com/atc-bff/v2/graphql'
+      PSS_BASE_URL: 'https://api-gateway.prod.icanbwell.com/provider-search/graphql'
+      API_GATEWAY_BASE_URL: 'https://api-gateway.prod.icanbwell.com/federated-graph-authed/graphql'
       ENABLE_ELICITATION: "false"
 
     env_file: .env
@@ -430,6 +444,5 @@ networks:
     name: language-model-gateway_web
 
 secrets:
-  GITHUB_TOKEN:
-    environment: GITHUB_TOKEN
-
+  jfrog_token:
+    environment: JFROG_READ_TOKEN

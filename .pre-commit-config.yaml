@@ -120,7 +120,8 @@ repos:
           (?x)^(
             tests/.*|
             docker-compose.*\.yml|
-            .helm/.*
+            .helm/.*|
+            language-model-gateway-configs/.*
           )$
 
   - repo: https://github.com/python-jsonschema/check-jsonschema

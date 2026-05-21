@@ -14,8 +14,30 @@
       "type": "http",
       "url": "https://mcp.atlassian.com/v1/mcp"
     },
+    "fhir-server-local": {
+      "description": "Access patient health data in the local development environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
+      "displayName": "b.well FHIR Local",
+      "oauth": {
+        "appLogin": {
+          "apiGatewayBaseUrl": "http://fhir:3000",
+          "clientKeys": {
+            "Local": "local-dev-key"
+          }
+        },
+        "authServerMetadataUrl": "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
+        "clientId": "bwell-client-id",
+        "displayName": "Keycloak BWell Realm",
+        "scopes": [
+          "openid",
+          "profile",
+          "email"
+        ]
+      },
+      "type": "http",
+      "url": "http://mcp-fhir-agent:5000/"
+    },
     "fhir-server-client-sandbox": {
-      "description": "Query and manage FHIR healthcare resources in the client sandbox environment",
+      "description": "Access patient health data in the client sandbox environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Client Sandbox",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
@@ -32,9 +54,15 @@
       "url": "https://mcpfhiragent.client-sandbox.icanbwell.com/"
     },
     "fhir-server-dev": {
-      "description": "Query and manage FHIR healthcare resources in the development environment",
+      "description": "Access patient health data in the development environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Dev",
       "oauth": {
+        "appLogin": {
+          "apiGatewayBaseUrl": "https://api.dev.icanbwell.com",
+          "clientKeys": {
+            "Dev": "eyJyIjoiY2Zoa2h3ODZvNHdoNWFiOW9kaHgiLCJlbnYiOiJkZXYiLCJraWQiOiJid2VsbF9kZW1vLWRldiJ9"
+          }
+        },
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
         "clientId": "0oarf29h6x2DaWCkT697",
         "displayName": "Okta FHIR Dev",
@@ -49,9 +77,16 @@
       "url": "https://mcpfhiragent.dev.icanbwell.com/"
     },
     "fhir-server-prod": {
-      "description": "Query and manage FHIR healthcare resources in the production environment",
+      "description": "Access patient health data in the production environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Production",
       "oauth": {
+        "appLogin": {
+          "apiGatewayBaseUrl": "https://api.prod.icanbwell.com",
+          "clientKeys": {
+            "Trial": "eyJyIjoiMDMyZHF0ZWN1ODVkaWZxazU0dTQiLCJlbnYiOiJwcm9kIiwia2lkIjoiYndlbGxfdHJpYWwtcHJvZCJ9",
+            "Demo": "eyJyIjoiNnl5bXVyNHR0eGUzdjA1cTk4IiwiZW52IjoicHJvZCIsImtpZCI6ImJ3ZWxsX2RlbW8tcHJvZCJ9"
+          }
+        },
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
         "clientId": "0oargxz9fkFFcSM38697",
         "displayName": "Okta FHIR Production",
@@ -66,7 +101,7 @@
       "url": "https://mcpfhiragent.prod.icanbwell.com/"
     },
     "fhir-server-staging": {
-      "description": "Query and manage FHIR healthcare resources in the staging environment",
+      "description": "Access patient health data in the staging environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Staging",
       "oauth": {
         "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",

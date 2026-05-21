@@ -94,20 +94,18 @@ class AppLoginManager:
                 status_code=500, detail="Authentication configuration error"
             )
 
-        auth_config_extra_info: dict[str, str] | None = auth_config.extra_info
+        app_login_config: dict[str, str] | None = auth_config.app_login
         base_url = (
-            auth_config_extra_info.get("api_gateway_base_url")
-            if auth_config_extra_info
-            else None
+            app_login_config.get("api_gateway_base_url") if app_login_config else None
         )
 
         if not base_url:
             logger.error(
-                f"api_gateway_base_url not set in auth config extra_info for auth provider '{auth_provider}'"
+                f"api_gateway_base_url not set in app_login config for auth provider '{auth_provider}'"
             )
             raise HTTPException(
                 status_code=500,
-                detail=f"api_gateway_base_url not set in auth config extra_info for auth provider '{auth_provider}'",
+                detail=f"api_gateway_base_url not set in app_login config for auth provider '{auth_provider}'",
             )
 
         if auth_client_key is None:
@@ -209,19 +207,17 @@ class AppLoginManager:
                 status_code=500, detail="Authentication configuration error"
             )
 
-        auth_config_extra_info: dict[str, Any] | None = auth_config.extra_info
+        app_login_config: dict[str, Any] | None = auth_config.app_login
         client_keys: dict[str, str] | None = (
-            auth_config_extra_info.get("client_keys")
-            if auth_config_extra_info
-            else None
+            app_login_config.get("client_keys") if app_login_config else None
         )
         if not client_keys:
             logger.error(
-                f"client_keys not set in auth config extra_info for auth provider '{auth_provider}'"
+                f"client_keys not set in app_login config for auth provider '{auth_provider}'"
             )
             raise HTTPException(
                 status_code=500,
-                detail=f"client_keys not set in auth config extra_info for auth provider '{auth_provider}'",
+                detail=f"client_keys not set in app_login config for auth provider '{auth_provider}'",
             )
 
         return client_keys
