@@ -58,7 +58,7 @@ services:
       # Inbound auth providers for JWT validation of gateway callers.
       # Outbound providers (for MCP servers and models) are defined inline
       # in .mcp.json mcpServers[x].oauth and model config oauth_providers.
-      AUTH_PROVIDERS: "client1,client3,oktaaiden"
+      AUTH_PROVIDERS: "client1,client3,oktaaiden, cognitostaging"
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
@@ -85,6 +85,11 @@ services:
       AUTH_REDIRECT_URI: "http://localhost:5050/auth/callback"
       APP_LOGIN_URI: "http://localhost:5050/app/login"
       APP_TOKEN_SAVE_URI: "http://localhost:5050/app/token"
+      # ── COGNITO_STAGING ─────────────────────────────────────────────
+      AUTH_ISSUER_COGNITOSTAGING: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_zzOfrTtVr"
+      AUTH_AUDIENCE_COGNITOSTAGING: "5bmd3qdmcgn9f5nbvbhdqh14pb"
+      AUTH_CLIENT_ID_COGNITOSTAGING: "5bmd3qdmcgn9f5nbvbhdqh14pb"
+      AUTH_WELL_KNOWN_URI_COGNITOSTAGING: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_zzOfrTtVr/.well-known/openid-configuration"
       # Mongo DB settings for storing tokens
       MONGO_DB_NAME: language_model_gateway
       MONGO_URL: ${LANGUAGE_MODEL_GATEWAY_MONGO_URL-mongodb://mongo:27017?appName=fhir-server}
