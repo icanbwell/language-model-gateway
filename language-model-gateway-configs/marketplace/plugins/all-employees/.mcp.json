@@ -18,19 +18,14 @@
       "description": "Access patient health data in the local development environment including medications, conditions, allergies, lab results, vitals, immunizations, procedures, encounters, care plans, and clinical notes",
       "displayName": "b.well FHIR Local",
       "oauth": {
-        "appLogin": {
-          "apiGatewayBaseUrl": "http://fhir:3000",
-          "clientKeys": {
-            "Local": "local-dev-key"
-          }
-        },
-        "authServerMetadataUrl": "http://keycloak:8080/realms/bwell-realm/.well-known/openid-configuration",
-        "clientId": "bwell-client-id",
-        "displayName": "Keycloak BWell Realm",
+        "authServerMetadataUrl": "https://icanbwell.okta.com/.well-known/openid-configuration",
+        "clientId": "0oarhz13sa21nfecS697",
+        "displayName": "Okta FHIR Staging",
         "scopes": [
           "openid",
           "profile",
-          "email"
+          "email",
+          "groups"
         ]
       },
       "type": "http",
@@ -157,12 +152,6 @@
       },
       "type": "http",
       "url": "https://mcp.groundcover.com/api/mcp"
-    },
-    "provider-search": {
-      "description": "Search for healthcare providers by name, specialty, location, and insurance network",
-      "displayName": "Provider Search",
-      "type": "http",
-      "url": "${MCP_SERVER_GATEWAY_URL}/provider_search/"
     },
     "sigma-reporting": {
       "description": "Search, download, and extract data from Sigma Computing workbooks and reports (sigmacomputing.com). Use this for any sigmacomputing.com URL instead of url-to-markdown.",

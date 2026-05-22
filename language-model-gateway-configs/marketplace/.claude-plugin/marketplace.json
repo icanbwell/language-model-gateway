@@ -26,6 +26,15 @@
       "category": "developer-tools",
       "tags": ["migration", "pipenv", "uv", "python", "docker", "jfrog"],
       "keywords": ["pipenv", "uv", "pyproject.toml", "migration", "Python", "dependency management", "JFrog"]
+    },
+    {
+      "name": "bailey",
+      "source": "./plugins/bailey",
+      "description": "Bailey AI patient-facing skills for healthcare data access, preventive care screening, and clinical workflows",
+      "version": "1.0.0",
+      "category": "healthcare",
+      "tags": ["bailey", "patient", "healthcare", "fhir", "screening", "preventive-care"],
+      "keywords": ["Bailey", "patient portal", "USPSTF", "vaccine", "scheduling", "depression screening", "PHQ", "preventive care"]
     }
   ]
 }
