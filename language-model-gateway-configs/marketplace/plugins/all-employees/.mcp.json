@@ -153,12 +153,6 @@
       "type": "http",
       "url": "https://mcp.groundcover.com/api/mcp"
     },
-    "provider-search": {
-      "description": "Search for healthcare providers by name, specialty, location, and insurance network",
-      "displayName": "Provider Search",
-      "type": "http",
-      "url": "${MCP_SERVER_GATEWAY_URL}/provider_search/"
-    },
     "sigma-reporting": {
       "description": "Search, download, and extract data from Sigma Computing workbooks and reports (sigmacomputing.com). Use this for any sigmacomputing.com URL instead of url-to-markdown.",
       "displayName": "Sigma Reporting",
