@@ -13,7 +13,8 @@ services:
     volumes:
     - ../mcp-server-gateway/:/usr/src/mcp_server_gateway/
     - ./language-model-gateway-configs/marketplace:/usr/src/mcp_server_gateway/marketplace
-#    - ../bwell-ai-plugin-marketplace:/usr/src/mcp_server_gateway/marketplace
+    # bring in bailey plugins
+#    - ../bwell-ai-plugin-marketplace/plugins/bailey:/usr/src/mcp_server_gateway/marketplace/plugins/bailey
 #    - ../langchain-ai-skills-framework/langchain_ai_skills_framework:/opt/venv/lib/python3.12/site-packages/langchain_ai_skills_framework:ro
 #    image: 875300655693.dkr.ecr.us-east-1.amazonaws.com/mcp-server-gateway:1.0.20
     environment:
