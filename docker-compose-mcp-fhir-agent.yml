@@ -178,9 +178,9 @@ services:
       # GraphQL endpoint URL for ATC BFF (default: staging).
       ATC_BFF_GRAPHQL: "https://api-gateway.staging.icanbwell.com/atc-bff/v2/graphql"
       # Provider Search Service GraphQL endpoint for directory lookups.
-      PSS_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/provider-search/graphql"
+      PSS_BASE_URL: "https://api-gateway.staging.icanbwell.com/provider-search/graphql"
       # Federated API gateway endpoint used for supporting data fetches.
-      API_GATEWAY_BASE_URL: "https://api-gateway.client-sandbox.icanbwell.com/federated-graph-authed/graphql"
+      API_GATEWAY_BASE_URL: "https://api-gateway.staging.icanbwell.com/federated-graph-authed/graphql"
       # Username for scripted auth tests and demo logins.
       TEST_USER_NAME: "tester"
       # Password paired with TEST_USER_NAME for integration tests.
