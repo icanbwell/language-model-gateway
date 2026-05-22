@@ -58,7 +58,7 @@ services:
       # Inbound auth providers for JWT validation of gateway callers.
       # Outbound providers (for MCP servers and models) are defined inline
       # in .mcp.json mcpServers[x].oauth and model config oauth_providers.
-      AUTH_PROVIDERS: "client1,client3,oktaaiden, cognitostaging"
+      AUTH_PROVIDERS: "client1,client3,oktaaiden,cognitostaging"
       # first client for testing
       AUTH_ISSUER_CLIENT1: "http://keycloak:8080/realms/bwell-realm"
       AUTH_AUDIENCE_CLIENT1: "client1"
