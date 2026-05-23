@@ -155,10 +155,10 @@ class ChatCompletionsRouter:
                 **chat_request
             )
 
-            chat_request_wrapper: ChatCompletionApiRequestWrapper = (
-                ChatCompletionApiRequestWrapper(
-                    chat_request=chat_request_typed, enable_debug_logging=False
-                )
+            chat_request_wrapper: ChatCompletionApiRequestWrapper = ChatCompletionApiRequestWrapper(
+                chat_request=chat_request_typed,
+                enable_debug_logging=False,
+                emit_task_progress=environment_variables.emit_task_progress_in_chat_completions,
             )
             return await self._chat_completions(
                 request=request,

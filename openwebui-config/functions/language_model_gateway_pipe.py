@@ -832,7 +832,8 @@ class Pipe:
 
         Single app:
             event: mcp_app
-            data: {"html": "<html>...</html>", "title": "Optional Title"}
+            data: {"html": "<html>...</html>", "title": "Optional Title",
+                   "csp": {...}, "permissions": {...}, "prefersBorder": true}
 
         Multiple apps:
             event: mcp_app
