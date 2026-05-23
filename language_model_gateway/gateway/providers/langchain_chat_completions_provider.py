@@ -185,6 +185,7 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 mcp_tool_provider=self.mcp_tool_provider,
                 auth_interceptor=auth_interceptor,
                 session_pool=session_pool,
+                proxy_base_url=self.environment_variables.mcp_app_proxy_base_url,
             )
         )
 
