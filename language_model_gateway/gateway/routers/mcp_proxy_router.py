@@ -160,22 +160,18 @@ class McpProxyRouter:
         server_name: str | None,
     ) -> AgentConfig | None:
         """Find the AgentConfig for a tool or server name."""
-        configs = await config_reader.read_configs()
+        configs = await config_reader.read_model_configs_async()
         for config in configs:
-            if not config.agents:
-                continue
-            for agent in config.agents:
+            for agent in config.get_agents():
                 if server_name and agent.name == server_name:
                     return agent
-                if tool_name and hasattr(agent, "tools"):
-                    agent_tools = getattr(agent, "tools", None)
-                    if isinstance(agent_tools, list) and tool_name in agent_tools:
+                if tool_name and agent.tools:
+                    agent_tool_names = [t.strip() for t in agent.tools.split(",")]
+                    if tool_name in agent_tool_names:
                         return agent
         if server_name:
             for config in configs:
-                if not config.agents:
-                    continue
-                for agent in config.agents:
+                for agent in config.get_agents():
                     if agent.name and server_name in agent.name:
                         return agent
         return None
