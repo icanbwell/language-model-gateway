@@ -66,6 +66,35 @@ class McpProxyRouter:
     def get_router(self) -> APIRouter:
         return self.router
 
+    @staticmethod
+    async def _verify_auth(
+        request: Request,
+        token_reader: TokenReader,
+        environment_variables: LanguageModelGatewayEnvironmentVariables,
+    ) -> str:
+        """Extract and verify the bearer token, returning the raw token string.
+
+        Raises HTTPException(401) if the token is missing or invalid.
+        """
+        auth_header = request.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Bearer "):
+            raise HTTPException(
+                status_code=401,
+                detail="Missing or invalid Authorization header",
+            )
+
+        token: str | None = token_reader.extract_token(authorization_header=auth_header)
+        if not token:
+            raise HTTPException(status_code=401, detail="Could not extract token")
+
+        # Allow dev bypass tokens
+        if token not in ("bedrock", "fake-api-key"):
+            token_item = await token_reader.verify_token_async(token=token)
+            if token_item is None:
+                raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+        return token
+
     async def proxy_tools_call(
         self,
         request: Request,
@@ -79,6 +108,8 @@ class McpProxyRouter:
         ],
     ) -> JSONResponse:
         """Proxy a tools/call from an MCP App iframe to the MCP server."""
+        await self._verify_auth(request, token_reader, environment_variables)
+
         tool_name = body.get("name")
         arguments = body.get("arguments", {})
         server_name = body.get("server")
@@ -123,6 +154,8 @@ class McpProxyRouter:
         ],
     ) -> JSONResponse:
         """Proxy a resources/read from an MCP App iframe to the MCP server."""
+        await self._verify_auth(request, token_reader, environment_variables)
+
         uri = body.get("uri")
         server_name = body.get("server")
 
@@ -159,19 +192,27 @@ class McpProxyRouter:
         tool_name: str | None,
         server_name: str | None,
     ) -> AgentConfig | None:
-        """Find the AgentConfig for a tool or server name."""
+        """Find the AgentConfig for a tool or server name.
+
+        Resolution order:
+        1. Exact server_name match (highest priority — caller's explicit selection)
+        2. Tool name match (fallback when server_name not provided or not found)
+        """
         configs = await config_reader.read_model_configs_async()
-        for config in configs:
-            for agent in config.get_agents():
-                if server_name and agent.name == server_name:
-                    return agent
-                if tool_name and agent.tools:
-                    agent_tool_names = [t.strip() for t in agent.tools.split(",")]
-                    if tool_name in agent_tool_names:
-                        return agent
+
         if server_name:
             for config in configs:
                 for agent in config.get_agents():
-                    if agent.name and server_name in agent.name:
+                    if agent.name == server_name:
                         return agent
+
+        if tool_name:
+            for config in configs:
+                for agent in config.get_agents():
+                    if not agent.tools:
+                        continue
+                    agent_tool_names = [t.strip() for t in agent.tools.split(",")]
+                    if tool_name in agent_tool_names:
+                        return agent
+
         return None
