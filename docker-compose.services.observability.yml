@@ -29,9 +29,10 @@ x-clickhouse-defaults: &clickhouse-defaults
       - --spider
       - -q
       - 0.0.0.0:8123/ping
-    interval: 30s
+    interval: 15s
     timeout: 5s
-    retries: 3
+    retries: 5
+    start_period: 30s
   ulimits:
     nproc: 65535
     nofile:
@@ -51,9 +52,10 @@ x-zookeeper-defaults: &zookeeper-defaults
     test:
       - CMD-SHELL
       - echo ruok | nc 127.0.0.1 2181 | grep imok
-    interval: 30s
+    interval: 15s
     timeout: 5s
-    retries: 3
+    retries: 5
+    start_period: 10s
 x-db-depend: &db-depend
   !!merge <<: *common
   depends_on:
@@ -143,9 +145,10 @@ services:
       - DEPLOYMENT_TYPE=docker-standalone-amd
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://localhost:8080/api/v1/health || exit 1" ]
-      interval: 30s
+      interval: 15s
       timeout: 5s
-      retries: 3
+      retries: 5
+      start_period: 30s
   otel-collector:
     !!merge <<: *db-depend
     image: signoz/signoz-otel-collector:${OTELCOL_TAG:-0.111.30}

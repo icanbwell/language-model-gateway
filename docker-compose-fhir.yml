@@ -89,6 +89,10 @@ services:
     command: yarn run dev
     healthcheck:
       test: [ 'CMD-SHELL', 'wget --spider --quiet localhost:3000/health || exit 1' ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
       - web
 

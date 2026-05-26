@@ -12,6 +12,10 @@ services:
       MONGODB_INITDB_ROOT_PASSWORD: "test123" # pragma: allowlist secret
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh mongo:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     networks:
       - web
 
@@ -50,6 +54,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 10
+      start_period: 15s
     networks:
       - web
 
