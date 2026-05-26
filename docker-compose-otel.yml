@@ -21,7 +21,7 @@ services:
     networks:
       - web
     healthcheck:
-      test: ["CMD-SHELL", "curl --fail -s http://localhost:16686/ || exit 1"]
+      test: ["CMD-SHELL", "wget --spider --quiet http://localhost:16686/ || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 5
@@ -49,12 +49,6 @@ services:
         condition: service_healthy
     networks:
       - web
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail -s http://localhost:13133/ || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   language-model-gateway:
     extends:
@@ -99,7 +93,7 @@ services:
       OTEL_BSP_SCHEDULE_DELAY: "2000"   # 2 seconds
     depends_on:
       otel-collector:
-        condition: service_healthy
+        condition: service_started
     networks:
       - web
 
@@ -132,7 +126,7 @@ services:
       OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: "grpc"
     depends_on:
       otel-collector:
-        condition: service_healthy
+        condition: service_started
     networks:
       - web
 
