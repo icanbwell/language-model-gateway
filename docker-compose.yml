@@ -168,6 +168,8 @@ services:
       AIDEN_OAUTH_CLIENT_NAME: "b.well Aiden Local"
       # Allow http:// URLs for local OIDC providers (e.g. keycloak in Docker)
       AUTH_ALLOW_HTTP_URLS: "true"
+      # use ChatAnthropicBedrock instead of ChatBedrockConverse
+      BEDROCK_USE_ANTHROPIC_CLIENT: "true"
     env_file: .env
     command:
       - opentelemetry-instrument
