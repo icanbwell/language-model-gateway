@@ -12,6 +12,9 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -58,6 +61,9 @@ from simple_container.container.inject import Inject
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
 )
+from language_model_gateway.gateway.providers.langchain_chat_completions_provider import (
+    LangChainCompletionsProvider,
+)
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
 
@@ -91,15 +97,31 @@ ContainerRegistry.set_default(
 async def _load_all_configs(
     *,
     config_reader: ConfigReader,
+    langchain_provider: LangChainCompletionsProvider | None = None,
 ) -> None:
-    """Eagerly load model configs (incl. MCP JSON resolution)."""
-    configs = await config_reader.read_model_configs_async()
+    """Eagerly load model configs (incl. MCP JSON resolution).
+
+    When langchain_provider is provided, also pre-warms the per-model
+    resource cache (LLM instances, ToolCatalogs) so the first user
+    request avoids that setup cost.
+    """
+    configs: list[ChatModelConfig] = await config_reader.read_model_configs_async()
     logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
+
+    if langchain_provider is not None:
+        for config in configs:
+            if config.type == "langchain":
+                langchain_provider._get_or_create_cached_resources(
+                    model_config=config,
+                    headers={},
+                )
+        logger.info("Pre-warmed model resource cache for langchain models")
 
 
 async def _config_refresh_loop(
     *,
     config_reader: ConfigReader,
+    langchain_provider: LangChainCompletionsProvider,
     interval_minutes: int,
 ) -> None:
     """Periodically reload all configs in the background."""
@@ -107,8 +129,12 @@ async def _config_refresh_loop(
     while True:
         await asyncio.sleep(interval_seconds)
         try:
+            langchain_provider.invalidate_cache()
             await config_reader.clear_cache()
-            await _load_all_configs(config_reader=config_reader)
+            await _load_all_configs(
+                config_reader=config_reader,
+                langchain_provider=langchain_provider,
+            )
             logger.info("Background config refresh completed")
         except asyncio.CancelledError:
             raise
@@ -124,6 +150,8 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     repo_manager = container.resolve(GithubConfigRepoManager)
     snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
     config_reader = container.resolve(ConfigReader)
+    langchain_provider = container.resolve(LangChainCompletionsProvider)
+    well_known_manager = container.resolve(WellKnownConfigurationManager)
     refresh_task: asyncio.Task[None] | None = None
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
@@ -134,14 +162,22 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Eagerly load all configs at startup
-        await _load_all_configs(config_reader=config_reader)
+        # Pre-warm OIDC discovery documents and JWKS so the first request
+        # doesn't pay the network latency cost
+        await well_known_manager.ensure_initialized_async()
+
+        # Eagerly load all configs and pre-warm model resource caches at startup
+        await _load_all_configs(
+            config_reader=config_reader,
+            langchain_provider=langchain_provider,
+        )
 
         # Start background refresh loop
         interval = env_vars.config_refresh_interval_minutes
         refresh_task = asyncio.create_task(
             _config_refresh_loop(
                 config_reader=config_reader,
+                langchain_provider=langchain_provider,
                 interval_minutes=interval,
             )
         )
