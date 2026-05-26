@@ -1,6 +1,9 @@
 import datetime
 import logging
+import threading
+import time
 import uuid
+from dataclasses import dataclass, field
 from typing import (
     Dict,
     Any,
@@ -62,6 +65,21 @@ from languagemodelcommon.utilities.request_information import RequestInformation
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
+
+_MODEL_CACHE_TTL_SECONDS = 300
+
+
+@dataclass
+class _CachedModelResources:
+    """Cached per-model resources that don't change between requests."""
+
+    catalog: ToolCatalog
+    llm: BaseChatModel
+    base_tools: list[BaseTool]
+    created_at: float = field(default_factory=time.monotonic)
+
+    def is_expired(self) -> bool:
+        return (time.monotonic() - self.created_at) > _MODEL_CACHE_TTL_SECONDS
 
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
@@ -150,46 +168,68 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
-    def _add_discovery_tools(
+        self._model_cache: Dict[str, _CachedModelResources] = {}
+        self._model_cache_lock = threading.Lock()
+
+    def _get_or_create_cached_resources(
         self,
         *,
-        tools: list[BaseTool],
-        mcp_tool_configs: list[AgentConfig],
+        model_config: ChatModelConfig,
         headers: Dict[str, str],
-        auth_interceptor: AuthMcpCallInterceptor,
-        session_pool: McpSessionPool | None = None,
-    ) -> tuple[list[BaseTool], ToolCatalog | None]:
-        """Replace direct MCP tool loading with meta-discovery tools.
+    ) -> _CachedModelResources:
+        """Return cached LLM, ToolCatalog, and base tools for a model.
 
-        Builds a ToolCatalog from MCP servers and adds search_tools +
-        call_tool to the tool list. The ToolDiscoveryMiddleware is
-        responsible for injecting category descriptions into the system
-        prompt at model-call time.
-
-        Returns:
-            A tuple of (tools, catalog). The catalog is ``None`` when no
-            categories were registered.
+        Creates them on first access or when the cache entry has expired.
+        The catalog and LLM are model-level resources that don't vary
+        between requests.
         """
+        cache_key = model_config.name
+        with self._model_cache_lock:
+            cached = self._model_cache.get(cache_key)
+            if cached is not None and not cached.is_expired():
+                return cached
+
+        llm: BaseChatModel = self.model_factory.get_model(
+            chat_model_config=model_config
+        )
+
+        base_tools: list[BaseTool] = (
+            self.tool_provider.get_tools(
+                tools=[t for t in model_config.get_agents()], headers=headers
+            )
+            if model_config.get_agents() is not None
+            else []
+        )
+
+        mcp_tool_configs: list[AgentConfig] = (
+            [t for t in model_config.get_agents()]
+            if model_config.get_agents() is not None
+            else []
+        )
         catalog = self.mcp_tool_provider.discover_tool_catalog(
             tools=mcp_tool_configs,
         )
 
-        resolver = self.mcp_tool_provider.create_tool_resolver(
-            headers=headers,
-            auth_interceptor=auth_interceptor,
+        resources = _CachedModelResources(
+            catalog=catalog,
+            llm=llm,
+            base_tools=base_tools,
         )
-        tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
-        tools.append(
-            CallToolTool(
-                catalog=catalog,
-                mcp_tool_provider=self.mcp_tool_provider,
-                auth_interceptor=auth_interceptor,
-                session_pool=session_pool,
-                proxy_base_url=self.environment_variables.mcp_app_proxy_base_url,
-            )
+        with self._model_cache_lock:
+            self._model_cache[cache_key] = resources
+        logger.info(
+            "Cached model resources for '%s' (llm + catalog with %d servers + %d base tools)",
+            cache_key,
+            len(mcp_tool_configs),
+            len(base_tools),
         )
+        return resources
 
-        return tools, catalog
+    def invalidate_cache(self) -> None:
+        """Clear all cached model resources (called on config refresh)."""
+        with self._model_cache_lock:
+            self._model_cache.clear()
+        logger.info("Model resource cache invalidated")
 
     @override
     async def chat_completions(
@@ -200,10 +240,12 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
-        # noinspection PyArgumentList
-        llm: BaseChatModel = self.model_factory.get_model(
-            chat_model_config=model_config
+        # Retrieve cached model-level resources (LLM, ToolCatalog, base tools)
+        cached = self._get_or_create_cached_resources(
+            model_config=model_config,
+            headers=headers,
         )
+        llm = cached.llm
 
         # noinspection PyUnusedLocal
         def get_current_time(*args: Any, **kwargs: Any) -> str:
@@ -211,14 +253,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             now = datetime.datetime.now()  # Get current time
             return now.strftime("%Y-%m-%d %H:%M:%S%Z%z")
 
-        # Initialize tools
-        tools: Sequence[BaseTool] = (
-            self.tool_provider.get_tools(
-                tools=[t for t in model_config.get_agents()], headers=headers
-            )
-            if model_config.get_agents() is not None
-            else []
-        )
+        # Start with the cached base tools (non-MCP tools from ToolProvider)
+        tools: list[BaseTool] = list(cached.base_tools)
 
         # Create a per-request auth interceptor so concurrent requests
         # don't share mutable auth state
@@ -242,15 +278,24 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # add MCP tools — either via meta-discovery or direct loading
         tool_catalog: ToolCatalog | None = None
         if model_config.use_tool_discovery:
-            tools, tool_catalog = self._add_discovery_tools(
-                tools=list(tools),
-                mcp_tool_configs=mcp_tool_configs,
+            # Reuse the cached catalog; only per-request items (resolver, session_pool) are new
+            tool_catalog = cached.catalog
+            resolver = self.mcp_tool_provider.create_tool_resolver(
                 headers=headers,
                 auth_interceptor=auth_interceptor,
-                session_pool=session_pool,
+            )
+            tools.append(SearchToolsTool(catalog=tool_catalog, resolver=resolver))
+            tools.append(
+                CallToolTool(
+                    catalog=tool_catalog,
+                    mcp_tool_provider=self.mcp_tool_provider,
+                    auth_interceptor=auth_interceptor,
+                    session_pool=session_pool,
+                    proxy_base_url=self.environment_variables.mcp_app_proxy_base_url,
+                )
             )
         else:
-            tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
+            tools = tools + await self.mcp_tool_provider.get_tools_async(
                 tools=mcp_tool_configs,
                 headers=headers,
                 auth_interceptor=auth_interceptor,
