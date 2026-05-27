@@ -136,6 +136,8 @@ services:
       SNAPSHOT_CACHE_TYPE: ${SNAPSHOT_CACHE_TYPE:-mongo}
       SNAPSHOT_CACHE_TTL_SECONDS: 3600
       SNAPSHOT_CACHE_COLLECTION_NAME: snapshot_cache
+      SNAPSHOT_CACHE_SCHEMA_VERSION: ${SNAPSHOT_CACHE_SCHEMA_VERSION:-1}
+      TOKEN_CACHE_SCHEMA_VERSION: ${TOKEN_CACHE_SCHEMA_VERSION:-1}
 #      SNAPSHOT_CACHE_MODEL_CONFIGS_COLLECTION: model_configs_snapshot
       # ── LLM storage & snapshot cache MongoDB ──────────────────────
       # All use MONGO_LLM_STORAGE_* vars, which fall back to
