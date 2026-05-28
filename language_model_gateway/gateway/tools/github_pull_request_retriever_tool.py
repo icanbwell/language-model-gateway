@@ -46,6 +46,7 @@ class GitHubPullRequestRetriever(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         url: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,
     ) -> Tuple[str, str]:
@@ -60,6 +61,7 @@ class GitHubPullRequestRetriever(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         url: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,
     ) -> Tuple[str, str]:

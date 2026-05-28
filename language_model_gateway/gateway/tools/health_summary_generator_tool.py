@@ -49,7 +49,7 @@ class HealthSummaryGeneratorTool(ResilientBaseTool):
     file_manager_factory: FileManagerFactory
 
     @override
-    async def _arun(self, s3_uri: str) -> Tuple[str, str]:
+    async def _arun(self, *, s3_uri: str) -> Tuple[str, str]:
         """
         Asynchronous version of the health summary generator tool.
         :param s3_uri: (string) s3 uri of the file which we need to parse.
@@ -78,7 +78,7 @@ class HealthSummaryGeneratorTool(ResilientBaseTool):
         return content, "File successfully fetched"
 
     @override
-    def _run(self, s3_uri: str) -> Tuple[str, str]:
+    def _run(self, *, s3_uri: str) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).
         :param s3_uri: (string) s3 uri of the file which we need to parse.

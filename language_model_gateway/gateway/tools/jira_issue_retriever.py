@@ -46,6 +46,7 @@ class JiraIssueRetriever(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         issue_id: str,
     ) -> Tuple[str, str]:
         """
@@ -95,6 +96,7 @@ class JiraIssueRetriever(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         issue_id: str,
     ) -> Tuple[str, str]:
         """

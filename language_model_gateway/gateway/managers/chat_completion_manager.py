@@ -285,6 +285,7 @@ class ChatCompletionManager:
     # noinspection PyMethodMayBeStatic
     def add_system_messages(
         self,
+        *,
         chat_request_wrapper: ChatRequestWrapper,
         system_prompts: List[PromptConfig] | None,
     ) -> ChatRequestWrapper:

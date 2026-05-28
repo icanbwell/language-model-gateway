@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 class UserMemoryValidator:
     @staticmethod
     def validate_action(
-        action: str | None, permitted: Optional[tuple[str, ...]] = None
+        *, action: str | None, permitted: Optional[tuple[str, ...]] = None
     ) -> None:
         if not action:
             raise ToolException("Action is required")
