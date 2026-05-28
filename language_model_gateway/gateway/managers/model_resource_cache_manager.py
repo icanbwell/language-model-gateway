@@ -114,7 +114,20 @@ class ModelResourceCacheManager:
     async def warm_cache(self, *, config_reader: ConfigReader) -> None:
         """Pre-warm the cache for all langchain model configs."""
         configs: list[ChatModelConfig] = await config_reader.read_model_configs_async()
+        warmed = 0
         for config in configs:
             if config.type == "langchain":
-                self.get_or_create(model_config=config)
-        logger.info("Pre-warmed model resource cache for langchain models")
+                try:
+                    self.get_or_create(model_config=config)
+                    warmed += 1
+                except Exception:
+                    logger.warning(
+                        "Failed to pre-warm model '%s', will retry on first request",
+                        config.name,
+                        exc_info=True,
+                    )
+        logger.info(
+            "Pre-warmed model resource cache: %d/%d langchain models ready",
+            warmed,
+            sum(1 for c in configs if c.type == "langchain"),
+        )
