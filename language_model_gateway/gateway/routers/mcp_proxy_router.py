@@ -7,7 +7,6 @@ from fastapi import params
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from oidcauthlib.auth.auth_manager import AuthManager
 from oidcauthlib.auth.token_reader import TokenReader
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from languagemodelcommon.configs.schemas.config_schema import AgentConfig
@@ -100,7 +99,6 @@ class McpProxyRouter:
         request: Request,
         body: Dict[str, Any],
         token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
-        auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
         config_reader: Annotated[ConfigReader, Depends(Inject(ConfigReader))],
         environment_variables: Annotated[
             LanguageModelGatewayEnvironmentVariables,
@@ -146,7 +144,6 @@ class McpProxyRouter:
         request: Request,
         body: Dict[str, Any],
         token_reader: Annotated[TokenReader, Depends(Inject(TokenReader))],
-        auth_manager: Annotated[AuthManager, Depends(Inject(AuthManager))],
         config_reader: Annotated[ConfigReader, Depends(Inject(ConfigReader))],
         environment_variables: Annotated[
             LanguageModelGatewayEnvironmentVariables,
