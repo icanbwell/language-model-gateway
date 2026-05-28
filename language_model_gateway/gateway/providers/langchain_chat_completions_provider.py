@@ -1,9 +1,6 @@
 import datetime
 import logging
-import threading
-import time
 import uuid
-from dataclasses import dataclass, field
 from typing import (
     Dict,
     Any,
@@ -18,7 +15,6 @@ from languagemodelcommon.utilities.tool_display_name_mapper import (
 )
 from starlette.responses import StreamingResponse, JSONResponse
 
-from langchain_core.language_models import BaseChatModel
 from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
@@ -29,12 +25,14 @@ from languagemodelcommon.configs.schemas.config_schema import (
 )
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.token_reader import TokenReader
+from language_model_gateway.gateway.managers.model_resource_cache_manager import (
+    ModelResourceCacheManager,
+)
 
 from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
 from languagemodelcommon.state.messages_state import MyMessagesState
-from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
@@ -52,7 +50,6 @@ from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
-from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
@@ -66,29 +63,13 @@ from languagemodelcommon.utilities.request_information import RequestInformation
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS["LLM"])
 
-_MODEL_CACHE_TTL_SECONDS = 300
-
-
-@dataclass
-class _CachedModelResources:
-    """Cached per-model resources that don't change between requests."""
-
-    catalog: ToolCatalog
-    llm: BaseChatModel
-    base_tools: list[BaseTool]
-    created_at: float = field(default_factory=time.monotonic)
-
-    def is_expired(self) -> bool:
-        return (time.monotonic() - self.created_at) > _MODEL_CACHE_TTL_SECONDS
-
 
 class LangChainCompletionsProvider(BaseChatCompletionsProvider):
     def __init__(
         self,
         *,
-        model_factory: ModelFactory,
+        model_resource_cache_manager: ModelResourceCacheManager,
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
-        tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
         pass_through_token_manager: PassThroughTokenManager,
@@ -96,11 +77,15 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         persistence_factory: PersistenceFactory,
         tool_display_name_mapper: ToolDisplayNameMapper,
     ) -> None:
-        self.model_factory: ModelFactory = model_factory
-        if self.model_factory is None:
-            raise ValueError("model_factory must not be None")
-        if not isinstance(self.model_factory, ModelFactory):
-            raise TypeError("model_factory must be an instance of ModelFactory")
+        self.model_resource_cache_manager: ModelResourceCacheManager = (
+            model_resource_cache_manager
+        )
+        if self.model_resource_cache_manager is None:
+            raise ValueError("model_resource_cache_manager must not be None")
+        if not isinstance(self.model_resource_cache_manager, ModelResourceCacheManager):
+            raise TypeError(
+                "model_resource_cache_manager must be an instance of ModelResourceCacheManager"
+            )
         self.lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter = (
             lang_graph_to_open_ai_converter
         )
@@ -112,11 +97,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             raise TypeError(
                 "lang_graph_to_open_ai_converter must be an instance of LangGraphToOpenAIConverter"
             )
-        self.tool_provider: ToolProvider = tool_provider
-        if self.tool_provider is None:
-            raise ValueError("tool_provider must not be None")
-        if not isinstance(self.tool_provider, ToolProvider):
-            raise TypeError("tool_provider must be an instance of ToolProvider")
 
         self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
         if self.mcp_tool_provider is None:
@@ -168,69 +148,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
-        self._model_cache: Dict[str, _CachedModelResources] = {}
-        self._model_cache_lock = threading.Lock()
-
-    def _get_or_create_cached_resources(
-        self,
-        *,
-        model_config: ChatModelConfig,
-        headers: Dict[str, str],
-    ) -> _CachedModelResources:
-        """Return cached LLM, ToolCatalog, and base tools for a model.
-
-        Creates them on first access or when the cache entry has expired.
-        The catalog and LLM are model-level resources that don't vary
-        between requests.
-        """
-        cache_key = model_config.name
-        with self._model_cache_lock:
-            cached = self._model_cache.get(cache_key)
-            if cached is not None and not cached.is_expired():
-                return cached
-
-        llm: BaseChatModel = self.model_factory.get_model(
-            chat_model_config=model_config
-        )
-
-        base_tools: list[BaseTool] = (
-            self.tool_provider.get_tools(
-                tools=[t for t in model_config.get_agents()], headers=headers
-            )
-            if model_config.get_agents() is not None
-            else []
-        )
-
-        mcp_tool_configs: list[AgentConfig] = (
-            [t for t in model_config.get_agents()]
-            if model_config.get_agents() is not None
-            else []
-        )
-        catalog = self.mcp_tool_provider.discover_tool_catalog(
-            tools=mcp_tool_configs,
-        )
-
-        resources = _CachedModelResources(
-            catalog=catalog,
-            llm=llm,
-            base_tools=base_tools,
-        )
-        with self._model_cache_lock:
-            self._model_cache[cache_key] = resources
-        logger.info(
-            "Cached model resources for '%s' (llm + catalog with %d servers + %d base tools)",
-            cache_key,
-            len(mcp_tool_configs),
-            len(base_tools),
-        )
-        return resources
-
-    def invalidate_cache(self) -> None:
-        """Clear all cached model resources (called on config refresh)."""
-        with self._model_cache_lock:
-            self._model_cache.clear()
-        logger.info("Model resource cache invalidated")
-
     @override
     async def chat_completions(
         self,
@@ -241,9 +158,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
         # Retrieve cached model-level resources (LLM, ToolCatalog, base tools)
-        cached = self._get_or_create_cached_resources(
+        cached = self.model_resource_cache_manager.get_or_create(
             model_config=model_config,
-            headers=headers,
         )
         llm = cached.llm
 
