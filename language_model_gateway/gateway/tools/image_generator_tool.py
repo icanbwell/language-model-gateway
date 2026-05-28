@@ -69,7 +69,7 @@ class ImageGeneratorTool(ResilientBaseTool):
         self._environment_variables = environment_variables
 
     @override
-    def _run(self, prompt: str) -> Tuple[str, str]:
+    def _run(self, *, prompt: str) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).
         :param prompt: The URL of the webpage to fetch.
@@ -78,7 +78,7 @@ class ImageGeneratorTool(ResilientBaseTool):
         raise NotImplementedError("Use async version of this tool")
 
     @override
-    async def _arun(self, prompt: str) -> Tuple[str, str]:
+    async def _arun(self, *, prompt: str) -> Tuple[str, str]:
         """
         Asynchronous version of the tool.
         :param prompt: The URL of the webpage to fetch.

@@ -44,7 +44,7 @@ class ConfluenceHelper:
         }
 
     async def search_content(
-        self, search_string: str, limit: int = 10
+        self, *, search_string: str, limit: int = 10
     ) -> List[ConfluenceSearchResult]:
         if not self.confluence_base_url:
             logger.error("Confluence base URL is not set.")
@@ -96,7 +96,7 @@ class ConfluenceHelper:
                 return []
 
     def write_results_to_csv(
-        self, search_results: List[ConfluenceSearchResult], output_file: str
+        self, *, search_results: List[ConfluenceSearchResult], output_file: str
     ) -> None:
         """
         Export search results to a CSV file.

@@ -345,7 +345,7 @@ class GitHubPullRequestAnalyzerTool(ResilientBaseTool):
                 # artifact += f"\n```{full_text}```"
 
             artifact += "\n\nResults:"
-            artifact += f"\n{CsvToMarkdownConverter.csv_to_markdown_table(full_text)}"
+            artifact += f"\n{CsvToMarkdownConverter.csv_to_markdown_table(csv_string=full_text)}"
 
             return full_text, artifact
 

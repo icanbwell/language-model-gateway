@@ -6,6 +6,7 @@ from typing import Union, Optional
 class CsvToMarkdownConverter:
     @staticmethod
     def csv_to_markdown_table(
+        *,
         csv_string: str,
         delimiter: str = ",",
         quote_char: str = '"',

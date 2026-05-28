@@ -69,7 +69,7 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
         self._environment_variables = environment_variables
 
     @override
-    def _run(self, dot_input: str) -> Tuple[str, str]:
+    def _run(self, *, dot_input: str) -> Tuple[str, str]:
         """
         Run the tool to generate a diagram from DOT input.
         :param dot_input: The DOT description of the graph.
@@ -78,7 +78,7 @@ class GraphVizDiagramGeneratorTool(ResilientBaseTool):
         raise NotImplementedError("Call the asynchronous version of the tool")
 
     @override
-    async def _arun(self, dot_input: str) -> Tuple[str, str]:
+    async def _arun(self, *, dot_input: str) -> Tuple[str, str]:
         """
         Asynchronous version of the tool.
         :param dot_input: The DOT description of the graph.

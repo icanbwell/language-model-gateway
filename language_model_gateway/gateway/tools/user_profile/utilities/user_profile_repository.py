@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class UserProfileRepository:
-    def __init__(self, store: BaseStore, namespace: str | tuple[str, ...]):
+    def __init__(self, *, store: BaseStore, namespace: str | tuple[str, ...]):
         self.store = store
         self.namespace = NamespaceTemplate(namespace)()
 

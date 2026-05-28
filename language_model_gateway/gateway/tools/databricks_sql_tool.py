@@ -42,15 +42,16 @@ class DatabricksSQLTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         fhir_request: Optional[str] = None,
     ) -> Tuple[str, Any]:
         raise NotImplementedError("Use async version of this tool")
 
     @override
-    async def _arun(self, fhir_request: str) -> Tuple[str, str]:
+    async def _arun(self, *, fhir_request: str) -> Tuple[str, str]:
         if not fhir_request or not fhir_request.strip():
             raise ValueError("Query cannot be empty or None")
-        results = self.databricks_helper.execute_query(fhir_request)
+        results = self.databricks_helper.execute_query(query=fhir_request)
         artifact = f"\n\nDatabricksSQLTool: Query Results\n {results}"
 
         return results, artifact

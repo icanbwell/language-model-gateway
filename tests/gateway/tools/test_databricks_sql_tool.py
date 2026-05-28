@@ -33,12 +33,12 @@ async def test_databricks_sql_tool_successful_query(
     mock_databricks_helper.execute_query.return_value = mock_result
 
     # Act
-    result, artifact = await databricks_sql_tool._arun(test_query)
+    result, artifact = await databricks_sql_tool._arun(fhir_request=test_query)
 
     # Assert
     assert result == mock_result
     assert "DatabricksSQLTool: Query Results" in artifact
-    mock_databricks_helper.execute_query.assert_called_once_with(test_query)
+    mock_databricks_helper.execute_query.assert_called_once_with(query=test_query)
 
 
 @pytest.mark.asyncio
@@ -53,7 +53,7 @@ async def test_databricks_sql_tool_empty_query(
 
     # Act & Assert
     with pytest.raises(ValueError):
-        await databricks_sql_tool._arun(test_query)
+        await databricks_sql_tool._arun(fhir_request=test_query)
 
 
 @pytest.mark.asyncio
@@ -69,12 +69,12 @@ async def test_databricks_sql_tool_error_handling(
     mock_databricks_helper.execute_query.return_value = mock_error_result
 
     # Act
-    result, artifact = await databricks_sql_tool._arun(test_query)
+    result, artifact = await databricks_sql_tool._arun(fhir_request=test_query)
 
     # Assert
     assert result == mock_error_result
     assert "DatabricksSQLTool: Query Results" in artifact
-    mock_databricks_helper.execute_query.assert_called_once_with(test_query)
+    mock_databricks_helper.execute_query.assert_called_once_with(query=test_query)
 
 
 @pytest.mark.parametrize(
@@ -97,12 +97,12 @@ async def test_databricks_sql_tool_multiple_queries(
     mock_databricks_helper.execute_query.return_value = mock_result
 
     # Act
-    result, artifact = await databricks_sql_tool._arun(query)
+    result, artifact = await databricks_sql_tool._arun(fhir_request=query)
 
     # Assert
     assert result == mock_result
     assert "DatabricksSQLTool: Query Results" in artifact
-    mock_databricks_helper.execute_query.assert_called_once_with(query)
+    mock_databricks_helper.execute_query.assert_called_once_with(query=query)
 
 
 def test_databricks_sql_tool_response_format(
@@ -173,4 +173,4 @@ async def test_databricks_sql_tool_empty_or_none_input(
     """
     # Act & Assert
     with pytest.raises(ValueError, match="Query cannot be empty or None"):
-        await databricks_sql_tool._arun(input_query)
+        await databricks_sql_tool._arun(fhir_request=input_query)

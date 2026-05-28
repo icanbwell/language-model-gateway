@@ -44,10 +44,10 @@ class ConfluenceSearchTool(ResilientBaseTool):
     confluence_helper: ConfluenceHelper
 
     @override
-    async def _arun(self, search_string: str, limit: int = 10) -> Tuple[str, str]:
+    async def _arun(self, *, search_string: str, limit: int = 10) -> Tuple[str, str]:
         try:
             search_results = await self.confluence_helper.search_content(
-                search_string, limit
+                search_string=search_string, limit=limit
             )
 
             logger.info(f"CONFLUENCE SEARCH TOOL, RESULTS:\n{search_results}")
@@ -60,7 +60,7 @@ class ConfluenceSearchTool(ResilientBaseTool):
                 self.confluence_helper.format_results_as_csv_for_display(search_results)
             )
             markdown_results = CsvToMarkdownConverter.csv_to_markdown_table(
-                csv_results_display
+                csv_string=csv_results_display
             )
 
             artifact = f"Search results for query: {search_string}\n\nResults:\n{markdown_results}"
@@ -70,7 +70,7 @@ class ConfluenceSearchTool(ResilientBaseTool):
             return error_msg, error_msg
 
     @override
-    def _run(self, search_string: str, limit: Optional[int] = 10) -> Tuple[str, str]:
+    def _run(self, *, search_string: str, limit: Optional[int] = 10) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).
 

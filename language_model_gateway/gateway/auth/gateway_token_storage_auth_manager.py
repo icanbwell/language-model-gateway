@@ -89,7 +89,9 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
             ):
                 await self._try_register_from_mcp_json(auth_provider)
             url_from_state: str | None = state_decoded.get("url")
-            if url_from_state and self._is_safe_redirect(url_from_state, request):
+            if url_from_state and self._is_safe_redirect(
+                url=url_from_state, request=request
+            ):
                 _pending_return_url_var.set(url_from_state)
         return await super().read_callback_response(request=request)
 
@@ -154,7 +156,7 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         return await self._mcp_json_fetcher.fetch_all_async()
 
     @staticmethod
-    def _is_safe_redirect(url: str, request: Request) -> bool:
+    def _is_safe_redirect(*, url: str, request: Request) -> bool:
         """Only allow relative paths or URLs pointing back to this server."""
         if url.startswith("/"):
             return True
