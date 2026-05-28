@@ -29,11 +29,11 @@ from languagemodelcommon.structures.openai.request.chat_completion_api_request_w
 from languagemodelcommon.structures.openai.request.chat_request_wrapper import (
     ChatRequestWrapper,
 )
-from languagemodelcommon.utilities.environment.language_model_common_environment_variables import (
-    LanguageModelCommonEnvironmentVariables,
-)
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
+)
+from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
+    LanguageModelGatewayEnvironmentVariables,
 )
 from tests.gateway.mocks.mock_open_ai_completions_provider import (
     MockOpenAiChatCompletionsProvider,
@@ -57,7 +57,7 @@ async def test_call_agent_with_input(async_client: httpx.AsyncClient) -> None:
             messages=chat_history + [user_message],
         ),
         enable_debug_logging=False,
-        environment_variables=LanguageModelCommonEnvironmentVariables(),
+        environment_variables=LanguageModelGatewayEnvironmentVariables(),
     )
 
     provider: OpenAiChatCompletionsProvider
