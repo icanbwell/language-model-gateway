@@ -13,8 +13,9 @@ from typing import (
 from languagemodelcommon.utilities.tool_display_name_mapper import (
     ToolDisplayNameMapper,
 )
-from starlette.responses import StreamingResponse, JSONResponse
+from starlette.responses import JSONResponse, Response, StreamingResponse
 
+from langchain_core.messages import AnyMessage
 from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
@@ -272,25 +273,73 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
             conversation_thread_id: str | None = headers.get("X-Chat-Id".lower())
 
-            result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-                compiled_state_graph=compiled_state_graph,
-                chat_request_wrapper=chat_request_wrapper,
-                system_messages=[],
-                request_information=RequestInformation(
-                    auth_information=auth_information,
-                    user_id=auth_information.subject,
-                    user_email=auth_information.email,
-                    user_name=auth_information.user_name,
-                    request_id=str(request_id),
-                    conversation_thread_id=conversation_thread_id
-                    if conversation_thread_id
-                    else str(request_id),
-                    headers=headers,
-                    tool_display_name_mapper=self.tool_display_name_mapper,
-                ),
-                config=None,
-                state=None,
+            request_information = RequestInformation(
+                auth_information=auth_information,
+                user_id=auth_information.subject,
+                user_email=auth_information.email,
+                user_name=auth_information.user_name,
+                request_id=str(request_id),
+                conversation_thread_id=conversation_thread_id
+                if conversation_thread_id
+                else str(request_id),
+                headers=headers,
+                tool_display_name_mapper=self.tool_display_name_mapper,
             )
+
+            # Inject user context as a system message after existing system
+            # messages (BaileyAI pattern: keep all system messages consecutive
+            # at the start). We handle this here rather than relying on the
+            # converter's add_system_message_for_user_info which appends to
+            # the end and breaks Anthropic's consecutive-system-message rule.
+            user_info_content: str = (
+                f"You are interacting with user_id: {auth_information.subject} "
+                f"who is named {auth_information.user_name} and has email {auth_information.email}"
+                if auth_information.subject
+                else "You are interacting with an anonymous user"
+            )
+            user_info_msg = chat_request_wrapper.create_system_message(
+                content=user_info_content
+            )
+            messages = chat_request_wrapper.messages
+            insert_idx = 0
+            for i, msg in enumerate(messages):
+                if msg.system_message:
+                    insert_idx = i + 1
+                else:
+                    break
+            messages.insert(insert_idx, user_info_msg)
+            chat_request_wrapper.messages = messages
+
+            result: Response
+            if chat_request_wrapper.stream:
+                result = StreamingResponse(
+                    content=await self.lang_graph_to_open_ai_converter.get_streaming_response_async(
+                        chat_request_wrapper=chat_request_wrapper,
+                        compiled_state_graph=compiled_state_graph,
+                        system_messages=[],
+                        request_information=request_information,
+                        config=None,
+                        state=None,
+                    ),
+                    media_type="text/event-stream",
+                )
+            else:
+                responses: list[
+                    AnyMessage
+                ] = await self.lang_graph_to_open_ai_converter.ainvoke(
+                    compiled_state_graph=compiled_state_graph,
+                    chat_request_wrapper=chat_request_wrapper,
+                    system_messages=[],
+                    request_information=request_information,
+                    config=None,
+                    state=None,
+                )
+                content_json = chat_request_wrapper.create_non_streaming_response(
+                    request_id=request_information.request_id,
+                    responses=responses,
+                    json_output_requested=False,
+                )
+                result = JSONResponse(content=content_json)
             # If result is a StreamingResponse, wrap the generator so context managers stay open
             if isinstance(result, StreamingResponse):
                 original_generator = result.body_iterator
