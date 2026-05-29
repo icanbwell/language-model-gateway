@@ -157,8 +157,15 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         await repo_manager.start()
 
         # Pre-warm OIDC discovery documents and JWKS so the first request
-        # doesn't pay the network latency cost
-        await well_known_manager.ensure_initialized_async()
+        # doesn't pay the network latency cost.  Non-fatal: if the cache
+        # backend (e.g. MongoDB) is unavailable, configs load on-demand.
+        try:
+            await well_known_manager.ensure_initialized_async()
+        except Exception:
+            logger.warning(
+                "OIDC well-known pre-warm failed; will load on-demand",
+                exc_info=True,
+            )
 
         # Eagerly load all configs and pre-warm model resource caches at startup
         await _load_all_configs(
