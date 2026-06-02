@@ -384,7 +384,7 @@ services:
     image: mcp-fhir-agent:local
     environment:
       <<: *agent_env
-      FHIR_SERVER_GET_URL: 'https://fhir-mcp.prod.bwell.zone/4_0_0/'
+      FHIR_SERVER_GET_URL: 'https://fhir.prod.bwell.zone/4_0_0/'
       TOKEN_EXCHANGE_GRAPHQL_URL: 'https://api.prod.icanbwell.com/v1/graphql'
       ATC_BFF_GRAPHQL: 'https://api-gateway.prod.icanbwell.com/atc-bff/v2/graphql'
       PSS_BASE_URL: 'https://api-gateway.prod.icanbwell.com/provider-search/graphql'
