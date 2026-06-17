@@ -146,6 +146,7 @@ class ScrapingBeeWebScraperTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         url: str,
         query: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,
@@ -156,6 +157,7 @@ class ScrapingBeeWebScraperTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         url: str,
         query: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,

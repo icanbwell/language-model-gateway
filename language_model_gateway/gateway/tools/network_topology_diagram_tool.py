@@ -97,6 +97,7 @@ class NetworkTopologyGeneratorTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         nodes: Dict[str, Dict[str, str]],
         connections: List[Dict[str, str]],
         title: Optional[str] = None,

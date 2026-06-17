@@ -84,6 +84,7 @@ class SequenceDiagramGeneratorTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         participants: List[str],
         interactions: List[List[str]],
         title: Optional[str] = None,
@@ -96,6 +97,7 @@ class SequenceDiagramGeneratorTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         participants: List[str],
         interactions: List[List[str]],
         title: Optional[str] = None,

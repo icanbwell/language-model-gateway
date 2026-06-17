@@ -25,7 +25,10 @@ class TestIsSafeRedirect:
     )
     def test_relative_paths_allowed(self, url: str) -> None:
         request = _make_request()
-        assert GatewayTokenStorageAuthManager._is_safe_redirect(url, request) is True
+        assert (
+            GatewayTokenStorageAuthManager._is_safe_redirect(url=url, request=request)
+            is True
+        )
 
     @pytest.mark.parametrize(
         "url",
@@ -36,12 +39,18 @@ class TestIsSafeRedirect:
     )
     def test_relative_without_slash_allowed(self, url: str) -> None:
         request = _make_request()
-        assert GatewayTokenStorageAuthManager._is_safe_redirect(url, request) is True
+        assert (
+            GatewayTokenStorageAuthManager._is_safe_redirect(url=url, request=request)
+            is True
+        )
 
     def test_same_host_absolute_url_allowed(self) -> None:
         request = _make_request("gateway.example.com")
         url = "https://gateway.example.com/skills/publish"
-        assert GatewayTokenStorageAuthManager._is_safe_redirect(url, request) is True
+        assert (
+            GatewayTokenStorageAuthManager._is_safe_redirect(url=url, request=request)
+            is True
+        )
 
     @pytest.mark.parametrize(
         "url",
@@ -53,9 +62,15 @@ class TestIsSafeRedirect:
     )
     def test_external_urls_rejected(self, url: str) -> None:
         request = _make_request("gateway.example.com")
-        assert GatewayTokenStorageAuthManager._is_safe_redirect(url, request) is False
+        assert (
+            GatewayTokenStorageAuthManager._is_safe_redirect(url=url, request=request)
+            is False
+        )
 
     def test_no_host_header_rejects_absolute_urls(self) -> None:
         request = _make_request("")
         url = "https://any-host.com/path"
-        assert GatewayTokenStorageAuthManager._is_safe_redirect(url, request) is False
+        assert (
+            GatewayTokenStorageAuthManager._is_safe_redirect(url=url, request=request)
+            is False
+        )

@@ -57,7 +57,7 @@ class URLToMarkdownTool(ResilientBaseTool):
 
     @override
     def _run(
-        self, url: str, use_verbose_logging: Optional[bool] = None
+        self, *, url: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
         """
         Synchronous version of the tool (falls back to async implementation).
@@ -68,7 +68,7 @@ class URLToMarkdownTool(ResilientBaseTool):
 
     @override
     async def _arun(
-        self, url: str, use_verbose_logging: Optional[bool] = None
+        self, *, url: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
         """
         Asynchronous version of the tool.

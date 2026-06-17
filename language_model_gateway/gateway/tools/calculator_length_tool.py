@@ -23,7 +23,7 @@ class CalculatorLengthTool(ResilientBaseTool):
     )
 
     @override
-    async def _arun(self, items: list[Any]) -> str:
+    async def _arun(self, *, items: list[Any]) -> str:
         """Run the tool to calculate the length of a list of items"""
         if items is None:
             logger.warning("No list provided to calculate the length.")
@@ -34,6 +34,6 @@ class CalculatorLengthTool(ResilientBaseTool):
         return f"The length of the provided list is: {length}"
 
     @override
-    def _run(self, items: list[Any]) -> str:
+    def _run(self, *, items: list[Any]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(items=items))

@@ -58,6 +58,9 @@ from language_model_gateway.gateway.managers.chat_completion_manager import (
     ChatCompletionManager,
 )
 from language_model_gateway.gateway.managers.model_manager import ModelManager
+from language_model_gateway.gateway.managers.model_resource_cache_manager import (
+    ModelResourceCacheManager,
+)
 from language_model_gateway.gateway.managers.system_command_manager import (
     SystemCommandManager,
 )
@@ -348,11 +351,19 @@ class LanguageModelGatewayContainerFactory:
         )
 
         container.singleton(
+            ModelResourceCacheManager,
+            lambda c: ModelResourceCacheManager(
+                model_factory=c.resolve(ModelFactory),
+                tool_provider=c.resolve(ToolProvider),
+                mcp_tool_provider=c.resolve(MCPToolProvider),
+            ),
+        )
+
+        container.singleton(
             LangChainCompletionsProvider,
             lambda c: LangChainCompletionsProvider(
-                model_factory=c.resolve(ModelFactory),
+                model_resource_cache_manager=c.resolve(ModelResourceCacheManager),
                 lang_graph_to_open_ai_converter=c.resolve(LangGraphToOpenAIConverter),
-                tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
                 token_reader=c.resolve(TokenReader),
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),

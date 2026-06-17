@@ -12,6 +12,9 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
+from oidcauthlib.auth.well_known_configuration.well_known_configuration_manager import (
+    WellKnownConfigurationManager,
+)
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -43,6 +46,9 @@ from language_model_gateway.gateway.routers.app_login_router import (
 from language_model_gateway.gateway.routers.skill_publish_router import (
     SkillPublishRouter,
 )
+from language_model_gateway.gateway.routers.mcp_proxy_router import (
+    McpProxyRouter,
+)
 from language_model_gateway.gateway.routers.token_submission_router import (
     TokenSubmissionRouter,
 )
@@ -54,6 +60,9 @@ from simple_container.container.inject import Inject
 
 from language_model_gateway.gateway.utilities.language_model_gateway_environment_variables import (
     LanguageModelGatewayEnvironmentVariables,
+)
+from language_model_gateway.gateway.managers.model_resource_cache_manager import (
+    ModelResourceCacheManager,
 )
 
 # warnings.filterwarnings("ignore", category=LangChainBetaWarning)
@@ -88,15 +97,25 @@ ContainerRegistry.set_default(
 async def _load_all_configs(
     *,
     config_reader: ConfigReader,
+    cache_manager: ModelResourceCacheManager | None = None,
 ) -> None:
-    """Eagerly load model configs (incl. MCP JSON resolution)."""
-    configs = await config_reader.read_model_configs_async()
+    """Eagerly load model configs (incl. MCP JSON resolution).
+
+    When cache_manager is provided, also pre-warms the per-model
+    resource cache (LLM instances, ToolCatalogs) so the first user
+    request avoids that setup cost.
+    """
+    configs: list[ChatModelConfig] = await config_reader.read_model_configs_async()
     logger.info("Loaded %d model configs (includes MCP JSON resolution)", len(configs))
+
+    if cache_manager is not None:
+        await cache_manager.warm_cache(config_reader=config_reader)
 
 
 async def _config_refresh_loop(
     *,
     config_reader: ConfigReader,
+    cache_manager: ModelResourceCacheManager,
     interval_minutes: int,
 ) -> None:
     """Periodically reload all configs in the background."""
@@ -104,8 +123,12 @@ async def _config_refresh_loop(
     while True:
         await asyncio.sleep(interval_seconds)
         try:
+            cache_manager.invalidate()
             await config_reader.clear_cache()
-            await _load_all_configs(config_reader=config_reader)
+            await _load_all_configs(
+                config_reader=config_reader,
+                cache_manager=cache_manager,
+            )
             logger.info("Background config refresh completed")
         except asyncio.CancelledError:
             raise
@@ -121,6 +144,8 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     repo_manager = container.resolve(GithubConfigRepoManager)
     snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
     config_reader = container.resolve(ConfigReader)
+    cache_manager = container.resolve(ModelResourceCacheManager)
+    well_known_manager = container.resolve(WellKnownConfigurationManager)
     refresh_task: asyncio.Task[None] | None = None
     try:
         logger.info(f"Starting application initialization for worker {worker_id}...")
@@ -131,14 +156,29 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Download GitHub config repo if configured (before first request)
         await repo_manager.start()
 
-        # Eagerly load all configs at startup
-        await _load_all_configs(config_reader=config_reader)
+        # Pre-warm OIDC discovery documents and JWKS so the first request
+        # doesn't pay the network latency cost.  Non-fatal: if the cache
+        # backend (e.g. MongoDB) is unavailable, configs load on-demand.
+        try:
+            await well_known_manager.ensure_initialized_async()
+        except Exception:
+            logger.warning(
+                "OIDC well-known pre-warm failed; will load on-demand",
+                exc_info=True,
+            )
+
+        # Eagerly load all configs and pre-warm model resource caches at startup
+        await _load_all_configs(
+            config_reader=config_reader,
+            cache_manager=cache_manager,
+        )
 
         # Start background refresh loop
         interval = env_vars.config_refresh_interval_minutes
         refresh_task = asyncio.create_task(
             _config_refresh_loop(
                 config_reader=config_reader,
+                cache_manager=cache_manager,
                 interval_minutes=interval,
             )
         )
@@ -181,6 +221,7 @@ def create_app() -> FastAPI:
     app1.include_router(AppLoginRouter(prefix="/app").get_router())
     app1.include_router(TokenSubmissionRouter(prefix="/app").get_router())
     app1.include_router(SkillPublishRouter(prefix="/skills").get_router())
+    app1.include_router(McpProxyRouter(prefix="/api/v1/mcp-proxy").get_router())
     # Mount the static directory
     app1.mount(
         "/static",

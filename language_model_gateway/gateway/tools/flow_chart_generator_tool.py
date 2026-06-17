@@ -105,6 +105,7 @@ class FlowChartGeneratorTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         nodes: Dict[str, Dict[str, Union[str, Dict[str, str]]]],
         connections: List[Dict[str, str]],
         title: Optional[str] = None,
@@ -117,6 +118,7 @@ class FlowChartGeneratorTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         nodes: Dict[str, Dict[str, Union[str, Dict[str, str]]]],
         connections: List[Dict[str, str]],
         title: Optional[str] = None,

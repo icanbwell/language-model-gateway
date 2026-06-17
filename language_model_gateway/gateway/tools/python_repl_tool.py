@@ -47,7 +47,7 @@ class PythonReplTool(ResilientBaseTool):
         )
 
     @override
-    async def _arun(self, query: str) -> str:
+    async def _arun(self, *, query: str) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         try:
             python_repl = PythonREPL()
@@ -63,7 +63,7 @@ class PythonReplTool(ResilientBaseTool):
             return f"Error running Python Repl: {e}"
 
     @override
-    def _run(self, query: str) -> str:
+    def _run(self, *, query: str) -> str:
         try:
             python_repl = PythonREPL()
             if self._should_log():

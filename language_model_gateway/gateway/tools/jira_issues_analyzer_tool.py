@@ -135,6 +135,7 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         project_name: Optional[str] = None,
         minimum_created_date: Optional[datetime] = None,
         maximum_created_date: Optional[datetime] = None,
@@ -159,6 +160,7 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         project_name: Optional[str] = None,
         minimum_created_date: Optional[datetime] = None,
         maximum_created_date: Optional[datetime] = None,
@@ -272,7 +274,7 @@ class JiraIssuesAnalyzerTool(ResilientBaseTool):
                 artifact += f"\nJira Query: {jira_issues_result.query}"
 
             artifact += "\n\nResults:"
-            artifact += f"\n{CsvToMarkdownConverter.csv_to_markdown_table(full_text)}"
+            artifact += f"\n{CsvToMarkdownConverter.csv_to_markdown_table(csv_string=full_text)}"
 
             return full_text, artifact
 
