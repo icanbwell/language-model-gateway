@@ -8,9 +8,6 @@ from languagemodelcommon.image_generation.image_generator_factory import (
 )
 from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
-    GithubConfigRepoManager,
-)
 from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
@@ -177,15 +174,6 @@ class LanguageModelGatewayContainerFactory:
             LanguageModelGatewayEnvironmentVariables,
             lambda c: LanguageModelGatewayEnvironmentVariables(),
         )
-        container.singleton(
-            GithubConfigRepoManager,
-            lambda c: GithubConfigRepoManager(
-                environment_variables=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ),
-            ),
-        )
-
         container.singleton(
             GithubPullRequestHelper,
             lambda c: GithubPullRequestHelper(

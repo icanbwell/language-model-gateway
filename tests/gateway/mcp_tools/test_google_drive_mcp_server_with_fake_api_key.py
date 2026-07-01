@@ -11,9 +11,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     AgentConfig,
 )
 from languagemodelcommon.models.model_factory import ModelFactory
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from language_model_gateway.gateway.utilities.environment_reader import (
     EnvironmentReader,
 )
@@ -42,11 +40,9 @@ async def test_google_drive_mcp_server_with_fake_api_key(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
     url: str = "http://mcp_server_gateway:5000/google_drive/"
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="test_google_drive",
@@ -66,7 +62,7 @@ async def test_google_drive_mcp_server_with_fake_api_key(
                     ),
                 ],
             )
-        ]
+        ],
     )
 
     client = AsyncOpenAI(
@@ -105,5 +101,3 @@ async def test_google_drive_mcp_server_with_fake_api_key(
     print("====== End of Final Content ======")
 
     assert "ABCDGX Test File Shared With b.well" in content
-
-    await model_configuration_cache.clear()
