@@ -41,7 +41,7 @@ up: create-docker-network fix-script-permissions ## starts docker containers
 	docker compose --progress=plain \
 	-f docker-compose-keycloak.yml \
 	 -f docker-compose-mongo.yml up -d && \
-	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 150 2 || exit 1 && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-mongo-1 || exit 1 && \
 	docker compose --progress=plain \
 	-f docker-compose.yml up -d && \
@@ -79,7 +79,7 @@ up-open-webui-auth: create-docker-network fix-script-permissions create-certs ch
 	-f docker-compose.yml \
 	-f docker-compose-mcp-server-gateway.yml \
 	up -d
-	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 || exit 1 && \
+	sh scripts/wait-for-healthy.sh language-model-gateway-keycloak-1 150 2 || exit 1 && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-mongo-1 || exit 1 && \
 	sh scripts/wait-for-healthy.sh language-model-gateway-mcp_server_gateway-1 || exit 1
 	docker compose \
