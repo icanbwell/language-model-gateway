@@ -70,6 +70,9 @@ from languagemodelcommon.mcp.interceptors.truncation import (
 from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
 )
+from languagemodelcommon.mcp.mcp_client.server_card_discovery import (
+    ServerCardDiscovery,
+)
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
@@ -323,6 +326,7 @@ class LanguageModelGatewayContainerFactory:
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
                 auth_server_metadata_discovery=McpAuthServerDiscovery(),
+                server_card_discovery=ServerCardDiscovery(),
             ),
         )
 
