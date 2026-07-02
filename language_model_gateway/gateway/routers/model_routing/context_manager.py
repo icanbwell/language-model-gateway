@@ -217,8 +217,46 @@ def _reassemble(
 
 
 def _char_estimate_tokens(oai_body: dict[str, Any]) -> int:
-    """Rough 4-chars-per-token heuristic used when the Qwen tokenizer is unavailable."""
-    return len(json.dumps(oai_body)) // 4
+    # 3.5 chars/token is more conservative than the 4-char nominal; code-heavy content
+    # often tokenizes more densely (lower chars/token) and the nominal heuristic
+    # understimates by ~4% on observed traffic, causing backend context-limit errors.
+    return int(len(json.dumps(oai_body)) / 3.5)
+
+
+def _apply_output_budget_cap(
+    oai_body: dict[str, Any],
+    token_count: int,
+    budget: ContextBudget,
+) -> dict[str, Any]:
+    """
+    Tighten max_tokens based on the final estimated input token count.
+
+    The safety margin is applied a second time here (it was already consumed by the
+    input compression budget). This protects against the char-estimate being lower
+    than the actual token count: if the estimate is off by up to one safety_margin,
+    the total (actual_input + max_tokens) stays within the backend limit.
+    """
+    current = oai_body.get("max_tokens")
+    if current is None:
+        return oai_body
+    safe = max(
+        0,
+        budget.backend_max_context_tokens
+        - token_count
+        - 2 * budget.tokenizer_safety_margin,
+    )
+    if current > safe:
+        logger.info(
+            "[coding-model-router] output cap after compression: %d → %d "
+            "(backend=%d - tokens=%d - 2×margin=%d)",
+            current,
+            safe,
+            budget.backend_max_context_tokens,
+            token_count,
+            budget.tokenizer_safety_margin,
+        )
+        return {**oai_body, "max_tokens": safe}
+    return oai_body
 
 
 def enforce_context_budget(
@@ -240,6 +278,20 @@ def enforce_context_budget(
     no changes are needed.
     """
     budget = build_budget(route)
+
+    # Cap max_tokens to reserved_output_tokens so input+output never exceeds backend limit.
+    # The client may request more output than the budget allows (e.g. 128k vs 65k reserved).
+    current_max_tokens = oai_body.get("max_tokens")
+    if (
+        current_max_tokens is not None
+        and current_max_tokens > budget.reserved_output_tokens
+    ):
+        logger.info(
+            "[coding-model-router] capping max_tokens %d → %d (reserved_output_tokens)",
+            current_max_tokens,
+            budget.reserved_output_tokens,
+        )
+        oai_body = {**oai_body, "max_tokens": budget.reserved_output_tokens}
 
     _raw_count = count_oai_request_tokens(oai_body, tokenizer_model)
     _using_char_estimate: bool
@@ -275,7 +327,7 @@ def enforce_context_budget(
     )
 
     if token_count <= budget.effective_input_tokens:
-        return oai_body
+        return _apply_output_budget_cap(oai_body, token_count, budget)
 
     logger.warning(
         "[coding-model-router] request exceeds budget by %d tokens (%d > %d); compressing",
@@ -302,7 +354,9 @@ def enforce_context_budget(
         )
         token_count = new_count
         if token_count <= budget.effective_input_tokens:
-            return {**oai_body, "messages": messages}
+            return _apply_output_budget_cap(
+                {**oai_body, "messages": messages}, token_count, budget
+            )
 
     # ── Phase 2: drop oldest message groups ──────────────────────────────────
     system_msg, groups, last_user_msg = _group_conversation(messages)
@@ -341,4 +395,6 @@ def enforce_context_budget(
         budget.effective_input_tokens,
     )
 
-    return {**oai_body, "messages": messages}
+    return _apply_output_budget_cap(
+        {**oai_body, "messages": messages}, token_count, budget
+    )
