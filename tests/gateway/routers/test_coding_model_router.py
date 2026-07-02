@@ -19,7 +19,7 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.gateway.routers.coding_model_router import (
+from language_model_gateway.gateway.routers.model_routing import (
     CodingModelRouter,
     _ThinkingStripper,
     _anthropic_to_openai_request,

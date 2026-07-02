@@ -11,7 +11,7 @@ import httpx
 import pytest
 from fastapi import FastAPI
 
-from language_model_gateway.gateway.routers.coding_model_router import CodingModelRouter
+from language_model_gateway.gateway.routers.model_routing import CodingModelRouter
 
 
 @pytest.fixture
