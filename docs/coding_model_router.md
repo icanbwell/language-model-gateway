@@ -222,8 +222,10 @@ Auth is handled implicitly: `passthrough` routes relay the client's
 
 ## Configuring a client to use the router
 
-Set `ANTHROPIC_BASE_URL` (and optionally `ANTHROPIC_API_KEY`) to point at the
-gateway host.
+Set `ANTHROPIC_BASE_URL` to point at the gateway host.  For `passthrough`
+routes (opus/fable), Claude Code's own `Authorization` header is forwarded
+verbatim to Anthropic — no separate `ANTHROPIC_API_KEY` env var is required
+at the gateway level.
 
 **Anthropic SDK (Python)**
 
@@ -231,17 +233,68 @@ gateway host.
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="http://localhost:4000",   # gateway host
-    api_key="dummy",                    # required by the SDK; ignored for aws routes
+    base_url="http://localhost:5050",   # gateway host (docker-compose port)
+    api_key="dummy",                    # required by the SDK; not forwarded for aws routes
 )
 ```
 
-**Claude Code / Claude Desktop**
+**Claude Code — one-off**
+
+| Environment | Base URL |
+|-------------|----------|
+| Local (`make up`) | `http://localhost:5050` |
+| Production | `https://language-model-gateway.services.bwell.zone` |
 
 ```sh
-export ANTHROPIC_BASE_URL=http://localhost:4000
-export ANTHROPIC_API_KEY=your-real-key   # only needed for passthrough routes
+# local
+export ANTHROPIC_BASE_URL=http://localhost:5050
+claude
+
+# production
+export ANTHROPIC_BASE_URL=https://language-model-gateway.services.bwell.zone
+claude
 ```
+
+**Claude Code — shell function (`~/.zshrc`)**
+
+Add the following block to your `~/.zshrc` to get a `claude-router` command
+that enables routing for a single invocation without affecting plain `claude`:
+
+```zsh
+# >>> claude model routing >>>
+# Run Claude Code WITH local model routing (Mode A — OAuth subscription).
+# Plain 'claude' is unaffected and still talks to Anthropic directly.
+# Session model is 'opusplan': Opus for plan-mode (complex reasoning), Sonnet for
+# execution (normal coding); Haiku still handles background tasks. Override per run
+# with 'claude-router --model sonnet' or /model.
+claude-router() {
+  # For production swap the URL below:
+  # ANTHROPIC_BASE_URL="https://language-model-gateway.services.bwell.zone"
+  echo "[model-router] proxy=localhost:5050" >&2
+  env -u ANTHROPIC_API_KEY \
+    ANTHROPIC_BASE_URL="http://localhost:5050" \
+    ANTHROPIC_MODEL="opusplan" \
+    CLAUDE_CODE_MAX_OUTPUT_TOKENS="200000" \
+    CLAUDE_CODE_AUTO_COMPACT_WINDOW="262144" \
+    CLAUDE_AUTOCOMPACT_PCT_OVERRIDE="55" \
+    DISABLE_NON_ESSENTIAL_MODEL_CALLS="1" \
+    DISABLE_AUTOUPDATER="1" \
+    DISABLE_TELEMETRY="1" \
+    DISABLE_ERROR_REPORTING="1" \
+    claude \
+      "$@"
+}
+# <<< claude model routing <<<
+```
+
+Key env vars:
+
+| Variable                            | Purpose                                                                                    |
+|-------------------------------------|--------------------------------------------------------------------------------------------|
+| `-u ANTHROPIC_API_KEY`              | Unsets any existing key so it is not accidentally forwarded to `aws` routes                |
+| `ANTHROPIC_BASE_URL`                | Points Claude Code at the gateway instead of `api.anthropic.com`                          |
+| `ANTHROPIC_MODEL`                   | Sets the default session model (`opusplan` = Opus for plan mode, Sonnet for execution)     |
+| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Suppresses background Claude calls (auto-title etc.) that would bypass the router directly |
 
 The client sends requests to `/v1/messages` exactly as it would to
 `api.anthropic.com`.  The router rewrites the destination based on the config
