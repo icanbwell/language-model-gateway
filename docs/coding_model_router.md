@@ -1,7 +1,8 @@
 # CodingModelRouter
 
-Routes Anthropic Messages API requests to either **Anthropic direct** (passthrough)
-or **AWS Bedrock** based on a JSON config keyed by model name.
+Routes Anthropic Messages API requests to **Claude models** (via Anthropic API
+passthrough) or **AWS Bedrock models** (Qwen, or Bedrock-hosted Claude) based on
+a JSON config keyed by model name.
 
 ---
 
@@ -14,9 +15,24 @@ requests exactly as they would to `api.anthropic.com`.  The router:
 
 1. Reads the `model` field from the request body.
 2. Looks up the model name in a local route config file.
-3. Forwards the request to the configured upstream (Anthropic or Bedrock).
+3. Forwards the request to the configured upstream — either Anthropic's API
+   (for Claude models) or AWS Bedrock (for Qwen or Bedrock-hosted Claude).
 4. Streams the response back verbatim, or translates it when the upstream
    speaks OpenAI Chat Completions format.
+
+The current production config uses a **tier-based routing model**:
+
+| Tier     | Client model         | Upstream                          | Backend model              |
+|----------|----------------------|-----------------------------------|----------------------------|
+| `haiku`  | `claude-haiku-4-5-*` | AWS Bedrock (OpenAI-compat)       | Qwen3-Coder-30B (fast/cheap) |
+| `sonnet` | `claude-sonnet-4-6`  | AWS Bedrock (OpenAI-compat)       | Qwen3-Coder-next (capable) |
+| `opus`   | `claude-opus-4-8`    | Anthropic API (passthrough)       | Claude Opus 4.8            |
+| `fable`  | `claude-fable-5`     | Anthropic API (passthrough)       | Claude Fable 5             |
+
+Haiku and Sonnet requests are handled by Bedrock Qwen models (lower cost, 262k
+context).  Opus and Fable requests are forwarded unchanged to Anthropic —
+the client's `Authorization` header is used directly, so no API key is needed
+at the gateway level for those tiers.
 
 ---
 
