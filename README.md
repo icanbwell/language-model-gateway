@@ -43,6 +43,7 @@ The project is structured into several main components:
 - **API**: Built using FastAPI, it provides endpoints for interacting with the language models.
 - **GraphQL**: Used for querying and mutating data.
 - **Routers**: Define the routes for different functionalities like chat completions, image generation, etc.
+  - [CodingModelRouter](docs/coding_model_router.md) — Anthropic/Bedrock proxy for model routing
 - **Managers**: Handle the business logic for different functionalities.
 - **Utilities**: Helper functions and classes used across the project.
 - **Tools**: AI Agents that perform specific tasks like querying databases, calling APIs, etc.

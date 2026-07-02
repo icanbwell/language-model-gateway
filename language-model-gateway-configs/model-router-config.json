@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {"tier": "haiku", "claude_model": "claude-haiku-4-5-20251001", "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions", "model": "qwen.qwen3-coder-30b-a3b-v1:0", "auth": "aws", "aws_region": "us-east-1", "api_type": "openai", "price_per_mtok": 0.15, "context_window": 262144, "max_tokens": 32768},
+    {"tier": "sonnet", "claude_model": "claude-sonnet-4-6", "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions", "model": "qwen.qwen3-coder-next", "auth": "aws", "aws_region": "us-east-1", "api_type": "openai", "price_per_mtok": 0.5, "context_window": 262144, "max_tokens": 65536},
+    {"tier": "opus", "claude_model": "claude-opus-4-8", "url": "https://api.anthropic.com/v1/messages", "model": "claude-opus-4-8", "auth": "passthrough", "price_per_mtok": 5.0},
+    {"tier": "fable", "claude_model": "claude-fable-5", "url": "https://api.anthropic.com/v1/messages", "model": "claude-fable-5", "auth": "passthrough", "price_per_mtok": 10.0}
+  ]
+}
