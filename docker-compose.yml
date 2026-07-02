@@ -160,7 +160,6 @@ services:
       # wait time for tool calls before timing out (in seconds)
       TOOL_CALL_TIMEOUT_SECONDS: '600'
       OPEN_TELEMETRY_LOG_LEVEL: 'DEBUG'
-      ROUTER_CONFIG: /usr/src/language_model_gateway/language-model-gateway-configs/model-router-config.json
       WRITE_TOOL_OUTPUT_TO_FILE: 1
       AWS_BEDROCK_READ_TIMEOUT_SECONDS: 1200
       STREAMING_BUFFER_FLUSH_INTERVAL_SECONDS: 1

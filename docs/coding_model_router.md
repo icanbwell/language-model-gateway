@@ -52,15 +52,13 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 
 | Variable        | Default                                    | Description                                      |
 |-----------------|--------------------------------------------|--------------------------------------------------|
-| `ROUTER_CONFIG` | `~/model-router/router_config.json`        | Path to the route config JSON file               |
-| `AWS_PROFILE`   | *(none)*                                   | AWS profile used when signing Bedrock requests   |
+| `ROUTER_CONFIG` | `<package>/gateway/routers/model_routing/model-router-config.json` | Path to the route config JSON file (defaults to the file bundled in the Python package) |
+| `AWS_PROFILE`   | *(none)*                                                           | AWS profile used when signing Bedrock requests                                          |
 
-In `docker-compose.yml` this is set to:
-```
-ROUTER_CONFIG: /usr/src/language_model_gateway/language-model-gateway-configs/model-router-config.json
-```
-which resolves via the existing `./:/usr/src/language_model_gateway/` volume mount to
-`language-model-gateway-configs/model-router-config.json` in the repo root.
+The config file lives at
+`language_model_gateway/gateway/routers/model_routing/model-router-config.json`
+and is bundled into the Docker image as part of the normal Python source copy.
+No separate volume mount or `ROUTER_CONFIG` env var is required.
 
 ---
 

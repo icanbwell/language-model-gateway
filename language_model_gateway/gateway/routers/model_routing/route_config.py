@@ -12,7 +12,10 @@ logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
 
 _CONFIG_PATH = Path(
-    os.environ.get("ROUTER_CONFIG", Path.home() / "model-router" / "router_config.json")
+    os.environ.get(
+        "ROUTER_CONFIG",
+        Path(__file__).parent / "model-router-config.json",
+    )
 )
 
 
