@@ -4,6 +4,12 @@ from datetime import datetime
 from enum import Enum
 from typing import Annotated, Dict, Any, TypedDict, Sequence
 
+from languagemodelcommon.context.request_context import init_request_context
+from languagemodelcommon.converters.stream_buffer import StreamBufferManager
+from languagemodelcommon.converters.stream_debug_output_manager import (
+    StreamDebugOutputManager,
+)
+
 from botocore.exceptions import TokenRetrievalError
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import params
@@ -157,7 +163,9 @@ class ChatCompletionsRouter:
 
             chat_request_wrapper: ChatCompletionApiRequestWrapper = (
                 ChatCompletionApiRequestWrapper(
-                    chat_request=chat_request_typed, enable_debug_logging=False
+                    chat_request=chat_request_typed,
+                    enable_debug_logging=False,
+                    environment_variables=environment_variables,
                 )
             )
             return await self._chat_completions(
@@ -218,7 +226,9 @@ class ChatCompletionsRouter:
         return await self._chat_completions(
             request=request,
             chat_request_wrapper=ResponsesApiRequestWrapper(
-                chat_request=chat_request_typed, enable_debug_logging=False
+                chat_request=chat_request_typed,
+                enable_debug_logging=False,
+                environment_variables=environment_variables,
             ),
             chat_manager=chat_manager,
             token_reader=token_reader,
@@ -250,6 +260,14 @@ class ChatCompletionsRouter:
                 request=request,
                 token_reader=token_reader,
                 auth_manager=auth_manager,
+            )
+
+            init_request_context(
+                stream_debug_output_manager=StreamDebugOutputManager(),
+                stream_buffer_manager=StreamBufferManager(
+                    flush_interval_seconds=environment_variables.streaming_buffer_flush_interval_seconds,
+                    enabled=environment_variables.enable_streaming_buffering,
+                ),
             )
 
             return await chat_manager.chat_completions(

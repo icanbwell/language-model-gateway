@@ -10,9 +10,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     ModelConfig,
     AgentConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
@@ -50,10 +48,8 @@ async def test_chat_flow_chart_generator(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="general_purpose",
@@ -68,7 +64,7 @@ async def test_chat_flow_chart_generator(
                     AgentConfig(name="flow_chart_generator"),
                 ],
             )
-        ]
+        ],
     )
 
     # Test health endpoint

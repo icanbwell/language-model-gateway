@@ -102,9 +102,9 @@ class AppLoginRouter:
             auth_provider=auth_provider
         )
         return self._templates.TemplateResponse(
+            request=request,
             name=self._form_template_filename,
             context={
-                "request": request,
                 "clients": client_keys,
                 "state": state,
             },

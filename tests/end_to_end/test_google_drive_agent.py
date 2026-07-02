@@ -28,9 +28,7 @@ from mcp.types import (
 from oidcauthlib.auth.models.token import Token
 
 from languagemodelcommon.state.messages_state import MyMessagesState
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.converters.streaming_tool_node import (
     StreamingToolNode,
 )
@@ -274,10 +272,8 @@ async def test_chat_completions_with_google_drive(
         verify_aws_boto3_authentication()
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="google_drive",
@@ -294,7 +290,7 @@ async def test_chat_completions_with_google_drive(
                     ),
                 ],
             )
-        ]
+        ],
     )
 
     # init client and connect to localhost server

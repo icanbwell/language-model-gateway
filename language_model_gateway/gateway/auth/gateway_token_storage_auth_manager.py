@@ -113,7 +113,9 @@ class GatewayTokenStorageAuthManager(TokenStorageAuthManager):
         for server_key, entry in mcp_config.mcpServers.items():
             if not entry.oauth:
                 continue
-            provider_key = _compute_oauth_provider_key(server_key, entry.oauth)
+            provider_key = _compute_oauth_provider_key(
+                server_key=server_key, oauth=entry.oauth
+            )
             if provider_key.lower() != auth_provider.lower():
                 continue
 

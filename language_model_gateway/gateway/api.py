@@ -18,9 +18,6 @@ from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
 
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
-    GithubConfigRepoManager,
-)
 from key_value.aio.stores.base import BaseContextManagerStore, BaseStore
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
 from language_model_gateway.container.container_factory import (
@@ -118,7 +115,6 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
     worker_id = id(app1)
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
-    repo_manager = container.resolve(GithubConfigRepoManager)
     snapshot_cache: BaseContextManagerStore = container.resolve(BaseStore)
     config_reader = container.resolve(ConfigReader)
     refresh_task: asyncio.Task[None] | None = None
@@ -128,10 +124,7 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
         # Open the snapshot cache store (MongoDB if configured, memory otherwise)
         await snapshot_cache.__aenter__()
 
-        # Download GitHub config repo if configured (before first request)
-        await repo_manager.start()
-
-        # Eagerly load all configs at startup
+        # Eagerly load all configs at startup (triggers GitHub download if configured)
         await _load_all_configs(config_reader=config_reader)
 
         # Start background refresh loop
@@ -162,7 +155,6 @@ async def lifespan(app1: FastAPI) -> AsyncGenerator[None, None]:
                     # Expected: background refresh task was cancelled during shutdown
                     logger.debug("Background refresh task cancelled during shutdown")
             await snapshot_cache.__aexit__(None, None, None)
-            await repo_manager.stop()
             logger.info("Application shutdown completed")
         except Exception:
             logger.exception("Application shutdown failed for worker %s", worker_id)
