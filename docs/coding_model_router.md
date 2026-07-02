@@ -65,13 +65,35 @@ Claude model name (as sent by the client) to an upstream destination.
       "model":        "upstream-model-id",   // model name forwarded to upstream
       "auth":         "passthrough" | "aws", // auth strategy (see below)
 
-      // Optional fields
+      // Optional routing metadata
+      "tier":         "haiku" | "sonnet" | "opus" | "fable", // logical tier label (informational)
       "api_type":     "anthropic" | "openai", // wire protocol (default: "anthropic")
-      "aws_region":   "us-east-1"             // AWS region for Bedrock (default: "us-east-1")
+      "aws_region":   "us-east-1",            // AWS region for Bedrock (default: "us-east-1")
+      "price_per_mtok": 0.5,                  // cost per million tokens (informational, not enforced)
+
+      // Context budget fields (openai routes only — controls Qwen token counting and compression)
+      "context_window":             262144,   // advertised context window returned to the client
+      "backend_max_context_tokens": 262144,   // actual backend limit used for budget math
+      "reserved_output_tokens":     32768,    // tokens reserved for output; caps max_tokens and reduces input budget
+      "tokenizer_safety_margin":    4096,     // extra headroom subtracted from input budget to absorb estimation error
+      "max_tokens":                 32768,    // default max_tokens cap applied when the client doesn't send one
+      "tokenizer_model":  "Qwen/Qwen3-Coder-30B-A3B-Instruct"
+                                              // HuggingFace model ID for accurate preflight token counting
     }
   ]
 }
 ```
+
+**Effective input budget formula** (for `api_type: openai` routes):
+
+```
+effective_input_tokens = backend_max_context_tokens
+                       - reserved_output_tokens
+                       - tokenizer_safety_margin
+```
+
+Example with the default Sonnet route:
+`262144 − 32768 − 4096 = 225280 tokens` available for input (system prompt + history + tools).
 
 If the config file is not found, the router logs a warning and falls back to
 Anthropic direct for all requests.
@@ -276,8 +298,10 @@ claude-router() {
     ANTHROPIC_MODEL="opusplan" \
     CLAUDE_CODE_MAX_OUTPUT_TOKENS="200000" \
     CLAUDE_CODE_AUTO_COMPACT_WINDOW="262144" \
-    CLAUDE_AUTOCOMPACT_PCT_OVERRIDE="55" \
+    CLAUDE_AUTOCOMPACT_PCT_OVERRIDE="80" \
+    DISABLE_PROMPT_CACHING="1" \
     DISABLE_NON_ESSENTIAL_MODEL_CALLS="1" \
+    CLAUDE_CODE_ATTRIBUTION_HEADER="0" \
     DISABLE_AUTOUPDATER="1" \
     DISABLE_TELEMETRY="1" \
     DISABLE_ERROR_REPORTING="1" \
@@ -289,12 +313,17 @@ claude-router() {
 
 Key env vars:
 
-| Variable                            | Purpose                                                                                    |
-|-------------------------------------|--------------------------------------------------------------------------------------------|
-| `-u ANTHROPIC_API_KEY`              | Unsets any existing key so it is not accidentally forwarded to `aws` routes                |
-| `ANTHROPIC_BASE_URL`                | Points Claude Code at the gateway instead of `api.anthropic.com`                          |
-| `ANTHROPIC_MODEL`                   | Sets the default session model (`opusplan` = Opus for plan mode, Sonnet for execution)     |
-| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Suppresses background Claude calls (auto-title etc.) that would bypass the router directly |
+| Variable                            | Purpose                                                                                                                         |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `-u ANTHROPIC_API_KEY`              | Unsets any existing key so it is not accidentally forwarded to `aws` routes                                                     |
+| `ANTHROPIC_BASE_URL`                | Points Claude Code at the gateway instead of `api.anthropic.com`                                                               |
+| `ANTHROPIC_MODEL`                   | Sets the default session model (`opusplan` = Opus for plan mode, Sonnet for execution)                                          |
+| `CLAUDE_CODE_MAX_OUTPUT_TOKENS`     | Upper bound Claude Code requests for output; the gateway caps this server-side to `reserved_output_tokens` (32 768)             |
+| `CLAUDE_CODE_AUTO_COMPACT_WINDOW`   | Tells Claude Code the total context window size (262 144 = Qwen's actual limit)                                                 |
+| `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`   | Compact conversation history at this % of the window. 80 % × 262 144 ≈ 210 k tokens, leaving ~15 k margin before the 225 k effective input budget |
+| `DISABLE_PROMPT_CACHING`            | Suppresses `cache_control` headers; AWS Bedrock does not support Anthropic prompt caching so these would be ignored anyway      |
+| `CLAUDE_CODE_ATTRIBUTION_HEADER`    | Prevents a per-request header from changing between calls, which would otherwise invalidate any server-side KV cache            |
+| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Suppresses background Claude calls (auto-title etc.) that would bypass the router directly                                      |
 
 The client sends requests to `/v1/messages` exactly as it would to
 `api.anthropic.com`.  The router rewrites the destination based on the config

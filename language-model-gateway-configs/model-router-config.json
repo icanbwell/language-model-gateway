@@ -26,10 +26,10 @@
       "api_type": "openai",
       "price_per_mtok": 0.5,
       "context_window": 262144,
-      "max_tokens": 65536,
+      "max_tokens": 32768,
       "tokenizer_model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
       "backend_max_context_tokens": 262144,
-      "reserved_output_tokens": 65536,
+      "reserved_output_tokens": 32768,
       "tokenizer_safety_margin": 4096
     },
     {
