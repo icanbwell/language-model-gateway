@@ -30,11 +30,6 @@ class TestLanguageModelGatewayEnvironmentVariables(
     def llm_storage_type(self) -> str:
         return "memory"
 
-    @override
-    @property
-    def snapshot_cache_type(self) -> str:
-        return "memory"
-
 
 def create_test_container() -> SimpleContainer:
     container: SimpleContainer = LanguageModelGatewayContainerFactory.create_container(
@@ -68,4 +63,4 @@ async def set_model_configs(
     """
     config_reader: ConfigReader = container.resolve(ConfigReader)
     await config_reader.clear_cache()
-    await config_reader._write_to_snapshot_cache(configs)
+    await config_reader._write_to_model_config_cache(configs)

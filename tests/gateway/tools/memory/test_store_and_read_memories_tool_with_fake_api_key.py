@@ -13,9 +13,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
     ChatModelConfig,
     ModelConfig,
 )
-from languagemodelcommon.utilities.cache.config_expiring_cache import (
-    ConfigExpiringCache,
-)
+from tests.common import set_model_configs
 from languagemodelcommon.image_generation.image_generator_factory import (
     ImageGeneratorFactory,
 )
@@ -54,10 +52,8 @@ async def test_store_and_read_memories_tool_with_fake_api_key(
         )
 
     # set the model configuration for this test
-    model_configuration_cache: ConfigExpiringCache = test_container.resolve(
-        ConfigExpiringCache
-    )
-    await model_configuration_cache.set(
+    await set_model_configs(
+        test_container,
         [
             ChatModelConfig(
                 id="general_purpose",
@@ -69,7 +65,7 @@ async def test_store_and_read_memories_tool_with_fake_api_key(
                     model="us.anthropic.claude-3-5-haiku-20241022-v1:0",
                 ),
             )
-        ]
+        ],
     )
 
     # Test health endpoint

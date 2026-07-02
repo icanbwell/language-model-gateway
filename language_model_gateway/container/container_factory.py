@@ -8,9 +8,6 @@ from languagemodelcommon.image_generation.image_generator_factory import (
 )
 from languagemodelcommon.ocr.ocr_extractor_factory import OCRExtractorFactory
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
-from languagemodelcommon.configs.config_reader.github_config_repo_manager import (
-    GithubConfigRepoManager,
-)
 from languagemodelcommon.configs.config_reader.mcp_json_fetcher import McpJsonFetcher
 from languagemodelcommon.container.container_factory import (
     LanguageModelCommonContainerFactory,
@@ -72,6 +69,9 @@ from languagemodelcommon.mcp.interceptors.truncation import (
 )
 from languagemodelcommon.mcp.auth.auth_server_metadata_discovery import (
     McpAuthServerDiscovery,
+)
+from languagemodelcommon.mcp.mcp_client.server_card_discovery import (
+    ServerCardDiscovery,
 )
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.models.model_factory import ModelFactory
@@ -177,15 +177,6 @@ class LanguageModelGatewayContainerFactory:
             LanguageModelGatewayEnvironmentVariables,
             lambda c: LanguageModelGatewayEnvironmentVariables(),
         )
-        container.singleton(
-            GithubConfigRepoManager,
-            lambda c: GithubConfigRepoManager(
-                environment_variables=c.resolve(
-                    LanguageModelGatewayEnvironmentVariables
-                ),
-            ),
-        )
-
         container.singleton(
             GithubPullRequestHelper,
             lambda c: GithubPullRequestHelper(
@@ -335,6 +326,7 @@ class LanguageModelGatewayContainerFactory:
                 truncation_interceptor=c.resolve(TruncationMcpCallInterceptor),
                 pass_through_token_manager=c.resolve(PassThroughTokenManager),
                 auth_server_metadata_discovery=McpAuthServerDiscovery(),
+                server_card_discovery=ServerCardDiscovery(),
             ),
         )
 
