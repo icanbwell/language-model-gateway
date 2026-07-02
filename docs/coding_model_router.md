@@ -315,7 +315,6 @@ claude-router() {
     CLAUDE_CODE_MAX_OUTPUT_TOKENS="200000" \
     CLAUDE_CODE_AUTO_COMPACT_WINDOW="262144" \
     CLAUDE_AUTOCOMPACT_PCT_OVERRIDE="80" \
-    DISABLE_PROMPT_CACHING="1" \
     DISABLE_NON_ESSENTIAL_MODEL_CALLS="1" \
     CLAUDE_CODE_ATTRIBUTION_HEADER="0" \
     DISABLE_AUTOUPDATER="1" \
@@ -337,7 +336,6 @@ Key env vars:
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS`     | Upper bound Claude Code requests for output; the gateway caps this server-side to `reserved_output_tokens` (32 768)             |
 | `CLAUDE_CODE_AUTO_COMPACT_WINDOW`   | Tells Claude Code the total context window size (262 144 = Qwen's actual limit)                                                 |
 | `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`   | Compact conversation history at this % of the window. 80 % × 262 144 ≈ 210 k tokens, leaving ~15 k margin before the 225 k effective input budget |
-| `DISABLE_PROMPT_CACHING`            | Suppresses `cache_control` headers; AWS Bedrock does not support Anthropic prompt caching so these would be ignored anyway      |
 | `CLAUDE_CODE_ATTRIBUTION_HEADER`    | Prevents a per-request header from changing between calls, which would otherwise invalidate any server-side KV cache            |
 | `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Suppresses background Claude calls (auto-title etc.) that would bypass the router directly                                      |
 
