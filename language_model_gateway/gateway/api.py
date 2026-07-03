@@ -26,7 +26,7 @@ from language_model_gateway.container.container_factory import (
 from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
     FastApiLoggingMiddleware,
 )
-from language_model_gateway.gateway.routers.model_routing import (
+from language_model_gateway.gateway.routers.model_routing.router import (
     CodingModelRouter,
 )
 from language_model_gateway.gateway.routers.chat_completion_router import (

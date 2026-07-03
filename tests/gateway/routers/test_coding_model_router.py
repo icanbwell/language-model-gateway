@@ -19,13 +19,17 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
-from language_model_gateway.gateway.routers.model_routing import (
-    CodingModelRouter,
-    _ThinkingStripper,
-    _anthropic_to_openai_request,
+from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
+)
+from language_model_gateway.gateway.routers.model_routing.message_translator import (
+    _anthropic_to_openai_request,
     _openai_to_anthropic_response,
-    _ROUTES,
+)
+from language_model_gateway.gateway.routers.model_routing.route_config import _ROUTES
+from language_model_gateway.gateway.routers.model_routing.router import CodingModelRouter
+from language_model_gateway.gateway.routers.model_routing.stream_converter import (
+    ThinkingStripper as _ThinkingStripper,
 )
 
 

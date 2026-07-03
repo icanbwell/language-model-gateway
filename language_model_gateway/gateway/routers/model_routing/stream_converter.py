@@ -33,9 +33,9 @@ class ThinkingStripper:
             if self._inside:
                 end = self._buf.find(self._CLOSE)
                 if end == -1:
-                    # Symmetric with open-tag branch: preserve suffix that might be start of close tag
+                    # Discard content inside the think block; keep only a suffix that
+                    # could be the start of the close tag so it isn't lost across chunks.
                     safe = self._safe_forward_len_close()
-                    out.append(self._buf[:safe])
                     self._buf = self._buf[safe:]
                     break
                 self._inside = False
