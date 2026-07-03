@@ -27,7 +27,9 @@ from language_model_gateway.gateway.routers.model_routing.message_translator imp
     _openai_to_anthropic_response,
 )
 from language_model_gateway.gateway.routers.model_routing.route_config import _ROUTES
-from language_model_gateway.gateway.routers.model_routing.router import CodingModelRouter
+from language_model_gateway.gateway.routers.model_routing.router import (
+    CodingModelRouter,
+)
 from language_model_gateway.gateway.routers.model_routing.stream_converter import (
     ThinkingStripper as _ThinkingStripper,
 )
