@@ -97,7 +97,7 @@ def _load_tokenizer(model_id: str) -> Any:
         "[coding-model-router] loading tokenizer '%s' (cached after first use)",
         model_id,
     )
-    return AutoTokenizer.from_pretrained(model_id)  # nosec B615 — model_id comes from operator config, not user input; revision pinning would require per-deployment SHA management outside this layer
+    return AutoTokenizer.from_pretrained(model_id)  # nosec B615 — model_id comes from operator config, not user input; revision pinning would require per-deployment SHA management outside this layer; trust_remote_code not needed for standard models
 
 
 def count_oai_request_tokens(

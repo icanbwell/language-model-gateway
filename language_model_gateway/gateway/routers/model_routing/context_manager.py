@@ -240,7 +240,7 @@ def _apply_output_budget_cap(
     if current is None:
         return oai_body
     safe = max(
-        0,
+        1024,
         budget.backend_max_context_tokens
         - token_count
         - 2 * budget.tokenizer_safety_margin,

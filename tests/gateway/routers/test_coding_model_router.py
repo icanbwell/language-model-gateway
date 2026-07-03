@@ -367,7 +367,7 @@ async def test_passthrough_unknown_model_calls_anthropic(
     assert response.status_code == 200
     intercepted = httpx_mock.get_requests()
     assert len(intercepted) == 1
-    assert "api.anthropic.com" in str(intercepted[0].url)
+    assert str(intercepted[0].url).startswith("https://api.anthropic.com/v1/messages")
 
 
 @pytest.mark.asyncio

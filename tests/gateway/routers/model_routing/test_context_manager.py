@@ -378,3 +378,28 @@ def test_truncation_marker_visible_in_compressed_result() -> None:
     big = "line\n" * 5000
     compressed = compress_tool_result_text(big)
     assert "[truncated" in compressed.lower()
+
+
+# ---------------------------------------------------------------------------
+# output budget cap — safe value floor (req 13)
+# ---------------------------------------------------------------------------
+
+
+def test_output_budget_cap_does_not_zero_out_safe_value() -> None:
+    """When context is severely exceeded, safe should be floored at 1024 not 0."""
+    from language_model_gateway.gateway.routers.model_routing.context_manager import (
+        _apply_output_budget_cap,
+    )
+
+    # In this scenario, token_count is very high, so:
+    # safe = max(1024, backend_max - token_count - 2*safety_margin)
+    #      = max(1024, 10000 - 20000 - 1000) = max(1024, -11000) = 1024
+    oai_body = {"max_tokens": 5000}
+    budget = ContextBudget(
+        backend_max_context_tokens=10000,
+        reserved_output_tokens=1000,
+        tokenizer_safety_margin=500,
+    )
+    # Simulate severe context overflow
+    result = _apply_output_budget_cap(oai_body, 20000, budget)
+    assert result["max_tokens"] == 1024
