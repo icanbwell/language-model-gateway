@@ -93,6 +93,7 @@ COPY --from=python_packages /usr/src/language_model_gateway/uv.lock ${PROJECT_DI
 COPY --from=python_packages /tmp/uv.lock /tmp/uv.lock
 
 # Create the folder where we will store generated images
+RUN mkdir -p ${HF_HOME}
 RUN mkdir -p ${PROJECT_DIR}/image_generation
 RUN mkdir -p ${PROJECT_DIR}/github_config_cache
 
