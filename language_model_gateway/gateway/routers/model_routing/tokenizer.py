@@ -97,7 +97,7 @@ def _load_tokenizer(model_id: str) -> Any:
         "[coding-model-router] loading tokenizer '%s' (cached after first use)",
         model_id,
     )
-    return AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)  # nosec B615
+    return AutoTokenizer.from_pretrained(model_id)
 
 
 def count_oai_request_tokens(

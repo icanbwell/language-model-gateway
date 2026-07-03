@@ -129,7 +129,7 @@ class CodingModelRouter:
             )
             route = {
                 "auth": "passthrough",
-                "url": f"https://api.anthropic.com/v1/messages{req_suffix}",
+                "url": "https://api.anthropic.com/v1/messages",
                 "model": model,
             }
 

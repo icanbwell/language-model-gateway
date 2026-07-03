@@ -33,7 +33,10 @@ class ThinkingStripper:
             if self._inside:
                 end = self._buf.find(self._CLOSE)
                 if end == -1:
-                    self._buf = ""
+                    # Symmetric with open-tag branch: preserve suffix that might be start of close tag
+                    safe = self._safe_forward_len_close()
+                    out.append(self._buf[:safe])
+                    self._buf = self._buf[safe:]
                     break
                 self._inside = False
                 self._buf = self._buf[end + len(self._CLOSE) :]
@@ -61,6 +64,14 @@ class ThinkingStripper:
 
     def _safe_forward_len(self) -> int:
         tag = self._OPEN
+        for i in range(1, len(tag)):
+            if self._buf.endswith(tag[:i]):
+                return len(self._buf) - i
+        return len(self._buf)
+
+    def _safe_forward_len_close(self) -> int:
+        """Return length to preserve trailing suffix that could be prefix of _CLOSE."""
+        tag = self._CLOSE
         for i in range(1, len(tag)):
             if self._buf.endswith(tag[:i]):
                 return len(self._buf) - i

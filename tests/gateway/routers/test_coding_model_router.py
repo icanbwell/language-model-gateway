@@ -371,6 +371,38 @@ async def test_passthrough_unknown_model_calls_anthropic(
 
 
 @pytest.mark.asyncio
+async def test_passthrough_unknown_model_count_tokens(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """Test that /count_tokens works for unknown models (falls back to Anthropic direct)."""
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages/count_tokens",
+        method="POST",
+        status_code=200,
+        content=b'{"error": {"type": "unknown_model"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+    }
+    response = await router_client.post(
+        "/v1/messages/count_tokens",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    # Verify the URL is correct - the fallback should not double-append /count_tokens
+    assert (
+        str(intercepted[0].url) == "https://api.anthropic.com/v1/messages/count_tokens"
+    )
+
+
+@pytest.mark.asyncio
 async def test_passthrough_route_forwards_auth_header(
     router_client: httpx.AsyncClient,
     httpx_mock: HTTPXMock,

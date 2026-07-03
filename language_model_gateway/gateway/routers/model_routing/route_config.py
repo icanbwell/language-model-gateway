@@ -33,6 +33,9 @@ def _load_config() -> dict[str, Any]:
         return {"routes": []}
 
 
+# Note: Config loaded at module import time and cached globally.
+# In production, containers are restarted when config changes via volume mounts.
+# For runtime config reload, call _reload_routes() to refresh _ROUTES from disk.
 _CONFIG: dict[str, Any] = _load_config()
 _ROUTES: dict[str, dict[str, Any]] = {}
 for _r in _CONFIG.get("routes", []):
@@ -47,3 +50,19 @@ for _r in _CONFIG.get("routes", []):
 
 def _find_route(model: str) -> dict[str, Any] | None:
     return _ROUTES.get(model)
+
+
+def _reload_routes() -> dict[str, dict[str, Any]]:
+    """Reload routes from disk and return the updated routes dict."""
+    global _CONFIG, _ROUTES
+    _CONFIG = _load_config()
+    _ROUTES = {}
+    for _r in _CONFIG.get("routes", []):
+        _key = _r["claude_model"]
+        if _key in _ROUTES:
+            logger.warning(
+                "[coding-model-router] duplicate route for model '%s' — later entry wins",
+                _key,
+            )
+        _ROUTES[_key] = _r
+    return _ROUTES

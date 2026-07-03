@@ -85,15 +85,8 @@ COPY pyproject.toml uv.lock* ${PROJECT_DIR}/
 # Copy the application code into the runtime image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
 
-# HuggingFace cache directory — set here so build-time download and runtime both use the same path.
+# HuggingFace cache directory — set here so build-time and runtime both use the same path.
 ENV HF_HOME=/opt/huggingface
-
-# Pre-download the Qwen tokenizer used by the model router for preflight token counting.
-# Without this, each worker downloads it on first request (10 workers × 5–15 replicas = up to
-# 150 concurrent HuggingFace downloads per rollout, risking rate-limiting and cold-start spikes).
-RUN python -c \
-    "from transformers import AutoTokenizer; \
-     AutoTokenizer.from_pretrained('Qwen/Qwen3-Coder-30B-A3B-Instruct', trust_remote_code=True)"
 
 # Copy the uv.lock from the first stage
 COPY --from=python_packages /usr/src/language_model_gateway/uv.lock ${PROJECT_DIR}/uv.lock
