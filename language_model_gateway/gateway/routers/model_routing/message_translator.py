@@ -1,10 +1,18 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from typing import Any
 
 from .constants import _OAI_TO_ANT_STOP
+
+# Environment variable to control whether to append cost savings info to response
+_COST_SAVINGS_ENABLED = os.environ.get("ENABLE_COST_SAVINGS_INFO", "false").lower() in (
+    "true",
+    "1",
+    "yes",
+)
 
 
 def _anthropic_content_to_text(content: str | list[Any]) -> str:
@@ -213,7 +221,7 @@ def _openai_to_anthropic_response(
                     "input": input_data,
                 }
             )
-    return {
+    response = {
         "id": msg_id,
         "type": "message",
         "role": "assistant",
@@ -226,3 +234,16 @@ def _openai_to_anthropic_response(
             "output_tokens": usage.get("completion_tokens", 0),
         },
     }
+
+    # Optionally append cost savings info to the response content
+    if _COST_SAVINGS_ENABLED and content:
+        input_tokens = usage.get("prompt_tokens", 0)
+        output_tokens = usage.get("completion_tokens", 0)
+        cost_info = (
+            f"\n\n—\n*Cost: {input_tokens} input + {output_tokens} output tokens. "
+            "Routing decision optimized for cost/quality balance.*"
+        )
+        # Prepend cost info so it appears at the top in Claude Code
+        content[0]["text"] = content[0]["text"] + cost_info
+
+    return response

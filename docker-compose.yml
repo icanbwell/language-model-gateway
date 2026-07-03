@@ -48,6 +48,8 @@ services:
       RETURN_RAW_TOOL_OUTPUT: 0
       DEFAULT_MODEL_PROVIDER: "bedrock"
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+      # Enable cost savings info in responses (appends token usage info to model output)
+      ENABLE_COST_SAVINGS_INFO: "false"
       GITHUB_ORGANIZATION_NAME: "icanbwell"
       GITHUB_MAXIMUM_REPOS: "100"
       GITHUB_MAXIMUM_PULL_REQUESTS_PER_REPO: "100"
