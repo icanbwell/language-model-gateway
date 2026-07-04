@@ -400,9 +400,10 @@ class CodingModelRouter:
                     )
             except openai.APIStatusError as exc:
                 logger.error(
-                    "[coding-model-router] upstream %d: %s",
+                    "[coding-model-router] upstream %d for model=%s: %s",
                     exc.status_code,
-                    exc.response.text,
+                    upstream_model,
+                    exc.response.text[:200],
                 )
                 try:
                     err_body = exc.response.json()
