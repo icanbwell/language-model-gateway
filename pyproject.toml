@@ -6,11 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "requests>=2.32.3",
     "ariadne>=0.23.0",
-    # Capped <0.137 until route-walking ASGI middleware (prometheus-fastapi-instrumentator
-    # per trallnag PR #371, and opentelemetry-instrumentation-fastapi) handle FastAPI's
-    # internal `_IncludedRouter` wrapper, which has no `.path` and 500s on preflight/
-    # method-mismatch requests. See BAI-267 (follow-up to BAI-265).
-    "fastapi>=0.115.8,<0.137.0",
+    "fastapi>=0.115.8",
     "boto3>=1.40.21",
     "botocore>=1.40.21",
     "uvicorn>=0.34.0",
@@ -75,8 +71,9 @@ dependencies = [
     "prometheus-fastapi-instrumentator>=7.1.0",
     "gunicorn>=23.0.0",
     "py-key-value-aio>=0.4.4",
-    "language-model-common>=2.0.46",
-    "jinja2>=3.1.6"
+    "language-model-common>=2.0.87",
+    "jinja2>=3.1.6",
+    "transformers>=4.45.0"
 ]
 
 [dependency-groups]

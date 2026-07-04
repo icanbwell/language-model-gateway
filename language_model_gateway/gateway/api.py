@@ -26,6 +26,9 @@ from language_model_gateway.container.container_factory import (
 from language_model_gateway.gateway.middleware.fastapi_logging_middleware import (
     FastApiLoggingMiddleware,
 )
+from language_model_gateway.gateway.routers.model_routing.router import (
+    CodingModelRouter,
+)
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -166,6 +169,7 @@ def create_app() -> FastAPI:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
 
+    app1.include_router(CodingModelRouter().get_router())
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())

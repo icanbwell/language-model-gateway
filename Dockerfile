@@ -85,11 +85,15 @@ COPY pyproject.toml uv.lock* ${PROJECT_DIR}/
 # Copy the application code into the runtime image
 COPY ./language_model_gateway ${PROJECT_DIR}/language_model_gateway
 
+# HuggingFace cache directory — set here so build-time and runtime both use the same path.
+ENV HF_HOME=/opt/huggingface
+
 # Copy the uv.lock from the first stage
 COPY --from=python_packages /usr/src/language_model_gateway/uv.lock ${PROJECT_DIR}/uv.lock
 COPY --from=python_packages /tmp/uv.lock /tmp/uv.lock
 
 # Create the folder where we will store generated images
+RUN mkdir -p ${HF_HOME}
 RUN mkdir -p ${PROJECT_DIR}/image_generation
 RUN mkdir -p ${PROJECT_DIR}/github_config_cache
 
@@ -106,7 +110,7 @@ RUN dot -V
 RUN addgroup -S appgroup && adduser -S -h /etc/appuser appuser -G appgroup
 
 # Ensure that the appuser owns the application files and directories
-RUN chown -R appuser:appgroup ${PROJECT_DIR} /opt/venv ${PROMETHEUS_MULTIPROC_DIR}
+RUN chown -R appuser:appgroup ${PROJECT_DIR} /opt/venv /opt/huggingface ${PROMETHEUS_MULTIPROC_DIR}
 
 # Switch to the restricted user to enhance security
 USER appuser
