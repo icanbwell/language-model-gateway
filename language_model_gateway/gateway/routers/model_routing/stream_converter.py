@@ -200,9 +200,13 @@ async def _stream_oai_sdk_to_anthropic(
     else:
         _stream_error_msg = None
     finally:
-        _close_result = stream.close()
-        if inspect.isawaitable(_close_result):
-            await _close_result
+        if stream is not None:
+            # Handle both sync close() and async aclose()
+            close_method = getattr(stream, "aclose", getattr(stream, "close", None))
+            if close_method is not None:
+                _close_result = close_method()
+                if inspect.isawaitable(_close_result):
+                    await _close_result
 
     if not sent_message_start:
         yield _sse_event(
