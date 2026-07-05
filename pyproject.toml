@@ -136,3 +136,6 @@ url = "https://imranq2.github.io/alpine-wheels/docs/"
 
 [tool.uv]
 index-strategy = "unsafe-best-match"
+override-dependencies = [
+    "tokenizers>=0.23.1",
+]
