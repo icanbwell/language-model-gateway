@@ -3,6 +3,7 @@
     {
       "tier": "haiku",
       "claude_model": "claude-haiku-4-5-20251001",
+      "claude_model_pattern": "^claude-haiku-",
       "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions",
       "model": "qwen.qwen3-coder-30b-a3b-v1:0",
       "auth": "aws",
@@ -18,7 +19,8 @@
     },
     {
       "tier": "sonnet",
-      "claude_model": "claude-sonnet-4-6",
+      "claude_model": "claude-sonnet-5",
+      "claude_model_pattern": "^claude-sonnet(-|$)",
       "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions",
       "model": "qwen.qwen3-coder-next",
       "auth": "aws",
@@ -35,6 +37,7 @@
     {
       "tier": "opus",
       "claude_model": "claude-opus-4-8",
+      "claude_model_pattern": "^claude-opus-",
       "url": "https://api.anthropic.com/v1/messages",
       "model": "claude-opus-4-8",
       "auth": "passthrough",
@@ -43,6 +46,7 @@
     {
       "tier": "fable",
       "claude_model": "claude-fable-5",
+      "claude_model_pattern": "^claude-fable-",
       "url": "https://api.anthropic.com/v1/messages",
       "model": "claude-fable-5",
       "auth": "passthrough",

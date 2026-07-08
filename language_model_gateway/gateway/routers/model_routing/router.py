@@ -122,9 +122,12 @@ class CodingModelRouter:
         route = _find_route(model)
         req_suffix = request.url.path[len("/v1/messages") :]
 
+        is_fallback_route: bool = route is None
         if route is None:
-            logger.warning(
-                "[coding-model-router] unknown model '%s' — falling back to Anthropic direct",
+            logger.error(
+                "[coding-model-router] unknown model '%s' — falling back to Anthropic "
+                "direct with no cost-routing or context-budget enforcement; "
+                "add a route (or claude_model_pattern) for it in model-router-config.json",
                 model,
             )
             route = {
@@ -135,7 +138,12 @@ class CodingModelRouter:
 
         auth: str = route["auth"]
         api_type: str = route.get("api_type", "anthropic")
-        upstream_model: str = route["model"]
+        # Passthrough routes forward the client's exact model id — Anthropic is
+        # authoritative on which model ids exist, so a version-bumped id must
+        # never be silently overridden by a possibly-stale pinned config value.
+        # Bedrock/openai routes DO rewrite to the configured backend model id,
+        # since that's a genuinely different upstream model, not just a version.
+        upstream_model: str = model if auth == "passthrough" else route["model"]
         is_streaming: bool = bool(body_json.get("stream"))
         tokenizer_model: str | None = route.get("tokenizer_model")
 
@@ -456,6 +464,8 @@ class CodingModelRouter:
                 target_url,
                 error_body[:1000].decode("utf-8", errors="replace"),
             )
+            if is_fallback_route:
+                error_body = self._annotate_fallback_error(error_body, model)
             return Response(
                 content=error_body,
                 status_code=upstream_resp.status_code,
@@ -475,6 +485,31 @@ class CodingModelRouter:
             headers=resp_headers,
             media_type=upstream_resp.headers.get("content-type", "text/event-stream"),
         )
+
+    @staticmethod
+    def _annotate_fallback_error(error_body: bytes, model: str) -> bytes:
+        """
+        Prefix an upstream error with a note explaining that this request had
+        no configured route and went directly to Anthropic — without cost-
+        routing or context-budget enforcement. Without this, a fallback
+        request that later hits a real context-length error just looks like
+        a bare, unexplained "context exceeded" failure with no link back to
+        the actual root cause (a missing/stale route entry).
+        """
+        note = (
+            f"[language-model-gateway] model '{model}' has no configured route — "
+            "this request went directly to Anthropic without cost-routing or "
+            "context-budget enforcement. Original error: "
+        )
+        try:
+            parsed = json.loads(error_body)
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return note.encode() + error_body
+        error_obj = parsed.get("error")
+        if isinstance(error_obj, dict) and isinstance(error_obj.get("message"), str):
+            error_obj["message"] = note + error_obj["message"]
+            return json.dumps(parsed).encode()
+        return note.encode() + error_body
 
     @staticmethod
     def _error_response(
