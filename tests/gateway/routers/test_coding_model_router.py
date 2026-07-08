@@ -13,6 +13,7 @@ Tests cover:
 """
 
 import json
+import re
 from unittest.mock import patch
 
 import httpx
@@ -463,6 +464,69 @@ async def test_passthrough_route_forwards_auth_header(
 
 
 @pytest.mark.asyncio
+async def test_passthrough_forwards_clients_model_not_configured_model(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """
+    A passthrough route matched via claude_model_pattern (not the exact
+    claude_model key) must forward the client's exact requested model id, not
+    the pinned `model` value from config — Anthropic is authoritative on
+    which model ids exist, so a stale pinned id must never silently override
+    a newer one the client actually asked for.
+    """
+    fake_route = {
+        "claude_model": "claude-opus-stale-pin",
+        "claude_model_pattern": "^claude-opus-stale",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-opus-OLD-PINNED-ID",
+        "auth": "passthrough",
+    }
+    upstream_body = json.dumps(
+        {
+            "id": "msg_1",
+            "type": "message",
+            "role": "assistant",
+            "content": [{"type": "text", "text": "ok"}],
+            "model": "claude-opus-stale-pin-v2",
+            "stop_reason": "end_turn",
+            "stop_sequence": None,
+            "usage": {"input_tokens": 1, "output_tokens": 1},
+        }
+    ).encode()
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=upstream_body,
+        headers={"content-type": "application/json"},
+    )
+
+    with patch(
+        "language_model_gateway.gateway.routers.model_routing.route_config._PATTERNS",
+        [(re.compile("^claude-opus-stale"), fake_route)],
+    ):
+        body = {
+            "model": "claude-opus-stale-pin-v2",  # matches via pattern, not exact key
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={
+                "content-type": "application/json",
+                "authorization": "Bearer key",
+            },
+        )
+
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    sent_body = json.loads(intercepted[0].content)
+    assert sent_body["model"] == "claude-opus-stale-pin-v2"
+
+
+@pytest.mark.asyncio
 async def test_upstream_error_propagated(
     router_client: httpx.AsyncClient,
     httpx_mock: HTTPXMock,
@@ -486,3 +550,79 @@ async def test_upstream_error_propagated(
         headers={"content-type": "application/json"},
     )
     assert response.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_unmatched_model_error_is_annotated_with_fallback_note(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """
+    When a model has no configured route, the request silently falls back to
+    Anthropic direct with no cost-routing or context-budget enforcement. If
+    that fallback request then errors upstream (e.g. context exceeded), the
+    client must see *why* — not just the bare upstream error — so the
+    confusing "context exceeded" symptom is traceable to the actual root
+    cause (missing route config).
+    """
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=400,
+        content=b'{"error": {"message": "prompt is too long: 205000 tokens"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-brand-new-tier-9",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await router_client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 400
+    error_message = response.json()["error"]["message"]
+    assert "claude-brand-new-tier-9" in error_message
+    assert "no configured route" in error_message
+    assert "prompt is too long: 205000 tokens" in error_message
+
+
+@pytest.mark.asyncio
+async def test_matched_route_error_is_not_annotated(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A route that *is* configured (not a fallback) must return the upstream
+    error verbatim — the annotation is only for unmatched-model fallbacks."""
+    fake_route = {
+        "claude_model": "claude-configured-test",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-configured-test",
+        "auth": "passthrough",
+    }
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=401,
+        content=b'{"error": {"message": "Unauthorized"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-configured-test": fake_route}):
+        body = {
+            "model": "claude-configured-test",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 401
+    assert response.json() == {"error": {"message": "Unauthorized"}}

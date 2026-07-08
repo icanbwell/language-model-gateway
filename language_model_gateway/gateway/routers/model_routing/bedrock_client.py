@@ -42,10 +42,19 @@ def _throttle_backoff(attempt: int) -> float:
 
 
 def _is_throttling(status_code: int, body_text: str = "") -> bool:
-    if _CONTEXT_OVERFLOW_RE.search(body_text or ""):
-        return False
+    # Context overflow errors (input token limits) are not retried as throttling
+    # EXCEPT for 429 status codes, which explicitly indicate rate limiting.
+    # A 429 with "context overflow" in the body should still be retried.
     if status_code == 429:
         return True
+    # Only exclude context overflow for non-429 client errors (4xx)
+    if (
+        status_code >= 400
+        and status_code != 429
+        and _CONTEXT_OVERFLOW_RE.search(body_text or "")
+    ):
+        return False
+    # Check body text for throttling indicators in error responses (4xx/5xx)
     if status_code >= 400 and _THROTTLE_TEXT_RE.search(body_text or ""):
         return True
     return False

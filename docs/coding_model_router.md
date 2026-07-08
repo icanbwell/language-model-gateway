@@ -22,17 +22,29 @@ requests exactly as they would to `api.anthropic.com`.  The router:
 
 The current production config uses a **tier-based routing model**:
 
-| Tier     | Client model         | Upstream                          | Backend model              |
-|----------|----------------------|-----------------------------------|----------------------------|
-| `haiku`  | `claude-haiku-4-5-*` | AWS Bedrock (OpenAI-compat)       | Qwen3-Coder-30B (fast/cheap) |
-| `sonnet` | `claude-sonnet-4-6`  | AWS Bedrock (OpenAI-compat)       | Qwen3-Coder-next (capable) |
-| `opus`   | `claude-opus-4-8`    | Anthropic API (passthrough)       | Claude Opus 4.8            |
-| `fable`  | `claude-fable-5`     | Anthropic API (passthrough)       | Claude Fable 5             |
+| Tier     | Client model (exact) | Client model (pattern) | Upstream                     | Backend model                |
+|----------|-----------------------|-------------------------|-------------------------------|-------------------------------|
+| `haiku`  | `claude-haiku-4-5-*`  | `^claude-haiku-`        | AWS Bedrock (OpenAI-compat)   | Qwen3-Coder-30B (fast/cheap)  |
+| `sonnet` | `claude-sonnet-5`     | `^claude-sonnet(-\|$)`  | AWS Bedrock (OpenAI-compat)   | Qwen3-Coder-next (capable)    |
+| `opus`   | `claude-opus-4-8`     | `^claude-opus-`         | Anthropic API (passthrough)   | Claude Opus 4.8               |
+| `fable`  | `claude-fable-5`      | `^claude-fable-`        | Anthropic API (passthrough)   | Claude Fable 5                |
 
 Haiku and Sonnet requests are handled by Bedrock Qwen models (lower cost, 262k
 context).  Opus and Fable requests are forwarded unchanged to Anthropic —
 the client's `Authorization` header is used directly, so no API key is needed
 at the gateway level for those tiers.
+
+Each tier also has a `claude_model_pattern` regex (see schema below) so a
+Claude model *version bump* (e.g. `claude-sonnet-4-6` → `claude-sonnet-5` →
+`claude-sonnet-6`) keeps routing correctly without a config change — the
+exact `claude_model` key is only the fast-path/documentation value, matched
+first; the pattern is the fallback that keeps old *and* new ids working.
+Only a genuinely new tier needs a new route entry. This is a
+recurrence-prevention fix for an incident where the exact-match-only sonnet
+route silently fell back to Anthropic direct after Claude Code's default
+model id changed, bypassing cost-routing and context-budget enforcement with
+no visible symptom until a real context-length error surfaced downstream,
+confusingly unrelated to the actual root cause.
 
 ---
 
@@ -74,12 +86,15 @@ Claude model name (as sent by the client) to an upstream destination.
   "routes": [
     {
       // Required fields
-      "claude_model": "claude-sonnet-4-6",   // model name the client sends
+      "claude_model": "claude-sonnet-5",     // model name the client sends (exact match, checked first)
       "url":          "https://...",          // upstream URL
-      "model":        "upstream-model-id",   // model name forwarded to upstream
+      "model":        "upstream-model-id",   // model name forwarded to upstream (aws/openai routes only — see note below)
       "auth":         "passthrough" | "aws", // auth strategy (see below)
 
       // Optional routing metadata
+      "claude_model_pattern": "^claude-sonnet(-|$)", // regex fallback checked when claude_model doesn't match exactly;
+                                              // keeps routing correct across Claude model version bumps (old and new
+                                              // ids both match) without needing a config change per bump
       "tier":         "haiku" | "sonnet" | "opus" | "fable", // logical tier label (informational)
       "api_type":     "anthropic" | "openai", // wire protocol (default: "anthropic")
       "aws_region":   "us-east-1",            // AWS region for Bedrock (default: "us-east-1")
@@ -112,15 +127,20 @@ Example with the default Sonnet route:
 If the config file is not found, the router logs a warning and falls back to
 Anthropic direct for all requests.
 
-If a model is not listed in `routes`, the router also falls back to Anthropic
-direct, forwarding the client's `Authorization` header unchanged.
+If a model is not listed in `routes` (no exact or pattern match), the router
+also falls back to Anthropic direct, forwarding the client's `Authorization`
+header unchanged — but this is now logged at **ERROR** (not warning) and, if
+the fallback request then errors upstream, the error body returned to the
+client is annotated with a note that the request had no configured route, so
+a confusing downstream symptom (e.g. a context-length error) is traceable
+back to the actual root cause instead of looking unrelated.
 
 ### Auth strategies
 
 | Value         | Behaviour                                                                               |
 |---------------|-----------------------------------------------------------------------------------------|
-| `passthrough` | Forwards the client's `Authorization` header to the upstream as-is (Anthropic direct). |
-| `aws`         | Signs each request with AWS SigV4 (for Bedrock). No auth header is forwarded.          |
+| `passthrough` | Forwards the client's `Authorization` header, and the client's exact requested model id (not the configured `model` value), to the upstream as-is (Anthropic direct). |
+| `aws`         | Signs each request with AWS SigV4 (for Bedrock); forwards the configured `model` value, since that's a genuinely different backend model id. No auth header is forwarded. |
 
 ### API types
 
@@ -231,7 +251,9 @@ context window) are not retried and are surfaced immediately.  For
 ## Error handling
 
 Upstream errors (4xx/5xx) are returned to the client with the original status
-code and body.
+code and body — except for unmatched-model fallback requests (see "Auth
+strategies" above), where the error body's `error.message` is prefixed with a
+note identifying the missing route as the likely root cause.
 
 AWS credential errors (`TokenRetrievalError`) and other infrastructure errors
 are surfaced as a valid Anthropic assistant message with `stop_reason:
