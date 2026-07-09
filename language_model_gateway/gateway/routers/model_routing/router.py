@@ -26,7 +26,7 @@ import json
 import logging
 import os
 from enum import Enum
-from typing import AsyncGenerator, Sequence
+from typing import Any, AsyncGenerator, Sequence
 
 import httpx
 from fastapi import APIRouter
@@ -60,9 +60,11 @@ from .tokenizer import count_oai_request_tokens
 from .stream_converter import (
     _msg_id,
     _oai_stream_with_cleanup,
+    _oai_stream_with_usage_tracking,
     _sse_event,
     _stream_passthrough,
 )
+from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
@@ -82,12 +84,23 @@ class CodingModelRouter:
         prefix: str = "/v1",
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
+        mongo_uri: str | None = None,
+        usage_db_name: str = "llm_storage",
+        usage_collection_name: str = "usage",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
             tags=tags or ["anthropic-proxy"],
             dependencies=dependencies or [],
         )
+        self._usage_tracker: UsageTracker | None = None
+        if mongo_uri:
+            self._usage_tracker = UsageTracker(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=usage_collection_name,
+                enabled=True,
+            )
         self._register_routes()
 
     def _register_routes(self) -> None:
@@ -366,14 +379,28 @@ class CodingModelRouter:
                             else:
                                 raise
                     streaming_started = True
-                    return StreamingResponse(
-                        _oai_stream_with_cleanup(
+                    # Create streaming response with usage tracking
+                    auth_info = self._get_auth_info(request)
+                    if self._usage_tracker:
+                        stream_gen = _oai_stream_with_usage_tracking(
+                            stream,
+                            msg_id,
+                            upstream_model,
+                            http_client,
+                            self._usage_tracker,
+                            auth_info,
+                            first_chunk=first_chunk,
+                        )
+                    else:
+                        stream_gen = _oai_stream_with_cleanup(
                             stream,
                             msg_id,
                             upstream_model,
                             http_client,
                             first_chunk=first_chunk,
-                        ),
+                        )
+                    return StreamingResponse(
+                        stream_gen,
                         status_code=200,
                         media_type="text/event-stream",
                     )
@@ -401,9 +428,21 @@ class CodingModelRouter:
                                 await asyncio.sleep(delay)
                                 continue
                             raise
+                    openai_response_body = resp.model_dump()
+                    # Record usage before returning response
+                    if self._usage_tracker:
+                        input_tokens, output_tokens = self._extract_usage_from_response(
+                            openai_response_body, "openai"
+                        )
+                        await self._usage_tracker.record_usage_from_openai_response(
+                            request_id=msg_id,
+                            auth_info=self._get_auth_info(request),
+                            model=upstream_model,
+                            response_body=openai_response_body,
+                        )
                     return JSONResponse(
                         _openai_to_anthropic_response(
-                            resp.model_dump(), msg_id, upstream_model
+                            openai_response_body, msg_id, upstream_model
                         )
                     )
             except openai.APIStatusError as exc:
@@ -584,3 +623,43 @@ class CodingModelRouter:
 
     def get_router(self) -> APIRouter:
         return self.router
+
+    def _get_auth_info(self, request: Request) -> dict[str, Any]:
+        """Extract auth information from the request headers."""
+        auth_info: dict[str, Any] = {"headers": dict(request.headers)}
+
+        # Extract user info from x-openwebui headers (preferred) or legacy headers
+        if user_id := request.headers.get("x-openwebui-user-id"):
+            auth_info["user_id"] = user_id
+        elif user_id := request.headers.get("x-customer-id"):
+            auth_info["user_id"] = user_id
+
+        if auth_provider := request.headers.get("x-auth-provider"):
+            auth_info["auth_provider"] = auth_provider
+
+        if email := request.headers.get("x-openwebui-user-email"):
+            auth_info["email"] = email
+        elif email := request.headers.get("x-email"):
+            auth_info["email"] = email
+
+        if user_name := request.headers.get("x-openwebui-user-name"):
+            auth_info["user_name"] = user_name
+        elif user_name := request.headers.get("x-user-name"):
+            auth_info["user_name"] = user_name
+
+        return auth_info
+
+    def _extract_usage_from_response(
+        self, response_body: dict[str, Any], api_type: str
+    ) -> tuple[int, int]:
+        """Extract input and output tokens from a response body."""
+        if api_type == "openai":
+            usage = response_body.get("usage", {})
+            input_tokens = usage.get("prompt_tokens", 0)
+            output_tokens = usage.get("completion_tokens", 0)
+        else:
+            usage = response_body.get("usage", {})
+            input_tokens = usage.get("input_tokens", 0)
+            output_tokens = usage.get("output_tokens", 0)
+
+        return input_tokens, output_tokens
