@@ -52,7 +52,9 @@ class UsageTracker:
             self._enabled = False
 
     @staticmethod
-    def extract_user_id_from_headers(headers: Optional[dict[str, str]]) -> Optional[str]:
+    def extract_user_id_from_headers(
+        headers: Optional[dict[str, str]],
+    ) -> Optional[str]:
         """Extract user ID from headers using x-openwebui headers (preferred) or legacy."""
         if headers:
             return headers.get("x-openwebui-user-id") or headers.get("x-customer-id")
@@ -66,7 +68,9 @@ class UsageTracker:
         return None
 
     @staticmethod
-    def extract_user_name_from_headers(headers: Optional[dict[str, str]]) -> Optional[str]:
+    def extract_user_name_from_headers(
+        headers: Optional[dict[str, str]],
+    ) -> Optional[str]:
         """Extract user name from headers using x-openwebui headers (preferred) or legacy."""
         if headers:
             return headers.get("x-openwebui-user-name") or headers.get("x-user-name")
@@ -74,7 +78,7 @@ class UsageTracker:
 
     @staticmethod
     def extract_auth_provider_from_headers(
-        headers: Optional[dict[str, str]]
+        headers: Optional[dict[str, str]],
     ) -> Optional[str]:
         """Extract auth provider from headers."""
         if headers:
