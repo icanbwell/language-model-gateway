@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -50,40 +50,6 @@ class UsageTracker:
                 e,
             )
             self._enabled = False
-
-    @staticmethod
-    def extract_user_id_from_headers(
-        headers: Optional[dict[str, str]],
-    ) -> Optional[str]:
-        """Extract user ID from headers using x-openwebui headers (preferred) or legacy."""
-        if headers:
-            return headers.get("x-openwebui-user-id") or headers.get("x-customer-id")
-        return None
-
-    @staticmethod
-    def extract_email_from_headers(headers: Optional[dict[str, str]]) -> Optional[str]:
-        """Extract email from headers using x-openwebui headers (preferred) or legacy."""
-        if headers:
-            return headers.get("x-openwebui-user-email") or headers.get("x-email")
-        return None
-
-    @staticmethod
-    def extract_user_name_from_headers(
-        headers: Optional[dict[str, str]],
-    ) -> Optional[str]:
-        """Extract user name from headers using x-openwebui headers (preferred) or legacy."""
-        if headers:
-            return headers.get("x-openwebui-user-name") or headers.get("x-user-name")
-        return None
-
-    @staticmethod
-    def extract_auth_provider_from_headers(
-        headers: Optional[dict[str, str]],
-    ) -> Optional[str]:
-        """Extract auth provider from headers."""
-        if headers:
-            return headers.get("x-auth-provider")
-        return None
 
     async def record_usage(
         self,
@@ -149,11 +115,16 @@ class UsageTracker:
         input_tokens = usage.get("input_tokens", 0)
         output_tokens = usage.get("output_tokens", 0)
 
-        # Extract user info from headers if present
+        # auth_info's identity fields are only populated when the caller's
+        # Authorization header verified as a genuine OIDC token (see
+        # CodingModelRouter._get_auth_info) — never re-derive identity from
+        # raw, caller-controlled headers here.
         user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
         email = auth_info.get("email") if isinstance(auth_info, dict) else None
         user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
-        auth_provider = auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
+        auth_provider = (
+            auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
+        )
 
         await self.record_usage(
             request_id=request_id,
@@ -178,11 +149,16 @@ class UsageTracker:
         input_tokens = usage.get("prompt_tokens", 0)
         output_tokens = usage.get("completion_tokens", 0)
 
-        # Extract user info from headers if present
+        # auth_info's identity fields are only populated when the caller's
+        # Authorization header verified as a genuine OIDC token (see
+        # CodingModelRouter._get_auth_info) — never re-derive identity from
+        # raw, caller-controlled headers here.
         user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
         email = auth_info.get("email") if isinstance(auth_info, dict) else None
         user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
-        auth_provider = auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
+        auth_provider = (
+            auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
+        )
 
         await self.record_usage(
             request_id=request_id,

@@ -1,7 +1,7 @@
 """
 Tests for usage_tracker.py.
 
-Tests for usage tracking functionality including header extraction and usage recording.
+Tests for usage tracking functionality including data extraction and usage recording.
 """
 
 from __future__ import annotations
@@ -11,87 +11,6 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from language_model_gateway.gateway.routers.model_routing.usage_tracker import (
     UsageTracker,
 )
-
-
-class TestUsageTrackerHeaderExtraction:
-    """Tests for header extraction methods."""
-
-    def test_extract_user_id_from_headers_x_openwebui_preferred(self) -> None:
-        """Should prefer x-openwebui-user-id over legacy x-customer-id."""
-        headers = {
-            "x-openwebui-user-id": "user-openwebui-123",
-            "x-customer-id": "user-legacy-456",
-        }
-        result = UsageTracker.extract_user_id_from_headers(headers)
-        assert result == "user-openwebui-123"
-
-    def test_extract_user_id_from_headers_fallback_to_legacy(self) -> None:
-        """Should fall back to x-customer-id when x-openwebui header is absent."""
-        headers = {
-            "x-customer-id": "user-legacy-456",
-        }
-        result = UsageTracker.extract_user_id_from_headers(headers)
-        assert result == "user-legacy-456"
-
-    def test_extract_user_id_from_headers_returns_none_when_missing(self) -> None:
-        """Should return None when neither header is present."""
-        headers = {"other-header": "value"}
-        result = UsageTracker.extract_user_id_from_headers(headers)
-        assert result is None
-
-    def test_extract_user_id_from_headers_empty_headers(self) -> None:
-        """Should return None for empty or None headers."""
-        result = UsageTracker.extract_user_id_from_headers(None)
-        assert result is None
-
-        result = UsageTracker.extract_user_id_from_headers({})
-        assert result is None
-
-    def test_extract_email_from_headers_x_openwebui_preferred(self) -> None:
-        """Should prefer x-openwebui-user-email over legacy x-email."""
-        headers = {
-            "x-openwebui-user-email": "user@example.com",
-            "x-email": "legacy@example.com",
-        }
-        result = UsageTracker.extract_email_from_headers(headers)
-        assert result == "user@example.com"
-
-    def test_extract_email_from_headers_fallback_to_legacy(self) -> None:
-        """Should fall back to x-email when x-openwebui header is absent."""
-        headers = {
-            "x-email": "legacy@example.com",
-        }
-        result = UsageTracker.extract_email_from_headers(headers)
-        assert result == "legacy@example.com"
-
-    def test_extract_email_from_headers_returns_none_when_missing(self) -> None:
-        """Should return None when neither header is present."""
-        headers = {"other-header": "value"}
-        result = UsageTracker.extract_email_from_headers(headers)
-        assert result is None
-
-    def test_extract_user_name_from_headers_x_openwebui_preferred(self) -> None:
-        """Should prefer x-openwebui-user-name over legacy x-user-name."""
-        headers = {
-            "x-openwebui-user-name": "John Doe",
-            "x-user-name": "Legacy John",
-        }
-        result = UsageTracker.extract_user_name_from_headers(headers)
-        assert result == "John Doe"
-
-    def test_extract_user_name_from_headers_fallback_to_legacy(self) -> None:
-        """Should fall back to x-user-name when x-openwebui header is absent."""
-        headers = {
-            "x-user-name": "Legacy John",
-        }
-        result = UsageTracker.extract_user_name_from_headers(headers)
-        assert result == "Legacy John"
-
-    def test_extract_user_name_from_headers_returns_none_when_missing(self) -> None:
-        """Should return None when neither header is present."""
-        headers = {"other-header": "value"}
-        result = UsageTracker.extract_user_name_from_headers(headers)
-        assert result is None
 
 
 class TestUsageTrackerDataExtraction:
