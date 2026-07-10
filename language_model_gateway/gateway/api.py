@@ -48,7 +48,10 @@ from language_model_gateway.gateway.routers.token_submission_router import (
     TokenSubmissionRouter,
 )
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
-from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from language_model_gateway.gateway.utilities.logger.log_levels import (
+    SRC_LOG_LEVELS,
+    build_log_handler,
+)
 
 from simple_container.container.container_registry import ContainerRegistry
 from simple_container.container.inject import Inject
@@ -62,9 +65,13 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 logger = logging.getLogger(__name__)
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+# force=True: log_levels.py may already have called basicConfig depending on
+# whether LOG_LEVEL was set when it was imported; this ensures the JSON/text
+# formatter choice here is always the one that takes effect.
 logging.basicConfig(
-    format="%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s",
     level=getattr(logging, log_level),
+    force=True,
+    handlers=[build_log_handler()],
 )
 
 # disable INFO logging for httpx because it logs every request
