@@ -33,9 +33,9 @@ class UsageTracker:
 
         try:
             # Import pymongo in the function to avoid hard dependency
-            import motor.motor_asyncio
+            from pymongo import AsyncMongoClient
 
-            self._client = motor.motor_asyncio.AsyncIOMotorClient(self._mongo_uri)
+            self._client = AsyncMongoClient(self._mongo_uri)
             self._db = self._client[self._db_name]
             self._collection = self._db[self._collection_name]
             logger.info(

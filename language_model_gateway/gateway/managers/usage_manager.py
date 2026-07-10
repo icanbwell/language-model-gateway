@@ -11,13 +11,15 @@ This manager tracks usage data including:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import datetime, UTC
 from typing import Any, Dict, Optional, List
 from typing_extensions import TypedDict
 
-from pymongoshim import AsyncMongoClient
-from pymongo.collection import Collection
+# Use pymongo built-in async client (available since pymongo 4.4)
+from pymongo import AsyncMongoClient
+from pymongo.asynchronous.collection import AsyncCollection
 from pymongo.errors import PyMongoError
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
@@ -75,22 +77,23 @@ class UsageManager:
         self._mongo_client: AsyncMongoClient[Any] = mongo_client
         self._db_name: str = db_name
         self._collection_name: str = collection_name
-        self._collection: Collection[Any] = mongo_client[db_name][collection_name]
+        self._collection: AsyncCollection[Any] = mongo_client[db_name][collection_name]
 
         # Create index on user_id for efficient queries
-        self._create_indexes()
+        # Note: This is an async method but called from sync __init__, so we fire it and forget
+        asyncio.create_task(self._create_indexes())  # type: ignore[unused-awaitable]
 
-    def _create_indexes(self) -> None:
+    async def _create_indexes(self) -> None:
         """Create indexes for efficient querying."""
         try:
             # Index on user_id
-            self._collection.create_index("user_id")
+            await self._collection.create_index("user_id")
             # Index on timestamp for time-based queries
-            self._collection.create_index("timestamp")
+            await self._collection.create_index("timestamp")
             # Index on model for model-specific queries
-            self._collection.create_index("model")
+            await self._collection.create_index("model")
             # Compound index for common query patterns
-            self._collection.create_index([("user_id", 1), ("timestamp", -1)])
+            await self._collection.create_index([("user_id", 1), ("timestamp", -1)])
             logger.info(
                 f"Created indexes for usage collection: {self._collection_name}"
             )
@@ -198,23 +201,23 @@ class UsageManager:
         Returns:
             True if successful, False otherwise
         """
-        usage_data: UsageData = {
-            "request_id": request_id,
-            "user_id": user_id,
-            "model": model,
-            "input_tokens": input_tokens,
-            "output_tokens": output_tokens,
-            "timestamp": timestamp or datetime.now(UTC),
-            "auth_provider": auth_provider,
-            "email": email,
-            "user_name": user_name,
-        }
-
         try:
-            result = await self._collection.insert_one(usage_data)
-            logger.debug(
-                f"Recorded usage: request_id={request_id}, user_id={user_id}, "
-                f"model={model}, input_tokens={input_tokens}, output_tokens={output_tokens}"
+            usage_data: UsageData = {
+                "request_id": request_id,
+                "user_id": user_id,
+                "model": model,
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+                "timestamp": timestamp or datetime.now(UTC),
+                "auth_provider": auth_provider,
+                "email": email,
+                "user_name": user_name,
+            }
+
+            await self._collection.insert_one(usage_data)
+            logger.info(
+                f"Recorded usage: {input_tokens} input, {output_tokens} output tokens "
+                f"for model {model}, user {user_id}"
             )
             return True
         except PyMongoError as e:
@@ -354,7 +357,7 @@ class UsageManager:
                 },
             ]
 
-            cursor = self._collection.aggregate(pipeline)
+            cursor = await self._collection.aggregate(pipeline)
             result = await cursor.to_list(length=1)
 
             if result:
@@ -418,7 +421,7 @@ class UsageManager:
                 {"$limit": limit},
             ]
 
-            cursor = self._collection.aggregate(pipeline)
+            cursor = await self._collection.aggregate(pipeline)
             result = await cursor.to_list(length=limit)
 
             return [
