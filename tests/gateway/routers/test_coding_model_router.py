@@ -14,11 +14,15 @@ Tests cover:
 
 import json
 import re
-from unittest.mock import patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import pytest
+from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
+    AuthorizationBearerTokenInvalidException,
+)
 from pytest_httpx import HTTPXMock
+from starlette.requests import Request
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
@@ -286,6 +290,101 @@ def test_coding_model_router_registers_messages_route() -> None:
     paths = {r.path for r in router.get_router().routes if isinstance(r, APIRoute)}
     assert "/v1/messages" in paths
     assert "/v1/messages/count_tokens" in paths
+
+
+# ---------------------------------------------------------------------------
+# _get_auth_info — usage-tracking identity validation
+#
+# x-openwebui-user-id/x-customer-id/etc. headers are fully caller-controlled,
+# so they must never be trusted for usage-tracking attribution unless the
+# Authorization header verifies as a genuine, signature-checked OIDC token.
+# ---------------------------------------------------------------------------
+
+
+def _make_request(headers: dict[str, str]) -> Request:
+    scope = {
+        "type": "http",
+        "headers": [(k.lower().encode(), v.encode()) for k, v in headers.items()],
+    }
+    return Request(scope)
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_token_reader_ignores_identity_headers() -> None:
+    """Without a token_reader configured, identity headers must not be trusted."""
+    router = CodingModelRouter()
+    request = _make_request({"x-openwebui-user-id": "victim@example.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_authorization_header_ignores_identity_headers() -> None:
+    """No Authorization header at all means no verified identity."""
+    token_reader = MagicMock()
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request({"x-openwebui-user-id": "victim@example.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+    token_reader.verify_token_async.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_invalid_token_ignores_identity_headers() -> None:
+    """An Authorization header that fails verification must not fall back to
+    trusting caller-controlled identity headers (this is the IDOR closed by
+    this fix — a spoofed/opaque Bearer value must not grant attribution)."""
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "not-a-real-jwt"
+    token_reader.verify_token_async = AsyncMock(
+        side_effect=AuthorizationBearerTokenInvalidException(
+            message="bad token", token="not-a-real-jwt"
+        )
+    )
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request(
+        {
+            "authorization": "Bearer not-a-real-jwt",
+            "x-openwebui-user-id": "victim@example.com",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() -> None:
+    """A verified token's claims are used for attribution, taking precedence
+    over (and ignoring) any caller-supplied identity headers."""
+    verified_token = MagicMock()
+    verified_token.subject = "verified-user-123"
+    verified_token.email = "verified@example.com"
+    verified_token.name = "Verified User"
+
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "a.valid.jwt"
+    token_reader.verify_token_async = AsyncMock(return_value=verified_token)
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request(
+        {
+            "authorization": "Bearer a.valid.jwt",
+            "x-openwebui-user-id": "attacker-supplied-id",
+            "x-auth-provider": "okta",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "verified-user-123"
+    assert auth_info["email"] == "verified@example.com"
+    assert auth_info["user_name"] == "Verified User"
+    assert auth_info["auth_provider"] == "okta"
 
 
 # ---------------------------------------------------------------------------

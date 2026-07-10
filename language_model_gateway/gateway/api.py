@@ -12,6 +12,7 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
+from oidcauthlib.auth.token_reader import TokenReader
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -173,6 +174,7 @@ def create_app() -> FastAPI:
         CodingModelRouter(
             mongo_uri=env_vars.mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
+            token_reader=container.resolve(TokenReader),
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())

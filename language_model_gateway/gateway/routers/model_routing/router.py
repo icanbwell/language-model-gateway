@@ -31,6 +31,13 @@ from typing import Any, AsyncGenerator, Sequence
 import httpx
 from fastapi import APIRouter
 from fastapi import params
+from oidcauthlib.auth.exceptions.authorization_bearer_token_expired_exception import (
+    AuthorizationBearerTokenExpiredException,
+)
+from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
+    AuthorizationBearerTokenInvalidException,
+)
+from oidcauthlib.auth.token_reader import TokenReader
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response, StreamingResponse
 
@@ -87,12 +94,14 @@ class CodingModelRouter:
         mongo_uri: str | None = None,
         usage_db_name: str = "llm_storage",
         usage_collection_name: str = "usage",
+        token_reader: TokenReader | None = None,
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
             tags=tags or ["anthropic-proxy"],
             dependencies=dependencies or [],
         )
+        self._token_reader: TokenReader | None = token_reader
         self._usage_tracker: UsageTracker | None = None
         if mongo_uri:
             self._usage_tracker = UsageTracker(
@@ -143,8 +152,9 @@ class CodingModelRouter:
         route = _find_route(model)
         req_suffix = request.url.path[len("/v1/messages") :]
 
-        user_id = self._get_auth_info(request).get("user_id", "unknown")
-        auth_provider = self._get_auth_info(request).get("auth_provider", "unknown")
+        auth_info = await self._get_auth_info(request)
+        user_id = auth_info.get("user_id", "unknown")
+        auth_provider = auth_info.get("auth_provider", "unknown")
 
         is_fallback_route: bool = route is None
         if route is None:
@@ -398,7 +408,7 @@ class CodingModelRouter:
                                 raise
                     streaming_started = True
                     # Create streaming response with usage tracking
-                    auth_info = self._get_auth_info(request)
+                    auth_info = await self._get_auth_info(request)
                     if self._usage_tracker:
                         stream_gen = _oai_stream_with_usage_tracking(
                             stream,
@@ -456,7 +466,7 @@ class CodingModelRouter:
                         )
                         await self._usage_tracker.record_usage_from_openai_response(
                             request_id=msg_id,
-                            auth_info=self._get_auth_info(request),
+                            auth_info=await self._get_auth_info(request),
                             model=upstream_model,
                             response_body=openai_response_body,
                         )
@@ -466,7 +476,7 @@ class CodingModelRouter:
                         )
                     )
             except openai.APIStatusError as exc:
-                user_id = self._get_auth_info(request).get("user_id", "unknown")
+                user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
                 logger.error(
                     "[coding-model-router] upstream %d for model=%s user_id=%s request_id=%s: %s",
                     exc.status_code,
@@ -520,7 +530,7 @@ class CodingModelRouter:
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
-            user_id = self._get_auth_info(request).get("user_id", "unknown")
+            user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
             logger.error(
                 "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
@@ -650,44 +660,71 @@ class CodingModelRouter:
     def get_router(self) -> APIRouter:
         return self.router
 
-    def _get_auth_info(self, request: Request) -> dict[str, Any]:
-        """Extract auth information from the request headers."""
+    async def _get_auth_info(self, request: Request) -> dict[str, Any]:
+        """Extract auth information from the request headers.
+
+        The `Authorization` header on this router is the client's own
+        upstream Anthropic/Bedrock credential (forwarded as-is — see class
+        docstring), not necessarily a b.well-issued OIDC token, so it cannot
+        be used to gate the proxy call itself. It CAN be used to decide
+        whether user-identification headers (`x-openwebui-user-id` etc.) are
+        trustworthy for usage-tracking attribution: those headers are fully
+        caller-controlled and otherwise trivially spoofable (IDOR), so they
+        are only honored when `Authorization` verifies as a genuine,
+        signature-checked OIDC token. Otherwise usage is recorded with no
+        user_id rather than a spoofable one — this never blocks the proxy
+        call itself.
+        """
         auth_info: dict[str, Any] = {"headers": dict(request.headers)}
-        
-        # CRITICAL: Only trust user identity headers if validated via authentication token.
-        # Check for Bearer token or HMAC-signed headers from trusted proxy.
-        auth_header = request.headers.get("authorization", "")
-        if not auth_header.startswith("Bearer "):
-            logger.warning(
-                "[coding-model-router] User identity headers without valid auth token. "
-                "User attribution disabled."
+
+        verified_subject: str | None = None
+        verified_email: str | None = None
+        verified_user_name: str | None = None
+        if self._token_reader is not None:
+            auth_header = request.headers.get("authorization")
+            token = (
+                self._token_reader.extract_token(authorization_header=auth_header)
+                if auth_header
+                else None
             )
+            if token:
+                try:
+                    token_item = await self._token_reader.verify_token_async(
+                        token=token
+                    )
+                except (
+                    AuthorizationBearerTokenExpiredException,
+                    AuthorizationBearerTokenInvalidException,
+                    ValueError,
+                ) as e:
+                    logger.warning(
+                        "[coding-model-router] Authorization token failed validation "
+                        "(%s); usage attribution disabled for this request.",
+                        type(e).__name__,
+                    )
+                    token_item = None
+                if token_item is not None:
+                    verified_subject = token_item.subject or token_item.email
+                    verified_email = token_item.email or (
+                        token_item.subject
+                        if token_item.subject and "@" in token_item.subject
+                        else None
+                    )
+                    verified_user_name = token_item.name
+
+        if verified_subject is None:
+            # No verified identity — do not trust caller-controlled headers for
+            # attribution. The proxy call proceeds regardless; only attribution
+            # is affected.
             return auth_info
 
-        # Extract user info from x-openwebui headers (preferred) or legacy headers
-        # NOTE: Only trusted because auth token validation passed above.
-        if user_id := request.headers.get("x-openwebui-user-id"):
-            auth_info["user_id"] = user_id
-        elif user_id := request.headers.get("x-customer-id"):
-            auth_info["user_id"] = user_id
-
-        # Prevent excessively long values that could indicate injection attempts
-        if auth_info.get("user_id") and len(str(auth_info.get("user_id", ""))) > 256:
-            logger.warning("[coding-model-router] Rejecting suspiciously long user_id.")
-            auth_info.pop("user_id", None)
-
+        auth_info["user_id"] = verified_subject
+        if verified_email:
+            auth_info["email"] = verified_email
+        if verified_user_name:
+            auth_info["user_name"] = verified_user_name
         if auth_provider := request.headers.get("x-auth-provider"):
             auth_info["auth_provider"] = auth_provider
-
-        if email := request.headers.get("x-openwebui-user-email"):
-            auth_info["email"] = email
-        elif email := request.headers.get("x-email"):
-            auth_info["email"] = email
-
-        if user_name := request.headers.get("x-openwebui-user-name"):
-            auth_info["user_name"] = user_name
-        elif user_name := request.headers.get("x-user-name"):
-            auth_info["user_name"] = user_name
 
         return auth_info
 
