@@ -63,7 +63,7 @@ class UsageTracker:
         user_name: str | None = None,
     ) -> None:
         """Record token usage to MongoDB."""
-        if not self._enabled or (input_tokens == 0 and output_tokens == 0):
+        if input_tokens == 0 and output_tokens == 0:
             return
 
         await self._ensure_connected()

@@ -215,7 +215,7 @@ class TestUsageTrackerInitialization:
         """Should use default db_name and collection_name when not provided."""
         tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=True)
         assert tracker._mongo_uri == "mongodb://localhost:27017"
-        assert tracker._db_name == "usage_tracker"
+        assert tracker._db_name == "llm_storage"
         assert tracker._collection_name == "usage"
         assert tracker._enabled is True
 

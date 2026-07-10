@@ -115,6 +115,12 @@ dev = [
 addopts = "--capture=fd"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: marks tests that hit real external services (deselect with '-m \"not integration\"')",
+]
+filterwarnings = [
+    "ignore:Using .httpx. with .starlette.testclient. is deprecated:starlette.exceptions.StarletteDeprecationWarning",
+]
 
 [tool.mypy]
 python_version = "3.12"
