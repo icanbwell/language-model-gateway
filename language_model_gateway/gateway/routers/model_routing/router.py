@@ -25,12 +25,14 @@ import inspect
 import json
 import logging
 import os
+import time
 from enum import Enum
 from typing import Any, AsyncGenerator, Sequence
 
 import httpx
 from fastapi import APIRouter
 from fastapi import params
+from opentelemetry import trace
 from oidcauthlib.auth.exceptions.authorization_bearer_token_expired_exception import (
     AuthorizationBearerTokenExpiredException,
 )
@@ -175,6 +177,7 @@ class CodingModelRouter:
 
         auth: str = route["auth"]
         api_type: str = route.get("api_type", "anthropic")
+        model_tier: str = route.get("tier", "unknown")
         # Passthrough routes forward the client's exact model id — Anthropic is
         # authoritative on which model ids exist, so a version-bumped id must
         # never be silently overridden by a possibly-stale pinned config value.
@@ -336,6 +339,8 @@ class CodingModelRouter:
                 upstream_model,
             )
 
+        dispatch_start = time.perf_counter()
+
         # ── OpenAI-format route: use openai SDK + Anthropic translation ──────────
         if api_type == "openai":
             import openai
@@ -407,6 +412,13 @@ class CodingModelRouter:
                             else:
                                 raise
                     streaming_started = True
+                    self._record_upstream_latency(
+                        dispatch_start,
+                        model_tier=model_tier,
+                        upstream_model=upstream_model,
+                        auth=auth,
+                        api_type=api_type,
+                    )
                     # Create streaming response with usage tracking
                     auth_info = await self._get_auth_info(request)
                     if self._usage_tracker:
@@ -458,6 +470,13 @@ class CodingModelRouter:
                                 await asyncio.sleep(delay)
                                 continue
                             raise
+                    self._record_upstream_latency(
+                        dispatch_start,
+                        model_tier=model_tier,
+                        upstream_model=upstream_model,
+                        auth=auth,
+                        api_type=api_type,
+                    )
                     openai_response_body = resp.model_dump()
                     # Record usage before returning response
                     if self._usage_tracker:
@@ -527,6 +546,14 @@ class CodingModelRouter:
             await client.aclose()
             raise
 
+        self._record_upstream_latency(
+            dispatch_start,
+            model_tier=model_tier,
+            upstream_model=upstream_model,
+            auth=auth,
+            api_type=api_type,
+        )
+
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
@@ -560,6 +587,30 @@ class CodingModelRouter:
             headers=resp_headers,
             media_type=upstream_resp.headers.get("content-type", "text/event-stream"),
         )
+
+    @staticmethod
+    def _record_upstream_latency(
+        dispatch_start: float,
+        *,
+        model_tier: str,
+        upstream_model: str,
+        auth: str,
+        api_type: str,
+    ) -> None:
+        """Record time-to-first-response-from-upstream on the current span.
+
+        This is the proxy's own processing latency — time until Anthropic/
+        Bedrock starts responding — not total streaming duration, which is
+        dominated by the upstream model's own token-generation speed rather
+        than anything this router controls.
+        """
+        latency_ms = (time.perf_counter() - dispatch_start) * 1000
+        span = trace.get_current_span()
+        span.set_attribute("model_tier", model_tier)
+        span.set_attribute("upstream_model", upstream_model)
+        span.set_attribute("auth_strategy", auth)
+        span.set_attribute("api_type", api_type)
+        span.set_attribute("upstream_latency_ms", latency_ms)
 
     @staticmethod
     def _annotate_fallback_error(error_body: bytes, model: str) -> bytes:

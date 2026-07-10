@@ -14,6 +14,7 @@ Tests cover:
 
 import json
 import re
+import time
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
@@ -385,6 +386,57 @@ async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() ->
     assert auth_info["email"] == "verified@example.com"
     assert auth_info["user_name"] == "Verified User"
     assert auth_info["auth_provider"] == "okta"
+
+
+# ---------------------------------------------------------------------------
+# _record_upstream_latency — model_tier latency visibility (Groundcover)
+# ---------------------------------------------------------------------------
+
+
+def test_record_upstream_latency_sets_span_attributes() -> None:
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import (
+        InMemorySpanExporter,
+    )
+
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    tracer = provider.get_tracer(__name__)
+
+    with tracer.start_as_current_span("test-span"):
+        dispatch_start = time.perf_counter() - 0.05  # simulate 50ms elapsed
+        CodingModelRouter._record_upstream_latency(
+            dispatch_start,
+            model_tier="sonnet",
+            upstream_model="claude-sonnet-4-6",
+            auth="passthrough",
+            api_type="anthropic",
+        )
+
+    (span,) = exporter.get_finished_spans()
+    attributes = span.attributes
+    assert attributes is not None
+    assert attributes["model_tier"] == "sonnet"
+    assert attributes["upstream_model"] == "claude-sonnet-4-6"
+    assert attributes["auth_strategy"] == "passthrough"
+    assert attributes["api_type"] == "anthropic"
+    latency_ms = attributes["upstream_latency_ms"]
+    assert isinstance(latency_ms, (int, float)) and latency_ms >= 50
+
+
+def test_record_upstream_latency_noop_without_active_span() -> None:
+    """With no active span (e.g. tracing disabled), this must not raise —
+    OpenTelemetry's no-op span silently absorbs set_attribute calls."""
+    dispatch_start = time.perf_counter()
+    CodingModelRouter._record_upstream_latency(
+        dispatch_start,
+        model_tier="haiku",
+        upstream_model="claude-haiku-4-5",
+        auth="aws",
+        api_type="openai",
+    )
 
 
 # ---------------------------------------------------------------------------
