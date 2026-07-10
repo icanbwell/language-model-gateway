@@ -2,14 +2,57 @@ import json
 import logging
 import os
 import sys
+import time
 import traceback
-from typing import override
+
+import structlog
+from structlog.typing import EventDict, WrappedLogger
 
 TEXT_FORMAT = "%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s"
 
 
-class JsonLogFormatter(logging.Formatter):
-    """Formats each log record as a single-line JSON object.
+def _extract_stdlib_fields(
+    logger: WrappedLogger, method_name: str, event_dict: EventDict
+) -> EventDict:
+    """Pull the fields Groundcover expects out of the raw stdlib LogRecord.
+
+    Every logger in this app is a plain `logging.getLogger(...)`, so every
+    record structlog sees here is "foreign" — this pre-chain processor is
+    what turns it into our JSON schema before rendering.
+    """
+    record: logging.LogRecord = event_dict["_record"]
+    event_dict["timestamp"] = time.strftime(
+        "%Y-%m-%dT%H:%M:%S%z", time.localtime(record.created)
+    )
+    event_dict["level"] = record.levelname
+    event_dict["logger"] = record.name
+    event_dict["file"] = record.filename
+    event_dict["line"] = record.lineno
+    if record.exc_info:
+        event_dict["exception"] = "".join(traceback.format_exception(*record.exc_info))
+    event_dict.pop("exc_info", None)
+    event_dict["_extra_fields"] = getattr(record, "extra_fields", None)
+    return event_dict
+
+
+def _finalize_message_and_extras(
+    logger: WrappedLogger, method_name: str, event_dict: EventDict
+) -> EventDict:
+    """Rename structlog's `event` key to `message` and merge extra_fields last.
+
+    Merging last (rather than in `_extract_stdlib_fields`) preserves the
+    original formatter's semantics: extra_fields can override any of the
+    core fields set above, since it is applied after them.
+    """
+    event_dict["message"] = event_dict.pop("event", "")
+    extra_fields = event_dict.pop("_extra_fields", None)
+    if extra_fields:
+        event_dict.update(extra_fields)
+    return event_dict
+
+
+def build_json_log_formatter() -> logging.Formatter:
+    """Formats each log record as a single-line JSON object via structlog.
 
     Groundcover (and other line-oriented log shippers) treats every newline
     in stdout as a separate log entry. Emitting one JSON object per record —
@@ -17,23 +60,14 @@ class JsonLogFormatter(logging.Formatter):
     fields rather than left as raw embedded newlines — keeps each logical
     log event as exactly one line.
     """
-
-    @override
-    def format(self, record: logging.LogRecord) -> str:
-        payload: dict[str, object] = {
-            "timestamp": self.formatTime(record, "%Y-%m-%dT%H:%M:%S%z"),
-            "level": record.levelname,
-            "logger": record.name,
-            "message": record.getMessage(),
-            "file": record.filename,
-            "line": record.lineno,
-        }
-        if record.exc_info:
-            payload["exception"] = "".join(traceback.format_exception(*record.exc_info))
-        extra_fields = getattr(record, "extra_fields", None)
-        if extra_fields:
-            payload.update(extra_fields)
-        return json.dumps(payload, default=str)
+    return structlog.stdlib.ProcessorFormatter(
+        foreign_pre_chain=[_extract_stdlib_fields],
+        processors=[
+            structlog.stdlib.ProcessorFormatter.remove_processors_meta,
+            _finalize_message_and_extras,
+            structlog.processors.JSONRenderer(serializer=json.dumps, default=str),
+        ],
+    )
 
 
 def build_log_handler() -> logging.Handler:
@@ -41,7 +75,7 @@ def build_log_handler() -> logging.Handler:
     if os.environ.get("LOG_FORMAT", "json").lower() == "text":
         handler.setFormatter(logging.Formatter(TEXT_FORMAT))
     else:
-        handler.setFormatter(JsonLogFormatter())
+        handler.setFormatter(build_json_log_formatter())
     return handler
 
 

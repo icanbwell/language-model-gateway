@@ -1,4 +1,4 @@
-"""Tests for JsonLogFormatter and build_log_handler.
+"""Tests for build_json_log_formatter and build_log_handler.
 
 Groundcover splits stdout on every newline, so a multi-line log message or
 traceback becomes multiple log entries. These tests verify each record
@@ -14,9 +14,10 @@ from types import TracebackType
 from typing import Any
 
 import pytest
+import structlog
 
 from language_model_gateway.gateway.utilities.logger.log_levels import (
-    JsonLogFormatter,
+    build_json_log_formatter,
     build_log_handler,
 )
 
@@ -44,7 +45,7 @@ def _make_record(
 
 
 def test_json_log_formatter_produces_single_line_valid_json() -> None:
-    formatter = JsonLogFormatter()
+    formatter = build_json_log_formatter()
     record = _make_record("hello world")
 
     output = formatter.format(record)
@@ -58,7 +59,7 @@ def test_json_log_formatter_produces_single_line_valid_json() -> None:
 
 
 def test_json_log_formatter_escapes_embedded_newlines() -> None:
-    formatter = JsonLogFormatter()
+    formatter = build_json_log_formatter()
     record = _make_record("line1\nline2\nline3")
 
     output = formatter.format(record)
@@ -69,7 +70,7 @@ def test_json_log_formatter_escapes_embedded_newlines() -> None:
 
 
 def test_json_log_formatter_folds_exception_into_single_line() -> None:
-    formatter = JsonLogFormatter()
+    formatter = build_json_log_formatter()
     try:
         raise ValueError("boom")
     except ValueError:
@@ -84,10 +85,11 @@ def test_json_log_formatter_folds_exception_into_single_line() -> None:
     assert "\n" not in output
     payload = json.loads(output)
     assert "ValueError: boom" in payload["exception"]
+    assert "exc_info" not in payload
 
 
 def test_json_log_formatter_merges_extra_fields() -> None:
-    formatter = JsonLogFormatter()
+    formatter = build_json_log_formatter()
     record = _make_record(
         "request handled",
         extra_fields={"request_id": "req-123", "duration_ms": 42.5},
@@ -105,7 +107,7 @@ def test_build_log_handler_defaults_to_json_formatter(
 ) -> None:
     monkeypatch.delenv("LOG_FORMAT", raising=False)
     handler = build_log_handler()
-    assert isinstance(handler.formatter, JsonLogFormatter)
+    assert isinstance(handler.formatter, structlog.stdlib.ProcessorFormatter)
 
 
 def test_build_log_handler_uses_text_formatter_when_configured(
@@ -113,5 +115,5 @@ def test_build_log_handler_uses_text_formatter_when_configured(
 ) -> None:
     monkeypatch.setenv("LOG_FORMAT", "text")
     handler = build_log_handler()
-    assert not isinstance(handler.formatter, JsonLogFormatter)
+    assert not isinstance(handler.formatter, structlog.stdlib.ProcessorFormatter)
     assert isinstance(handler.formatter, logging.Formatter)
