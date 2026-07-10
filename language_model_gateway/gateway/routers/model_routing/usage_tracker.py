@@ -220,5 +220,5 @@ class UsageTracker:
     async def close(self) -> None:
         """Close MongoDB connection."""
         if self._client is not None:
-            self._client.close()
+            await self._client.close()
             logger.info("[usage_tracker] MongoDB connection closed")

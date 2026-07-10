@@ -86,33 +86,23 @@ def _sse_event(event_type: str, data: dict[str, Any]) -> bytes:
     return f"event: {event_type}\ndata: {json.dumps(data)}\n\n".encode()
 
 
-# Track usage from streaming response
-_usage_tracking_data: dict[str, Any] = {"input_tokens": 0, "output_tokens": 0}
-
-
-def _get_stream_usage() -> tuple[int, int]:
-    """Get the accumulated usage from the last stream (input_tokens, output_tokens)."""
-    return (
-        _usage_tracking_data.get("input_tokens", 0),
-        _usage_tracking_data.get("output_tokens", 0),
-    )
-
-
-def _reset_stream_usage() -> None:
-    """Reset the usage tracking data."""
-    global _usage_tracking_data
-    _usage_tracking_data = {"input_tokens": 0, "output_tokens": 0}
-
-
 async def _stream_oai_sdk_to_anthropic(
     stream: Any,
     msg_id: str,
     upstream_model: str,
     first_chunk: Any = None,
+    usage_sink: dict[str, int] | None = None,
 ) -> AsyncGenerator[bytes, None]:
-    """Convert an openai SDK async stream to Anthropic SSE format."""
-    global _usage_tracking_data
-    _reset_stream_usage()
+    """Convert an openai SDK async stream to Anthropic SSE format.
+
+    Accumulated input/output token usage is written into `usage_sink` (if
+    provided) so callers can read it after the stream completes without
+    relying on shared module state across concurrent requests.
+    """
+    if usage_sink is None:
+        usage_sink = {}
+    usage_sink["input_tokens"] = 0
+    usage_sink["output_tokens"] = 0
 
     sent_message_start = False
     open_blocks: dict[int, dict[str, Any]] = {}
@@ -216,10 +206,10 @@ async def _stream_oai_sdk_to_anthropic(
             if chunk.usage:
                 # Capture both input and output tokens from usage
                 if chunk.usage.prompt_tokens is not None:
-                    _usage_tracking_data["input_tokens"] = chunk.usage.prompt_tokens
+                    usage_sink["input_tokens"] = chunk.usage.prompt_tokens
                 if chunk.usage.completion_tokens is not None:
                     output_tokens = chunk.usage.completion_tokens
-                    _usage_tracking_data["output_tokens"] = output_tokens
+                    usage_sink["output_tokens"] = output_tokens
     except Exception as _exc:
         logger.error("[coding-model-router] upstream stream error: %s", _exc)
         _stream_error_msg: str | None = str(_exc)
@@ -325,8 +315,8 @@ async def _oai_stream_with_cleanup(
     first_chunk: Any = None,
 ) -> AsyncGenerator[bytes, None]:
     """
-    Stream wrapper that records usage after stream completes.
-    Usage is extracted from _usage_tracking_data populated during streaming.
+    Stream wrapper that closes the upstream HTTP client after the stream
+    completes. Does not record usage.
     """
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
@@ -349,15 +339,21 @@ async def _oai_stream_with_usage_tracking(
     """
     Stream wrapper that records usage to MongoDB after stream completes.
     """
+    usage_sink: dict[str, int] = {}
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
-            stream, msg_id, upstream_model, first_chunk=first_chunk
+            stream,
+            msg_id,
+            upstream_model,
+            first_chunk=first_chunk,
+            usage_sink=usage_sink,
         ):
             yield chunk
     finally:
         await http_client.aclose()
         # Record usage after stream completes
-        input_tokens, output_tokens = _get_stream_usage()
+        input_tokens = usage_sink.get("input_tokens", 0)
+        output_tokens = usage_sink.get("output_tokens", 0)
         if usage_tracker and (input_tokens > 0 or output_tokens > 0):
             await usage_tracker.record_usage(
                 request_id=msg_id,

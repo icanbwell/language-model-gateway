@@ -169,7 +169,12 @@ def create_app() -> FastAPI:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
 
-    app1.include_router(CodingModelRouter().get_router())
+    app1.include_router(
+        CodingModelRouter(
+            mongo_uri=env_vars.mongo_llm_storage_uri,
+            usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
+        ).get_router()
+    )
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())

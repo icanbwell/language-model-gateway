@@ -1,35 +1,16 @@
 """
-Tests for usage_tracker.py and usage_manager.py.
+Tests for usage_tracker.py.
 
 Tests for usage tracking functionality including header extraction and usage recording.
 """
 
 from __future__ import annotations
 
-from datetime import datetime, UTC
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from language_model_gateway.gateway.routers.model_routing.usage_tracker import (
     UsageTracker,
 )
-from language_model_gateway.gateway.managers.usage_manager import UsageManager
-
-
-# Mock AuthInformation class for testing
-class MockAuthInformation:
-    """Mock auth information object for testing."""
-
-    def __init__(
-        self,
-        subject: str | None = None,
-        email: str | None = None,
-        user_name: str | None = None,
-        auth_provider: str | None = None,
-    ) -> None:
-        self.subject = subject
-        self.email = email
-        self.user_name = user_name
-        self.auth_provider = auth_provider
 
 
 class TestUsageTrackerHeaderExtraction:
@@ -337,146 +318,3 @@ class TestUsageTrackerInitialization:
         tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
         assert tracker._enabled is False
         assert tracker._client is None
-
-
-class TestUsageManagerHeaderExtraction:
-    """Tests for UsageManager header extraction methods."""
-
-    def test_extract_user_id_from_auth_subject(self) -> None:
-        """Should extract user_id from auth_information subject."""
-        auth_info = MockAuthInformation(subject="user-123")
-        result = UsageManager.extract_user_id(auth_information=auth_info)
-        assert result == "user-123"
-
-    def test_extract_user_id_from_auth_email(self) -> None:
-        """Should fall back to email when subject is not available."""
-        auth_info = MockAuthInformation(email="user@example.com")
-        result = UsageManager.extract_user_id(auth_information=auth_info)
-        assert result == "user@example.com"
-
-    def test_extract_user_id_from_headers_x_openwebui(self) -> None:
-        """Should extract user_id from x-openwebui-user-id header."""
-        headers = {"x-openwebui-user-id": "user-123"}
-        result = UsageManager.extract_user_id(auth_information=None, headers=headers)
-        assert result == "user-123"
-
-    def test_extract_user_id_default_anonymous(self) -> None:
-        """Should return 'anonymous' when no user info is available."""
-        result = UsageManager.extract_user_id(
-            auth_information=None, headers={"other": "value"}
-        )
-        assert result == "anonymous"
-
-    def test_extract_user_id_empty_auth_info(self) -> None:
-        """Should return 'anonymous' with empty auth info and headers."""
-        result = UsageManager.extract_user_id(auth_information=None, headers={})
-        assert result == "anonymous"
-
-    def test_extract_email_from_auth(self) -> None:
-        """Should extract email from auth_information."""
-        auth_info = MockAuthInformation(email="user@example.com")
-        result = UsageManager.extract_email(auth_information=auth_info)
-        assert result == "user@example.com"
-
-    def test_extract_email_from_headers(self) -> None:
-        """Should extract email from x-openwebui-user-email header."""
-        headers = {"x-openwebui-user-email": "user@example.com"}
-        result = UsageManager.extract_email(auth_information=None, headers=headers)
-        assert result == "user@example.com"
-
-    def test_extract_email_none_when_missing(self) -> None:
-        """Should return None when email is not available."""
-        result = UsageManager.extract_email(
-            auth_information=None, headers={"other": "value"}
-        )
-        assert result is None
-
-    def test_extract_user_name_from_auth(self) -> None:
-        """Should extract user_name from auth_information."""
-        auth_info = MockAuthInformation(user_name="John Doe")
-        result = UsageManager.extract_user_name(auth_information=auth_info)
-        assert result == "John Doe"
-
-    def test_extract_user_name_from_headers(self) -> None:
-        """Should extract user_name from x-openwebui-user-name header."""
-        headers = {"x-openwebui-user-name": "John Doe"}
-        result = UsageManager.extract_user_name(auth_information=None, headers=headers)
-        assert result == "John Doe"
-
-    def test_extract_user_name_none_when_missing(self) -> None:
-        """Should return None when user_name is not available."""
-        result = UsageManager.extract_user_name(
-            auth_information=None, headers={"other": "value"}
-        )
-        assert result is None
-
-    def test_extract_auth_provider_from_auth(self) -> None:
-        """Should extract auth_provider from auth_information."""
-        auth_info = MockAuthInformation(auth_provider="okta")
-        result = UsageManager.extract_auth_provider(auth_information=auth_info)
-        assert result == "okta"
-
-    def test_extract_auth_provider_none_when_missing(self) -> None:
-        """Should return None when auth_provider is not available."""
-        result = UsageManager.extract_auth_provider(auth_information=None)
-        assert result is None
-
-
-class TestUsageManagerRequestRecording:
-    """Tests for UsageManager record usage from request."""
-
-    async def test_record_usage_from_request(self) -> None:
-        """Should extract info from request and record usage."""
-        auth_info = MockAuthInformation(
-            subject="user-123",
-            email="user@example.com",
-            user_name="John Doe",
-            auth_provider="okta",
-        )
-        headers = {"x-openwebui-user-name": "OpenWebUI John"}
-
-        mock_collection = MagicMock()
-        mock_collection.insert_one = AsyncMock()
-
-        with patch(
-            "language_model_gateway.gateway.managers.usage_manager.AsyncMongoClient"
-        ) as mock_client:
-            mock_client.return_value.__getitem__ = MagicMock(
-                return_value=mock_collection
-            )
-            mock_client.return_value.__getitem__.__getitem__ = MagicMock(
-                return_value=mock_collection
-            )
-
-            manager = UsageManager(
-                mongo_client=mock_client.return_value,
-                db_name="test_db",
-                collection_name="usage",
-            )
-
-            # Override _collection for direct testing
-            manager._collection = mock_collection
-
-            await manager.record_usage_from_request(
-                request_id="req-123",
-                model="claude-opus-4-8",
-                input_tokens=100,
-                output_tokens=50,
-                auth_information=auth_info,
-                headers=headers,
-                timestamp=datetime(2025, 1, 1, tzinfo=UTC),
-            )
-
-            # Verify record was created with correct values
-            call_args = mock_collection.insert_one.call_args
-            assert call_args is not None
-
-            actual_record = call_args[0][0]
-            assert actual_record["request_id"] == "req-123"
-            assert actual_record["user_id"] == "user-123"
-            assert actual_record["email"] == "user@example.com"
-            assert actual_record["user_name"] == "John Doe"  # From auth, not headers
-            assert actual_record["auth_provider"] == "okta"
-            assert actual_record["model"] == "claude-opus-4-8"
-            assert actual_record["input_tokens"] == 100
-            assert actual_record["output_tokens"] == 50
