@@ -67,6 +67,7 @@ async def _send_with_bedrock_retry(
     raw_body: bytes,
     route: dict[str, Any],
     auth: str,
+    request_id: str = "unknown",
 ) -> httpx.Response:
     attempt = 0
     while True:
@@ -91,10 +92,13 @@ async def _send_with_bedrock_retry(
 
         delay = _throttle_backoff(attempt)
         attempt += 1
+        # Include status code and truncated error for debugging
         logger.warning(
-            "[coding-model-router] Bedrock throttled (attempt %d/%d): backing off %.1fs — %s",
+            "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): status=%d backing off %.1fs — %s",
+            request_id,
             attempt,
             _MAX_THROTTLE_RETRIES,
+            resp.status_code,
             delay,
             error_text[:200],
         )

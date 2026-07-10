@@ -126,22 +126,33 @@ class CodingModelRouter:
         self, request: Request
     ) -> StreamingResponse | JSONResponse | Response:
         raw_body = await request.body()
+
+        # Generate request_id at the start for consistent tracing
+        request_id = _msg_id()
+
         try:
             body_json = json.loads(raw_body)
         except json.JSONDecodeError:
+            logger.error(
+                "[coding-model-router] invalid JSON body request_id=%s",
+                request_id,
+            )
             return JSONResponse({"error": "invalid JSON body"}, status_code=400)
 
         model: str = body_json.get("model", "")
         route = _find_route(model)
         req_suffix = request.url.path[len("/v1/messages") :]
 
+        user_id = self._get_auth_info(request).get("user_id", "unknown")
+        auth_provider = self._get_auth_info(request).get("auth_provider", "unknown")
+
         is_fallback_route: bool = route is None
         if route is None:
             logger.error(
                 "[coding-model-router] unknown model '%s' — falling back to Anthropic "
-                "direct with no cost-routing or context-budget enforcement; "
-                "add a route (or claude_model_pattern) for it in model-router-config.json",
-                model,
+                "direct with no cost-routing or context-budget enforcement. "
+                "user_id=%s request_id=%s auth_provider=%s - add a route for it in model-router-config.json",
+                model, user_id, request_id, auth_provider,
             )
             route = {
                 "auth": "passthrough",
@@ -293,7 +304,8 @@ class CodingModelRouter:
                 upstream_headers["content-type"] = "application/json"
                 upstream_headers["anthropic-version"] = "2023-06-01"
             logger.info(
-                "[coding-model-router] %s -> BEDROCK  region=%s  model=%s  api=%s",
+                "[coding-model-router] request_id=%s %s -> BEDROCK  region=%s  model=%s  api=%s",
+                request_id,
                 model,
                 region,
                 upstream_model,
@@ -304,7 +316,8 @@ class CodingModelRouter:
             if auth_val := request.headers.get("authorization"):
                 upstream_headers["authorization"] = auth_val
             logger.info(
-                "[coding-model-router] %s -> ANTHROPIC  url=%s  model=%s",
+                "[coding-model-router] request_id=%s %s -> ANTHROPIC  url=%s  model=%s",
+                request_id,
                 model,
                 target_url,
                 upstream_model,
@@ -370,10 +383,12 @@ class CodingModelRouter:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] Bedrock throttled (attempt %d/%d): backing off %.1fs",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
+                                    _status,
                                 )
                                 await asyncio.sleep(delay)
                             else:
@@ -420,10 +435,12 @@ class CodingModelRouter:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] Bedrock throttled (attempt %d/%d): backing off %.1fs",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
+                                    exc.status_code,
                                 )
                                 await asyncio.sleep(delay)
                                 continue
@@ -446,10 +463,13 @@ class CodingModelRouter:
                         )
                     )
             except openai.APIStatusError as exc:
+                user_id = self._get_auth_info(request).get("user_id", "unknown")
                 logger.error(
-                    "[coding-model-router] upstream %d for model=%s: %s",
+                    "[coding-model-router] upstream %d for model=%s user_id=%s request_id=%s: %s",
                     exc.status_code,
                     upstream_model,
+                    user_id,
+                    msg_id,
                     exc.response.text[:200],
                 )
                 try:
@@ -488,7 +508,7 @@ class CodingModelRouter:
         client = httpx.AsyncClient(timeout=None)  # nosec B113
         try:
             upstream_resp = await _send_with_bedrock_retry(
-                client, target_url, upstream_headers, raw_body, route, auth
+                client, target_url, upstream_headers, raw_body, route, auth, request_id
             )
         except Exception:
             await client.aclose()
@@ -497,10 +517,13 @@ class CodingModelRouter:
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
+            user_id = self._get_auth_info(request).get("user_id", "unknown")
             logger.error(
-                "[coding-model-router] upstream %d from %s: %s",
+                "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
                 target_url,
+                user_id,
+                request_id,
                 error_body[:1000].decode("utf-8", errors="replace"),
             )
             if is_fallback_route:
