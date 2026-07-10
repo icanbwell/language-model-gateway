@@ -405,16 +405,12 @@ class ChatCompletionsRouter:
                 )
                 auth_information.subject = token_item.subject or token_item.email
                 auth_information.user_name = token_item.name
-            else:
-                # read information from headers if present
-                if "x-openwebui-user-id" in request.headers:
-                    auth_information.subject = request.headers["x-openwebui-user-id"]
-                if "x-openwebui-user-email" in request.headers:
-                    auth_information.email = request.headers["x-openwebui-user-email"]
-                if "x-openwebui-user-name" in request.headers:
-                    auth_information.user_name = request.headers[
-                        "x-openwebui-user-name"
-                    ]
+            # else: no verified token — do not trust caller-controlled
+            # x-openwebui-user-* headers for identity (they are fully
+            # spoofable and were previously used to set auth_information.subject,
+            # which system_command_manager uses to delete another user's cached
+            # tokens via referring_subject; an unauthenticated caller could
+            # forge that header to force-clear an arbitrary user's session).
         return auth_information
 
     def get_router(self) -> APIRouter:
