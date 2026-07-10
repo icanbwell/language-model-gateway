@@ -221,6 +221,12 @@ async def health() -> str:
     return "OK"
 
 
+@app.api_route("/", methods=["GET", "HEAD"])
+async def root() -> str:
+    """Root endpoint for ingress health checks."""
+    return "Language Model Gateway"
+
+
 @app.get("/favicon.png", include_in_schema=False)
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon() -> FileResponse:
