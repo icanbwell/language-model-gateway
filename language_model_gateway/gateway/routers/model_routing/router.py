@@ -152,7 +152,10 @@ class CodingModelRouter:
                 "[coding-model-router] unknown model '%s' — falling back to Anthropic "
                 "direct with no cost-routing or context-budget enforcement. "
                 "user_id=%s request_id=%s auth_provider=%s - add a route for it in model-router-config.json",
-                model, user_id, request_id, auth_provider,
+                model,
+                user_id,
+                request_id,
+                auth_provider,
             )
             route = {
                 "auth": "passthrough",
