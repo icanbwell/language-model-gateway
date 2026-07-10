@@ -150,21 +150,10 @@ class UsageTracker:
         output_tokens = usage.get("output_tokens", 0)
 
         # Extract user info from headers if present
-        headers = auth_info.get("headers")
-        user_id = None
-        if isinstance(auth_info, dict):
-            user_id = auth_info.get("user_id") or self.extract_user_id_from_headers(
-                headers
-            )
-        email = (
-            auth_info.get("email") if isinstance(auth_info, dict) else None
-        ) or self.extract_email_from_headers(headers)
-        user_name = (
-            auth_info.get("user_name") if isinstance(auth_info, dict) else None
-        ) or self.extract_user_name_from_headers(headers)
-        auth_provider = (
-            auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
-        ) or self.extract_auth_provider_from_headers(headers)
+        user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
+        email = auth_info.get("email") if isinstance(auth_info, dict) else None
+        user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
+        auth_provider = auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
 
         await self.record_usage(
             request_id=request_id,
@@ -190,21 +179,10 @@ class UsageTracker:
         output_tokens = usage.get("completion_tokens", 0)
 
         # Extract user info from headers if present
-        headers = auth_info.get("headers")
-        user_id = None
-        if isinstance(auth_info, dict):
-            user_id = auth_info.get("user_id") or self.extract_user_id_from_headers(
-                headers
-            )
-        email = (
-            auth_info.get("email") if isinstance(auth_info, dict) else None
-        ) or self.extract_email_from_headers(headers)
-        user_name = (
-            auth_info.get("user_name") if isinstance(auth_info, dict) else None
-        ) or self.extract_user_name_from_headers(headers)
-        auth_provider = (
-            auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
-        ) or self.extract_auth_provider_from_headers(headers)
+        user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
+        email = auth_info.get("email") if isinstance(auth_info, dict) else None
+        user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
+        auth_provider = auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
 
         await self.record_usage(
             request_id=request_id,
