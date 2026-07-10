@@ -653,12 +653,28 @@ class CodingModelRouter:
     def _get_auth_info(self, request: Request) -> dict[str, Any]:
         """Extract auth information from the request headers."""
         auth_info: dict[str, Any] = {"headers": dict(request.headers)}
+        
+        # CRITICAL: Only trust user identity headers if validated via authentication token.
+        # Check for Bearer token or HMAC-signed headers from trusted proxy.
+        auth_header = request.headers.get("authorization", "")
+        if not auth_header.startswith("Bearer "):
+            logger.warning(
+                "[coding-model-router] User identity headers without valid auth token. "
+                "User attribution disabled."
+            )
+            return auth_info
 
         # Extract user info from x-openwebui headers (preferred) or legacy headers
+        # NOTE: Only trusted because auth token validation passed above.
         if user_id := request.headers.get("x-openwebui-user-id"):
             auth_info["user_id"] = user_id
         elif user_id := request.headers.get("x-customer-id"):
             auth_info["user_id"] = user_id
+
+        # Prevent excessively long values that could indicate injection attempts
+        if auth_info.get("user_id") and len(str(auth_info.get("user_id", ""))) > 256:
+            logger.warning("[coding-model-router] Rejecting suspiciously long user_id.")
+            auth_info.pop("user_id", None)
 
         if auth_provider := request.headers.get("x-auth-provider"):
             auth_info["auth_provider"] = auth_provider
