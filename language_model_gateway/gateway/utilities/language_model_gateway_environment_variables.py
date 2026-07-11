@@ -117,3 +117,15 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
     @property
     def config_refresh_interval_minutes(self) -> int:
         return int(os.environ.get("CONFIG_REFRESH_INTERVAL_MINUTES", "60"))
+
+    @property
+    def debug_log_received_oauth_tokens(self) -> bool:
+        """Log full requests (headers + body) received by CodingModelRouter.
+
+        Local-development debugging only — lets you inspect exactly what a
+        client (e.g. Claude Code's subscription OAuth token, or whether it
+        requests streaming) actually sends. Never enable outside local dev;
+        this writes bearer tokens and full request bodies to logs in
+        plaintext.
+        """
+        return self.str2bool(os.environ.get("DEBUG_LOG_RECEIVED_OAUTH_TOKENS", "false"))

@@ -46,6 +46,9 @@ services:
       HELP_KEYWORDS: "help;/help;aid"
       LOG_INPUT_AND_OUTPUT: 0
       RETURN_RAW_TOOL_OUTPUT: 0
+      # Local-debug only: logs raw Authorization tokens received on /v1/messages
+      # (CodingModelRouter) at WARNING level. Never enable outside local dev.
+      DEBUG_LOG_RECEIVED_OAUTH_TOKENS: 1
       DEFAULT_MODEL_PROVIDER: "bedrock"
       DEFAULT_MODEL_NAME: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
       # Enable cost savings info in responses (appends token usage info to model output)

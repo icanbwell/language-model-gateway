@@ -97,6 +97,7 @@ class CodingModelRouter:
         usage_db_name: str = "llm_storage",
         usage_collection_name: str = "usage",
         token_reader: TokenReader | None = None,
+        debug_log_received_oauth_tokens: bool = False,
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -104,6 +105,14 @@ class CodingModelRouter:
             dependencies=dependencies or [],
         )
         self._token_reader: TokenReader | None = token_reader
+        self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
+        if self._debug_log_received_oauth_tokens:
+            logger.warning(
+                "[coding-model-router] DEBUG_LOG_RECEIVED_OAUTH_TOKENS is enabled — "
+                "full request headers (including raw Authorization tokens) and "
+                "bodies will be written to logs. Local development only; never "
+                "enable this in a shared or deployed environment."
+            )
         self._usage_tracker: UsageTracker | None = None
         if mongo_uri:
             self._usage_tracker = UsageTracker(
@@ -149,6 +158,18 @@ class CodingModelRouter:
                 request_id,
             )
             return JSONResponse({"error": "invalid JSON body"}, status_code=400)
+
+        if self._debug_log_received_oauth_tokens:
+            logger.warning(
+                "[coding-model-router] DEBUG received request (local-debug only, do "
+                "not enable in shared environments) request_id=%s method=%s path=%s "
+                "headers=%s body=%s",
+                request_id,
+                request.method,
+                request.url.path,
+                dict(request.headers),
+                body_json,
+            )
 
         model: str = body_json.get("model", "")
         route = _find_route(model)
@@ -320,23 +341,25 @@ class CodingModelRouter:
                 upstream_headers["content-type"] = "application/json"
                 upstream_headers["anthropic-version"] = "2023-06-01"
             logger.info(
-                "[coding-model-router] request_id=%s %s -> BEDROCK  region=%s  model=%s  api=%s",
+                "[coding-model-router] request_id=%s %s -> BEDROCK  region=%s  model=%s  api=%s  streaming=%s",
                 request_id,
                 model,
                 region,
                 upstream_model,
                 api_type,
+                is_streaming,
             )
         else:  # passthrough
             upstream_headers = base_headers
             if auth_val := request.headers.get("authorization"):
                 upstream_headers["authorization"] = auth_val
             logger.info(
-                "[coding-model-router] request_id=%s %s -> ANTHROPIC  url=%s  model=%s",
+                "[coding-model-router] request_id=%s %s -> ANTHROPIC  url=%s  model=%s  streaming=%s",
                 request_id,
                 model,
                 target_url,
                 upstream_model,
+                is_streaming,
             )
 
         dispatch_start = time.perf_counter()
@@ -497,12 +520,15 @@ class CodingModelRouter:
             except openai.APIStatusError as exc:
                 user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
                 logger.error(
-                    "[coding-model-router] upstream %d for model=%s user_id=%s request_id=%s: %s",
+                    "[coding-model-router] Bedrock Mantle upstream error: status=%d "
+                    "model=%s auth=%s user_id=%s request_id=%s streaming=%s body=%s",
                     exc.status_code,
                     upstream_model,
+                    auth,
                     user_id,
                     msg_id,
-                    exc.response.text[:200],
+                    is_streaming,
+                    exc.response.text[:1000],
                 )
                 try:
                     err_body = exc.response.json()
@@ -531,6 +557,20 @@ class CodingModelRouter:
                         upstream_model,
                         is_streaming,
                     )
+                user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
+                logger.error(
+                    "[coding-model-router] Bedrock Mantle request failed with an "
+                    "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
+                    "streaming=%s: %s",
+                    type(exc).__name__,
+                    upstream_model,
+                    auth,
+                    user_id,
+                    msg_id,
+                    is_streaming,
+                    exc,
+                    exc_info=True,
+                )
                 raise
             finally:
                 if not streaming_started:

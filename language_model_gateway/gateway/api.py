@@ -182,6 +182,7 @@ def create_app() -> FastAPI:
             mongo_uri=env_vars.mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
             token_reader=container.resolve(TokenReader),
+            debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())

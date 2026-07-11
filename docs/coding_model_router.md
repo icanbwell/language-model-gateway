@@ -66,6 +66,7 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 |-----------------|--------------------------------------------|--------------------------------------------------|
 | `ROUTER_CONFIG` | `<package>/gateway/routers/model_routing/model-router-config.json` | Path to the route config JSON file (defaults to the file bundled in the Python package) |
 | `AWS_PROFILE`   | *(none)*                                                           | AWS profile used when signing Bedrock requests                                          |
+| `DEBUG_LOG_RECEIVED_OAUTH_TOKENS` | `false` | Logs the full request (method, path, headers, body) received on `/v1/messages` at WARNING level, so you can inspect exactly what a client sends — e.g. whether Claude Code's subscription OAuth token is a JWT or an opaque string, or whether it requests `"stream": true`. **Local development only — never enable in a shared or deployed environment**; this writes bearer tokens and full request bodies to logs in plaintext. |
 
 The config file lives at
 `language_model_gateway/gateway/routers/model_routing/model-router-config.json`
