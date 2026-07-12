@@ -120,6 +120,7 @@ class CodingModelRouter:
         account_directory_collection_name: str = "account_directory",
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
+        custom_header_prefix: str = "x-model-routing-",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -127,6 +128,7 @@ class CodingModelRouter:
             dependencies=dependencies or [],
         )
         self._token_reader: TokenReader | None = token_reader
+        self._custom_header_prefix: str = custom_header_prefix.lower()
         self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
         if self._debug_log_received_oauth_tokens:
             logger.warning(
@@ -212,6 +214,7 @@ class CodingModelRouter:
         user_id = auth_info.get("user_id", "unknown")
         auth_provider = auth_info.get("auth_provider", "unknown")
         prompt_text = _extract_last_user_text(body_json)
+        accept_encoding = request.headers.get("accept-encoding")
 
         is_fallback_route: bool = route is None
         if route is None:
@@ -233,6 +236,9 @@ class CodingModelRouter:
         auth: str = route["auth"]
         api_type: str = route.get("api_type", "anthropic")
         model_tier: str = route.get("tier", "unknown")
+        backend: str = "anthropic" if auth == "passthrough" else "aws_bedrock"
+        price_per_mtok: float | None = route.get("price_per_mtok")
+        anthropic_price_per_mtok: float | None = route.get("anthropic_price_per_mtok")
         # Passthrough routes forward the client's exact model id — Anthropic is
         # authoritative on which model ids exist, so a version-bumped id must
         # never be silently overridden by a possibly-stale pinned config value.
@@ -337,7 +343,10 @@ class CodingModelRouter:
 
         # Build upstream headers
         base_headers: dict[str, str] = {
-            k: v for k, v in request.headers.items() if k.lower() not in _SKIP_HEADERS
+            k: v
+            for k, v in request.headers.items()
+            if k.lower() not in _SKIP_HEADERS
+            and not k.lower().startswith(self._custom_header_prefix)
         }
         base_headers["content-type"] = "application/json"
 
@@ -488,6 +497,14 @@ class CodingModelRouter:
                             first_chunk=first_chunk,
                             prompt_text=prompt_text,
                             model_tier=model_tier,
+                            backend=backend,
+                            price_per_mtok=price_per_mtok,
+                            anthropic_price_per_mtok=anthropic_price_per_mtok,
+                            streaming=True,
+                            compression_requested=accept_encoding,
+                            # GZipMiddleware always skips streaming responses
+                            # (no known Content-Length) — never compressed.
+                            compression_used="none",
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -536,6 +553,23 @@ class CodingModelRouter:
                         api_type=api_type,
                     )
                     openai_response_body = resp.model_dump()
+                    response = JSONResponse(
+                        _openai_to_anthropic_response(
+                            openai_response_body, msg_id, upstream_model
+                        )
+                    )
+                    # GZipMiddleware (added in api.py) only compresses non-streaming
+                    # responses at least 500 bytes when the client's Accept-Encoding
+                    # allows gzip — predict its decision now, before it runs, since
+                    # the usage record is written from a background task after this
+                    # response is already on its way out.
+                    compression_used = (
+                        "gzip"
+                        if accept_encoding
+                        and "gzip" in accept_encoding.lower()
+                        and len(response.body) >= 500
+                        else "none"
+                    )
                     # Record usage after the response is sent to the client, not before.
                     if self._usage_tracker:
                         background_tasks.add_task(
@@ -546,12 +580,13 @@ class CodingModelRouter:
                             response_body=openai_response_body,
                             prompt_text=prompt_text,
                             model_tier=model_tier,
+                            backend=backend,
+                            price_per_mtok=price_per_mtok,
+                            anthropic_price_per_mtok=anthropic_price_per_mtok,
+                            streaming=False,
+                            compression_requested=accept_encoding,
+                            compression_used=compression_used,
                         )
-                    response = JSONResponse(
-                        _openai_to_anthropic_response(
-                            openai_response_body, msg_id, upstream_model
-                        )
-                    )
                     response.background = background_tasks
                     return response
             except openai.APIStatusError as exc:
@@ -820,8 +855,32 @@ class CodingModelRouter:
         signature-checked OIDC token. Otherwise usage is recorded with no
         user_id rather than a spoofable one — this never blocks the proxy
         call itself.
+
+        Every header under `{custom_header_prefix}` is captured into
+        auth_info["custom_headers"] (keyed by the suffix after the prefix)
+        unconditionally — this is a deliberately open-ended channel so new
+        client-supplied attribution fields (e.g. from Claude Code's
+        ANTHROPIC_CUSTOM_HEADERS) can be added later without a code change
+        here. `{custom_header_prefix}user-id` additionally gets pulled out
+        as auth_info["user_id"] as a best-effort, self-asserted fallback when
+        there's no verified identity — recorded with auth_provider="custom-
+        header" so it's never confused with OIDC-verified identity
+        downstream. This is exactly as spoofable as the OIDC-gated headers
+        above (any caller can set it); it's accepted anyway because this
+        router is deployed per-user/local rather than as a shared
+        multi-tenant ingress — there's no other caller who could spoof it
+        against this instance. Re-gate this behind verification before
+        deploying to a shared environment.
         """
         auth_info: dict[str, Any] = {}
+
+        custom_headers = {
+            k[len(self._custom_header_prefix) :]: v
+            for k, v in request.headers.items()
+            if k.lower().startswith(self._custom_header_prefix)
+        }
+        if custom_headers:
+            auth_info["custom_headers"] = custom_headers
 
         verified_subject: str | None = None
         verified_email: str | None = None
@@ -859,9 +918,13 @@ class CodingModelRouter:
                     verified_user_name = token_item.name
 
         if verified_subject is None:
-            # No verified identity — do not trust caller-controlled headers for
-            # attribution. The proxy call proceeds regardless; only attribution
-            # is affected.
+            # No verified identity — do not trust the OIDC-gated headers for
+            # attribution, but do accept the operator-configured custom
+            # header fallback (see docstring). The proxy call proceeds
+            # regardless; only attribution is affected.
+            if header_user_id := custom_headers.get("user-id"):
+                auth_info["user_id"] = header_user_id
+                auth_info["auth_provider"] = "custom-header"
             return auth_info
 
         auth_info["user_id"] = verified_subject

@@ -167,6 +167,21 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return int(os.environ.get("MODEL_ROUTING_USAGE_PREVIEW_CHARS", "100"))
 
     @property
+    def model_routing_custom_header_prefix(self) -> str:
+        """Prefix identifying CodingModelRouter's own custom identity headers.
+
+        Any incoming header whose name starts with this prefix (case
+        insensitive) is stripped before forwarding the request upstream to
+        Anthropic/Bedrock, and `{prefix}user-id` is used as a best-effort
+        usage-attribution fallback when no OIDC-verified identity is present
+        (e.g. via Claude Code's ANTHROPIC_CUSTOM_HEADERS). See
+        CodingModelRouter._get_auth_info for the trust model.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_CUSTOM_HEADER_PREFIX", "x-model-routing-"
+        ).lower()
+
+    @property
     def model_routing_account_directory_collection_name(self) -> str:
         """Collection name for CodingModelRouter's account_uuid -> email directory.
 

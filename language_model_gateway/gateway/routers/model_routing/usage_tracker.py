@@ -84,6 +84,13 @@ class UsageTracker:
         session_id: str | None = None,
         account_uuid: str | None = None,
         model_tier: str | None = None,
+        backend: str | None = None,
+        price_per_mtok: float | None = None,
+        anthropic_price_per_mtok: float | None = None,
+        streaming: bool | None = None,
+        compression_requested: str | None = None,
+        compression_used: str | None = None,
+        custom_headers: dict[str, str] | None = None,
         prompt_text: str | None = None,
         response_text: str | None = None,
     ) -> None:
@@ -93,6 +100,10 @@ class UsageTracker:
         (configurable; 0 disables preview capture) before being persisted —
         callers pass the full text and this is the single place that decides
         how much of it is retained.
+
+        `custom_headers` is stored as-is (a flat dict) so new client-supplied
+        attribution headers can be added later without a schema change here —
+        see CodingModelRouter._get_auth_info for what populates it.
         """
         if input_tokens == 0 and output_tokens == 0:
             return
@@ -125,6 +136,28 @@ class UsageTracker:
             usage_record["account_uuid"] = account_uuid
         if model_tier:
             usage_record["model_tier"] = model_tier
+        if backend:
+            usage_record["backend"] = backend
+        if price_per_mtok is not None:
+            cost_usd = (input_tokens + output_tokens) / 1_000_000 * price_per_mtok
+            usage_record["cost_usd"] = round(cost_usd, 6)
+            if anthropic_price_per_mtok is not None:
+                baseline_cost_usd = (
+                    (input_tokens + output_tokens)
+                    / 1_000_000
+                    * anthropic_price_per_mtok
+                )
+                usage_record["cost_savings_usd"] = round(
+                    baseline_cost_usd - cost_usd, 6
+                )
+        if streaming is not None:
+            usage_record["streaming"] = streaming
+        if compression_requested:
+            usage_record["compression_requested"] = compression_requested
+        if compression_used:
+            usage_record["compression_used"] = compression_used
+        if custom_headers:
+            usage_record["custom_headers"] = custom_headers
         if self._capture_previews:
             if input_preview := _truncate(prompt_text, self._preview_chars):
                 usage_record["input_preview"] = input_preview
@@ -153,9 +186,18 @@ class UsageTracker:
         model: str,
         response_body: dict[str, Any],
         model_tier: str | None = None,
+        backend: str | None = None,
+        price_per_mtok: float | None = None,
+        anthropic_price_per_mtok: float | None = None,
+        streaming: bool | None = None,
+        compression_requested: str | None = None,
+        compression_used: str | None = None,
         prompt_text: str | None = None,
     ) -> None:
         """Extract usage from Anthropic response and record it."""
+        custom_headers = (
+            auth_info.get("custom_headers") if isinstance(auth_info, dict) else None
+        )
         usage = response_body.get("usage", {})
         input_tokens = usage.get("input_tokens", 0)
         output_tokens = usage.get("output_tokens", 0)
@@ -202,6 +244,13 @@ class UsageTracker:
             session_id=session_id,
             account_uuid=account_uuid,
             model_tier=model_tier,
+            backend=backend,
+            price_per_mtok=price_per_mtok,
+            anthropic_price_per_mtok=anthropic_price_per_mtok,
+            streaming=streaming,
+            compression_requested=compression_requested,
+            compression_used=compression_used,
+            custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
         )
@@ -213,9 +262,18 @@ class UsageTracker:
         model: str,
         response_body: dict[str, Any],
         model_tier: str | None = None,
+        backend: str | None = None,
+        price_per_mtok: float | None = None,
+        anthropic_price_per_mtok: float | None = None,
+        streaming: bool | None = None,
+        compression_requested: str | None = None,
+        compression_used: str | None = None,
         prompt_text: str | None = None,
     ) -> None:
         """Extract usage from OpenAI response and record it."""
+        custom_headers = (
+            auth_info.get("custom_headers") if isinstance(auth_info, dict) else None
+        )
         usage = response_body.get("usage", {})
         input_tokens = usage.get("prompt_tokens", 0)
         output_tokens = usage.get("completion_tokens", 0)
@@ -260,6 +318,13 @@ class UsageTracker:
             session_id=session_id,
             account_uuid=account_uuid,
             model_tier=model_tier,
+            backend=backend,
+            price_per_mtok=price_per_mtok,
+            anthropic_price_per_mtok=anthropic_price_per_mtok,
+            streaming=streaming,
+            compression_requested=compression_requested,
+            compression_used=compression_used,
+            custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
         )

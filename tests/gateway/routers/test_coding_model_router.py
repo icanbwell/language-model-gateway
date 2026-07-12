@@ -388,6 +388,86 @@ async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() ->
     assert auth_info["auth_provider"] == "okta"
 
 
+@pytest.mark.asyncio
+async def test_get_auth_info_falls_back_to_custom_header_when_unverified() -> None:
+    """With no verified identity, the operator-configured custom header wins."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({"x-bwell-user-id": "imran.qureshi@bwell.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "imran.qureshi@bwell.com"
+    assert auth_info["auth_provider"] == "custom-header"
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_verified_identity_wins_over_custom_header() -> None:
+    """A verified OIDC identity still takes precedence over the custom header."""
+    verified_token = MagicMock()
+    verified_token.subject = "verified-user-123"
+    verified_token.email = None
+    verified_token.name = None
+
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "a.valid.jwt"
+    token_reader.verify_token_async = AsyncMock(return_value=verified_token)
+    router = CodingModelRouter(
+        token_reader=token_reader, custom_header_prefix="x-bwell-"
+    )
+    request = _make_request(
+        {
+            "authorization": "Bearer a.valid.jwt",
+            "x-bwell-user-id": "someone-else@bwell.com",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "verified-user-123"
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_custom_header_present() -> None:
+    """No fallback header present means no user_id, same as before."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_captures_all_prefixed_headers() -> None:
+    """Any header under the prefix is captured, not just user-id — new
+    attribution headers can be added later without a code change here."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request(
+        {
+            "x-bwell-user-id": "imran.qureshi@bwell.com",
+            "x-bwell-project": "language-model-gateway",
+            "x-openwebui-user-id": "not-under-our-prefix",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["custom_headers"] == {
+        "user-id": "imran.qureshi@bwell.com",
+        "project": "language-model-gateway",
+    }
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_custom_headers_key_when_none_present() -> None:
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({"authorization": "Bearer irrelevant"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "custom_headers" not in auth_info
+
+
 # ---------------------------------------------------------------------------
 # _attach_account_uuid — records Claude Code's account_uuid on auth_info,
 # unresolved (email resolution now happens downstream in reporting).
@@ -661,6 +741,62 @@ async def test_passthrough_route_forwards_auth_header(
     assert len(intercepted) == 1
     forwarded_auth = intercepted[0].headers.get("authorization", "")
     assert forwarded_auth == "Bearer my-api-key"
+
+
+@pytest.mark.asyncio
+async def test_custom_header_prefix_stripped_before_forwarding_upstream(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """Headers under the custom prefix are for local attribution only — never
+    forwarded to the upstream Anthropic/Bedrock API."""
+    fake_route = {
+        "claude_model": "claude-passthrough-test",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-passthrough-test",
+        "auth": "passthrough",
+    }
+    upstream_body = json.dumps(
+        {
+            "id": "msg_1",
+            "type": "message",
+            "role": "assistant",
+            "content": [{"type": "text", "text": "response"}],
+            "model": "claude-passthrough-test",
+            "stop_reason": "end_turn",
+            "stop_sequence": None,
+            "usage": {"input_tokens": 1, "output_tokens": 1},
+        }
+    ).encode()
+
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=upstream_body,
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-passthrough-test": fake_route}):
+        body = {
+            "model": "claude-passthrough-test",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={
+                "content-type": "application/json",
+                "authorization": "Bearer my-api-key",
+                "x-model-routing-user-id": "imran.qureshi@bwell.com",
+            },
+        )
+
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    assert "x-model-routing-user-id" not in intercepted[0].headers
 
 
 @pytest.mark.asyncio

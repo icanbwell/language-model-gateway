@@ -415,6 +415,245 @@ class TestUsageTrackerSessionIdAndTimestamp:
             assert actual_record["model_tier"] == "premium"
 
 
+class TestUsageTrackerBackendAndCost:
+    """Tests for backend and cost/savings fields on recorded usage."""
+
+    async def test_record_usage_includes_backend_when_present(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                backend="aws_bedrock",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["backend"] == "aws_bedrock"
+
+    async def test_record_usage_computes_cost_and_savings(self) -> None:
+        """cost_usd is actual price; cost_savings_usd is vs the Anthropic baseline."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="qwen.qwen3-coder-next",
+                input_tokens=1_000_000,
+                output_tokens=0,
+                price_per_mtok=0.5,
+                anthropic_price_per_mtok=3.0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["cost_usd"] == 0.5
+            assert actual_record["cost_savings_usd"] == 2.5
+
+    async def test_record_usage_omits_savings_without_baseline_price(self) -> None:
+        """cost_usd is recorded even with no baseline to compare against."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=1_000_000,
+                output_tokens=0,
+                price_per_mtok=5.0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["cost_usd"] == 5.0
+            assert "cost_savings_usd" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_backend_and_cost(
+        self,
+    ) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 1_000_000, "completion_tokens": 0},
+                },
+                backend="aws_bedrock",
+                price_per_mtok=0.15,
+                anthropic_price_per_mtok=1.0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["backend"] == "aws_bedrock"
+            assert actual_record["cost_usd"] == 0.15
+            assert actual_record["cost_savings_usd"] == 0.85
+
+
+class TestUsageTrackerStreamingAndCompression:
+    """Tests for streaming/compression metadata fields."""
+
+    async def test_record_usage_includes_streaming_true(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                streaming=True,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["streaming"] is True
+
+    async def test_record_usage_includes_streaming_false(self) -> None:
+        """streaming=False should still be recorded — falsy is not the same as absent."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                streaming=False,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["streaming"] is False
+
+    async def test_record_usage_omits_streaming_when_not_supplied(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "streaming" not in actual_record
+
+    async def test_record_usage_includes_compression_fields(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                compression_requested="gzip, deflate, br, zstd",
+                compression_used="gzip",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["compression_requested"] == "gzip, deflate, br, zstd"
+            assert actual_record["compression_used"] == "gzip"
+
+
+class TestUsageTrackerCustomHeaders:
+    """Tests for the open-ended custom_headers passthrough field."""
+
+    async def test_record_usage_includes_custom_headers_dict(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                custom_headers={"user-id": "imran.qureshi@bwell.com", "project": "lmg"},
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["custom_headers"] == {
+                "user-id": "imran.qureshi@bwell.com",
+                "project": "lmg",
+            }
+
+    async def test_record_usage_omits_custom_headers_when_absent(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "custom_headers" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_custom_headers(
+        self,
+    ) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"custom_headers": {"project": "lmg"}},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                },
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["custom_headers"] == {"project": "lmg"}
+
+
 class TestUsageTrackerPreviews:
     """Tests for opt-in prompt/response preview capture."""
 

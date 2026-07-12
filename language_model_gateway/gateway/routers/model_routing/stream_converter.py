@@ -355,6 +355,12 @@ async def _oai_stream_with_usage_tracking(
     first_chunk: Any = None,
     prompt_text: str | None = None,
     model_tier: str | None = None,
+    backend: str | None = None,
+    price_per_mtok: float | None = None,
+    anthropic_price_per_mtok: float | None = None,
+    streaming: bool | None = None,
+    compression_requested: str | None = None,
+    compression_used: str | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that records usage to MongoDB after stream completes.
@@ -390,6 +396,13 @@ async def _oai_stream_with_usage_tracking(
                     session_id=auth_info.get("session_id"),
                     account_uuid=auth_info.get("account_uuid"),
                     model_tier=model_tier,
+                    backend=backend,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    streaming=streaming,
+                    compression_requested=compression_requested,
+                    compression_used=compression_used,
+                    custom_headers=auth_info.get("custom_headers"),
                     prompt_text=prompt_text,
                     response_text=text_sink.get("output_text"),
                 )
