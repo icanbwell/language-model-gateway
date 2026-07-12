@@ -67,6 +67,10 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `ROUTER_CONFIG` | `<package>/gateway/routers/model_routing/model-router-config.json` | Path to the route config JSON file (defaults to the file bundled in the Python package) |
 | `AWS_PROFILE`   | *(none)*                                                           | AWS profile used when signing Bedrock requests                                          |
 | `DEBUG_LOG_RECEIVED_OAUTH_TOKENS` | `false` | Logs the full request (method, path, headers, body) received on `/v1/messages` at WARNING level, so you can inspect exactly what a client sends — e.g. whether Claude Code's subscription OAuth token is a JWT or an opaque string, or whether it requests `"stream": true`. **Local development only — never enable in a shared or deployed environment**; this writes bearer tokens and full request bodies to logs in plaintext. |
+| `MONGO_LLM_STORAGE_URI` (falls back to `MONGO_URL`) | *(none)* | MongoDB connection string used for usage tracking (see "Usage tracking" below). If unset, usage tracking is disabled entirely. |
+| `MONGO_LLM_STORAGE_DB_NAME` | `llm_storage` | Database name for the usage-tracking collection. |
+| `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
+| `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
 The config file lives at
 `language_model_gateway/gateway/routers/model_routing/model-router-config.json`
@@ -261,6 +265,40 @@ are surfaced as a valid Anthropic assistant message with `stop_reason:
 end_turn`, so that streaming clients receive a well-formed response rather than
 a broken stream.  The error text is included in the assistant message content
 to aid debugging.
+
+---
+
+## Usage tracking
+
+When `MONGO_LLM_STORAGE_URI` is set, the router records per-request token
+usage to a MongoDB `usage` collection: `request_id`, `model`, `input_tokens`,
+`output_tokens`, `total_tokens`, and — only when attribution is available
+(see below) — `user_id`, `auth_provider`, `email`, `user_name`.
+
+**Coverage:** only `api_type: openai` routes (Bedrock Mantle) record usage,
+for both streaming and non-streaming requests. The `api_type: anthropic`
+passthrough path streams upstream bytes verbatim and does not currently
+record usage.
+
+**Attribution:** the client's `Authorization` header on this router is the
+upstream Anthropic/Bedrock credential, not necessarily a b.well-issued OIDC
+token, so it can't gate the proxy call itself. It can only decide whether
+identity headers are trustworthy: `user_id`/`email`/`user_name` are attached
+to a usage record *only* when `Authorization` verifies as a genuine,
+signature-checked OIDC token via the configured `TokenReader`. Caller-supplied
+identity headers (e.g. `x-openwebui-user-id`) are never trusted for
+attribution, since they are trivially spoofable by the caller (IDOR). If the
+token doesn't verify, usage is still recorded, just without a `user_id`.
+
+**Never blocks the response:** the MongoDB write always happens after the
+response has already been sent to the client, so a slow or failing write
+never adds latency or errors to the proxy call itself — write failures are
+caught and logged, never raised.
+- Non-streaming: scheduled via Starlette `BackgroundTasks`, which Starlette
+  runs only after the response body has been fully sent.
+- Streaming: scheduled as an `asyncio.create_task()` from the stream
+  generator's `finally` block, so the SSE stream can close as soon as the
+  last chunk is sent instead of waiting on the write.
 
 ---
 
