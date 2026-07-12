@@ -14,6 +14,7 @@ from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMid
 from oidcauthlib.auth.routers.auth_router import AuthRouter
 from oidcauthlib.auth.token_reader import TokenReader
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
@@ -236,6 +237,12 @@ def create_app() -> FastAPI:
     app1.add_middleware(FastApiLoggingMiddleware)
 
     app1.add_middleware(RequestScopeMiddleware)
+
+    # Outermost middleware (added last) so it compresses the final response
+    # after FastApiLoggingMiddleware has already inspected the plain body.
+    # GZipMiddleware skips streaming responses (no known Content-Length), so
+    # SSE responses from the model routers are unaffected.
+    app1.add_middleware(GZipMiddleware)
 
     return app1
 
