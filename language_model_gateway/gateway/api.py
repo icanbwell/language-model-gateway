@@ -193,6 +193,7 @@ def create_app() -> FastAPI:
         CodingModelRouter(
             mongo_uri=mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
+            usage_collection_name=env_vars.model_routing_usage_collection_name,
             token_reader=container.resolve(TokenReader),
             debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
         ).get_router()

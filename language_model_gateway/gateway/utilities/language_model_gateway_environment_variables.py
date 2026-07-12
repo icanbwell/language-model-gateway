@@ -129,3 +129,14 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         plaintext.
         """
         return self.str2bool(os.environ.get("DEBUG_LOG_RECEIVED_OAUTH_TOKENS", "false"))
+
+    @property
+    def model_routing_usage_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's per-request usage tracking.
+
+        Sibling of mongo_llm_storage_store_collection_name /
+        mongo_llm_storage_checkpointer_collection_name (languagemodelcommon),
+        but this collection is gateway-specific rather than part of the
+        shared persistence factory, so it lives here instead.
+        """
+        return os.environ.get("MODEL_ROUTING_USAGE_COLLECTION_NAME", "usage")
