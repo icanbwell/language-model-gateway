@@ -21,6 +21,7 @@ from starlette.staticfiles import StaticFiles
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from key_value.aio.stores.base import BaseContextManagerStore, BaseStore
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
+from languagemodelcommon.utilities.mongo_url_utils import MongoUrlHelpers
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
 )
@@ -177,9 +178,20 @@ def create_app() -> FastAPI:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
 
+    mongo_llm_storage_uri = env_vars.mongo_llm_storage_uri
+    if mongo_llm_storage_uri:
+        # The bare MONGO_URL/MONGO_LLM_STORAGE_URI has no embedded credentials in
+        # some environments; merge in MONGO_LLM_STORAGE_DB_USERNAME/PASSWORD the
+        # same way persistence_factory.py does for other Mongo-backed stores.
+        mongo_llm_storage_uri = MongoUrlHelpers.add_credentials_to_mongo_url(
+            mongo_url=mongo_llm_storage_uri,
+            username=env_vars.mongo_llm_storage_db_username,
+            password=env_vars.mongo_llm_storage_db_password,
+        )
+
     app1.include_router(
         CodingModelRouter(
-            mongo_uri=env_vars.mongo_llm_storage_uri,
+            mongo_uri=mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
             token_reader=container.resolve(TokenReader),
             debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
