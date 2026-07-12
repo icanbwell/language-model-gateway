@@ -70,6 +70,7 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MONGO_LLM_STORAGE_URI` (falls back to `MONGO_URL`) | *(none)* | MongoDB connection string used for usage tracking (see "Usage tracking" below). If unset, usage tracking is disabled entirely. |
 | `MONGO_LLM_STORAGE_DB_NAME` | `llm_storage` | Database name for the usage-tracking collection. |
 | `MODEL_ROUTING_USAGE_COLLECTION_NAME` | `model-router-usage` | Collection name for usage-tracking records within that database. |
+| `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
@@ -290,6 +291,19 @@ signature-checked OIDC token via the configured `TokenReader`. Caller-supplied
 identity headers (e.g. `x-openwebui-user-id`) are never trusted for
 attribution, since they are trivially spoofable by the caller (IDOR). If the
 token doesn't verify, usage is still recorded, just without a `user_id`.
+
+**Fallback attribution via account directory:** for real Claude Code traffic, the
+OIDC-verification path above never actually applies — Claude Code's `Authorization`
+header is always the client's own Anthropic subscription OAuth token, never a
+b.well-issued JWT, so it never verifies. Every Claude Code request does carry an
+opaque `account_uuid` in `body.metadata.user_id` (a JSON string Claude Code sends
+automatically), but Anthropic doesn't expose any API to resolve that to a human
+email. When `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME`'s collection has a
+manually-imported `{_id: account_uuid, email}` document for that `account_uuid`
+(populated from an Anthropic/Claude Console admin export — there is no import
+tooling in this repo, load it directly with `mongoimport`/Compass), that email is
+used for `user_id`/`email` on the usage record instead. The OIDC-verified path
+always wins when it does apply; this is purely a fallback for when it doesn't.
 
 **Never blocks the response:** the MongoDB write always happens after the
 response has already been sent to the client, so a slow or failing write
