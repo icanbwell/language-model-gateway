@@ -89,7 +89,9 @@ class AccountDirectory:
 
         Results (including misses) are cached in-process for the lifetime of
         this instance, since the underlying directory only changes via manual
-        re-import and this is called on the hot request path.
+        re-import and this is called on the hot request path. A transient
+        Mongo failure is cached as a miss too, same as a genuine "not in the
+        directory" — it won't be retried until the process restarts.
         """
         if account_uuid in self._email_cache:
             return self._email_cache[account_uuid]
