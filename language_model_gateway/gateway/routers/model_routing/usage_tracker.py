@@ -10,9 +10,16 @@ logger = logging.getLogger(__name__)
 
 
 def _truncate(text: str | None, limit: int) -> str | None:
+    """Truncate to `limit` chars, marking truncation with a trailing "…".
+
+    The marker makes it unambiguous when eyeballing a usage record whether
+    input_preview/output_preview is the whole text or a cut-off prefix.
+    """
     if not text or limit <= 0:
         return None
-    return text[:limit]
+    if len(text) <= limit:
+        return text
+    return text[:limit] + "…"
 
 
 class UsageTracker:
@@ -75,6 +82,8 @@ class UsageTracker:
         email: str | None = None,
         user_name: str | None = None,
         session_id: str | None = None,
+        account_uuid: str | None = None,
+        model_tier: str | None = None,
         prompt_text: str | None = None,
         response_text: str | None = None,
     ) -> None:
@@ -112,6 +121,10 @@ class UsageTracker:
             usage_record["user_name"] = user_name
         if session_id:
             usage_record["session_id"] = session_id
+        if account_uuid:
+            usage_record["account_uuid"] = account_uuid
+        if model_tier:
+            usage_record["model_tier"] = model_tier
         if self._capture_previews:
             if input_preview := _truncate(prompt_text, self._preview_chars):
                 usage_record["input_preview"] = input_preview
@@ -139,6 +152,7 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        model_tier: str | None = None,
         prompt_text: str | None = None,
     ) -> None:
         """Extract usage from Anthropic response and record it."""
@@ -159,6 +173,9 @@ class UsageTracker:
         )
         session_id = (
             auth_info.get("session_id") if isinstance(auth_info, dict) else None
+        )
+        account_uuid = (
+            auth_info.get("account_uuid") if isinstance(auth_info, dict) else None
         )
 
         content_blocks = response_body.get("content")
@@ -183,6 +200,8 @@ class UsageTracker:
             email=email,
             user_name=user_name,
             session_id=session_id,
+            account_uuid=account_uuid,
+            model_tier=model_tier,
             prompt_text=prompt_text,
             response_text=response_text,
         )
@@ -193,6 +212,7 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        model_tier: str | None = None,
         prompt_text: str | None = None,
     ) -> None:
         """Extract usage from OpenAI response and record it."""
@@ -213,6 +233,9 @@ class UsageTracker:
         )
         session_id = (
             auth_info.get("session_id") if isinstance(auth_info, dict) else None
+        )
+        account_uuid = (
+            auth_info.get("account_uuid") if isinstance(auth_info, dict) else None
         )
 
         choices = response_body.get("choices")
@@ -235,6 +258,8 @@ class UsageTracker:
             email=email,
             user_name=user_name,
             session_id=session_id,
+            account_uuid=account_uuid,
+            model_tier=model_tier,
             prompt_text=prompt_text,
             response_text=response_text,
         )

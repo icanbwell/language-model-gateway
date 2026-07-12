@@ -290,6 +290,130 @@ class TestUsageTrackerSessionIdAndTimestamp:
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert actual_record["session_id"] == "sess-1"
 
+    async def test_record_usage_includes_account_uuid_when_present(self) -> None:
+        """account_uuid should be recorded even when it doesn't resolve to a user_id.
+
+        Email resolution now happens downstream in reporting, not in this
+        hot path, so account_uuid must survive on the record on its own.
+        """
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id=None,
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                account_uuid="acct-123",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["account_uuid"] == "acct-123"
+            assert "user_id" not in actual_record
+
+    async def test_record_usage_omits_account_uuid_when_absent(self) -> None:
+        """account_uuid should not appear in the record when not supplied."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "account_uuid" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_account_uuid(self) -> None:
+        """auth_info's account_uuid should flow through to the recorded document."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"account_uuid": "acct-123"},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                },
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["account_uuid"] == "acct-123"
+
+    async def test_record_usage_includes_model_tier_when_present(self) -> None:
+        """model_tier should be recorded when supplied by the caller."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                model_tier="premium",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["model_tier"] == "premium"
+
+    async def test_record_usage_omits_model_tier_when_absent(self) -> None:
+        """model_tier should not appear in the record when not supplied."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "model_tier" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_model_tier(self) -> None:
+        """model_tier passed into record_usage_from_openai_response should be recorded."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                },
+                model_tier="premium",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["model_tier"] == "premium"
+
 
 class TestUsageTrackerPreviews:
     """Tests for opt-in prompt/response preview capture."""
@@ -366,7 +490,34 @@ class TestUsageTrackerPreviews:
             )
 
             actual_record = tracker._collection.insert_one.call_args[0][0]
-            assert actual_record["input_preview"] == "01234"
+            assert actual_record["input_preview"] == "01234…"
+            assert actual_record["output_preview"] == "abcde…"
+
+    async def test_preview_not_marked_truncated_when_within_limit(self) -> None:
+        """Text at or under preview_chars should be stored as-is, with no marker."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            capture_previews=True,
+            preview_chars=10,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                prompt_text="0123456789",
+                response_text="abcde",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["input_preview"] == "0123456789"
             assert actual_record["output_preview"] == "abcde"
 
     async def test_record_usage_from_anthropic_response_extracts_output_preview(

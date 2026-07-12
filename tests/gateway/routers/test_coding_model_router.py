@@ -25,9 +25,6 @@ from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception im
 from pytest_httpx import HTTPXMock
 from starlette.requests import Request
 
-from language_model_gateway.gateway.routers.model_routing.account_directory import (
-    AccountDirectory,
-)
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
 )
@@ -392,15 +389,14 @@ async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() ->
 
 
 # ---------------------------------------------------------------------------
-# _enrich_with_account_directory — usage-attribution fallback via account_uuid
+# _attach_account_uuid — records Claude Code's account_uuid on auth_info,
+# unresolved (email resolution now happens downstream in reporting).
 # ---------------------------------------------------------------------------
 
 
-async def test_enrich_with_account_directory_fills_in_missing_user_id() -> None:
-    """Should resolve account_uuid to email and set user_id/email when unset."""
+def test_attach_account_uuid_sets_it_from_body_metadata() -> None:
+    """Should record account_uuid on auth_info when present in request metadata."""
     router = CodingModelRouter()
-    router._account_directory = AsyncMock(spec=AccountDirectory)
-    router._account_directory.resolve_email.return_value = "person@example.com"
 
     auth_info: dict[str, object] = {}
     body_json = {
@@ -409,70 +405,34 @@ async def test_enrich_with_account_directory_fills_in_missing_user_id() -> None:
         }
     }
 
-    await router._enrich_with_account_directory(auth_info, body_json)
+    router._attach_account_uuid(auth_info, body_json)
 
-    assert auth_info["user_id"] == "person@example.com"
-    assert auth_info["email"] == "person@example.com"
-    router._account_directory.resolve_email.assert_awaited_once_with("acct-123")
+    assert auth_info["account_uuid"] == "acct-123"
+    assert "user_id" not in auth_info
+    assert "email" not in auth_info
 
 
-async def test_enrich_with_account_directory_does_not_override_verified_identity() -> (
-    None
-):
-    """Should leave auth_info alone when OIDC-verified user_id is already set."""
+def test_attach_account_uuid_does_not_override_verified_identity() -> None:
+    """Should leave a pre-existing user_id alone — this never resolves identity."""
     router = CodingModelRouter()
-    router._account_directory = AsyncMock(spec=AccountDirectory)
-    router._account_directory.resolve_email.return_value = "person@example.com"
 
     auth_info: dict[str, object] = {"user_id": "verified-subject"}
     body_json = {"metadata": {"user_id": '{"account_uuid": "acct-123"}'}}
 
-    await router._enrich_with_account_directory(auth_info, body_json)
+    router._attach_account_uuid(auth_info, body_json)
 
     assert auth_info["user_id"] == "verified-subject"
-    assert "email" not in auth_info
-    router._account_directory.resolve_email.assert_not_awaited()
+    assert auth_info["account_uuid"] == "acct-123"
 
 
-async def test_enrich_with_account_directory_noop_when_no_directory_configured() -> (
-    None
-):
-    """Should be a no-op when no mongo_uri was configured (no AccountDirectory)."""
+def test_attach_account_uuid_noop_when_account_uuid_missing() -> None:
+    """Should be a no-op when the request body has no extractable account_uuid."""
     router = CodingModelRouter()
-    assert router._account_directory is None
-
-    auth_info: dict[str, object] = {}
-    body_json = {"metadata": {"user_id": '{"account_uuid": "acct-123"}'}}
-
-    await router._enrich_with_account_directory(auth_info, body_json)
-
-    assert auth_info == {}
-
-
-async def test_enrich_with_account_directory_noop_when_account_uuid_missing() -> None:
-    """Should be a no-op when the request body has no resolvable account_uuid."""
-    router = CodingModelRouter()
-    router._account_directory = AsyncMock(spec=AccountDirectory)
 
     auth_info: dict[str, object] = {}
     body_json: dict[str, object] = {}
 
-    await router._enrich_with_account_directory(auth_info, body_json)
-
-    assert auth_info == {}
-    router._account_directory.resolve_email.assert_not_awaited()
-
-
-async def test_enrich_with_account_directory_noop_when_email_not_resolved() -> None:
-    """Should be a no-op when the directory has no entry for this account_uuid."""
-    router = CodingModelRouter()
-    router._account_directory = AsyncMock(spec=AccountDirectory)
-    router._account_directory.resolve_email.return_value = None
-
-    auth_info: dict[str, object] = {}
-    body_json = {"metadata": {"user_id": '{"account_uuid": "acct-123"}'}}
-
-    await router._enrich_with_account_directory(auth_info, body_json)
+    router._attach_account_uuid(auth_info, body_json)
 
     assert auth_info == {}
 

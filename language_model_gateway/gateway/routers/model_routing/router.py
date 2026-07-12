@@ -207,7 +207,7 @@ class CodingModelRouter:
         req_suffix = request.url.path[len("/v1/messages") :]
 
         auth_info = await self._get_auth_info(request)
-        await self._enrich_with_account_directory(auth_info, body_json)
+        self._attach_account_uuid(auth_info, body_json)
         auth_info["session_id"] = extract_session_id(body_json)
         user_id = auth_info.get("user_id", "unknown")
         auth_provider = auth_info.get("auth_provider", "unknown")
@@ -487,6 +487,7 @@ class CodingModelRouter:
                             auth_info,
                             first_chunk=first_chunk,
                             prompt_text=prompt_text,
+                            model_tier=model_tier,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -544,6 +545,7 @@ class CodingModelRouter:
                             model=upstream_model,
                             response_body=openai_response_body,
                             prompt_text=prompt_text,
+                            model_tier=model_tier,
                         )
                     response = JSONResponse(
                         _openai_to_anthropic_response(
@@ -783,30 +785,26 @@ class CodingModelRouter:
     def get_router(self) -> APIRouter:
         return self.router
 
-    async def _enrich_with_account_directory(
+    def _attach_account_uuid(
         self, auth_info: dict[str, Any], body_json: dict[str, Any]
     ) -> None:
-        """Best-effort attribution fallback via Claude Code's account_uuid.
+        """Record Claude Code's account_uuid on auth_info, unresolved.
 
         _get_auth_info only populates auth_info["user_id"] when the caller's
         Authorization header verifies as a genuine OIDC token — which never
         happens for real Claude Code traffic, since that header is always the
-        client's own Anthropic subscription OAuth token. This fills the gap
-        using a manually-populated account_uuid -> email directory, but only
-        when the OIDC-verified path left user_id unset; verified identity
-        always wins when present.
+        client's own Anthropic subscription OAuth token. account_uuid is
+        stored as-is on the usage record instead; account_uuid -> email
+        resolution happens downstream in reporting, not in this hot path.
+
+        self._account_directory is intentionally unused here — it's still
+        constructed so the model-router-account-directory collection exists
+        for that downstream reporting join, but this router no longer queries
+        it live.
         """
-        if auth_info.get("user_id") or self._account_directory is None:
-            return
-
         account_uuid = extract_account_uuid(body_json)
-        if account_uuid is None:
-            return
-
-        email = await self._account_directory.resolve_email(account_uuid)
-        if email:
-            auth_info["user_id"] = email
-            auth_info["email"] = email
+        if account_uuid:
+            auth_info["account_uuid"] = account_uuid
 
     async def _get_auth_info(self, request: Request) -> dict[str, Any]:
         """Extract auth information from the request headers.
