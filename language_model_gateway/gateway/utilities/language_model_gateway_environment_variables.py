@@ -142,3 +142,17 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return os.environ.get(
             "MODEL_ROUTING_USAGE_COLLECTION_NAME", "model-router-usage"
         )
+
+    @property
+    def model_routing_account_directory_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's account_uuid -> email directory.
+
+        Sibling of model_routing_usage_collection_name: the class's own
+        constructor default stays the generic "account_directory"; this is
+        the app's actual deployed default, more specific and
+        collision-resistant for discoverability in a shared database.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME",
+            "model-router-account-directory",
+        )
