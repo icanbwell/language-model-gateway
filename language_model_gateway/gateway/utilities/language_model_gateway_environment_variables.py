@@ -139,4 +139,6 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         but this collection is gateway-specific rather than part of the
         shared persistence factory, so it lives here instead.
         """
-        return os.environ.get("MODEL_ROUTING_USAGE_COLLECTION_NAME", "usage")
+        return os.environ.get(
+            "MODEL_ROUTING_USAGE_COLLECTION_NAME", "model-router-usage"
+        )

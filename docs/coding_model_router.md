@@ -69,7 +69,7 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `DEBUG_LOG_RECEIVED_OAUTH_TOKENS` | `false` | Logs the full request (method, path, headers, body) received on `/v1/messages` at WARNING level, so you can inspect exactly what a client sends — e.g. whether Claude Code's subscription OAuth token is a JWT or an opaque string, or whether it requests `"stream": true`. **Local development only — never enable in a shared or deployed environment**; this writes bearer tokens and full request bodies to logs in plaintext. |
 | `MONGO_LLM_STORAGE_URI` (falls back to `MONGO_URL`) | *(none)* | MongoDB connection string used for usage tracking (see "Usage tracking" below). If unset, usage tracking is disabled entirely. |
 | `MONGO_LLM_STORAGE_DB_NAME` | `llm_storage` | Database name for the usage-tracking collection. |
-| `MODEL_ROUTING_USAGE_COLLECTION_NAME` | `usage` | Collection name for usage-tracking records within that database. |
+| `MODEL_ROUTING_USAGE_COLLECTION_NAME` | `model-router-usage` | Collection name for usage-tracking records within that database. |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
