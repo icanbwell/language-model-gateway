@@ -6,6 +6,7 @@ Tests for usage tracking functionality including data extraction and usage recor
 
 from __future__ import annotations
 
+from datetime import datetime
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from language_model_gateway.gateway.routers.model_routing.usage_tracker import (
@@ -206,6 +207,225 @@ class TestUsageTrackerDataExtraction:
 
             # Verify that insert_one was NOT called (since tokens default to 0)
             tracker._collection.insert_one.assert_not_called()
+
+
+class TestUsageTrackerSessionIdAndTimestamp:
+    """Tests for session_id and timestamp fields on recorded usage."""
+
+    async def test_record_usage_includes_timestamp(self) -> None:
+        """Every recorded usage document should carry a UTC timestamp."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert isinstance(actual_record["timestamp"], datetime)
+
+    async def test_record_usage_includes_session_id_when_present(self) -> None:
+        """session_id should be recorded when supplied via auth_info."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                session_id="sess-1",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["session_id"] == "sess-1"
+
+    async def test_record_usage_omits_session_id_when_absent(self) -> None:
+        """session_id should not appear in the record when not supplied."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "session_id" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_session_id(self) -> None:
+        """auth_info's session_id should flow through to the recorded document."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"user_id": "user-1", "session_id": "sess-1"},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                },
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["session_id"] == "sess-1"
+
+
+class TestUsageTrackerPreviews:
+    """Tests for opt-in prompt/response preview capture."""
+
+    async def test_preview_omitted_by_default(self) -> None:
+        """Previews should not be written when capture_previews is left at its default (off)."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                prompt_text="what does this function do?",
+                response_text="it parses the request body.",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "input_preview" not in actual_record
+            assert "output_preview" not in actual_record
+
+    async def test_preview_recorded_when_capture_enabled(self) -> None:
+        """Previews should be written when capture_previews is explicitly enabled."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            capture_previews=True,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                prompt_text="what does this function do?",
+                response_text="it parses the request body.",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["input_preview"] == "what does this function do?"
+            assert actual_record["output_preview"] == "it parses the request body."
+
+    async def test_preview_truncated_to_configured_length(self) -> None:
+        """Preview text should be truncated to preview_chars."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            capture_previews=True,
+            preview_chars=5,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                prompt_text="0123456789",
+                response_text="abcdefghij",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["input_preview"] == "01234"
+            assert actual_record["output_preview"] == "abcde"
+
+    async def test_record_usage_from_anthropic_response_extracts_output_preview(
+        self,
+    ) -> None:
+        """Output preview should be extracted from Anthropic content text blocks."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            capture_previews=True,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_anthropic_response(
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="claude-opus-4-8",
+                response_body={
+                    "usage": {"input_tokens": 10, "output_tokens": 5},
+                    "content": [{"type": "text", "text": "here is the answer"}],
+                },
+                prompt_text="what is the answer?",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["input_preview"] == "what is the answer?"
+            assert actual_record["output_preview"] == "here is the answer"
+
+    async def test_record_usage_from_openai_response_extracts_output_preview(
+        self,
+    ) -> None:
+        """Output preview should be extracted from the OpenAI message content."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            capture_previews=True,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="gpt-4",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                    "choices": [{"message": {"content": "here is the answer"}}],
+                },
+                prompt_text="what is the answer?",
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["input_preview"] == "what is the answer?"
+            assert actual_record["output_preview"] == "here is the answer"
 
 
 class TestUsageTrackerInitialization:

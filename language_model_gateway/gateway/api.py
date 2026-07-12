@@ -195,6 +195,8 @@ def create_app() -> FastAPI:
             mongo_uri=mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
             usage_collection_name=env_vars.model_routing_usage_collection_name,
+            usage_capture_previews=env_vars.model_routing_usage_capture_previews,
+            usage_preview_chars=env_vars.model_routing_usage_preview_chars,
             account_directory_collection_name=(
                 env_vars.model_routing_account_directory_collection_name
             ),

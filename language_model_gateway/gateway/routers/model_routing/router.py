@@ -61,6 +61,7 @@ from .constants import (
 )
 from .context_manager import enforce_context_budget
 from .message_translator import (
+    _anthropic_content_to_text,
     _anthropic_to_openai_request,
     _estimate_input_tokens,
     _openai_to_anthropic_response,
@@ -74,11 +75,27 @@ from .stream_converter import (
     _sse_event,
     _stream_passthrough,
 )
-from .account_directory import AccountDirectory, extract_account_uuid
+from .account_directory import (
+    AccountDirectory,
+    extract_account_uuid,
+    extract_session_id,
+)
 from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
+
+
+def _extract_last_user_text(body_json: dict[str, Any]) -> str | None:
+    """Extract the text of the most recent user message, for usage-record previews."""
+    messages = body_json.get("messages")
+    if not isinstance(messages, list):
+        return None
+    for message in reversed(messages):
+        if isinstance(message, dict) and message.get("role") == "user":
+            text = _anthropic_content_to_text(message.get("content") or "")
+            return text or None
+    return None
 
 
 class CodingModelRouter:
@@ -98,6 +115,8 @@ class CodingModelRouter:
         mongo_uri: str | None = None,
         usage_db_name: str = "llm_storage",
         usage_collection_name: str = "usage",
+        usage_capture_previews: bool = False,
+        usage_preview_chars: int = 100,
         account_directory_collection_name: str = "account_directory",
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
@@ -124,6 +143,8 @@ class CodingModelRouter:
                 db_name=usage_db_name,
                 collection_name=usage_collection_name,
                 enabled=True,
+                capture_previews=usage_capture_previews,
+                preview_chars=usage_preview_chars,
             )
             self._account_directory = AccountDirectory(
                 mongo_uri=mongo_uri,
@@ -187,8 +208,10 @@ class CodingModelRouter:
 
         auth_info = await self._get_auth_info(request)
         await self._enrich_with_account_directory(auth_info, body_json)
+        auth_info["session_id"] = extract_session_id(body_json)
         user_id = auth_info.get("user_id", "unknown")
         auth_provider = auth_info.get("auth_provider", "unknown")
+        prompt_text = _extract_last_user_text(body_json)
 
         is_fallback_route: bool = route is None
         if route is None:
@@ -463,6 +486,7 @@ class CodingModelRouter:
                             self._usage_tracker,
                             auth_info,
                             first_chunk=first_chunk,
+                            prompt_text=prompt_text,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -519,6 +543,7 @@ class CodingModelRouter:
                             auth_info=auth_info,
                             model=upstream_model,
                             response_body=openai_response_body,
+                            prompt_text=prompt_text,
                         )
                     response = JSONResponse(
                         _openai_to_anthropic_response(

@@ -9,6 +9,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from language_model_gateway.gateway.routers.model_routing.account_directory import (
     AccountDirectory,
     extract_account_uuid,
+    extract_session_id,
 )
 
 
@@ -48,6 +49,32 @@ class TestExtractAccountUuid:
     def test_returns_none_when_account_uuid_not_string(self) -> None:
         body_json = {"metadata": {"user_id": '{"account_uuid": 123}'}}
         assert extract_account_uuid(body_json) is None
+
+
+class TestExtractSessionId:
+    """Tests for extracting session_id from Claude Code's request metadata."""
+
+    def test_extracts_session_id_from_valid_metadata(self) -> None:
+        body_json = {
+            "metadata": {
+                "user_id": (
+                    '{"device_id": "dev-1", "account_uuid": "acct-123", '
+                    '"session_id": "sess-1"}'
+                )
+            }
+        }
+        assert extract_session_id(body_json) == "sess-1"
+
+    def test_returns_none_when_metadata_missing(self) -> None:
+        assert extract_session_id({}) is None
+
+    def test_returns_none_when_session_id_missing(self) -> None:
+        body_json = {"metadata": {"user_id": '{"account_uuid": "acct-123"}'}}
+        assert extract_session_id(body_json) is None
+
+    def test_returns_none_when_session_id_not_string(self) -> None:
+        body_json = {"metadata": {"user_id": '{"session_id": 123}'}}
+        assert extract_session_id(body_json) is None
 
 
 class TestAccountDirectoryInitialization:

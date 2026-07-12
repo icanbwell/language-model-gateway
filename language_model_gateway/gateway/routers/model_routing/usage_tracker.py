@@ -3,9 +3,16 @@
 from __future__ import annotations
 
 import logging
+from datetime import datetime, timezone
 from typing import Any
 
 logger = logging.getLogger(__name__)
+
+
+def _truncate(text: str | None, limit: int) -> str | None:
+    if not text or limit <= 0:
+        return None
+    return text[:limit]
 
 
 class UsageTracker:
@@ -17,11 +24,15 @@ class UsageTracker:
         db_name: str = "llm_storage",
         collection_name: str = "usage",
         enabled: bool = True,
+        capture_previews: bool = False,
+        preview_chars: int = 100,
     ) -> None:
         self._mongo_uri = mongo_uri
         self._db_name = db_name
         self._collection_name = collection_name
         self._enabled = enabled
+        self._capture_previews = capture_previews
+        self._preview_chars = preview_chars
         self._client: Any | None = None
         self._db: Any | None = None
         self._collection: Any | None = None
@@ -63,8 +74,17 @@ class UsageTracker:
         auth_provider: str | None = None,
         email: str | None = None,
         user_name: str | None = None,
+        session_id: str | None = None,
+        prompt_text: str | None = None,
+        response_text: str | None = None,
     ) -> None:
-        """Record token usage to MongoDB."""
+        """Record token usage to MongoDB.
+
+        `prompt_text`/`response_text` are truncated to `preview_chars`
+        (configurable; 0 disables preview capture) before being persisted —
+        callers pass the full text and this is the single place that decides
+        how much of it is retained.
+        """
         if input_tokens == 0 and output_tokens == 0:
             return
 
@@ -79,6 +99,7 @@ class UsageTracker:
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": input_tokens + output_tokens,
+            "timestamp": datetime.now(timezone.utc),
         }
 
         if user_id:
@@ -89,6 +110,13 @@ class UsageTracker:
             usage_record["email"] = email
         if user_name:
             usage_record["user_name"] = user_name
+        if session_id:
+            usage_record["session_id"] = session_id
+        if self._capture_previews:
+            if input_preview := _truncate(prompt_text, self._preview_chars):
+                usage_record["input_preview"] = input_preview
+            if output_preview := _truncate(response_text, self._preview_chars):
+                usage_record["output_preview"] = output_preview
 
         try:
             await self._collection.insert_one(usage_record)
@@ -111,6 +139,7 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        prompt_text: str | None = None,
     ) -> None:
         """Extract usage from Anthropic response and record it."""
         usage = response_body.get("usage", {})
@@ -120,13 +149,29 @@ class UsageTracker:
         # auth_info's identity fields are only populated when the caller's
         # Authorization header verified as a genuine OIDC token (see
         # CodingModelRouter._get_auth_info) — never re-derive identity from
-        # raw, caller-controlled headers here.
+        # raw, caller-controlled headers here. session_id is not an identity
+        # field (see extract_session_id) so it's trusted regardless.
         user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
         email = auth_info.get("email") if isinstance(auth_info, dict) else None
         user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
         auth_provider = (
             auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
         )
+        session_id = (
+            auth_info.get("session_id") if isinstance(auth_info, dict) else None
+        )
+
+        content_blocks = response_body.get("content")
+        response_text = None
+        if isinstance(content_blocks, list):
+            texts = [
+                text
+                for block in content_blocks
+                if isinstance(block, dict)
+                and block.get("type") == "text"
+                and isinstance(text := block.get("text"), str)
+            ]
+            response_text = "\n".join(texts) if texts else None
 
         await self.record_usage(
             request_id=request_id,
@@ -137,6 +182,9 @@ class UsageTracker:
             auth_provider=auth_provider,
             email=email,
             user_name=user_name,
+            session_id=session_id,
+            prompt_text=prompt_text,
+            response_text=response_text,
         )
 
     async def record_usage_from_openai_response(
@@ -145,6 +193,7 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        prompt_text: str | None = None,
     ) -> None:
         """Extract usage from OpenAI response and record it."""
         usage = response_body.get("usage", {})
@@ -154,13 +203,27 @@ class UsageTracker:
         # auth_info's identity fields are only populated when the caller's
         # Authorization header verified as a genuine OIDC token (see
         # CodingModelRouter._get_auth_info) — never re-derive identity from
-        # raw, caller-controlled headers here.
+        # raw, caller-controlled headers here. session_id is not an identity
+        # field (see extract_session_id) so it's trusted regardless.
         user_id = auth_info.get("user_id") if isinstance(auth_info, dict) else None
         email = auth_info.get("email") if isinstance(auth_info, dict) else None
         user_name = auth_info.get("user_name") if isinstance(auth_info, dict) else None
         auth_provider = (
             auth_info.get("auth_provider") if isinstance(auth_info, dict) else None
         )
+        session_id = (
+            auth_info.get("session_id") if isinstance(auth_info, dict) else None
+        )
+
+        choices = response_body.get("choices")
+        response_text = None
+        if isinstance(choices, list) and choices:
+            first_choice = choices[0]
+            message = (
+                first_choice.get("message") if isinstance(first_choice, dict) else None
+            )
+            if isinstance(message, dict) and isinstance(message.get("content"), str):
+                response_text = message["content"]
 
         await self.record_usage(
             request_id=request_id,
@@ -171,6 +234,9 @@ class UsageTracker:
             auth_provider=auth_provider,
             email=email,
             user_name=user_name,
+            session_id=session_id,
+            prompt_text=prompt_text,
+            response_text=response_text,
         )
 
     async def close(self) -> None:

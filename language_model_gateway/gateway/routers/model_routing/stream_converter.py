@@ -104,17 +104,22 @@ async def _stream_oai_sdk_to_anthropic(
     upstream_model: str,
     first_chunk: Any = None,
     usage_sink: dict[str, int] | None = None,
+    text_sink: dict[str, str] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Convert an openai SDK async stream to Anthropic SSE format.
 
     Accumulated input/output token usage is written into `usage_sink` (if
-    provided) so callers can read it after the stream completes without
-    relying on shared module state across concurrent requests.
+    provided), and the visible output text into `text_sink` (if provided),
+    so callers can read them after the stream completes without relying on
+    shared module state across concurrent requests.
     """
     if usage_sink is None:
         usage_sink = {}
     usage_sink["input_tokens"] = 0
     usage_sink["output_tokens"] = 0
+    if text_sink is None:
+        text_sink = {}
+    text_sink["output_text"] = ""
 
     sent_message_start = False
     open_blocks: dict[int, dict[str, Any]] = {}
@@ -160,6 +165,7 @@ async def _stream_oai_sdk_to_anthropic(
                 if delta.content:
                     visible = thinking_stripper.feed(delta.content)
                     if visible:
+                        text_sink["output_text"] += visible
                         if text_idx is None:
                             text_idx = next_idx
                             next_idx += 1
@@ -280,6 +286,7 @@ async def _stream_oai_sdk_to_anthropic(
 
     remaining = thinking_stripper.flush()
     if remaining:
+        text_sink["output_text"] += remaining
         if text_idx is None:
             text_idx = next_idx
             next_idx += 1
@@ -346,11 +353,13 @@ async def _oai_stream_with_usage_tracking(
     usage_tracker: Any,
     auth_info: dict[str, Any],
     first_chunk: Any = None,
+    prompt_text: str | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that records usage to MongoDB after stream completes.
     """
     usage_sink: dict[str, int] = {}
+    text_sink: dict[str, str] = {}
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
             stream,
@@ -358,6 +367,7 @@ async def _oai_stream_with_usage_tracking(
             upstream_model,
             first_chunk=first_chunk,
             usage_sink=usage_sink,
+            text_sink=text_sink,
         ):
             yield chunk
     finally:
@@ -376,6 +386,9 @@ async def _oai_stream_with_usage_tracking(
                     auth_provider=auth_info.get("auth_provider"),
                     email=auth_info.get("email"),
                     user_name=auth_info.get("user_name"),
+                    session_id=auth_info.get("session_id"),
+                    prompt_text=prompt_text,
+                    response_text=text_sink.get("output_text"),
                 )
             )
 

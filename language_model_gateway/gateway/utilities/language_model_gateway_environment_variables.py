@@ -144,6 +144,29 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         )
 
     @property
+    def model_routing_usage_capture_previews(self) -> bool:
+        """Whether to write input_preview/output_preview fields to the usage collection.
+
+        Off by default: prompt/response text (even truncated) is
+        user/model-generated content, unlike the rest of the usage record
+        which is only metadata, so this is an explicit opt-in rather than
+        following the tracker's default-enabled posture.
+        """
+        return self.str2bool(
+            os.environ.get("MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS", "false")
+        )
+
+    @property
+    def model_routing_usage_preview_chars(self) -> int:
+        """Max characters of prompt/response text captured per usage record.
+
+        Applies to the input_preview/output_preview fields on
+        model_routing_usage_collection_name documents, and only takes effect
+        when model_routing_usage_capture_previews is enabled.
+        """
+        return int(os.environ.get("MODEL_ROUTING_USAGE_PREVIEW_CHARS", "100"))
+
+    @property
     def model_routing_account_directory_collection_name(self) -> str:
         """Collection name for CodingModelRouter's account_uuid -> email directory.
 
