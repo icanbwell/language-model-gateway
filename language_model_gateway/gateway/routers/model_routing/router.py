@@ -74,6 +74,7 @@ from .stream_converter import (
     _sse_event,
     _stream_passthrough,
 )
+from .account_directory import AccountDirectory, extract_account_uuid
 from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
@@ -97,6 +98,7 @@ class CodingModelRouter:
         mongo_uri: str | None = None,
         usage_db_name: str = "llm_storage",
         usage_collection_name: str = "usage",
+        account_directory_collection_name: str = "account_directory",
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
     ) -> None:
@@ -115,11 +117,18 @@ class CodingModelRouter:
                 "enable this in a shared or deployed environment."
             )
         self._usage_tracker: UsageTracker | None = None
+        self._account_directory: AccountDirectory | None = None
         if mongo_uri:
             self._usage_tracker = UsageTracker(
                 mongo_uri=mongo_uri,
                 db_name=usage_db_name,
                 collection_name=usage_collection_name,
+                enabled=True,
+            )
+            self._account_directory = AccountDirectory(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=account_directory_collection_name,
                 enabled=True,
             )
         self._register_routes()
@@ -177,6 +186,7 @@ class CodingModelRouter:
         req_suffix = request.url.path[len("/v1/messages") :]
 
         auth_info = await self._get_auth_info(request)
+        await self._enrich_with_account_directory(auth_info, body_json)
         user_id = auth_info.get("user_id", "unknown")
         auth_provider = auth_info.get("auth_provider", "unknown")
 
@@ -747,6 +757,31 @@ class CodingModelRouter:
 
     def get_router(self) -> APIRouter:
         return self.router
+
+    async def _enrich_with_account_directory(
+        self, auth_info: dict[str, Any], body_json: dict[str, Any]
+    ) -> None:
+        """Best-effort attribution fallback via Claude Code's account_uuid.
+
+        _get_auth_info only populates auth_info["user_id"] when the caller's
+        Authorization header verifies as a genuine OIDC token — which never
+        happens for real Claude Code traffic, since that header is always the
+        client's own Anthropic subscription OAuth token. This fills the gap
+        using a manually-populated account_uuid -> email directory, but only
+        when the OIDC-verified path left user_id unset; verified identity
+        always wins when present.
+        """
+        if auth_info.get("user_id") or self._account_directory is None:
+            return
+
+        account_uuid = extract_account_uuid(body_json)
+        if account_uuid is None:
+            return
+
+        email = await self._account_directory.resolve_email(account_uuid)
+        if email:
+            auth_info["user_id"] = email
+            auth_info["email"] = email
 
     async def _get_auth_info(self, request: Request) -> dict[str, Any]:
         """Extract auth information from the request headers.
