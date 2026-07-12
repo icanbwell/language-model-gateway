@@ -40,6 +40,7 @@ from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception im
     AuthorizationBearerTokenInvalidException,
 )
 from oidcauthlib.auth.token_reader import TokenReader
+from starlette.background import BackgroundTasks
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response, StreamingResponse
 
@@ -143,7 +144,7 @@ class CodingModelRouter:
         )
 
     async def proxy_messages(
-        self, request: Request
+        self, request: Request, background_tasks: BackgroundTasks
     ) -> StreamingResponse | JSONResponse | Response:
         raw_body = await request.body()
 
@@ -443,7 +444,6 @@ class CodingModelRouter:
                         api_type=api_type,
                     )
                     # Create streaming response with usage tracking
-                    auth_info = await self._get_auth_info(request)
                     if self._usage_tracker:
                         stream_gen = _oai_stream_with_usage_tracking(
                             stream,
@@ -501,24 +501,23 @@ class CodingModelRouter:
                         api_type=api_type,
                     )
                     openai_response_body = resp.model_dump()
-                    # Record usage before returning response
+                    # Record usage after the response is sent to the client, not before.
                     if self._usage_tracker:
-                        input_tokens, output_tokens = self._extract_usage_from_response(
-                            openai_response_body, "openai"
-                        )
-                        await self._usage_tracker.record_usage_from_openai_response(
+                        background_tasks.add_task(
+                            self._usage_tracker.record_usage_from_openai_response,
                             request_id=msg_id,
-                            auth_info=await self._get_auth_info(request),
+                            auth_info=auth_info,
                             model=upstream_model,
                             response_body=openai_response_body,
                         )
-                    return JSONResponse(
+                    response = JSONResponse(
                         _openai_to_anthropic_response(
                             openai_response_body, msg_id, upstream_model
                         )
                     )
+                    response.background = background_tasks
+                    return response
             except openai.APIStatusError as exc:
-                user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
                 logger.error(
                     "[coding-model-router] Bedrock Mantle upstream error: status=%d "
                     "model=%s auth=%s user_id=%s request_id=%s streaming=%s body=%s",
@@ -557,7 +556,6 @@ class CodingModelRouter:
                         upstream_model,
                         is_streaming,
                     )
-                user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
                 logger.error(
                     "[coding-model-router] Bedrock Mantle request failed with an "
                     "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
@@ -597,7 +595,6 @@ class CodingModelRouter:
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
-            user_id = (await self._get_auth_info(request)).get("user_id", "unknown")
             logger.error(
                 "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
@@ -818,18 +815,3 @@ class CodingModelRouter:
             auth_info["auth_provider"] = auth_provider
 
         return auth_info
-
-    def _extract_usage_from_response(
-        self, response_body: dict[str, Any], api_type: str
-    ) -> tuple[int, int]:
-        """Extract input and output tokens from a response body."""
-        if api_type == "openai":
-            usage = response_body.get("usage", {})
-            input_tokens = usage.get("prompt_tokens", 0)
-            output_tokens = usage.get("completion_tokens", 0)
-        else:
-            usage = response_body.get("usage", {})
-            input_tokens = usage.get("input_tokens", 0)
-            output_tokens = usage.get("output_tokens", 0)
-
-        return input_tokens, output_tokens

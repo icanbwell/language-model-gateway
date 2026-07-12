@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import asyncio
 import inspect
 import json
 import logging
 import os
-from typing import Any, AsyncGenerator
+from typing import Any, AsyncGenerator, Coroutine
 
 import httpx
 
@@ -14,6 +15,17 @@ from .constants import _OAI_TO_ANT_STOP
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
+
+# asyncio does not keep a strong reference to a bare create_task() result, so an
+# in-flight task can be garbage-collected before it finishes. Stash a reference here
+# until the task's own done-callback removes it.
+_background_tasks: set[asyncio.Task[Any]] = set()
+
+
+def _fire_and_forget(coro: Coroutine[Any, Any, Any]) -> None:
+    task = asyncio.create_task(coro)
+    _background_tasks.add(task)
+    task.add_done_callback(_background_tasks.discard)
 
 
 class ThinkingStripper:
@@ -208,8 +220,7 @@ async def _stream_oai_sdk_to_anthropic(
                 if chunk.usage.prompt_tokens is not None:
                     usage_sink["input_tokens"] = chunk.usage.prompt_tokens
                 if chunk.usage.completion_tokens is not None:
-                    output_tokens = chunk.usage.completion_tokens
-                    usage_sink["output_tokens"] = output_tokens
+                    usage_sink["output_tokens"] = chunk.usage.completion_tokens
     except Exception as _exc:
         logger.error("[coding-model-router] upstream stream error: %s", _exc)
         _stream_error_msg: str | None = str(_exc)
@@ -351,19 +362,21 @@ async def _oai_stream_with_usage_tracking(
             yield chunk
     finally:
         await http_client.aclose()
-        # Record usage after stream completes
         input_tokens = usage_sink.get("input_tokens", 0)
         output_tokens = usage_sink.get("output_tokens", 0)
         if usage_tracker and (input_tokens > 0 or output_tokens > 0):
-            await usage_tracker.record_usage(
-                request_id=msg_id,
-                user_id=auth_info.get("user_id"),
-                model=upstream_model,
-                input_tokens=input_tokens,
-                output_tokens=output_tokens,
-                auth_provider=auth_info.get("auth_provider"),
-                email=auth_info.get("email"),
-                user_name=auth_info.get("user_name"),
+            # Fire-and-forget: don't hold the stream's close on the Mongo write.
+            _fire_and_forget(
+                usage_tracker.record_usage(
+                    request_id=msg_id,
+                    user_id=auth_info.get("user_id"),
+                    model=upstream_model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    auth_provider=auth_info.get("auth_provider"),
+                    email=auth_info.get("email"),
+                    user_name=auth_info.get("user_name"),
+                )
             )
 
 
