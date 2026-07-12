@@ -133,3 +133,43 @@ class TestAccountDirectoryResolveEmail:
         ):
             await directory._ensure_connected()
             assert directory._enabled is False
+
+    async def test_resolve_email_second_call_uses_cache(self) -> None:
+        directory = AccountDirectory(
+            mongo_uri="mongodb://localhost:27017", enabled=False
+        )
+        with patch.object(
+            directory, "_ensure_connected", new_callable=AsyncMock
+        ) as mock_ensure_connected:
+            directory._collection = MagicMock()
+            directory._collection.find_one = AsyncMock(
+                return_value={"_id": "acct-123", "email": "person@example.com"}
+            )
+
+            first_result = await directory.resolve_email("acct-123")
+            second_result = await directory.resolve_email("acct-123")
+
+            assert first_result == "person@example.com"
+            assert second_result == "person@example.com"
+            directory._collection.find_one.assert_called_once_with({"_id": "acct-123"})
+            mock_ensure_connected.assert_called_once()
+
+    async def test_resolve_email_not_found_is_cached(self) -> None:
+        directory = AccountDirectory(
+            mongo_uri="mongodb://localhost:27017", enabled=False
+        )
+        with patch.object(
+            directory, "_ensure_connected", new_callable=AsyncMock
+        ) as mock_ensure_connected:
+            directory._collection = MagicMock()
+            directory._collection.find_one = AsyncMock(return_value=None)
+
+            first_result = await directory.resolve_email("unknown-acct")
+            second_result = await directory.resolve_email("unknown-acct")
+
+            assert first_result is None
+            assert second_result is None
+            directory._collection.find_one.assert_called_once_with(
+                {"_id": "unknown-acct"}
+            )
+            mock_ensure_connected.assert_called_once()

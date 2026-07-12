@@ -32,7 +32,9 @@ class UsageTracker:
             return
 
         try:
-            # Import pymongo in the function to avoid hard dependency
+            # Deferred import: skip pymongo's import cost when this feature
+            # is disabled (no mongo_uri configured), since _ensure_connected
+            # is then never called.
             from pymongo import AsyncMongoClient
 
             self._client = AsyncMongoClient(self._mongo_uri)

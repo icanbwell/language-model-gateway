@@ -55,6 +55,7 @@ class AccountDirectory:
         self._client: Any | None = None
         self._db: Any | None = None
         self._collection: Any | None = None
+        self._email_cache: dict[str, str | None] = {}
 
     async def _ensure_connected(self) -> None:
         """Ensure MongoDB connection is established."""
@@ -62,7 +63,9 @@ class AccountDirectory:
             return
 
         try:
-            # Import pymongo in the function to avoid hard dependency
+            # Deferred import: skip pymongo's import cost when this feature
+            # is disabled (no mongo_uri configured), since _ensure_connected
+            # is then never called.
             from pymongo import AsyncMongoClient
 
             self._client = AsyncMongoClient(self._mongo_uri)
@@ -82,10 +85,19 @@ class AccountDirectory:
             self._enabled = False
 
     async def resolve_email(self, account_uuid: str) -> str | None:
-        """Look up the email for an account_uuid. Returns None on any failure."""
+        """Look up the email for an account_uuid. Returns None on any failure.
+
+        Results (including misses) are cached in-process for the lifetime of
+        this instance, since the underlying directory only changes via manual
+        re-import and this is called on the hot request path.
+        """
+        if account_uuid in self._email_cache:
+            return self._email_cache[account_uuid]
+
         await self._ensure_connected()
 
         if self._collection is None:
+            self._email_cache[account_uuid] = None
             return None
 
         try:
@@ -96,13 +108,17 @@ class AccountDirectory:
                 e,
                 exc_info=True,
             )
+            self._email_cache[account_uuid] = None
             return None
 
         if not doc:
+            self._email_cache[account_uuid] = None
             return None
 
         email = doc.get("email")
-        return email if isinstance(email, str) else None
+        result = email if isinstance(email, str) else None
+        self._email_cache[account_uuid] = result
+        return result
 
     async def close(self) -> None:
         """Close MongoDB connection."""

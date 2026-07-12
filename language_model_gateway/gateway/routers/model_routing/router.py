@@ -798,7 +798,7 @@ class CodingModelRouter:
         user_id rather than a spoofable one — this never blocks the proxy
         call itself.
         """
-        auth_info: dict[str, Any] = {"headers": dict(request.headers)}
+        auth_info: dict[str, Any] = {}
 
         verified_subject: str | None = None
         verified_email: str | None = None
