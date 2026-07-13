@@ -23,8 +23,8 @@ instead of Mantle, so on-call can flip a single switch during a Mantle incident.
 
 ## Goals
 
-- A single global env var, `BEDROCK_TRANSPORT` (`"mantle"` default / `"native"`),
-  controls transport for all `auth == "aws"` routes at once.
+- A single global env var, `MODEL_ROUTING_BEDROCK_TRANSPORT` (`"mantle"` default /
+  `"native"`), controls transport for all `auth == "aws"` routes at once.
 - Same model IDs (`qwen.qwen3-coder-30b-a3b-v1:0`, `qwen.qwen3-coder-next`) — only the
   transport layer changes, not the model or its cost profile.
 - No automatic failover, no per-route/per-tier granularity — this is an operator-flipped
@@ -42,13 +42,35 @@ instead of Mantle, so on-call can flip a single switch during a Mantle incident.
 
 ## Architecture
 
-`BEDROCK_TRANSPORT` is read once at module load (same pattern as
-`_COST_SAVINGS_ENABLED` in `message_translator.py`). In `router.py`, the existing
-`if api_type == "openai":` branch gains one more condition: when native transport is
-enabled for an `auth == "aws"` route, dispatch to a new module,
-`bedrock_converse_client.py`, instead of constructing an `openai.AsyncOpenAI` client.
-Every other route (Opus/Fable passthrough to Anthropic, and Mantle when the toggle is
-off) is unaffected.
+`MODEL_ROUTING_BEDROCK_TRANSPORT` is read via the `EnvironmentVariables` DI class
+(`LanguageModelGatewayEnvironmentVariables` in
+`language_model_gateway_environment_variables.py`), not a bare module-level
+`os.environ.get()` in the `model_routing/` package. A new
+`model_routing_bedrock_transport` property is added there, following the exact
+convention already used for every other model-routing setting (e.g.
+`model_routing_error_collection_name`, `model_routing_usage_collection_name`):
+
+```python
+@property
+def model_routing_bedrock_transport(self) -> str:
+    return os.environ.get("MODEL_ROUTING_BEDROCK_TRANSPORT", "mantle")
+```
+
+`api.py:create_app()` already resolves `env_vars =
+container.resolve(LanguageModelGatewayEnvironmentVariables)` and passes individual
+`model_routing_*` settings into `CodingModelRouter(...)` as constructor kwargs (see
+`usage_collection_name`, `error_collection_name`, etc.). This value follows the same
+path: `bedrock_transport=env_vars.model_routing_bedrock_transport` is added to that
+constructor call, and `CodingModelRouter.__init__` stores it as `self._bedrock_transport`.
+This is the first `model_routing_*` setting the package itself doesn't read directly —
+but that's consistent with, not a departure from, how every sibling setting already
+flows in from `api.py`.
+
+In `router.py`, the existing `if api_type == "openai":` branch gains one more
+condition: when `self._bedrock_transport == "native"` for an `auth == "aws"` route,
+dispatch to a new module, `bedrock_converse_client.py`, instead of constructing an
+`openai.AsyncOpenAI` client. Every other route (Opus/Fable passthrough to Anthropic, and
+Mantle when the toggle is at its default) is unaffected.
 
 `bedrock_converse_client.py` sits alongside `bedrock_client.py` (httpx passthrough +
 retry helpers) and `aws_auth.py` (SigV4 signing, credential-error mapping), each keeping
@@ -135,9 +157,14 @@ debugged earlier.
 - Streaming-adapter unit test using a fake synchronous iterator standing in for boto3's
   `EventStream`, verifying ordered async yielding and exception propagation.
 - Router-level tests mocking `boto3.client("bedrock-runtime")` at the boundary (no real
-  AWS calls in CI): verify `BEDROCK_TRANSPORT=native` routes haiku/sonnet through the new
-  path while the `mantle` default is unaffected, and that the emitted Anthropic SSE
-  sequence matches the existing Mantle-path output.
+  AWS calls in CI): construct `CodingModelRouter(..., bedrock_transport="native")`
+  directly (mirroring how existing router tests already pass other
+  constructor-injected `model_routing_*` settings) and verify haiku/sonnet route through
+  the new path while the `mantle` default is unaffected, and that the emitted Anthropic
+  SSE sequence matches the existing Mantle-path output.
+- A test for the new `model_routing_bedrock_transport` property on
+  `LanguageModelGatewayEnvironmentVariables`, and confirmation that `api.py:create_app()`
+  threads it into `CodingModelRouter(...)` as `bedrock_transport=...`.
 - Error-path tests: transient `ClientError` codes retried; non-transient codes recorded
   via `_record_error` with `bedrock_native_error` and the AWS request ID surfaced to the
   client.
