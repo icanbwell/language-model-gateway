@@ -80,9 +80,27 @@ def check_chat_completions_caching(model: str) -> None:
             time.sleep(1)
 
 
+def check_responses_api_support(model: str) -> bool:
+    """Question 2: does this model accept a Responses API call at all?"""
+    route: dict[str, Any] = {"aws_region": AWS_REGION}
+    client = _client(route)
+    try:
+        resp = client.responses.create(
+            model=model,
+            input=[{"role": "user", "content": "Hello"}],
+        )
+        print(f"[{model}] Responses API: SUPPORTED (response id={resp.id})")
+        return True
+    except Exception as exc:  # noqa: BLE001 - any failure means "not supported"
+        print(f"[{model}] Responses API: NOT SUPPORTED ({type(exc).__name__}: {exc})")
+        return False
+
+
 def main() -> None:
     for model in MODELS:
         check_chat_completions_caching(model)
+    for model in MODELS:
+        check_responses_api_support(model)
 
 
 if __name__ == "__main__":
