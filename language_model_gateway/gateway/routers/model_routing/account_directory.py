@@ -15,8 +15,8 @@ from typing import Any
 logger = logging.getLogger(__name__)
 
 
-def extract_account_uuid(body_json: dict[str, Any]) -> str | None:
-    """Best-effort extraction of Claude Code's account_uuid from request metadata.
+def _parse_claude_code_metadata(body_json: dict[str, Any]) -> dict[str, Any] | None:
+    """Best-effort parse of Claude Code's request metadata blob.
 
     Claude Code sends body["metadata"]["user_id"] as a JSON-encoded string
     containing device_id/account_uuid/session_id — untrusted, client-supplied
@@ -30,12 +30,33 @@ def extract_account_uuid(body_json: dict[str, Any]) -> str | None:
         if not isinstance(raw_user_id, str):
             return None
         parsed = json.loads(raw_user_id)
-        if not isinstance(parsed, dict):
-            return None
-        account_uuid = parsed.get("account_uuid")
-        return account_uuid if isinstance(account_uuid, str) else None
+        return parsed if isinstance(parsed, dict) else None
     except (json.JSONDecodeError, TypeError, ValueError):
         return None
+
+
+def extract_account_uuid(body_json: dict[str, Any]) -> str | None:
+    """Best-effort extraction of Claude Code's account_uuid from request metadata."""
+    parsed = _parse_claude_code_metadata(body_json)
+    if parsed is None:
+        return None
+    account_uuid = parsed.get("account_uuid")
+    return account_uuid if isinstance(account_uuid, str) else None
+
+
+def extract_session_id(body_json: dict[str, Any]) -> str | None:
+    """Best-effort extraction of Claude Code's session_id from request metadata.
+
+    Unlike account_uuid, this is never used for identity or authorization —
+    only to correlate usage records within a single CLI session — so it's
+    safe to trust this client-supplied value even when the caller's identity
+    hasn't been verified.
+    """
+    parsed = _parse_claude_code_metadata(body_json)
+    if parsed is None:
+        return None
+    session_id = parsed.get("session_id")
+    return session_id if isinstance(session_id, str) else None
 
 
 class AccountDirectory:

@@ -195,11 +195,19 @@ def create_app() -> FastAPI:
             mongo_uri=mongo_llm_storage_uri,
             usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
             usage_collection_name=env_vars.model_routing_usage_collection_name,
+            usage_session_collection_name=(
+                env_vars.model_routing_usage_session_collection_name
+            ),
+            usage_track_sessions=env_vars.model_routing_usage_session_tracking_enabled,
+            usage_capture_previews=env_vars.model_routing_usage_capture_previews,
+            usage_preview_chars=env_vars.model_routing_usage_preview_chars,
+            error_collection_name=env_vars.model_routing_error_collection_name,
             account_directory_collection_name=(
                 env_vars.model_routing_account_directory_collection_name
             ),
             token_reader=container.resolve(TokenReader),
             debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
+            custom_header_prefix=env_vars.model_routing_custom_header_prefix,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())
@@ -243,8 +251,10 @@ def create_app() -> FastAPI:
 
     # Outermost middleware (added last) so it compresses the final response
     # after FastApiLoggingMiddleware has already inspected the plain body.
-    # GZipMiddleware skips streaming responses (no known Content-Length), so
-    # SSE responses from the model routers are unaffected.
+    # Starlette's GZipMiddleware hardcodes text/event-stream into its
+    # excluded-content-types list (not configurable via this constructor in
+    # the installed version), so SSE responses from the model routers are
+    # never compressed regardless of the client's Accept-Encoding.
     app1.add_middleware(GZipMiddleware)
 
     return app1

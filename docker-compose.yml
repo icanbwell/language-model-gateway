@@ -152,6 +152,10 @@ services:
       ENABLE_LLM_MEMORY: 'true'
       MONGO_LLM_STORAGE_STORE_COLLECTION_NAME: "stores"
       MONGO_LLM_STORAGE_CHECKPOINTER_COLLECTION_NAME: "checkpointers"
+      # Local-dev only: captures truncated prompt/response text on
+      # model-router-usage records. Off by default in deployed environments
+      # since this persists user/model content, not just metadata.
+      MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS: "true"
       # This is the user and password that can be used for testing
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password
