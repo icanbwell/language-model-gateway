@@ -70,6 +70,9 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MONGO_LLM_STORAGE_URI` (falls back to `MONGO_URL`) | *(none)* | MongoDB connection string used for usage tracking (see "Usage tracking" below). If unset, usage tracking is disabled entirely. |
 | `MONGO_LLM_STORAGE_DB_NAME` | `llm_storage` | Database name for the usage-tracking collection. |
 | `MODEL_ROUTING_USAGE_COLLECTION_NAME` | `model-router-usage` | Collection name for usage-tracking records within that database. |
+| `MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS` | `false` | Opt-in: write truncated `input_preview`/`output_preview` fields (see "Usage tracking" below). Off by default because, unlike the rest of the record, previews persist actual prompt/response content. |
+| `MODEL_ROUTING_USAGE_PREVIEW_CHARS` | `100` | Max characters kept in `input_preview`/`output_preview` when previews are enabled. |
+| `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` | `x-model-routing-` | Any incoming header under this prefix (case-insensitive) is (a) stripped before forwarding upstream and (b) captured into the usage record's `custom_headers` field. `{prefix}user-id` is additionally used as a best-effort `user_id` fallback — see "Usage tracking" below. |
 | `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
@@ -105,7 +108,8 @@ Claude model name (as sent by the client) to an upstream destination.
       "tier":         "haiku" | "sonnet" | "opus" | "fable", // logical tier label (informational)
       "api_type":     "anthropic" | "openai", // wire protocol (default: "anthropic")
       "aws_region":   "us-east-1",            // AWS region for Bedrock (default: "us-east-1")
-      "price_per_mtok": 0.5,                  // cost per million tokens (informational, not enforced)
+      "price_per_mtok": 0.5,                  // actual backend cost per million tokens (used to compute cost_usd; not enforced as a limit)
+      "anthropic_price_per_mtok": 3.0,        // what claude_model would cost at Anthropic's own list price — baseline for cost_savings_usd (see "Usage tracking" below)
 
       // Context budget fields (openai routes only — controls Qwen token counting and compression)
       "context_window":             262144,   // advertised context window returned to the client
@@ -270,50 +274,153 @@ to aid debugging.
 
 ---
 
+## Streaming reliability
+
+Per the [gateway protocol reference](https://code.claude.com/docs/en/llm-gateway-protocol):
+"Inference responses must stream... a gateway that buffers complete responses
+before relaying them stalls the client." The router genuinely streams
+end-to-end (upstream call → translation → client) on every code path, but two
+things outside the router's own generator logic can silently defeat that if
+not handled:
+
+- **`X-Accel-Buffering: no`** is set on every SSE `StreamingResponse`. Without
+  it, an nginx-based reverse proxy or ingress with default buffering would
+  hold the entire response until it completes before forwarding any of it —
+  the router's own code streams correctly, but the proxy in front of it
+  wouldn't.
+- **`FastApiLoggingMiddleware`** (applied gateway-wide, not router-specific)
+  used to fully drain a `StreamingResponse`'s body iterator into memory
+  whenever DEBUG logging was enabled for `HTTP_TRACING_LOG_LEVEL` — exactly
+  the failure mode above, caused by application middleware rather than a
+  proxy. It now peeks only the first chunk (which is all it ever logged) and
+  re-chains the rest of the iterator lazily. `HTTP_TRACING_LOG_LEVEL=DEBUG`
+  is set in this repo's `docker-compose.yml` for local dev, so this path is
+  exercised on every local streaming request, not just a rare production
+  configuration.
+
+**Client disconnect handling:** the router checks `request.is_disconnected()`
+on each chunk while relaying a stream (both the `api_type: openai` and
+`api_type: anthropic` streaming paths) and stops pulling further chunks from
+the upstream the moment the client disconnects (Ctrl-C, network drop). Without
+this, a client giving up mid-generation would leave the router still
+consuming — and paying for — upstream tokens nobody will receive. This only
+stops *upstream consumption*; the SSE write side to an already-closed client
+connection is handled independently by Starlette/the ASGI server.
+
+---
+
 ## Usage tracking
 
-When `MONGO_LLM_STORAGE_URI` is set, the router records per-request token
-usage to a MongoDB `usage` collection: `request_id`, `model`, `input_tokens`,
-`output_tokens`, `total_tokens`, and — only when attribution is available
-(see below) — `user_id`, `auth_provider`, `email`, `user_name`.
+### Purpose
+
+`UsageTracker` (`language_model_gateway/gateway/routers/model_routing/usage_tracker.py`)
+writes one document per request to a MongoDB collection
+(`MODEL_ROUTING_USAGE_COLLECTION_NAME`, default `model-router-usage`) whenever
+`MONGO_LLM_STORAGE_URI` is set. It exists to answer, after the fact: who made
+this request (best-effort), which model/tier/backend served it, how many
+tokens it used, what it cost vs. what it would have cost at Anthropic's own
+price, and whether it streamed. There is no read path in this codebase for
+this collection — it's written for downstream reporting/BI, not consumed by
+the router itself.
 
 **Coverage:** only `api_type: openai` routes (Bedrock Mantle) record usage,
 for both streaming and non-streaming requests. The `api_type: anthropic`
-passthrough path streams upstream bytes verbatim and does not currently
-record usage.
+passthrough path (direct-to-Anthropic and Bedrock-native-Anthropic-format
+routes) streams upstream bytes verbatim and does not currently record usage —
+this is a known gap, not a design choice.
 
-**Attribution:** the client's `Authorization` header on this router is the
-upstream Anthropic/Bedrock credential, not necessarily a b.well-issued OIDC
-token, so it can't gate the proxy call itself. It can only decide whether
-identity headers are trustworthy: `user_id`/`email`/`user_name` are attached
-to a usage record *only* when `Authorization` verifies as a genuine,
-signature-checked OIDC token via the configured `TokenReader`. Caller-supplied
-identity headers (e.g. `x-openwebui-user-id`) are never trusted for
-attribution, since they are trivially spoofable by the caller (IDOR). If the
-token doesn't verify, usage is still recorded, just without a `user_id`.
+### How a record gets written
 
-**Fallback attribution via account directory:** for real Claude Code traffic, the
-OIDC-verification path above never actually applies — Claude Code's `Authorization`
-header is always the client's own Anthropic subscription OAuth token, never a
-b.well-issued JWT, so it never verifies. Every Claude Code request does carry an
-opaque `account_uuid` in `body.metadata.user_id` (a JSON string Claude Code sends
-automatically), but Anthropic doesn't expose any API to resolve that to a human
-email. When `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME`'s collection has a
-manually-imported `{_id: account_uuid, email}` document for that `account_uuid`
-(populated from an Anthropic/Claude Console admin export — there is no import
-tooling in this repo, load it directly with `mongoimport`/Compass), that email is
-used for `user_id`/`email` on the usage record instead. The OIDC-verified path
-always wins when it does apply; this is purely a fallback for when it doesn't.
+`record_usage()` is the single place that assembles and inserts the document;
+`record_usage_from_openai_response()`/`record_usage_from_anthropic_response()`
+are thin wrappers that pull tokens/response text out of the upstream response
+shape and call it. A record is only written when `input_tokens +
+output_tokens > 0` — a request with zero usage on both sides is silently
+skipped.
 
-**Never blocks the response:** the MongoDB write always happens after the
+**Never blocks the response** — the MongoDB write always happens after the
 response has already been sent to the client, so a slow or failing write
-never adds latency or errors to the proxy call itself — write failures are
+never adds latency or errors to the proxy call itself. Write failures are
 caught and logged, never raised.
 - Non-streaming: scheduled via Starlette `BackgroundTasks`, which Starlette
   runs only after the response body has been fully sent.
-- Streaming: scheduled as an `asyncio.create_task()` from the stream
-  generator's `finally` block, so the SSE stream can close as soon as the
-  last chunk is sent instead of waiting on the write.
+- Streaming: fire-and-forget via `asyncio.create_task()` from the stream
+  generator's `finally` block (see `_fire_and_forget` in
+  `stream_converter.py`), so the SSE stream can close as soon as the last
+  chunk is sent instead of waiting on the write.
+
+### Field reference
+
+Every record always has `request_id`, `model`, `input_tokens`,
+`output_tokens`, `total_tokens`, `timestamp` (UTC). Everything else is
+written only when the corresponding value is available for that request —
+absence of a field means "not available for this request," not an error.
+
+| Field | Type | Always present? | Meaning |
+|-------|------|------------------|---------|
+| `request_id` | string | always | Anthropic-format message id (`msg_...`) generated per request. |
+| `model` | string | always | The **upstream** model id actually called (e.g. `qwen.qwen3-coder-next`), not the client-requested `claude_model`. |
+| `input_tokens` / `output_tokens` / `total_tokens` | int | always | From the upstream response's own usage block. |
+| `timestamp` | datetime (UTC) | always | Set at write time, i.e. after the response was already sent — not the time the request arrived. |
+| `user_id` | string | when attribution succeeds | See "Attribution" below. |
+| `auth_provider` | string | when `user_id` is set | **Provenance of `user_id`, not a fixed enum of identity providers.** Either the real IdP name from a verified OIDC token (e.g. `"okta"`), or the literal string `"custom-header"` meaning `user_id` came from the self-asserted `{prefix}user-id` header — unverified, spoofable by anyone who can reach this router. Check this field before trusting `user_id` for anything security-sensitive. |
+| `email` / `user_name` | string | when OIDC verification succeeds | Only populated on the verified-identity path — never set via the custom-header fallback. |
+| `session_id` | string | when Claude Code sends it | Correlates requests within one CLI session. Read from the documented `x-claude-code-session-id` header (see [gateway protocol reference](https://code.claude.com/docs/en/llm-gateway-protocol)) when present; falls back to parsing Claude Code's `body.metadata.user_id` JSON blob (`{device_id, account_uuid, session_id}`) otherwise. Client-supplied and unverified, but not an identity field, so it's trusted for correlation purposes regardless of auth state. |
+| `account_uuid` | string | when Claude Code sends it | From the same `body.metadata.user_id` JSON blob as the `session_id` fallback. Opaque per-Anthropic-account identifier; stored raw — this router does **not** resolve it to an email at request time (see "Account directory" below). |
+| `agent_id` / `parent_agent_id` | string | only on requests from a subagent Claude Code spawned | From the `x-claude-code-agent-id`/`x-claude-code-parent-agent-id` headers. Identifies an agent, not a person or device — use alongside `session_id` to attribute cost to parallel subagents, never as a user identifier. |
+| `model_tier` | string | when the route matched a config entry | The `tier` label from `model-router-config.json` (e.g. `"sonnet"`). Absent for unmatched-model fallback requests. |
+| `backend` | string | when the route matched | `"anthropic"` (passthrough) or `"aws_bedrock"` (aws auth), derived from the route's `auth` field. |
+| `price_per_mtok` → `cost_usd` | float (USD) | when the route has `price_per_mtok` configured | `cost_usd = total_tokens / 1_000_000 * price_per_mtok` — the actual cost at the backend that served this request. |
+| `anthropic_price_per_mtok` → `anthropic_cost_usd` | float (USD) | when the route also has `anthropic_price_per_mtok` configured | `anthropic_cost_usd = total_tokens / 1_000_000 * anthropic_price_per_mtok` — what the client's requested `claude_model` would have cost at Anthropic's own list price. For passthrough routes (opus/fable) this equals `cost_usd`, since the backend *is* Anthropic. |
+| `cost_savings_usd` | float (USD) | alongside `anthropic_cost_usd` | `anthropic_cost_usd - cost_usd`. Zero for passthrough routes; positive for Bedrock routes serving a cheaper model in place of the requested Claude tier. |
+| `streaming` | bool | always, once any request reaches the recording point | Whether the client's original request had `"stream": true`. |
+| `compression_requested` | string | when the client sent one | Raw `Accept-Encoding` request header (e.g. `"gzip, deflate, br, zstd"`) — what the client said it could accept. |
+| `compression_used` | string | always alongside `compression_requested`'s recording point | `"gzip"` or `"none"` — what the gateway's `GZipMiddleware` actually did. Streaming responses are always `"none"`: Starlette hardcodes `text/event-stream` into `GZipMiddleware`'s excluded content types regardless of `Accept-Encoding` (see `api.py`). For non-streaming responses it's computed by replicating Starlette's own decision (gzip if the client accepts it and the body is ≥500 bytes) before the middleware runs, since the usage record is written from a background task after the middleware has already acted. |
+| `custom_headers` | object (flat string→string map) | when any header under `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` is present | **Every** header under the configured prefix, keyed by the suffix after the prefix — e.g. `X-Model-Routing-Client-Type: claude code` becomes `{"client-type": "claude code"}`. Deliberately open-ended: new attribution headers can be added by any client without a code change here. `{prefix}user-id` is additionally pulled out into the top-level `user_id` field (see "Attribution"). |
+| `input_preview` / `output_preview` | string | only when `MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS=true` | First `MODEL_ROUTING_USAGE_PREVIEW_CHARS` characters of the last user message / model response text, truncated with a trailing `…` marker when the original was longer (so `"…"` present tells you the preview is a prefix, not the whole thing). Off by default — this is the one field group that persists actual conversation content rather than metadata. |
+| `sse_event_count` | int | streaming (`api_type: openai`) requests only | Number of SSE events actually yielded to the client for this response. A cheap sanity signal that the response really streamed rather than being buffered and dumped as one blob — a long generation with a suspiciously low count (e.g. 1) is worth investigating. Not recorded for non-streaming requests or the `api_type: anthropic` passthrough path (which doesn't record usage at all — see "Coverage" above). |
+
+### Attribution
+
+The client's `Authorization` header on this router is the upstream
+Anthropic/Bedrock credential, not necessarily a b.well-issued OIDC token, so
+it can't gate the proxy call itself. `user_id` is populated by the first of
+these that applies, in order:
+
+1. **OIDC-verified token.** If `Authorization` verifies as a genuine,
+   signature-checked JWT via the configured `TokenReader`, `user_id`/`email`/
+   `user_name` come from the token's claims, and `auth_provider` is set from
+   the `x-auth-provider` header. This is the only path that also sets `email`
+   and `user_name`.
+2. **Custom-header fallback.** If there's no verified identity,
+   `{MODEL_ROUTING_CUSTOM_HEADER_PREFIX}user-id` (e.g. Claude Code's
+   `ANTHROPIC_CUSTOM_HEADERS` set to `X-Model-Routing-User-Id: ...`) is used
+   as-is for `user_id`, with `auth_provider` set to the literal string
+   `"custom-header"`. This is exactly as spoofable as any other
+   caller-controlled header — it's accepted because this router is deployed
+   per-user/local rather than as a shared multi-tenant ingress. **Do not**
+   enable this fallback's trust model on a shared deployment without
+   re-gating it behind verification.
+3. **No match.** `user_id` is omitted entirely. Caller-supplied identity
+   headers outside the configured custom-header prefix (e.g.
+   `x-openwebui-user-id`) are never trusted for attribution — they're
+   trivially spoofable by the caller (IDOR).
+
+### Account directory (manual, not live)
+
+Claude Code sends an opaque `account_uuid` on every request (see
+`account_uuid` in the field reference above), but Anthropic exposes no API to
+resolve it to a human email. `AccountDirectory`
+(`account_directory.py`) exists to hold a **manually-imported**
+`{_id: account_uuid, email}` lookup table in
+`MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` (populated from an
+Anthropic/Claude Console admin export — there is no import tooling in this
+repo; load it directly with `mongoimport`/Compass) — but this router does
+**not** query it live on the request path. `account_uuid` is stored raw on
+the usage record, and the `account_uuid` → email join happens downstream in
+reporting, against whatever's currently in that collection. This means a
+usage record's resolved identity can change over time as the directory is
+updated, without needing to reprocess old records.
 
 ---
 

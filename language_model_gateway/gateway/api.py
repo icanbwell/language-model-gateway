@@ -246,8 +246,10 @@ def create_app() -> FastAPI:
 
     # Outermost middleware (added last) so it compresses the final response
     # after FastApiLoggingMiddleware has already inspected the plain body.
-    # GZipMiddleware skips streaming responses (no known Content-Length), so
-    # SSE responses from the model routers are unaffected.
+    # Starlette's GZipMiddleware hardcodes text/event-stream into its
+    # excluded-content-types list (not configurable via this constructor in
+    # the installed version), so SSE responses from the model routers are
+    # never compressed regardless of the client's Accept-Encoding.
     app1.add_middleware(GZipMiddleware)
 
     return app1

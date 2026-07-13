@@ -438,7 +438,8 @@ class TestUsageTrackerBackendAndCost:
             assert actual_record["backend"] == "aws_bedrock"
 
     async def test_record_usage_computes_cost_and_savings(self) -> None:
-        """cost_usd is actual price; cost_savings_usd is vs the Anthropic baseline."""
+        """cost_usd is actual price; anthropic_cost_usd is the baseline used
+        to compute cost_savings_usd."""
         tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
 
         with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
@@ -457,6 +458,7 @@ class TestUsageTrackerBackendAndCost:
 
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert actual_record["cost_usd"] == 0.5
+            assert actual_record["anthropic_cost_usd"] == 3.0
             assert actual_record["cost_savings_usd"] == 2.5
 
     async def test_record_usage_omits_savings_without_baseline_price(self) -> None:
@@ -478,6 +480,7 @@ class TestUsageTrackerBackendAndCost:
 
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert actual_record["cost_usd"] == 5.0
+            assert "anthropic_cost_usd" not in actual_record
             assert "cost_savings_usd" not in actual_record
 
     async def test_record_usage_from_openai_response_threads_backend_and_cost(
@@ -504,6 +507,7 @@ class TestUsageTrackerBackendAndCost:
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert actual_record["backend"] == "aws_bedrock"
             assert actual_record["cost_usd"] == 0.15
+            assert actual_record["anthropic_cost_usd"] == 1.0
             assert actual_record["cost_savings_usd"] == 0.85
 
 
@@ -587,6 +591,64 @@ class TestUsageTrackerStreamingAndCompression:
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert actual_record["compression_requested"] == "gzip, deflate, br, zstd"
             assert actual_record["compression_used"] == "gzip"
+
+    async def test_record_usage_includes_sse_event_count(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                sse_event_count=42,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["sse_event_count"] == 42
+
+    async def test_record_usage_records_zero_sse_event_count(self) -> None:
+        """0 is meaningful (a stream that produced no events) and must not be
+        conflated with the field being absent."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                sse_event_count=0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["sse_event_count"] == 0
+
+    async def test_record_usage_omits_sse_event_count_when_absent(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "sse_event_count" not in actual_record
 
 
 class TestUsageTrackerCustomHeaders:

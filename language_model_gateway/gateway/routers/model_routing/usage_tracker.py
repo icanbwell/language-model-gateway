@@ -83,6 +83,8 @@ class UsageTracker:
         user_name: str | None = None,
         session_id: str | None = None,
         account_uuid: str | None = None,
+        agent_id: str | None = None,
+        parent_agent_id: str | None = None,
         model_tier: str | None = None,
         backend: str | None = None,
         price_per_mtok: float | None = None,
@@ -91,6 +93,7 @@ class UsageTracker:
         compression_requested: str | None = None,
         compression_used: str | None = None,
         custom_headers: dict[str, str] | None = None,
+        sse_event_count: int | None = None,
         prompt_text: str | None = None,
         response_text: str | None = None,
     ) -> None:
@@ -134,6 +137,10 @@ class UsageTracker:
             usage_record["session_id"] = session_id
         if account_uuid:
             usage_record["account_uuid"] = account_uuid
+        if agent_id:
+            usage_record["agent_id"] = agent_id
+        if parent_agent_id:
+            usage_record["parent_agent_id"] = parent_agent_id
         if model_tier:
             usage_record["model_tier"] = model_tier
         if backend:
@@ -147,6 +154,7 @@ class UsageTracker:
                     / 1_000_000
                     * anthropic_price_per_mtok
                 )
+                usage_record["anthropic_cost_usd"] = round(baseline_cost_usd, 6)
                 usage_record["cost_savings_usd"] = round(
                     baseline_cost_usd - cost_usd, 6
                 )
@@ -158,6 +166,8 @@ class UsageTracker:
             usage_record["compression_used"] = compression_used
         if custom_headers:
             usage_record["custom_headers"] = custom_headers
+        if sse_event_count is not None:
+            usage_record["sse_event_count"] = sse_event_count
         if self._capture_previews:
             if input_preview := _truncate(prompt_text, self._preview_chars):
                 usage_record["input_preview"] = input_preview
@@ -219,6 +229,10 @@ class UsageTracker:
         account_uuid = (
             auth_info.get("account_uuid") if isinstance(auth_info, dict) else None
         )
+        agent_id = auth_info.get("agent_id") if isinstance(auth_info, dict) else None
+        parent_agent_id = (
+            auth_info.get("parent_agent_id") if isinstance(auth_info, dict) else None
+        )
 
         content_blocks = response_body.get("content")
         response_text = None
@@ -243,6 +257,8 @@ class UsageTracker:
             user_name=user_name,
             session_id=session_id,
             account_uuid=account_uuid,
+            agent_id=agent_id,
+            parent_agent_id=parent_agent_id,
             model_tier=model_tier,
             backend=backend,
             price_per_mtok=price_per_mtok,
@@ -295,6 +311,10 @@ class UsageTracker:
         account_uuid = (
             auth_info.get("account_uuid") if isinstance(auth_info, dict) else None
         )
+        agent_id = auth_info.get("agent_id") if isinstance(auth_info, dict) else None
+        parent_agent_id = (
+            auth_info.get("parent_agent_id") if isinstance(auth_info, dict) else None
+        )
 
         choices = response_body.get("choices")
         response_text = None
@@ -317,6 +337,8 @@ class UsageTracker:
             user_name=user_name,
             session_id=session_id,
             account_uuid=account_uuid,
+            agent_id=agent_id,
+            parent_agent_id=parent_agent_id,
             model_tier=model_tier,
             backend=backend,
             price_per_mtok=price_per_mtok,

@@ -518,6 +518,65 @@ def test_attach_account_uuid_noop_when_account_uuid_missing() -> None:
 
 
 # ---------------------------------------------------------------------------
+# _attach_claude_code_headers — session_id from the documented
+# x-claude-code-session-id header (preferred), agent_id/parent_agent_id for
+# subagent cost attribution.
+# ---------------------------------------------------------------------------
+
+
+def test_attach_claude_code_headers_prefers_session_header_over_body_metadata() -> None:
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({"x-claude-code-session-id": "sess-from-header"})
+    body_json = {"metadata": {"user_id": '{"session_id": "sess-from-body"}'}}
+
+    router._attach_claude_code_headers(auth_info, request, body_json)
+
+    assert auth_info["session_id"] == "sess-from-header"
+
+
+def test_attach_claude_code_headers_falls_back_to_body_metadata() -> None:
+    """No x-claude-code-session-id header: fall back to the body blob."""
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({})
+    body_json = {"metadata": {"user_id": '{"session_id": "sess-from-body"}'}}
+
+    router._attach_claude_code_headers(auth_info, request, body_json)
+
+    assert auth_info["session_id"] == "sess-from-body"
+
+
+def test_attach_claude_code_headers_captures_agent_ids() -> None:
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request(
+        {
+            "x-claude-code-session-id": "sess-1",
+            "x-claude-code-agent-id": "agent-1",
+            "x-claude-code-parent-agent-id": "agent-0",
+        }
+    )
+
+    router._attach_claude_code_headers(auth_info, request, {})
+
+    assert auth_info["agent_id"] == "agent-1"
+    assert auth_info["parent_agent_id"] == "agent-0"
+
+
+def test_attach_claude_code_headers_omits_agent_ids_when_absent() -> None:
+    """A main-session request (not a subagent) carries no agent-id headers."""
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({"x-claude-code-session-id": "sess-1"})
+
+    router._attach_claude_code_headers(auth_info, request, {})
+
+    assert "agent_id" not in auth_info
+    assert "parent_agent_id" not in auth_info
+
+
+# ---------------------------------------------------------------------------
 # _record_upstream_latency — model_tier latency visibility (Groundcover)
 # ---------------------------------------------------------------------------
 

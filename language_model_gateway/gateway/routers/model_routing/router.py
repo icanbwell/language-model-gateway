@@ -210,7 +210,7 @@ class CodingModelRouter:
 
         auth_info = await self._get_auth_info(request)
         self._attach_account_uuid(auth_info, body_json)
-        auth_info["session_id"] = extract_session_id(body_json)
+        self._attach_claude_code_headers(auth_info, request, body_json)
         user_id = auth_info.get("user_id", "unknown")
         auth_provider = auth_info.get("auth_provider", "unknown")
         prompt_text = _extract_last_user_text(body_json)
@@ -502,9 +502,13 @@ class CodingModelRouter:
                             anthropic_price_per_mtok=anthropic_price_per_mtok,
                             streaming=True,
                             compression_requested=accept_encoding,
-                            # GZipMiddleware always skips streaming responses
-                            # (no known Content-Length) — never compressed.
+                            # This response's media_type is text/event-stream,
+                            # which GZipMiddleware hardcodes into its excluded
+                            # content types (see api.py) — never compressed,
+                            # regardless of what the client's Accept-Encoding
+                            # offers.
                             compression_used="none",
+                            request=request,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -513,11 +517,17 @@ class CodingModelRouter:
                             upstream_model,
                             http_client,
                             first_chunk=first_chunk,
+                            request=request,
                         )
                     return StreamingResponse(
                         stream_gen,
                         status_code=200,
                         media_type="text/event-stream",
+                        # Tells nginx/ingress not to buffer this response —
+                        # without it, a reverse proxy with default buffering
+                        # would hold the entire SSE stream until it completes
+                        # before forwarding any of it to the client.
+                        headers={"X-Accel-Buffering": "no"},
                     )
                 else:
                     _throttle_attempt = 0
@@ -690,8 +700,11 @@ class CodingModelRouter:
             for k, v in upstream_resp.headers.items()
             if k.lower() not in _HOP_BY_HOP_HEADERS
         }
+        # See the comment on the other StreamingResponse construction above —
+        # tells nginx/ingress not to buffer this response before relaying it.
+        resp_headers["X-Accel-Buffering"] = "no"
         return StreamingResponse(
-            _stream_passthrough(upstream_resp, client),
+            _stream_passthrough(upstream_resp, client, request=request),
             status_code=upstream_resp.status_code,
             headers=resp_headers,
             media_type=upstream_resp.headers.get("content-type", "text/event-stream"),
@@ -814,7 +827,10 @@ class CodingModelRouter:
             yield _sse_event("message_stop", {"type": "message_stop"})
 
         return StreamingResponse(
-            _stream(), status_code=200, media_type="text/event-stream"
+            _stream(),
+            status_code=200,
+            media_type="text/event-stream",
+            headers={"X-Accel-Buffering": "no"},
         )
 
     def get_router(self) -> APIRouter:
@@ -840,6 +856,30 @@ class CodingModelRouter:
         account_uuid = extract_account_uuid(body_json)
         if account_uuid:
             auth_info["account_uuid"] = account_uuid
+
+    def _attach_claude_code_headers(
+        self, auth_info: dict[str, Any], request: Request, body_json: dict[str, Any]
+    ) -> None:
+        """Record Claude Code's session/subagent identity headers on auth_info.
+
+        Per the documented gateway protocol
+        (https://code.claude.com/docs/en/llm-gateway-protocol):
+        - `x-claude-code-session-id` uniquely identifies the CLI session —
+          the officially documented source, preferred over parsing
+          `body.metadata.user_id` (a reverse-engineered fallback used before
+          this header was confirmed; still used when the header is absent).
+        - `x-claude-code-agent-id`/`x-claude-code-parent-agent-id` identify a
+          subagent Claude Code spawned and its parent, present only on
+          requests from an agent — not a person or device identifier. Used
+          alongside session_id to attribute cost to parallel subagents.
+        """
+        auth_info["session_id"] = request.headers.get(
+            "x-claude-code-session-id"
+        ) or extract_session_id(body_json)
+        if agent_id := request.headers.get("x-claude-code-agent-id"):
+            auth_info["agent_id"] = agent_id
+        if parent_agent_id := request.headers.get("x-claude-code-parent-agent-id"):
+            auth_info["parent_agent_id"] = parent_agent_id
 
     async def _get_auth_info(self, request: Request) -> dict[str, Any]:
         """Extract auth information from the request headers.

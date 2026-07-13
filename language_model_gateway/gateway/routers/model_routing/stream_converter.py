@@ -8,6 +8,7 @@ import os
 from typing import Any, AsyncGenerator, Coroutine
 
 import httpx
+from starlette.requests import Request
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -105,6 +106,7 @@ async def _stream_oai_sdk_to_anthropic(
     first_chunk: Any = None,
     usage_sink: dict[str, int] | None = None,
     text_sink: dict[str, str] | None = None,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Convert an openai SDK async stream to Anthropic SSE format.
 
@@ -112,6 +114,11 @@ async def _stream_oai_sdk_to_anthropic(
     provided), and the visible output text into `text_sink` (if provided),
     so callers can read them after the stream completes without relying on
     shared module state across concurrent requests.
+
+    When `request` is provided, stops pulling further chunks from `stream`
+    once the client has disconnected — otherwise a client that gives up
+    mid-generation (Ctrl-C, network drop) leaves us paying for upstream
+    tokens nobody will ever receive.
     """
     if usage_sink is None:
         usage_sink = {}
@@ -134,6 +141,13 @@ async def _stream_oai_sdk_to_anthropic(
         if first_chunk is not None:
             yield first_chunk
         async for chunk in stream:
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] request_id=%s client disconnected "
+                    "mid-stream — stopping upstream consumption",
+                    msg_id,
+                )
+                return
             yield chunk
 
     try:
@@ -331,6 +345,7 @@ async def _oai_stream_with_cleanup(
     upstream_model: str,
     http_client: httpx.AsyncClient,
     first_chunk: Any = None,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that closes the upstream HTTP client after the stream
@@ -338,7 +353,7 @@ async def _oai_stream_with_cleanup(
     """
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
-            stream, msg_id, upstream_model, first_chunk=first_chunk
+            stream, msg_id, upstream_model, first_chunk=first_chunk, request=request
         ):
             yield chunk
     finally:
@@ -361,12 +376,14 @@ async def _oai_stream_with_usage_tracking(
     streaming: bool | None = None,
     compression_requested: str | None = None,
     compression_used: str | None = None,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that records usage to MongoDB after stream completes.
     """
     usage_sink: dict[str, int] = {}
     text_sink: dict[str, str] = {}
+    sse_event_count = 0
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
             stream,
@@ -375,7 +392,9 @@ async def _oai_stream_with_usage_tracking(
             first_chunk=first_chunk,
             usage_sink=usage_sink,
             text_sink=text_sink,
+            request=request,
         ):
+            sse_event_count += 1
             yield chunk
     finally:
         await http_client.aclose()
@@ -395,6 +414,8 @@ async def _oai_stream_with_usage_tracking(
                     user_name=auth_info.get("user_name"),
                     session_id=auth_info.get("session_id"),
                     account_uuid=auth_info.get("account_uuid"),
+                    agent_id=auth_info.get("agent_id"),
+                    parent_agent_id=auth_info.get("parent_agent_id"),
                     model_tier=model_tier,
                     backend=backend,
                     price_per_mtok=price_per_mtok,
@@ -403,6 +424,7 @@ async def _oai_stream_with_usage_tracking(
                     compression_requested=compression_requested,
                     compression_used=compression_used,
                     custom_headers=auth_info.get("custom_headers"),
+                    sse_event_count=sse_event_count,
                     prompt_text=prompt_text,
                     response_text=text_sink.get("output_text"),
                 )
@@ -412,9 +434,16 @@ async def _oai_stream_with_usage_tracking(
 async def _stream_passthrough(
     resp: httpx.Response,
     client: httpx.AsyncClient,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
     try:
         async for chunk in resp.aiter_bytes():
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] client disconnected mid-stream — "
+                    "stopping upstream consumption"
+                )
+                return
             yield chunk
     finally:
         await resp.aclose()
