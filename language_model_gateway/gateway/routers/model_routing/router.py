@@ -673,6 +673,66 @@ class CodingModelRouter:
                     upstream_model,
                     is_streaming,
                 )
+            except openai.APIError as exc:
+                # Raised by the SDK for errors embedded in an SSE data event
+                # (no HTTP status code involved) — e.g. Bedrock Mantle sends
+                # `{"error": {...}}` mid-stream instead of a 4xx/5xx response.
+                # exc.body is the raw error payload; capture it verbatim since
+                # str(exc) alone is a generic, unhelpful message.
+                logger.error(
+                    "[coding-model-router] Bedrock Mantle stream error: "
+                    "model=%s auth=%s user_id=%s request_id=%s streaming=%s "
+                    "code=%s type=%s param=%s body=%s",
+                    upstream_model,
+                    auth,
+                    user_id,
+                    msg_id,
+                    is_streaming,
+                    exc.code,
+                    exc.type,
+                    exc.param,
+                    exc.body,
+                )
+                self._record_error(
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_stream_error",
+                    error_message=json.dumps(
+                        {
+                            "message": exc.message,
+                            "code": exc.code,
+                            "type": exc.type,
+                            "param": exc.param,
+                            "body": exc.body,
+                        },
+                        default=str,
+                    ),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
+                )
+                # Surface whatever detail Bedrock actually sent (not just
+                # exc.message, which can itself be a generic passthrough
+                # string) so the client sees the same diagnostic info now
+                # captured in model-router-errors, instead of a vaguer
+                # message than what's on record.
+                _extra_detail = (
+                    {k: v for k, v in exc.body.items() if k != "message"}
+                    if isinstance(exc.body, dict)
+                    else None
+                )
+                client_text = f"Bedrock stream error: {exc.message}"
+                if _extra_detail:
+                    client_text += f" ({json.dumps(_extra_detail, default=str)})"
+                return self._error_response(
+                    client_text,
+                    upstream_model,
+                    is_streaming,
+                )
             except Exception as exc:
                 from botocore.exceptions import TokenRetrievalError
 

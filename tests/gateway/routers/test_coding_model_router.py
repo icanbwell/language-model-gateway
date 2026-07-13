@@ -1187,3 +1187,66 @@ async def test_anthropic_passthrough_upstream_error_records_error(
     assert call_kwargs["error_type"] == "upstream_error"
     assert "overloaded" in call_kwargs["error_message"]
     usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_mid_stream_error_records_full_detail(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """Bedrock Mantle can send a `{"error": {...}}` SSE data event mid-stream
+    instead of a 4xx/5xx HTTP response. The openai SDK raises a plain
+    `openai.APIError` for this (no `.status_code`) — distinct from
+    `openai.APIStatusError`. Before this fix, that fell through to the
+    generic `except Exception` handler and only `str(exc)` (a generic
+    message) reached model-router-errors. The `.body`/`.code`/`.type` detail
+    the SDK actually attaches must now be captured."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-oai",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    sse_body = (
+        b'data: {"error": {"message": "ModelStreamErrorException: model '
+        b'timed out mid-stream", "code": "ModelStreamErrorException", '
+        b'"type": "server_error"}}\n\n'
+    )
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=200,
+        content=sse_body,
+        headers={"content-type": "text/event-stream"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-model-oai": fake_route}):
+        body = {
+            "model": "claude-test-model-oai",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": True,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 200
+    assert b"ModelStreamErrorException: model timed out mid-stream" in response.content
+    # The client (e.g. Claude Code) must see the same code/type detail that's
+    # now captured in model-router-errors, not just the generic message.
+    assert b"server_error" in response.content
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_stream_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ModelStreamErrorException"
+    assert recorded["type"] == "server_error"
+    assert "timed out mid-stream" in recorded["message"]
+    assert recorded["body"]["code"] == "ModelStreamErrorException"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
