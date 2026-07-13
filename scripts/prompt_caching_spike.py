@@ -26,7 +26,7 @@ RUN_ID = uuid.uuid4().hex[:8]
 
 # Representative of a real Claude Code system prompt + tool defs, long enough
 # to clear the ~1024-token minimum OpenAI's own automatic caching requires.
-LONG_PREFIX = (
+LONG_PREFIX_BASE = (
     "You are a coding assistant working in a large repository. " * 200
 ) + f" [run:{RUN_ID}]"
 
@@ -59,13 +59,14 @@ def check_chat_completions_caching(model: str) -> None:
             "prompt_cache_retention": "24h",
         },
     ]
-    for variant in variants:
+    for variant_index, variant in enumerate(variants):
         label = variant.pop("label")
+        variant_prefix = LONG_PREFIX_BASE + f" [variant:{variant_index}]"
         for call_index in range(2):
             resp = client.chat.completions.create(
                 model=model,
                 messages=[
-                    {"role": "system", "content": LONG_PREFIX},
+                    {"role": "system", "content": variant_prefix},
                     {"role": "user", "content": f"Say hello, attempt {call_index}"},
                 ],
                 **variant,
