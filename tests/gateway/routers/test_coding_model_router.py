@@ -1103,6 +1103,126 @@ async def test_matched_route_error_is_not_annotated(
     assert response.json() == {"error": {"message": "Unauthorized"}}
 
 
+@pytest.mark.asyncio
+async def test_unmatched_model_malformed_error_still_gets_fallback_note(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """The fallback-route annotation must survive even when the upstream error
+    body isn't the `{"error": {"message": str}}` shape `_annotate_fallback_error`
+    knows how to rewrite in place (e.g. `{"error": {"code": ...}}`, no
+    "message" key) — the note must not be silently dropped just because the
+    body needs wrapping rather than passthrough."""
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=400,
+        content=b'{"error": {"code": "context_length_exceeded"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-brand-new-tier-malformed",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await router_client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 400
+    error_message = response.json()["error"]["message"]
+    assert "claude-brand-new-tier-malformed" in error_message
+    assert "no configured route" in error_message
+    assert "context_length_exceeded" in error_message
+
+
+@pytest.mark.asyncio
+async def test_matched_route_malformed_error_object_is_normalized(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """An `"error"` key alone isn't enough to pass a body through verbatim —
+    its value must actually be a usable message shape. `{"error": null}`
+    must be normalized into a real message, not forwarded as-is."""
+    fake_route = {
+        "claude_model": "claude-configured-malformed",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-configured-malformed",
+        "auth": "passthrough",
+    }
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=400,
+        content=b'{"error": null}',
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-configured-malformed": fake_route}):
+        body = {
+            "model": "claude-configured-malformed",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 400
+    error_message = response.json()["error"]["message"]
+    # Must not be forwarded verbatim (`None`/`null`) or leak Python repr
+    # syntax (single-quoted keys) — just a readable, JSON-safe description.
+    assert error_message != "null"
+    assert "'" not in error_message
+    assert "null" in error_message.lower() or "error" in error_message.lower()
+
+
+@pytest.mark.asyncio
+async def test_matched_route_error_without_message_is_valid_json_not_python_repr(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """An error object present but missing a `message` field (e.g. just a
+    `code`) must be summarized as valid JSON text, not a Python dict repr
+    (single-quoted keys) leaking into a client-facing string."""
+    fake_route = {
+        "claude_model": "claude-configured-no-message",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-configured-no-message",
+        "auth": "passthrough",
+    }
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=429,
+        content=b'{"error": {"type": "rate_limit", "code": 42}}',
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-configured-no-message": fake_route}):
+        body = {
+            "model": "claude-configured-no-message",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 429
+    error_message = response.json()["error"]["message"]
+    assert "'" not in error_message
+    assert "rate_limit" in error_message
+    assert "42" in error_message
+
+
 # ---------------------------------------------------------------------------
 # Anthropic-passthrough usage/error tracking (BAI-299)
 # ---------------------------------------------------------------------------

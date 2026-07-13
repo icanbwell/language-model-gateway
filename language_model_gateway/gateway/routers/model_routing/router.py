@@ -870,6 +870,7 @@ class CodingModelRouter:
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
+
             logger.error(
                 "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
@@ -892,14 +893,34 @@ class CodingModelRouter:
                 streaming=is_streaming,
                 status_code=upstream_resp.status_code,
             )
+
             if is_fallback_route:
+                # For fallback routes, annotate with context about missing route
                 error_body = self._annotate_fallback_error(error_body, model)
+
+            # Parse once, after annotation, so the passthrough decision and
+            # the wrapped message (if any) are always derived from the exact
+            # bytes about to be sent to the client — previously these were
+            # two separate json.loads calls with two different criteria,
+            # which could disagree (e.g. the wrap branch using a clean_error
+            # computed from the pre-annotation body).
+            try:
+                parsed = json.loads(error_body)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                parsed = None
+
+            if self._upstream_error_is_well_formed(parsed):
+                final_content = error_body
+            else:
+                clean_error = self._extract_clean_error(
+                    parsed, error_body, upstream_resp.status_code
+                )
+                final_content = json.dumps({"error": {"message": clean_error}}).encode()
+
             return Response(
-                content=error_body,
+                content=final_content,
                 status_code=upstream_resp.status_code,
-                media_type=upstream_resp.headers.get(
-                    "content-type", "application/json"
-                ),
+                media_type="application/json",
             )
 
         resp_headers = {
@@ -1157,6 +1178,41 @@ class CodingModelRouter:
             error_obj["message"] = note + error_obj["message"]
             return json.dumps(parsed).encode()
         return note.encode() + error_body
+
+    @staticmethod
+    def _upstream_error_is_well_formed(parsed: Any) -> bool:
+        """Whether `parsed` (the result of `json.loads`-ing an upstream error
+        body, or `None` if that failed) is already a `{"error": {"message":
+        str}}` or `{"error": str}` body worth passing through to the client
+        verbatim, rather than wrapping via `_extract_clean_error`.
+        """
+        if not isinstance(parsed, dict) or "error" not in parsed:
+            return False
+        err = parsed["error"]
+        return isinstance(err, str) or (
+            isinstance(err, dict) and isinstance(err.get("message"), str)
+        )
+
+    @staticmethod
+    def _extract_clean_error(parsed: Any, error_body: bytes, status_code: int) -> str:
+        """Pull a client-safe message out of an upstream error body that
+        `_upstream_error_is_well_formed` rejected — `parsed` may still be a
+        JSON value (just not the expected error shape), or `None` if the
+        body wasn't valid JSON at all.
+        """
+        if isinstance(parsed, dict):
+            if "error" in parsed:
+                return f"Error: {json.dumps(parsed['error'], default=str)}"
+            message = parsed.get("message")
+            if isinstance(message, str):
+                return message
+            return f"Error response (status {status_code})"
+        if parsed is not None:
+            return f"Error: {json.dumps(parsed, default=str)}"
+        return (
+            error_body[:500].decode("utf-8", errors="replace")
+            or f"Unknown error (status {status_code})"
+        )
 
     @staticmethod
     def _error_response(
