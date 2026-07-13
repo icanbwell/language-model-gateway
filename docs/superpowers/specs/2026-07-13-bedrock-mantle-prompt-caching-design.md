@@ -131,3 +131,60 @@ today. Revisit only if AWS documents a caching mechanism for Bedrock Mantle in t
 - **Path B is a large enough initiative that estimating it accurately from this document
   alone is not realistic** — the bullet list above is a starting outline for its own spec,
   not a committed implementation scope.
+
+## Phase 0 findings (2026-07-13)
+
+**Question 1 — Chat Completions caching signal:**
+
+Final, isolated run (all 12 calls — 2 models × 3 variants × 2 calls each — using
+`qwen.qwen3-coder-30b-a3b-v1:0` and `qwen.qwen3-coder-next`):
+
+| model | variant | call 0 `cached_tokens` | call 1 `cached_tokens` |
+|---|---|---|---|
+| qwen.qwen3-coder-30b-a3b-v1:0 | no cache params | None | None |
+| qwen.qwen3-coder-30b-a3b-v1:0 | prompt_cache_key set | None | None |
+| qwen.qwen3-coder-30b-a3b-v1:0 | prompt_cache_retention=24h | None | None |
+| qwen.qwen3-coder-next | no cache params | None | None |
+| qwen.qwen3-coder-next | prompt_cache_key set | None | None |
+| qwen.qwen3-coder-next | prompt_cache_retention=24h | None | None |
+
+Every one of the 12 calls returned `cached_tokens=None` — no evidence of any caching
+benefit, with or without `prompt_cache_key` or `prompt_cache_retention=24h`.
+
+Earlier runs of this same spike showed sporadic, ambiguous `cached_tokens` hits (e.g. a
+hit on the first call of a variant, before any repeat had even executed). These were
+traced to a methodology flaw, not real caching: OpenAI-style automatic prompt caching
+matches on longest-common-prefix, and the uniqueness markers used to isolate runs and
+variants from each other were appended to the *end* of the shared ~2-5k-token prefix
+rather than the front. That left a large shared *leading* block — identical across every
+run, every variant, and every model, ever executed against this endpoint under this
+account — free to prefix-match and produce apparent "hits" that had nothing to do with
+the variant under test. Once the uniqueness markers were moved to the front of the
+prefix (so every call's prompt diverges from every other call's at the very first token),
+every one of the 12 calls in this final run came back `cached_tokens=None`, and no
+ambiguous hit reproduced. This final, front-loaded-marker run is the trustworthy result;
+the earlier ambiguous hits should not be treated as evidence of real caching behavior.
+
+**Question 2 — Responses API model compatibility:**
+
+Both models: **NOT SUPPORTED**. Bedrock Mantle rejects Responses API calls for both
+models with an explicit HTTP 400 `validation_error`:
+
+- `qwen.qwen3-coder-30b-a3b-v1:0`:
+  `BadRequestError: Error code: 400 - {'error': {'code': 'validation_error', 'message': "The model 'qwen.qwen3-coder-30b-a3b-v1:0' does not support the '/v1/responses' API", 'param': None, 'type': 'invalid_request_error'}}`
+- `qwen.qwen3-coder-next`:
+  `BadRequestError: Error code: 400 - {'error': {'code': 'validation_error', 'message': "The model 'qwen.qwen3-coder-next' does not support the '/v1/responses' API", 'param': None, 'type': 'invalid_request_error'}}`
+
+**Question 3 — previous_response_id statefulness benefit:**
+
+Not applicable — neither model supports the Responses API (see Question 2), so this task
+was skipped per the plan.
+
+**Conclusion:** **Path C.** Question 1 shows no observed caching benefit on the Chat
+Completions endpoint for either model (all 12 calls in the final, methodologically clean
+run returned `cached_tokens=None`), and Question 2 shows neither model even supports the
+Responses API, which forecloses Question 3 entirely. With both avenues negative, there is
+no viable caching lever on this endpoint today for `haiku`/`sonnet` traffic — this
+initiative is closed out per Path C, with no speculative gateway-side response caching
+built (see Non-goals). Revisit only if AWS documents a caching mechanism for Bedrock
+Mantle in the future.
