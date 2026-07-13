@@ -6,12 +6,14 @@ Tests for usage tracking functionality including data extraction and usage recor
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from language_model_gateway.gateway.routers.model_routing.usage_tracker import (
     UsageTracker,
 )
+
+_TEST_START_TIME = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
 
 class TestUsageTrackerDataExtraction:
@@ -55,6 +57,7 @@ class TestUsageTrackerDataExtraction:
 
             # Call record_usage_from_anthropic_response
             await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-123",
                 auth_info=auth_info,
                 model="claude-opus-4-8",
@@ -111,6 +114,7 @@ class TestUsageTrackerDataExtraction:
 
             # Call record_usage_from_openai_response
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-456",
                 auth_info=auth_info,
                 model="gpt-4",
@@ -147,6 +151,7 @@ class TestUsageTrackerDataExtraction:
 
             # Call record_usage_from_anthropic_response
             await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-123",
                 auth_info=auth_info,
                 model="claude-opus-4-8",
@@ -174,6 +179,7 @@ class TestUsageTrackerDataExtraction:
 
             # Call record_usage_from_openai_response
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-123",
                 auth_info=auth_info,
                 model="gpt-4",
@@ -199,6 +205,7 @@ class TestUsageTrackerDataExtraction:
 
             # Call record_usage_from_anthropic_response without usage field
             await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-123",
                 auth_info=auth_info,
                 model="claude-opus-4-8",
@@ -221,6 +228,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -240,6 +248,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -260,6 +269,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -279,6 +289,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"user_id": "user-1", "session_id": "sess-1"},
                 model="gpt-4",
@@ -303,6 +314,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id=None,
                 model="claude-opus-4-8",
@@ -324,6 +336,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -343,6 +356,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"account_uuid": "acct-123"},
                 model="gpt-4",
@@ -363,6 +377,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -383,6 +398,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -402,6 +418,7 @@ class TestUsageTrackerSessionIdAndTimestamp:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"user_id": "user-1"},
                 model="gpt-4",
@@ -426,6 +443,7 @@ class TestUsageTrackerBackendAndCost:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -447,6 +465,7 @@ class TestUsageTrackerBackendAndCost:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="qwen.qwen3-coder-next",
@@ -470,6 +489,7 @@ class TestUsageTrackerBackendAndCost:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -493,6 +513,7 @@ class TestUsageTrackerBackendAndCost:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"user_id": "user-1"},
                 model="gpt-4",
@@ -522,6 +543,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -542,6 +564,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -561,6 +584,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -579,6 +603,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -600,6 +625,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -621,6 +647,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -640,6 +667,7 @@ class TestUsageTrackerStreamingAndCompression:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -662,6 +690,7 @@ class TestUsageTrackerCustomHeaders:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -684,6 +713,7 @@ class TestUsageTrackerCustomHeaders:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -704,6 +734,7 @@ class TestUsageTrackerCustomHeaders:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"custom_headers": {"project": "lmg"}},
                 model="gpt-4",
@@ -728,6 +759,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -754,6 +786,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -781,6 +814,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -808,6 +842,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 user_id="user-1",
                 model="claude-opus-4-8",
@@ -836,6 +871,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"user_id": "user-1"},
                 model="claude-opus-4-8",
@@ -865,6 +901,7 @@ class TestUsageTrackerPreviews:
             tracker._collection.insert_one = AsyncMock()
 
             await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
                 request_id="req-1",
                 auth_info={"user_id": "user-1"},
                 model="gpt-4",
@@ -880,6 +917,196 @@ class TestUsageTrackerPreviews:
             assert actual_record["output_preview"] == "here is the answer"
 
 
+class TestUsageTrackerSessionRollup:
+    """Tests for the per-session usage rollup collection."""
+
+    async def test_upserts_session_by_session_id(self) -> None:
+        """A request with a session_id should upsert the session collection."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-3-5-haiku",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+                account_uuid="acct-1",
+                model_tier="haiku",
+                price_per_mtok=1.0,
+                anthropic_price_per_mtok=3.0,
+            )
+
+            tracker._session_collection.update_one.assert_awaited_once()
+            filter_arg, update_arg = tracker._session_collection.update_one.call_args[0]
+            kwargs = tracker._session_collection.update_one.call_args[1]
+            assert filter_arg == {"session_id": "sess-1"}
+            assert update_arg["$inc"]["input_tokens"] == 100
+            assert update_arg["$inc"]["output_tokens"] == 50
+            assert update_arg["$inc"]["total_tokens"] == 150
+            assert update_arg["$inc"]["low_tier_cost"] == 0.00015
+            assert update_arg["$inc"]["low_tier_anthropic_cost"] == 0.00045
+            assert update_arg["$inc"]["total_savings_usd"] == 0.0003
+            assert update_arg["$set"]["account_uuid"] == "acct-1"
+            assert update_arg["$set"]["user_id"] == "user-1"
+            assert update_arg["$set"]["low_tier_model"] == "claude-3-5-haiku"
+            assert kwargs["upsert"] is True
+
+    async def test_skips_session_rollup_when_session_id_absent(self) -> None:
+        """No session_id means no session-collection write at all."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            tracker._session_collection.update_one.assert_not_awaited()
+
+    async def test_maps_each_model_tier_to_its_own_bucket(self) -> None:
+        """sonnet/opus/fable should land on their own bucket, not haiku's."""
+        for tier, bucket in [
+            ("sonnet", "medium"),
+            ("opus", "high"),
+            ("fable", "fable"),
+        ]:
+            tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+            with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+                tracker._collection = MagicMock()
+                tracker._collection.insert_one = AsyncMock()
+                tracker._session_collection = MagicMock()
+                tracker._session_collection.update_one = AsyncMock()
+
+                await tracker.record_usage(
+                    start_time=_TEST_START_TIME,
+                    request_id="req-1",
+                    user_id="user-1",
+                    model="some-model",
+                    input_tokens=100,
+                    output_tokens=50,
+                    session_id="sess-1",
+                    model_tier=tier,
+                    price_per_mtok=1.0,
+                )
+
+                update_arg = tracker._session_collection.update_one.call_args[0][1]
+                assert f"{bucket}_tier_cost" in update_arg["$inc"]
+                assert update_arg["$set"][f"{bucket}_tier_model"] == "some-model"
+
+    async def test_accumulates_tokens_across_multiple_models_in_one_session(
+        self,
+    ) -> None:
+        """A session spanning tiers should accumulate totals, not overwrite them."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-3-5-haiku",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+                model_tier="haiku",
+                price_per_mtok=1.0,
+            )
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-2",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=200,
+                output_tokens=75,
+                session_id="sess-1",
+                model_tier="opus",
+                price_per_mtok=15.0,
+            )
+
+            assert tracker._session_collection.update_one.await_count == 2
+            second_update = tracker._session_collection.update_one.call_args[0][1]
+            # Second call only $incs its own request's tokens/cost — MongoDB's
+            # $inc (not this test) is what accumulates them into the running
+            # session total across the two upserts.
+            assert second_update["$inc"]["input_tokens"] == 200
+            assert "low_tier_cost" not in second_update["$inc"]
+            assert "high_tier_cost" in second_update["$inc"]
+
+    async def test_session_rollup_failure_does_not_raise(self) -> None:
+        """A broken session-collection write should log and not blow up the caller."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock(
+                side_effect=RuntimeError("boom")
+            )
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                session_id="sess-1",
+            )
+
+            # The per-request insert still happened despite the session-side failure.
+            tracker._collection.insert_one.assert_awaited_once()
+
+    async def test_track_sessions_false_skips_session_write(self) -> None:
+        """track_sessions=False should keep per-request writes but skip the rollup."""
+        tracker = UsageTracker(
+            mongo_uri="mongodb://localhost:27017",
+            enabled=False,
+            track_sessions=False,
+        )
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                session_id="sess-1",
+            )
+
+            tracker._collection.insert_one.assert_awaited_once()
+            tracker._session_collection.update_one.assert_not_awaited()
+
+
 class TestUsageTrackerInitialization:
     """Tests for UsageTracker initialization."""
 
@@ -889,6 +1116,8 @@ class TestUsageTrackerInitialization:
         assert tracker._mongo_uri == "mongodb://localhost:27017"
         assert tracker._db_name == "llm_storage"
         assert tracker._collection_name == "usage"
+        assert tracker._session_collection_name == "usage_sessions"
+        assert tracker._track_sessions is True
         assert tracker._enabled is True
 
     def test_init_with_custom_values(self) -> None:

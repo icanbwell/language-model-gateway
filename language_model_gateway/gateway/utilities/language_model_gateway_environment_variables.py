@@ -144,6 +144,45 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         )
 
     @property
+    def model_routing_error_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's upstream-failure tracking.
+
+        Sibling of model_routing_usage_collection_name — one document per
+        failed upstream request (throttle exhaustion, Bedrock session expiry,
+        4xx/5xx upstream responses), for trend-spotting without grepping logs.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_ERROR_COLLECTION_NAME", "model-router-errors"
+        )
+
+    @property
+    def model_routing_usage_session_collection_name(self) -> str:
+        """Collection name for the per-session usage rollup.
+
+        Sibling of model_routing_usage_collection_name, but one document per
+        session_id (upserted on every request) instead of one per request —
+        cheap to query for session-level totals (tokens, cost by tier,
+        savings) without a $group aggregation over the larger per-request
+        collection.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_USAGE_SESSION_COLLECTION_NAME", "model-router-sessions"
+        )
+
+    @property
+    def model_routing_usage_session_tracking_enabled(self) -> bool:
+        """Whether to upsert the per-session usage rollup at all.
+
+        Independent of the per-request collection (model_routing_usage_collection_name)
+        so the two can eventually be toggled separately — e.g. session-only
+        tracking once the rollup is trusted to carry the reporting load that
+        the per-request collection carries today.
+        """
+        return self.str2bool(
+            os.environ.get("MODEL_ROUTING_USAGE_SESSION_TRACKING_ENABLED", "true")
+        )
+
+    @property
     def model_routing_usage_capture_previews(self) -> bool:
         """Whether to write input_preview/output_preview fields to the usage collection.
 

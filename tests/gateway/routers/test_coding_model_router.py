@@ -12,13 +12,16 @@ Tests cover:
 - Error response helpers (streaming + non-streaming)
 """
 
+import asyncio
 import json
 import re
 import time
+from typing import AsyncGenerator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import pytest
+from fastapi import FastAPI
 from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
     AuthorizationBearerTokenInvalidException,
 )
@@ -1021,3 +1024,166 @@ async def test_matched_route_error_is_not_annotated(
 
     assert response.status_code == 401
     assert response.json() == {"error": {"message": "Unauthorized"}}
+
+
+# ---------------------------------------------------------------------------
+# Anthropic-passthrough usage/error tracking (BAI-299)
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+async def router_client_with_trackers() -> AsyncGenerator[
+    tuple[httpx.AsyncClient, MagicMock, MagicMock], None
+]:
+    """Same shape as `router_client`, but with mocked usage/error trackers
+    attached directly — avoids needing a real Mongo connection while still
+    exercising the router's own wiring (which fields it passes, when).
+
+    Returns the mocks themselves (not `router`) so callers assert against
+    `UsageTracker`/`ErrorTracker`-shaped mocks rather than the `X | None`
+    attribute type on CodingModelRouter.
+    """
+    router = CodingModelRouter()
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    usage_tracker.record_usage_from_anthropic_response = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+    async with httpx.AsyncClient(
+        transport=httpx.ASGITransport(app=app), base_url="http://test"
+    ) as client:
+        yield client, usage_tracker, error_tracker
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_non_streaming_records_usage(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=json.dumps(
+            {
+                "id": "msg_test",
+                "type": "message",
+                "role": "assistant",
+                "content": [{"type": "text", "text": "Hi"}],
+                "model": "claude-unknown",
+                "usage": {"input_tokens": 5, "output_tokens": 2},
+            }
+        ).encode(),
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["usage"] == {"input_tokens": 5, "output_tokens": 2}
+    usage_tracker.record_usage_from_anthropic_response.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage_from_anthropic_response.call_args.kwargs
+    assert call_kwargs["model"] == "claude-unknown-model-xyz"
+    assert call_kwargs["streaming"] is False
+    assert call_kwargs["response_body"]["usage"] == {
+        "input_tokens": 5,
+        "output_tokens": 2,
+    }
+    error_tracker.record_error.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_streaming_relays_bytes_and_records_usage(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    sse_body = (
+        b"event: message_start\n"
+        b'data: {"type":"message_start","message":{"usage":{"input_tokens":9,"output_tokens":1}}}\n\n'
+        b"event: content_block_delta\n"
+        b'data: {"type":"content_block_delta","delta":{"type":"text_delta","text":"hi"}}\n\n'
+        b"event: message_delta\n"
+        b'data: {"type":"message_delta","usage":{"output_tokens":4}}\n\n'
+        b"event: message_stop\n"
+        b'data: {"type":"message_stop"}\n\n'
+    )
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=sse_body,
+        headers={"content-type": "text/event-stream"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": True,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 200
+    assert response.content == sse_body
+
+    await asyncio.sleep(0)  # let the fire-and-forget usage-recording task run
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["model"] == "claude-unknown-model-xyz"
+    assert call_kwargs["input_tokens"] == 9
+    assert call_kwargs["output_tokens"] == 4
+    assert call_kwargs["streaming"] is True
+    error_tracker.record_error.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_upstream_error_records_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=503,
+        content=b'{"error": {"message": "overloaded"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 503
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["status_code"] == 503
+    assert call_kwargs["error_type"] == "upstream_error"
+    assert "overloaded" in call_kwargs["error_message"]
+    usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()

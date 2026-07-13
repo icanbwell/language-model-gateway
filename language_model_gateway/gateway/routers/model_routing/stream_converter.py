@@ -5,6 +5,7 @@ import inspect
 import json
 import logging
 import os
+from datetime import datetime
 from typing import Any, AsyncGenerator, Coroutine
 
 import httpx
@@ -367,6 +368,8 @@ async def _oai_stream_with_usage_tracking(
     http_client: httpx.AsyncClient,
     usage_tracker: Any,
     auth_info: dict[str, Any],
+    start_time: datetime,
+    *,
     first_chunk: Any = None,
     prompt_text: str | None = None,
     model_tier: str | None = None,
@@ -427,6 +430,7 @@ async def _oai_stream_with_usage_tracking(
                     sse_event_count=sse_event_count,
                     prompt_text=prompt_text,
                     response_text=text_sink.get("output_text"),
+                    start_time=start_time,
                 )
             )
 
@@ -448,3 +452,111 @@ async def _stream_passthrough(
     finally:
         await resp.aclose()
         await client.aclose()
+
+
+def _parse_anthropic_sse_usage(raw: bytes) -> tuple[int, int, str | None]:
+    """Sniff token usage and visible text out of a raw Anthropic SSE stream.
+
+    Anthropic's own wire format needs no reformatting (unlike the OpenAI-SDK
+    conversion path), so this only reads `data:` lines for the fields it
+    needs — it never touches the bytes actually relayed to the client.
+    `input_tokens` comes from `message_start`; `output_tokens` comes from
+    `message_delta`, which carries the final cumulative count (message_start's
+    own `usage.output_tokens` is a placeholder, not the real total).
+    """
+    input_tokens = 0
+    output_tokens = 0
+    text_parts: list[str] = []
+    for line in raw.decode("utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if not line.startswith("data:"):
+            continue
+        payload = line[len("data:") :].strip()
+        if not payload or payload == "[DONE]":
+            continue
+        try:
+            event = json.loads(payload)
+        except json.JSONDecodeError:
+            continue
+        event_type = event.get("type")
+        if event_type == "message_start":
+            usage = event.get("message", {}).get("usage", {})
+            input_tokens = usage.get("input_tokens", input_tokens)
+        elif event_type == "message_delta":
+            output_tokens = event.get("usage", {}).get("output_tokens", output_tokens)
+        elif event_type == "content_block_delta":
+            delta = event.get("delta", {})
+            if delta.get("type") == "text_delta":
+                text_parts.append(delta.get("text", ""))
+    return input_tokens, output_tokens, "".join(text_parts) if text_parts else None
+
+
+async def _stream_passthrough_with_usage_tracking(
+    resp: httpx.Response,
+    client: httpx.AsyncClient,
+    usage_tracker: Any,
+    request_id: str,
+    auth_info: dict[str, Any],
+    upstream_model: str,
+    start_time: datetime,
+    *,
+    prompt_text: str | None = None,
+    model_tier: str | None = None,
+    backend: str | None = None,
+    price_per_mtok: float | None = None,
+    anthropic_price_per_mtok: float | None = None,
+    compression_requested: str | None = None,
+    compression_used: str | None = None,
+    request: Request | None = None,
+) -> AsyncGenerator[bytes, None]:
+    """
+    Relay a native-Anthropic-format SSE stream verbatim (byte-for-byte, same
+    as `_stream_passthrough`) while sniffing usage from the same bytes to
+    record it once the stream ends.
+    """
+    raw_chunks: list[bytes] = []
+    try:
+        async for chunk in resp.aiter_bytes():
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] request_id=%s client disconnected "
+                    "mid-stream — stopping upstream consumption",
+                    request_id,
+                )
+                return
+            raw_chunks.append(chunk)
+            yield chunk
+    finally:
+        await resp.aclose()
+        await client.aclose()
+        input_tokens, output_tokens, response_text = _parse_anthropic_sse_usage(
+            b"".join(raw_chunks)
+        )
+        if usage_tracker and (input_tokens > 0 or output_tokens > 0):
+            _fire_and_forget(
+                usage_tracker.record_usage(
+                    request_id=request_id,
+                    user_id=auth_info.get("user_id"),
+                    model=upstream_model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    auth_provider=auth_info.get("auth_provider"),
+                    email=auth_info.get("email"),
+                    user_name=auth_info.get("user_name"),
+                    session_id=auth_info.get("session_id"),
+                    account_uuid=auth_info.get("account_uuid"),
+                    agent_id=auth_info.get("agent_id"),
+                    parent_agent_id=auth_info.get("parent_agent_id"),
+                    model_tier=model_tier,
+                    backend=backend,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    streaming=True,
+                    compression_requested=compression_requested,
+                    compression_used=compression_used,
+                    custom_headers=auth_info.get("custom_headers"),
+                    prompt_text=prompt_text,
+                    response_text=response_text,
+                    start_time=start_time,
+                )
+            )

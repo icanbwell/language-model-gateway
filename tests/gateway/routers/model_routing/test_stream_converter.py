@@ -5,6 +5,8 @@ Tests for stream_converter.py's client-disconnect handling and SSE event countin
 from __future__ import annotations
 
 import asyncio
+import json
+from datetime import datetime, timezone
 from types import SimpleNamespace
 from typing import AsyncIterator
 from unittest.mock import AsyncMock, MagicMock
@@ -13,9 +15,13 @@ import httpx
 
 from language_model_gateway.gateway.routers.model_routing.stream_converter import (
     _oai_stream_with_usage_tracking,
+    _parse_anthropic_sse_usage,
     _stream_oai_sdk_to_anthropic,
     _stream_passthrough,
+    _stream_passthrough_with_usage_tracking,
 )
+
+_TEST_START_TIME = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
 
 def _fake_chunk(
@@ -136,6 +142,7 @@ class TestSseEventCount:
                 http_client,
                 usage_tracker,
                 {"user_id": "user-1"},
+                _TEST_START_TIME,
             )
         ]
 
@@ -146,3 +153,175 @@ class TestSseEventCount:
         recorded_count = usage_tracker.record_usage.call_args.kwargs["sse_event_count"]
         assert recorded_count == len(chunks)
         assert recorded_count > 0
+
+
+def _anthropic_sse_event(event_type: str, data: dict[str, object]) -> bytes:
+    return f"event: {event_type}\ndata: {json.dumps(data)}\n\n".encode()
+
+
+_MESSAGE_START = _anthropic_sse_event(
+    "message_start",
+    {
+        "type": "message_start",
+        "message": {
+            "id": "msg_1",
+            "usage": {"input_tokens": 42, "output_tokens": 1},
+        },
+    },
+)
+_CONTENT_DELTA = _anthropic_sse_event(
+    "content_block_delta",
+    {
+        "type": "content_block_delta",
+        "index": 0,
+        "delta": {"type": "text_delta", "text": "hello"},
+    },
+)
+_MESSAGE_DELTA = _anthropic_sse_event(
+    "message_delta",
+    {
+        "type": "message_delta",
+        "delta": {"stop_reason": "end_turn"},
+        "usage": {"output_tokens": 17},
+    },
+)
+_MESSAGE_STOP = _anthropic_sse_event("message_stop", {"type": "message_stop"})
+
+
+class TestParseAnthropicSseUsage:
+    def test_extracts_input_and_output_tokens(self) -> None:
+        raw = _MESSAGE_START + _CONTENT_DELTA + _MESSAGE_DELTA + _MESSAGE_STOP
+
+        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(raw)
+
+        # message_delta's usage.output_tokens (the final cumulative count)
+        # wins over message_start's placeholder output_tokens=1.
+        assert input_tokens == 42
+        assert output_tokens == 17
+        assert text == "hello"
+
+    def test_no_events_returns_zeros_and_none_text(self) -> None:
+        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(b"")
+        assert (input_tokens, output_tokens, text) == (0, 0, None)
+
+    def test_ignores_malformed_data_lines(self) -> None:
+        raw = b"data: not-json\n\n" + _MESSAGE_START + _MESSAGE_DELTA
+        input_tokens, output_tokens, _ = _parse_anthropic_sse_usage(raw)
+        assert input_tokens == 42
+        assert output_tokens == 17
+
+    def test_concatenates_multiple_text_deltas(self) -> None:
+        raw = _MESSAGE_START + _CONTENT_DELTA + _CONTENT_DELTA + _MESSAGE_DELTA
+        _, _, text = _parse_anthropic_sse_usage(raw)
+        assert text == "hellohello"
+
+
+class TestStreamPassthroughWithUsageTracking:
+    async def test_relays_bytes_verbatim_and_records_usage(self) -> None:
+        async def fake_aiter_bytes() -> AsyncIterator[bytes]:
+            yield _MESSAGE_START
+            yield _CONTENT_DELTA
+            yield _MESSAGE_DELTA
+            yield _MESSAGE_STOP
+
+        resp = MagicMock(spec=httpx.Response)
+        resp.aiter_bytes = fake_aiter_bytes
+        resp.aclose = AsyncMock()
+        client = MagicMock(spec=httpx.AsyncClient)
+        client.aclose = AsyncMock()
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        received = [
+            chunk
+            async for chunk in _stream_passthrough_with_usage_tracking(
+                resp,
+                client,
+                usage_tracker,
+                "req-1",
+                {"user_id": "user-1"},
+                "claude-opus-4-8",
+                _TEST_START_TIME,
+            )
+        ]
+
+        assert b"".join(received) == (
+            _MESSAGE_START + _CONTENT_DELTA + _MESSAGE_DELTA + _MESSAGE_STOP
+        )
+
+        await asyncio.sleep(0)  # let the fire-and-forget task run
+
+        usage_tracker.record_usage.assert_awaited_once()
+        call_kwargs = usage_tracker.record_usage.call_args.kwargs
+        assert call_kwargs["request_id"] == "req-1"
+        assert call_kwargs["model"] == "claude-opus-4-8"
+        assert call_kwargs["input_tokens"] == 42
+        assert call_kwargs["output_tokens"] == 17
+        assert call_kwargs["user_id"] == "user-1"
+        assert call_kwargs["streaming"] is True
+        assert call_kwargs["response_text"] == "hello"
+        assert call_kwargs["start_time"] == _TEST_START_TIME
+        resp.aclose.assert_awaited_once()
+        client.aclose.assert_awaited_once()
+
+    async def test_skips_recording_when_no_usage_found(self) -> None:
+        async def fake_aiter_bytes() -> AsyncIterator[bytes]:
+            yield b"event: ping\ndata: {}\n\n"
+
+        resp = MagicMock(spec=httpx.Response)
+        resp.aiter_bytes = fake_aiter_bytes
+        resp.aclose = AsyncMock()
+        client = MagicMock(spec=httpx.AsyncClient)
+        client.aclose = AsyncMock()
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        _ = [
+            chunk
+            async for chunk in _stream_passthrough_with_usage_tracking(
+                resp,
+                client,
+                usage_tracker,
+                "req-1",
+                {"user_id": "user-1"},
+                "claude-opus-4-8",
+                _TEST_START_TIME,
+            )
+        ]
+
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_not_awaited()
+
+    async def test_stops_pulling_after_disconnect(self) -> None:
+        async def fake_aiter_bytes() -> AsyncIterator[bytes]:
+            yield _MESSAGE_START
+            yield _MESSAGE_DELTA
+
+        resp = MagicMock(spec=httpx.Response)
+        resp.aiter_bytes = fake_aiter_bytes
+        resp.aclose = AsyncMock()
+        client = MagicMock(spec=httpx.AsyncClient)
+        client.aclose = AsyncMock()
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        request = MagicMock()
+        request.is_disconnected = AsyncMock(side_effect=[False, True])
+
+        received = [
+            chunk
+            async for chunk in _stream_passthrough_with_usage_tracking(
+                resp,
+                client,
+                usage_tracker,
+                "req-1",
+                {"user_id": "user-1"},
+                "claude-opus-4-8",
+                _TEST_START_TIME,
+                request=request,
+            )
+        ]
+
+        assert received == [_MESSAGE_START]
+        resp.aclose.assert_awaited_once()
+        client.aclose.assert_awaited_once()

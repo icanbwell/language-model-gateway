@@ -8,6 +8,18 @@ from typing import Any
 
 logger = logging.getLogger(__name__)
 
+# Maps model_tier (the `tier` label in model-router-config.json) to the cost
+# bucket used on the per-session rollup document. Ordered roughly by list
+# price — "fable" gets its own bucket rather than being folded into one of
+# the other three since it's a distinct model family, not a price point
+# between them.
+_TIER_TO_SESSION_BUCKET: dict[str, str] = {
+    "haiku": "low",
+    "sonnet": "medium",
+    "opus": "high",
+    "fable": "fable",
+}
+
 
 def _truncate(text: str | None, limit: int) -> str | None:
     """Truncate to `limit` chars, marking truncation with a trailing "…".
@@ -30,19 +42,27 @@ class UsageTracker:
         mongo_uri: str,
         db_name: str = "llm_storage",
         collection_name: str = "usage",
+        session_collection_name: str = "usage_sessions",
         enabled: bool = True,
+        track_sessions: bool = True,
         capture_previews: bool = False,
         preview_chars: int = 100,
     ) -> None:
         self._mongo_uri = mongo_uri
         self._db_name = db_name
         self._collection_name = collection_name
+        self._session_collection_name = session_collection_name
         self._enabled = enabled
+        # Independent of `enabled`: lets the session rollup be turned off (or,
+        # eventually, be the only thing turned on) without touching whether
+        # per-request tracking happens.
+        self._track_sessions = track_sessions
         self._capture_previews = capture_previews
         self._preview_chars = preview_chars
         self._client: Any | None = None
         self._db: Any | None = None
         self._collection: Any | None = None
+        self._session_collection: Any | None = None
 
     async def _ensure_connected(self) -> None:
         """Ensure MongoDB connection is established."""
@@ -58,10 +78,12 @@ class UsageTracker:
             self._client = AsyncMongoClient(self._mongo_uri)
             self._db = self._client[self._db_name]
             self._collection = self._db[self._collection_name]
+            self._session_collection = self._db[self._session_collection_name]
             logger.info(
-                "[usage_tracker] Connected to MongoDB: %s.%s",
+                "[usage_tracker] Connected to MongoDB: %s.%s (sessions: %s)",
                 self._db_name,
                 self._collection_name,
+                self._session_collection_name,
             )
         except Exception as e:
             logger.warning(
@@ -78,6 +100,8 @@ class UsageTracker:
         model: str,
         input_tokens: int,
         output_tokens: int,
+        start_time: datetime,
+        *,
         auth_provider: str | None = None,
         email: str | None = None,
         user_name: str | None = None,
@@ -107,6 +131,11 @@ class UsageTracker:
         `custom_headers` is stored as-is (a flat dict) so new client-supplied
         attribution headers can be added later without a schema change here —
         see CodingModelRouter._get_auth_info for what populates it.
+
+        `start_time` is when the caller received the client's request; it's
+        used to derive `end_time`/`duration_ms` — the wall-clock span between
+        the request landing and this record being written, which for
+        streaming responses is effectively "time to fully respond".
         """
         if input_tokens == 0 and output_tokens == 0:
             return
@@ -116,13 +145,17 @@ class UsageTracker:
         if self._collection is None:
             return
 
+        end_time = datetime.now(timezone.utc)
         usage_record: dict[str, Any] = {
             "request_id": request_id,
             "model": model,
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": input_tokens + output_tokens,
-            "timestamp": datetime.now(timezone.utc),
+            "timestamp": end_time,
+            "start_time": start_time,
+            "end_time": end_time,
+            "duration_ms": round((end_time - start_time).total_seconds() * 1000, 3),
         }
 
         if user_id:
@@ -188,6 +221,100 @@ class UsageTracker:
                 e,
                 exc_info=True,
             )
+            return
+
+        if session_id and self._track_sessions:
+            try:
+                await self._upsert_session_usage(
+                    session_id=session_id,
+                    account_uuid=account_uuid,
+                    user_id=user_id,
+                    model=model,
+                    model_tier=model_tier,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                )
+            except Exception as e:
+                logger.warning(
+                    "[usage_tracker] Failed to update session usage: %s",
+                    e,
+                    exc_info=True,
+                )
+
+    async def _upsert_session_usage(
+        self,
+        *,
+        session_id: str,
+        account_uuid: str | None,
+        user_id: str | None,
+        model: str,
+        model_tier: str | None,
+        input_tokens: int,
+        output_tokens: int,
+        price_per_mtok: float | None,
+        anthropic_price_per_mtok: float | None,
+    ) -> None:
+        """Roll this request's usage into a single per-session document.
+
+        Keyed by session_id and upserted on every request so a session's
+        totals are queryable without a $group aggregation over the (much
+        larger) per-request collection. Cost is bucketed by tier — low
+        (haiku), medium (sonnet), high (opus), fable — since a single
+        session can span multiple model tiers and there's no per-model
+        array here (unbounded growth risk for long-running agent sessions).
+
+        Token/cost fields use $inc so concurrent requests in the same
+        session (e.g. parallel sub-agent calls) accumulate correctly rather
+        than racing on a last-write-wins $set. account_uuid/user_id/tier
+        model names are stable per session in practice, so plain $set is
+        fine for those.
+        """
+        if self._session_collection is None:
+            return
+
+        inc_fields: dict[str, int | float] = {
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": input_tokens + output_tokens,
+        }
+        set_fields: dict[str, str] = {}
+        if account_uuid:
+            set_fields["account_uuid"] = account_uuid
+        if user_id:
+            set_fields["user_id"] = user_id
+
+        bucket = _TIER_TO_SESSION_BUCKET.get(model_tier or "")
+        cost_usd = anthropic_cost_usd = None
+        if price_per_mtok is not None:
+            cost_usd = (input_tokens + output_tokens) / 1_000_000 * price_per_mtok
+            if anthropic_price_per_mtok is not None:
+                anthropic_cost_usd = (
+                    (input_tokens + output_tokens)
+                    / 1_000_000
+                    * anthropic_price_per_mtok
+                )
+        if bucket:
+            if model:
+                set_fields[f"{bucket}_tier_model"] = model
+            if cost_usd is not None:
+                inc_fields[f"{bucket}_tier_cost"] = round(cost_usd, 6)
+            if anthropic_cost_usd is not None:
+                inc_fields[f"{bucket}_tier_anthropic_cost"] = round(
+                    anthropic_cost_usd, 6
+                )
+        # Savings is a session-wide total, independent of tier bucketing, so
+        # it accumulates even for tiers not (yet) mapped to a bucket.
+        if cost_usd is not None and anthropic_cost_usd is not None:
+            inc_fields["total_savings_usd"] = round(anthropic_cost_usd - cost_usd, 6)
+
+        update: dict[str, dict[str, Any]] = {"$inc": inc_fields}
+        if set_fields:
+            update["$set"] = set_fields
+        await self._session_collection.update_one(
+            {"session_id": session_id}, update, upsert=True
+        )
 
     async def record_usage_from_anthropic_response(
         self,
@@ -195,6 +322,8 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        start_time: datetime,
+        *,
         model_tier: str | None = None,
         backend: str | None = None,
         price_per_mtok: float | None = None,
@@ -269,6 +398,7 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            start_time=start_time,
         )
 
     async def record_usage_from_openai_response(
@@ -277,6 +407,8 @@ class UsageTracker:
         auth_info: dict[str, Any],
         model: str,
         response_body: dict[str, Any],
+        start_time: datetime,
+        *,
         model_tier: str | None = None,
         backend: str | None = None,
         price_per_mtok: float | None = None,
@@ -349,6 +481,7 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            start_time=start_time,
         )
 
     async def close(self) -> None:

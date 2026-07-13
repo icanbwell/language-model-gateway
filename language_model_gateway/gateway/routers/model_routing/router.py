@@ -26,6 +26,7 @@ import json
 import logging
 import os
 import time
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, AsyncGenerator, Sequence
 
@@ -69,17 +70,20 @@ from .message_translator import (
 from .route_config import _find_route
 from .tokenizer import count_oai_request_tokens
 from .stream_converter import (
+    _fire_and_forget,
     _msg_id,
     _oai_stream_with_cleanup,
     _oai_stream_with_usage_tracking,
     _sse_event,
     _stream_passthrough,
+    _stream_passthrough_with_usage_tracking,
 )
 from .account_directory import (
     AccountDirectory,
     extract_account_uuid,
     extract_session_id,
 )
+from .error_tracker import ErrorTracker
 from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
@@ -115,8 +119,11 @@ class CodingModelRouter:
         mongo_uri: str | None = None,
         usage_db_name: str = "llm_storage",
         usage_collection_name: str = "usage",
+        usage_session_collection_name: str = "usage_sessions",
+        usage_track_sessions: bool = True,
         usage_capture_previews: bool = False,
         usage_preview_chars: int = 100,
+        error_collection_name: str = "errors",
         account_directory_collection_name: str = "account_directory",
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
@@ -138,15 +145,24 @@ class CodingModelRouter:
                 "enable this in a shared or deployed environment."
             )
         self._usage_tracker: UsageTracker | None = None
+        self._error_tracker: ErrorTracker | None = None
         self._account_directory: AccountDirectory | None = None
         if mongo_uri:
             self._usage_tracker = UsageTracker(
                 mongo_uri=mongo_uri,
                 db_name=usage_db_name,
                 collection_name=usage_collection_name,
+                session_collection_name=usage_session_collection_name,
                 enabled=True,
+                track_sessions=usage_track_sessions,
                 capture_previews=usage_capture_previews,
                 preview_chars=usage_preview_chars,
+            )
+            self._error_tracker = ErrorTracker(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=error_collection_name,
+                enabled=True,
             )
             self._account_directory = AccountDirectory(
                 mongo_uri=mongo_uri,
@@ -178,6 +194,9 @@ class CodingModelRouter:
     async def proxy_messages(
         self, request: Request, background_tasks: BackgroundTasks
     ) -> StreamingResponse | JSONResponse | Response:
+        # Captured before any parsing/upstream work so the usage record's
+        # duration reflects the client's full wait, not just upstream time.
+        request_start_time = datetime.now(timezone.utc)
         raw_body = await request.body()
 
         # Generate request_id at the start for consistent tracing
@@ -373,6 +392,19 @@ class CodingModelRouter:
                     from botocore.exceptions import TokenRetrievalError
 
                     if isinstance(cred_exc, TokenRetrievalError):
+                        self._record_error(
+                            request_id=request_id,
+                            auth_info=auth_info,
+                            model=upstream_model,
+                            error_type="bedrock_session_expired",
+                            error_message=str(cred_exc),
+                            start_time=request_start_time,
+                            model_tier=model_tier,
+                            backend=backend,
+                            auth=auth,
+                            api_type=api_type,
+                            streaming=is_streaming,
+                        )
                         profile = os.environ.get("AWS_PROFILE", "<profile>")
                         return self._error_response(
                             f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
@@ -509,6 +541,7 @@ class CodingModelRouter:
                             # offers.
                             compression_used="none",
                             request=request,
+                            start_time=request_start_time,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -596,6 +629,7 @@ class CodingModelRouter:
                             streaming=False,
                             compression_requested=accept_encoding,
                             compression_used=compression_used,
+                            start_time=request_start_time,
                         )
                     response.background = background_tasks
                     return response
@@ -620,6 +654,20 @@ class CodingModelRouter:
                     )
                 except Exception:
                     err_msg = exc.message or str(exc)
+                self._record_error(
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_upstream_error",
+                    error_message=exc.response.text,
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
+                    status_code=exc.status_code,
+                )
                 return self._error_response(
                     f"Bedrock error ({exc.status_code}): {err_msg}",
                     upstream_model,
@@ -632,6 +680,19 @@ class CodingModelRouter:
                 if isinstance(exc, TokenRetrievalError) or isinstance(
                     _cause, TokenRetrievalError
                 ):
+                    self._record_error(
+                        request_id=msg_id,
+                        auth_info=auth_info,
+                        model=upstream_model,
+                        error_type="bedrock_session_expired",
+                        error_message=str(exc),
+                        start_time=request_start_time,
+                        model_tier=model_tier,
+                        backend=backend,
+                        auth=auth,
+                        api_type=api_type,
+                        streaming=is_streaming,
+                    )
                     profile = os.environ.get("AWS_PROFILE", "<profile>")
                     return self._error_response(
                         f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
@@ -650,6 +711,19 @@ class CodingModelRouter:
                     is_streaming,
                     exc,
                     exc_info=True,
+                )
+                self._record_error(
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
                 )
                 raise
             finally:
@@ -685,6 +759,20 @@ class CodingModelRouter:
                 request_id,
                 error_body[:1000].decode("utf-8", errors="replace"),
             )
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type="upstream_error",
+                error_message=error_body[:1000].decode("utf-8", errors="replace"),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=is_streaming,
+                status_code=upstream_resp.status_code,
+            )
             if is_fallback_route:
                 error_body = self._annotate_fallback_error(error_body, model)
             return Response(
@@ -703,11 +791,126 @@ class CodingModelRouter:
         # See the comment on the other StreamingResponse construction above —
         # tells nginx/ingress not to buffer this response before relaying it.
         resp_headers["X-Accel-Buffering"] = "no"
+
+        if not is_streaming:
+            # Anthropic's non-streaming response is a single JSON blob, so
+            # there's no byte-relay benefit to keeping it as a StreamingResponse
+            # — buffer it (same as the >=400 branch above already does) so
+            # usage can be extracted the same way the openai-format route does.
+            body_bytes = await upstream_resp.aread()
+            await upstream_resp.aclose()
+            await client.aclose()
+            if self._usage_tracker:
+                try:
+                    response_body = json.loads(body_bytes)
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    response_body = None
+                if response_body is not None:
+                    compression_used = (
+                        "gzip"
+                        if accept_encoding
+                        and "gzip" in accept_encoding.lower()
+                        and len(body_bytes) >= 500
+                        else "none"
+                    )
+                    background_tasks.add_task(
+                        self._usage_tracker.record_usage_from_anthropic_response,
+                        request_id=request_id,
+                        auth_info=auth_info,
+                        model=upstream_model,
+                        response_body=response_body,
+                        model_tier=model_tier,
+                        backend=backend,
+                        price_per_mtok=price_per_mtok,
+                        anthropic_price_per_mtok=anthropic_price_per_mtok,
+                        streaming=False,
+                        compression_requested=accept_encoding,
+                        compression_used=compression_used,
+                        prompt_text=prompt_text,
+                        start_time=request_start_time,
+                    )
+            passthrough_response = Response(
+                content=body_bytes,
+                status_code=upstream_resp.status_code,
+                headers=resp_headers,
+                media_type=upstream_resp.headers.get(
+                    "content-type", "application/json"
+                ),
+            )
+            passthrough_response.background = background_tasks
+            return passthrough_response
+
+        if self._usage_tracker:
+            stream_gen = _stream_passthrough_with_usage_tracking(
+                upstream_resp,
+                client,
+                self._usage_tracker,
+                request_id,
+                auth_info,
+                upstream_model,
+                request_start_time,
+                prompt_text=prompt_text,
+                model_tier=model_tier,
+                backend=backend,
+                price_per_mtok=price_per_mtok,
+                anthropic_price_per_mtok=anthropic_price_per_mtok,
+                compression_requested=accept_encoding,
+                # Same reasoning as the openai-format route's streaming
+                # response — text/event-stream is excluded from GZipMiddleware
+                # regardless of what the client's Accept-Encoding offers.
+                compression_used="none",
+                request=request,
+            )
+        else:
+            stream_gen = _stream_passthrough(upstream_resp, client, request=request)
+
         return StreamingResponse(
-            _stream_passthrough(upstream_resp, client, request=request),
+            stream_gen,
             status_code=upstream_resp.status_code,
             headers=resp_headers,
             media_type=upstream_resp.headers.get("content-type", "text/event-stream"),
+        )
+
+    def _record_error(
+        self,
+        *,
+        request_id: str,
+        auth_info: dict[str, Any],
+        model: str,
+        error_type: str,
+        error_message: str,
+        start_time: datetime,
+        model_tier: str | None = None,
+        backend: str | None = None,
+        auth: str | None = None,
+        api_type: str | None = None,
+        streaming: bool | None = None,
+        status_code: int | None = None,
+    ) -> None:
+        """Fire-and-forget an error record — never blocks or masks the caller's
+        own error handling (raising/returning the client-facing error response).
+        """
+        if self._error_tracker is None:
+            return
+        _fire_and_forget(
+            self._error_tracker.record_error(
+                request_id=request_id,
+                model=model,
+                error_type=error_type,
+                error_message=error_message,
+                start_time=start_time,
+                user_id=auth_info.get("user_id"),
+                session_id=auth_info.get("session_id"),
+                account_uuid=auth_info.get("account_uuid"),
+                agent_id=auth_info.get("agent_id"),
+                parent_agent_id=auth_info.get("parent_agent_id"),
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=streaming,
+                status_code=status_code,
+            )
         )
 
     @staticmethod
