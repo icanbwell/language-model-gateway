@@ -20,6 +20,7 @@ from typing import AsyncGenerator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
+import openai
 import pytest
 from fastapi import FastAPI
 from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
@@ -38,10 +39,12 @@ from language_model_gateway.gateway.routers.model_routing.message_translator imp
     _anthropic_to_openai_request,
     _openai_to_anthropic_response,
 )
+from language_model_gateway.gateway.routers.model_routing.aws_auth import (
+    _bedrock_credential_error_detail,
+)
 from language_model_gateway.gateway.routers.model_routing.route_config import _ROUTES
 from language_model_gateway.gateway.routers.model_routing.router import (
     CodingModelRouter,
-    _bedrock_credential_error_detail,
 )
 from language_model_gateway.gateway.routers.model_routing.stream_converter import (
     ThinkingStripper as _ThinkingStripper,
@@ -1424,4 +1427,45 @@ async def test_bedrock_mantle_transient_stream_error_retries_then_gives_up(
     error_tracker.record_error.assert_awaited_once()
     call_kwargs = error_tracker.record_error.call_args.kwargs
     assert call_kwargs["error_type"] == "bedrock_stream_error"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_connection_error_is_not_misrecorded_as_stream_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """`openai.APIConnectionError` is a *subclass* of `openai.APIError`, but
+    unlike a genuine Bedrock Mantle mid-stream error body it carries no
+    `.code`/`.type`/`.param`/`.body` — those are always None on a transport
+    failure. It must be recorded with its own exception type (matching prior
+    behavior for any other unexpected exception), not misclassified as
+    `bedrock_stream_error` with a null-filled detail body."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-connerr",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_exception(httpx.ConnectError("connection refused"))
+
+    with patch.dict(_ROUTES, {"claude-test-model-connerr": fake_route}):
+        body = {
+            "model": "claude-test-model-connerr",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        with pytest.raises(openai.APIConnectionError):
+            await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "APIConnectionError"
     usage_tracker.record_usage_from_openai_response.assert_not_called()

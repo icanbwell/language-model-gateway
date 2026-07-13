@@ -24,7 +24,6 @@ import asyncio
 import inspect
 import json
 import logging
-import os
 import time
 from datetime import datetime, timezone
 from enum import Enum
@@ -47,7 +46,7 @@ from starlette.responses import JSONResponse, Response, StreamingResponse
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
-from .aws_auth import SigV4Auth, _sign_bedrock
+from .aws_auth import SigV4Auth, _bedrock_credential_error_detail, _sign_bedrock
 from .bedrock_client import (
     _is_throttling,
     _is_transient_stream_error,
@@ -89,40 +88,6 @@ from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
-
-
-def _bedrock_credential_error_detail(exc: BaseException) -> tuple[str, str] | None:
-    """If `exc` (or its cause/context) is a Bedrock-credentials failure,
-    return `(error_type, actionable_client_message)` for it — else None.
-
-    Previously only `TokenRetrievalError` (expired SSO session) got this
-    treatment; any other credential failure — no profile/role configured at
-    all, or an STS/SSO API error surfaced as `botocore.ClientError` — fell
-    through to the generic handler with an unhelpful `error_type` (e.g.
-    "RuntimeError") and no actionable fix for the user.
-    """
-    from botocore.exceptions import ClientError, NoCredentialsError, TokenRetrievalError
-
-    from .aws_auth import BedrockCredentialsUnavailableError
-
-    profile = os.environ.get("AWS_PROFILE", "<profile>")
-    for candidate in (exc, exc.__cause__, exc.__context__):
-        if isinstance(candidate, TokenRetrievalError):
-            return (
-                "bedrock_session_expired",
-                f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
-            )
-        if isinstance(
-            candidate, (NoCredentialsError, BedrockCredentialsUnavailableError)
-        ):
-            return (
-                "bedrock_no_credentials",
-                f"No AWS credentials configured (profile={profile}). Set "
-                "AWS_PROFILE or configure a default AWS profile/role.",
-            )
-        if isinstance(candidate, ClientError):
-            return ("bedrock_credential_error", f"AWS credential error: {candidate}")
-    return None
 
 
 def _extract_last_user_text(body_json: dict[str, Any]) -> str | None:
@@ -739,6 +704,27 @@ class CodingModelRouter:
                     is_streaming,
                 )
             except openai.APIError as exc:
+                if type(exc) is not openai.APIError:
+                    # A genuine transport failure (dropped connection, timeout,
+                    # malformed response) — not a Bedrock error body embedded
+                    # in an SSE event. exc.code/type/param/body are always
+                    # None on these subclasses, so recording this as
+                    # "bedrock_stream_error" would just be a null-filled,
+                    # misleading record. Route it through the same handling
+                    # as any other unexpected exception instead.
+                    return self._handle_unexpected_upstream_error(
+                        exc,
+                        request_id=msg_id,
+                        auth_info=auth_info,
+                        upstream_model=upstream_model,
+                        request_start_time=request_start_time,
+                        model_tier=model_tier,
+                        backend=backend,
+                        auth=auth,
+                        api_type=api_type,
+                        streaming=is_streaming,
+                        user_id=user_id,
+                    )
                 # Raised by the SDK for errors embedded in an SSE data event
                 # (no HTTP status code involved) — e.g. Bedrock Mantle sends
                 # `{"error": {...}}` mid-stream instead of a 4xx/5xx response.
@@ -799,50 +785,19 @@ class CodingModelRouter:
                     is_streaming,
                 )
             except Exception as exc:
-                detail = _bedrock_credential_error_detail(exc)
-                if detail is not None:
-                    error_type, message = detail
-                    self._record_error(
-                        request_id=msg_id,
-                        auth_info=auth_info,
-                        model=upstream_model,
-                        error_type=error_type,
-                        error_message=str(exc),
-                        start_time=request_start_time,
-                        model_tier=model_tier,
-                        backend=backend,
-                        auth=auth,
-                        api_type=api_type,
-                        streaming=is_streaming,
-                    )
-                    return self._error_response(message, upstream_model, is_streaming)
-                logger.error(
-                    "[coding-model-router] Bedrock Mantle request failed with an "
-                    "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
-                    "streaming=%s: %s",
-                    type(exc).__name__,
-                    upstream_model,
-                    auth,
-                    user_id,
-                    msg_id,
-                    is_streaming,
+                return self._handle_unexpected_upstream_error(
                     exc,
-                    exc_info=True,
-                )
-                self._record_error(
                     request_id=msg_id,
                     auth_info=auth_info,
-                    model=upstream_model,
-                    error_type=type(exc).__name__,
-                    error_message=str(exc),
-                    start_time=request_start_time,
+                    upstream_model=upstream_model,
+                    request_start_time=request_start_time,
                     model_tier=model_tier,
                     backend=backend,
                     auth=auth,
                     api_type=api_type,
                     streaming=is_streaming,
+                    user_id=user_id,
                 )
-                raise
             finally:
                 if not streaming_started:
                     await http_client.aclose()
@@ -1057,6 +1012,81 @@ class CodingModelRouter:
                 status_code=status_code,
             )
         )
+
+    def _handle_unexpected_upstream_error(
+        self,
+        exc: Exception,
+        *,
+        request_id: str,
+        auth_info: dict[str, Any],
+        upstream_model: str,
+        request_start_time: datetime,
+        model_tier: str | None,
+        backend: str | None,
+        auth: str | None,
+        api_type: str | None,
+        streaming: bool,
+        user_id: str | None,
+    ) -> StreamingResponse | JSONResponse:
+        """Classify, record, and re-raise an exception that isn't one of the
+        specific Bedrock/OpenAI error shapes handled above it.
+
+        Shared by the generic `except Exception` handler and by
+        `openai.APIError` subclasses (`APIConnectionError`, `APITimeoutError`,
+        `APIResponseValidationError`) that carry no `code`/`type`/`param`/
+        `body` — those aren't genuine mid-stream Bedrock error bodies and
+        must not be recorded as `bedrock_stream_error`. Sibling `except`
+        clauses on one `try` don't chain, so callers can't get here via a
+        bare `raise` from another clause — they must call this directly.
+
+        Must be called from within an active `except` block: it ends with a
+        bare `raise`, which re-raises whatever exception is currently being
+        handled by the caller.
+        """
+        detail = _bedrock_credential_error_detail(exc)
+        if detail is not None:
+            error_type, message = detail
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type=error_type,
+                error_message=str(exc),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=streaming,
+            )
+            return self._error_response(message, upstream_model, streaming)
+        logger.error(
+            "[coding-model-router] Bedrock Mantle request failed with an "
+            "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
+            "streaming=%s: %s",
+            type(exc).__name__,
+            upstream_model,
+            auth,
+            user_id,
+            request_id,
+            streaming,
+            exc,
+            exc_info=True,
+        )
+        self._record_error(
+            request_id=request_id,
+            auth_info=auth_info,
+            model=upstream_model,
+            error_type=type(exc).__name__,
+            error_message=str(exc),
+            start_time=request_start_time,
+            model_tier=model_tier,
+            backend=backend,
+            auth=auth,
+            api_type=api_type,
+            streaming=streaming,
+        )
+        raise
 
     @staticmethod
     def _record_upstream_latency(

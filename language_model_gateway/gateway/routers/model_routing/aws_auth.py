@@ -15,6 +15,38 @@ class BedrockCredentialsUnavailableError(RuntimeError):
     """
 
 
+def _bedrock_credential_error_detail(exc: BaseException) -> tuple[str, str] | None:
+    """If `exc` (or its cause/context) is a Bedrock-credentials failure,
+    return `(error_type, actionable_client_message)` for it — else None.
+
+    Previously only `TokenRetrievalError` (expired SSO session) got this
+    treatment; any other credential failure — no profile/role configured at
+    all, or an STS/SSO API error surfaced as `botocore.ClientError` — fell
+    through to the generic handler with an unhelpful `error_type` (e.g.
+    "RuntimeError") and no actionable fix for the user.
+    """
+    from botocore.exceptions import ClientError, NoCredentialsError, TokenRetrievalError
+
+    profile = os.environ.get("AWS_PROFILE", "<profile>")
+    for candidate in (exc, exc.__cause__, exc.__context__):
+        if isinstance(candidate, TokenRetrievalError):
+            return (
+                "bedrock_session_expired",
+                f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
+            )
+        if isinstance(
+            candidate, (NoCredentialsError, BedrockCredentialsUnavailableError)
+        ):
+            return (
+                "bedrock_no_credentials",
+                f"No AWS credentials configured (profile={profile}). Set "
+                "AWS_PROFILE or configure a default AWS profile/role.",
+            )
+        if isinstance(candidate, ClientError):
+            return ("bedrock_credential_error", f"AWS credential error: {candidate}")
+    return None
+
+
 def _sign_bedrock(url: str, body: bytes, route: dict[str, Any]) -> dict[str, str]:
     """Return headers dict with AWS SigV4 Authorization for a Bedrock POST."""
     import boto3
