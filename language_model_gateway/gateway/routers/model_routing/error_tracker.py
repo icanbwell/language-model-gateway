@@ -80,6 +80,7 @@ class ErrorTracker:
         api_type: str | None = None,
         streaming: bool | None = None,
         status_code: int | None = None,
+        response_headers: dict[str, str] | None = None,
     ) -> None:
         """Record an upstream request failure to MongoDB.
 
@@ -125,6 +126,8 @@ class ErrorTracker:
             error_record["streaming"] = streaming
         if status_code is not None:
             error_record["status_code"] = status_code
+        if response_headers:
+            error_record["response_headers"] = response_headers
 
         try:
             await self._collection.insert_one(error_record)

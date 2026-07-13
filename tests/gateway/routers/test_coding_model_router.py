@@ -1298,6 +1298,68 @@ async def test_anthropic_passthrough_dispatch_failure_records_error(
 
 
 @pytest.mark.asyncio
+async def test_bedrock_mantle_upstream_error_records_response_headers(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A non-streaming request that gets a 4xx/5xx HTTP response from Bedrock
+    Mantle raises `openai.APIStatusError`, which carries the full `httpx.Response`
+    (unlike the mid-stream `openai.APIError` case). The response headers —
+    e.g. an AWS request ID — must be captured in model-router-errors alongside
+    the body, since Mantle's error bodies are often too generic on their own
+    to correlate against AWS-side logs."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-status-error",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=500,
+        json={
+            "error": {
+                "message": "The server had an error while processing your request.",
+                "type": "server_error",
+                "code": "internal_server_error",
+            }
+        },
+        headers={
+            "content-type": "application/json",
+            "x-amzn-requestid": "req-status-error-xyz",
+        },
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-model-status-error": fake_route}):
+        body = {
+            "model": "claude-test-model-status-error",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    # Bedrock/Mantle errors are surfaced to the client as a valid Anthropic
+    # assistant message (status 200) rather than propagating the upstream
+    # status code — see CodingModelRouter._error_response.
+    assert response.status_code == 200
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_upstream_error"
+    assert call_kwargs["status_code"] == 500
+    assert call_kwargs["response_headers"]["x-amzn-requestid"] == "req-status-error-xyz"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
 async def test_bedrock_mantle_mid_stream_error_records_full_detail(
     router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
     httpx_mock: HTTPXMock,
@@ -1332,7 +1394,10 @@ async def test_bedrock_mantle_mid_stream_error_records_full_detail(
         method="POST",
         status_code=200,
         content=sse_body,
-        headers={"content-type": "text/event-stream"},
+        headers={
+            "content-type": "text/event-stream",
+            "x-amzn-requestid": "req-mid-stream-abc",
+        },
     )
 
     with patch.dict(_ROUTES, {"claude-test-model-oai": fake_route}):
@@ -1364,6 +1429,11 @@ async def test_bedrock_mantle_mid_stream_error_records_full_detail(
     assert recorded["type"] == "invalid_request_error"
     assert "temperature must be between 0 and 1" in recorded["message"]
     assert recorded["body"]["code"] == "ValidationException"
+    # Bedrock Mantle's initial (successful) handshake response headers are
+    # captured too — the error itself only appears as a later SSE event on
+    # that same response, so there's no separate error-response to read
+    # headers from.
+    assert call_kwargs["response_headers"]["x-amzn-requestid"] == "req-mid-stream-abc"
     usage_tracker.record_usage_from_openai_response.assert_not_called()
 
 

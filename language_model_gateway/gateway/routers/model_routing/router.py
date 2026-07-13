@@ -453,6 +453,10 @@ class CodingModelRouter:
             oai_kwargs = {k: v for k, v in body_json.items() if k != "stream"}
             msg_id = _msg_id()
             streaming_started = False
+            # Bound here (not just inside `if is_streaming:`) so the bare
+            # openai.APIError handler below can safely check it regardless of
+            # which branch ran — it's only ever non-None for the streaming path.
+            stream = None
             try:
                 if is_streaming:
                     first_chunk = None
@@ -543,6 +547,10 @@ class CodingModelRouter:
                             auth=auth,
                             api_type=api_type,
                             streaming=True,
+                            # The initial handshake response — headers only,
+                            # since the error body itself arrived as a later
+                            # SSE event on this same response, not a fresh one.
+                            response_headers=dict(stream.response.headers),
                         )
 
                     # Create streaming response with usage tracking
@@ -697,6 +705,7 @@ class CodingModelRouter:
                     api_type=api_type,
                     streaming=is_streaming,
                     status_code=exc.status_code,
+                    response_headers=dict(exc.response.headers),
                 )
                 return self._error_response(
                     f"Bedrock error ({exc.status_code}): {err_msg}",
@@ -765,6 +774,16 @@ class CodingModelRouter:
                     auth=auth,
                     api_type=api_type,
                     streaming=is_streaming,
+                    # Headers from the initial (successful) handshake response —
+                    # the error itself arrived as a later SSE event on this same
+                    # response, so there's no separate error-response to read
+                    # headers from. `stream` is always assigned by this point:
+                    # a bare openai.APIError (as opposed to APIConnectionError,
+                    # filtered out above) only happens after the SSE body has
+                    # started decoding.
+                    response_headers=(
+                        dict(stream.response.headers) if stream is not None else None
+                    ),
                 )
                 # Surface whatever detail Bedrock actually sent (not just
                 # exc.message, which can itself be a generic passthrough
@@ -986,6 +1005,7 @@ class CodingModelRouter:
         api_type: str | None = None,
         streaming: bool | None = None,
         status_code: int | None = None,
+        response_headers: dict[str, str] | None = None,
     ) -> None:
         """Fire-and-forget an error record — never blocks or masks the caller's
         own error handling (raising/returning the client-facing error response).
@@ -1010,6 +1030,7 @@ class CodingModelRouter:
                 api_type=api_type,
                 streaming=streaming,
                 status_code=status_code,
+                response_headers=response_headers,
             )
         )
 

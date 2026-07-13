@@ -67,6 +67,7 @@ class TestErrorTrackerRecordError:
                 api_type="anthropic",
                 streaming=True,
                 status_code=503,
+                response_headers={"x-amzn-requestid": "req-abc-123"},
             )
 
             record = tracker._collection.insert_one.call_args[0][0]
@@ -88,6 +89,7 @@ class TestErrorTrackerRecordError:
             assert record["api_type"] == "anthropic"
             assert record["streaming"] is True
             assert record["status_code"] == 503
+            assert record["response_headers"] == {"x-amzn-requestid": "req-abc-123"}
 
     async def test_omits_optional_fields_when_absent(self) -> None:
         tracker = ErrorTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
@@ -117,6 +119,7 @@ class TestErrorTrackerRecordError:
                 "api_type",
                 "streaming",
                 "status_code",
+                "response_headers",
             ):
                 assert field not in record
 
