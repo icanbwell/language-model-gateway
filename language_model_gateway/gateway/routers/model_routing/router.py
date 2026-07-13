@@ -50,6 +50,7 @@ from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_L
 from .aws_auth import SigV4Auth, _sign_bedrock
 from .bedrock_client import (
     _is_throttling,
+    _is_transient_stream_error,
     _send_with_bedrock_retry,
     _throttle_backoff,
 )
@@ -88,6 +89,40 @@ from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
+
+
+def _bedrock_credential_error_detail(exc: BaseException) -> tuple[str, str] | None:
+    """If `exc` (or its cause/context) is a Bedrock-credentials failure,
+    return `(error_type, actionable_client_message)` for it — else None.
+
+    Previously only `TokenRetrievalError` (expired SSO session) got this
+    treatment; any other credential failure — no profile/role configured at
+    all, or an STS/SSO API error surfaced as `botocore.ClientError` — fell
+    through to the generic handler with an unhelpful `error_type` (e.g.
+    "RuntimeError") and no actionable fix for the user.
+    """
+    from botocore.exceptions import ClientError, NoCredentialsError, TokenRetrievalError
+
+    from .aws_auth import BedrockCredentialsUnavailableError
+
+    profile = os.environ.get("AWS_PROFILE", "<profile>")
+    for candidate in (exc, exc.__cause__, exc.__context__):
+        if isinstance(candidate, TokenRetrievalError):
+            return (
+                "bedrock_session_expired",
+                f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
+            )
+        if isinstance(
+            candidate, (NoCredentialsError, BedrockCredentialsUnavailableError)
+        ):
+            return (
+                "bedrock_no_credentials",
+                f"No AWS credentials configured (profile={profile}). Set "
+                "AWS_PROFILE or configure a default AWS profile/role.",
+            )
+        if isinstance(candidate, ClientError):
+            return ("bedrock_credential_error", f"AWS credential error: {candidate}")
+    return None
 
 
 def _extract_last_user_text(body_json: dict[str, Any]) -> str | None:
@@ -389,14 +424,14 @@ class CodingModelRouter:
                         for k, v in _sign_bedrock(target_url, raw_body, route).items()
                     }
                 except Exception as cred_exc:
-                    from botocore.exceptions import TokenRetrievalError
-
-                    if isinstance(cred_exc, TokenRetrievalError):
+                    detail = _bedrock_credential_error_detail(cred_exc)
+                    if detail is not None:
+                        error_type, message = detail
                         self._record_error(
                             request_id=request_id,
                             auth_info=auth_info,
                             model=upstream_model,
-                            error_type="bedrock_session_expired",
+                            error_type=error_type,
                             error_message=str(cred_exc),
                             start_time=request_start_time,
                             model_tier=model_tier,
@@ -405,11 +440,8 @@ class CodingModelRouter:
                             api_type=api_type,
                             streaming=is_streaming,
                         )
-                        profile = os.environ.get("AWS_PROFILE", "<profile>")
                         return self._error_response(
-                            f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
-                            upstream_model,
-                            is_streaming,
+                            message, upstream_model, is_streaming
                         )
                     raise
                 upstream_headers = {**base_headers, **sig_headers}
@@ -491,20 +523,31 @@ class CodingModelRouter:
                             _peek_text = getattr(_resp_obj, "text", None) or str(
                                 peek_exc
                             )
-                            if (
-                                _status is not None
-                                and _is_throttling(_status, _peek_text)
-                                and _throttle_attempt < _MAX_THROTTLE_RETRIES
-                            ):
+                            # A plain openai.APIError (SSE `{"error": {...}}`
+                            # mid-stream, e.g. Bedrock Mantle) has no
+                            # .status_code at all — _is_throttling can't apply,
+                            # so it needs its own transient/permanent check
+                            # instead of skipping retry entirely.
+                            _retryable = (
+                                _is_throttling(_status, _peek_text)
+                                if _status is not None
+                                else _is_transient_stream_error(
+                                    getattr(peek_exc, "code", None),
+                                    getattr(peek_exc, "type", None),
+                                    _peek_text,
+                                )
+                            )
+                            if _retryable and _throttle_attempt < _MAX_THROTTLE_RETRIES:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s code=%s",
                                     request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
                                     _status,
+                                    getattr(peek_exc, "code", None),
                                 )
                                 await asyncio.sleep(delay)
                             else:
@@ -517,6 +560,26 @@ class CodingModelRouter:
                         auth=auth,
                         api_type=api_type,
                     )
+
+                    # Record mid-stream Bedrock Mantle failures the same way as
+                    # the pre-first-chunk case above — otherwise a failure
+                    # after streaming has already started is only ever shown
+                    # inline to the client and never reaches model-router-errors.
+                    def _record_mid_stream_error(message: str) -> None:
+                        self._record_error(
+                            request_id=msg_id,
+                            auth_info=auth_info,
+                            model=upstream_model,
+                            error_type="bedrock_stream_error",
+                            error_message=message,
+                            start_time=request_start_time,
+                            model_tier=model_tier,
+                            backend=backend,
+                            auth=auth,
+                            api_type=api_type,
+                            streaming=True,
+                        )
+
                     # Create streaming response with usage tracking
                     if self._usage_tracker:
                         stream_gen = _oai_stream_with_usage_tracking(
@@ -542,6 +605,7 @@ class CodingModelRouter:
                             compression_used="none",
                             request=request,
                             start_time=request_start_time,
+                            on_stream_error=_record_mid_stream_error,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -551,6 +615,7 @@ class CodingModelRouter:
                             http_client,
                             first_chunk=first_chunk,
                             request=request,
+                            on_stream_error=_record_mid_stream_error,
                         )
                     return StreamingResponse(
                         stream_gen,
@@ -734,17 +799,14 @@ class CodingModelRouter:
                     is_streaming,
                 )
             except Exception as exc:
-                from botocore.exceptions import TokenRetrievalError
-
-                _cause = exc.__cause__ or exc.__context__
-                if isinstance(exc, TokenRetrievalError) or isinstance(
-                    _cause, TokenRetrievalError
-                ):
+                detail = _bedrock_credential_error_detail(exc)
+                if detail is not None:
+                    error_type, message = detail
                     self._record_error(
                         request_id=msg_id,
                         auth_info=auth_info,
                         model=upstream_model,
-                        error_type="bedrock_session_expired",
+                        error_type=error_type,
                         error_message=str(exc),
                         start_time=request_start_time,
                         model_tier=model_tier,
@@ -753,12 +815,7 @@ class CodingModelRouter:
                         api_type=api_type,
                         streaming=is_streaming,
                     )
-                    profile = os.environ.get("AWS_PROFILE", "<profile>")
-                    return self._error_response(
-                        f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
-                        upstream_model,
-                        is_streaming,
-                    )
+                    return self._error_response(message, upstream_model, is_streaming)
                 logger.error(
                     "[coding-model-router] Bedrock Mantle request failed with an "
                     "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
@@ -796,8 +853,36 @@ class CodingModelRouter:
             upstream_resp = await _send_with_bedrock_retry(
                 client, target_url, upstream_headers, raw_body, route, auth, request_id
             )
-        except Exception:
+        except Exception as exc:
             await client.aclose()
+            # Previously re-raised with no record at all — a connection
+            # failure/timeout dispatching to Anthropic/Bedrock became a bare
+            # 500 with zero trace in model-router-errors.
+            logger.error(
+                "[coding-model-router] passthrough dispatch failed: url=%s "
+                "model=%s auth=%s user_id=%s request_id=%s streaming=%s: %s",
+                target_url,
+                upstream_model,
+                auth,
+                user_id,
+                request_id,
+                is_streaming,
+                exc,
+                exc_info=True,
+            )
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type=type(exc).__name__,
+                error_message=str(exc),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=is_streaming,
+            )
             raise
 
         self._record_upstream_latency(

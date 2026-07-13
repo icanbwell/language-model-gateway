@@ -6,6 +6,15 @@ from typing import Any, Generator, override
 import httpx
 
 
+class BedrockCredentialsUnavailableError(RuntimeError):
+    """No AWS credentials are configured at all (no profile/role found).
+
+    Distinct from botocore's TokenRetrievalError (an expired SSO session) —
+    this is "nothing to refresh", not "refresh needed" — so callers can give
+    a different, actionable message for each.
+    """
+
+
 def _sign_bedrock(url: str, body: bytes, route: dict[str, Any]) -> dict[str, str]:
     """Return headers dict with AWS SigV4 Authorization for a Bedrock POST."""
     import boto3
@@ -17,7 +26,7 @@ def _sign_bedrock(url: str, body: bytes, route: dict[str, Any]) -> dict[str, str
     session = boto3.Session(profile_name=profile) if profile else boto3.Session()
     raw_creds = session.get_credentials()
     if raw_creds is None:
-        raise RuntimeError("No AWS credentials available")
+        raise BedrockCredentialsUnavailableError("No AWS credentials available")
     creds = raw_creds.get_frozen_credentials()
     req = AWSRequest(
         method="POST",

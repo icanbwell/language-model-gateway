@@ -122,6 +122,67 @@ class TestDisconnectDetection:
         client.aclose.assert_awaited_once()
 
 
+class TestOnStreamError:
+    async def test_mid_stream_failure_invokes_on_stream_error(self) -> None:
+        """A failure after streaming has already started (e.g. Bedrock Mantle
+        sends a stream-level error partway through) must reach the caller's
+        `on_stream_error` hook — previously such failures were only ever
+        shown inline to the client and never recorded anywhere for triage."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="partial")
+            raise RuntimeError("upstream connection reset")
+
+        recorded: list[str] = []
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                on_stream_error=recorded.append,
+            )
+        ]
+
+        assert recorded == ["upstream connection reset"]
+        assert any(b"partial" in c for c in chunks)
+
+    async def test_clean_stream_never_invokes_on_stream_error(self) -> None:
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="all good", finish_reason="stop")
+
+        recorded: list[str] = []
+
+        _ = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                on_stream_error=recorded.append,
+            )
+        ]
+
+        assert recorded == []
+
+    async def test_no_hook_provided_does_not_raise(self) -> None:
+        """on_stream_error defaults to None — a stream error must not crash
+        just because no hook was wired up (e.g. no error_tracker configured)."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="partial")
+            raise RuntimeError("boom")
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+        assert any(b"partial" in c for c in chunks)
+
+
 class TestSseEventCount:
     async def test_records_sse_event_count_matching_yielded_chunks(self) -> None:
         async def fake_stream() -> AsyncIterator[object]:

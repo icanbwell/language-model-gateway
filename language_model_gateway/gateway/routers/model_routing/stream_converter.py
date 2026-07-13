@@ -6,7 +6,7 @@ import json
 import logging
 import os
 from datetime import datetime
-from typing import Any, AsyncGenerator, Coroutine
+from typing import Any, AsyncGenerator, Callable, Coroutine
 
 import httpx
 from starlette.requests import Request
@@ -108,6 +108,7 @@ async def _stream_oai_sdk_to_anthropic(
     usage_sink: dict[str, int] | None = None,
     text_sink: dict[str, str] | None = None,
     request: Request | None = None,
+    on_stream_error: Callable[[str], None] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Convert an openai SDK async stream to Anthropic SSE format.
 
@@ -120,6 +121,14 @@ async def _stream_oai_sdk_to_anthropic(
     once the client has disconnected — otherwise a client that gives up
     mid-generation (Ctrl-C, network drop) leaves us paying for upstream
     tokens nobody will ever receive.
+
+    `on_stream_error`, if provided, is invoked with the error message when
+    the upstream stream fails mid-generation (e.g. Bedrock Mantle sends a
+    stream-level error after already having started emitting chunks) — this
+    is the caller's hook to record it, since this function has no
+    error-tracker dependency of its own (kept decoupled from infrastructure).
+    Without this hook, such failures were only ever surfaced inline to the
+    client and never recorded anywhere for triage.
     """
     if usage_sink is None:
         usage_sink = {}
@@ -244,7 +253,10 @@ async def _stream_oai_sdk_to_anthropic(
                     usage_sink["output_tokens"] = chunk.usage.completion_tokens
     except Exception as _exc:
         logger.error("[coding-model-router] upstream stream error: %s", _exc)
-        _stream_error_msg: str | None = str(_exc)
+        _exc_text = str(_exc)
+        _stream_error_msg: str | None = _exc_text
+        if on_stream_error is not None:
+            on_stream_error(_exc_text)
     else:
         _stream_error_msg = None
     finally:
@@ -347,6 +359,7 @@ async def _oai_stream_with_cleanup(
     http_client: httpx.AsyncClient,
     first_chunk: Any = None,
     request: Request | None = None,
+    on_stream_error: Callable[[str], None] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that closes the upstream HTTP client after the stream
@@ -354,7 +367,12 @@ async def _oai_stream_with_cleanup(
     """
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
-            stream, msg_id, upstream_model, first_chunk=first_chunk, request=request
+            stream,
+            msg_id,
+            upstream_model,
+            first_chunk=first_chunk,
+            request=request,
+            on_stream_error=on_stream_error,
         ):
             yield chunk
     finally:
@@ -380,6 +398,7 @@ async def _oai_stream_with_usage_tracking(
     compression_requested: str | None = None,
     compression_used: str | None = None,
     request: Request | None = None,
+    on_stream_error: Callable[[str], None] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that records usage to MongoDB after stream completes.
@@ -396,6 +415,7 @@ async def _oai_stream_with_usage_tracking(
             usage_sink=usage_sink,
             text_sink=text_sink,
             request=request,
+            on_stream_error=on_stream_error,
         ):
             sse_event_count += 1
             yield chunk

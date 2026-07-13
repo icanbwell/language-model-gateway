@@ -41,6 +41,36 @@ def _throttle_backoff(attempt: int) -> float:
     return random.uniform(ceiling / 2, ceiling)
 
 
+# Bedrock's own streaming API (ConverseStream/InvokeModelWithResponseStream)
+# documents these exception names as transient — network blips or momentary
+# model overload that succeed on retry — as opposed to e.g. ValidationException
+# or a content-policy failure, which fail identically every time.
+_TRANSIENT_STREAM_ERROR_CODES = frozenset(
+    {
+        "ModelStreamErrorException",
+        "ModelTimeoutException",
+        "InternalServerException",
+        "ServiceUnavailableException",
+        "ThrottlingException",
+    }
+)
+
+
+def _is_transient_stream_error(
+    code: str | None, type_: str | None, text: str = ""
+) -> bool:
+    """Whether a mid-stream Bedrock error (no HTTP status code attached, so
+    `_is_throttling` doesn't apply) is worth retrying.
+
+    Covers `openai.APIError` raised by the SDK for SSE `{"error": {...}}`
+    events — Bedrock Mantle's way of surfacing a stream-level failure instead
+    of a 4xx/5xx response.
+    """
+    if code in _TRANSIENT_STREAM_ERROR_CODES or type_ in _TRANSIENT_STREAM_ERROR_CODES:
+        return True
+    return bool(_THROTTLE_TEXT_RE.search(text or ""))
+
+
 def _is_throttling(status_code: int, body_text: str = "") -> bool:
     # Context overflow errors (input token limits) are not retried as throttling
     # EXCEPT for 429 status codes, which explicitly indicate rate limiting.
@@ -76,7 +106,34 @@ async def _send_with_bedrock_retry(
         upstream_req = client.build_request(
             "POST", target_url, headers=upstream_headers, content=raw_body
         )
-        resp = await client.send(upstream_req, stream=True)
+        try:
+            resp = await client.send(upstream_req, stream=True)
+        except httpx.TransportError as exc:
+            # Connection-level failures (timeout, connection reset, DNS) had
+            # no retry at all here — a momentary network blip failed the
+            # request outright instead of getting the same backoff treatment
+            # as an HTTP-level throttle response.
+            if auth != "aws" or attempt >= _MAX_THROTTLE_RETRIES:
+                raise
+            delay = _throttle_backoff(attempt)
+            attempt += 1
+            logger.warning(
+                "[coding-model-router] request_id=%s Bedrock transport error "
+                "(attempt %d/%d): backing off %.1fs — %s: %s",
+                request_id,
+                attempt,
+                _MAX_THROTTLE_RETRIES,
+                delay,
+                type(exc).__name__,
+                exc,
+            )
+            await asyncio.sleep(delay)
+            sig_headers = {
+                k.lower(): v
+                for k, v in _sign_bedrock(target_url, raw_body, route).items()
+            }
+            upstream_headers = {**upstream_headers, **sig_headers}
+            continue
 
         if auth != "aws" or resp.status_code < 400 or attempt >= _MAX_THROTTLE_RETRIES:
             return resp

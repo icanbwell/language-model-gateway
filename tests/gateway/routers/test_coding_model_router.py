@@ -31,6 +31,9 @@ from starlette.requests import Request
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
 )
+from language_model_gateway.gateway.routers.model_routing.constants import (
+    _MAX_THROTTLE_RETRIES,
+)
 from language_model_gateway.gateway.routers.model_routing.message_translator import (
     _anthropic_to_openai_request,
     _openai_to_anthropic_response,
@@ -38,6 +41,7 @@ from language_model_gateway.gateway.routers.model_routing.message_translator imp
 from language_model_gateway.gateway.routers.model_routing.route_config import _ROUTES
 from language_model_gateway.gateway.routers.model_routing.router import (
     CodingModelRouter,
+    _bedrock_credential_error_detail,
 )
 from language_model_gateway.gateway.routers.model_routing.stream_converter import (
     ThinkingStripper as _ThinkingStripper,
@@ -469,6 +473,76 @@ async def test_get_auth_info_no_custom_headers_key_when_none_present() -> None:
     auth_info = await router._get_auth_info(request)
 
     assert "custom_headers" not in auth_info
+
+
+# ---------------------------------------------------------------------------
+# _bedrock_credential_error_detail — classifies AWS credential failures so
+# each gets a distinct error_type/actionable message instead of every
+# non-TokenRetrievalError case falling through generically.
+# ---------------------------------------------------------------------------
+
+
+def test_bedrock_credential_error_detail_token_retrieval_error() -> None:
+    from botocore.exceptions import TokenRetrievalError
+
+    exc = TokenRetrievalError(provider="sso", error_msg="token expired")
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, message = detail
+    assert error_type == "bedrock_session_expired"
+    assert "aws sso login" in message
+
+
+def test_bedrock_credential_error_detail_no_credentials_available() -> None:
+    from language_model_gateway.gateway.routers.model_routing.aws_auth import (
+        BedrockCredentialsUnavailableError,
+    )
+
+    exc = BedrockCredentialsUnavailableError("No AWS credentials available")
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, message = detail
+    assert error_type == "bedrock_no_credentials"
+    assert "AWS_PROFILE" in message
+
+
+def test_bedrock_credential_error_detail_botocore_client_error() -> None:
+    from botocore.exceptions import ClientError
+
+    exc = ClientError(
+        error_response={"Error": {"Code": "ExpiredTokenException", "Message": "x"}},
+        operation_name="AssumeRole",
+    )
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, _ = detail
+    assert error_type == "bedrock_credential_error"
+
+
+def test_bedrock_credential_error_detail_checks_cause_and_context() -> None:
+    """The credential exception is often wrapped (raised via `from` or an
+    implicit `except`-block context) rather than being the exception itself —
+    both must be checked, not just the top-level exception."""
+    from botocore.exceptions import TokenRetrievalError
+
+    cause = TokenRetrievalError(provider="sso", error_msg="token expired")
+    wrapper = RuntimeError("wrapped")
+    wrapper.__cause__ = cause
+
+    detail = _bedrock_credential_error_detail(wrapper)
+
+    assert detail is not None
+    assert detail[0] == "bedrock_session_expired"
+
+
+def test_bedrock_credential_error_detail_none_for_unrelated_error() -> None:
+    assert _bedrock_credential_error_detail(ValueError("unrelated")) is None
 
 
 # ---------------------------------------------------------------------------
@@ -1190,6 +1264,37 @@ async def test_anthropic_passthrough_upstream_error_records_error(
 
 
 @pytest.mark.asyncio
+async def test_anthropic_passthrough_dispatch_failure_records_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A connection-level failure dispatching to Anthropic/Bedrock (timeout,
+    connection reset, DNS) previously re-raised with zero record in
+    model-router-errors — a real production 500 invisible to triage."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_exception(httpx.ConnectError("connection refused"))
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    with pytest.raises(httpx.ConnectError):
+        await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "ConnectError"
+    assert "connection refused" in call_kwargs["error_message"]
+    usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()
+
+
+@pytest.mark.asyncio
 async def test_bedrock_mantle_mid_stream_error_records_full_detail(
     router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
     httpx_mock: HTTPXMock,
@@ -1200,7 +1305,12 @@ async def test_bedrock_mantle_mid_stream_error_records_full_detail(
     `openai.APIStatusError`. Before this fix, that fell through to the
     generic `except Exception` handler and only `str(exc)` (a generic
     message) reached model-router-errors. The `.body`/`.code`/`.type` detail
-    the SDK actually attaches must now be captured."""
+    the SDK actually attaches must now be captured.
+
+    Uses a `ValidationException`-coded error (not in
+    `_TRANSIENT_STREAM_ERROR_CODES`) so this stays a single-attempt failure —
+    retry behavior for the transient case is covered separately by
+    `test_bedrock_mantle_transient_stream_error_retries_then_gives_up`."""
     client, usage_tracker, error_tracker = router_client_with_trackers
     fake_route = {
         "claude_model": "claude-test-model-oai",
@@ -1210,9 +1320,9 @@ async def test_bedrock_mantle_mid_stream_error_records_full_detail(
         "api_type": "openai",
     }
     sse_body = (
-        b'data: {"error": {"message": "ModelStreamErrorException: model '
-        b'timed out mid-stream", "code": "ModelStreamErrorException", '
-        b'"type": "server_error"}}\n\n'
+        b'data: {"error": {"message": "ValidationException: temperature must '
+        b'be between 0 and 1", "code": "ValidationException", '
+        b'"type": "invalid_request_error"}}\n\n'
     )
     httpx_mock.add_response(
         url="https://example.bedrock.aws/v1/chat/completions",
@@ -1235,18 +1345,83 @@ async def test_bedrock_mantle_mid_stream_error_records_full_detail(
         )
 
     assert response.status_code == 200
-    assert b"ModelStreamErrorException: model timed out mid-stream" in response.content
+    assert (
+        b"ValidationException: temperature must be between 0 and 1" in response.content
+    )
     # The client (e.g. Claude Code) must see the same code/type detail that's
     # now captured in model-router-errors, not just the generic message.
-    assert b"server_error" in response.content
+    assert b"invalid_request_error" in response.content
 
     await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
     error_tracker.record_error.assert_awaited_once()
     call_kwargs = error_tracker.record_error.call_args.kwargs
     assert call_kwargs["error_type"] == "bedrock_stream_error"
     recorded = json.loads(call_kwargs["error_message"])
-    assert recorded["code"] == "ModelStreamErrorException"
-    assert recorded["type"] == "server_error"
-    assert "timed out mid-stream" in recorded["message"]
-    assert recorded["body"]["code"] == "ModelStreamErrorException"
+    assert recorded["code"] == "ValidationException"
+    assert recorded["type"] == "invalid_request_error"
+    assert "temperature must be between 0 and 1" in recorded["message"]
+    assert recorded["body"]["code"] == "ValidationException"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_transient_stream_error_retries_then_gives_up(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A `ModelStreamErrorException` (Bedrock's own taxonomy for a transient,
+    retryable stream failure — network blip, momentary model overload) must
+    be retried with backoff like an HTTP-level throttle, not failed on the
+    first attempt. Previously this class of error (no HTTP status code, so
+    `_is_throttling` didn't apply) skipped the retry loop entirely regardless
+    of whether the underlying failure was transient."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-retry",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    sse_body = (
+        b'data: {"error": {"message": "ModelStreamErrorException: transient '
+        b'failure", "code": "ModelStreamErrorException", '
+        b'"type": "server_error"}}\n\n'
+    )
+    for _ in range(_MAX_THROTTLE_RETRIES + 1):
+        httpx_mock.add_response(
+            url="https://example.bedrock.aws/v1/chat/completions",
+            method="POST",
+            status_code=200,
+            content=sse_body,
+            headers={"content-type": "text/event-stream"},
+        )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-model-retry": fake_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.router._throttle_backoff",
+            return_value=0,
+        ),
+    ):
+        body = {
+            "model": "claude-test-model-retry",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": True,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 200
+    # Initial attempt + _MAX_THROTTLE_RETRIES retries, all exhausted before
+    # finally giving up and surfacing the error.
+    assert len(httpx_mock.get_requests()) == _MAX_THROTTLE_RETRIES + 1
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_stream_error"
     usage_tracker.record_usage_from_openai_response.assert_not_called()
