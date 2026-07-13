@@ -12,13 +12,21 @@ Tests cover:
 - Error response helpers (streaming + non-streaming)
 """
 
+import asyncio
 import json
 import re
-from unittest.mock import patch
+import time
+from typing import AsyncGenerator
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import pytest
+from fastapi import FastAPI
+from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
+    AuthorizationBearerTokenInvalidException,
+)
 from pytest_httpx import HTTPXMock
+from starlette.requests import Request
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
@@ -289,6 +297,340 @@ def test_coding_model_router_registers_messages_route() -> None:
 
 
 # ---------------------------------------------------------------------------
+# _get_auth_info — usage-tracking identity validation
+#
+# x-openwebui-user-id/x-customer-id/etc. headers are fully caller-controlled,
+# so they must never be trusted for usage-tracking attribution unless the
+# Authorization header verifies as a genuine, signature-checked OIDC token.
+# ---------------------------------------------------------------------------
+
+
+def _make_request(headers: dict[str, str]) -> Request:
+    scope = {
+        "type": "http",
+        "headers": [(k.lower().encode(), v.encode()) for k, v in headers.items()],
+    }
+    return Request(scope)
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_token_reader_ignores_identity_headers() -> None:
+    """Without a token_reader configured, identity headers must not be trusted."""
+    router = CodingModelRouter()
+    request = _make_request({"x-openwebui-user-id": "victim@example.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_authorization_header_ignores_identity_headers() -> None:
+    """No Authorization header at all means no verified identity."""
+    token_reader = MagicMock()
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request({"x-openwebui-user-id": "victim@example.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+    token_reader.verify_token_async.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_invalid_token_ignores_identity_headers() -> None:
+    """An Authorization header that fails verification must not fall back to
+    trusting caller-controlled identity headers (this is the IDOR closed by
+    this fix — a spoofed/opaque Bearer value must not grant attribution)."""
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "not-a-real-jwt"
+    token_reader.verify_token_async = AsyncMock(
+        side_effect=AuthorizationBearerTokenInvalidException(
+            message="bad token", token="not-a-real-jwt"
+        )
+    )
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request(
+        {
+            "authorization": "Bearer not-a-real-jwt",
+            "x-openwebui-user-id": "victim@example.com",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() -> None:
+    """A verified token's claims are used for attribution, taking precedence
+    over (and ignoring) any caller-supplied identity headers."""
+    verified_token = MagicMock()
+    verified_token.subject = "verified-user-123"
+    verified_token.email = "verified@example.com"
+    verified_token.name = "Verified User"
+
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "a.valid.jwt"
+    token_reader.verify_token_async = AsyncMock(return_value=verified_token)
+    router = CodingModelRouter(token_reader=token_reader)
+    request = _make_request(
+        {
+            "authorization": "Bearer a.valid.jwt",
+            "x-openwebui-user-id": "attacker-supplied-id",
+            "x-auth-provider": "okta",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "verified-user-123"
+    assert auth_info["email"] == "verified@example.com"
+    assert auth_info["user_name"] == "Verified User"
+    assert auth_info["auth_provider"] == "okta"
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_falls_back_to_custom_header_when_unverified() -> None:
+    """With no verified identity, the operator-configured custom header wins."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({"x-bwell-user-id": "imran.qureshi@bwell.com"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "imran.qureshi@bwell.com"
+    assert auth_info["auth_provider"] == "custom-header"
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_verified_identity_wins_over_custom_header() -> None:
+    """A verified OIDC identity still takes precedence over the custom header."""
+    verified_token = MagicMock()
+    verified_token.subject = "verified-user-123"
+    verified_token.email = None
+    verified_token.name = None
+
+    token_reader = MagicMock()
+    token_reader.extract_token.return_value = "a.valid.jwt"
+    token_reader.verify_token_async = AsyncMock(return_value=verified_token)
+    router = CodingModelRouter(
+        token_reader=token_reader, custom_header_prefix="x-bwell-"
+    )
+    request = _make_request(
+        {
+            "authorization": "Bearer a.valid.jwt",
+            "x-bwell-user-id": "someone-else@bwell.com",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["user_id"] == "verified-user-123"
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_custom_header_present() -> None:
+    """No fallback header present means no user_id, same as before."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "user_id" not in auth_info
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_captures_all_prefixed_headers() -> None:
+    """Any header under the prefix is captured, not just user-id — new
+    attribution headers can be added later without a code change here."""
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request(
+        {
+            "x-bwell-user-id": "imran.qureshi@bwell.com",
+            "x-bwell-project": "language-model-gateway",
+            "x-openwebui-user-id": "not-under-our-prefix",
+        }
+    )
+
+    auth_info = await router._get_auth_info(request)
+
+    assert auth_info["custom_headers"] == {
+        "user-id": "imran.qureshi@bwell.com",
+        "project": "language-model-gateway",
+    }
+
+
+@pytest.mark.asyncio
+async def test_get_auth_info_no_custom_headers_key_when_none_present() -> None:
+    router = CodingModelRouter(custom_header_prefix="x-bwell-")
+    request = _make_request({"authorization": "Bearer irrelevant"})
+
+    auth_info = await router._get_auth_info(request)
+
+    assert "custom_headers" not in auth_info
+
+
+# ---------------------------------------------------------------------------
+# _attach_account_uuid — records Claude Code's account_uuid on auth_info,
+# unresolved (email resolution now happens downstream in reporting).
+# ---------------------------------------------------------------------------
+
+
+def test_attach_account_uuid_sets_it_from_body_metadata() -> None:
+    """Should record account_uuid on auth_info when present in request metadata."""
+    router = CodingModelRouter()
+
+    auth_info: dict[str, object] = {}
+    body_json = {
+        "metadata": {
+            "user_id": '{"account_uuid": "acct-123", "device_id": "d", "session_id": "s"}'
+        }
+    }
+
+    router._attach_account_uuid(auth_info, body_json)
+
+    assert auth_info["account_uuid"] == "acct-123"
+    assert "user_id" not in auth_info
+    assert "email" not in auth_info
+
+
+def test_attach_account_uuid_does_not_override_verified_identity() -> None:
+    """Should leave a pre-existing user_id alone — this never resolves identity."""
+    router = CodingModelRouter()
+
+    auth_info: dict[str, object] = {"user_id": "verified-subject"}
+    body_json = {"metadata": {"user_id": '{"account_uuid": "acct-123"}'}}
+
+    router._attach_account_uuid(auth_info, body_json)
+
+    assert auth_info["user_id"] == "verified-subject"
+    assert auth_info["account_uuid"] == "acct-123"
+
+
+def test_attach_account_uuid_noop_when_account_uuid_missing() -> None:
+    """Should be a no-op when the request body has no extractable account_uuid."""
+    router = CodingModelRouter()
+
+    auth_info: dict[str, object] = {}
+    body_json: dict[str, object] = {}
+
+    router._attach_account_uuid(auth_info, body_json)
+
+    assert auth_info == {}
+
+
+# ---------------------------------------------------------------------------
+# _attach_claude_code_headers — session_id from the documented
+# x-claude-code-session-id header (preferred), agent_id/parent_agent_id for
+# subagent cost attribution.
+# ---------------------------------------------------------------------------
+
+
+def test_attach_claude_code_headers_prefers_session_header_over_body_metadata() -> None:
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({"x-claude-code-session-id": "sess-from-header"})
+    body_json = {"metadata": {"user_id": '{"session_id": "sess-from-body"}'}}
+
+    router._attach_claude_code_headers(auth_info, request, body_json)
+
+    assert auth_info["session_id"] == "sess-from-header"
+
+
+def test_attach_claude_code_headers_falls_back_to_body_metadata() -> None:
+    """No x-claude-code-session-id header: fall back to the body blob."""
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({})
+    body_json = {"metadata": {"user_id": '{"session_id": "sess-from-body"}'}}
+
+    router._attach_claude_code_headers(auth_info, request, body_json)
+
+    assert auth_info["session_id"] == "sess-from-body"
+
+
+def test_attach_claude_code_headers_captures_agent_ids() -> None:
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request(
+        {
+            "x-claude-code-session-id": "sess-1",
+            "x-claude-code-agent-id": "agent-1",
+            "x-claude-code-parent-agent-id": "agent-0",
+        }
+    )
+
+    router._attach_claude_code_headers(auth_info, request, {})
+
+    assert auth_info["agent_id"] == "agent-1"
+    assert auth_info["parent_agent_id"] == "agent-0"
+
+
+def test_attach_claude_code_headers_omits_agent_ids_when_absent() -> None:
+    """A main-session request (not a subagent) carries no agent-id headers."""
+    router = CodingModelRouter()
+    auth_info: dict[str, object] = {}
+    request = _make_request({"x-claude-code-session-id": "sess-1"})
+
+    router._attach_claude_code_headers(auth_info, request, {})
+
+    assert "agent_id" not in auth_info
+    assert "parent_agent_id" not in auth_info
+
+
+# ---------------------------------------------------------------------------
+# _record_upstream_latency — model_tier latency visibility (Groundcover)
+# ---------------------------------------------------------------------------
+
+
+def test_record_upstream_latency_sets_span_attributes() -> None:
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import (
+        InMemorySpanExporter,
+    )
+
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    tracer = provider.get_tracer(__name__)
+
+    with tracer.start_as_current_span("test-span"):
+        dispatch_start = time.perf_counter() - 0.05  # simulate 50ms elapsed
+        CodingModelRouter._record_upstream_latency(
+            dispatch_start,
+            model_tier="sonnet",
+            upstream_model="claude-sonnet-4-6",
+            auth="passthrough",
+            api_type="anthropic",
+        )
+
+    (span,) = exporter.get_finished_spans()
+    attributes = span.attributes
+    assert attributes is not None
+    assert attributes["model_tier"] == "sonnet"
+    assert attributes["upstream_model"] == "claude-sonnet-4-6"
+    assert attributes["auth_strategy"] == "passthrough"
+    assert attributes["api_type"] == "anthropic"
+    latency_ms = attributes["upstream_latency_ms"]
+    assert isinstance(latency_ms, (int, float)) and latency_ms >= 50
+
+
+def test_record_upstream_latency_noop_without_active_span() -> None:
+    """With no active span (e.g. tracing disabled), this must not raise —
+    OpenTelemetry's no-op span silently absorbs set_attribute calls."""
+    dispatch_start = time.perf_counter()
+    CodingModelRouter._record_upstream_latency(
+        dispatch_start,
+        model_tier="haiku",
+        upstream_model="claude-haiku-4-5",
+        auth="aws",
+        api_type="openai",
+    )
+
+
+# ---------------------------------------------------------------------------
 # Integration tests via ASGI client
 # ---------------------------------------------------------------------------
 
@@ -464,6 +806,62 @@ async def test_passthrough_route_forwards_auth_header(
 
 
 @pytest.mark.asyncio
+async def test_custom_header_prefix_stripped_before_forwarding_upstream(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """Headers under the custom prefix are for local attribution only — never
+    forwarded to the upstream Anthropic/Bedrock API."""
+    fake_route = {
+        "claude_model": "claude-passthrough-test",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-passthrough-test",
+        "auth": "passthrough",
+    }
+    upstream_body = json.dumps(
+        {
+            "id": "msg_1",
+            "type": "message",
+            "role": "assistant",
+            "content": [{"type": "text", "text": "response"}],
+            "model": "claude-passthrough-test",
+            "stop_reason": "end_turn",
+            "stop_sequence": None,
+            "usage": {"input_tokens": 1, "output_tokens": 1},
+        }
+    ).encode()
+
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=upstream_body,
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-passthrough-test": fake_route}):
+        body = {
+            "model": "claude-passthrough-test",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={
+                "content-type": "application/json",
+                "authorization": "Bearer my-api-key",
+                "x-model-routing-user-id": "imran.qureshi@bwell.com",
+            },
+        )
+
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    assert "x-model-routing-user-id" not in intercepted[0].headers
+
+
+@pytest.mark.asyncio
 async def test_passthrough_forwards_clients_model_not_configured_model(
     router_client: httpx.AsyncClient,
     httpx_mock: HTTPXMock,
@@ -626,3 +1024,166 @@ async def test_matched_route_error_is_not_annotated(
 
     assert response.status_code == 401
     assert response.json() == {"error": {"message": "Unauthorized"}}
+
+
+# ---------------------------------------------------------------------------
+# Anthropic-passthrough usage/error tracking (BAI-299)
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+async def router_client_with_trackers() -> AsyncGenerator[
+    tuple[httpx.AsyncClient, MagicMock, MagicMock], None
+]:
+    """Same shape as `router_client`, but with mocked usage/error trackers
+    attached directly — avoids needing a real Mongo connection while still
+    exercising the router's own wiring (which fields it passes, when).
+
+    Returns the mocks themselves (not `router`) so callers assert against
+    `UsageTracker`/`ErrorTracker`-shaped mocks rather than the `X | None`
+    attribute type on CodingModelRouter.
+    """
+    router = CodingModelRouter()
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    usage_tracker.record_usage_from_anthropic_response = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+    async with httpx.AsyncClient(
+        transport=httpx.ASGITransport(app=app), base_url="http://test"
+    ) as client:
+        yield client, usage_tracker, error_tracker
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_non_streaming_records_usage(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=json.dumps(
+            {
+                "id": "msg_test",
+                "type": "message",
+                "role": "assistant",
+                "content": [{"type": "text", "text": "Hi"}],
+                "model": "claude-unknown",
+                "usage": {"input_tokens": 5, "output_tokens": 2},
+            }
+        ).encode(),
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["usage"] == {"input_tokens": 5, "output_tokens": 2}
+    usage_tracker.record_usage_from_anthropic_response.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage_from_anthropic_response.call_args.kwargs
+    assert call_kwargs["model"] == "claude-unknown-model-xyz"
+    assert call_kwargs["streaming"] is False
+    assert call_kwargs["response_body"]["usage"] == {
+        "input_tokens": 5,
+        "output_tokens": 2,
+    }
+    error_tracker.record_error.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_streaming_relays_bytes_and_records_usage(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    sse_body = (
+        b"event: message_start\n"
+        b'data: {"type":"message_start","message":{"usage":{"input_tokens":9,"output_tokens":1}}}\n\n'
+        b"event: content_block_delta\n"
+        b'data: {"type":"content_block_delta","delta":{"type":"text_delta","text":"hi"}}\n\n'
+        b"event: message_delta\n"
+        b'data: {"type":"message_delta","usage":{"output_tokens":4}}\n\n'
+        b"event: message_stop\n"
+        b'data: {"type":"message_stop"}\n\n'
+    )
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=200,
+        content=sse_body,
+        headers={"content-type": "text/event-stream"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": True,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 200
+    assert response.content == sse_body
+
+    await asyncio.sleep(0)  # let the fire-and-forget usage-recording task run
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["model"] == "claude-unknown-model-xyz"
+    assert call_kwargs["input_tokens"] == 9
+    assert call_kwargs["output_tokens"] == 4
+    assert call_kwargs["streaming"] is True
+    error_tracker.record_error.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_upstream_error_records_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=503,
+        content=b'{"error": {"message": "overloaded"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 503
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["status_code"] == 503
+    assert call_kwargs["error_type"] == "upstream_error"
+    assert "overloaded" in call_kwargs["error_message"]
+    usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()

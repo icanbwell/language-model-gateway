@@ -12,7 +12,9 @@ from fastapi.params import Depends
 from fastapi.responses import JSONResponse
 from oidcauthlib.auth.middleware.request_scope_middleware import RequestScopeMiddleware
 from oidcauthlib.auth.routers.auth_router import AuthRouter
+from oidcauthlib.auth.token_reader import TokenReader
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 from starlette.requests import Request
 from starlette.responses import FileResponse
 from starlette.staticfiles import StaticFiles
@@ -20,6 +22,7 @@ from starlette.staticfiles import StaticFiles
 from languagemodelcommon.configs.config_reader.config_reader import ConfigReader
 from key_value.aio.stores.base import BaseContextManagerStore, BaseStore
 from languagemodelcommon.configs.schemas.config_schema import ChatModelConfig
+from languagemodelcommon.utilities.mongo_url_utils import MongoUrlHelpers
 from language_model_gateway.container.container_factory import (
     LanguageModelGatewayContainerFactory,
 )
@@ -47,7 +50,10 @@ from language_model_gateway.gateway.routers.token_submission_router import (
     TokenSubmissionRouter,
 )
 from language_model_gateway.gateway.utilities.endpoint_filter import EndpointFilter
-from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+from language_model_gateway.gateway.utilities.logger.log_levels import (
+    SRC_LOG_LEVELS,
+    build_log_handler,
+)
 
 from simple_container.container.container_registry import ContainerRegistry
 from simple_container.container.inject import Inject
@@ -61,9 +67,13 @@ from language_model_gateway.gateway.utilities.language_model_gateway_environment
 logger = logging.getLogger(__name__)
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+# force=True: log_levels.py may already have called basicConfig depending on
+# whether LOG_LEVEL was set when it was imported; this ensures the JSON/text
+# formatter choice here is always the one that takes effect.
 logging.basicConfig(
-    format="%(asctime)s %(levelname)s %(name)s [%(filename)s:%(lineno)d] %(message)s",
     level=getattr(logging, log_level),
+    force=True,
+    handlers=[build_log_handler()],
 )
 
 # disable INFO logging for httpx because it logs every request
@@ -169,7 +179,37 @@ def create_app() -> FastAPI:
     container = ContainerRegistry.get_current()
     env_vars = container.resolve(LanguageModelGatewayEnvironmentVariables)
 
-    app1.include_router(CodingModelRouter().get_router())
+    mongo_llm_storage_uri = env_vars.mongo_llm_storage_uri
+    if mongo_llm_storage_uri:
+        # The bare MONGO_URL/MONGO_LLM_STORAGE_URI has no embedded credentials in
+        # some environments; merge in MONGO_LLM_STORAGE_DB_USERNAME/PASSWORD the
+        # same way persistence_factory.py does for other Mongo-backed stores.
+        mongo_llm_storage_uri = MongoUrlHelpers.add_credentials_to_mongo_url(
+            mongo_url=mongo_llm_storage_uri,
+            username=env_vars.mongo_llm_storage_db_username,
+            password=env_vars.mongo_llm_storage_db_password,
+        )
+
+    app1.include_router(
+        CodingModelRouter(
+            mongo_uri=mongo_llm_storage_uri,
+            usage_db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
+            usage_collection_name=env_vars.model_routing_usage_collection_name,
+            usage_session_collection_name=(
+                env_vars.model_routing_usage_session_collection_name
+            ),
+            usage_track_sessions=env_vars.model_routing_usage_session_tracking_enabled,
+            usage_capture_previews=env_vars.model_routing_usage_capture_previews,
+            usage_preview_chars=env_vars.model_routing_usage_preview_chars,
+            error_collection_name=env_vars.model_routing_error_collection_name,
+            account_directory_collection_name=(
+                env_vars.model_routing_account_directory_collection_name
+            ),
+            token_reader=container.resolve(TokenReader),
+            debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
+            custom_header_prefix=env_vars.model_routing_custom_header_prefix,
+        ).get_router()
+    )
     app1.include_router(ChatCompletionsRouter().get_router())
     app1.include_router(ModelsRouter().get_router())
     app1.include_router(ImageGenerationRouter().get_router())
@@ -209,6 +249,14 @@ def create_app() -> FastAPI:
 
     app1.add_middleware(RequestScopeMiddleware)
 
+    # Outermost middleware (added last) so it compresses the final response
+    # after FastApiLoggingMiddleware has already inspected the plain body.
+    # Starlette's GZipMiddleware hardcodes text/event-stream into its
+    # excluded-content-types list (not configurable via this constructor in
+    # the installed version), so SSE responses from the model routers are
+    # never compressed regardless of the client's Accept-Encoding.
+    app1.add_middleware(GZipMiddleware)
+
     return app1
 
 
@@ -219,6 +267,12 @@ app = create_app()
 @app.api_route("/health", methods=["GET", "POST"])
 async def health() -> str:
     return "OK"
+
+
+@app.api_route("/", methods=["GET", "HEAD"])
+async def root() -> str:
+    """Root endpoint for ingress health checks."""
+    return "Language Model Gateway"
 
 
 @app.get("/favicon.png", include_in_schema=False)

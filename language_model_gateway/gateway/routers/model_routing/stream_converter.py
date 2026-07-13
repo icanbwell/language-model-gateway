@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import asyncio
 import inspect
 import json
 import logging
 import os
-from typing import Any, AsyncGenerator
+from datetime import datetime
+from typing import Any, AsyncGenerator, Coroutine
 
 import httpx
+from starlette.requests import Request
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -14,6 +17,17 @@ from .constants import _OAI_TO_ANT_STOP
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
+
+# asyncio does not keep a strong reference to a bare create_task() result, so an
+# in-flight task can be garbage-collected before it finishes. Stash a reference here
+# until the task's own done-callback removes it.
+_background_tasks: set[asyncio.Task[Any]] = set()
+
+
+def _fire_and_forget(coro: Coroutine[Any, Any, Any]) -> None:
+    task = asyncio.create_task(coro)
+    _background_tasks.add(task)
+    task.add_done_callback(_background_tasks.discard)
 
 
 class ThinkingStripper:
@@ -91,8 +105,30 @@ async def _stream_oai_sdk_to_anthropic(
     msg_id: str,
     upstream_model: str,
     first_chunk: Any = None,
+    usage_sink: dict[str, int] | None = None,
+    text_sink: dict[str, str] | None = None,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
-    """Convert an openai SDK async stream to Anthropic SSE format."""
+    """Convert an openai SDK async stream to Anthropic SSE format.
+
+    Accumulated input/output token usage is written into `usage_sink` (if
+    provided), and the visible output text into `text_sink` (if provided),
+    so callers can read them after the stream completes without relying on
+    shared module state across concurrent requests.
+
+    When `request` is provided, stops pulling further chunks from `stream`
+    once the client has disconnected — otherwise a client that gives up
+    mid-generation (Ctrl-C, network drop) leaves us paying for upstream
+    tokens nobody will ever receive.
+    """
+    if usage_sink is None:
+        usage_sink = {}
+    usage_sink["input_tokens"] = 0
+    usage_sink["output_tokens"] = 0
+    if text_sink is None:
+        text_sink = {}
+    text_sink["output_text"] = ""
+
     sent_message_start = False
     open_blocks: dict[int, dict[str, Any]] = {}
     next_idx = 0
@@ -106,6 +142,13 @@ async def _stream_oai_sdk_to_anthropic(
         if first_chunk is not None:
             yield first_chunk
         async for chunk in stream:
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] request_id=%s client disconnected "
+                    "mid-stream — stopping upstream consumption",
+                    msg_id,
+                )
+                return
             yield chunk
 
     try:
@@ -137,6 +180,7 @@ async def _stream_oai_sdk_to_anthropic(
                 if delta.content:
                     visible = thinking_stripper.feed(delta.content)
                     if visible:
+                        text_sink["output_text"] += visible
                         if text_idx is None:
                             text_idx = next_idx
                             next_idx += 1
@@ -192,8 +236,12 @@ async def _stream_oai_sdk_to_anthropic(
                                 },
                             },
                         )
-            if chunk.usage and chunk.usage.completion_tokens is not None:
-                output_tokens = chunk.usage.completion_tokens
+            if chunk.usage:
+                # Capture both input and output tokens from usage
+                if chunk.usage.prompt_tokens is not None:
+                    usage_sink["input_tokens"] = chunk.usage.prompt_tokens
+                if chunk.usage.completion_tokens is not None:
+                    usage_sink["output_tokens"] = chunk.usage.completion_tokens
     except Exception as _exc:
         logger.error("[coding-model-router] upstream stream error: %s", _exc)
         _stream_error_msg: str | None = str(_exc)
@@ -253,6 +301,7 @@ async def _stream_oai_sdk_to_anthropic(
 
     remaining = thinking_stripper.flush()
     if remaining:
+        text_sink["output_text"] += remaining
         if text_idx is None:
             text_idx = next_idx
             next_idx += 1
@@ -297,23 +346,217 @@ async def _oai_stream_with_cleanup(
     upstream_model: str,
     http_client: httpx.AsyncClient,
     first_chunk: Any = None,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
+    """
+    Stream wrapper that closes the upstream HTTP client after the stream
+    completes. Does not record usage.
+    """
     try:
         async for chunk in _stream_oai_sdk_to_anthropic(
-            stream, msg_id, upstream_model, first_chunk=first_chunk
+            stream, msg_id, upstream_model, first_chunk=first_chunk, request=request
         ):
             yield chunk
     finally:
         await http_client.aclose()
 
 
+async def _oai_stream_with_usage_tracking(
+    stream: Any,
+    msg_id: str,
+    upstream_model: str,
+    http_client: httpx.AsyncClient,
+    usage_tracker: Any,
+    auth_info: dict[str, Any],
+    start_time: datetime,
+    *,
+    first_chunk: Any = None,
+    prompt_text: str | None = None,
+    model_tier: str | None = None,
+    backend: str | None = None,
+    price_per_mtok: float | None = None,
+    anthropic_price_per_mtok: float | None = None,
+    streaming: bool | None = None,
+    compression_requested: str | None = None,
+    compression_used: str | None = None,
+    request: Request | None = None,
+) -> AsyncGenerator[bytes, None]:
+    """
+    Stream wrapper that records usage to MongoDB after stream completes.
+    """
+    usage_sink: dict[str, int] = {}
+    text_sink: dict[str, str] = {}
+    sse_event_count = 0
+    try:
+        async for chunk in _stream_oai_sdk_to_anthropic(
+            stream,
+            msg_id,
+            upstream_model,
+            first_chunk=first_chunk,
+            usage_sink=usage_sink,
+            text_sink=text_sink,
+            request=request,
+        ):
+            sse_event_count += 1
+            yield chunk
+    finally:
+        await http_client.aclose()
+        input_tokens = usage_sink.get("input_tokens", 0)
+        output_tokens = usage_sink.get("output_tokens", 0)
+        if usage_tracker and (input_tokens > 0 or output_tokens > 0):
+            # Fire-and-forget: don't hold the stream's close on the Mongo write.
+            _fire_and_forget(
+                usage_tracker.record_usage(
+                    request_id=msg_id,
+                    user_id=auth_info.get("user_id"),
+                    model=upstream_model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    auth_provider=auth_info.get("auth_provider"),
+                    email=auth_info.get("email"),
+                    user_name=auth_info.get("user_name"),
+                    session_id=auth_info.get("session_id"),
+                    account_uuid=auth_info.get("account_uuid"),
+                    agent_id=auth_info.get("agent_id"),
+                    parent_agent_id=auth_info.get("parent_agent_id"),
+                    model_tier=model_tier,
+                    backend=backend,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    streaming=streaming,
+                    compression_requested=compression_requested,
+                    compression_used=compression_used,
+                    custom_headers=auth_info.get("custom_headers"),
+                    sse_event_count=sse_event_count,
+                    prompt_text=prompt_text,
+                    response_text=text_sink.get("output_text"),
+                    start_time=start_time,
+                )
+            )
+
+
 async def _stream_passthrough(
     resp: httpx.Response,
     client: httpx.AsyncClient,
+    request: Request | None = None,
 ) -> AsyncGenerator[bytes, None]:
     try:
         async for chunk in resp.aiter_bytes():
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] client disconnected mid-stream — "
+                    "stopping upstream consumption"
+                )
+                return
             yield chunk
     finally:
         await resp.aclose()
         await client.aclose()
+
+
+def _parse_anthropic_sse_usage(raw: bytes) -> tuple[int, int, str | None]:
+    """Sniff token usage and visible text out of a raw Anthropic SSE stream.
+
+    Anthropic's own wire format needs no reformatting (unlike the OpenAI-SDK
+    conversion path), so this only reads `data:` lines for the fields it
+    needs — it never touches the bytes actually relayed to the client.
+    `input_tokens` comes from `message_start`; `output_tokens` comes from
+    `message_delta`, which carries the final cumulative count (message_start's
+    own `usage.output_tokens` is a placeholder, not the real total).
+    """
+    input_tokens = 0
+    output_tokens = 0
+    text_parts: list[str] = []
+    for line in raw.decode("utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if not line.startswith("data:"):
+            continue
+        payload = line[len("data:") :].strip()
+        if not payload or payload == "[DONE]":
+            continue
+        try:
+            event = json.loads(payload)
+        except json.JSONDecodeError:
+            continue
+        event_type = event.get("type")
+        if event_type == "message_start":
+            usage = event.get("message", {}).get("usage", {})
+            input_tokens = usage.get("input_tokens", input_tokens)
+        elif event_type == "message_delta":
+            output_tokens = event.get("usage", {}).get("output_tokens", output_tokens)
+        elif event_type == "content_block_delta":
+            delta = event.get("delta", {})
+            if delta.get("type") == "text_delta":
+                text_parts.append(delta.get("text", ""))
+    return input_tokens, output_tokens, "".join(text_parts) if text_parts else None
+
+
+async def _stream_passthrough_with_usage_tracking(
+    resp: httpx.Response,
+    client: httpx.AsyncClient,
+    usage_tracker: Any,
+    request_id: str,
+    auth_info: dict[str, Any],
+    upstream_model: str,
+    start_time: datetime,
+    *,
+    prompt_text: str | None = None,
+    model_tier: str | None = None,
+    backend: str | None = None,
+    price_per_mtok: float | None = None,
+    anthropic_price_per_mtok: float | None = None,
+    compression_requested: str | None = None,
+    compression_used: str | None = None,
+    request: Request | None = None,
+) -> AsyncGenerator[bytes, None]:
+    """
+    Relay a native-Anthropic-format SSE stream verbatim (byte-for-byte, same
+    as `_stream_passthrough`) while sniffing usage from the same bytes to
+    record it once the stream ends.
+    """
+    raw_chunks: list[bytes] = []
+    try:
+        async for chunk in resp.aiter_bytes():
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[coding-model-router] request_id=%s client disconnected "
+                    "mid-stream — stopping upstream consumption",
+                    request_id,
+                )
+                return
+            raw_chunks.append(chunk)
+            yield chunk
+    finally:
+        await resp.aclose()
+        await client.aclose()
+        input_tokens, output_tokens, response_text = _parse_anthropic_sse_usage(
+            b"".join(raw_chunks)
+        )
+        if usage_tracker and (input_tokens > 0 or output_tokens > 0):
+            _fire_and_forget(
+                usage_tracker.record_usage(
+                    request_id=request_id,
+                    user_id=auth_info.get("user_id"),
+                    model=upstream_model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    auth_provider=auth_info.get("auth_provider"),
+                    email=auth_info.get("email"),
+                    user_name=auth_info.get("user_name"),
+                    session_id=auth_info.get("session_id"),
+                    account_uuid=auth_info.get("account_uuid"),
+                    agent_id=auth_info.get("agent_id"),
+                    parent_agent_id=auth_info.get("parent_agent_id"),
+                    model_tier=model_tier,
+                    backend=backend,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    streaming=True,
+                    compression_requested=compression_requested,
+                    compression_used=compression_used,
+                    custom_headers=auth_info.get("custom_headers"),
+                    prompt_text=prompt_text,
+                    response_text=response_text,
+                    start_time=start_time,
+                )
+            )

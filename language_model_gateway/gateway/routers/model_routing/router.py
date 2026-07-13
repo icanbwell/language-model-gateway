@@ -25,12 +25,23 @@ import inspect
 import json
 import logging
 import os
+import time
+from datetime import datetime, timezone
 from enum import Enum
-from typing import AsyncGenerator, Sequence
+from typing import Any, AsyncGenerator, Sequence
 
 import httpx
 from fastapi import APIRouter
 from fastapi import params
+from opentelemetry import trace
+from oidcauthlib.auth.exceptions.authorization_bearer_token_expired_exception import (
+    AuthorizationBearerTokenExpiredException,
+)
+from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
+    AuthorizationBearerTokenInvalidException,
+)
+from oidcauthlib.auth.token_reader import TokenReader
+from starlette.background import BackgroundTasks
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response, StreamingResponse
 
@@ -51,6 +62,7 @@ from .constants import (
 )
 from .context_manager import enforce_context_budget
 from .message_translator import (
+    _anthropic_content_to_text,
     _anthropic_to_openai_request,
     _estimate_input_tokens,
     _openai_to_anthropic_response,
@@ -58,14 +70,36 @@ from .message_translator import (
 from .route_config import _find_route
 from .tokenizer import count_oai_request_tokens
 from .stream_converter import (
+    _fire_and_forget,
     _msg_id,
     _oai_stream_with_cleanup,
+    _oai_stream_with_usage_tracking,
     _sse_event,
     _stream_passthrough,
+    _stream_passthrough_with_usage_tracking,
 )
+from .account_directory import (
+    AccountDirectory,
+    extract_account_uuid,
+    extract_session_id,
+)
+from .error_tracker import ErrorTracker
+from .usage_tracker import UsageTracker
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
+
+
+def _extract_last_user_text(body_json: dict[str, Any]) -> str | None:
+    """Extract the text of the most recent user message, for usage-record previews."""
+    messages = body_json.get("messages")
+    if not isinstance(messages, list):
+        return None
+    for message in reversed(messages):
+        if isinstance(message, dict) and message.get("role") == "user":
+            text = _anthropic_content_to_text(message.get("content") or "")
+            return text or None
+    return None
 
 
 class CodingModelRouter:
@@ -82,12 +116,60 @@ class CodingModelRouter:
         prefix: str = "/v1",
         tags: list[str | Enum] | None = None,
         dependencies: Sequence[params.Depends] | None = None,
+        mongo_uri: str | None = None,
+        usage_db_name: str = "llm_storage",
+        usage_collection_name: str = "usage",
+        usage_session_collection_name: str = "usage_sessions",
+        usage_track_sessions: bool = True,
+        usage_capture_previews: bool = False,
+        usage_preview_chars: int = 100,
+        error_collection_name: str = "errors",
+        account_directory_collection_name: str = "account_directory",
+        token_reader: TokenReader | None = None,
+        debug_log_received_oauth_tokens: bool = False,
+        custom_header_prefix: str = "x-model-routing-",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
             tags=tags or ["anthropic-proxy"],
             dependencies=dependencies or [],
         )
+        self._token_reader: TokenReader | None = token_reader
+        self._custom_header_prefix: str = custom_header_prefix.lower()
+        self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
+        if self._debug_log_received_oauth_tokens:
+            logger.warning(
+                "[coding-model-router] DEBUG_LOG_RECEIVED_OAUTH_TOKENS is enabled — "
+                "full request headers (including raw Authorization tokens) and "
+                "bodies will be written to logs. Local development only; never "
+                "enable this in a shared or deployed environment."
+            )
+        self._usage_tracker: UsageTracker | None = None
+        self._error_tracker: ErrorTracker | None = None
+        self._account_directory: AccountDirectory | None = None
+        if mongo_uri:
+            self._usage_tracker = UsageTracker(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=usage_collection_name,
+                session_collection_name=usage_session_collection_name,
+                enabled=True,
+                track_sessions=usage_track_sessions,
+                capture_previews=usage_capture_previews,
+                preview_chars=usage_preview_chars,
+            )
+            self._error_tracker = ErrorTracker(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=error_collection_name,
+                enabled=True,
+            )
+            self._account_directory = AccountDirectory(
+                mongo_uri=mongo_uri,
+                db_name=usage_db_name,
+                collection_name=account_directory_collection_name,
+                enabled=True,
+            )
         self._register_routes()
 
     def _register_routes(self) -> None:
@@ -110,25 +192,59 @@ class CodingModelRouter:
         )
 
     async def proxy_messages(
-        self, request: Request
+        self, request: Request, background_tasks: BackgroundTasks
     ) -> StreamingResponse | JSONResponse | Response:
+        # Captured before any parsing/upstream work so the usage record's
+        # duration reflects the client's full wait, not just upstream time.
+        request_start_time = datetime.now(timezone.utc)
         raw_body = await request.body()
+
+        # Generate request_id at the start for consistent tracing
+        request_id = _msg_id()
+
         try:
             body_json = json.loads(raw_body)
         except json.JSONDecodeError:
+            logger.error(
+                "[coding-model-router] invalid JSON body request_id=%s",
+                request_id,
+            )
             return JSONResponse({"error": "invalid JSON body"}, status_code=400)
+
+        if self._debug_log_received_oauth_tokens:
+            logger.warning(
+                "[coding-model-router] DEBUG received request (local-debug only, do "
+                "not enable in shared environments) request_id=%s method=%s path=%s "
+                "headers=%s body=%s",
+                request_id,
+                request.method,
+                request.url.path,
+                dict(request.headers),
+                body_json,
+            )
 
         model: str = body_json.get("model", "")
         route = _find_route(model)
         req_suffix = request.url.path[len("/v1/messages") :]
 
+        auth_info = await self._get_auth_info(request)
+        self._attach_account_uuid(auth_info, body_json)
+        self._attach_claude_code_headers(auth_info, request, body_json)
+        user_id = auth_info.get("user_id", "unknown")
+        auth_provider = auth_info.get("auth_provider", "unknown")
+        prompt_text = _extract_last_user_text(body_json)
+        accept_encoding = request.headers.get("accept-encoding")
+
         is_fallback_route: bool = route is None
         if route is None:
             logger.error(
                 "[coding-model-router] unknown model '%s' — falling back to Anthropic "
-                "direct with no cost-routing or context-budget enforcement; "
-                "add a route (or claude_model_pattern) for it in model-router-config.json",
+                "direct with no cost-routing or context-budget enforcement. "
+                "user_id=%s request_id=%s auth_provider=%s - add a route for it in model-router-config.json",
                 model,
+                user_id,
+                request_id,
+                auth_provider,
             )
             route = {
                 "auth": "passthrough",
@@ -138,6 +254,10 @@ class CodingModelRouter:
 
         auth: str = route["auth"]
         api_type: str = route.get("api_type", "anthropic")
+        model_tier: str = route.get("tier", "unknown")
+        backend: str = "anthropic" if auth == "passthrough" else "aws_bedrock"
+        price_per_mtok: float | None = route.get("price_per_mtok")
+        anthropic_price_per_mtok: float | None = route.get("anthropic_price_per_mtok")
         # Passthrough routes forward the client's exact model id — Anthropic is
         # authoritative on which model ids exist, so a version-bumped id must
         # never be silently overridden by a possibly-stale pinned config value.
@@ -242,7 +362,10 @@ class CodingModelRouter:
 
         # Build upstream headers
         base_headers: dict[str, str] = {
-            k: v for k, v in request.headers.items() if k.lower() not in _SKIP_HEADERS
+            k: v
+            for k, v in request.headers.items()
+            if k.lower() not in _SKIP_HEADERS
+            and not k.lower().startswith(self._custom_header_prefix)
         }
         base_headers["content-type"] = "application/json"
 
@@ -269,6 +392,19 @@ class CodingModelRouter:
                     from botocore.exceptions import TokenRetrievalError
 
                     if isinstance(cred_exc, TokenRetrievalError):
+                        self._record_error(
+                            request_id=request_id,
+                            auth_info=auth_info,
+                            model=upstream_model,
+                            error_type="bedrock_session_expired",
+                            error_message=str(cred_exc),
+                            start_time=request_start_time,
+                            model_tier=model_tier,
+                            backend=backend,
+                            auth=auth,
+                            api_type=api_type,
+                            streaming=is_streaming,
+                        )
                         profile = os.environ.get("AWS_PROFILE", "<profile>")
                         return self._error_response(
                             f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
@@ -280,22 +416,28 @@ class CodingModelRouter:
                 upstream_headers["content-type"] = "application/json"
                 upstream_headers["anthropic-version"] = "2023-06-01"
             logger.info(
-                "[coding-model-router] %s -> BEDROCK  region=%s  model=%s  api=%s",
+                "[coding-model-router] request_id=%s %s -> BEDROCK  region=%s  model=%s  api=%s  streaming=%s",
+                request_id,
                 model,
                 region,
                 upstream_model,
                 api_type,
+                is_streaming,
             )
         else:  # passthrough
             upstream_headers = base_headers
             if auth_val := request.headers.get("authorization"):
                 upstream_headers["authorization"] = auth_val
             logger.info(
-                "[coding-model-router] %s -> ANTHROPIC  url=%s  model=%s",
+                "[coding-model-router] request_id=%s %s -> ANTHROPIC  url=%s  model=%s  streaming=%s",
+                request_id,
                 model,
                 target_url,
                 upstream_model,
+                is_streaming,
             )
+
+        dispatch_start = time.perf_counter()
 
         # ── OpenAI-format route: use openai SDK + Anthropic translation ──────────
         if api_type == "openai":
@@ -357,25 +499,68 @@ class CodingModelRouter:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] Bedrock throttled (attempt %d/%d): backing off %.1fs",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
+                                    _status,
                                 )
                                 await asyncio.sleep(delay)
                             else:
                                 raise
                     streaming_started = True
-                    return StreamingResponse(
-                        _oai_stream_with_cleanup(
+                    self._record_upstream_latency(
+                        dispatch_start,
+                        model_tier=model_tier,
+                        upstream_model=upstream_model,
+                        auth=auth,
+                        api_type=api_type,
+                    )
+                    # Create streaming response with usage tracking
+                    if self._usage_tracker:
+                        stream_gen = _oai_stream_with_usage_tracking(
+                            stream,
+                            msg_id,
+                            upstream_model,
+                            http_client,
+                            self._usage_tracker,
+                            auth_info,
+                            first_chunk=first_chunk,
+                            prompt_text=prompt_text,
+                            model_tier=model_tier,
+                            backend=backend,
+                            price_per_mtok=price_per_mtok,
+                            anthropic_price_per_mtok=anthropic_price_per_mtok,
+                            streaming=True,
+                            compression_requested=accept_encoding,
+                            # This response's media_type is text/event-stream,
+                            # which GZipMiddleware hardcodes into its excluded
+                            # content types (see api.py) — never compressed,
+                            # regardless of what the client's Accept-Encoding
+                            # offers.
+                            compression_used="none",
+                            request=request,
+                            start_time=request_start_time,
+                        )
+                    else:
+                        stream_gen = _oai_stream_with_cleanup(
                             stream,
                             msg_id,
                             upstream_model,
                             http_client,
                             first_chunk=first_chunk,
-                        ),
+                            request=request,
+                        )
+                    return StreamingResponse(
+                        stream_gen,
                         status_code=200,
                         media_type="text/event-stream",
+                        # Tells nginx/ingress not to buffer this response —
+                        # without it, a reverse proxy with default buffering
+                        # would hold the entire SSE stream until it completes
+                        # before forwarding any of it to the client.
+                        headers={"X-Accel-Buffering": "no"},
                     )
                 else:
                     _throttle_attempt = 0
@@ -393,25 +578,72 @@ class CodingModelRouter:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] Bedrock throttled (attempt %d/%d): backing off %.1fs",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
+                                    exc.status_code,
                                 )
                                 await asyncio.sleep(delay)
                                 continue
                             raise
-                    return JSONResponse(
+                    self._record_upstream_latency(
+                        dispatch_start,
+                        model_tier=model_tier,
+                        upstream_model=upstream_model,
+                        auth=auth,
+                        api_type=api_type,
+                    )
+                    openai_response_body = resp.model_dump()
+                    response = JSONResponse(
                         _openai_to_anthropic_response(
-                            resp.model_dump(), msg_id, upstream_model
+                            openai_response_body, msg_id, upstream_model
                         )
                     )
+                    # GZipMiddleware (added in api.py) only compresses non-streaming
+                    # responses at least 500 bytes when the client's Accept-Encoding
+                    # allows gzip — predict its decision now, before it runs, since
+                    # the usage record is written from a background task after this
+                    # response is already on its way out.
+                    compression_used = (
+                        "gzip"
+                        if accept_encoding
+                        and "gzip" in accept_encoding.lower()
+                        and len(response.body) >= 500
+                        else "none"
+                    )
+                    # Record usage after the response is sent to the client, not before.
+                    if self._usage_tracker:
+                        background_tasks.add_task(
+                            self._usage_tracker.record_usage_from_openai_response,
+                            request_id=msg_id,
+                            auth_info=auth_info,
+                            model=upstream_model,
+                            response_body=openai_response_body,
+                            prompt_text=prompt_text,
+                            model_tier=model_tier,
+                            backend=backend,
+                            price_per_mtok=price_per_mtok,
+                            anthropic_price_per_mtok=anthropic_price_per_mtok,
+                            streaming=False,
+                            compression_requested=accept_encoding,
+                            compression_used=compression_used,
+                            start_time=request_start_time,
+                        )
+                    response.background = background_tasks
+                    return response
             except openai.APIStatusError as exc:
                 logger.error(
-                    "[coding-model-router] upstream %d for model=%s: %s",
+                    "[coding-model-router] Bedrock Mantle upstream error: status=%d "
+                    "model=%s auth=%s user_id=%s request_id=%s streaming=%s body=%s",
                     exc.status_code,
                     upstream_model,
-                    exc.response.text[:200],
+                    auth,
+                    user_id,
+                    msg_id,
+                    is_streaming,
+                    exc.response.text[:1000],
                 )
                 try:
                     err_body = exc.response.json()
@@ -422,6 +654,20 @@ class CodingModelRouter:
                     )
                 except Exception:
                     err_msg = exc.message or str(exc)
+                self._record_error(
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_upstream_error",
+                    error_message=exc.response.text,
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
+                    status_code=exc.status_code,
+                )
                 return self._error_response(
                     f"Bedrock error ({exc.status_code}): {err_msg}",
                     upstream_model,
@@ -434,12 +680,51 @@ class CodingModelRouter:
                 if isinstance(exc, TokenRetrievalError) or isinstance(
                     _cause, TokenRetrievalError
                 ):
+                    self._record_error(
+                        request_id=msg_id,
+                        auth_info=auth_info,
+                        model=upstream_model,
+                        error_type="bedrock_session_expired",
+                        error_message=str(exc),
+                        start_time=request_start_time,
+                        model_tier=model_tier,
+                        backend=backend,
+                        auth=auth,
+                        api_type=api_type,
+                        streaming=is_streaming,
+                    )
                     profile = os.environ.get("AWS_PROFILE", "<profile>")
                     return self._error_response(
                         f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
                         upstream_model,
                         is_streaming,
                     )
+                logger.error(
+                    "[coding-model-router] Bedrock Mantle request failed with an "
+                    "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
+                    "streaming=%s: %s",
+                    type(exc).__name__,
+                    upstream_model,
+                    auth,
+                    user_id,
+                    msg_id,
+                    is_streaming,
+                    exc,
+                    exc_info=True,
+                )
+                self._record_error(
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
+                )
                 raise
             finally:
                 if not streaming_started:
@@ -449,20 +734,44 @@ class CodingModelRouter:
         client = httpx.AsyncClient(timeout=None)  # nosec B113
         try:
             upstream_resp = await _send_with_bedrock_retry(
-                client, target_url, upstream_headers, raw_body, route, auth
+                client, target_url, upstream_headers, raw_body, route, auth, request_id
             )
         except Exception:
             await client.aclose()
             raise
 
+        self._record_upstream_latency(
+            dispatch_start,
+            model_tier=model_tier,
+            upstream_model=upstream_model,
+            auth=auth,
+            api_type=api_type,
+        )
+
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
             logger.error(
-                "[coding-model-router] upstream %d from %s: %s",
+                "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
                 target_url,
+                user_id,
+                request_id,
                 error_body[:1000].decode("utf-8", errors="replace"),
+            )
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type="upstream_error",
+                error_message=error_body[:1000].decode("utf-8", errors="replace"),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=is_streaming,
+                status_code=upstream_resp.status_code,
             )
             if is_fallback_route:
                 error_body = self._annotate_fallback_error(error_body, model)
@@ -479,12 +788,154 @@ class CodingModelRouter:
             for k, v in upstream_resp.headers.items()
             if k.lower() not in _HOP_BY_HOP_HEADERS
         }
+        # See the comment on the other StreamingResponse construction above —
+        # tells nginx/ingress not to buffer this response before relaying it.
+        resp_headers["X-Accel-Buffering"] = "no"
+
+        if not is_streaming:
+            # Anthropic's non-streaming response is a single JSON blob, so
+            # there's no byte-relay benefit to keeping it as a StreamingResponse
+            # — buffer it (same as the >=400 branch above already does) so
+            # usage can be extracted the same way the openai-format route does.
+            body_bytes = await upstream_resp.aread()
+            await upstream_resp.aclose()
+            await client.aclose()
+            if self._usage_tracker:
+                try:
+                    response_body = json.loads(body_bytes)
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    response_body = None
+                if response_body is not None:
+                    compression_used = (
+                        "gzip"
+                        if accept_encoding
+                        and "gzip" in accept_encoding.lower()
+                        and len(body_bytes) >= 500
+                        else "none"
+                    )
+                    background_tasks.add_task(
+                        self._usage_tracker.record_usage_from_anthropic_response,
+                        request_id=request_id,
+                        auth_info=auth_info,
+                        model=upstream_model,
+                        response_body=response_body,
+                        model_tier=model_tier,
+                        backend=backend,
+                        price_per_mtok=price_per_mtok,
+                        anthropic_price_per_mtok=anthropic_price_per_mtok,
+                        streaming=False,
+                        compression_requested=accept_encoding,
+                        compression_used=compression_used,
+                        prompt_text=prompt_text,
+                        start_time=request_start_time,
+                    )
+            passthrough_response = Response(
+                content=body_bytes,
+                status_code=upstream_resp.status_code,
+                headers=resp_headers,
+                media_type=upstream_resp.headers.get(
+                    "content-type", "application/json"
+                ),
+            )
+            passthrough_response.background = background_tasks
+            return passthrough_response
+
+        if self._usage_tracker:
+            stream_gen = _stream_passthrough_with_usage_tracking(
+                upstream_resp,
+                client,
+                self._usage_tracker,
+                request_id,
+                auth_info,
+                upstream_model,
+                request_start_time,
+                prompt_text=prompt_text,
+                model_tier=model_tier,
+                backend=backend,
+                price_per_mtok=price_per_mtok,
+                anthropic_price_per_mtok=anthropic_price_per_mtok,
+                compression_requested=accept_encoding,
+                # Same reasoning as the openai-format route's streaming
+                # response — text/event-stream is excluded from GZipMiddleware
+                # regardless of what the client's Accept-Encoding offers.
+                compression_used="none",
+                request=request,
+            )
+        else:
+            stream_gen = _stream_passthrough(upstream_resp, client, request=request)
+
         return StreamingResponse(
-            _stream_passthrough(upstream_resp, client),
+            stream_gen,
             status_code=upstream_resp.status_code,
             headers=resp_headers,
             media_type=upstream_resp.headers.get("content-type", "text/event-stream"),
         )
+
+    def _record_error(
+        self,
+        *,
+        request_id: str,
+        auth_info: dict[str, Any],
+        model: str,
+        error_type: str,
+        error_message: str,
+        start_time: datetime,
+        model_tier: str | None = None,
+        backend: str | None = None,
+        auth: str | None = None,
+        api_type: str | None = None,
+        streaming: bool | None = None,
+        status_code: int | None = None,
+    ) -> None:
+        """Fire-and-forget an error record — never blocks or masks the caller's
+        own error handling (raising/returning the client-facing error response).
+        """
+        if self._error_tracker is None:
+            return
+        _fire_and_forget(
+            self._error_tracker.record_error(
+                request_id=request_id,
+                model=model,
+                error_type=error_type,
+                error_message=error_message,
+                start_time=start_time,
+                user_id=auth_info.get("user_id"),
+                session_id=auth_info.get("session_id"),
+                account_uuid=auth_info.get("account_uuid"),
+                agent_id=auth_info.get("agent_id"),
+                parent_agent_id=auth_info.get("parent_agent_id"),
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=streaming,
+                status_code=status_code,
+            )
+        )
+
+    @staticmethod
+    def _record_upstream_latency(
+        dispatch_start: float,
+        *,
+        model_tier: str,
+        upstream_model: str,
+        auth: str,
+        api_type: str,
+    ) -> None:
+        """Record time-to-first-response-from-upstream on the current span.
+
+        This is the proxy's own processing latency — time until Anthropic/
+        Bedrock starts responding — not total streaming duration, which is
+        dominated by the upstream model's own token-generation speed rather
+        than anything this router controls.
+        """
+        latency_ms = (time.perf_counter() - dispatch_start) * 1000
+        span = trace.get_current_span()
+        span.set_attribute("model_tier", model_tier)
+        span.set_attribute("upstream_model", upstream_model)
+        span.set_attribute("auth_strategy", auth)
+        span.set_attribute("api_type", api_type)
+        span.set_attribute("upstream_latency_ms", latency_ms)
 
     @staticmethod
     def _annotate_fallback_error(error_body: bytes, model: str) -> bytes:
@@ -579,8 +1030,152 @@ class CodingModelRouter:
             yield _sse_event("message_stop", {"type": "message_stop"})
 
         return StreamingResponse(
-            _stream(), status_code=200, media_type="text/event-stream"
+            _stream(),
+            status_code=200,
+            media_type="text/event-stream",
+            headers={"X-Accel-Buffering": "no"},
         )
 
     def get_router(self) -> APIRouter:
         return self.router
+
+    def _attach_account_uuid(
+        self, auth_info: dict[str, Any], body_json: dict[str, Any]
+    ) -> None:
+        """Record Claude Code's account_uuid on auth_info, unresolved.
+
+        _get_auth_info only populates auth_info["user_id"] when the caller's
+        Authorization header verifies as a genuine OIDC token — which never
+        happens for real Claude Code traffic, since that header is always the
+        client's own Anthropic subscription OAuth token. account_uuid is
+        stored as-is on the usage record instead; account_uuid -> email
+        resolution happens downstream in reporting, not in this hot path.
+
+        self._account_directory is intentionally unused here — it's still
+        constructed so the model-router-account-directory collection exists
+        for that downstream reporting join, but this router no longer queries
+        it live.
+        """
+        account_uuid = extract_account_uuid(body_json)
+        if account_uuid:
+            auth_info["account_uuid"] = account_uuid
+
+    def _attach_claude_code_headers(
+        self, auth_info: dict[str, Any], request: Request, body_json: dict[str, Any]
+    ) -> None:
+        """Record Claude Code's session/subagent identity headers on auth_info.
+
+        Per the documented gateway protocol
+        (https://code.claude.com/docs/en/llm-gateway-protocol):
+        - `x-claude-code-session-id` uniquely identifies the CLI session —
+          the officially documented source, preferred over parsing
+          `body.metadata.user_id` (a reverse-engineered fallback used before
+          this header was confirmed; still used when the header is absent).
+        - `x-claude-code-agent-id`/`x-claude-code-parent-agent-id` identify a
+          subagent Claude Code spawned and its parent, present only on
+          requests from an agent — not a person or device identifier. Used
+          alongside session_id to attribute cost to parallel subagents.
+        """
+        auth_info["session_id"] = request.headers.get(
+            "x-claude-code-session-id"
+        ) or extract_session_id(body_json)
+        if agent_id := request.headers.get("x-claude-code-agent-id"):
+            auth_info["agent_id"] = agent_id
+        if parent_agent_id := request.headers.get("x-claude-code-parent-agent-id"):
+            auth_info["parent_agent_id"] = parent_agent_id
+
+    async def _get_auth_info(self, request: Request) -> dict[str, Any]:
+        """Extract auth information from the request headers.
+
+        The `Authorization` header on this router is the client's own
+        upstream Anthropic/Bedrock credential (forwarded as-is — see class
+        docstring), not necessarily a b.well-issued OIDC token, so it cannot
+        be used to gate the proxy call itself. It CAN be used to decide
+        whether user-identification headers (`x-openwebui-user-id` etc.) are
+        trustworthy for usage-tracking attribution: those headers are fully
+        caller-controlled and otherwise trivially spoofable (IDOR), so they
+        are only honored when `Authorization` verifies as a genuine,
+        signature-checked OIDC token. Otherwise usage is recorded with no
+        user_id rather than a spoofable one — this never blocks the proxy
+        call itself.
+
+        Every header under `{custom_header_prefix}` is captured into
+        auth_info["custom_headers"] (keyed by the suffix after the prefix)
+        unconditionally — this is a deliberately open-ended channel so new
+        client-supplied attribution fields (e.g. from Claude Code's
+        ANTHROPIC_CUSTOM_HEADERS) can be added later without a code change
+        here. `{custom_header_prefix}user-id` additionally gets pulled out
+        as auth_info["user_id"] as a best-effort, self-asserted fallback when
+        there's no verified identity — recorded with auth_provider="custom-
+        header" so it's never confused with OIDC-verified identity
+        downstream. This is exactly as spoofable as the OIDC-gated headers
+        above (any caller can set it); it's accepted anyway because this
+        router is deployed per-user/local rather than as a shared
+        multi-tenant ingress — there's no other caller who could spoof it
+        against this instance. Re-gate this behind verification before
+        deploying to a shared environment.
+        """
+        auth_info: dict[str, Any] = {}
+
+        custom_headers = {
+            k[len(self._custom_header_prefix) :]: v
+            for k, v in request.headers.items()
+            if k.lower().startswith(self._custom_header_prefix)
+        }
+        if custom_headers:
+            auth_info["custom_headers"] = custom_headers
+
+        verified_subject: str | None = None
+        verified_email: str | None = None
+        verified_user_name: str | None = None
+        if self._token_reader is not None:
+            auth_header = request.headers.get("authorization")
+            token = (
+                self._token_reader.extract_token(authorization_header=auth_header)
+                if auth_header
+                else None
+            )
+            if token:
+                try:
+                    token_item = await self._token_reader.verify_token_async(
+                        token=token
+                    )
+                except (
+                    AuthorizationBearerTokenExpiredException,
+                    AuthorizationBearerTokenInvalidException,
+                    ValueError,
+                ) as e:
+                    logger.warning(
+                        "[coding-model-router] Authorization token failed validation "
+                        "(%s); usage attribution disabled for this request.",
+                        type(e).__name__,
+                    )
+                    token_item = None
+                if token_item is not None:
+                    verified_subject = token_item.subject or token_item.email
+                    verified_email = token_item.email or (
+                        token_item.subject
+                        if token_item.subject and "@" in token_item.subject
+                        else None
+                    )
+                    verified_user_name = token_item.name
+
+        if verified_subject is None:
+            # No verified identity — do not trust the OIDC-gated headers for
+            # attribution, but do accept the operator-configured custom
+            # header fallback (see docstring). The proxy call proceeds
+            # regardless; only attribution is affected.
+            if header_user_id := custom_headers.get("user-id"):
+                auth_info["user_id"] = header_user_id
+                auth_info["auth_provider"] = "custom-header"
+            return auth_info
+
+        auth_info["user_id"] = verified_subject
+        if verified_email:
+            auth_info["email"] = verified_email
+        if verified_user_name:
+            auth_info["user_name"] = verified_user_name
+        if auth_provider := request.headers.get("x-auth-provider"):
+            auth_info["auth_provider"] = auth_provider
+
+        return auth_info

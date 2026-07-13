@@ -117,3 +117,119 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
     @property
     def config_refresh_interval_minutes(self) -> int:
         return int(os.environ.get("CONFIG_REFRESH_INTERVAL_MINUTES", "60"))
+
+    @property
+    def debug_log_received_oauth_tokens(self) -> bool:
+        """Log full requests (headers + body) received by CodingModelRouter.
+
+        Local-development debugging only — lets you inspect exactly what a
+        client (e.g. Claude Code's subscription OAuth token, or whether it
+        requests streaming) actually sends. Never enable outside local dev;
+        this writes bearer tokens and full request bodies to logs in
+        plaintext.
+        """
+        return self.str2bool(os.environ.get("DEBUG_LOG_RECEIVED_OAUTH_TOKENS", "false"))
+
+    @property
+    def model_routing_usage_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's per-request usage tracking.
+
+        Sibling of mongo_llm_storage_store_collection_name /
+        mongo_llm_storage_checkpointer_collection_name (languagemodelcommon),
+        but this collection is gateway-specific rather than part of the
+        shared persistence factory, so it lives here instead.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_USAGE_COLLECTION_NAME", "model-router-usage"
+        )
+
+    @property
+    def model_routing_error_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's upstream-failure tracking.
+
+        Sibling of model_routing_usage_collection_name — one document per
+        failed upstream request (throttle exhaustion, Bedrock session expiry,
+        4xx/5xx upstream responses), for trend-spotting without grepping logs.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_ERROR_COLLECTION_NAME", "model-router-errors"
+        )
+
+    @property
+    def model_routing_usage_session_collection_name(self) -> str:
+        """Collection name for the per-session usage rollup.
+
+        Sibling of model_routing_usage_collection_name, but one document per
+        session_id (upserted on every request) instead of one per request —
+        cheap to query for session-level totals (tokens, cost by tier,
+        savings) without a $group aggregation over the larger per-request
+        collection.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_USAGE_SESSION_COLLECTION_NAME", "model-router-sessions"
+        )
+
+    @property
+    def model_routing_usage_session_tracking_enabled(self) -> bool:
+        """Whether to upsert the per-session usage rollup at all.
+
+        Independent of the per-request collection (model_routing_usage_collection_name)
+        so the two can eventually be toggled separately — e.g. session-only
+        tracking once the rollup is trusted to carry the reporting load that
+        the per-request collection carries today.
+        """
+        return self.str2bool(
+            os.environ.get("MODEL_ROUTING_USAGE_SESSION_TRACKING_ENABLED", "true")
+        )
+
+    @property
+    def model_routing_usage_capture_previews(self) -> bool:
+        """Whether to write input_preview/output_preview fields to the usage collection.
+
+        Off by default: prompt/response text (even truncated) is
+        user/model-generated content, unlike the rest of the usage record
+        which is only metadata, so this is an explicit opt-in rather than
+        following the tracker's default-enabled posture.
+        """
+        return self.str2bool(
+            os.environ.get("MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS", "false")
+        )
+
+    @property
+    def model_routing_usage_preview_chars(self) -> int:
+        """Max characters of prompt/response text captured per usage record.
+
+        Applies to the input_preview/output_preview fields on
+        model_routing_usage_collection_name documents, and only takes effect
+        when model_routing_usage_capture_previews is enabled.
+        """
+        return int(os.environ.get("MODEL_ROUTING_USAGE_PREVIEW_CHARS", "100"))
+
+    @property
+    def model_routing_custom_header_prefix(self) -> str:
+        """Prefix identifying CodingModelRouter's own custom identity headers.
+
+        Any incoming header whose name starts with this prefix (case
+        insensitive) is stripped before forwarding the request upstream to
+        Anthropic/Bedrock, and `{prefix}user-id` is used as a best-effort
+        usage-attribution fallback when no OIDC-verified identity is present
+        (e.g. via Claude Code's ANTHROPIC_CUSTOM_HEADERS). See
+        CodingModelRouter._get_auth_info for the trust model.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_CUSTOM_HEADER_PREFIX", "x-model-routing-"
+        ).lower()
+
+    @property
+    def model_routing_account_directory_collection_name(self) -> str:
+        """Collection name for CodingModelRouter's account_uuid -> email directory.
+
+        Sibling of model_routing_usage_collection_name: the class's own
+        constructor default stays the generic "account_directory"; this is
+        the app's actual deployed default, more specific and
+        collision-resistant for discoverability in a shared database.
+        """
+        return os.environ.get(
+            "MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME",
+            "model-router-account-directory",
+        )
