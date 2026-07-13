@@ -615,6 +615,17 @@ Key env vars:
 | `CLAUDE_CODE_ATTRIBUTION_HEADER`    | Prevents a per-request header from changing between calls, which would otherwise invalidate any server-side KV cache            |
 | `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Suppresses background Claude calls (auto-title etc.) that would bypass the router directly                                      |
 
-The client sends requests to `/v1/messages` exactly as it would to
-`api.anthropic.com`.  The router rewrites the destination based on the config
-file without any change to the client-side request format.
+### Usage
+
+```sh
+# Run with local model routing
+claude-router
+
+# With a specific model override
+claude-router --model sonnet
+```
+
+### For production
+
+Replace `http://localhost:5050` with `https://language-model-gateway.services.bwell.zone` in your `claude-router` function.
+
