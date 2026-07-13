@@ -10,6 +10,7 @@ Usage:
 from __future__ import annotations
 
 import time
+import uuid
 from typing import Any
 
 import httpx
@@ -21,15 +22,19 @@ AWS_REGION = "us-east-1"
 BASE_URL = "https://bedrock-mantle.us-east-1.api.aws/v1"
 MODELS = ["qwen.qwen3-coder-30b-a3b-v1:0", "qwen.qwen3-coder-next"]
 
+RUN_ID = uuid.uuid4().hex[:8]
+
 # Representative of a real Claude Code system prompt + tool defs, long enough
 # to clear the ~1024-token minimum OpenAI's own automatic caching requires.
-LONG_PREFIX = "You are a coding assistant working in a large repository. " * 200
+LONG_PREFIX = (
+    "You are a coding assistant working in a large repository. " * 200
+) + f" [run:{RUN_ID}]"
 
 
 def _client(route: dict[str, Any]) -> openai.OpenAI:
     http_client = httpx.Client(auth=SigV4Auth(route), timeout=30.0)
     return openai.OpenAI(
-        api_key="dummy",
+        api_key="dummy",  # pragma: allowlist secret
         base_url=BASE_URL,
         http_client=http_client,
         max_retries=0,
@@ -44,10 +49,13 @@ def check_chat_completions_caching(model: str) -> None:
     client = _client(route)
     variants: list[dict[str, Any]] = [
         {"label": "no cache params"},
-        {"label": "prompt_cache_key set", "prompt_cache_key": "bai-306-spike-key"},
+        {
+            "label": "prompt_cache_key set",
+            "prompt_cache_key": f"bai-306-spike-key-{RUN_ID}",
+        },
         {
             "label": "prompt_cache_retention=24h",
-            "prompt_cache_key": "bai-306-spike-key-24h",
+            "prompt_cache_key": f"bai-306-spike-key-24h-{RUN_ID}",
             "prompt_cache_retention": "24h",
         },
     ]
