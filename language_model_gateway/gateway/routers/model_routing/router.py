@@ -128,6 +128,7 @@ class CodingModelRouter:
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
         custom_header_prefix: str = "x-model-routing-",
+        bedrock_transport: str = "mantle",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -136,6 +137,7 @@ class CodingModelRouter:
         )
         self._token_reader: TokenReader | None = token_reader
         self._custom_header_prefix: str = custom_header_prefix.lower()
+        self._bedrock_transport: str = bedrock_transport
         self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
         if self._debug_log_received_oauth_tokens:
             logger.warning(

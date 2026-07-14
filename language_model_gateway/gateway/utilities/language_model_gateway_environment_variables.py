@@ -233,3 +233,14 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
             "MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME",
             "model-router-account-directory",
         )
+
+    @property
+    def model_routing_bedrock_transport(self) -> str:
+        """Which transport CodingModelRouter uses for auth="aws" routes:
+        "mantle" (default) sends requests through Bedrock Mantle's
+        OpenAI-compatible endpoint; "native" sends them through Bedrock's
+        own Converse API instead, using the same model IDs. A manual,
+        operator-flipped fallback for Bedrock Mantle incidents — see
+        docs/superpowers/specs/2026-07-13-native-bedrock-transport-design.md.
+        """
+        return os.environ.get("MODEL_ROUTING_BEDROCK_TRANSPORT", "mantle")

@@ -303,6 +303,16 @@ def test_coding_model_router_registers_messages_route() -> None:
     assert "/v1/messages/count_tokens" in paths
 
 
+def test_bedrock_transport_defaults_to_mantle() -> None:
+    router = CodingModelRouter()
+    assert router._bedrock_transport == "mantle"
+
+
+def test_bedrock_transport_stores_native_override() -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    assert router._bedrock_transport == "native"
+
+
 # ---------------------------------------------------------------------------
 # _get_auth_info — usage-tracking identity validation
 #
