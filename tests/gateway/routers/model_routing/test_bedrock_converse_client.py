@@ -20,7 +20,9 @@ from language_model_gateway.gateway.routers.model_routing.bedrock_converse_clien
     _get_bedrock_runtime_client,
     _is_transient_bedrock_error_code,
     _iter_converse_stream_events,
+    _MAX_BEDROCK_TOOL_NAME_LEN,
     _openai_to_converse_request,
+    _safe_bedrock_tool_name,
     _stream_bedrock_converse_to_anthropic,
 )
 
@@ -134,7 +136,7 @@ class TestOpenaiToConverseRequest:
             "messages": [{"role": "user", "content": "Hello"}],
             "max_tokens": 1024,
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["modelId"] == "qwen.qwen3-coder-next"
         assert result["messages"] == [{"role": "user", "content": [{"text": "Hello"}]}]
         assert result["inferenceConfig"] == {"maxTokens": 1024}
@@ -148,7 +150,7 @@ class TestOpenaiToConverseRequest:
                 {"role": "user", "content": "Hi"},
             ],
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["system"] == [{"text": "You are a helpful assistant."}]
         assert result["messages"] == [{"role": "user", "content": [{"text": "Hi"}]}]
 
@@ -172,7 +174,7 @@ class TestOpenaiToConverseRequest:
                 },
             ],
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assistant_msg = result["messages"][1]
         assert assistant_msg["role"] == "assistant"
         assert assistant_msg["content"] == [
@@ -203,7 +205,7 @@ class TestOpenaiToConverseRequest:
                 {"role": "tool", "tool_call_id": "call_1", "content": "72F, sunny"},
             ],
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         tool_result_msg = result["messages"][2]
         assert tool_result_msg == {
             "role": "user",
@@ -235,7 +237,7 @@ class TestOpenaiToConverseRequest:
             ],
             "tool_choice": "auto",
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["toolConfig"]["tools"] == [
             {
                 "toolSpec": {
@@ -263,7 +265,7 @@ class TestOpenaiToConverseRequest:
             ],
             "tool_choice": {"type": "function", "function": {"name": "get_weather"}},
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["toolConfig"]["toolChoice"] == {"tool": {"name": "get_weather"}}
 
     def test_multi_turn_conversation_preserves_order(self) -> None:
@@ -274,7 +276,7 @@ class TestOpenaiToConverseRequest:
                 {"role": "user", "content": "Second question"},
             ],
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert [m["role"] for m in result["messages"]] == ["user", "assistant", "user"]
         assert result["messages"][0]["content"] == [{"text": "First question"}]
         assert result["messages"][1]["content"] == [{"text": "First answer"}]
@@ -295,7 +297,7 @@ class TestOpenaiToConverseRequest:
                 }
             ],
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["messages"][0]["content"] == [{"text": "What's in this image?"}]
 
     def test_temperature_and_top_p_map_to_inference_config(self) -> None:
@@ -304,7 +306,7 @@ class TestOpenaiToConverseRequest:
             "temperature": 0.7,
             "top_p": 0.9,
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["inferenceConfig"] == {"temperature": 0.7, "topP": 0.9}
 
     def test_tool_choice_none_omits_tool_config_entirely(self) -> None:
@@ -318,7 +320,7 @@ class TestOpenaiToConverseRequest:
             ],
             "tool_choice": "none",
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert "toolConfig" not in result
 
     def test_tool_choice_none_without_tools_still_omits_tool_config(self) -> None:
@@ -326,8 +328,98 @@ class TestOpenaiToConverseRequest:
             "messages": [{"role": "user", "content": "Hi"}],
             "tool_choice": "none",
         }
-        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert "toolConfig" not in result
+
+    def test_long_tool_name_is_shortened_and_mapped_back(self) -> None:
+        long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+        oai_body = {
+            "messages": [{"role": "user", "content": "Hi"}],
+            "tools": [
+                {
+                    "type": "function",
+                    "function": {"name": long_name, "parameters": {}},
+                }
+            ],
+            "tool_choice": "auto",
+        }
+        result, tool_name_map = _openai_to_converse_request(
+            oai_body, "qwen.qwen3-coder-next"
+        )
+        safe_name = result["toolConfig"]["tools"][0]["toolSpec"]["name"]
+        assert len(safe_name) <= _MAX_BEDROCK_TOOL_NAME_LEN
+        assert tool_name_map[safe_name] == long_name
+
+    def test_specific_tool_choice_with_long_name_maps_to_safe_name(self) -> None:
+        long_name = (
+            "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_product_service_list"
+        )
+        oai_body = {
+            "messages": [{"role": "user", "content": "Hi"}],
+            "tools": [
+                {
+                    "type": "function",
+                    "function": {"name": long_name, "parameters": {}},
+                }
+            ],
+            "tool_choice": {"type": "function", "function": {"name": long_name}},
+        }
+        result, tool_name_map = _openai_to_converse_request(
+            oai_body, "qwen.qwen3-coder-next"
+        )
+        chosen_name = result["toolConfig"]["toolChoice"]["tool"]["name"]
+        assert len(chosen_name) <= _MAX_BEDROCK_TOOL_NAME_LEN
+        assert tool_name_map[chosen_name] == long_name
+
+    def test_replayed_assistant_tool_call_with_long_name_uses_safe_name(self) -> None:
+        long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+        oai_body = {
+            "messages": [
+                {"role": "user", "content": "What's my balance?"},
+                {
+                    "role": "assistant",
+                    "content": "",
+                    "tool_calls": [
+                        {
+                            "id": "call_1",
+                            "type": "function",
+                            "function": {"name": long_name, "arguments": "{}"},
+                        }
+                    ],
+                },
+            ],
+        }
+        result, tool_name_map = _openai_to_converse_request(
+            oai_body, "qwen.qwen3-coder-next"
+        )
+        safe_name = result["messages"][1]["content"][0]["toolUse"]["name"]
+        assert len(safe_name) <= _MAX_BEDROCK_TOOL_NAME_LEN
+        assert tool_name_map[safe_name] == long_name
+
+
+class TestSafeBedrockToolName:
+    def test_short_name_passes_through_unchanged(self) -> None:
+        assert _safe_bedrock_tool_name("get_weather") == "get_weather"
+
+    def test_name_at_exact_limit_passes_through_unchanged(self) -> None:
+        name = "a" * _MAX_BEDROCK_TOOL_NAME_LEN
+        assert _safe_bedrock_tool_name(name) == name
+
+    def test_long_name_is_shortened_to_limit(self) -> None:
+        long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+        safe_name = _safe_bedrock_tool_name(long_name)
+        assert len(safe_name) <= _MAX_BEDROCK_TOOL_NAME_LEN
+
+    def test_same_long_name_maps_deterministically(self) -> None:
+        long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+        assert _safe_bedrock_tool_name(long_name) == _safe_bedrock_tool_name(long_name)
+
+    def test_different_long_names_sharing_a_prefix_dont_collide(self) -> None:
+        name_a = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+        name_b = (
+            "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_product_service_list"
+        )
+        assert _safe_bedrock_tool_name(name_a) != _safe_bedrock_tool_name(name_b)
 
 
 class TestConverseResponseToAnthropic:
@@ -385,6 +477,35 @@ class TestConverseResponseToAnthropic:
             }
         ]
         assert result["stop_reason"] == "tool_use"
+
+    def test_tool_use_response_restores_original_long_name(self) -> None:
+        resp = {
+            "output": {
+                "message": {
+                    "role": "assistant",
+                    "content": [
+                        {
+                            "toolUse": {
+                                "toolUseId": "tooluse_1",
+                                "name": "safe_name_123",
+                                "input": {},
+                            }
+                        }
+                    ],
+                }
+            },
+            "stopReason": "tool_use",
+            "usage": {"inputTokens": 1, "outputTokens": 1, "totalTokens": 2},
+        }
+        result = _converse_response_to_anthropic(
+            resp,
+            "msg_abc",
+            "qwen.qwen3-coder-next",
+            {"safe_name_123": "mcp__claude_ai_Intuit_QuickBooks__original_name"},
+        )
+        assert result["content"][0]["name"] == (
+            "mcp__claude_ai_Intuit_QuickBooks__original_name"
+        )
 
     def test_mixed_text_and_tool_use_content(self) -> None:
         resp = {
@@ -586,6 +707,40 @@ class TestStreamBedrockConverseToAnthropic:
         assert "input_json_delta" in joined
         assert '"partial_json": "{\\"city\\": \\"Boston\\"}"' in joined
         assert '"stop_reason": "tool_use"' in joined
+
+    @pytest.mark.asyncio
+    async def test_tool_use_stream_restores_original_long_name(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {
+                    "contentBlockStart": {
+                        "contentBlockIndex": 0,
+                        "start": {
+                            "toolUse": {
+                                "toolUseId": "tooluse_1",
+                                "name": "safe_name_123",
+                            }
+                        },
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "tool_use"}},
+            ]
+        )
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                events,
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                tool_name_map={
+                    "safe_name_123": "mcp__claude_ai_Intuit_QuickBooks__original_name"
+                },
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert '"name": "mcp__claude_ai_Intuit_QuickBooks__original_name"' in joined
 
     @pytest.mark.asyncio
     async def test_mid_stream_error_invokes_on_stream_error(self) -> None:

@@ -2016,6 +2016,81 @@ async def test_native_bedrock_streaming_happy_path(
 
 
 @pytest.mark.asyncio
+async def test_native_bedrock_streaming_with_long_tool_name_restores_original(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """MCP-prefixed tool names (e.g. mcp__claude_ai_Intuit_QuickBooks__...)
+    routinely exceed Bedrock Converse's 64-character toolSpec.name limit.
+    Sending one un-shortened fails the whole request with a
+    ValidationException; the client must still see its original tool name
+    back in the tool_use block."""
+    long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+
+    def _capture_and_stream(**kwargs: Any) -> dict[str, Any]:
+        sent_name = kwargs["toolConfig"]["tools"][0]["toolSpec"]["name"]
+        assert len(sent_name) <= 64
+        return {
+            "stream": iter(
+                [
+                    {"messageStart": {"role": "assistant"}},
+                    {
+                        "contentBlockStart": {
+                            "contentBlockIndex": 0,
+                            "start": {
+                                "toolUse": {
+                                    "toolUseId": "tooluse_1",
+                                    "name": sent_name,
+                                }
+                            },
+                        }
+                    },
+                    {"contentBlockStop": {"contentBlockIndex": 0}},
+                    {"messageStop": {"stopReason": "tool_use"}},
+                    {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+                ]
+            )
+        }
+
+    mock_client.converse_stream.side_effect = _capture_and_stream
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "What's my balance?"}],
+                "tools": [
+                    {
+                        "name": long_name,
+                        "description": "Get balance sheet",
+                        "input_schema": {"type": "object", "properties": {}},
+                    }
+                ],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    assert f'"name": "{long_name}"'.encode() in response.content
+
+
+@pytest.mark.asyncio
 async def test_native_bedrock_streaming_records_usage(
     native_bedrock_route: dict[str, Any],
 ) -> None:

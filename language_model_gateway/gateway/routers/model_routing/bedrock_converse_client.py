@@ -13,6 +13,7 @@ conversions, which are a distinct concern from either.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import os
@@ -44,6 +45,25 @@ _CONVERSE_TO_ANT_STOP = {
     "max_tokens": "max_tokens",
     "stop_sequence": "stop_sequence",
 }
+
+# Bedrock Converse enforces this as a hard limit on toolSpec.name / toolUse.name.
+# MCP-prefixed tool names (e.g. mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_
+# get_balance_sheet) routinely exceed it, which otherwise fails the whole
+# request with a ValidationException rather than just dropping that tool.
+_MAX_BEDROCK_TOOL_NAME_LEN = 64
+
+
+def _safe_bedrock_tool_name(name: str) -> str:
+    """Shorten a tool name to fit Bedrock's limit, deterministically — the
+    same original name always produces the same safe name across turns, and
+    a hash suffix keeps two long names sharing a common prefix from
+    colliding after truncation.
+    """
+    if len(name) <= _MAX_BEDROCK_TOOL_NAME_LEN:
+        return name
+    digest = hashlib.sha1(name.encode(), usedforsecurity=False).hexdigest()[:8]
+    prefix_len = _MAX_BEDROCK_TOOL_NAME_LEN - len(digest) - 1
+    return f"{name[:prefix_len]}_{digest}"
 
 
 def _get_bedrock_runtime_client(route: dict[str, Any]) -> Any:
@@ -81,7 +101,7 @@ def _is_transient_bedrock_error_code(code: str | None) -> bool:
 
 def _openai_to_converse_request(
     oai_body_json: dict[str, Any], model_id: str
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], dict[str, str]]:
     """Translate an OpenAI-Chat-Completions-shaped request body (as produced
     by message_translator.py's _anthropic_to_openai_request, and already run
     through context-budget enforcement by the time router.py reaches the
@@ -92,8 +112,13 @@ def _openai_to_converse_request(
     request — see the "Deviation from the committed spec" note in this
     plan/module for why: budget enforcement already ran on the OpenAI shape
     upstream of this call, and re-deriving from Anthropic would skip it.
+
+    Also returns a safe-name -> original-name map for any tool names
+    shortened by _safe_bedrock_tool_name, so the response translators can
+    restore the original name before it reaches the client.
     """
     converse: dict[str, Any] = {"modelId": model_id}
+    tool_name_map: dict[str, str] = {}
 
     messages: list[dict[str, Any]] = []
     system: list[dict[str, str]] = []
@@ -130,11 +155,14 @@ def _openai_to_converse_request(
                     tool_input = json.loads(fn.get("arguments") or "{}")
                 except json.JSONDecodeError:
                     tool_input = {}
+                original_name = fn.get("name", "")
+                safe_name = _safe_bedrock_tool_name(original_name)
+                tool_name_map[safe_name] = original_name
                 content.append(
                     {
                         "toolUse": {
                             "toolUseId": tc.get("id", ""),
-                            "name": fn.get("name", ""),
+                            "name": safe_name,
                             "input": tool_input,
                         }
                     }
@@ -181,37 +209,48 @@ def _openai_to_converse_request(
     # has no explicit "disable tools" toolChoice value, so we omit toolConfig
     # entirely — if the model isn't told about any tools, it can't call one.
     if tool_choice != "none" and (tools := oai_body_json.get("tools")):
-        tool_config: dict[str, Any] = {
-            "tools": [
+        tools_list: list[dict[str, Any]] = []
+        for t in tools:
+            original_name = t["function"]["name"]
+            safe_name = _safe_bedrock_tool_name(original_name)
+            tool_name_map[safe_name] = original_name
+            tools_list.append(
                 {
                     "toolSpec": {
-                        "name": t["function"]["name"],
+                        "name": safe_name,
                         "description": t["function"].get("description", ""),
                         "inputSchema": {"json": t["function"].get("parameters", {})},
                     }
                 }
-                for t in tools
-            ]
-        }
+            )
+        tool_config: dict[str, Any] = {"tools": tools_list}
         if tool_choice == "auto":
             tool_config["toolChoice"] = {"auto": {}}
         elif tool_choice == "required":
             tool_config["toolChoice"] = {"any": {}}
         elif isinstance(tool_choice, dict):
+            chosen_name = tool_choice.get("function", {}).get("name", "")
             tool_config["toolChoice"] = {
-                "tool": {"name": tool_choice.get("function", {}).get("name", "")}
+                "tool": {"name": _safe_bedrock_tool_name(chosen_name)}
             }
         converse["toolConfig"] = tool_config
 
-    return converse
+    return converse, tool_name_map
 
 
 def _converse_response_to_anthropic(
-    resp: dict[str, Any], msg_id: str, upstream_model: str
+    resp: dict[str, Any],
+    msg_id: str,
+    upstream_model: str,
+    tool_name_map: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Translate a non-streaming Bedrock Converse response to Anthropic
     Messages format — the Converse-API counterpart to
     message_translator.py's _openai_to_anthropic_response.
+
+    tool_name_map (from _openai_to_converse_request) restores any tool name
+    Bedrock's 64-character limit forced us to shorten before sending, so the
+    client sees the same name it originally declared.
     """
     content: list[dict[str, Any]] = []
     message = resp.get("output", {}).get("message", {})
@@ -220,11 +259,12 @@ def _converse_response_to_anthropic(
             content.append({"type": "text", "text": block["text"]})
         elif "toolUse" in block:
             tool_use = block["toolUse"]
+            safe_name = tool_use.get("name", "")
             content.append(
                 {
                     "type": "tool_use",
                     "id": tool_use.get("toolUseId", ""),
-                    "name": tool_use.get("name", ""),
+                    "name": (tool_name_map or {}).get(safe_name, safe_name),
                     "input": tool_use.get("input", {}),
                 }
             )
@@ -279,6 +319,7 @@ async def _stream_bedrock_converse_to_anthropic(
     text_sink: dict[str, str] | None = None,
     request: Request | None = None,
     on_stream_error: Callable[[str], None] | None = None,
+    tool_name_map: dict[str, str] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Convert a Bedrock Converse event stream to Anthropic SSE format —
     the Converse-API counterpart to
@@ -286,6 +327,9 @@ async def _stream_bedrock_converse_to_anthropic(
     contract (sinks, on_stream_error hook, emitted SSE event sequence) so
     it plugs into the existing usage-tracking/cleanup wrapper pattern
     without changes to that pattern itself.
+
+    tool_name_map (from _openai_to_converse_request) restores any tool name
+    Bedrock's 64-character limit forced us to shorten before sending.
     """
     if usage_sink is None:
         usage_sink = {}
@@ -333,6 +377,7 @@ async def _stream_bedrock_converse_to_anthropic(
                 start = event["contentBlockStart"].get("start") or {}
                 if "toolUse" in start:
                     tool_use = start["toolUse"]
+                    safe_name = tool_use.get("name", "")
                     open_block_types[idx] = "tool_use"
                     yield _sse_event(
                         "content_block_start",
@@ -342,7 +387,7 @@ async def _stream_bedrock_converse_to_anthropic(
                             "content_block": {
                                 "type": "tool_use",
                                 "id": tool_use.get("toolUseId", ""),
-                                "name": tool_use.get("name", ""),
+                                "name": (tool_name_map or {}).get(safe_name, safe_name),
                                 "input": {},
                             },
                         },
@@ -470,6 +515,7 @@ async def _converse_stream_with_usage_tracking(
     compression_used: str | None = None,
     request: Request | None = None,
     on_stream_error: Callable[[str], None] | None = None,
+    tool_name_map: dict[str, str] | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Stream wrapper that records usage to MongoDB after the stream
     completes — the Converse-API counterpart to
@@ -488,6 +534,7 @@ async def _converse_stream_with_usage_tracking(
         text_sink=text_sink,
         request=request,
         on_stream_error=on_stream_error,
+        tool_name_map=tool_name_map,
     ):
         yield chunk
 

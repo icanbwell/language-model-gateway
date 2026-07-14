@@ -1141,7 +1141,9 @@ class CodingModelRouter:
 
         msg_id = _msg_id()
         bedrock_client = bedrock_converse_client._get_bedrock_runtime_client(route)
-        converse_kwargs = _openai_to_converse_request(body_json, route["model"])
+        converse_kwargs, tool_name_map = _openai_to_converse_request(
+            body_json, route["model"]
+        )
 
         throttle_attempt = 0
         while True:
@@ -1234,7 +1236,7 @@ class CodingModelRouter:
             api_type=api_type,
         )
         anthropic_response = _converse_response_to_anthropic(
-            resp, msg_id, upstream_model
+            resp, msg_id, upstream_model, tool_name_map
         )
         response = JSONResponse(anthropic_response)
         if self._usage_tracker:
@@ -1297,7 +1299,9 @@ class CodingModelRouter:
 
         msg_id = _msg_id()
         bedrock_client = bedrock_converse_client._get_bedrock_runtime_client(route)
-        converse_kwargs = _openai_to_converse_request(body_json, route["model"])
+        converse_kwargs, tool_name_map = _openai_to_converse_request(
+            body_json, route["model"]
+        )
 
         throttle_attempt = 0
         while True:
@@ -1419,6 +1423,7 @@ class CodingModelRouter:
                 compression_used="none",
                 request=request,
                 on_stream_error=_record_mid_stream_error,
+                tool_name_map=tool_name_map,
             )
         else:
             stream_gen = _stream_bedrock_converse_to_anthropic(
@@ -1427,6 +1432,7 @@ class CodingModelRouter:
                 upstream_model,
                 request=request,
                 on_stream_error=_record_mid_stream_error,
+                tool_name_map=tool_name_map,
             )
         return StreamingResponse(
             stream_gen,
