@@ -54,7 +54,6 @@ from language_model_gateway.gateway.routers.model_routing.stream_converter impor
     ThinkingStripper as _ThinkingStripper,
 )
 
-
 # ---------------------------------------------------------------------------
 # _ThinkingStripper
 # ---------------------------------------------------------------------------
@@ -242,6 +241,55 @@ def test_openai_to_anthropic_text_response() -> None:
     assert result["content"][0]["text"] == "Hello there"
     assert result["usage"]["input_tokens"] == 10
     assert result["usage"]["output_tokens"] == 5
+
+
+def test_openai_to_anthropic_maps_cached_tokens_to_cache_read_input_tokens() -> None:
+    """Bedrock Mantle is a conformant OpenAI Chat Completions endpoint —
+    usage.prompt_tokens_details.cached_tokens must map onto Anthropic's
+    cache_read_input_tokens, per anthropics/claude-code#13385.
+    cache_creation_input_tokens has no OpenAI equivalent but must still be
+    present (defaulting to 0), not omitted."""
+    oai = {
+        "choices": [
+            {
+                "finish_reason": "stop",
+                "message": {"role": "assistant", "content": "hi", "tool_calls": None},
+            }
+        ],
+        "usage": {
+            "prompt_tokens": 50,
+            "completion_tokens": 10,
+            "prompt_tokens_details": {"cached_tokens": 100},
+        },
+    }
+    result = _openai_to_anthropic_response(oai, "msg_abc", "upstream-model")
+    assert result["usage"] == {
+        "input_tokens": 50,
+        "output_tokens": 10,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 100,
+    }
+
+
+def test_openai_to_anthropic_missing_prompt_tokens_details_defaults_cache_to_zero() -> (
+    None
+):
+    oai = {
+        "choices": [
+            {
+                "finish_reason": "stop",
+                "message": {"role": "assistant", "content": "hi", "tool_calls": None},
+            }
+        ],
+        "usage": {"prompt_tokens": 5, "completion_tokens": 2},
+    }
+    result = _openai_to_anthropic_response(oai, "msg_abc", "upstream-model")
+    assert result["usage"] == {
+        "input_tokens": 5,
+        "output_tokens": 2,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+    }
 
 
 def test_openai_to_anthropic_strips_think_blocks() -> None:

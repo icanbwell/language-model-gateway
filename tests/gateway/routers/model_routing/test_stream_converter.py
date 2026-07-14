@@ -29,12 +29,27 @@ def _fake_chunk(
     finish_reason: str | None = None,
     prompt_tokens: int | None = None,
     completion_tokens: int | None = None,
+    cached_tokens: int | None = None,
 ) -> object:
     usage = None
     if prompt_tokens is not None or completion_tokens is not None:
-        usage = SimpleNamespace(
-            prompt_tokens=prompt_tokens, completion_tokens=completion_tokens
+        prompt_tokens_details = (
+            SimpleNamespace(cached_tokens=cached_tokens)
+            if cached_tokens is not None
+            else None
         )
+        usage = SimpleNamespace(
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            prompt_tokens_details=prompt_tokens_details,
+        )
+        usage.model_dump = lambda: {
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "prompt_tokens_details": (
+                {"cached_tokens": cached_tokens} if cached_tokens is not None else None
+            ),
+        }
     return SimpleNamespace(
         choices=[
             SimpleNamespace(
@@ -216,6 +231,78 @@ class TestSseEventCount:
         assert recorded_count > 0
 
 
+class TestOaiStreamUsageAndCacheTokens:
+    async def test_message_delta_reports_real_output_tokens(self) -> None:
+        """Regression test: message_delta's usage.output_tokens previously
+        always emitted 0 (a stale local variable that was never updated from
+        usage_sink) instead of the actual completion_tokens count."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5)
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert '"output_tokens": 5' in joined
+
+    async def test_cache_read_tokens_surface_in_message_delta(self) -> None:
+        """Bedrock Mantle is a conformant OpenAI Chat Completions endpoint —
+        usage.prompt_tokens_details.cached_tokens must map onto Anthropic's
+        cache_read_input_tokens, per anthropics/claude-code#13385."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5, cached_tokens=100)
+
+        usage_sink: dict[str, object] = {}
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model", usage_sink=usage_sink
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert usage_sink["cache_read_input_tokens"] == 100
+        assert usage_sink["cache_creation_input_tokens"] == 0
+        assert '"cache_read_input_tokens": 100' in joined
+
+    async def test_raw_usage_recorded_after_stream_completes(self) -> None:
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5, cached_tokens=100)
+
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+        http_client = MagicMock(spec=httpx.AsyncClient)
+        http_client.aclose = AsyncMock()
+
+        _ = [
+            chunk
+            async for chunk in _oai_stream_with_usage_tracking(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                http_client,
+                usage_tracker,
+                {"user_id": "user-1"},
+                _TEST_START_TIME,
+            )
+        ]
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_awaited_once()
+        call_kwargs = usage_tracker.record_usage.call_args.kwargs
+        assert call_kwargs["raw_usage"] == {
+            "prompt_tokens": 10,
+            "completion_tokens": 5,
+            "prompt_tokens_details": {"cached_tokens": 100},
+        }
+
+
 def _anthropic_sse_event(event_type: str, data: dict[str, object]) -> bytes:
     return f"event: {event_type}\ndata: {json.dumps(data)}\n\n".encode()
 
@@ -253,28 +340,58 @@ class TestParseAnthropicSseUsage:
     def test_extracts_input_and_output_tokens(self) -> None:
         raw = _MESSAGE_START + _CONTENT_DELTA + _MESSAGE_DELTA + _MESSAGE_STOP
 
-        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(raw)
+        input_tokens, output_tokens, text, raw_usage = _parse_anthropic_sse_usage(raw)
 
         # message_delta's usage.output_tokens (the final cumulative count)
         # wins over message_start's placeholder output_tokens=1.
         assert input_tokens == 42
         assert output_tokens == 17
         assert text == "hello"
+        assert raw_usage == {"input_tokens": 42, "output_tokens": 17}
 
     def test_no_events_returns_zeros_and_none_text(self) -> None:
-        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(b"")
-        assert (input_tokens, output_tokens, text) == (0, 0, None)
+        input_tokens, output_tokens, text, raw_usage = _parse_anthropic_sse_usage(b"")
+        assert (input_tokens, output_tokens, text, raw_usage) == (0, 0, None, {})
 
     def test_ignores_malformed_data_lines(self) -> None:
         raw = b"data: not-json\n\n" + _MESSAGE_START + _MESSAGE_DELTA
-        input_tokens, output_tokens, _ = _parse_anthropic_sse_usage(raw)
+        input_tokens, output_tokens, _, _ = _parse_anthropic_sse_usage(raw)
         assert input_tokens == 42
         assert output_tokens == 17
 
     def test_concatenates_multiple_text_deltas(self) -> None:
         raw = _MESSAGE_START + _CONTENT_DELTA + _CONTENT_DELTA + _MESSAGE_DELTA
-        _, _, text = _parse_anthropic_sse_usage(raw)
+        _, _, text, _ = _parse_anthropic_sse_usage(raw)
         assert text == "hellohello"
+
+    def test_raw_usage_carries_cache_token_fields_from_message_start(self) -> None:
+        """cache_creation_input_tokens/cache_read_input_tokens only ever
+        appear in message_start (Anthropic knows them before generation
+        starts) — they must survive being overlaid by message_delta's
+        usage object, which only repeats output_tokens."""
+        message_start_with_cache = _anthropic_sse_event(
+            "message_start",
+            {
+                "type": "message_start",
+                "message": {
+                    "id": "msg_1",
+                    "usage": {
+                        "input_tokens": 42,
+                        "output_tokens": 1,
+                        "cache_creation_input_tokens": 20,
+                        "cache_read_input_tokens": 100,
+                    },
+                },
+            },
+        )
+        raw = message_start_with_cache + _MESSAGE_DELTA
+        _, _, _, raw_usage = _parse_anthropic_sse_usage(raw)
+        assert raw_usage == {
+            "input_tokens": 42,
+            "output_tokens": 17,
+            "cache_creation_input_tokens": 20,
+            "cache_read_input_tokens": 100,
+        }
 
 
 class TestStreamPassthroughWithUsageTracking:
@@ -321,6 +438,7 @@ class TestStreamPassthroughWithUsageTracking:
         assert call_kwargs["user_id"] == "user-1"
         assert call_kwargs["streaming"] is True
         assert call_kwargs["response_text"] == "hello"
+        assert call_kwargs["raw_usage"] == {"input_tokens": 42, "output_tokens": 17}
         assert call_kwargs["start_time"] == _TEST_START_TIME
         resp.aclose.assert_awaited_once()
         client.aclose.assert_awaited_once()

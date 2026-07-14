@@ -105,7 +105,7 @@ async def _stream_oai_sdk_to_anthropic(
     msg_id: str,
     upstream_model: str,
     first_chunk: Any = None,
-    usage_sink: dict[str, int] | None = None,
+    usage_sink: dict[str, Any] | None = None,
     text_sink: dict[str, str] | None = None,
     request: Request | None = None,
     on_stream_error: Callable[[str], None] | None = None,
@@ -134,6 +134,9 @@ async def _stream_oai_sdk_to_anthropic(
         usage_sink = {}
     usage_sink["input_tokens"] = 0
     usage_sink["output_tokens"] = 0
+    usage_sink["cache_creation_input_tokens"] = 0
+    usage_sink["cache_read_input_tokens"] = 0
+    usage_sink["raw_usage"] = {}
     if text_sink is None:
         text_sink = {}
     text_sink["output_text"] = ""
@@ -144,7 +147,6 @@ async def _stream_oai_sdk_to_anthropic(
     text_idx: int | None = None
     tool_idx_map: dict[int, int] = {}
     finish_reason: str | None = None
-    output_tokens = 0
     thinking_stripper = ThinkingStripper()
 
     async def _iter_stream() -> AsyncGenerator[Any, None]:
@@ -251,6 +253,11 @@ async def _stream_oai_sdk_to_anthropic(
                     usage_sink["input_tokens"] = chunk.usage.prompt_tokens
                 if chunk.usage.completion_tokens is not None:
                     usage_sink["output_tokens"] = chunk.usage.completion_tokens
+                usage_sink["raw_usage"] = chunk.usage.model_dump()
+                if chunk.usage.prompt_tokens_details is not None:
+                    usage_sink["cache_read_input_tokens"] = (
+                        chunk.usage.prompt_tokens_details.cached_tokens or 0
+                    )
     except Exception as _exc:
         logger.error("[coding-model-router] upstream stream error: %s", _exc)
         _exc_text = str(_exc)
@@ -346,7 +353,13 @@ async def _stream_oai_sdk_to_anthropic(
         {
             "type": "message_delta",
             "delta": {"stop_reason": stop_reason, "stop_sequence": None},
-            "usage": {"output_tokens": output_tokens},
+            "usage": {
+                "output_tokens": usage_sink["output_tokens"],
+                "cache_creation_input_tokens": usage_sink[
+                    "cache_creation_input_tokens"
+                ],
+                "cache_read_input_tokens": usage_sink["cache_read_input_tokens"],
+            },
         },
     )
     yield _sse_event("message_stop", {"type": "message_stop"})
@@ -403,7 +416,7 @@ async def _oai_stream_with_usage_tracking(
     """
     Stream wrapper that records usage to MongoDB after stream completes.
     """
-    usage_sink: dict[str, int] = {}
+    usage_sink: dict[str, Any] = {}
     text_sink: dict[str, str] = {}
     sse_event_count = 0
     try:
@@ -450,6 +463,7 @@ async def _oai_stream_with_usage_tracking(
                     sse_event_count=sse_event_count,
                     prompt_text=prompt_text,
                     response_text=text_sink.get("output_text"),
+                    raw_usage=usage_sink.get("raw_usage"),
                     start_time=start_time,
                 )
             )
@@ -474,7 +488,9 @@ async def _stream_passthrough(
         await client.aclose()
 
 
-def _parse_anthropic_sse_usage(raw: bytes) -> tuple[int, int, str | None]:
+def _parse_anthropic_sse_usage(
+    raw: bytes,
+) -> tuple[int, int, str | None, dict[str, Any]]:
     """Sniff token usage and visible text out of a raw Anthropic SSE stream.
 
     Anthropic's own wire format needs no reformatting (unlike the OpenAI-SDK
@@ -483,10 +499,18 @@ def _parse_anthropic_sse_usage(raw: bytes) -> tuple[int, int, str | None]:
     `input_tokens` comes from `message_start`; `output_tokens` comes from
     `message_delta`, which carries the final cumulative count (message_start's
     own `usage.output_tokens` is a placeholder, not the real total).
+
+    The returned raw_usage dict starts from message_start's usage object
+    (which already carries cache_creation_input_tokens/cache_read_input_tokens
+    — Anthropic knows those upfront, before generation starts) and is
+    overlaid with message_delta's usage object, so the final output_tokens
+    count wins without discarding the cache fields message_delta doesn't
+    repeat.
     """
     input_tokens = 0
     output_tokens = 0
     text_parts: list[str] = []
+    raw_usage: dict[str, Any] = {}
     for line in raw.decode("utf-8", errors="replace").splitlines():
         line = line.strip()
         if not line.startswith("data:"):
@@ -502,13 +526,21 @@ def _parse_anthropic_sse_usage(raw: bytes) -> tuple[int, int, str | None]:
         if event_type == "message_start":
             usage = event.get("message", {}).get("usage", {})
             input_tokens = usage.get("input_tokens", input_tokens)
+            raw_usage.update(usage)
         elif event_type == "message_delta":
-            output_tokens = event.get("usage", {}).get("output_tokens", output_tokens)
+            usage = event.get("usage", {})
+            output_tokens = usage.get("output_tokens", output_tokens)
+            raw_usage.update(usage)
         elif event_type == "content_block_delta":
             delta = event.get("delta", {})
             if delta.get("type") == "text_delta":
                 text_parts.append(delta.get("text", ""))
-    return input_tokens, output_tokens, "".join(text_parts) if text_parts else None
+    return (
+        input_tokens,
+        output_tokens,
+        "".join(text_parts) if text_parts else None,
+        raw_usage,
+    )
 
 
 async def _stream_passthrough_with_usage_tracking(
@@ -549,8 +581,8 @@ async def _stream_passthrough_with_usage_tracking(
     finally:
         await resp.aclose()
         await client.aclose()
-        input_tokens, output_tokens, response_text = _parse_anthropic_sse_usage(
-            b"".join(raw_chunks)
+        input_tokens, output_tokens, response_text, raw_usage = (
+            _parse_anthropic_sse_usage(b"".join(raw_chunks))
         )
         if usage_tracker and (input_tokens > 0 or output_tokens > 0):
             _fire_and_forget(
@@ -577,6 +609,7 @@ async def _stream_passthrough_with_usage_tracking(
                     custom_headers=auth_info.get("custom_headers"),
                     prompt_text=prompt_text,
                     response_text=response_text,
+                    raw_usage=raw_usage,
                     start_time=start_time,
                 )
             )

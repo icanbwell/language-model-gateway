@@ -185,6 +185,29 @@ def _anthropic_to_openai_request(body_json: dict[str, Any]) -> dict[str, Any]:
     return oai
 
 
+def _openai_usage_to_anthropic(usage: dict[str, Any]) -> dict[str, int]:
+    """Map an OpenAI Chat Completions usage object (Bedrock Mantle, per
+    https://docs.aws.amazon.com/bedrock/latest/userguide/inference-chat-completions-mantle.html,
+    is a conformant OpenAI Chat Completions endpoint) onto Anthropic's usage
+    shape.
+
+    cache_read_input_tokens comes from usage.prompt_tokens_details.cached_tokens
+    (OpenAI's prompt-caching field). cache_creation_input_tokens has no OpenAI
+    equivalent — that API doesn't charge separately for cache writes — but is
+    still always included (defaulting to 0) rather than omitted: clients that
+    derive context-window usage from these fields (e.g. Claude Code, see
+    anthropics/claude-code#13385) treat a missing field the same as a broken
+    one, not as "not applicable".
+    """
+    cached_tokens = (usage.get("prompt_tokens_details") or {}).get("cached_tokens", 0)
+    return {
+        "input_tokens": usage.get("prompt_tokens", 0),
+        "output_tokens": usage.get("completion_tokens", 0),
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": cached_tokens,
+    }
+
+
 def _openai_to_anthropic_response(
     resp_json: dict[str, Any], msg_id: str, upstream_model: str
 ) -> dict[str, Any]:
@@ -229,10 +252,7 @@ def _openai_to_anthropic_response(
         "model": upstream_model,
         "stop_reason": stop_reason,
         "stop_sequence": None,
-        "usage": {
-            "input_tokens": usage.get("prompt_tokens", 0),
-            "output_tokens": usage.get("completion_tokens", 0),
-        },
+        "usage": _openai_usage_to_anthropic(usage),
     }
 
     # Optionally append cost savings info to the response content
