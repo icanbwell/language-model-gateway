@@ -56,8 +56,11 @@ from .bedrock_client import (
 from . import bedrock_converse_client
 from .bedrock_converse_client import (
     _converse_response_to_anthropic,
+    _converse_stream_with_usage_tracking,
     _is_transient_bedrock_error_code,
+    _iter_converse_stream_events,
     _openai_to_converse_request,
+    _stream_bedrock_converse_to_anthropic,
 )
 from .constants import (
     _ANTHROPIC_ONLY_HEADERS,
@@ -451,9 +454,7 @@ class CodingModelRouter:
             and self._bedrock_transport == "native"
         ):
             if is_streaming:
-                # _dispatch_bedrock_native_streaming doesn't exist yet — added by
-                # the next task. Remove this type: ignore when that lands.
-                return await self._dispatch_bedrock_native_streaming(  # type: ignore[attr-defined,no-any-return]
+                return await self._dispatch_bedrock_native_streaming(
                     route=route,
                     body_json=body_json,
                     upstream_model=upstream_model,
@@ -1266,6 +1267,173 @@ class CodingModelRouter:
             )
         response.background = background_tasks
         return response
+
+    async def _dispatch_bedrock_native_streaming(
+        self,
+        *,
+        route: dict[str, Any],
+        body_json: dict[str, Any],
+        upstream_model: str,
+        model_tier: str,
+        backend: str,
+        auth: str,
+        api_type: str,
+        price_per_mtok: float | None,
+        anthropic_price_per_mtok: float | None,
+        prompt_text: str | None,
+        accept_encoding: str | None,
+        request: Request,
+        request_id: str,
+        auth_info: dict[str, Any],
+        request_start_time: datetime,
+        dispatch_start: float,
+    ) -> StreamingResponse | JSONResponse:
+        """Streaming counterpart to _dispatch_bedrock_native_nonstreaming."""
+        from botocore.exceptions import (
+            ClientError,
+            NoCredentialsError,
+            TokenRetrievalError,
+        )
+
+        msg_id = _msg_id()
+        bedrock_client = bedrock_converse_client._get_bedrock_runtime_client(route)
+        converse_kwargs = _openai_to_converse_request(body_json, route["model"])
+
+        throttle_attempt = 0
+        while True:
+            try:
+                raw_response = await asyncio.to_thread(
+                    bedrock_client.converse_stream, **converse_kwargs
+                )
+                break
+            except (NoCredentialsError, TokenRetrievalError) as cred_exc:
+                detail = _bedrock_credential_error_detail(cred_exc)
+                if detail is None:
+                    raise
+                error_type, message = detail
+                self._record_error(
+                    request_id=request_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type=error_type,
+                    error_message=str(cred_exc),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=True,
+                )
+                return self._error_response(message, upstream_model, True)
+            except ClientError as exc:
+                error_info = exc.response.get("Error", {})
+                error_code = error_info.get("Code", "")
+                error_message_text = error_info.get("Message", "")
+                aws_request_id = exc.response.get("ResponseMetadata", {}).get(
+                    "RequestId"
+                )
+                if (
+                    _is_transient_bedrock_error_code(error_code)
+                    and throttle_attempt < _MAX_THROTTLE_RETRIES
+                ):
+                    delay = _throttle_backoff(throttle_attempt)
+                    throttle_attempt += 1
+                    logger.warning(
+                        "[coding-model-router] request_id=%s native Bedrock stream "
+                        "throttled (attempt %d/%d): backing off %.1fs code=%s",
+                        request_id,
+                        throttle_attempt,
+                        _MAX_THROTTLE_RETRIES,
+                        delay,
+                        error_code,
+                    )
+                    await asyncio.sleep(delay)
+                    continue
+                self._record_error(
+                    request_id=request_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_native_error",
+                    error_message=json.dumps(
+                        {
+                            "code": error_code,
+                            "message": error_message_text,
+                            "request_id": aws_request_id,
+                        }
+                    ),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=True,
+                )
+                return self._error_response(
+                    f"Bedrock error ({error_code}): {error_message_text}",
+                    upstream_model,
+                    True,
+                )
+
+        self._record_upstream_latency(
+            dispatch_start,
+            model_tier=model_tier,
+            upstream_model=upstream_model,
+            auth=auth,
+            api_type=api_type,
+        )
+
+        events = _iter_converse_stream_events(raw_response["stream"])
+
+        # Mirrors router.py's own _record_mid_stream_error closure for the
+        # Mantle path — a failure raised after streaming has already started
+        # is only ever shown inline to the client unless recorded here too.
+        def _record_mid_stream_error(message: str) -> None:
+            self._record_error(
+                request_id=msg_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type="bedrock_native_error",
+                error_message=message,
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=True,
+            )
+
+        if self._usage_tracker:
+            stream_gen = _converse_stream_with_usage_tracking(
+                events,
+                msg_id,
+                upstream_model,
+                self._usage_tracker,
+                auth_info,
+                request_start_time,
+                prompt_text=prompt_text,
+                model_tier=model_tier,
+                backend=backend,
+                price_per_mtok=price_per_mtok,
+                anthropic_price_per_mtok=anthropic_price_per_mtok,
+                compression_requested=accept_encoding,
+                compression_used="none",
+                request=request,
+                on_stream_error=_record_mid_stream_error,
+            )
+        else:
+            stream_gen = _stream_bedrock_converse_to_anthropic(
+                events,
+                msg_id,
+                upstream_model,
+                request=request,
+                on_stream_error=_record_mid_stream_error,
+            )
+        return StreamingResponse(
+            stream_gen,
+            status_code=200,
+            media_type="text/event-stream",
+            headers={"X-Accel-Buffering": "no"},
+        )
 
     def _handle_unexpected_upstream_error(
         self,

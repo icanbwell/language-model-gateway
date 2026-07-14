@@ -16,7 +16,7 @@ import asyncio
 import json
 import re
 import time
-from typing import Any, AsyncGenerator
+from typing import Any, AsyncGenerator, Iterator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
@@ -1887,3 +1887,171 @@ async def test_native_bedrock_nonstreaming_client_error_is_recorded(
     recorded = json.loads(call_kwargs["error_message"])
     assert recorded["code"] == "ValidationException"
     assert recorded["request_id"] == "aws-req-123"
+
+
+# ---------------------------------------------------------------------------
+# Native Bedrock Converse transport — streaming dispatch
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_happy_path(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {
+        "stream": iter(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Streamed hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+            ]
+        )
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    assert b"Streamed hi" in response.content
+    assert b"event: message_start" in response.content
+    assert b"event: message_stop" in response.content
+    mock_client.converse_stream.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_records_usage(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    router._usage_tracker = usage_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {
+        "stream": iter(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+            ]
+        )
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    await asyncio.sleep(0)
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["input_tokens"] == 4
+    assert call_kwargs["output_tokens"] == 2
+    assert call_kwargs["streaming"] is True
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_mid_stream_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A failure raised mid-iteration of converse_stream()'s EventStream
+    (after streaming has already started, so it can't become a clean
+    pre-first-chunk error response) must still reach model-router-errors —
+    mirroring test_bedrock_mantle_mid_stream_error_records_full_detail for
+    the Mantle path."""
+
+    def _raising_stream() -> Iterator[dict[str, Any]]:
+        yield {"messageStart": {"role": "assistant"}}
+        raise RuntimeError("native bedrock stream failed")
+
+    router = CodingModelRouter(bedrock_transport="native")
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {"stream": _raising_stream()}
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "native bedrock stream failed" in call_kwargs["error_message"]
