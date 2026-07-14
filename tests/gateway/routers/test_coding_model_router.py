@@ -1895,6 +1895,72 @@ async def test_native_bedrock_nonstreaming_client_error_is_recorded(
 
 
 @pytest.mark.asyncio
+async def test_native_bedrock_streaming_client_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A non-transient ClientError (e.g. ValidationException) raised by
+    converse_stream() itself — before any streaming has started — must be
+    recorded via _record_error with error_type="bedrock_native_error" and
+    the AWS request ID from the ClientError response metadata. Mirrors
+    test_native_bedrock_nonstreaming_client_error_is_recorded for the
+    streaming dispatch (_dispatch_bedrock_native_streaming), which previously
+    had no direct test of its ClientError/credential-error handling — only
+    the mid-stream-after-connection-succeeds error path was covered."""
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.side_effect = ClientError(
+        {
+            "Error": {"Code": "ValidationException", "Message": "bad request"},
+            "ResponseMetadata": {
+                "RequestId": "aws-req-456",
+                "HTTPStatusCode": 400,
+                "HTTPHeaders": {},
+                "RetryAttempts": 0,
+                "HostId": "",
+            },
+        },
+        "ConverseStream",
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ValidationException"
+    assert recorded["request_id"] == "aws-req-456"
+
+
+@pytest.mark.asyncio
 async def test_native_bedrock_streaming_happy_path(
     native_bedrock_route: dict[str, Any],
 ) -> None:

@@ -607,6 +607,36 @@ class TestStreamBedrockConverseToAnthropic:
         joined = b"".join(chunks).decode()
         assert "message_stop" in joined
 
+    @pytest.mark.asyncio
+    async def test_early_mid_stream_error_injects_visible_error_text(self) -> None:
+        """An error raised before any contentBlockStart (the common case for
+        a fast-failing upstream) must produce visible error text in the SSE
+        output, not a silently empty assistant message — message_start is
+        emitted eagerly at the top of this function, so unlike Mantle's lazy
+        message_start gate, this path needs its own "no block ever opened"
+        check to know it's safe to inject inline error text."""
+
+        async def _raising_events() -> AsyncGenerator[dict[str, Any], None]:
+            yield {"messageStart": {"role": "assistant"}}
+            raise RuntimeError("bedrock stream failed before first token")
+
+        captured: list[str] = []
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                _raising_events(),
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                on_stream_error=captured.append,
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert "[bedrock-native-proxy error]" in joined
+        assert "bedrock stream failed before first token" in joined
+        assert "event: content_block_start" in joined
+        assert "event: content_block_stop" in joined
+        assert "event: message_stop" in joined
+
 
 _TEST_START_TIME = datetime(2026, 1, 1, tzinfo=timezone.utc)
 

@@ -100,14 +100,25 @@ boto3 directly isn't worth the risk.
 
 ### Non-streaming
 
-`_anthropic_to_converse_request(body_json, model_id)` builds boto3 kwargs:
+**Deviation from this section as originally written:** the shipped function is
+`_openai_to_converse_request(oai_body_json, model_id)`, not `_anthropic_to_converse_request`.
+It builds boto3 kwargs from the already-OpenAI-Chat-Completions-shaped, context-budget-
+enforced request body (as produced by `message_translator.py`'s
+`_anthropic_to_openai_request`), not the raw Anthropic request — `router.py`'s dispatch
+runs context-budget enforcement upstream of the native-Bedrock branch, and that
+enforcement only understands the OpenAI shape, so converting from the original Anthropic
+request would bypass it. The field mapping itself is unchanged from what's described
+below, just sourced from OpenAI-shaped fields (`messages[].role/content/tool_calls`,
+`tools`/`tool_choice`) instead of Anthropic ones.
+
+`_openai_to_converse_request(oai_body_json, model_id)` builds boto3 kwargs:
 
 - `modelId` = `model_id`
-- `messages`: Anthropic `messages` → Converse block shape
+- `messages`: OpenAI `messages` → Converse block shape
   (`{"role": ..., "content": [{"text": ...} | {"toolUse": {...}} | {"toolResult": {...}}]}`)
 - `system` → `[{"text": ...}]`
 - `inferenceConfig` → `{"maxTokens", "temperature", "topP"}`
-- `toolConfig` → `{"tools": [...], "toolChoice": ...}` from Anthropic `tools`/`tool_choice`
+- `toolConfig` → `{"tools": [...], "toolChoice": ...}` from OpenAI `tools`/`tool_choice`
 
 `_converse_response_to_anthropic(resp, msg_id, upstream_model)` mirrors
 `_openai_to_anthropic_response`: reads `resp["output"]["message"]["content"]` blocks,

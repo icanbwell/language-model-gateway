@@ -314,6 +314,7 @@ async def _stream_bedrock_converse_to_anthropic(
     yield _sse_event("ping", {"type": "ping"})
 
     open_block_types: dict[int, str] = {}
+    any_block_opened = False
     stop_reason = "end_turn"
     stream_error_msg: str | None = None
 
@@ -327,6 +328,7 @@ async def _stream_bedrock_converse_to_anthropic(
                 )
                 break
             if "contentBlockStart" in event:
+                any_block_opened = True
                 idx = event["contentBlockStart"]["contentBlockIndex"]
                 start = event["contentBlockStart"].get("start") or {}
                 if "toolUse" in start:
@@ -405,6 +407,39 @@ async def _stream_bedrock_converse_to_anthropic(
     for idx in sorted(open_block_types):
         yield _sse_event(
             "content_block_stop", {"type": "content_block_stop", "index": idx}
+        )
+
+    # message_start is emitted eagerly at the top of this function (unlike
+    # Mantle's lazy gate in _stream_oai_sdk_to_anthropic), so an error that
+    # arrives before the first content block would otherwise produce a
+    # silently empty, well-formed assistant message — the client never sees
+    # that anything went wrong, even though the failure IS recorded via
+    # on_stream_error above. Mirror Mantle's inline-error-text injection here,
+    # gated on "no content block has ever been opened" (not just "no blocks
+    # are currently open" — a block could have opened AND closed before the
+    # error hit).
+    if stream_error_msg and not any_block_opened:
+        yield _sse_event(
+            "content_block_start",
+            {
+                "type": "content_block_start",
+                "index": 0,
+                "content_block": {"type": "text", "text": ""},
+            },
+        )
+        yield _sse_event(
+            "content_block_delta",
+            {
+                "type": "content_block_delta",
+                "index": 0,
+                "delta": {
+                    "type": "text_delta",
+                    "text": f"[bedrock-native-proxy error] {stream_error_msg}",
+                },
+            },
+        )
+        yield _sse_event(
+            "content_block_stop", {"type": "content_block_stop", "index": 0}
         )
 
     yield _sse_event(
