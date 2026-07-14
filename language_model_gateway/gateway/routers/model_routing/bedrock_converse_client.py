@@ -12,15 +12,19 @@ conversions, which are a distinct concern from either.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
 import threading
-from typing import Any
+from typing import Any, AsyncGenerator, Callable
+
+from starlette.requests import Request
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 from .bedrock_client import _TRANSIENT_STREAM_ERROR_CODES
+from .stream_converter import _sse_event
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
@@ -240,3 +244,174 @@ def _converse_response_to_anthropic(
             "output_tokens": usage.get("outputTokens", 0),
         },
     }
+
+
+async def _iter_converse_stream_events(
+    sync_events: Any,
+) -> AsyncGenerator[dict[str, Any], None]:
+    """Adapt boto3's synchronous converse_stream() EventStream onto the
+    asyncio event loop — pulling one event at a time via asyncio.to_thread,
+    since boto3 has no native async client and iterating its EventStream
+    blocks the thread it's called from.
+    """
+    iterator = iter(sync_events)
+
+    def _next_event() -> dict[str, Any] | None:
+        try:
+            result = next(iterator)
+            return result  # type: ignore[no-any-return]
+        except StopIteration:
+            return None
+
+    while True:
+        event = await asyncio.to_thread(_next_event)
+        if event is None:
+            return
+        yield event
+
+
+async def _stream_bedrock_converse_to_anthropic(
+    events: AsyncGenerator[dict[str, Any], None],
+    msg_id: str,
+    upstream_model: str,
+    usage_sink: dict[str, int] | None = None,
+    text_sink: dict[str, str] | None = None,
+    request: Request | None = None,
+    on_stream_error: Callable[[str], None] | None = None,
+) -> AsyncGenerator[bytes, None]:
+    """Convert a Bedrock Converse event stream to Anthropic SSE format —
+    the Converse-API counterpart to
+    stream_converter.py:_stream_oai_sdk_to_anthropic. Same external
+    contract (sinks, on_stream_error hook, emitted SSE event sequence) so
+    it plugs into the existing usage-tracking/cleanup wrapper pattern
+    without changes to that pattern itself.
+    """
+    if usage_sink is None:
+        usage_sink = {}
+    usage_sink["input_tokens"] = 0
+    usage_sink["output_tokens"] = 0
+    if text_sink is None:
+        text_sink = {}
+    text_sink["output_text"] = ""
+
+    yield _sse_event(
+        "message_start",
+        {
+            "type": "message_start",
+            "message": {
+                "id": msg_id,
+                "type": "message",
+                "role": "assistant",
+                "content": [],
+                "model": upstream_model,
+                "stop_reason": None,
+                "stop_sequence": None,
+                "usage": {"input_tokens": 0, "output_tokens": 1},
+            },
+        },
+    )
+    yield _sse_event("ping", {"type": "ping"})
+
+    open_block_types: dict[int, str] = {}
+    stop_reason = "end_turn"
+    stream_error_msg: str | None = None
+
+    try:
+        async for event in events:
+            if request is not None and await request.is_disconnected():
+                logger.info(
+                    "[bedrock-converse] request_id=%s client disconnected "
+                    "mid-stream — stopping upstream consumption",
+                    msg_id,
+                )
+                break
+            if "contentBlockStart" in event:
+                idx = event["contentBlockStart"]["contentBlockIndex"]
+                start = event["contentBlockStart"].get("start") or {}
+                if "toolUse" in start:
+                    tool_use = start["toolUse"]
+                    open_block_types[idx] = "tool_use"
+                    yield _sse_event(
+                        "content_block_start",
+                        {
+                            "type": "content_block_start",
+                            "index": idx,
+                            "content_block": {
+                                "type": "tool_use",
+                                "id": tool_use.get("toolUseId", ""),
+                                "name": tool_use.get("name", ""),
+                                "input": {},
+                            },
+                        },
+                    )
+                else:
+                    open_block_types[idx] = "text"
+                    yield _sse_event(
+                        "content_block_start",
+                        {
+                            "type": "content_block_start",
+                            "index": idx,
+                            "content_block": {"type": "text", "text": ""},
+                        },
+                    )
+            elif "contentBlockDelta" in event:
+                idx = event["contentBlockDelta"]["contentBlockIndex"]
+                delta = event["contentBlockDelta"]["delta"]
+                if "text" in delta:
+                    text_sink["output_text"] += delta["text"]
+                    yield _sse_event(
+                        "content_block_delta",
+                        {
+                            "type": "content_block_delta",
+                            "index": idx,
+                            "delta": {"type": "text_delta", "text": delta["text"]},
+                        },
+                    )
+                elif "toolUse" in delta:
+                    yield _sse_event(
+                        "content_block_delta",
+                        {
+                            "type": "content_block_delta",
+                            "index": idx,
+                            "delta": {
+                                "type": "input_json_delta",
+                                "partial_json": delta["toolUse"].get("input", ""),
+                            },
+                        },
+                    )
+            elif "contentBlockStop" in event:
+                idx = event["contentBlockStop"]["contentBlockIndex"]
+                open_block_types.pop(idx, None)
+                yield _sse_event(
+                    "content_block_stop", {"type": "content_block_stop", "index": idx}
+                )
+            elif "messageStop" in event:
+                stop_reason = _CONVERSE_TO_ANT_STOP.get(
+                    event["messageStop"].get("stopReason", ""), "end_turn"
+                )
+            elif "metadata" in event:
+                usage = event["metadata"].get("usage", {})
+                if "inputTokens" in usage:
+                    usage_sink["input_tokens"] = usage["inputTokens"]
+                if "outputTokens" in usage:
+                    usage_sink["output_tokens"] = usage["outputTokens"]
+    except Exception as exc:
+        logger.error("[bedrock-converse] upstream stream error: %s", exc)
+        stream_error_msg = str(exc)
+        if on_stream_error is not None:
+            on_stream_error(stream_error_msg)
+
+    for idx in sorted(open_block_types):
+        yield _sse_event(
+            "content_block_stop", {"type": "content_block_stop", "index": idx}
+        )
+
+    yield _sse_event(
+        "message_delta",
+        {
+            "type": "message_delta",
+            "delta": {"stop_reason": stop_reason, "stop_sequence": None},
+            "usage": {"output_tokens": usage_sink["output_tokens"]},
+        },
+    )
+    yield _sse_event("message_stop", {"type": "message_stop"})

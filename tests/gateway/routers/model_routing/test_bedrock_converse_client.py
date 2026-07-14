@@ -7,14 +7,18 @@ from __future__ import annotations
 
 import threading
 import time
-from typing import Any
+from typing import Any, AsyncGenerator
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
     _converse_response_to_anthropic,
     _get_bedrock_runtime_client,
     _is_transient_bedrock_error_code,
+    _iter_converse_stream_events,
     _openai_to_converse_request,
+    _stream_bedrock_converse_to_anthropic,
 )
 
 
@@ -438,3 +442,164 @@ class TestConverseResponseToAnthropic:
             resp, "msg_abc", "qwen.qwen3-coder-next"
         )
         assert result["usage"] == {"input_tokens": 0, "output_tokens": 0}
+
+
+class FakeSyncEventStream:
+    """Stands in for boto3's synchronous EventStream — a plain iterator."""
+
+    def __init__(self, events: list[dict[str, Any]]) -> None:
+        self._iter = iter(events)
+
+    def __iter__(self) -> "FakeSyncEventStream":
+        return self
+
+    def __next__(self) -> dict[str, Any]:
+        return next(self._iter)
+
+
+class FakeSyncEventStreamThatRaises:
+    def __init__(self, events: list[dict[str, Any]], exc: Exception) -> None:
+        self._iter = iter(events)
+        self._exc = exc
+
+    def __iter__(self) -> "FakeSyncEventStreamThatRaises":
+        return self
+
+    def __next__(self) -> dict[str, Any]:
+        try:
+            return next(self._iter)
+        except StopIteration:
+            raise self._exc from None
+
+
+class TestIterConverseStreamEvents:
+    @pytest.mark.asyncio
+    async def test_yields_events_in_order(self) -> None:
+        events = [
+            {"messageStart": {"role": "assistant"}},
+            {"messageStop": {"stopReason": "end_turn"}},
+        ]
+        sync_stream = FakeSyncEventStream(events)
+        result = [e async for e in _iter_converse_stream_events(sync_stream)]
+        assert result == events
+
+    @pytest.mark.asyncio
+    async def test_propagates_exception_mid_stream(self) -> None:
+        events = [{"messageStart": {"role": "assistant"}}]
+        sync_stream = FakeSyncEventStreamThatRaises(events, RuntimeError("boom"))
+        collected = []
+        with pytest.raises(RuntimeError, match="boom"):
+            async for e in _iter_converse_stream_events(sync_stream):
+                collected.append(e)
+        assert collected == events
+
+
+class TestStreamBedrockConverseToAnthropic:
+    @staticmethod
+    async def _fake_events(
+        events: list[dict[str, Any]],
+    ) -> AsyncGenerator[dict[str, Any], None]:
+        for e in events:
+            yield e
+
+    @pytest.mark.asyncio
+    async def test_text_only_stream_emits_expected_sse_sequence(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Hello"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 3, "outputTokens": 2}}},
+            ]
+        )
+        usage_sink: dict[str, int] = {}
+        text_sink: dict[str, str] = {}
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                events,
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                usage_sink=usage_sink,
+                text_sink=text_sink,
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert "event: message_start" in joined
+        assert "event: content_block_start" in joined
+        assert '"type": "text"' in joined
+        assert "event: content_block_delta" in joined
+        assert '"text": "Hello"' in joined
+        assert "event: content_block_stop" in joined
+        assert "event: message_delta" in joined
+        assert "event: message_stop" in joined
+        assert usage_sink == {"input_tokens": 3, "output_tokens": 2}
+        assert text_sink == {"output_text": "Hello"}
+
+    @pytest.mark.asyncio
+    async def test_tool_use_stream_emits_tool_use_block(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {
+                    "contentBlockStart": {
+                        "contentBlockIndex": 0,
+                        "start": {
+                            "toolUse": {
+                                "toolUseId": "tooluse_1",
+                                "name": "get_weather",
+                            }
+                        },
+                    }
+                },
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"toolUse": {"input": '{"city": "Boston"}'}},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "tool_use"}},
+                {"metadata": {"usage": {"inputTokens": 5, "outputTokens": 4}}},
+            ]
+        )
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                events, "msg_abc", "qwen.qwen3-coder-next"
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert '"type": "tool_use"' in joined
+        assert '"id": "tooluse_1"' in joined
+        assert '"name": "get_weather"' in joined
+        assert "input_json_delta" in joined
+        assert '"partial_json": "{\\"city\\": \\"Boston\\"}"' in joined
+        assert '"stop_reason": "tool_use"' in joined
+
+    @pytest.mark.asyncio
+    async def test_mid_stream_error_invokes_on_stream_error(self) -> None:
+        async def _raising_events() -> AsyncGenerator[dict[str, Any], None]:
+            yield {"messageStart": {"role": "assistant"}}
+            raise RuntimeError("bedrock stream failed")
+
+        captured: list[str] = []
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                _raising_events(),
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                on_stream_error=captured.append,
+            )
+        ]
+        assert captured == ["bedrock stream failed"]
+        joined = b"".join(chunks).decode()
+        assert "message_stop" in joined
