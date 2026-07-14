@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import threading
+from datetime import datetime
 from typing import Any, AsyncGenerator, Callable
 
 from starlette.requests import Request
@@ -24,7 +25,7 @@ from starlette.requests import Request
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 from .bedrock_client import _TRANSIENT_STREAM_ERROR_CODES
-from .stream_converter import _sse_event
+from .stream_converter import _fire_and_forget, _sse_event
 
 logger = logging.getLogger(__name__)
 logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
@@ -415,3 +416,73 @@ async def _stream_bedrock_converse_to_anthropic(
         },
     )
     yield _sse_event("message_stop", {"type": "message_stop"})
+
+
+async def _converse_stream_with_usage_tracking(
+    events: AsyncGenerator[dict[str, Any], None],
+    msg_id: str,
+    upstream_model: str,
+    usage_tracker: Any,
+    auth_info: dict[str, Any],
+    start_time: datetime,
+    *,
+    prompt_text: str | None = None,
+    model_tier: str | None = None,
+    backend: str | None = None,
+    price_per_mtok: float | None = None,
+    anthropic_price_per_mtok: float | None = None,
+    compression_requested: str | None = None,
+    compression_used: str | None = None,
+    request: Request | None = None,
+    on_stream_error: Callable[[str], None] | None = None,
+) -> AsyncGenerator[bytes, None]:
+    """Stream wrapper that records usage to MongoDB after the stream
+    completes — the Converse-API counterpart to
+    stream_converter.py:_oai_stream_with_usage_tracking. No httpx client to
+    close here (boto3 manages its own connection pooling internally), so
+    this is simpler than its OAI counterpart — just the sink bookkeeping
+    and the record_usage call.
+    """
+    usage_sink: dict[str, int] = {}
+    text_sink: dict[str, str] = {}
+    async for chunk in _stream_bedrock_converse_to_anthropic(
+        events,
+        msg_id,
+        upstream_model,
+        usage_sink=usage_sink,
+        text_sink=text_sink,
+        request=request,
+        on_stream_error=on_stream_error,
+    ):
+        yield chunk
+
+    input_tokens = usage_sink.get("input_tokens", 0)
+    output_tokens = usage_sink.get("output_tokens", 0)
+    if usage_tracker and (input_tokens > 0 or output_tokens > 0):
+        _fire_and_forget(
+            usage_tracker.record_usage(
+                request_id=msg_id,
+                user_id=auth_info.get("user_id"),
+                model=upstream_model,
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                auth_provider=auth_info.get("auth_provider"),
+                email=auth_info.get("email"),
+                user_name=auth_info.get("user_name"),
+                session_id=auth_info.get("session_id"),
+                account_uuid=auth_info.get("account_uuid"),
+                agent_id=auth_info.get("agent_id"),
+                parent_agent_id=auth_info.get("parent_agent_id"),
+                model_tier=model_tier,
+                backend=backend,
+                price_per_mtok=price_per_mtok,
+                anthropic_price_per_mtok=anthropic_price_per_mtok,
+                streaming=True,
+                compression_requested=compression_requested,
+                compression_used=compression_used,
+                custom_headers=auth_info.get("custom_headers"),
+                prompt_text=prompt_text,
+                response_text=text_sink.get("output_text"),
+                start_time=start_time,
+            )
+        )

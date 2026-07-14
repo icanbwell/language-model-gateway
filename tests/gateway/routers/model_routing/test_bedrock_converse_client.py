@@ -5,15 +5,18 @@ classification helpers.
 
 from __future__ import annotations
 
+import asyncio
 import threading
 import time
+from datetime import datetime, timezone
 from typing import Any, AsyncGenerator
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
     _converse_response_to_anthropic,
+    _converse_stream_with_usage_tracking,
     _get_bedrock_runtime_client,
     _is_transient_bedrock_error_code,
     _iter_converse_stream_events,
@@ -603,3 +606,89 @@ class TestStreamBedrockConverseToAnthropic:
         assert captured == ["bedrock stream failed"]
         joined = b"".join(chunks).decode()
         assert "message_stop" in joined
+
+
+_TEST_START_TIME = datetime(2026, 1, 1, tzinfo=timezone.utc)
+
+
+class TestConverseStreamWithUsageTracking:
+    @staticmethod
+    async def _fake_events(
+        events: list[dict[str, Any]],
+    ) -> AsyncGenerator[dict[str, Any], None]:
+        for e in events:
+            yield e
+
+    @pytest.mark.asyncio
+    async def test_records_usage_after_stream_completes(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 7, "outputTokens": 3}}},
+            ]
+        )
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+        auth_info = {"user_id": "user-1", "session_id": "sess-1"}
+
+        chunks = [
+            c
+            async for c in _converse_stream_with_usage_tracking(
+                events,
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                usage_tracker,
+                auth_info,
+                _TEST_START_TIME,
+                model_tier="sonnet",
+                backend="aws_bedrock",
+            )
+        ]
+        assert b"".join(chunks)  # something was yielded
+
+        await asyncio.sleep(0)  # let the fire-and-forget task run
+        usage_tracker.record_usage.assert_awaited_once()
+        call_kwargs = usage_tracker.record_usage.call_args.kwargs
+        assert call_kwargs["request_id"] == "msg_abc"
+        assert call_kwargs["user_id"] == "user-1"
+        assert call_kwargs["model"] == "qwen.qwen3-coder-next"
+        assert call_kwargs["input_tokens"] == 7
+        assert call_kwargs["output_tokens"] == 3
+        assert call_kwargs["model_tier"] == "sonnet"
+        assert call_kwargs["backend"] == "aws_bedrock"
+        assert call_kwargs["streaming"] is True
+        assert call_kwargs["response_text"] == "Hi"
+
+    @pytest.mark.asyncio
+    async def test_skips_recording_when_no_tokens_used(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"messageStop": {"stopReason": "end_turn"}},
+            ]
+        )
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        _ = [
+            c
+            async for c in _converse_stream_with_usage_tracking(
+                events,
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                usage_tracker,
+                {},
+                _TEST_START_TIME,
+            )
+        ]
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_not_awaited()
