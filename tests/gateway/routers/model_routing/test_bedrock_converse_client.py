@@ -6,6 +6,7 @@ classification helpers.
 from __future__ import annotations
 
 import threading
+import time
 from typing import Any
 from unittest.mock import MagicMock, patch
 
@@ -80,6 +81,10 @@ class TestGetBedrockRuntimeClient:
             barrier.wait()
             results.append(_get_bedrock_runtime_client(route))
 
+        def _slow_client(*args: Any, **kwargs: Any) -> Any:
+            time.sleep(0.001)
+            return MagicMock()
+
         with (
             patch(
                 "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._CLIENT_CACHE",
@@ -87,9 +92,7 @@ class TestGetBedrockRuntimeClient:
             ),
             patch("boto3.Session") as mock_session_cls,
         ):
-            mock_session_cls.return_value.client.side_effect = lambda *a, **k: (
-                MagicMock()
-            )
+            mock_session_cls.return_value.client.side_effect = _slow_client
             threads = [threading.Thread(target=_call) for _ in range(2)]
             for t in threads:
                 t.start()
