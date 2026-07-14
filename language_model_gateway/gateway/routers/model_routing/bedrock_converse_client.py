@@ -12,11 +12,18 @@ conversions, which are a distinct concern from either.
 
 from __future__ import annotations
 
+import json
+import logging
 import os
 import threading
 from typing import Any
 
+from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
+
 from .bedrock_client import _TRANSIENT_STREAM_ERROR_CODES
+
+logger = logging.getLogger(__name__)
+logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
 
 _CLIENT_CACHE: dict[tuple[str | None, str], Any] = {}
 _CLIENT_CACHE_LOCK = threading.Lock()
@@ -53,3 +60,127 @@ def _is_transient_bedrock_error_code(code: str | None) -> bool:
     are the same underlying Bedrock exception names either way.
     """
     return code in _TRANSIENT_STREAM_ERROR_CODES
+
+
+def _openai_to_converse_request(
+    oai_body_json: dict[str, Any], model_id: str
+) -> dict[str, Any]:
+    """Translate an OpenAI-Chat-Completions-shaped request body (as produced
+    by message_translator.py's _anthropic_to_openai_request, and already run
+    through context-budget enforcement by the time router.py reaches the
+    native-Bedrock dispatch branch) into kwargs for boto3's
+    bedrock-runtime.converse / .converse_stream.
+
+    Deliberately converts from the OpenAI shape, not the original Anthropic
+    request — see the "Deviation from the committed spec" note in this
+    plan/module for why: budget enforcement already ran on the OpenAI shape
+    upstream of this call, and re-deriving from Anthropic would skip it.
+    """
+    converse: dict[str, Any] = {"modelId": model_id}
+
+    messages: list[dict[str, Any]] = []
+    system: list[dict[str, str]] = []
+    pending_tool_results: list[dict[str, Any]] = []
+
+    def _flush_tool_results() -> None:
+        if pending_tool_results:
+            messages.append({"role": "user", "content": list(pending_tool_results)})
+            pending_tool_results.clear()
+
+    for msg in oai_body_json.get("messages", []):
+        role = msg.get("role")
+        if role == "system":
+            system.append({"text": msg.get("content") or ""})
+            continue
+        if role == "tool":
+            pending_tool_results.append(
+                {
+                    "toolResult": {
+                        "toolUseId": msg.get("tool_call_id", ""),
+                        "content": [{"text": msg.get("content") or ""}],
+                    }
+                }
+            )
+            continue
+        _flush_tool_results()
+        if role == "assistant":
+            content: list[dict[str, Any]] = []
+            if text := msg.get("content"):
+                content.append({"text": text})
+            for tc in msg.get("tool_calls") or []:
+                fn = tc.get("function", {})
+                try:
+                    tool_input = json.loads(fn.get("arguments") or "{}")
+                except json.JSONDecodeError:
+                    tool_input = {}
+                content.append(
+                    {
+                        "toolUse": {
+                            "toolUseId": tc.get("id", ""),
+                            "name": fn.get("name", ""),
+                            "input": tool_input,
+                        }
+                    }
+                )
+            messages.append({"role": "assistant", "content": content})
+        elif role == "user":
+            content_field = msg.get("content")
+            if isinstance(content_field, str):
+                messages.append({"role": "user", "content": [{"text": content_field}]})
+            elif isinstance(content_field, list):
+                blocks: list[dict[str, Any]] = []
+                for block in content_field:
+                    block_type = block.get("type")
+                    if block_type == "text":
+                        blocks.append({"text": block.get("text", "")})
+                    elif block_type == "image_url":
+                        logger.warning(
+                            "[bedrock-converse] dropping image content block — "
+                            "native Bedrock transport does not support image "
+                            "input yet"
+                        )
+                    # Unknown block types are silently skipped, not raised —
+                    # forward-compatible with new Anthropic/OpenAI content
+                    # block types this router doesn't know about yet.
+                messages.append({"role": "user", "content": blocks})
+    _flush_tool_results()
+
+    converse["messages"] = messages
+    if system:
+        converse["system"] = system
+
+    inference_config: dict[str, Any] = {}
+    if "max_tokens" in oai_body_json:
+        inference_config["maxTokens"] = oai_body_json["max_tokens"]
+    if "temperature" in oai_body_json:
+        inference_config["temperature"] = oai_body_json["temperature"]
+    if "top_p" in oai_body_json:
+        inference_config["topP"] = oai_body_json["top_p"]
+    if inference_config:
+        converse["inferenceConfig"] = inference_config
+
+    if tools := oai_body_json.get("tools"):
+        tool_config: dict[str, Any] = {
+            "tools": [
+                {
+                    "toolSpec": {
+                        "name": t["function"]["name"],
+                        "description": t["function"].get("description", ""),
+                        "inputSchema": {"json": t["function"].get("parameters", {})},
+                    }
+                }
+                for t in tools
+            ]
+        }
+        tool_choice = oai_body_json.get("tool_choice")
+        if tool_choice == "auto":
+            tool_config["toolChoice"] = {"auto": {}}
+        elif tool_choice == "required":
+            tool_config["toolChoice"] = {"any": {}}
+        elif isinstance(tool_choice, dict):
+            tool_config["toolChoice"] = {
+                "tool": {"name": tool_choice.get("function", {}).get("name", "")}
+            }
+        converse["toolConfig"] = tool_config
+
+    return converse
