@@ -5,6 +5,8 @@ classification helpers.
 
 from __future__ import annotations
 
+import threading
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
@@ -66,6 +68,37 @@ class TestGetBedrockRuntimeClient:
 
             assert first is second
             mock_session_cls.return_value.client.assert_called_once()
+
+    def test_concurrent_calls_for_same_new_key_construct_only_one_client(
+        self,
+    ) -> None:
+        route = {"aws_region": "us-east-1"}
+        barrier = threading.Barrier(2)
+        results: list[Any] = []
+
+        def _call() -> None:
+            barrier.wait()
+            results.append(_get_bedrock_runtime_client(route))
+
+        with (
+            patch(
+                "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._CLIENT_CACHE",
+                {},
+            ),
+            patch("boto3.Session") as mock_session_cls,
+        ):
+            mock_session_cls.return_value.client.side_effect = lambda *a, **k: (
+                MagicMock()
+            )
+            threads = [threading.Thread(target=_call) for _ in range(2)]
+            for t in threads:
+                t.start()
+            for t in threads:
+                t.join()
+
+        assert len(results) == 2
+        assert results[0] is results[1]
+        assert mock_session_cls.return_value.client.call_count == 1
 
 
 class TestIsTransientBedrockErrorCode:

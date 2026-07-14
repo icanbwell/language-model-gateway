@@ -13,11 +13,13 @@ conversions, which are a distinct concern from either.
 from __future__ import annotations
 
 import os
+import threading
 from typing import Any
 
 from .bedrock_client import _TRANSIENT_STREAM_ERROR_CODES
 
 _CLIENT_CACHE: dict[tuple[str | None, str], Any] = {}
+_CLIENT_CACHE_LOCK = threading.Lock()
 
 
 def _get_bedrock_runtime_client(route: dict[str, Any]) -> Any:
@@ -33,8 +35,14 @@ def _get_bedrock_runtime_client(route: dict[str, Any]) -> Any:
     region = route.get("aws_region", "us-east-1")
     key = (profile, region)
     if key not in _CLIENT_CACHE:
-        session = boto3.Session(profile_name=profile) if profile else boto3.Session()
-        _CLIENT_CACHE[key] = session.client("bedrock-runtime", region_name=region)
+        with _CLIENT_CACHE_LOCK:
+            if key not in _CLIENT_CACHE:
+                session = (
+                    boto3.Session(profile_name=profile) if profile else boto3.Session()
+                )
+                _CLIENT_CACHE[key] = session.client(
+                    "bedrock-runtime", region_name=region
+                )
     return _CLIENT_CACHE[key]
 
 
