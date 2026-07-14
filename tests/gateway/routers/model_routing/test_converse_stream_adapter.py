@@ -300,6 +300,66 @@ class TestStreamBedrockConverseToAnthropic:
         assert "event: content_block_stop" in joined
         assert "event: message_stop" in joined
 
+    @pytest.mark.asyncio
+    async def test_delta_without_prior_start_is_lazily_opened(self) -> None:
+        """Observed live with qwen.qwen3-coder-next over the native Bedrock
+        transport: the upstream skips contentBlockStart entirely and goes
+        straight to contentBlockDelta. Forwarding that delta without ever
+        having sent a content_block_start breaks Claude Code's SSE parser
+        ("Content block not found") and starves its context-usage tracking,
+        which is what makes the context bar read 0% until auto-compact."""
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Hi! How can I help you today?"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 9, "outputTokens": 10}}},
+            ]
+        )
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                events, "msg_abc", "qwen.qwen3-coder-next"
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        start_idx = joined.index("event: content_block_start")
+        delta_idx = joined.index("event: content_block_delta")
+        assert start_idx < delta_idx
+        assert '"type": "text"' in joined
+        assert "Hi! How can I help you today?" in joined
+
+    @pytest.mark.asyncio
+    async def test_no_visible_content_still_opens_a_content_block(self) -> None:
+        """A completion that ends with no content block ever opened and no
+        error (e.g. the model exhausted its token budget entirely within
+        hidden reasoning) must still produce a well-formed message — a
+        message with content=[] isn't valid Anthropic protocol and breaks
+        Claude Code's SSE parser."""
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"messageStop": {"stopReason": "max_tokens"}},
+                {"metadata": {"usage": {"inputTokens": 9, "outputTokens": 32768}}},
+            ]
+        )
+        chunks = [
+            c
+            async for c in _stream_bedrock_converse_to_anthropic(
+                events, "msg_abc", "qwen.qwen3-coder-next"
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert "event: content_block_start" in joined
+        assert "event: content_block_stop" in joined
+        assert '"stop_reason": "max_tokens"' in joined
+
 
 _TEST_START_TIME = datetime(2026, 1, 1, tzinfo=timezone.utc)
 

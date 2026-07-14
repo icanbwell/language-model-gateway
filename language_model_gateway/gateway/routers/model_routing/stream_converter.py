@@ -294,12 +294,20 @@ async def _stream_oai_sdk_to_anthropic(
         )
         yield _sse_event("ping", {"type": "ping"})
 
-    if _stream_error_msg and not sent_message_start:
+    if _stream_error_msg and not open_blocks:
+        # Guard on `open_blocks`, not `sent_message_start` — the latter is
+        # already True as soon as the first chunk arrives, so an upstream
+        # error on a later chunk (e.g. mid-<think>, before any visible text)
+        # would otherwise skip this and silently close an empty message
+        # with no indication anything went wrong.
+        text_idx = next_idx
+        next_idx += 1
+        open_blocks[text_idx] = {"type": "text"}
         yield _sse_event(
             "content_block_start",
             {
                 "type": "content_block_start",
-                "index": 0,
+                "index": text_idx,
                 "content_block": {"type": "text", "text": ""},
             },
         )
@@ -307,15 +315,12 @@ async def _stream_oai_sdk_to_anthropic(
             "content_block_delta",
             {
                 "type": "content_block_delta",
-                "index": 0,
+                "index": text_idx,
                 "delta": {
                     "type": "text_delta",
                     "text": f"[anthropic-proxy error] {_stream_error_msg}",
                 },
             },
-        )
-        yield _sse_event(
-            "content_block_stop", {"type": "content_block_stop", "index": 0}
         )
 
     remaining = thinking_stripper.flush()
@@ -339,6 +344,22 @@ async def _stream_oai_sdk_to_anthropic(
                 "type": "content_block_delta",
                 "index": text_idx,
                 "delta": {"type": "text_delta", "text": remaining},
+            },
+        )
+
+    if not open_blocks:
+        # A message with zero content blocks (e.g. the model ran out of
+        # max_tokens while still inside an unterminated <think> block, so
+        # nothing visible was ever emitted) is not valid Anthropic protocol
+        # and breaks Claude Code's SSE parser ("Content block not found").
+        # Emit an empty text block so the message is always well-formed.
+        open_blocks[next_idx] = {"type": "text"}
+        yield _sse_event(
+            "content_block_start",
+            {
+                "type": "content_block_start",
+                "index": next_idx,
+                "content_block": {"type": "text", "text": ""},
             },
         )
 

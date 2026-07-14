@@ -197,6 +197,61 @@ class TestOnStreamError:
         ]
         assert any(b"partial" in c for c in chunks)
 
+    async def test_mid_stream_failure_before_any_content_still_shows_error(
+        self,
+    ) -> None:
+        """A failure that happens after message_start was sent but before any
+        content block was ever opened (e.g. the model was still inside an
+        unterminated <think> block) must still surface inline error text.
+        Previously this guarded on `sent_message_start`, which is already
+        True as soon as the first chunk arrives, so the error was silently
+        dropped and the client got an empty assistant message."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="<think>still reasoning")
+            raise RuntimeError("upstream connection reset")
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+
+        joined = b"".join(chunks)
+        assert b"[anthropic-proxy error] upstream connection reset" in joined
+        # Exactly one content block was opened and closed — no duplicate
+        # index-0 block from a later flush()/remaining-text step.
+        assert joined.count(b'"content_block_start"') == 1
+        assert joined.count(b'"content_block_stop"') == 1
+
+    async def test_stream_with_no_visible_content_still_opens_a_content_block(
+        self,
+    ) -> None:
+        """A completion that never emits visible text (e.g. it hits
+        max_tokens while still inside an unterminated <think> block) must
+        still produce a well-formed message with at least one content
+        block — a message with content=[] is not valid Anthropic protocol
+        and breaks Claude Code's SSE parser ("Content block not found")."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(
+                content="<think>reasoning that never closes",
+                finish_reason="length",
+            )
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+
+        joined = b"".join(chunks)
+        assert b'"content_block_start"' in joined
+        assert b'"content_block_stop"' in joined
+        assert b'"max_tokens"' in joined  # stop_reason mapped through
+
 
 class TestSseEventCount:
     async def test_records_sse_event_count_matching_yielded_chunks(self) -> None:

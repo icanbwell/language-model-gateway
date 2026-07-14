@@ -150,6 +150,34 @@ async def _stream_bedrock_converse_to_anthropic(
             elif "contentBlockDelta" in event:
                 idx = event["contentBlockDelta"]["contentBlockIndex"]
                 delta = event["contentBlockDelta"]["delta"]
+                if idx not in open_block_types:
+                    # Some Bedrock Converse backends (observed with
+                    # qwen.qwen3-coder-next over the native transport) skip
+                    # contentBlockStart and go straight to contentBlockDelta.
+                    # Forwarding the delta without ever having sent a start
+                    # for this index breaks Claude Code's SSE parser
+                    # ("Content block not found") — lazily open it here so
+                    # the client-facing stream stays well-formed.
+                    any_block_opened = True
+                    block_type = "tool_use" if "toolUse" in delta else "text"
+                    open_block_types[idx] = block_type
+                    yield _sse_event(
+                        "content_block_start",
+                        {
+                            "type": "content_block_start",
+                            "index": idx,
+                            "content_block": (
+                                {
+                                    "type": "tool_use",
+                                    "id": "",
+                                    "name": "",
+                                    "input": {},
+                                }
+                                if block_type == "tool_use"
+                                else {"type": "text", "text": ""}
+                            ),
+                        },
+                    )
                 if "text" in delta:
                     text_sink["output_text"] += delta["text"]
                     yield _sse_event(
@@ -232,6 +260,24 @@ async def _stream_bedrock_converse_to_anthropic(
                     "type": "text_delta",
                     "text": f"[bedrock-native-proxy error] {stream_error_msg}",
                 },
+            },
+        )
+        yield _sse_event(
+            "content_block_stop", {"type": "content_block_stop", "index": 0}
+        )
+
+    if not any_block_opened and not stream_error_msg:
+        # No error, but the model produced no visible content at all (e.g.
+        # it exhausted its token budget entirely within reasoning/thinking
+        # that never surfaced as a content block). A message with
+        # content=[] isn't valid Anthropic protocol and breaks Claude
+        # Code's SSE parser, so guarantee at least one (empty) block.
+        yield _sse_event(
+            "content_block_start",
+            {
+                "type": "content_block_start",
+                "index": 0,
+                "content_block": {"type": "text", "text": ""},
             },
         )
         yield _sse_event(
