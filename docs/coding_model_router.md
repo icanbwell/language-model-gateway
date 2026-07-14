@@ -310,6 +310,63 @@ consuming — and paying for — upstream tokens nobody will receive. This only
 stops *upstream consumption*; the SSE write side to an already-closed client
 connection is handled independently by Starlette/the ASGI server.
 
+### SSE content-block well-formedness (2026-07-14 incident)
+
+**Symptom:** Claude Code's context-usage percentage stayed at 0% until
+auto-compact recalculated it from scratch, and its debug log showed `Error
+streaming, falling back to non-streaming mode: Content block not found`
+immediately after the first chunk of a stream arrived.
+
+**Root cause:** an Anthropic SSE stream is only valid if every
+`content_block_delta`/`content_block_stop` event's index was previously
+opened by a `content_block_start`, and the finished message has at least one
+content block. Two independent gaps let the router emit a stream violating
+that invariant:
+
+* **`_stream_bedrock_converse_to_anthropic`** (`converse_stream_adapter.py`,
+  the `MODEL_ROUTING_BEDROCK_TRANSPORT: native` path this repo's
+  `docker-compose.yml` sets for local dev) — AWS Bedrock's Converse API, for
+  `qwen.qwen3-coder-next` over the native transport, skips `contentBlockStart`
+  entirely and goes straight to `contentBlockDelta`. The translator forwarded
+  that delta verbatim, producing a delta for a block index the client had
+  never seen opened. This was the actual live trigger of the symptom above.
+* **`_stream_oai_sdk_to_anthropic`** (`stream_converter.py`, the Mantle
+  path) — the inline error-visibility guard checked `not sent_message_start`
+  instead of `not open_blocks`. `sent_message_start` goes `True` as soon as
+  the first upstream chunk arrives, so a failure later in the stream (e.g.
+  the model exhausting `max_tokens` while still inside an unterminated
+  `<think>` block, before any visible text ever surfaced) silently closed an
+  empty assistant message instead of showing error text — a well-formed but
+  misleading stream, found while auditing the Mantle path for the same class
+  of bug.
+
+Diagnosing which of the two translators was actually live took longer than
+fixing it: the router logs `-> BEDROCK ... api=openai streaming=True`
+regardless of which transport handles the request, so that line alone doesn't
+tell you whether `_bedrock_transport == "native"` diverted it to
+`BedrockNativeDispatcher` before ever reaching the Mantle/OpenAI SDK code.
+Confirming the live path required replaying the exact captured request body
+against the running gateway with `curl` and instrumenting each candidate
+translator directly, rather than trusting that log line.
+
+**Fix:** both translators now (a) lazily open a content block on its first
+delta if the upstream never sent an explicit start event, and (b) emit at
+least one empty content block if a completion ends with none opened and no
+error (e.g. the model exhausts its token budget entirely inside hidden
+reasoning). The error-visibility guards in both translators are gated on
+"has any block ever opened" rather than "has message_start been sent" or
+"are any blocks currently open" — either of the latter two can be true/false
+at the wrong time and either miss a real error or collide with an
+already-open block.
+
+Audited and confirmed safe by construction, no fix needed: Anthropic
+passthrough streaming and non-streaming (byte-for-byte relay, no
+transformation), non-streaming Mantle/Converse responses (a JSON body's
+`content` array has no SSE index-matching invariant to violate, even if
+empty), and `router.py`'s `_error_response` (already always opens a block
+before its first delta). Regression tests: `test_stream_converter.py` and
+`test_converse_stream_adapter.py`.
+
 ---
 
 ## Usage tracking
