@@ -16,12 +16,13 @@ import asyncio
 import json
 import re
 import time
-from typing import AsyncGenerator
+from typing import Any, AsyncGenerator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import openai
 import pytest
+from botocore.exceptions import ClientError
 from fastapi import FastAPI
 from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
     AuthorizationBearerTokenInvalidException,
@@ -1669,3 +1670,220 @@ async def test_bedrock_mantle_connection_error_is_not_misrecorded_as_stream_erro
     call_kwargs = error_tracker.record_error.call_args.kwargs
     assert call_kwargs["error_type"] == "APIConnectionError"
     usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+# ---------------------------------------------------------------------------
+# Native Bedrock Converse transport — non-streaming dispatch
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+def native_bedrock_route() -> dict[str, Any]:
+    return {
+        "tier": "sonnet",
+        "claude_model": "claude-test-native-sonnet",
+        "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "aws",
+        "aws_region": "us-east-1",
+        "api_type": "openai",
+        "price_per_mtok": 0.5,
+        "anthropic_price_per_mtok": 3.0,
+    }
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_happy_path(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """When bedrock_transport="native" and the route's auth is "aws", a
+    non-streaming request must go through the Converse API, not Mantle's
+    openai.AsyncOpenAI client."""
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.return_value = {
+        "output": {"message": {"role": "assistant", "content": [{"text": "Hi there"}]}},
+        "stopReason": "end_turn",
+        "usage": {"inputTokens": 5, "outputTokens": 3, "totalTokens": 8},
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    resp_json = response.json()
+    assert resp_json["content"] == [{"type": "text", "text": "Hi there"}]
+    assert resp_json["stop_reason"] == "end_turn"
+    mock_client.converse.assert_called_once()
+    call_kwargs = mock_client.converse.call_args.kwargs
+    assert call_kwargs["modelId"] == "qwen.qwen3-coder-next"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_mantle_default_transport_unaffected(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """With bedrock_transport left at its "mantle" default, an auth="aws"
+    route must still go through the openai SDK path — the native branch
+    must not be reachable without the explicit toggle."""
+    router = CodingModelRouter()  # default bedrock_transport="mantle"
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            # No httpx_mock response registered for the openai SDK's target
+            # URL, so this will fail to connect — that's fine, we're only
+            # asserting the native client was never touched.
+            try:
+                await client.post(
+                    "/v1/messages",
+                    json=body,
+                    headers={"content-type": "application/json"},
+                )
+            except Exception:
+                pass
+
+    mock_client.converse.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_records_usage(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    router._usage_tracker = usage_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.return_value = {
+        "output": {"message": {"role": "assistant", "content": [{"text": "Hi"}]}},
+        "stopReason": "end_turn",
+        "usage": {"inputTokens": 5, "outputTokens": 3, "totalTokens": 8},
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    await asyncio.sleep(0)
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["input_tokens"] == 5
+    assert call_kwargs["output_tokens"] == 3
+    assert call_kwargs["streaming"] is False
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_client_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A non-transient ClientError (e.g. ValidationException) must be
+    recorded via _record_error with error_type="bedrock_native_error" and
+    the AWS request ID from the ClientError response metadata."""
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.side_effect = ClientError(
+        {
+            "Error": {"Code": "ValidationException", "Message": "bad request"},
+            "ResponseMetadata": {
+                "RequestId": "aws-req-123",
+                "HTTPStatusCode": 400,
+                "HTTPHeaders": {},
+                "RetryAttempts": 0,
+                "HostId": "",
+            },
+        },
+        "Converse",
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
+            return_value=mock_client,
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ValidationException"
+    assert recorded["request_id"] == "aws-req-123"
