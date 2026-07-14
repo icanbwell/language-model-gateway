@@ -1,5 +1,18 @@
 # Native Bedrock transport as a fallback for Bedrock Mantle
 
+> **2026-07-14 update:** the default flipped. `MODEL_ROUTING_BEDROCK_TRANSPORT`
+> now defaults to `"native"`; `"mantle"` is the manual opt-out instead of the
+> default. Mantle's own reliability (bare, undiagnosable
+> `internal_server_error` 500s — see the Context section below, which this
+> design already anticipated) made native the better default once both
+> transports were proven out in production. Everything below describes the
+> original design, where the defaults were reversed; see
+> `LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_transport`
+> for the current behavior. Every `model-router-usage`/`model-router-errors`
+> record now also carries a `bedrock_transport` field ("native"/"mantle") so
+> which transport handled a given `backend="aws_bedrock"` request no longer
+> has to be inferred from error shape or log lines.
+
 ## Context
 
 The coding model router (`language_model_gateway/gateway/routers/model_routing/`) routes

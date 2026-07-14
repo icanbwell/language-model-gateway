@@ -156,12 +156,6 @@ services:
       # model-router-usage records. Off by default in deployed environments
       # since this persists user/model content, not just metadata.
       MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS: "true"
-      # Manual fallback for Bedrock Mantle incidents — routes haiku/sonnet
-      # traffic through Bedrock's native Converse API instead of Mantle's
-      # OpenAI-compatible endpoint, using the same Qwen model IDs and the
-      # same AWS access as Mantle. Flip back to "mantle" (or remove this
-      # line) once Mantle recovers.
-      MODEL_ROUTING_BEDROCK_TRANSPORT: native
       # This is the user and password that can be used for testing
       MY_USER_NAME: tester
       MY_USER_PASSWORD: password

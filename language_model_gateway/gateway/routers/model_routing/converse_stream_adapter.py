@@ -360,6 +360,10 @@ async def _converse_stream_with_usage_tracking(
                 parent_agent_id=auth_info.get("parent_agent_id"),
                 model_tier=model_tier,
                 backend=backend,
+                # This is the Converse-API streaming path — always native,
+                # unlike Mantle's counterpart which threads the value in
+                # from the caller's self._bedrock_transport.
+                bedrock_transport="native",
                 price_per_mtok=price_per_mtok,
                 anthropic_price_per_mtok=anthropic_price_per_mtok,
                 streaming=True,

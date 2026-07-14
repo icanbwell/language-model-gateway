@@ -621,6 +621,7 @@ class CodingModelRouter:
                             prompt_text=prompt_text,
                             model_tier=model_tier,
                             backend=backend,
+                            bedrock_transport=self._bedrock_transport,
                             price_per_mtok=price_per_mtok,
                             anthropic_price_per_mtok=anthropic_price_per_mtok,
                             streaming=True,
@@ -717,6 +718,7 @@ class CodingModelRouter:
                             prompt_text=prompt_text,
                             model_tier=model_tier,
                             backend=backend,
+                            bedrock_transport=self._bedrock_transport,
                             price_per_mtok=price_per_mtok,
                             anthropic_price_per_mtok=anthropic_price_per_mtok,
                             streaming=False,
@@ -1085,6 +1087,12 @@ class CodingModelRouter:
     ) -> None:
         """Fire-and-forget an error record — never blocks or masks the caller's
         own error handling (raising/returning the client-facing error response).
+
+        `bedrock_transport` is derived here from `self._bedrock_transport`
+        rather than threaded in by each of this method's ~9 call sites —
+        `auth`/`api_type` alone can't tell a Mantle error apart from a
+        native Converse one, since native dispatch is also reached via
+        `auth="aws"`, `api_type="openai"` routes.
         """
         if self._error_tracker is None:
             return
@@ -1104,6 +1112,9 @@ class CodingModelRouter:
                 backend=backend,
                 auth=auth,
                 api_type=api_type,
+                bedrock_transport=(
+                    self._bedrock_transport if backend == "aws_bedrock" else None
+                ),
                 streaming=streaming,
                 status_code=status_code,
                 response_headers=response_headers,

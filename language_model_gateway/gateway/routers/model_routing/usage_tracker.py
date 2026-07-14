@@ -111,6 +111,7 @@ class UsageTracker:
         parent_agent_id: str | None = None,
         model_tier: str | None = None,
         backend: str | None = None,
+        bedrock_transport: str | None = None,
         price_per_mtok: float | None = None,
         anthropic_price_per_mtok: float | None = None,
         streaming: bool | None = None,
@@ -123,6 +124,11 @@ class UsageTracker:
         raw_usage: dict[str, Any] | None = None,
     ) -> None:
         """Record token usage to MongoDB.
+
+        `bedrock_transport` ("native" or "mantle") disambiguates which
+        Bedrock transport handled a `backend="aws_bedrock"` request —
+        callers pass it explicitly since, unlike `CodingModelRouter`, this
+        class has no `self._bedrock_transport` of its own to derive it from.
 
         `raw_usage` is the upstream response's usage object, stored verbatim
         (whatever shape/keys that upstream uses — Anthropic's
@@ -186,6 +192,8 @@ class UsageTracker:
             usage_record["model_tier"] = model_tier
         if backend:
             usage_record["backend"] = backend
+        if bedrock_transport:
+            usage_record["bedrock_transport"] = bedrock_transport
         if price_per_mtok is not None:
             cost_usd = (input_tokens + output_tokens) / 1_000_000 * price_per_mtok
             usage_record["cost_usd"] = round(cost_usd, 6)
@@ -422,6 +430,7 @@ class UsageTracker:
         *,
         model_tier: str | None = None,
         backend: str | None = None,
+        bedrock_transport: str | None = None,
         price_per_mtok: float | None = None,
         anthropic_price_per_mtok: float | None = None,
         streaming: bool | None = None,
@@ -484,6 +493,7 @@ class UsageTracker:
             parent_agent_id=parent_agent_id,
             model_tier=model_tier,
             backend=backend,
+            bedrock_transport=bedrock_transport,
             price_per_mtok=price_per_mtok,
             anthropic_price_per_mtok=anthropic_price_per_mtok,
             streaming=streaming,

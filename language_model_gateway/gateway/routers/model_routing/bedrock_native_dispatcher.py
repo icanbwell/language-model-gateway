@@ -217,6 +217,7 @@ class BedrockNativeDispatcher:
                 parent_agent_id=auth_info.get("parent_agent_id"),
                 model_tier=model_tier,
                 backend=backend,
+                bedrock_transport="native",
                 price_per_mtok=price_per_mtok,
                 anthropic_price_per_mtok=anthropic_price_per_mtok,
                 streaming=False,
