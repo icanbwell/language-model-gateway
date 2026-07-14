@@ -159,7 +159,11 @@ def _openai_to_converse_request(
     if inference_config:
         converse["inferenceConfig"] = inference_config
 
-    if tools := oai_body_json.get("tools"):
+    tool_choice = oai_body_json.get("tool_choice")
+    # tool_choice=="none" means the model must not use any tools. Bedrock Converse
+    # has no explicit "disable tools" toolChoice value, so we omit toolConfig
+    # entirely — if the model isn't told about any tools, it can't call one.
+    if tool_choice != "none" and (tools := oai_body_json.get("tools")):
         tool_config: dict[str, Any] = {
             "tools": [
                 {
@@ -172,7 +176,6 @@ def _openai_to_converse_request(
                 for t in tools
             ]
         }
-        tool_choice = oai_body_json.get("tool_choice")
         if tool_choice == "auto":
             tool_config["toolChoice"] = {"auto": {}}
         elif tool_choice == "required":

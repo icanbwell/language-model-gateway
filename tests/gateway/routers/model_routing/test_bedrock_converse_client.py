@@ -298,3 +298,25 @@ class TestOpenaiToConverseRequest:
         }
         result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert result["inferenceConfig"] == {"temperature": 0.7, "topP": 0.9}
+
+    def test_tool_choice_none_omits_tool_config_entirely(self) -> None:
+        oai_body = {
+            "messages": [{"role": "user", "content": "Hi"}],
+            "tools": [
+                {
+                    "type": "function",
+                    "function": {"name": "get_weather", "parameters": {}},
+                }
+            ],
+            "tool_choice": "none",
+        }
+        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        assert "toolConfig" not in result
+
+    def test_tool_choice_none_without_tools_still_omits_tool_config(self) -> None:
+        oai_body = {
+            "messages": [{"role": "user", "content": "Hi"}],
+            "tool_choice": "none",
+        }
+        result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        assert "toolConfig" not in result
