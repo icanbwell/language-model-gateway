@@ -28,6 +28,18 @@ logger.setLevel(SRC_LOG_LEVELS.get("LLM", logging.INFO))
 _CLIENT_CACHE: dict[tuple[str | None, str], Any] = {}
 _CLIENT_CACHE_LOCK = threading.Lock()
 
+# Converse's stopReason values that have a direct Anthropic equivalent.
+# guardrail_intervened/content_filtered have no Anthropic counterpart —
+# they fall through to the "end_turn" default below, matching the
+# "no exhaustive enum switch without a default" rule for forward
+# compatibility with stop reasons this router doesn't know about yet.
+_CONVERSE_TO_ANT_STOP = {
+    "end_turn": "end_turn",
+    "tool_use": "tool_use",
+    "max_tokens": "max_tokens",
+    "stop_sequence": "stop_sequence",
+}
+
 
 def _get_bedrock_runtime_client(route: dict[str, Any]) -> Any:
     """Return a cached boto3 bedrock-runtime client for this route's
@@ -187,3 +199,44 @@ def _openai_to_converse_request(
         converse["toolConfig"] = tool_config
 
     return converse
+
+
+def _converse_response_to_anthropic(
+    resp: dict[str, Any], msg_id: str, upstream_model: str
+) -> dict[str, Any]:
+    """Translate a non-streaming Bedrock Converse response to Anthropic
+    Messages format — the Converse-API counterpart to
+    message_translator.py's _openai_to_anthropic_response.
+    """
+    content: list[dict[str, Any]] = []
+    message = resp.get("output", {}).get("message", {})
+    for block in message.get("content", []):
+        if "text" in block:
+            content.append({"type": "text", "text": block["text"]})
+        elif "toolUse" in block:
+            tool_use = block["toolUse"]
+            content.append(
+                {
+                    "type": "tool_use",
+                    "id": tool_use.get("toolUseId", ""),
+                    "name": tool_use.get("name", ""),
+                    "input": tool_use.get("input", {}),
+                }
+            )
+
+    stop_reason = _CONVERSE_TO_ANT_STOP.get(resp.get("stopReason", ""), "end_turn")
+    usage = resp.get("usage", {})
+
+    return {
+        "id": msg_id,
+        "type": "message",
+        "role": "assistant",
+        "content": content,
+        "model": upstream_model,
+        "stop_reason": stop_reason,
+        "stop_sequence": None,
+        "usage": {
+            "input_tokens": usage.get("inputTokens", 0),
+            "output_tokens": usage.get("outputTokens", 0),
+        },
+    }

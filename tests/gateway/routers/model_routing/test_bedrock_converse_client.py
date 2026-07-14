@@ -11,6 +11,7 @@ from typing import Any
 from unittest.mock import MagicMock, patch
 
 from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
+    _converse_response_to_anthropic,
     _get_bedrock_runtime_client,
     _is_transient_bedrock_error_code,
     _openai_to_converse_request,
@@ -320,3 +321,120 @@ class TestOpenaiToConverseRequest:
         }
         result = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert "toolConfig" not in result
+
+
+class TestConverseResponseToAnthropic:
+    def test_plain_text_response(self) -> None:
+        resp = {
+            "output": {
+                "message": {
+                    "role": "assistant",
+                    "content": [{"text": "Hello there"}],
+                }
+            },
+            "stopReason": "end_turn",
+            "usage": {"inputTokens": 10, "outputTokens": 5, "totalTokens": 15},
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["id"] == "msg_abc"
+        assert result["type"] == "message"
+        assert result["role"] == "assistant"
+        assert result["content"] == [{"type": "text", "text": "Hello there"}]
+        assert result["model"] == "qwen.qwen3-coder-next"
+        assert result["stop_reason"] == "end_turn"
+        assert result["stop_sequence"] is None
+        assert result["usage"] == {"input_tokens": 10, "output_tokens": 5}
+
+    def test_tool_use_response(self) -> None:
+        resp = {
+            "output": {
+                "message": {
+                    "role": "assistant",
+                    "content": [
+                        {
+                            "toolUse": {
+                                "toolUseId": "tooluse_1",
+                                "name": "get_weather",
+                                "input": {"city": "Boston"},
+                            }
+                        }
+                    ],
+                }
+            },
+            "stopReason": "tool_use",
+            "usage": {"inputTokens": 20, "outputTokens": 8, "totalTokens": 28},
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["content"] == [
+            {
+                "type": "tool_use",
+                "id": "tooluse_1",
+                "name": "get_weather",
+                "input": {"city": "Boston"},
+            }
+        ]
+        assert result["stop_reason"] == "tool_use"
+
+    def test_mixed_text_and_tool_use_content(self) -> None:
+        resp = {
+            "output": {
+                "message": {
+                    "role": "assistant",
+                    "content": [
+                        {"text": "Let me check that for you."},
+                        {
+                            "toolUse": {
+                                "toolUseId": "tooluse_1",
+                                "name": "get_weather",
+                                "input": {},
+                            }
+                        },
+                    ],
+                }
+            },
+            "stopReason": "tool_use",
+            "usage": {"inputTokens": 1, "outputTokens": 1, "totalTokens": 2},
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["content"] == [
+            {"type": "text", "text": "Let me check that for you."},
+            {"type": "tool_use", "id": "tooluse_1", "name": "get_weather", "input": {}},
+        ]
+
+    def test_max_tokens_stop_reason_maps_directly(self) -> None:
+        resp = {
+            "output": {"message": {"role": "assistant", "content": [{"text": "..."}]}},
+            "stopReason": "max_tokens",
+            "usage": {"inputTokens": 1, "outputTokens": 1, "totalTokens": 2},
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["stop_reason"] == "max_tokens"
+
+    def test_unknown_stop_reason_defaults_to_end_turn(self) -> None:
+        resp = {
+            "output": {"message": {"role": "assistant", "content": [{"text": "..."}]}},
+            "stopReason": "guardrail_intervened",
+            "usage": {"inputTokens": 1, "outputTokens": 1, "totalTokens": 2},
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["stop_reason"] == "end_turn"
+
+    def test_missing_usage_defaults_to_zero(self) -> None:
+        resp = {
+            "output": {"message": {"role": "assistant", "content": [{"text": "hi"}]}},
+            "stopReason": "end_turn",
+        }
+        result = _converse_response_to_anthropic(
+            resp, "msg_abc", "qwen.qwen3-coder-next"
+        )
+        assert result["usage"] == {"input_tokens": 0, "output_tokens": 0}
