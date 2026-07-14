@@ -120,8 +120,16 @@ class UsageTracker:
         sse_event_count: int | None = None,
         prompt_text: str | None = None,
         response_text: str | None = None,
+        raw_usage: dict[str, Any] | None = None,
     ) -> None:
         """Record token usage to MongoDB.
+
+        `raw_usage` is the upstream response's usage object, stored verbatim
+        (whatever shape/keys that upstream uses — Anthropic's
+        cache_creation_input_tokens/cache_read_input_tokens, Bedrock
+        Converse's cacheReadInputTokens/cacheWriteInputTokens, OpenAI's
+        prompt_tokens_details, etc.) so fields this router doesn't yet
+        normalize into a top-level column aren't silently dropped.
 
         `prompt_text`/`response_text` are truncated to `preview_chars`
         (configurable; 0 disables preview capture) before being persisted —
@@ -201,6 +209,8 @@ class UsageTracker:
             usage_record["custom_headers"] = custom_headers
         if sse_event_count is not None:
             usage_record["sse_event_count"] = sse_event_count
+        if raw_usage:
+            usage_record["raw_usage"] = raw_usage
         if self._capture_previews:
             if input_preview := _truncate(prompt_text, self._preview_chars):
                 usage_record["input_preview"] = input_preview
@@ -398,6 +408,7 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            raw_usage=usage,
             start_time=start_time,
         )
 
@@ -481,6 +492,7 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            raw_usage=usage,
             start_time=start_time,
         )
 

@@ -215,6 +215,87 @@ class TestUsageTrackerDataExtraction:
             # Verify that insert_one was NOT called (since tokens default to 0)
             tracker._collection.insert_one.assert_not_called()
 
+    async def test_record_usage_from_anthropic_response_includes_raw_usage(
+        self,
+    ) -> None:
+        """The full upstream usage object should be stored verbatim, including
+        fields (e.g. cache tokens) this router doesn't otherwise normalize."""
+        auth_info = {"user_id": "user-123"}
+        usage = {
+            "input_tokens": 100,
+            "output_tokens": 50,
+            "cache_creation_input_tokens": 20,
+            "cache_read_input_tokens": 5,
+        }
+        response_body = {"usage": usage}
+
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-123",
+                auth_info=auth_info,
+                model="claude-opus-4-8",
+                response_body=response_body,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["raw_usage"] == usage
+
+    async def test_record_usage_from_openai_response_includes_raw_usage(self) -> None:
+        """The full upstream usage object should be stored verbatim for the
+        OpenAI/Bedrock-Mantle path too."""
+        auth_info = {"user_id": "user-789"}
+        usage = {
+            "prompt_tokens": 200,
+            "completion_tokens": 75,
+            "total_tokens": 275,
+            "prompt_tokens_details": {"cached_tokens": 50},
+        }
+        response_body = {"usage": usage}
+
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-456",
+                auth_info=auth_info,
+                model="gpt-4",
+                response_body=response_body,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["raw_usage"] == usage
+
+    async def test_record_usage_omits_raw_usage_when_absent(self) -> None:
+        """record_usage's raw_usage param is optional and independent of the
+        normalized input_tokens/output_tokens args."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-123",
+                user_id="user-123",
+                model="claude-opus-4-8",
+                input_tokens=100,
+                output_tokens=50,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "raw_usage" not in actual_record
+
 
 class TestUsageTrackerSessionIdAndTimestamp:
     """Tests for session_id and timestamp fields on recorded usage."""

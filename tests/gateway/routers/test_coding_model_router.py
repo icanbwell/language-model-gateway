@@ -33,6 +33,9 @@ from starlette.requests import Request
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
 )
+from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
+    BedrockRuntimeClientProvider,
+)
 from language_model_gateway.gateway.routers.model_routing.constants import (
     _MAX_THROTTLE_RETRIES,
 )
@@ -1707,14 +1710,19 @@ async def test_native_bedrock_nonstreaming_happy_path(
     mock_client.converse.return_value = {
         "output": {"message": {"role": "assistant", "content": [{"text": "Hi there"}]}},
         "stopReason": "end_turn",
-        "usage": {"inputTokens": 5, "outputTokens": 3, "totalTokens": 8},
+        "usage": {
+            "inputTokens": 5,
+            "outputTokens": 3,
+            "totalTokens": 8,
+            "cacheReadInputTokens": 100,
+            "cacheWriteInputTokens": 20,
+        },
     }
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -1735,6 +1743,11 @@ async def test_native_bedrock_nonstreaming_happy_path(
     resp_json = response.json()
     assert resp_json["content"] == [{"type": "text", "text": "Hi there"}]
     assert resp_json["stop_reason"] == "end_turn"
+    # Cache-token fields must reach the client — see
+    # anthropics/claude-code#13385 (clients derive context-window usage
+    # from these, and a missing field looks identical to "no caching").
+    assert resp_json["usage"]["cache_read_input_tokens"] == 100
+    assert resp_json["usage"]["cache_creation_input_tokens"] == 20
     mock_client.converse.assert_called_once()
     call_kwargs = mock_client.converse.call_args.kwargs
     assert call_kwargs["modelId"] == "qwen.qwen3-coder-next"
@@ -1755,9 +1768,8 @@ async def test_native_bedrock_mantle_default_transport_unaffected(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -1803,9 +1815,8 @@ async def test_native_bedrock_nonstreaming_records_usage(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -1826,6 +1837,11 @@ async def test_native_bedrock_nonstreaming_records_usage(
     assert call_kwargs["input_tokens"] == 5
     assert call_kwargs["output_tokens"] == 3
     assert call_kwargs["streaming"] is False
+    assert call_kwargs["raw_usage"] == {
+        "inputTokens": 5,
+        "outputTokens": 3,
+        "totalTokens": 8,
+    }
 
 
 @pytest.mark.asyncio
@@ -1862,9 +1878,8 @@ async def test_native_bedrock_nonstreaming_client_error_is_recorded(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -1933,9 +1948,8 @@ async def test_native_bedrock_streaming_client_error_is_recorded(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -1982,16 +1996,24 @@ async def test_native_bedrock_streaming_happy_path(
                 },
                 {"contentBlockStop": {"contentBlockIndex": 0}},
                 {"messageStop": {"stopReason": "end_turn"}},
-                {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+                {
+                    "metadata": {
+                        "usage": {
+                            "inputTokens": 4,
+                            "outputTokens": 2,
+                            "cacheReadInputTokens": 100,
+                            "cacheWriteInputTokens": 20,
+                        }
+                    }
+                },
             ]
         )
     }
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -2012,6 +2034,10 @@ async def test_native_bedrock_streaming_happy_path(
     assert b"Streamed hi" in response.content
     assert b"event: message_start" in response.content
     assert b"event: message_stop" in response.content
+    # Cache-token fields must reach the client's message_delta event — see
+    # anthropics/claude-code#13385.
+    assert b'"cache_read_input_tokens": 100' in response.content
+    assert b'"cache_creation_input_tokens": 20' in response.content
     mock_client.converse_stream.assert_called_once()
 
 
@@ -2060,9 +2086,8 @@ async def test_native_bedrock_streaming_with_long_tool_name_restores_original(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -2122,9 +2147,8 @@ async def test_native_bedrock_streaming_records_usage(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
@@ -2145,6 +2169,7 @@ async def test_native_bedrock_streaming_records_usage(
     assert call_kwargs["input_tokens"] == 4
     assert call_kwargs["output_tokens"] == 2
     assert call_kwargs["streaming"] is True
+    assert call_kwargs["raw_usage"] == {"inputTokens": 4, "outputTokens": 2}
 
 
 @pytest.mark.asyncio
@@ -2173,9 +2198,8 @@ async def test_native_bedrock_streaming_mid_stream_error_is_recorded(
 
     with (
         patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
-        patch(
-            "language_model_gateway.gateway.routers.model_routing.bedrock_converse_client._get_bedrock_runtime_client",
-            return_value=mock_client,
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
         ),
     ):
         async with httpx.AsyncClient(
