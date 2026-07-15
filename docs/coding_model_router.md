@@ -739,7 +739,8 @@ option because:
   are captured in `model-router-errors` logs
 - **More reliable** - Bypasses Bedrock Mantle's OpenAI-compatible shim which
   has occasionally returned generic `internal_server_error` 500s
-- **Native format** - No request/response translation overhead
+- **Fewer translation hops** - No OpenAI-compatibility shim layer (translates
+  directly Anthropic↔Converse instead of Anthropic↔OpenAI↔Bedrock)
 
 The gateway automatically converts between the Anthropic Messages API format
 and Bedrock's Converse API shape.
@@ -762,6 +763,6 @@ environment:
 
 ### Verifying Which Transport is Used
 
-Each `model-router-usage` and `model-router-errors` record includes a
-`bedrock_transport` field (`"native"` or `"mantle"`) so you can confirm which
-path handled a given request.
+Each `aws_bedrock`-backed `model-router-usage` and `model-router-errors`
+record includes a `bedrock_transport` field (`"native"` or `"mantle"`) so
+you can confirm which path handled a given request.
