@@ -191,6 +191,33 @@ def test_anthropic_to_openai_tool_result_becomes_tool_role() -> None:
     assert msg["content"] == "search result"
 
 
+def test_anthropic_to_openai_qwen_model_defaults_thinking_enabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-next",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body)
+    assert result["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+def test_anthropic_to_openai_qwen_model_thinking_disabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-30b-a3b-v1:0",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert result["chat_template_kwargs"] == {"enable_thinking": False}
+
+
+def test_anthropic_to_openai_non_qwen_model_has_no_chat_template_kwargs() -> None:
+    body = {
+        "model": "claude-sonnet-5",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert "chat_template_kwargs" not in result
+
+
 def test_anthropic_to_openai_tools_translated() -> None:
     body = {
         "model": "m",
