@@ -255,6 +255,14 @@ responses (HTTP 429 or bodies matching common Bedrock throttle messages):
 | Backoff             | Exponential with jitter |
 | Dispatch pacing     | 300 ms minimum between requests |
 
+Dispatch pacing (`_pace_bedrock_dispatch` in `bedrock_client.py`) is a single
+process-wide rate limiter shared by all three `auth: aws` dispatch paths —
+Bedrock Mantle, native Bedrock Converse, and the Anthropic-format Bedrock
+route — not a per-path throttle. It runs before every attempt (including
+retries), so a burst of concurrent requests (e.g. parallel Claude Code
+subagents sharing one session) is spaced out client-side instead of hitting
+Bedrock simultaneously and triggering avoidable throttling.
+
 Context-overflow errors (Bedrock reports that the prompt exceeds the model's
 context window) are not retried and are surfaced immediately.  For
 `api_type: openai` streaming requests, the router additionally halves
@@ -470,7 +478,8 @@ absence of a field means "not available for this request," not an error.
 | `compression_used` | string | always alongside `compression_requested`'s recording point | `"gzip"` or `"none"` — what the gateway's `GZipMiddleware` actually did. Streaming responses are always `"none"`: Starlette hardcodes `text/event-stream` into `GZipMiddleware`'s excluded content types regardless of `Accept-Encoding` (see `api.py`). For non-streaming responses it's computed by replicating Starlette's own decision (gzip if the client accepts it and the body is ≥500 bytes) before the middleware runs, since the usage record is written from a background task after the middleware has already acted. |
 | `custom_headers` | object (flat string→string map) | when any header under `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` is present | **Every** header under the configured prefix, keyed by the suffix after the prefix — e.g. `X-Model-Routing-Client-Type: claude code` becomes `{"client-type": "claude code"}`. Deliberately open-ended: new attribution headers can be added by any client without a code change here. `{prefix}user-id` is additionally pulled out into the top-level `user_id` field (see "Attribution"). |
 | `input_preview` / `output_preview` | string | only when `MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS=true` | First `MODEL_ROUTING_USAGE_PREVIEW_CHARS` characters of the last user message / model response text, truncated with a trailing `…` marker when the original was longer (so `"…"` present tells you the preview is a prefix, not the whole thing). Off by default — this is the one field group that persists actual conversation content rather than metadata. |
-| `sse_event_count` | int | streaming (`api_type: openai`) requests only | Number of SSE events actually yielded to the client for this response. A cheap sanity signal that the response really streamed rather than being buffered and dumped as one blob — a long generation with a suspiciously low count (e.g. 1) is worth investigating. Not recorded for non-streaming requests, nor for `api_type: anthropic` streaming — that path relays bytes verbatim rather than yielding discrete translated events, so there's nothing analogous to count. |
+| `sse_event_count` | int | streaming (`api_type: openai`) requests only, both Bedrock transports (Mantle and native Converse) | Number of SSE events actually yielded to the client for this response. A cheap sanity signal that the response really streamed rather than being buffered and dumped as one blob — a long generation with a suspiciously low count (e.g. 1) is worth investigating. Not recorded for non-streaming requests, nor for `api_type: anthropic` streaming — that path relays bytes verbatim rather than yielding discrete translated events, so there's nothing analogous to count. |
+| `retry_count` | int | always | How many throttle/transient-error retries this request needed before it succeeded — `0` if none. Populated from the same attempt counters used for the exponential-backoff logging (see "Throttle retry and backoff" above), across all four dispatch paths (Bedrock Mantle and native Converse, streaming and non-streaming) plus the Anthropic-format passthrough/native-Bedrock-Anthropic-format path, which always reports `0` since only `auth: aws` routes retry. `0` is a real, present value — its absence on a record means this field predates the record, not that retries are unknown for that request. |
 
 ### Session rollup
 
@@ -501,8 +510,11 @@ limit on a long-running agent session:
 Fields: `session_id`, `account_uuid`, `user_id`, `input_tokens`,
 `output_tokens`, `total_tokens`, `{bucket}_tier_cost`,
 `{bucket}_tier_anthropic_cost`, `{bucket}_tier_model` (one triple per bucket
-actually used by the session), and `total_savings_usd` (session-wide sum of
-`anthropic_cost_usd - cost_usd` across every request, regardless of tier).
+actually used by the session), `total_savings_usd` (session-wide sum of
+`anthropic_cost_usd - cost_usd` across every request, regardless of tier),
+and `total_retries` (session-wide sum of each request's `retry_count`, same
+"sum regardless of tier" shape as `total_savings_usd` — how many retries a
+session needed overall is the useful signal, not a per-tier breakdown).
 
 Token and cost fields use MongoDB's `$inc` so concurrent requests within the
 same session (e.g. parallel subagent calls sharing one `session_id`)

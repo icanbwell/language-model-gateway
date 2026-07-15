@@ -50,6 +50,7 @@ from .aws_auth import SigV4Auth, _bedrock_credential_error_detail, _sign_bedrock
 from .bedrock_client import (
     _is_throttling,
     _is_transient_stream_error,
+    _pace_bedrock_dispatch,
     _send_with_bedrock_retry,
     _throttle_backoff,
 )
@@ -528,6 +529,8 @@ class CodingModelRouter:
                                 http_client=http_client,
                                 max_retries=0,
                             )
+                        if auth == "aws":
+                            await _pace_bedrock_dispatch()
                         stream = None
                         try:
                             stream = await oai_client.chat.completions.create(
@@ -635,6 +638,7 @@ class CodingModelRouter:
                             request=request,
                             start_time=request_start_time,
                             on_stream_error=_record_mid_stream_error,
+                            retry_count=_throttle_attempt,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -659,6 +663,8 @@ class CodingModelRouter:
                 else:
                     _throttle_attempt = 0
                     while True:
+                        if auth == "aws":
+                            await _pace_bedrock_dispatch()
                         try:
                             resp = await oai_client.chat.completions.create(
                                 **oai_kwargs, stream=False
@@ -725,6 +731,7 @@ class CodingModelRouter:
                             compression_requested=accept_encoding,
                             compression_used=compression_used,
                             start_time=request_start_time,
+                            retry_count=_throttle_attempt,
                         )
                     response.background = background_tasks
                     return response
@@ -881,7 +888,7 @@ class CodingModelRouter:
         # ── Anthropic-format route: stream bytes verbatim via httpx ──────────────
         client = httpx.AsyncClient(timeout=None)  # nosec B113
         try:
-            upstream_resp = await _send_with_bedrock_retry(
+            upstream_resp, bedrock_retry_count = await _send_with_bedrock_retry(
                 client, target_url, upstream_headers, raw_body, route, auth, request_id
             )
         except Exception as exc:
@@ -1025,6 +1032,7 @@ class CodingModelRouter:
                         compression_used=compression_used,
                         prompt_text=prompt_text,
                         start_time=request_start_time,
+                        retry_count=bedrock_retry_count,
                     )
             passthrough_response = Response(
                 content=body_bytes,
@@ -1057,6 +1065,7 @@ class CodingModelRouter:
                 # regardless of what the client's Accept-Encoding offers.
                 compression_used="none",
                 request=request,
+                retry_count=bedrock_retry_count,
             )
         else:
             stream_gen = _stream_passthrough(upstream_resp, client, request=request)

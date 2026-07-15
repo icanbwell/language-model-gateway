@@ -423,6 +423,83 @@ class TestConverseStreamWithUsageTracking:
         assert call_kwargs["raw_usage"] == {"inputTokens": 7, "outputTokens": 3}
 
     @pytest.mark.asyncio
+    async def test_records_sse_event_count_matching_yielded_chunks(self) -> None:
+        """Regression test: unlike its Mantle counterpart
+        (_oai_stream_with_usage_tracking), this wrapper never counted the SSE
+        events it yielded, so model-router-usage records for native Bedrock
+        streaming were silently missing sse_event_count."""
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 7, "outputTokens": 3}}},
+            ]
+        )
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        chunks = [
+            c
+            async for c in _converse_stream_with_usage_tracking(
+                events,
+                "msg_abc",
+                "qwen.qwen3-coder-next",
+                usage_tracker,
+                {"user_id": "user-1"},
+                _TEST_START_TIME,
+            )
+        ]
+
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_awaited_once()
+        recorded_count = usage_tracker.record_usage.call_args.kwargs["sse_event_count"]
+        assert recorded_count == len(chunks)
+        assert recorded_count > 0
+
+    @pytest.mark.asyncio
+    async def test_threads_retry_count_through_to_record_usage(self) -> None:
+        events = self._fake_events(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 7, "outputTokens": 3}}},
+            ]
+        )
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        async for _ in _converse_stream_with_usage_tracking(
+            events,
+            "msg_abc",
+            "qwen.qwen3-coder-next",
+            usage_tracker,
+            {"user_id": "user-1"},
+            _TEST_START_TIME,
+            retry_count=4,
+        ):
+            pass
+
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_awaited_once()
+        assert usage_tracker.record_usage.call_args.kwargs["retry_count"] == 4
+
+    @pytest.mark.asyncio
     async def test_skips_recording_when_no_tokens_used(self) -> None:
         events = self._fake_events(
             [

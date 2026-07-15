@@ -98,7 +98,12 @@ async def _send_with_bedrock_retry(
     route: dict[str, Any],
     auth: str,
     request_id: str = "unknown",
-) -> httpx.Response:
+) -> tuple[httpx.Response, int]:
+    """Returns `(response, attempt)` — `attempt` is the number of throttle/
+    transport-error retries consumed before this response was returned (0
+    for non-"aws" auth, which never retries here, and for any "aws" request
+    that succeeded or hit a non-retryable error on the first try).
+    """
     attempt = 0
     while True:
         if auth == "aws":
@@ -136,15 +141,20 @@ async def _send_with_bedrock_retry(
             continue
 
         if auth != "aws" or resp.status_code < 400 or attempt >= _MAX_THROTTLE_RETRIES:
-            return resp
+            return resp, attempt
 
         error_body = await resp.aread()
         await resp.aclose()
         error_text = error_body.decode("utf-8", errors="replace")
 
         if not _is_throttling(resp.status_code, error_text):
-            return httpx.Response(
-                status_code=resp.status_code, headers=resp.headers, content=error_body
+            return (
+                httpx.Response(
+                    status_code=resp.status_code,
+                    headers=resp.headers,
+                    content=error_body,
+                ),
+                attempt,
             )
 
         delay = _throttle_backoff(attempt)

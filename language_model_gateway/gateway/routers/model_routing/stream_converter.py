@@ -434,6 +434,7 @@ async def _oai_stream_with_usage_tracking(
     compression_used: str | None = None,
     request: Request | None = None,
     on_stream_error: Callable[[str], None] | None = None,
+    retry_count: int | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Stream wrapper that records usage to MongoDB after stream completes.
@@ -484,6 +485,7 @@ async def _oai_stream_with_usage_tracking(
                     compression_used=compression_used,
                     custom_headers=auth_info.get("custom_headers"),
                     sse_event_count=sse_event_count,
+                    retry_count=retry_count,
                     prompt_text=prompt_text,
                     response_text=text_sink.get("output_text"),
                     raw_usage=usage_sink.get("raw_usage"),
@@ -583,6 +585,7 @@ async def _stream_passthrough_with_usage_tracking(
     compression_requested: str | None = None,
     compression_used: str | None = None,
     request: Request | None = None,
+    retry_count: int | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """
     Relay a native-Anthropic-format SSE stream verbatim (byte-for-byte, same
@@ -634,5 +637,6 @@ async def _stream_passthrough_with_usage_tracking(
                     response_text=response_text,
                     raw_usage=raw_usage,
                     start_time=start_time,
+                    retry_count=retry_count,
                 )
             )

@@ -19,7 +19,7 @@ from starlette.responses import JSONResponse, StreamingResponse
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
 from .aws_auth import _bedrock_credential_error_detail
-from .bedrock_client import _throttle_backoff
+from .bedrock_client import _pace_bedrock_dispatch, _throttle_backoff
 from .bedrock_converse_client import (
     BedrockRuntimeClientProvider,
     _is_transient_bedrock_error_code,
@@ -105,6 +105,7 @@ class BedrockNativeDispatcher:
 
         throttle_attempt = 0
         while True:
+            await _pace_bedrock_dispatch()
             try:
                 resp = await asyncio.to_thread(
                     bedrock_client.converse, **converse_kwargs
@@ -227,6 +228,7 @@ class BedrockNativeDispatcher:
                 prompt_text=prompt_text,
                 response_text=None,
                 raw_usage=usage,
+                retry_count=throttle_attempt,
             )
         response.background = background_tasks
         return response
@@ -266,6 +268,7 @@ class BedrockNativeDispatcher:
 
         throttle_attempt = 0
         while True:
+            await _pace_bedrock_dispatch()
             try:
                 raw_response = await asyncio.to_thread(
                     bedrock_client.converse_stream, **converse_kwargs
@@ -386,6 +389,7 @@ class BedrockNativeDispatcher:
                 request=request,
                 on_stream_error=_record_mid_stream_error,
                 tool_name_map=tool_name_map,
+                retry_count=throttle_attempt,
             )
         else:
             stream_gen = _stream_bedrock_converse_to_anthropic(

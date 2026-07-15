@@ -286,6 +286,39 @@ class TestSseEventCount:
         assert recorded_count > 0
 
 
+class TestOaiStreamUsageRetryCount:
+    async def test_threads_retry_count_through_to_record_usage(self) -> None:
+        """The throttle-retry count the caller consumed before this stream
+        started must survive to the usage record, not just non-streaming
+        responses."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hello", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5)
+
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+        http_client = MagicMock(spec=httpx.AsyncClient)
+        http_client.aclose = AsyncMock()
+
+        async for _ in _oai_stream_with_usage_tracking(
+            fake_stream(),
+            "msg_1",
+            "upstream-model",
+            http_client,
+            usage_tracker,
+            {"user_id": "user-1"},
+            _TEST_START_TIME,
+            retry_count=3,
+        ):
+            pass
+
+        await asyncio.sleep(0)
+
+        usage_tracker.record_usage.assert_awaited_once()
+        assert usage_tracker.record_usage.call_args.kwargs["retry_count"] == 3
+
+
 class TestOaiStreamUsageAndCacheTokens:
     async def test_message_delta_reports_real_output_tokens(self) -> None:
         """Regression test: message_delta's usage.output_tokens previously
@@ -497,6 +530,38 @@ class TestStreamPassthroughWithUsageTracking:
         assert call_kwargs["start_time"] == _TEST_START_TIME
         resp.aclose.assert_awaited_once()
         client.aclose.assert_awaited_once()
+
+    async def test_threads_retry_count_through_to_record_usage(self) -> None:
+        async def fake_aiter_bytes() -> AsyncIterator[bytes]:
+            yield _MESSAGE_START
+            yield _CONTENT_DELTA
+            yield _MESSAGE_DELTA
+            yield _MESSAGE_STOP
+
+        resp = MagicMock(spec=httpx.Response)
+        resp.aiter_bytes = fake_aiter_bytes
+        resp.aclose = AsyncMock()
+        client = MagicMock(spec=httpx.AsyncClient)
+        client.aclose = AsyncMock()
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        async for _ in _stream_passthrough_with_usage_tracking(
+            resp,
+            client,
+            usage_tracker,
+            "req-1",
+            {"user_id": "user-1"},
+            "claude-opus-4-8",
+            _TEST_START_TIME,
+            retry_count=1,
+        ):
+            pass
+
+        await asyncio.sleep(0)
+
+        usage_tracker.record_usage.assert_awaited_once()
+        assert usage_tracker.record_usage.call_args.kwargs["retry_count"] == 1
 
     async def test_skips_recording_when_no_usage_found(self) -> None:
         async def fake_aiter_bytes() -> AsyncIterator[bytes]:

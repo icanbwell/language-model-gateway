@@ -61,7 +61,7 @@ class TestSendWithBedrockRetry:
             patch(_SIGN_BEDROCK, return_value={}),
             patch(_THROTTLE_BACKOFF, return_value=0),
         ):
-            resp = await _send_with_bedrock_retry(
+            resp, retry_count = await _send_with_bedrock_retry(
                 client,
                 "https://example.bedrock.aws/v1/messages",
                 {},
@@ -71,6 +71,7 @@ class TestSendWithBedrockRetry:
             )
 
         assert resp is success_resp
+        assert retry_count == 1
         assert client.send.await_count == 2
 
     async def test_gives_up_after_max_retries(self) -> None:

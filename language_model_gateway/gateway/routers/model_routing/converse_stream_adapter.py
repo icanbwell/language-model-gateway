@@ -319,6 +319,7 @@ async def _converse_stream_with_usage_tracking(
     request: Request | None = None,
     on_stream_error: Callable[[str], None] | None = None,
     tool_name_map: dict[str, str] | None = None,
+    retry_count: int | None = None,
 ) -> AsyncGenerator[bytes, None]:
     """Stream wrapper that records usage to MongoDB after the stream
     completes — the Converse-API counterpart to
@@ -329,6 +330,7 @@ async def _converse_stream_with_usage_tracking(
     """
     usage_sink: dict[str, Any] = {}
     text_sink: dict[str, str] = {}
+    sse_event_count = 0
     async for chunk in _stream_bedrock_converse_to_anthropic(
         events,
         msg_id,
@@ -339,6 +341,7 @@ async def _converse_stream_with_usage_tracking(
         on_stream_error=on_stream_error,
         tool_name_map=tool_name_map,
     ):
+        sse_event_count += 1
         yield chunk
 
     input_tokens = usage_sink.get("input_tokens", 0)
@@ -370,9 +373,11 @@ async def _converse_stream_with_usage_tracking(
                 compression_requested=compression_requested,
                 compression_used=compression_used,
                 custom_headers=auth_info.get("custom_headers"),
+                sse_event_count=sse_event_count,
                 prompt_text=prompt_text,
                 response_text=text_sink.get("output_text"),
                 raw_usage=usage_sink.get("raw_usage"),
                 start_time=start_time,
+                retry_count=retry_count,
             )
         )
