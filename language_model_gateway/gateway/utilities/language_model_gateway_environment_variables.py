@@ -257,3 +257,20 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
             if os.environ.get("MODEL_ROUTING_BEDROCK_TRANSPORT", "").lower() == "mantle"
             else "native"
         )
+
+    @property
+    def model_routing_qwen_enable_thinking(self) -> bool:
+        """Whether Qwen routes (`api_type="openai"`) should think before answering.
+
+        Passed to the upstream OpenAI-compatible endpoint as
+        `chat_template_kwargs.enable_thinking`. Qwen already emits its
+        reasoning as an inline `<think>...</think>` block that
+        CodingModelRouter strips from the visible response either way — this
+        toggle controls whether that reasoning is generated at all, trading
+        answer quality for lower latency/token cost. Defaults to on, matching
+        Qwen's own default and this router's behavior before the toggle
+        existed.
+        """
+        return self.str2bool(
+            os.environ.get("MODEL_ROUTING_QWEN_ENABLE_THINKING", "true")
+        )

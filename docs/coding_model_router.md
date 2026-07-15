@@ -77,6 +77,7 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` | `x-model-routing-` | Any incoming header under this prefix (case-insensitive) is (a) stripped before forwarding upstream and (b) captured into the usage record's `custom_headers` field. `{prefix}user-id` is additionally used as a best-effort `user_id` fallback — see "Usage tracking" below. |
 | `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MODEL_ROUTING_ERROR_COLLECTION_NAME` | `model-router-errors` | Collection name for upstream-failure tracking (see "Error tracking" below). |
+| `MODEL_ROUTING_QWEN_ENABLE_THINKING` | `true` | Whether Qwen routes (`api_type: openai`) are allowed to think before answering — see "Request translation" below. |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
@@ -239,6 +240,14 @@ Translated fields:
 Thinking blocks (`<think>…</think>`) emitted by reasoning models are stripped
 from both streaming and non-streaming responses before they are returned to the
 client.
+
+For Qwen models specifically (routes whose resolved backend model id contains
+`qwen`), the request also gets a `chat_template_kwargs.enable_thinking` field
+controlled by `MODEL_ROUTING_QWEN_ENABLE_THINKING` (default `true`). Setting
+it to `false` stops Qwen from generating the `<think>` block at all, trading
+answer quality for lower latency/token cost — the stripping behavior above
+still applies either way, this only controls whether there's anything to
+strip.
 
 ---
 

@@ -132,6 +132,7 @@ class CodingModelRouter:
         debug_log_received_oauth_tokens: bool = False,
         custom_header_prefix: str = "x-model-routing-",
         bedrock_transport: str = "mantle",
+        qwen_enable_thinking: bool = True,
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -141,6 +142,7 @@ class CodingModelRouter:
         self._token_reader: TokenReader | None = token_reader
         self._custom_header_prefix: str = custom_header_prefix.lower()
         self._bedrock_transport: str = bedrock_transport
+        self._qwen_enable_thinking: bool = qwen_enable_thinking
         self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
         if self._debug_log_received_oauth_tokens:
             logger.warning(
@@ -283,7 +285,9 @@ class CodingModelRouter:
         # otherwise fall back to the character-based estimate.
         if req_suffix == "/count_tokens" and api_type == "openai":
             if tokenizer_model:
-                oai_body_for_count = _anthropic_to_openai_request(body_json)
+                oai_body_for_count = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 token_count = count_oai_request_tokens(
                     oai_body_for_count, tokenizer_model
                 )
@@ -310,7 +314,9 @@ class CodingModelRouter:
         #    multiplier. Used when no tokenizer is configured.
         #
         if tokenizer_model and api_type == "openai":
-            body_json = _anthropic_to_openai_request(body_json)
+            body_json = _anthropic_to_openai_request(
+                body_json, enable_qwen_thinking=self._qwen_enable_thinking
+            )
             body_json = enforce_context_budget(body_json, route, tokenizer_model)
             raw_body = json.dumps(body_json).encode()
         else:
@@ -369,7 +375,9 @@ class CodingModelRouter:
                         )
 
             if api_type == "openai":
-                body_json = _anthropic_to_openai_request(body_json)
+                body_json = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 raw_body = json.dumps(body_json).encode()
 
         # Build upstream headers
