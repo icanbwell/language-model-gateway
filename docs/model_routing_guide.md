@@ -93,7 +93,7 @@ Each route in the config has these key fields:
 Add the following to your `~/.zshrc`:
 
 ```bash
-# <<< claude model routing <<<
+# >>> claude model routing >>>
 claude-router() {
   # For production swap the URL below:
   # ANTHROPIC_BASE_URL="https://language-model-gateway.services.bwell.zone"
