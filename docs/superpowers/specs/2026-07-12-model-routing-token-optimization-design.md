@@ -57,9 +57,11 @@ change can be rolled out gradually and rolled back instantly.
 `MODEL_ROUTING_TOKEN_OPTIMIZATION_ENABLED` — bool, parsed the same way
 `ENABLE_COST_SAVINGS_INFO` already is in `message_translator.py:11`
 (`os.environ.get(..., "false").lower() in ("true", "1", "yes")`). Default `false`. One
-master switch gates everything below — no per-technique flags. Read once at module import
-time into a module-level constant in `router.py`, following the existing `_COST_SAVINGS_ENABLED`
-pattern.
+master switch gates everything below — no per-technique flags. Exposed as a
+`token_optimization_enabled() -> bool` function in `.constants` that reads
+`os.environ` fresh on every call — deliberately *not* a module-level constant like
+`_COST_SAVINGS_ENABLED`, so tests can `monkeypatch.setenv` without needing to reload the
+module. Every caller that needs the flag imports this function.
 
 ### Phase 1 — Anthropic prompt caching (`api_type == "anthropic"` routes)
 
@@ -98,7 +100,7 @@ Wiring in `router.py`, immediately after the existing model-rewrite block (~line
 context-enforcement block:
 
 ```python
-if _TOKEN_OPTIMIZATION_ENABLED and api_type == "anthropic":
+if token_optimization_enabled() and api_type == "anthropic":
     body_json = add_cache_breakpoints(body_json)
     raw_body = json.dumps(body_json).encode()
 ```
@@ -184,7 +186,9 @@ Flag-gating tests in `test_coding_model_router.py`:
 - `=true` on an `api_type="anthropic"` route → outgoing body has `cache_control` keys per
   above rules.
 - `=true` on an `api_type="openai"` route → Phase 1 is a no-op (only applies to
-  `api_type == "anthropic"`); Phase 2 dedup still applies.
+  `api_type == "anthropic"`); Phase 2 dedup still applies for such a route as long as it
+  also has `tokenizer_model` configured, since `enforce_context_budget` (where dedup is
+  wired in) only runs when both `tokenizer_model` and `api_type == "openai"` are set.
 
 ### Governance
 

@@ -811,7 +811,6 @@ Add to imports (after the existing `from .tokenizer import count_oai_request_tok
 
 ```python
 from .constants import token_optimization_enabled
-from .tokenizer import count_oai_request_tokens
 ```
 
 Add the new function, placed after `_compress_tool_messages` (in the "Tool result compression" section) since it's conceptually adjacent:
