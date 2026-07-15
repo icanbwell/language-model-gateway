@@ -515,6 +515,15 @@ class CodingModelRouter:
                 max_retries=0,
             )
             oai_kwargs = {k: v for k, v in body_json.items() if k != "stream"}
+            if chat_template_kwargs := oai_kwargs.pop("chat_template_kwargs", None):
+                # The openai SDK's `create()` is keyword-only with a closed
+                # parameter list — it has no `chat_template_kwargs` param and
+                # would raise TypeError if splatted in directly. `extra_body`
+                # is the SDK-sanctioned escape hatch for merging arbitrary
+                # extra fields into the outgoing JSON request body.
+                oai_kwargs["extra_body"] = {
+                    "chat_template_kwargs": chat_template_kwargs
+                }
             msg_id = _msg_id()
             streaming_started = False
             # Bound here (not just inside `if is_streaming:`) so the bare
