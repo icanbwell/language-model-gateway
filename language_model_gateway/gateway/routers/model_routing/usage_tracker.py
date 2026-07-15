@@ -111,6 +111,7 @@ class UsageTracker:
         parent_agent_id: str | None = None,
         model_tier: str | None = None,
         backend: str | None = None,
+        bedrock_transport: str | None = None,
         price_per_mtok: float | None = None,
         anthropic_price_per_mtok: float | None = None,
         streaming: bool | None = None,
@@ -118,10 +119,33 @@ class UsageTracker:
         compression_used: str | None = None,
         custom_headers: dict[str, str] | None = None,
         sse_event_count: int | None = None,
+        retry_count: int | None = None,
         prompt_text: str | None = None,
         response_text: str | None = None,
+        raw_usage: dict[str, Any] | None = None,
     ) -> None:
         """Record token usage to MongoDB.
+
+        `bedrock_transport` ("native" or "mantle") disambiguates which
+        Bedrock transport handled a `backend="aws_bedrock"` request —
+        callers pass it explicitly since, unlike `CodingModelRouter`, this
+        class has no `self._bedrock_transport` of its own to derive it from.
+
+        `retry_count` is how many throttle/transient-error retries this
+        request needed before it succeeded (0 if none) — see the throttle
+        retry loops in `router.py`/`bedrock_native_dispatcher.py`. Passed as
+        a plain int (never None) from every dispatch path, including
+        Anthropic passthrough, which never retries and always reports 0 —
+        so its absence on older records means "not tracked yet", not
+        "unknown", and 0 is a meaningful value, not a default standing in
+        for missing data.
+
+        `raw_usage` is the upstream response's usage object, stored verbatim
+        (whatever shape/keys that upstream uses — Anthropic's
+        cache_creation_input_tokens/cache_read_input_tokens, Bedrock
+        Converse's cacheReadInputTokens/cacheWriteInputTokens, OpenAI's
+        prompt_tokens_details, etc.) so fields this router doesn't yet
+        normalize into a top-level column aren't silently dropped.
 
         `prompt_text`/`response_text` are truncated to `preview_chars`
         (configurable; 0 disables preview capture) before being persisted —
@@ -178,6 +202,8 @@ class UsageTracker:
             usage_record["model_tier"] = model_tier
         if backend:
             usage_record["backend"] = backend
+        if bedrock_transport:
+            usage_record["bedrock_transport"] = bedrock_transport
         if price_per_mtok is not None:
             cost_usd = (input_tokens + output_tokens) / 1_000_000 * price_per_mtok
             usage_record["cost_usd"] = round(cost_usd, 6)
@@ -201,6 +227,10 @@ class UsageTracker:
             usage_record["custom_headers"] = custom_headers
         if sse_event_count is not None:
             usage_record["sse_event_count"] = sse_event_count
+        if retry_count is not None:
+            usage_record["retry_count"] = retry_count
+        if raw_usage:
+            usage_record["raw_usage"] = raw_usage
         if self._capture_previews:
             if input_preview := _truncate(prompt_text, self._preview_chars):
                 usage_record["input_preview"] = input_preview
@@ -235,6 +265,7 @@ class UsageTracker:
                     output_tokens=output_tokens,
                     price_per_mtok=price_per_mtok,
                     anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    retry_count=retry_count,
                 )
             except Exception as e:
                 logger.warning(
@@ -255,6 +286,7 @@ class UsageTracker:
         output_tokens: int,
         price_per_mtok: float | None,
         anthropic_price_per_mtok: float | None,
+        retry_count: int | None = None,
     ) -> None:
         """Roll this request's usage into a single per-session document.
 
@@ -270,6 +302,11 @@ class UsageTracker:
         than racing on a last-write-wins $set. account_uuid/user_id/tier
         model names are stable per session in practice, so plain $set is
         fine for those.
+
+        `retry_count` rolls into `total_retries`, a session-wide sum (like
+        `total_savings_usd`) rather than a per-tier bucket — how many
+        retries a session needed overall is the useful signal, not how
+        many per tier.
         """
         if self._session_collection is None:
             return
@@ -308,6 +345,8 @@ class UsageTracker:
         # it accumulates even for tiers not (yet) mapped to a bucket.
         if cost_usd is not None and anthropic_cost_usd is not None:
             inc_fields["total_savings_usd"] = round(anthropic_cost_usd - cost_usd, 6)
+        if retry_count is not None:
+            inc_fields["total_retries"] = retry_count
 
         update: dict[str, dict[str, Any]] = {"$inc": inc_fields}
         if set_fields:
@@ -332,6 +371,7 @@ class UsageTracker:
         compression_requested: str | None = None,
         compression_used: str | None = None,
         prompt_text: str | None = None,
+        retry_count: int | None = None,
     ) -> None:
         """Extract usage from Anthropic response and record it."""
         custom_headers = (
@@ -398,7 +438,9 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            raw_usage=usage,
             start_time=start_time,
+            retry_count=retry_count,
         )
 
     async def record_usage_from_openai_response(
@@ -411,12 +453,14 @@ class UsageTracker:
         *,
         model_tier: str | None = None,
         backend: str | None = None,
+        bedrock_transport: str | None = None,
         price_per_mtok: float | None = None,
         anthropic_price_per_mtok: float | None = None,
         streaming: bool | None = None,
         compression_requested: str | None = None,
         compression_used: str | None = None,
         prompt_text: str | None = None,
+        retry_count: int | None = None,
     ) -> None:
         """Extract usage from OpenAI response and record it."""
         custom_headers = (
@@ -473,6 +517,7 @@ class UsageTracker:
             parent_agent_id=parent_agent_id,
             model_tier=model_tier,
             backend=backend,
+            bedrock_transport=bedrock_transport,
             price_per_mtok=price_per_mtok,
             anthropic_price_per_mtok=anthropic_price_per_mtok,
             streaming=streaming,
@@ -481,7 +526,9 @@ class UsageTracker:
             custom_headers=custom_headers,
             prompt_text=prompt_text,
             response_text=response_text,
+            raw_usage=usage,
             start_time=start_time,
+            retry_count=retry_count,
         )
 
     async def close(self) -> None:

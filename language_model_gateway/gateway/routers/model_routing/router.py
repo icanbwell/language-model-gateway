@@ -24,7 +24,6 @@ import asyncio
 import inspect
 import json
 import logging
-import os
 import time
 from datetime import datetime, timezone
 from enum import Enum
@@ -47,12 +46,16 @@ from starlette.responses import JSONResponse, Response, StreamingResponse
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
-from .aws_auth import SigV4Auth, _sign_bedrock
+from .aws_auth import SigV4Auth, _bedrock_credential_error_detail, _sign_bedrock
 from .bedrock_client import (
     _is_throttling,
+    _is_transient_stream_error,
+    _pace_bedrock_dispatch,
     _send_with_bedrock_retry,
     _throttle_backoff,
 )
+from .bedrock_converse_client import BedrockRuntimeClientProvider
+from .bedrock_native_dispatcher import BedrockNativeDispatcher
 from .constants import (
     _ANTHROPIC_ONLY_HEADERS,
     _HOP_BY_HOP_HEADERS,
@@ -128,6 +131,12 @@ class CodingModelRouter:
         token_reader: TokenReader | None = None,
         debug_log_received_oauth_tokens: bool = False,
         custom_header_prefix: str = "x-model-routing-",
+        bedrock_transport: str = "mantle",
+        qwen_enable_thinking: bool = True,
+        bedrock_connect_timeout_seconds: float = 60.0,
+        bedrock_read_timeout_seconds: float = 60.0,
+        bedrock_max_attempts: int = 1,
+        bedrock_retry_mode: str = "adaptive",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -136,6 +145,8 @@ class CodingModelRouter:
         )
         self._token_reader: TokenReader | None = token_reader
         self._custom_header_prefix: str = custom_header_prefix.lower()
+        self._bedrock_transport: str = bedrock_transport
+        self._qwen_enable_thinking: bool = qwen_enable_thinking
         self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
         if self._debug_log_received_oauth_tokens:
             logger.warning(
@@ -170,6 +181,18 @@ class CodingModelRouter:
                 collection_name=account_directory_collection_name,
                 enabled=True,
             )
+        self._bedrock_native_dispatcher = BedrockNativeDispatcher(
+            client_provider=BedrockRuntimeClientProvider(
+                connect_timeout_seconds=bedrock_connect_timeout_seconds,
+                read_timeout_seconds=bedrock_read_timeout_seconds,
+                max_attempts=bedrock_max_attempts,
+                retry_mode=bedrock_retry_mode,
+            ),
+            get_usage_tracker=lambda: self._usage_tracker,
+            record_error=self._record_error,
+            record_upstream_latency=self._record_upstream_latency,
+            error_response=self._error_response,
+        )
         self._register_routes()
 
     def _register_routes(self) -> None:
@@ -271,7 +294,9 @@ class CodingModelRouter:
         # otherwise fall back to the character-based estimate.
         if req_suffix == "/count_tokens" and api_type == "openai":
             if tokenizer_model:
-                oai_body_for_count = _anthropic_to_openai_request(body_json)
+                oai_body_for_count = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 token_count = count_oai_request_tokens(
                     oai_body_for_count, tokenizer_model
                 )
@@ -298,7 +323,9 @@ class CodingModelRouter:
         #    multiplier. Used when no tokenizer is configured.
         #
         if tokenizer_model and api_type == "openai":
-            body_json = _anthropic_to_openai_request(body_json)
+            body_json = _anthropic_to_openai_request(
+                body_json, enable_qwen_thinking=self._qwen_enable_thinking
+            )
             body_json = enforce_context_budget(body_json, route, tokenizer_model)
             raw_body = json.dumps(body_json).encode()
         else:
@@ -357,7 +384,9 @@ class CodingModelRouter:
                         )
 
             if api_type == "openai":
-                body_json = _anthropic_to_openai_request(body_json)
+                body_json = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 raw_body = json.dumps(body_json).encode()
 
         # Build upstream headers
@@ -389,14 +418,14 @@ class CodingModelRouter:
                         for k, v in _sign_bedrock(target_url, raw_body, route).items()
                     }
                 except Exception as cred_exc:
-                    from botocore.exceptions import TokenRetrievalError
-
-                    if isinstance(cred_exc, TokenRetrievalError):
+                    detail = _bedrock_credential_error_detail(cred_exc)
+                    if detail is not None:
+                        error_type, message = detail
                         self._record_error(
                             request_id=request_id,
                             auth_info=auth_info,
                             model=upstream_model,
-                            error_type="bedrock_session_expired",
+                            error_type=error_type,
                             error_message=str(cred_exc),
                             start_time=request_start_time,
                             model_tier=model_tier,
@@ -405,11 +434,8 @@ class CodingModelRouter:
                             api_type=api_type,
                             streaming=is_streaming,
                         )
-                        profile = os.environ.get("AWS_PROFILE", "<profile>")
                         return self._error_response(
-                            f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
-                            upstream_model,
-                            is_streaming,
+                            message, upstream_model, is_streaming
                         )
                     raise
                 upstream_headers = {**base_headers, **sig_headers}
@@ -439,6 +465,50 @@ class CodingModelRouter:
 
         dispatch_start = time.perf_counter()
 
+        # ── Native Bedrock Converse route: manual fallback for Bedrock Mantle ──
+        if (
+            api_type == "openai"
+            and auth == "aws"
+            and self._bedrock_transport == "native"
+        ):
+            if is_streaming:
+                return await self._bedrock_native_dispatcher.dispatch_streaming(
+                    route=route,
+                    body_json=body_json,
+                    upstream_model=upstream_model,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    price_per_mtok=price_per_mtok,
+                    anthropic_price_per_mtok=anthropic_price_per_mtok,
+                    prompt_text=prompt_text,
+                    accept_encoding=accept_encoding,
+                    request=request,
+                    request_id=request_id,
+                    auth_info=auth_info,
+                    request_start_time=request_start_time,
+                    dispatch_start=dispatch_start,
+                )
+            return await self._bedrock_native_dispatcher.dispatch_nonstreaming(
+                route=route,
+                body_json=body_json,
+                upstream_model=upstream_model,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                price_per_mtok=price_per_mtok,
+                anthropic_price_per_mtok=anthropic_price_per_mtok,
+                prompt_text=prompt_text,
+                accept_encoding=accept_encoding,
+                request_id=request_id,
+                auth_info=auth_info,
+                request_start_time=request_start_time,
+                dispatch_start=dispatch_start,
+                background_tasks=background_tasks,
+            )
+
         # ── OpenAI-format route: use openai SDK + Anthropic translation ──────────
         if api_type == "openai":
             import openai
@@ -454,8 +524,21 @@ class CodingModelRouter:
                 max_retries=0,
             )
             oai_kwargs = {k: v for k, v in body_json.items() if k != "stream"}
+            if chat_template_kwargs := oai_kwargs.pop("chat_template_kwargs", None):
+                # The openai SDK's `create()` is keyword-only with a closed
+                # parameter list — it has no `chat_template_kwargs` param and
+                # would raise TypeError if splatted in directly. `extra_body`
+                # is the SDK-sanctioned escape hatch for merging arbitrary
+                # extra fields into the outgoing JSON request body.
+                oai_kwargs["extra_body"] = {
+                    "chat_template_kwargs": chat_template_kwargs
+                }
             msg_id = _msg_id()
             streaming_started = False
+            # Bound here (not just inside `if is_streaming:`) so the bare
+            # openai.APIError handler below can safely check it regardless of
+            # which branch ran — it's only ever non-None for the streaming path.
+            stream = None
             try:
                 if is_streaming:
                     first_chunk = None
@@ -472,6 +555,8 @@ class CodingModelRouter:
                                 http_client=http_client,
                                 max_retries=0,
                             )
+                        if auth == "aws":
+                            await _pace_bedrock_dispatch()
                         stream = None
                         try:
                             stream = await oai_client.chat.completions.create(
@@ -491,20 +576,31 @@ class CodingModelRouter:
                             _peek_text = getattr(_resp_obj, "text", None) or str(
                                 peek_exc
                             )
-                            if (
-                                _status is not None
-                                and _is_throttling(_status, _peek_text)
-                                and _throttle_attempt < _MAX_THROTTLE_RETRIES
-                            ):
+                            # A plain openai.APIError (SSE `{"error": {...}}`
+                            # mid-stream, e.g. Bedrock Mantle) has no
+                            # .status_code at all — _is_throttling can't apply,
+                            # so it needs its own transient/permanent check
+                            # instead of skipping retry entirely.
+                            _retryable = (
+                                _is_throttling(_status, _peek_text)
+                                if _status is not None
+                                else _is_transient_stream_error(
+                                    getattr(peek_exc, "code", None),
+                                    getattr(peek_exc, "type", None),
+                                    _peek_text,
+                                )
+                            )
+                            if _retryable and _throttle_attempt < _MAX_THROTTLE_RETRIES:
                                 delay = _throttle_backoff(_throttle_attempt)
                                 _throttle_attempt += 1
                                 logger.warning(
-                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s",
+                                    "[coding-model-router] request_id=%s Bedrock throttled (attempt %d/%d): backing off %.1fs status=%s code=%s",
                                     request_id,
                                     _throttle_attempt,
                                     _MAX_THROTTLE_RETRIES,
                                     delay,
                                     _status,
+                                    getattr(peek_exc, "code", None),
                                 )
                                 await asyncio.sleep(delay)
                             else:
@@ -517,6 +613,30 @@ class CodingModelRouter:
                         auth=auth,
                         api_type=api_type,
                     )
+
+                    # Record mid-stream Bedrock Mantle failures the same way as
+                    # the pre-first-chunk case above — otherwise a failure
+                    # after streaming has already started is only ever shown
+                    # inline to the client and never reaches model-router-errors.
+                    def _record_mid_stream_error(message: str) -> None:
+                        self._record_error(
+                            request_id=msg_id,
+                            auth_info=auth_info,
+                            model=upstream_model,
+                            error_type="bedrock_stream_error",
+                            error_message=message,
+                            start_time=request_start_time,
+                            model_tier=model_tier,
+                            backend=backend,
+                            auth=auth,
+                            api_type=api_type,
+                            streaming=True,
+                            # The initial handshake response — headers only,
+                            # since the error body itself arrived as a later
+                            # SSE event on this same response, not a fresh one.
+                            response_headers=dict(stream.response.headers),
+                        )
+
                     # Create streaming response with usage tracking
                     if self._usage_tracker:
                         stream_gen = _oai_stream_with_usage_tracking(
@@ -530,6 +650,7 @@ class CodingModelRouter:
                             prompt_text=prompt_text,
                             model_tier=model_tier,
                             backend=backend,
+                            bedrock_transport=self._bedrock_transport,
                             price_per_mtok=price_per_mtok,
                             anthropic_price_per_mtok=anthropic_price_per_mtok,
                             streaming=True,
@@ -542,6 +663,8 @@ class CodingModelRouter:
                             compression_used="none",
                             request=request,
                             start_time=request_start_time,
+                            on_stream_error=_record_mid_stream_error,
+                            retry_count=_throttle_attempt,
                         )
                     else:
                         stream_gen = _oai_stream_with_cleanup(
@@ -551,6 +674,7 @@ class CodingModelRouter:
                             http_client,
                             first_chunk=first_chunk,
                             request=request,
+                            on_stream_error=_record_mid_stream_error,
                         )
                     return StreamingResponse(
                         stream_gen,
@@ -565,6 +689,8 @@ class CodingModelRouter:
                 else:
                     _throttle_attempt = 0
                     while True:
+                        if auth == "aws":
+                            await _pace_bedrock_dispatch()
                         try:
                             resp = await oai_client.chat.completions.create(
                                 **oai_kwargs, stream=False
@@ -624,12 +750,14 @@ class CodingModelRouter:
                             prompt_text=prompt_text,
                             model_tier=model_tier,
                             backend=backend,
+                            bedrock_transport=self._bedrock_transport,
                             price_per_mtok=price_per_mtok,
                             anthropic_price_per_mtok=anthropic_price_per_mtok,
                             streaming=False,
                             compression_requested=accept_encoding,
                             compression_used=compression_used,
                             start_time=request_start_time,
+                            retry_count=_throttle_attempt,
                         )
                     response.background = background_tasks
                     return response
@@ -667,65 +795,118 @@ class CodingModelRouter:
                     api_type=api_type,
                     streaming=is_streaming,
                     status_code=exc.status_code,
+                    response_headers=dict(exc.response.headers),
                 )
                 return self._error_response(
                     f"Bedrock error ({exc.status_code}): {err_msg}",
                     upstream_model,
                     is_streaming,
                 )
-            except Exception as exc:
-                from botocore.exceptions import TokenRetrievalError
-
-                _cause = exc.__cause__ or exc.__context__
-                if isinstance(exc, TokenRetrievalError) or isinstance(
-                    _cause, TokenRetrievalError
-                ):
-                    self._record_error(
+            except openai.APIError as exc:
+                if type(exc) is not openai.APIError:
+                    # A genuine transport failure (dropped connection, timeout,
+                    # malformed response) — not a Bedrock error body embedded
+                    # in an SSE event. exc.code/type/param/body are always
+                    # None on these subclasses, so recording this as
+                    # "bedrock_stream_error" would just be a null-filled,
+                    # misleading record. Route it through the same handling
+                    # as any other unexpected exception instead.
+                    return self._handle_unexpected_upstream_error(
+                        exc,
                         request_id=msg_id,
                         auth_info=auth_info,
-                        model=upstream_model,
-                        error_type="bedrock_session_expired",
-                        error_message=str(exc),
-                        start_time=request_start_time,
+                        upstream_model=upstream_model,
+                        request_start_time=request_start_time,
                         model_tier=model_tier,
                         backend=backend,
                         auth=auth,
                         api_type=api_type,
                         streaming=is_streaming,
+                        user_id=user_id,
                     )
-                    profile = os.environ.get("AWS_PROFILE", "<profile>")
-                    return self._error_response(
-                        f"AWS Bedrock session expired. Run: aws sso login --profile {profile}",
-                        upstream_model,
-                        is_streaming,
-                    )
+                # Raised by the SDK for errors embedded in an SSE data event
+                # (no HTTP status code involved) — e.g. Bedrock Mantle sends
+                # `{"error": {...}}` mid-stream instead of a 4xx/5xx response.
+                # exc.body is the raw error payload; capture it verbatim since
+                # str(exc) alone is a generic, unhelpful message.
                 logger.error(
-                    "[coding-model-router] Bedrock Mantle request failed with an "
-                    "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
-                    "streaming=%s: %s",
-                    type(exc).__name__,
+                    "[coding-model-router] Bedrock Mantle stream error: "
+                    "model=%s auth=%s user_id=%s request_id=%s streaming=%s "
+                    "code=%s type=%s param=%s body=%s",
                     upstream_model,
                     auth,
                     user_id,
                     msg_id,
                     is_streaming,
-                    exc,
-                    exc_info=True,
+                    exc.code,
+                    exc.type,
+                    exc.param,
+                    exc.body,
                 )
                 self._record_error(
                     request_id=msg_id,
                     auth_info=auth_info,
                     model=upstream_model,
-                    error_type=type(exc).__name__,
-                    error_message=str(exc),
+                    error_type="bedrock_stream_error",
+                    error_message=json.dumps(
+                        {
+                            "message": exc.message,
+                            "code": exc.code,
+                            "type": exc.type,
+                            "param": exc.param,
+                            "body": exc.body,
+                        },
+                        default=str,
+                    ),
                     start_time=request_start_time,
                     model_tier=model_tier,
                     backend=backend,
                     auth=auth,
                     api_type=api_type,
                     streaming=is_streaming,
+                    # Headers from the initial (successful) handshake response —
+                    # the error itself arrived as a later SSE event on this same
+                    # response, so there's no separate error-response to read
+                    # headers from. `stream` is always assigned by this point:
+                    # a bare openai.APIError (as opposed to APIConnectionError,
+                    # filtered out above) only happens after the SSE body has
+                    # started decoding.
+                    response_headers=(
+                        dict(stream.response.headers) if stream is not None else None
+                    ),
                 )
-                raise
+                # Surface whatever detail Bedrock actually sent (not just
+                # exc.message, which can itself be a generic passthrough
+                # string) so the client sees the same diagnostic info now
+                # captured in model-router-errors, instead of a vaguer
+                # message than what's on record.
+                _extra_detail = (
+                    {k: v for k, v in exc.body.items() if k != "message"}
+                    if isinstance(exc.body, dict)
+                    else None
+                )
+                client_text = f"Bedrock stream error: {exc.message}"
+                if _extra_detail:
+                    client_text += f" ({json.dumps(_extra_detail, default=str)})"
+                return self._error_response(
+                    client_text,
+                    upstream_model,
+                    is_streaming,
+                )
+            except Exception as exc:
+                return self._handle_unexpected_upstream_error(
+                    exc,
+                    request_id=msg_id,
+                    auth_info=auth_info,
+                    upstream_model=upstream_model,
+                    request_start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=is_streaming,
+                    user_id=user_id,
+                )
             finally:
                 if not streaming_started:
                     await http_client.aclose()
@@ -733,11 +914,39 @@ class CodingModelRouter:
         # ── Anthropic-format route: stream bytes verbatim via httpx ──────────────
         client = httpx.AsyncClient(timeout=None)  # nosec B113
         try:
-            upstream_resp = await _send_with_bedrock_retry(
+            upstream_resp, bedrock_retry_count = await _send_with_bedrock_retry(
                 client, target_url, upstream_headers, raw_body, route, auth, request_id
             )
-        except Exception:
+        except Exception as exc:
             await client.aclose()
+            # Previously re-raised with no record at all — a connection
+            # failure/timeout dispatching to Anthropic/Bedrock became a bare
+            # 500 with zero trace in model-router-errors.
+            logger.error(
+                "[coding-model-router] passthrough dispatch failed: url=%s "
+                "model=%s auth=%s user_id=%s request_id=%s streaming=%s: %s",
+                target_url,
+                upstream_model,
+                auth,
+                user_id,
+                request_id,
+                is_streaming,
+                exc,
+                exc_info=True,
+            )
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type=type(exc).__name__,
+                error_message=str(exc),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=is_streaming,
+            )
             raise
 
         self._record_upstream_latency(
@@ -751,6 +960,7 @@ class CodingModelRouter:
         if upstream_resp.status_code >= 400:
             error_body = await upstream_resp.aread()
             await client.aclose()
+
             logger.error(
                 "[coding-model-router] upstream %d from %s user_id=%s request_id=%s: %s",
                 upstream_resp.status_code,
@@ -773,14 +983,34 @@ class CodingModelRouter:
                 streaming=is_streaming,
                 status_code=upstream_resp.status_code,
             )
+
             if is_fallback_route:
+                # For fallback routes, annotate with context about missing route
                 error_body = self._annotate_fallback_error(error_body, model)
+
+            # Parse once, after annotation, so the passthrough decision and
+            # the wrapped message (if any) are always derived from the exact
+            # bytes about to be sent to the client — previously these were
+            # two separate json.loads calls with two different criteria,
+            # which could disagree (e.g. the wrap branch using a clean_error
+            # computed from the pre-annotation body).
+            try:
+                parsed = json.loads(error_body)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                parsed = None
+
+            if self._upstream_error_is_well_formed(parsed):
+                final_content = error_body
+            else:
+                clean_error = self._extract_clean_error(
+                    parsed, error_body, upstream_resp.status_code
+                )
+                final_content = json.dumps({"error": {"message": clean_error}}).encode()
+
             return Response(
-                content=error_body,
+                content=final_content,
                 status_code=upstream_resp.status_code,
-                media_type=upstream_resp.headers.get(
-                    "content-type", "application/json"
-                ),
+                media_type="application/json",
             )
 
         resp_headers = {
@@ -828,6 +1058,7 @@ class CodingModelRouter:
                         compression_used=compression_used,
                         prompt_text=prompt_text,
                         start_time=request_start_time,
+                        retry_count=bedrock_retry_count,
                     )
             passthrough_response = Response(
                 content=body_bytes,
@@ -860,6 +1091,7 @@ class CodingModelRouter:
                 # regardless of what the client's Accept-Encoding offers.
                 compression_used="none",
                 request=request,
+                retry_count=bedrock_retry_count,
             )
         else:
             stream_gen = _stream_passthrough(upstream_resp, client, request=request)
@@ -886,9 +1118,16 @@ class CodingModelRouter:
         api_type: str | None = None,
         streaming: bool | None = None,
         status_code: int | None = None,
+        response_headers: dict[str, str] | None = None,
     ) -> None:
         """Fire-and-forget an error record — never blocks or masks the caller's
         own error handling (raising/returning the client-facing error response).
+
+        `bedrock_transport` is derived here from `self._bedrock_transport`
+        rather than threaded in by each of this method's ~9 call sites —
+        `auth`/`api_type` alone can't tell a Mantle error apart from a
+        native Converse one, since native dispatch is also reached via
+        `auth="aws"`, `api_type="openai"` routes.
         """
         if self._error_tracker is None:
             return
@@ -908,10 +1147,89 @@ class CodingModelRouter:
                 backend=backend,
                 auth=auth,
                 api_type=api_type,
+                bedrock_transport=(
+                    self._bedrock_transport if backend == "aws_bedrock" else None
+                ),
                 streaming=streaming,
                 status_code=status_code,
+                response_headers=response_headers,
             )
         )
+
+    def _handle_unexpected_upstream_error(
+        self,
+        exc: Exception,
+        *,
+        request_id: str,
+        auth_info: dict[str, Any],
+        upstream_model: str,
+        request_start_time: datetime,
+        model_tier: str | None,
+        backend: str | None,
+        auth: str | None,
+        api_type: str | None,
+        streaming: bool,
+        user_id: str | None,
+    ) -> StreamingResponse | JSONResponse:
+        """Classify, record, and re-raise an exception that isn't one of the
+        specific Bedrock/OpenAI error shapes handled above it.
+
+        Shared by the generic `except Exception` handler and by
+        `openai.APIError` subclasses (`APIConnectionError`, `APITimeoutError`,
+        `APIResponseValidationError`) that carry no `code`/`type`/`param`/
+        `body` — those aren't genuine mid-stream Bedrock error bodies and
+        must not be recorded as `bedrock_stream_error`. Sibling `except`
+        clauses on one `try` don't chain, so callers can't get here via a
+        bare `raise` from another clause — they must call this directly.
+
+        Must be called from within an active `except` block: it ends with a
+        bare `raise`, which re-raises whatever exception is currently being
+        handled by the caller.
+        """
+        detail = _bedrock_credential_error_detail(exc)
+        if detail is not None:
+            error_type, message = detail
+            self._record_error(
+                request_id=request_id,
+                auth_info=auth_info,
+                model=upstream_model,
+                error_type=error_type,
+                error_message=str(exc),
+                start_time=request_start_time,
+                model_tier=model_tier,
+                backend=backend,
+                auth=auth,
+                api_type=api_type,
+                streaming=streaming,
+            )
+            return self._error_response(message, upstream_model, streaming)
+        logger.error(
+            "[coding-model-router] Bedrock Mantle request failed with an "
+            "unexpected %s: model=%s auth=%s user_id=%s request_id=%s "
+            "streaming=%s: %s",
+            type(exc).__name__,
+            upstream_model,
+            auth,
+            user_id,
+            request_id,
+            streaming,
+            exc,
+            exc_info=True,
+        )
+        self._record_error(
+            request_id=request_id,
+            auth_info=auth_info,
+            model=upstream_model,
+            error_type=type(exc).__name__,
+            error_message=str(exc),
+            start_time=request_start_time,
+            model_tier=model_tier,
+            backend=backend,
+            auth=auth,
+            api_type=api_type,
+            streaming=streaming,
+        )
+        raise
 
     @staticmethod
     def _record_upstream_latency(
@@ -961,6 +1279,41 @@ class CodingModelRouter:
             error_obj["message"] = note + error_obj["message"]
             return json.dumps(parsed).encode()
         return note.encode() + error_body
+
+    @staticmethod
+    def _upstream_error_is_well_formed(parsed: Any) -> bool:
+        """Whether `parsed` (the result of `json.loads`-ing an upstream error
+        body, or `None` if that failed) is already a `{"error": {"message":
+        str}}` or `{"error": str}` body worth passing through to the client
+        verbatim, rather than wrapping via `_extract_clean_error`.
+        """
+        if not isinstance(parsed, dict) or "error" not in parsed:
+            return False
+        err = parsed["error"]
+        return isinstance(err, str) or (
+            isinstance(err, dict) and isinstance(err.get("message"), str)
+        )
+
+    @staticmethod
+    def _extract_clean_error(parsed: Any, error_body: bytes, status_code: int) -> str:
+        """Pull a client-safe message out of an upstream error body that
+        `_upstream_error_is_well_formed` rejected — `parsed` may still be a
+        JSON value (just not the expected error shape), or `None` if the
+        body wasn't valid JSON at all.
+        """
+        if isinstance(parsed, dict):
+            if "error" in parsed:
+                return f"Error: {json.dumps(parsed['error'], default=str)}"
+            message = parsed.get("message")
+            if isinstance(message, str):
+                return message
+            return f"Error response (status {status_code})"
+        if parsed is not None:
+            return f"Error: {json.dumps(parsed, default=str)}"
+        return (
+            error_body[:500].decode("utf-8", errors="replace")
+            or f"Unknown error (status {status_code})"
+        )
 
     @staticmethod
     def _error_response(

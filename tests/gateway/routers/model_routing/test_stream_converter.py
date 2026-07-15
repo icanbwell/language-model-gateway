@@ -29,12 +29,27 @@ def _fake_chunk(
     finish_reason: str | None = None,
     prompt_tokens: int | None = None,
     completion_tokens: int | None = None,
+    cached_tokens: int | None = None,
 ) -> object:
     usage = None
     if prompt_tokens is not None or completion_tokens is not None:
-        usage = SimpleNamespace(
-            prompt_tokens=prompt_tokens, completion_tokens=completion_tokens
+        prompt_tokens_details = (
+            SimpleNamespace(cached_tokens=cached_tokens)
+            if cached_tokens is not None
+            else None
         )
+        usage = SimpleNamespace(
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            prompt_tokens_details=prompt_tokens_details,
+        )
+        usage.model_dump = lambda: {
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "prompt_tokens_details": (
+                {"cached_tokens": cached_tokens} if cached_tokens is not None else None
+            ),
+        }
     return SimpleNamespace(
         choices=[
             SimpleNamespace(
@@ -122,6 +137,122 @@ class TestDisconnectDetection:
         client.aclose.assert_awaited_once()
 
 
+class TestOnStreamError:
+    async def test_mid_stream_failure_invokes_on_stream_error(self) -> None:
+        """A failure after streaming has already started (e.g. Bedrock Mantle
+        sends a stream-level error partway through) must reach the caller's
+        `on_stream_error` hook — previously such failures were only ever
+        shown inline to the client and never recorded anywhere for triage."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="partial")
+            raise RuntimeError("upstream connection reset")
+
+        recorded: list[str] = []
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                on_stream_error=recorded.append,
+            )
+        ]
+
+        assert recorded == ["upstream connection reset"]
+        assert any(b"partial" in c for c in chunks)
+
+    async def test_clean_stream_never_invokes_on_stream_error(self) -> None:
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="all good", finish_reason="stop")
+
+        recorded: list[str] = []
+
+        _ = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                on_stream_error=recorded.append,
+            )
+        ]
+
+        assert recorded == []
+
+    async def test_no_hook_provided_does_not_raise(self) -> None:
+        """on_stream_error defaults to None — a stream error must not crash
+        just because no hook was wired up (e.g. no error_tracker configured)."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="partial")
+            raise RuntimeError("boom")
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+        assert any(b"partial" in c for c in chunks)
+
+    async def test_mid_stream_failure_before_any_content_still_shows_error(
+        self,
+    ) -> None:
+        """A failure that happens after message_start was sent but before any
+        content block was ever opened (e.g. the model was still inside an
+        unterminated <think> block) must still surface inline error text.
+        Previously this guarded on `sent_message_start`, which is already
+        True as soon as the first chunk arrives, so the error was silently
+        dropped and the client got an empty assistant message."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="<think>still reasoning")
+            raise RuntimeError("upstream connection reset")
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+
+        joined = b"".join(chunks)
+        assert b"[anthropic-proxy error] upstream connection reset" in joined
+        # Exactly one content block was opened and closed — no duplicate
+        # index-0 block from a later flush()/remaining-text step.
+        assert joined.count(b'"content_block_start"') == 1
+        assert joined.count(b'"content_block_stop"') == 1
+
+    async def test_stream_with_no_visible_content_still_opens_a_content_block(
+        self,
+    ) -> None:
+        """A completion that never emits visible text (e.g. it hits
+        max_tokens while still inside an unterminated <think> block) must
+        still produce a well-formed message with at least one content
+        block — a message with content=[] is not valid Anthropic protocol
+        and breaks Claude Code's SSE parser ("Content block not found")."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(
+                content="<think>reasoning that never closes",
+                finish_reason="length",
+            )
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+
+        joined = b"".join(chunks)
+        assert b'"content_block_start"' in joined
+        assert b'"content_block_stop"' in joined
+        assert b'"max_tokens"' in joined  # stop_reason mapped through
+
+
 class TestSseEventCount:
     async def test_records_sse_event_count_matching_yielded_chunks(self) -> None:
         async def fake_stream() -> AsyncIterator[object]:
@@ -153,6 +284,111 @@ class TestSseEventCount:
         recorded_count = usage_tracker.record_usage.call_args.kwargs["sse_event_count"]
         assert recorded_count == len(chunks)
         assert recorded_count > 0
+
+
+class TestOaiStreamUsageRetryCount:
+    async def test_threads_retry_count_through_to_record_usage(self) -> None:
+        """The throttle-retry count the caller consumed before this stream
+        started must survive to the usage record, not just non-streaming
+        responses."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hello", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5)
+
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+        http_client = MagicMock(spec=httpx.AsyncClient)
+        http_client.aclose = AsyncMock()
+
+        async for _ in _oai_stream_with_usage_tracking(
+            fake_stream(),
+            "msg_1",
+            "upstream-model",
+            http_client,
+            usage_tracker,
+            {"user_id": "user-1"},
+            _TEST_START_TIME,
+            retry_count=3,
+        ):
+            pass
+
+        await asyncio.sleep(0)
+
+        usage_tracker.record_usage.assert_awaited_once()
+        assert usage_tracker.record_usage.call_args.kwargs["retry_count"] == 3
+
+
+class TestOaiStreamUsageAndCacheTokens:
+    async def test_message_delta_reports_real_output_tokens(self) -> None:
+        """Regression test: message_delta's usage.output_tokens previously
+        always emitted 0 (a stale local variable that was never updated from
+        usage_sink) instead of the actual completion_tokens count."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5)
+
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model"
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert '"output_tokens": 5' in joined
+
+    async def test_cache_read_tokens_surface_in_message_delta(self) -> None:
+        """Bedrock Mantle is a conformant OpenAI Chat Completions endpoint —
+        usage.prompt_tokens_details.cached_tokens must map onto Anthropic's
+        cache_read_input_tokens, per anthropics/claude-code#13385."""
+
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5, cached_tokens=100)
+
+        usage_sink: dict[str, object] = {}
+        chunks = [
+            chunk
+            async for chunk in _stream_oai_sdk_to_anthropic(
+                fake_stream(), "msg_1", "upstream-model", usage_sink=usage_sink
+            )
+        ]
+        joined = b"".join(chunks).decode()
+        assert usage_sink["cache_read_input_tokens"] == 100
+        assert usage_sink["cache_creation_input_tokens"] == 0
+        assert '"cache_read_input_tokens": 100' in joined
+
+    async def test_raw_usage_recorded_after_stream_completes(self) -> None:
+        async def fake_stream() -> AsyncIterator[object]:
+            yield _fake_chunk(content="hi", finish_reason="stop")
+            yield _fake_chunk(prompt_tokens=10, completion_tokens=5, cached_tokens=100)
+
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+        http_client = MagicMock(spec=httpx.AsyncClient)
+        http_client.aclose = AsyncMock()
+
+        _ = [
+            chunk
+            async for chunk in _oai_stream_with_usage_tracking(
+                fake_stream(),
+                "msg_1",
+                "upstream-model",
+                http_client,
+                usage_tracker,
+                {"user_id": "user-1"},
+                _TEST_START_TIME,
+            )
+        ]
+        await asyncio.sleep(0)
+        usage_tracker.record_usage.assert_awaited_once()
+        call_kwargs = usage_tracker.record_usage.call_args.kwargs
+        assert call_kwargs["raw_usage"] == {
+            "prompt_tokens": 10,
+            "completion_tokens": 5,
+            "prompt_tokens_details": {"cached_tokens": 100},
+        }
 
 
 def _anthropic_sse_event(event_type: str, data: dict[str, object]) -> bytes:
@@ -192,28 +428,58 @@ class TestParseAnthropicSseUsage:
     def test_extracts_input_and_output_tokens(self) -> None:
         raw = _MESSAGE_START + _CONTENT_DELTA + _MESSAGE_DELTA + _MESSAGE_STOP
 
-        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(raw)
+        input_tokens, output_tokens, text, raw_usage = _parse_anthropic_sse_usage(raw)
 
         # message_delta's usage.output_tokens (the final cumulative count)
         # wins over message_start's placeholder output_tokens=1.
         assert input_tokens == 42
         assert output_tokens == 17
         assert text == "hello"
+        assert raw_usage == {"input_tokens": 42, "output_tokens": 17}
 
     def test_no_events_returns_zeros_and_none_text(self) -> None:
-        input_tokens, output_tokens, text = _parse_anthropic_sse_usage(b"")
-        assert (input_tokens, output_tokens, text) == (0, 0, None)
+        input_tokens, output_tokens, text, raw_usage = _parse_anthropic_sse_usage(b"")
+        assert (input_tokens, output_tokens, text, raw_usage) == (0, 0, None, {})
 
     def test_ignores_malformed_data_lines(self) -> None:
         raw = b"data: not-json\n\n" + _MESSAGE_START + _MESSAGE_DELTA
-        input_tokens, output_tokens, _ = _parse_anthropic_sse_usage(raw)
+        input_tokens, output_tokens, _, _ = _parse_anthropic_sse_usage(raw)
         assert input_tokens == 42
         assert output_tokens == 17
 
     def test_concatenates_multiple_text_deltas(self) -> None:
         raw = _MESSAGE_START + _CONTENT_DELTA + _CONTENT_DELTA + _MESSAGE_DELTA
-        _, _, text = _parse_anthropic_sse_usage(raw)
+        _, _, text, _ = _parse_anthropic_sse_usage(raw)
         assert text == "hellohello"
+
+    def test_raw_usage_carries_cache_token_fields_from_message_start(self) -> None:
+        """cache_creation_input_tokens/cache_read_input_tokens only ever
+        appear in message_start (Anthropic knows them before generation
+        starts) — they must survive being overlaid by message_delta's
+        usage object, which only repeats output_tokens."""
+        message_start_with_cache = _anthropic_sse_event(
+            "message_start",
+            {
+                "type": "message_start",
+                "message": {
+                    "id": "msg_1",
+                    "usage": {
+                        "input_tokens": 42,
+                        "output_tokens": 1,
+                        "cache_creation_input_tokens": 20,
+                        "cache_read_input_tokens": 100,
+                    },
+                },
+            },
+        )
+        raw = message_start_with_cache + _MESSAGE_DELTA
+        _, _, _, raw_usage = _parse_anthropic_sse_usage(raw)
+        assert raw_usage == {
+            "input_tokens": 42,
+            "output_tokens": 17,
+            "cache_creation_input_tokens": 20,
+            "cache_read_input_tokens": 100,
+        }
 
 
 class TestStreamPassthroughWithUsageTracking:
@@ -260,9 +526,42 @@ class TestStreamPassthroughWithUsageTracking:
         assert call_kwargs["user_id"] == "user-1"
         assert call_kwargs["streaming"] is True
         assert call_kwargs["response_text"] == "hello"
+        assert call_kwargs["raw_usage"] == {"input_tokens": 42, "output_tokens": 17}
         assert call_kwargs["start_time"] == _TEST_START_TIME
         resp.aclose.assert_awaited_once()
         client.aclose.assert_awaited_once()
+
+    async def test_threads_retry_count_through_to_record_usage(self) -> None:
+        async def fake_aiter_bytes() -> AsyncIterator[bytes]:
+            yield _MESSAGE_START
+            yield _CONTENT_DELTA
+            yield _MESSAGE_DELTA
+            yield _MESSAGE_STOP
+
+        resp = MagicMock(spec=httpx.Response)
+        resp.aiter_bytes = fake_aiter_bytes
+        resp.aclose = AsyncMock()
+        client = MagicMock(spec=httpx.AsyncClient)
+        client.aclose = AsyncMock()
+        usage_tracker = MagicMock()
+        usage_tracker.record_usage = AsyncMock()
+
+        async for _ in _stream_passthrough_with_usage_tracking(
+            resp,
+            client,
+            usage_tracker,
+            "req-1",
+            {"user_id": "user-1"},
+            "claude-opus-4-8",
+            _TEST_START_TIME,
+            retry_count=1,
+        ):
+            pass
+
+        await asyncio.sleep(0)
+
+        usage_tracker.record_usage.assert_awaited_once()
+        assert usage_tracker.record_usage.call_args.kwargs["retry_count"] == 1
 
     async def test_skips_recording_when_no_usage_found(self) -> None:
         async def fake_aiter_bytes() -> AsyncIterator[bytes]:

@@ -78,10 +78,18 @@ class ErrorTracker:
         backend: str | None = None,
         auth: str | None = None,
         api_type: str | None = None,
+        bedrock_transport: str | None = None,
         streaming: bool | None = None,
         status_code: int | None = None,
+        response_headers: dict[str, str] | None = None,
     ) -> None:
         """Record an upstream request failure to MongoDB.
+
+        `bedrock_transport` ("native" or "mantle") disambiguates which
+        Bedrock transport handled a `backend="aws_bedrock"` request — `auth`
+        and `api_type` alone don't, since native Converse dispatch is also
+        reached via `auth="aws"`, `api_type="openai"` routes (see
+        CodingModelRouter._record_error, which fills this in automatically).
 
         `error_message` is truncated to `_ERROR_MESSAGE_LIMIT` chars — the
         message is for triage/trend-spotting, not full incident replay, and
@@ -121,10 +129,14 @@ class ErrorTracker:
             error_record["auth"] = auth
         if api_type:
             error_record["api_type"] = api_type
+        if bedrock_transport:
+            error_record["bedrock_transport"] = bedrock_transport
         if streaming is not None:
             error_record["streaming"] = streaming
         if status_code is not None:
             error_record["status_code"] = status_code
+        if response_headers:
+            error_record["response_headers"] = response_headers
 
         try:
             await self._collection.insert_one(error_record)
