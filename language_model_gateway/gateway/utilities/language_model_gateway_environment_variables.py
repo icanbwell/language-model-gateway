@@ -300,3 +300,25 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         rather than hardcoding a larger value for every route.
         """
         return float(os.environ.get("MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS", "60"))
+
+    @property
+    def model_routing_bedrock_max_attempts(self) -> int:
+        """Max botocore-level attempts for the native Bedrock Converse client.
+
+        Defaults to 1 (no additional retries at this layer) deliberately,
+        mirroring languagemodelcommon's AwsClientFactory.create_bedrock_client
+        default — CodingModelRouter already retries transient native-Bedrock
+        errors itself with its own backoff (see _throttle_backoff in
+        router.py). Raising this stacks botocore's own retry/backoff on top
+        of that outer loop.
+        """
+        return int(os.environ.get("MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS", "1"))
+
+    @property
+    def model_routing_bedrock_retry_mode(self) -> str:
+        """botocore retry mode for the native Bedrock Converse client.
+
+        Only takes effect if model_routing_bedrock_max_attempts > 1. Mirrors
+        AwsClientFactory.create_bedrock_client's own default of "adaptive".
+        """
+        return os.environ.get("MODEL_ROUTING_BEDROCK_RETRY_MODE", "adaptive")

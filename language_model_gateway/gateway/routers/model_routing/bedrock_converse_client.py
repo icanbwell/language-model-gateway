@@ -27,7 +27,7 @@ from __future__ import annotations
 import logging
 import os
 import threading
-from typing import Any
+from typing import Any, Literal, cast
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -51,6 +51,21 @@ class BedrockRuntimeClientProvider:
     LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_connect_timeout_seconds
     / model_routing_bedrock_read_timeout_seconds for the env vars that
     control these in CodingModelRouter.
+
+    `max_attempts`/`retry_mode` mirror languagemodelcommon's
+    AwsClientFactory.create_bedrock_client (used by the general
+    chat-completions path, a separate Bedrock client from this one) —
+    defaulting max_attempts to 1 there and here is deliberate, not an
+    oversight: CodingModelRouter already retries transient native-Bedrock
+    errors itself with its own backoff (see _throttle_backoff /
+    _is_transient_bedrock_error_code in router.py). Raising max_attempts
+    above 1 stacks botocore's own retry/backoff on top of that outer loop,
+    so only do so with that interaction in mind.
+
+    `tcp_keepalive=True` (also mirroring AwsClientFactory) enables TCP
+    keepalive probes on the underlying socket, so a genuinely dead
+    connection is detected via keepalive rather than only via the read
+    timeout above.
     """
 
     def __init__(
@@ -58,9 +73,13 @@ class BedrockRuntimeClientProvider:
         *,
         connect_timeout_seconds: float = 60.0,
         read_timeout_seconds: float = 60.0,
+        max_attempts: int = 1,
+        retry_mode: str = "adaptive",
     ) -> None:
         self._connect_timeout_seconds = connect_timeout_seconds
         self._read_timeout_seconds = read_timeout_seconds
+        self._max_attempts = max_attempts
+        self._retry_mode = retry_mode
         self._cache: dict[tuple[str | None, str], Any] = {}
         self._lock = threading.Lock()
 
@@ -85,6 +104,14 @@ class BedrockRuntimeClientProvider:
                         config=Config(
                             connect_timeout=self._connect_timeout_seconds,
                             read_timeout=self._read_timeout_seconds,
+                            retries={
+                                "max_attempts": self._max_attempts,
+                                "mode": cast(
+                                    Literal["legacy", "standard", "adaptive"],
+                                    self._retry_mode,
+                                ),
+                            },
+                            tcp_keepalive=True,
                         ),
                     )
         return self._cache[key]

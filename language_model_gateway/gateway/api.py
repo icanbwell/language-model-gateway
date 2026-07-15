@@ -216,6 +216,8 @@ def create_app() -> FastAPI:
             bedrock_read_timeout_seconds=(
                 env_vars.model_routing_bedrock_read_timeout_seconds
             ),
+            bedrock_max_attempts=env_vars.model_routing_bedrock_max_attempts,
+            bedrock_retry_mode=env_vars.model_routing_bedrock_retry_mode,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())

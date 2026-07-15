@@ -135,6 +135,8 @@ class CodingModelRouter:
         qwen_enable_thinking: bool = True,
         bedrock_connect_timeout_seconds: float = 60.0,
         bedrock_read_timeout_seconds: float = 60.0,
+        bedrock_max_attempts: int = 1,
+        bedrock_retry_mode: str = "adaptive",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -183,6 +185,8 @@ class CodingModelRouter:
             client_provider=BedrockRuntimeClientProvider(
                 connect_timeout_seconds=bedrock_connect_timeout_seconds,
                 read_timeout_seconds=bedrock_read_timeout_seconds,
+                max_attempts=bedrock_max_attempts,
+                retry_mode=bedrock_retry_mode,
             ),
             get_usage_tracker=lambda: self._usage_tracker,
             record_error=self._record_error,

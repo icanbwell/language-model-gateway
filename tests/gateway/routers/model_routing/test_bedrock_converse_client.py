@@ -44,7 +44,9 @@ class TestBedrockRuntimeClientProvider:
             call_kwargs = mock_session_cls.return_value.client.call_args.kwargs
             assert call_kwargs["region_name"] == "us-east-1"
 
-    def test_defaults_boto_config_timeouts_to_60_seconds(self) -> None:
+    def test_defaults_boto_config_to_60_second_timeouts_and_no_extra_retries(
+        self,
+    ) -> None:
         route: dict[str, str] = {}
         provider = BedrockRuntimeClientProvider()
         with (
@@ -56,15 +58,23 @@ class TestBedrockRuntimeClientProvider:
             provider.get_client(route)
 
             mock_config_cls.assert_called_once_with(
-                connect_timeout=60.0, read_timeout=60.0
+                connect_timeout=60.0,
+                read_timeout=60.0,
+                retries={"max_attempts": 1, "mode": "adaptive"},
+                tcp_keepalive=True,
             )
             call_kwargs = mock_session_cls.return_value.client.call_args.kwargs
             assert call_kwargs["config"] is mock_config_cls.return_value
 
-    def test_passes_through_explicit_timeouts_to_boto_config(self) -> None:
+    def test_passes_through_explicit_timeouts_and_retry_config_to_boto_config(
+        self,
+    ) -> None:
         route: dict[str, str] = {}
         provider = BedrockRuntimeClientProvider(
-            connect_timeout_seconds=10.0, read_timeout_seconds=300.0
+            connect_timeout_seconds=10.0,
+            read_timeout_seconds=300.0,
+            max_attempts=3,
+            retry_mode="standard",
         )
         with (
             patch("boto3.Session") as mock_session_cls,
@@ -75,7 +85,10 @@ class TestBedrockRuntimeClientProvider:
             provider.get_client(route)
 
             mock_config_cls.assert_called_once_with(
-                connect_timeout=10.0, read_timeout=300.0
+                connect_timeout=10.0,
+                read_timeout=300.0,
+                retries={"max_attempts": 3, "mode": "standard"},
+                tcp_keepalive=True,
             )
 
     def test_reuses_cached_client_for_same_region(self) -> None:
