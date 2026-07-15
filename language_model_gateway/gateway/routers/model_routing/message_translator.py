@@ -76,8 +76,16 @@ def _convert_user_content(blocks: list[Any]) -> str | list[Any]:
     return result
 
 
-def _anthropic_to_openai_request(body_json: dict[str, Any]) -> dict[str, Any]:
-    """Translate an Anthropic Messages API request body to OpenAI Chat Completions format."""
+def _anthropic_to_openai_request(
+    body_json: dict[str, Any], *, enable_qwen_thinking: bool = True
+) -> dict[str, Any]:
+    """Translate an Anthropic Messages API request body to OpenAI Chat Completions format.
+
+    `enable_qwen_thinking` only applies when the resolved backend model is a
+    Qwen model (by this point `body_json["model"]` has already been rewritten
+    to the upstream model id — see CodingModelRouter.proxy_messages) — other
+    `api_type="openai"` backends don't understand `chat_template_kwargs`.
+    """
     oai: dict[str, Any] = {"model": body_json["model"]}
     for field in ("stream", "temperature", "top_p", "max_tokens"):
         if field in body_json:
@@ -181,6 +189,9 @@ def _anthropic_to_openai_request(body_json: dict[str, Any]) -> dict[str, Any]:
                 "type": "function",
                 "function": {"name": tc.get("name", "")},
             }
+
+    if "qwen" in oai["model"].lower():
+        oai["chat_template_kwargs"] = {"enable_thinking": enable_qwen_thinking}
 
     return oai
 

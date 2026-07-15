@@ -77,6 +77,11 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` | `x-model-routing-` | Any incoming header under this prefix (case-insensitive) is (a) stripped before forwarding upstream and (b) captured into the usage record's `custom_headers` field. `{prefix}user-id` is additionally used as a best-effort `user_id` fallback — see "Usage tracking" below. |
 | `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MODEL_ROUTING_ERROR_COLLECTION_NAME` | `model-router-errors` | Collection name for upstream-failure tracking (see "Error tracking" below). |
+| `MODEL_ROUTING_QWEN_ENABLE_THINKING` | `true` | Whether Qwen routes (`api_type: openai`) are allowed to think before answering — see "Request translation" below. |
+| `MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS` | `60` | Connect timeout for the native Bedrock Converse boto3 client (only applies when `bedrock_transport="native"`). |
+| `MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS` | `60` | Read timeout for the native Bedrock Converse boto3 client. A long streamed generation (large `max_tokens`, slow model) can exceed botocore's 60s default on a single read and fail with `AWSHTTPSConnectionPool ... Read timed out` (`error_type: bedrock_native_error`) — raise this for routes/models that legitimately need longer per-read. |
+| `MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS` | `1` | Max botocore-level attempts for the native Bedrock Converse client. Defaults to 1 (no extra retries at this layer) deliberately — CodingModelRouter already retries transient native-Bedrock errors itself with its own backoff (see "Throttle retry and backoff" below); raising this stacks botocore's own retry/backoff on top of that outer loop. |
+| `MODEL_ROUTING_BEDROCK_RETRY_MODE` | `adaptive` | botocore retry mode for the native Bedrock Converse client. Only takes effect if `MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS` > 1. |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
@@ -239,6 +244,14 @@ Translated fields:
 Thinking blocks (`<think>…</think>`) emitted by reasoning models are stripped
 from both streaming and non-streaming responses before they are returned to the
 client.
+
+For Qwen models specifically (routes whose resolved backend model id contains
+`qwen`), the request also gets a `chat_template_kwargs.enable_thinking` field
+controlled by `MODEL_ROUTING_QWEN_ENABLE_THINKING` (default `true`). Setting
+it to `false` stops Qwen from generating the `<think>` block at all, trading
+answer quality for lower latency/token cost — the stripping behavior above
+still applies either way, this only controls whether there's anything to
+strip.
 
 ---
 
@@ -715,3 +728,54 @@ Key env vars:
 The client sends requests to `/v1/messages` exactly as it would to
 `api.anthropic.com`.  The router rewrites the destination based on the config
 file without any change to the client-side request format.
+
+## Bedrock Transport Options
+
+When routing to AWS Bedrock (via `auth: "aws"` routes in the config), the gateway
+supports two transport mechanisms controlled by the
+`MODEL_ROUTING_BEDROCK_TRANSPORT` environment variable:
+
+| Value | Transport | Description |
+|-------|-----------|-------------|
+| `native` (default) | Bedrock Converse API | Direct calls to Bedrock's native `Converse`/`ConverseStream` API using `boto3` |
+| `mantle` | Bedrock Mantle | OpenAI-compatible API endpoint at `bedrock-mantle.us-east-1.api.aws` |
+
+### Native Transport (Default)
+
+**Introduced:** PR #200 (July 2026)
+
+The `native` transport routes `haiku`/`sonnet` tier traffic directly to AWS
+Bedrock's Converse API using the `boto3` SDK. This is the default and recommended
+option because:
+
+- **Better error visibility** - Full AWS request IDs and specific error codes
+  are captured in `model-router-errors` logs
+- **More reliable** - Bypasses Bedrock Mantle's OpenAI-compatible shim which
+  has occasionally returned generic `internal_server_error` 500s
+- **Fewer translation hops** - No OpenAI-compatibility shim layer (translates
+  directly Anthropic↔Converse instead of Anthropic↔OpenAI↔Bedrock)
+
+The gateway automatically converts between the Anthropic Messages API format
+and Bedrock's Converse API shape.
+
+### Mantle Transport (Legacy)
+
+The `mantle` transport uses Bedrock Mantle's OpenAI-compatible endpoint at
+`bedrock-mantle.us-east-1.api.aws`. Use this if you need to temporarily revert
+to the older path for debugging or in case of native transport issues.
+
+### Environment Variable
+
+Set `MODEL_ROUTING_BEDROCK_TRANSPORT` in your environment or
+`docker-compose.yml`:
+
+```yaml
+environment:
+  MODEL_ROUTING_BEDROCK_TRANSPORT: native  # or "mantle"
+```
+
+### Verifying Which Transport is Used
+
+Each `aws_bedrock`-backed `model-router-usage` and `model-router-errors`
+record includes a `bedrock_transport` field (`"native"` or `"mantle"`) so
+you can confirm which path handled a given request.

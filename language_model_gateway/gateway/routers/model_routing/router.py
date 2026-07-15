@@ -132,6 +132,11 @@ class CodingModelRouter:
         debug_log_received_oauth_tokens: bool = False,
         custom_header_prefix: str = "x-model-routing-",
         bedrock_transport: str = "mantle",
+        qwen_enable_thinking: bool = True,
+        bedrock_connect_timeout_seconds: float = 60.0,
+        bedrock_read_timeout_seconds: float = 60.0,
+        bedrock_max_attempts: int = 1,
+        bedrock_retry_mode: str = "adaptive",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -141,6 +146,7 @@ class CodingModelRouter:
         self._token_reader: TokenReader | None = token_reader
         self._custom_header_prefix: str = custom_header_prefix.lower()
         self._bedrock_transport: str = bedrock_transport
+        self._qwen_enable_thinking: bool = qwen_enable_thinking
         self._debug_log_received_oauth_tokens: bool = debug_log_received_oauth_tokens
         if self._debug_log_received_oauth_tokens:
             logger.warning(
@@ -176,7 +182,12 @@ class CodingModelRouter:
                 enabled=True,
             )
         self._bedrock_native_dispatcher = BedrockNativeDispatcher(
-            client_provider=BedrockRuntimeClientProvider(),
+            client_provider=BedrockRuntimeClientProvider(
+                connect_timeout_seconds=bedrock_connect_timeout_seconds,
+                read_timeout_seconds=bedrock_read_timeout_seconds,
+                max_attempts=bedrock_max_attempts,
+                retry_mode=bedrock_retry_mode,
+            ),
             get_usage_tracker=lambda: self._usage_tracker,
             record_error=self._record_error,
             record_upstream_latency=self._record_upstream_latency,
@@ -283,7 +294,9 @@ class CodingModelRouter:
         # otherwise fall back to the character-based estimate.
         if req_suffix == "/count_tokens" and api_type == "openai":
             if tokenizer_model:
-                oai_body_for_count = _anthropic_to_openai_request(body_json)
+                oai_body_for_count = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 token_count = count_oai_request_tokens(
                     oai_body_for_count, tokenizer_model
                 )
@@ -310,7 +323,9 @@ class CodingModelRouter:
         #    multiplier. Used when no tokenizer is configured.
         #
         if tokenizer_model and api_type == "openai":
-            body_json = _anthropic_to_openai_request(body_json)
+            body_json = _anthropic_to_openai_request(
+                body_json, enable_qwen_thinking=self._qwen_enable_thinking
+            )
             body_json = enforce_context_budget(body_json, route, tokenizer_model)
             raw_body = json.dumps(body_json).encode()
         else:
@@ -369,7 +384,9 @@ class CodingModelRouter:
                         )
 
             if api_type == "openai":
-                body_json = _anthropic_to_openai_request(body_json)
+                body_json = _anthropic_to_openai_request(
+                    body_json, enable_qwen_thinking=self._qwen_enable_thinking
+                )
                 raw_body = json.dumps(body_json).encode()
 
         # Build upstream headers
@@ -507,6 +524,15 @@ class CodingModelRouter:
                 max_retries=0,
             )
             oai_kwargs = {k: v for k, v in body_json.items() if k != "stream"}
+            if chat_template_kwargs := oai_kwargs.pop("chat_template_kwargs", None):
+                # The openai SDK's `create()` is keyword-only with a closed
+                # parameter list — it has no `chat_template_kwargs` param and
+                # would raise TypeError if splatted in directly. `extra_body`
+                # is the SDK-sanctioned escape hatch for merging arbitrary
+                # extra fields into the outgoing JSON request body.
+                oai_kwargs["extra_body"] = {
+                    "chat_template_kwargs": chat_template_kwargs
+                }
             msg_id = _msg_id()
             streaming_started = False
             # Bound here (not just inside `if is_streaming:`) so the bare

@@ -191,6 +191,33 @@ def test_anthropic_to_openai_tool_result_becomes_tool_role() -> None:
     assert msg["content"] == "search result"
 
 
+def test_anthropic_to_openai_qwen_model_defaults_thinking_enabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-next",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body)
+    assert result["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+def test_anthropic_to_openai_qwen_model_thinking_disabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-30b-a3b-v1:0",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert result["chat_template_kwargs"] == {"enable_thinking": False}
+
+
+def test_anthropic_to_openai_non_qwen_model_has_no_chat_template_kwargs() -> None:
+    body = {
+        "model": "claude-sonnet-5",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert "chat_template_kwargs" not in result
+
+
 def test_anthropic_to_openai_tools_translated() -> None:
     body = {
         "model": "m",
@@ -1723,6 +1750,77 @@ async def test_bedrock_mantle_connection_error_is_not_misrecorded_as_stream_erro
     usage_tracker.record_usage_from_openai_response.assert_not_called()
 
 
+@pytest.mark.asyncio
+async def test_bedrock_mantle_qwen_chat_template_kwargs_reaches_wire_via_extra_body(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """`_anthropic_to_openai_request` stamps `chat_template_kwargs` onto the
+    OpenAI-shaped body for Qwen routes. The openai SDK's `create()` has no
+    such parameter and no `**kwargs` catch-all, so splatting it in directly
+    raises `TypeError` before any network call — a total outage for every
+    Qwen request on the Mantle transport. It must instead be threaded through
+    via `extra_body`, which the SDK merges back into the outgoing JSON body
+    so the upstream still receives the field at the top level."""
+    # `auth="passthrough"` routes forward the client's exact model id as
+    # `upstream_model` (see router.py's `upstream_model` derivation) — the
+    # route's own `model` field is only used for `auth="aws"` routes. So the
+    # client-facing model id itself must contain "qwen" to trigger
+    # `_anthropic_to_openai_request`'s `chat_template_kwargs` stamping.
+    fake_route = {
+        "claude_model": "claude-test-qwen-mantle-thinking",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=200,
+        json={
+            "id": "chatcmpl-abc",
+            "object": "chat.completion",
+            "created": 1234567890,
+            "model": "qwen.qwen3-coder-next",
+            "choices": [
+                {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                        "role": "assistant",
+                        "content": "Hi there",
+                        "tool_calls": None,
+                    },
+                }
+            ],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+        },
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-qwen-mantle-thinking": fake_route}):
+        body = {
+            "model": "claude-test-qwen-mantle-thinking",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    # Would be a 500 (TypeError surfaced as bedrock_upstream_error) before the fix.
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    sent_body = json.loads(intercepted[0].read())
+    # `extra_body` is merged back into the top-level JSON by the SDK, so the
+    # upstream still sees the field exactly where it expects it.
+    assert sent_body["chat_template_kwargs"] == {"enable_thinking": True}
+
+
 # ---------------------------------------------------------------------------
 # Native Bedrock Converse transport — non-streaming dispatch
 # ---------------------------------------------------------------------------
@@ -1952,6 +2050,63 @@ async def test_native_bedrock_nonstreaming_client_error_is_recorded(
     assert recorded["request_id"] == "aws-req-123"
 
 
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """`ReadTimeoutError`/`ConnectTimeoutError`/`EndpointConnectionError` are
+    `BotoCoreError` subclasses, not `ClientError` — before this fix, a timeout
+    on the blocking `converse()` call escaped both the credential-error and
+    ClientError branches entirely, producing a bare unhandled 500 with no
+    model-router-errors record. It must be caught, recorded as
+    "bedrock_native_error", and surfaced as a normal 200 assistant message
+    like every other native-Bedrock error path — and NOT retried, since the
+    connect/read timeouts are already app-configured (retrying here would
+    just multiply the configured wait time again)."""
+    from botocore.exceptions import ReadTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.side_effect = ReadTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Read timeout" in call_kwargs["error_message"]
+
+
 # ---------------------------------------------------------------------------
 # Native Bedrock Converse transport — streaming dispatch
 # ---------------------------------------------------------------------------
@@ -2020,6 +2175,62 @@ async def test_native_bedrock_streaming_client_error_is_recorded(
     recorded = json.loads(call_kwargs["error_message"])
     assert recorded["code"] == "ValidationException"
     assert recorded["request_id"] == "aws-req-456"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_connect_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """Mirrors test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled
+    for the pre-first-event portion of dispatch_streaming: a `ConnectTimeoutError`
+    raised by `converse_stream()` itself (establishing the stream, before any
+    event arrives) is a `BotoCoreError` subclass that escaped the
+    credential-error/ClientError branches entirely before this fix. Mid-stream
+    timeouts (after the first event) were already covered by the generic
+    `except Exception` in converse_stream_adapter.py — this test is specifically
+    the pre-first-event gap."""
+    from botocore.exceptions import ConnectTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.side_effect = ConnectTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse_stream.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Connect timeout" in call_kwargs["error_message"]
 
 
 @pytest.mark.asyncio

@@ -215,6 +215,27 @@ class TestOpenaiToConverseRequest:
         result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
         assert "toolConfig" not in result
 
+    def test_chat_template_kwargs_maps_to_additional_model_request_fields(
+        self,
+    ) -> None:
+        """The Qwen `enable_thinking` toggle is carried as `chat_template_kwargs`
+        on the OpenAI-shaped body (see message_translator.py). Without mapping
+        it onto Converse's `additionalModelRequestFields`, native transport
+        silently drops the toggle."""
+        oai_body = {
+            "messages": [{"role": "user", "content": "Hi"}],
+            "chat_template_kwargs": {"enable_thinking": False},
+        }
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        assert result["additionalModelRequestFields"] == {"enable_thinking": False}
+
+    def test_no_chat_template_kwargs_omits_additional_model_request_fields(
+        self,
+    ) -> None:
+        oai_body = {"messages": [{"role": "user", "content": "Hi"}]}
+        result, _ = _openai_to_converse_request(oai_body, "qwen.qwen3-coder-next")
+        assert "additionalModelRequestFields" not in result
+
     def test_long_tool_name_is_shortened_and_mapped_back(self) -> None:
         long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
         oai_body = {
