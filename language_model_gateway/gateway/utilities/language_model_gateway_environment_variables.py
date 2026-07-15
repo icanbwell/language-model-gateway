@@ -274,3 +274,29 @@ class LanguageModelGatewayEnvironmentVariables(LanguageModelCommonEnvironmentVar
         return self.str2bool(
             os.environ.get("MODEL_ROUTING_QWEN_ENABLE_THINKING", "true")
         )
+
+    @property
+    def model_routing_bedrock_connect_timeout_seconds(self) -> float:
+        """Connect timeout (seconds) for the native Bedrock Converse boto3 client.
+
+        botocore defaults this to 60s internally if left unset; passed
+        explicitly here so it's tunable via env var instead of a code
+        change — see model_routing_bedrock_read_timeout_seconds, the more
+        commonly-hit sibling of this timeout for streamed generations.
+        """
+        return float(
+            os.environ.get("MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS", "60")
+        )
+
+    @property
+    def model_routing_bedrock_read_timeout_seconds(self) -> float:
+        """Read timeout (seconds) for the native Bedrock Converse boto3 client.
+
+        botocore defaults this to 60s internally if left unset. A long
+        streamed generation (large max_tokens, slow model) can exceed that
+        on a single read and fail with a generic
+        "AWSHTTPSConnectionPool ... Read timed out" — raise this via env var
+        for routes/models that legitimately need longer than 60s per read,
+        rather than hardcoding a larger value for every route.
+        """
+        return float(os.environ.get("MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS", "60"))

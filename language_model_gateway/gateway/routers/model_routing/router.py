@@ -133,6 +133,8 @@ class CodingModelRouter:
         custom_header_prefix: str = "x-model-routing-",
         bedrock_transport: str = "mantle",
         qwen_enable_thinking: bool = True,
+        bedrock_connect_timeout_seconds: float = 60.0,
+        bedrock_read_timeout_seconds: float = 60.0,
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
@@ -178,7 +180,10 @@ class CodingModelRouter:
                 enabled=True,
             )
         self._bedrock_native_dispatcher = BedrockNativeDispatcher(
-            client_provider=BedrockRuntimeClientProvider(),
+            client_provider=BedrockRuntimeClientProvider(
+                connect_timeout_seconds=bedrock_connect_timeout_seconds,
+                read_timeout_seconds=bedrock_read_timeout_seconds,
+            ),
             get_usage_tracker=lambda: self._usage_tracker,
             record_error=self._record_error,
             record_upstream_latency=self._record_upstream_latency,
