@@ -191,6 +191,33 @@ def test_anthropic_to_openai_tool_result_becomes_tool_role() -> None:
     assert msg["content"] == "search result"
 
 
+def test_anthropic_to_openai_qwen_model_defaults_thinking_enabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-next",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body)
+    assert result["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+def test_anthropic_to_openai_qwen_model_thinking_disabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-30b-a3b-v1:0",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert result["chat_template_kwargs"] == {"enable_thinking": False}
+
+
+def test_anthropic_to_openai_non_qwen_model_has_no_chat_template_kwargs() -> None:
+    body = {
+        "model": "claude-sonnet-5",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert "chat_template_kwargs" not in result
+
+
 def test_anthropic_to_openai_tools_translated() -> None:
     body = {
         "model": "m",
@@ -1721,6 +1748,77 @@ async def test_bedrock_mantle_connection_error_is_not_misrecorded_as_stream_erro
     call_kwargs = error_tracker.record_error.call_args.kwargs
     assert call_kwargs["error_type"] == "APIConnectionError"
     usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_qwen_chat_template_kwargs_reaches_wire_via_extra_body(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """`_anthropic_to_openai_request` stamps `chat_template_kwargs` onto the
+    OpenAI-shaped body for Qwen routes. The openai SDK's `create()` has no
+    such parameter and no `**kwargs` catch-all, so splatting it in directly
+    raises `TypeError` before any network call — a total outage for every
+    Qwen request on the Mantle transport. It must instead be threaded through
+    via `extra_body`, which the SDK merges back into the outgoing JSON body
+    so the upstream still receives the field at the top level."""
+    # `auth="passthrough"` routes forward the client's exact model id as
+    # `upstream_model` (see router.py's `upstream_model` derivation) — the
+    # route's own `model` field is only used for `auth="aws"` routes. So the
+    # client-facing model id itself must contain "qwen" to trigger
+    # `_anthropic_to_openai_request`'s `chat_template_kwargs` stamping.
+    fake_route = {
+        "claude_model": "claude-test-qwen-mantle-thinking",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=200,
+        json={
+            "id": "chatcmpl-abc",
+            "object": "chat.completion",
+            "created": 1234567890,
+            "model": "qwen.qwen3-coder-next",
+            "choices": [
+                {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                        "role": "assistant",
+                        "content": "Hi there",
+                        "tool_calls": None,
+                    },
+                }
+            ],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+        },
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-qwen-mantle-thinking": fake_route}):
+        body = {
+            "model": "claude-test-qwen-mantle-thinking",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    # Would be a 500 (TypeError surfaced as bedrock_upstream_error) before the fix.
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    sent_body = json.loads(intercepted[0].read())
+    # `extra_body` is merged back into the top-level JSON by the SDK, so the
+    # upstream still sees the field exactly where it expects it.
+    assert sent_body["chat_template_kwargs"] == {"enable_thinking": True}
 
 
 # ---------------------------------------------------------------------------
