@@ -184,6 +184,12 @@ def _openai_to_converse_request(
             }
         converse["toolConfig"] = tool_config
 
+    if chat_template_kwargs := oai_body_json.get("chat_template_kwargs"):
+        # Converse's mechanism for model-specific extra parameters — carries
+        # e.g. the Qwen `enable_thinking` toggle through on this transport too,
+        # so it isn't silently dropped when native is the resolved transport.
+        converse["additionalModelRequestFields"] = chat_template_kwargs
+
     return converse, tool_name_map
 
 
