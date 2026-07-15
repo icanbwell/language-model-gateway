@@ -27,7 +27,7 @@ from __future__ import annotations
 import logging
 import os
 import threading
-from typing import Any
+from typing import Any, Literal, cast
 
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -42,14 +42,50 @@ class BedrockRuntimeClientProvider:
     boto3 clients are thread-safe and reusable, so one is built per pair,
     not per request — mirrors the credential resolution in aws_auth.py's
     _sign_bedrock, which also keys off AWS_PROFILE and the route's aws_region.
+
+    `connect_timeout_seconds`/`read_timeout_seconds` are passed explicitly
+    to botocore's Config rather than left to its built-in defaults (60s/60s)
+    — a long streamed generation (large max_tokens, slow model) can exceed
+    that on a single read, surfacing as a generic "Read timed out" error with
+    no way to tune it short of a code change. See
+    LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_connect_timeout_seconds
+    / model_routing_bedrock_read_timeout_seconds for the env vars that
+    control these in CodingModelRouter.
+
+    `max_attempts`/`retry_mode` mirror languagemodelcommon's
+    AwsClientFactory.create_bedrock_client (used by the general
+    chat-completions path, a separate Bedrock client from this one) —
+    defaulting max_attempts to 1 there and here is deliberate, not an
+    oversight: CodingModelRouter already retries transient native-Bedrock
+    errors itself with its own backoff (see _throttle_backoff /
+    _is_transient_bedrock_error_code in router.py). Raising max_attempts
+    above 1 stacks botocore's own retry/backoff on top of that outer loop,
+    so only do so with that interaction in mind.
+
+    `tcp_keepalive=True` (also mirroring AwsClientFactory) enables TCP
+    keepalive probes on the underlying socket, so a genuinely dead
+    connection is detected via keepalive rather than only via the read
+    timeout above.
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        connect_timeout_seconds: float = 60.0,
+        read_timeout_seconds: float = 60.0,
+        max_attempts: int = 1,
+        retry_mode: str = "adaptive",
+    ) -> None:
+        self._connect_timeout_seconds = connect_timeout_seconds
+        self._read_timeout_seconds = read_timeout_seconds
+        self._max_attempts = max_attempts
+        self._retry_mode = retry_mode
         self._cache: dict[tuple[str | None, str], Any] = {}
         self._lock = threading.Lock()
 
     def get_client(self, route: dict[str, Any]) -> Any:
         import boto3
+        from botocore.config import Config
 
         profile = os.environ.get("AWS_PROFILE")
         region = route.get("aws_region", "us-east-1")
@@ -63,7 +99,20 @@ class BedrockRuntimeClientProvider:
                         else boto3.Session()
                     )
                     self._cache[key] = session.client(
-                        "bedrock-runtime", region_name=region
+                        "bedrock-runtime",
+                        region_name=region,
+                        config=Config(
+                            connect_timeout=self._connect_timeout_seconds,
+                            read_timeout=self._read_timeout_seconds,
+                            retries={
+                                "max_attempts": self._max_attempts,
+                                "mode": cast(
+                                    Literal["legacy", "standard", "adaptive"],
+                                    self._retry_mode,
+                                ),
+                            },
+                            tcp_keepalive=True,
+                        ),
                     )
         return self._cache[key]
 

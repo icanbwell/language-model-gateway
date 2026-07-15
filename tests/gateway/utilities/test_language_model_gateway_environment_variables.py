@@ -1,6 +1,7 @@
 """
-Tests for LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_transport
-and model_routing_qwen_enable_thinking.
+Tests for LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_transport,
+model_routing_qwen_enable_thinking, and the native-Bedrock client timeout
+properties.
 """
 
 from __future__ import annotations
@@ -64,3 +65,67 @@ def test_model_routing_qwen_enable_thinking_reads_false(
     monkeypatch.setenv("MODEL_ROUTING_QWEN_ENABLE_THINKING", "false")
     env_vars = LanguageModelGatewayEnvironmentVariables()
     assert env_vars.model_routing_qwen_enable_thinking is False
+
+
+def test_model_routing_bedrock_connect_timeout_seconds_defaults_to_60(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS", raising=False)
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_connect_timeout_seconds == 60.0
+
+
+def test_model_routing_bedrock_connect_timeout_seconds_reads_override(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS", "10")
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_connect_timeout_seconds == 10.0
+
+
+def test_model_routing_bedrock_read_timeout_seconds_defaults_to_60(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS", raising=False)
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_read_timeout_seconds == 60.0
+
+
+def test_model_routing_bedrock_read_timeout_seconds_reads_override(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS", "300")
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_read_timeout_seconds == 300.0
+
+
+def test_model_routing_bedrock_max_attempts_defaults_to_1(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS", raising=False)
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_max_attempts == 1
+
+
+def test_model_routing_bedrock_max_attempts_reads_override(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS", "3")
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_max_attempts == 3
+
+
+def test_model_routing_bedrock_retry_mode_defaults_to_adaptive(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("MODEL_ROUTING_BEDROCK_RETRY_MODE", raising=False)
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_retry_mode == "adaptive"
+
+
+def test_model_routing_bedrock_retry_mode_reads_override(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("MODEL_ROUTING_BEDROCK_RETRY_MODE", "standard")
+    env_vars = LanguageModelGatewayEnvironmentVariables()
+    assert env_vars.model_routing_bedrock_retry_mode == "standard"

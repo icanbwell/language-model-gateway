@@ -210,6 +210,14 @@ def create_app() -> FastAPI:
             custom_header_prefix=env_vars.model_routing_custom_header_prefix,
             bedrock_transport=env_vars.model_routing_bedrock_transport,
             qwen_enable_thinking=env_vars.model_routing_qwen_enable_thinking,
+            bedrock_connect_timeout_seconds=(
+                env_vars.model_routing_bedrock_connect_timeout_seconds
+            ),
+            bedrock_read_timeout_seconds=(
+                env_vars.model_routing_bedrock_read_timeout_seconds
+            ),
+            bedrock_max_attempts=env_vars.model_routing_bedrock_max_attempts,
+            bedrock_retry_mode=env_vars.model_routing_bedrock_retry_mode,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())
