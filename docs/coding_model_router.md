@@ -77,6 +77,11 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` | `x-model-routing-` | Any incoming header under this prefix (case-insensitive) is (a) stripped before forwarding upstream and (b) captured into the usage record's `custom_headers` field. `{prefix}user-id` is additionally used as a best-effort `user_id` fallback — see "Usage tracking" below. |
 | `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MODEL_ROUTING_ERROR_COLLECTION_NAME` | `model-router-errors` | Collection name for upstream-failure tracking (see "Error tracking" below). |
+| `MODEL_ROUTING_QWEN_ENABLE_THINKING` | `true` | Whether Qwen routes (`api_type: openai`) are allowed to think before answering — see "Request translation" below. |
+| `MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS` | `60` | Connect timeout for the native Bedrock Converse boto3 client (only applies when `bedrock_transport="native"`). |
+| `MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS` | `60` | Read timeout for the native Bedrock Converse boto3 client. A long streamed generation (large `max_tokens`, slow model) can exceed botocore's 60s default on a single read and fail with `AWSHTTPSConnectionPool ... Read timed out` (`error_type: bedrock_native_error`) — raise this for routes/models that legitimately need longer per-read. |
+| `MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS` | `1` | Max botocore-level attempts for the native Bedrock Converse client. Defaults to 1 (no extra retries at this layer) deliberately — CodingModelRouter already retries transient native-Bedrock errors itself with its own backoff (see "Throttle retry and backoff" below); raising this stacks botocore's own retry/backoff on top of that outer loop. |
+| `MODEL_ROUTING_BEDROCK_RETRY_MODE` | `adaptive` | botocore retry mode for the native Bedrock Converse client. Only takes effect if `MODEL_ROUTING_BEDROCK_MAX_ATTEMPTS` > 1. |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 
@@ -240,6 +245,14 @@ Thinking blocks (`<think>…</think>`) emitted by reasoning models are stripped
 from both streaming and non-streaming responses before they are returned to the
 client.
 
+For Qwen models specifically (routes whose resolved backend model id contains
+`qwen`), the request also gets a `chat_template_kwargs.enable_thinking` field
+controlled by `MODEL_ROUTING_QWEN_ENABLE_THINKING` (default `true`). Setting
+it to `false` stops Qwen from generating the `<think>` block at all, trading
+answer quality for lower latency/token cost — the stripping behavior above
+still applies either way, this only controls whether there's anything to
+strip.
+
 ---
 
 ## Throttle retry and backoff
@@ -254,6 +267,14 @@ responses (HTTP 429 or bodies matching common Bedrock throttle messages):
 | Max delay           | 20 s                  |
 | Backoff             | Exponential with jitter |
 | Dispatch pacing     | 300 ms minimum between requests |
+
+Dispatch pacing (`_pace_bedrock_dispatch` in `bedrock_client.py`) is a single
+process-wide rate limiter shared by all three `auth: aws` dispatch paths —
+Bedrock Mantle, native Bedrock Converse, and the Anthropic-format Bedrock
+route — not a per-path throttle. It runs before every attempt (including
+retries), so a burst of concurrent requests (e.g. parallel Claude Code
+subagents sharing one session) is spaced out client-side instead of hitting
+Bedrock simultaneously and triggering avoidable throttling.
 
 Context-overflow errors (Bedrock reports that the prompt exceeds the model's
 context window) are not retried and are surfaced immediately.  For
@@ -309,6 +330,79 @@ this, a client giving up mid-generation would leave the router still
 consuming — and paying for — upstream tokens nobody will receive. This only
 stops *upstream consumption*; the SSE write side to an already-closed client
 connection is handled independently by Starlette/the ASGI server.
+
+### SSE content-block well-formedness (2026-07-14 incident)
+
+**Symptom:** Claude Code's context-usage percentage stayed at 0% until
+auto-compact recalculated it from scratch, and its debug log showed `Error
+streaming, falling back to non-streaming mode: Content block not found`
+immediately after the first chunk of a stream arrived.
+
+**Root cause:** an Anthropic SSE stream is only valid if every
+`content_block_delta`/`content_block_stop` event's index was previously
+opened by a `content_block_start`, and the finished message has at least one
+content block. Two independent gaps let the router emit a stream violating
+that invariant:
+
+* **`_stream_bedrock_converse_to_anthropic`** (`converse_stream_adapter.py`,
+  the `MODEL_ROUTING_BEDROCK_TRANSPORT: native` path — now the default; see
+  below) — AWS Bedrock's Converse API, for `qwen.qwen3-coder-next` over the
+  native transport, skips `contentBlockStart` entirely and goes straight to
+  `contentBlockDelta`. The translator forwarded that delta verbatim,
+  producing a delta for a block index the client had never seen opened. This
+  was the actual live trigger of the symptom above.
+* **`_stream_oai_sdk_to_anthropic`** (`stream_converter.py`, the Mantle
+  path) — the inline error-visibility guard checked `not sent_message_start`
+  instead of `not open_blocks`. `sent_message_start` goes `True` as soon as
+  the first upstream chunk arrives, so a failure later in the stream (e.g.
+  the model exhausting `max_tokens` while still inside an unterminated
+  `<think>` block, before any visible text ever surfaced) silently closed an
+  empty assistant message instead of showing error text — a well-formed but
+  misleading stream, found while auditing the Mantle path for the same class
+  of bug.
+
+Diagnosing which of the two translators was actually live took longer than
+fixing it: the router logs `-> BEDROCK ... api=openai streaming=True`
+regardless of which transport handles the request, so that line alone doesn't
+tell you whether `_bedrock_transport == "native"` diverted it to
+`BedrockNativeDispatcher` before ever reaching the Mantle/OpenAI SDK code.
+Confirming the live path required replaying the exact captured request body
+against the running gateway with `curl` and instrumenting each candidate
+translator directly, rather than trusting that log line.
+
+**Fix:** both translators now (a) lazily open a content block on its first
+delta if the upstream never sent an explicit start event, and (b) emit at
+least one empty content block if a completion ends with none opened and no
+error (e.g. the model exhausts its token budget entirely inside hidden
+reasoning). The error-visibility guards in both translators are gated on
+"has any block ever opened" rather than "has message_start been sent" or
+"are any blocks currently open" — either of the latter two can be true/false
+at the wrong time and either miss a real error or collide with an
+already-open block.
+
+Audited and confirmed safe by construction, no fix needed: Anthropic
+passthrough streaming and non-streaming (byte-for-byte relay, no
+transformation), non-streaming Mantle/Converse responses (a JSON body's
+`content` array has no SSE index-matching invariant to violate, even if
+empty), and `router.py`'s `_error_response` (already always opens a block
+before its first delta). Regression tests: `test_stream_converter.py` and
+`test_converse_stream_adapter.py`.
+
+**Follow-up (same day):** a genuine Bedrock Mantle backend failure in a
+deployed environment — a bare `internal_server_error` 500 six minutes into a
+stream — prompted two further changes, since diagnosing *that* incident
+required inferring from error shape alone that Mantle (not native) had
+handled the request:
+
+- `MODEL_ROUTING_BEDROCK_TRANSPORT` now defaults to `"native"` instead of
+  `"mantle"` — `"mantle"` is the manual opt-out instead of the default. See
+  `LanguageModelGatewayEnvironmentVariables.model_routing_bedrock_transport`
+  and the updated `docs/superpowers/specs/2026-07-13-native-bedrock-transport-design.md`.
+- Every `model-router-usage`/`model-router-errors` record now carries a
+  `bedrock_transport` field (`"native"`/`"mantle"`) whenever
+  `backend == "aws_bedrock"` — see the field references below — so which
+  transport handled a given request is a direct field, not an inference from
+  `error_message` shape or response headers.
 
 ---
 
@@ -388,6 +482,7 @@ absence of a field means "not available for this request," not an error.
 | `agent_id` / `parent_agent_id` | string | only on requests from a subagent Claude Code spawned | From the `x-claude-code-agent-id`/`x-claude-code-parent-agent-id` headers. Identifies an agent, not a person or device — use alongside `session_id` to attribute cost to parallel subagents, never as a user identifier. |
 | `model_tier` | string | when the route matched a config entry | The `tier` label from `model-router-config.json` (e.g. `"sonnet"`). Absent for unmatched-model fallback requests. |
 | `backend` | string | when the route matched | `"anthropic"` (passthrough) or `"aws_bedrock"` (aws auth), derived from the route's `auth` field. |
+| `bedrock_transport` | string | when `backend == "aws_bedrock"` | `"native"` or `"mantle"` — which Bedrock transport actually handled this request. `auth`/`api_type` alone can't tell them apart, since native Converse dispatch is also reached via `auth="aws"`, `api_type="openai"` routes; see "SSE content-block well-formedness" above for why this field exists. |
 | `price_per_mtok` → `cost_usd` | float (USD) | when the route has `price_per_mtok` configured | `cost_usd = total_tokens / 1_000_000 * price_per_mtok` — the actual cost at the backend that served this request. |
 | `anthropic_price_per_mtok` → `anthropic_cost_usd` | float (USD) | when the route also has `anthropic_price_per_mtok` configured | `anthropic_cost_usd = total_tokens / 1_000_000 * anthropic_price_per_mtok` — what the client's requested `claude_model` would have cost at Anthropic's own list price. For passthrough routes (opus/fable) this equals `cost_usd`, since the backend *is* Anthropic. |
 | `cost_savings_usd` | float (USD) | alongside `anthropic_cost_usd` | `anthropic_cost_usd - cost_usd`. Zero for passthrough routes; positive for Bedrock routes serving a cheaper model in place of the requested Claude tier. |
@@ -396,7 +491,8 @@ absence of a field means "not available for this request," not an error.
 | `compression_used` | string | always alongside `compression_requested`'s recording point | `"gzip"` or `"none"` — what the gateway's `GZipMiddleware` actually did. Streaming responses are always `"none"`: Starlette hardcodes `text/event-stream` into `GZipMiddleware`'s excluded content types regardless of `Accept-Encoding` (see `api.py`). For non-streaming responses it's computed by replicating Starlette's own decision (gzip if the client accepts it and the body is ≥500 bytes) before the middleware runs, since the usage record is written from a background task after the middleware has already acted. |
 | `custom_headers` | object (flat string→string map) | when any header under `MODEL_ROUTING_CUSTOM_HEADER_PREFIX` is present | **Every** header under the configured prefix, keyed by the suffix after the prefix — e.g. `X-Model-Routing-Client-Type: claude code` becomes `{"client-type": "claude code"}`. Deliberately open-ended: new attribution headers can be added by any client without a code change here. `{prefix}user-id` is additionally pulled out into the top-level `user_id` field (see "Attribution"). |
 | `input_preview` / `output_preview` | string | only when `MODEL_ROUTING_USAGE_CAPTURE_PREVIEWS=true` | First `MODEL_ROUTING_USAGE_PREVIEW_CHARS` characters of the last user message / model response text, truncated with a trailing `…` marker when the original was longer (so `"…"` present tells you the preview is a prefix, not the whole thing). Off by default — this is the one field group that persists actual conversation content rather than metadata. |
-| `sse_event_count` | int | streaming (`api_type: openai`) requests only | Number of SSE events actually yielded to the client for this response. A cheap sanity signal that the response really streamed rather than being buffered and dumped as one blob — a long generation with a suspiciously low count (e.g. 1) is worth investigating. Not recorded for non-streaming requests, nor for `api_type: anthropic` streaming — that path relays bytes verbatim rather than yielding discrete translated events, so there's nothing analogous to count. |
+| `sse_event_count` | int | streaming (`api_type: openai`) requests only, both Bedrock transports (Mantle and native Converse) | Number of SSE events actually yielded to the client for this response. A cheap sanity signal that the response really streamed rather than being buffered and dumped as one blob — a long generation with a suspiciously low count (e.g. 1) is worth investigating. Not recorded for non-streaming requests, nor for `api_type: anthropic` streaming — that path relays bytes verbatim rather than yielding discrete translated events, so there's nothing analogous to count. |
+| `retry_count` | int | always | How many throttle/transient-error retries this request needed before it succeeded — `0` if none. Populated from the same attempt counters used for the exponential-backoff logging (see "Throttle retry and backoff" above), across all four dispatch paths (Bedrock Mantle and native Converse, streaming and non-streaming) plus the Anthropic-format passthrough/native-Bedrock-Anthropic-format path, which always reports `0` since only `auth: aws` routes retry. `0` is a real, present value — its absence on a record means this field predates the record, not that retries are unknown for that request. |
 
 ### Session rollup
 
@@ -427,8 +523,11 @@ limit on a long-running agent session:
 Fields: `session_id`, `account_uuid`, `user_id`, `input_tokens`,
 `output_tokens`, `total_tokens`, `{bucket}_tier_cost`,
 `{bucket}_tier_anthropic_cost`, `{bucket}_tier_model` (one triple per bucket
-actually used by the session), and `total_savings_usd` (session-wide sum of
-`anthropic_cost_usd - cost_usd` across every request, regardless of tier).
+actually used by the session), `total_savings_usd` (session-wide sum of
+`anthropic_cost_usd - cost_usd` across every request, regardless of tier),
+and `total_retries` (session-wide sum of each request's `retry_count`, same
+"sum regardless of tier" shape as `total_savings_usd` — how many retries a
+session needed overall is the useful signal, not a per-tier breakdown).
 
 Token and cost fields use MongoDB's `$inc` so concurrent requests within the
 same session (e.g. parallel subagent calls sharing one `session_id`)
@@ -502,6 +601,13 @@ Recorded failure points in `proxy_messages`:
 - A Bedrock Mantle (`api_type: openai`) upstream 4xx/5xx after throttle
   retries are exhausted (`error_type: "bedrock_upstream_error"`,
   `status_code` set).
+- A Bedrock Mantle stream that fails after it had already started emitting
+  chunks (`error_type: "bedrock_stream_error"`) — e.g. the bare,
+  undiagnosable `internal_server_error` 500s that motivated the native
+  transport (see "SSE content-block well-formedness" above and
+  `docs/superpowers/specs/2026-07-13-native-bedrock-transport-design.md`).
+- The native Bedrock Converse path's equivalent failures, non-streaming and
+  mid-stream alike (`error_type: "bedrock_native_error"`).
 - Any other unexpected exception from the Bedrock Mantle path
   (`error_type` set to the exception's class name), recorded just before
   it's re-raised.
@@ -513,9 +619,13 @@ Fields: `request_id`, `model`, `error_type`, `error_message` (truncated to
 `timestamp`, `start_time`/`end_time`/`duration_ms` (same meaning as on usage
 records), plus whatever attribution/context is available at the failure
 point (`user_id`, `session_id`, `account_uuid`, `agent_id`,
-`parent_agent_id`, `model_tier`, `backend`, `auth`, `api_type`, `streaming`,
-`status_code`) — each omitted rather than null when not available, same
-convention as the usage collection.
+`parent_agent_id`, `model_tier`, `backend`, `bedrock_transport`, `auth`,
+`api_type`, `streaming`, `status_code`) — each omitted rather than null when
+not available, same convention as the usage collection. `bedrock_transport`
+("native"/"mantle") is filled in automatically from
+`CodingModelRouter._bedrock_transport` whenever `backend == "aws_bedrock"` —
+callers don't pass it themselves, since `auth`/`api_type` alone can't tell
+a Mantle error apart from a native Converse one.
 
 ---
 
@@ -618,3 +728,54 @@ Key env vars:
 The client sends requests to `/v1/messages` exactly as it would to
 `api.anthropic.com`.  The router rewrites the destination based on the config
 file without any change to the client-side request format.
+
+## Bedrock Transport Options
+
+When routing to AWS Bedrock (via `auth: "aws"` routes in the config), the gateway
+supports two transport mechanisms controlled by the
+`MODEL_ROUTING_BEDROCK_TRANSPORT` environment variable:
+
+| Value | Transport | Description |
+|-------|-----------|-------------|
+| `native` (default) | Bedrock Converse API | Direct calls to Bedrock's native `Converse`/`ConverseStream` API using `boto3` |
+| `mantle` | Bedrock Mantle | OpenAI-compatible API endpoint at `bedrock-mantle.us-east-1.api.aws` |
+
+### Native Transport (Default)
+
+**Introduced:** PR #200 (July 2026)
+
+The `native` transport routes `haiku`/`sonnet` tier traffic directly to AWS
+Bedrock's Converse API using the `boto3` SDK. This is the default and recommended
+option because:
+
+- **Better error visibility** - Full AWS request IDs and specific error codes
+  are captured in `model-router-errors` logs
+- **More reliable** - Bypasses Bedrock Mantle's OpenAI-compatible shim which
+  has occasionally returned generic `internal_server_error` 500s
+- **Fewer translation hops** - No OpenAI-compatibility shim layer (translates
+  directly Anthropic↔Converse instead of Anthropic↔OpenAI↔Bedrock)
+
+The gateway automatically converts between the Anthropic Messages API format
+and Bedrock's Converse API shape.
+
+### Mantle Transport (Legacy)
+
+The `mantle` transport uses Bedrock Mantle's OpenAI-compatible endpoint at
+`bedrock-mantle.us-east-1.api.aws`. Use this if you need to temporarily revert
+to the older path for debugging or in case of native transport issues.
+
+### Environment Variable
+
+Set `MODEL_ROUTING_BEDROCK_TRANSPORT` in your environment or
+`docker-compose.yml`:
+
+```yaml
+environment:
+  MODEL_ROUTING_BEDROCK_TRANSPORT: native  # or "mantle"
+```
+
+### Verifying Which Transport is Used
+
+Each `aws_bedrock`-backed `model-router-usage` and `model-router-errors`
+record includes a `bedrock_transport` field (`"native"` or `"mantle"`) so
+you can confirm which path handled a given request.

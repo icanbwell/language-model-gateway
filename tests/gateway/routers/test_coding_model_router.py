@@ -16,11 +16,13 @@ import asyncio
 import json
 import re
 import time
-from typing import AsyncGenerator
+from typing import Any, AsyncGenerator, Iterator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
+import openai
 import pytest
+from botocore.exceptions import ClientError
 from fastapi import FastAPI
 from oidcauthlib.auth.exceptions.authorization_bearer_token_invalid_exception import (
     AuthorizationBearerTokenInvalidException,
@@ -31,9 +33,18 @@ from starlette.requests import Request
 from language_model_gateway.gateway.routers.model_routing.bedrock_client import (
     _is_throttling,
 )
+from language_model_gateway.gateway.routers.model_routing.bedrock_converse_client import (
+    BedrockRuntimeClientProvider,
+)
+from language_model_gateway.gateway.routers.model_routing.constants import (
+    _MAX_THROTTLE_RETRIES,
+)
 from language_model_gateway.gateway.routers.model_routing.message_translator import (
     _anthropic_to_openai_request,
     _openai_to_anthropic_response,
+)
+from language_model_gateway.gateway.routers.model_routing.aws_auth import (
+    _bedrock_credential_error_detail,
 )
 from language_model_gateway.gateway.routers.model_routing.route_config import _ROUTES
 from language_model_gateway.gateway.routers.model_routing.router import (
@@ -42,7 +53,6 @@ from language_model_gateway.gateway.routers.model_routing.router import (
 from language_model_gateway.gateway.routers.model_routing.stream_converter import (
     ThinkingStripper as _ThinkingStripper,
 )
-
 
 # ---------------------------------------------------------------------------
 # _ThinkingStripper
@@ -181,6 +191,33 @@ def test_anthropic_to_openai_tool_result_becomes_tool_role() -> None:
     assert msg["content"] == "search result"
 
 
+def test_anthropic_to_openai_qwen_model_defaults_thinking_enabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-next",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body)
+    assert result["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+def test_anthropic_to_openai_qwen_model_thinking_disabled() -> None:
+    body = {
+        "model": "qwen.qwen3-coder-30b-a3b-v1:0",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert result["chat_template_kwargs"] == {"enable_thinking": False}
+
+
+def test_anthropic_to_openai_non_qwen_model_has_no_chat_template_kwargs() -> None:
+    body = {
+        "model": "claude-sonnet-5",
+        "messages": [{"role": "user", "content": "Hi"}],
+    }
+    result = _anthropic_to_openai_request(body, enable_qwen_thinking=False)
+    assert "chat_template_kwargs" not in result
+
+
 def test_anthropic_to_openai_tools_translated() -> None:
     body = {
         "model": "m",
@@ -231,6 +268,55 @@ def test_openai_to_anthropic_text_response() -> None:
     assert result["content"][0]["text"] == "Hello there"
     assert result["usage"]["input_tokens"] == 10
     assert result["usage"]["output_tokens"] == 5
+
+
+def test_openai_to_anthropic_maps_cached_tokens_to_cache_read_input_tokens() -> None:
+    """Bedrock Mantle is a conformant OpenAI Chat Completions endpoint —
+    usage.prompt_tokens_details.cached_tokens must map onto Anthropic's
+    cache_read_input_tokens, per anthropics/claude-code#13385.
+    cache_creation_input_tokens has no OpenAI equivalent but must still be
+    present (defaulting to 0), not omitted."""
+    oai = {
+        "choices": [
+            {
+                "finish_reason": "stop",
+                "message": {"role": "assistant", "content": "hi", "tool_calls": None},
+            }
+        ],
+        "usage": {
+            "prompt_tokens": 50,
+            "completion_tokens": 10,
+            "prompt_tokens_details": {"cached_tokens": 100},
+        },
+    }
+    result = _openai_to_anthropic_response(oai, "msg_abc", "upstream-model")
+    assert result["usage"] == {
+        "input_tokens": 50,
+        "output_tokens": 10,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 100,
+    }
+
+
+def test_openai_to_anthropic_missing_prompt_tokens_details_defaults_cache_to_zero() -> (
+    None
+):
+    oai = {
+        "choices": [
+            {
+                "finish_reason": "stop",
+                "message": {"role": "assistant", "content": "hi", "tool_calls": None},
+            }
+        ],
+        "usage": {"prompt_tokens": 5, "completion_tokens": 2},
+    }
+    result = _openai_to_anthropic_response(oai, "msg_abc", "upstream-model")
+    assert result["usage"] == {
+        "input_tokens": 5,
+        "output_tokens": 2,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+    }
 
 
 def test_openai_to_anthropic_strips_think_blocks() -> None:
@@ -294,6 +380,16 @@ def test_coding_model_router_registers_messages_route() -> None:
     paths = {r.path for r in router.get_router().routes if isinstance(r, APIRoute)}
     assert "/v1/messages" in paths
     assert "/v1/messages/count_tokens" in paths
+
+
+def test_bedrock_transport_defaults_to_mantle() -> None:
+    router = CodingModelRouter()
+    assert router._bedrock_transport == "mantle"
+
+
+def test_bedrock_transport_stores_native_override() -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    assert router._bedrock_transport == "native"
 
 
 # ---------------------------------------------------------------------------
@@ -469,6 +565,76 @@ async def test_get_auth_info_no_custom_headers_key_when_none_present() -> None:
     auth_info = await router._get_auth_info(request)
 
     assert "custom_headers" not in auth_info
+
+
+# ---------------------------------------------------------------------------
+# _bedrock_credential_error_detail — classifies AWS credential failures so
+# each gets a distinct error_type/actionable message instead of every
+# non-TokenRetrievalError case falling through generically.
+# ---------------------------------------------------------------------------
+
+
+def test_bedrock_credential_error_detail_token_retrieval_error() -> None:
+    from botocore.exceptions import TokenRetrievalError
+
+    exc = TokenRetrievalError(provider="sso", error_msg="token expired")
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, message = detail
+    assert error_type == "bedrock_session_expired"
+    assert "aws sso login" in message
+
+
+def test_bedrock_credential_error_detail_no_credentials_available() -> None:
+    from language_model_gateway.gateway.routers.model_routing.aws_auth import (
+        BedrockCredentialsUnavailableError,
+    )
+
+    exc = BedrockCredentialsUnavailableError("No AWS credentials available")
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, message = detail
+    assert error_type == "bedrock_no_credentials"
+    assert "AWS_PROFILE" in message
+
+
+def test_bedrock_credential_error_detail_botocore_client_error() -> None:
+    from botocore.exceptions import ClientError
+
+    exc = ClientError(
+        error_response={"Error": {"Code": "ExpiredTokenException", "Message": "x"}},
+        operation_name="AssumeRole",
+    )
+
+    detail = _bedrock_credential_error_detail(exc)
+
+    assert detail is not None
+    error_type, _ = detail
+    assert error_type == "bedrock_credential_error"
+
+
+def test_bedrock_credential_error_detail_checks_cause_and_context() -> None:
+    """The credential exception is often wrapped (raised via `from` or an
+    implicit `except`-block context) rather than being the exception itself —
+    both must be checked, not just the top-level exception."""
+    from botocore.exceptions import TokenRetrievalError
+
+    cause = TokenRetrievalError(provider="sso", error_msg="token expired")
+    wrapper = RuntimeError("wrapped")
+    wrapper.__cause__ = cause
+
+    detail = _bedrock_credential_error_detail(wrapper)
+
+    assert detail is not None
+    assert detail[0] == "bedrock_session_expired"
+
+
+def test_bedrock_credential_error_detail_none_for_unrelated_error() -> None:
+    assert _bedrock_credential_error_detail(ValueError("unrelated")) is None
 
 
 # ---------------------------------------------------------------------------
@@ -1026,6 +1192,126 @@ async def test_matched_route_error_is_not_annotated(
     assert response.json() == {"error": {"message": "Unauthorized"}}
 
 
+@pytest.mark.asyncio
+async def test_unmatched_model_malformed_error_still_gets_fallback_note(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """The fallback-route annotation must survive even when the upstream error
+    body isn't the `{"error": {"message": str}}` shape `_annotate_fallback_error`
+    knows how to rewrite in place (e.g. `{"error": {"code": ...}}`, no
+    "message" key) — the note must not be silently dropped just because the
+    body needs wrapping rather than passthrough."""
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=400,
+        content=b'{"error": {"code": "context_length_exceeded"}}',
+        headers={"content-type": "application/json"},
+    )
+
+    body = {
+        "model": "claude-brand-new-tier-malformed",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    response = await router_client.post(
+        "/v1/messages",
+        json=body,
+        headers={"content-type": "application/json"},
+    )
+
+    assert response.status_code == 400
+    error_message = response.json()["error"]["message"]
+    assert "claude-brand-new-tier-malformed" in error_message
+    assert "no configured route" in error_message
+    assert "context_length_exceeded" in error_message
+
+
+@pytest.mark.asyncio
+async def test_matched_route_malformed_error_object_is_normalized(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """An `"error"` key alone isn't enough to pass a body through verbatim —
+    its value must actually be a usable message shape. `{"error": null}`
+    must be normalized into a real message, not forwarded as-is."""
+    fake_route = {
+        "claude_model": "claude-configured-malformed",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-configured-malformed",
+        "auth": "passthrough",
+    }
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=400,
+        content=b'{"error": null}',
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-configured-malformed": fake_route}):
+        body = {
+            "model": "claude-configured-malformed",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 400
+    error_message = response.json()["error"]["message"]
+    # Must not be forwarded verbatim (`None`/`null`) or leak Python repr
+    # syntax (single-quoted keys) — just a readable, JSON-safe description.
+    assert error_message != "null"
+    assert "'" not in error_message
+    assert "null" in error_message.lower() or "error" in error_message.lower()
+
+
+@pytest.mark.asyncio
+async def test_matched_route_error_without_message_is_valid_json_not_python_repr(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """An error object present but missing a `message` field (e.g. just a
+    `code`) must be summarized as valid JSON text, not a Python dict repr
+    (single-quoted keys) leaking into a client-facing string."""
+    fake_route = {
+        "claude_model": "claude-configured-no-message",
+        "url": "https://api.anthropic.com/v1/messages",
+        "model": "claude-configured-no-message",
+        "auth": "passthrough",
+    }
+    httpx_mock.add_response(
+        url="https://api.anthropic.com/v1/messages",
+        method="POST",
+        status_code=429,
+        content=b'{"error": {"type": "rate_limit", "code": 42}}',
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-configured-no-message": fake_route}):
+        body = {
+            "model": "claude-configured-no-message",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 429
+    error_message = response.json()["error"]["message"]
+    assert "'" not in error_message
+    assert "rate_limit" in error_message
+    assert "42" in error_message
+
+
 # ---------------------------------------------------------------------------
 # Anthropic-passthrough usage/error tracking (BAI-299)
 # ---------------------------------------------------------------------------
@@ -1187,3 +1473,1009 @@ async def test_anthropic_passthrough_upstream_error_records_error(
     assert call_kwargs["error_type"] == "upstream_error"
     assert "overloaded" in call_kwargs["error_message"]
     usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_anthropic_passthrough_dispatch_failure_records_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A connection-level failure dispatching to Anthropic/Bedrock (timeout,
+    connection reset, DNS) previously re-raised with zero record in
+    model-router-errors — a real production 500 invisible to triage."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    httpx_mock.add_exception(httpx.ConnectError("connection refused"))
+
+    body = {
+        "model": "claude-unknown-model-xyz",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "stream": False,
+    }
+    with pytest.raises(httpx.ConnectError):
+        await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "ConnectError"
+    assert "connection refused" in call_kwargs["error_message"]
+    usage_tracker.record_usage_from_anthropic_response.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_upstream_error_records_response_headers(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A non-streaming request that gets a 4xx/5xx HTTP response from Bedrock
+    Mantle raises `openai.APIStatusError`, which carries the full `httpx.Response`
+    (unlike the mid-stream `openai.APIError` case). The response headers —
+    e.g. an AWS request ID — must be captured in model-router-errors alongside
+    the body, since Mantle's error bodies are often too generic on their own
+    to correlate against AWS-side logs."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-status-error",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=500,
+        json={
+            "error": {
+                "message": "The server had an error while processing your request.",
+                "type": "server_error",
+                "code": "internal_server_error",
+            }
+        },
+        headers={
+            "content-type": "application/json",
+            "x-amzn-requestid": "req-status-error-xyz",
+        },
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-model-status-error": fake_route}):
+        body = {
+            "model": "claude-test-model-status-error",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    # Bedrock/Mantle errors are surfaced to the client as a valid Anthropic
+    # assistant message (status 200) rather than propagating the upstream
+    # status code — see CodingModelRouter._error_response.
+    assert response.status_code == 200
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_upstream_error"
+    assert call_kwargs["status_code"] == 500
+    assert call_kwargs["response_headers"]["x-amzn-requestid"] == "req-status-error-xyz"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_mid_stream_error_records_full_detail(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """Bedrock Mantle can send a `{"error": {...}}` SSE data event mid-stream
+    instead of a 4xx/5xx HTTP response. The openai SDK raises a plain
+    `openai.APIError` for this (no `.status_code`) — distinct from
+    `openai.APIStatusError`. Before this fix, that fell through to the
+    generic `except Exception` handler and only `str(exc)` (a generic
+    message) reached model-router-errors. The `.body`/`.code`/`.type` detail
+    the SDK actually attaches must now be captured.
+
+    Uses a `ValidationException`-coded error (not in
+    `_TRANSIENT_STREAM_ERROR_CODES`) so this stays a single-attempt failure —
+    retry behavior for the transient case is covered separately by
+    `test_bedrock_mantle_transient_stream_error_retries_then_gives_up`."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-oai",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    sse_body = (
+        b'data: {"error": {"message": "ValidationException: temperature must '
+        b'be between 0 and 1", "code": "ValidationException", '
+        b'"type": "invalid_request_error"}}\n\n'
+    )
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=200,
+        content=sse_body,
+        headers={
+            "content-type": "text/event-stream",
+            "x-amzn-requestid": "req-mid-stream-abc",
+        },
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-model-oai": fake_route}):
+        body = {
+            "model": "claude-test-model-oai",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": True,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 200
+    assert (
+        b"ValidationException: temperature must be between 0 and 1" in response.content
+    )
+    # The client (e.g. Claude Code) must see the same code/type detail that's
+    # now captured in model-router-errors, not just the generic message.
+    assert b"invalid_request_error" in response.content
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_stream_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ValidationException"
+    assert recorded["type"] == "invalid_request_error"
+    assert "temperature must be between 0 and 1" in recorded["message"]
+    assert recorded["body"]["code"] == "ValidationException"
+    # Bedrock Mantle's initial (successful) handshake response headers are
+    # captured too — the error itself only appears as a later SSE event on
+    # that same response, so there's no separate error-response to read
+    # headers from.
+    assert call_kwargs["response_headers"]["x-amzn-requestid"] == "req-mid-stream-abc"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_transient_stream_error_retries_then_gives_up(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """A `ModelStreamErrorException` (Bedrock's own taxonomy for a transient,
+    retryable stream failure — network blip, momentary model overload) must
+    be retried with backoff like an HTTP-level throttle, not failed on the
+    first attempt. Previously this class of error (no HTTP status code, so
+    `_is_throttling` didn't apply) skipped the retry loop entirely regardless
+    of whether the underlying failure was transient."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-retry",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    sse_body = (
+        b'data: {"error": {"message": "ModelStreamErrorException: transient '
+        b'failure", "code": "ModelStreamErrorException", '
+        b'"type": "server_error"}}\n\n'
+    )
+    for _ in range(_MAX_THROTTLE_RETRIES + 1):
+        httpx_mock.add_response(
+            url="https://example.bedrock.aws/v1/chat/completions",
+            method="POST",
+            status_code=200,
+            content=sse_body,
+            headers={"content-type": "text/event-stream"},
+        )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-model-retry": fake_route}),
+        patch(
+            "language_model_gateway.gateway.routers.model_routing.router._throttle_backoff",
+            return_value=0,
+        ),
+    ):
+        body = {
+            "model": "claude-test-model-retry",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": True,
+        }
+        response = await client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    assert response.status_code == 200
+    # Initial attempt + _MAX_THROTTLE_RETRIES retries, all exhausted before
+    # finally giving up and surfacing the error.
+    assert len(httpx_mock.get_requests()) == _MAX_THROTTLE_RETRIES + 1
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_stream_error"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_connection_error_is_not_misrecorded_as_stream_error(
+    router_client_with_trackers: tuple[httpx.AsyncClient, MagicMock, MagicMock],
+    httpx_mock: HTTPXMock,
+) -> None:
+    """`openai.APIConnectionError` is a *subclass* of `openai.APIError`, but
+    unlike a genuine Bedrock Mantle mid-stream error body it carries no
+    `.code`/`.type`/`.param`/`.body` — those are always None on a transport
+    failure. It must be recorded with its own exception type (matching prior
+    behavior for any other unexpected exception), not misclassified as
+    `bedrock_stream_error` with a null-filled detail body."""
+    client, usage_tracker, error_tracker = router_client_with_trackers
+    fake_route = {
+        "claude_model": "claude-test-model-connerr",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_exception(httpx.ConnectError("connection refused"))
+
+    with patch.dict(_ROUTES, {"claude-test-model-connerr": fake_route}):
+        body = {
+            "model": "claude-test-model-connerr",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        with pytest.raises(openai.APIConnectionError):
+            await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    await asyncio.sleep(0)  # let the fire-and-forget error-recording task run
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "APIConnectionError"
+    usage_tracker.record_usage_from_openai_response.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bedrock_mantle_qwen_chat_template_kwargs_reaches_wire_via_extra_body(
+    router_client: httpx.AsyncClient,
+    httpx_mock: HTTPXMock,
+) -> None:
+    """`_anthropic_to_openai_request` stamps `chat_template_kwargs` onto the
+    OpenAI-shaped body for Qwen routes. The openai SDK's `create()` has no
+    such parameter and no `**kwargs` catch-all, so splatting it in directly
+    raises `TypeError` before any network call — a total outage for every
+    Qwen request on the Mantle transport. It must instead be threaded through
+    via `extra_body`, which the SDK merges back into the outgoing JSON body
+    so the upstream still receives the field at the top level."""
+    # `auth="passthrough"` routes forward the client's exact model id as
+    # `upstream_model` (see router.py's `upstream_model` derivation) — the
+    # route's own `model` field is only used for `auth="aws"` routes. So the
+    # client-facing model id itself must contain "qwen" to trigger
+    # `_anthropic_to_openai_request`'s `chat_template_kwargs` stamping.
+    fake_route = {
+        "claude_model": "claude-test-qwen-mantle-thinking",
+        "url": "https://example.bedrock.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "passthrough",
+        "api_type": "openai",
+    }
+    httpx_mock.add_response(
+        url="https://example.bedrock.aws/v1/chat/completions",
+        method="POST",
+        status_code=200,
+        json={
+            "id": "chatcmpl-abc",
+            "object": "chat.completion",
+            "created": 1234567890,
+            "model": "qwen.qwen3-coder-next",
+            "choices": [
+                {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                        "role": "assistant",
+                        "content": "Hi there",
+                        "tool_calls": None,
+                    },
+                }
+            ],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+        },
+        headers={"content-type": "application/json"},
+    )
+
+    with patch.dict(_ROUTES, {"claude-test-qwen-mantle-thinking": fake_route}):
+        body = {
+            "model": "claude-test-qwen-mantle-thinking",
+            "messages": [{"role": "user", "content": "Hello"}],
+            "stream": False,
+        }
+        response = await router_client.post(
+            "/v1/messages",
+            json=body,
+            headers={"content-type": "application/json"},
+        )
+
+    # Would be a 500 (TypeError surfaced as bedrock_upstream_error) before the fix.
+    assert response.status_code == 200
+    intercepted = httpx_mock.get_requests()
+    assert len(intercepted) == 1
+    sent_body = json.loads(intercepted[0].read())
+    # `extra_body` is merged back into the top-level JSON by the SDK, so the
+    # upstream still sees the field exactly where it expects it.
+    assert sent_body["chat_template_kwargs"] == {"enable_thinking": True}
+
+
+# ---------------------------------------------------------------------------
+# Native Bedrock Converse transport — non-streaming dispatch
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+def native_bedrock_route() -> dict[str, Any]:
+    return {
+        "tier": "sonnet",
+        "claude_model": "claude-test-native-sonnet",
+        "url": "https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions",
+        "model": "qwen.qwen3-coder-next",
+        "auth": "aws",
+        "aws_region": "us-east-1",
+        "api_type": "openai",
+        "price_per_mtok": 0.5,
+        "anthropic_price_per_mtok": 3.0,
+    }
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_happy_path(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """When bedrock_transport="native" and the route's auth is "aws", a
+    non-streaming request must go through the Converse API, not Mantle's
+    openai.AsyncOpenAI client."""
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.return_value = {
+        "output": {"message": {"role": "assistant", "content": [{"text": "Hi there"}]}},
+        "stopReason": "end_turn",
+        "usage": {
+            "inputTokens": 5,
+            "outputTokens": 3,
+            "totalTokens": 8,
+            "cacheReadInputTokens": 100,
+            "cacheWriteInputTokens": 20,
+        },
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    resp_json = response.json()
+    assert resp_json["content"] == [{"type": "text", "text": "Hi there"}]
+    assert resp_json["stop_reason"] == "end_turn"
+    # Cache-token fields must reach the client — see
+    # anthropics/claude-code#13385 (clients derive context-window usage
+    # from these, and a missing field looks identical to "no caching").
+    assert resp_json["usage"]["cache_read_input_tokens"] == 100
+    assert resp_json["usage"]["cache_creation_input_tokens"] == 20
+    mock_client.converse.assert_called_once()
+    call_kwargs = mock_client.converse.call_args.kwargs
+    assert call_kwargs["modelId"] == "qwen.qwen3-coder-next"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_mantle_default_transport_unaffected(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """With bedrock_transport left at its "mantle" default, an auth="aws"
+    route must still go through the openai SDK path — the native branch
+    must not be reachable without the explicit toggle."""
+    router = CodingModelRouter()  # default bedrock_transport="mantle"
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            # No httpx_mock response registered for the openai SDK's target
+            # URL, so this will fail to connect — that's fine, we're only
+            # asserting the native client was never touched.
+            try:
+                await client.post(
+                    "/v1/messages",
+                    json=body,
+                    headers={"content-type": "application/json"},
+                )
+            except Exception:
+                pass
+
+    mock_client.converse.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_records_usage(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    router._usage_tracker = usage_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.return_value = {
+        "output": {"message": {"role": "assistant", "content": [{"text": "Hi"}]}},
+        "stopReason": "end_turn",
+        "usage": {"inputTokens": 5, "outputTokens": 3, "totalTokens": 8},
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    await asyncio.sleep(0)
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["input_tokens"] == 5
+    assert call_kwargs["output_tokens"] == 3
+    assert call_kwargs["streaming"] is False
+    assert call_kwargs["raw_usage"] == {
+        "inputTokens": 5,
+        "outputTokens": 3,
+        "totalTokens": 8,
+    }
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_client_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A non-transient ClientError (e.g. ValidationException) must be
+    recorded via _record_error with error_type="bedrock_native_error" and
+    the AWS request ID from the ClientError response metadata."""
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.side_effect = ClientError(
+        {
+            "Error": {"Code": "ValidationException", "Message": "bad request"},
+            "ResponseMetadata": {
+                "RequestId": "aws-req-123",
+                "HTTPStatusCode": 400,
+                "HTTPHeaders": {},
+                "RetryAttempts": 0,
+                "HostId": "",
+            },
+        },
+        "Converse",
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ValidationException"
+    assert recorded["request_id"] == "aws-req-123"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """`ReadTimeoutError`/`ConnectTimeoutError`/`EndpointConnectionError` are
+    `BotoCoreError` subclasses, not `ClientError` — before this fix, a timeout
+    on the blocking `converse()` call escaped both the credential-error and
+    ClientError branches entirely, producing a bare unhandled 500 with no
+    model-router-errors record. It must be caught, recorded as
+    "bedrock_native_error", and surfaced as a normal 200 assistant message
+    like every other native-Bedrock error path — and NOT retried, since the
+    connect/read timeouts are already app-configured (retrying here would
+    just multiply the configured wait time again)."""
+    from botocore.exceptions import ReadTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.side_effect = ReadTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Read timeout" in call_kwargs["error_message"]
+
+
+# ---------------------------------------------------------------------------
+# Native Bedrock Converse transport — streaming dispatch
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_client_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A non-transient ClientError (e.g. ValidationException) raised by
+    converse_stream() itself — before any streaming has started — must be
+    recorded via _record_error with error_type="bedrock_native_error" and
+    the AWS request ID from the ClientError response metadata. Mirrors
+    test_native_bedrock_nonstreaming_client_error_is_recorded for the
+    streaming dispatch (_dispatch_bedrock_native_streaming), which previously
+    had no direct test of its ClientError/credential-error handling — only
+    the mid-stream-after-connection-succeeds error path was covered."""
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.side_effect = ClientError(
+        {
+            "Error": {"Code": "ValidationException", "Message": "bad request"},
+            "ResponseMetadata": {
+                "RequestId": "aws-req-456",
+                "HTTPStatusCode": 400,
+                "HTTPHeaders": {},
+                "RetryAttempts": 0,
+                "HostId": "",
+            },
+        },
+        "ConverseStream",
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    recorded = json.loads(call_kwargs["error_message"])
+    assert recorded["code"] == "ValidationException"
+    assert recorded["request_id"] == "aws-req-456"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_connect_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """Mirrors test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled
+    for the pre-first-event portion of dispatch_streaming: a `ConnectTimeoutError`
+    raised by `converse_stream()` itself (establishing the stream, before any
+    event arrives) is a `BotoCoreError` subclass that escaped the
+    credential-error/ClientError branches entirely before this fix. Mid-stream
+    timeouts (after the first event) were already covered by the generic
+    `except Exception` in converse_stream_adapter.py — this test is specifically
+    the pre-first-event gap."""
+    from botocore.exceptions import ConnectTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.side_effect = ConnectTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse_stream.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Connect timeout" in call_kwargs["error_message"]
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_happy_path(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {
+        "stream": iter(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "Streamed hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {
+                    "metadata": {
+                        "usage": {
+                            "inputTokens": 4,
+                            "outputTokens": 2,
+                            "cacheReadInputTokens": 100,
+                            "cacheWriteInputTokens": 20,
+                        }
+                    }
+                },
+            ]
+        )
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    assert b"Streamed hi" in response.content
+    assert b"event: message_start" in response.content
+    assert b"event: message_stop" in response.content
+    # Cache-token fields must reach the client's message_delta event — see
+    # anthropics/claude-code#13385.
+    assert b'"cache_read_input_tokens": 100' in response.content
+    assert b'"cache_creation_input_tokens": 20' in response.content
+    mock_client.converse_stream.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_with_long_tool_name_restores_original(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """MCP-prefixed tool names (e.g. mcp__claude_ai_Intuit_QuickBooks__...)
+    routinely exceed Bedrock Converse's 64-character toolSpec.name limit.
+    Sending one un-shortened fails the whole request with a
+    ValidationException; the client must still see its original tool name
+    back in the tool_use block."""
+    long_name = "mcp__claude_ai_Intuit_QuickBooks__qbo_accounting_get_balance_sheet"
+    router = CodingModelRouter(bedrock_transport="native")
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+
+    def _capture_and_stream(**kwargs: Any) -> dict[str, Any]:
+        sent_name = kwargs["toolConfig"]["tools"][0]["toolSpec"]["name"]
+        assert len(sent_name) <= 64
+        return {
+            "stream": iter(
+                [
+                    {"messageStart": {"role": "assistant"}},
+                    {
+                        "contentBlockStart": {
+                            "contentBlockIndex": 0,
+                            "start": {
+                                "toolUse": {
+                                    "toolUseId": "tooluse_1",
+                                    "name": sent_name,
+                                }
+                            },
+                        }
+                    },
+                    {"contentBlockStop": {"contentBlockIndex": 0}},
+                    {"messageStop": {"stopReason": "tool_use"}},
+                    {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+                ]
+            )
+        }
+
+    mock_client.converse_stream.side_effect = _capture_and_stream
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "What's my balance?"}],
+                "tools": [
+                    {
+                        "name": long_name,
+                        "description": "Get balance sheet",
+                        "input_schema": {"type": "object", "properties": {}},
+                    }
+                ],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages",
+                json=body,
+                headers={"content-type": "application/json"},
+            )
+
+    assert response.status_code == 200
+    assert f'"name": "{long_name}"'.encode() in response.content
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_records_usage(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    router._usage_tracker = usage_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {
+        "stream": iter(
+            [
+                {"messageStart": {"role": "assistant"}},
+                {"contentBlockStart": {"contentBlockIndex": 0, "start": {}}},
+                {
+                    "contentBlockDelta": {
+                        "contentBlockIndex": 0,
+                        "delta": {"text": "hi"},
+                    }
+                },
+                {"contentBlockStop": {"contentBlockIndex": 0}},
+                {"messageStop": {"stopReason": "end_turn"}},
+                {"metadata": {"usage": {"inputTokens": 4, "outputTokens": 2}}},
+            ]
+        )
+    }
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    await asyncio.sleep(0)
+    usage_tracker.record_usage.assert_awaited_once()
+    call_kwargs = usage_tracker.record_usage.call_args.kwargs
+    assert call_kwargs["input_tokens"] == 4
+    assert call_kwargs["output_tokens"] == 2
+    assert call_kwargs["streaming"] is True
+    assert call_kwargs["raw_usage"] == {"inputTokens": 4, "outputTokens": 2}
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_mid_stream_error_is_recorded(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """A failure raised mid-iteration of converse_stream()'s EventStream
+    (after streaming has already started, so it can't become a clean
+    pre-first-chunk error response) must still reach model-router-errors —
+    mirroring test_bedrock_mantle_mid_stream_error_records_full_detail for
+    the Mantle path."""
+
+    def _raising_stream() -> Iterator[dict[str, Any]]:
+        yield {"messageStart": {"role": "assistant"}}
+        raise RuntimeError("native bedrock stream failed")
+
+    router = CodingModelRouter(bedrock_transport="native")
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.return_value = {"stream": _raising_stream()}
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "native bedrock stream failed" in call_kwargs["error_message"]
