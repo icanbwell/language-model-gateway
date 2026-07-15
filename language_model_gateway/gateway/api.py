@@ -208,6 +208,7 @@ def create_app() -> FastAPI:
             token_reader=container.resolve(TokenReader),
             debug_log_received_oauth_tokens=env_vars.debug_log_received_oauth_tokens,
             custom_header_prefix=env_vars.model_routing_custom_header_prefix,
+            bedrock_transport=env_vars.model_routing_bedrock_transport,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())

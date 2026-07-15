@@ -215,6 +215,87 @@ class TestUsageTrackerDataExtraction:
             # Verify that insert_one was NOT called (since tokens default to 0)
             tracker._collection.insert_one.assert_not_called()
 
+    async def test_record_usage_from_anthropic_response_includes_raw_usage(
+        self,
+    ) -> None:
+        """The full upstream usage object should be stored verbatim, including
+        fields (e.g. cache tokens) this router doesn't otherwise normalize."""
+        auth_info = {"user_id": "user-123"}
+        usage = {
+            "input_tokens": 100,
+            "output_tokens": 50,
+            "cache_creation_input_tokens": 20,
+            "cache_read_input_tokens": 5,
+        }
+        response_body = {"usage": usage}
+
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-123",
+                auth_info=auth_info,
+                model="claude-opus-4-8",
+                response_body=response_body,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["raw_usage"] == usage
+
+    async def test_record_usage_from_openai_response_includes_raw_usage(self) -> None:
+        """The full upstream usage object should be stored verbatim for the
+        OpenAI/Bedrock-Mantle path too."""
+        auth_info = {"user_id": "user-789"}
+        usage = {
+            "prompt_tokens": 200,
+            "completion_tokens": 75,
+            "total_tokens": 275,
+            "prompt_tokens_details": {"cached_tokens": 50},
+        }
+        response_body = {"usage": usage}
+
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-456",
+                auth_info=auth_info,
+                model="gpt-4",
+                response_body=response_body,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["raw_usage"] == usage
+
+    async def test_record_usage_omits_raw_usage_when_absent(self) -> None:
+        """record_usage's raw_usage param is optional and independent of the
+        normalized input_tokens/output_tokens args."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-123",
+                user_id="user-123",
+                model="claude-opus-4-8",
+                input_tokens=100,
+                output_tokens=50,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "raw_usage" not in actual_record
+
 
 class TestUsageTrackerSessionIdAndTimestamp:
     """Tests for session_id and timestamp fields on recorded usage."""
@@ -677,6 +758,165 @@ class TestUsageTrackerStreamingAndCompression:
 
             actual_record = tracker._collection.insert_one.call_args[0][0]
             assert "sse_event_count" not in actual_record
+
+
+class TestUsageTrackerRetryCount:
+    """Tests for the retry_count field and its session-rollup total."""
+
+    async def test_record_usage_includes_retry_count(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="qwen.qwen3-coder-next",
+                input_tokens=10,
+                output_tokens=5,
+                retry_count=3,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["retry_count"] == 3
+
+    async def test_record_usage_records_zero_retry_count(self) -> None:
+        """0 is meaningful (no retries needed) and must not be conflated with
+        the field being absent — mirrors sse_event_count's convention."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+                retry_count=0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["retry_count"] == 0
+
+    async def test_record_usage_omits_retry_count_when_absent(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=10,
+                output_tokens=5,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert "retry_count" not in actual_record
+
+    async def test_record_usage_from_openai_response_threads_retry_count(
+        self,
+    ) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_openai_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="qwen.qwen3-coder-next",
+                response_body={
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+                },
+                retry_count=2,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["retry_count"] == 2
+
+    async def test_record_usage_from_anthropic_response_threads_retry_count(
+        self,
+    ) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+
+            await tracker.record_usage_from_anthropic_response(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                auth_info={"user_id": "user-1"},
+                model="claude-opus-4-8",
+                response_body={
+                    "usage": {"input_tokens": 10, "output_tokens": 5},
+                },
+                retry_count=0,
+            )
+
+            actual_record = tracker._collection.insert_one.call_args[0][0]
+            assert actual_record["retry_count"] == 0
+
+    async def test_session_rollup_accumulates_total_retries(self) -> None:
+        """retry_count rolls into total_retries via $inc, summed across the
+        session rather than bucketed by tier."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="qwen.qwen3-coder-next",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+                model_tier="sonnet",
+                retry_count=2,
+            )
+
+            update_arg = tracker._session_collection.update_one.call_args[0][1]
+            assert update_arg["$inc"]["total_retries"] == 2
+
+    async def test_session_rollup_omits_total_retries_when_absent(self) -> None:
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-opus-4-8",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+            )
+
+            update_arg = tracker._session_collection.update_one.call_args[0][1]
+            assert "total_retries" not in update_arg["$inc"]
 
 
 class TestUsageTrackerCustomHeaders:
