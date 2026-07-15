@@ -78,6 +78,8 @@ upstream; the router returns a rough estimate (`len(body_json) / 4`) instead.
 | `MODEL_ROUTING_ACCOUNT_DIRECTORY_COLLECTION_NAME` | `model-router-account-directory` | Collection name for the manually-populated account_uuid → email lookup table (see "Usage tracking" below). |
 | `MODEL_ROUTING_ERROR_COLLECTION_NAME` | `model-router-errors` | Collection name for upstream-failure tracking (see "Error tracking" below). |
 | `MODEL_ROUTING_QWEN_ENABLE_THINKING` | `true` | Whether Qwen routes (`api_type: openai`) are allowed to think before answering — see "Request translation" below. |
+| `MODEL_ROUTING_BEDROCK_CONNECT_TIMEOUT_SECONDS` | `60` | Connect timeout for the native Bedrock Converse boto3 client (only applies when `bedrock_transport="native"`). |
+| `MODEL_ROUTING_BEDROCK_READ_TIMEOUT_SECONDS` | `60` | Read timeout for the native Bedrock Converse boto3 client. A long streamed generation (large `max_tokens`, slow model) can exceed botocore's 60s default on a single read and fail with `AWSHTTPSConnectionPool ... Read timed out` (`error_type: bedrock_native_error`) — raise this for routes/models that legitimately need longer per-read. |
 | `MONGO_LLM_STORAGE_DB_USERNAME` / `MONGO_LLM_STORAGE_DB_PASSWORD` (fall back to `MONGO_DB_USERNAME` / `MONGO_DB_PASSWORD`) | *(none)* | Merged into the connection string above if the URI has no embedded credentials. |
 | `LOG_FORMAT` (gateway-wide, not router-specific) | `json` | Set to `text` to use the plain-text log format instead of single-line JSON (`language_model_gateway/gateway/utilities/logger/log_levels.py`). JSON is required for Groundcover to parse each log line correctly. |
 

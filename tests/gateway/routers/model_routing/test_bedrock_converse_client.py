@@ -27,9 +27,11 @@ class TestBedrockRuntimeClientProvider:
             result = provider.get_client(route)
 
             assert result is mock_client
-            mock_session_cls.return_value.client.assert_called_once_with(
-                "bedrock-runtime", region_name="us-west-2"
+            call_kwargs = mock_session_cls.return_value.client.call_args.kwargs
+            assert mock_session_cls.return_value.client.call_args.args == (
+                "bedrock-runtime",
             )
+            assert call_kwargs["region_name"] == "us-west-2"
 
     def test_defaults_region_to_us_east_1(self) -> None:
         route: dict[str, str] = {}
@@ -39,8 +41,41 @@ class TestBedrockRuntimeClientProvider:
 
             provider.get_client(route)
 
-            mock_session_cls.return_value.client.assert_called_once_with(
-                "bedrock-runtime", region_name="us-east-1"
+            call_kwargs = mock_session_cls.return_value.client.call_args.kwargs
+            assert call_kwargs["region_name"] == "us-east-1"
+
+    def test_defaults_boto_config_timeouts_to_60_seconds(self) -> None:
+        route: dict[str, str] = {}
+        provider = BedrockRuntimeClientProvider()
+        with (
+            patch("boto3.Session") as mock_session_cls,
+            patch("botocore.config.Config") as mock_config_cls,
+        ):
+            mock_session_cls.return_value.client.return_value = MagicMock()
+
+            provider.get_client(route)
+
+            mock_config_cls.assert_called_once_with(
+                connect_timeout=60.0, read_timeout=60.0
+            )
+            call_kwargs = mock_session_cls.return_value.client.call_args.kwargs
+            assert call_kwargs["config"] is mock_config_cls.return_value
+
+    def test_passes_through_explicit_timeouts_to_boto_config(self) -> None:
+        route: dict[str, str] = {}
+        provider = BedrockRuntimeClientProvider(
+            connect_timeout_seconds=10.0, read_timeout_seconds=300.0
+        )
+        with (
+            patch("boto3.Session") as mock_session_cls,
+            patch("botocore.config.Config") as mock_config_cls,
+        ):
+            mock_session_cls.return_value.client.return_value = MagicMock()
+
+            provider.get_client(route)
+
+            mock_config_cls.assert_called_once_with(
+                connect_timeout=10.0, read_timeout=300.0
             )
 
     def test_reuses_cached_client_for_same_region(self) -> None:
