@@ -724,3 +724,54 @@ Key env vars:
 The client sends requests to `/v1/messages` exactly as it would to
 `api.anthropic.com`.  The router rewrites the destination based on the config
 file without any change to the client-side request format.
+
+## Bedrock Transport Options
+
+When routing to AWS Bedrock (via `auth: "aws"` routes in the config), the gateway
+supports two transport mechanisms controlled by the
+`MODEL_ROUTING_BEDROCK_TRANSPORT` environment variable:
+
+| Value | Transport | Description |
+|-------|-----------|-------------|
+| `native` (default) | Bedrock Converse API | Direct calls to Bedrock's native `Converse`/`ConverseStream` API using `boto3` |
+| `mantle` | Bedrock Mantle | OpenAI-compatible API endpoint at `bedrock-mantle.us-east-1.api.aws` |
+
+### Native Transport (Default)
+
+**Introduced:** PR #200 (July 2026)
+
+The `native` transport routes `haiku`/`sonnet` tier traffic directly to AWS
+Bedrock's Converse API using the `boto3` SDK. This is the default and recommended
+option because:
+
+- **Better error visibility** - Full AWS request IDs and specific error codes
+  are captured in `model-router-errors` logs
+- **More reliable** - Bypasses Bedrock Mantle's OpenAI-compatible shim which
+  has occasionally returned generic `internal_server_error` 500s
+- **Fewer translation hops** - No OpenAI-compatibility shim layer (translates
+  directly Anthropic↔Converse instead of Anthropic↔OpenAI↔Bedrock)
+
+The gateway automatically converts between the Anthropic Messages API format
+and Bedrock's Converse API shape.
+
+### Mantle Transport (Legacy)
+
+The `mantle` transport uses Bedrock Mantle's OpenAI-compatible endpoint at
+`bedrock-mantle.us-east-1.api.aws`. Use this if you need to temporarily revert
+to the older path for debugging or in case of native transport issues.
+
+### Environment Variable
+
+Set `MODEL_ROUTING_BEDROCK_TRANSPORT` in your environment or
+`docker-compose.yml`:
+
+```yaml
+environment:
+  MODEL_ROUTING_BEDROCK_TRANSPORT: native  # or "mantle"
+```
+
+### Verifying Which Transport is Used
+
+Each `aws_bedrock`-backed `model-router-usage` and `model-router-errors`
+record includes a `bedrock_transport` field (`"native"` or `"mantle"`) so
+you can confirm which path handled a given request.
