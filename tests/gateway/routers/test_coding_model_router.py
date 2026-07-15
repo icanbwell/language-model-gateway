@@ -2050,6 +2050,63 @@ async def test_native_bedrock_nonstreaming_client_error_is_recorded(
     assert recorded["request_id"] == "aws-req-123"
 
 
+@pytest.mark.asyncio
+async def test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """`ReadTimeoutError`/`ConnectTimeoutError`/`EndpointConnectionError` are
+    `BotoCoreError` subclasses, not `ClientError` — before this fix, a timeout
+    on the blocking `converse()` call escaped both the credential-error and
+    ClientError branches entirely, producing a bare unhandled 500 with no
+    model-router-errors record. It must be caught, recorded as
+    "bedrock_native_error", and surfaced as a normal 200 assistant message
+    like every other native-Bedrock error path — and NOT retried, since the
+    connect/read timeouts are already app-configured (retrying here would
+    just multiply the configured wait time again)."""
+    from botocore.exceptions import ReadTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse.side_effect = ReadTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": False,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Read timeout" in call_kwargs["error_message"]
+
+
 # ---------------------------------------------------------------------------
 # Native Bedrock Converse transport — streaming dispatch
 # ---------------------------------------------------------------------------
@@ -2118,6 +2175,62 @@ async def test_native_bedrock_streaming_client_error_is_recorded(
     recorded = json.loads(call_kwargs["error_message"])
     assert recorded["code"] == "ValidationException"
     assert recorded["request_id"] == "aws-req-456"
+
+
+@pytest.mark.asyncio
+async def test_native_bedrock_streaming_connect_timeout_is_recorded_not_unhandled(
+    native_bedrock_route: dict[str, Any],
+) -> None:
+    """Mirrors test_native_bedrock_nonstreaming_read_timeout_is_recorded_not_unhandled
+    for the pre-first-event portion of dispatch_streaming: a `ConnectTimeoutError`
+    raised by `converse_stream()` itself (establishing the stream, before any
+    event arrives) is a `BotoCoreError` subclass that escaped the
+    credential-error/ClientError branches entirely before this fix. Mid-stream
+    timeouts (after the first event) were already covered by the generic
+    `except Exception` in converse_stream_adapter.py — this test is specifically
+    the pre-first-event gap."""
+    from botocore.exceptions import ConnectTimeoutError
+
+    router = CodingModelRouter(bedrock_transport="native")
+    usage_tracker = MagicMock()
+    usage_tracker.record_usage = AsyncMock()
+    error_tracker = MagicMock()
+    error_tracker.record_error = AsyncMock()
+    router._usage_tracker = usage_tracker
+    router._error_tracker = error_tracker
+    app = FastAPI()
+    app.include_router(router.get_router())
+
+    mock_client = MagicMock()
+    mock_client.converse_stream.side_effect = ConnectTimeoutError(
+        endpoint_url="https://bedrock-runtime.us-east-1.amazonaws.com"
+    )
+
+    with (
+        patch.dict(_ROUTES, {"claude-test-native-sonnet": native_bedrock_route}),
+        patch.object(
+            BedrockRuntimeClientProvider, "get_client", return_value=mock_client
+        ),
+    ):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            body = {
+                "model": "claude-test-native-sonnet",
+                "messages": [{"role": "user", "content": "Hello"}],
+                "stream": True,
+            }
+            response = await client.post(
+                "/v1/messages", json=body, headers={"content-type": "application/json"}
+            )
+
+    assert response.status_code == 200  # errors surfaced as a 200 assistant message
+    assert mock_client.converse_stream.call_count == 1  # not retried
+    await asyncio.sleep(0)
+    error_tracker.record_error.assert_awaited_once()
+    call_kwargs = error_tracker.record_error.call_args.kwargs
+    assert call_kwargs["error_type"] == "bedrock_native_error"
+    assert "Connect timeout" in call_kwargs["error_message"]
 
 
 @pytest.mark.asyncio

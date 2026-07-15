@@ -93,7 +93,10 @@ class BedrockNativeDispatcher:
         """
         from botocore.exceptions import (
             ClientError,
+            ConnectTimeoutError,
+            EndpointConnectionError,
             NoCredentialsError,
+            ReadTimeoutError,
             TokenRetrievalError,
         )
 
@@ -186,6 +189,34 @@ class BedrockNativeDispatcher:
                         False,
                     ),
                 )
+            except (
+                ReadTimeoutError,
+                ConnectTimeoutError,
+                EndpointConnectionError,
+            ) as exc:
+                # BotoCoreError subclasses, not ClientError — the ClientError
+                # branch above never sees these. Not retried here: the
+                # connect/read timeouts are already app-configured (see
+                # BedrockRuntimeClientProvider), so retrying on top of them
+                # would silently multiply wait time again, the exact problem
+                # botocore's own retries={"max_attempts": 1} was set to avoid.
+                self._record_error(
+                    request_id=request_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_native_error",
+                    error_message=str(exc),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=False,
+                )
+                return cast(
+                    JSONResponse,
+                    self._error_response(str(exc), upstream_model, False),
+                )
 
         self._record_upstream_latency(
             dispatch_start,
@@ -256,7 +287,10 @@ class BedrockNativeDispatcher:
         """Streaming counterpart to dispatch_nonstreaming."""
         from botocore.exceptions import (
             ClientError,
+            ConnectTimeoutError,
+            EndpointConnectionError,
             NoCredentialsError,
+            ReadTimeoutError,
             TokenRetrievalError,
         )
 
@@ -341,6 +375,28 @@ class BedrockNativeDispatcher:
                     upstream_model,
                     True,
                 )
+            except (
+                ReadTimeoutError,
+                ConnectTimeoutError,
+                EndpointConnectionError,
+            ) as exc:
+                # Same rationale as dispatch_nonstreaming's equivalent branch:
+                # BotoCoreError subclasses the ClientError branch never sees,
+                # and deliberately not retried — see that branch's comment.
+                self._record_error(
+                    request_id=request_id,
+                    auth_info=auth_info,
+                    model=upstream_model,
+                    error_type="bedrock_native_error",
+                    error_message=str(exc),
+                    start_time=request_start_time,
+                    model_tier=model_tier,
+                    backend=backend,
+                    auth=auth,
+                    api_type=api_type,
+                    streaming=True,
+                )
+                return self._error_response(str(exc), upstream_model, True)
 
         self._record_upstream_latency(
             dispatch_start,
