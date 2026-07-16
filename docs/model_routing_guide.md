@@ -149,6 +149,33 @@ alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
 - **Pattern fallback**: Routes with matching `claude_model_pattern` regex (e.g., `^claude-haiku-` matches `claude-haiku-4-5-20251001`)
 - **Unknown models**: Falls back to Anthropic direct if no route matches
 
+## Statusline: Session Savings
+
+This gateway exposes `GET /v1/model-routing/sessions/{session_id}/savings`,
+returning the current Claude Code session's cumulative cost savings (vs.
+Anthropic list price) from being routed through this gateway, broken down by
+model tier. `scripts/claude_code_statusline.py` turns that into a Claude Code
+statusline message.
+
+1. Set `MODEL_ROUTING_GATEWAY_URL` in your shell profile to this gateway's
+   base URL (the same host Claude Code's `ANTHROPIC_BASE_URL` already points
+   at).
+2. Add to `~/.claude/settings.json`:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "python3 /absolute/path/to/scripts/claude_code_statusline.py"
+  }
+}
+```
+
+The footer shows nothing until the session has at least one completed
+request — this is expected, not an error. If the gateway is unreachable or
+slow, the script fails silent within ~2 seconds rather than stalling Claude
+Code's UI.
+
 ## Key Points
 
 - The router is **wire-compatible** - clients send exactly the same format as they would to `api.anthropic.com`
