@@ -96,10 +96,12 @@ Add the following to your `~/.zshrc`:
 # >>> claude model routing >>>
 claude-router() {
   # For production swap the URL below:
-  # ANTHROPIC_BASE_URL="https://language-model-gateway.services.bwell.zone"
-  echo "[model-router] proxy=localhost:5050" >&2
+  # gateway_url="https://language-model-gateway.services.bwell.zone"
+  local gateway_url="http://localhost:5050"
+  echo "[model-router] proxy=$gateway_url" >&2
   env -u ANTHROPIC_API_KEY \
-    ANTHROPIC_BASE_URL="http://localhost:5050" \
+    ANTHROPIC_BASE_URL="$gateway_url" \
+    MODEL_ROUTING_GATEWAY_URL="$gateway_url" \
     ANTHROPIC_MODEL="opusplan" \
     CLAUDE_CODE_MAX_OUTPUT_TOKENS="200000" \
     CLAUDE_CODE_AUTO_COMPACT_WINDOW="262144" \
@@ -125,6 +127,7 @@ alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
 |----------|---------|
 | `-u ANTHROPIC_API_KEY` | Unsets any existing key (not forwarded to AWS routes) |
 | `ANTHROPIC_BASE_URL` | Points Claude Code at the gateway instead of `api.anthropic.com` |
+| `MODEL_ROUTING_GATEWAY_URL` | Same gateway host, for the [statusline script](#statusline-session-savings) — set from the same `gateway_url` local var so it never drifts from `ANTHROPIC_BASE_URL` when you swap environments |
 | `ANTHROPIC_MODEL` | Default session model (`opusplan` = Opus for plan mode, Sonnet for execution) |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Upper bound for Claude Code output requests (gateway caps server-side to `max_tokens`) |
 | `CLAUDE_CODE_AUTO_COMPACT_WINDOW` | Total context window size for auto-compaction |
@@ -155,26 +158,89 @@ This gateway exposes `GET /v1/model-routing/sessions/{session_id}/savings`,
 returning the current Claude Code session's cumulative cost savings (vs.
 Anthropic list price) from being routed through this gateway, broken down by
 model tier. `scripts/claude_code_statusline.py` turns that into a Claude Code
-statusline message.
+statusline message. Nothing here is a gateway server change — it's entirely
+local setup on your own machine.
 
-1. Set `MODEL_ROUTING_GATEWAY_URL` in your shell profile to this gateway's
-   base URL (the same host Claude Code's `ANTHROPIC_BASE_URL` already points
-   at).
-2. Add to `~/.claude/settings.json`:
+### Prerequisites
 
-```json
-{
-  "statusLine": {
-    "type": "command",
-    "command": "python3 /absolute/path/to/scripts/claude_code_statusline.py"
-  }
-}
-```
+- The [Shell Configuration](#shell-configuration-claude-router) above is
+  already set up — it's what exports `MODEL_ROUTING_GATEWAY_URL` for you (see
+  the table above), so there's nothing extra to configure for that part.
+- `python3` on your `PATH` (macOS/Linux ship this by default; no extra
+  packages needed — the script only uses the standard library).
+- A local clone of this repo, so you have an absolute path to
+  `scripts/claude_code_statusline.py`.
 
-The footer shows nothing until the session has at least one completed
-request — this is expected, not an error. If the gateway is unreachable or
-slow, the script fails silent within ~2 seconds rather than stalling Claude
-Code's UI.
+### Setup
+
+1. **Get the absolute path to the script:**
+
+   ```bash
+   cd /path/to/language-model-gateway
+   realpath scripts/claude_code_statusline.py
+   ```
+
+   Copy the printed path — you'll paste it into `settings.json` in the next
+   step.
+
+2. **Confirm it's executable** (the repo ships it with the execute bit set,
+   but `git clone` on some setups can drop it):
+
+   ```bash
+   chmod +x scripts/claude_code_statusline.py
+   ```
+
+3. **Test it manually before wiring it into Claude Code.** Start a
+   `claude-router` session, send at least one message so a usage record
+   exists, then copy that session's ID from the transcript's
+   `x-claude-code-session-id` (or just grab any `session_id` you've used
+   recently) and pipe a fake statusline payload into the script by hand:
+
+   ```bash
+   echo '{"session_id": "<your-session-id>"}' | python3 scripts/claude_code_statusline.py
+   ```
+
+   You should see a line like `💰 $0.12 saved (haiku $0.03 · sonnet $0.09)`.
+   Printing nothing at this step usually means `MODEL_ROUTING_GATEWAY_URL`
+   isn't set in this shell — see Troubleshooting below.
+
+4. **Add to `~/.claude/settings.json`**, using the absolute path from step 1:
+
+   ```json
+   {
+     "statusLine": {
+       "type": "command",
+       "command": "python3 /absolute/path/to/scripts/claude_code_statusline.py"
+     }
+   }
+   ```
+
+5. **Start a new Claude Code session** (`claude-router`) — the statusline
+   command is read at session start, so an already-running session won't
+   pick up a `settings.json` change.
+
+### Troubleshooting
+
+- **Footer shows nothing:** expected until the session has at least one
+  completed request — the gateway has no rollup to report yet. Also expected,
+  silently, if the gateway is unreachable or slow (the script fails silent
+  within ~2 seconds rather than stalling Claude Code's UI) — this is by
+  design, not a bug to chase.
+- **Still nothing after a completed request:** re-run the manual test in
+  step 3 directly in a terminal, in the *same* shell you'd launch
+  `claude-router` from — `echo ... | python3 scripts/claude_code_statusline.py`
+  prints its own errors when run this way, unlike inside Claude Code's
+  statusline. A common cause is `MODEL_ROUTING_GATEWAY_URL` not being set in
+  that shell — confirm with `echo $MODEL_ROUTING_GATEWAY_URL` after running
+  `claude-router` (it's set inside that function, not globally, so it's only
+  present in a shell where you've invoked it at least once — check by
+  running `claude-router` and then `echo` from a **second** terminal tab in
+  the same session, or add `env | grep MODEL_ROUTING_GATEWAY_URL` right
+  before the `claude "$@"` line temporarily).
+- **`command not found` in Claude Code's footer area:** check the
+  `command` path in `settings.json` is absolute (not `~/...` — some shells
+  don't expand `~` in this context) and that `python3` resolves on `PATH`
+  for non-interactive shells too (`which python3` in a fresh terminal).
 
 ## Key Points
 
