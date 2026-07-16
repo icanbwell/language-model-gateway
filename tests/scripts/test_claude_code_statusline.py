@@ -1,5 +1,5 @@
 """
-Tests for scripts/claude_code_statusline.py.
+Tests for language_model_gateway/static/claude_code_statusline.py.
 """
 
 from __future__ import annotations
@@ -14,7 +14,10 @@ from unittest.mock import patch
 import pytest
 
 _SCRIPT_PATH = (
-    Path(__file__).resolve().parents[2] / "scripts" / "claude_code_statusline.py"
+    Path(__file__).resolve().parents[2]
+    / "language_model_gateway"
+    / "static"
+    / "claude_code_statusline.py"
 )
 _spec = importlib.util.spec_from_file_location("claude_code_statusline", _SCRIPT_PATH)
 assert _spec is not None and _spec.loader is not None

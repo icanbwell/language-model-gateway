@@ -157,9 +157,12 @@ alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
 This gateway exposes `GET /v1/model-routing/sessions/{session_id}/savings`,
 returning the current Claude Code session's cumulative cost savings (vs.
 Anthropic list price) from being routed through this gateway, broken down by
-model tier. `scripts/claude_code_statusline.py` turns that into a Claude Code
+model tier. `claude_code_statusline.py` turns that into a Claude Code
 statusline message. Nothing here is a gateway server change — it's entirely
-local setup on your own machine.
+local setup on your own machine, and it does **not** require cloning this
+repo: the script is downloaded directly from the gateway itself, since it's
+served as a static asset alongside the app's other static files (same
+mechanism as the login/branding pages under `/static`).
 
 ### Prerequisites
 
@@ -168,56 +171,62 @@ local setup on your own machine.
   the table above), so there's nothing extra to configure for that part.
 - `python3` on your `PATH` (macOS/Linux ship this by default; no extra
   packages needed — the script only uses the standard library).
-- A local clone of this repo, so you have an absolute path to
-  `scripts/claude_code_statusline.py`.
+- `curl` (or any way to download a URL) to fetch the script.
 
 ### Setup
 
-1. **Get the absolute path to the script:**
+1. **Download the script** from the gateway itself — no repo clone needed:
 
    ```bash
-   cd /path/to/language-model-gateway
-   realpath scripts/claude_code_statusline.py
+   mkdir -p ~/.claude/scripts
+   curl -fsSL "$MODEL_ROUTING_GATEWAY_URL/static/claude_code_statusline.py" \
+     -o ~/.claude/scripts/claude_code_statusline.py
+   chmod +x ~/.claude/scripts/claude_code_statusline.py
    ```
 
-   Copy the printed path — you'll paste it into `settings.json` in the next
-   step.
+   (Run this from a shell where `claude-router` has already exported
+   `MODEL_ROUTING_GATEWAY_URL` — see Troubleshooting below if it's empty.
+   You can also substitute the gateway's URL directly if you'd rather not
+   depend on that being set yet.)
 
-2. **Confirm it's executable** (the repo ships it with the execute bit set,
-   but `git clone` on some setups can drop it):
-
-   ```bash
-   chmod +x scripts/claude_code_statusline.py
-   ```
-
-3. **Test it manually before wiring it into Claude Code.** Start a
+2. **Test it manually before wiring it into Claude Code.** Start a
    `claude-router` session, send at least one message so a usage record
    exists, then copy that session's ID from the transcript's
    `x-claude-code-session-id` (or just grab any `session_id` you've used
-   recently) and pipe a fake statusline payload into the script by hand:
+   recently) and pipe a fake statusline payload into the downloaded script
+   by hand:
 
    ```bash
-   echo '{"session_id": "<your-session-id>"}' | python3 scripts/claude_code_statusline.py
+   echo '{"session_id": "<your-session-id>"}' | python3 ~/.claude/scripts/claude_code_statusline.py
    ```
 
    You should see a line like `💰 $0.12 saved (haiku $0.03 · sonnet $0.09)`.
    Printing nothing at this step usually means `MODEL_ROUTING_GATEWAY_URL`
    isn't set in this shell — see Troubleshooting below.
 
-4. **Add to `~/.claude/settings.json`**, using the absolute path from step 1:
+3. **Add to `~/.claude/settings.json`, using an absolute path** (some shells
+   don't expand `~` in this context, so resolve it first):
+
+   ```bash
+   realpath ~/.claude/scripts/claude_code_statusline.py
+   ```
 
    ```json
    {
      "statusLine": {
        "type": "command",
-       "command": "python3 /absolute/path/to/scripts/claude_code_statusline.py"
+       "command": "python3 /absolute/path/from/realpath/claude_code_statusline.py"
      }
    }
    ```
 
-5. **Start a new Claude Code session** (`claude-router`) — the statusline
+4. **Start a new Claude Code session** (`claude-router`) — the statusline
    command is read at session start, so an already-running session won't
    pick up a `settings.json` change.
+
+To pick up a future update to the script, just re-run the `curl` command in
+step 1 — it always fetches whatever version is currently deployed on that
+gateway.
 
 ### Troubleshooting
 
@@ -227,16 +236,21 @@ local setup on your own machine.
   within ~2 seconds rather than stalling Claude Code's UI) — this is by
   design, not a bug to chase.
 - **Still nothing after a completed request:** re-run the manual test in
-  step 3 directly in a terminal, in the *same* shell you'd launch
-  `claude-router` from — `echo ... | python3 scripts/claude_code_statusline.py`
-  prints its own errors when run this way, unlike inside Claude Code's
-  statusline. A common cause is `MODEL_ROUTING_GATEWAY_URL` not being set in
-  that shell — confirm with `echo $MODEL_ROUTING_GATEWAY_URL` after running
-  `claude-router` (it's set inside that function, not globally, so it's only
-  present in a shell where you've invoked it at least once — check by
-  running `claude-router` and then `echo` from a **second** terminal tab in
-  the same session, or add `env | grep MODEL_ROUTING_GATEWAY_URL` right
-  before the `claude "$@"` line temporarily).
+  step 2 directly in a terminal, in the *same* shell you'd launch
+  `claude-router` from — running it directly like that prints its own
+  errors, unlike inside Claude Code's statusline. A common cause is
+  `MODEL_ROUTING_GATEWAY_URL` not being set in that shell — confirm with
+  `echo $MODEL_ROUTING_GATEWAY_URL` after running `claude-router` (it's set
+  inside that function, not globally, so it's only present in a shell where
+  you've invoked it at least once — check by running `claude-router` and
+  then `echo` from a **second** terminal tab in the same session, or add
+  `env | grep MODEL_ROUTING_GATEWAY_URL` right before the `claude "$@"` line
+  temporarily).
+- **`curl` in step 1 fails or downloads an HTML error page instead of the
+  script:** confirm `MODEL_ROUTING_GATEWAY_URL` actually points at a running
+  gateway (`curl -fsSL "$MODEL_ROUTING_GATEWAY_URL/api/v1/models"` should
+  return JSON, not an error) before troubleshooting the statusline script
+  itself.
 - **`command not found` in Claude Code's footer area:** check the
   `command` path in `settings.json` is absolute (not `~/...` — some shells
   don't expand `~` in this context) and that `python3` resolves on `PATH`
