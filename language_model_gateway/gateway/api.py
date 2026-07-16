@@ -32,6 +32,9 @@ from language_model_gateway.gateway.middleware.fastapi_logging_middleware import
 from language_model_gateway.gateway.routers.model_routing.router import (
     CodingModelRouter,
 )
+from language_model_gateway.gateway.routers.model_routing.session_savings_router import (
+    SessionSavingsRouter,
+)
 from language_model_gateway.gateway.routers.chat_completion_router import (
     ChatCompletionsRouter,
 )
@@ -218,6 +221,13 @@ def create_app() -> FastAPI:
             ),
             bedrock_max_attempts=env_vars.model_routing_bedrock_max_attempts,
             bedrock_retry_mode=env_vars.model_routing_bedrock_retry_mode,
+        ).get_router()
+    )
+    app1.include_router(
+        SessionSavingsRouter(
+            mongo_uri=mongo_llm_storage_uri,
+            db_name=env_vars.mongo_llm_storage_db_name or "llm_storage",
+            collection_name=env_vars.model_routing_usage_session_collection_name,
         ).get_router()
     )
     app1.include_router(ChatCompletionsRouter().get_router())
