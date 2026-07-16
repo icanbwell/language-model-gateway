@@ -1294,6 +1294,60 @@ class TestUsageTrackerSessionRollup:
             assert "low_tier_cost" not in second_update["$inc"]
             assert "high_tier_cost" in second_update["$inc"]
 
+    async def test_records_backend_per_tier_bucket(self) -> None:
+        """The tier's backend (anthropic/aws_bedrock) should land on its own
+        bucket, alongside {bucket}_tier_model, so the savings endpoint can
+        show which provider served each tier."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-3-5-haiku",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+                model_tier="haiku",
+                backend="aws_bedrock",
+                price_per_mtok=1.0,
+            )
+
+            update_arg = tracker._session_collection.update_one.call_args[0][1]
+            assert update_arg["$set"]["low_tier_backend"] == "aws_bedrock"
+
+    async def test_no_backend_field_when_backend_absent(self) -> None:
+        """No backend supplied means no {bucket}_tier_backend field at all —
+        distinguishable from an explicitly recorded value."""
+        tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)
+
+        with patch.object(tracker, "_ensure_connected", new_callable=AsyncMock):
+            tracker._collection = MagicMock()
+            tracker._collection.insert_one = AsyncMock()
+            tracker._session_collection = MagicMock()
+            tracker._session_collection.update_one = AsyncMock()
+
+            await tracker.record_usage(
+                start_time=_TEST_START_TIME,
+                request_id="req-1",
+                user_id="user-1",
+                model="claude-3-5-haiku",
+                input_tokens=100,
+                output_tokens=50,
+                session_id="sess-1",
+                model_tier="haiku",
+                price_per_mtok=1.0,
+            )
+
+            update_arg = tracker._session_collection.update_one.call_args[0][1]
+            assert "low_tier_backend" not in update_arg["$set"]
+
     async def test_session_rollup_failure_does_not_raise(self) -> None:
         """A broken session-collection write should log and not blow up the caller."""
         tracker = UsageTracker(mongo_uri="mongodb://localhost:27017", enabled=False)

@@ -6,7 +6,11 @@ Pipeline (per spec):
   2. Count tokens with Qwen tokenizer + chat template
   3. If within budget → send as-is
   4. Phase 1: head+tail compress oversized tool results, recount
-  5. Phase 2: drop oldest message groups (newest first, system+last-user never dropped)
+  5. Phase 2: drop oldest message groups (system never dropped; never cut past
+     the last group that starts with role=="user" — every backend rejects a
+     conversation that doesn't start with a user turn, and the conversation's
+     most recent turn is not always a plain user message, e.g. right after a
+     tool call)
   6. Recount after each drop; stop when budget satisfied
   7. Log all compression actions with token deltas
 
@@ -149,23 +153,23 @@ def _compress_tool_messages(
 
 def _group_conversation(
     messages: list[dict[str, Any]],
-) -> tuple[
-    dict[str, Any] | None,
-    list[list[dict[str, Any]]],
-    dict[str, Any] | None,
-]:
+) -> tuple[dict[str, Any] | None, list[list[dict[str, Any]]]]:
     """
-    Partition messages into (system_msg, groups, last_user_msg).
+    Partition messages into (system_msg, groups).
 
     Groups are atomic units for drop purposes: a plain message is a group of 1;
     an assistant message with tool_calls plus its subsequent tool responses form
     a single group (dropping the assistant without its tool responses would break
     the conversation structure, and vice versa).
 
-    system_msg and last_user_msg are extracted separately — they are never dropped.
+    system_msg is extracted separately — it is never dropped. Every other
+    message is just another group, including the conversation's most recent
+    turn: it is NOT necessarily role=="user" (a conversation resumed right
+    after a tool call, e.g. right after Read/Bash/AskUserQuestion, ends in a
+    "tool" message instead) — see `_max_valid_cut_index` for how the trailing
+    turn is actually protected.
     """
     system_msg: dict[str, Any] | None = None
-    last_user_msg: dict[str, Any] | None = None
     middle: list[dict[str, Any]] = []
 
     for msg in messages:
@@ -173,9 +177,6 @@ def _group_conversation(
             system_msg = msg
         else:
             middle.append(msg)
-
-    if middle and middle[-1].get("role") == "user":
-        last_user_msg = middle.pop()
 
     groups: list[list[dict[str, Any]]] = []
     i = 0
@@ -193,22 +194,40 @@ def _group_conversation(
             groups.append([msg])
             i += 1
 
-    return system_msg, groups, last_user_msg
+    return system_msg, groups
 
 
 def _reassemble(
     system_msg: dict[str, Any] | None,
     groups: list[list[dict[str, Any]]],
-    last_user_msg: dict[str, Any] | None,
 ) -> list[dict[str, Any]]:
     msgs: list[dict[str, Any]] = []
     if system_msg:
         msgs.append(system_msg)
     for group in groups:
         msgs.extend(group)
-    if last_user_msg:
-        msgs.append(last_user_msg)
     return msgs
+
+
+def _max_valid_cut_index(groups: list[list[dict[str, Any]]]) -> int:
+    """
+    The largest cut index `k` such that `groups[k:]` still starts with a
+    user-role message — the furthest Phase 2 is allowed to drop from the
+    front. Every backend this router talks to (Bedrock Converse, Bedrock
+    Mantle/Qwen chat templates, etc.) rejects a conversation that doesn't
+    start with a user turn once the system message is stripped out
+    downstream, so a group whose own first message isn't role=="user" can
+    never become the new front of the conversation.
+
+    Returns 0 (i.e. "don't drop anything") if no group starts with
+    role=="user" at all — an edge case that shouldn't occur for a real
+    client conversation, but corrupting the conversation further would only
+    make things worse.
+    """
+    user_starting_indices = [
+        k for k, group in enumerate(groups) if group[0].get("role") == "user"
+    ]
+    return max(user_starting_indices, default=0)
 
 
 # ---------------------------------------------------------------------------
@@ -359,16 +378,20 @@ def enforce_context_budget(
             )
 
     # ── Phase 2: drop oldest message groups ──────────────────────────────────
-    system_msg, groups, last_user_msg = _group_conversation(messages)
+    system_msg, groups = _group_conversation(messages)
+    max_cut = _max_valid_cut_index(groups)
+    cut = 0
     dropped = 0
 
-    while groups and token_count > budget.effective_input_tokens:
-        dropped_group = groups.pop(0)
-        dropped += len(dropped_group)
-        messages = _reassemble(system_msg, groups, last_user_msg)
+    while cut < max_cut and token_count > budget.effective_input_tokens:
+        dropped += len(groups[cut])
+        cut += 1
+        messages = _reassemble(system_msg, groups[cut:])
         token_count = _recount({**oai_body, "messages": messages})
         if token_count <= budget.effective_input_tokens:
             break
+
+    groups = groups[cut:]
 
     if dropped:
         logger.warning(
@@ -382,8 +405,9 @@ def enforce_context_budget(
     if token_count > budget.effective_input_tokens:
         logger.error(
             "[coding-model-router] request still over budget after full compression "
-            "(%d > %d tokens); only system prompt + latest user message remain — "
-            "sending anyway, upstream may reject",
+            "(%d > %d tokens); only system prompt + the most recent turn(s) that can "
+            "still legally start the conversation remain — sending anyway, "
+            "upstream may reject",
             token_count,
             budget.effective_input_tokens,
         )

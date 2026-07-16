@@ -96,10 +96,12 @@ Add the following to your `~/.zshrc`:
 # >>> claude model routing >>>
 claude-router() {
   # For production swap the URL below:
-  # ANTHROPIC_BASE_URL="https://language-model-gateway.services.bwell.zone"
-  echo "[model-router] proxy=localhost:5050" >&2
+  # gateway_url="https://language-model-gateway.services.bwell.zone"
+  local gateway_url="http://localhost:5050"
+  echo "[model-router] proxy=$gateway_url" >&2
   env -u ANTHROPIC_API_KEY \
-    ANTHROPIC_BASE_URL="http://localhost:5050" \
+    ANTHROPIC_BASE_URL="$gateway_url" \
+    MODEL_ROUTING_GATEWAY_URL="$gateway_url" \
     ANTHROPIC_MODEL="opusplan" \
     CLAUDE_CODE_MAX_OUTPUT_TOKENS="200000" \
     CLAUDE_CODE_AUTO_COMPACT_WINDOW="262144" \
@@ -116,6 +118,19 @@ alias install-model-router="bash $HOME/model-router/install-model-router.sh"
 alias uninstall-model-router="bash $HOME/model-router/uninstall-model-router.sh"
 alias start-model-router="bash $HOME/model-router/start-model-router.sh"
 alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
+setup-model-router-statusline() {
+  local gateway_url="${MODEL_ROUTING_GATEWAY_URL:-http://localhost:5050}"
+  local script_path="$HOME/.claude/scripts/claude_code_statusline.py"
+  mkdir -p "$(dirname "$script_path")"
+  if ! curl -fsSL "$gateway_url/static/claude_code_statusline.py" -o "$script_path"; then
+    echo "[model-router] failed to download from $gateway_url -- is the gateway reachable?" >&2
+    return 1
+  fi
+  chmod +x "$script_path"
+  echo "[model-router] statusline script installed at $script_path" >&2
+  echo "[model-router] add this to ~/.claude/settings.json:" >&2
+  echo "  {\"statusLine\": {\"type\": \"command\", \"command\": \"python3 $script_path\"}}" >&2
+}
 # <<< claude model routing <<<
 ```
 
@@ -125,6 +140,7 @@ alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
 |----------|---------|
 | `-u ANTHROPIC_API_KEY` | Unsets any existing key (not forwarded to AWS routes) |
 | `ANTHROPIC_BASE_URL` | Points Claude Code at the gateway instead of `api.anthropic.com` |
+| `MODEL_ROUTING_GATEWAY_URL` | Same gateway host, for the [statusline script](#statusline-session-savings) — set from the same `gateway_url` local var so it never drifts from `ANTHROPIC_BASE_URL` when you swap environments |
 | `ANTHROPIC_MODEL` | Default session model (`opusplan` = Opus for plan mode, Sonnet for execution) |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Upper bound for Claude Code output requests (gateway caps server-side to `max_tokens`) |
 | `CLAUDE_CODE_AUTO_COMPACT_WINDOW` | Total context window size for auto-compaction |
@@ -149,9 +165,131 @@ alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
 - **Pattern fallback**: Routes with matching `claude_model_pattern` regex (e.g., `^claude-haiku-` matches `claude-haiku-4-5-20251001`)
 - **Unknown models**: Falls back to Anthropic direct if no route matches
 
+## Statusline: Session Savings
+
+This gateway exposes `GET /v1/model-routing/sessions/{session_id}/savings`,
+returning the current Claude Code session's cumulative cost savings (vs.
+Anthropic list price) from being routed through this gateway, broken down by
+model tier. `claude_code_statusline.py` turns that into a Claude Code
+statusline message. Nothing here is a gateway server change — it's entirely
+local setup on your own machine, and it does **not** require cloning this
+repo: the script is downloaded directly from the gateway itself, since it's
+served as a static asset alongside the app's other static files (same
+mechanism as the login/branding pages under `/static`).
+
+### Prerequisites
+
+- The [Shell Configuration](#shell-configuration-claude-router) above is
+  already set up — it's what exports `MODEL_ROUTING_GATEWAY_URL` for you (see
+  the table above), so there's nothing extra to configure for that part.
+- `python3` on your `PATH` (macOS/Linux ship this by default; no extra
+  packages needed — the script only uses the standard library).
+- `curl` (or any way to download a URL) to fetch the script.
+
+### Setup
+
+1. **Download the script** from the gateway itself — no repo clone needed.
+   The [Shell Configuration](#shell-configuration-claude-router) snippet
+   above already includes a `setup-model-router-statusline` shell function
+   that does this for you and prints the exact `settings.json` snippet to
+   add (including the resolved absolute path):
+
+   ```bash
+   setup-model-router-statusline
+   ```
+
+   Or do it by hand if you'd rather see each step:
+
+   ```bash
+   mkdir -p ~/.claude/scripts
+   curl -fsSL "$MODEL_ROUTING_GATEWAY_URL/static/claude_code_statusline.py" \
+     -o ~/.claude/scripts/claude_code_statusline.py
+   chmod +x ~/.claude/scripts/claude_code_statusline.py
+   ```
+
+   (Run this from a shell where `claude-router` has already exported
+   `MODEL_ROUTING_GATEWAY_URL` — see Troubleshooting below if it's empty.
+   You can also substitute the gateway's URL directly if you'd rather not
+   depend on that being set yet.)
+
+2. **Test it manually before wiring it into Claude Code.** Start a
+   `claude-router` session, send at least one message so a usage record
+   exists, then copy that session's ID from the transcript's
+   `x-claude-code-session-id` (or just grab any `session_id` you've used
+   recently) and pipe a fake statusline payload into the downloaded script
+   by hand:
+
+   ```bash
+   echo '{"session_id": "<your-session-id>"}' | python3 ~/.claude/scripts/claude_code_statusline.py
+   ```
+
+   You should see a line like
+   `💰 $0.12 saved (costs: Haiku(AWS) $0.03 · Sonnet(Anthropic) $0.09)`. The
+   parenthetical is a per-tier *cost* breakdown (with the provider that
+   served each tier), not a breakdown of the leading savings total — a tier
+   used before backend tracking existed shows `(?)` instead of a provider
+   name.
+   Printing nothing at this step usually means `MODEL_ROUTING_GATEWAY_URL`
+   isn't set in this shell — see Troubleshooting below.
+
+3. **Add to `~/.claude/settings.json`, using an absolute path** (some shells
+   don't expand `~` in this context, so resolve it first — skip this if you
+   used `setup-model-router-statusline`, which already printed the exact
+   snippet with the resolved path):
+
+   ```bash
+   realpath ~/.claude/scripts/claude_code_statusline.py
+   ```
+
+   ```json
+   {
+     "statusLine": {
+       "type": "command",
+       "command": "python3 /absolute/path/from/realpath/claude_code_statusline.py"
+     }
+   }
+   ```
+
+4. **Start a new Claude Code session** (`claude-router`) — the statusline
+   command is read at session start, so an already-running session won't
+   pick up a `settings.json` change.
+
+To pick up a future update to the script, just re-run
+`setup-model-router-statusline` (or the manual `curl` command) — it always
+fetches whatever version is currently deployed on that gateway.
+
+### Troubleshooting
+
+- **Footer shows nothing:** expected until the session has at least one
+  completed request — the gateway has no rollup to report yet. Also expected,
+  silently, if the gateway is unreachable or slow (the script fails silent
+  within ~2 seconds rather than stalling Claude Code's UI) — this is by
+  design, not a bug to chase.
+- **Still nothing after a completed request:** re-run the manual test in
+  step 2 directly in a terminal, in the *same* shell you'd launch
+  `claude-router` from — running it directly like that prints its own
+  errors, unlike inside Claude Code's statusline. A common cause is
+  `MODEL_ROUTING_GATEWAY_URL` not being set where the statusline script
+  runs. Note that `claude-router` only sets it inside the one-shot `env
+  ... claude "$@"` subprocess environment — it is never exported to your
+  interactive shell, so `echo $MODEL_ROUTING_GATEWAY_URL` in that shell (or
+  in a second terminal tab) will always come back empty even when
+  everything is working correctly. To actually confirm it's being set,
+  temporarily add `env | grep MODEL_ROUTING_GATEWAY_URL` right before the
+  `claude "$@"` line inside the `claude-router` function and re-run it.
+- **`curl` in step 1 fails or downloads an HTML error page instead of the
+  script:** confirm `MODEL_ROUTING_GATEWAY_URL` actually points at a running
+  gateway (`curl -fsSL "$MODEL_ROUTING_GATEWAY_URL/api/v1/models"` should
+  return JSON, not an error) before troubleshooting the statusline script
+  itself.
+- **`command not found` in Claude Code's footer area:** check the
+  `command` path in `settings.json` is absolute (not `~/...` — some shells
+  don't expand `~` in this context) and that `python3` resolves on `PATH`
+  for non-interactive shells too (`which python3` in a fresh terminal).
+
 ## Key Points
 
 - The router is **wire-compatible** - clients send exactly the same format as they would to `api.anthropic.com`
 - No client-side changes required - just set `ANTHROPIC_BASE_URL` to point at the gateway
 - Route config is loaded once at module import time; restart containers or call `_reload_routes()` for changes
-- Usage attribution requires either valid OIDC token or custom headers (`X-Model-Routing-User-Id`, `X-Model-Routing-Client-Type`)
+- Usage attribution (`user_id`/`email`/`user_name`) requires a valid, signature-verified OIDC token on `Authorization` — caller-supplied headers (e.g. `X-Model-Routing-User-Id`) are never trusted for attribution since they're trivially spoofable on this shared, multi-tenant router; see [Attribution](coding_model_router.md#attribution)
