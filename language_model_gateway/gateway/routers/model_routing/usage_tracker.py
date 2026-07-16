@@ -261,6 +261,7 @@ class UsageTracker:
                     user_id=user_id,
                     model=model,
                     model_tier=model_tier,
+                    backend=backend,
                     input_tokens=input_tokens,
                     output_tokens=output_tokens,
                     price_per_mtok=price_per_mtok,
@@ -282,6 +283,7 @@ class UsageTracker:
         user_id: str | None,
         model: str,
         model_tier: str | None,
+        backend: str | None,
         input_tokens: int,
         output_tokens: int,
         price_per_mtok: float | None,
@@ -335,6 +337,8 @@ class UsageTracker:
         if bucket:
             if model:
                 set_fields[f"{bucket}_tier_model"] = model
+            if backend:
+                set_fields[f"{bucket}_tier_backend"] = backend
             if cost_usd is not None:
                 inc_fields[f"{bucket}_tier_cost"] = round(cost_usd, 6)
             if anthropic_cost_usd is not None:

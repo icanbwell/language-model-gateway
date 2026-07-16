@@ -35,7 +35,10 @@ async def test_get_savings_returns_200_with_body() -> None:
         total_tokens=12345,
         tiers={
             "low": TierSavings(
-                model="qwen-coder", cost_usd=0.10, anthropic_cost_usd=0.30
+                model="qwen-coder",
+                backend="aws_bedrock",
+                cost_usd=0.10,
+                anthropic_cost_usd=0.30,
             )
         },
     )

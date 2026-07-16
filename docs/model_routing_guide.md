@@ -223,7 +223,12 @@ mechanism as the login/branding pages under `/static`).
    echo '{"session_id": "<your-session-id>"}' | python3 ~/.claude/scripts/claude_code_statusline.py
    ```
 
-   You should see a line like `💰 $0.12 saved (haiku $0.03 · sonnet $0.09)`.
+   You should see a line like
+   `💰 $0.12 saved (costs: Haiku(AWS) $0.03 · Sonnet(Anthropic) $0.09)`. The
+   parenthetical is a per-tier *cost* breakdown (with the provider that
+   served each tier), not a breakdown of the leading savings total — a tier
+   used before backend tracking existed shows `(?)` instead of a provider
+   name.
    Printing nothing at this step usually means `MODEL_ROUTING_GATEWAY_URL`
    isn't set in this shell — see Troubleshooting below.
 

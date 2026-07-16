@@ -30,17 +30,30 @@ class TestFormatSavingsLine:
         payload = {
             "total_savings_usd": 0.42,
             "tiers": {
-                "low": {"cost_usd": 0.10},
-                "medium": {"cost_usd": 0.30},
-                "high": {"cost_usd": 0.02},
+                "low": {"cost_usd": 0.10, "backend": "aws_bedrock"},
+                "medium": {"cost_usd": 0.30, "backend": "anthropic"},
+                "high": {"cost_usd": 0.02, "backend": "aws_bedrock"},
             },
         }
         line = statusline.format_savings_line(payload)
         assert line is not None
         assert "0.42" in line
-        assert "haiku $0.10" in line
-        assert "sonnet $0.30" in line
-        assert "opus $0.02" in line
+        assert "costs:" in line
+        assert "Haiku(AWS) $0.10" in line
+        assert "Sonnet(Anthropic) $0.30" in line
+        assert "Opus(AWS) $0.02" in line
+
+    def test_shows_placeholder_when_tier_backend_unknown(self) -> None:
+        """A tier recorded before backend tracking shipped (or any other
+        missing-backend case) shows a "?" placeholder rather than guessing
+        or omitting the provider tag silently."""
+        payload = {
+            "total_savings_usd": 0.10,
+            "tiers": {"medium": {"cost_usd": 0.23}},
+        }
+        line = statusline.format_savings_line(payload)
+        assert line is not None
+        assert "Sonnet(?) $0.23" in line
 
     def test_formats_total_with_no_tiers(self) -> None:
         payload = {"total_savings_usd": 0.0, "tiers": {}}

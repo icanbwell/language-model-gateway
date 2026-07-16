@@ -23,6 +23,7 @@ _TIER_BUCKETS: tuple[str, ...] = ("low", "medium", "high", "fable")
 
 class TierSavings(BaseModel):
     model: str | None
+    backend: str | None
     cost_usd: float
     anthropic_cost_usd: float
 
@@ -112,6 +113,7 @@ class SessionSavingsReader:
                 continue
             tiers[bucket] = TierSavings(
                 model=doc.get(f"{bucket}_tier_model"),
+                backend=doc.get(f"{bucket}_tier_backend"),
                 cost_usd=cost,
                 anthropic_cost_usd=doc.get(f"{bucket}_tier_anthropic_cost", 0.0),
             )

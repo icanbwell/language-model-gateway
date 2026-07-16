@@ -167,8 +167,13 @@ follow-up work, not a code tweak here.
 3. `SessionSavingsRouter` → `SessionSavingsReader.get_session_savings` →
    `find_one` on `model-router-sessions` → typed response, or 404.
 4. The script formats the response into a single line, e.g.:
-   `💰 $0.42 saved (haiku $0.10 · sonnet $0.30 · opus $0.02)`
-   and writes it to stdout.
+   `💰 $0.42 saved (costs: Haiku(AWS) $0.10 · Sonnet(Anthropic) $0.30 · Opus(AWS) $0.02)`
+   and writes it to stdout. The `costs:` breakdown shows each tier's actual
+   spend and serving provider — deliberately labeled and formatted so it's
+   never mistaken for a breakdown of the leading `saved` total, which is a
+   savings figure (Anthropic list price minus actual cost), not a cost.
+   Provider comes from `{bucket}_tier_backend` in the session rollup; a tier
+   used before that field existed renders as `(?)` instead of guessing.
 
 ## Error handling
 

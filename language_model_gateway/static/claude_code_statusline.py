@@ -23,11 +23,17 @@ import urllib.request
 from typing import Any
 
 _TIMEOUT_SECONDS = 2.0
-_TIER_LABELS = {"low": "haiku", "medium": "sonnet", "high": "opus", "fable": "fable"}
+_TIER_LABELS = {"low": "Haiku", "medium": "Sonnet", "high": "Opus", "fable": "Fable"}
+_BACKEND_LABELS = {"anthropic": "Anthropic", "aws_bedrock": "AWS"}
 
 
 def format_savings_line(payload: dict[str, Any]) -> str | None:
     """Format the endpoint's JSON body into a one-line statusline message.
+
+    The parenthetical is a per-tier *cost* breakdown, not a savings
+    breakdown — it's labeled "costs:" and each tier shows its provider (or
+    "?" if the tier predates backend tracking) precisely so it's never
+    mistaken for a breakdown of the leading "saved" total.
 
     Returns None on any malformed field type (wrong type, missing field, etc.)
     rather than raising. This ensures the statusline never crashes Claude Code's UI.
@@ -38,13 +44,15 @@ def format_savings_line(payload: dict[str, Any]) -> str | None:
             return None
         tiers = payload.get("tiers") or {}
         tier_parts = [
-            f"{_TIER_LABELS.get(bucket, bucket)} ${tier['cost_usd']:.2f}"
+            f"{_TIER_LABELS.get(bucket, bucket)}"
+            f"({_BACKEND_LABELS.get(tier.get('backend', ''), '?')})"
+            f" ${tier['cost_usd']:.2f}"
             for bucket, tier in tiers.items()
             if isinstance(tier, dict) and "cost_usd" in tier
         ]
         line = f"\U0001f4b0 ${total_savings:.2f} saved"
         if tier_parts:
-            line += " (" + " · ".join(tier_parts) + ")"
+            line += " (costs: " + " · ".join(tier_parts) + ")"
         return line
     except (TypeError, ValueError, AttributeError, KeyError):
         return None

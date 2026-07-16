@@ -37,9 +37,11 @@ class TestSessionSavingsReaderGetSessionSavings:
             "total_savings_usd": 0.42,
             "total_tokens": 12345,
             "low_tier_model": "qwen-coder",
+            "low_tier_backend": "aws_bedrock",
             "low_tier_cost": 0.10,
             "low_tier_anthropic_cost": 0.30,
             "medium_tier_model": "claude-sonnet-5",
+            "medium_tier_backend": "anthropic",
             "medium_tier_cost": 0.30,
             "medium_tier_anthropic_cost": 0.50,
             "high_tier_model": "claude-opus-4-8",
@@ -58,8 +60,13 @@ class TestSessionSavingsReaderGetSessionSavings:
             assert result.total_tokens == 12345
             assert set(result.tiers.keys()) == {"low", "medium", "high"}
             assert result.tiers["low"].model == "qwen-coder"
+            assert result.tiers["low"].backend == "aws_bedrock"
             assert result.tiers["low"].cost_usd == 0.10
             assert result.tiers["low"].anthropic_cost_usd == 0.30
+            assert result.tiers["medium"].backend == "anthropic"
+            # high tier's backend was never recorded (older rollup, or a
+            # pre-fix session) — must be None, not a guessed/default value.
+            assert result.tiers["high"].backend is None
             reader._collection.find_one.assert_called_once_with(
                 {"session_id": "sess-1"}
             )
