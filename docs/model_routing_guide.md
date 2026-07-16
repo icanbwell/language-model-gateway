@@ -118,6 +118,19 @@ alias install-model-router="bash $HOME/model-router/install-model-router.sh"
 alias uninstall-model-router="bash $HOME/model-router/uninstall-model-router.sh"
 alias start-model-router="bash $HOME/model-router/start-model-router.sh"
 alias stop-model-router="bash $HOME/model-router/stop-model-router.sh"
+setup-model-router-statusline() {
+  local gateway_url="${MODEL_ROUTING_GATEWAY_URL:-http://localhost:5050}"
+  local script_path="$HOME/.claude/scripts/claude_code_statusline.py"
+  mkdir -p "$(dirname "$script_path")"
+  if ! curl -fsSL "$gateway_url/static/claude_code_statusline.py" -o "$script_path"; then
+    echo "[model-router] failed to download from $gateway_url -- is the gateway reachable?" >&2
+    return 1
+  fi
+  chmod +x "$script_path"
+  echo "[model-router] statusline script installed at $script_path" >&2
+  echo "[model-router] add this to ~/.claude/settings.json:" >&2
+  echo "  {\"statusLine\": {\"type\": \"command\", \"command\": \"python3 $script_path\"}}" >&2
+}
 # <<< claude model routing <<<
 ```
 
@@ -175,7 +188,17 @@ mechanism as the login/branding pages under `/static`).
 
 ### Setup
 
-1. **Download the script** from the gateway itself — no repo clone needed:
+1. **Download the script** from the gateway itself — no repo clone needed.
+   The [Shell Configuration](#shell-configuration-claude-router) snippet
+   above already includes a `setup-model-router-statusline` shell function
+   that does this for you and prints the exact `settings.json` snippet to
+   add (including the resolved absolute path):
+
+   ```bash
+   setup-model-router-statusline
+   ```
+
+   Or do it by hand if you'd rather see each step:
 
    ```bash
    mkdir -p ~/.claude/scripts
@@ -205,7 +228,9 @@ mechanism as the login/branding pages under `/static`).
    isn't set in this shell — see Troubleshooting below.
 
 3. **Add to `~/.claude/settings.json`, using an absolute path** (some shells
-   don't expand `~` in this context, so resolve it first):
+   don't expand `~` in this context, so resolve it first — skip this if you
+   used `setup-model-router-statusline`, which already printed the exact
+   snippet with the resolved path):
 
    ```bash
    realpath ~/.claude/scripts/claude_code_statusline.py
@@ -224,9 +249,9 @@ mechanism as the login/branding pages under `/static`).
    command is read at session start, so an already-running session won't
    pick up a `settings.json` change.
 
-To pick up a future update to the script, just re-run the `curl` command in
-step 1 — it always fetches whatever version is currently deployed on that
-gateway.
+To pick up a future update to the script, just re-run
+`setup-model-router-statusline` (or the manual `curl` command) — it always
+fetches whatever version is currently deployed on that gateway.
 
 ### Troubleshooting
 
