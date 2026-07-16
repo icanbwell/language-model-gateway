@@ -324,6 +324,67 @@ def test_atomic_tool_call_group_dropped_together() -> None:
 
 
 # ---------------------------------------------------------------------------
+# enforce_context_budget — conversation ends in a tool result, not a plain
+# user message (e.g. right after Read/Bash/AskUserQuestion, before the
+# client's next natural-language turn) — regression for the Bedrock
+# "conversation must start with a user message" bug.
+# ---------------------------------------------------------------------------
+
+
+def test_conversation_ending_in_tool_result_is_never_dropped_to_empty() -> None:
+    """When the trailing turn is a tool result (no plain user message to
+    protect via the old last-message check), group-dropping must not strip
+    every remaining group — every backend rejects a conversation that
+    doesn't start with a user turn once system is excluded."""
+    route = {
+        "backend_max_context_tokens": 10000,
+        "reserved_output_tokens": 2000,
+        "tokenizer_safety_margin": 1000,
+    }  # effective_input_tokens = 7000 -> ~24500 chars at 3.5 chars/token
+    messages = [
+        _msg("system", "sys"),
+        _msg("user", "write me a story " + "x" * 40000),  # forces over budget
+        *_tool_call_group("tc1", "genre: Sci-Fi, length: Short"),
+    ]
+    body = _body(messages)
+    with _mock_count(None):  # char-estimate fallback, no mocked call sequence
+        result = enforce_context_budget(body, route, FAKE_MODEL)
+
+    non_system_roles = [m["role"] for m in result["messages"] if m["role"] != "system"]
+    assert non_system_roles, "must not drop every non-system message"
+    assert non_system_roles[0] == "user"
+
+
+def test_drops_stop_at_last_group_starting_with_user() -> None:
+    """Group-dropping may remove an oldest user-starting group, but must
+    never cut past the last group that starts with role=="user" — otherwise
+    the surviving conversation would start with the trailing assistant+tool
+    group instead."""
+    route = {
+        "backend_max_context_tokens": 10000,
+        "reserved_output_tokens": 2000,
+        "tokenizer_safety_margin": 1000,
+    }  # effective_input_tokens = 7000 -> ~24500 chars at 3.5 chars/token
+    messages = [
+        _msg("system", "sys"),
+        _msg("user", "oldest question " + "x" * 40000),  # droppable; over budget alone
+        _msg("user", "recent question"),  # last valid cut point — must survive
+        *_tool_call_group("tc1", "recent tool result"),
+    ]
+    body = _body(messages)
+    with _mock_count(None):
+        result = enforce_context_budget(body, route, FAKE_MODEL)
+
+    contents = [m.get("content") for m in result["messages"]]
+    assert not any(
+        isinstance(c, str) and c.startswith("oldest question") for c in contents
+    )
+    assert "recent question" in contents
+    non_system_roles = [m["role"] for m in result["messages"] if m["role"] != "system"]
+    assert non_system_roles[0] == "user"
+
+
+# ---------------------------------------------------------------------------
 # enforce_context_budget — stack trace tail preservation (req 9)
 # ---------------------------------------------------------------------------
 
