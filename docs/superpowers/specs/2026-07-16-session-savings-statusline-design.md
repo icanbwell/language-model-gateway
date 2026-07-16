@@ -12,7 +12,7 @@ whatever the command writes to stdout as the status line.
 This gateway (`language_model_gateway/gateway/routers/model_routing/`) already
 computes the equivalent number for its own routing decisions.
 `usage_tracker.py`'s `_upsert_session_usage` upserts a per-session rollup
-document into the `usage_sessions` collection on every request, keyed by
+document into the `model-router-sessions` collection on every request, keyed by
 `session_id`, accumulating `total_savings_usd` (Anthropic list price minus
 whatever this gateway's routing — Bedrock, Qwen, etc. — actually cost) and a
 `{tier}_tier_cost` / `{tier}_tier_anthropic_cost` pair per tier bucket
@@ -24,7 +24,7 @@ own built-in `cost` object in the statusline payload is priced off whatever
 model id it thinks it called — it has no visibility into this gateway silently
 swapping in a cheaper backend, so it cannot show this number itself.
 
-There is currently no HTTP endpoint that reads `usage_sessions` back out —
+There is currently no HTTP endpoint that reads `model-router-sessions` back out —
 `usage_tracker.py` only ever writes to it. A local statusline script cannot
 reach MongoDB directly either: `docker-compose.yml` only exposes `mongo` on
 the compose network, not to the host.
@@ -65,7 +65,7 @@ One method:
 
 ```python
 async def get_session_savings(self, session_id: str) -> SessionSavings | None:
-    """find_one({"session_id": session_id}) against usage_sessions, mapped
+    """find_one({"session_id": session_id}) against model-router-sessions, mapped
     into a typed SessionSavings — None if the session has no rollup yet
     (e.g. its first request is still in flight, or the id is unknown)."""
 ```
@@ -150,11 +150,11 @@ here for a follow-up ticket, not fixed as part of this work.
 
 1. Claude Code renders its footer → invokes the configured `statusLine`
    command → pipes its stdin JSON payload (including `session_id`) to it.
-2. The script extracts `session_id`, `curl`s
-   `GET {gateway_url}/v1/model-routing/sessions/{session_id}/savings` with a
-   short timeout (~1-2s).
+2. The script extracts `session_id`, calls
+   `GET {gateway_url}/v1/model-routing/sessions/{session_id}/savings` via
+   `urllib.request.urlopen()` with a short timeout (~1-2s).
 3. `SessionSavingsRouter` → `SessionSavingsReader.get_session_savings` →
-   `find_one` on `usage_sessions` → typed response, or 404.
+   `find_one` on `model-router-sessions` → typed response, or 404.
 4. The script formats the response into a single line, e.g.:
    `💰 $0.42 saved (haiku $0.10 · sonnet $0.30 · opus $0.02)`
    and writes it to stdout.
@@ -165,10 +165,10 @@ here for a follow-up ticket, not fixed as part of this work.
   id): 404 from the endpoint; the script prints nothing (empty statusline
   segment) rather than an error string, since this is a normal transient
   state at the start of a session, not a fault.
-- **Gateway unreachable / slow**: the script's `curl` timeout must be short
-  enough that a down or slow gateway never visibly stalls Claude Code's UI —
-  any curl failure (nonzero exit, timeout) is swallowed the same as the
-  404 case.
+- **Gateway unreachable / slow**: the script's `urllib.request.urlopen()`
+  call must use a short timeout so a down or slow gateway never visibly
+  stalls Claude Code's UI — any urllib error (URLError, timeout) is
+  swallowed the same as the 404 case.
 - **Malformed/unexpected response body**: the script treats anything that
   doesn't parse as JSON with the expected fields the same as "no data" —
   fails silent, never prints a raw error blob into the footer.
@@ -186,7 +186,7 @@ here for a follow-up ticket, not fixed as part of this work.
 - `SessionSavingsRouter` contract test: 200 shape matches
   `SessionSavingsResponse`, 404 shape when the reader returns `None`.
 - Statusline script: a scripted test (or documented manual check) covering
-  the curl-timeout and non-200/malformed-response paths print nothing rather
+  the urllib-timeout and non-200/malformed-response paths print nothing rather
   than erroring or hanging.
 
 ## Deliverables

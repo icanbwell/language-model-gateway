@@ -4,7 +4,7 @@
 
 **Goal:** Show a Claude Code statusline message with this session's model-routing cost savings (total $ saved vs. Anthropic list price, plus a per-tier breakdown), fed by a new read-only gateway endpoint.
 
-**Architecture:** A new `SessionSavingsReader` reads the `usage_sessions` rollup collection that `usage_tracker.py` already maintains per `session_id`. A new `SessionSavingsRouter` exposes it at `GET /v1/model-routing/sessions/{session_id}/savings`, mounted in `api.py` alongside the existing `CodingModelRouter`. A small Python statusline script (no new dependencies) reads Claude Code's stdin payload, calls that endpoint, and prints a formatted line.
+**Architecture:** A new `SessionSavingsReader` reads the `model-router-sessions` rollup collection that `usage_tracker.py` already maintains per `session_id`. A new `SessionSavingsRouter` exposes it at `GET /v1/model-routing/sessions/{session_id}/savings`, mounted in `api.py` alongside the existing `CodingModelRouter`. A small Python statusline script (no new dependencies) reads Claude Code's stdin payload, calls that endpoint, and prints a formatted line.
 
 **Tech Stack:** FastAPI, Pydantic, `pymongo` (`AsyncMongoClient`, already a dependency), Python stdlib `urllib.request` for the statusline script (deliberately no `requests`/`httpx` dependency for the script, since it must be runnable standalone on a developer's machine with only stdlib).
 
@@ -25,7 +25,7 @@
 - Test: `tests/gateway/routers/model_routing/test_session_savings_reader.py`
 
 **Interfaces:**
-- Produces: `TierSavings` (Pydantic model: `model: str | None`, `cost_usd: float`, `anthropic_cost_usd: float`), `SessionSavings` (Pydantic model: `session_id: str`, `total_savings_usd: float`, `total_tokens: int`, `tiers: dict[str, TierSavings]`), `SessionSavingsReader` with constructor `(mongo_uri: str, db_name: str = "llm_storage", collection_name: str = "usage_sessions", enabled: bool = True)` and `async def get_session_savings(self, session_id: str) -> SessionSavings | None`.
+- Produces: `TierSavings` (Pydantic model: `model: str | None`, `cost_usd: float`, `anthropic_cost_usd: float`), `SessionSavings` (Pydantic model: `session_id: str`, `total_savings_usd: float`, `total_tokens: int`, `tiers: dict[str, TierSavings]`), `SessionSavingsReader` with constructor `(mongo_uri: str, db_name: str = "llm_storage", collection_name: str = "model-router-sessions", enabled: bool = True)` and `async def get_session_savings(self, session_id: str) -> SessionSavings | None`.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -50,7 +50,7 @@ class TestSessionSavingsReaderInitialization:
         reader = SessionSavingsReader(mongo_uri="mongodb://localhost:27017")
         assert reader._mongo_uri == "mongodb://localhost:27017"
         assert reader._db_name == "llm_storage"
-        assert reader._collection_name == "usage_sessions"
+        assert reader._collection_name == "model-router-sessions"
         assert reader._enabled is True
 
     def test_init_disabled_does_not_connect(self) -> None:
@@ -177,7 +177,7 @@ Create `language_model_gateway/gateway/routers/model_routing/session_savings_rea
 """Read-only access to the per-session usage rollup for model routing.
 
 Mirrors account_directory.py's connect-lazily/disable-on-failure pattern,
-but reads usage_tracker.py's `usage_sessions` rollup collection instead of
+but reads usage_tracker.py's `model-router-sessions` rollup collection instead of
 the account directory. Deliberately kept separate from `UsageTracker` (which
 only ever writes) so a read-only consumer never depends on an interface
 that also exposes insert/upsert methods.
@@ -211,13 +211,13 @@ class SessionSavings(BaseModel):
 
 
 class SessionSavingsReader:
-    """Read-only reader for the usage_sessions rollup collection."""
+    """Read-only reader for the model-router-sessions rollup collection."""
 
     def __init__(
         self,
         mongo_uri: str,
         db_name: str = "llm_storage",
-        collection_name: str = "usage_sessions",
+        collection_name: str = "model-router-sessions",
         enabled: bool = True,
     ) -> None:
         self._mongo_uri = mongo_uri
@@ -328,7 +328,7 @@ git commit -m "Add SessionSavingsReader for model-routing session cost rollups"
 
 **Interfaces:**
 - Consumes: `SessionSavings`, `SessionSavingsReader` from Task 1 (`language_model_gateway.gateway.routers.model_routing.session_savings_reader`).
-- Produces: `SessionSavingsRouter` with constructor `(*, prefix: str = "/v1/model-routing", tags: list[str | Enum] | None = None, dependencies: Sequence[params.Depends] | None = None, mongo_uri: str | None = None, db_name: str = "llm_storage", collection_name: str = "usage_sessions")` and `get_router() -> APIRouter`, registering `GET {prefix}/sessions/{session_id}/savings`.
+- Produces: `SessionSavingsRouter` with constructor `(*, prefix: str = "/v1/model-routing", tags: list[str | Enum] | None = None, dependencies: Sequence[params.Depends] | None = None, mongo_uri: str | None = None, db_name: str = "llm_storage", collection_name: str = "model-router-sessions")` and `get_router() -> APIRouter`, registering `GET {prefix}/sessions/{session_id}/savings`.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -470,7 +470,7 @@ class SessionSavingsRouter:
         dependencies: Sequence[params.Depends] | None = None,
         mongo_uri: str | None = None,
         db_name: str = "llm_storage",
-        collection_name: str = "usage_sessions",
+        collection_name: str = "model-router-sessions",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,

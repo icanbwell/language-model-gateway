@@ -1,10 +1,10 @@
 """Read-only access to the per-session usage rollup for model routing.
 
 Mirrors account_directory.py's connect-lazily/disable-on-failure pattern,
-but reads usage_tracker.py's `usage_sessions` rollup collection instead of
-the account directory. Deliberately kept separate from `UsageTracker` (which
-only ever writes) so a read-only consumer never depends on an interface
-that also exposes insert/upsert methods.
+but reads usage_tracker.py's `model-router-sessions` rollup collection
+instead of the account directory. Deliberately kept separate from
+`UsageTracker` (which only ever writes) so a read-only consumer never
+depends on an interface that also exposes insert/upsert methods.
 """
 
 from __future__ import annotations
@@ -35,13 +35,13 @@ class SessionSavings(BaseModel):
 
 
 class SessionSavingsReader:
-    """Read-only reader for the usage_sessions rollup collection."""
+    """Read-only reader for the model-router-sessions rollup collection."""
 
     def __init__(
         self,
         mongo_uri: str,
         db_name: str = "llm_storage",
-        collection_name: str = "usage_sessions",
+        collection_name: str = "model-router-sessions",
         enabled: bool = True,
     ) -> None:
         self._mongo_uri = mongo_uri

@@ -16,7 +16,7 @@ class TestSessionSavingsReaderInitialization:
         reader = SessionSavingsReader(mongo_uri="mongodb://localhost:27017")
         assert reader._mongo_uri == "mongodb://localhost:27017"
         assert reader._db_name == "llm_storage"
-        assert reader._collection_name == "usage_sessions"
+        assert reader._collection_name == "model-router-sessions"
         assert reader._enabled is True
 
     def test_init_disabled_does_not_connect(self) -> None:

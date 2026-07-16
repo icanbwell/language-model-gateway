@@ -37,7 +37,7 @@ class SessionSavingsRouter:
         dependencies: Sequence[params.Depends] | None = None,
         mongo_uri: str | None = None,
         db_name: str = "llm_storage",
-        collection_name: str = "usage_sessions",
+        collection_name: str = "model-router-sessions",
     ) -> None:
         self.router = APIRouter(
             prefix=prefix,
