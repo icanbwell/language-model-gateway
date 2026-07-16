@@ -27,20 +27,27 @@ _TIER_LABELS = {"low": "haiku", "medium": "sonnet", "high": "opus", "fable": "fa
 
 
 def format_savings_line(payload: dict[str, Any]) -> str | None:
-    """Format the endpoint's JSON body into a one-line statusline message."""
-    total_savings = payload.get("total_savings_usd")
-    if total_savings is None:
+    """Format the endpoint's JSON body into a one-line statusline message.
+
+    Returns None on any malformed field type (wrong type, missing field, etc.)
+    rather than raising. This ensures the statusline never crashes Claude Code's UI.
+    """
+    try:
+        total_savings = payload.get("total_savings_usd")
+        if total_savings is None:
+            return None
+        tiers = payload.get("tiers") or {}
+        tier_parts = [
+            f"{_TIER_LABELS.get(bucket, bucket)} ${tier['cost_usd']:.2f}"
+            for bucket, tier in tiers.items()
+            if isinstance(tier, dict) and "cost_usd" in tier
+        ]
+        line = f"\U0001f4b0 ${total_savings:.2f} saved"
+        if tier_parts:
+            line += " (" + " · ".join(tier_parts) + ")"
+        return line
+    except (TypeError, ValueError, AttributeError, KeyError):
         return None
-    tiers = payload.get("tiers") or {}
-    tier_parts = [
-        f"{_TIER_LABELS.get(bucket, bucket)} ${tier['cost_usd']:.2f}"
-        for bucket, tier in tiers.items()
-        if isinstance(tier, dict) and "cost_usd" in tier
-    ]
-    line = f"\U0001f4b0 ${total_savings:.2f} saved"
-    if tier_parts:
-        line += " (" + " · ".join(tier_parts) + ")"
-    return line
 
 
 def fetch_savings(gateway_url: str, session_id: str) -> dict[str, Any] | None:

@@ -48,6 +48,27 @@ class TestFormatSavingsLine:
     def test_returns_none_when_total_missing(self) -> None:
         assert statusline.format_savings_line({}) is None
 
+    def test_returns_none_when_total_savings_is_string(self) -> None:
+        """Malformed field type: total_savings_usd is a string instead of number."""
+        payload = {"total_savings_usd": "not-a-number", "tiers": {}}
+        assert statusline.format_savings_line(payload) is None
+
+    def test_returns_none_when_tier_cost_is_string(self) -> None:
+        """Malformed field type: cost_usd within a tier is a string instead of number."""
+        payload = {
+            "total_savings_usd": 0.42,
+            "tiers": {
+                "low": {"cost_usd": "nope"},
+                "medium": {"cost_usd": 0.30},
+            },
+        }
+        assert statusline.format_savings_line(payload) is None
+
+    def test_returns_none_when_tiers_is_not_dict(self) -> None:
+        """Malformed field type: tiers is a non-dict value (e.g., string)."""
+        payload = {"total_savings_usd": 0.42, "tiers": "not-a-dict"}
+        assert statusline.format_savings_line(payload) is None
+
 
 class TestFetchSavings:
     def test_returns_none_on_url_error(self) -> None:
