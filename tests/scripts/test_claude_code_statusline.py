@@ -116,6 +116,15 @@ class TestMain:
             statusline.main()
         assert capsys.readouterr().out == ""
 
+    @pytest.mark.parametrize("stdin_value", [None, [], "sess-1", 42])
+    def test_prints_nothing_when_stdin_is_valid_json_but_not_an_object(
+        self, capsys: pytest.CaptureFixture[str], stdin_value: object
+    ) -> None:
+        """Valid JSON that isn't a dict (null, list, string, number) must not crash main()."""
+        with patch.object(sys, "stdin", io.StringIO(json.dumps(stdin_value))):
+            statusline.main()
+        assert capsys.readouterr().out == ""
+
     def test_prints_nothing_when_gateway_url_unset(
         self, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
     ) -> None:

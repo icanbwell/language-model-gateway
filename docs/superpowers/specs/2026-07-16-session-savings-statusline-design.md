@@ -133,18 +133,29 @@ baseline be a documented, reasoned decision rather than an implicit one. If
 EA review disagrees with treating this as "not an auth flow" rather than "a
 custom auth scheme," this needs a Tech Design Review before shipping.
 
-### Related fix (already applied, not part of this feature)
+This exception is tracked in **BAI-320** (owner: Imran Qureshi, review by
+2026-10-16), per CLAUDE.md's requirement that baseline exceptions have a
+documented rationale, scope, owner, JIRA ticket, and expiry — not just this
+design doc.
+
+### Related fix (fixed as part of PR review, not the savings feature itself)
 
 While confirming the deployment model for this design, it came out that this
 router is a **shared multi-tenant** ingress — contradicting a docstring in
 `router.py`'s `_get_auth_info` (and the matching paragraph in
-`docs/coding_model_router.md`) that justified the spoofable custom-header
+`docs/coding_model_router.md`) that had justified the spoofable custom-header
 `user_id` fallback as safe because the router was "deployed per-user/local."
-Both docs have been corrected in place to flag this as a known gap: on a
-shared deployment, that fallback currently lets any caller attribute their
-usage cost to another user's `user_id`. This is a pre-existing billing/cost
-attribution integrity issue, independent of the savings feature — flagged
-here for a follow-up ticket, not fixed as part of this work.
+On a shared deployment, that fallback let any caller attribute their usage
+cost to another user's `user_id` — a pre-existing billing/cost attribution
+integrity issue, independent of the savings feature. Rather than leave this
+as a follow-up ticket, the fallback has been removed entirely in
+`_get_auth_info`: `user_id` attribution now happens only via a verified OIDC
+token, and any caller without one is recorded with no `user_id` instead of a
+spoofable one. This trades away attribution for non-OIDC callers (which was
+every current Claude Code caller, since it has no OIDC credential to send)
+in exchange for closing the spoofing vector — restoring attribution for
+those callers requires a real, per-user verifiable credential, which is
+follow-up work, not a code tweak here.
 
 ## Data flow
 

@@ -4,6 +4,9 @@ Deliberately unauthenticated (session_id-as-capability) — see
 docs/superpowers/specs/2026-07-16-session-savings-statusline-design.md
 ("Security posture") for the reasoning. Returns only an aggregate cost
 figure — no prompt/response content, no PHI, no email/account identity.
+
+This is a tracked CLAUDE.md baseline exception, not a silent gap — see
+BAI-320 for owner/scope/expiry.
 """
 
 from __future__ import annotations

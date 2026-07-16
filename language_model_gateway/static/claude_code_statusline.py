@@ -68,6 +68,8 @@ def main() -> None:
         stdin_payload = json.loads(sys.stdin.read())
     except (json.JSONDecodeError, ValueError):
         return
+    if not isinstance(stdin_payload, dict):
+        return
     session_id = stdin_payload.get("session_id")
     if not session_id:
         return

@@ -264,13 +264,14 @@ fetches whatever version is currently deployed on that gateway.
   step 2 directly in a terminal, in the *same* shell you'd launch
   `claude-router` from — running it directly like that prints its own
   errors, unlike inside Claude Code's statusline. A common cause is
-  `MODEL_ROUTING_GATEWAY_URL` not being set in that shell — confirm with
-  `echo $MODEL_ROUTING_GATEWAY_URL` after running `claude-router` (it's set
-  inside that function, not globally, so it's only present in a shell where
-  you've invoked it at least once — check by running `claude-router` and
-  then `echo` from a **second** terminal tab in the same session, or add
-  `env | grep MODEL_ROUTING_GATEWAY_URL` right before the `claude "$@"` line
-  temporarily).
+  `MODEL_ROUTING_GATEWAY_URL` not being set where the statusline script
+  runs. Note that `claude-router` only sets it inside the one-shot `env
+  ... claude "$@"` subprocess environment — it is never exported to your
+  interactive shell, so `echo $MODEL_ROUTING_GATEWAY_URL` in that shell (or
+  in a second terminal tab) will always come back empty even when
+  everything is working correctly. To actually confirm it's being set,
+  temporarily add `env | grep MODEL_ROUTING_GATEWAY_URL` right before the
+  `claude "$@"` line inside the `claude-router` function and re-run it.
 - **`curl` in step 1 fails or downloads an HTML error page instead of the
   script:** confirm `MODEL_ROUTING_GATEWAY_URL` actually points at a running
   gateway (`curl -fsSL "$MODEL_ROUTING_GATEWAY_URL/api/v1/models"` should
@@ -286,4 +287,4 @@ fetches whatever version is currently deployed on that gateway.
 - The router is **wire-compatible** - clients send exactly the same format as they would to `api.anthropic.com`
 - No client-side changes required - just set `ANTHROPIC_BASE_URL` to point at the gateway
 - Route config is loaded once at module import time; restart containers or call `_reload_routes()` for changes
-- Usage attribution requires either valid OIDC token or custom headers (`X-Model-Routing-User-Id`, `X-Model-Routing-Client-Type`)
+- Usage attribution (`user_id`/`email`/`user_name`) requires a valid, signature-verified OIDC token on `Authorization` — caller-supplied headers (e.g. `X-Model-Routing-User-Id`) are never trusted for attribution since they're trivially spoofable on this shared, multi-tenant router; see [Attribution](coding_model_router.md#attribution)

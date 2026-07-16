@@ -1444,33 +1444,26 @@ class CodingModelRouter:
         upstream Anthropic/Bedrock credential (forwarded as-is — see class
         docstring), not necessarily a b.well-issued OIDC token, so it cannot
         be used to gate the proxy call itself. It CAN be used to decide
-        whether user-identification headers (`x-openwebui-user-id` etc.) are
-        trustworthy for usage-tracking attribution: those headers are fully
-        caller-controlled and otherwise trivially spoofable (IDOR), so they
-        are only honored when `Authorization` verifies as a genuine,
-        signature-checked OIDC token. Otherwise usage is recorded with no
-        user_id rather than a spoofable one — this never blocks the proxy
-        call itself.
+        whether to attribute usage/cost to a user_id: attribution only
+        happens when `Authorization` verifies as a genuine, signature-checked
+        OIDC token. Otherwise usage is recorded with no user_id rather than a
+        caller-asserted one — this never blocks the proxy call itself.
 
         Every header under `{custom_header_prefix}` is captured into
         auth_info["custom_headers"] (keyed by the suffix after the prefix)
-        unconditionally — this is a deliberately open-ended channel so new
-        client-supplied attribution fields (e.g. from Claude Code's
-        ANTHROPIC_CUSTOM_HEADERS) can be added later without a code change
-        here. `{custom_header_prefix}user-id` additionally gets pulled out
-        as auth_info["user_id"] as a best-effort, self-asserted fallback when
-        there's no verified identity — recorded with auth_provider="custom-
-        header" so it's never confused with OIDC-verified identity
-        downstream. This is exactly as spoofable as the OIDC-gated headers
-        above (any caller can set it).
-
-        KNOWN GAP: this router is deployed as a shared multi-tenant
-        ingress, not per-user/local — the assumption that previously
-        justified accepting this fallback unverified no longer holds. Any
-        caller can currently attribute usage/cost to another user's
-        identity via this header. Re-gate this behind verification (or
-        drop the fallback) before relying on it for anything
-        billing-sensitive.
+        unconditionally — this is a deliberately open-ended channel for
+        non-identity, caller-supplied metadata (e.g. `{custom_header_prefix}
+        project`). It is informational only and is never used for identity
+        attribution: this router is deployed as a shared multi-tenant
+        ingress, so any caller-controlled header (including
+        `{custom_header_prefix}user-id`) is trivially spoofable (IDOR) and
+        must not be trusted as a substitute for a verified identity.
+        Formerly, `{custom_header_prefix}user-id` was pulled out as a
+        self-asserted `user_id` fallback when there was no verified
+        identity — that fallback has been removed because it let any caller
+        attribute usage/cost to another user's identity. Re-introducing
+        user_id attribution for non-OIDC callers requires a real, verifiable
+        per-user credential (a b.well-issued OIDC token), not a bare header.
         """
         auth_info: dict[str, Any] = {}
 
@@ -1518,13 +1511,9 @@ class CodingModelRouter:
                     verified_user_name = token_item.name
 
         if verified_subject is None:
-            # No verified identity — do not trust the OIDC-gated headers for
-            # attribution, but do accept the operator-configured custom
-            # header fallback (see docstring). The proxy call proceeds
-            # regardless; only attribution is affected.
-            if header_user_id := custom_headers.get("user-id"):
-                auth_info["user_id"] = header_user_id
-                auth_info["auth_provider"] = "custom-header"
+            # No verified identity — attribution is skipped entirely rather
+            # than trusting a caller-asserted header (see docstring). The
+            # proxy call proceeds regardless; only attribution is affected.
             return auth_info
 
         auth_info["user_id"] = verified_subject

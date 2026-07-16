@@ -544,29 +544,22 @@ session rollup independently of per-request tracking.
 
 The client's `Authorization` header on this router is the upstream
 Anthropic/Bedrock credential, not necessarily a b.well-issued OIDC token, so
-it can't gate the proxy call itself. `user_id` is populated by the first of
-these that applies, in order:
+it can't gate the proxy call itself. `user_id` is populated only by:
 
 1. **OIDC-verified token.** If `Authorization` verifies as a genuine,
    signature-checked JWT via the configured `TokenReader`, `user_id`/`email`/
    `user_name` come from the token's claims, and `auth_provider` is set from
-   the `x-auth-provider` header. This is the only path that also sets `email`
-   and `user_name`.
-2. **Custom-header fallback.** If there's no verified identity,
-   `{MODEL_ROUTING_CUSTOM_HEADER_PREFIX}user-id` (e.g. Claude Code's
-   `ANTHROPIC_CUSTOM_HEADERS` set to `X-Model-Routing-User-Id: ...`) is used
-   as-is for `user_id`, with `auth_provider` set to the literal string
-   `"custom-header"`. This is exactly as spoofable as any other
-   caller-controlled header. **KNOWN GAP:** this router is currently
-   deployed as a shared multi-tenant ingress, not per-user/local, so this
-   fallback's original trust assumption no longer holds — any caller can
-   currently attribute usage/cost to another user's identity via this
-   header. Re-gate this behind verification (or drop the fallback) before
-   relying on it for anything billing-sensitive.
-3. **No match.** `user_id` is omitted entirely. Caller-supplied identity
-   headers outside the configured custom-header prefix (e.g.
-   `x-openwebui-user-id`) are never trusted for attribution — they're
-   trivially spoofable by the caller (IDOR).
+   the `x-auth-provider` header. This is the only path that sets `user_id`,
+   `email`, and `user_name`.
+2. **No match.** Otherwise `user_id` is omitted entirely — usage is still
+   recorded, just without attribution. This router is deployed as a shared
+   multi-tenant ingress, so no caller-controlled header (including
+   `{MODEL_ROUTING_CUSTOM_HEADER_PREFIX}user-id`, e.g. Claude Code's
+   `ANTHROPIC_CUSTOM_HEADERS` set to `X-Model-Routing-User-Id: ...`, or
+   `x-openwebui-user-id`) is trusted for attribution — they're trivially
+   spoofable by the caller (IDOR). Restoring attribution for non-OIDC
+   callers requires a real, per-user verifiable credential, not a bare
+   header.
 
 ### Account directory (manual, not live)
 

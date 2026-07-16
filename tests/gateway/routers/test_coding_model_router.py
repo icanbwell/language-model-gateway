@@ -488,20 +488,21 @@ async def test_get_auth_info_valid_token_uses_verified_identity_not_headers() ->
 
 
 @pytest.mark.asyncio
-async def test_get_auth_info_falls_back_to_custom_header_when_unverified() -> None:
-    """With no verified identity, the operator-configured custom header wins."""
+async def test_get_auth_info_ignores_custom_header_when_unverified() -> None:
+    """With no verified identity, the caller-asserted custom header must
+    never be trusted for attribution — it's trivially spoofable (IDOR)."""
     router = CodingModelRouter(custom_header_prefix="x-bwell-")
     request = _make_request({"x-bwell-user-id": "imran.qureshi@bwell.com"})
 
     auth_info = await router._get_auth_info(request)
 
-    assert auth_info["user_id"] == "imran.qureshi@bwell.com"
-    assert auth_info["auth_provider"] == "custom-header"
+    assert "user_id" not in auth_info
+    assert "auth_provider" not in auth_info
 
 
 @pytest.mark.asyncio
 async def test_get_auth_info_verified_identity_wins_over_custom_header() -> None:
-    """A verified OIDC identity still takes precedence over the custom header."""
+    """A verified OIDC identity is used; the custom header is never trusted."""
     verified_token = MagicMock()
     verified_token.subject = "verified-user-123"
     verified_token.email = None
