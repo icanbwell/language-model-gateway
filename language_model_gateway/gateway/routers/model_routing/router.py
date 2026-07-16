@@ -1462,11 +1462,15 @@ class CodingModelRouter:
         there's no verified identity — recorded with auth_provider="custom-
         header" so it's never confused with OIDC-verified identity
         downstream. This is exactly as spoofable as the OIDC-gated headers
-        above (any caller can set it); it's accepted anyway because this
-        router is deployed per-user/local rather than as a shared
-        multi-tenant ingress — there's no other caller who could spoof it
-        against this instance. Re-gate this behind verification before
-        deploying to a shared environment.
+        above (any caller can set it).
+
+        KNOWN GAP: this router is deployed as a shared multi-tenant
+        ingress, not per-user/local — the assumption that previously
+        justified accepting this fallback unverified no longer holds. Any
+        caller can currently attribute usage/cost to another user's
+        identity via this header. Re-gate this behind verification (or
+        drop the fallback) before relying on it for anything
+        billing-sensitive.
         """
         auth_info: dict[str, Any] = {}
 

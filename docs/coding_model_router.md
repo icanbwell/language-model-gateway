@@ -557,10 +557,12 @@ these that applies, in order:
    `ANTHROPIC_CUSTOM_HEADERS` set to `X-Model-Routing-User-Id: ...`) is used
    as-is for `user_id`, with `auth_provider` set to the literal string
    `"custom-header"`. This is exactly as spoofable as any other
-   caller-controlled header — it's accepted because this router is deployed
-   per-user/local rather than as a shared multi-tenant ingress. **Do not**
-   enable this fallback's trust model on a shared deployment without
-   re-gating it behind verification.
+   caller-controlled header. **KNOWN GAP:** this router is currently
+   deployed as a shared multi-tenant ingress, not per-user/local, so this
+   fallback's original trust assumption no longer holds — any caller can
+   currently attribute usage/cost to another user's identity via this
+   header. Re-gate this behind verification (or drop the fallback) before
+   relying on it for anything billing-sensitive.
 3. **No match.** `user_id` is omitted entirely. Caller-supplied identity
    headers outside the configured custom-header prefix (e.g.
    `x-openwebui-user-id`) are never trusted for attribution — they're
