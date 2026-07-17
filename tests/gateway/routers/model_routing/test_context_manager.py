@@ -446,21 +446,68 @@ def test_truncation_marker_visible_in_compressed_result() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_output_budget_cap_does_not_zero_out_safe_value() -> None:
-    """When context is severely exceeded, safe should be floored at 1024 not 0."""
+def test_output_budget_cap_never_exceeds_hard_backend_limit() -> None:
+    """
+    Reproduces the production incident: after Phase 2 group-dropping stops at
+    the last group that must start with role=="user" (BAI-321), the remaining
+    input can still be within a few hundred tokens of the hard backend limit.
+    The old unconditional `max(1024, ...)` floor forced max_tokens=1024 anyway,
+    so input(261121) + output(1024) = 262145 > backend_max(262144) -- exactly
+    the Bedrock "ValidationException: maximum context length" error reported.
+
+    The floor must never push (input + output) past backend_max_context_tokens.
+    """
     from language_model_gateway.gateway.routers.model_routing.context_manager import (
         _apply_output_budget_cap,
     )
 
-    # In this scenario, token_count is very high, so:
-    # safe = max(1024, backend_max - token_count - 2*safety_margin)
-    #      = max(1024, 10000 - 20000 - 1000) = max(1024, -11000) = 1024
+    oai_body = {"max_tokens": 4096}
+    budget = ContextBudget(
+        backend_max_context_tokens=262144,
+        reserved_output_tokens=16384,
+        tokenizer_safety_margin=6000,
+    )
+    token_count = 261121  # leaves only 1023 tokens of hard headroom, not 1024
+
+    result = _apply_output_budget_cap(oai_body, token_count, budget)
+
+    assert token_count + result["max_tokens"] <= budget.backend_max_context_tokens
+
+
+def test_output_budget_cap_does_not_zero_out_safe_value() -> None:
+    """When there's still real headroom, safe should be floored at 1024, not 0."""
+    from language_model_gateway.gateway.routers.model_routing.context_manager import (
+        _apply_output_budget_cap,
+    )
+
+    # backend_max - token_count - 2*safety_margin = 10000 - 5000 - 1000 = 4000
+    # comfortably above the 1024 floor, so the floor doesn't even kick in here.
     oai_body = {"max_tokens": 5000}
     budget = ContextBudget(
         backend_max_context_tokens=10000,
         reserved_output_tokens=1000,
         tokenizer_safety_margin=500,
     )
-    # Simulate severe context overflow
+    result = _apply_output_budget_cap(oai_body, 5000, budget)
+    assert result["max_tokens"] == 4000
+
+
+def test_output_budget_cap_clamps_to_hard_headroom_when_severely_exceeded() -> None:
+    """
+    When input alone already meets or exceeds the hard backend limit, there is
+    no valid max_tokens that avoids overflow -- the cap must not silently claim
+    otherwise by forcing a 1024-token floor. It clamps down to the minimal
+    viable value instead of guaranteeing a doomed request.
+    """
+    from language_model_gateway.gateway.routers.model_routing.context_manager import (
+        _apply_output_budget_cap,
+    )
+
+    oai_body = {"max_tokens": 5000}
+    budget = ContextBudget(
+        backend_max_context_tokens=10000,
+        reserved_output_tokens=1000,
+        tokenizer_safety_margin=500,
+    )
     result = _apply_output_budget_cap(oai_body, 20000, budget)
-    assert result["max_tokens"] == 1024
+    assert result["max_tokens"] == 1
