@@ -273,18 +273,29 @@ def _apply_output_budget_cap(
         - 2 * budget.tokenizer_safety_margin,
     )
     hard_headroom = budget.backend_max_context_tokens - token_count
-    if safe > hard_headroom:
+    clamped_to_hard_headroom = safe > hard_headroom
+    if clamped_to_hard_headroom:
         safe = max(1, hard_headroom)
     if current > safe:
-        logger.info(
-            "[coding-model-router] output cap after compression: %d → %d "
-            "(backend=%d - tokens=%d - 2×margin=%d)",
-            current,
-            safe,
-            budget.backend_max_context_tokens,
-            token_count,
-            budget.tokenizer_safety_margin,
-        )
+        if clamped_to_hard_headroom:
+            logger.info(
+                "[coding-model-router] output cap after compression: %d → %d "
+                "(hard_headroom: backend=%d - tokens=%d)",
+                current,
+                safe,
+                budget.backend_max_context_tokens,
+                token_count,
+            )
+        else:
+            logger.info(
+                "[coding-model-router] output cap after compression: %d → %d "
+                "(backend=%d - tokens=%d - 2×margin=%d)",
+                current,
+                safe,
+                budget.backend_max_context_tokens,
+                token_count,
+                budget.tokenizer_safety_margin,
+            )
         return {**oai_body, "max_tokens": safe}
     return oai_body
 
