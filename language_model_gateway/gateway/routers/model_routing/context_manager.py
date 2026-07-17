@@ -254,6 +254,14 @@ def _apply_output_budget_cap(
     input compression budget). This protects against the char-estimate being lower
     than the actual token count: if the estimate is off by up to one safety_margin,
     the total (actual_input + max_tokens) stays within the backend limit.
+
+    The 1024 floor exists so a merely-tight budget still leaves a usable output
+    allowance, but it must never win out over the hard backend limit: when Phase 2's
+    undroppable tail (the last group that must start with role=="user", plus
+    everything after it — see `_max_valid_cut_index`) alone leaves less than 1024
+    tokens of headroom, clamping to the floor would push (input + output) past
+    backend_max_context_tokens and get the request rejected upstream. Clamp to
+    the actual headroom instead, down to a hard minimum of 1 token.
     """
     current = oai_body.get("max_tokens")
     if current is None:
@@ -264,6 +272,9 @@ def _apply_output_budget_cap(
         - token_count
         - 2 * budget.tokenizer_safety_margin,
     )
+    hard_headroom = budget.backend_max_context_tokens - token_count
+    if safe > hard_headroom:
+        safe = max(1, hard_headroom)
     if current > safe:
         logger.info(
             "[coding-model-router] output cap after compression: %d → %d "
