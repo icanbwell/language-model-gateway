@@ -142,4 +142,5 @@ name = "alpine-wheels"
 url = "https://imranq2.github.io/alpine-wheels/docs/"
 
 [tool.uv]
+exclude-newer = "2 days"
 index-strategy = "unsafe-best-match"
