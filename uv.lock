@@ -2611,7 +2611,7 @@ requires-dist = [
     { name = "language-model-common", specifier = ">=2.0.87" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "mcp", specifier = ">=1.27.2" },
-    { name = "oidcauthlib", specifier = ">=3.0.18" },
+    { name = "oidcauthlib", specifier = ">=3.0.20" },
     { name = "openai", specifier = ">=2.5.0" },
     { name = "opentelemetry-api", specifier = ">=1.39.1" },
     { name = "opentelemetry-distro", extras = ["otlp"], specifier = ">=0.60b0" },
@@ -3203,7 +3203,7 @@ wheels = [
 
 [[package]]
 name = "oidcauthlib"
-version = "3.0.18"
+version = "3.0.20"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "authlib" },
@@ -3218,9 +3218,9 @@ dependencies = [
     { name = "simple-container" },
     { name = "starlette" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7e/7d/85a94c3643acc61daa1bb3372299cf27bbbc249d41060cfa3aebfa478993/oidcauthlib-3.0.18.tar.gz", hash = "sha256:8a8179befc180c570dad62186658aa2f1b73e54be5b48600b9a306c42dd8b9ea", size = 67430, upload-time = "2026-09-10T03:23:16.715Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/77/569329dbf40ea6abd9329aa8ee113e1c7c70ffaf28463e9cdb4486804960/oidcauthlib-3.0.20.tar.gz", hash = "sha256:946f2b718874047b49668e33acf53f7e0292908cf2d4fb966f78537f1d2ea70f", size = 70219, upload-time = "2026-09-14T19:33:58.983Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2b/04/827eb48251ac1d5da5863efe8ea59cfdc8243a94ebd098d765d12ceadeb1/oidcauthlib-3.0.18-py3-none-any.whl", hash = "sha256:014b2a772a932d89f5b068c41831bd77f58c79b9365581c0df80030d6242f606", size = 90880, upload-time = "2026-09-10T03:23:15.674Z" },
+    { url = "https://files.pythonhosted.org/packages/b7/45/b520a68d8473aae132f9412313c9f1b0b354dbb63311e7fe90dae8406889/oidcauthlib-3.0.20-py3-none-any.whl", hash = "sha256:63921bbb449edfc8952e269d65371fb21e612b9af19a6c4dbcc40d302c97deb3", size = 95001, upload-time = "2026-09-14T19:33:58.036Z" },
 ]
 
 [[package]]
@@ -5016,8 +5016,8 @@ name = "secretstorage"
 version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cryptography" },
-    { name = "jeepney" },
+    { name = "cryptography", marker = "(python_full_version >= '3.13' and sys_platform == 'emscripten') or (sys_platform != 'emscripten' and sys_platform != 'win32')" },
+    { name = "jeepney", marker = "(python_full_version >= '3.13' and sys_platform == 'emscripten') or (sys_platform != 'emscripten' and sys_platform != 'win32')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/1c/03/e834bcd866f2f8a49a85eaff47340affa3bfa391ee9912a952a1faa68c7b/secretstorage-3.5.0.tar.gz", hash = "sha256:f04b8e4689cbce351744d5537bf6b1329c6fc68f91fa666f60a380edddcd11be", size = 19884, upload-time = "2025-11-23T19:02:53.191Z" }
 wheels = [
