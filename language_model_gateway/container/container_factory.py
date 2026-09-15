@@ -345,7 +345,7 @@ class LanguageModelGatewayContainerFactory:
         container.singleton(
             ModelResourceCacheManager,
             lambda c: ModelResourceCacheManager(
-                model_factory=c.resolve(ModelFactory),
+                container=c,
                 tool_provider=c.resolve(ToolProvider),
                 mcp_tool_provider=c.resolve(MCPToolProvider),
             ),

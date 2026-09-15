@@ -15,6 +15,7 @@ from languagemodelcommon.configs.schemas.config_schema import (
 from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
 from languagemodelcommon.models.model_factory import ModelFactory
+from simple_container.container.interfaces import IContainer
 from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from language_model_gateway.gateway.utilities.logger.log_levels import SRC_LOG_LEVELS
 
@@ -47,11 +48,14 @@ class ModelResourceCacheManager:
     def __init__(
         self,
         *,
-        model_factory: ModelFactory,
+        container: IContainer,
         tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
     ) -> None:
-        self._model_factory = model_factory
+        # Resolved lazily from the container (not captured here) so that tests
+        # overriding ModelFactory after this singleton is constructed (e.g. during
+        # FastAPI lifespan startup) still take effect on the next cache miss.
+        self._container = container
         self._tool_provider = tool_provider
         self._mcp_tool_provider = mcp_tool_provider
         self._cache: Dict[str, CachedModelResources] = {}
@@ -72,7 +76,7 @@ class ModelResourceCacheManager:
             if cached is not None and not cached.is_expired():
                 return cached
 
-        llm: BaseChatModel = self._model_factory.get_model(
+        llm: BaseChatModel = self._container.resolve(ModelFactory).get_model(
             chat_model_config=model_config
         )
 
