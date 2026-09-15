@@ -123,6 +123,7 @@ class ERDiagramGeneratorTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         entities: Dict[str, Dict[str, Union[List[Dict[str, Any]], Dict[str, str]]]],
         relationships: List[Dict[str, str]],
         title: Optional[str] = None,
@@ -135,6 +136,7 @@ class ERDiagramGeneratorTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         entities: Dict[str, Dict[str, Union[List[Dict[str, Any]], Dict[str, str]]]],
         relationships: List[Dict[str, str]],
         title: Optional[str] = None,

@@ -156,6 +156,7 @@ class ProviderSearchTool(ResilientBaseTool):
     # noinspection PyMethodMayBeStatic
     def _prepare_variables(
         self,
+        *,
         search: Optional[str] = None,
         lat: Optional[float] = None,
         lon: Optional[float] = None,
@@ -184,13 +185,13 @@ class ProviderSearchTool(ResilientBaseTool):
 
         return variables
 
-    def _prepare_request_payload(self, variables: Dict[str, Any]) -> Dict[str, Any]:
+    def _prepare_request_payload(self, *, variables: Dict[str, Any]) -> Dict[str, Any]:
         pss_gql_query = self._build_query()
         logger.info(f"PSS Query:\n{pss_gql_query}\nVariables\n:{variables}")
         return {"query": pss_gql_query, "variables": variables}
 
     # noinspection PyMethodMayBeStatic
-    def _handle_response(self, response: httpx.Response) -> Dict[str, Any]:
+    def _handle_response(self, *, response: httpx.Response) -> Dict[str, Any]:
         """Process and validate the API response"""
         if response.status_code != 200:
             raise Exception(
@@ -207,6 +208,7 @@ class ProviderSearchTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         search: Optional[str] = None,
         lat: Optional[float] = None,
         lon: Optional[float] = None,
@@ -221,6 +223,7 @@ class ProviderSearchTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         search: Optional[str] = None,
         lat: Optional[float] = None,
         lon: Optional[float] = None,
@@ -243,7 +246,7 @@ class ProviderSearchTool(ResilientBaseTool):
             insurance=insurance,
         )
 
-        payload = self._prepare_request_payload(variables)
+        payload = self._prepare_request_payload(variables=variables)
 
         headers = {
             "Content-Type": "application/json; charset=utf-8",
@@ -260,7 +263,7 @@ class ProviderSearchTool(ResilientBaseTool):
             if use_verbose_logging:
                 artifact += f"\nRequest: {payload}"
                 artifact += f"===== Response ======\n```{response.text}```\n====== End of Response ======"
-            return self._handle_response(response), artifact
+            return self._handle_response(response=response), artifact
 
         except httpx.TimeoutException:
             raise Exception("Request timed out")

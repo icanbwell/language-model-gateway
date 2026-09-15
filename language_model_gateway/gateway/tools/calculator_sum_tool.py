@@ -23,7 +23,7 @@ class CalculatorSumTool(ResilientBaseTool):
     )
 
     @override
-    async def _arun(self, numbers: List[float]) -> str:
+    async def _arun(self, *, numbers: List[float]) -> str:
         """Run the tool to calculate the sum of a list of numbers"""
         logger.debug(f"Received numbers for sum: {numbers}")
 
@@ -36,6 +36,6 @@ class CalculatorSumTool(ResilientBaseTool):
         return f"The sum of the provided numbers is: {total}"
 
     @override
-    def _run(self, numbers: List[float]) -> str:
+    def _run(self, *, numbers: List[float]) -> str:
         """Async implementation of the tool (in this case, just calls _run)"""
         return asyncio.run(self._arun(numbers=numbers))

@@ -43,6 +43,7 @@ class GitHubPullRequestDiffTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         url: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,
     ) -> Tuple[str, str]:
@@ -57,6 +58,7 @@ class GitHubPullRequestDiffTool(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         url: Optional[str] = None,
         use_verbose_logging: Optional[bool] = None,
     ) -> Tuple[str, str]:

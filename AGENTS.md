@@ -156,6 +156,19 @@ Use current language idioms for the repo's language version. Do not write legacy
 
 ---
 
+## Repo-Specific Conventions (language-model-gateway)
+
+### IoC Container
+This project uses an Inversion of Control (IoC) container for dependency injection. Register services with the container and resolve dependencies through it. Do not manually instantiate services that should be container-managed. Use `Depends(Inject(...))` for FastAPI route dependencies.
+
+### Environment Variables
+Access environment variables through the `LanguageModelGatewayEnvironmentVariables` class (or its parent `LanguageModelCommonEnvironmentVariables`), never via raw `os.environ` in business logic. The environment variables class is injected via the IoC container. Add new environment variable accessors as properties on the appropriate environment variables class.
+
+### Keyword Arguments Over Positional
+Prefer keyword arguments over positional arguments in function and constructor calls. Use keyword-only parameters (after `*` in function signatures) for functions with more than one or two parameters. This improves readability at call sites and prevents argument-ordering bugs. When calling functions from `languagemodelcommon` or other shared libraries, always use named arguments.
+
+---
+
 ## Security
 
 ### PHI/PII Protection

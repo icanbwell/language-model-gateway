@@ -13,10 +13,10 @@ ARG RUN_UV_LOCK=false
 ARG GITHUB_TOKEN
 
 # Install common tools and dependencies (git is required for some Python packages)
-RUN apk add --no-cache git build-base
+RUN apk add --no-cache git build-base python3-dev
 
 # Install uv from the official image (fast, single binary)
-COPY --from=ghcr.io/astral-sh/uv:0.11.6@sha256:b1e699368d24c57cda93c338a57a8c5a119009ba809305cc8e86986d4a006754 /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:0.11.16@sha256:440fd6477af86a2f1b38080c539f1672cd22acb1b1a47e321dba5158ab08864d /uv /uvx /usr/local/bin/
 
 # Use a venv outside the project dir so docker-compose volume mounts don't hide it
 ENV UV_PROJECT_ENVIRONMENT=/opt/venv
@@ -61,7 +61,7 @@ ARG GITHUB_TOKEN
 RUN apk add --no-cache curl libstdc++ libffi git graphviz graphviz-dev
 
 # Install uv from the official image (fast, single binary)
-COPY --from=ghcr.io/astral-sh/uv:0.11.6@sha256:b1e699368d24c57cda93c338a57a8c5a119009ba809305cc8e86986d4a006754 /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:0.11.16@sha256:440fd6477af86a2f1b38080c539f1672cd22acb1b1a47e321dba5158ab08864d /uv /uvx /usr/local/bin/
 
 # Set environment variables for project configuration
 ENV PROJECT_DIR=/usr/src/language_model_gateway

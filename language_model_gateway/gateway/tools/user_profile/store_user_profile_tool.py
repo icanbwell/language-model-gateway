@@ -63,6 +63,7 @@ class StoreUserProfileTool(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         name: str,
         age: int | None,
         recent_memories: list[str],
@@ -87,7 +88,9 @@ class StoreUserProfileTool(ResilientBaseTool):
         try:
             # Validate state and action
             UserProfileValidator.validate_state_user_id(state)
-            UserProfileValidator.validate_action(action, self.actions_permitted)
+            UserProfileValidator.validate_action(
+                action=action, permitted=self.actions_permitted
+            )
             # use the user_id from the state since it is more reliable than the one the llm sets in the user_profile
             if not state["user_id"]:
                 raise ToolException(
@@ -97,7 +100,7 @@ class StoreUserProfileTool(ResilientBaseTool):
             store = self._get_store()
             namespacer = NamespaceTemplate(self.namespace)
             namespace = namespacer()
-            repo = UserProfileRepository(store, namespace)
+            repo = UserProfileRepository(store=store, namespace=namespace)
             if action == "delete":
                 await repo.delete(user_profile.user_id)
                 return f"Deleted user profile user_profile_{user_profile.user_id}"

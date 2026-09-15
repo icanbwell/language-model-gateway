@@ -32,7 +32,7 @@ logger.setLevel(SRC_LOG_LEVELS["AGENTS"])
 
 
 # Utility to redact sensitive info from params
-def redact_params(params: Dict[str, Any]) -> Dict[str, Any]:
+def redact_params(*, params: Dict[str, Any]) -> Dict[str, Any]:
     redacted = params.copy()
     for sensitive_key in ("key", "cx", "api_key", "cse_id"):
         if sensitive_key in redacted:
@@ -131,7 +131,7 @@ class GoogleSearchTool(ResilientBaseTool):
                     self._environment_variables
                     and self._environment_variables.log_input_and_output
                 ):
-                    safe_params = redact_params(params)
+                    safe_params = redact_params(params=params)
                     logger.info(
                         f"Running Google search with query {params.get('q')}. Params: {safe_params}. Retry count: {retry_count}"
                     )
@@ -162,7 +162,7 @@ class GoogleSearchTool(ResilientBaseTool):
                     continue
                 raise
             except Exception as e:
-                safe_params = redact_params(params)
+                safe_params = redact_params(params=params)
                 logger.exception(
                     f"Error making request for {url} with params {safe_params}\n{str(e)}"
                 )
@@ -174,14 +174,14 @@ class GoogleSearchTool(ResilientBaseTool):
 
     @override
     def _run(
-        self, query: str, use_verbose_logging: Optional[bool] = None
+        self, *, query: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
         """Use async version of this tool."""
         raise NotImplementedError("Use async version of this tool")
 
     @override
     async def _arun(
-        self, query: str, use_verbose_logging: Optional[bool] = None
+        self, *, query: str, use_verbose_logging: Optional[bool] = None
     ) -> Tuple[str, str]:
         """Async implementation of the Google search tool."""
 
@@ -273,7 +273,7 @@ class GoogleSearchTool(ResilientBaseTool):
         try:
             result = await self._make_request(url, params)
             if not result:
-                safe_params = redact_params(params)
+                safe_params = redact_params(params=params)
                 logger.exception(
                     f"Error making request for {url} with params {safe_params}"
                 )

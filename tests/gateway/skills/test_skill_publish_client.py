@@ -1,8 +1,14 @@
 """Tests for SkillPublishClient."""
 
-import pytest
+import json
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+from dataclasses import dataclass
+from typing import Any
+from unittest.mock import patch
+
 import httpx
-from unittest.mock import AsyncMock, patch
+import pytest
 
 from language_model_gateway.gateway.skills.skill_publish_client import (
     SkillPublishClient,
@@ -14,26 +20,80 @@ def client() -> SkillPublishClient:
     return SkillPublishClient(mcp_server_gateway_url="http://mcp-gateway:5000")
 
 
+@dataclass
+class FakeSSEEvent:
+    event: str
+    data: str
+
+
+class FakeEventSource:
+    def __init__(self, *, status_code: int, events: list[FakeSSEEvent]) -> None:
+        self.response = httpx.Response(status_code=status_code)
+        self._events = events
+
+    async def aiter_sse(self) -> AsyncIterator[FakeSSEEvent]:
+        for ev in self._events:
+            yield ev
+
+
+@asynccontextmanager
+async def _fake_sse(
+    *, status_code: int = 200, events: list[FakeSSEEvent] | None = None
+) -> AsyncIterator[FakeEventSource]:
+    """Produces a context manager matching the aconnect_sse interface."""
+
+    async def _inner(*_args: Any, **_kwargs: Any) -> AsyncIterator[FakeEventSource]:
+        yield FakeEventSource(status_code=status_code, events=events or [])
+
+    async for ctx in _inner():
+        yield ctx
+
+
 class TestPublish:
     @pytest.mark.asyncio
     async def test_successful_publish(self, client: SkillPublishClient) -> None:
-        mock_response = httpx.Response(
-            status_code=200,
-            json={"status": "published", "url": "https://github.com/org/repo/pr/1"},
-        )
-        with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.return_value = mock_response
+        events = [
+            FakeSSEEvent(event="keepalive", data="{}"),
+            FakeSSEEvent(
+                event="complete",
+                data=json.dumps({"message": "Skill published successfully."}),
+            ),
+        ]
+
+        @asynccontextmanager
+        async def mock_sse(
+            *_args: Any, **_kwargs: Any
+        ) -> AsyncIterator[FakeEventSource]:
+            yield FakeEventSource(status_code=200, events=events)
+
+        with patch(
+            "language_model_gateway.gateway.skills.skill_publish_client.aconnect_sse",
+            mock_sse,
+        ):
             response = await client.publish(
                 body={"name": "test-skill", "content": "# Test"},
                 auth_header="Bearer token123",
             )
 
         assert response.status_code == 200
+        assert (
+            json.loads(bytes(response.body))["message"]
+            == "Skill published successfully."
+        )
 
     @pytest.mark.asyncio
     async def test_network_error_returns_502(self, client: SkillPublishClient) -> None:
-        with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.side_effect = httpx.ConnectError("Connection refused")
+        @asynccontextmanager
+        async def mock_sse(
+            *_args: Any, **_kwargs: Any
+        ) -> AsyncIterator[FakeEventSource]:
+            raise httpx.ConnectError("Connection refused")
+            yield FakeEventSource(status_code=500, events=[])  # unreachable
+
+        with patch(
+            "language_model_gateway.gateway.skills.skill_publish_client.aconnect_sse",
+            mock_sse,
+        ):
             response = await client.publish(
                 body={"name": "test-skill"},
                 auth_header="Bearer token123",
@@ -42,49 +102,86 @@ class TestPublish:
         assert response.status_code == 502
 
     @pytest.mark.asyncio
-    async def test_upstream_error_forwarded(self, client: SkillPublishClient) -> None:
-        mock_response = httpx.Response(
-            status_code=422,
-            json={"error": "Invalid skill format"},
-        )
-        with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.return_value = mock_response
+    async def test_upstream_error_status_forwarded(
+        self, client: SkillPublishClient
+    ) -> None:
+        @asynccontextmanager
+        async def mock_sse(
+            *_args: Any, **_kwargs: Any
+        ) -> AsyncIterator[FakeEventSource]:
+            resp = httpx.Response(
+                status_code=422,
+                content=json.dumps({"error": "Invalid skill format"}).encode(),
+            )
+            source = FakeEventSource(status_code=422, events=[])
+            source.response = resp
+            yield source
+
+        with patch(
+            "language_model_gateway.gateway.skills.skill_publish_client.aconnect_sse",
+            mock_sse,
+        ):
             response = await client.publish(
                 body={"name": "bad-skill"},
                 auth_header="Bearer token123",
             )
 
         assert response.status_code == 422
+        assert json.loads(bytes(response.body))["error"] == "Invalid skill format"
 
     @pytest.mark.asyncio
-    async def test_non_json_response_handled(self, client: SkillPublishClient) -> None:
-        mock_response = httpx.Response(
-            status_code=500,
-            text="Internal Server Error",
-        )
-        with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.return_value = mock_response
+    async def test_sse_error_event_returns_500(
+        self, client: SkillPublishClient
+    ) -> None:
+        events = [
+            FakeSSEEvent(event="keepalive", data="{}"),
+            FakeSSEEvent(
+                event="error",
+                data=json.dumps({"error": "Internal server error"}),
+            ),
+        ]
+
+        @asynccontextmanager
+        async def mock_sse(
+            *_args: Any, **_kwargs: Any
+        ) -> AsyncIterator[FakeEventSource]:
+            yield FakeEventSource(status_code=200, events=events)
+
+        with patch(
+            "language_model_gateway.gateway.skills.skill_publish_client.aconnect_sse",
+            mock_sse,
+        ):
             response = await client.publish(
                 body={"name": "test-skill"},
                 auth_header="Bearer token123",
             )
 
         assert response.status_code == 500
+        assert json.loads(bytes(response.body))["error"] == "Internal server error"
 
     @pytest.mark.asyncio
-    async def test_posts_to_correct_url(self, client: SkillPublishClient) -> None:
-        mock_response = httpx.Response(status_code=200, json={"status": "ok"})
-        with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.return_value = mock_response
-            await client.publish(
-                body={"name": "my-skill"},
-                auth_header="Bearer abc",
+    async def test_stream_ends_without_terminal_event(
+        self, client: SkillPublishClient
+    ) -> None:
+        events = [
+            FakeSSEEvent(event="keepalive", data="{}"),
+            FakeSSEEvent(event="keepalive", data="{}"),
+        ]
+
+        @asynccontextmanager
+        async def mock_sse(
+            *_args: Any, **_kwargs: Any
+        ) -> AsyncIterator[FakeEventSource]:
+            yield FakeEventSource(status_code=200, events=events)
+
+        with patch(
+            "language_model_gateway.gateway.skills.skill_publish_client.aconnect_sse",
+            mock_sse,
+        ):
+            response = await client.publish(
+                body={"name": "test-skill"},
+                auth_header="Bearer token123",
             )
 
-        mock_post.assert_called_once()
-        call_args = mock_post.call_args
-        expected_url = "http://mcp-gateway:5000/api/skills/publish"
-        actual_url = (
-            call_args.args[0] if call_args.args else call_args.kwargs.get("url")
-        )
-        assert actual_url == expected_url
+        assert response.status_code == 502
+        assert "terminal event" in json.loads(bytes(response.body))["error"]

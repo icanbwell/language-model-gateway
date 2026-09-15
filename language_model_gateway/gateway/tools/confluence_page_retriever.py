@@ -44,6 +44,7 @@ class ConfluencePageRetriever(ResilientBaseTool):
     @override
     async def _arun(
         self,
+        *,
         page_id: str,
     ) -> Tuple[str, str]:
         """
@@ -92,6 +93,7 @@ class ConfluencePageRetriever(ResilientBaseTool):
     @override
     def _run(
         self,
+        *,
         page_id: str,
     ) -> Tuple[str, str]:
         """

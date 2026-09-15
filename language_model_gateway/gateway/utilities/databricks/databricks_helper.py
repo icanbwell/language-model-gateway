@@ -90,7 +90,7 @@ class DatabricksHelper:
 
         return markdown_table
 
-    def execute_query(self, query: str, max_wait_time: int = 300) -> str:
+    def execute_query(self, *, query: str, max_wait_time: int = 300) -> str:
         databricks_host: Optional[str] = (
             self._environment_variables.databricks_host
             if self._environment_variables

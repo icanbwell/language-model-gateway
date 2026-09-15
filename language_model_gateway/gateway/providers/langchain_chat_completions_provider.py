@@ -13,9 +13,9 @@ from typing import (
 from languagemodelcommon.utilities.tool_display_name_mapper import (
     ToolDisplayNameMapper,
 )
-from starlette.responses import StreamingResponse, JSONResponse
+from starlette.responses import JSONResponse, Response, StreamingResponse
 
-from langchain_core.language_models import BaseChatModel
+from langchain_core.messages import AnyMessage
 from langchain_core.tools import BaseTool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph.state import CompiledStateGraph
@@ -26,12 +26,14 @@ from languagemodelcommon.configs.schemas.config_schema import (
 )
 from oidcauthlib.auth.models.auth import AuthInformation
 from oidcauthlib.auth.token_reader import TokenReader
+from language_model_gateway.gateway.managers.model_resource_cache_manager import (
+    ModelResourceCacheManager,
+)
 
 from languagemodelcommon.converters.langgraph_to_openai_converter import (
     LangGraphToOpenAIConverter,
 )
 from languagemodelcommon.state.messages_state import MyMessagesState
-from languagemodelcommon.models.model_factory import ModelFactory
 from languagemodelcommon.persistence.persistence_factory import (
     PersistenceFactory,
 )
@@ -49,7 +51,6 @@ from languagemodelcommon.mcp.mcp_tool_provider import MCPToolProvider
 from languagemodelcommon.tools.mcp.search_tools_tool import SearchToolsTool
 from languagemodelcommon.tools.mcp.call_tool_tool import CallToolTool
 from languagemodelcommon.mcp.tool_catalog import ToolCatalog
-from language_model_gateway.gateway.tools.tool_provider import ToolProvider
 from languagemodelcommon.auth.pass_through_token_manager import (
     PassThroughTokenManager,
 )
@@ -68,9 +69,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
     def __init__(
         self,
         *,
-        model_factory: ModelFactory,
+        model_resource_cache_manager: ModelResourceCacheManager,
         lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter,
-        tool_provider: ToolProvider,
         mcp_tool_provider: MCPToolProvider,
         token_reader: TokenReader,
         pass_through_token_manager: PassThroughTokenManager,
@@ -78,11 +78,15 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         persistence_factory: PersistenceFactory,
         tool_display_name_mapper: ToolDisplayNameMapper,
     ) -> None:
-        self.model_factory: ModelFactory = model_factory
-        if self.model_factory is None:
-            raise ValueError("model_factory must not be None")
-        if not isinstance(self.model_factory, ModelFactory):
-            raise TypeError("model_factory must be an instance of ModelFactory")
+        self.model_resource_cache_manager: ModelResourceCacheManager = (
+            model_resource_cache_manager
+        )
+        if self.model_resource_cache_manager is None:
+            raise ValueError("model_resource_cache_manager must not be None")
+        if not isinstance(self.model_resource_cache_manager, ModelResourceCacheManager):
+            raise TypeError(
+                "model_resource_cache_manager must be an instance of ModelResourceCacheManager"
+            )
         self.lang_graph_to_open_ai_converter: LangGraphToOpenAIConverter = (
             lang_graph_to_open_ai_converter
         )
@@ -94,11 +98,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             raise TypeError(
                 "lang_graph_to_open_ai_converter must be an instance of LangGraphToOpenAIConverter"
             )
-        self.tool_provider: ToolProvider = tool_provider
-        if self.tool_provider is None:
-            raise ValueError("tool_provider must not be None")
-        if not isinstance(self.tool_provider, ToolProvider):
-            raise TypeError("tool_provider must be an instance of ToolProvider")
 
         self.mcp_tool_provider: MCPToolProvider = mcp_tool_provider
         if self.mcp_tool_provider is None:
@@ -150,46 +149,6 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
                 f"Expected ToolDisplayNameMapper, got {type(self.tool_display_name_mapper)}"
             )
 
-    def _add_discovery_tools(
-        self,
-        *,
-        tools: list[BaseTool],
-        mcp_tool_configs: list[AgentConfig],
-        headers: Dict[str, str],
-        auth_interceptor: AuthMcpCallInterceptor,
-        session_pool: McpSessionPool | None = None,
-    ) -> tuple[list[BaseTool], ToolCatalog | None]:
-        """Replace direct MCP tool loading with meta-discovery tools.
-
-        Builds a ToolCatalog from MCP servers and adds search_tools +
-        call_tool to the tool list. The ToolDiscoveryMiddleware is
-        responsible for injecting category descriptions into the system
-        prompt at model-call time.
-
-        Returns:
-            A tuple of (tools, catalog). The catalog is ``None`` when no
-            categories were registered.
-        """
-        catalog = self.mcp_tool_provider.discover_tool_catalog(
-            tools=mcp_tool_configs,
-        )
-
-        resolver = self.mcp_tool_provider.create_tool_resolver(
-            headers=headers,
-            auth_interceptor=auth_interceptor,
-        )
-        tools.append(SearchToolsTool(catalog=catalog, resolver=resolver))
-        tools.append(
-            CallToolTool(
-                catalog=catalog,
-                mcp_tool_provider=self.mcp_tool_provider,
-                auth_interceptor=auth_interceptor,
-                session_pool=session_pool,
-            )
-        )
-
-        return tools, catalog
-
     @override
     async def chat_completions(
         self,
@@ -199,10 +158,11 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         chat_request_wrapper: ChatRequestWrapper,
         auth_information: AuthInformation,
     ) -> StreamingResponse | JSONResponse:
-        # noinspection PyArgumentList
-        llm: BaseChatModel = self.model_factory.get_model(
-            chat_model_config=model_config
+        # Retrieve cached model-level resources (LLM, ToolCatalog, base tools)
+        cached = self.model_resource_cache_manager.get_or_create(
+            model_config=model_config,
         )
+        llm = cached.llm
 
         # noinspection PyUnusedLocal
         def get_current_time(*args: Any, **kwargs: Any) -> str:
@@ -210,14 +170,8 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
             now = datetime.datetime.now()  # Get current time
             return now.strftime("%Y-%m-%d %H:%M:%S%Z%z")
 
-        # Initialize tools
-        tools: Sequence[BaseTool] = (
-            self.tool_provider.get_tools(
-                tools=[t for t in model_config.get_agents()], headers=headers
-            )
-            if model_config.get_agents() is not None
-            else []
-        )
+        # Start with the cached base tools (non-MCP tools from ToolProvider)
+        tools: list[BaseTool] = list(cached.base_tools)
 
         # Create a per-request auth interceptor so concurrent requests
         # don't share mutable auth state
@@ -241,15 +195,24 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
         # add MCP tools — either via meta-discovery or direct loading
         tool_catalog: ToolCatalog | None = None
         if model_config.use_tool_discovery:
-            tools, tool_catalog = self._add_discovery_tools(
-                tools=list(tools),
-                mcp_tool_configs=mcp_tool_configs,
+            # Reuse the cached catalog; only per-request items (resolver, session_pool) are new
+            tool_catalog = cached.catalog
+            resolver = self.mcp_tool_provider.create_tool_resolver(
                 headers=headers,
                 auth_interceptor=auth_interceptor,
-                session_pool=session_pool,
+            )
+            tools.append(SearchToolsTool(catalog=tool_catalog, resolver=resolver))
+            tools.append(
+                CallToolTool(
+                    catalog=tool_catalog,
+                    mcp_tool_provider=self.mcp_tool_provider,
+                    auth_interceptor=auth_interceptor,
+                    session_pool=session_pool,
+                    proxy_base_url=self.environment_variables.mcp_app_proxy_base_url,
+                )
             )
         else:
-            tools = [t for t in tools] + await self.mcp_tool_provider.get_tools_async(
+            tools = tools + await self.mcp_tool_provider.get_tools_async(
                 tools=mcp_tool_configs,
                 headers=headers,
                 auth_interceptor=auth_interceptor,
@@ -310,25 +273,73 @@ class LangChainCompletionsProvider(BaseChatCompletionsProvider):
 
             conversation_thread_id: str | None = headers.get("X-Chat-Id".lower())
 
-            result = await self.lang_graph_to_open_ai_converter.call_agent_with_input(
-                compiled_state_graph=compiled_state_graph,
-                chat_request_wrapper=chat_request_wrapper,
-                system_messages=[],
-                request_information=RequestInformation(
-                    auth_information=auth_information,
-                    user_id=auth_information.subject,
-                    user_email=auth_information.email,
-                    user_name=auth_information.user_name,
-                    request_id=str(request_id),
-                    conversation_thread_id=conversation_thread_id
-                    if conversation_thread_id
-                    else str(request_id),
-                    headers=headers,
-                    tool_display_name_mapper=self.tool_display_name_mapper,
-                ),
-                config=None,
-                state=None,
+            request_information = RequestInformation(
+                auth_information=auth_information,
+                user_id=auth_information.subject,
+                user_email=auth_information.email,
+                user_name=auth_information.user_name,
+                request_id=str(request_id),
+                conversation_thread_id=conversation_thread_id
+                if conversation_thread_id
+                else str(request_id),
+                headers=headers,
+                tool_display_name_mapper=self.tool_display_name_mapper,
             )
+
+            # Inject user context as a system message after existing system
+            # messages (BaileyAI pattern: keep all system messages consecutive
+            # at the start). We handle this here rather than relying on the
+            # converter's add_system_message_for_user_info which appends to
+            # the end and breaks Anthropic's consecutive-system-message rule.
+            user_info_content: str = (
+                f"You are interacting with user_id: {auth_information.subject} "
+                f"who is named {auth_information.user_name} and has email {auth_information.email}"
+                if auth_information.subject
+                else "You are interacting with an anonymous user"
+            )
+            user_info_msg = chat_request_wrapper.create_system_message(
+                content=user_info_content
+            )
+            messages = chat_request_wrapper.messages
+            insert_idx = 0
+            for i, msg in enumerate(messages):
+                if msg.system_message:
+                    insert_idx = i + 1
+                else:
+                    break
+            messages.insert(insert_idx, user_info_msg)
+            chat_request_wrapper.messages = messages
+
+            result: Response
+            if chat_request_wrapper.stream:
+                result = StreamingResponse(
+                    content=await self.lang_graph_to_open_ai_converter.get_streaming_response_async(
+                        chat_request_wrapper=chat_request_wrapper,
+                        compiled_state_graph=compiled_state_graph,
+                        system_messages=[],
+                        request_information=request_information,
+                        config=None,
+                        state=None,
+                    ),
+                    media_type="text/event-stream",
+                )
+            else:
+                responses: list[
+                    AnyMessage
+                ] = await self.lang_graph_to_open_ai_converter.ainvoke(
+                    compiled_state_graph=compiled_state_graph,
+                    chat_request_wrapper=chat_request_wrapper,
+                    system_messages=[],
+                    request_information=request_information,
+                    config=None,
+                    state=None,
+                )
+                content_json = chat_request_wrapper.create_non_streaming_response(
+                    request_id=request_information.request_id,
+                    responses=responses,
+                    json_output_requested=False,
+                )
+                result = JSONResponse(content=content_json)
             # If result is a StreamingResponse, wrap the generator so context managers stay open
             if isinstance(result, StreamingResponse):
                 original_generator = result.body_iterator
