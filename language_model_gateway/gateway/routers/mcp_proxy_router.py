@@ -86,11 +86,9 @@ class McpProxyRouter:
         if not token:
             raise HTTPException(status_code=401, detail="Could not extract token")
 
-        # Allow dev bypass tokens
-        if token not in ("bedrock", "fake-api-key"):
-            token_item = await token_reader.verify_token_async(token=token)
-            if token_item is None:
-                raise HTTPException(status_code=401, detail="Invalid or expired token")
+        token_item = await token_reader.verify_token_async(token=token)
+        if token_item is None:
+            raise HTTPException(status_code=401, detail="Invalid or expired token")
 
         return token
 
