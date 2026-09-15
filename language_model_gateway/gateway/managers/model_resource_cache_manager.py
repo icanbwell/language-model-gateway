@@ -32,6 +32,11 @@ class CachedModelResources:
     catalog: ToolCatalog
     llm: BaseChatModel
     base_tools: list[BaseTool]
+    # id() of the ModelFactory used to build this entry. Lets get_or_create()
+    # detect a ModelFactory swap (e.g. a test overriding it after warm_cache()
+    # already ran at startup with the real one) and rebuild instead of serving
+    # resources built from a since-replaced factory.
+    model_factory_id: int
     created_at: float = field(default_factory=time.monotonic)
 
     def is_expired(self) -> bool:
@@ -71,14 +76,17 @@ class ModelResourceCacheManager:
         Creates them on first access or when the cache entry has expired.
         """
         cache_key = model_config.name
+        model_factory = self._container.resolve(ModelFactory)
         with self._lock:
             cached = self._cache.get(cache_key)
-            if cached is not None and not cached.is_expired():
+            if (
+                cached is not None
+                and not cached.is_expired()
+                and cached.model_factory_id == id(model_factory)
+            ):
                 return cached
 
-        llm: BaseChatModel = self._container.resolve(ModelFactory).get_model(
-            chat_model_config=model_config
-        )
+        llm: BaseChatModel = model_factory.get_model(chat_model_config=model_config)
 
         agents = model_config.get_agents()
         base_tools: list[BaseTool] = (
@@ -98,6 +106,7 @@ class ModelResourceCacheManager:
             catalog=catalog,
             llm=llm,
             base_tools=base_tools,
+            model_factory_id=id(model_factory),
         )
         with self._lock:
             self._cache[cache_key] = resources
