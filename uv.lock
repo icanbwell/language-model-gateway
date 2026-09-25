@@ -1718,8 +1718,8 @@ name = "httpcore2"
 version = "2.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "h11", marker = "python_full_version >= '3.13' or sys_platform != 'emscripten'" },
-    { name = "truststore", marker = "python_full_version >= '3.13' or sys_platform != 'emscripten'" },
+    { name = "h11" },
+    { name = "truststore" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/15/8c/e925b1c92018abb3a1863ce1549d76d2381e334d21d65d4ac8f65dabd78a/httpcore2-2.13.0.tar.gz", hash = "sha256:2adc8be4fb285fbcd6d894298db3b52c177e74b6674eda3a76bd36be3292a3db", size = 67740, upload-time = "2026-09-14T14:18:04.717Z" }
 wheels = [
@@ -2404,16 +2404,16 @@ wheels = [
 
 [[package]]
 name = "langgraph-store-mongodb"
-version = "0.3.0"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-mongodb" },
     { name = "langgraph-checkpoint" },
     { name = "pymongo-search-utils" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2b/5d/75fe61110b2644355d21bd85a6b12498ca49bb18be858e4aacd6aa95c917/langgraph_store_mongodb-0.3.0.tar.gz", hash = "sha256:87d1e809f3b317c55c3106c30922246c1336c335d7ebc37d670e00f810c03ae5", size = 110456, upload-time = "2026-05-12T17:18:49.172Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8e/44/15fdd94f3ba4f7df776a086be031cefdb0ba84ec77643ef17ae74df607e6/langgraph_store_mongodb-0.4.0.tar.gz", hash = "sha256:da319dcd0bb2c8d7de75c521a65539cdd352144509a21f70d71eb6a2b6e8b42b", size = 187299, upload-time = "2026-09-04T15:33:39.707Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/8c/e803901b5bb366ed7366b270c8c1b01a294b020297fff818a0de79f00f01/langgraph_store_mongodb-0.3.0-py3-none-any.whl", hash = "sha256:3629892932362d7f43e53bcd0e8ae9bbea01a558fd92a2d5e960c039ff54e65f", size = 10983, upload-time = "2026-05-12T17:18:48.124Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/f4/60bf266c35e418e60d443694f922f63d829c9f97c376a099bc5488ae6737/langgraph_store_mongodb-0.4.0-py3-none-any.whl", hash = "sha256:c2b6e276d248b9cf0531d90cd6cf520c4cf5ff987c7a424b1be319de677ed92c", size = 12194, upload-time = "2026-09-04T15:33:38.722Z" },
 ]
 
 [[package]]
