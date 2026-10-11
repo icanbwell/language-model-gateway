@@ -412,3 +412,10 @@ Assume clients may receive unknown enum values and new fields at any time. Desig
 ## Code Style
 
 Follow whatever linter, formatter, and static analysis configuration exists in the repo. Do not duplicate what automated tooling already enforces. These instructions are for architectural and design decisions that linters cannot catch.
+
+---
+
+<!-- REPO-SPECIFIC ADDENDUM -->
+## Repo-specific addendum
+
+Read playbooks/README.md first for where to look, how to deploy and review, and what this repo depends on. Propose updates to it by PR.
