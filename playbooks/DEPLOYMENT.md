@@ -19,13 +19,13 @@ How to release and deploy this repo. Whether any environment currently runs the 
 
 ## Before and after a deploy
 
-- **Test commands:** `make tests` (unit and functional in Docker); `make tests-integration` (`tests_integration/`, needs `make up-integration`); CI runs `pytest .` in the `language-model-gateway` compose service. Which need credentials: tests using a real LLM are gated by `RUN_TESTS_WITH_REAL_LLM` (`.env.example`), and `AWS_CREDENTIALS_PROFILE` is required for Bedrock. Reports are written to `reports/test-results.xml` in CI.
+- **Test commands:** `make tests` (unit and functional in Docker); `make tests-integration` (runs `pytest tests` with `RUN_TESTS_WITH_REAL_LLM=1`, per the Makefile; it does not run `tests_integration/` and does not need `make up-integration`); `tests_integration/` holds one file, `test_aiden_api.py`, outside both targets; CI runs `pytest .` in the `language-model-gateway` compose service. Which need credentials: tests using a real LLM are gated by `RUN_TESTS_WITH_REAL_LLM` (`.env.example`), and `AWS_CREDENTIALS_PROFILE` is required for Bedrock. Reports are written to `reports/test-results.xml` in CI.
 - **Before / after / compare / stop rule:** no baseline files or evaluation harness exist in this repo (unverified elsewhere). Compare the Groundcover `Response ERROR` counts for the same hours and weekday type ([MONITORING.md](MONITORING.md)).
 
 ## Release gotchas
 
 - The image build needs the private package `language-model-common` from a private index configured in `pyproject.toml` (`[[tool.uv.index]]`); the credential name is unverified (not found in the Dockerfile on `origin/main`).
-- Configuration is read at startup; a config-only change needs a restart.
+- Configuration is read at startup and refreshed by `_config_refresh_loop` every `CONFIG_REFRESH_INTERVAL_MINUTES` (default 60); `GET /refresh` clears the caches and re-reads from disk (`api.py`, `CACHING.md`). For a config-only change wait for the interval or call `/refresh`; restart only as a last resort.
 
 ## Verify in production
 
@@ -33,6 +33,6 @@ Check `GET /health`, then `GET /api/v1/models` lists the expected configs, then 
 
 ## Rollback
 
-Redeploy the previous tag with the `Deploy Workflow` (read from the workflow; not exercised, unverified). It does not undo configuration changes made in `language-model-gateway-configuration`.
+Redeploy the previous tag with the `Deploy Workflow` (read from the workflow; not exercised, unverified). It does not undo configuration changes made in `language-model-gateway-configuration` (archived on GitHub; confirm where configs live now).
 
 Next: [MONITORING.md](MONITORING.md) to verify; if verification fails, [TROUBLESHOOTING.md](TROUBLESHOOTING.md).

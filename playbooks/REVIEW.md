@@ -16,7 +16,7 @@ It fronts model providers and MCP tool servers behind one OpenAI-compatible API 
 | 2 | Absolute imports, full type annotations, Ruff and mypy clean | BLOCKING | `make run-pre-commit` in `build_and_test` | `.pre-commit-config.yaml` |
 | 3 | Tenant and token handling goes through `TokenExchangeManager`, `ToolAuthManager`, `oidcauthlib`; no ad-hoc env reads | BLOCKING | reviewer | `.github/copilot-instructions.md` |
 | 4 | New dependencies are listed in `policies/approved-tech.yaml` or flagged | REVIEW | reviewer | structlog ADR |
-| 5 | Changes to `AGENTS.md` / `CLAUDE.md` need Enterprise Architecture | BLOCKING | CODEOWNERS | `CODEOWNERS` |
+| 5 | Changes to `AGENTS.md` / `CLAUDE.md` need Enterprise Architecture | CONVENTION (not enforced; `require_code_owner_review: false`) | CODEOWNERS | `CODEOWNERS`, ruleset on `main` |
 
 ## Evidence required by change type
 

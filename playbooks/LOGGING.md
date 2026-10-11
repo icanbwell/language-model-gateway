@@ -41,7 +41,7 @@ No bounded error-class set exists in this repo (no such field or enum found in `
 ## Never log
 
 - Authorization headers, JWTs, S3 paths with PHI, OpenWebUI user details (`.github/copilot-instructions.md`).
-- Known exception: the middleware writes full request headers and bodies, and response bodies, at ERROR for any status 300 or above, and at DEBUG for all requests (`fastapi_logging_middleware.py`). Treat these lines as carrying credentials and PHI risk; do not copy them into any file or report. A safe summarizer (type, length, key names) is not implemented. Body logging is controlled by `HTTP_TRACING_LOG_LEVEL`, but the ERROR path logs regardless of level. No test enforces a no-PHI rule (`none; reviewer only`).
+- Known exception: at status 300 or above the middleware always logs request headers (including Authorization) and the request body at ERROR, regardless of level; the response body is logged only when DEBUG is enabled for `HTTP_TRACING_LOG_LEVEL`, otherwise the line reads `No body`. At DEBUG it also logs headers and bodies for every request (`fastapi_logging_middleware.py`). Treat these lines as carrying credentials and PHI risk; do not copy them into any file or report. A safe summarizer (type, length, key names) is not implemented. No test enforces a no-PHI rule (`none; reviewer only`).
 
 ## When you change logging
 

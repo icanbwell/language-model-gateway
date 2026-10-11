@@ -18,7 +18,7 @@ Who depends on this repo and what it depends on. This file is the source of trut
 
 | Dependency | What we use it for | How we reach it | Assumptions we make | Evidence |
 |---|---|---|---|---|
-| language-model-gateway-configuration | model and tool configs, loaded at startup | mounted configuration directory (`language-model-gateway-configs/` locally) | read-only; restart to reload | `CACHING.md`, `docker-compose.yml` |
+| language-model-gateway-configuration (archived on GitHub; confirm where configs live now) | model and tool configs, loaded at startup and refreshed on an interval | mounted configuration directory (`language-model-gateway-configs/` locally) | read-only; reloads on the refresh interval or `GET /refresh` | `CACHING.md`, `docker-compose.yml` |
 | language-model-common (`languagemodelcommon`) | shared provider, tool and MCP code | Python package, `>=2.0.99` | API of `SearchToolsTool`, `CallToolTool` | `pyproject.toml` |
 | oidc-auth-lib (`oidcauthlib`) | token verification, token exchange | Python package | OIDC claims for tenancy | `.github/copilot-instructions.md` |
 | mcp-server-gateway | MCP tool marketplace | `MCP_SERVER_GATEWAY_URL` | tool manifest shape | `docker-compose.yml`, `skill_publish_router.py` |

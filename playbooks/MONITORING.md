@@ -37,7 +37,7 @@ Where to look when investigating this repo. This is where-to-look knowledge, not
 ## Databases
 
 - MongoDB: database `language_model_gateway` locally (`MONGO_DB_NAME` in `docker-compose.yml`); collections `oauth_cache`, `tokens`, `dcr_registrations` (`MONGO_DB_AUTH_CACHE_COLLECTION_NAME`, `MONGO_DB_TOKEN_COLLECTION_NAME`, `MONGO_DB_DCR_COLLECTION_NAME`). Conversation memory and snapshot cache also use Mongo (`MONGO_LLM_STORAGE_URI`, `CACHING.md`). Deployed cluster, project and database names are unverified.
-- Conversation lookup for Bailey turns: this repo does not own `bailey_messages`; see [baileyai's playbook](https://github.com/icanbwell/baileyai/tree/main/playbooks).
+- Conversation lookup for Bailey turns: this repo does not own `bailey_messages`; see [baileyai's playbook](https://github.com/icanbwell/baileyai/tree/main/playbooks) (that repo's playbooks folder is not yet on main at time of writing; the link 404s until it lands).
 
 ## Kubernetes / Deployment
 
@@ -46,5 +46,5 @@ Where to look when investigating this repo. This is where-to-look knowledge, not
 
 ## Other
 
-- Model and tool configuration is read from the configuration tree (`language-model-gateway-configs/` locally; deployed source is the separate `language-model-gateway-configuration` repo, loaded at startup, see `CACHING.md` for cache TTLs).
+- Model and tool configuration is read from the configuration tree (`language-model-gateway-configs/` locally; deployed source is the separate `language-model-gateway-configuration` repo (archived on GitHub; confirm where configs live now), loaded at startup and refreshed every `CONFIG_REFRESH_INTERVAL_MINUTES` or by `GET /refresh`, see `CACHING.md` for cache TTLs).
 - Per-source log levels: `HTTP_TRACING`, `CONFIG`, `INITIALIZATION`, `HTTP`, `AUTH`, `TOKEN_EXCHANGE`, `DATABASE`, `LLM`, `FILES`, `IMAGE_GENERATION`, `IMAGE_PROCESSING`, `MCP`, `AGENTS`, `ERRORS`, `BAILEY`, each set with `<SOURCE>_LOG_LEVEL` (`log_levels.py`).
