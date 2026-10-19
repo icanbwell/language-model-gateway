@@ -30,12 +30,6 @@
       "role": "system"
     }
   ],
-  "model_parameters": [
-    {
-      "key": "temperature",
-      "value": "0.0"
-    }
-  ],
   "headers": [
     {
       "key": "Authorization",
