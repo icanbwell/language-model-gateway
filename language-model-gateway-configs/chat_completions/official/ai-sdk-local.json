@@ -6,7 +6,7 @@
   "type": "langchain",
   "model": {
     "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "model": "us.anthropic.claude-sonnet-5-5"
   },
   "system_prompts": [
     {
