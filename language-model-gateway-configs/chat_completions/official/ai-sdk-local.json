@@ -6,7 +6,7 @@
   "type": "langchain",
   "model": {
     "provider": "bedrock",
-    "model": "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    "model": "us.anthropic.claude-sonnet-5-5"
   },
   "system_prompts": [
     {
@@ -28,12 +28,6 @@
     {
       "content": "Remind the user that they can provide a different person id if they want health data for a different person.",
       "role": "system"
-    }
-  ],
-  "model_parameters": [
-    {
-      "key": "temperature",
-      "value": "0.0"
     }
   ],
   "headers": [
