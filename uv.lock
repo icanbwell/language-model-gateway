@@ -2678,7 +2678,7 @@ requires-dist = [
     { name = "language-model-common", specifier = ">=2.0.99" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "mcp", specifier = ">=1.27.2" },
-    { name = "oidcauthlib", specifier = ">=3.0.21" },
+    { name = "oidcauthlib", specifier = ">=3.0.27" },
     { name = "openai", specifier = ">=2.5.0" },
     { name = "opentelemetry-api", specifier = ">=1.39.1" },
     { name = "opentelemetry-distro", extras = ["otlp"], specifier = ">=0.60b0" },
@@ -3270,7 +3270,7 @@ wheels = [
 
 [[package]]
 name = "oidcauthlib"
-version = "3.0.21"
+version = "3.0.27"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "authlib" },
@@ -3286,9 +3286,9 @@ dependencies = [
     { name = "simple-container" },
     { name = "starlette" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e8/fb/145df6f3397f56007a5418b8c201dbe9c2b757f1935bb20dc647d397b5bc/oidcauthlib-3.0.21.tar.gz", hash = "sha256:1e1087df8e8b783b2eb6386b8eb65087af4d9222f5dfcf9362e29484e1871baa", size = 70734, upload-time = "2026-09-14T21:06:13.447Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9a/74/5c750610d40758a4d3b3310f4a0ca686cdf8db9d4edcbae7da013aeea718/oidcauthlib-3.0.27.tar.gz", hash = "sha256:d99b41c62df0f0e48fc47add0142e326a064d89b65690920c176637196780cf4", size = 83852, upload-time = "2026-10-25T17:39:20.573Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8e/39/139035fdfe955cd015b9c4261812cfb0d2dae65f67c1999d5e43d91f73e9/oidcauthlib-3.0.21-py3-none-any.whl", hash = "sha256:e9a4359ffd05f149f95b73a6278d0e2a1cd61cc0a04f47b1201fe49640db599f", size = 95284, upload-time = "2026-09-14T21:06:12.439Z" },
+    { url = "https://files.pythonhosted.org/packages/ab/01/fdd987ec8629f1b0d4cfca7da8d4b53072c112bfff16112ef13f64f9f492/oidcauthlib-3.0.27-py3-none-any.whl", hash = "sha256:d410890c6c5d44635313ab55d8b5451468720cc20e2d56231f5fff5a336f8c85", size = 111561, upload-time = "2026-10-25T17:39:19.448Z" },
 ]
 
 [[package]]
